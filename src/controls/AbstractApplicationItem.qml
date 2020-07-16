@@ -5,6 +5,7 @@
  */
 
 import QtQuick 2.12
+import QtQml 2.14
 import QtQuick.Templates 2.12 as T
 import QtQuick.Window 2.12
 import "templates/private"
@@ -434,12 +435,14 @@ Item {
         target: globalDrawer
         property: "parent"
         value: overlay
+        restoreMode: Binding.RestoreBinding
     }
     Binding {
         when: contextDrawer !== undefined && root.visible
         target: contextDrawer
         property: "parent"
         value: overlay
+        restoreMode: Binding.RestoreBinding
     }
     onPageStackChanged: pageStack.parent = root.contentItem;
 
