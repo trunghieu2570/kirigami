@@ -25,6 +25,7 @@
 #include "sizegroup.h"
 #include "toolbarlayout.h"
 #include "wheelhandler.h"
+#include "units.h"
 
 #include <QClipboard>
 #include <QGuiApplication>
@@ -36,6 +37,8 @@
 #include "libkirigami/platformtheme.h"
 #include "libkirigami/styleselector_p.h"
 #include "loggingcategory.h"
+#include "libkirigami/basictheme_p.h"
+#include "libkirigami/kirigamipluginfactory.h"
 
 static QString s_selectedStyle;
 
@@ -132,7 +135,29 @@ void KirigamiPlugin::registerTypes(const char *uri)
         return new Kirigami::BasicThemeDefinition{};
     });
 
-    qmlRegisterSingletonType(componentUrl(QStringLiteral("Units.qml")), uri, 2, 0, "Units");
+    qmlRegisterSingletonType<Kirigami::Units>(uri, 2, 0, "Units", [] (QQmlEngine *engine, QJSEngine *) {
+        auto plugin = Kirigami::KirigamiPluginFactory::findPlugin();
+        if (plugin) {
+            // Check if the plugin implements units
+            auto pluginV2 = qobject_cast<Kirigami::KirigamiPluginFactoryV2 *>(plugin);
+            if (pluginV2) {
+                auto units = pluginV2->createUnits(engine);
+                if (units) {
+                    return units;
+                } else {
+                    qWarning(KirigamiLog) << "The style returned a nullptr Units*, falling back to defaults";
+                }
+            } else {
+                qWarning(KirigamiLog) << "The style does not provide a C++ Units implementation"
+                                      << "QML Units implementations are not longer supported";
+            }
+        } else {
+            qWarning(KirigamiLog) << "Failed to find a Kirigami platform plugin";
+        }
+
+        // Fall back to the default units implementation
+        return new Kirigami::Units(engine);
+    });
 
     qmlRegisterType(componentUrl(QStringLiteral("Action.qml")), uri, 2, 0, "Action");
     qmlRegisterType(componentUrl(QStringLiteral("AbstractApplicationHeader.qml")), uri, 2, 0, "AbstractApplicationHeader");

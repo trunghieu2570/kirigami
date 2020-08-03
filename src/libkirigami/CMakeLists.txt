@@ -6,6 +6,7 @@ set(libkirigami_SRCS
     kirigamipluginfactory.cpp
     tabletmodewatcher.cpp
     styleselector.cpp
+    units.cpp
 )
 
 #use dbus on linux, bsd etc, but not android and apple stuff
@@ -29,7 +30,7 @@ add_library(KF5::Kirigami2 ALIAS KF5Kirigami2)
 ecm_generate_export_header(KF5Kirigami2
     VERSION ${KF_VERSION}
     BASE_NAME Kirigami2
-    DEPRECATION_VERSIONS 5.80
+    DEPRECATION_VERSIONS 5.80 5.83
 )
 
 target_include_directories(KF5Kirigami2
@@ -57,6 +58,7 @@ ecm_generate_headers(Kirigami2_HEADERS
     PlatformTheme
     KirigamiPluginFactory
     TabletModeWatcher
+    Units
 
     REQUIRED_HEADERS Kirigami2_HEADERS
 )

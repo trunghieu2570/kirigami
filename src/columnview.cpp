@@ -17,6 +17,8 @@
 #include <QQmlEngine>
 #include <QStyleHints>
 
+#include "units.h"
+
 QHash<QObject *, ColumnViewAttached *> ColumnView::m_attachedObjects = QHash<QObject *, ColumnViewAttached *>();
 
 class QmlComponentsPoolSingleton
@@ -96,11 +98,11 @@ QtObject {
     m_rightSeparatorComponent = m_instance->property("rightSeparator").value<QQmlComponent *>();
     Q_ASSERT(m_rightSeparatorComponent);
 
-    m_units = m_instance->property("units").value<QObject *>();
+    m_units = engine->singletonInstance<Kirigami::Units *>(qmlTypeId("org.kde.kirigami", 2, 0, "Units"));
     Q_ASSERT(m_units);
 
-    connect(m_units, SIGNAL(gridUnitChanged()), this, SIGNAL(gridUnitChanged()));
-    connect(m_units, SIGNAL(longDurationChanged()), this, SIGNAL(longDurationChanged()));
+    connect(m_units, &Kirigami::Units::gridUnitChanged, this, &QmlComponentsPool::gridUnitChanged);
+    connect(m_units, &Kirigami::Units::longDurationChanged, this, &QmlComponentsPool::longDurationChanged);
 }
 
 QmlComponentsPool::~QmlComponentsPool()

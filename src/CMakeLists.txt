@@ -7,6 +7,7 @@ else()
         libkirigami/styleselector.cpp
         libkirigami/tabletmodewatcher.cpp
         libkirigami/kirigamipluginfactory.cpp
+        libkirigami/units.cpp
         ${CMAKE_CURRENT_BINARY_DIR}/libkirigami/loggingcategory.cpp)
 endif()
 

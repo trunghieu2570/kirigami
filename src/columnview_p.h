@@ -13,6 +13,9 @@
 
 class QPropertyAnimation;
 class QQmlComponent;
+namespace Kirigami {
+class Units;
+}
 
 class QmlComponentsPool : public QObject
 {
@@ -24,7 +27,7 @@ public:
 
     QQmlComponent *m_separatorComponent = nullptr;
     QQmlComponent *m_rightSeparatorComponent = nullptr;
-    QObject *m_units = nullptr;
+    Kirigami::Units *m_units = nullptr;
 
 Q_SIGNALS:
     void gridUnitChanged();

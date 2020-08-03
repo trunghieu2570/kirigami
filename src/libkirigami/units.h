@@ -1,28 +1,76 @@
 /*
+ *  SPDX-FileCopyrightText: 2021 Jonah Brüchert <jbb@kaidan.im>
  *  SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.4
-import QtQuick.Window 2.2
-import org.kde.kirigami 2.4
+#pragma once
 
-pragma Singleton
+#include <QObject>
+#include <memory>
 
-/**
- * A set of values to define semantically sizes and durations
- * @inherit QtQml.QtObject
- */
-QtObject {
-    id: units
+#include <kirigami2_export.h>
+
+class QQmlEngine;
+
+namespace Kirigami {
+class Units;
+class UnitsPrivate;
+
+class KIRIGAMI2_EXPORT IconSizes : public QObject
+{
+    Q_OBJECT
+
+    Q_PROPERTY(int sizeForLabels READ sizeForLabels NOTIFY sizeForLabelsChanged)
+    Q_PROPERTY(int small READ small NOTIFY smallChanged)
+    Q_PROPERTY(int smallMedium READ smallMedium NOTIFY smallMediumChanged)
+    Q_PROPERTY(int medium READ medium NOTIFY mediumChanged)
+    Q_PROPERTY(int large READ large NOTIFY largeChanged)
+    Q_PROPERTY(int huge READ huge NOTIFY hugeChanged)
+    Q_PROPERTY(int enormous READ enormous NOTIFY enormousChanged)
+
+public:
+    IconSizes(Units *units);
+
+    int sizeForLabels() const;
+    int small() const;
+    int smallMedium() const;
+    int medium() const;
+    int large() const;
+    int huge() const;
+    int enormous() const;
+
+    Q_INVOKABLE int roundedIconSize(int size) const;
+
+private:
+    float iconScaleFactor() const;
+
+    Units *m_units;
+
+Q_SIGNALS:
+    void sizeForLabelsChanged();
+    void smallChanged();
+    void smallMediumChanged();
+    void mediumChanged();
+    void largeChanged();
+    void hugeChanged();
+    void enormousChanged();
+};
+
+
+class KIRIGAMI2_EXPORT Units : public QObject
+{
+    Q_OBJECT
+
+    friend class IconSizes;
 
     /**
      * The fundamental unit of space that should be used for sizes, expressed in pixels.
      * Given the screen has an accurate DPI settings, it corresponds to the height of
      * the font's boundingRect.
      */
-    property int gridUnit: fontMetrics.height
+    Q_PROPERTY(int gridUnit READ gridUnit WRITE setGridUnit NOTIFY gridUnitChanged)
 
     /**
      * units.iconSizes provides access to platform-dependent icon sizing
@@ -38,15 +86,7 @@ QtObject {
      * * huge
      * * enormous
      */
-    property QtObject iconSizes: QtObject {
-        property int sizeForLabels: fontMetrics.roundedIconSize(fontMetrics.height)
-        property int small: fontMetrics.roundedIconSize(16 * devicePixelRatio)
-        property int smallMedium: fontMetrics.roundedIconSize(22 * devicePixelRatio)
-        property int medium: fontMetrics.roundedIconSize(32 * devicePixelRatio)
-        property int large: fontMetrics.roundedIconSize(48 * devicePixelRatio)
-        property int huge: fontMetrics.roundedIconSize(64 * devicePixelRatio)
-        property int enormous: 128 * devicePixelRatio
-    }
+    Q_PROPERTY(IconSizes *iconSizes READ iconSizes CONSTANT)
 
     /**
      * units.smallSpacing is the amount of spacing that should be used around smaller UI elements,
@@ -54,7 +94,7 @@ QtObject {
      * the default font as rendered on the screen, so it takes user-configured font size and DPI
      * into account.
      */
-    property int smallSpacing: Math.floor(gridUnit/4)
+    Q_PROPERTY(int smallSpacing READ smallSpacing WRITE setSmallSpacing NOTIFY smallSpacingChanged)
 
     /**
      * units.largeSpacing is the amount of spacing that should be used inside bigger UI elements,
@@ -62,7 +102,7 @@ QtObject {
      * the size of the default font as rendered on the screen, so it takes user-configured font
      * size and DPI into account.
      */
-    property int largeSpacing: smallSpacing * 2
+    Q_PROPERTY(int largeSpacing READ largeSpacing WRITE setLargeSpacing NOTIFY largeSpacingChanged)
 
     /**
      * The ratio between physical and device-independent pixels. This value does not depend on the \
@@ -70,38 +110,31 @@ QtObject {
      * use theme.mSize(theme.defaultFont), units.smallSpacing and units.largeSpacing.
      * The devicePixelRatio follows the definition of "device independent pixel" by Microsoft.
      */
-    property real devicePixelRatio: Math.max(1, ((fontMetrics.font.pixelSize*0.75) / fontMetrics.font.pointSize))
+    Q_PROPERTY(qreal devicePixelRatio READ devicePixelRatio NOTIFY devicePixelRatioChanged)
 
     /**
      * units.veryLongDuration should be used for specialty animations that benefit
      * from being even longer than longDuration.
      */
-    property int veryLongDuration: 400
+    Q_PROPERTY(int veryLongDuration READ veryLongDuration WRITE setVeryLongDuration NOTIFY veryLongDurationChanged)
 
     /**
      * units.longDuration should be used for longer, screen-covering animations, for opening and
      * closing of dialogs and other "not too small" animations
      */
-    property int longDuration: 200
+    Q_PROPERTY(int longDuration READ longDuration WRITE setLongDuration NOTIFY longDurationChanged)
 
     /**
      * units.shortDuration should be used for short animations, such as accentuating a UI event,
      * hover events, etc..
      */
-    property int shortDuration: 100
+    Q_PROPERTY(int shortDuration READ shortDuration WRITE setShortDuration NOTIFY shortDurationChanged)
 
     /**
      * units.veryShortDuration should be used for elements that should have a hint of smoothness,
      * but otherwise animate near instantly.
      */
-    property int veryShortDuration: 50
-
-    /**
-     * time in ms by which the display of tooltips will be delayed.
-     *
-     * @sa ToolTip.delay property
-     */
-    property int toolTipDelay: 700
+    Q_PROPERTY(int veryShortDuration READ veryShortDuration WRITE setVeryShortDuration NOTIFY veryShortDurationChanged)
 
     /**
      * Time in milliseconds equivalent to the theoretical human moment, which can be used
@@ -137,32 +170,98 @@ QtObject {
      * @since 5.81
      * @since org.kde.kirigami 2.16
      */
-    property int humanMoment: 2000
+    Q_PROPERTY(int humanMoment READ humanMoment WRITE setHumanMoment NOTIFY humanMomentChanged)
+
+    /**
+     * time in ms by which the display of tooltips will be delayed.
+     *
+     * @sa ToolTip.delay property
+     */
+    Q_PROPERTY(int toolTipDelay READ toolTipDelay WRITE setToolTipDelay NOTIFY toolTipDelayChanged)
 
     /**
      * How much the mouse scroll wheel scrolls, expressed in lines of text.
      * Note: this is strictly for classical mouse wheels, touchpads 2 figer scrolling won't be affected
      */
-    readonly property int wheelScrollLines: 3
+#if KIRIGAMI2_ENABLE_DEPRECATED_SINCE(5, 83)
+    Q_PROPERTY(int wheelScrollLines READ wheelScrollLines NOTIFY wheelScrollLinesChanged)
+#endif
 
     /**
      * metrics used by the default font
+     *
+     * @deprecated since 5.83.0, Create your own TextMetrics object if needed.
+     * For the roundedIconSize function, use Units.iconSizes.roundedIconSize instead
      */
-    property variant fontMetrics: FontMetrics {
-        function roundedIconSize(size) {
-            if (size < 16) {
-                return size;
-            } else if (size < 22) {
-                return 16;
-            } else if (size < 32) {
-                return 22;
-            } else if (size < 48) {
-                return 32;
-            } else if (size < 64) {
-                return 48;
-            } else {
-                return size;
-            }
-        }
-    }
+#if KIRIGAMI2_ENABLE_DEPRECATED_SINCE(5, 83)
+    Q_PROPERTY(QObject *fontMetrics READ fontMetrics CONSTANT)
+#endif
+
+public:
+    explicit Units(QObject *parent = nullptr);
+    ~Units();
+
+    int gridUnit() const;
+    void setGridUnit(int size);
+
+    int smallSpacing() const;
+    void setSmallSpacing(int size);
+
+    int largeSpacing() const;
+    void setLargeSpacing(int size);
+
+#if KIRIGAMI2_ENABLE_DEPRECATED_SINCE(5, 83)
+    // TODO KF6 remove
+    KIRIGAMI2_DEPRECATED_VERSION(5, 83, "When using Qt scaling, this would return a value of 1")
+    qreal devicePixelRatio() const;
+#endif
+
+    int veryLongDuration() const;
+    void setVeryLongDuration(int duration);
+
+    int longDuration() const;
+    void setLongDuration(int duration);
+
+    int shortDuration() const;
+    void setShortDuration(int duration);
+
+    int veryShortDuration() const;
+    void setVeryShortDuration(int duration);
+
+    int humanMoment() const;
+    void setHumanMoment(int duration);
+
+    int toolTipDelay() const;
+    void setToolTipDelay(int delay);
+
+#if KIRIGAMI2_ENABLE_DEPRECATED_SINCE(5, 83)
+    // TODO KF6 remove
+    KIRIGAMI2_DEPRECATED_VERSION(5, 83, "Use Qt.styleHints.wheelScrollLines instead")
+    int wheelScrollLines() const;
+    void setWheelScrollLines(int lines);
+#endif
+
+    IconSizes *iconSizes() const;
+
+Q_SIGNALS:
+    void gridUnitChanged();
+    void smallSpacingChanged();
+    void largeSpacingChanged();
+    void devicePixelRatioChanged();
+    void veryLongDurationChanged();
+    void longDurationChanged();
+    void shortDurationChanged();
+    void veryShortDurationChanged();
+    void humanMomentChanged();
+    void toolTipDelayChanged();
+    void wheelScrollLinesChanged();
+
+private:
+#if KIRIGAMI2_ENABLE_DEPRECATED_SINCE(5, 83)
+    QObject *fontMetrics() const;
+#endif
+
+    std::unique_ptr<UnitsPrivate> d;
+};
+
 }

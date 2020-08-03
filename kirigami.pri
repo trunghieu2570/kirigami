@@ -31,7 +31,8 @@ HEADERS     += $$PWD/src/kirigamiplugin.h \
                $$PWD/src/pagepool.h \
                $$PWD/src/avatar.h \
                $$PWD/src/toolbarlayout.h \
-               $$PWD/src/toolbarlayoutdelegate.h
+               $$PWD/src/toolbarlayoutdelegate.h \
+               $$PWD/src/libkirigami/units.h
 SOURCES     += $$PWD/src/kirigamiplugin.cpp \
                $$PWD/src/enums.cpp \
                $$PWD/src/settings.cpp \
@@ -63,7 +64,8 @@ SOURCES     += $$PWD/src/kirigamiplugin.cpp \
                $$PWD/src/pagepool.cpp \
                $$PWD/src/avatar.cpp \
                $$PWD/src/toolbarlayout.cpp \
-               $$PWD/src/toolbarlayoutdelegate.cpp
+               $$PWD/src/toolbarlayoutdelegate.cpp \
+               $$PWD/src/libkirigami/units.cpp
 
 INCLUDEPATH += $$PWD/src $$PWD/src/libkirigami
 DEFINES     += KIRIGAMI_BUILD_TYPE_STATIC

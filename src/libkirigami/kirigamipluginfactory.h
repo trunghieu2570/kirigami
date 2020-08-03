@@ -14,8 +14,11 @@
 #include <kirigami2_export.h>
 #endif
 
-namespace Kirigami
-{
+class QQmlEngine;
+
+namespace Kirigami {
+class Units;
+
 /**
  * @class KirigamiPluginFactory kirigamipluginfactory.h KirigamiPluginFactory
  *
@@ -40,8 +43,35 @@ public:
      * @param parent the parent object of the created PlatformTheme
      */
     virtual PlatformTheme *createPlatformTheme(QObject *parent) = 0;
+
+    /**
+     * finds the plugin providing units and platformtheme for the current style
+     * The plugin pointer is cached, so only the first call is a potentially heavy operation
+     * @return pointer to the KirigamiPluginFactory of the current style
+     */
+    static KirigamiPluginFactory *findPlugin();
 };
 
+// TODO KF6 unify KirigamiPluginFactory and KirigamiPluginFactoryV2 again
+#ifdef KIRIGAMI_BUILD_TYPE_STATIC
+class KirigamiPluginFactoryV2 : public KirigamiPluginFactory
+#else
+class KIRIGAMI2_EXPORT KirigamiPluginFactoryV2 : public KirigamiPluginFactory
+#endif
+{
+    Q_OBJECT
+
+public:
+    explicit KirigamiPluginFactoryV2(QObject *parent = nullptr);
+    ~KirigamiPluginFactoryV2();
+
+    /**
+     * Creates an instance of Units which can come from an implementation
+     * provided by a plugin
+     * @param parent the parent of the units object
+     */
+    virtual Units *createUnits(QObject *parent) = 0;
+};
 }
 
 QT_BEGIN_NAMESPACE
