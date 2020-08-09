@@ -16,27 +16,17 @@ Flickable {
 
     property Kirigami.PageRow pageRow: parent.pageRow
 
+    readonly property Item currentItem: mainLayout.children[pageRow.currentIndex]
+
     contentHeight: height
     contentWidth: mainLayout.width
     clip: true
     boundsBehavior: Flickable.StopAtBounds
     interactive: Kirigami.Settings.hasTransientTouchInput
 
-    Connections {
-        target: pageRow
-        function onCurrentIndexChanged() {
-            const currentItem = mainLayout.children[pageRow.currentIndex];
-            if (!currentItem)
-                return;
-
-            listScrollAnim.running = false
-            listScrollAnim.from = root.contentX;
-            listScrollAnim.to = Math.max( 0,
-                    Math.min(currentItem.x + currentItem.width/2 - root.width/2,
-                    root.contentWidth - root.width))
-            listScrollAnim.running = true;
-        }
-    }
+    contentX: Math.max( 0,
+        Math.min(currentItem.x + currentItem.width/2 - root.width/2,
+        root.contentWidth - root.width))
 
     RowLayout {
         id: mainLayout
@@ -95,12 +85,11 @@ Flickable {
         }
     }
 
-    NumberAnimation {
-        id: listScrollAnim
-        target: root
-        property: "contentX"
-        duration: Kirigami.Units.longDuration
-        easing.type: Easing.InOutQuad
+    Behavior on contentX {
+        NumberAnimation {
+            duration: Kirigami.Units.longDuration
+            easing.type: Easing.InOutQuad
+        }
     }
 }
 
