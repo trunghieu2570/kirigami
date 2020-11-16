@@ -391,7 +391,7 @@ Item {
             Layout.fillWidth: !root.wideMode
             wrapMode: Text.Wrap
 
-            Layout.topMargin: root.wideMode && item.Kirigami.FormData.buddyFor.parent != root ? item.Kirigami.FormData.buddyFor.y : (index === 0 ? 0 : Kirigami.Units.smallSpacing)
+            Layout.topMargin: root.wideMode && item.Kirigami.FormData.buddyFor.parent != root ? item.Kirigami.FormData.buddyFor.y : ((index === 0 || root.wideMode) ? 0 : Kirigami.Units.smallSpacing)
             onItemChanged: {
                 if (!item) {
                     labelItem.destroy();
