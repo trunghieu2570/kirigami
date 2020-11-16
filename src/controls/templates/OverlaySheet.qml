@@ -516,7 +516,7 @@ QtObject {
 
                 Behavior on height {
                     NumberAnimation {
-                        duration: Units.smallDuration
+                        duration: Units.shortDuration
                         easing.type: Easing.InOutCubic
                     }
                 }
