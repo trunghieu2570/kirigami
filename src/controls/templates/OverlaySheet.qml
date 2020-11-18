@@ -227,15 +227,17 @@ QtObject {
         }
         
         onPressed: {
-            var pos = mapToItem(contentLayout, mouse.x, mouse.y);
-            if (!contentLayout.contains(pos)) {
-                root.close();
-            } else if (mouseHover.hovered) { // only on mouse event, not touch
+            let pos = mapToItem(contentLayout, mouse.x, mouse.y);
+            if (contentLayout.contains(pos) && mouseHover.hovered) { // only on mouse event, not touch
                 // disable dragging the sheet with a mouse
                 outerFlickable.interactive = false
             }
         }
         onReleased: {
+            let pos = mapToItem(contentLayout, mouse.x, mouse.y);
+            if (!contentLayout.contains(pos)) {
+                root.close();
+            }
             // enable dragging of sheet once mouse is not clicked
             outerFlickable.interactive = true
         }
@@ -289,7 +291,7 @@ QtObject {
                 target: outerFlickable
                 properties: "contentY"
                 from: -outerFlickable.height
-                to: Math.max(0, outerFlickable.height - outerFlickable.contentHeight + headerItem.height + footerItem.height) + outerFlickable.topMargin/2 - contentLayout.height/2
+                to: outerFlickable.openPosition
                 duration: Units.longDuration
                 easing.type: Easing.OutQuad
             }
@@ -308,7 +310,7 @@ QtObject {
             properties: "contentY"
             from: outerFlickable.contentY
             to: outerFlickable.visibleArea.yPosition < (1 - outerFlickable.visibleArea.heightRatio)/2 || scrollView.flickableItem.contentHeight < outerFlickable.height
-                ? Math.max(0, outerFlickable.height - outerFlickable.contentHeight + headerItem.height + footerItem.height) + outerFlickable.topMargin/2 - contentLayout.height/2
+                ? outerFlickable.openPosition
                 : outerFlickable.contentHeight - outerFlickable.height + outerFlickable.topEmptyArea + headerItem.height + footerItem.height
             duration: Units.longDuration
             easing.type: Easing.OutQuad
@@ -391,10 +393,21 @@ QtObject {
 
         Connections {
             target: scrollView.flickableItem
+            property real oldContentHeight: 0
             onContentHeightChanged: {
                 if (openAnimation.running) {
                     openAnimation.running = false;
                     open();
+                } else {
+                    // repositioning is relevant only when the content height is less than the viewport height.
+                    // In that case the sheet looks like a dialog and shouldbe centered. there is also a corner case when now is bigger then the viewport but prior to the
+                    // resize event it was smaller, also in this case we need repositioning
+                    if (scrollView.flickableItem.contentHeight < outerFlickable.height
+                        || scrollView.flickableItem.oldContentHeight < outerFlickable.height
+                    ) {
+                        outerFlickable.adjustPosition();
+                    }
+                    oldContentHeight = scrollView.flickableItem.contentHeight
                 }
             }
         }
@@ -410,7 +423,16 @@ QtObject {
 
             readonly property int topEmptyArea: Math.max(height-scrollView.flickableItem.contentHeight, Units.gridUnit * 3)
 
+            readonly property real openPosition: Math.max(0, outerFlickable.height - outerFlickable.contentHeight + headerItem.height + footerItem.height) + height/2 - contentLayout.height/2;
+            onOpenPositionChanged: {
+                if (openAnimation.running) {
+                    openAnimation.running = false;
+                    root.open();
+                }
+            }
+
             property int oldContentY: NaN
+            property int oldContentHeight: 0
             property bool lastMovementWasDown: false
             property real startDraggingPos
             WheelHandler {
@@ -418,6 +440,10 @@ QtObject {
                 scrollFlickableTarget: false
             }
             
+            function adjustPosition() {
+                contentY = openPosition;
+            }
+
             // disable dragging the sheet with a mouse on header bar
             MouseArea {
                 anchors.fill: parent
@@ -493,15 +519,17 @@ QtObject {
             }
 
             onHeightChanged: {
-                if (scrollView.flickableItem.contentHeight < height) {
-                    contentYChanged();
-                }
+                adjustPosition();
             }
 
             onContentHeightChanged: {
-                if (scrollView.flickableItem.contentHeight < height) {
-                    contentYChanged();
+                // repositioning is relevant only when the content height is less than the viewport height.
+                // In that case the sheet looks like a dialog and shouldbe centered. there is also a corner case when now is bigger then the viewport but prior to the
+                // resize event it was smaller, also in this case we need repositioning
+                if (contentHeight < height || oldContentHeight < height) {
+                    adjustPosition();
                 }
+                oldContentHeight = contentHeight;
             }
 
             ColumnLayout {
