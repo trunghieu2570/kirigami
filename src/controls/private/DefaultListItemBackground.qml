@@ -35,13 +35,16 @@ Rectangle {
                                                && (!!listItem.ListView.view ? listItem.ListView.nextSection == listItem.ListView.section : true)
                                                // This is the last item in the list
                                                // TODO: implement this
+
+    property var leadingWidth
+
     Separator {
         anchors {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            leftMargin: Units.largeSpacing
-            rightMargin: Units.largeSpacing
+            leftMargin: background.leadingWidth != undefined ? background.leadingWidth : Units.largeSpacing
+            rightMargin: background.leadingWidth != undefined ? 0 : Units.largeSpacing
         }
         visible: background.__separatorVisible
         weight: Separator.Weight.Light
