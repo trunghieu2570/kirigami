@@ -118,8 +118,8 @@ Item {
 
             onContentYChanged: {
                 if(root.page && root.page.flickable && root.page.flickable.contentHeight < root.page.height) {
-                    return;
-                }
+                    return
+                }                
 
                 if ((root.pageRow ? root.pageRow.wideMode : (__appWindow && __appWindow.wideScreen)) || !Settings.isMobile || root.page.flickable.atYBeginning) {
                     root.implicitHeight = root.preferredHeight;
