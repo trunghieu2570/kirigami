@@ -118,8 +118,8 @@ Item {
 
             onContentYChanged: {
                 if(root.page && root.page.flickable && root.page.flickable.contentHeight < root.page.height) {
-                    return
-                }                
+                    return;
+                }
 
                 if ((root.pageRow ? root.pageRow.wideMode : (__appWindow && __appWindow.wideScreen)) || !Settings.isMobile || root.page.flickable.atYBeginning) {
                     root.implicitHeight = root.preferredHeight;
@@ -142,12 +142,10 @@ Item {
                     return;
                 }
                 if (root.height > root.minimumHeight + (root.preferredHeight - root.minimumHeight)/2 ) {
-                    heightAnim.to = root.preferredHeight;
+                    root.implicitHeight = root.preferredHeight;
                 } else {
-                    heightAnim.to = root.minimumHeight;
+                    root.implicitHeight = root.minimumHeight;
                 }
-                heightAnim.from = root.implicitHeight
-                heightAnim.restart();
             }
         }
         Connections {
