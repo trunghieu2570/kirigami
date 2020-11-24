@@ -191,7 +191,7 @@ P.ScrollView {
             flickableItem.anchors.leftMargin = leftPadding;
             flickableItem.anchors.topMargin = topPadding;
             flickableItem.anchors.rightMargin = rightPadding;
-            flickableItem.anchors.bottomMargin = bottomPadding;
+            flickableItem.anchors.bottomMargin = 0;
         }
     }
 }
