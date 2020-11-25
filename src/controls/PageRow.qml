@@ -591,7 +591,7 @@ T.Control {
 
         // Internal hidden api for Page
         readonly property Item __pageRow: root
-        acceptsMouse: false
+        acceptsMouse: Settings.isMobile
         columnResizeMode: root.wideMode ? ColumnView.FixedColumns : ColumnView.SingleColumn
         columnWidth: root.defaultColumnWidth
 
