@@ -26,6 +26,10 @@ QString AvatarPrivate::initialsFromString(const QString& string)
 
     auto normalized = string.normalized(QString::NormalizationForm_D);
 
+    if (normalized.startsWith(QLatin1Char('#')) || normalized.startsWith(QLatin1Char('@'))) {
+        normalized = normalized.remove(0, 1);
+    }
+
     // Names written with Han and Hangul characters generally can be initialised by taking the
     // first character
     if (contains(normalized, QChar::Script_Han) || contains(normalized, QChar::Script_Hangul)) {
