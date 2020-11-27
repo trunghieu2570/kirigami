@@ -137,7 +137,8 @@ QQC2.Control {
             fontSizeMode: Text.Fit
             visible: avatarRoot.initialsMode == Kirigami.Avatar.InitialsMode.UseInitials &&
                     !__private.showImage &&
-                    !AvatarPrivate.stringUnsuitableForInitials(avatarRoot.name)
+                    !AvatarPrivate.stringUnsuitableForInitials(avatarRoot.name) &&
+                    avatarRoot.width > Kirigami.Units.gridUnit
 
             text: AvatarPrivate.initialsFromString(name)
             color: __private.textColor
