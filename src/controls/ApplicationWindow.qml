@@ -85,7 +85,7 @@ AbstractApplicationWindow {
     id: root
 
     /**
-     * pageStack: StackView
+     * @var QtQuick.Control.StackView pageStack
      * Readonly.
      * The stack used to allocate the pages and to manage the transitions
      * between them.
