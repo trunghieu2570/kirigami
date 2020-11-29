@@ -13,19 +13,19 @@ import org.kde.kirigami 2.11 as Kirigami
  * An action used to load Pages coming from a common PagePool
  * in a PageRow or QtQuickControls2 StackView
  *
+ * @see PagePool
+ *
  * @inherit Action
  */
 Kirigami.Action {
     id: root
 
     /**
-     * page: string
      * Url or filename of the page this action will load
      */
     property string page
 
     /**
-     * pagePool: Kirigami.PagePool
      * The PagePool used by this PagePoolAction.
      * PagePool will make sure only one instance of the page identified by the page url will be created and reused.
      * PagePool's lastLoaderUrl property will be used to control the mutual
@@ -35,7 +35,7 @@ Kirigami.Action {
     property Kirigami.PagePool pagePool
 
     /**
-     * pageStack: Kirigami.PageRow or QtQuickControls2 StackView
+     * The pageStack property accepts either a Kirigami.PageRow or a QtQuickControls2 StackView.
      * The component that will instantiate the pages, which has to work with a stack logic.
      * Kirigami.PageRow is recommended, but will work with QtQuicControls2 StackView as well.
      * By default this property is binded to ApplicationWindow's global
@@ -44,7 +44,6 @@ Kirigami.Action {
     property Item pageStack: typeof applicationWindow != undefined ? applicationWindow().pageStack : null
 
     /**
-     * basePage: Kirigami.Page
      * The page of pageStack new pages will be pushed after.
      * All pages present after the given basePage will be removed from the pageStack
      */
@@ -57,7 +56,7 @@ Kirigami.Action {
       */
     property var initialProperties
 
-    /** useLayers: bool
+    /** 
       * @since 5.70
       * @since org.kde.kirigami 2.12
       * When true the PagePoolAction will use the layers property of the pageStack.
@@ -67,14 +66,14 @@ Kirigami.Action {
     property bool useLayers: false
 
     /**
-      * Retrieve the page item held in the PagePool or null if it has not been loaded yet.
+      * @returns the page item held in the PagePool or null if it has not been loaded yet.
       */
     function pageItem() {
         return pagePool.pageForUrl(page)
     }
 
     /**
-      * Return true if the page has been loaded and placed on pageStack.layers
+      * @returns true if the page has been loaded and placed on pageStack.layers
       * and useLayers is true, otherwise returns null.
       */
     function layerContainsPage() {
@@ -87,7 +86,7 @@ Kirigami.Action {
     }
 
     /**
-      * Return true if the page has been loaded and placed on the pageStack,
+      * @returns true if the page has been loaded and placed on the pageStack,
       * otherwise returns null.
       */
     function stackContainsPage() {
