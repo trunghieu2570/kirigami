@@ -30,7 +30,7 @@ Item {
     property int maximumHeight: Units.gridUnit * 3
 
     property int position: Controls.ToolBar.Header
-    
+
     property PageRow pageRow: __appWindow ? __appWindow.pageStack: null
     property Page page: pageRow ? pageRow.currentItem : null
 
@@ -122,7 +122,7 @@ Item {
             onContentYChanged: {
                 if(root.page && root.page.flickable && root.page.flickable.contentHeight < root.page.height) {
                     return
-                }                
+                }
 
                 if ((root.pageRow ? root.pageRow.wideMode : (__appWindow && __appWindow.wideScreen)) || !Settings.isMobile || root.page.flickable.atYBeginning) {
                     root.implicitHeight = root.preferredHeight;
