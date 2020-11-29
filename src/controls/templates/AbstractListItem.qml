@@ -22,7 +22,7 @@ T2.ItemDelegate {
     id: listItem
 
     /**
-     * supportsMouseEvents: bool
+     * @deprecated
      * Holds if the item emits signals related to mouse interaction.
      *TODO: remove
      * The default value is false.
@@ -30,7 +30,7 @@ T2.ItemDelegate {
     property bool supportsMouseEvents: hoverEnabled
 
     /**
-     * containsMouse: bool
+     * @var bool containsMouse
      * True when the user hovers the mouse over the list item
      * NOTE: on mobile touch devices this will be true only when pressed is also true
      * TODO: remove?
@@ -38,7 +38,6 @@ T2.ItemDelegate {
     property alias containsMouse: listItem.hovered
 
     /**
-     * alternatingBackground: bool
      * If true the background of the list items will be alternating between two
      * colors, helping readability with multiple column views.
      * Use it only when implementing a view which shows data visually in multiple columns
@@ -47,21 +46,18 @@ T2.ItemDelegate {
     property bool alternatingBackground: false
 
     /**
-     * sectionDelegate: bool
      * If true the item will be a delegate for a section, so will look like a
      * "title" for the items under it.
      */
     property bool sectionDelegate: false
 
     /**
-     * separatorVisible: bool
      * True if the separator between items is visible
      * default: true
      */
     property bool separatorVisible: true
 
     /**
-     * textColor: color
      * Color for the text in the item
      * It is advised to leave the default value (Theme.textColor)
      *
@@ -71,14 +67,12 @@ T2.ItemDelegate {
     property color textColor: Theme.textColor
 
     /**
-     * backgroundColor: color
      * Color for the background of the item
      * It is advised to leave the default value (Theme.viewBackgroundColor)
      */
     property color backgroundColor: "transparent"
 
     /**
-     * alternateBackgroundColor: color
      * The background color to use if alternatingBackground is true.
      * It is advised to leave the default.
      * @since 2.7
@@ -86,7 +80,6 @@ T2.ItemDelegate {
     property color alternateBackgroundColor: Theme.alternateBackgroundColor
 
     /**
-     * activeTextColor: color
      * Color for the text in the item when pressed or selected
      * It is advised to leave the default value (Theme.highlightedTextColor)
      *
@@ -96,7 +89,6 @@ T2.ItemDelegate {
     property color activeTextColor: Theme.highlightedTextColor
 
     /**
-     * activeBackgroundColor: color
      * Color for the background of the item when pressed or selected
      * It is advised to leave the default value (Theme.highlightColor)
      */

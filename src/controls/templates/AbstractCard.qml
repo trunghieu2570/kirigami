@@ -26,27 +26,24 @@ T.ItemDelegate {
     id: root
 
     /**
-     * header: Item
      * This item serves as header, it will be put either on top if headerOrientation
      * is Qt.Vertical(default) or on the left if it's Qt.Horizontal
      */
     property Item header
 
     /**
-     * headerOrientation: Qt.Orientation
+     * @var Qt.Orientation headerOrientation
      * If Qt.Vertical the header will be positioned on top(default),
      * if Qt.Horizontal will be positioned on the left (or right if an RTL layout is used)
      */
     property int headerOrientation: Qt.Vertical
 
     /**
-     * footer: Item
      * This item serves as footer, and it will be positioned at the bottom of the card.
      */
     property Item footer
 
     /**
-     * showClickFeedback: bool
      * if true, when clicking or tapping on the card area, the card will be colored
      * to show a visual click feedback.
      * Use this if you want to do an action in the onClicked signal handler of the card.

@@ -43,23 +43,22 @@ T2.SwipeDelegate {
     id: listItem
 
     /**
-     * supportsMouseEvents: bool
      * Holds if the item emits signals related to mouse interaction.
-     *TODO: remove
      * The default value is false.
+     * @var bool supportsMouseEvents
+     * @deprcated Use hoverEnabled instead.
      */
     property alias supportsMouseEvents: listItem.hoverEnabled
 
     /**
-     * containsMouse: bool
      * True when the user hover the mouse over the list item
      * NOTE: on mobile touch devices this will be true only when pressed is also true
-     * KF6: remove
+     * @var bool containsMouse
+     * @deprecated Use hovered instead.
      */
     property alias containsMouse: listItem.hovered
 
     /**
-     * alternatingBackground: bool
      * If true the background of the list items will be alternating between two
      * colors, helping readability with multiple column views.
      * Use it only when implementing a view which shows data visually in multiple columns
@@ -68,21 +67,18 @@ T2.SwipeDelegate {
     property bool alternatingBackground: false
 
     /**
-     * sectionDelegate: bool
      * If true the item will be a delegate for a section, so will look like a
      * "title" for the items under it.
      */
     property bool sectionDelegate: false
 
     /**
-     * separatorVisible: bool
      * True if the separator between items is visible
      * default: true
      */
     property bool separatorVisible: true
 
     /**
-     * actionsVisible: bool
      * True if it's possible to see and access the item actions.
      * Actions should go completely out of the way for instance during
      * the editing of an item.
@@ -91,7 +87,7 @@ T2.SwipeDelegate {
     readonly property bool actionsVisible: actionsLayout.hasVisibleActions
 
     /**
-     * actions: list<Action>
+     * @var list<QtQuick.Controls.Action> actions
      * Defines the actions for the list item: at most 4 buttons will
      * contain the actions for the item, that can be revealed by
      * sliding away the list item.
@@ -103,7 +99,7 @@ T2.SwipeDelegate {
      * Color for the text in the item
      *
      * Note: if custom text elements are inserted in an AbstractListItem,
-     * their color property will have to be manually bound with this property
+     * their color property will have to be manually bound with this property.
      */
     property color textColor: Kirigami.Theme.textColor
 
@@ -147,6 +143,8 @@ T2.SwipeDelegate {
     property bool alwaysVisibleActions: false
 
     //TODO KF6 remove this super wrong thing
+    /// @private
+    /// @deprecated This property will be removed in KDE Framework 6. Use contentItem instead.
     default property alias _default: listItem.contentItem
 
     LayoutMirroring.childrenInherit: true
