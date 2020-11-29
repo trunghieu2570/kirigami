@@ -24,19 +24,16 @@ T2.Drawer {
 
 //BEGIN Properties
     /**
-     * drawerOpen: bool
      * true when the drawer is open and visible
      */
     property bool drawerOpen: false
 
     /**
-     * enabled: bool
      * This property holds whether the item receives mouse and keyboard events. By default this is true.
      */
     property bool enabled: true
 
     /**
-     * peeking: true
      * When true the drawer is in a state between open and closed. the drawer is visible but not completely open.
      * This is usually the case when the user is dragging the drawer from a screen
      * edge, so the user is "peeking" what's in the drawer
@@ -44,13 +41,11 @@ T2.Drawer {
     property bool peeking: false
 
     /**
-     * animating: Bool
      * True during an animation of a drawer either opening or closing
      */
     readonly property bool animating : enterAnimation.animating || exitAnimation.animating || positionResetAnim.running
 
     /**
-     * collapsible: Bool
      * When true, the drawer can be collapsed to a very thin, usually icon only sidebar.
      * Only modal drawers are collapsible.
      * Collapsible is not supported in Mobile mode
@@ -59,7 +54,6 @@ T2.Drawer {
     property bool collapsible: false
 
     /**
-     * collapsed: bool
      * When true, the drawer will be collapsed to a very thin sidebar,
      * usually icon only.
      * Only collapsible drawers can be collapsed
@@ -67,7 +61,6 @@ T2.Drawer {
     property bool collapsed: false
 
     /**
-     * collapsedSize: int
      * When collapsed, the drawer will be resized to this size
      * (which may be width for vertical drawers or height for
      * horizontal drawers).
@@ -108,16 +101,15 @@ T2.Drawer {
     }
 
     /**
-     * handleVisible: bool
      * If true, a little handle will be visible to make opening the drawer easier
      * Currently supported only on left and right drawers
      */
     property bool handleVisible: typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true
 
     /**
-     * handle: Item
      * Readonly property that points to the item that will act as a physical
      * handle for the Drawer
+     * @var MouseArea handle
      **/
     readonly property Item handle: MouseArea {
         id: drawerHandle
