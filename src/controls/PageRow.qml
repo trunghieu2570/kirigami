@@ -14,6 +14,7 @@ import "private/globaltoolbar" as GlobalToolBar
 import "templates" as KT
 
 /**
+ * @inherits QtQuick.Controls.Control
  * PageRow implements a row-based navigation model, which can be used
  * with a set of interlinked information pages. Items are pushed in the
  * back of the row and the view scrolls until that row is visualized.
@@ -27,37 +28,42 @@ T.Control {
 
 //BEGIN PROPERTIES
     /**
-     * This property holds the number of items currently pushed onto the view
+     * This property holds the number of items currently pushed onto the view.
+     * @var int depth
      */
     property alias depth: columnView.count
 
     /**
-     * The last Page in the Row
+     * The last Page in the Row.
      */
     readonly property Item lastItem: columnView.contentChildren.length > 0 ?  columnView.contentChildren[columnView.contentChildren.length - 1] : null
 
     /**
-     * The currently visible Item
+     * The currently visible Item.
+     * @var Item currentItem
      */
     property alias currentItem: columnView.currentItem
 
     /**
-     * the index of the currently visible Item
+     * The index of the currently visible Item.
+     * @var int currentIndex
      */
     property alias currentIndex: columnView.currentIndex
 
     /**
-     * The initial item when this PageRow is created
+     * The initial item when this PageRow is created.
+     * @var Page initialPage
      */
     property variant initialPage
 
     /**
-     * The main ColumnView of this Row
+     * The main ColumnView of this Row.
+     * @var Item contentItem
      */
     contentItem: columnView
 
     /**
-     * columnView: Kirigami::ColumnView
+     * @var ColumnView columnView
      *
      * The ColumnView that this PageRow owns.
      * Generally, you shouldn't need to change
@@ -68,28 +74,28 @@ T.Control {
     property alias columnView: columnView
 
     /**
-     * items: list<Item>
-     * All the items that are present in the PageRow
+     * @var list<Item> items
+     * All the items that are present in the PageRow.
      * @since 2.6
      */
     property alias items: columnView.contentChildren;
 
     /**
-     * visibleItems: list<Item>
+     * @var list<Item> visibleItems
      * All pages which are visible in the PageRow, excluding those which are scrolled away
      * @since 2.6
      */
     property alias visibleItems: columnView.visibleItems
 
     /**
-     * firstVisibleItem: Item
+     * @var Item firstVisibleItem
      * The first at least partially visible page in the PageRow, pages before that one will be out of the viewport
      * @since 2.6
      */
     property alias firstVisibleItem: columnView.firstVisibleItem
 
     /**
-     * lastVisibleItem: Item
+     * @var Item lastVisibleItem
      * The last at least partially visible page in the PageRow, pages after that one will be out of the viewport
      * @since 2.6
      */
@@ -104,7 +110,7 @@ T.Control {
     property int defaultColumnWidth: Units.gridUnit * 20
 
     /**
-     * interactive: bool
+     * @var bool interactive
      * If true it will be possible to go back/forward by dragging the
      * content themselves with a gesture.
      * Otherwise the only way to go back will be programmatically
@@ -113,14 +119,13 @@ T.Control {
     property alias interactive: columnView.interactive
 
     /**
-     * wideMode: bool
      * If true, the PageRow is wide enough that willshow more than one column at once
      * @since 5.37
      */
     readonly property bool wideMode: root.width >= root.defaultColumnWidth*2 && depth >= 2
 
     /**
-     * separatorVisible: bool
+     * @var bool separatorVisible
      * True if the separator between pages should be visible
      * default: true
      * @since 5.38
@@ -377,7 +382,7 @@ T.Control {
     }
 
     /**
-     * go back to the previous index and scroll to the left to show one more column
+     * Go back to the previous index and scroll to the left to show one more column.
      */
     function flickBack() {
         if (depth > 1) {
@@ -386,7 +391,7 @@ T.Control {
     }
 
     /**
-     * layers: QtQuick.Controls.StackView
+     * @var QtQuick.Controls.StackView layers
      * Access to the modal layers.
      * Sometimes an application needs a modal page that always covers all the rows.
      * For instance the full screen image of an image viewer or a settings page.
