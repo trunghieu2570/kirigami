@@ -78,7 +78,9 @@ Item {
         if (headerItem.oldPage) {
             headerItem.oldPage.ColumnView.scrollIntention.disconnect(headerItem.scrollIntentHandler);
         }
-        root.page.ColumnView.scrollIntention.connect(headerItem.scrollIntentHandler);
+        if (root.page) {
+            root.page.ColumnView.scrollIntention.connect(headerItem.scrollIntentHandler);
+        }
         headerItem.oldPage = root.page;
     }
     Component.onDestruction: {
