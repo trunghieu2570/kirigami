@@ -119,14 +119,17 @@ Item {
         function scrollIntentHandler(event) {
             if (root.pageRow
                 && root.pageRow.globalToolBar.actualStyle !== ApplicationHeaderStyle.TabBar
-                && root.pageRow.globalToolBar.actualStyle != ApplicationHeaderStyle.Breadcrumb) {
+                && root.pageRow.globalToolBar.actualStyle !== ApplicationHeaderStyle.Breadcrumb) {
+                return;
+            }
+            if (!root.page.flickable || (root.page.flickable.atYBeginning && root.page.flickable.atYEnd)) {
                 return;
             }
 
             root.implicitHeight = Math.max(0, Math.min(root.preferredHeight, root.implicitHeight + event.delta.y))
             event.accepted = root.implicitHeight > 0 && root.implicitHeight < root.preferredHeight;
             slideResetTimer.restart();
-            if (root.page.flickable && (root.page.flickable instanceof ListView) && root.page.flickable.verticalLayoutDirection === ListView.BottomToTop) {
+            if ((root.page.flickable instanceof ListView) && root.page.flickable.verticalLayoutDirection === ListView.BottomToTop) {
                 root.page.flickable.contentY -= event.delta.y;
             }
         }

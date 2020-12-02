@@ -731,6 +731,7 @@ ColumnView::ColumnView(QQuickItem *parent)
     //NOTE: this is to *not* trigger itemChange
     m_contentItem = new ContentItem(this);
     setAcceptedMouseButtons(Qt::LeftButton | Qt::BackButton | Qt::ForwardButton);
+    setAcceptTouchEvents(false); // Relies on synthetized mouse events
     setFiltersChildMouseEvents(true);
 
     connect(m_contentItem->m_slideAnim, &QPropertyAnimation::finished, this, [this] () {
@@ -1293,6 +1294,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
 
             if (scrollIntentionEvent.accepted) {
                 verticalScrollIntercepted = true;
+                event->setAccepted(true);
             }
         }
 
@@ -1300,7 +1302,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
             m_contentItem->snapToItem();
             m_oldMouseX = pos.x();
             m_oldMouseY = pos.y();
-            return verticalScrollIntercepted;
+            return false;
         }
 
         const bool wasDragging = m_dragging;
@@ -1324,7 +1326,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
         setKeepMouseGrab(m_dragging);
         me->setAccepted(m_dragging);
 
-        return m_dragging || verticalScrollIntercepted;
+        return m_dragging && !verticalScrollIntercepted;
         break;
     }
     case QEvent::MouseButtonRelease: {
