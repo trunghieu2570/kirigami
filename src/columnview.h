@@ -68,6 +68,12 @@ class ColumnViewAttached : public QObject
      */
     Q_PROPERTY(ColumnView *view READ view NOTIFY viewChanged)
 
+    /**
+     * True if this column is at least partly visible in the ColumnView's viewport.
+     * @since 5.77
+     */
+    Q_PROPERTY(bool inViewport READ inViewport NOTIFY inViewportChanged)
+
 public:
     ColumnViewAttached(QObject *parent = nullptr);
     ~ColumnViewAttached();
@@ -97,6 +103,9 @@ public:
     bool isPinned() const;
     void setPinned(bool pinned);
 
+    bool inViewport() const;
+    void setInViewport(bool inViewport);
+
 Q_SIGNALS:
     void indexChanged();
     void fillWidthChanged();
@@ -105,6 +114,7 @@ Q_SIGNALS:
     void preventStealingChanged();
     void pinnedChanged();
     void scrollIntention(ScrollIntentionEvent *event);
+    void inViewportChanged();
 
 private:
     int m_index = -1;
@@ -117,6 +127,7 @@ private:
     bool m_shouldDeleteOnRemove = true;
     bool m_preventStealing = false;
     bool m_pinned = false;
+    bool m_inViewport = false;
 };
 
 /**

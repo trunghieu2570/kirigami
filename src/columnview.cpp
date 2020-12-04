@@ -273,6 +273,22 @@ void ColumnViewAttached::setPinned(bool pinned)
     }
 }
 
+bool ColumnViewAttached::inViewport() const
+{
+    return m_inViewport;
+}
+
+void ColumnViewAttached::setInViewport(bool inViewport)
+{
+    if (m_inViewport == inViewport) {
+        return;
+    }
+
+    m_inViewport = inViewport;
+
+    emit inViewportChanged();
+}
+
 
 
 /////////
@@ -525,11 +541,16 @@ void ContentItem::updateVisibleItems()
     QList <QObject *> newItems;
 
     for (auto *item : qAsConst(m_items)) {
-        if (item->isVisible() && item->x() + x() < width() && item->x() + item->width() + x() > 0) {
+        ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
+
+        if (item->isVisible() && item->x() + x() < m_view->width() && item->x() + item->width() + x() > 0) {
             newItems << item;
             connect(item, &QObject::destroyed, this, [this, item] {
                 m_visibleItems.removeAll(item);
             });
+            attached->setInViewport(true);
+        } else {
+            attached->setInViewport(false);
         }
     }
 
