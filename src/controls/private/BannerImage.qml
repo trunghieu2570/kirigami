@@ -125,6 +125,7 @@ Kirigami.ShadowedImage {
             id: heading
             Layout.fillWidth: true
             Layout.fillHeight: true
+            verticalAlignment: Text.AlignVCenter
             visible: text.length > 0
             level: 1
             color: source != "" ? "white" : Kirigami.Theme.textColor
