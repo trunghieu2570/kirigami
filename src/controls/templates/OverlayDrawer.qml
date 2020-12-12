@@ -12,10 +12,10 @@ import "private"
 /**
  * Overlay Drawers are used to expose additional UI elements needed for
  * small secondary tasks for which the main UI elements are not needed.
- * For example in Okular Active, an Overlay Drawer is used to display
+ * For example in Okular Mobile, an Overlay Drawer is used to display
  * thumbnails of all pages within a document along with a search field.
  * This is used for the distinct task of navigating to another page.
- * @inherits: QtQuick.Templates.Drawer
+ * @inherits: QtQuick.Controls.Drawer
  */
 T2.Drawer {
     id: root
