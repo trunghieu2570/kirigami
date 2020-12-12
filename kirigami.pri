@@ -26,6 +26,7 @@ HEADERS     += $$PWD/src/kirigamiplugin.h \
                $$PWD/src/wheelhandler.h \
                $$PWD/src/shadowedrectangle.h \
                $$PWD/src/shadowedtexture.h \
+               $$PWD/src/sizegroup.h \
                $$PWD/src/pagerouter.h \
                $$PWD/src/pagepool.h \
                $$PWD/src/avatar.h \
@@ -57,6 +58,7 @@ SOURCES     += $$PWD/src/kirigamiplugin.cpp \
                $$PWD/src/wheelhandler.cpp \
                $$PWD/src/shadowedrectangle.cpp \
                $$PWD/src/shadowedtexture.cpp \
+               $$PWD/src/sizegroup.cpp \
                $$PWD/src/pagerouter.cpp \
                $$PWD/src/pagepool.cpp \
                $$PWD/src/avatar.cpp \
