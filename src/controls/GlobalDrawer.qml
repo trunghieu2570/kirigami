@@ -518,13 +518,16 @@ OverlayDrawer {
                                         Theme.colorSet: root.modal ? Theme.View : Theme.Window
                                         contentItem: RowLayout {
                                             Icon {
-                                                height: header.height
-                                                width: height
+                                                property int size: Units.iconSizes.smallMedium
+                                                Layout.minimumHeight: size
+                                                Layout.maximumHeight: size
+                                                Layout.minimumWidth: size
+                                                Layout.maximumWidth: size
                                                 source: modelData.icon.name || modelData.icon.source
                                             }
                                             Heading {
                                                 id: header
-                                                level: 3
+                                                level: 4
                                                 text: modelData.text
                                             }
                                             Item {
@@ -540,13 +543,6 @@ OverlayDrawer {
                                         width: parent.width
                                         opacity: !root.collapsed
                                         leftPadding: actionsRepeater.withSections && !root.collapsed && !root.modal ? padding * 2 : padding * 4
-                                    }
-                                }
-                                Separator {
-                                    visible: __repeater.count > 0
-                                    anchors {
-                                        left: parent.left
-                                        right: parent.right
                                     }
                                 }
                             }
