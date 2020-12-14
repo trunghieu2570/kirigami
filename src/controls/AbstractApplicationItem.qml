@@ -191,7 +191,8 @@ Item {
             menuBar.position = T.DialogButtonBox.Footer
         }
         menuBar.width = Qt.binding(() => root.contentItem.width)
-        menuBar.y = Qt.binding(() => -menuBar.height - (root.header.height ?? 0))
+        //FIXME: (root.header.height ?? 0) when we can depend from 5.15
+        menuBar.y = Qt.binding(() => -menuBar.height - (root.header.height ? root.header.height : 0))
     }
 
    /**
