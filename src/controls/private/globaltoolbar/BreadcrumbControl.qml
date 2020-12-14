@@ -25,6 +25,9 @@ Flickable {
         target: pageRow
         onCurrentIndexChanged: {
             var currentItem = mainLayout.children[pageRow.currentIndex];
+            if (!currentItem)
+                return;
+
             listScrollAnim.running = false
             listScrollAnim.from = root.contentX;
             listScrollAnim.to = Math.max( 0,

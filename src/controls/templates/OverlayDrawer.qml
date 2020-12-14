@@ -186,7 +186,7 @@ T2.Drawer {
                     margin = applicationWindow().footer.height + Units.smallSpacing;
                 }
 
-                if(root.height < root.parent.height) {
+                if(root.parent && root.height < root.parent.height) {
                     margin = root.parent.height - root.height - root.y + Units.smallSpacing;
                 }
 
@@ -263,7 +263,7 @@ T2.Drawer {
 
     y: modal ? 0 : ((T2.ApplicationWindow.menuBar ? T2.ApplicationWindow.menuBar.height : 0) + (T2.ApplicationWindow.header ? T2.ApplicationWindow.header.height : 0))
 
-    height: root.edge == Qt.LeftEdge || root.edge == Qt.RightEdge ? (modal ? parent.height : (parent.height - y - (T2.ApplicationWindow.footer ? T2.ApplicationWindow.footer.height : 0))) : implicitHeight
+    height: parent && (root.edge == Qt.LeftEdge || root.edge == Qt.RightEdge) ? (modal ? parent.height : (parent.height - y - (T2.ApplicationWindow.footer ? T2.ApplicationWindow.footer.height : 0))) : implicitHeight
 
     parent: modal || edge === Qt.LeftEdge || edge === Qt.RightEdge ? T2.ApplicationWindow.overlay : T2.ApplicationWindow.contentItem
 
