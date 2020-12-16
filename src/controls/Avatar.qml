@@ -126,10 +126,14 @@ QQC2.Control {
     background: Rectangle {
         radius: parent.width / 2
 
-        gradient: Gradient {
+        readonly property Gradient colouredGradient: Gradient {
             GradientStop { position: 0.0; color: __private.backgroundColor }
             GradientStop { position: 1.0; color: Kirigami.ColorUtils.scaleColor(__private.backgroundColor, {lightness: -35.0}) }
         }
+
+        color: __private.showImage ? Kirigami.Theme.backgroundColor : undefined
+        gradient: __private.showImage ? undefined : colouredGradient
+
         MouseArea {
             id: primaryMouse
 
@@ -235,7 +239,7 @@ QQC2.Control {
                 height: avatarRoot.height
             }
 
-            fillMode: Image.PreserveAspectFit
+            fillMode: Image.PreserveAspectCrop
             anchors.fill: parent
         }
 
