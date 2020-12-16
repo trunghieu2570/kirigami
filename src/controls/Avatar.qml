@@ -94,14 +94,7 @@ QQC2.Control {
     property AvatarGroup actions: AvatarGroup {}
 
     property P.BorderPropertiesGroup border: P.BorderPropertiesGroup {
-        width: {
-            if (avatarRoot.width < Kirigami.Units.iconSizes.small) {
-                return 0
-            } else if (Kirigami.Units.iconSizes.small <= avatarRoot.width && avatarRoot.width < Kirigami.Units.iconSizes.medium) {
-                return 1
-            }
-            return 2
-        }
+        width: 0
         color: Qt.rgba(0,0,0,0.2)
     }
 
@@ -127,8 +120,8 @@ QQC2.Control {
         radius: parent.width / 2
 
         readonly property Gradient colouredGradient: Gradient {
-            GradientStop { position: 0.0; color: __private.backgroundColor }
-            GradientStop { position: 1.0; color: Kirigami.ColorUtils.scaleColor(__private.backgroundColor, {lightness: -35.0}) }
+            GradientStop { position: 0.0; color: Qt.lighter(__private.backgroundColor, 1.2) }
+            GradientStop { position: 1.0; color: Qt.darker(__private.backgroundColor, 1.3) }
         }
 
         color: __private.showImage ? Kirigami.Theme.backgroundColor : undefined
