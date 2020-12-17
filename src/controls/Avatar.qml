@@ -74,11 +74,15 @@ QQC2.Control {
     property alias smooth: avatarImage.smooth
 
     /**
+     *
+     */
+
+    /**
      * color: color
      *
-     * The color to use for this avatar.
+     * The color to use for this avatar. If not explicitly set, this defaults to generating a colour from the name.
      */
-    property var color: undefined
+    property var color: AvatarPrivate.colorsFromString(name)
     // We use a var instead of a color here to allow setting the colour
     // as undefined, which will result in a generated colour being used.
 
@@ -120,8 +124,8 @@ QQC2.Control {
         radius: parent.width / 2
 
         readonly property Gradient colouredGradient: Gradient {
-            GradientStop { position: 0.0; color: Qt.lighter(__private.backgroundColor, 1.2) }
-            GradientStop { position: 1.0; color: Qt.darker(__private.backgroundColor, 1.3) }
+            GradientStop { position: 0.0; color: Qt.lighter(avatarRoot.color, 1.2) }
+            GradientStop { position: 1.0; color: Qt.darker(avatarRoot.color, 1.3) }
         }
 
         color: __private.showImage ? Kirigami.Theme.backgroundColor : undefined
@@ -170,15 +174,7 @@ QQC2.Control {
 
     QtObject {
         id: __private
-        // This property allows us to fall back to colour generation if
-        // the root colour property is undefined.
-        property color backgroundColor: {
-            if (!!avatarRoot.color) {
-                return avatarRoot.color
-            }
-            return AvatarPrivate.colorsFromString(name)
-        }
-        property color textColor: Kirigami.ColorUtils.brightnessForColor(__private.backgroundColor) == Kirigami.ColorUtils.Light
+        property color textColor: Kirigami.ColorUtils.brightnessForColor(avatarRoot.color) == Kirigami.ColorUtils.Light
                                 ? "black"
                                 : "white"
         property bool showImage: {
