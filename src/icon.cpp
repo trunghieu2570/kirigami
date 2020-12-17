@@ -248,8 +248,10 @@ void Icon::handleFinished(QNetworkReply* reply)
         qWarning() << "received broken image" << reply->url();
 
         // broken image from data, inform the user of this with some useful broken-image thing...
-        m_loadedImage = QIcon::fromTheme(m_fallback).pixmap(window(), QSize(width(), height()), iconMode(), QIcon::On).toImage();
+        const QIcon icon = QIcon::fromTheme(m_fallback);
+        m_loadedImage = icon.pixmap(window(), icon.actualSize(size().toSize()), iconMode(), QIcon::On).toImage();
     }
+
     polish();
 }
 
@@ -279,9 +281,11 @@ void Icon::updatePolish()
         case QVariant::Bitmap:
             m_icon = m_source.value<QBitmap>().toImage();
             break;
-        case QVariant::Icon:
-            m_icon = m_source.value<QIcon>().pixmap(window(), itemSize, iconMode(), QIcon::On).toImage();
+        case QVariant::Icon: {
+            const QIcon icon = m_source.value<QIcon>();
+            m_icon = icon.pixmap(window(), icon.actualSize(itemSize), iconMode(), QIcon::On).toImage();
             break;
+        }
         case QVariant::Url:
         case QVariant::String:
             m_icon = findIcon(size);
@@ -360,7 +364,8 @@ QImage Icon::findIcon(const QSize &size)
                     }
                     if (m_loadedImage.isNull()) {
                         // broken image from data, inform the user of this with some useful broken-image thing...
-                        m_loadedImage = QIcon::fromTheme(m_fallback).pixmap(window(), QSize(width(), height()), iconMode(), QIcon::On).toImage();
+                        const QIcon icon = QIcon::fromTheme(m_fallback);
+                        m_loadedImage = icon.pixmap(window(), icon.actualSize(QSize(width(), height())), iconMode(), QIcon::On).toImage();
                         setStatus(Error);
                     } else {
                         setStatus(Ready);
@@ -369,7 +374,8 @@ QImage Icon::findIcon(const QSize &size)
                 }
             });
             // Temporary icon while we wait for the real image to load...
-            img = QIcon::fromTheme(m_placeholder).pixmap(window(), size, iconMode(), QIcon::On).toImage();
+            const QIcon icon = QIcon::fromTheme(m_placeholder);
+            img = icon.pixmap(window(), icon.actualSize(size), iconMode(), QIcon::On).toImage();
             break;
         }
         case QQmlImageProviderBase::Texture:
@@ -380,7 +386,8 @@ QImage Icon::findIcon(const QSize &size)
             }
             if (img.isNull()) {
                 // broken image from data, or the texture factory wasn't healthy, inform the user of this with some useful broken-image thing...
-                img = QIcon::fromTheme(m_fallback).pixmap(window(), QSize(width(), height()), iconMode(), QIcon::On).toImage();
+                const QIcon icon = QIcon::fromTheme(m_fallback);
+                img = icon.pixmap(window(), icon.actualSize(QSize(width(), height())), iconMode(), QIcon::On).toImage();
                 setStatus(Error);
             } else {
                 setStatus(Ready);
@@ -410,7 +417,8 @@ QImage Icon::findIcon(const QSize &size)
             });
         }
         // Temporary icon while we wait for the real image to load...
-        img = QIcon::fromTheme(m_placeholder).pixmap(window(), size, iconMode(), QIcon::On).toImage();
+        const QIcon icon = QIcon::fromTheme(m_placeholder);
+        img = icon.pixmap(window(), icon.actualSize(size), iconMode(), QIcon::On).toImage();
     } else {
         if (iconSource.startsWith(QLatin1String("qrc:/"))) {
             iconSource = iconSource.mid(3);
@@ -428,7 +436,7 @@ QImage Icon::findIcon(const QSize &size)
             }
         }
         if (!icon.isNull()) {
-            img = icon.pixmap(window(), size, iconMode(), QIcon::On).toImage();
+            img = icon.pixmap(window(), icon.actualSize(size), iconMode(), QIcon::On).toImage();
 
             setStatus(Ready);
             /*const QColor tintColor = !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor()) : m_color;
@@ -444,7 +452,8 @@ QImage Icon::findIcon(const QSize &size)
 
     if (!iconSource.isEmpty() && img.isNull()) {
         setStatus(Error);
-        img = QIcon::fromTheme(m_fallback).pixmap(window(), size, iconMode(), QIcon::On).toImage();
+        const QIcon icon = QIcon::fromTheme(m_fallback);
+        img = icon.pixmap(window(), icon.actualSize(size), iconMode(), QIcon::On).toImage();
     }
     return img;
 }
@@ -579,15 +588,15 @@ void Icon::updatePaintedGeometry()
     if (!m_icon.width() || !m_icon.height()) {
         newWidth = newHeight = 0.0;
     } else {
-        const qreal w = widthValid() ? width() : m_icon.width();
-        const qreal widthScale = w / m_icon.width();
-        const qreal h = heightValid() ? height() : m_icon.height();
-        const qreal heightScale = h / m_icon.height();
+        const qreal w = widthValid() ? width() : m_icon.size().width();
+        const qreal widthScale = w / m_icon.size().width();
+        const qreal h = heightValid() ? height() : m_icon.size().height();
+        const qreal heightScale = h / m_icon.size().height();
         if (widthScale <= heightScale) {
             newWidth = w;
-            newHeight = widthScale * m_icon.height();
+            newHeight = widthScale * m_icon.size().height();
         } else if (heightScale < widthScale) {
-            newWidth = heightScale * m_icon.width();
+            newWidth = heightScale * m_icon.size().width();
             newHeight = h;
         }
     }
