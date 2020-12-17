@@ -5,7 +5,7 @@
  */
 
 import QtQuick 2.13
-import org.kde.kirigami 2.13 as Kirigami
+import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.13 as QQC2
 import QtGraphicalEffects 1.0
 import org.kde.kirigami.private 2.14
@@ -82,7 +82,7 @@ QQC2.Control {
      *
      * The color to use for this avatar. If not explicitly set, this defaults to generating a colour from the name.
      */
-    property var color: AvatarPrivate.colorsFromString(name)
+    property var color: Kirigami.NameUtils.colorsFromString(name)
     // We use a var instead of a color here to allow setting the colour
     // as undefined, which will result in a generated colour being used.
 
@@ -190,10 +190,10 @@ QQC2.Control {
             fontSizeMode: Text.Fit
             visible: avatarRoot.initialsMode == Kirigami.Avatar.InitialsMode.UseInitials &&
                     !__private.showImage &&
-                    !AvatarPrivate.stringUnsuitableForInitials(avatarRoot.name) &&
+                    !Kirigami.NameUtils.isStringUnsuitableForInitials(avatarRoot.name) &&
                     avatarRoot.width > Kirigami.Units.gridUnit
 
-            text: AvatarPrivate.initialsFromString(name)
+            text: Kirigami.NameUtils.initialsFromString(name)
             color: __private.textColor
 
             anchors.fill: parent
@@ -208,7 +208,7 @@ QQC2.Control {
         Kirigami.Icon {
             id: avatarIcon
             visible: (avatarRoot.initialsMode == Kirigami.Avatar.InitialsMode.UseIcon && !__private.showImage) ||
-                    (AvatarPrivate.stringUnsuitableForInitials(avatarRoot.name) && !__private.showImage)
+                    (Kirigami.NameUtils.isStringUnsuitableForInitials(avatarRoot.name) && !__private.showImage)
 
             source: "user"
 

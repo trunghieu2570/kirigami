@@ -8,13 +8,13 @@
 #include <QColor>
 #include <QVariant>
 
-class AvatarPrivate : public QObject {
+class NameUtils : public QObject {
     Q_OBJECT
 
 public:
     Q_INVOKABLE QString initialsFromString(const QString& name);
     Q_INVOKABLE QColor colorsFromString(const QString& name);
-    Q_INVOKABLE bool stringUnsuitableForInitials(const QString& name);
+    Q_INVOKABLE bool isStringUnsuitableForInitials(const QString& name);
 };
 
 class AvatarGroup : public QObject {

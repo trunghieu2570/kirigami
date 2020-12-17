@@ -9,33 +9,33 @@ Kirigami.PageRow {
     TestCase {
         name: "AvatarTests"
         function test_latin_name() {
-            compare(AvatarPrivate.stringUnsuitableForInitials("Nate Martin"), false)
-            compare(AvatarPrivate.initialsFromString("Nate Martin"), "NM")
+            compare(NameUtils.isStringUnsuitableForInitials("Nate Martin"), false)
+            compare(NameUtils.initialsFromString("Nate Martin"), "NM")
 
-            compare(AvatarPrivate.stringUnsuitableForInitials("Kalanoka"), false)
-            compare(AvatarPrivate.initialsFromString("Kalanoka"), "K")
+            compare(NameUtils.isStringUnsuitableForInitials("Kalanoka"), false)
+            compare(NameUtils.initialsFromString("Kalanoka"), "K")
 
-            compare(AvatarPrivate.stringUnsuitableForInitials("Why would anyone use such a long not name in the field of the Name"), false)
-            compare(AvatarPrivate.initialsFromString("Why would anyone use such a long not name in the field of the Name"), "WN")
+            compare(NameUtils.isStringUnsuitableForInitials("Why would anyone use such a long not name in the field of the Name"), false)
+            compare(NameUtils.initialsFromString("Why would anyone use such a long not name in the field of the Name"), "WN")
 
-            compare(AvatarPrivate.stringUnsuitableForInitials("Live-CD User"), false)
-            compare(AvatarPrivate.initialsFromString("Live-CD User"), "LU")
+            compare(NameUtils.isStringUnsuitableForInitials("Live-CD User"), false)
+            compare(NameUtils.initialsFromString("Live-CD User"), "LU")
         }
         // these are just randomly sampled names from internet pages in the
         // source languages of the name
         function test_jp_name() {
-            compare(AvatarPrivate.stringUnsuitableForInitials("北里 柴三郎"), false)
-            compare(AvatarPrivate.initialsFromString("北里 柴三郎"), "北")
+            compare(NameUtils.isStringUnsuitableForInitials("北里 柴三郎"), false)
+            compare(NameUtils.initialsFromString("北里 柴三郎"), "北")
 
-            compare(AvatarPrivate.stringUnsuitableForInitials("小野田 寛郎"), false)
-            compare(AvatarPrivate.initialsFromString("小野田 寛郎"), "小")
+            compare(NameUtils.isStringUnsuitableForInitials("小野田 寛郎"), false)
+            compare(NameUtils.initialsFromString("小野田 寛郎"), "小")
         }
         function test_cn_name() {
-            compare(AvatarPrivate.stringUnsuitableForInitials("蔣經國"), false)
-            compare(AvatarPrivate.initialsFromString("蔣經國"), "蔣")
+            compare(NameUtils.isStringUnsuitableForInitials("蔣經國"), false)
+            compare(NameUtils.initialsFromString("蔣經國"), "蔣")
         }
         function test_bad_names() {
-            compare(AvatarPrivate.stringUnsuitableForInitials("151231023"), true)
+            compare(NameUtils.isStringUnsuitableForInitials("151231023"), true)
         }
     }
 }

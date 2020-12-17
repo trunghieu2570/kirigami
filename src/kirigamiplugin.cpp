@@ -260,7 +260,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     // 2.13
     qmlRegisterType<ImageColors>(uri, 2, 13, "ImageColors");
-    qmlRegisterSingletonType<AvatarPrivate>("org.kde.kirigami.private", 2, 13, "AvatarPrivate", [] (QQmlEngine*, QJSEngine*) -> QObject* { return new AvatarPrivate; });
     qmlRegisterType(componentUrl(QStringLiteral("Avatar.qml")), uri, 2, 13, "Avatar");
     qmlRegisterType(componentUrl(QStringLiteral("swipenavigator/SwipeNavigator.qml")), uri, 2, 13, "SwipeNavigator");
 
@@ -272,6 +271,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType<SizeGroup>(uri, 2, 14, "SizeGroup");
     qmlRegisterType<AvatarGroup>("org.kde.kirigami.private", 2, 14, "AvatarGroup");
     qmlRegisterType(componentUrl(QStringLiteral("CheckableListItem.qml")), uri, 2, 14, "CheckableListItem");
+    qmlRegisterSingletonType<NameUtils>(uri, 2, 14, "NameUtils", [] (QQmlEngine*, QJSEngine*) -> QObject* { return new NameUtils; });
 
     qmlRegisterType(componentUrl(QStringLiteral("Hero.qml")), uri, 2, 15, "Hero");
 
