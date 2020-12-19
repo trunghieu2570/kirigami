@@ -265,7 +265,7 @@ Item {
                         height: width
                         source: root.action && root.action.icon.name ? root.action.icon.name : ""
                         selected: true
-                        color: root.action && root.action.color && root.action.color.a > 0 ? root.action.color : (selected ? Theme.highlightedTextColor : Theme.textColor)
+                        color: root.action && root.action.icon && root.action.icon.color && root.action.icon.color.a > 0 ? root.action.icon.color : (selected ? Theme.highlightedTextColor : Theme.textColor)
                     }
                     Behavior on color {
                         ColorAnimation {
@@ -318,7 +318,7 @@ Item {
                         width: Units.iconSizes.smallMedium
                         height: width
                         selected: leftButtonGraphics.pressed
-                        color: root.action && root.action.color && root.action.color.a > 0 ? root.action.color : (selected ? Theme.highlightedTextColor : Theme.textColor)
+                        color: root.leftAction && root.leftAction.icon && root.leftAction.icon.color && root.leftAction.icon.color.a > 0 ? root.leftAction.icon.color : (selected ? Theme.highlightedTextColor : Theme.textColor)
                         anchors {
                             left: parent.left
                             verticalCenter: parent.verticalCenter
@@ -364,7 +364,7 @@ Item {
                         width: Units.iconSizes.smallMedium
                         height: width
                         selected: rightButtonGraphics.pressed
-                        color: root.action && root.action.color && root.action.color.a > 0 ? root.action.color : (selected ? Theme.highlightedTextColor : Theme.textColor)
+                        color: root.rightAction && root.rightAction.icon && root.rightAction.icon.color && root.rightAction.icon.color.a > 0 ? root.rightAction.icon.color : (selected ? Theme.highlightedTextColor : Theme.textColor)
                         anchors {
                             right: parent.right
                             verticalCenter: parent.verticalCenter
