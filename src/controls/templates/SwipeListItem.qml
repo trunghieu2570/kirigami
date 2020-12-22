@@ -140,7 +140,7 @@ T2.SwipeDelegate {
      * Valid both in tablet and desktop modes
      * @since 2.15
      */
-    property bool alwaysVisibleActions: false
+    property bool alwaysVisibleActions: !Kirigami.Settings.isMobile
 
     //TODO KF6 remove this super wrong thing
     /// @private
