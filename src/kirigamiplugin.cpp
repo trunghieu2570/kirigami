@@ -273,6 +273,9 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType<AvatarGroup>("org.kde.kirigami.private", 2, 14, "AvatarGroup");
     qmlRegisterType(componentUrl(QStringLiteral("CheckableListItem.qml")), uri, 2, 14, "CheckableListItem");
 
+    qmlRegisterType(componentUrl(QStringLiteral("Hero.qml")), uri, 2, 15, "Hero");
+
+
     qmlProtectModule(uri, 2);
 }
 
