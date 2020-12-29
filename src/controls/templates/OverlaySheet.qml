@@ -577,13 +577,18 @@ QtObject {
                         }
                     }
                     Icon {
+                        // We want to position the close button in the top-right
+                        // corner if the header is very tall, but we want to
+                        // vertically center it in a short header
+                        readonly property bool tallHeader: headerItem.height > (Units.iconSizes.smallMedium + Units.largeSpacing + Units.largeSpacing)
                         id: closeIcon
                         anchors {
                             right: parent.right
-                            top: parent.top
-                            margins: Units.smallSpacing
                             rightMargin: Units.largeSpacing
-                            verticalCenter: headerItem.verticalCenter
+                            top: tallHeader ? parent.top : undefined
+                            topMargin: tallHeader ? Units.largeSpacing : undefined
+                            verticalCenter: tallHeader ? undefined : headerItem.verticalCenter
+                            margins: Units.smallSpacing
                         }
                         z: 3
                         visible: root.showCloseButton
