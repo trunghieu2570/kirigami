@@ -311,8 +311,8 @@ QQC2.ApplicationWindow {
     }
     onPageStackChanged: pageStack.parent = contentItem;
 
-    width: Units.gridUnit * 30
-    height: Units.gridUnit * 45
+    width: Settings.isMobile ? Units.gridUnit * 30 : Units.gridUnit * 55
+    height: Settings.isMobile ? Units.gridUnit * 45 : Units.gridUnit * 40
     visible: true
 
 
