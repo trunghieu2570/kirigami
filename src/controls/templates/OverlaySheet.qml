@@ -244,7 +244,7 @@ QtObject {
 
         readonly property int contentItemPreferredWidth: root.contentItem.Layout.preferredWidth > 0 ? root.contentItem.Layout.preferredWidth : root.contentItem.implicitWidth
 
-        readonly property int contentItemMaximumWidth: width > Units.gridUnit * 30 ? width * 0.95 : width
+        readonly property int contentItemMaximumWidth: root.contentItem.Layout.maximumWidth > 0 ? Math.min(root.contentItem.Layout.maximumWidth, width) : width > Units.gridUnit * 30 ? width * 0.95 : width
 
         onHeightChanged: {
             var focusItem;
@@ -358,7 +358,7 @@ QtObject {
 
             y: (scrollView.contentItem != flickableContents ? -scrollView.flickableItem.contentY - listHeaderHeight  - (headerItem.visible ? headerItem.height : 0): 0)
 
-            width: mainItem.contentItemPreferredWidth <= 0 ? mainItem.width : Math.max(mainItem.width/2, Math.min(mainItem.contentItemMaximumWidth, mainItem.contentItemPreferredWidth))
+            width: mainItem.contentItemPreferredWidth <= 0 ? mainItem.width : (mainItem.contentItemMaximumWidth > 0 ? Math.min( mainItem.contentItemMaximumWidth, Math.max( mainItem.width/2, mainItem.contentItemPreferredWidth ) ) : Math.max( mainItem.width / 2, mainItem.contentItemPreferredWidth ) )
 
             height: scrollView.contentItem == flickableContents ? root.contentItem.height + topPadding + bottomPadding : 0
             Connections {
@@ -538,7 +538,7 @@ QtObject {
                 // Its events should be filtered but not scrolled
                 parent: outerFlickable
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: mainItem.contentItemPreferredWidth <= 0 ? mainItem.width : Math.max(mainItem.width/2, Math.min(mainItem.contentItemMaximumWidth, mainItem.contentItemPreferredWidth)) - root.leftInset - root.rightInset
+                width: mainItem.contentItemPreferredWidth <= 0 ? mainItem.width : (mainItem.contentItemMaximumWidth > 0 ? Math.min( mainItem.contentItemMaximumWidth, Math.max( mainItem.width/2, mainItem.contentItemPreferredWidth ) ) : Math.max( mainItem.width / 2, mainItem.contentItemPreferredWidth ) ) - root.leftInset - root.rightInset
                 height: Math.min(implicitHeight, parent.height) - root.topInset - root.bottomInset
                 property real initialHeight
 
