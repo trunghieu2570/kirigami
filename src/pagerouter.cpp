@@ -743,6 +743,10 @@ QJSValue PageRouter::currentRoutes() const
         auto object = engine->newObject();
         object.setProperty(QStringLiteral("route"), m_currentRoutes[i]->name);
         object.setProperty(QStringLiteral("data"), engine->toScriptValue(m_currentRoutes[i]->data));
+        auto keys = m_currentRoutes[i]->properties.keys();
+        for (auto key : keys) {
+            object.setProperty(key, engine->toScriptValue(m_currentRoutes[i]->properties[key]));
+        }
         ret.setProperty(i, object);
     }
     return ret;
