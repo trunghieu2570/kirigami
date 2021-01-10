@@ -78,7 +78,7 @@ QtObject {
      * units.veryLongDuration should be used for specialty animations that benefit
      * from being even longer than longDuration.
      */
-    property int veryLongDuration: 500
+    property int veryLongDuration: 400
 
     /**
      * units.longDuration should be used for longer, screen-covering animations, for opening and
