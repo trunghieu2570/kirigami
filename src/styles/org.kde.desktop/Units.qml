@@ -77,19 +77,19 @@ QtObject {
      * units.veryLongDuration should be used for specialty animations that benefit
      * from being even longer than longDuration.
      */
-    property int veryLongDuration: 500
+    property int veryLongDuration: 400
 
     /**
      * units.longDuration should be used for longer, screen-covering animations, for opening and
      * closing of dialogs and other "not too small" animations
      */
-    property int longDuration: 250
+    property int longDuration: 200
 
     /**
      * units.shortDuration should be used for short animations, such as accentuating a UI event,
      * hover events, etc..
      */
-    property int shortDuration: 150
+    property int shortDuration: 100
 
     /**
      * units.veryShortDuration should be used for elements that should have a hint of smoothness,
