@@ -1262,6 +1262,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
 
         // if !m_acceptsMouse we don't dra gwith mouse
         if (!m_acceptsMouse &&  me->source() == Qt::MouseEventNotSynthesized) {
+            event->setAccepted(false);
             return false;
         }
 
@@ -1404,6 +1405,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
 void ColumnView::mousePressEvent(QMouseEvent *event)
 {
     if (!m_acceptsMouse &&  event->source() == Qt::MouseEventNotSynthesized) {
+        event->setAccepted(false);
         return;
     }
 
