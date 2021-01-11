@@ -120,55 +120,76 @@ QQC2.Control {
         avatarRoot.actions.main.trigger()
     }
 
-    background: Rectangle {
-        radius: parent.width / 2
+    background: Item {
+        Rectangle {
+            id: rect
 
-        readonly property Gradient colouredGradient: Gradient {
-            GradientStop { position: 0.0; color: Qt.lighter(avatarRoot.color, 1.2) }
-            GradientStop { position: 1.0; color: Qt.darker(avatarRoot.color, 1.3) }
-        }
-
-        color: __private.showImage ? Kirigami.Theme.backgroundColor : "white"
-        gradient: __private.showImage ? undefined : colouredGradient
-
-        MouseArea {
-            id: primaryMouse
-
+            radius: parent.width / 2
             anchors.fill: parent
-            hoverEnabled: true
-            property bool mouseInCircle: {
-                let x = avatarRoot.width / 2, y = avatarRoot.height / 2
-                let xPrime = mouseX, yPrime = mouseY
 
-                let distance = (x - xPrime) ** 2 + (y - yPrime) ** 2
-                let radiusSquared = (Math.min(avatarRoot.width, avatarRoot.height) / 2) ** 2
-
-                return distance < radiusSquared
+            readonly property Gradient colouredGradient: Gradient {
+                GradientStop { position: 0.0; color: Qt.lighter(avatarRoot.color, 1.2) }
+                GradientStop { position: 1.0; color: Qt.darker(avatarRoot.color, 1.3) }
             }
 
-            onClicked: {
-                if (mouseY > avatarRoot.height - secondaryRect.height && !!avatarRoot.actions.secondary) {
-                    avatarRoot.actions.secondary.trigger()
-                    return
-                }
-                if (!!avatarRoot.actions.main) {
-                    avatarRoot.actions.main.trigger()
-                }
-            }
+            color: __private.showImage ? Kirigami.Theme.backgroundColor : "white"
+            gradient: __private.showImage ? undefined : colouredGradient
 
-            enabled: !!avatarRoot.actions.main || !!avatarRoot.actions.secondary
-            cursorShape: containsMouse && mouseInCircle && enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
+            MouseArea {
+                id: primaryMouse
 
-            states: [
-                State {
-                    name: "secondaryRevealed"
-                    when: (!Kirigami.Settings.isMobile) && (!!avatarRoot.actions.secondary) && (primaryMouse.containsMouse && primaryMouse.mouseInCircle)
-                    PropertyChanges {
-                        target: secondaryRect
-                        visible: true
+                anchors.fill: parent
+                hoverEnabled: true
+                property bool mouseInCircle: {
+                    let x = avatarRoot.width / 2, y = avatarRoot.height / 2
+                    let xPrime = mouseX, yPrime = mouseY
+
+                    let distance = (x - xPrime) ** 2 + (y - yPrime) ** 2
+                    let radiusSquared = (Math.min(avatarRoot.width, avatarRoot.height) / 2) ** 2
+
+                    return distance < radiusSquared
+                }
+
+                onClicked: {
+                    if (mouseY > avatarRoot.height - secondaryRect.height && !!avatarRoot.actions.secondary) {
+                        avatarRoot.actions.secondary.trigger()
+                        return
+                    }
+                    if (!!avatarRoot.actions.main) {
+                        avatarRoot.actions.main.trigger()
                     }
                 }
-            ]
+
+                enabled: !!avatarRoot.actions.main || !!avatarRoot.actions.secondary
+                cursorShape: containsMouse && mouseInCircle && enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
+
+                states: [
+                    State {
+                        name: "secondaryRevealed"
+                        when: (!Kirigami.Settings.isMobile) && (!!avatarRoot.actions.secondary) && (primaryMouse.containsMouse && primaryMouse.mouseInCircle)
+                        PropertyChanges {
+                            target: secondaryRect
+                            visible: true
+                        }
+                    }
+                ]
+            }
+        }
+
+        DropShadow {
+            anchors.fill: rect
+            source: rect
+
+            visible: opacity != 0
+            opacity: (primaryMouse.mouseInCircle && primaryMouse.enabled && primaryMouse.containsMouse) ? 1 : 0
+            Behavior on opacity {
+                NumberAnimation { duration: Kirigami.Units.veryShortDuration }
+            }
+
+            verticalOffset: 2
+            radius: 8
+            samples: radius * 2
+            color: Qt.rgba(0,0,0,0.3)
         }
     }
 
