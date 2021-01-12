@@ -32,8 +32,11 @@ HEADERS     += $$PWD/src/kirigamiplugin.h \
                $$PWD/src/avatar.h \
                $$PWD/src/toolbarlayout.h \
                $$PWD/src/toolbarlayoutdelegate.h
+               $$PWD/src/copyinterceptor.h
+               $$PWD/src/copyinterceptor_p.h
 SOURCES     += $$PWD/src/kirigamiplugin.cpp \
                $$PWD/src/enums.cpp \
+               $$PWD/src/copyinterceptor.cpp \
                $$PWD/src/settings.cpp \
                $$PWD/src/colorutils.cpp \
                $$PWD/src/columnview.cpp \

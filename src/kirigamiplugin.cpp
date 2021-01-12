@@ -25,6 +25,7 @@
 #include "avatar.h"
 #include "toolbarlayout.h"
 #include "sizegroup.h"
+#include "copyinterceptor.h"
 
 #include <QQmlContext>
 #include <QQuickItem>
@@ -275,6 +276,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     qmlRegisterType(componentUrl(QStringLiteral("Hero.qml")), uri, 2, 15, "Hero");
 
+    qmlRegisterUncreatableType<CopyInterceptor>(uri, 2, 16, "Clipboard", QStringLiteral("You cannot create an instance of Clipboard."));
 
     qmlProtectModule(uri, 2);
 }
