@@ -176,6 +176,7 @@ Item {
         Item {
             id: mainItem
             clip: childrenRect.width > width
+            onChildrenChanged: Array.from(children).forEach(item => item.anchors.verticalCenter = this.verticalCenter)
             anchors {
                 fill: parent
                 leftMargin: root.leftPadding
