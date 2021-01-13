@@ -180,7 +180,7 @@ QSGNode* Icon::updatePaintNode(QSGNode* node, QQuickItem::UpdatePaintNodeData* /
         if (itemSize.width() != 0 && itemSize.height() != 0) {
             const auto multiplier = QCoreApplication::instance()->testAttribute(Qt::AA_UseHighDpiPixmaps) ? 1 : (window() ? window()->devicePixelRatio() : qGuiApp->devicePixelRatio());
             const QSize size = itemSize * multiplier;
-            mNode->setTexture(s_iconImageCache->loadTexture(window(), m_icon));
+            mNode->setTexture(s_iconImageCache->loadTexture(window(), m_icon, QQuickWindow::TextureCanUseAtlas));
             if (m_icon.size() != size) {
                 // At this point, the image will already be scaled, but we need to output it in
                 // the correct aspect ratio, painted centered in the viewport. So:
