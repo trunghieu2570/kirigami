@@ -84,7 +84,6 @@ Item {
     Component.onDestruction: {
         for (let i in twinFormLayouts) {
             twinFormLayouts[i].children[0].reverseTwins = twinFormLayouts[i].children[0].reverseTwins.filter(function(value, index, arr){ return value != root;})
-            Qt.callLater(() => twinFormLayouts[i].children[0].reverseTwinsChanged());
         }
     }
     GridLayout {
