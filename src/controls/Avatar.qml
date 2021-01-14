@@ -128,7 +128,7 @@ QQC2.Control {
             GradientStop { position: 1.0; color: Qt.darker(avatarRoot.color, 1.3) }
         }
 
-        color: __private.showImage ? Kirigami.Theme.backgroundColor : undefined
+        color: __private.showImage ? Kirigami.Theme.backgroundColor : "white"
         gradient: __private.showImage ? undefined : colouredGradient
 
         MouseArea {
