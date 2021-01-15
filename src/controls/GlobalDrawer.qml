@@ -338,7 +338,7 @@ OverlayDrawer {
                     Layout.fillWidth: true
                     visible: contentItem && opacity > 0
                     // Workaround for https://bugreports.qt.io/browse/QTBUG-90034
-                    Layout.preferredHeight: implicitHeight * opacity || -1
+                    Layout.preferredHeight: implicitHeight <= 0 || opacity == 1 ? -1 : implicitHeight * opacity
                     opacity: !root.collapsed || showHeaderWhenCollapsed
                     Behavior on opacity {
                         //not an animator as is binded
