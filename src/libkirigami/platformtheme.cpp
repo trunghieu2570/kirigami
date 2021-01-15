@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2017 by Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2021 Arjen Hiemstra <ahiemstra@heimr.nl>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -16,864 +17,792 @@
 #include <QPluginLoader>
 #include <QDir>
 #include <QQuickStyle>
+#include <unordered_map>
+#include <functional>
+#include <cinttypes>
 
 namespace Kirigami {
 
-class PlatformThemePrivate {
+// This class encapsulates the actual data of the Theme object. It may be shared
+// among several instances of PlatformTheme, to ensure that the memory usage of
+// PlatformTheme stays low.
+class PlatformThemeData : public QObject
+{
+    Q_OBJECT
+
 public:
-    PlatformThemePrivate(PlatformTheme *q);
-    ~PlatformThemePrivate();
+    // An enum for all colors in PlatformTheme.
+    // This is used so we can have a QHash of local overrides in the
+    // PlatformTheme, which avoids needing to store all these colors in
+    // PlatformTheme even when they're not used.
+    enum ColorRole {
+        TextColor,
+        DisabledTextColor,
+        HighlightedTextColor,
+        ActiveTextColor,
+        LinkColor,
+        VisitedLinkColor,
+        NegativeTextColor,
+        NeutralTextColor,
+        PositiveTextColor,
+        BackgroundColor,
+        AlternateBackgroundColor,
+        HighlightColor,
+        ActiveBackgroundColor,
+        LinkBackgroundColor,
+        VisitedLinkBackgroundColor,
+        NegativeBackgroundColor,
+        NeutralBackgroundColor,
+        PositiveBackgroundColor,
+        FocusColor,
+        HoverColor,
 
-    inline void syncCustomPalette();
-    void emitCompressedColorChanged();
-    void findParentStyle();
-    static QColor tint(const QColor &c1, const QColor &c2, qreal ratio);
+        // This should always be the last item. It indicates how many items
+        // there are and is used for the storage array below.
+        ColorRoleCount
+    };
 
+    using ColorMap = std::unordered_map<ColorRole, QColor>;
 
-    PlatformTheme *q;
-    PlatformTheme::ColorSet m_colorSet = PlatformTheme::Window;
-    PlatformTheme::ColorGroup m_colorGroup = PlatformTheme::Active;
-    QSet<PlatformTheme *> m_childThemes;
-    QPointer<PlatformTheme> m_parentTheme;
+    // Which PlatformTheme instance "owns" this data object. Only the owner is
+    // allowed to make changes to data.
+    QPointer<QObject> owner;
 
-    //ordinary colors
-    QColor textColor;
-    QColor disabledTextColor;
-    QColor highlightedTextColor;
-    QColor activeTextColor;
-    QColor linkColor;
-    QColor visitedLinkColor;
-    QColor negativeTextColor;
-    QColor neutralTextColor;
-    QColor positiveTextColor;
+    PlatformTheme::ColorSet colorSet = PlatformTheme::Window;
+    PlatformTheme::ColorGroup colorGroup = PlatformTheme::Active;
 
-    QColor backgroundColor;
-    QColor alternateBackgroundColor;
-    QColor highlightColor;
-    QColor activeBackgroundColor;
-    QColor linkBackgroundColor;
-    QColor visitedLinkBackgroundColor;
-    QColor negativeBackgroundColor;
-    QColor neutralBackgroundColor;
-    QColor positiveBackgroundColor;
+    std::array<QColor, ColorRoleCount> colors;
 
-    QColor focusColor;
-    QColor hoverColor;
+    QFont defaultFont;
+    QFont smallFont;
 
     QPalette palette;
 
-    //custom colors
-    QColor customTextColor;
-    QColor customDisabledTextColor;
-    QColor customHighlightedTextColor;
-    QColor customActiveTextColor;
-    QColor customLinkColor;
-    QColor customVisitedLinkColor;
-    QColor customNegativeTextColor;
-    QColor customNeutralTextColor;
-    QColor customPositiveTextColor;
+    // A list of PlatformTheme instances that want to be notified when the data
+    // changes. This is used instead of signal/slots as this way we only store
+    // a little bit of data and that data is shared among instances, whereas
+    // signal/slots turn out to have a pretty large memory overhead per instance.
+    using Watcher = QPair<PlatformTheme*, std::function<void()>>;
+    QVector<Watcher> watchers;
+    bool watcherNotificationQueued = false;
 
-    QColor customBackgroundColor;
-    QColor customAlternateBackgroundColor;
-    QColor customHighlightColor;
-    QColor customActiveBackgroundColor;
-    QColor customLinkBackgroundColor;
-    QColor customVisitedLinkBackgroundColor;
-    QColor customNegativeBackgroundColor;
-    QColor customNeutralBackgroundColor;
-    QColor customPositiveBackgroundColor;
+    inline void setColorSet(PlatformTheme *sender, PlatformTheme::ColorSet set)
+    {
+        if (sender != owner || colorSet == set) {
+            return;
+        }
 
-    QColor customFocusColor;
-    QColor customHoverColor;
+        colorSet = set;
+        notifyWatchers();
+    }
 
-    QPalette customPalette;
+    inline void setColorGroup(PlatformTheme *sender, PlatformTheme::ColorGroup group)
+    {
+        if (sender != owner || colorGroup == group) {
+            return;
+        }
 
-    QFont font;
-    QFont smallFont;
+        colorGroup = group;
+        palette.setCurrentColorGroup(QPalette::ColorGroup(group));
+        notifyWatchers();
+    }
 
-    bool m_inherit = true;
-    bool m_init = true;
-    bool m_supportsIconColoring = false;
-    bool m_pendingColorChange = false;
+    inline void setColor(PlatformTheme* sender, ColorRole role, const QColor &color)
+    {
+        if (sender != owner || colors[role] == color) {
+            return;
+        }
+
+        colors[role] = color;
+        updatePalette(palette, colors);
+        notifyWatchers();
+    }
+
+    inline void setDefaultFont(PlatformTheme *sender, const QFont &font)
+    {
+        if (sender != owner || font == defaultFont) {
+            return;
+        }
+
+        defaultFont = font;
+        notifyWatchers();
+    }
+
+    inline void setSmallFont(PlatformTheme *sender, const QFont &font)
+    {
+        if (sender != owner || font == smallFont) {
+            return;
+        }
+
+        smallFont = font;
+        notifyWatchers();
+    }
+
+    inline void setPalette(PlatformTheme *sender, const QPalette &newPalette)
+    {
+        if (sender != owner || palette == newPalette) {
+            return;
+        }
+
+        palette = newPalette;
+        notifyWatchers();
+    }
+
+    inline void addChangeWatcher(PlatformTheme *object, const std::function<void()> &callback)
+    {
+        watchers.append(qMakePair(object, callback));
+    }
+
+    inline void removeChangeWatcher(PlatformTheme *object)
+    {
+        auto begin = std::remove_if(watchers.begin(), watchers.end(), [object](const Watcher &entry) {
+            return entry.first == object;
+        });
+        watchers.erase(begin, watchers.end());
+    }
+
+    // TODO KF6: This is a workaround for the fact that we can't add new virtual
+    // methods to PlatformTheme and I did not want to add the overhead of a
+    // custom signal to each instance of PlatformTheme just to notify it of the
+    // data object being changed.
+    inline void moveChangeWatchers(std::shared_ptr<PlatformThemeData> from, PlatformTheme *object)
+    {
+        while (true) {
+            auto watcher = std::find_if(from->watchers.begin(), from->watchers.end(), [object](const Watcher &entry) {
+                return entry.first == object;
+            });
+            if (watcher == from->watchers.end()) {
+                break;
+            }
+            watchers.append(qMakePair(watcher->first, watcher->second));
+            from->watchers.erase(watcher);
+        }
+    }
+
+    inline void notifyWatchers()
+    {
+        if (!watcherNotificationQueued) {
+            watcherNotificationQueued = true;
+            QMetaObject::invokeMethod(this, [this]() {
+                watcherNotificationQueued = false;
+                for (auto entry : qAsConst(watchers)) {
+                    entry.second();
+                }
+            }, Qt::QueuedConnection);
+        }
+    }
+
+    // Update a palette from a list of colors.
+    inline static void updatePalette(QPalette &palette, const std::array<QColor, ColorRoleCount> &colors)
+    {
+        for (std::size_t i = 0; i < colors.size(); ++i) {
+            setPaletteColor(palette, ColorRole(i), colors.at(i));
+        }
+    }
+
+    // Update a palette from a hash of colors.
+    inline static void updatePalette(QPalette &palette, const ColorMap &colors)
+    {
+        for (auto entry : colors) {
+            setPaletteColor(palette, entry.first, entry.second);
+        }
+    }
+
+    inline static void setPaletteColor(QPalette& palette, ColorRole role, const QColor &color)
+    {
+        switch (role) {
+            case TextColor:
+                palette.setColor(QPalette::Text, color);
+                palette.setColor(QPalette::WindowText, color);
+                palette.setColor(QPalette::ButtonText, color);
+                break;
+            case BackgroundColor:
+                palette.setColor(QPalette::Window, color);
+                palette.setColor(QPalette::Base, color);
+                palette.setColor(QPalette::Button, color);
+                break;
+            case AlternateBackgroundColor:
+                palette.setColor(QPalette::AlternateBase, color);
+                break;
+            case HighlightColor:
+                palette.setColor(QPalette::Highlight, color);
+                break;
+            case HighlightedTextColor:
+                palette.setColor(QPalette::HighlightedText, color);
+                break;
+            case LinkColor:
+                palette.setColor(QPalette::Link, color);
+                break;
+            case VisitedLinkColor:
+                palette.setColor(QPalette::LinkVisited, color);
+                break;
+
+            default:
+                break;
+        }
+    }
+};
+
+class PlatformThemePrivate
+{
+public:
+    PlatformThemePrivate()
+        : inherit(true)
+        , supportsIconColoring(false)
+        , pendingColorChange(false)
+        , pendingChildUpdate(false)
+        , colorSet(PlatformTheme::Window)
+        , colorGroup(PlatformTheme::Active)
+    { }
+
+    inline QColor color(const PlatformTheme *theme, PlatformThemeData::ColorRole color) const
+    {
+        if (!data) {
+            return QColor{};
+        }
+
+        QColor value = data->colors.at(color);
+
+        if (data->owner != theme && localOverrides) {
+            auto itr = localOverrides->find(color);
+            if (itr != localOverrides->end()) {
+                value = itr->second;
+            }
+        }
+
+        return value;
+    }
+
+    inline void setColor(PlatformTheme *theme, PlatformThemeData::ColorRole color, const QColor &value)
+    {
+        if (!localOverrides) {
+            localOverrides.reset(new std::unordered_map<PlatformThemeData::ColorRole, QColor>{});
+        }
+
+        if (!value.isValid()) {
+            // Invalid color, assume we are resetting the value.
+            auto itr = localOverrides->find(color);
+            if (itr != localOverrides->end()) {
+                localOverrides->erase(itr);
+
+                if (data) {
+                    // TODO: Find a better way to determine "default" color.
+                    // Right now this sets the color to transparent to force a
+                    // color change and relies on the style-specific subclass to
+                    // handle resetting the actual color.
+                    data->setColor(theme, color, Qt::transparent);
+                }
+
+                emitCompressedColorChanged(theme);
+            }
+
+            return;
+        }
+
+        auto itr = localOverrides->find(color);
+        if (itr != localOverrides->end() && itr->second == value && (data && data->owner != theme)) {
+            return;
+        }
+
+        (*localOverrides)[color] = value;
+
+        if (data) {
+            data->setColor(theme, color, value);
+        }
+
+        emitCompressedColorChanged(theme);
+    }
+
+    inline void setDataColor(PlatformTheme *theme, PlatformThemeData::ColorRole color, const QColor &value)
+    {
+        // Only set color if we have no local override of the color.
+        // This is done because colorSet/colorGroup changes will trigger most
+        // subclasses to reevaluate and reset the colors, breaking any local
+        // overrides we have.
+        if (localOverrides) {
+            auto itr = localOverrides->find(color);
+            if (itr != localOverrides->end()) {
+                return;
+            }
+        }
+
+        if (data) {
+            data->setColor(theme, color, value);
+        }
+    }
+
+    inline void emitCompressedColorChanged(PlatformTheme *theme)
+    {
+        if (pendingColorChange) {
+            return;
+        }
+
+        pendingColorChange = true;
+        QMetaObject::invokeMethod(theme, &PlatformTheme::emitColorChanged, Qt::QueuedConnection);
+    }
+
+    inline void queueChildUpdate(PlatformTheme *theme)
+    {
+        if (pendingChildUpdate) {
+            return;
+        }
+
+        pendingChildUpdate = true;
+        QMetaObject::invokeMethod(theme, [this, theme]() {
+            pendingChildUpdate = false;
+            theme->updateChildren(theme->parent());
+        }, Qt::QueuedConnection);
+    }
+
+    /*
+     * Please note that there is no q pointer. This is intentional, as it avoids
+     * having to store that information for each instance of PlatformTheme,
+     * saving us 8 bytes per instance. Instead, we pass the theme object as
+     * first parameter of each method. This is a little uglier but essentially
+     * works the same without needing memory.
+     */
+
+    // An instance of the data object. This is potentially shared with many
+    // instances of PlatformTheme.
+    std::shared_ptr<PlatformThemeData> data;
+    // Used to store color overrides of inherited data. This is created on
+    // demand and will only exist if we actually have local overrides.
+    std::unique_ptr<PlatformThemeData::ColorMap> localOverrides;
+
+    bool inherit : 1;
+    bool supportsIconColoring : 1; // TODO KF6: Remove in favour of virtual method
+    bool pendingColorChange : 1;
+    bool pendingChildUpdate : 1;
+
+    // Note: We use these to store local values of PlatformTheme::ColorSet and
+    // PlatformTheme::ColorGroup. While these are standard enums and thus 32
+    // bits they only contain a few items so we store the value in only 4 bits
+    // to save space.
+    uint8_t colorSet : 4;
+    uint8_t colorGroup : 4;
+
+    // Ensure the above assumption holds. Should this static assert fail, the
+    // bit size above needs to be adjusted.
+    static_assert(PlatformTheme::ColorGroupCount <= 16, "PlatformTheme::ColorGroup contains more elements than can be stored in PlatformThemePrivate");
+    static_assert(PlatformTheme::ColorSetCount <= 16, "PlatformTheme::ColorSet contains more elements than can be stored in PlatformThemePrivate");
 
     static KirigamiPluginFactory *s_pluginFactory;
 };
 
 KirigamiPluginFactory *PlatformThemePrivate::s_pluginFactory = nullptr;
 
-PlatformThemePrivate::PlatformThemePrivate(PlatformTheme *q)
-    : q(q)
-{
-}
-
-PlatformThemePrivate::~PlatformThemePrivate()
-{}
-
-void setPaletteColor(QPalette& customPalette, QPalette::ColorGroup cg, QPalette::ColorRole cr, const QColor &color, bool *changed)
-{
-    if (customPalette.color(cg, cr) != color) {
-        *changed = true;
-        customPalette.setColor(cg, cr, color);
-    }
-}
-
-void PlatformThemePrivate::syncCustomPalette()
-{
-    bool changed = false;
-    for (auto state : { QPalette::Active, QPalette::Inactive, QPalette::Disabled }) {
-        setPaletteColor(customPalette, state, QPalette::WindowText, q->textColor(), &changed);
-        setPaletteColor(customPalette, state, QPalette::Window, q->backgroundColor(), &changed);
-        setPaletteColor(customPalette, state, QPalette::Base, q->backgroundColor(), &changed);
-        setPaletteColor(customPalette, state, QPalette::Text, q->textColor(), &changed);
-        setPaletteColor(customPalette, state, QPalette::Button, q->backgroundColor(), &changed);
-        setPaletteColor(customPalette, state, QPalette::ButtonText, q->textColor(), &changed);
-        setPaletteColor(customPalette, state, QPalette::Highlight, q->highlightColor(), &changed);
-        setPaletteColor(customPalette, state, QPalette::HighlightedText, q->highlightedTextColor(), &changed);
-        setPaletteColor(customPalette, state, QPalette::ToolTipBase, q->backgroundColor(), &changed);
-        setPaletteColor(customPalette, state, QPalette::ToolTipText, q->textColor(), &changed);
-        setPaletteColor(customPalette, state, QPalette::Link, q->linkColor(), &changed);
-        setPaletteColor(customPalette, state, QPalette::LinkVisited, q->visitedLinkColor(), &changed);
-    }
-    if (changed) {
-        Q_EMIT q->paletteChanged(customPalette);
-    }
-}
-
-void PlatformThemePrivate::findParentStyle()
-{
-    if (m_parentTheme) {
-        m_parentTheme->d->m_childThemes.remove(q);
-    }
-    QQuickItem *candidate = qobject_cast<QQuickItem *>(q->parent());
-    while (candidate) {
-        candidate = candidate->parentItem();
-        PlatformTheme *t = static_cast<PlatformTheme *>(qmlAttachedPropertiesObject<PlatformTheme>(candidate, false));
-        if (t) {
-            t->d->m_childThemes.insert(q);
-            m_parentTheme = t;
-            if (m_inherit) {
-                q->setColorSet(t->colorSet());
-
-                q->setCustomTextColor(t->d->customTextColor);
-                q->setCustomDisabledTextColor(t->d->customDisabledTextColor);
-                q->setCustomHighlightedTextColor(t->d->customHighlightedTextColor);
-                q->setCustomActiveTextColor(t->d->customActiveTextColor);
-                q->setCustomLinkColor(t->d->customLinkColor);
-                q->setCustomVisitedLinkColor(t->d->customVisitedLinkColor);
-                q->setCustomNegativeTextColor(t->d->customNegativeTextColor);
-                q->setCustomNeutralTextColor(t->d->customNeutralTextColor);
-                q->setCustomPositiveTextColor(t->d->customPositiveTextColor);
-                q->setCustomBackgroundColor(t->d->customBackgroundColor);
-                q->setCustomAlternateBackgroundColor(t->d->customAlternateBackgroundColor);
-                q->setCustomHighlightColor(t->d->customHighlightColor);
-                q->setCustomActiveBackgroundColor(t->d->customActiveBackgroundColor);
-                q->setCustomLinkBackgroundColor(t->d->customLinkBackgroundColor);
-                q->setCustomVisitedLinkBackgroundColor(t->d->customVisitedLinkBackgroundColor);
-                q->setCustomNegativeBackgroundColor(t->d->customNegativeBackgroundColor);
-                q->setCustomNeutralBackgroundColor(t->d->customNeutralBackgroundColor);
-                q->setCustomPositiveBackgroundColor(t->d->customPositiveBackgroundColor);
-                q->setCustomFocusColor(t->d->customFocusColor);
-                q->setCustomHoverColor(t->d->customHoverColor);
-            }
-            break;
-        }
-
-    }
-}
-
-QColor PlatformThemePrivate::tint(const QColor &c1, const QColor &c2, qreal ratio)
-{
-    qreal r = c1.redF() + (c2.redF() - c1.redF()) * ratio;
-    qreal g = c1.greenF() + (c2.greenF() - c1.greenF()) * ratio;
-    qreal b = c1.blueF() + (c2.blueF() - c1.blueF()) * ratio;
-
-    return QColor::fromRgbF(r, g, b, 1);
-}
-
-void PlatformThemePrivate::emitCompressedColorChanged()
-{
-    if (m_pendingColorChange) {
-        return;
-    }
-
-    m_pendingColorChange = true;
-    QMetaObject::invokeMethod(q, [this]() {
-        syncCustomPalette();
-        Q_EMIT q->colorsChanged();
-        m_pendingColorChange = false;
-    }, Qt::QueuedConnection);
-}
-
-
-
 PlatformTheme::PlatformTheme(QObject *parent)
-    : QObject(parent),
-      d(new PlatformThemePrivate(this))
+    : QObject(parent)
+    , d(new PlatformThemePrivate)
 {
-    d->findParentStyle();
-
     if (QQuickItem *item = qobject_cast<QQuickItem *>(parent)) {
-        connect(item, &QQuickItem::windowChanged, this, [this]() {
-            d->findParentStyle();
-        });
-        connect(item, &QQuickItem::parentChanged, this, [this]() {
-            d->findParentStyle();
-        });
+        connect(item, &QQuickItem::windowChanged, this, &PlatformTheme::update);
+        connect(item, &QQuickItem::parentChanged, this, &PlatformTheme::update);
     }
-    d->m_init = false;
-    //TODO: needs https://codereview.qt-project.org/#/c/206889/ for font changes
+
+    update();
 }
 
 PlatformTheme::~PlatformTheme()
 {
-    if (d->m_parentTheme) {
-        d->m_parentTheme->d->m_childThemes.remove(this);
+    if (d->data) {
+        d->data->removeChangeWatcher(this);
     }
+
     delete d;
 }
 
 void PlatformTheme::setColorSet(PlatformTheme::ColorSet colorSet)
 {
-    if (d->m_colorSet == colorSet) {
-        return;
-    }
+    d->colorSet = colorSet;
 
-    d->m_colorSet = colorSet;
-
-    for (PlatformTheme *t : qAsConst(d->m_childThemes)) {
-        if (t->inherit()) {
-            t->setColorSet(colorSet);
-        }
-    }
-
-    if (!d->m_init) {
-        Q_EMIT colorSetChanged(colorSet);
-        d->emitCompressedColorChanged();
+    if (d->data) {
+        d->data->setColorSet(this, colorSet);
     }
 }
 
 PlatformTheme::ColorSet PlatformTheme::colorSet() const
 {
-    return d->m_colorSet;
+    return d->data ? d->data->colorSet : Window;
 }
 
 void PlatformTheme::setColorGroup(PlatformTheme::ColorGroup colorGroup)
 {
-    if (d->m_colorGroup == colorGroup) {
-        return;
-    }
+    d->colorGroup = colorGroup;
 
-    d->m_colorGroup = colorGroup;
-
-    for (PlatformTheme *t : qAsConst(d->m_childThemes)) {
-        if (t->inherit()) {
-            t->setColorGroup(colorGroup);
-        }
-    }
-
-    if (!d->m_init) {
-        Q_EMIT colorGroupChanged(colorGroup);
-        d->emitCompressedColorChanged();
+    if (d->data) {
+        d->data->setColorGroup(this, colorGroup);
     }
 }
 
 PlatformTheme::ColorGroup PlatformTheme::colorGroup() const
 {
-    return d->m_colorGroup;
+    return d->data ? d->data->colorGroup : Active;
 }
 
 bool PlatformTheme::inherit() const
 {
-    return d->m_inherit;
+    return d->inherit;
 }
 
 void PlatformTheme::setInherit(bool inherit)
 {
-    if (d->m_inherit == inherit) {
+    if (inherit == d->inherit) {
         return;
     }
 
-    d->m_inherit = inherit;
-    if (inherit && d->m_parentTheme) {
-        setColorSet(d->m_parentTheme->colorSet());
-    }
+    d->inherit = inherit;
+    update();
+
     Q_EMIT inheritChanged(inherit);
 }
 
 QColor PlatformTheme::textColor() const
 {
-    return d->customTextColor.isValid() ? d->customTextColor : d->textColor;
+    return d->color(this, PlatformThemeData::TextColor);
 }
 
 QColor PlatformTheme::disabledTextColor() const
 {
-    return d->customDisabledTextColor.isValid() ? d->customDisabledTextColor : d->disabledTextColor;
+    return d->color(this, PlatformThemeData::DisabledTextColor);
 }
 
 QColor PlatformTheme::highlightColor() const
 {
-    return d->customHighlightColor.isValid() ? d->customHighlightColor : d->highlightColor;
+    return d->color(this, PlatformThemeData::HighlightColor);
 }
 
 QColor PlatformTheme::highlightedTextColor() const
 {
-    return d->customHighlightedTextColor.isValid() ? d->customHighlightedTextColor : d->highlightedTextColor;
+    return d->color(this, PlatformThemeData::HighlightedTextColor);
 }
 
 QColor PlatformTheme::backgroundColor() const
 {
-    return d->customBackgroundColor.isValid() ? d->customBackgroundColor : d->backgroundColor;
+    return d->color(this, PlatformThemeData::BackgroundColor);
 }
 
 QColor PlatformTheme::alternateBackgroundColor() const
 {
-    return d->customAlternateBackgroundColor.isValid() ? d->customAlternateBackgroundColor : d->alternateBackgroundColor;
+    return d->color(this, PlatformThemeData::AlternateBackgroundColor);
 }
 
 QColor PlatformTheme::activeTextColor() const
 {
-    return d->customActiveTextColor.isValid() ? d->customActiveTextColor : d->activeTextColor;
+    return d->color(this, PlatformThemeData::ActiveTextColor);
 }
 
 QColor PlatformTheme::activeBackgroundColor() const
 {
-    return d->customActiveBackgroundColor.isValid() ? d->customActiveBackgroundColor : d->activeBackgroundColor;
+    return d->color(this, PlatformThemeData::ActiveBackgroundColor);
 }
 
 QColor PlatformTheme::linkColor() const
 {
-    return d->customLinkColor.isValid() ? d->customLinkColor : d->linkColor;
+    return d->color(this, PlatformThemeData::LinkColor);
 }
 
 QColor PlatformTheme::linkBackgroundColor() const
 {
-    return d->customLinkBackgroundColor.isValid() ? d->customLinkBackgroundColor : d->linkBackgroundColor;
+    return d->color(this, PlatformThemeData::LinkBackgroundColor);
 }
 
 QColor PlatformTheme::visitedLinkColor() const
 {
-    return d->customVisitedLinkColor.isValid() ? d->customVisitedLinkColor : d->visitedLinkColor;
+    return d->color(this, PlatformThemeData::VisitedLinkColor);
 }
 
 QColor PlatformTheme::visitedLinkBackgroundColor() const
 {
-    return d->customVisitedLinkBackgroundColor.isValid() ? d->customVisitedLinkBackgroundColor : d->visitedLinkBackgroundColor;
+    return d->color(this, PlatformThemeData::VisitedLinkBackgroundColor);
 }
 
 QColor PlatformTheme::negativeTextColor() const
 {
-    return d->customNegativeTextColor.isValid() ? d->customNegativeTextColor : d->negativeTextColor;
+    return d->color(this, PlatformThemeData::NegativeTextColor);
 }
 
 QColor PlatformTheme::negativeBackgroundColor() const
 {
-    return d->customNegativeBackgroundColor.isValid() ? d->customNegativeBackgroundColor : d->negativeBackgroundColor;
+    return d->color(this, PlatformThemeData::NegativeBackgroundColor);
 }
 
 QColor PlatformTheme::neutralTextColor() const
 {
-    return d->customNeutralTextColor.isValid() ? d->customNeutralTextColor : d->neutralTextColor;
+    return d->color(this, PlatformThemeData::NeutralTextColor);
 }
 
 QColor PlatformTheme::neutralBackgroundColor() const
 {
-    return d->customNeutralBackgroundColor.isValid() ? d->customNeutralBackgroundColor : d->neutralBackgroundColor;
+    return d->color(this, PlatformThemeData::NeutralBackgroundColor);
 }
 
 QColor PlatformTheme::positiveTextColor() const
 {
-    return d->customPositiveTextColor.isValid() ? d->customPositiveTextColor : d->positiveTextColor;
+    return d->color(this, PlatformThemeData::PositiveTextColor);
 }
 
 QColor PlatformTheme::positiveBackgroundColor() const
 {
-    return d->customPositiveBackgroundColor.isValid() ? d->customPositiveBackgroundColor : d->positiveBackgroundColor;
+    return d->color(this, PlatformThemeData::PositiveBackgroundColor);
 }
 
 QColor PlatformTheme::focusColor() const
 {
-    return d->customFocusColor.isValid() ? d->customFocusColor : d->focusColor;
+    return d->color(this, PlatformThemeData::FocusColor);
 }
 
 QColor PlatformTheme::hoverColor() const
 {
-    return d->customHoverColor.isValid() ? d->customHoverColor : d->hoverColor;
+    return d->color(this, PlatformThemeData::HoverColor);
 }
 
 //setters for theme implementations
 void PlatformTheme::setTextColor(const QColor &color)
 {
-    if (d->textColor == color) {
-        return;
-    }
-
-    d->textColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::TextColor, color);
 }
 
 void PlatformTheme::setDisabledTextColor(const QColor &color)
 {
-    if (d->disabledTextColor == color) {
-        return;
-    }
-
-    d->disabledTextColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::DisabledTextColor, color);
 }
 
 void PlatformTheme::setBackgroundColor(const QColor &color)
 {
-    if (d->backgroundColor == color) {
-        return;
-    }
-
-    d->backgroundColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::BackgroundColor, color);
 }
 
 void PlatformTheme::setAlternateBackgroundColor(const QColor &color)
 {
-    if (d->alternateBackgroundColor == color) {
-        return;
-    }
-
-    d->alternateBackgroundColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::AlternateBackgroundColor, color);
 }
 
 void PlatformTheme::setHighlightColor(const QColor &color)
 {
-    if (d->highlightColor == color) {
-        return;
-    }
-
-    d->highlightColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::HighlightColor, color);
 }
 
 void PlatformTheme::setHighlightedTextColor(const QColor &color)
 {
-    if (d->highlightedTextColor == color) {
-        return;
-    }
-
-    d->highlightedTextColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::HighlightedTextColor, color);
 }
 
 void PlatformTheme::setActiveTextColor(const QColor &color)
 {
-    if (d->activeTextColor == color) {
-        return;
-    }
-
-    d->activeTextColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::ActiveTextColor, color);
 }
 
 void PlatformTheme::setActiveBackgroundColor(const QColor &color)
 {
-    if (d->activeBackgroundColor == color) {
-        return;
-    }
-
-    d->activeBackgroundColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::ActiveBackgroundColor, color);
 }
 
 void PlatformTheme::setLinkColor(const QColor &color)
 {
-    if (d->linkColor == color) {
-        return;
-    }
-
-    d->linkColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::LinkColor, color);
 }
 
 void PlatformTheme::setLinkBackgroundColor(const QColor &color)
 {
-    if (d->linkBackgroundColor == color) {
-        return;
-    }
-
-    d->linkBackgroundColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::LinkBackgroundColor, color);
 }
 
 void PlatformTheme::setVisitedLinkColor(const QColor &color)
 {
-    if (d->visitedLinkColor == color) {
-        return;
-    }
-
-    d->visitedLinkColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::VisitedLinkColor, color);
 }
 
 void PlatformTheme::setVisitedLinkBackgroundColor(const QColor &color)
 {
-    if (d->visitedLinkBackgroundColor == color) {
-        return;
-    }
 
-    d->visitedLinkBackgroundColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::VisitedLinkBackgroundColor, color);
 }
 
 void PlatformTheme::setNegativeTextColor(const QColor &color)
 {
-    if (d->negativeTextColor == color) {
-        return;
-    }
 
-    d->negativeTextColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::NegativeTextColor, color);
 }
 
 void PlatformTheme::setNegativeBackgroundColor(const QColor &color)
 {
-    if (d->negativeBackgroundColor == color) {
-        return;
-    }
-
-    d->negativeBackgroundColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::NegativeBackgroundColor, color);
 }
 
 void PlatformTheme::setNeutralTextColor(const QColor &color)
 {
-    if (d->neutralTextColor == color) {
-        return;
-    }
-
-    d->neutralTextColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::NeutralTextColor, color);
 }
 
 void PlatformTheme::setNeutralBackgroundColor(const QColor &color)
 {
-    if (d->neutralBackgroundColor == color) {
-        return;
-    }
-
-    d->neutralBackgroundColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::NeutralBackgroundColor, color);
 }
 
 void PlatformTheme::setPositiveTextColor(const QColor &color)
 {
-    if (d->positiveTextColor == color) {
-        return;
-    }
-
-    d->positiveTextColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::PositiveTextColor, color);
 }
 
 void PlatformTheme::setPositiveBackgroundColor(const QColor &color)
 {
-    if (d->positiveBackgroundColor == color) {
-        return;
-    }
-
-    d->positiveBackgroundColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::PositiveBackgroundColor, color);
 }
 
 void PlatformTheme::setHoverColor(const QColor &color)
 {
-    if (d->hoverColor == color) {
-        return;
-    }
-
-    d->hoverColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::HoverColor, color);
 }
 
 void PlatformTheme::setFocusColor(const QColor &color)
 {
-    if (d->focusColor == color) {
-        return;
-    }
-
-    d->focusColor = color;
-    d->emitCompressedColorChanged();
+    d->setDataColor(this, PlatformThemeData::FocusColor, color);
 }
 
 QFont PlatformTheme::defaultFont() const
 {
-    return d->font;
+    return d->data ? d->data->defaultFont : QFont{};
 }
 
 void PlatformTheme::setDefaultFont(const QFont &font)
 {
-    if (d->font == font) {
-        return;
+    if (d->data) {
+        d->data->setDefaultFont(this, font);
     }
-
-    d->font = font;
-    Q_EMIT defaultFontChanged(font);
 }
 
 QFont PlatformTheme::smallFont() const
 {
-    return d->smallFont;
+    return d->data ? d->data->smallFont : QFont{};
 }
 
 void PlatformTheme::setSmallFont(const QFont &font)
 {
-    if (d->smallFont != font) {
-        d->smallFont = font;
-        Q_EMIT smallFontChanged(font);
+    if (d->data) {
+        d->data->setSmallFont(this, font);
     }
 }
-
-#define PROPAGATECUSTOMCOLOR(colorName, color)\
-            for (PlatformTheme *t : qAsConst(d->m_childThemes)) {\
-                if (t->inherit()) {\
-                    t->set##colorName(color);\
-                }\
-            }
-
 
 //setters for QML clients
 void PlatformTheme::setCustomTextColor(const QColor &color)
 {
-    if (d->customTextColor == color) {
-        return;
-    }
-
-    d->customTextColor = color;
-    PROPAGATECUSTOMCOLOR(CustomTextColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::TextColor, color);
 }
 
 void PlatformTheme::setCustomDisabledTextColor(const QColor &color)
 {
-    if (d->customDisabledTextColor == color) {
-        return;
-    }
-
-    d->customDisabledTextColor = color;
-    PROPAGATECUSTOMCOLOR(CustomDisabledTextColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::DisabledTextColor, color);
 }
 
 void PlatformTheme::setCustomBackgroundColor(const QColor &color)
 {
-    if (d->customBackgroundColor == color) {
-        return;
-    }
-
-    d->customBackgroundColor = color;
-    PROPAGATECUSTOMCOLOR(CustomBackgroundColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::BackgroundColor, color);
 }
 
 void PlatformTheme::setCustomAlternateBackgroundColor(const QColor &color)
 {
-    if (d->customAlternateBackgroundColor == color) {
-        return;
-    }
-
-    d->customAlternateBackgroundColor = color;
-    PROPAGATECUSTOMCOLOR(CustomAlternateBackgroundColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::AlternateBackgroundColor, color);
 }
 
 void PlatformTheme::setCustomHighlightColor(const QColor &color)
 {
-    if (d->customHighlightColor == color) {
-        return;
-    }
-
-    d->customHighlightColor = color;
-    PROPAGATECUSTOMCOLOR(CustomHighlightColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::HighlightColor, color);
 }
 
 void PlatformTheme::setCustomHighlightedTextColor(const QColor &color)
 {
-    if (d->customHighlightedTextColor == color) {
-        return;
-    }
-
-    d->customHighlightedTextColor = color;
-    PROPAGATECUSTOMCOLOR(CustomHighlightedTextColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::HighlightedTextColor, color);
 }
 
 void PlatformTheme::setCustomActiveTextColor(const QColor &color)
 {
-    if (d->customActiveTextColor == color) {
-        return;
-    }
-
-    d->customActiveTextColor = color;
-    PROPAGATECUSTOMCOLOR(CustomActiveTextColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::ActiveTextColor, color);
 }
 
 void PlatformTheme::setCustomActiveBackgroundColor(const QColor &color)
 {
-    if (d->customActiveBackgroundColor == color) {
-        return;
-    }
-
-    d->customActiveBackgroundColor = color;
-    PROPAGATECUSTOMCOLOR(CustomActiveBackgroundColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::ActiveBackgroundColor, color);
 }
 
 void PlatformTheme::setCustomLinkColor(const QColor &color)
 {
-    if (d->customLinkColor == color) {
-        return;
-    }
-
-    d->customLinkColor = color;
-    PROPAGATECUSTOMCOLOR(CustomLinkColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::LinkColor, color);
 }
 
 void PlatformTheme::setCustomLinkBackgroundColor(const QColor &color)
 {
-    if (d->customLinkBackgroundColor == color) {
-        return;
-    }
-
-    d->customLinkBackgroundColor = color;
-    PROPAGATECUSTOMCOLOR(CustomLinkBackgroundColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::LinkBackgroundColor, color);
 }
 
 void PlatformTheme::setCustomVisitedLinkColor(const QColor &color)
 {
-    if (d->customVisitedLinkColor == color) {
-        return;
-    }
-
-    d->customVisitedLinkColor = color;
-    PROPAGATECUSTOMCOLOR(CustomVisitedLinkColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::TextColor, color);
 }
 
 void PlatformTheme::setCustomVisitedLinkBackgroundColor(const QColor &color)
 {
-    if (d->customVisitedLinkBackgroundColor == color) {
-        return;
-    }
-
-    d->customVisitedLinkBackgroundColor = color;
-    PROPAGATECUSTOMCOLOR(CustomVisitedLinkBackgroundColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::VisitedLinkBackgroundColor, color);
 }
 
 void PlatformTheme::setCustomNegativeTextColor(const QColor &color)
 {
-    if (d->customNegativeTextColor == color) {
-        return;
-    }
-
-    d->customNegativeTextColor = color;
-    PROPAGATECUSTOMCOLOR(CustomNegativeTextColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::NegativeTextColor, color);
 }
 
 void PlatformTheme::setCustomNegativeBackgroundColor(const QColor &color)
 {
-    if (d->customNegativeBackgroundColor == color) {
-        return;
-    }
-
-    d->customNegativeBackgroundColor = color;
-    PROPAGATECUSTOMCOLOR(CustomNegativeBackgroundColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::NegativeBackgroundColor, color);
 }
 
 void PlatformTheme::setCustomNeutralTextColor(const QColor &color)
 {
-    if (d->customNeutralTextColor == color) {
-        return;
-    }
-
-    d->customNeutralTextColor = color;
-    PROPAGATECUSTOMCOLOR(CustomNeutralTextColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::NeutralTextColor, color);
 }
 
 void PlatformTheme::setCustomNeutralBackgroundColor(const QColor &color)
 {
-    if (d->customNeutralBackgroundColor == color) {
-        return;
-    }
-
-    d->customNeutralBackgroundColor = color;
-    PROPAGATECUSTOMCOLOR(CustomNeutralBackgroundColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::NeutralBackgroundColor, color);
 }
 
 void PlatformTheme::setCustomPositiveTextColor(const QColor &color)
 {
-    if (d->customPositiveTextColor == color) {
-        return;
-    }
-
-    d->customPositiveTextColor = color;
-    PROPAGATECUSTOMCOLOR(CustomPositiveTextColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::PositiveTextColor, color);
 }
 
 void PlatformTheme::setCustomPositiveBackgroundColor(const QColor &color)
 {
-    if (d->customPositiveBackgroundColor == color) {
-        return;
-    }
-
-    d->customPositiveBackgroundColor = color;
-    PROPAGATECUSTOMCOLOR(CustomPositiveBackgroundColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::PositiveBackgroundColor, color);
 }
 
 void PlatformTheme::setCustomHoverColor(const QColor &color)
 {
-    if (d->customHoverColor == color) {
-        return;
-    }
-
-    d->customHoverColor = color;
-    PROPAGATECUSTOMCOLOR(CustomHoverColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::HoverColor, color);
 }
 
 void PlatformTheme::setCustomFocusColor(const QColor &color)
 {
-    if (d->customFocusColor == color) {
-        return;
-    }
-
-    d->customFocusColor = color;
-    PROPAGATECUSTOMCOLOR(CustomFocusColor, color)
-    d->emitCompressedColorChanged();
+    d->setColor(this, PlatformThemeData::FocusColor, color);
 }
-
 
 QPalette PlatformTheme::palette() const
 {
-    //check the most important custom colors to decide to return a custom palette
-    return d->customTextColor.isValid() || d->customBackgroundColor.isValid() || d->customHighlightColor.isValid() ? d->customPalette : d->palette;
+    if (!d->data) {
+        return QPalette{};
+    }
+
+    auto palette = d->data->palette;
+
+    if (d->localOverrides) {
+        PlatformThemeData::updatePalette(palette, *d->localOverrides);
+    }
+
+    return palette;
 }
 
 void PlatformTheme::setPalette(const QPalette &palette)
 {
-    if (d->palette == palette) {
-        return;
-    }
-
-    d->palette = palette;
-    PROPAGATECUSTOMCOLOR(Palette, palette)
-    Q_EMIT paletteChanged(palette);
+    Q_UNUSED(palette);
 }
 
 QIcon PlatformTheme::iconFromTheme(const QString &name, const QColor &customColor)
@@ -885,14 +814,13 @@ QIcon PlatformTheme::iconFromTheme(const QString &name, const QColor &customColo
 
 bool PlatformTheme::supportsIconColoring() const
 {
-    return d->m_supportsIconColoring;
+    return d->supportsIconColoring;
 }
 
 void PlatformTheme::setSupportsIconColoring(bool support)
 {
-    d->m_supportsIconColoring = support;
+    d->supportsIconColoring = support;
 }
-
 
 PlatformTheme *PlatformTheme::qmlAttachedProperties(QObject *object)
 {
@@ -938,6 +866,144 @@ PlatformTheme *PlatformTheme::qmlAttachedProperties(QObject *object)
     return new BasicTheme(object);
 }
 
+void PlatformTheme::addChangeWatcher(PlatformTheme *watcher, const std::function<void()> &callback)
+{
+    if (d->data) {
+        d->data->addChangeWatcher(watcher, callback);
+    }
 }
 
-#include "moc_platformtheme.cpp"
+void PlatformTheme::removeChangeWatcher(PlatformTheme *watcher)
+{
+    if (d->data) {
+        d->data->removeChangeWatcher(watcher);
+    }
+}
+
+void PlatformTheme::update()
+{
+    d->queueChildUpdate(this);
+
+    auto oldData = d->data;
+
+    if (d->inherit) {
+        QObject *candidate = parent();
+        while (true) {
+            candidate = determineParent(candidate);
+            if (!candidate) {
+                break;
+            }
+
+            auto t = static_cast<PlatformTheme*>(qmlAttachedPropertiesObject<PlatformTheme>(candidate, false));
+            if (t && t->d->data && t->d->data->owner == t) {
+                if (d->data == t->d->data) {
+                    // Inheritance is already correct, do nothing.
+                    return;
+                }
+
+                if (t->d->data) {
+                    if (d->data) {
+                        t->d->data->moveChangeWatchers(d->data, this);
+                    } else {
+                        t->d->data->addChangeWatcher(this, std::bind(&PlatformTheme::emitSignals, this));
+                    }
+                }
+
+                d->data = t->d->data;
+
+                emitSignals();
+
+                return;
+            }
+        }
+    } else if (d->data->owner != this) {
+        // Inherit has changed and we no longer want to inherit, clear the data
+        // so it is recreated below.
+        d->data = nullptr;
+    }
+
+    if (!d->data) {
+        d->data = std::make_shared<PlatformThemeData>();
+        d->data->owner = this;
+
+        if (oldData) {
+            d->data->moveChangeWatchers(oldData, this);
+        } else {
+            d->data->addChangeWatcher(this, std::bind(&PlatformTheme::emitSignals, this));
+        }
+
+        d->data->setColorSet(this, static_cast<ColorSet>(d->colorSet));
+        d->data->setColorGroup(this, static_cast<ColorGroup>(d->colorGroup));
+    }
+
+    if (d->localOverrides) {
+        for (auto entry : *d->localOverrides) {
+            d->data->setColor(this, entry.first, entry.second);
+        }
+    }
+
+    // Notifications from the data object are queued and thus may end up being
+    // slightly delayed. This can cause graphical glitches because the wrong
+    // colours are requested when the data object changes. So instead, do an
+    // instant notification here.
+    for (auto entry : d->data->watchers) {
+        entry.second();
+    }
+}
+
+void PlatformTheme::updateChildren(QObject *object)
+{
+    if (!object) {
+        return;
+    }
+
+    const auto children = object->children();
+    for (auto child : children) {
+        auto t = static_cast<PlatformTheme*>(qmlAttachedPropertiesObject<PlatformTheme>(child, false));
+        if (t) {
+            t->update();
+        } else {
+            updateChildren(child);
+        }
+    }
+}
+
+void PlatformTheme::emitSignals()
+{
+    if (d->data) {
+        Q_EMIT colorSetChanged(d->data->colorSet);
+        Q_EMIT colorGroupChanged(d->data->colorGroup);
+        Q_EMIT defaultFontChanged(d->data->defaultFont);
+        Q_EMIT smallFontChanged(d->data->smallFont);
+        Q_EMIT paletteChanged(d->data->palette);
+    }
+
+    d->emitCompressedColorChanged(this);
+}
+
+void PlatformTheme::emitColorChanged()
+{
+    Q_EMIT colorsChanged();
+    d->pendingColorChange = false;
+}
+
+// We sometimes set theme properties on non-visual objects. However, if an item
+// has a visual and a non-visual parent that are different, we should prefer the
+// visual parent, so we need to apply some extra logic.
+QObject * PlatformTheme::determineParent(QObject* object)
+{
+    if (!object) {
+        return nullptr;
+    }
+
+    auto item = qobject_cast<QQuickItem*>(object);
+    if (item) {
+        return item->parentItem();
+    } else {
+        return object->parent();
+    }
+}
+
+}
+
+#include "platformtheme.moc"

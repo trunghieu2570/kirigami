@@ -13,12 +13,11 @@
 #include <QPalette>
 #include <QIcon>
 
-#ifndef KIRIGAMI_BUILD_TYPE_STATIC
 #include <kirigami2_export.h>
-#endif
 
 namespace Kirigami {
 
+class PlatformThemeData;
 class PlatformThemePrivate;
 
 /**
@@ -28,11 +27,7 @@ class PlatformThemePrivate;
  * different platforms can reimplement this class to integrate with
  * system platform colors of a given platform
  */
-#ifdef KIRIGAMI_BUILD_TYPE_STATIC
-class PlatformTheme : public QObject
-#else
 class KIRIGAMI2_EXPORT PlatformTheme : public QObject
-#endif
 {
     Q_OBJECT
 
@@ -184,7 +179,9 @@ public:
         Selection, /** Color set used by selectged areas */
         Tooltip, /** Color set used by tooltips */
         Complementary, /** Color set meant to be complementary to Window: usually is a dark theme for light themes */
-        Header /** Color set to be used by heading areas of applications, such as toolbars */
+        Header, /** Color set to be used by heading areas of applications, such as toolbars */
+
+        ColorSetCount, // Number of items in this enum, this should always be the last item.
     };
     Q_ENUM(ColorSet)
 
@@ -192,7 +189,9 @@ public:
         Disabled = QPalette::Disabled,
         Active = QPalette::Active,
         Inactive = QPalette::Inactive,
-        Normal = QPalette::Normal
+        Normal = QPalette::Normal,
+
+        ColorGroupCount, // Number of items in this enum, this should always be the last item.
     };
     Q_ENUM(ColorGroup)
 
@@ -315,9 +314,20 @@ protected:
     void setDefaultFont(const QFont &defaultFont);
     void setSmallFont(const QFont &smallFont);
     void setPalette(const QPalette &palette);
+
+    void addChangeWatcher(PlatformTheme *watcher, const std::function<void()> &callback);
+    void removeChangeWatcher(PlatformTheme *watcher);
+
 private:
+    void update();
+    void updateChildren(QObject *item);
+    void emitSignals();
+    void emitColorChanged();
+    QObject *determineParent(QObject* object);
+
     PlatformThemePrivate *d;
     friend class PlatformThemePrivate;
+    friend class PlatformThemeData;
 };
 
 }
