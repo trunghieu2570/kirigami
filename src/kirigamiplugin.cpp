@@ -138,8 +138,14 @@ void KirigamiPlugin::registerTypes(const char *uri)
         m_stylesFallbackChain.prepend(QStringLiteral("org.kde.desktop"));
 #endif
     }
+
     //At this point the fallback chain will be selected->org.kde.desktop->Fallback
-    s_selectedStyle = m_stylesFallbackChain.first();
+    if (qEnvironmentVariableIntValue("KIRIGAMI_FORCE_STYLE") != 1) {
+        s_selectedStyle = m_stylesFallbackChain.first();
+    } else {
+        s_selectedStyle = style;
+        m_stylesFallbackChain.clear();
+    }
 
     qmlRegisterSingletonType<Settings>(uri, 2, 0, "Settings",
          [](QQmlEngine *e, QJSEngine*) -> QObject* {
