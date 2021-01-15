@@ -31,7 +31,11 @@ kirigami_add_tests(
     tst_pagerouter.qml
     tst_routerwindow.qml
     tst_avatar.qml
+    tst_theme.qml
     pagepool/tst_pagepool.qml
     pagepool/tst_layers.qml
 )
 
+set_tests_properties(tst_theme.qml PROPERTIES
+    ENVIRONMENT "QT_QUICK_CONTROLS_STYLE=default;KIRIGAMI_FORCE_STYLE=1"
+)
