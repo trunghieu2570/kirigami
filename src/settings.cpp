@@ -121,7 +121,7 @@ void Settings::setTabletModeAvailable(bool mobileAvailable)
     }
 
     m_tabletModeAvailable = mobileAvailable;
-    emit tabletModeAvailableChanged();
+    Q_EMIT tabletModeAvailableChanged();
 }
 
 bool Settings::isTabletModeAvailable() const
@@ -136,7 +136,7 @@ void Settings::setIsMobile(bool mobile)
     }
 
     m_mobile = mobile;
-    emit isMobileChanged();
+    Q_EMIT isMobileChanged();
 }
 
 bool Settings::isMobile() const
@@ -151,7 +151,7 @@ void Settings::setTabletMode(bool tablet)
     }
 
     m_tabletMode = tablet;
-    emit tabletModeChanged();
+    Q_EMIT tabletModeChanged();
 }
 
 bool Settings::tabletMode() const
@@ -167,7 +167,7 @@ void Settings::setTransientTouchInput(bool touch)
 
     m_hasTransientTouchInput = touch;
     if (!m_tabletMode) {
-        emit hasTransientTouchInputChanged();
+        Q_EMIT hasTransientTouchInputChanged();
     }
 }
 

@@ -67,7 +67,7 @@ void Icon::setSource(const QVariant &icon)
         m_isMaskHeuristic = (iconSource.endsWith(QLatin1String("-symbolic"))
                             || iconSource.endsWith(QLatin1String("-symbolic-rtl"))
                             || iconSource.endsWith(QLatin1String("-symbolic-ltr")));
-        emit isMaskChanged();
+        Q_EMIT isMaskChanged();
     }
 
     if (m_networkReply) {
@@ -78,8 +78,8 @@ void Icon::setSource(const QVariant &icon)
     setStatus(Loading);
 
     polish();
-    emit sourceChanged();
-    emit validChanged();
+    Q_EMIT sourceChanged();
+    Q_EMIT validChanged();
 }
 
 QVariant Icon::source() const
@@ -94,7 +94,7 @@ void Icon::setActive(const bool active)
     }
     m_active = active;
     polish();
-    emit activeChanged();
+    Q_EMIT activeChanged();
 }
 
 bool Icon::active() const
@@ -120,7 +120,7 @@ void Icon::setSelected(const bool selected)
     }
     m_selected = selected;
     polish();
-    emit selectedChanged();
+    Q_EMIT selectedChanged();
 }
 
 bool Icon::selected() const
@@ -137,7 +137,7 @@ void Icon::setIsMask(bool mask)
     m_isMask = mask;
     m_isMaskHeuristic = mask;
     polish();
-    emit isMaskChanged();
+    Q_EMIT isMaskChanged();
 }
 
 bool Icon::isMask() const
@@ -153,7 +153,7 @@ void Icon::setColor(const QColor &color)
 
     m_color = color;
     polish();
-    emit colorChanged();
+    Q_EMIT colorChanged();
 }
 
 QColor Icon::color() const
@@ -563,7 +563,7 @@ void Icon::setStatus(Status status)
     }
 
     m_status = status;
-    emit statusChanged();
+    Q_EMIT statusChanged();
 }
 
 Icon::Status Icon::status() const

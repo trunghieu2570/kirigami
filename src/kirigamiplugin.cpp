@@ -60,7 +60,7 @@ public:
     bool eventFilter(QObject *receiver, QEvent *event) override
     {
         if (event->type() == QEvent::LanguageChange && receiver == QCoreApplication::instance()) {
-            emit languageChangeEvent();
+            Q_EMIT languageChangeEvent();
         }
         return QObject::eventFilter(receiver, event);
     }
