@@ -13,6 +13,7 @@
 #include <QGuiApplication>
 #include <QIcon>
 #include <QTouchDevice>
+#include <QMouseEvent>
 #include <QWindow>
 
 #include "libkirigami/tabletmodewatcher.h"
@@ -104,7 +105,13 @@ bool Settings::eventFilter(QObject *watched, QEvent *event)
         setTransientTouchInput(true);
         break;
     case QEvent::MouseButtonPress:
-    case QEvent::MouseMove:
+    case QEvent::MouseMove: {
+        QMouseEvent *me = static_cast<QMouseEvent *>(event);
+        if (me->source() == Qt::MouseEventNotSynthesized) {
+            setTransientTouchInput(false);
+        }
+        break;
+    }
     case QEvent::Wheel:
         setTransientTouchInput(false);
     default:
