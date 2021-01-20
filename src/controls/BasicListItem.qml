@@ -226,6 +226,7 @@ AbstractListItem {
                 Layout.minimumHeight: size
                 Layout.maximumHeight: size
                 Layout.minimumWidth: size
+                Layout.maximumWidth: size
                 selected: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents))
                 opacity: 1
                 visible: source != undefined
