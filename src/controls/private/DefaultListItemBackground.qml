@@ -44,7 +44,7 @@ Rectangle {
             right: parent.right
             bottom: parent.bottom
             leftMargin: background.leadingWidth != undefined ? background.leadingWidth : Units.largeSpacing
-            rightMargin: background.leadingWidth != undefined ? 0 : Units.largeSpacing
+            rightMargin: Units.largeSpacing
         }
         visible: background.__separatorVisible
         weight: Separator.Weight.Light
