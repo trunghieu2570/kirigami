@@ -199,7 +199,6 @@ AbstractListItem {
         id: contItem
         implicitWidth: (listItem.leading || {implicitWidth: 0}).implicitWidth + layout.implicitWidth + (listItem.trailing || {implicitWidth: 0}).implicitWidth
         implicitHeight: layout.implicitHeight
-        Component.onCompleted: listItem.background.leadingWidth = Qt.binding(function() { return listItem.leading ? listItem.leading.width + (LayoutMirroring.enabled ? listItem.rightPadding : listItem.leftPadding) : undefined })
 
         RowLayout {
             id: layout

@@ -43,7 +43,7 @@ Rectangle {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            leftMargin: background.leadingWidth != undefined ? background.leadingWidth : Units.largeSpacing
+            leftMargin: Units.largeSpacing
             rightMargin: Units.largeSpacing
         }
         visible: background.__separatorVisible
