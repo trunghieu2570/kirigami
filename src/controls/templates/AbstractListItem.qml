@@ -121,10 +121,10 @@ T2.ItemDelegate {
     padding: Settings.tabletMode ? Units.largeSpacing : Units.smallSpacing
 
     leftPadding: padding*2
-    topPadding: padding
+    topPadding: Units.largeSpacing
 
     rightPadding: padding*2
-    bottomPadding: padding
+    bottomPadding: Units.largeSpacing
 
     implicitWidth: contentItem ? contentItem.implicitWidth + leftPadding + rightPadding : Units.gridUnit * 12
 
