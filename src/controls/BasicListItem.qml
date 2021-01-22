@@ -207,6 +207,7 @@ AbstractListItem {
             anchors.leftMargin: listItem.leadingPadding
             anchors.right: contItem.right
             anchors.rightMargin: listItem.trailingPadding
+            anchors.verticalCenter: parent.verticalCenter
 
             Icon {
                 id: iconItem
