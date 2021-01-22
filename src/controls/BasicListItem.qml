@@ -191,6 +191,16 @@ AbstractListItem {
      */
     property alias reserveSpaceForLabel: labelItem.visible
 
+    /**
+     * reserveSpaceForSubtitle: bool
+     *
+     * Whether or not the list item's height should account for
+     * the presence of a subtitle, even if one is not present.
+     * @since 5.77
+     * @since org.kde.kirigami 2.15
+     */
+    property bool reserveSpaceForSubtitle: false
+
     default property alias _basicDefault: layout.data
 
     icon: action ? action.icon.name || action.icon.source : undefined
@@ -198,7 +208,7 @@ AbstractListItem {
     contentItem: Item {
         id: contItem
         implicitWidth: (listItem.leading || {implicitWidth: 0}).implicitWidth + layout.implicitWidth + (listItem.trailing || {implicitWidth: 0}).implicitWidth
-        implicitHeight: layout.implicitHeight
+        implicitHeight: layout.implicitHeight + (subtitleItem.text === "" && listItem.reserveSpaceForSubtitle ? subtitleItem.implicitHeight : 0)
 
         RowLayout {
             id: layout
