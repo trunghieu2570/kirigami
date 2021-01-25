@@ -98,7 +98,7 @@ Item {
     }
     Connections {
         target: __appWindow
-        onControlsVisibleChanged: {
+        function onControlsVisibleChanged() {
             heightAnim.from = root.implicitHeight
             heightAnim.to = __appWindow.controlsVisible ? root.preferredHeight : 0;
             heightAnim.restart();
@@ -139,13 +139,13 @@ Item {
         Connections {
             target: root.page ? root.page.globalToolBarItem : null
             enabled: target
-            onImplicitHeightChanged: root.implicitHeight = root.page.globalToolBarItem.implicitHeight
+            function onImplicitHeightChanged() { root.implicitHeight = root.page.globalToolBarItem.implicitHeight }
         }
 
         Timer {
-            id: slideResetTimer
-            interval: 500
-            onTriggered: {
+           id: slideResetTimer
+           interval: 500
+           onTriggered: {
                 if ((root.pageRow ? root.pageRow.wideMode : (__appWindow && __appWindow.wideScreen)) || !Settings.isMobile) {
                     return;
                 }
@@ -161,7 +161,7 @@ Item {
 
         Connections {
             target: pageRow
-            onCurrentItemChanged: {
+            function onCurrentItemChanged() {
                 if (!root.page) {
                     return;
                 }
