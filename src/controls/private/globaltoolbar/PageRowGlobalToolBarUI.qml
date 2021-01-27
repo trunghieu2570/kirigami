@@ -65,6 +65,7 @@ Kirigami.AbstractApplicationHeader {
         RowLayout {
             id: buttonsLayout
             Layout.fillHeight: true
+            Layout.preferredHeight: Math.max(backButton.visible ? backButton.implicitHeight : 0, forwardButton.visible ? forwardButton.implicitHeight : 0)
 
             Layout.leftMargin: leftHandleAnchor.visible ? Kirigami.Units.smallSpacing : 0
 
@@ -80,6 +81,7 @@ Kirigami.AbstractApplicationHeader {
                 Layout.maximumHeight: buttonsLayout.height
             }
             TemplatesPrivate.ForwardButton {
+                id: forwardButton
                 Layout.minimumWidth: implicitHeight
                 Layout.minimumHeight: implicitHeight
                 Layout.maximumHeight: buttonsLayout.height
