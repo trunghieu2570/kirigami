@@ -136,6 +136,18 @@ QQC2.Control {
         color: __private.showImage ? Kirigami.Theme.backgroundColor : "white"
         gradient: __private.showImage ? undefined : colouredGradient
 
+        Rectangle {
+            anchors.fill: parent
+            anchors.margins: -border.width
+
+            radius: width / 2
+
+            color: "transparent"
+            border.width: Kirigami.Units.smallSpacing
+            border.color: Kirigami.Theme.focusColor
+            visible: avatarRoot.focus
+        }
+
         MouseArea {
             id: primaryMouse
 
