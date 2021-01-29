@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
 
-set(KF5_VERSION "5.79.0") # handled by release scripts
+set(KF_VERSION "5.79.0") # handled by release scripts
 set(KF5_DEP_VERSION "5.79.0") # handled by release scripts
 
-project(kirigami2 VERSION ${KF5_VERSION})
+project(kirigami2 VERSION ${KF_VERSION})
 
 set(REQUIRED_QT_VERSION 5.14.0)
 
@@ -90,7 +90,7 @@ install(EXPORT KF5Kirigami2Targets
 )
 
 
-ecm_setup_version(${KF5_VERSION}
+ecm_setup_version(${KF_VERSION}
     VARIABLE_PREFIX KIRIGAMI2
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kirigami_version.h"
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5Kirigami2ConfigVersion.cmake"
