@@ -1,118 +1,79 @@
 /*
  *  SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2021 Arjen Hiemstra <ahiemstra@heimr.nl>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.4
+import QtQuick 2.12
+
+import org.kde.kirigami 2.16
 
 pragma Singleton
 
 /**
- * A set of named colors for the application
+ * Basic theme definition that contains some default colors.
  *
- * Since frameworks 5.38 Kirigami.Theme has been made an attached
- * property - the recommended way to interact with the Kirigami.Theme
- * object is documented in its replacement found at
- * Kirigami::PlatformTheme.
- *
- * Attempting to access the depreciated colors declared here will
- * generate warnings. Use the attached properties color sets instead.
- * For example, instead of using:
- *
- * @code
- * color: Kirigami.Theme.buttonTextColor
- * @endcode
- *
- * Use the button color set instead:
- *
- * @code
- * Kirigami.Theme.colorSet: Kirigami.Theme.Button
- * color: Kirigami.Theme.textColor
- * @endcode
- *
- * For more color sets, see Kirigami::PlatformTheme::ColorSet.
- * @inherit QtQuick.QtObject
+ * Please Note: This is instantiated by Kirigami and acts as backend for the
+ * Theme attached property. Properties here do not necessarily reflect those of
+ * the attached property, see Kirigami::PlatformTheme for the properties that
+ * should be used instead.
  */
-QtObject {
-    id: theme
+BasicThemeDefinition {
+    textColor: "#31363b"
+    disabledTextColor: "#9931363b"
 
-    property color textColor: "#31363b"
-    property color disabledTextColor: "#9931363b"
+    highlightColor: "#2196F3"
+    highlightedTextColor: "#eff0fa"
+    backgroundColor: "#eff0f1"
+    alternateBackgroundColor: "#bdc3c7"
 
-    property color highlightColor: "#2196F3"
-    property color highlightedTextColor: "#eff0fa"
-    property color backgroundColor: "#eff0f1"
-    property color alternateBackgroundColor: "#bdc3c7"
+    activeTextColor: "#0176D3"
+    activeBackgroundColor: "#0176D3"
+    linkColor: "#2196F3"
+    linkBackgroundColor: "#2196F3"
+    visitedLinkColor: "#2196F3"
+    visitedLinkBackgroundColor: "#2196F3"
+    negativeTextColor: "#DA4453"
+    negativeBackgroundColor: "#DA4453"
+    neutralTextColor: "#F67400"
+    neutralBackgroundColor: "#F67400"
+    positiveTextColor: "#27AE60"
+    positiveBackgroundColor: "#27AE60"
 
-    property color activeTextColor: "#0176D3"
-    property color activeBackgroundColor: "#0176D3"
-    property color linkColor: "#2196F3"
-    property color linkBackgroundColor: "#2196F3"
-    property color visitedLinkColor: "#2196F3"
-    property color visitedLinkBackgroundColor: "#2196F3"
-    property color negativeTextColor: "#DA4453"
-    property color negativeBackgroundColor: "#DA4453"
-    property color neutralTextColor: "#F67400"
-    property color neutralBackgroundColor: "#F67400"
-    property color positiveTextColor: "#27AE60"
-    property color positiveBackgroundColor: "#27AE60"
+    buttonTextColor: "#31363b"
+    buttonBackgroundColor: "#eff0f1"
+    buttonAlternateBackgroundColor: "#bdc3c7"
+    buttonHoverColor: "#2196F3"
+    buttonFocusColor: "#2196F3"
 
-    property color buttonTextColor: "#31363b"
-    property color buttonBackgroundColor: "#eff0f1"
-    property color buttonAlternateBackgroundColor: "#bdc3c7"
-    property color buttonHoverColor: "#2196F3"
-    property color buttonFocusColor: "#2196F3"
+    viewTextColor: "#31363b"
+    viewBackgroundColor: "#fcfcfc"
+    viewAlternateBackgroundColor: "#eff0f1"
+    viewHoverColor: "#2196F3"
+    viewFocusColor: "#2196F3"
 
-    property color viewTextColor: "#31363b"
-    property color viewBackgroundColor: "#fcfcfc"
-    property color viewAlternateBackgroundColor: "#eff0f1"
-    property color viewHoverColor: "#2196F3"
-    property color viewFocusColor: "#2196F3"
+    selectionTextColor: "#eff0fa"
+    selectionBackgroundColor: "#2196F3"
+    selectionAlternateBackgroundColor: "#1d99f3"
+    selectionHoverColor: "#2196F3"
+    selectionFocusColor: "#2196F3"
 
-    property color selectionTextColor: "#eff0fa"
-    property color selectionBackgroundColor: "#2196F3"
-    property color selectionAlternateBackgroundColor: "#1d99f3"
-    property color selectionHoverColor: "#2196F3"
-    property color selectionFocusColor: "#2196F3"
+    tooltipTextColor: "#eff0f1"
+    tooltipBackgroundColor: "#31363b"
+    tooltipAlternateBackgroundColor: "#4d4d4d"
+    tooltipHoverColor: "#2196F3"
+    tooltipFocusColor: "#2196F3"
 
-    property color tooltipTextColor: "#eff0f1"
-    property color tooltipBackgroundColor: "#31363b"
-    property color tooltipAlternateBackgroundColor: "#4d4d4d"
-    property color tooltipHoverColor: "#2196F3"
-    property color tooltipFocusColor: "#2196F3"
+    complementaryTextColor: "#eff0f1"
+    complementaryBackgroundColor: "#31363b"
+    complementaryAlternateBackgroundColor: "#3b4045"
+    complementaryHoverColor: "#2196F3"
+    complementaryFocusColor: "#2196F3"
 
-    property color complementaryTextColor: "#eff0f1"
-    property color complementaryBackgroundColor: "#31363b"
-    property color complementaryAlternateBackgroundColor: "#3b4045"
-    property color complementaryHoverColor: "#2196F3"
-    property color complementaryFocusColor: "#2196F3"
-
-    property color headerTextColor: "#232629"
-    property color headerBackgroundColor: "#e3e5e7"
-    property color headerAlternateBackgroundColor: "#eff0f1"
-    property color headerHoverColor: "#2196F3"
-    property color headerFocusColor: "#93cee9"
-    
-    property font defaultFont: fontMetrics.font
-    property font smallFont: {
-        let font = fontMetrics.font
-        if (!!font.pixelSize) {
-            font.pixelSize =- 2
-        } else {
-            font.pointSize =- 2
-        }
-        return font
-    }
-
-    property list<QtObject> children: [
-        TextMetrics {
-            id: fontMetrics
-        }
-    ]
-    function __propagateColorSet(object, context) {}
-    function __propagateTextColor(object, color) {}
-    function __propagateBackgroundColor(object, color) {}
-    function __propagatePrimaryColor(object, color) {}
-    function __propagateAccentColor(object, color) {}
+    headerTextColor: "#232629"
+    headerBackgroundColor: "#e3e5e7"
+    headerAlternateBackgroundColor: "#eff0f1"
+    headerHoverColor: "#2196F3"
+    headerFocusColor: "#93cee9"
 }

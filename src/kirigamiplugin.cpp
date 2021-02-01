@@ -237,6 +237,9 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     qmlRegisterType(componentUrl(QStringLiteral("Hero.qml")), uri, 2, 15, "Hero");
 
+    // 2.16
+    qmlRegisterType<Kirigami::BasicThemeDefinition>(uri, 2, 16, "BasicThemeDefinition");
+
 
     qmlProtectModule(uri, 2);
 }
