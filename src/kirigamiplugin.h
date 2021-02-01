@@ -51,27 +51,6 @@ Q_SIGNALS:
 
 private:
     QUrl componentUrl(const QString &fileName) const;
-    QString resolveFilePath(const QString &path) const
-    {
-#if defined(Q_OS_ANDROID)
-        return QStringLiteral(":/android_rcc_bundle/qml/org/kde/kirigami.2/") + path;
-#elif defined(KIRIGAMI_BUILD_TYPE_STATIC)
-        return QStringLiteral(":/org/kde/kirigami.2/") + path;
-#else
-        return baseUrl().toLocalFile() + QLatin1Char('/') + path;
-#endif
-    }
-    QString resolveFileUrl(const QString &filePath) const
-    {
-#if defined(Q_OS_ANDROID)
-        return QStringLiteral("qrc:/android_rcc_bundle/qml/org/kde/kirigami.2/") + filePath;
-#elif defined(KIRIGAMI_BUILD_TYPE_STATIC)
-        return filePath;
-#else
-        return baseUrl().toString() + QLatin1Char('/') + filePath;
-#endif
-    }
-    QStringList m_stylesFallbackChain;
 };
 
 #endif

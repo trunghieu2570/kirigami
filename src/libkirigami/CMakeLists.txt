@@ -5,6 +5,7 @@ set(libkirigami_SRCS
     basictheme.cpp
     kirigamipluginfactory.cpp
     tabletmodewatcher.cpp
+    styleselector.cpp
 )
 
 #use dbus on linux, bsd etc, but not andoid and apple stuff

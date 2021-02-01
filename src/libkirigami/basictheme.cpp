@@ -13,6 +13,10 @@
 #include <QQuickWindow>
 #include <QTimer>
 
+#include "styleselector_p.h"
+
+#include "loggingcategory.h"
+
 namespace Kirigami {
 
 class BasicThemeDeclarativeSingleton
