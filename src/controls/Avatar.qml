@@ -14,6 +14,7 @@ import "templates/private" as P
 
 /**
  * An element that represents a user, either with initials, an icon, or a profile image.
+ * @inherit QtQuick.Controls.Control
  */
 QQC2.Control {
     id: avatarRoot

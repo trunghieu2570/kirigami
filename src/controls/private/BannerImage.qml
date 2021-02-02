@@ -12,7 +12,8 @@ import org.kde.kirigami 2.12 as Kirigami
 /**
  * This Component is used as the header of GlobalDrawer and as the header
  * of Card, It can be accessed there as a grouped property but can never
- * be instantiated directly
+ * be instantiated directly.
+ * \private
  */
 Kirigami.ShadowedImage {
     id: root

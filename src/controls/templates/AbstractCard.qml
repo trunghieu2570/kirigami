@@ -19,7 +19,7 @@ import org.kde.kirigami 2.4 as Kirigami
  * for cards, use the Card component.
  *
  * @see Card
- * @inherits QtQuick.Templates.ItemDelegate
+ * @inherit QtQuick.Controls.ItemDelegate
  * @since 2.4
  */
 T.ItemDelegate {

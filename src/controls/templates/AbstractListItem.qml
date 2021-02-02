@@ -16,7 +16,7 @@ import QtQuick.Templates 2.4 as QQC2
  *
  * It's intended to make all listviews look coherent.
  *
- * @inherit QtQuick.Templates.ItemDelegate
+ * @inherit QtQuick.Controls.ItemDelegate
  */
 T2.ItemDelegate {
     id: listItem
@@ -24,18 +24,16 @@ T2.ItemDelegate {
     /**
      * @deprecated
      * Holds if the item emits signals related to mouse interaction.
-     *TODO: remove
      * The default value is false.
      */
-    property bool supportsMouseEvents: hoverEnabled
+    property bool supportsMouseEvents: hoverEnabled // TODO KF6 remove
 
     /**
      * @var bool containsMouse
      * True when the user hovers the mouse over the list item
      * NOTE: on mobile touch devices this will be true only when pressed is also true
-     * TODO: remove?
      */
-    property alias containsMouse: listItem.hovered
+    property alias containsMouse: listItem.hovered // TODO KF6 remove.
 
     /**
      * If true the background of the list items will be alternating between two
@@ -97,6 +95,10 @@ T2.ItemDelegate {
     default property alias _default: listItem.contentItem
 
     // Overrides action property of newer import versions which we can't use
+    /**
+     * This property holds the item action.
+     * \property QtQuick.Controls.Action AbstractListItem::action
+     */
     property QQC2.Action action
 
     activeFocusOnTab: ListView.view ? false : true
