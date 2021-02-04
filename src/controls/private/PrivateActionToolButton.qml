@@ -45,19 +45,22 @@ Controls.ToolButton {
     onMenuActionsChanged: {
         if (menuComponent && menuActions.length > 0) {
             if (!menu) {
+                var setupIncubatedMenu = function(incubatedMenu) {
+                    menu = incubatedMenu
+                    // Important: We handle the press on parent in the parent, so ignore it here.
+                    menu.closePolicy = Controls.Popup.CloseOnEscape | Controls.Popup.CloseOnPressOutsideParent
+                    menu.closed.connect(() => control.checked = false)
+                    menu.actions = control.menuActions
+                }
                 let incubator = menuComponent.incubateObject(control, {"actions": menuActions})
                 if (incubator.status != Component.Ready) {
                     incubator.onStatusChanged = function(status) {
                         if (status == Component.Ready) {
-                            menu = incubator.object
-                            // Important: We handle the press on parent in the parent, so ignore it here.
-                            menu.closePolicy = Controls.Popup.CloseOnEscape | Controls.Popup.CloseOnPressOutsideParent
-                            menu.closed.connect(() => control.checked = false)
-                            menu.actions = control.menuActions
+                            setupIncubatedMenu(incubator.object)
                         }
                     }
                 } else {
-                    menu = incubator.object
+                    setupIncubatedMenu(incubator.object);
                 }
             } else {
                 menu.actions = menuActions
