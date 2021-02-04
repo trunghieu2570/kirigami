@@ -326,7 +326,7 @@ QQC2.ApplicationWindow {
     Action {
         id: _quitAction
         text: qsTr("Quit")
-        icon.name: "application-exit-symbolic";
+        icon.name: "application-exit";
         shortcut: StandardKey.Quit
         onTriggered: root.close()
     }
