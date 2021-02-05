@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/org/kde/kirigami.2/">
         <file alias="qmldir">@kirigami_QML_DIR@/src/qmldir</file>
+        <file alias="Avatar.qml">@kirigami_QML_DIR@/src/controls/Avatar.qml</file>
         <file alias="AbstractApplicationWindow.qml">@kirigami_QML_DIR@/src/controls/AbstractApplicationWindow.qml</file>
         <file alias="ContextDrawer.qml">@kirigami_QML_DIR@/src/controls/ContextDrawer.qml</file>
         <file alias="Action.qml">@kirigami_QML_DIR@/src/controls/Action.qml</file>
@@ -60,6 +61,7 @@
         <file alias="templates/private/BackButton.qml">@kirigami_QML_DIR@/src/controls/templates/private/BackButton.qml</file>
         <file alias="templates/private/IconPropertiesGroup.qml">@kirigami_QML_DIR@/src/controls/templates/private/IconPropertiesGroup.qml</file>
         <file alias="templates/private/ForwardButton.qml">@kirigami_QML_DIR@/src/controls/templates/private/ForwardButton.qml</file>
+        <file alias="templates/private/BorderPropertiesGroup.qml">@kirigami_QML_DIR@/src/controls/templates/private/BorderPropertiesGroup.qml</file>
         <file alias="templates/OverlayDrawer.qml">@kirigami_QML_DIR@/src/controls/templates/OverlayDrawer.qml</file>
         <file alias="templates/OverlaySheet.qml">@kirigami_QML_DIR@/src/controls/templates/OverlaySheet.qml</file>
         <file alias="templates/SwipeListItem.qml">@kirigami_QML_DIR@/src/controls/templates/SwipeListItem.qml</file>
