@@ -283,11 +283,12 @@ void PageRouter::navigateToRoute(QJSValue route)
         } else { 
             auto current = resolvedRoutes.value(i);
             Q_ASSERT(current);
+            auto props = incoming->properties;
             if (current->name != incoming->name || current->data != incoming->data) {
                 resolvedRoutes.replace(i, incoming);
             }
             resolvedRoutes[i]->properties.clear();
-            for (auto it = incoming->properties.constBegin(); it != incoming->properties.constEnd(); it++) {
+            for (auto it = props.constBegin(); it != props.constEnd(); it++) {
                 resolvedRoutes[i]->properties.insert(it.key(), it.value());
             }
         }
