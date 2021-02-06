@@ -101,6 +101,18 @@ T2.Drawer {
     }
 
     /**
+     * The tooltip displayed when the drawer is open.
+     * @since 2.15
+     */
+    property string handleOpenToolTip: qsTr("Close")
+
+    /**
+     * The tooltip displayed when the drawer is closed.
+     * @since 2.15
+     */
+    property string handleClosedToolTip: qsTr("Open")
+
+    /**
      * If true, a little handle will be visible to make opening the drawer easier
      * Currently supported only on left and right drawers
      */
@@ -117,6 +129,10 @@ T2.Drawer {
         preventStealing: true
         hoverEnabled: handleAnchor && handleAnchor.visible
         parent: applicationWindow().overlay.parent
+
+        T2.ToolTip.visible: containsMouse
+        T2.ToolTip.text: root.drawerOpen ? handleOpenToolTip : handleClosedToolTip
+        T2.ToolTip.delay: Units.toolTipDelay
 
         property Item handleAnchor: (applicationWindow().pageStack && applicationWindow().pageStack.globalToolBar)
                 ? ((root.edge === Qt.LeftEdge && Qt.application.layoutDirection == Qt.LeftToRight)
