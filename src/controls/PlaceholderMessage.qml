@@ -153,7 +153,18 @@ ColumnLayout {
      *
      * @since 5.70
      */
-    property alias text: label.text
+    property string text
+
+    /**
+     * title: string
+     * The text to show as a placeholder title.
+     *
+     * Optional; if not defined, the message will have no text. Useful when you
+     * only want to display an icon, action button, and/or other custom content
+     *
+     * @since 5.7?
+     */
+    property string title
 
     /**
      * icon: QVariant
@@ -202,18 +213,40 @@ ColumnLayout {
     }
 
     Kirigami.Heading {
-        id: label
+        text: root.title
+        visible: root.title !== ""
+
+        level: 3
+
+        horizontalAlignment: Qt.AlignHCenter
+        wrapMode: Text.WordWrap
 
         Layout.fillWidth: true
-        Layout.alignment: Qt.AlignHCenter
-        horizontalAlignment: Qt.AlignHCenter
+    }
 
-        visible: text.length > 0
+    QQC2.Label {
+        text: root.text
+        visible: root.text !== "" && root.title !== ""
+
+        horizontalAlignment: Qt.AlignHCenter
+        wrapMode: Text.WordWrap
+
+        Layout.fillWidth: true
+    }
+
+    // TODO KF6: remove, force users to use the new design
+    // this is here not to break existing users who expect
+    // the old style of heading
+    Kirigami.Heading {
+        text: root.text
+        visible: root.text !== "" && root.title === ""
 
         level: 2
-        opacity: 0.5
 
+        horizontalAlignment: Qt.AlignHCenter
         wrapMode: Text.WordWrap
+
+        Layout.fillWidth: true
     }
 
     QQC2.Button {
