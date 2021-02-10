@@ -77,6 +77,7 @@ Controls.Popup {
         }
     }
 
+    Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
     
     background: Item {}
@@ -152,6 +153,7 @@ Controls.Popup {
             contentItem: RowLayout {
                 id: mainLayout
 
+                Kirigami.Theme.inherit: false
                 Kirigami.Theme.colorSet: root.Kirigami.Theme.colorSet
                 width: mainLayout.width
                 //FIXME: why this is not automatic?
@@ -189,6 +191,7 @@ Controls.Popup {
                 }
             }
             background: Kirigami.ShadowedRectangle {
+                Kirigami.Theme.inherit: false
                 Kirigami.Theme.colorSet: root.Kirigami.Theme.colorSet
                 shadow {
                     size: Kirigami.Units.gridUnit/2

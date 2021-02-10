@@ -116,6 +116,7 @@ Page {
     implicitHeight: (header ? header.implicitHeight : 0) + (footer ? footer.implicitHeight : 0) + contentHeight + topPadding + bottomPadding
     implicitWidth: root.flickable.contentItem ? root.flickable.contentItem.implicitWidth : contentItem.implicitWidth + leftPadding + rightPadding
 
+    Theme.inherit: false
     Theme.colorSet: flickable && flickable.hasOwnProperty("model") ? Theme.View : Theme.Window
 
     clip: true

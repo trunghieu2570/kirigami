@@ -262,6 +262,8 @@ T2.Drawer {
     }
 
     interactive: modal
+
+    Theme.inherit: false
     Theme.colorSet: modal ? Theme.View : Theme.Window
     Theme.onColorSetChanged: {
         contentItem.Theme.colorSet = Theme.colorSet
