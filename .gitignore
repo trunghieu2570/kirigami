@@ -22,3 +22,4 @@ CMakeLists.txt.user*
 .cmake/
 .vscode/
 /.clang-format
+/compile_commands.json
