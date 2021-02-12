@@ -12,7 +12,6 @@ pragma Singleton
 
 /**
  * A set of values to define semantically sizes and durations
- * @inherit QtQuick.QtObject
  */
 QtObject {
     id: units
