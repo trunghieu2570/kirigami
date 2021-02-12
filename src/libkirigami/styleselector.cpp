@@ -45,9 +45,9 @@ QStringList StyleSelector::styleChain()
         }
     }
 #elif defined(Q_OS_ANDROID)
-    chain.prepend(QStringLiteral("Material"));
+    s_styleChain.prepend(QStringLiteral("Material"));
 #else // do we have an iOS specific style?
-    chain.prepend(QStringLiteral("Material"));
+    s_styleChain.prepend(QStringLiteral("Material"));
 #endif
 
     auto stylePath = resolveFilePath(QStringLiteral("/styles/") + style);
