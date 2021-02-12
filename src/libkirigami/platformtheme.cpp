@@ -65,7 +65,7 @@ public:
         ColorRoleCount
     };
 
-    using ColorMap = std::unordered_map<ColorRole, QColor>;
+    using ColorMap = std::unordered_map<std::underlying_type<ColorRole>::type, QColor>;
 
     // Which PlatformTheme instance "owns" this data object. Only the owner is
     // allowed to make changes to data.
@@ -207,7 +207,7 @@ public:
     inline static void updatePalette(QPalette &palette, const ColorMap &colors)
     {
         for (auto entry : colors) {
-            setPaletteColor(palette, entry.first, entry.second);
+            setPaletteColor(palette, ColorRole(entry.first), entry.second);
         }
     }
 
@@ -279,7 +279,7 @@ public:
     inline void setColor(PlatformTheme *theme, PlatformThemeData::ColorRole color, const QColor &value)
     {
         if (!localOverrides) {
-            localOverrides.reset(new std::unordered_map<PlatformThemeData::ColorRole, QColor>{});
+            localOverrides.reset(new PlatformThemeData::ColorMap{});
         }
 
         if (!value.isValid()) {
@@ -943,7 +943,7 @@ void PlatformTheme::update()
 
     if (d->localOverrides) {
         for (auto entry : *d->localOverrides) {
-            d->data->setColor(this, entry.first, entry.second);
+            d->data->setColor(this, PlatformThemeData::ColorRole(entry.first), entry.second);
         }
     }
 
