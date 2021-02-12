@@ -17,6 +17,9 @@
 #include <QPluginLoader>
 #include <QDir>
 #include <QQuickStyle>
+
+#include <array>
+#include <memory>
 #include <unordered_map>
 #include <functional>
 #include <cinttypes>
