@@ -69,7 +69,7 @@ public:
 
     // Which PlatformTheme instance "owns" this data object. Only the owner is
     // allowed to make changes to data.
-    QPointer<QObject> owner;
+    QPointer<PlatformTheme> owner;
 
     PlatformTheme::ColorSet colorSet = PlatformTheme::Window;
     PlatformTheme::ColorGroup colorGroup = PlatformTheme::Active;
