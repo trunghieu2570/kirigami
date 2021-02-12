@@ -8,8 +8,6 @@ import QtQuick 2.7
 import QtQuick.Controls.Material 2.0
 import org.kde.kirigami 2.16 as Kirigami
 
-pragma Singleton
-
 Kirigami.BasicThemeDefinition {
     id: theme
     //NOTE: this is useless per se, but it forces the Material attached property to be created

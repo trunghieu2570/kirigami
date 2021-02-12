@@ -123,8 +123,22 @@ BasicThemeDefinition &BasicThemeInstance::themeDefinition(QQmlEngine *engine)
     }
 
     auto componentUrl = StyleSelector::componentUrl(QStringLiteral("Theme.qml"));
-    if (QFile::exists(componentUrl.toLocalFile())) {
-        QQmlComponent component(engine, componentUrl);
+    QFile themeFile{componentUrl.toLocalFile()};
+    if (themeFile.open(QIODevice::ReadOnly)) {
+        auto data = themeFile.readAll();
+
+        // Before Kirigami 5.80, custom Theme files would be registered as a
+        // "Theme" singleton that would then be proxied by BasicTheme. This has
+        // changed with the Theme singleton being an instance of BasicTheme.
+        // However, this means that old theme files fail to load because
+        // QQmlComponent complains about "pragma Singleton". To workaround this,
+        // we remove the pragma here, as everything else should still work
+        // correctly.
+        // TODO KF6: Remove this and rely on all Theme files not being singletons.
+        data.replace("\npragma Singleton\n", "");
+
+        QQmlComponent component(engine);
+        component.setData(data, componentUrl);
         auto result = component.create();
 
         if (!result) {

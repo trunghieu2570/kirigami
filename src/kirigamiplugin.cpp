@@ -116,7 +116,10 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterUncreatableType<ApplicationHeaderStyle>(uri, 2, 0, "ApplicationHeaderStyle", QStringLiteral("Cannot create objects of type ApplicationHeaderStyle"));
 
     //old legacy retrocompatible Theme
-    qmlRegisterSingletonType(componentUrl(QStringLiteral("Theme.qml")), uri, 2, 0, "Theme");
+    qmlRegisterSingletonType<Kirigami::BasicThemeDefinition>(uri, 2, 0, "Theme", [](QQmlEngine*, QJSEngine*) {
+        qWarning() << "The Theme singleton is deprecated (since 5.39). Import Kirigami 2.2 or higher and use the attached property instead.";
+        return new Kirigami::BasicThemeDefinition{};
+    });
 
     qmlRegisterSingletonType(componentUrl(QStringLiteral("Units.qml")), uri, 2, 0, "Units");
 
