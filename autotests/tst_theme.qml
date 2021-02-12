@@ -23,6 +23,16 @@ TestCase {
         id: textMetrics
     }
 
+    // Not all properties are updated immediately to avoid having massive storms
+    // of duplicated signals and to prevent changes from retriggering code that
+    // changed it. To deal with that, we need to wait a bit before continuiing
+    // when we change properties. This time shouldn't be too short because on
+    // some machines it may take a bit longer for things to properly be updated.
+    function waitForEvents()
+    {
+        wait(10)
+    }
+
     Component {
         id: basic
 
@@ -71,7 +81,7 @@ TestCase {
 
         // Changes to Theme are not immediately propagated, so give it a few
         // moments.
-        wait(1)
+        waitForEvents()
 
         compare(item.color, "#00ff00")
 
@@ -79,7 +89,7 @@ TestCase {
         item.Kirigami.Theme.colorSet = Kirigami.Theme.Complementary
         item.Kirigami.Theme.colorGroup = Kirigami.Theme.Disabled
 
-        wait(1)
+        waitForEvents()
 
         compare(item.color, "#00ff00")
     }
@@ -118,7 +128,7 @@ TestCase {
         // the item that does not stays the same.
         item.Kirigami.Theme.colorSet = Kirigami.Theme.View
 
-        wait(1)
+        waitForEvents()
 
         compare(item.color, "#fcfcfc")
         compare(item.child1.color, "#fcfcfc")
@@ -128,7 +138,7 @@ TestCase {
         // the item that does not ignores it.
         item.Kirigami.Theme.backgroundColor = "#ff0000"
 
-        wait(1)
+        waitForEvents()
 
         compare(item.color, "#ff0000")
         compare(item.child1.color, "#ff0000")
@@ -138,7 +148,7 @@ TestCase {
         // same for both the original object and the inherited object.
         item.Kirigami.Theme.colorSet = Kirigami.Theme.View
 
-        wait(1)
+        waitForEvents()
 
         compare(item.color, "#ff0000")
         compare(item.child1.color, "#ff0000")
@@ -149,7 +159,7 @@ TestCase {
         item.child1.Kirigami.Theme.backgroundColor = "#00ff00"
         item.Kirigami.Theme.backgroundColor = "#0000ff"
 
-        wait(1)
+        waitForEvents()
 
         compare(item.color, "#0000ff")
         compare(item.child1.color, "#00ff00")
@@ -187,7 +197,7 @@ TestCase {
         var item = createTemporaryObject(deepInherit, testCase)
         verify(item)
 
-        wait(1)
+        waitForEvents()
 
         compare(item.color, "#eff0f1")
         compare(item.child1.color, "#eff0f1")
@@ -196,7 +206,7 @@ TestCase {
 
         item.Kirigami.Theme.backgroundColor = "#ff0000"
 
-        wait(1)
+        waitForEvents()
 
         compare(item.color, "#ff0000")
         compare(item.child1.color, "#ff0000")
@@ -206,7 +216,7 @@ TestCase {
         item.child2.Kirigami.Theme.inherit = false
         item.child2.Kirigami.Theme.backgroundColor = "#00ff00"
 
-        wait(1)
+        waitForEvents()
 
         compare(item.color, "#ff0000")
         compare(item.child1.color, "#ff0000")
@@ -216,7 +226,7 @@ TestCase {
         item.child2.Kirigami.Theme.inherit = true
         item.child2.Kirigami.Theme.backgroundColor = undefined
 
-        wait(1)
+        waitForEvents()
 
         compare(item.color, "#ff0000")
         compare(item.child1.color, "#ff0000")
@@ -226,7 +236,7 @@ TestCase {
         item.child2.Kirigami.Theme.colorSet = Kirigami.Theme.Complementary
         item.child2.Kirigami.Theme.inherit = false
 
-        wait(1)
+        waitForEvents()
 
         compare(item.color, "#ff0000")
         compare(item.child1.color, "#ff0000")
@@ -247,13 +257,13 @@ TestCase {
         var item = createTemporaryObject(colorSet, testCase)
         verify(item)
 
-        wait(1)
+        waitForEvents()
 
         compare(item.color, "#fcfcfc")
 
         item.Kirigami.Theme.colorSet = Kirigami.Theme.Complementary
 
-        wait(1)
+        waitForEvents()
 
         compare(item.color, "#31363b")
     }
@@ -271,7 +281,7 @@ TestCase {
         var item = createTemporaryObject(colorGroup, testCase)
         verify(item)
 
-        wait(1)
+        waitForEvents()
 
         var color = Qt.tint("#eff0f1", "transparent")
 
@@ -279,7 +289,7 @@ TestCase {
 
         item.Kirigami.Theme.colorGroup = Kirigami.Theme.Inactive
 
-        wait(1)
+        waitForEvents()
 
         compare(item.color, Qt.hsva(color.hsvHue, color.hsvSaturation * 0.5, color.hsvValue))
     }
@@ -308,7 +318,7 @@ TestCase {
 
         item.Kirigami.Theme.backgroundColor = "#ff0000"
 
-        wait(1)
+        waitForEvents()
 
         compare(item.child.background.color, "#ff0000")
     }
