@@ -181,6 +181,9 @@ public:
 
     void sync();
 
+protected:
+    bool event(QEvent *event) override;
+
 private:
     QColor tint(const QColor &color);
 };

@@ -26,6 +26,30 @@
 
 namespace Kirigami {
 
+template<> KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::DataChangedEvent::type = QEvent::None;
+template<> KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::ColorSetChangedEvent::type = QEvent::None;
+template<> KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::ColorGroupChangedEvent::type = QEvent::None;
+template<> KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::ColorChangedEvent::type = QEvent::None;
+template<> KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::FontChangedEvent::type = QEvent::None;
+
+// Initialize event types.
+// We want to avoid collisions with application event types so we should use
+// registerEventType for generating the event types. Unfortunately, that method
+// is not constexpr so we need to call it somewhere during application startup.
+// This struct handles that.
+struct TypeInitializer
+{
+    TypeInitializer()
+    {
+        PlatformThemeEvents::DataChangedEvent::type = QEvent::Type(QEvent::registerEventType());
+        PlatformThemeEvents::ColorSetChangedEvent::type = QEvent::Type(QEvent::registerEventType());
+        PlatformThemeEvents::ColorGroupChangedEvent::type = QEvent::Type(QEvent::registerEventType());
+        PlatformThemeEvents::ColorChangedEvent::type = QEvent::Type(QEvent::registerEventType());
+        PlatformThemeEvents::FontChangedEvent::type = QEvent::Type(QEvent::registerEventType());
+    }
+};
+static TypeInitializer initializer;
+
 // This class encapsulates the actual data of the Theme object. It may be shared
 // among several instances of PlatformTheme, to ensure that the memory usage of
 // PlatformTheme stays low.
@@ -85,9 +109,8 @@ public:
     // changes. This is used instead of signal/slots as this way we only store
     // a little bit of data and that data is shared among instances, whereas
     // signal/slots turn out to have a pretty large memory overhead per instance.
-    using Watcher = QPair<PlatformTheme*, std::function<void()>>;
+    using Watcher = PlatformTheme*;
     QVector<Watcher> watchers;
-    bool watcherNotificationQueued = false;
 
     inline void setColorSet(PlatformTheme *sender, PlatformTheme::ColorSet set)
     {
@@ -95,8 +118,11 @@ public:
             return;
         }
 
+        auto oldValue = colorSet;
+
         colorSet = set;
-        notifyWatchers();
+
+        notifyWatchers<PlatformTheme::ColorSet>(sender, oldValue, set);
     }
 
     inline void setColorGroup(PlatformTheme *sender, PlatformTheme::ColorGroup group)
@@ -105,9 +131,12 @@ public:
             return;
         }
 
+        auto oldValue = colorGroup;
+
         colorGroup = group;
         palette.setCurrentColorGroup(QPalette::ColorGroup(group));
-        notifyWatchers();
+
+        notifyWatchers<PlatformTheme::ColorGroup>(sender, oldValue, group);
     }
 
     inline void setColor(PlatformTheme* sender, ColorRole role, const QColor &color)
@@ -116,9 +145,12 @@ public:
             return;
         }
 
+        auto oldValue = colors[role];
+
         colors[role] = color;
         updatePalette(palette, colors);
-        notifyWatchers();
+
+        notifyWatchers<QColor>(sender, oldValue, colors[role]);
     }
 
     inline void setDefaultFont(PlatformTheme *sender, const QFont &font)
@@ -127,8 +159,11 @@ public:
             return;
         }
 
+        auto oldValue = defaultFont;
+
         defaultFont = font;
-        notifyWatchers();
+
+        notifyWatchers<QFont>(sender, oldValue, font);
     }
 
     inline void setSmallFont(PlatformTheme *sender, const QFont &font)
@@ -137,61 +172,29 @@ public:
             return;
         }
 
+        auto oldValue = smallFont;
+
         smallFont = font;
-        notifyWatchers();
+
+        notifyWatchers<QFont>(sender, oldValue, smallFont);
     }
 
-    inline void setPalette(PlatformTheme *sender, const QPalette &newPalette)
+    inline void addChangeWatcher(PlatformTheme *object)
     {
-        if (sender != owner || palette == newPalette) {
-            return;
-        }
-
-        palette = newPalette;
-        notifyWatchers();
-    }
-
-    inline void addChangeWatcher(PlatformTheme *object, const std::function<void()> &callback)
-    {
-        watchers.append(qMakePair(object, callback));
+        watchers.append(object);
     }
 
     inline void removeChangeWatcher(PlatformTheme *object)
     {
-        auto begin = std::remove_if(watchers.begin(), watchers.end(), [object](const Watcher &entry) {
-            return entry.first == object;
-        });
-        watchers.erase(begin, watchers.end());
+        watchers.removeOne(object);
     }
 
-    // TODO KF6: This is a workaround for the fact that we can't add new virtual
-    // methods to PlatformTheme and I did not want to add the overhead of a
-    // custom signal to each instance of PlatformTheme just to notify it of the
-    // data object being changed.
-    inline void moveChangeWatchers(std::shared_ptr<PlatformThemeData> from, PlatformTheme *object)
+    template <typename T>
+    inline void notifyWatchers(PlatformTheme *sender, const T &oldValue, const T &newValue)
     {
-        while (true) {
-            auto watcher = std::find_if(from->watchers.begin(), from->watchers.end(), [object](const Watcher &entry) {
-                return entry.first == object;
-            });
-            if (watcher == from->watchers.end()) {
-                break;
-            }
-            watchers.append(qMakePair(watcher->first, watcher->second));
-            from->watchers.erase(watcher);
-        }
-    }
-
-    inline void notifyWatchers()
-    {
-        if (!watcherNotificationQueued) {
-            watcherNotificationQueued = true;
-            QMetaObject::invokeMethod(this, [this]() {
-                watcherNotificationQueued = false;
-                for (auto entry : qAsConst(watchers)) {
-                    entry.second();
-                }
-            }, Qt::QueuedConnection);
+        for (auto object : qAsConst(watchers)) {
+            auto event = new PlatformThemeEvents::PropertyChangedEvent<T>(sender, oldValue, newValue);
+            QCoreApplication::postEvent(object, event);
         }
     }
 
@@ -871,18 +874,61 @@ PlatformTheme *PlatformTheme::qmlAttachedProperties(QObject *object)
     return new BasicTheme(object);
 }
 
-void PlatformTheme::addChangeWatcher(PlatformTheme *watcher, const std::function<void()> &callback)
+bool PlatformTheme::event(QEvent* event)
 {
-    if (d->data) {
-        d->data->addChangeWatcher(watcher, callback);
-    }
-}
+    if (event->type() == PlatformThemeEvents::DataChangedEvent::type) {
+        auto changeEvent = static_cast<PlatformThemeEvents::DataChangedEvent*>(event);
 
-void PlatformTheme::removeChangeWatcher(PlatformTheme *watcher)
-{
-    if (d->data) {
-        d->data->removeChangeWatcher(watcher);
+        if (changeEvent->sender != this) {
+            return false;
+        }
+
+        if (changeEvent->oldValue) {
+            changeEvent->oldValue->removeChangeWatcher(this);
+        }
+
+        if (changeEvent->newValue) {
+            auto data = changeEvent->newValue;
+            data->addChangeWatcher(this);
+
+            Q_EMIT colorSetChanged(data->colorSet);
+            Q_EMIT colorGroupChanged(data->colorGroup);
+            Q_EMIT defaultFontChanged(data->defaultFont);
+            Q_EMIT smallFontChanged(data->smallFont);
+            d->emitCompressedColorChanged(this);
+        }
+
+        return true;
     }
+
+    if (event->type() == PlatformThemeEvents::ColorSetChangedEvent::type) {
+        if (d->data) {
+            Q_EMIT colorSetChanged(d->data->colorSet);
+        }
+        return true;
+    }
+
+    if (event->type() == PlatformThemeEvents::ColorGroupChangedEvent::type) {
+        if (d->data) {
+            Q_EMIT colorGroupChanged(d->data->colorGroup);
+        }
+        return true;
+    }
+
+    if (event->type() == PlatformThemeEvents::ColorChangedEvent::type) {
+        d->emitCompressedColorChanged(this);
+        return true;
+    }
+
+    if (event->type() == PlatformThemeEvents::FontChangedEvent::type) {
+        if (d->data) {
+            Q_EMIT defaultFontChanged(d->data->defaultFont);
+            Q_EMIT smallFontChanged(d->data->smallFont);
+        }
+        return true;
+    }
+
+    return QObject::event(event);
 }
 
 void PlatformTheme::update()
@@ -906,17 +952,10 @@ void PlatformTheme::update()
                     return;
                 }
 
-                if (t->d->data) {
-                    if (d->data) {
-                        t->d->data->moveChangeWatchers(d->data, this);
-                    } else {
-                        t->d->data->addChangeWatcher(this, std::bind(&PlatformTheme::emitSignals, this));
-                    }
-                }
-
                 d->data = t->d->data;
 
-                emitSignals();
+                PlatformThemeEvents::DataChangedEvent event{this, oldData, t->d->data};
+                QCoreApplication::sendEvent(this, &event);
 
                 return;
             }
@@ -930,13 +969,6 @@ void PlatformTheme::update()
     if (!d->data) {
         d->data = std::make_shared<PlatformThemeData>();
         d->data->owner = this;
-
-        if (oldData) {
-            d->data->moveChangeWatchers(oldData, this);
-        } else {
-            d->data->addChangeWatcher(this, std::bind(&PlatformTheme::emitSignals, this));
-        }
-
         d->data->setColorSet(this, static_cast<ColorSet>(d->colorSet));
         d->data->setColorGroup(this, static_cast<ColorGroup>(d->colorGroup));
     }
@@ -947,13 +979,8 @@ void PlatformTheme::update()
         }
     }
 
-    // Notifications from the data object are queued and thus may end up being
-    // slightly delayed. This can cause graphical glitches because the wrong
-    // colours are requested when the data object changes. So instead, do an
-    // instant notification here.
-    for (auto entry : d->data->watchers) {
-        entry.second();
-    }
+    PlatformThemeEvents::DataChangedEvent event{this, oldData, d->data};
+    QCoreApplication::sendEvent(this, &event);
 }
 
 void PlatformTheme::updateChildren(QObject *object)
@@ -973,21 +1000,12 @@ void PlatformTheme::updateChildren(QObject *object)
     }
 }
 
-void PlatformTheme::emitSignals()
+void PlatformTheme::emitColorChanged()
 {
     if (d->data) {
-        Q_EMIT colorSetChanged(d->data->colorSet);
-        Q_EMIT colorGroupChanged(d->data->colorGroup);
-        Q_EMIT defaultFontChanged(d->data->defaultFont);
-        Q_EMIT smallFontChanged(d->data->smallFont);
         Q_EMIT paletteChanged(d->data->palette);
     }
 
-    d->emitCompressedColorChanged(this);
-}
-
-void PlatformTheme::emitColorChanged()
-{
     Q_EMIT colorsChanged();
     d->pendingColorChange = false;
 }

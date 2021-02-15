@@ -177,8 +177,6 @@ Q_GLOBAL_STATIC(BasicThemeInstance, basicThemeInstance)
 BasicTheme::BasicTheme(QObject* parent)
     : PlatformTheme(parent)
 {
-    addChangeWatcher(this, std::bind(&BasicTheme::sync, this));
-
     basicThemeInstance()->watchers.append(this);
 
     sync();
@@ -257,10 +255,31 @@ void BasicTheme::sync()
 
     setDefaultFont(definition.defaultFont);
     setSmallFont(definition.smallFont);
+}
 
-    QMetaObject::invokeMethod(this, [this]() {
+bool BasicTheme::event(QEvent *event)
+{
+    if (event->type() == PlatformThemeEvents::DataChangedEvent::type) {
+        sync();
+    }
+
+    if (event->type() == PlatformThemeEvents::ColorSetChangedEvent::type) {
+        sync();
+    }
+
+    if (event->type() == PlatformThemeEvents::ColorGroupChangedEvent::type) {
+        sync();
+    }
+
+    if (event->type() == PlatformThemeEvents::ColorChangedEvent::type) {
         basicThemeInstance()->themeDefinition(qmlEngine(parent())).syncToQml(this);
-    }, Qt::QueuedConnection);
+    }
+
+    if (event->type() == PlatformThemeEvents::FontChangedEvent::type) {
+        basicThemeInstance()->themeDefinition(qmlEngine(parent())).syncToQml(this);
+    }
+
+    return PlatformTheme::event(event);
 }
 
 QColor BasicTheme::tint(const QColor &color)

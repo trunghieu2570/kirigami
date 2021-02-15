@@ -319,8 +319,7 @@ protected:
     void setPalette(const QPalette &palette);
 #endif
 
-    void addChangeWatcher(PlatformTheme *watcher, const std::function<void()> &callback);
-    void removeChangeWatcher(PlatformTheme *watcher);
+    bool event(QEvent *event) override;
 
 private:
     void update();
@@ -334,7 +333,43 @@ private:
     friend class PlatformThemeData;
 };
 
+namespace PlatformThemeEvents {
+
+// To avoid the overhead of Qt's signal/slot connections, we use custom events
+// to communicate with subclasses. This way, we can indicate what actually
+// changed without needing to add new virtual functions to PlatformTheme which
+// would break binary compatibility.
+//
+// To handle these events in your subclass, override QObject::event() and check
+// if you receive one of these events, then do what is needed. Finally, make
+// sure to call PlatformTheme::event() since that will also do some processing
+// of these events.
+
+template <typename T>
+class KIRIGAMI2_EXPORT PropertyChangedEvent : public QEvent
+{
+public:
+    PropertyChangedEvent(PlatformTheme *theme, const T &previous, const T &current)
+        : QEvent(PropertyChangedEvent<T>::type), sender(theme), oldValue(previous), newValue(current)
+    {
+    }
+
+    PlatformTheme *sender;
+    T oldValue;
+    T newValue;
+
+    static QEvent::Type type;
+};
+
+using DataChangedEvent = PropertyChangedEvent<std::shared_ptr<PlatformThemeData>>;
+using ColorSetChangedEvent = PropertyChangedEvent<PlatformTheme::ColorSet>;
+using ColorGroupChangedEvent = PropertyChangedEvent<PlatformTheme::ColorGroup>;
+using ColorChangedEvent = PropertyChangedEvent<QColor>;
+using FontChangedEvent = PropertyChangedEvent<QFont>;
+
 }
+
+} //namespace Kirigami
 
 QML_DECLARE_TYPEINFO(Kirigami::PlatformTheme, QML_HAS_ATTACHED_PROPERTIES)
 
