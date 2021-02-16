@@ -30,7 +30,7 @@ TestCase {
     // some machines it may take a bit longer for things to properly be updated.
     function waitForEvents()
     {
-        wait(10)
+        wait(20)
     }
 
     Component {
