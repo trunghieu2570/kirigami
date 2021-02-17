@@ -625,6 +625,8 @@ QtObject {
                 ScrollView {
                     id: scrollView
 
+                    //Don't do the automatic interactive enable/disable
+                    canFlickWithMouse: true
                     property real animatedContentHeight: contentItem ? flickableItem.contentHeight : 0
                     property bool userInteracting: false
                     Layout.fillWidth: true

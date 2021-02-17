@@ -20,6 +20,7 @@ MouseArea {
     property int leftPadding: 0
     property int rightPadding: !Kirigami.Settings.hasTransientTouchInput && flickableItem.ScrollBar.vertical && flickableItem.ScrollBar.vertical.visible ? flickableItem.ScrollBar.vertical.width : 0
     property int bottomPadding: 0
+    property bool canFlickWithMouse: false
 
     Accessible.onScrollDownAction: flickableItem.Accessible.onScrollDownAction
     Accessible.onScrollUpAction: flickableItem.Accessible.onScrollUpAction
@@ -64,13 +65,13 @@ MouseArea {
             contentItem.parent = flickableItem.contentItem;
         }
 
-        flickableItem.interactive = true;
         flickableItem.anchors.fill = flickableParent;
 
         scrollBarCreationTimer.restart();
     }
 
     Binding {
+        when: !root.canFlickWithMouse
         target: root.flickableItem
         property: "interactive"
         value: Kirigami.Settings.hasTransientTouchInput
