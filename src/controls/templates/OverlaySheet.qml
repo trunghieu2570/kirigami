@@ -360,7 +360,7 @@ QtObject {
 
             width: mainItem.contentItemPreferredWidth <= 0 ? mainItem.width : (mainItem.contentItemMaximumWidth > 0 ? Math.min( mainItem.contentItemMaximumWidth, Math.max( mainItem.width/2, mainItem.contentItemPreferredWidth ) ) : Math.max( mainItem.width / 2, mainItem.contentItemPreferredWidth ) )
 
-            height: scrollView.contentItem == flickableContents ? root.contentItem.height + topPadding + bottomPadding : 0
+            implicitHeight: scrollView.contentItem == flickableContents ? root.contentItem.height + topPadding + bottomPadding : 0
             Connections {
                 target: enabled ? flickableContents.Window.activeFocusItem : null
                 enabled: flickableContents.focus && flickableContents.Window.activeFocusItem && flickableContents.Window.activeFocusItem.hasOwnProperty("text")
@@ -402,12 +402,12 @@ QtObject {
                     // repositioning is relevant only when the content height is less than the viewport height.
                     // In that case the sheet looks like a dialog and shouldbe centered. there is also a corner case when now is bigger then the viewport but prior to the
                     // resize event it was smaller, also in this case we need repositioning
-                    if (scrollView.flickableItem.contentHeight < outerFlickable.height
+                    if (scrollView.animatedContentHeight < outerFlickable.height
                         || scrollView.flickableItem.oldContentHeight < outerFlickable.height
                     ) {
                         outerFlickable.adjustPosition();
                     }
-                    oldContentHeight = scrollView.flickableItem.contentHeight
+                    oldContentHeight = scrollView.animatedContentHeight
                 }
             }
         }
@@ -419,15 +419,19 @@ QtObject {
             topMargin: height
             bottomMargin: height
             // +1: we need the flickable to be always interactive
-            contentHeight: Math.max(height+1, scrollView.flickableItem.contentHeight + topEmptyArea)
+            contentHeight: Math.max(height+1, scrollView.animatedContentHeight + topEmptyArea)
 
-            readonly property int topEmptyArea: Math.max(height-scrollView.flickableItem.contentHeight, Units.gridUnit * 3)
+            //readonly property int topEmptyArea: Math.max(height-scrollView.animatedContentHeight, Units.gridUnit * 3)
+             readonly property int topEmptyArea: Math.max(height-scrollView.animatedContentHeight, Units.gridUnit * 3)
 
-            readonly property real openPosition: Math.max(0, outerFlickable.height - outerFlickable.contentHeight + headerItem.height + footerItem.height) + height/2 - contentLayout.height/2;
+             readonly property real openPosition: Math.max(0, outerFlickable.height - outerFlickable.contentHeight + headerItem.height + footerItem.height) + height/2 - contentLayout.height/2;
+
             onOpenPositionChanged: {
                 if (openAnimation.running) {
                     openAnimation.running = false;
                     root.open();
+                } else if (root.sheetOpen) {
+                    adjustPosition();
                 }
             }
 
@@ -435,12 +439,16 @@ QtObject {
             property int oldContentHeight: 0
             property bool lastMovementWasDown: false
             property real startDraggingPos
+            property bool layoutMovingGuard: false
             WheelHandler {
                 target: outerFlickable
                 scrollFlickableTarget: false
             }
             
             function adjustPosition() {
+                if(layoutMovingGuard) return;
+                openAnimation.running = false;
+                resetAnimation.running = false;
                 contentY = openPosition;
             }
 
@@ -462,13 +470,15 @@ QtObject {
 
                 let startPos = -scrollView.flickableItem.topMargin - flickableContents.listHeaderHeight;
                 let pos = contentY - topEmptyArea - flickableContents.listHeaderHeight;
-                let endPos = scrollView.flickableItem.contentHeight - scrollView.flickableItem.height + scrollView.flickableItem.bottomMargin - flickableContents.listHeaderHeight;
+                let endPos = scrollView.animatedContentHeight - scrollView.flickableItem.height + scrollView.flickableItem.bottomMargin - flickableContents.listHeaderHeight;
 
+                layoutMovingGuard = true;
                 if (endPos - pos > 0) {
                     contentLayout.y = Math.round(Math.max(root.topInset, scrollView.flickableItem.topMargin - pos - flickableContents.listHeaderHeight));
                 } else if (scrollView.flickableItem.topMargin - pos < 0) {
-                    contentLayout.y = Math.round(endPos - pos + root.topInset);
+                   contentLayout.y = Math.round(endPos - pos + root.topInset);
                 }
+                layoutMovingGuard = false;
 
                 scrollView.flickableItem.contentY = Math.max(
                     startPos, Math.min(pos, endPos));
@@ -615,6 +625,7 @@ QtObject {
                 ScrollView {
                     id: scrollView
 
+                    property real animatedContentHeight: contentItem ? flickableItem.contentHeight : 0
                     property bool userInteracting: false
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -623,6 +634,13 @@ QtObject {
                     Layout.maximumHeight: flickableItem.contentHeight
 
                     Layout.alignment: Qt.AlignTop
+
+                    Behavior on animatedContentHeight {
+                        NumberAnimation {
+                            duration: Units.shortDuration
+                            easing.type: Easing.InOutCubic
+                        }
+                    }
                 }
 
                 Item { Layout.fillHeight: true }
