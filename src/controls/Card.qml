@@ -22,14 +22,14 @@ import "private"
  * It is possible even tough is discouraged to override the footer:
  * in this case the actions property shouldn't be used.
  *
- * @inherits AbstractCard
+ * @inherits org::kde::kirigami::AbstractCard
  * @since 2.4
  */
 Kirigami.AbstractCard {
     id: root
 
     /**
-     * actions: list<Action>
+     * @property list<org::kde::kirigami::Action> Card::actions
      * if the card should provide clickable actions, put them in this property,
      * they will be put in the footer as a list of ToolButtons plus an optional
      * overflow menu, when not all of them will fit in the available Card width.
@@ -37,16 +37,16 @@ Kirigami.AbstractCard {
     property list<QtObject> actions
 
     /**
-    * actions: hiddenActions<Action>
-    * This list of actions is for those you always want in the menu, even if there
-    * is enough space.
-    * @since 2.6
-    */
+     * @property list<org::kde::kirigami::Action> hiddenActions
+     * This list of actions is for those you always want in the menu, even if there
+     * is enough space.
+     * @since 2.6
+     */
     property alias hiddenActions: actionsToolBar.hiddenActions
 
     /**
-     * banner: Image
-     * Gropuped property to control the banner image present in the header, it
+     * @property Image Card::banner
+     * Groupped property to control the banner image present in the header, it
      * has the following sub properties:
      * * url source: the source for the image, it understands any url
      *                    valid for an Image component
