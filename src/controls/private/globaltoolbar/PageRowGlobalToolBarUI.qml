@@ -39,8 +39,8 @@ Kirigami.AbstractApplicationHeader {
             id: leftHandleAnchor
             visible: (typeof applicationWindow() !== "undefined" && applicationWindow().globalDrawer && applicationWindow().globalDrawer.enabled && applicationWindow().globalDrawer.handleVisible &&
             applicationWindow().globalDrawer.handle.handleAnchor == leftHandleAnchor) &&
-            breadcrumbLoader.pageRow.firstVisibleItem &&
-            breadcrumbLoader.pageRow.firstVisibleItem.globalToolBarStyle == Kirigami.ApplicationHeaderStyle.ToolBar
+            (globalToolBar.canContainHandles || (breadcrumbLoader.pageRow.firstVisibleItem &&
+            breadcrumbLoader.pageRow.firstVisibleItem.globalToolBarStyle == Kirigami.ApplicationHeaderStyle.ToolBar))
 
 
             Layout.preferredHeight: Math.min(backButton.implicitHeight, parent.height)
@@ -123,7 +123,8 @@ Kirigami.AbstractApplicationHeader {
                     applicationWindow().contextDrawer.enabled &&
                     applicationWindow().contextDrawer.handleVisible &&
                     applicationWindow().contextDrawer.handle.handleAnchor == rightHandleAnchor &&
-                    breadcrumbLoader.pageRow && breadcrumbLoader.pageRow.lastVisibleItem.globalToolBarStyle == Kirigami.ApplicationHeaderStyle.ToolBar)
+                    (globalToolBar.canContainHandles || (breadcrumbLoader.pageRow && breadcrumbLoader.pageRow.lastVisibleItem &&
+            breadcrumbLoader.pageRow.lastVisibleItem.globalToolBarStyle == Kirigami.ApplicationHeaderStyle.ToolBar)))
             Layout.fillHeight: true
             Layout.preferredWidth: height
         }

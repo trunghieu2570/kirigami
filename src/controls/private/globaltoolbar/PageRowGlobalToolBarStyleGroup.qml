@@ -29,6 +29,10 @@ QtObject {
 
     property var showNavigationButtons: (style != Kirigami.ApplicationHeaderStyle.TabBar && (!Kirigami.Settings.isMobile || Qt.platform.os == "ios")) ? (Kirigami.ApplicationHeaderStyle.ShowBackButton | Kirigami.ApplicationHeaderStyle.ShowForwardButton) : Kirigami.ApplicationHeaderStyle.NoNavigationButtons
     property bool separatorVisible: true
+    /**
+     * If true, when any kind of toolbar is shown, the drawer handles will be shown inside the toolbar, if they're present
+     */
+    property bool canContainHandles: actualStyle == Kirigami.ApplicationHeaderStyle.ToolBar
     property int toolbarActionAlignment: Qt.AlignRight
 
     property int minimumHeight: 0
