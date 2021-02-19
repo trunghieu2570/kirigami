@@ -5,7 +5,7 @@
  */
 
 import QtQuick 2.12
-import QtQuick.Templates 2.0 as T2
+import QtQuick.Templates 2.3 as T2
 import QtQuick.Controls 2.2 as QQC2
 import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
