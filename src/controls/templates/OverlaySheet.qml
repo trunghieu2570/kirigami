@@ -583,7 +583,7 @@ QtObject {
                             fill: parent
                             leftMargin: Units.largeSpacing
                             margins: Units.smallSpacing
-                            rightMargin: closeIcon.width + Units.smallSpacing
+                            rightMargin: (root.showCloseButton ? closeIcon.width : 0) + Units.smallSpacing
                         }
                     }
                     Icon {
