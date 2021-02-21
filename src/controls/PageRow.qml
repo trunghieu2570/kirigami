@@ -552,7 +552,7 @@ T.Control {
         id: pagesLogic
         readonly property var componentCache: new Array()
 
-        function initAndInsertPage(position, page, properties) {
+        function getPageComponent(page) {
             var pageComp;
 
             if (page.createObject) {
@@ -565,11 +565,17 @@ T.Control {
                     pageComp = pagesLogic.componentCache[page] = Qt.createComponent(page);
                 }
             }
+
+            return pageComp
+        }
+
+        function initPage(page, properties) {
+            var pageComp = getPageComponent(page, properties);
+
             if (pageComp) {
                 // instantiate page from component
                 // FIXME: parent directly to columnView or root?
                 page = pageComp.createObject(null, properties || {});
-                columnView.insertItem(position, page);
 
                 if (pageComp.status === Component.Error) {
                     throw new Error("Error while loading page: " + pageComp.errorString());
@@ -581,9 +587,13 @@ T.Control {
                         page[prop] = properties[prop];
                     }
                 }
-                columnView.insertItem(position, page);
             }
+            return page;
+        }
 
+        function initAndInsertPage(position, page, properties) {
+            page = initPage(page, properties);
+            columnView.insertItem(position, page);
             return page;
         }
     }
