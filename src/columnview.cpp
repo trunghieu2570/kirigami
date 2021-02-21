@@ -1111,6 +1111,17 @@ void ColumnView::insertItem(int pos, QQuickItem *item)
     Q_EMIT itemInserted(pos, item);
 }
 
+void ColumnView::replaceItem(int pos, QQuickItem *item)
+{
+  if (!item)
+    {
+      return;
+    }
+
+  removeItem(pos);
+  insertItem(pos, item);
+}
+
 void ColumnView::moveItem(int from, int to)
 {
     if (m_contentItem->m_items.isEmpty() //

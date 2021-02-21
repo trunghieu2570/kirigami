@@ -343,6 +343,14 @@ public Q_SLOTS:
     void insertItem(int pos, QQuickItem *item);
 
     /**
+     * Replaces an item in the view at a given position with a new item.
+     * The current Item and currentIndex will not be changed.
+     * @param pos the position we want the new item to be placed in
+     * @param item the new item which will be reparented and managed
+     */
+    void replaceItem(int pos, QQuickItem *item);
+
+    /**
      * Move an item inside the view.
      * The currentIndex property may be changed in order to keep currentItem the same.
      * @param from the old position
