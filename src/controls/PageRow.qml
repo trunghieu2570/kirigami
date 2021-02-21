@@ -355,14 +355,51 @@ T.Control {
      * @see push() for details.
      */
     function replace(page, properties) {
-        if (currentIndex >= 1) {
-            pop(columnView.contentChildren[currentIndex-1]);
-        } else if (currentIndex == 0) {
-            pop();
+        if (!page) {
+            return null;
+        }
+
+        // Remove all pages on top of the one being replaced.
+        if (currentIndex >= 0) {
+            columnView.pop(columnView.contentChildren[currentIndex]);
         } else {
             console.warn("There's no page to replace");
         }
-        return push(page, properties);
+
+        // Figure out if more than one page is being pushed.
+        var pages;
+        var propsArray = [];
+        if (page instanceof Array) {
+            pages = page;
+            page = pages.shift();
+        }
+        if (properties instanceof Array) {
+            propsArray = properties;
+            properties = propsArray.shift();
+        } else {
+            propsArray = [properties];
+        }
+
+        // Replace topmost page.
+        var pageItem = pagesLogic.initPage(page, properties);
+        columnView.replaceItem(depth - 1, pageItem);
+        pagePushed(pageItem);
+
+        // Push any extra defined pages onto the stack.
+        if (pages) {
+            var i;
+            for (i = 0; i < pages.length; i++) {
+                var tPage = pages[i];
+                var tProps = propsArray[i];
+
+                var pageItem = pagesLogic.initPage(tPage, tProps);
+                columnView.addItem(pageItem);
+                pagePushed(pageItem);
+            }
+        }
+
+        currentIndex = depth - 1;
+        return pageItem;
     }
 
     /**
