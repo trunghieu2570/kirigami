@@ -1113,13 +1113,60 @@ void ColumnView::insertItem(int pos, QQuickItem *item)
 
 void ColumnView::replaceItem(int pos, QQuickItem *item)
 {
-  if (!item)
-    {
-      return;
+    if (pos < 0 || pos >= m_contentItem->m_items.length()) {
+        qWarning() << "Position" << pos << "passed to ColumnView::replaceItem is out of range.";
+        return;
     }
 
-  removeItem(pos);
-  insertItem(pos, item);
+    if (!item) {
+        qWarning() << "Null item passed to ColumnView::replaceItem.";
+        return;
+    }
+
+    QQuickItem *oldItem = m_contentItem->m_items[pos];
+
+    // In order to keep the same current item we need to increase the current index if displaced
+    if (m_currentIndex >= pos) {
+        setCurrentIndex(m_currentIndex - 1);
+    }
+
+    m_contentItem->forgetItem(oldItem);
+    oldItem->setVisible(false);
+
+    ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(oldItem, false));
+
+    if (attached && attached->shouldDeleteOnRemove()) {
+        oldItem->deleteLater();
+    } else {
+        oldItem->setParentItem(attached ? attached->originalParent() : nullptr);
+    }
+
+    Q_EMIT itemRemoved(oldItem);
+
+    if (!m_contentItem->m_items.contains(item)) {
+        m_contentItem->m_items.insert(qBound(0, pos, m_contentItem->m_items.length()), item);
+
+        connect(item, &QObject::destroyed, m_contentItem, [this, item]() {
+            removeItem(item);
+        });
+        ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
+        attached->setOriginalParent(item->parentItem());
+        attached->setShouldDeleteOnRemove(item->parentItem() == nullptr && QQmlEngine::objectOwnership(item) == QQmlEngine::JavaScriptOwnership);
+        item->setParentItem(m_contentItem);
+
+        item->forceActiveFocus();
+        // We layout immediately to be sure all geometries are final after the return of this call
+        m_contentItem->m_shouldAnimate = false;
+        m_contentItem->layoutItems();
+        Q_EMIT contentChildrenChanged();
+
+        if (m_currentIndex >= pos) {
+            ++m_currentIndex;
+            Q_EMIT currentIndexChanged();
+        }
+
+        Q_EMIT itemInserted(pos, item);
+    }
 }
 
 void ColumnView::moveItem(int from, int to)
