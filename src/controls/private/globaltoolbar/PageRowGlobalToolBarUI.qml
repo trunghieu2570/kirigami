@@ -71,7 +71,7 @@ Kirigami.AbstractApplicationHeader {
 
             visible: (globalToolBar.showNavigationButtons != Kirigami.ApplicationHeaderStyle.NoNavigationButtons || root.layers.depth > 0) && (globalToolBar.actualStyle != Kirigami.ApplicationHeaderStyle.None)
 
-            Layout.maximumWidth: visibleChildren.length > 0 ? implicitWidth : 0
+            Layout.maximumWidth: visibleChildren.length > 0 ? Layout.preferredWidth : 0
 
             TemplatesPrivate.BackButton {
                 id: backButton
