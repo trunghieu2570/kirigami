@@ -4,12 +4,13 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#include <QJsonValue>
-#include <QJsonObject>
-#include <QJSValue>
 #include <QJSEngine>
+#include <QJsonObject>
+#include <QJsonValue>
+#include <QJSValue>
 #include <QQmlProperty>
 #include <QQuickWindow>
+#include <QTimer>
 #include <qqmlpropertymap.h>
 #include "pagerouter.h"
 
@@ -218,6 +219,9 @@ void PageRouter::push(ParsedRoute* route)
         // for a PageRouterAttached to find its parent
         // on construction time.
         auto item = component->beginCreate(context);
+        if (item == nullptr) {
+            return;
+        }
         item->setParent(this);
         auto qqItem = qobject_cast<QQuickItem*>(item);
         if (!qqItem) {
