@@ -10,9 +10,12 @@
 
 
 \subsection overview Introduction
-Kirigami is a set of QtQuick components for building adaptable UIs based on Qt Quick Controls 2. Its goal is to enable creation of applications that look and feel great on mobile as well as desktop devices and follow the <a href="https://hig.kde.org">KDE Human Interface Guidelines</a>.
+Kirigami is a set of QtQuick components for building adaptable UIs based on Qt Quick Controls 2. Its goal is to enable creation of applications that look and feel great on mobile as well as desktop devices and follow the <a href="https://develop.kde.org/hig">KDE Human Interface Guidelines</a>.
 The target of those components is anybody that wants to do an application using QtQuick as its main UI, especially if targeting a mobile platform, without adding many dependencies. They work on a variety of platforms, such as Plasma Mobile, Desktop Linux, Android, iOS and Windows.
 It is a Tier-1 KDE Framework starting with KDE Frameworks 5.37.
+
+\subsection tutorial Tutorial
+A tutorial for Kirigami is available on <a href="https://develop.kde.org/docs/kirigami/">our developer platform</a>.
 
 \subsection components Main Components
 - \link org::kde::kirigami::ApplicationWindow  ApplicationWindow \endlink
