@@ -22,7 +22,7 @@ import "private"
  * It is possible even tough is discouraged to override the footer:
  * in this case the actions property shouldn't be used.
  *
- * @inherits org::kde::kirigami::AbstractCard
+ * @inherit org::kde::kirigami::AbstractCard
  * @since 2.4
  */
 Kirigami.AbstractCard {

@@ -13,6 +13,7 @@ import org.kde.kirigami 2.13 as Kirigami
  * SwipeNavigator is a control providing for lateral navigation.
  * 
  * @include swipenavigator/main.qml
+ * @inherit QtQuick.Item
  */
 Item {
     id: swipeNavigatorRoot

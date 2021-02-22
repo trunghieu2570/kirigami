@@ -10,6 +10,7 @@ import org.kde.kirigami 2.13 as Kirigami
 
 /**
  * FlexColumn is a column that grows in width to a fixed cap.
+ * @inherit QtQuick.Layouts.ColumnLayout
  */
 ColumnLayout {
     id: __outer

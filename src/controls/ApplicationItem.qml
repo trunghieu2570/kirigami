@@ -80,7 +80,7 @@ AbstractApplicationItem {
     id: root
 
     /**
-     * pageStack: StackView
+     * @property QtQuick.StackView ApplicationItem::pageStack
      * Readonly.
      * The stack used to allocate the pages and to manage the transitions
      * between them.

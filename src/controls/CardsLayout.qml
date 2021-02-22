@@ -20,7 +20,7 @@ import org.kde.kirigami 2.4 as Kirigami
  * column if there is not enough space for two columns,
  * such as a mobile phone screen.
  * A CardsLayout should always be contained within a ColumnLayout.
- * @inherits GridLayout
+ * @inherit QtQuick.GridLayout
  * @since 2.4
  */
 GridLayout {

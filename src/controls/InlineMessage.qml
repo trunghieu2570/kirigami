@@ -57,10 +57,9 @@ import "templates" as T
  *     ]
  * }
  * @endcode
- *
+ * @inherit org::kde::kirigami::templates::InlineMessage
  * @since 5.45
  */
-
 T.InlineMessage {
     id: root
 

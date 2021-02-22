@@ -22,7 +22,7 @@ import org.kde.kirigami 2.7 as Kirigami
  * }
  * @endcode
  *
- * @inherit org.kde.kirgami.ActionTextField
+ * @inherit org::kde::kirgami::ActionTextField
  */
 Kirigami.ActionTextField
 {

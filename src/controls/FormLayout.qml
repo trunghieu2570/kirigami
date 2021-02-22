@@ -34,7 +34,7 @@ import org.kde.kirigami 2.4 as Kirigami
  *    }
  * }
  * @endcode
- * @inherits QtQuick.Item
+ * @inherit QtQuick.Item
  * @since 2.3
  */
 Item {

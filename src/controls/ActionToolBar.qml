@@ -15,13 +15,13 @@ import "private"
  * each action is represented by a ToolButton, those that won't fit
  * the size will go in a menu under a button with the overflow ... icon
  *
- * @inherits Item
+ * @inherit QtQuick.Controls.Control
  * @since 2.5
  */
 Controls.Control {
     id: root
     /**
-    * actions: list<Action>
+    * @property list<Action> ActionToolBar::actions
     * if the card should provide clickable actions, put them in this property,
     * they will be put in the footer as a list of ToolButtons plus an optional
     * overflow menu, when not all of them will fit in the available Card width.
@@ -29,7 +29,7 @@ Controls.Control {
     property alias actions: layout.actions
 
     /**
-    * actions: hiddenActions<Action>
+    * @property list<Action> ActionToolBar::hiddenActions
     * This list of actions is for those you always want in the menu, even if there
     * is enough space.
     * @since 2.6
@@ -39,7 +39,6 @@ Controls.Control {
     onHiddenActionsChanged: print("ActionToolBar::hiddenActions is deprecated, use the AlwaysHide hint on your actions instead")
 
     /**
-     * flat: bool
      * Wether we want our buttons to have a flat appearance. Default: true
      */
     property bool flat: true

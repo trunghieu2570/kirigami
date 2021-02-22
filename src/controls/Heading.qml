@@ -33,7 +33,7 @@ import org.kde.kirigami 2.4
  * Label. See the Label component from QtQuick.Controls 2 and primitive QML Text
  * element API for additional properties, methods and signals.
  *
- * @inherits QtQuick.Controls.Label
+ * @inherit QtQuick.Controls.Label
  */
 QQC2.Label {
     id: heading

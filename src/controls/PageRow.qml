@@ -21,7 +21,7 @@ import "templates" as KT
  * A PageRow can show a single page or a multiple set of columns, depending
  * on the window width: on a phone a single column should be fullscreen,
  * while on a tablet or a desktop more than one column should be visible.
- * @inherit QtQuick.Templates.Control
+ * @inherit QtQuick.Control
  */
 T.Control {
     id: root

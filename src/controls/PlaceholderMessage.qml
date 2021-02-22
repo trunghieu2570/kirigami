@@ -138,6 +138,7 @@ import "private"
  *     }
  * }
  * @endcode
+ * @inherit QtQuick.Layouts.ColumnLayout
  * @since 2.12
  */
 ColumnLayout {

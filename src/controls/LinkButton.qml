@@ -18,6 +18,7 @@ import QtQuick.Controls 2.1 as QQC2
  *
  * @since 5.52
  * @since org.kde.kirigami 2.6
+ * @inherit QtQuick.Controls.Label
  */
 QQC2.Label {
     id: control

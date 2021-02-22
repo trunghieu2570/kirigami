@@ -43,8 +43,8 @@ import org.kde.kirigami 2.14 as Kirigami
  * }
  * @endcode
  * @since 2.14
+ * @inherit org::kde::kirigami::BasicListItem
  */
-
 Kirigami.BasicListItem {
     id: checkableListItem
 

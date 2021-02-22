@@ -11,8 +11,8 @@ import org.kde.kirigami 2.12 as Kirigami
  * An org::kde::kirigami::ApplicationWindow with a preconfigured PageRouter.
  *
  * In order to call functions on the PageRouter, use @link PageRouterAttached  the attached Kirigami.PageRouter object @endlink.
+ * @inherit org::kde::kirigami::ApplicationWindow
  */
-
 Kirigami.ApplicationWindow {
     id: __kirigamiApplicationWindow
 

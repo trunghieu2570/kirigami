@@ -17,6 +17,7 @@ import "private"
  * of list headers in many mobile applications.
  * It provides some default content: a title and an optional background image
  * @since 2.1
+ * @inherit org::kde::kirigami::AbstractItemViewHeader
  */
 Kirigami.AbstractItemViewHeader {
     id: root
