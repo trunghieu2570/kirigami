@@ -355,8 +355,6 @@ T.Control {
      * @see push() for details.
      */
     function replace(page, properties) {
-        columnView.animationsEnabled = false;
-
         if (currentIndex >= 1) {
             pop(columnView.contentChildren[currentIndex-1]);
         } else if (currentIndex == 0) {
@@ -364,10 +362,7 @@ T.Control {
         } else {
             console.warn("There's no page to replace");
         }
-
-        let pageItem = push(page, properties);
-        columnView.animationsEnabled = true;
-        return pageItem;
+        return push(page, properties);
     }
 
     /**
@@ -604,10 +599,6 @@ T.Control {
         acceptsMouse: Settings.isMobile
         columnResizeMode: root.wideMode ? ColumnView.FixedColumns : ColumnView.SingleColumn
         columnWidth: root.defaultColumnWidth
-
-        property bool animationsEnabled: true
-
-        scrollDuration: animationsEnabled ? Units.longDuration : 0
 
         onItemInserted: root.pageInserted(position, item);
         onItemRemoved: root.pageRemoved(item);
