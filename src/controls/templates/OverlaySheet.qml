@@ -219,13 +219,13 @@ QtObject {
         drag.filterChildren: true
         hoverEnabled: true
         clip: true
-        
+
         // differentiate between mouse and touch
         HoverHandler {
             id: mouseHover
             acceptedDevices: PointerDevice.Mouse
         }
-        
+
         onPressed: {
             let pos = mapToItem(contentLayout, mouse.x, mouse.y);
             if (contentLayout.contains(pos) && mouseHover.hovered) { // only on mouse event, not touch
@@ -444,7 +444,7 @@ QtObject {
                 target: outerFlickable
                 scrollFlickableTarget: false
             }
-            
+
             function adjustPosition() {
                 if(layoutMovingGuard) return;
                 openAnimation.running = false;
@@ -462,7 +462,7 @@ QtObject {
                 }
                 onReleased: outerFlickable.interactive = true
             }
-            
+
             onContentYChanged: {
                 if (scrollView.userInteracting) {
                     return;
