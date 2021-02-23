@@ -467,7 +467,8 @@ QtObject {
                 if (scrollView.userInteracting) {
                     return;
                 }
-return;
+                return;
+
                 let startPos = -scrollView.flickableItem.topMargin - flickableContents.listHeaderHeight;
                 let pos = contentY - topEmptyArea - flickableContents.listHeaderHeight;
                 let endPos = scrollView.animatedContentHeight - scrollView.flickableItem.height + scrollView.flickableItem.bottomMargin - flickableContents.listHeaderHeight;
