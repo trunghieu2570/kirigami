@@ -8,7 +8,7 @@ import QtQuick 2.12
 
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
-import org.kde.kirigami 2.12 as Kirigami
+import org.kde.kirigami 2.14 as Kirigami
 
 ScrollView {
     id: view
@@ -20,6 +20,11 @@ ScrollView {
         implicitHeight: bar.implicitHeight
         implicitWidth: bar.implicitWidth
         width: Math.max(view.width, bar.implicitWidth)
+
+        Kirigami.SizeGroup {
+            mode: Kirigami.SizeGroup.Width
+            items: bar.children
+        }
 
         RowLayout {
             id: bar

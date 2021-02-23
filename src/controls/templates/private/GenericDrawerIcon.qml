@@ -21,14 +21,14 @@ Item {
         selected: drawer.handle.pressed
         opacity: 1 - drawer.position
         anchors.fill: parent
-        source: drawer.handleClosedIcon.source
+        source: drawer.handleClosedIcon.name ? drawer.handleClosedIcon.name : drawer.handleClosedIcon.source
         color: drawer.handleClosedIcon.color
     }
     Kirigami.Icon {
         selected: drawer.handle.pressed
         opacity: drawer.position
         anchors.fill: parent
-        source: drawer.handleOpenIcon.source
+        source: drawer.handleOpenIcon.name ? drawer.handleOpenIcon.name : drawer.handleOpenIcon.source
         color: drawer.handleOpenIcon.color
     }
 }

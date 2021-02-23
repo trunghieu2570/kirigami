@@ -97,7 +97,8 @@ T.OverlayDrawer {
                         }
                     }
 
-                    if (root.handleClosedIcon.source && root.handleOpenIcon.source) {
+                    if ((root.handleClosedIcon.source || root.handleClosedIcon.name)
+                        && (root.handleOpenIcon.source || root.handleOpenIcon.name)) {
                         return Qt.resolvedUrl("templates/private/GenericDrawerIcon.qml");
                     } else if (edge == Qt.LeftEdge ) {
                         return Qt.resolvedUrl("templates/private/MenuIcon.qml");
