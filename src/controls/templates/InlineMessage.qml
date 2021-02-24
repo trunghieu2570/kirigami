@@ -201,7 +201,7 @@ T2.Control {
 
             source: {
                 if (root.icon.name) {
-                    return root.icon.source;
+                    return root.icon.name;
                 } else if (root.icon.source) {
                     return root.icon.source;
                 }
