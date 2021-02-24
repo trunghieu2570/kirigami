@@ -24,11 +24,18 @@ Controls.ToolButton {
             return false
         }
     }
-    visible: applicationWindow().pageStack.layers.depth == 1 && applicationWindow().pageStack.contentItem.contentWidth > applicationWindow().pageStack.width && (showNavButtons === true || (showNavButtons & ApplicationHeaderStyle.ShowForwardButton))
+    visible: false
 
     onClicked: applicationWindow().pageStack.goForward();
 
-
+    Timer {
+        id: visibleCompressTimer
+        interval: 150
+        property bool shouldBeVisible: applicationWindow().pageStack.layers.depth == 1 && applicationWindow().pageStack.contentItem.contentWidth > applicationWindow().pageStack.width && (showNavButtons === true || (showNavButtons & ApplicationHeaderStyle.ShowForwardButton))
+        onShouldBeVisibleChanged: restart()
+        onTriggered: button.visible = visibleCompressTimer.shouldBeVisible
+    }
+    Component.onCompleted: button.visible = visibleCompressTimer.shouldBeVisible
 
     Controls.ToolTip {
         visible: button.hovered

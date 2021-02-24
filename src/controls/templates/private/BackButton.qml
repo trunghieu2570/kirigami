@@ -24,7 +24,16 @@ Controls.ToolButton {
             return false
         }
     }
-    visible: applicationWindow().pageStack.layers.depth > 1 || (applicationWindow().pageStack.contentItem.contentWidth > applicationWindow().pageStack.width && (showNavButtons === true || (showNavButtons & ApplicationHeaderStyle.ShowBackButton)))
+    visible: false
+
+    Timer {
+        id: visibleCompressTimer
+        interval: 150
+        property bool shouldBeVisible: applicationWindow().pageStack.layers.depth > 1 || (applicationWindow().pageStack.contentItem.contentWidth > applicationWindow().pageStack.width && (button.showNavButtons === true || (button.showNavButtons & ApplicationHeaderStyle.ShowBackButton)))
+        onShouldBeVisibleChanged: restart()
+        onTriggered: button.visible = visibleCompressTimer.shouldBeVisible
+    }
+    Component.onCompleted: button.visible = visibleCompressTimer.shouldBeVisible
 
     onClicked: {
         if (applicationWindow().pageStack.layers && applicationWindow().pageStack.layers.depth > 1) {
