@@ -355,18 +355,52 @@ T.Control {
      * @see push() for details.
      */
     function replace(page, properties) {
-        columnView.animationsEnabled = false;
+        if (!page) {
+            return null;
+        }
 
-        if (currentIndex >= 1) {
-            pop(columnView.contentChildren[currentIndex-1]);
+        // Remove all pages on top of the one being replaced.
+        if (currentIndex > 0) {
+            columnView.pop(columnView.contentChildren[currentIndex]);
         } else if (currentIndex == 0) {
-            pop();
+            columnView.pop()
         } else {
             console.warn("There's no page to replace");
         }
 
-        let pageItem = push(page, properties);
-        columnView.animationsEnabled = true;
+        // Figure out if more than one page is being pushed.
+        var pages;
+        var propsArray = [];
+        if (page instanceof Array) {
+            pages = page;
+            page = pages.shift();
+        }
+        if (properties instanceof Array) {
+            propsArray = properties;
+            properties = propsArray.shift();
+        } else {
+            propsArray = [properties];
+        }
+
+        // Replace topmost page.
+        var pageItem = pagesLogic.initPage(page, properties);
+        columnView.replaceItem(depth - 1, page);
+        pagePushed(pageItem);
+
+        // Push any extra defined pages onto the stack.
+        if (pages) {
+            var i;
+            for (i = 0; i < pages.length; i++) {
+                var tPage = pages[i];
+                var tProps = propsArray[i];
+
+                var pageItem = pagesLogic.initPage(tPage, tProps);
+                columnView.addItem(pageItem);
+                pagePushed(pageItem);
+            }
+        }
+
+        currentIndex = depth - 1;
         return pageItem;
     }
 
@@ -557,7 +591,7 @@ T.Control {
         id: pagesLogic
         readonly property var componentCache: new Array()
 
-        function initAndInsertPage(position, page, properties) {
+        function getPageComponent(page) {
             var pageComp;
 
             if (page.createObject) {
@@ -570,11 +604,17 @@ T.Control {
                     pageComp = pagesLogic.componentCache[page] = Qt.createComponent(page);
                 }
             }
+
+            return pageComp
+        }
+
+        function initPage(page, properties) {
+            var pageComp = getPageComponent(page, properties);
+
             if (pageComp) {
                 // instantiate page from component
                 // FIXME: parent directly to columnView or root?
                 page = pageComp.createObject(null, properties || {});
-                columnView.insertItem(position, page);
 
                 if (pageComp.status === Component.Error) {
                     throw new Error("Error while loading page: " + pageComp.errorString());
@@ -586,9 +626,13 @@ T.Control {
                         page[prop] = properties[prop];
                     }
                 }
-                columnView.insertItem(position, page);
             }
+            return page;
+        }
 
+        function initAndInsertPage(position, page, properties) {
+            page = initPage(page, properties);
+            columnView.insertItem(position, page);
             return page;
         }
     }
@@ -604,10 +648,6 @@ T.Control {
         acceptsMouse: Settings.isMobile
         columnResizeMode: root.wideMode ? ColumnView.FixedColumns : ColumnView.SingleColumn
         columnWidth: root.defaultColumnWidth
-
-        property bool animationsEnabled: true
-
-        scrollDuration: animationsEnabled ? Units.longDuration : 0
 
         onItemInserted: root.pageInserted(position, item);
         onItemRemoved: root.pageRemoved(item);
