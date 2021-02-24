@@ -21,11 +21,6 @@ ScrollView {
         implicitWidth: bar.implicitWidth
         width: Math.max(view.width, bar.implicitWidth)
 
-        Kirigami.SizeGroup {
-            mode: Kirigami.SizeGroup.Width
-            items: bar.children
-        }
-
         RowLayout {
             id: bar
             spacing: 0
