@@ -63,6 +63,7 @@ public:
     QVector<ToolBarLayoutDelegate*> sortedDelegates;
     QQuickItem *moreButtonInstance = nullptr;
     ToolBarDelegateIncubator *moreButtonIncubator = nullptr;
+    bool shouldShowMoreButton = false;
     int firstHiddenIndex = -1;
 
     QVector<QObject*> removedActions;
@@ -429,8 +430,10 @@ void ToolBarLayout::Private::performLayout()
         }
 
         moreButtonInstance->setY(qRound((maxHeight - moreButtonInstance->height()) / 2.0));
+        shouldShowMoreButton = true;
         moreButtonInstance->setVisible(true);
     } else {
+        shouldShowMoreButton = false;
         moreButtonInstance->setVisible(false);
     }
 
@@ -504,6 +507,9 @@ QVector<ToolBarLayoutDelegate*> ToolBarLayout::Private::createDelegates()
             moreButtonInstance = qobject_cast<QQuickItem*>(incubator->object());
             moreButtonInstance->setVisible(false);
 
+            connect(moreButtonInstance, &QQuickItem::visibleChanged, q, [this](){
+                moreButtonInstance->setVisible(shouldShowMoreButton);
+            });
             connect(moreButtonInstance, &QQuickItem::widthChanged, q, [this]() {
                 Q_EMIT q->minimumWidthChanged();
             });

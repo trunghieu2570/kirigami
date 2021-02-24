@@ -133,6 +133,7 @@ void ToolBarLayoutDelegate::createItems(QQmlComponent *fullComponent, QQmlCompon
         m_full->setVisible(false);
         connect(m_full, &QQuickItem::widthChanged, this, [this]() { m_parent->relayout(); });
         connect(m_full, &QQuickItem::heightChanged, this, [this]() { m_parent->relayout(); });
+        connect(m_full, &QQuickItem::visibleChanged, this, &ToolBarLayoutDelegate::ensureItemVisibility);
 
         if (m_icon) {
             m_ready = true;
@@ -158,6 +159,7 @@ void ToolBarLayoutDelegate::createItems(QQmlComponent *fullComponent, QQmlCompon
         m_icon->setVisible(false);
         connect(m_icon, &QQuickItem::widthChanged, this, [this]() { m_parent->relayout(); });
         connect(m_icon, &QQuickItem::heightChanged, this, [this]() { m_parent->relayout(); });
+        connect(m_icon, &QQuickItem::visibleChanged, this, &ToolBarLayoutDelegate::ensureItemVisibility);
 
         if (m_full) {
             m_ready = true;
