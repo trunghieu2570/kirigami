@@ -24,16 +24,8 @@ Controls.ToolButton {
             return false
         }
     }
-    visible: false
-
-    Timer {
-        id: visibleCompressTimer
-        interval: 150
-        property bool shouldBeVisible: applicationWindow().pageStack.layers.depth > 1 || (applicationWindow().pageStack.contentItem.contentWidth > applicationWindow().pageStack.width && (button.showNavButtons === true || (button.showNavButtons & ApplicationHeaderStyle.ShowBackButton)))
-        onShouldBeVisibleChanged: restart()
-        onTriggered: button.visible = visibleCompressTimer.shouldBeVisible
-    }
-    Component.onCompleted: button.visible = visibleCompressTimer.shouldBeVisible
+    // The gridUnit wiggle room is used to not flicker the button visibility during an animated resize for instance due to a sidebar collapse
+    visible: applicationWindow().pageStack.layers.depth > 1 || (applicationWindow().pageStack.contentItem.contentWidth > applicationWindow().pageStack.width + Units.gridUnit && (button.showNavButtons === true || (button.showNavButtons & ApplicationHeaderStyle.ShowBackButton)))
 
     onClicked: {
         if (applicationWindow().pageStack.layers && applicationWindow().pageStack.layers.depth > 1) {

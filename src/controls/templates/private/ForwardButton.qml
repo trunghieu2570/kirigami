@@ -24,18 +24,10 @@ Controls.ToolButton {
             return false
         }
     }
-    visible: false
+    // The gridUnit wiggle room is used to not flicker the button visibility during an animated resize for instance due to a sidebar collapse
+    visible: applicationWindow().pageStack.layers.depth == 1 && applicationWindow().pageStack.contentItem.contentWidth > applicationWindow().pageStack.width + Units.gridUnit && (showNavButtons === true || (showNavButtons & ApplicationHeaderStyle.ShowForwardButton))
 
     onClicked: applicationWindow().pageStack.goForward();
-
-    Timer {
-        id: visibleCompressTimer
-        interval: 150
-        property bool shouldBeVisible: applicationWindow().pageStack.layers.depth == 1 && applicationWindow().pageStack.contentItem.contentWidth > applicationWindow().pageStack.width && (showNavButtons === true || (showNavButtons & ApplicationHeaderStyle.ShowForwardButton))
-        onShouldBeVisibleChanged: restart()
-        onTriggered: button.visible = visibleCompressTimer.shouldBeVisible
-    }
-    Component.onCompleted: button.visible = visibleCompressTimer.shouldBeVisible
 
     Controls.ToolTip {
         visible: button.hovered
