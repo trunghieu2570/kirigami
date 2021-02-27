@@ -1154,7 +1154,6 @@ void ColumnView::replaceItem(int pos, QQuickItem *item)
         attached->setShouldDeleteOnRemove(item->parentItem() == nullptr && QQmlEngine::objectOwnership(item) == QQmlEngine::JavaScriptOwnership);
         item->setParentItem(m_contentItem);
 
-        item->forceActiveFocus();
         // We layout immediately to be sure all geometries are final after the return of this call
         m_contentItem->m_shouldAnimate = false;
         m_contentItem->layoutItems();
