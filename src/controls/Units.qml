@@ -29,16 +29,13 @@ QtObject {
      * The icon sizes provided are normalized for different DPI, so icons
      * will scale depending on the DPI.
      *
-     * Icon sizes from KIconLoader, adjusted to devicePixelRatio:
+     * * sizeForLabels (the largest icon size that fits within fontMetrics.height) @since 5.80 @since org.kde.kirigami 2.16
      * * small
      * * smallMedium
      * * medium
      * * large
      * * huge
      * * enormous
-     *
-     * Not devicePixelRation-adjusted::
-     * * desktop
      */
     property QtObject iconSizes: QtObject {
         property int sizeForLabels: fontMetrics.roundedIconSize(fontMetrics.height)
