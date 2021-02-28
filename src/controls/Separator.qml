@@ -21,6 +21,7 @@ Rectangle {
     id: root
     implicitHeight: Math.floor(Units.devicePixelRatio)
     implicitWidth: Math.floor(Units.devicePixelRatio)
+    Accessible.role: Accessible.Separator
 
     enum Weight {
         Light,

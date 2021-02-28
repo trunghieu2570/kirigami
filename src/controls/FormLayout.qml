@@ -55,6 +55,7 @@ Item {
     implicitWidth: lay.wideImplicitWidth
     implicitHeight: lay.implicitHeight
     Layout.preferredHeight: lay.implicitHeight
+    Accessible.role: Accessible.Form
 
     Component.onCompleted: {
         relayoutTimer.triggered()
