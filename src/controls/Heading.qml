@@ -54,6 +54,8 @@ QQC2.Label {
 
     font.pointSize: headerPointSize(level)
 
+    Accessible.role: Accessible.Heading
+
     function headerPointSize(l) {
         var n = Theme.defaultFont.pointSize;
         var s;
