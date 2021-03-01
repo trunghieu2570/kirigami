@@ -6,7 +6,7 @@
 
 import QtQuick 2.6
 import QtQuick.Layouts 1.2
-import QtQuick.Templates 2.0 as T
+import QtQuick.Templates 2.12 as T
 import org.kde.kirigami 2.4 as Kirigami
 
 /**
@@ -76,11 +76,11 @@ T.ItemDelegate {
             top: parent.top
             left: parent.left
             right: parent.right
-            leftMargin: root.leftPadding
-            topMargin: root.topPadding
-            rightMargin: root.rightPadding
+            leftMargin: root.leftPadding + root.leftInset
+            topMargin: root.topPadding + root.topInset
+            rightMargin: root.rightPadding + root.rightInset
             bottom:parent.bottom
-            bottomMargin: root.bottomPadding
+            bottomMargin: root.bottomPadding + root.bottomInset
         }
         columns: headerOrientation == Qt.Vertical ? 1 : 2
         function preferredHeight(item) {
