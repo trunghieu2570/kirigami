@@ -231,7 +231,7 @@ ColumnLayout {
     }
 
     QQC2.Label {
-        text: root.text
+        text: root.explanation
         visible:  root.explanation !== ""
 
         opacity: 0.5
