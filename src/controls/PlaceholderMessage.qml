@@ -84,7 +84,8 @@ import "private"
  *         visible: root.networkConnected
  *
  *         icon.name: "network-disconnect"
- *         text: "Network disconnected; unable to load content"
+ *         text: "Unable to load content
+ *         explanation: "Please try again later"
  *     }
  * }
  * @endcode
@@ -148,25 +149,26 @@ ColumnLayout {
      * text: string
      * The text to show as a placeholder label
      *
-     * Optional; if not defined, the message will have no smaller text label
-     * text. If both text: and title: are omitted, the message will have no text
-     * and only an icon, action button, and/or other custom content.
+     * Optional; if not defined, the message will have no large text label
+     * text. If both text: and explanation: are omitted, the message will have
+     * no text and only an icon, action button, and/or other custom content.
      *
      * @since 5.70
      */
     property string text
 
     /**
-     * title: string
-     * The text to show as a placeholder title.
+     * explanation: string
+     * Smaller explanatory text to show below the larger title-style text
      *
-     * Optional; if not defined, the message will have no large title element.
-     * Useful when you also define text: as a user-friendly explanation for how
-     * to proceed.
+     * Useful for providing a user-friendly explanation for how to proceed.
+     *
+     * Optional; if not defined, the message will have no supplementary
+     * explanatory text.
      *
      * @since 5.80
      */
-    property string title
+    property string explanation
 
     /**
      * icon: QVariant
@@ -215,10 +217,11 @@ ColumnLayout {
     }
 
     Kirigami.Heading {
-        text: root.title
-        visible: root.title !== ""
+        text: root.text
+        visible: root.text !== ""
 
-        level: 3
+        level: 2
+        opacity: 0.5
 
         horizontalAlignment: Qt.AlignHCenter
         wrapMode: Text.WordWrap
@@ -228,22 +231,8 @@ ColumnLayout {
 
     QQC2.Label {
         text: root.text
-        visible: root.text !== "" && root.title !== ""
+        visible:  root.explanation !== ""
 
-        horizontalAlignment: Qt.AlignHCenter
-        wrapMode: Text.WordWrap
-
-        Layout.fillWidth: true
-    }
-
-    // TODO KF6: remove, force users to use the new design
-    // this is here not to break existing users who expect
-    // the old style of heading
-    Kirigami.Heading {
-        text: root.text
-        visible: root.text !== "" && root.title === ""
-
-        level: 2
         opacity: 0.5
 
         horizontalAlignment: Qt.AlignHCenter
