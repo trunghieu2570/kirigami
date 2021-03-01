@@ -148,8 +148,9 @@ ColumnLayout {
      * text: string
      * The text to show as a placeholder label
      *
-     * Optional; if not defined, the message will have no text. Useful when you
-     * only want to display an icon, action button, and/or other custom content
+     * Optional; if not defined, the message will have no smaller text label
+     * text. If both text: and title: are omitted, the message will have no text
+     * and only an icon, action button, and/or other custom content.
      *
      * @since 5.70
      */
@@ -159,10 +160,11 @@ ColumnLayout {
      * title: string
      * The text to show as a placeholder title.
      *
-     * Optional; if not defined, the message will have no text. Useful when you
-     * only want to display an icon, action button, and/or other custom content
+     * Optional; if not defined, the message will have no large title element.
+     * Useful when you also define text: as a user-friendly explanation for how
+     * to proceed.
      *
-     * @since 5.7?
+     * @since 5.80
      */
     property string title
 
@@ -242,6 +244,7 @@ ColumnLayout {
         visible: root.text !== "" && root.title === ""
 
         level: 2
+        opacity: 0.5
 
         horizontalAlignment: Qt.AlignHCenter
         wrapMode: Text.WordWrap
