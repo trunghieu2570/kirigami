@@ -5,8 +5,9 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Controls 2.4 as QQC2
 import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.12 as QQC2
+
 import org.kde.kirigami 2.12 as Kirigami
 
 import "private"
@@ -223,10 +224,10 @@ ColumnLayout {
         level: 2
         opacity: 0.5
 
-        horizontalAlignment: Qt.AlignHCenter
-        wrapMode: Text.WordWrap
-
         Layout.fillWidth: true
+        horizontalAlignment: Qt.AlignHCenter
+
+        wrapMode: Text.WordWrap
     }
 
     QQC2.Label {
