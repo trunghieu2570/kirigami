@@ -292,6 +292,9 @@ QQC2.Page {
      * A single page can override the application toolbar style for itself.
      * It is discouraged to use this, except very specific exceptions, like a chat
      * application which can't have controls on the bottom except the text field.
+     * If the Page is not in a PageRow, by default the toolbar will be invisible,
+     * so has to be explicitly set to Kirigami.ApplicationHeaderStyle.ToolBar if
+     * desired to be used in that case.
      */
     property int globalToolBarStyle: {
         if (globalToolBar.row && !globalToolBar.stack) {
@@ -334,7 +337,9 @@ QQC2.Page {
     Component.onCompleted: {
         headerChanged();
         parentChanged(root.parent);
+        globalToolBar.syncSource();
     }
+
     onParentChanged: {
         if (!parent) {
             return;
@@ -384,19 +389,32 @@ QQC2.Page {
             property T2.StackView stack
 
             visible: active
-            active: (row || stack) && (root.titleDelegate !== defaultTitleDelegate || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.Titles)
+            active: (root.titleDelegate !== defaultTitleDelegate || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.Titles)
+            onActiveChanged: {
+                if (active) {
+                    syncSource();
+                }
+            }
 
             function syncSource() {
                 if (root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar &&
                     root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.Titles &&
                     root.titleDelegate !== defaultTitleDelegate) {
                     sourceComponent = root.titleDelegate;
-                } else if (row && active) {
+                } else if (active) {
                     setSource(Qt.resolvedUrl(root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar ? "private/globaltoolbar/ToolBarPageHeader.qml" : "private/globaltoolbar/TitlesPageHeader.qml"),
                     //TODO: find container reliably, remove assumption
                     {"pageRow": Qt.binding(function() {return row}),
                     "page": root,
-                    "current": Qt.binding(function() {return stack || row.currentIndex === root.Kirigami.ColumnView.level})});
+                    "current": Qt.binding(function() {
+                        if (!row && !stack) {
+                            return true;
+                        } else if (stack) {
+                            return stack;
+                        } else {
+                            return row.currentIndex === root.Kirigami.ColumnView.level;
+                        }
+                    })});
                 }
             }
         },
