@@ -9,7 +9,6 @@
         <file alias="PagePoolAction.qml">src/controls/PagePoolAction.qml</file>
         <file alias="PageRow.qml">src/controls/PageRow.qml</file>
         <file alias="AbstractListItem.qml">src/controls/AbstractListItem.qml</file>
-        <file alias="Theme.qml">src/controls/Theme.qml</file>
         <file alias="AbstractCard.qml">src/controls/AbstractCard.qml</file>
         <file alias="templates/AbstractCard.qml">src/controls/templates/AbstractCard.qml</file>
         <file alias="Card.qml">src/controls/Card.qml</file>

@@ -9,7 +9,6 @@
         <file alias="PagePoolAction.qml">@kirigami_QML_DIR@/src/controls/PagePoolAction.qml</file>
         <file alias="PageRow.qml">@kirigami_QML_DIR@/src/controls/PageRow.qml</file>
         <file alias="AbstractListItem.qml">@kirigami_QML_DIR@/src/controls/AbstractListItem.qml</file>
-        <file alias="Theme.qml">@kirigami_QML_DIR@/src/controls/Theme.qml</file>
         <file alias="AbstractCard.qml">@kirigami_QML_DIR@/src/controls/AbstractCard.qml</file>
         <file alias="templates/AbstractCard.qml">@kirigami_QML_DIR@/src/controls/templates/AbstractCard.qml</file>
         <file alias="Card.qml">@kirigami_QML_DIR@/src/controls/Card.qml</file>
