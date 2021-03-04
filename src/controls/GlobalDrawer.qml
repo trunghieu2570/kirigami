@@ -394,27 +394,27 @@ OverlayDrawer {
                     // as while the animation is running the drawer may close, and
                     //the animator would stop when not drawing see BUG 381576
                     popEnter: Transition {
-                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * -stackView.width; to: 0; duration: 400; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * -stackView.width; to: 0; duration: Units.veryLongDuration; easing.type: Easing.OutCubic }
                     }
 
                     popExit: Transition {
-                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * stackView.width; duration: 400; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * stackView.width; duration: Units.veryLongDuration; easing.type: Easing.OutCubic }
                     }
 
                     pushEnter: Transition {
-                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: 400; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Units.veryLongDuration; easing.type: Easing.OutCubic }
                     }
 
                     pushExit: Transition {
-                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: 400; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Units.veryLongDuration; easing.type: Easing.OutCubic }
                     }
 
                     replaceEnter: Transition {
-                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: 400; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Units.veryLongDuration; easing.type: Easing.OutCubic }
                     }
 
                     replaceExit: Transition {
-                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: 400; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Units.veryLongDuration; easing.type: Easing.OutCubic }
                     }
                 }
                 Item {
