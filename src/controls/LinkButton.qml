@@ -5,7 +5,7 @@
  */
 
 import QtQuick 2.2
-import org.kde.kirigami 2.0
+import org.kde.kirigami 2.14
 import QtQuick.Controls 2.1 as QQC2
 
 /**
