@@ -85,6 +85,14 @@ QUrl KirigamiPlugin::componentUrl(const QString &fileName) const
     return Kirigami::StyleSelector::componentUrl(fileName);
 }
 
+template<typename T>
+inline std::function<QObject*(QQmlEngine*,QJSEngine*)> singleton()
+{
+    return [](QQmlEngine*,QJSEngine*) -> QObject* {
+        return new T;
+    };
+}
+
 void KirigamiPlugin::registerTypes(const char *uri)
 {
 #if defined(Q_OS_ANDROID)
@@ -183,7 +191,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(QStringLiteral("AboutPage.qml")), uri, 2, 6, "AboutPage");
     qmlRegisterType(componentUrl(QStringLiteral("LinkButton.qml")), uri, 2, 6, "LinkButton");
     qmlRegisterType(componentUrl(QStringLiteral("UrlButton.qml")), uri, 2, 6, "UrlButton");
-    qmlRegisterSingletonType<CopyHelperPrivate>("org.kde.kirigami.private", 2, 6, "CopyHelperPrivate", [] (QQmlEngine*, QJSEngine*) -> QObject* { return new CopyHelperPrivate; });
+    qmlRegisterSingletonType<CopyHelperPrivate>("org.kde.kirigami.private", 2, 6, "CopyHelperPrivate", singleton<CopyHelperPrivate>());
 
     //2.7
     qmlRegisterType<ColumnView>(uri, 2, 7, "ColumnView");
@@ -215,7 +223,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     qmlRegisterUncreatableType<BorderGroup>(uri, 2, 12, "BorderGroup", QStringLiteral("Used as grouped property"));
     qmlRegisterUncreatableType<ShadowGroup>(uri, 2, 12, "ShadowGroup", QStringLiteral("Used as grouped property"));
-    qmlRegisterSingletonType<ColorUtils>(uri, 2, 12, "ColorUtils", [] (QQmlEngine*, QJSEngine*) -> QObject* { return new ColorUtils; });
+    qmlRegisterSingletonType<ColorUtils>(uri, 2, 12, "ColorUtils", singleton<ColorUtils>());
 
     qmlRegisterUncreatableType<CornersGroup>(uri, 2, 12, "CornersGroup", QStringLiteral("Used as grouped property"));
     qmlRegisterType<PageRouter>(uri, 2, 12, "PageRouter");
@@ -232,11 +240,11 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterUncreatableType<PreloadRouteGroup>(uri, 2, 14, "PreloadRouteGroup", QStringLiteral("PreloadRouteGroup cannot be created"));
     qmlRegisterType(componentUrl(QStringLiteral("FlexColumn.qml")), uri, 2, 14, "FlexColumn");
     qmlRegisterType<ToolBarLayout>(uri, 2, 14, "ToolBarLayout");
-    qmlRegisterSingletonType<DisplayHint>(uri, 2, 14, "DisplayHint", [](QQmlEngine*, QJSEngine*) -> QObject* { return new DisplayHint; });
+    qmlRegisterSingletonType<DisplayHint>(uri, 2, 14, "DisplayHint", singleton<DisplayHint>());
     qmlRegisterType<SizeGroup>(uri, 2, 14, "SizeGroup");
     qmlRegisterType<AvatarGroup>("org.kde.kirigami.private", 2, 14, "AvatarGroup");
     qmlRegisterType(componentUrl(QStringLiteral("CheckableListItem.qml")), uri, 2, 14, "CheckableListItem");
-    qmlRegisterSingletonType<NameUtils>(uri, 2, 14, "NameUtils", [] (QQmlEngine*, QJSEngine*) -> QObject* { return new NameUtils; });
+    qmlRegisterSingletonType<NameUtils>(uri, 2, 14, "NameUtils", singleton<NameUtils>());
 
     qmlRegisterType(componentUrl(QStringLiteral("Hero.qml")), uri, 2, 15, "Hero");
 
