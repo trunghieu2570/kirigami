@@ -15,7 +15,7 @@ import "private"
  * For example in Okular Mobile, an Overlay Drawer is used to display
  * thumbnails of all pages within a document along with a search field.
  * This is used for the distinct task of navigating to another page.
- * @inherits: QtQuick.Controls.Drawer
+ * @inherit QtQuick.Controls.Drawer
  */
 T2.Drawer {
     id: root
