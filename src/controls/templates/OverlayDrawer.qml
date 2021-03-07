@@ -225,7 +225,7 @@ T2.Drawer {
                 }
 
                 var pageFooter = item && item.page ? item.page.footer : (item ? item.footer : undefined);
-                if (pageFooter) {
+                if (pageFooter && root.parent) {
                     margin = root.height < root.parent.height ? margin : margin + pageFooter.height
                 }
 
