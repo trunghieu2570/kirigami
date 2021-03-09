@@ -114,7 +114,7 @@ Item {
             top: !Settings.isMobile || root.position === Controls.ToolBar.Footer ? parent.top : undefined
         }
 
-        height: __appWindow && __appWindow.reachableMode && __appWindow.reachableModeEnabled ? root.maximumHeight : (root.minimumHeight > 0 ? Math.max(root.height, root.minimumHeight) : root.preferredHeight)
+        height: __appWindow && __appWindow.reachableMode && __appWindow.reachableModeEnabled ? root.maximumHeight : (root.minimumHeight > 0 ? Math.max(root.height, root.minimumHeight) : Math.max(root.height, root.preferredHeight))
 
         function scrollIntentHandler(event) {
             if (root.pageRow
