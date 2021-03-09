@@ -371,7 +371,7 @@ QtObject {
                 }
             }
 
-            Item {
+            FocusScope {
                 id: contentItemParent
                 anchors {
                     fill: parent
