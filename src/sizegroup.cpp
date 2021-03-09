@@ -98,6 +98,10 @@ void SizeGroup::adjustItems(Mode whatChanged)
             continue;
         }
 
+        if (!qmlEngine(item)) {
+            continue;
+        }
+
         switch (m_mode) {
         case Mode::Width:
             QQmlProperty(item, QStringLiteral("Layout.preferredWidth"), qmlContext(item)).write(maxWidth);
