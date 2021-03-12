@@ -41,17 +41,22 @@ Rectangle {
     Accessible.description: {
         if (!!modelData.progress) {
             if (index == columnView.currentIndex) {
-                return i18nc("Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.", "Current page. Progress: %1 percent.", Math.round(modelData.progress*100))
+                //: Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
+                return qsTr("Current page. Progress: %1 percent.").arg(Math.round(modelData.progress*100))
             } else {
-                return i18nc("Accessibility text for a page tab. Keep the text as concise as possible.", "Navigate to %1. Progress: %1 percent.", modelData.title, Math.round(modelData.progress*100))
+                //: Accessibility text for a page tab. Keep the text as concise as possible.
+                return qsTr("Navigate to %1. Progress: %2 percent.").arg(modelData.title).arg(Math.round(modelData.progress*100))
             }
         } else {
             if (index == columnView.currentIndex) {
-                return i18nc("Accessibility text for a page tab. Keep the text as concise as possible.", "Current page.")
+                //: Accessibility text for a page tab. Keep the text as concise as possible.
+                return qsTr("Current page.")
             } else if (modelData.needsAttention) {
-                return i18nc("Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.", "Navigate to %1. Demanding attention.", modelData.title)
+                //: Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
+                return qsTr("Navigate to %1. Demanding attention.", modelData.title)
             } else {
-                return i18nc("Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.", "Navigate to %1.", modelData.title)
+                //: Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
+                return qsTr("Navigate to %1.", modelData.title)
             }
         }
     }
