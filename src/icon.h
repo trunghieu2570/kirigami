@@ -150,7 +150,7 @@ public:
         Null = 0, /// No icon has been set
         Ready, /// The icon loaded correctly
         Loading, // The icon is being loaded, but not ready yet
-        Error /// There was an error while loading the icon, for instance a non existent themed name, or an invalid url
+        Error, /// There was an error while loading the icon, for instance a non existent themed name, or an invalid url
     };
     Q_ENUM(Status)
 

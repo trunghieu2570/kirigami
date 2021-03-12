@@ -20,14 +20,14 @@ public:
         Titles,
         TabBar,
         ToolBar, ///@since 5.48
-        None ///@since 5.48
+        None, ///@since 5.48
     };
     Q_ENUM(Status)
 
     enum NavigationButton {
         NoNavigationButtons = 0,
         ShowBackButton = 0x1,
-        ShowForwardButton = 0x2
+        ShowForwardButton = 0x2,
     };
     Q_ENUM(NavigationButton)
     Q_DECLARE_FLAGS(NavigationButtons, NavigationButton)
@@ -42,7 +42,7 @@ public:
         Information = 0,
         Positive,
         Warning,
-        Error
+        Error,
     };
     Q_ENUM(Type)
 };
@@ -78,7 +78,7 @@ public:
          * When this action has children, do not display any indicator (like a
          * menu arrow) for this action.
          */
-        HideChildIndicator = 8
+        HideChildIndicator = 8,
     };
     Q_DECLARE_FLAGS(DisplayHints, Hint)
     Q_ENUM(Hint)

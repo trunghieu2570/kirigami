@@ -79,7 +79,7 @@ public:
         DialogButton, /**< buttons for dialogs */
         MenuItem, /**< Menu items */
         FormLabel, /**< Buddy label in a FormLayout*/
-        SecondaryControl /**< Other controls that are considered not much important and low priority for shortcuts */
+        SecondaryControl, /**< Other controls that are considered not much important and low priority for shortcuts */
     };
     Q_ENUM(ControlType)
 
@@ -138,7 +138,7 @@ private:
         // Weight for Secondary controls which are considered less important (low)
         SECONDARY_CONTROL_WEIGHT = 10,
         // Default weight for menu items
-        MENU_ITEM_WEIGHT = 250
+        MENU_ITEM_WEIGHT = 250,
     };
 
     //order word letters by weight

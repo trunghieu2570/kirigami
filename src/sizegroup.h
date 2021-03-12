@@ -28,7 +28,7 @@ public:
         None = 0, /// SizeGroup does nothing
         Width = 1, /// SizeGroup syncs item widths
         Height = 2, /// SizeGroup syncs item heights
-        Both = 3 /// SizeGroup syncs both item widths and heights
+        Both = 3, /// SizeGroup syncs both item widths and heights
     };
     Q_ENUM(Mode)
     Q_DECLARE_FLAGS(Modes, Mode)

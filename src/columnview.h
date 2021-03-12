@@ -258,7 +258,7 @@ public:
     enum ColumnResizeMode {
         FixedColumns = 0,
         DynamicColumns,
-        SingleColumn
+        SingleColumn,
     };
     Q_ENUM(ColumnResizeMode)
 

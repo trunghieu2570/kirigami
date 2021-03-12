@@ -86,7 +86,7 @@ public:
 
         // This should always be the last item. It indicates how many items
         // there are and is used for the storage array below.
-        ColorRoleCount
+        ColorRoleCount,
     };
 
     using ColorMap = std::unordered_map<std::underlying_type<ColorRole>::type, QColor>;

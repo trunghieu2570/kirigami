@@ -21,7 +21,7 @@ class ShadowedRectangleMaterial : public QSGMaterial
 public:
     enum class ShaderType {
         Standard,
-        LowPower
+        LowPower,
     };
 
     ShadowedRectangleMaterial();
