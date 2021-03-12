@@ -7,8 +7,8 @@
 #ifndef FORMLAYOUTATTACHED_H
 #define FORMLAYOUTATTACHED_H
 
-#include <QtQml>
 #include <QObject>
+#include <QtQml>
 
 class QQuickItem;
 
@@ -109,7 +109,6 @@ class FormLayoutAttached : public QObject
     Q_PROPERTY(QQuickItem *buddyFor READ buddyFor WRITE setBuddyFor NOTIFY buddyForChanged)
 
 public:
-
     explicit FormLayoutAttached(QObject *parent = nullptr);
     ~FormLayoutAttached() override;
 
@@ -134,7 +133,7 @@ public:
     int labelAlignment() const;
     void setLabelAlignment(int alignment);
 
-    //QML attached property
+    // QML attached property
     static FormLayoutAttached *qmlAttachedProperties(QObject *object);
 
 Q_SIGNALS:
@@ -150,7 +149,7 @@ private:
     QString m_label;
     QString m_actualDecoratedLabel;
     QString m_decoratedLabel;
-    QPointer <QQuickItem> m_buddyFor;
+    QPointer<QQuickItem> m_buddyFor;
     bool m_isSection = false;
     bool m_checkable = false;
     bool m_checked = false;

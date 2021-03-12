@@ -16,12 +16,12 @@ ShadowedTextureMaterial::ShadowedTextureMaterial()
     setFlag(QSGMaterial::Blending, true);
 }
 
-QSGMaterialShader* ShadowedTextureMaterial::createShader() const
+QSGMaterialShader *ShadowedTextureMaterial::createShader() const
 {
     return new ShadowedTextureShader{shaderType};
 }
 
-QSGMaterialType* ShadowedTextureMaterial::type() const
+QSGMaterialType *ShadowedTextureMaterial::type() const
 {
     return &staticType;
 }
@@ -54,11 +54,11 @@ void ShadowedTextureShader::initialize()
     program()->setUniformValue("textureSource", 0);
 }
 
-void ShadowedTextureShader::updateState(const QSGMaterialShader::RenderState& state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial)
+void ShadowedTextureShader::updateState(const QSGMaterialShader::RenderState &state, QSGMaterial *newMaterial, QSGMaterial *oldMaterial)
 {
     ShadowedRectangleShader::updateState(state, newMaterial, oldMaterial);
 
-    auto texture = static_cast<ShadowedTextureMaterial*>(newMaterial)->textureSource;
+    auto texture = static_cast<ShadowedTextureMaterial *>(newMaterial)->textureSource;
     if (texture) {
         texture->bind();
     }

@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <memory>
 #include <QQuickItem>
+#include <memory>
 
 class PaintedRectangleItem;
 

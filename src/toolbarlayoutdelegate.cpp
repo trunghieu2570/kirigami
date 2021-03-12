@@ -1,27 +1,26 @@
 /*
  * SPDX-FileCopyrightText: 2020 Arjen Hiemstra <ahiemstra@heimr.nl>
- * 
+ *
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 
 #include "toolbarlayoutdelegate.h"
 
-
 #include "toolbarlayout.h"
 
-ToolBarDelegateIncubator::ToolBarDelegateIncubator(QQmlComponent* component, QQmlContext *context)
+ToolBarDelegateIncubator::ToolBarDelegateIncubator(QQmlComponent *component, QQmlContext *context)
     : QQmlIncubator(QQmlIncubator::Asynchronous)
     , m_component(component)
     , m_context(context)
 {
 }
 
-void ToolBarDelegateIncubator::setStateCallback(std::function<void (QQuickItem *)> callback)
+void ToolBarDelegateIncubator::setStateCallback(std::function<void(QQuickItem *)> callback)
 {
     m_stateCallback = callback;
 }
 
-void ToolBarDelegateIncubator::setCompletedCallback(std::function<void (ToolBarDelegateIncubator *)> callback)
+void ToolBarDelegateIncubator::setCompletedCallback(std::function<void(ToolBarDelegateIncubator *)> callback)
 {
     m_completedCallback = callback;
 }
@@ -36,9 +35,9 @@ bool ToolBarDelegateIncubator::isFinished()
     return m_finished;
 }
 
-void ToolBarDelegateIncubator::setInitialState(QObject* object)
+void ToolBarDelegateIncubator::setInitialState(QObject *object)
 {
-    auto item = qobject_cast<QQuickItem*>(object);
+    auto item = qobject_cast<QQuickItem *>(object);
     if (item) {
         m_stateCallback(item);
     }
@@ -61,7 +60,7 @@ void ToolBarDelegateIncubator::statusChanged(QQmlIncubator::Status status)
     }
 }
 
-ToolBarLayoutDelegate::ToolBarLayoutDelegate(ToolBarLayout* parent)
+ToolBarLayoutDelegate::ToolBarLayoutDelegate(ToolBarLayout *parent)
     : QObject() // Note: delegates are managed by unique_ptr, so don't parent
     , m_parent(parent)
 {
@@ -85,12 +84,12 @@ ToolBarLayoutDelegate::~ToolBarLayoutDelegate()
     }
 }
 
-QObject * ToolBarLayoutDelegate::action() const
+QObject *ToolBarLayoutDelegate::action() const
 {
     return m_action;
 }
 
-void ToolBarLayoutDelegate::setAction(QObject* action)
+void ToolBarLayoutDelegate::setAction(QObject *action)
 {
     if (action == m_action) {
         return;
@@ -115,7 +114,7 @@ void ToolBarLayoutDelegate::setAction(QObject* action)
     }
 }
 
-void ToolBarLayoutDelegate::createItems(QQmlComponent *fullComponent, QQmlComponent *iconComponent, std::function<void(QQuickItem*)> callback)
+void ToolBarLayoutDelegate::createItems(QQmlComponent *fullComponent, QQmlComponent *iconComponent, std::function<void(QQuickItem *)> callback)
 {
     m_fullIncubator = new ToolBarDelegateIncubator(fullComponent, qmlContext(fullComponent));
     m_fullIncubator->setStateCallback(callback);
@@ -129,10 +128,14 @@ void ToolBarLayoutDelegate::createItems(QQmlComponent *fullComponent, QQmlCompon
             return;
         }
 
-        m_full = qobject_cast<QQuickItem*>(incubator->object());
+        m_full = qobject_cast<QQuickItem *>(incubator->object());
         m_full->setVisible(false);
-        connect(m_full, &QQuickItem::widthChanged, this, [this]() { m_parent->relayout(); });
-        connect(m_full, &QQuickItem::heightChanged, this, [this]() { m_parent->relayout(); });
+        connect(m_full, &QQuickItem::widthChanged, this, [this]() {
+            m_parent->relayout();
+        });
+        connect(m_full, &QQuickItem::heightChanged, this, [this]() {
+            m_parent->relayout();
+        });
         connect(m_full, &QQuickItem::visibleChanged, this, &ToolBarLayoutDelegate::ensureItemVisibility);
 
         if (m_icon) {
@@ -155,10 +158,14 @@ void ToolBarLayoutDelegate::createItems(QQmlComponent *fullComponent, QQmlCompon
             return;
         }
 
-        m_icon = qobject_cast<QQuickItem*>(incubator->object());
+        m_icon = qobject_cast<QQuickItem *>(incubator->object());
         m_icon->setVisible(false);
-        connect(m_icon, &QQuickItem::widthChanged, this, [this]() { m_parent->relayout(); });
-        connect(m_icon, &QQuickItem::heightChanged, this, [this]() { m_parent->relayout(); });
+        connect(m_icon, &QQuickItem::widthChanged, this, [this]() {
+            m_parent->relayout();
+        });
+        connect(m_icon, &QQuickItem::heightChanged, this, [this]() {
+            m_parent->relayout();
+        });
         connect(m_icon, &QQuickItem::visibleChanged, this, &ToolBarLayoutDelegate::ensureItemVisibility);
 
         if (m_full) {

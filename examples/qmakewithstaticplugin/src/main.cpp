@@ -7,7 +7,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-
 #include <QtPlugin>
 
 Q_IMPORT_PLUGIN(KirigamiPlugin)

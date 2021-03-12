@@ -19,9 +19,9 @@ class ShadowedBorderRectangleMaterial : public ShadowedRectangleMaterial
 public:
     ShadowedBorderRectangleMaterial();
 
-    QSGMaterialShader* createShader() const override;
-    QSGMaterialType* type() const override;
-    int compare(const QSGMaterial* other) const override;
+    QSGMaterialShader *createShader() const override;
+    QSGMaterialType *type() const override;
+    int compare(const QSGMaterial *other) const override;
 
     float borderWidth = 0.0;
     QColor borderColor = Qt::black;

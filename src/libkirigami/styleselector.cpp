@@ -1,17 +1,17 @@
 /*
  * SPDX-FileCopyrightText: 2021 Arjen Hiemstra <ahiemstra@heimr.nl>
- * 
+ *
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
 #include "styleselector_p.h"
 
-#include <QQuickStyle>
-#include <QFile>
 #include <QDir>
+#include <QFile>
+#include <QQuickStyle>
 
-namespace Kirigami {
-
+namespace Kirigami
+{
 QUrl StyleSelector::s_baseUrl;
 QStringList StyleSelector::s_styleChain;
 
@@ -37,7 +37,7 @@ QStringList StyleSelector::styleChain()
     auto style = QQuickStyle::name();
 
 #if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
-    //org.kde.desktop.plasma is a couple of files that fall back to desktop by purpose
+    // org.kde.desktop.plasma is a couple of files that fall back to desktop by purpose
     if (style.isEmpty() || style == QStringLiteral("org.kde.desktop.plasma")) {
         auto path = resolveFilePath(QStringLiteral("/styles/org.kde.desktop"));
         if (QFile::exists(path)) {
@@ -53,7 +53,7 @@ QStringList StyleSelector::styleChain()
     auto stylePath = resolveFilePath(QStringLiteral("/styles/") + style);
     if (!style.isEmpty() && QFile::exists(stylePath) && !s_styleChain.contains(style)) {
         s_styleChain.prepend(style);
-        //if we have plasma deps installed, use them for extra integration
+        // if we have plasma deps installed, use them for extra integration
         auto plasmaPath = resolveFilePath(QStringLiteral("/styles/org.kde.desktop.plasma"));
         if (style == QStringLiteral("org.kde.desktop") && QFile::exists(plasmaPath)) {
             s_styleChain.prepend(QStringLiteral("org.kde.desktop.plasma"));
@@ -67,7 +67,7 @@ QStringList StyleSelector::styleChain()
     return s_styleChain;
 }
 
-QUrl StyleSelector::componentUrl(const QString& fileName)
+QUrl StyleSelector::componentUrl(const QString &fileName)
 {
     const auto chain = styleChain();
     for (const QString &style : chain) {
@@ -80,12 +80,12 @@ QUrl StyleSelector::componentUrl(const QString& fileName)
     return QUrl(resolveFileUrl(fileName));
 }
 
-void StyleSelector::setBaseUrl(const QUrl& baseUrl)
+void StyleSelector::setBaseUrl(const QUrl &baseUrl)
 {
     s_baseUrl = baseUrl;
 }
 
-QString StyleSelector::resolveFilePath(const QString& path)
+QString StyleSelector::resolveFilePath(const QString &path)
 {
 #if defined(Q_OS_ANDROID)
     return QStringLiteral(":/android_rcc_bundle/qml/org/kde/kirigami.2/") + path;
@@ -100,7 +100,7 @@ QString StyleSelector::resolveFilePath(const QString& path)
 #endif
 }
 
-QString StyleSelector::resolveFileUrl(const QString& path)
+QString StyleSelector::resolveFileUrl(const QString &path)
 {
 #if defined(Q_OS_ANDROID)
     return QStringLiteral("qrc:/android_rcc_bundle/qml/org/kde/kirigami.2/") + path;

@@ -9,14 +9,15 @@
 #pragma once
 
 #include <QIcon>
+#include <QPointer>
 #include <QQuickItem>
 #include <QVariant>
-#include <QPointer>
 
 class QNetworkReply;
 
-namespace Kirigami {
-    class PlatformTheme;
+namespace Kirigami
+{
+class PlatformTheme;
 }
 
 /**
@@ -28,7 +29,7 @@ class Icon : public QQuickItem
 
     /**
      * The source of this icon. An `Icon` can pull from:
-     * 
+     *
      * * The icon theme:
      * @include icon/IconThemeSource.qml
      * * The filesystem:
@@ -39,11 +40,11 @@ class Icon : public QQuickItem
      * @include icon/CustomSource.qml
      * * Your application's bundled resources:
      * @include icon/ResourceSource.qml
-     * 
+     *
      * @note See https://doc.qt.io/qt-5/qtquickcontrols2-icons.html for how to
      * bundle icon themes in your application to refer to them by name instead of
      * by resource URL.
-     * 
+     *
      * @note Use `fallback` to provide a fallback theme name for icons.
      */
     Q_PROPERTY(QVariant source READ source WRITE setSource NOTIFY sourceChanged)
@@ -51,9 +52,9 @@ class Icon : public QQuickItem
     /**
      * The name of a fallback icon to load from the icon theme when the `source`
      * cannot be found. The default fallback icon is `"unknown"`.
-     * 
+     *
      * @include icon/Fallback.qml
-     * 
+     *
      * @note This will only be loaded if source is unavailable (e.g. it doesn't exist, or network issues have prevented loading).
      */
     Q_PROPERTY(QString fallback READ fallback WRITE setFallback NOTIFY fallbackChanged)
@@ -75,11 +76,11 @@ class Icon : public QQuickItem
      * Whether this icon will use the QIcon::Active mode when drawing the icon,
      * resulting in a graphical effect being applied to the icon to indicate that
      * it is currently active.
-     * 
+     *
      * This is typically used to indicate when an item is being hovered or pressed.
-     * 
+     *
      * @image html icon/active.png
-     * 
+     *
      * The color differences under the default KDE color palette, Breeze. Note
      * that a dull highlight background is typically displayed behind active icons and
      * it is recommended to add one if you are creating a custom component.
@@ -95,11 +96,11 @@ class Icon : public QQuickItem
      * Whether this icon will use the QIcon::Selected mode when drawing the icon,
      * resulting in a graphical effect being applied to the icon to indicate that
      * it is currently selected.
-     * 
+     *
      * This is typically used to indicate when a list item is currently selected.
-     * 
+     *
      * @image html icon/selected.png
-     * 
+     *
      * The color differences under the default KDE color palette, Breeze. Note
      * that a blue background is typically displayed behind selected elements.
      */
@@ -109,7 +110,7 @@ class Icon : public QQuickItem
      * Whether this icon will be treated as a mask. When an icon is being used
      * as a mask, all non-transparent colors are replaced with the color provided in the Icon's
      * @link Icon::color color @endlink property.
-     * 
+     *
      * @see color
      */
     Q_PROPERTY(bool isMask READ isMask WRITE setIsMask NOTIFY isMaskChanged)
@@ -185,7 +186,7 @@ public:
     qreal paintedWidth() const;
     qreal paintedHeight() const;
 
-    QSGNode* updatePaintNode(QSGNode* node, UpdatePaintNodeData* data) override;
+    QSGNode *updatePaintNode(QSGNode *node, UpdatePaintNodeData *data) override;
 
 Q_SIGNALS:
     void sourceChanged();
@@ -201,9 +202,9 @@ Q_SIGNALS:
 
 protected:
     void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry) override;
-    QImage findIcon(const QSize& size);
-    void handleFinished(QNetworkReply* reply);
-    void handleRedirect(QNetworkReply* reply);
+    QImage findIcon(const QSize &size);
+    void handleFinished(QNetworkReply *reply);
+    void handleRedirect(QNetworkReply *reply);
     QIcon::Mode iconMode() const;
     bool guessMonochrome(const QImage &img);
     void setStatus(Status status);
@@ -230,4 +231,3 @@ private:
 
     QImage m_icon;
 };
-

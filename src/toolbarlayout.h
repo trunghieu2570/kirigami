@@ -1,14 +1,14 @@
 /*
  * SPDX-FileCopyrightText: 2020 Arjen Hiemstra <ahiemstra@heimr.nl>
- * 
+ *
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 
 #ifndef TOOLBARLAYOUT_H
 #define TOOLBARLAYOUT_H
 
-#include <memory>
 #include <QQuickItem>
+#include <memory>
 
 /**
  * Attached property for ToolBarLayout delegates.
@@ -53,7 +53,7 @@ class ToolBarLayout : public QQuickItem
     /**
      * A list of actions that do not fit in the current view and are thus hidden.
      */
-    Q_PROPERTY(QList<QObject*> hiddenActions READ hiddenActions NOTIFY hiddenActionsChanged)
+    Q_PROPERTY(QList<QObject *> hiddenActions READ hiddenActions NOTIFY hiddenActionsChanged)
     /**
      * A component that is used to create full-size delegates from.
      *
@@ -164,7 +164,7 @@ public:
     void clearActions();
     Q_SIGNAL void actionsChanged();
 
-    QList<QObject*> hiddenActions() const;
+    QList<QObject *> hiddenActions() const;
     Q_SIGNAL void hiddenActionsChanged();
 
     QQmlComponent *fullDelegate() const;

@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2021 Arjen Hiemstra <ahiemstra@heimr.nl>
- * 
+ *
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
@@ -13,8 +13,8 @@
 
 class QUrl;
 
-namespace Kirigami {
-
+namespace Kirigami
+{
 class KIRIGAMI2_EXPORT StyleSelector
 {
 public:

@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <QSGGeometryNode>
 #include <QColor>
+#include <QSGGeometryNode>
 #include <QVector2D>
 #include <QVector4D>
 
@@ -61,8 +61,8 @@ public:
 protected:
     virtual ShadowedRectangleMaterial *createBorderlessMaterial();
     virtual ShadowedBorderRectangleMaterial *createBorderMaterial();
-    virtual QSGMaterialType* borderMaterialType();
-    virtual QSGMaterialType* borderlessMaterialType();
+    virtual QSGMaterialType *borderMaterialType();
+    virtual QSGMaterialType *borderlessMaterialType();
 
     QSGGeometry *m_geometry;
     ShadowedRectangleMaterial *m_material = nullptr;

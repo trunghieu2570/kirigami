@@ -1,17 +1,17 @@
 /*
  * SPDX-FileCopyrightText: 2020 Arjen Hiemstra <ahiemstra@heimr.nl>
- * 
+ *
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 
 #include "toolbarlayout.h"
 
-#include <unordered_map>
 #include <cmath>
+#include <unordered_map>
 
+#include <QDeadlineTimer>
 #include <QQmlComponent>
 #include <QTimer>
-#include <QDeadlineTimer>
 
 #include "enums.h"
 #include "toolbarlayoutdelegate.h"
@@ -34,19 +34,22 @@ void ToolBarLayoutAttached::setAction(QObject *action)
 class ToolBarLayout::Private
 {
 public:
-    Private(ToolBarLayout *qq) : q(qq) { }
+    Private(ToolBarLayout *qq)
+        : q(qq)
+    {
+    }
 
     void performLayout();
-    QVector<ToolBarLayoutDelegate*> createDelegates();
+    QVector<ToolBarLayoutDelegate *> createDelegates();
     ToolBarLayoutDelegate *createDelegate(QObject *action);
     qreal layoutStart(qreal layoutWidth);
     void maybeHideDelegate(int index, qreal &currentWidth, qreal totalWidth);
 
     ToolBarLayout *q;
 
-    QVector<QObject*> actions;
+    QVector<QObject *> actions;
     ActionsProperty actionsProperty;
-    QList<QObject*> hiddenActions;
+    QList<QObject *> hiddenActions;
     QQmlComponent *fullDelegate = nullptr;
     QQmlComponent *iconDelegate = nullptr;
     QQmlComponent *moreButton = nullptr;
@@ -59,14 +62,14 @@ public:
     bool completed = false;
     bool layoutQueued = false;
     bool actionsChanged = false;
-    std::unordered_map<QObject*, std::unique_ptr<ToolBarLayoutDelegate>> delegates;
-    QVector<ToolBarLayoutDelegate*> sortedDelegates;
+    std::unordered_map<QObject *, std::unique_ptr<ToolBarLayoutDelegate>> delegates;
+    QVector<ToolBarLayoutDelegate *> sortedDelegates;
     QQuickItem *moreButtonInstance = nullptr;
     ToolBarDelegateIncubator *moreButtonIncubator = nullptr;
     bool shouldShowMoreButton = false;
     int firstHiddenIndex = -1;
 
-    QVector<QObject*> removedActions;
+    QVector<QObject *> removedActions;
     QTimer *removalTimer = nullptr;
 
     QElapsedTimer performanceTimer;
@@ -108,7 +111,7 @@ ToolBarLayout::ActionsProperty ToolBarLayout::actionsProperty() const
     return d->actionsProperty;
 }
 
-void ToolBarLayout::addAction(QObject* action)
+void ToolBarLayout::addAction(QObject *action)
 {
     d->actions.append(action);
     d->actionsChanged = true;
@@ -128,7 +131,7 @@ void ToolBarLayout::addAction(QObject* action)
     relayout();
 }
 
-void ToolBarLayout::removeAction(QObject* action)
+void ToolBarLayout::removeAction(QObject *action)
 {
     auto itr = d->delegates.find(action);
     if (itr != d->delegates.end()) {
@@ -159,12 +162,12 @@ void ToolBarLayout::clearActions()
     relayout();
 }
 
-QList<QObject*> ToolBarLayout::hiddenActions() const
+QList<QObject *> ToolBarLayout::hiddenActions() const
 {
     return d->hiddenActions;
 }
 
-QQmlComponent * ToolBarLayout::fullDelegate() const
+QQmlComponent *ToolBarLayout::fullDelegate() const
 {
     return d->fullDelegate;
 }
@@ -181,7 +184,7 @@ void ToolBarLayout::setFullDelegate(QQmlComponent *newFullDelegate)
     Q_EMIT fullDelegateChanged();
 }
 
-QQmlComponent * ToolBarLayout::iconDelegate() const
+QQmlComponent *ToolBarLayout::iconDelegate() const
 {
     return d->iconDelegate;
 }
@@ -197,7 +200,6 @@ void ToolBarLayout::setIconDelegate(QQmlComponent *newIconDelegate)
     relayout();
     Q_EMIT iconDelegateChanged();
 }
-
 
 QQmlComponent *ToolBarLayout::moreButton() const
 {
@@ -307,7 +309,7 @@ void ToolBarLayout::componentComplete()
     relayout();
 }
 
-void ToolBarLayout::geometryChanged(const QRectF& newGeometry, const QRectF& oldGeometry)
+void ToolBarLayout::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
 {
     if (newGeometry != oldGeometry) {
         relayout();
@@ -315,7 +317,7 @@ void ToolBarLayout::geometryChanged(const QRectF& newGeometry, const QRectF& old
     QQuickItem::geometryChanged(newGeometry, oldGeometry);
 }
 
-void ToolBarLayout::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData& data)
+void ToolBarLayout::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &data)
 {
     if (change == ItemVisibleHasChanged || change == ItemSceneChange) {
         relayout();
@@ -346,7 +348,7 @@ void ToolBarLayout::Private::performLayout()
 
     sortedDelegates = createDelegates();
 
-    bool ready = std::all_of(delegates.cbegin(), delegates.cend(), [](const std::pair<QObject* const, std::unique_ptr<ToolBarLayoutDelegate>> &entry) {
+    bool ready = std::all_of(delegates.cbegin(), delegates.cend(), [](const std::pair<QObject *const, std::unique_ptr<ToolBarLayoutDelegate>> &entry) {
         return entry.second->isReady();
     });
     if (!ready || !moreButtonInstance) {
@@ -483,9 +485,9 @@ void ToolBarLayout::Private::performLayout()
     sortedDelegates.clear();
 }
 
-QVector<ToolBarLayoutDelegate*> ToolBarLayout::Private::createDelegates()
+QVector<ToolBarLayoutDelegate *> ToolBarLayout::Private::createDelegates()
 {
-    QVector<ToolBarLayoutDelegate*> result;
+    QVector<ToolBarLayoutDelegate *> result;
     for (auto action : qAsConst(actions)) {
         if (delegates.find(action) != delegates.end()) {
             result.append(delegates.at(action).get());
@@ -503,11 +505,11 @@ QVector<ToolBarLayoutDelegate*> ToolBarLayout::Private::createDelegates()
         moreButtonIncubator->setStateCallback([this](QQuickItem *item) {
             item->setParentItem(q);
         });
-        moreButtonIncubator->setCompletedCallback([this](ToolBarDelegateIncubator* incubator) {
-            moreButtonInstance = qobject_cast<QQuickItem*>(incubator->object());
+        moreButtonIncubator->setCompletedCallback([this](ToolBarDelegateIncubator *incubator) {
+            moreButtonInstance = qobject_cast<QQuickItem *>(incubator->object());
             moreButtonInstance->setVisible(false);
 
-            connect(moreButtonInstance, &QQuickItem::visibleChanged, q, [this](){
+            connect(moreButtonInstance, &QQuickItem::visibleChanged, q, [this]() {
                 moreButtonInstance->setVisible(shouldShowMoreButton);
             });
             connect(moreButtonInstance, &QQuickItem::widthChanged, q, [this]() {
@@ -527,12 +529,12 @@ QVector<ToolBarLayoutDelegate*> ToolBarLayout::Private::createDelegates()
     return result;
 }
 
-ToolBarLayoutDelegate *ToolBarLayout::Private::createDelegate(QObject* action)
+ToolBarLayoutDelegate *ToolBarLayout::Private::createDelegate(QObject *action)
 {
     QQmlComponent *fullComponent = nullptr;
     auto displayComponent = action->property("displayComponent");
     if (displayComponent.isValid()) {
-        fullComponent = displayComponent.value<QQmlComponent*>();
+        fullComponent = displayComponent.value<QQmlComponent *>();
     }
 
     if (!fullComponent) {
@@ -543,7 +545,7 @@ ToolBarLayoutDelegate *ToolBarLayout::Private::createDelegate(QObject* action)
     result->setAction(action);
     result->createItems(fullComponent, iconDelegate, [this, action](QQuickItem *newItem) {
         newItem->setParentItem(q);
-        auto attached = static_cast<ToolBarLayoutAttached*>(qmlAttachedPropertiesObject<ToolBarLayout>(newItem, true));
+        auto attached = static_cast<ToolBarLayoutAttached *>(qmlAttachedPropertiesObject<ToolBarLayout>(newItem, true));
         attached->setAction(action);
     });
 
@@ -657,13 +659,13 @@ void ToolBarLayout::Private::maybeHideDelegate(int index, qreal &currentWidth, q
 
 void ToolBarLayout::Private::appendAction(ToolBarLayout::ActionsProperty *list, QObject *action)
 {
-    auto layout = reinterpret_cast<ToolBarLayout*>(list->data);
+    auto layout = reinterpret_cast<ToolBarLayout *>(list->data);
     layout->addAction(action);
 }
 
 int ToolBarLayout::Private::actionCount(ToolBarLayout::ActionsProperty *list)
 {
-    return reinterpret_cast<ToolBarLayout*>(list->data)->d->actions.count();
+    return reinterpret_cast<ToolBarLayout *>(list->data)->d->actions.count();
 }
 
 QObject *ToolBarLayout::Private::action(ToolBarLayout::ActionsProperty *list, int index)

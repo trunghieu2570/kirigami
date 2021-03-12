@@ -8,13 +8,13 @@
 
 #include "columnview.h"
 
-#include <QQuickItem>
 #include <QPointer>
+#include <QQuickItem>
 
 class QPropertyAnimation;
 class QQmlComponent;
 
-class QmlComponentsPool: public QObject
+class QmlComponentsPool : public QObject
 {
     Q_OBJECT
 
@@ -73,7 +73,7 @@ private:
     QPointer<QQuickItem> m_viewAnchorItem;
     QHash<QQuickItem *, QQuickItem *> m_separators;
     QHash<QQuickItem *, QQuickItem *> m_rightSeparators;
-    QHash<QObject *, QObject*> m_models;
+    QHash<QObject *, QObject *> m_models;
 
     qreal m_leftPinnedSpace = 361;
     qreal m_rightPinnedSpace = 0;
@@ -84,4 +84,3 @@ private:
     bool m_shouldAnimate = false;
     friend class ColumnView;
 };
-

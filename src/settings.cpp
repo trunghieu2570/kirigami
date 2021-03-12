@@ -7,13 +7,13 @@
 #include "settings.h"
 
 #include <QDebug>
-#include <QStandardPaths>
-#include <QSettings>
 #include <QFile>
 #include <QGuiApplication>
 #include <QIcon>
-#include <QTouchDevice>
 #include <QMouseEvent>
+#include <QSettings>
+#include <QStandardPaths>
+#include <QTouchDevice>
 #include <QWindow>
 
 #include "libkirigami/tabletmodewatcher.h"
@@ -30,30 +30,27 @@ public:
 
 Q_GLOBAL_STATIC(SettingsSingleton, privateSettingsSelf)
 
-
 Settings::Settings(QObject *parent)
-    : QObject(parent),
-      m_hasTouchScreen(false),
-      m_hasTransientTouchInput(false)
+    : QObject(parent)
+    , m_hasTouchScreen(false)
+    , m_hasTransientTouchInput(false)
 {
     m_tabletModeAvailable = Kirigami::TabletModeWatcher::self()->isTabletModeAvailable();
-    connect(Kirigami::TabletModeWatcher::self(), &Kirigami::TabletModeWatcher::tabletModeAvailableChanged,
-            this, [this](bool tabletModeAvailable) {
-                setTabletModeAvailable(tabletModeAvailable);
-            });
+    connect(Kirigami::TabletModeWatcher::self(), &Kirigami::TabletModeWatcher::tabletModeAvailableChanged, this, [this](bool tabletModeAvailable) {
+        setTabletModeAvailable(tabletModeAvailable);
+    });
 
     m_tabletMode = Kirigami::TabletModeWatcher::self()->isTabletMode();
-    connect(Kirigami::TabletModeWatcher::self(), &Kirigami::TabletModeWatcher::tabletModeChanged,
-            this, [this](bool tabletMode) {
-                setTabletMode(tabletMode);
-            });
+    connect(Kirigami::TabletModeWatcher::self(), &Kirigami::TabletModeWatcher::tabletModeChanged, this, [this](bool tabletMode) {
+        setTabletMode(tabletMode);
+    });
 
 #if defined(Q_OS_ANDROID) || defined(Q_OS_IOS) || defined(UBUNTU_TOUCH)
     m_mobile = true;
     m_hasTouchScreen = true;
 #else
-    //Mostly for debug purposes and for platforms which are always mobile,
-    //such as Plasma Mobile
+    // Mostly for debug purposes and for platforms which are always mobile,
+    // such as Plasma Mobile
     if (qEnvironmentVariableIsSet("QT_QUICK_CONTROLS_MOBILE")) {
         m_mobile = QByteArrayList{"1", "true"}.contains(qgetenv("QT_QUICK_CONTROLS_MOBILE"));
     } else {
@@ -68,12 +65,11 @@ Settings::Settings(QObject *parent)
         }
     }
     if (m_hasTouchScreen) {
-        connect(qApp, &QGuiApplication::focusWindowChanged,
-                this, [this](QWindow *win) {
-                    if (win) {
-                        win->installEventFilter(this);
-                    }
-                });
+        connect(qApp, &QGuiApplication::focusWindowChanged, this, [this](QWindow *win) {
+            if (win) {
+                win->installEventFilter(this);
+            }
+        });
     }
 #endif
 
@@ -86,7 +82,6 @@ Settings::Settings(QObject *parent)
         m_scrollLines = 3;
     }
 }
-
 
 Settings::~Settings()
 {
@@ -205,13 +200,12 @@ QStringList Settings::information() const
         tr("KDE Frameworks %1").arg(QStringLiteral(KIRIGAMI2_VERSION_STRING)),
 #endif
         tr("The %1 windowing system").arg(QGuiApplication::platformName()),
-        tr("Qt %2 (built against %3)").arg(QString::fromLocal8Bit(qVersion()), QStringLiteral(QT_VERSION_STR))
-    };
+        tr("Qt %2 (built against %3)").arg(QString::fromLocal8Bit(qVersion()), QStringLiteral(QT_VERSION_STR))};
 }
 
 QVariant Settings::applicationWindowIcon() const
 {
-    const QIcon& windowIcon = qApp->windowIcon();
+    const QIcon &windowIcon = qApp->windowIcon();
     if (windowIcon.isNull()) {
         return QVariant();
     }

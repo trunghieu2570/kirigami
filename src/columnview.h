@@ -6,25 +6,29 @@
 
 #pragma once
 
+#include <QPointer>
 #include <QQuickItem>
 #include <QVariant>
-#include <QPointer>
 
 class ContentItem;
 class ColumnView;
 
-class ScrollIntentionEvent : public QObject {
+class ScrollIntentionEvent : public QObject
+{
     Q_OBJECT
     Q_PROPERTY(QPointF delta MEMBER delta CONSTANT)
     Q_PROPERTY(bool accepted MEMBER accepted)
 public:
-    ScrollIntentionEvent(){}
-    ~ScrollIntentionEvent(){}
+    ScrollIntentionEvent()
+    {
+    }
+    ~ScrollIntentionEvent()
+    {
+    }
 
     QPointF delta;
     bool accepted = false;
 };
-
 
 /**
  * This is an attached property to every item that is inserted in the ColumnView,
@@ -79,7 +83,7 @@ public:
     ~ColumnViewAttached();
 
     void setIndex(int index);
-    int  index() const;
+    int index() const;
 
     void setFillWidth(bool fill);
     bool fillWidth() const;
@@ -90,7 +94,7 @@ public:
     ColumnView *view();
     void setView(ColumnView *view);
 
-    //Private API, not for QML use
+    // Private API, not for QML use
     QQuickItem *originalParent() const;
     void setOriginalParent(QQuickItem *parent);
 
@@ -251,7 +255,7 @@ class ColumnView : public QQuickItem
     /**
      * every item declared inside the view, both visual and non-visual items
      */
-    Q_PROPERTY(QQmlListProperty<QObject> contentData READ contentData  FINAL)
+    Q_PROPERTY(QQmlListProperty<QObject> contentData READ contentData FINAL)
     Q_CLASSINFO("DefaultProperty", "contentData")
 
 public:
@@ -291,11 +295,10 @@ public:
 
     QQuickItem *currentItem();
 
-    //NOTE: It's a QList<QObject *> as QML can't corectly build an Array out of QList<QQuickItem*>
+    // NOTE: It's a QList<QObject *> as QML can't corectly build an Array out of QList<QQuickItem*>
     QList<QObject *> visibleItems() const;
     QQuickItem *firstVisibleItem() const;
     QQuickItem *lastVisibleItem() const;
-
 
     QQuickItem *contentItem() const;
 
@@ -316,7 +319,7 @@ public:
     void setAcceptsMouse(bool accepts);
 
     // Api not intended for QML use
-    //can't do overloads in QML
+    // can't do overloads in QML
     QQuickItem *removeItem(QQuickItem *item);
     QQuickItem *removeItem(int item);
 
@@ -441,7 +444,6 @@ private:
     static int contentData_count(QQmlListProperty<QObject> *prop);
     static QObject *contentData_at(QQmlListProperty<QObject> *prop, int index);
     static void contentData_clear(QQmlListProperty<QObject> *prop);
-
 
     QList<QObject *> m_contentData;
 

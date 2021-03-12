@@ -5,8 +5,8 @@
  */
 
 #include "scenepositionattached.h"
-#include <QQuickItem>
 #include <QDebug>
+#include <QQuickItem>
 
 ScenePositionAttached::ScenePositionAttached(QObject *parent)
     : QObject(parent)
@@ -57,18 +57,16 @@ void ScenePositionAttached::connectAncestors(QQuickItem *item)
 
         connect(ancestor, &QQuickItem::xChanged, this, &ScenePositionAttached::xChanged);
         connect(ancestor, &QQuickItem::yChanged, this, &ScenePositionAttached::yChanged);
-        connect(ancestor, &QQuickItem::parentChanged, this,
-            [this, ancestor]() {
-                do {
-                    disconnect(ancestor, nullptr, this, nullptr);
-                    m_ancestors.pop_back();
-                } while (!m_ancestors.isEmpty() && m_ancestors.last() != ancestor);
+        connect(ancestor, &QQuickItem::parentChanged, this, [this, ancestor]() {
+            do {
+                disconnect(ancestor, nullptr, this, nullptr);
+                m_ancestors.pop_back();
+            } while (!m_ancestors.isEmpty() && m_ancestors.last() != ancestor);
 
-                connectAncestors(ancestor);
-                Q_EMIT xChanged();
-                Q_EMIT yChanged();
-            }
-        );
+            connectAncestors(ancestor);
+            Q_EMIT xChanged();
+            Q_EMIT yChanged();
+        });
 
         ancestor = ancestor->parentItem();
     }

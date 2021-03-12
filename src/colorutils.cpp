@@ -11,9 +11,13 @@
 #include <cmath>
 #include <map>
 
-ColorUtils::ColorUtils(QObject *parent) : QObject(parent) {}
+ColorUtils::ColorUtils(QObject *parent)
+    : QObject(parent)
+{
+}
 
-ColorUtils::Brightness ColorUtils::brightnessForColor(const QColor &color) {
+ColorUtils::Brightness ColorUtils::brightnessForColor(const QColor &color)
+{
     auto luma = [](const QColor &color) {
         return (0.299 * color.red() + 0.587 * color.green() + 0.114 * color.blue()) / 255;
     };
@@ -21,7 +25,8 @@ ColorUtils::Brightness ColorUtils::brightnessForColor(const QColor &color) {
     return luma(color) > 0.5 ? ColorUtils::Brightness::Light : ColorUtils::Brightness::Dark;
 }
 
-QColor ColorUtils::alphaBlend(const QColor &foreground, const QColor &background) {
+QColor ColorUtils::alphaBlend(const QColor &foreground, const QColor &background)
+{
     const auto foregroundAlpha = foreground.alpha();
     const auto inverseForegroundAlpha = 0xff - foregroundAlpha;
     const auto backgroundAlpha = background.alpha();
@@ -31,27 +36,23 @@ QColor ColorUtils::alphaBlend(const QColor &foreground, const QColor &background
     }
 
     if (backgroundAlpha == 0xff) {
-        return QColor::fromRgb(
-            (foregroundAlpha*foreground.red()) + (inverseForegroundAlpha*background.red()),
-            (foregroundAlpha*foreground.green()) + (inverseForegroundAlpha*background.green()),
-            (foregroundAlpha*foreground.blue()) + (inverseForegroundAlpha*background.blue()),
-            0xff
-        );
+        return QColor::fromRgb((foregroundAlpha * foreground.red()) + (inverseForegroundAlpha * background.red()),
+                               (foregroundAlpha * foreground.green()) + (inverseForegroundAlpha * background.green()),
+                               (foregroundAlpha * foreground.blue()) + (inverseForegroundAlpha * background.blue()),
+                               0xff);
     } else {
         const auto inverseBackgroundAlpha = (backgroundAlpha * inverseForegroundAlpha) / 255;
         const auto finalAlpha = foregroundAlpha + inverseBackgroundAlpha;
         Q_ASSERT(finalAlpha != 0x00);
-        return QColor::fromRgb(
-            (foregroundAlpha*foreground.red()) + (inverseBackgroundAlpha*background.red()),
-            (foregroundAlpha*foreground.green()) + (inverseBackgroundAlpha*background.green()),
-            (foregroundAlpha*foreground.blue()) + (inverseBackgroundAlpha*background.blue()),
-            finalAlpha
-        );
+        return QColor::fromRgb((foregroundAlpha * foreground.red()) + (inverseBackgroundAlpha * background.red()),
+                               (foregroundAlpha * foreground.green()) + (inverseBackgroundAlpha * background.green()),
+                               (foregroundAlpha * foreground.blue()) + (inverseBackgroundAlpha * background.blue()),
+                               finalAlpha);
     }
 }
 
-QColor ColorUtils::linearInterpolation(const QColor &one, const QColor &two, double balance) {
-
+QColor ColorUtils::linearInterpolation(const QColor &one, const QColor &two, double balance)
+{
     auto scaleAlpha = [](const QColor &color, double factor) {
         return QColor::fromRgb(color.red(), color.green(), color.blue(), color.alpha() * factor);
     };
@@ -66,17 +67,14 @@ QColor ColorUtils::linearInterpolation(const QColor &one, const QColor &two, dou
         return scaleAlpha(one, 1 - balance);
     }
 
-    return QColor::fromHsv(
-        std::fmod(linearlyInterpolateDouble(one.hue(), two.hue(), balance), 360.0),
-        qBound(0.0, linearlyInterpolateDouble(one.saturation(), two.saturation(), balance), 255.0),
-        qBound(0.0, linearlyInterpolateDouble(one.value(), two.value(), balance), 255.0),
-        qBound(0.0, linearlyInterpolateDouble(one.alpha(), two.alpha(), balance), 255.0)
-    );
+    return QColor::fromHsv(std::fmod(linearlyInterpolateDouble(one.hue(), two.hue(), balance), 360.0),
+                           qBound(0.0, linearlyInterpolateDouble(one.saturation(), two.saturation(), balance), 255.0),
+                           qBound(0.0, linearlyInterpolateDouble(one.value(), two.value(), balance), 255.0),
+                           qBound(0.0, linearlyInterpolateDouble(one.alpha(), two.alpha(), balance), 255.0));
 }
 
 // Some private things for the adjust, change, and scale properties
-struct ParsedAdjustments
-{
+struct ParsedAdjustments {
     double red = 0.0;
     double green = 0.0;
     double blue = 0.0;
@@ -102,18 +100,16 @@ ParsedAdjustments parseAdjustments(const QJSValue &value)
         return QVariant();
     };
 
-    std::vector<std::pair<QString, double&>> items {
-        { QStringLiteral("red"), parsed.red },
-        { QStringLiteral("green"), parsed.green },
-        { QStringLiteral("blue"), parsed.blue },
-        //
-        { QStringLiteral("hue"), parsed.hue },
-        { QStringLiteral("saturation"), parsed.saturation },
-        { QStringLiteral("value"), parsed.value },
-        { QStringLiteral("lightness"), parsed.value },
-        //
-        { QStringLiteral("alpha"), parsed.alpha }
-    };
+    std::vector<std::pair<QString, double &>> items{{QStringLiteral("red"), parsed.red},
+                                                    {QStringLiteral("green"), parsed.green},
+                                                    {QStringLiteral("blue"), parsed.blue},
+                                                    //
+                                                    {QStringLiteral("hue"), parsed.hue},
+                                                    {QStringLiteral("saturation"), parsed.saturation},
+                                                    {QStringLiteral("value"), parsed.value},
+                                                    {QStringLiteral("lightness"), parsed.value},
+                                                    //
+                                                    {QStringLiteral("alpha"), parsed.alpha}};
 
     for (const auto &item : items) {
         auto val = checkProperty(value, item.first);
@@ -166,18 +162,13 @@ QColor ColorUtils::adjustColor(const QColor &color, const QJSValue &adjustments)
         copy.setGreen(copy.green() + adjusts.green);
         copy.setBlue(copy.blue() + adjusts.blue);
     } else if (adjusts.hue || adjusts.saturation || adjusts.value) {
-        copy.setHsl(
-            std::fmod(copy.hue() + adjusts.hue, 360.0),
-            copy.saturation() + adjusts.saturation,
-            copy.value() + adjusts.value,
-            copy.alpha()
-        );
+        copy.setHsl(std::fmod(copy.hue() + adjusts.hue, 360.0), copy.saturation() + adjusts.saturation, copy.value() + adjusts.value, copy.alpha());
     }
 
     return copy;
 }
 
-QColor ColorUtils::scaleColor(const QColor& color, const QJSValue &adjustments)
+QColor ColorUtils::scaleColor(const QColor &color, const QJSValue &adjustments)
 {
     auto adjusts = parseAdjustments(adjustments);
     auto copy = color;
@@ -200,7 +191,7 @@ QColor ColorUtils::scaleColor(const QColor& color, const QJSValue &adjustments)
     if (qBound(-100.0, adjusts.alpha, 100.00) != adjusts.alpha) {
         qCritical() << "Alpha is out of bounds";
     }
-    
+
     if (adjusts.hue != 0) {
         qCritical() << "Hue cannot be scaled";
     }
@@ -215,12 +206,10 @@ QColor ColorUtils::scaleColor(const QColor& color, const QJSValue &adjustments)
         copy.setGreen(qBound(0.0, shiftToAverage(copy.green(), adjusts.green), 255.0));
         copy.setBlue(qBound(0.0, shiftToAverage(copy.blue(), adjusts.blue), 255.0));
     } else {
-        copy.setHsl(
-            copy.hue(),
-            qBound(0.0, shiftToAverage(copy.saturation(), adjusts.saturation), 255.0),
-            qBound(0.0, shiftToAverage(copy.value(), adjusts.value), 255.0),
-            qBound(0.0, shiftToAverage(copy.alpha(), adjusts.alpha), 255.0)
-        );
+        copy.setHsl(copy.hue(),
+                    qBound(0.0, shiftToAverage(copy.saturation(), adjusts.saturation), 255.0),
+                    qBound(0.0, shiftToAverage(copy.value(), adjusts.value), 255.0),
+                    qBound(0.0, shiftToAverage(copy.alpha(), adjusts.alpha), 255.0));
     }
 
     return copy;
@@ -237,12 +226,10 @@ QColor ColorUtils::tintWithAlpha(const QColor &targetColor, const QColor &tintCo
         return targetColor;
     }
 
-    return QColor::fromRgbF(
-        tintColor.redF() * tintAlpha + targetColor.redF() * inverseAlpha,
-        tintColor.greenF() * tintAlpha + targetColor.greenF() * inverseAlpha,
-        tintColor.blueF() * tintAlpha + targetColor.blueF() * inverseAlpha,
-        tintAlpha + inverseAlpha * targetColor.alphaF()
-    );
+    return QColor::fromRgbF(tintColor.redF() * tintAlpha + targetColor.redF() * inverseAlpha,
+                            tintColor.greenF() * tintAlpha + targetColor.greenF() * inverseAlpha,
+                            tintColor.blueF() * tintAlpha + targetColor.blueF() * inverseAlpha,
+                            tintAlpha + inverseAlpha * targetColor.alphaF());
 }
 
 ColorUtils::LabColor ColorUtils::colorToLab(const QColor &color)
@@ -252,22 +239,22 @@ ColorUtils::LabColor ColorUtils::colorToLab(const QColor &color)
     qreal r = color.redF();
     qreal g = color.greenF();
     qreal b = color.blueF();
-    
+
     // Apply gamma correction (i.e. conversion to linear-space)
     if (r > 0.04045) {
-        r = pow((r + 0.055 ) / 1.055, 2.4);
+        r = pow((r + 0.055) / 1.055, 2.4);
     } else {
         r = r / 12.92;
     }
 
-    if (g > 0.04045 ) {
-        g = pow((g + 0.055 ) / 1.055, 2.4);
+    if (g > 0.04045) {
+        g = pow((g + 0.055) / 1.055, 2.4);
     } else {
         g = g / 12.92;
     }
 
     if (b > 0.04045) {
-        b = pow((b + 0.055 ) / 1.055, 2.4);
+        b = pow((b + 0.055) / 1.055, 2.4);
     } else {
         b = b / 12.92;
     }
@@ -278,26 +265,26 @@ ColorUtils::LabColor ColorUtils::colorToLab(const QColor &color)
     qreal z = r * 0.0193 + g * 0.1192 + b * 0.9505;
 
     // Second: convert from XYZ to L*a*b
-    x = x / 0.95047;     // Observer= 2°, Illuminant= D65
+    x = x / 0.95047; // Observer= 2°, Illuminant= D65
     y = y / 1.0;
     z = z / 1.08883;
 
     if (x > 0.008856) {
-        x = pow(x, 1.0/3.0);
+        x = pow(x, 1.0 / 3.0);
     } else {
         x = (7.787 * x) + (16.0 / 116.0);
     }
 
     if (y > 0.008856) {
-        y = pow(y, 1.0/3.0);
+        y = pow(y, 1.0 / 3.0);
     } else {
         y = (7.787 * y) + (16.0 / 116.0);
     }
 
     if (z > 0.008856) {
-        z = pow(z, 1.0/3.0);
+        z = pow(z, 1.0 / 3.0);
     } else {
-        z = (7.787 * z) +  (16.0 / 116.0);
+        z = (7.787 * z) + (16.0 / 116.0);
     }
 
     LabColor labColor;

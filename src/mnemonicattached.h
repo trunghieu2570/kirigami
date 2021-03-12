@@ -7,10 +7,9 @@
 #ifndef MNEMONICATTACHED_H
 #define MNEMONICATTACHED_H
 
-#include <QtQml>
 #include <QObject>
 #include <QQuickWindow>
-
+#include <QtQml>
 
 /**
  * This Attached property is used to calculate automated keyboard sequences
@@ -102,7 +101,7 @@ public:
 
     bool active() const;
 
-    //QML attached property
+    // QML attached property
     static MnemonicAttached *qmlAttachedProperties(QObject *object);
 
 protected:
@@ -121,7 +120,7 @@ Q_SIGNALS:
 private:
     void calculateWeights();
 
-    //TODO: to have support for DIALOG_BUTTON_EXTRA_WEIGHT etc, a type enum should be exported
+    // TODO: to have support for DIALOG_BUTTON_EXTRA_WEIGHT etc, a type enum should be exported
     enum {
         // Additional weight for first character in string
         FIRST_CHARACTER_EXTRA_WEIGHT = 50,
@@ -141,7 +140,7 @@ private:
         MENU_ITEM_WEIGHT = 250,
     };
 
-    //order word letters by weight
+    // order word letters by weight
     int m_weight = 0;
     int m_baseWeight = 0;
     ControlType m_controlType = SecondaryControl;
@@ -157,8 +156,8 @@ private:
 
     QPointer<QQuickWindow> m_window;
 
-    //global mapping of mnemonics
-    //TODO: map by QWindow
+    // global mapping of mnemonics
+    // TODO: map by QWindow
     static QHash<QKeySequence, MnemonicAttached *> s_sequenceToObject;
 };
 

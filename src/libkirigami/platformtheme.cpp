@@ -6,39 +6,43 @@
  */
 
 #include "platformtheme.h"
-#include "kirigamipluginfactory.h"
 #include "basictheme_p.h"
-#include <QQmlEngine>
-#include <QQmlContext>
-#include <QGuiApplication>
+#include "kirigamipluginfactory.h"
 #include <QDebug>
-#include <QPointer>
-#include <QQuickWindow>
-#include <QPluginLoader>
 #include <QDir>
+#include <QGuiApplication>
+#include <QPluginLoader>
+#include <QPointer>
+#include <QQmlContext>
+#include <QQmlEngine>
 #include <QQuickStyle>
+#include <QQuickWindow>
 
 #include <array>
+#include <cinttypes>
+#include <functional>
 #include <memory>
 #include <unordered_map>
-#include <functional>
-#include <cinttypes>
 
-namespace Kirigami {
-
-template<> KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::DataChangedEvent::type = QEvent::None;
-template<> KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::ColorSetChangedEvent::type = QEvent::None;
-template<> KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::ColorGroupChangedEvent::type = QEvent::None;
-template<> KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::ColorChangedEvent::type = QEvent::None;
-template<> KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::FontChangedEvent::type = QEvent::None;
+namespace Kirigami
+{
+template<>
+KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::DataChangedEvent::type = QEvent::None;
+template<>
+KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::ColorSetChangedEvent::type = QEvent::None;
+template<>
+KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::ColorGroupChangedEvent::type = QEvent::None;
+template<>
+KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::ColorChangedEvent::type = QEvent::None;
+template<>
+KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::FontChangedEvent::type = QEvent::None;
 
 // Initialize event types.
 // We want to avoid collisions with application event types so we should use
 // registerEventType for generating the event types. Unfortunately, that method
 // is not constexpr so we need to call it somewhere during application startup.
 // This struct handles that.
-struct TypeInitializer
-{
+struct TypeInitializer {
     TypeInitializer()
     {
         PlatformThemeEvents::DataChangedEvent::type = QEvent::Type(QEvent::registerEventType());
@@ -109,7 +113,7 @@ public:
     // changes. This is used instead of signal/slots as this way we only store
     // a little bit of data and that data is shared among instances, whereas
     // signal/slots turn out to have a pretty large memory overhead per instance.
-    using Watcher = PlatformTheme*;
+    using Watcher = PlatformTheme *;
     QVector<Watcher> watchers;
 
     inline void setColorSet(PlatformTheme *sender, PlatformTheme::ColorSet set)
@@ -139,7 +143,7 @@ public:
         notifyWatchers<PlatformTheme::ColorGroup>(sender, oldValue, group);
     }
 
-    inline void setColor(PlatformTheme* sender, ColorRole role, const QColor &color)
+    inline void setColor(PlatformTheme *sender, ColorRole role, const QColor &color)
     {
         if (sender != owner || colors[role] == color) {
             return;
@@ -189,7 +193,7 @@ public:
         watchers.removeOne(object);
     }
 
-    template <typename T>
+    template<typename T>
     inline void notifyWatchers(PlatformTheme *sender, const T &oldValue, const T &newValue)
     {
         for (auto object : qAsConst(watchers)) {
@@ -214,37 +218,37 @@ public:
         }
     }
 
-    inline static void setPaletteColor(QPalette& palette, ColorRole role, const QColor &color)
+    inline static void setPaletteColor(QPalette &palette, ColorRole role, const QColor &color)
     {
         switch (role) {
-            case TextColor:
-                palette.setColor(QPalette::Text, color);
-                palette.setColor(QPalette::WindowText, color);
-                palette.setColor(QPalette::ButtonText, color);
-                break;
-            case BackgroundColor:
-                palette.setColor(QPalette::Window, color);
-                palette.setColor(QPalette::Base, color);
-                palette.setColor(QPalette::Button, color);
-                break;
-            case AlternateBackgroundColor:
-                palette.setColor(QPalette::AlternateBase, color);
-                break;
-            case HighlightColor:
-                palette.setColor(QPalette::Highlight, color);
-                break;
-            case HighlightedTextColor:
-                palette.setColor(QPalette::HighlightedText, color);
-                break;
-            case LinkColor:
-                palette.setColor(QPalette::Link, color);
-                break;
-            case VisitedLinkColor:
-                palette.setColor(QPalette::LinkVisited, color);
-                break;
+        case TextColor:
+            palette.setColor(QPalette::Text, color);
+            palette.setColor(QPalette::WindowText, color);
+            palette.setColor(QPalette::ButtonText, color);
+            break;
+        case BackgroundColor:
+            palette.setColor(QPalette::Window, color);
+            palette.setColor(QPalette::Base, color);
+            palette.setColor(QPalette::Button, color);
+            break;
+        case AlternateBackgroundColor:
+            palette.setColor(QPalette::AlternateBase, color);
+            break;
+        case HighlightColor:
+            palette.setColor(QPalette::Highlight, color);
+            break;
+        case HighlightedTextColor:
+            palette.setColor(QPalette::HighlightedText, color);
+            break;
+        case LinkColor:
+            palette.setColor(QPalette::Link, color);
+            break;
+        case VisitedLinkColor:
+            palette.setColor(QPalette::LinkVisited, color);
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
     }
 };
@@ -259,7 +263,8 @@ public:
         , pendingChildUpdate(false)
         , colorSet(PlatformTheme::Window)
         , colorGroup(PlatformTheme::Active)
-    { }
+    {
+    }
 
     inline QColor color(const PlatformTheme *theme, PlatformThemeData::ColorRole color) const
     {
@@ -354,10 +359,13 @@ public:
         }
 
         pendingChildUpdate = true;
-        QMetaObject::invokeMethod(theme, [this, theme]() {
-            pendingChildUpdate = false;
-            theme->updateChildren(theme->parent());
-        }, Qt::QueuedConnection);
+        QMetaObject::invokeMethod(
+            theme,
+            [this, theme]() {
+                pendingChildUpdate = false;
+                theme->updateChildren(theme->parent());
+            },
+            Qt::QueuedConnection);
     }
 
     /*
@@ -563,7 +571,7 @@ QColor PlatformTheme::hoverColor() const
     return d->color(this, PlatformThemeData::HoverColor);
 }
 
-//setters for theme implementations
+// setters for theme implementations
 void PlatformTheme::setTextColor(const QColor &color)
 {
     d->setDataColor(this, PlatformThemeData::TextColor, color);
@@ -621,13 +629,11 @@ void PlatformTheme::setVisitedLinkColor(const QColor &color)
 
 void PlatformTheme::setVisitedLinkBackgroundColor(const QColor &color)
 {
-
     d->setDataColor(this, PlatformThemeData::VisitedLinkBackgroundColor, color);
 }
 
 void PlatformTheme::setNegativeTextColor(const QColor &color)
 {
-
     d->setDataColor(this, PlatformThemeData::NegativeTextColor, color);
 }
 
@@ -690,7 +696,7 @@ void PlatformTheme::setSmallFont(const QFont &font)
     }
 }
 
-//setters for QML clients
+// setters for QML clients
 void PlatformTheme::setCustomTextColor(const QColor &color)
 {
     d->setColor(this, PlatformThemeData::TextColor, color);
@@ -834,14 +840,14 @@ PlatformTheme *PlatformTheme::qmlAttachedProperties(QObject *object)
 {
     static bool s_factoryChecked = false;
 
-    //check for the plugin only once: it's an heavy operation
+    // check for the plugin only once: it's an heavy operation
     if (PlatformThemePrivate::s_pluginFactory) {
         return PlatformThemePrivate::s_pluginFactory->createPlatformTheme(object);
     } else if (!s_factoryChecked) {
         s_factoryChecked = true;
 
 #ifdef KIRIGAMI_BUILD_TYPE_STATIC
-        for (QObject* staticPlugin : QPluginLoader::staticInstances()) {
+        for (QObject *staticPlugin : QPluginLoader::staticInstances()) {
             KirigamiPluginFactory *factory = qobject_cast<KirigamiPluginFactory *>(staticPlugin);
             if (factory) {
                 PlatformThemePrivate::s_pluginFactory = factory;
@@ -854,11 +860,11 @@ PlatformTheme *PlatformTheme::qmlAttachedProperties(QObject *object)
             QDir dir(path + QStringLiteral("/kf5/kirigami"));
             const auto fileNames = dir.entryList(QDir::Files);
             for (const QString &fileName : fileNames) {
-                //TODO: env variable?
+                // TODO: env variable?
                 if (!QQuickStyle::name().isEmpty() && fileName.startsWith(QQuickStyle::name())) {
                     QPluginLoader loader(dir.absoluteFilePath(fileName));
                     QObject *plugin = loader.instance();
-                    //TODO: load actually a factory as plugin
+                    // TODO: load actually a factory as plugin
 
                     KirigamiPluginFactory *factory = qobject_cast<KirigamiPluginFactory *>(plugin);
                     if (factory) {
@@ -874,10 +880,10 @@ PlatformTheme *PlatformTheme::qmlAttachedProperties(QObject *object)
     return new BasicTheme(object);
 }
 
-bool PlatformTheme::event(QEvent* event)
+bool PlatformTheme::event(QEvent *event)
 {
     if (event->type() == PlatformThemeEvents::DataChangedEvent::type) {
-        auto changeEvent = static_cast<PlatformThemeEvents::DataChangedEvent*>(event);
+        auto changeEvent = static_cast<PlatformThemeEvents::DataChangedEvent *>(event);
 
         if (changeEvent->sender != this) {
             return false;
@@ -945,7 +951,7 @@ void PlatformTheme::update()
                 break;
             }
 
-            auto t = static_cast<PlatformTheme*>(qmlAttachedPropertiesObject<PlatformTheme>(candidate, false));
+            auto t = static_cast<PlatformTheme *>(qmlAttachedPropertiesObject<PlatformTheme>(candidate, false));
             if (t && t->d->data && t->d->data->owner == t) {
                 if (d->data == t->d->data) {
                     // Inheritance is already correct, do nothing.
@@ -991,7 +997,7 @@ void PlatformTheme::updateChildren(QObject *object)
 
     const auto children = object->children();
     for (auto child : children) {
-        auto t = static_cast<PlatformTheme*>(qmlAttachedPropertiesObject<PlatformTheme>(child, false));
+        auto t = static_cast<PlatformTheme *>(qmlAttachedPropertiesObject<PlatformTheme>(child, false));
         if (t) {
             t->update();
         } else {
@@ -1013,13 +1019,13 @@ void PlatformTheme::emitColorChanged()
 // We sometimes set theme properties on non-visual objects. However, if an item
 // has a visual and a non-visual parent that are different, we should prefer the
 // visual parent, so we need to apply some extra logic.
-QObject * PlatformTheme::determineParent(QObject* object)
+QObject *PlatformTheme::determineParent(QObject *object)
 {
     if (!object) {
         return nullptr;
     }
 
-    auto item = qobject_cast<QQuickItem*>(object);
+    auto item = qobject_cast<QQuickItem *>(object);
     if (item) {
         return item->parentItem();
     } else {

@@ -6,9 +6,8 @@
 
 #include <QApplication>
 #include <QQuickView>
-#include <QtQml>
 #include <QUrl>
-
+#include <QtQml>
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {

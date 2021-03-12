@@ -21,9 +21,9 @@ class ShadowedTextureMaterial : public ShadowedRectangleMaterial
 public:
     ShadowedTextureMaterial();
 
-    QSGMaterialShader* createShader() const override;
-    QSGMaterialType* type() const override;
-    int compare(const QSGMaterial* other) const override;
+    QSGMaterialShader *createShader() const override;
+    QSGMaterialType *type() const override;
+    int compare(const QSGMaterial *other) const override;
 
     QSGTexture *textureSource = nullptr;
 

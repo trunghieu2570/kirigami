@@ -50,7 +50,7 @@ class Settings : public QObject
      */
     Q_PROPERTY(QString style READ style CONSTANT)
 
-    //TODO: make this adapt without file watchers?
+    // TODO: make this adapt without file watchers?
     /**
      * How many lines of text the mouse wheel should scroll
      */

@@ -21,7 +21,7 @@ int SizeGroup::itemCount(QQmlListProperty<QQuickItem> *prop)
     return pThis->m_items.count();
 }
 
-QQuickItem* SizeGroup::itemAt(QQmlListProperty<QQuickItem> *prop, int index)
+QQuickItem *SizeGroup::itemAt(QQmlListProperty<QQuickItem> *prop, int index)
 {
     return pThis->m_items[index];
 }
@@ -35,21 +35,21 @@ void SizeGroup::clearItems(QQmlListProperty<QQuickItem> *prop)
     pThis->m_items.clear();
 }
 
-void SizeGroup::connectItem(QQuickItem* item)
+void SizeGroup::connectItem(QQuickItem *item)
 {
-    auto conn1 = connect(item, &QQuickItem::implicitWidthChanged, this, [this](){ adjustItems(Mode::Width); });
-    auto conn2 = connect(item, &QQuickItem::implicitHeightChanged, this, [this](){ adjustItems(Mode::Height); });
+    auto conn1 = connect(item, &QQuickItem::implicitWidthChanged, this, [this]() {
+        adjustItems(Mode::Width);
+    });
+    auto conn2 = connect(item, &QQuickItem::implicitHeightChanged, this, [this]() {
+        adjustItems(Mode::Height);
+    });
     m_connections[item] = qMakePair(conn1, conn2);
     adjustItems(m_mode);
 }
 
 QQmlListProperty<QQuickItem> SizeGroup::items()
 {
-    return QQmlListProperty<QQuickItem>(
-        this, nullptr,
-        appendItem, itemCount,
-        itemAt, clearItems
-    );
+    return QQmlListProperty<QQuickItem>(this, nullptr, appendItem, itemCount, itemAt, clearItems);
 }
 
 void SizeGroup::relayout()

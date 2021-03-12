@@ -7,8 +7,8 @@
 #ifndef SCENEPOSITIONATTACHED_H
 #define SCENEPOSITIONATTACHED_H
 
-#include <QtQml>
 #include <QObject>
+#include <QtQml>
 
 class QQuickItem;
 
@@ -37,14 +37,13 @@ class ScenePositionAttached : public QObject
     Q_PROPERTY(int y READ y NOTIFY yChanged)
 
 public:
-
     explicit ScenePositionAttached(QObject *parent = nullptr);
     ~ScenePositionAttached() override;
 
     int x() const;
     int y() const;
 
-    //QML attached property
+    // QML attached property
     static ScenePositionAttached *qmlAttachedProperties(QObject *object);
 
 Q_SIGNALS:

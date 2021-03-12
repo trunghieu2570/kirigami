@@ -29,10 +29,10 @@ public:
     void initializeEngine(QQmlEngine *engine, const char *uri) override;
 
 #ifdef KIRIGAMI_BUILD_TYPE_STATIC
-    static KirigamiPlugin& getInstance()
+    static KirigamiPlugin &getInstance()
     {
-         static KirigamiPlugin instance;
-         return instance;
+        static KirigamiPlugin instance;
+        return instance;
     }
 
     static void registerTypes(QQmlEngine *engine = nullptr)
@@ -41,7 +41,8 @@ public:
         if (engine) {
             engine->addImportPath(QLatin1String(":/"));
         } else {
-            qWarning() << "Registering Kirigami on a null QQmlEngine instance - you likely want to pass a valid engine, or you will want to manually add the qrc root path :/ to your import paths list so the engine is able to load the plugin";
+            qWarning() << "Registering Kirigami on a null QQmlEngine instance - you likely want to pass a valid engine, or you will want to manually add the "
+                          "qrc root path :/ to your import paths list so the engine is able to load the plugin";
         }
     }
 #endif

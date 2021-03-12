@@ -7,15 +7,15 @@
  */
 
 #pragma once
-#include <QQuickWindow>
 #include <QImage>
+#include <QQuickWindow>
 #include <QSGSimpleTextureNode>
 #include <QSGTexture>
 #include <QSharedPointer>
 
 class ManagedTextureNode : public QSGSimpleTextureNode
 {
-Q_DISABLE_COPY(ManagedTextureNode)
+    Q_DISABLE_COPY(ManagedTextureNode)
 public:
     ManagedTextureNode();
 
@@ -25,10 +25,9 @@ private:
     QSharedPointer<QSGTexture> m_texture;
 };
 
-typedef QHash<qint64, QHash<QWindow*, QWeakPointer<QSGTexture> > > TexturesCache;
+typedef QHash<qint64, QHash<QWindow *, QWeakPointer<QSGTexture>>> TexturesCache;
 
-struct ImageTexturesCachePrivate
-{
+struct ImageTexturesCachePrivate {
     TexturesCache cache;
 };
 
@@ -48,8 +47,6 @@ public:
 
     QSharedPointer<QSGTexture> loadTexture(QQuickWindow *window, const QImage &image);
 
-
 private:
     QScopedPointer<ImageTexturesCachePrivate> d;
 };
-

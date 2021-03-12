@@ -9,39 +9,36 @@
 #include "libkirigami/platformtheme.h"
 #include "scenegraph/managedtexturenode.h"
 
-#include <QSGSimpleTextureNode>
-#include <QQuickWindow>
-#include <QIcon>
 #include <QBitmap>
-#include <QSGTexture>
 #include <QDebug>
+#include <QGuiApplication>
+#include <QIcon>
+#include <QPainter>
+#include <QQuickImageProvider>
+#include <QQuickWindow>
+#include <QSGSimpleTextureNode>
+#include <QSGTexture>
+#include <QScreen>
 #include <QSharedPointer>
 #include <QtQml>
-#include <QQuickImageProvider>
-#include <QGuiApplication>
-#include <QPainter>
-#include <QScreen>
-
-
 
 Q_GLOBAL_STATIC(ImageTexturesCache, s_iconImageCache)
 
 Icon::Icon(QQuickItem *parent)
-    : QQuickItem(parent),
-      m_changed(false),
-      m_active(false),
-      m_selected(false),
-      m_isMask(false)
+    : QQuickItem(parent)
+    , m_changed(false)
+    , m_active(false)
+    , m_selected(false)
+    , m_isMask(false)
 {
     setFlag(ItemHasContents, true);
     // Using 32 because Icon used to redefine implicitWidth and implicitHeight and hardcode them to 32
     setImplicitSize(32, 32);
-    //FIXME: not necessary anymore
+    // FIXME: not necessary anymore
     connect(qApp, &QGuiApplication::paletteChanged, this, &QQuickItem::polish);
     connect(this, &QQuickItem::enabledChanged, this, &QQuickItem::polish);
     connect(this, &QQuickItem::smoothChanged, this, &QQuickItem::polish);
 }
-
 
 Icon::~Icon()
 {
@@ -64,14 +61,13 @@ void Icon::setSource(const QVariant &icon)
 
     if (icon.type() == QVariant::String) {
         const QString iconSource = icon.toString();
-        m_isMaskHeuristic = (iconSource.endsWith(QLatin1String("-symbolic"))
-                            || iconSource.endsWith(QLatin1String("-symbolic-rtl"))
-                            || iconSource.endsWith(QLatin1String("-symbolic-ltr")));
+        m_isMaskHeuristic = (iconSource.endsWith(QLatin1String("-symbolic")) || iconSource.endsWith(QLatin1String("-symbolic-rtl"))
+                             || iconSource.endsWith(QLatin1String("-symbolic-ltr")));
         Q_EMIT isMaskChanged();
     }
 
     if (m_networkReply) {
-        //if there was a network query going on, interrupt it
+        // if there was a network query going on, interrupt it
         m_networkReply->close();
     }
     m_loadedImage = QImage();
@@ -161,7 +157,7 @@ QColor Icon::color() const
     return m_color;
 }
 
-QSGNode* Icon::updatePaintNode(QSGNode* node, QQuickItem::UpdatePaintNodeData* /*data*/)
+QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * /*data*/)
 {
     if (m_source.isNull() || qFuzzyIsNull(width()) || qFuzzyIsNull(height())) {
         delete node;
@@ -170,15 +166,17 @@ QSGNode* Icon::updatePaintNode(QSGNode* node, QQuickItem::UpdatePaintNodeData* /
 
     if (m_changed || node == nullptr) {
         const QSize itemSize(width(), height());
-        QRect nodeRect(QPoint(0,0), itemSize);
+        QRect nodeRect(QPoint(0, 0), itemSize);
 
-        ManagedTextureNode* mNode = dynamic_cast<ManagedTextureNode*>(node);
+        ManagedTextureNode *mNode = dynamic_cast<ManagedTextureNode *>(node);
         if (!mNode) {
             delete node;
             mNode = new ManagedTextureNode;
         }
         if (itemSize.width() != 0 && itemSize.height() != 0) {
-            const auto multiplier = QCoreApplication::instance()->testAttribute(Qt::AA_UseHighDpiPixmaps) ? 1 : (window() ? window()->devicePixelRatio() : qGuiApp->devicePixelRatio());
+            const auto multiplier = QCoreApplication::instance()->testAttribute(Qt::AA_UseHighDpiPixmaps)
+                ? 1
+                : (window() ? window()->devicePixelRatio() : qGuiApp->devicePixelRatio());
             const QSize size = itemSize * multiplier;
             mNode->setTexture(s_iconImageCache->loadTexture(window(), m_icon, QQuickWindow::TextureCanUseAtlas));
             if (m_icon.size() != size) {
@@ -208,9 +206,9 @@ void Icon::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
     }
 }
 
-void Icon::handleRedirect(QNetworkReply* reply)
+void Icon::handleRedirect(QNetworkReply *reply)
 {
-    QNetworkAccessManager* qnam = reply->manager();
+    QNetworkAccessManager *qnam = reply->manager();
     if (reply->error() != QNetworkReply::NoError) {
         return;
     }
@@ -226,14 +224,14 @@ void Icon::handleRedirect(QNetworkReply* reply)
         QNetworkRequest request(possibleRedirectUrl);
         request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
         m_networkReply = qnam->get(request);
-        connect(m_networkReply.data(), &QNetworkReply::finished, this, [this](){
+        connect(m_networkReply.data(), &QNetworkReply::finished, this, [this]() {
             if (m_networkReply)
                 handleFinished(m_networkReply);
         });
     }
 }
 
-void Icon::handleFinished(QNetworkReply* reply)
+void Icon::handleFinished(QNetworkReply *reply)
 {
     reply->deleteLater();
     if (!reply->attribute(QNetworkRequest::RedirectionTargetAttribute).isNull()) {
@@ -268,10 +266,11 @@ void Icon::updatePolish()
 
     const QSize itemSize(width(), height());
     if (itemSize.width() != 0 && itemSize.height() != 0) {
-        const auto multiplier = QCoreApplication::instance()->testAttribute(Qt::AA_UseHighDpiPixmaps) ? 1 : (window() ? window()->devicePixelRatio() : qGuiApp->devicePixelRatio());
+        const auto multiplier =
+            QCoreApplication::instance()->testAttribute(Qt::AA_UseHighDpiPixmaps) ? 1 : (window() ? window()->devicePixelRatio() : qGuiApp->devicePixelRatio());
         const QSize size = itemSize * multiplier;
 
-        switch(m_source.type()){
+        switch (m_source.type()) {
         case QVariant::Pixmap:
             m_icon = m_source.value<QPixmap>().toImage();
             break;
@@ -291,7 +290,7 @@ void Icon::updatePolish()
             m_icon = findIcon(size);
             break;
         case QVariant::Brush:
-            //todo: fill here too?
+            // todo: fill here too?
         case QVariant::Color:
             m_icon = QImage(size, QImage::Format_Alpha8);
             m_icon.fill(m_source.value<QColor>());
@@ -300,14 +299,15 @@ void Icon::updatePolish()
             break;
         }
 
-        if (m_icon.isNull()){
+        if (m_icon.isNull()) {
             m_icon = QImage(size, QImage::Format_Alpha8);
             m_icon.fill(Qt::transparent);
         }
 
-        const QColor tintColor = !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor()) : m_color;
+        const QColor tintColor =
+            !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor()) : m_color;
 
-        //TODO: initialize m_isMask with icon.isMask()
+        // TODO: initialize m_isMask with icon.isMask()
         if (tintColor.alpha() > 0 && (isMask() || guessMonochrome(m_icon))) {
             QPainter p(&m_icon);
             p.setCompositionMode(QPainter::CompositionMode_SourceIn);
@@ -326,37 +326,36 @@ QImage Icon::findIcon(const QSize &size)
     QString iconSource = m_source.toString();
 
     if (iconSource.startsWith(QLatin1String("image://"))) {
-        const auto multiplier = QCoreApplication::instance()->testAttribute(Qt::AA_UseHighDpiPixmaps) ? (window() ? window()->devicePixelRatio() : qGuiApp->devicePixelRatio()) : 1;
+        const auto multiplier =
+            QCoreApplication::instance()->testAttribute(Qt::AA_UseHighDpiPixmaps) ? (window() ? window()->devicePixelRatio() : qGuiApp->devicePixelRatio()) : 1;
         QUrl iconUrl(iconSource);
         QString iconProviderId = iconUrl.host();
         QString iconId = iconUrl.path();
 
         // QRC paths are not correctly handled by .path()
-        if (iconId.size() >=2 && iconId.startsWith(QLatin1String("/:"))) {
+        if (iconId.size() >= 2 && iconId.startsWith(QLatin1String("/:"))) {
             iconId.remove(0, 1);
         }
 
         QSize actualSize;
-        QQuickImageProvider* imageProvider = dynamic_cast<QQuickImageProvider*>(
-                    qmlEngine(this)->imageProvider(iconProviderId));
+        QQuickImageProvider *imageProvider = dynamic_cast<QQuickImageProvider *>(qmlEngine(this)->imageProvider(iconProviderId));
         if (!imageProvider)
             return img;
-        switch(imageProvider->imageType()){
+        switch (imageProvider->imageType()) {
         case QQmlImageProviderBase::Image:
             img = imageProvider->requestImage(iconId, &actualSize, size * multiplier);
             break;
         case QQmlImageProviderBase::Pixmap:
             img = imageProvider->requestPixmap(iconId, &actualSize, size * multiplier).toImage();
             break;
-        case QQmlImageProviderBase::ImageResponse:
-        {
+        case QQmlImageProviderBase::ImageResponse: {
             if (!m_loadedImage.isNull()) {
                 setStatus(Ready);
-                return m_loadedImage.scaled(size, Qt::KeepAspectRatio, smooth() ? Qt::SmoothTransformation : Qt::FastTransformation );
+                return m_loadedImage.scaled(size, Qt::KeepAspectRatio, smooth() ? Qt::SmoothTransformation : Qt::FastTransformation);
             }
-            QQuickAsyncImageProvider *provider = dynamic_cast<QQuickAsyncImageProvider*>(imageProvider);
+            QQuickAsyncImageProvider *provider = dynamic_cast<QQuickAsyncImageProvider *>(imageProvider);
             auto response = provider->requestImageResponse(iconId, size * multiplier);
-            connect(response, &QQuickImageResponse::finished, this, [iconId, response, this](){
+            connect(response, &QQuickImageResponse::finished, this, [iconId, response, this]() {
                 if (response->errorString().isEmpty()) {
                     QQuickTextureFactory *textureFactory = response->textureFactory();
                     if (textureFactory) {
@@ -378,8 +377,7 @@ QImage Icon::findIcon(const QSize &size)
             img = icon.pixmap(window(), icon.actualSize(size), iconMode(), QIcon::On).toImage();
             break;
         }
-        case QQmlImageProviderBase::Texture:
-        {
+        case QQmlImageProviderBase::Texture: {
             QQuickTextureFactory *textureFactory = imageProvider->requestTexture(iconId, &actualSize, size * multiplier);
             if (textureFactory) {
                 img = textureFactory->image();
@@ -395,23 +393,23 @@ QImage Icon::findIcon(const QSize &size)
             break;
         }
         case QQmlImageProviderBase::Invalid:
-            //will have to investigate this more
+            // will have to investigate this more
             setStatus(Error);
             break;
         }
-    } else if(iconSource.startsWith(QLatin1String("http://")) || iconSource.startsWith(QLatin1String("https://"))) {
-        if(!m_loadedImage.isNull()) {
+    } else if (iconSource.startsWith(QLatin1String("http://")) || iconSource.startsWith(QLatin1String("https://"))) {
+        if (!m_loadedImage.isNull()) {
             setStatus(Ready);
-            return m_loadedImage.scaled(size, Qt::KeepAspectRatio, smooth() ? Qt::SmoothTransformation : Qt::FastTransformation );
+            return m_loadedImage.scaled(size, Qt::KeepAspectRatio, smooth() ? Qt::SmoothTransformation : Qt::FastTransformation);
         }
         const auto url = m_source.toUrl();
-        QQmlEngine* engine = qmlEngine(this);
-        QNetworkAccessManager* qnam;
+        QQmlEngine *engine = qmlEngine(this);
+        QNetworkAccessManager *qnam;
         if (engine && (qnam = engine->networkAccessManager()) && (!m_networkReply || m_networkReply->url() != url)) {
             QNetworkRequest request(url);
             request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
             m_networkReply = qnam->get(request);
-            connect(m_networkReply.data(), &QNetworkReply::finished, this, [this](){
+            connect(m_networkReply.data(), &QNetworkReply::finished, this, [this]() {
                 if (m_networkReply)
                     handleFinished(m_networkReply);
             });
@@ -439,10 +437,11 @@ QImage Icon::findIcon(const QSize &size)
             img = icon.pixmap(window(), icon.actualSize(size), iconMode(), QIcon::On).toImage();
 
             setStatus(Ready);
-            /*const QColor tintColor = !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor()) : m_color;
+            /*const QColor tintColor = !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor())
+            : m_color;
 
-            if (m_isMask || icon.isMask() || iconSource.endsWith(QLatin1String("-symbolic")) || iconSource.endsWith(QLatin1String("-symbolic-rtl")) || iconSource.endsWith(QLatin1String("-symbolic-ltr")) || guessMonochrome(img)) {
-                QPainter p(&img);
+            if (m_isMask || icon.isMask() || iconSource.endsWith(QLatin1String("-symbolic")) || iconSource.endsWith(QLatin1String("-symbolic-rtl")) ||
+            iconSource.endsWith(QLatin1String("-symbolic-ltr")) || guessMonochrome(img)) { QPainter p(&img);
                 p.setCompositionMode(QPainter::CompositionMode_SourceIn);
                 p.fillRect(img.rect(), tintColor);
                 p.end();
@@ -472,7 +471,7 @@ QIcon::Mode Icon::iconMode() const
 
 bool Icon::guessMonochrome(const QImage &img)
 {
-    //don't try for too big images
+    // don't try for too big images
     if (img.width() >= 256 || m_theme->supportsIconColoring()) {
         return false;
     }
@@ -502,8 +501,8 @@ bool Icon::guessMonochrome(const QImage &img)
     QHash<int, int> dist;
     int transparentPixels = 0;
     int saturatedPixels = 0;
-    for(int x=0; x < img.width(); x++) {
-        for(int y=0; y < img.height(); y++) {
+    for (int x = 0; x < img.width(); x++) {
+        for (int y = 0; y < img.height(); y++) {
             QColor color = QColor::fromRgba(qUnpremultiply(img.pixel(x, y)));
             if (color.alpha() < 100) {
                 ++transparentPixels;
@@ -526,7 +525,7 @@ bool Icon::guessMonochrome(const QImage &img)
     }
 
     // Arbitrarly low values of entropy and colored pixels
-    m_monochromeHeuristics[stdSize] = saturatedPixels <= (img.size().width()*img.size().height() - transparentPixels) * 0.3 && entropy <= 0.3;
+    m_monochromeHeuristics[stdSize] = saturatedPixels <= (img.size().width() * img.size().height() - transparentPixels) * 0.3 && entropy <= 0.3;
     return m_monochromeHeuristics[stdSize];
 }
 
@@ -535,7 +534,7 @@ QString Icon::fallback() const
     return m_fallback;
 }
 
-void Icon::setFallback(const QString& fallback)
+void Icon::setFallback(const QString &fallback)
 {
     if (m_fallback != fallback) {
         m_fallback = fallback;
@@ -548,7 +547,7 @@ QString Icon::placeholder() const
     return m_placeholder;
 }
 
-void Icon::setPlaceholder(const QString& placeholder)
+void Icon::setPlaceholder(const QString &placeholder)
 {
     if (m_placeholder != placeholder) {
         m_placeholder = placeholder;

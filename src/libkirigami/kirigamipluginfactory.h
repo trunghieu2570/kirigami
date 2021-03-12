@@ -14,8 +14,8 @@
 #include <kirigami2_export.h>
 #endif
 
-namespace Kirigami {
-
+namespace Kirigami
+{
 /**
  * @class KirigamiPluginFactory kirigamipluginfactory.h KirigamiPluginFactory
  *
@@ -49,4 +49,4 @@ QT_BEGIN_NAMESPACE
 Q_DECLARE_INTERFACE(Kirigami::KirigamiPluginFactory, KirigamiPluginFactory_iid)
 QT_END_NAMESPACE
 
-#endif //KIRIGAMIPLUGINFACTORY_H
+#endif // KIRIGAMIPLUGINFACTORY_H

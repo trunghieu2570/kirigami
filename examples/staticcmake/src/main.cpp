@@ -10,10 +10,10 @@
 #include <QApplication>
 #endif
 
-#include <QQmlApplicationEngine>
-#include <QtQml>
-#include <QUrl>
 #include <QColor>
+#include <QQmlApplicationEngine>
+#include <QUrl>
+#include <QtQml>
 
 #ifdef Q_OS_ANDROID
 #include <QtAndroid>
@@ -26,21 +26,19 @@
 
 #endif
 
-
-
 Q_IMPORT_PLUGIN(KirigamiPlugin)
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-//The desktop QQC2 style needs it to be a QApplication
+// The desktop QQC2 style needs it to be a QApplication
 #ifdef Q_OS_ANDROID
     QGuiApplication app(argc, argv);
 #else
     QApplication app(argc, argv);
 #endif
 
-    //qputenv("QML_IMPORT_TRACE", "1");
+    // qputenv("QML_IMPORT_TRACE", "1");
 
     QQmlApplicationEngine engine;
 
@@ -50,7 +48,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         return -1;
     }
 
-    //HACK to color the system bar on Android, use qtandroidextras and call the appropriate Java methods
+    // HACK to color the system bar on Android, use qtandroidextras and call the appropriate Java methods
 #ifdef Q_OS_ANDROID
     QtAndroid::runOnAndroidThread([=]() {
         QAndroidJniObject window = QtAndroid::androidActivity().callObjectMethod("getWindow", "()Landroid/view/Window;");

@@ -7,16 +7,16 @@
 #ifndef PLATFORMTHEME_H
 #define PLATFORMTHEME_H
 
-#include <QObject>
-#include <QQuickItem>
 #include <QColor>
-#include <QPalette>
 #include <QIcon>
+#include <QObject>
+#include <QPalette>
+#include <QQuickItem>
 
 #include <kirigami2_export.h>
 
-namespace Kirigami {
-
+namespace Kirigami
+{
 class PlatformThemeData;
 class PlatformThemePrivate;
 
@@ -69,7 +69,8 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
     /**
      * Color for text that has been highlighted, often is a light color while normal text is dark
      */
-    Q_PROPERTY(QColor highlightedTextColor READ highlightedTextColor WRITE setCustomHighlightedTextColor RESET setCustomHighlightedTextColor NOTIFY colorsChanged)
+    Q_PROPERTY(
+        QColor highlightedTextColor READ highlightedTextColor WRITE setCustomHighlightedTextColor RESET setCustomHighlightedTextColor NOTIFY colorsChanged)
 
     /**
      * Foreground for areas that are active or requesting attention
@@ -101,7 +102,7 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
      */
     Q_PROPERTY(QColor positiveTextColor READ positiveTextColor WRITE setCustomPositiveTextColor RESET setCustomPositiveTextColor NOTIFY colorsChanged)
 
-    //background colors
+    // background colors
     /**
      * The generic background color
      */
@@ -113,7 +114,8 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
      * This color may be the same as BackgroundNormal,
      * especially in sets other than View and Window.
      */
-    Q_PROPERTY(QColor alternateBackgroundColor READ alternateBackgroundColor WRITE setCustomAlternateBackgroundColor RESET setCustomAlternateBackgroundColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor alternateBackgroundColor READ alternateBackgroundColor WRITE setCustomAlternateBackgroundColor RESET setCustomAlternateBackgroundColor
+                   NOTIFY colorsChanged)
 
     /**
      * The background color for selected areas
@@ -123,7 +125,8 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
     /**
      * Background for areas that are active or requesting attention
      */
-    Q_PROPERTY(QColor activeBackgroundColor READ activeBackgroundColor WRITE setCustomActiveBackgroundColor RESET setCustomActiveBackgroundColor NOTIFY colorsChanged)
+    Q_PROPERTY(
+        QColor activeBackgroundColor READ activeBackgroundColor WRITE setCustomActiveBackgroundColor RESET setCustomActiveBackgroundColor NOTIFY colorsChanged)
 
     /**
      * Background color for links
@@ -133,24 +136,28 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
     /**
      * Background color for visited links, usually a bit darker than linkBackgroundColor
      */
-    Q_PROPERTY(QColor visitedLinkBackgroundColor READ visitedLinkBackgroundColor WRITE setCustomVisitedLinkBackgroundColor RESET setCustomVisitedLinkBackgroundColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor visitedLinkBackgroundColor READ visitedLinkBackgroundColor WRITE setCustomVisitedLinkBackgroundColor RESET
+                   setCustomVisitedLinkBackgroundColor NOTIFY colorsChanged)
 
     /**
      * Background color for negative areas, such as critical errors and destructive actions
      */
-    Q_PROPERTY(QColor negativeBackgroundColor READ negativeBackgroundColor WRITE setCustomNegativeBackgroundColor RESET setCustomNegativeBackgroundColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor negativeBackgroundColor READ negativeBackgroundColor WRITE setCustomNegativeBackgroundColor RESET setCustomNegativeBackgroundColor NOTIFY
+                   colorsChanged)
 
     /**
      * Background color for neutral areas, such as warnings (but not critical)
      */
-    Q_PROPERTY(QColor neutralBackgroundColor READ neutralBackgroundColor WRITE setCustomNeutralBackgroundColor RESET setCustomNeutralBackgroundColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor neutralBackgroundColor READ neutralBackgroundColor WRITE setCustomNeutralBackgroundColor RESET setCustomNeutralBackgroundColor NOTIFY
+                   colorsChanged)
 
     /**
      * Background color for positive areas, such as success messages and trusted content
      */
-    Q_PROPERTY(QColor positiveBackgroundColor READ positiveBackgroundColor WRITE setCustomPositiveBackgroundColor RESET setCustomPositiveBackgroundColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor positiveBackgroundColor READ positiveBackgroundColor WRITE setCustomPositiveBackgroundColor RESET setCustomPositiveBackgroundColor NOTIFY
+                   colorsChanged)
 
-    //decoration colors
+    // decoration colors
     /**
      * A decoration color that indicates active focus
      */
@@ -167,11 +174,10 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
     // small font
     Q_PROPERTY(QFont smallFont READ smallFont NOTIFY defaultFontChanged)
 
-    //Active palette
+    // Active palette
     Q_PROPERTY(QPalette palette READ palette NOTIFY paletteChanged)
 
 public:
-
     enum ColorSet {
         View = 0, /** Color set for item views, usually the lightest of all */
         Window, /** Default Color set for windows and "chrome" areas */
@@ -207,7 +213,7 @@ public:
     bool inherit() const;
     void setInherit(bool inherit);
 
-    //foreground colors
+    // foreground colors
     QColor textColor() const;
     QColor disabledTextColor() const;
     QColor highlightedTextColor() const;
@@ -218,7 +224,7 @@ public:
     QColor neutralTextColor() const;
     QColor positiveTextColor() const;
 
-    //background colors
+    // background colors
     QColor backgroundColor() const;
     QColor alternateBackgroundColor() const;
     QColor highlightColor() const;
@@ -229,22 +235,22 @@ public:
     QColor neutralBackgroundColor() const;
     QColor positiveBackgroundColor() const;
 
-    //decoration colors
+    // decoration colors
     QColor focusColor() const;
     QColor hoverColor() const;
 
     QFont defaultFont() const;
     QFont smallFont() const;
 
-    //this may is used by the desktop QQC2 to set the styleoption palettes
+    // this may is used by the desktop QQC2 to set the styleoption palettes
     QPalette palette() const;
 
-    //this will be used by desktopicon to fetch icons with KIconLoader
+    // this will be used by desktopicon to fetch icons with KIconLoader
     virtual Q_INVOKABLE QIcon iconFromTheme(const QString &name, const QColor &customColor = Qt::transparent);
 
     bool supportsIconColoring() const;
 
-    //foreground colors
+    // foreground colors
     void setCustomTextColor(const QColor &color = QColor());
     void setCustomDisabledTextColor(const QColor &color = QColor());
     void setCustomHighlightedTextColor(const QColor &color = QColor());
@@ -254,7 +260,7 @@ public:
     void setCustomNegativeTextColor(const QColor &color = QColor());
     void setCustomNeutralTextColor(const QColor &color = QColor());
     void setCustomPositiveTextColor(const QColor &color = QColor());
-    //background colors
+    // background colors
     void setCustomBackgroundColor(const QColor &color = QColor());
     void setCustomAlternateBackgroundColor(const QColor &color = QColor());
     void setCustomHighlightColor(const QColor &color = QColor());
@@ -264,15 +270,15 @@ public:
     void setCustomNegativeBackgroundColor(const QColor &color = QColor());
     void setCustomNeutralBackgroundColor(const QColor &color = QColor());
     void setCustomPositiveBackgroundColor(const QColor &color = QColor());
-    //decoration colors
+    // decoration colors
     void setCustomFocusColor(const QColor &color = QColor());
     void setCustomHoverColor(const QColor &color = QColor());
 
-    //QML attached property
+    // QML attached property
     static PlatformTheme *qmlAttachedProperties(QObject *object);
 
 Q_SIGNALS:
-    //TODO: parameters to signals as this is also a c++ api
+    // TODO: parameters to signals as this is also a c++ api
     void colorsChanged();
     void defaultFontChanged(const QFont &font);
     void smallFontChanged(const QFont &font);
@@ -282,10 +288,10 @@ Q_SIGNALS:
     void inheritChanged(bool inherit);
 
 protected:
-    //Setters, not accessible from QML but from implementations
+    // Setters, not accessible from QML but from implementations
     void setSupportsIconColoring(bool support);
 
-    //foreground colors
+    // foreground colors
     void setTextColor(const QColor &color);
     void setDisabledTextColor(const QColor &color);
     void setHighlightedTextColor(const QColor &color);
@@ -296,7 +302,7 @@ protected:
     void setNeutralTextColor(const QColor &color);
     void setPositiveTextColor(const QColor &color);
 
-    //background colors
+    // background colors
     void setBackgroundColor(const QColor &color);
     void setAlternateBackgroundColor(const QColor &color);
     void setHighlightColor(const QColor &color);
@@ -307,7 +313,7 @@ protected:
     void setNeutralBackgroundColor(const QColor &color);
     void setPositiveBackgroundColor(const QColor &color);
 
-    //decoration colors
+    // decoration colors
     void setFocusColor(const QColor &color);
     void setHoverColor(const QColor &color);
 
@@ -326,15 +332,15 @@ private:
     void updateChildren(QObject *item);
     void emitSignals();
     void emitColorChanged();
-    QObject *determineParent(QObject* object);
+    QObject *determineParent(QObject *object);
 
     PlatformThemePrivate *d;
     friend class PlatformThemePrivate;
     friend class PlatformThemeData;
 };
 
-namespace PlatformThemeEvents {
-
+namespace PlatformThemeEvents
+{
 // To avoid the overhead of Qt's signal/slot connections, we use custom events
 // to communicate with subclasses. This way, we can indicate what actually
 // changed without needing to add new virtual functions to PlatformTheme which
@@ -345,12 +351,15 @@ namespace PlatformThemeEvents {
 // sure to call PlatformTheme::event() since that will also do some processing
 // of these events.
 
-template <typename T>
+template<typename T>
 class KIRIGAMI2_EXPORT PropertyChangedEvent : public QEvent
 {
 public:
     PropertyChangedEvent(PlatformTheme *theme, const T &previous, const T &current)
-        : QEvent(PropertyChangedEvent<T>::type), sender(theme), oldValue(previous), newValue(current)
+        : QEvent(PropertyChangedEvent<T>::type)
+        , sender(theme)
+        , oldValue(previous)
+        , newValue(current)
     {
     }
 
@@ -369,7 +378,7 @@ using FontChangedEvent = PropertyChangedEvent<QFont>;
 
 }
 
-} //namespace Kirigami
+} // namespace Kirigami
 
 QML_DECLARE_TYPEINFO(Kirigami::PlatformTheme, QML_HAS_ATTACHED_PROPERTIES)
 

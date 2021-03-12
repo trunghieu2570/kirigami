@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <QtQml>
+#include <QObject>
 #include <QPoint>
 #include <QQuickItem>
-#include <QObject>
+#include <QtQml>
 
 class QWheelEvent;
 
@@ -155,11 +155,9 @@ private:
     KirigamiWheelEvent m_wheelEvent;
 };
 
-
-
 /**
- * This class intercepts the mouse wheel events of its target, and gives them to the user code as a signal, which can be used for custom mouse wheel management code.
- * The handler can block completely the wheel events from its target, and if it's a Flickable, it can automatically handle scrolling on it
+ * This class intercepts the mouse wheel events of its target, and gives them to the user code as a signal, which can be used for custom mouse wheel management
+ * code. The handler can block completely the wheel events from its target, and if it's a Flickable, it can automatically handle scrolling on it
  */
 class WheelHandler : public QObject
 {
@@ -209,5 +207,3 @@ private:
 
     friend class GlobalWheelFilter;
 };
-
-

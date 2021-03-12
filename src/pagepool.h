@@ -6,8 +6,8 @@
 #pragma once
 
 #include <QObject>
-#include <QQuickItem>
 #include <QPointer>
+#include <QQuickItem>
 
 /**
  * A Pool of Page items, pages will be unique per url and the items
@@ -36,7 +36,8 @@ class PagePool : public QObject
 
     /**
      * If true (default) the pages will be kept around, will have C++ ownership and only one instance per page will be created.
-     * If false the pages will have Javascript ownership (thus deleted on pop by the page stacks) and each call to loadPage will create a new page instance. When cachePages is false, Components gets cached never the less
+     * If false the pages will have Javascript ownership (thus deleted on pop by the page stacks) and each call to loadPage will create a new page instance.
+     * When cachePages is false, Components gets cached never the less
      */
     Q_PROPERTY(bool cachePages READ cachePages WRITE setCachePages NOTIFY cachePagesChanged)
 
@@ -52,7 +53,8 @@ public:
 
     /**
      * Returns the instance of the item defined in the QML file identified
-     * by url, only one instance will be made per url if cachePAges is true. If the url is remote (i.e. http) don't rely on the return value but us the async callback instead
+     * by url, only one instance will be made per url if cachePAges is true. If the url is remote (i.e. http) don't rely on the return value but us the async
+     * callback instead
      * @param url full url of the item: it can be a well formed Url,
      *       an absolute path
      *       or a relative one to the path of the qml file the PagePool is instantiated from
@@ -64,8 +66,7 @@ public:
      */
     Q_INVOKABLE QQuickItem *loadPage(const QString &url, QJSValue callback = QJSValue());
 
-    Q_INVOKABLE QQuickItem *loadPageWithProperties(
-            const QString &url, const QVariantMap &properties, QJSValue callback = QJSValue());
+    Q_INVOKABLE QQuickItem *loadPageWithProperties(const QString &url, const QVariantMap &properties, QJSValue callback = QJSValue());
 
     /**
      * @returns The url of the page for the given instance, empty if there is no correspondence
@@ -114,11 +115,10 @@ private:
     QQuickItem *createFromComponent(QQmlComponent *component, const QVariantMap &properties);
 
     QUrl m_lastLoadedUrl;
-    QPointer <QQuickItem> m_lastLoadedItem;
+    QPointer<QQuickItem> m_lastLoadedItem;
     QHash<QUrl, QQuickItem *> m_itemForUrl;
     QHash<QUrl, QQmlComponent *> m_componentForUrl;
     QHash<QQuickItem *, QUrl> m_urlForItem;
 
     bool m_cachePages = true;
 };
-

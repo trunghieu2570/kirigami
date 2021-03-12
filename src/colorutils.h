@@ -7,9 +7,9 @@
 #pragma once
 
 #include <QColor>
+#include <QJSValue>
 #include <QObject>
 #include <QQuickItem>
-#include <QJSValue>
 
 /**
  * Utilities for processing items to obtain colors and information useful for
@@ -28,11 +28,11 @@ public:
     };
     Q_ENUM(Brightness)
 
-    explicit ColorUtils(QObject* parent = nullptr);
+    explicit ColorUtils(QObject *parent = nullptr);
 
     /**
      * Returns whether a color is bright or dark.
-     * 
+     *
      * @code{.qml}
      * import QtQuick 2.0
      * import org.kde.kirigami 2.12 as Kirigami
@@ -47,7 +47,7 @@ public:
      *     }
      * }
      * @endcode
-     * 
+     *
      * @since 5.69
      * @since org.kde.kirigami 2.12
      */
@@ -56,11 +56,11 @@ public:
     /**
      * Returns the result of overlaying the foreground color on the background
      * color.
-     * 
+     *
      * @param foreground The color to overlay on the background.
-     * 
+     *
      * @param background The color to overlay the foreground on.
-     * 
+     *
      * @code{.qml}
      * import QtQuick 2.0
      * import org.kde.kirigami 2.12 as Kirigami
@@ -69,7 +69,7 @@ public:
      *     color: Kirigami.ColorUtils.alphaBlend(Qt.rgba(0, 0, 0, 0.5), Qt.rgba(1, 1, 1, 1))
      * }
      * @endcode
-     * 
+     *
      * @since 5.69
      * @since org.kde.kirigami 2.12
      */
@@ -77,15 +77,15 @@ public:
 
     /**
      * Returns a linearly interpolated color between color one and color two.
-     * 
+     *
      * @param one The color to linearly interpolate from.
-     * 
+     *
      * @param two The color to linearly interpolate to.
-     * 
+     *
      * @param balance The balance between the two colors. 0.0 will return the
      * first color, 1.0 will return the second color. Values beyond these bounds
      * are valid, and will result in extrapolation.
-     * 
+     *
      * @code{.qml}
      * import QtQuick 2.0
      * import org.kde.kirigami 2.12 as Kirigami
@@ -94,7 +94,7 @@ public:
      *     color: Kirigami.ColorUtils.linearInterpolation("black", "white", 0.5)
      * }
      * @endcode
-     * 
+     *
      * @since 5.69
      * @since org.kde.kirigami 2.12
      */
@@ -102,13 +102,13 @@ public:
 
     /**
      * Increases or decreases the properties of `color` by fixed amounts.
-     * 
+     *
      * @param color The color to adjust.
-     * 
+     *
      * @param adjustments The adjustments to apply to the color.
-     * 
+     *
      * @note `value` and `lightness` are aliases for the same value.
-     * 
+     *
      * @code{.js}
      * {
      *     red: null, // Range: -255 to 255
@@ -121,9 +121,9 @@ public:
      *     alpha: null, // Range: -255 to 255
      * }
      * @endcode
-     * 
+     *
      * @warning It is an error to adjust both RGB and HSL properties.
-     * 
+     *
      * @since 5.69
      * @since org.kde.kirigami 2.12
      */
@@ -131,16 +131,16 @@ public:
 
     /**
      * Smoothly scales colors.
-     * 
+     *
      * @param color The color to adjust.
-     * 
+     *
      * @param adjustments The adjustments to apply to the color. Each value must
      * be between `-100.0` and `100.0`. This indicates how far the property should
      * be scaled from its original to the maximum if positive or to the minumum if
      * negative.
-     * 
+     *
      * @note `value` and `lightness` are aliases for the same value.
-     * 
+     *
      * @code{.js}
      * {
      *     red: null
@@ -152,9 +152,9 @@ public:
      *     alpha: null
      * }
      * @endcode
-     * 
+     *
      * @warning It is an error to scale both RGB and HSL properties.
-     * 
+     *
      * @since 5.69
      * @since org.kde.kirigami 2.12
      */

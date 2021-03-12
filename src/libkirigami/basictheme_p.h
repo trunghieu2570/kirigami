@@ -11,8 +11,8 @@
 
 #include <kirigami2_export.h>
 
-namespace Kirigami {
-
+namespace Kirigami
+{
 class BasicTheme;
 
 class KIRIGAMI2_EXPORT BasicThemeDefinition : public QObject
@@ -163,7 +163,7 @@ public:
 
     BasicThemeDefinition &themeDefinition(QQmlEngine *engine);
 
-    QVector<BasicTheme*> watchers;
+    QVector<BasicTheme *> watchers;
 
 private:
     void onDefinitionChanged();

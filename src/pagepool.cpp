@@ -7,9 +7,9 @@
 #include "pagepool.h"
 
 #include <QDebug>
-#include <QQmlEngine>
 #include <QQmlComponent>
 #include <QQmlContext>
+#include <QQmlEngine>
 #include <QQmlProperty>
 
 PagePool::PagePool(QObject *parent)
@@ -55,8 +55,7 @@ QQuickItem *PagePool::loadPage(const QString &url, QJSValue callback)
     return loadPageWithProperties(url, QVariantMap(), callback);
 }
 
-QQuickItem *PagePool::loadPageWithProperties(
-        const QString &url, const QVariantMap &properties, QJSValue callback)
+QQuickItem *PagePool::loadPageWithProperties(const QString &url, const QVariantMap &properties, QJSValue callback)
 {
     Q_ASSERT(qmlEngine(this));
     QQmlContext *ctx = QQmlEngine::contextForObject(this);
@@ -97,8 +96,7 @@ QQuickItem *PagePool::loadPageWithProperties(
             return nullptr;
         }
 
-        connect(component, &QQmlComponent::statusChanged, this,
-                [this, component, callback, properties] (QQmlComponent::Status status) mutable {
+        connect(component, &QQmlComponent::statusChanged, this, [this, component, callback, properties](QQmlComponent::Status status) mutable {
             if (status != QQmlComponent::Ready) {
                 qWarning() << component->errors();
                 m_componentForUrl.remove(component->url());
@@ -151,7 +149,7 @@ QQuickItem *PagePool::createFromComponent(QQmlComponent *component, const QVaria
     QQmlContext *ctx = QQmlEngine::contextForObject(this);
     Q_ASSERT(ctx);
 
-    //TODO:  As soon as we can depend on Qt 5.14, use QQmlComponent::createWithInitialProperties
+    // TODO:  As soon as we can depend on Qt 5.14, use QQmlComponent::createWithInitialProperties
     QObject *obj = component->beginCreate(ctx);
 
     // Error?
@@ -160,7 +158,6 @@ QQuickItem *PagePool::createFromComponent(QQmlComponent *component, const QVaria
     }
 
     for (auto it = properties.constBegin(); it != properties.constEnd(); ++it) {
-
         QQmlProperty p(obj, it.key(), ctx);
         if (!p.isValid()) {
             qWarning() << "Invalid property " << it.key();
@@ -290,7 +287,7 @@ void PagePool::clear()
     m_urlForItem.clear();
     m_lastLoadedUrl = QUrl();
     m_lastLoadedItem = nullptr;
-    
+
     Q_EMIT lastLoadedUrlChanged();
     Q_EMIT lastLoadedItemChanged();
 }

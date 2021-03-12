@@ -6,15 +6,15 @@
 
 #include "paintedrectangleitem.h"
 
-#include <cmath>
 #include <QPainter>
+#include <cmath>
 
-PaintedRectangleItem::PaintedRectangleItem(QQuickItem* parent)
+PaintedRectangleItem::PaintedRectangleItem(QQuickItem *parent)
     : QQuickPaintedItem(parent)
 {
 }
 
-void PaintedRectangleItem::setColor(const QColor& color)
+void PaintedRectangleItem::setColor(const QColor &color)
 {
     m_color = color;
     update();
@@ -26,7 +26,7 @@ void PaintedRectangleItem::setRadius(qreal radius)
     update();
 }
 
-void PaintedRectangleItem::setBorderColor(const QColor& color)
+void PaintedRectangleItem::setBorderColor(const QColor &color)
 {
     m_borderColor = color;
     update();
@@ -38,7 +38,7 @@ void PaintedRectangleItem::setBorderWidth(qreal width)
     update();
 }
 
-void PaintedRectangleItem::paint(QPainter* painter)
+void PaintedRectangleItem::paint(QPainter *painter)
 {
     painter->setRenderHint(QPainter::Antialiasing, true);
     painter->setPen(Qt::transparent);

@@ -7,11 +7,9 @@
 #ifndef DELEGATERECYCLER_H
 #define DELEGATERECYCLER_H
 
+#include <QPointer>
 #include <QQuickItem>
 #include <QVariant>
-#include <QPointer>
-
-
 
 class DelegateRecyclerAttached : public QObject
 {
@@ -21,13 +19,9 @@ public:
     DelegateRecyclerAttached(QObject *parent = nullptr);
     ~DelegateRecyclerAttached();
 
-
-
 Q_SIGNALS:
     void pooled();
     void reused();
-
-
 };
 
 /**
@@ -61,7 +55,6 @@ class DelegateRecycler : public QQuickItem
 public:
     DelegateRecycler(QQuickItem *parent = nullptr);
     ~DelegateRecycler();
-
 
     QQmlComponent *sourceComponent() const;
     void setSourceComponent(QQmlComponent *component);

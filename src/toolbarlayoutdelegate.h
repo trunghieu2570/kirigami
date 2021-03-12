@@ -1,15 +1,15 @@
 /*
  * SPDX-FileCopyrightText: 2020 Arjen Hiemstra <ahiemstra@heimr.nl>
- * 
+ *
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 
 #ifndef TOOLBARLAYOUTDELEGATE_H
 #define TOOLBARLAYOUTDELEGATE_H
 
-#include <QQuickItem>
-#include <QQmlIncubator>
 #include "enums.h"
+#include <QQmlIncubator>
+#include <QQuickItem>
 
 class ToolBarLayout;
 
@@ -22,8 +22,8 @@ class ToolBarDelegateIncubator : public QQmlIncubator
 public:
     ToolBarDelegateIncubator(QQmlComponent *component, QQmlContext *context);
 
-    void setStateCallback(std::function<void(QQuickItem*)> callback);
-    void setCompletedCallback(std::function<void(ToolBarDelegateIncubator*)> callback);
+    void setStateCallback(std::function<void(QQuickItem *)> callback);
+    void setCompletedCallback(std::function<void(ToolBarDelegateIncubator *)> callback);
 
     void create();
 
@@ -35,8 +35,8 @@ private:
 
     QQmlComponent *m_component;
     QQmlContext *m_context;
-    std::function<void(QQuickItem*)> m_stateCallback;
-    std::function<void(ToolBarDelegateIncubator*)> m_completedCallback;
+    std::function<void(QQuickItem *)> m_stateCallback;
+    std::function<void(ToolBarDelegateIncubator *)> m_completedCallback;
     bool m_finished = false;
 };
 
@@ -54,7 +54,7 @@ public:
 
     QObject *action() const;
     void setAction(QObject *action);
-    void createItems(QQmlComponent *fullComponent, QQmlComponent *iconComponent, std::function<void(QQuickItem*)> callback);
+    void createItems(QQmlComponent *fullComponent, QQmlComponent *iconComponent, std::function<void(QQuickItem *)> callback);
 
     bool isReady() const;
     bool isActionVisible() const;

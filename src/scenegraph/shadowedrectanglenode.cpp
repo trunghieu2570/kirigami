@@ -9,12 +9,7 @@
 
 QColor premultiply(const QColor &color)
 {
-    return QColor::fromRgbF(
-        color.redF() * color.alphaF(),
-        color.greenF() * color.alphaF(),
-        color.blueF() * color.alphaF(),
-        color.alphaF()
-    );
+    return QColor::fromRgbF(color.redF() * color.alphaF(), color.greenF() * color.alphaF(), color.blueF() * color.alphaF(), color.alphaF());
 }
 
 ShadowedRectangleNode::ShadowedRectangleNode()
@@ -53,7 +48,7 @@ void ShadowedRectangleNode::setBorderEnabled(bool enabled)
     }
 }
 
-void ShadowedRectangleNode::setRect(const QRectF& rect)
+void ShadowedRectangleNode::setRect(const QRectF &rect)
 {
     if (rect == m_rect) {
         return;
@@ -90,12 +85,10 @@ void ShadowedRectangleNode::setSize(qreal size)
 void ShadowedRectangleNode::setRadius(const QVector4D &radius)
 {
     float minDimension = std::min(m_rect.width(), m_rect.height());
-    auto uniformRadius = QVector4D{
-        std::min(radius.x() * 2.0f / minDimension, 1.0f),
-        std::min(radius.y() * 2.0f / minDimension, 1.0f),
-        std::min(radius.z() * 2.0f / minDimension, 1.0f),
-        std::min(radius.w() * 2.0f / minDimension, 1.0f)
-    };
+    auto uniformRadius = QVector4D{std::min(radius.x() * 2.0f / minDimension, 1.0f),
+                                   std::min(radius.y() * 2.0f / minDimension, 1.0f),
+                                   std::min(radius.z() * 2.0f / minDimension, 1.0f),
+                                   std::min(radius.w() * 2.0f / minDimension, 1.0f)};
 
     if (m_material->radius != uniformRadius) {
         m_material->radius = uniformRadius;
@@ -113,7 +106,7 @@ void ShadowedRectangleNode::setColor(const QColor &color)
     }
 }
 
-void ShadowedRectangleNode::setShadowColor(const QColor& color)
+void ShadowedRectangleNode::setShadowColor(const QColor &color)
 {
     auto premultiplied = premultiply(color);
     if (m_material->shadowColor != premultiplied) {
@@ -122,7 +115,7 @@ void ShadowedRectangleNode::setShadowColor(const QColor& color)
     }
 }
 
-void ShadowedRectangleNode::setOffset(const QVector2D& offset)
+void ShadowedRectangleNode::setOffset(const QVector2D &offset)
 {
     auto minDimension = std::min(m_rect.width(), m_rect.height());
     auto uniformOffset = offset / minDimension;
@@ -143,7 +136,7 @@ void ShadowedRectangleNode::setBorderWidth(qreal width)
     auto minDimension = std::min(m_rect.width(), m_rect.height());
     float uniformBorderWidth = width / minDimension;
 
-    auto borderMaterial = static_cast<ShadowedBorderRectangleMaterial*>(m_material);
+    auto borderMaterial = static_cast<ShadowedBorderRectangleMaterial *>(m_material);
     if (!qFuzzyCompare(borderMaterial->borderWidth, uniformBorderWidth)) {
         borderMaterial->borderWidth = uniformBorderWidth;
         markDirty(QSGNode::DirtyMaterial);
@@ -151,13 +144,13 @@ void ShadowedRectangleNode::setBorderWidth(qreal width)
     }
 }
 
-void ShadowedRectangleNode::setBorderColor(const QColor& color)
+void ShadowedRectangleNode::setBorderColor(const QColor &color)
 {
     if (m_material->type() != borderMaterialType()) {
         return;
     }
 
-    auto borderMaterial = static_cast<ShadowedBorderRectangleMaterial*>(m_material);
+    auto borderMaterial = static_cast<ShadowedBorderRectangleMaterial *>(m_material);
     auto premultiplied = premultiply(color);
     if (borderMaterial->borderColor != premultiplied) {
         borderMaterial->borderColor = premultiplied;
@@ -174,13 +167,11 @@ void ShadowedRectangleNode::updateGeometry()
 {
     auto rect = m_rect;
     if (m_shaderType == ShadowedRectangleMaterial::ShaderType::Standard) {
-        rect = rect.adjusted(-m_size * m_aspect.x(), -m_size * m_aspect.y(),
-                                    m_size * m_aspect.x(), m_size * m_aspect.y());
+        rect = rect.adjusted(-m_size * m_aspect.x(), -m_size * m_aspect.y(), m_size * m_aspect.x(), m_size * m_aspect.y());
 
         auto offsetLength = m_offset.length();
 
-        rect = rect.adjusted(-offsetLength * m_aspect.x(), -offsetLength * m_aspect.y(),
-                            offsetLength * m_aspect.x(), offsetLength * m_aspect.y());
+        rect = rect.adjusted(-offsetLength * m_aspect.x(), -offsetLength * m_aspect.y(), offsetLength * m_aspect.x(), offsetLength * m_aspect.y());
     }
 
     QSGGeometry::updateTexturedRectGeometry(m_geometry, rect, QRectF{0.0, 0.0, 1.0, 1.0});

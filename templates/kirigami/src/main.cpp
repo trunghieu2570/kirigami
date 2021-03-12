@@ -3,11 +3,11 @@
     SPDX-FileCopyrightText: %{CURRENT_YEAR} %{AUTHOR} <%{EMAIL}>
 */
 
+#include <KLocalizedContext>
 #include <QApplication>
 #include <QQmlApplicationEngine>
-#include <QtQml>
 #include <QUrl>
-#include <KLocalizedContext>
+#include <QtQml>
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {

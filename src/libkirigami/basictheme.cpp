@@ -13,8 +13,8 @@
 
 #include "loggingcategory.h"
 
-namespace Kirigami {
-
+namespace Kirigami
+{
 class CompatibilityThemeDefinition : public BasicThemeDefinition
 {
     Q_OBJECT
@@ -54,10 +54,22 @@ public:
         BasicThemeDefinition::syncToQml(object);
 
         QMetaObject::invokeMethod(m_object, "__propagateColorSet", Q_ARG(QVariant, QVariant::fromValue(object->parent())), Q_ARG(QVariant, object->colorSet()));
-        QMetaObject::invokeMethod(m_object, "__propagateTextColor", Q_ARG(QVariant, QVariant::fromValue(object->parent())), Q_ARG(QVariant, object->textColor()));
-        QMetaObject::invokeMethod(m_object, "__propagateBackgroundColor", Q_ARG(QVariant, QVariant::fromValue(object->parent())), Q_ARG(QVariant, object->backgroundColor()));
-        QMetaObject::invokeMethod(m_object, "__propagatePrimaryColor", Q_ARG(QVariant, QVariant::fromValue(object->parent())), Q_ARG(QVariant, object->highlightColor()));
-        QMetaObject::invokeMethod(m_object, "__propagateAccentColor", Q_ARG(QVariant, QVariant::fromValue(object->parent())), Q_ARG(QVariant, object->highlightColor()));
+        QMetaObject::invokeMethod(m_object,
+                                  "__propagateTextColor",
+                                  Q_ARG(QVariant, QVariant::fromValue(object->parent())),
+                                  Q_ARG(QVariant, object->textColor()));
+        QMetaObject::invokeMethod(m_object,
+                                  "__propagateBackgroundColor",
+                                  Q_ARG(QVariant, QVariant::fromValue(object->parent())),
+                                  Q_ARG(QVariant, object->backgroundColor()));
+        QMetaObject::invokeMethod(m_object,
+                                  "__propagatePrimaryColor",
+                                  Q_ARG(QVariant, QVariant::fromValue(object->parent())),
+                                  Q_ARG(QVariant, object->highlightColor()));
+        QMetaObject::invokeMethod(m_object,
+                                  "__propagateAccentColor",
+                                  Q_ARG(QVariant, QVariant::fromValue(object->parent())),
+                                  Q_ARG(QVariant, object->highlightColor()));
     }
 
     Q_SLOT void syncFromQml()
@@ -104,7 +116,7 @@ BasicThemeDefinition::BasicThemeDefinition(QObject *parent)
 
 void BasicThemeDefinition::syncToQml(PlatformTheme *object)
 {
-    auto item = qobject_cast<QQuickItem*>(object->parent());
+    auto item = qobject_cast<QQuickItem *>(object->parent());
     if (item) {
         Q_EMIT sync(item);
     }
@@ -113,7 +125,6 @@ void BasicThemeDefinition::syncToQml(PlatformTheme *object)
 BasicThemeInstance::BasicThemeInstance(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 BasicThemeDefinition &BasicThemeInstance::themeDefinition(QQmlEngine *engine)
@@ -149,8 +160,8 @@ BasicThemeDefinition &BasicThemeInstance::themeDefinition(QQmlEngine *engine)
 
             qCWarning(KirigamiLog) << "Invalid Theme file, using default Basic theme.";
             m_themeDefinition.reset(new BasicThemeDefinition);
-        } else if (qobject_cast<BasicThemeDefinition*>(result)) {
-            m_themeDefinition.reset(qobject_cast<BasicThemeDefinition*>(result));
+        } else if (qobject_cast<BasicThemeDefinition *>(result)) {
+            m_themeDefinition.reset(qobject_cast<BasicThemeDefinition *>(result));
         } else {
             qCWarning(KirigamiLog) << "Warning: Theme implementations should use Kirigami.BasicThemeDefinition for its root item";
             m_themeDefinition.reset(new CompatibilityThemeDefinition(result));
@@ -174,7 +185,7 @@ void BasicThemeInstance::onDefinitionChanged()
 
 Q_GLOBAL_STATIC(BasicThemeInstance, basicThemeInstance)
 
-BasicTheme::BasicTheme(QObject* parent)
+BasicTheme::BasicTheme(QObject *parent)
     : PlatformTheme(parent)
 {
     basicThemeInstance()->watchers.append(this);
@@ -191,7 +202,7 @@ void BasicTheme::sync()
 {
     auto &definition = basicThemeInstance()->themeDefinition(qmlEngine(parent()));
 
-    switch(colorSet()) {
+    switch (colorSet()) {
     case BasicTheme::Button:
         setTextColor(tint(definition.buttonTextColor));
         setBackgroundColor(tint(definition.buttonBackgroundColor));
@@ -288,7 +299,7 @@ QColor BasicTheme::tint(const QColor &color)
     case PlatformTheme::Inactive:
         return QColor::fromHsvF(color.hueF(), color.saturationF() * 0.5, color.valueF());
     case PlatformTheme::Disabled:
-        return QColor::fromHsvF(color.hueF(), color.saturationF() * 0.5, color.valueF()*0.8);
+        return QColor::fromHsvF(color.hueF(), color.saturationF() * 0.5, color.valueF() * 0.8);
     default:
         return color;
     }

@@ -7,10 +7,10 @@
 
 #include "delegaterecycler.h"
 
+#include <QDebug>
 #include <QQmlComponent>
 #include <QQmlContext>
 #include <QQmlEngine>
-#include <QDebug>
 
 DelegateRecyclerAttached::DelegateRecyclerAttached(QObject *parent)
     : QObject(parent)
@@ -18,7 +18,8 @@ DelegateRecyclerAttached::DelegateRecyclerAttached(QObject *parent)
 }
 
 DelegateRecyclerAttached::~DelegateRecyclerAttached()
-{}
+{
+}
 /*
 void setRecycler(DelegateRecycler *recycler)
 {
@@ -30,8 +31,6 @@ DelegateRecycler *recycler() const
     return m_recycler;
 }
 */
-
-
 
 class DelegateCache
 {
@@ -48,7 +47,7 @@ public:
 private:
     static const int s_cacheSize = 40;
     QHash<QQmlComponent *, int> m_refs;
-    QHash<QQmlComponent *, QList<QQuickItem *> > m_unusedItems;
+    QHash<QQmlComponent *, QList<QQuickItem *>> m_unusedItems;
 };
 
 Q_GLOBAL_STATIC(DelegateCache, s_delegateCache)
@@ -59,7 +58,7 @@ DelegateCache::DelegateCache()
 
 DelegateCache::~DelegateCache()
 {
-    for (auto& item : qAsConst(m_unusedItems)) {
+    for (auto &item : qAsConst(m_unusedItems)) {
         qDeleteAll(item);
     }
 }
@@ -86,7 +85,7 @@ void DelegateCache::deref(QQmlComponent *component)
 
 void DelegateCache::insert(QQmlComponent *component, QQuickItem *item)
 {
-    auto& items = m_unusedItems[component];
+    auto &items = m_unusedItems[component];
     if (items.length() >= s_cacheSize) {
         item->deleteLater();
         return;
@@ -109,10 +108,6 @@ QQuickItem *DelegateCache::take(QQmlComponent *component)
     }
     return nullptr;
 }
-
-
-
-
 
 DelegateRecycler::DelegateRecycler(QQuickItem *parent)
     : QQuickItem(parent)
@@ -147,7 +142,7 @@ void DelegateRecycler::syncModel()
     QQmlContext *ctx = QQmlEngine::contextForObject(m_item)->parentContext();
     ctx->setContextProperty(QStringLiteral("model"), newModel);
 
-    //try to bind all properties
+    // try to bind all properties
     QObject *modelObj = newModel.value<QObject *>();
     if (modelObj) {
         const QMetaObject *metaObj = modelObj->metaObject();
@@ -165,7 +160,7 @@ void DelegateRecycler::syncModelProperties()
     }
     QQmlContext *ctx = QQmlEngine::contextForObject(m_item)->parentContext();
 
-    //try to bind all properties
+    // try to bind all properties
     QObject *modelObj = model.value<QObject *>();
     if (modelObj) {
         const QMetaObject *metaObj = modelObj->metaObject();
@@ -201,11 +196,13 @@ void DelegateRecycler::setSourceComponent(QQmlComponent *component)
     }
 
     if (!m_propertiesTracker) {
-        static QHash<QQmlEngine*, QQmlComponent*> propertiesTrackerComponent;
+        static QHash<QQmlEngine *, QQmlComponent *> propertiesTrackerComponent;
         auto engine = qmlEngine(this);
         auto it = propertiesTrackerComponent.find(engine);
         if (it == propertiesTrackerComponent.end()) {
-            connect(engine, &QObject::destroyed, engine, [engine] { propertiesTrackerComponent.remove(engine); });
+            connect(engine, &QObject::destroyed, engine, [engine] {
+                propertiesTrackerComponent.remove(engine);
+            });
             it = propertiesTrackerComponent.insert(engine, new QQmlComponent(engine, engine));
 
             (*it)->setData(QByteArrayLiteral(R"(
@@ -215,7 +212,8 @@ QtObject {
     property var trackedModel: typeof model != 'undefined' ? model : null
     property var trackedModelData: typeof modelData != 'undefined' ? modelData : null
 }
-)"), QUrl(QStringLiteral("delegaterecycler.cpp")));
+)"),
+                           QUrl(QStringLiteral("delegaterecycler.cpp")));
         }
         m_propertiesTracker = (*it)->create(QQmlEngine::contextForObject(this));
 
@@ -277,8 +275,7 @@ QtObject {
                 QMetaProperty prop = metaObj->property(i);
                 ctx->setContextProperty(QString::fromUtf8(prop.name()), prop.read(modelObj));
                 if (prop.hasNotifySignal()) {
-                    QMetaMethod updateSlot = metaObject()->method(
-                    metaObject()->indexOfSlot("syncModelProperties()"));
+                    QMetaMethod updateSlot = metaObject()->method(metaObject()->indexOfSlot("syncModelProperties()"));
                     connect(modelObj, prop.notifySignal(), this, updateSlot);
                 }
             }
@@ -289,13 +286,13 @@ QtObject {
         ctx->setContextProperty(QStringLiteral("index"), m_propertiesTracker->property("trackedIndex"));
         ctx->setContextProperty(QStringLiteral("delegateRecycler"), this);
 
-        QObject * obj = component->create(ctx);
+        QObject *obj = component->create(ctx);
         m_item = qobject_cast<QQuickItem *>(obj);
         if (!m_item) {
             obj->deleteLater();
         } else {
             connect(m_item.data(), &QObject::destroyed, ctx, &QObject::deleteLater);
-            //if the user binded an explicit width, consider it, otherwise base upon implicit
+            // if the user binded an explicit width, consider it, otherwise base upon implicit
             m_widthFromItem = m_item->width() > 0 && m_item->width() != m_item->implicitWidth();
             m_heightFromItem = m_item->height() > 0 && m_item->height() != m_item->implicitHeight();
 
@@ -309,10 +306,9 @@ QtObject {
         syncModel();
 
         QQmlContext *ctx = QQmlEngine::contextForObject(m_item)->parentContext();
-        ctx->setContextProperties({ QQmlContext::PropertyPair{ QStringLiteral("modelData"), m_propertiesTracker->property("trackedModelData") },
-                                    QQmlContext::PropertyPair{ QStringLiteral("index"), m_propertiesTracker->property("trackedIndex")},
-                                    QQmlContext::PropertyPair{ QStringLiteral("delegateRecycler"), QVariant::fromValue<QObject*>(this) }
-                                 });
+        ctx->setContextProperties({QQmlContext::PropertyPair{QStringLiteral("modelData"), m_propertiesTracker->property("trackedModelData")},
+                                   QQmlContext::PropertyPair{QStringLiteral("index"), m_propertiesTracker->property("trackedIndex")},
+                                   QQmlContext::PropertyPair{QStringLiteral("delegateRecycler"), QVariant::fromValue<QObject *>(this)}});
 
         DelegateRecyclerAttached *attached = qobject_cast<DelegateRecyclerAttached *>(qmlAttachedPropertiesObject<DelegateRecycler>(m_item, false));
         if (attached) {
@@ -375,7 +371,7 @@ void DelegateRecycler::updateSize(bool parentResized)
     const bool needToUpdateHeight = !m_heightFromItem && parentResized && heightValid();
 
     if (parentResized) {
-        m_item->setPosition(QPoint(0,0));
+        m_item->setPosition(QPoint(0, 0));
     }
     if (needToUpdateWidth && needToUpdateHeight) {
         m_item->setSize(QSizeF(width(), height()));
@@ -399,8 +395,7 @@ void DelegateRecycler::updateSize(bool parentResized)
     }
 
     setImplicitSize(m_item->implicitWidth() >= 0 ? m_item->implicitWidth() : m_item->width(),
-                m_item->implicitHeight() >= 0 ? m_item->implicitHeight() : m_item->height());
-
+                    m_item->implicitHeight() >= 0 ? m_item->implicitHeight() : m_item->height());
 
     m_updatingSize = false;
 }

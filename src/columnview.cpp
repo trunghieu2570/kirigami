@@ -8,14 +8,13 @@
 #include "columnview_p.h"
 
 #include <QAbstractItemModel>
+#include <QDebug>
 #include <QGuiApplication>
-#include <QStyleHints>
+#include <QPropertyAnimation>
 #include <QQmlComponent>
 #include <QQmlContext>
 #include <QQmlEngine>
-#include <QDebug>
-#include <QPropertyAnimation>
-
+#include <QStyleHints>
 
 QHash<QObject *, ColumnViewAttached *> ColumnView::m_attachedObjects = QHash<QObject *, ColumnViewAttached *>();
 
@@ -23,14 +22,15 @@ class QmlComponentsPoolSingleton
 {
 public:
     QmlComponentsPoolSingleton()
-    {}
+    {
+    }
     static QmlComponentsPool *instance(QQmlEngine *engine);
+
 private:
-    QHash<QQmlEngine*, QmlComponentsPool*> m_instances;
+    QHash<QQmlEngine *, QmlComponentsPool *> m_instances;
 };
 
 Q_GLOBAL_STATIC(QmlComponentsPoolSingleton, privateQmlComponentsPoolSelf)
-
 
 QmlComponentsPool *QmlComponentsPoolSingleton::instance(QQmlEngine *engine)
 {
@@ -81,10 +81,11 @@ QtObject {
         anchors.bottom: column.bottom
     }
 }
-)"), QUrl(QStringLiteral("columnview.cpp")));
+)"),
+                       QUrl(QStringLiteral("columnview.cpp")));
 
     m_instance = component->create();
-    //qWarning()<<component->errors();
+    // qWarning()<<component->errors();
     Q_ASSERT(m_instance);
 
     m_separatorComponent = m_instance->property("separator").value<QQmlComponent *>();
@@ -101,17 +102,19 @@ QtObject {
 }
 
 QmlComponentsPool::~QmlComponentsPool()
-{}
-
+{
+}
 
 /////////
 
 ColumnViewAttached::ColumnViewAttached(QObject *parent)
     : QObject(parent)
-{}
+{
+}
 
 ColumnViewAttached::~ColumnViewAttached()
-{}
+{
+}
 
 void ColumnViewAttached::setIndex(int index)
 {
@@ -289,22 +292,20 @@ void ColumnViewAttached::setInViewport(bool inViewport)
     Q_EMIT inViewportChanged();
 }
 
-
-
 /////////
 
 ContentItem::ContentItem(ColumnView *parent)
-    : QQuickItem(parent),
-      m_view(parent)
+    : QQuickItem(parent)
+    , m_view(parent)
 {
     setFlags(flags() | ItemIsFocusScope);
     m_slideAnim = new QPropertyAnimation(this);
     m_slideAnim->setTargetObject(this);
     m_slideAnim->setPropertyName("x");
-    //NOTE: the duration will be taked from kirigami units upon classBegin
+    // NOTE: the duration will be taked from kirigami units upon classBegin
     m_slideAnim->setDuration(0);
     m_slideAnim->setEasingCurve(QEasingCurve(QEasingCurve::InOutQuad));
-    connect(m_slideAnim, &QPropertyAnimation::finished, this, [this] () {
+    connect(m_slideAnim, &QPropertyAnimation::finished, this, [this]() {
         if (!m_view->currentItem()) {
             m_view->setCurrentIndex(m_items.indexOf(m_viewAnchorItem));
         } else {
@@ -319,7 +320,8 @@ ContentItem::ContentItem(ColumnView *parent)
 }
 
 ContentItem::~ContentItem()
-{}
+{
+}
 
 void ContentItem::setBoundedX(qreal x)
 {
@@ -327,7 +329,7 @@ void ContentItem::setBoundedX(qreal x)
         return;
     }
     m_slideAnim->stop();
-    setX(qRound(qBound(qMin(0.0, -width()+parentItem()->width()), x, 0.0)));
+    setX(qRound(qBound(qMin(0.0, -width() + parentItem()->width()), x, 0.0)));
 }
 
 void ContentItem::animateX(qreal newX)
@@ -336,7 +338,7 @@ void ContentItem::animateX(qreal newX)
         return;
     }
 
-    const qreal to = qRound(qBound(qMin(0.0, -width()+parentItem()->width()), newX, 0.0));
+    const qreal to = qRound(qBound(qMin(0.0, -width() + parentItem()->width()), newX, 0.0));
 
     m_slideAnim->stop();
     m_slideAnim->setStartValue(x());
@@ -352,20 +354,18 @@ void ContentItem::snapToItem()
     }
     QQuickItem *nextItem = childAt(firstItem->x() + firstItem->width() + 1, 0);
 
-    //need to make the last item visible?
-    if (nextItem && ((m_view->dragging() && m_lastDragDelta < 0) ||
-        (!m_view->dragging() && width() - (viewportRight()) < viewportLeft() - firstItem->x()))) {
+    // need to make the last item visible?
+    if (nextItem && ((m_view->dragging() && m_lastDragDelta < 0) || (!m_view->dragging() && width() - (viewportRight()) < viewportLeft() - firstItem->x()))) {
         m_viewAnchorItem = nextItem;
         animateX(-nextItem->x() + m_leftPinnedSpace);
 
-    //The first one found?
-    } else if ((m_view->dragging() && m_lastDragDelta >= 0) ||
-        (!m_view->dragging() && viewportLeft() <= firstItem->x() + firstItem->width()/2) ||
-        !nextItem) {
+        // The first one found?
+    } else if ((m_view->dragging() && m_lastDragDelta >= 0) || (!m_view->dragging() && viewportLeft() <= firstItem->x() + firstItem->width() / 2)
+               || !nextItem) {
         m_viewAnchorItem = firstItem;
         animateX(-firstItem->x() + m_leftPinnedSpace);
 
-    //the second?
+        // the second?
     } else {
         m_viewAnchorItem = nextItem;
         animateX(-nextItem->x() + m_leftPinnedSpace);
@@ -399,9 +399,9 @@ qreal ContentItem::childWidth(QQuickItem *child)
     } else if (m_columnResizeMode == ColumnView::FixedColumns) {
         return qRound(qMin(parentItem()->width(), m_columnWidth));
 
-    // DynamicColumns
+        // DynamicColumns
     } else {
-        //TODO:look for Layout size hints
+        // TODO:look for Layout size hints
         qreal width = child->implicitWidth();
 
         if (width < 1.0) {
@@ -430,7 +430,7 @@ void ContentItem::layoutItems()
     auto lastPos = reverse ? m_items.begin() : m_items.end();
 
     for (; it != lastPos; it += increment) {
-    //for (QQuickItem *child : qAsConst(m_items)) {
+        // for (QQuickItem *child : qAsConst(m_items)) {
         QQuickItem *child = reverse ? *(it - 1) : *it;
         ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(child, true));
 
@@ -538,7 +538,7 @@ void ContentItem::layoutPinnedItems()
 
 void ContentItem::updateVisibleItems()
 {
-    QList <QObject *> newItems;
+    QList<QObject *> newItems;
 
     for (auto *item : qAsConst(m_items)) {
         ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
@@ -613,7 +613,8 @@ QQuickItem *ContentItem::ensureSeparator(QQuickItem *item)
     QQuickItem *separatorItem = m_separators.value(item);
 
     if (!separatorItem) {
-        separatorItem = qobject_cast<QQuickItem *>(privateQmlComponentsPoolSelf->instance(qmlEngine(item))->m_separatorComponent->beginCreate(QQmlEngine::contextForObject(item)));
+        separatorItem = qobject_cast<QQuickItem *>(
+            privateQmlComponentsPoolSelf->instance(qmlEngine(item))->m_separatorComponent->beginCreate(QQmlEngine::contextForObject(item)));
         if (separatorItem) {
             separatorItem->setParentItem(item);
             separatorItem->setZ(9999);
@@ -631,7 +632,8 @@ QQuickItem *ContentItem::ensureRightSeparator(QQuickItem *item)
     QQuickItem *separatorItem = m_rightSeparators.value(item);
 
     if (!separatorItem) {
-        separatorItem = qobject_cast<QQuickItem *>(QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_rightSeparatorComponent->beginCreate(QQmlEngine::contextForObject(item)));
+        separatorItem = qobject_cast<QQuickItem *>(
+            QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_rightSeparatorComponent->beginCreate(QQmlEngine::contextForObject(item)));
         if (separatorItem) {
             separatorItem->setParentItem(item);
             separatorItem->setZ(9999);
@@ -651,9 +653,9 @@ void ContentItem::itemChange(QQuickItem::ItemChange change, const QQuickItem::It
         ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(value.item, true));
         attached->setView(m_view);
 
-        //connect(attached, &ColumnViewAttached::fillWidthChanged, m_view, &ColumnView::polish);
+        // connect(attached, &ColumnViewAttached::fillWidthChanged, m_view, &ColumnView::polish);
         connect(attached, &ColumnViewAttached::fillWidthChanged, this, [this] {
-             m_view->polish();
+            m_view->polish();
         });
         connect(attached, &ColumnViewAttached::reservedSpaceChanged, m_view, &ColumnView::polish);
 
@@ -706,7 +708,7 @@ void ContentItem::syncItemsOrder()
     }
 
     m_items = childItems();
-    //NOTE: polish() here sometimes gets indefinitely delayed and items chaging order isn't seen
+    // NOTE: polish() here sometimes gets indefinitely delayed and items chaging order isn't seen
     layoutItems();
 }
 
@@ -739,23 +741,17 @@ void ContentItem::updateRepeaterModel()
     }
 }
 
-
-
-
-
-
-
 ColumnView::ColumnView(QQuickItem *parent)
-    : QQuickItem(parent),
-      m_contentItem(nullptr)
+    : QQuickItem(parent)
+    , m_contentItem(nullptr)
 {
-    //NOTE: this is to *not* trigger itemChange
+    // NOTE: this is to *not* trigger itemChange
     m_contentItem = new ContentItem(this);
     setAcceptedMouseButtons(Qt::LeftButton | Qt::BackButton | Qt::ForwardButton);
     setAcceptTouchEvents(false); // Relies on synthetized mouse events
     setFiltersChildMouseEvents(true);
 
-    connect(m_contentItem->m_slideAnim, &QPropertyAnimation::finished, this, [this] () {
+    connect(m_contentItem->m_slideAnim, &QPropertyAnimation::finished, this, [this]() {
         m_moving = false;
         Q_EMIT movingChanged();
     });
@@ -839,20 +835,15 @@ void ColumnView::setCurrentIndex(int index)
         m_currentItem->forceActiveFocus();
 
         // If the current item is not on view, scroll
-        QRectF mappedCurrent = m_currentItem->mapRectToItem(this,
-                                            QRectF(QPointF(0, 0),
-                                                   m_currentItem->size()));
+        QRectF mappedCurrent = m_currentItem->mapRectToItem(this, QRectF(QPointF(0, 0), m_currentItem->size()));
 
         if (m_contentItem->m_slideAnim->state() == QAbstractAnimation::Running) {
             mappedCurrent.moveLeft(mappedCurrent.left() + m_contentItem->x() + m_contentItem->m_slideAnim->endValue().toInt());
         }
 
-        //m_contentItem->m_slideAnim->stop();
+        // m_contentItem->m_slideAnim->stop();
 
-        QRectF contentsRect(m_contentItem->m_leftPinnedSpace,
-                            0,
-                            width() - m_contentItem->m_rightPinnedSpace - m_contentItem->m_leftPinnedSpace,
-                            height());
+        QRectF contentsRect(m_contentItem->m_leftPinnedSpace, 0, width() - m_contentItem->m_rightPinnedSpace - m_contentItem->m_leftPinnedSpace, height());
 
         m_contentItem->m_shouldAnimate = true;
 
@@ -875,7 +866,7 @@ QQuickItem *ColumnView::currentItem()
     return m_currentItem;
 }
 
-QList<QObject *>ColumnView::visibleItems() const
+QList<QObject *> ColumnView::visibleItems() const
 {
     return m_contentItem->m_visibleItems;
 }
@@ -934,7 +925,6 @@ void ColumnView::setBottomPadding(qreal padding)
     polish();
     Q_EMIT bottomPaddingChanged();
 }
-
 
 QQuickItem *ColumnView::contentItem() const
 {
@@ -1115,9 +1105,7 @@ void ColumnView::insertItem(int pos, QQuickItem *item)
 
 void ColumnView::moveItem(int from, int to)
 {
-    if (m_contentItem->m_items.isEmpty()
-        || from < 0 || from >= m_contentItem->m_items.length()
-        || to < 0 || to >= m_contentItem->m_items.length()) {
+    if (m_contentItem->m_items.isEmpty() || from < 0 || from >= m_contentItem->m_items.length() || to < 0 || to >= m_contentItem->m_items.length()) {
         return;
     }
 
@@ -1180,8 +1168,7 @@ QQuickItem *ColumnView::removeItem(QQuickItem *item)
 
 QQuickItem *ColumnView::removeItem(int pos)
 {
-    if (m_contentItem->m_items.isEmpty()
-        || pos < 0 || pos >= m_contentItem->m_items.length()) {
+    if (m_contentItem->m_items.isEmpty() || pos < 0 || pos >= m_contentItem->m_items.length()) {
         return nullptr;
     }
 
@@ -1261,7 +1248,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
         }
 
         // if !m_acceptsMouse we don't dra gwith mouse
-        if (!m_acceptsMouse &&  me->source() == Qt::MouseEventNotSynthesized) {
+        if (!m_acceptsMouse && me->source() == Qt::MouseEventNotSynthesized) {
             event->setAccepted(false);
             return false;
         }
@@ -1283,7 +1270,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
     case QEvent::MouseMove: {
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
 
-        if (!m_acceptsMouse &&  me->source() == Qt::MouseEventNotSynthesized) {
+        if (!m_acceptsMouse && me->source() == Qt::MouseEventNotSynthesized) {
             return false;
         }
 
@@ -1354,7 +1341,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
     case QEvent::MouseButtonRelease: {
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
 
-        if (!m_acceptsMouse &&  me->source() == Qt::MouseEventNotSynthesized) {
+        if (!m_acceptsMouse && me->source() == Qt::MouseEventNotSynthesized) {
             return false;
         }
 
@@ -1387,7 +1374,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
 
         event->accept();
 
-        //if a drag happened, don't pass the event
+        // if a drag happened, don't pass the event
         const bool block = keepMouseGrab();
         setKeepMouseGrab(false);
 
@@ -1404,7 +1391,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
 
 void ColumnView::mousePressEvent(QMouseEvent *event)
 {
-    if (!m_acceptsMouse &&  event->source() == Qt::MouseEventNotSynthesized) {
+    if (!m_acceptsMouse && event->source() == Qt::MouseEventNotSynthesized) {
         event->setAccepted(false);
         return;
     }
@@ -1605,11 +1592,7 @@ void ColumnView::contentChildren_clear(QQmlListProperty<QQuickItem> *prop)
 
 QQmlListProperty<QQuickItem> ColumnView::contentChildren()
 {
-    return QQmlListProperty<QQuickItem>(this, nullptr,
-                                     contentChildren_append,
-                                     contentChildren_count,
-                                     contentChildren_at,
-                                     contentChildren_clear);
+    return QQmlListProperty<QQuickItem>(this, nullptr, contentChildren_append, contentChildren_count, contentChildren_at, contentChildren_clear);
 }
 
 void ColumnView::contentData_append(QQmlListProperty<QObject> *prop, QObject *object)
@@ -1621,7 +1604,7 @@ void ColumnView::contentData_append(QQmlListProperty<QObject> *prop, QObject *ob
 
     view->m_contentData.append(object);
     QQuickItem *item = qobject_cast<QQuickItem *>(object);
-    //exclude repeaters from layout
+    // exclude repeaters from layout
     if (item && item->inherits("QQuickRepeater")) {
         item->setParentItem(view);
 
@@ -1679,11 +1662,7 @@ void ColumnView::contentData_clear(QQmlListProperty<QObject> *prop)
 
 QQmlListProperty<QObject> ColumnView::contentData()
 {
-    return QQmlListProperty<QObject>(this, nullptr,
-                                     contentData_append,
-                                     contentData_count,
-                                     contentData_at,
-                                     contentData_clear);
+    return QQmlListProperty<QObject>(this, nullptr, contentData_append, contentData_count, contentData_at, contentData_clear);
 }
 
 #include "moc_columnview.cpp"

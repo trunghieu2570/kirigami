@@ -16,12 +16,12 @@ ShadowedBorderTextureMaterial::ShadowedBorderTextureMaterial()
     setFlag(QSGMaterial::Blending, true);
 }
 
-QSGMaterialShader* ShadowedBorderTextureMaterial::createShader() const
+QSGMaterialShader *ShadowedBorderTextureMaterial::createShader() const
 {
     return new ShadowedBorderTextureShader{shaderType};
 }
 
-QSGMaterialType* ShadowedBorderTextureMaterial::type() const
+QSGMaterialType *ShadowedBorderTextureMaterial::type() const
 {
     return &staticType;
 }
@@ -54,11 +54,11 @@ void ShadowedBorderTextureShader::initialize()
     program()->setUniformValue("textureSource", 0);
 }
 
-void ShadowedBorderTextureShader::updateState(const QSGMaterialShader::RenderState& state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial)
+void ShadowedBorderTextureShader::updateState(const QSGMaterialShader::RenderState &state, QSGMaterial *newMaterial, QSGMaterial *oldMaterial)
 {
     ShadowedBorderRectangleShader::updateState(state, newMaterial, oldMaterial);
 
-    auto texture = static_cast<ShadowedBorderTextureMaterial*>(newMaterial)->textureSource;
+    auto texture = static_cast<ShadowedBorderTextureMaterial *>(newMaterial)->textureSource;
     if (texture) {
         texture->bind();
     }

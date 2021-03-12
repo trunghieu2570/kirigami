@@ -3,14 +3,15 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "avatar.h"
-#include <QQuickStyle>
+#include <QDebug>
 #include <QMap>
-#include <QVector>
+#include <QQuickStyle>
 #include <QStringRef>
 #include <QTextBoundaryFinder>
-#include <QDebug>
+#include <QVector>
 
-bool contains(const QString& str, QChar::Script s) {
+bool contains(const QString &str, QChar::Script s)
+{
     for (auto rune : str) {
         if (rune.script() == s) {
             return true;
@@ -19,10 +20,11 @@ bool contains(const QString& str, QChar::Script s) {
     return false;
 }
 
-QString NameUtils::initialsFromString(const QString& string)
+QString NameUtils::initialsFromString(const QString &string)
 {
     // "" -> ""
-    if (string.isEmpty()) return {};
+    if (string.isEmpty())
+        return {};
 
     auto normalized = string.normalized(QString::NormalizationForm_D);
 
@@ -54,53 +56,47 @@ QString NameUtils::initialsFromString(const QString& string)
         }
         // "FirstName" "LastName" -> "FL"
         return QString(first.front()) + last.front();
-    // "OneName"
+        // "OneName"
     } else {
         // "OneName" -> "O"
         return QString(normalized.front());
     }
 }
 
-const QMap<QString,QList<QColor>> c_colors = {
-    {
-        QStringLiteral("default"),
-        {
-            QColor("#e93a9a"),
-            QColor("#e93d58"),
-            QColor("#e9643a"),
-            QColor("#ef973c"),
-            QColor("#e8cb2d"),
-            QColor("#b6e521"),
-            QColor("#3dd425"),
-            QColor("#00d485"),
-            QColor("#00d3b8"),
-            QColor("#3daee9"),
-            QColor("#b875dc"),
-            QColor("#926ee4"),
-        }
-    },
-    {
-        QStringLiteral("Material"),
-        {
-            QColor("#f44336"),
-            QColor("#e91e63"),
-            QColor("#9c27b0"),
-            QColor("#673ab7"),
-            QColor("#3f51b5"),
-            QColor("#2196f3"),
-            QColor("#03a9f4"),
-            QColor("#00bcd4"),
-            QColor("#009688"),
-            QColor("#4caf50"),
-            QColor("#8bc34a"),
-            QColor("#cddc39"),
-            QColor("#ffeb3b"),
-            QColor("#ffc107"),
-            QColor("#ff9800"),
-            QColor("#ff5722"),
-        }
-    }
-};
+const QMap<QString, QList<QColor>> c_colors = {{QStringLiteral("default"),
+                                                {
+                                                    QColor("#e93a9a"),
+                                                    QColor("#e93d58"),
+                                                    QColor("#e9643a"),
+                                                    QColor("#ef973c"),
+                                                    QColor("#e8cb2d"),
+                                                    QColor("#b6e521"),
+                                                    QColor("#3dd425"),
+                                                    QColor("#00d485"),
+                                                    QColor("#00d3b8"),
+                                                    QColor("#3daee9"),
+                                                    QColor("#b875dc"),
+                                                    QColor("#926ee4"),
+                                                }},
+                                               {QStringLiteral("Material"),
+                                                {
+                                                    QColor("#f44336"),
+                                                    QColor("#e91e63"),
+                                                    QColor("#9c27b0"),
+                                                    QColor("#673ab7"),
+                                                    QColor("#3f51b5"),
+                                                    QColor("#2196f3"),
+                                                    QColor("#03a9f4"),
+                                                    QColor("#00bcd4"),
+                                                    QColor("#009688"),
+                                                    QColor("#4caf50"),
+                                                    QColor("#8bc34a"),
+                                                    QColor("#cddc39"),
+                                                    QColor("#ffeb3b"),
+                                                    QColor("#ffc107"),
+                                                    QColor("#ff9800"),
+                                                    QColor("#ff5722"),
+                                                }}};
 
 QList<QColor> grabColors()
 {
@@ -110,19 +106,19 @@ QList<QColor> grabColors()
     return c_colors[QStringLiteral("default")];
 }
 
-auto NameUtils::colorsFromString(const QString& string) -> QColor
+auto NameUtils::colorsFromString(const QString &string) -> QColor
 {
     // We use a hash to get a "random" number that's always the same for
     // a given string.
     auto hash = qHash(string);
     // hash modulo the length of the colors list minus one will always get us a valid
     // index
-    auto index = hash % (grabColors().length()-1);
+    auto index = hash % (grabColors().length() - 1);
     // return a colour
     return grabColors()[index];
 }
 
-auto NameUtils::isStringUnsuitableForInitials(const QString& string) -> bool
+auto NameUtils::isStringUnsuitableForInitials(const QString &string) -> bool
 {
     if (string.isEmpty()) {
         return true;
@@ -134,7 +130,7 @@ auto NameUtils::isStringUnsuitableForInitials(const QString& string) -> bool
         return true;
     }
 
-    const auto scripts = QList<QChar::Script> { QChar::Script_Common, QChar::Script_Inherited, QChar::Script_Latin, QChar::Script_Han, QChar::Script_Hangul };
+    const auto scripts = QList<QChar::Script>{QChar::Script_Common, QChar::Script_Inherited, QChar::Script_Latin, QChar::Script_Han, QChar::Script_Hangul};
 
     for (auto character : string) {
         if (!scripts.contains(character.script())) {

@@ -6,9 +6,9 @@
 
 #pragma once
 
+#include <QColor>
 #include <QSGMaterial>
 #include <QSGMaterialShader>
-#include <QColor>
 
 /**
  * A material rendering a rectangle with a shadow.
@@ -26,9 +26,9 @@ public:
 
     ShadowedRectangleMaterial();
 
-    QSGMaterialShader* createShader() const override;
-    QSGMaterialType* type() const override;
-    int compare(const QSGMaterial* other) const override;
+    QSGMaterialShader *createShader() const override;
+    QSGMaterialType *type() const override;
+    int compare(const QSGMaterial *other) const override;
 
     QVector2D aspect = QVector2D{1.0, 1.0};
     float size = 0.0;

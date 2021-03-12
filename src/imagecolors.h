@@ -20,14 +20,14 @@
 
 #include "colorutils.h"
 
-#include <QObject>
 #include <QColor>
+#include <QFuture>
 #include <QImage>
+#include <QObject>
+#include <QPointer>
 #include <QQuickItem>
 #include <QQuickItemGrabResult>
-#include <QPointer>
 #include <QQuickWindow>
-#include <QFuture>
 
 class QTimer;
 
@@ -84,7 +84,7 @@ class ImageColors : public QObject
      * * `contrastingColor`: The color from the source image that's closest to the inverse of `color`.
      *
      * The list is sorted by `ratio`; the first element is the most
-     * dominant color in the source image and the last element is the 
+     * dominant color in the source image and the last element is the
      * least dominant color of the image.
      *
      * \note K-means clustering is used to extract these colors; see https://en.wikipedia.org/wiki/K-means_clustering.
@@ -210,7 +210,7 @@ class ImageColors : public QObject
     Q_PROPERTY(QColor fallbackBackground MEMBER m_fallbackBackground NOTIFY fallbackBackgroundChanged)
 
 public:
-    explicit ImageColors(QObject* parent = nullptr);
+    explicit ImageColors(QObject *parent = nullptr);
     ~ImageColors();
 
     void setSource(const QVariant &source);
@@ -259,7 +259,6 @@ private:
     QSharedPointer<QQuickItemGrabResult> m_grabResult;
     QImage m_sourceImage;
 
-
     QTimer *m_imageSyncTimer;
 
     QFutureWatcher<ImageData> *m_futureImageData = nullptr;
@@ -274,4 +273,3 @@ private:
     QColor m_fallbackForeground;
     QColor m_fallbackBackground;
 };
-

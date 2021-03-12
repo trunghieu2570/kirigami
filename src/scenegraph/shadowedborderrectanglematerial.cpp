@@ -15,12 +15,12 @@ ShadowedBorderRectangleMaterial::ShadowedBorderRectangleMaterial()
     setFlag(QSGMaterial::Blending, true);
 }
 
-QSGMaterialShader* ShadowedBorderRectangleMaterial::createShader() const
+QSGMaterialShader *ShadowedBorderRectangleMaterial::createShader() const
 {
     return new ShadowedBorderRectangleShader{shaderType};
 }
 
-QSGMaterialType* ShadowedBorderRectangleMaterial::type() const
+QSGMaterialType *ShadowedBorderRectangleMaterial::type() const
 {
     return &staticType;
 }
@@ -30,10 +30,7 @@ int ShadowedBorderRectangleMaterial::compare(const QSGMaterial *other) const
     auto material = static_cast<const ShadowedBorderRectangleMaterial *>(other);
 
     auto result = ShadowedRectangleMaterial::compare(other);
-    if (result == 0
-        && material->borderColor == borderColor
-        && qFuzzyCompare(material->borderWidth, borderWidth)
-    ) {
+    if (result == 0 && material->borderColor == borderColor && qFuzzyCompare(material->borderWidth, borderWidth)) {
         return 0;
     }
 
@@ -53,7 +50,7 @@ void ShadowedBorderRectangleShader::initialize()
     m_borderColorLocation = program()->uniformLocation("borderColor");
 }
 
-void ShadowedBorderRectangleShader::updateState(const QSGMaterialShader::RenderState& state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial)
+void ShadowedBorderRectangleShader::updateState(const QSGMaterialShader::RenderState &state, QSGMaterial *newMaterial, QSGMaterial *oldMaterial)
 {
     ShadowedRectangleShader::updateState(state, newMaterial, oldMaterial);
 

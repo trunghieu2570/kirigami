@@ -7,8 +7,8 @@
 #include "shadowedtexture.h"
 
 #include <QQuickWindow>
-#include <QSGRendererInterface>
 #include <QSGRectangleNode>
+#include <QSGRendererInterface>
 
 #include "scenegraph/shadowedtexturenode.h"
 
@@ -48,7 +48,7 @@ QSGNode *ShadowedTexture::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaint
 {
     Q_UNUSED(data);
 
-    auto shadowNode = static_cast<ShadowedRectangleNode*>(node);
+    auto shadowNode = static_cast<ShadowedRectangleNode *>(node);
 
     if (!shadowNode || m_sourceChanged) {
         m_sourceChanged = false;
@@ -75,7 +75,7 @@ QSGNode *ShadowedTexture::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaint
     shadowNode->setBorderColor(border()->color());
 
     if (m_source) {
-        static_cast<ShadowedTextureNode*>(shadowNode)->setTextureSource(m_source->textureProvider());
+        static_cast<ShadowedTextureNode *>(shadowNode)->setTextureSource(m_source->textureProvider());
     }
 
     shadowNode->updateGeometry();

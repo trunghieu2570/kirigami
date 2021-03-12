@@ -8,9 +8,8 @@
 
 #include <QDebug>
 
-
-namespace Kirigami {
-
+namespace Kirigami
+{
 KirigamiPluginFactory::KirigamiPluginFactory(QObject *parent)
     : QObject(parent)
 {

@@ -7,13 +7,13 @@
 #include "shadowedrectangle.h"
 
 #include <QQuickWindow>
-#include <QSGRendererInterface>
 #include <QSGRectangleNode>
+#include <QSGRendererInterface>
 
-#include "scenegraph/shadowedrectanglenode.h"
 #include "scenegraph/paintedrectangleitem.h"
+#include "scenegraph/shadowedrectanglenode.h"
 
-BorderGroup::BorderGroup(QObject* parent)
+BorderGroup::BorderGroup(QObject *parent)
     : QObject(parent)
 {
 }
@@ -38,7 +38,7 @@ QColor BorderGroup::color() const
     return m_color;
 }
 
-void BorderGroup::setColor(const QColor & newColor)
+void BorderGroup::setColor(const QColor &newColor)
 {
     if (newColor == m_color) {
         return;
@@ -103,7 +103,7 @@ QColor ShadowGroup::color() const
     return m_color;
 }
 
-void ShadowGroup::setColor(const QColor & newColor)
+void ShadowGroup::setColor(const QColor &newColor)
 {
     if (newColor == m_color) {
         return;
@@ -113,7 +113,7 @@ void ShadowGroup::setColor(const QColor & newColor)
     Q_EMIT changed();
 }
 
-CornersGroup::CornersGroup(QObject* parent)
+CornersGroup::CornersGroup(QObject *parent)
     : QObject(parent)
 {
 }
@@ -180,12 +180,10 @@ void CornersGroup::setBottomRight(qreal newBottomRight)
 
 QVector4D CornersGroup::toVector4D(float all) const
 {
-    return QVector4D{
-        m_bottomRight < 0.0 ? all : m_bottomRight,
-        m_topRight < 0.0 ? all : m_topRight,
-        m_bottomLeft < 0.0 ? all : m_bottomLeft,
-        m_topLeft < 0.0 ? all : m_topLeft
-    };
+    return QVector4D{m_bottomRight < 0.0 ? all : m_bottomRight,
+                     m_topRight < 0.0 ? all : m_topRight,
+                     m_bottomLeft < 0.0 ? all : m_bottomLeft,
+                     m_topLeft < 0.0 ? all : m_topLeft};
 }
 
 ShadowedRectangle::ShadowedRectangle(QQuickItem *parentItem)
@@ -243,7 +241,7 @@ QColor ShadowedRectangle::color() const
     return m_color;
 }
 
-void ShadowedRectangle::setColor(const QColor & newColor)
+void ShadowedRectangle::setColor(const QColor &newColor)
 {
     if (newColor == m_color) {
         return;
@@ -277,7 +275,7 @@ void ShadowedRectangle::itemChange(QQuickItem::ItemChange change, const QQuickIt
 {
     if (change == QQuickItem::ItemSceneChange && value.window) {
         checkSoftwareItem();
-        //TODO: only conditionally emit?
+        // TODO: only conditionally emit?
         Q_EMIT softwareRenderingChanged();
     }
 }
@@ -286,7 +284,7 @@ QSGNode *ShadowedRectangle::updatePaintNode(QSGNode *node, QQuickItem::UpdatePai
 {
     Q_UNUSED(data);
 
-    auto shadowNode = static_cast<ShadowedRectangleNode*>(node);
+    auto shadowNode = static_cast<ShadowedRectangleNode *>(node);
 
     if (!shadowNode) {
         shadowNode = new ShadowedRectangleNode{};

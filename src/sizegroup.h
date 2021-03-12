@@ -9,10 +9,10 @@
 #include <QMap>
 #include <QObject>
 #include <QPair>
+#include <QPointer>
 #include <QQmlListProperty>
 #include <QQmlParserStatus>
 #include <QQuickItem>
-#include <QPointer>
 
 /**
  * SizeGroup is a utility object that makes groups of items request the same size.
@@ -23,7 +23,6 @@ class SizeGroup : public QObject, public QQmlParserStatus
     Q_INTERFACES(QQmlParserStatus)
 
 public:
-
     enum Mode {
         None = 0, /// SizeGroup does nothing
         Width = 1, /// SizeGroup syncs item widths
@@ -34,13 +33,11 @@ public:
     Q_DECLARE_FLAGS(Modes, Mode)
 
 private:
-
     Mode m_mode = None;
     QList<QPointer<QQuickItem>> m_items;
-    QMap<QQuickItem*,QPair<QMetaObject::Connection,QMetaObject::Connection>> m_connections;
+    QMap<QQuickItem *, QPair<QMetaObject::Connection, QMetaObject::Connection>> m_connections;
 
 public:
-
     /**
      * Which dimensions this SizeGroup should adjust
      */
@@ -54,7 +51,7 @@ public:
     QQmlListProperty<QQuickItem> items();
 
     void adjustItems(Mode whatChanged);
-    void connectItem(QQuickItem* item);
+    void connectItem(QQuickItem *item);
 
     /**
      * Forces the SizeGroup to relayout items.
@@ -64,12 +61,13 @@ public:
      */
     Q_INVOKABLE void relayout();
 
-    void classBegin() override {}
+    void classBegin() override
+    {
+    }
     void componentComplete() override;
 
     static void appendItem(QQmlListProperty<QQuickItem> *prop, QQuickItem *value);
     static int itemCount(QQmlListProperty<QQuickItem> *prop);
-    static QQuickItem* itemAt(QQmlListProperty<QQuickItem> *prop, int index);
+    static QQuickItem *itemAt(QQmlListProperty<QQuickItem> *prop, int index);
     static void clearItems(QQmlListProperty<QQuickItem> *prop);
-
 };

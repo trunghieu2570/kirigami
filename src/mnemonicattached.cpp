@@ -5,9 +5,9 @@
  */
 
 #include "mnemonicattached.h"
+#include <QDebug>
 #include <QQuickItem>
 #include <QQuickRenderControl>
-#include <QDebug>
 
 QHash<QKeySequence, MnemonicAttached *> MnemonicAttached::s_sequenceToObject = QHash<QKeySequence, MnemonicAttached *>();
 
@@ -15,9 +15,7 @@ QHash<QKeySequence, MnemonicAttached *> MnemonicAttached::s_sequenceToObject = Q
 // followed only by non-alphanumerics, then "(X)" gets removed.
 static QString removeReducedCJKAccMark(const QString &label, int pos)
 {
-    if (pos > 0 && pos + 1 < label.length()
-            && label[pos - 1] == QLatin1Char('(') && label[pos + 1] == QLatin1Char(')')
-            && label[pos].isLetterOrNumber()) {
+    if (pos > 0 && pos + 1 < label.length() && label[pos - 1] == QLatin1Char('(') && label[pos + 1] == QLatin1Char(')') && label[pos].isLetterOrNumber()) {
         // Check if at start or end, ignoring non-alphanumerics.
         int len = label.length();
         int p1 = pos - 2;
@@ -96,7 +94,6 @@ QString removeAcceleratorMarker(const QString &label_)
     return label;
 }
 
-
 MnemonicAttached::MnemonicAttached(QObject *parent)
     : QObject(parent)
 {
@@ -106,8 +103,7 @@ MnemonicAttached::MnemonicAttached(QObject *parent)
             m_window = parentItem->window();
             m_window->installEventFilter(this);
         }
-        connect(parentItem, &QQuickItem::windowChanged, this,
-                [this](QQuickWindow *window) {
+        connect(parentItem, &QQuickItem::windowChanged, this, [this](QQuickWindow *window) {
             if (m_window) {
                 QWindow *renderWindow = QQuickRenderControl::renderWindowFor(m_window);
                 if (renderWindow) {
@@ -119,7 +115,7 @@ MnemonicAttached::MnemonicAttached(QObject *parent)
             m_window = window;
             if (m_window) {
                 QWindow *renderWindow = QQuickRenderControl::renderWindowFor(m_window);
-                //renderWindow means the widget is rendering somewhere else, like a QQuickWidget
+                // renderWindow means the widget is rendering somewhere else, like a QQuickWidget
                 if (renderWindow && renderWindow != m_window) {
                     renderWindow->installEventFilter(this);
                 } else {
@@ -165,7 +161,7 @@ bool MnemonicAttached::eventFilter(QObject *watched, QEvent *e)
     return false;
 }
 
-//Algorythm adapted from KAccelString
+// Algorythm adapted from KAccelString
 void MnemonicAttached::calculateWeights()
 {
     m_weights.clear();
@@ -189,7 +185,7 @@ void MnemonicAttached::calculateWeights()
         // add special weight to first character
         if (pos == 0) {
             weight += FIRST_CHARACTER_EXTRA_WEIGHT;
-        // add weight to word beginnings
+            // add weight to word beginnings
         } else if (start_character) {
             weight += WORD_BEGINNING_EXTRA_WEIGHT;
             start_character = false;
@@ -207,10 +203,7 @@ void MnemonicAttached::calculateWeights()
         }
 
         // try to preserve the wanted accelerators
-        if (c == QLatin1Char('&')
-            && (pos != m_label.length() - 1
-                && m_label[pos + 1] != QLatin1Char('&')
-                && m_label[pos + 1].isLetterOrNumber())) {
+        if (c == QLatin1Char('&') && (pos != m_label.length() - 1 && m_label[pos + 1] != QLatin1Char('&') && m_label[pos + 1].isLetterOrNumber())) {
             wanted_character = true;
             ++pos;
             continue;
@@ -227,11 +220,11 @@ void MnemonicAttached::calculateWeights()
         ++pos;
     }
 
-    //update our maximum weight
+    // update our maximum weight
     if (m_weights.isEmpty()) {
         m_weight = m_baseWeight;
     } else {
-        m_weight = m_baseWeight + (m_weights.cend()-1).key();
+        m_weight = m_baseWeight + (m_weights.cend() - 1).key();
     }
 }
 
@@ -250,7 +243,7 @@ void MnemonicAttached::updateSequence()
     if (!m_enabled) {
         m_actualRichTextLabel = text;
         m_actualRichTextLabel = removeAcceleratorMarker(m_actualRichTextLabel);
-        //was the label already completely plain text? try to limit signal emission
+        // was the label already completely plain text? try to limit signal emission
         if (m_mnemonicLabel != m_actualRichTextLabel) {
             m_mnemonicLabel = m_actualRichTextLabel;
             Q_EMIT mnemonicLabelChanged();
@@ -269,7 +262,7 @@ void MnemonicAttached::updateSequence()
             MnemonicAttached *otherMa = s_sequenceToObject.value(ks);
             Q_ASSERT(otherMa != this);
             if (!otherMa || otherMa->m_weight < m_weight) {
-                //the old shortcut is less valuable than the current: remove it
+                // the old shortcut is less valuable than the current: remove it
                 if (otherMa) {
                     s_sequenceToObject.remove(otherMa->sequence());
                     otherMa->m_sequence = {};
@@ -292,7 +285,7 @@ void MnemonicAttached::updateSequence()
                     m_richTextLabel.replace(richTextPos, 1, QLatin1String("<u>") % c % QLatin1String("</u>"));
                 }
 
-                //remap the sequence of the previous shortcut
+                // remap the sequence of the previous shortcut
                 if (otherMa) {
                     otherMa->updateSequence();
                 }
@@ -308,7 +301,6 @@ void MnemonicAttached::updateSequence()
         m_actualRichTextLabel = text;
         m_actualRichTextLabel = removeAcceleratorMarker(m_actualRichTextLabel);
         m_mnemonicLabel = m_actualRichTextLabel;
-        
     }
 
     Q_EMIT richTextLabelChanged();
@@ -382,7 +374,7 @@ void MnemonicAttached::setControlType(MnemonicAttached::ControlType controlType)
         m_baseWeight = SECONDARY_CONTROL_WEIGHT;
         break;
     }
-    //update our maximum weight
+    // update our maximum weight
     if (m_weights.isEmpty()) {
         m_weight = m_baseWeight;
     } else {

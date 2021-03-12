@@ -13,8 +13,8 @@
 #include <kirigami2_export.h>
 #endif
 
-namespace Kirigami {
-
+namespace Kirigami
+{
 class TabletModeWatcherPrivate;
 
 /**

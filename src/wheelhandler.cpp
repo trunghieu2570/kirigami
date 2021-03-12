@@ -6,8 +6,8 @@
 
 #include "wheelhandler.h"
 #include "settings.h"
-#include <QWheelEvent>
 #include <QDebug>
+#include <QWheelEvent>
 
 class GlobalWheelFilterSingleton
 {
@@ -23,7 +23,8 @@ GlobalWheelFilter::GlobalWheelFilter(QObject *parent)
 }
 
 GlobalWheelFilter::~GlobalWheelFilter()
-{}
+{
+}
 
 GlobalWheelFilter *GlobalWheelFilter::self()
 {
@@ -97,16 +98,11 @@ bool GlobalWheelFilter::eventFilter(QObject *watched, QEvent *event)
 void GlobalWheelFilter::manageWheel(QQuickItem *target, QWheelEvent *event)
 {
     // Duck typing: accept everyhint that has all the properties we need
-    if (target->metaObject()->indexOfProperty("contentX") == -1
-        || target->metaObject()->indexOfProperty("contentY") == -1
-        || target->metaObject()->indexOfProperty("contentWidth") == -1
-        || target->metaObject()->indexOfProperty("contentHeight") == -1
-        || target->metaObject()->indexOfProperty("topMargin") == -1
-        || target->metaObject()->indexOfProperty("bottomMargin") == -1
-        || target->metaObject()->indexOfProperty("leftMargin") == -1
-        || target->metaObject()->indexOfProperty("rightMargin") == -1
-        || target->metaObject()->indexOfProperty("originX") == -1
-        || target->metaObject()->indexOfProperty("originY") == -1) {
+    if (target->metaObject()->indexOfProperty("contentX") == -1 || target->metaObject()->indexOfProperty("contentY") == -1
+        || target->metaObject()->indexOfProperty("contentWidth") == -1 || target->metaObject()->indexOfProperty("contentHeight") == -1
+        || target->metaObject()->indexOfProperty("topMargin") == -1 || target->metaObject()->indexOfProperty("bottomMargin") == -1
+        || target->metaObject()->indexOfProperty("leftMargin") == -1 || target->metaObject()->indexOfProperty("rightMargin") == -1
+        || target->metaObject()->indexOfProperty("originX") == -1 || target->metaObject()->indexOfProperty("originY") == -1) {
         return;
     }
 
@@ -123,10 +119,9 @@ void GlobalWheelFilter::manageWheel(QQuickItem *target, QWheelEvent *event)
 
     // Scroll Y
     if (contentHeight > target->height()) {
-
         int y = event->pixelDelta().y() != 0 ? event->pixelDelta().y() : event->angleDelta().y() / 8;
 
-        //if we don't have a pixeldelta, apply the configured mouse wheel lines
+        // if we don't have a pixeldelta, apply the configured mouse wheel lines
         if (!event->pixelDelta().y()) {
             y *= Settings::self()->mouseWheelScrollLines();
         }
@@ -146,9 +141,8 @@ void GlobalWheelFilter::manageWheel(QQuickItem *target, QWheelEvent *event)
         target->setProperty("contentY", qMin(-maxYExtent, qMax(-minYExtent, contentY - y)));
     }
 
-    //Scroll X
+    // Scroll X
     if (contentWidth > target->width()) {
-
         int x = event->pixelDelta().x() != 0 ? event->pixelDelta().x() : event->angleDelta().x() / 8;
 
         // Special case: when can't scroll vertically, scroll horizontally with vertical wheel as well
@@ -156,7 +150,7 @@ void GlobalWheelFilter::manageWheel(QQuickItem *target, QWheelEvent *event)
             x = event->pixelDelta().y() != 0 ? event->pixelDelta().y() : event->angleDelta().y() / 8;
         }
 
-        //if we don't have a pixeldelta, apply the configured mouse wheel lines
+        // if we don't have a pixeldelta, apply the configured mouse wheel lines
         if (!event->pixelDelta().x()) {
             x *= Settings::self()->mouseWheelScrollLines();
         }
@@ -176,19 +170,20 @@ void GlobalWheelFilter::manageWheel(QQuickItem *target, QWheelEvent *event)
         target->setProperty("contentX", qMin(-maxXExtent, qMax(-minXExtent, contentX - x)));
     }
 
-    //this is just for making the scrollbar
+    // this is just for making the scrollbar
     target->metaObject()->invokeMethod(target, "flick", Q_ARG(double, 0), Q_ARG(double, 1));
     target->metaObject()->invokeMethod(target, "cancelFlick");
 }
 
-
 ////////////////////////////
 KirigamiWheelEvent::KirigamiWheelEvent(QObject *parent)
     : QObject(parent)
-{}
+{
+}
 
 KirigamiWheelEvent::~KirigamiWheelEvent()
-{}
+{
+}
 
 void KirigamiWheelEvent::initializeFromEvent(QWheelEvent *event)
 {
@@ -247,7 +242,6 @@ void KirigamiWheelEvent::setAccepted(bool accepted)
     m_accepted = accepted;
 }
 
-
 ///////////////////////////////
 
 WheelHandler::WheelHandler(QObject *parent)
@@ -280,6 +274,5 @@ void WheelHandler::setTarget(QQuickItem *target)
 
     Q_EMIT targetChanged();
 }
-
 
 #include "moc_wheelhandler.cpp"

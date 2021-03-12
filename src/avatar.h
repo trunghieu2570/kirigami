@@ -4,20 +4,22 @@
 
 #pragma once
 
-#include <QObject>
 #include <QColor>
+#include <QObject>
 #include <QVariant>
 
-class NameUtils : public QObject {
+class NameUtils : public QObject
+{
     Q_OBJECT
 
 public:
-    Q_INVOKABLE QString initialsFromString(const QString& name);
-    Q_INVOKABLE QColor colorsFromString(const QString& name);
-    Q_INVOKABLE bool isStringUnsuitableForInitials(const QString& name);
+    Q_INVOKABLE QString initialsFromString(const QString &name);
+    Q_INVOKABLE QColor colorsFromString(const QString &name);
+    Q_INVOKABLE bool isStringUnsuitableForInitials(const QString &name);
 };
 
-class AvatarGroup : public QObject {
+class AvatarGroup : public QObject
+{
     Q_OBJECT
 
 public:

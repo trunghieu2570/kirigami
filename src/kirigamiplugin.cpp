@@ -7,38 +7,38 @@
  */
 
 #include "kirigamiplugin.h"
+#include "avatar.h"
+#include "colorutils.h"
 #include "columnview.h"
-#include "enums.h"
-#include "icon.h"
-#include "settings.h"
-#include "formlayoutattached.h"
-#include "mnemonicattached.h"
 #include "delegaterecycler.h"
+#include "enums.h"
+#include "formlayoutattached.h"
+#include "icon.h"
+#include "imagecolors.h"
+#include "mnemonicattached.h"
 #include "pagepool.h"
+#include "pagerouter.h"
 #include "scenepositionattached.h"
-#include "wheelhandler.h"
+#include "settings.h"
 #include "shadowedrectangle.h"
 #include "shadowedtexture.h"
-#include "colorutils.h"
-#include "pagerouter.h"
-#include "imagecolors.h"
-#include "avatar.h"
-#include "toolbarlayout.h"
 #include "sizegroup.h"
+#include "toolbarlayout.h"
+#include "wheelhandler.h"
 
+#include <QClipboard>
+#include <QGuiApplication>
 #include <QQmlContext>
 #include <QQuickItem>
 #include <QQuickStyle>
-#include <QGuiApplication>
-#include <QClipboard>
 
+#include "libkirigami/basictheme_p.h"
 #include "libkirigami/platformtheme.h"
 #include "libkirigami/styleselector_p.h"
-#include "libkirigami/basictheme_p.h"
 
 static QString s_selectedStyle;
 
-//Q_INIT_RESOURCE(kirigami);
+// Q_INIT_RESOURCE(kirigami);
 #ifdef KIRIGAMI_BUILD_TYPE_STATIC
 #include <qrc_kirigami.cpp>
 #endif
@@ -46,11 +46,11 @@ static QString s_selectedStyle;
 class CopyHelperPrivate : public QObject
 {
     Q_OBJECT
-    public:
-        Q_INVOKABLE static void copyTextToClipboard(const QString& text)
-        {
-            qGuiApp->clipboard()->setText(text);
-        }
+public:
+    Q_INVOKABLE static void copyTextToClipboard(const QString &text)
+    {
+        qGuiApp->clipboard()->setText(text);
+    }
 };
 
 // we can't do this in the plugin object directly, as that can live in a different thread
@@ -86,9 +86,9 @@ QUrl KirigamiPlugin::componentUrl(const QString &fileName) const
 }
 
 template<typename T>
-inline std::function<QObject*(QQmlEngine*,QJSEngine*)> singleton()
+inline std::function<QObject *(QQmlEngine *, QJSEngine *)> singleton()
 {
-    return [](QQmlEngine*,QJSEngine*) -> QObject* {
+    return [](QQmlEngine *, QJSEngine *) -> QObject * {
         return new T;
     };
 }
@@ -104,27 +104,26 @@ void KirigamiPlugin::registerTypes(const char *uri)
     Kirigami::StyleSelector::setBaseUrl(baseUrl());
 
     if (QIcon::themeName().isEmpty() && !qEnvironmentVariableIsSet("XDG_CURRENT_DESKTOP")) {
-        QIcon::setThemeSearchPaths({
-            Kirigami::StyleSelector::resolveFilePath(QStringLiteral(".")),
-            QStringLiteral(":/icons")
-        });
+        QIcon::setThemeSearchPaths({Kirigami::StyleSelector::resolveFilePath(QStringLiteral(".")), QStringLiteral(":/icons")});
         QIcon::setThemeName(QStringLiteral("breeze-internal"));
     }
 
-    qmlRegisterSingletonType<Settings>(uri, 2, 0, "Settings",
-         [](QQmlEngine *e, QJSEngine*) -> QObject* {
-             Settings *settings = Settings::self();
-             //singleton managed internally, qml should never delete it
-             e->setObjectOwnership(settings, QQmlEngine::CppOwnership);
-             settings->setStyle(Kirigami::StyleSelector::style());
-             return settings;
-         }
-    );
+    qmlRegisterSingletonType<Settings>(uri, 2, 0, "Settings", [](QQmlEngine *e, QJSEngine *) -> QObject * {
+        Settings *settings = Settings::self();
+        // singleton managed internally, qml should never delete it
+        e->setObjectOwnership(settings, QQmlEngine::CppOwnership);
+        settings->setStyle(Kirigami::StyleSelector::style());
+        return settings;
+    });
 
-    qmlRegisterUncreatableType<ApplicationHeaderStyle>(uri, 2, 0, "ApplicationHeaderStyle", QStringLiteral("Cannot create objects of type ApplicationHeaderStyle"));
+    qmlRegisterUncreatableType<ApplicationHeaderStyle>(uri,
+                                                       2,
+                                                       0,
+                                                       "ApplicationHeaderStyle",
+                                                       QStringLiteral("Cannot create objects of type ApplicationHeaderStyle"));
 
-    //old legacy retrocompatible Theme
-    qmlRegisterSingletonType<Kirigami::BasicThemeDefinition>(uri, 2, 0, "Theme", [](QQmlEngine*, QJSEngine*) {
+    // old legacy retrocompatible Theme
+    qmlRegisterSingletonType<Kirigami::BasicThemeDefinition>(uri, 2, 0, "Theme", [](QQmlEngine *, QJSEngine *) {
         qWarning() << "The Theme singleton is deprecated (since 5.39). Import Kirigami 2.2 or higher and use the attached property instead.";
         return new Kirigami::BasicThemeDefinition{};
     });
@@ -149,30 +148,42 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType<Icon>(uri, 2, 0, "Icon");
 
     qmlRegisterType(componentUrl(QStringLiteral("Label.qml")), uri, 2, 0, "Label");
-    //TODO: uncomment for 2.3 release
-    //qmlRegisterTypeNotAvailable(uri, 2, 3, "Label", "Label type not supported anymore, use QtQuick.Controls.Label 2.0 instead");
+    // TODO: uncomment for 2.3 release
+    // qmlRegisterTypeNotAvailable(uri, 2, 3, "Label", "Label type not supported anymore, use QtQuick.Controls.Label 2.0 instead");
     qmlRegisterType(componentUrl(QStringLiteral("OverlaySheet.qml")), uri, 2, 0, "OverlaySheet");
     qmlRegisterType(componentUrl(QStringLiteral("Page.qml")), uri, 2, 0, "Page");
     qmlRegisterType(componentUrl(QStringLiteral("ScrollablePage.qml")), uri, 2, 0, "ScrollablePage");
     qmlRegisterType(componentUrl(QStringLiteral("SplitDrawer.qml")), uri, 2, 0, "SplitDrawer");
     qmlRegisterType(componentUrl(QStringLiteral("SwipeListItem.qml")), uri, 2, 0, "SwipeListItem");
 
-    //2.1
+    // 2.1
     qmlRegisterType(componentUrl(QStringLiteral("AbstractItemViewHeader.qml")), uri, 2, 1, "AbstractItemViewHeader");
     qmlRegisterType(componentUrl(QStringLiteral("ItemViewHeader.qml")), uri, 2, 1, "ItemViewHeader");
     qmlRegisterType(componentUrl(QStringLiteral("AbstractApplicationItem.qml")), uri, 2, 1, "AbstractApplicationItem");
     qmlRegisterType(componentUrl(QStringLiteral("ApplicationItem.qml")), uri, 2, 1, "ApplicationItem");
 
-    //2.2
-    //Theme changed from a singleton to an attached property
-    qmlRegisterUncreatableType<Kirigami::PlatformTheme>(uri, 2, 2, "Theme", QStringLiteral("Cannot create objects of type Theme, use it as an attached property"));
+    // 2.2
+    // Theme changed from a singleton to an attached property
+    qmlRegisterUncreatableType<Kirigami::PlatformTheme>(uri,
+                                                        2,
+                                                        2,
+                                                        "Theme",
+                                                        QStringLiteral("Cannot create objects of type Theme, use it as an attached property"));
 
-    //2.3
+    // 2.3
     qmlRegisterType(componentUrl(QStringLiteral("FormLayout.qml")), uri, 2, 3, "FormLayout");
-    qmlRegisterUncreatableType<FormLayoutAttached>(uri, 2, 3, "FormData", QStringLiteral("Cannot create objects of type FormData, use it as an attached property"));
-    qmlRegisterUncreatableType<MnemonicAttached>(uri, 2, 3, "MnemonicData", QStringLiteral("Cannot create objects of type MnemonicData, use it as an attached property"));
+    qmlRegisterUncreatableType<FormLayoutAttached>(uri,
+                                                   2,
+                                                   3,
+                                                   "FormData",
+                                                   QStringLiteral("Cannot create objects of type FormData, use it as an attached property"));
+    qmlRegisterUncreatableType<MnemonicAttached>(uri,
+                                                 2,
+                                                 3,
+                                                 "MnemonicData",
+                                                 QStringLiteral("Cannot create objects of type MnemonicData, use it as an attached property"));
 
-    //2.4
+    // 2.4
     qmlRegisterType(componentUrl(QStringLiteral("AbstractCard.qml")), uri, 2, 4, "AbstractCard");
     qmlRegisterType(componentUrl(QStringLiteral("Card.qml")), uri, 2, 4, "Card");
     qmlRegisterType(componentUrl(QStringLiteral("CardsListView.qml")), uri, 2, 4, "CardsListView");
@@ -182,37 +193,41 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterUncreatableType<MessageType>(uri, 2, 4, "MessageType", QStringLiteral("Cannot create objects of type MessageType"));
     qmlRegisterType<DelegateRecycler>(uri, 2, 4, "DelegateRecycler");
 
-    //2.5
+    // 2.5
     qmlRegisterType(componentUrl(QStringLiteral("ListItemDragHandle.qml")), uri, 2, 5, "ListItemDragHandle");
     qmlRegisterType(componentUrl(QStringLiteral("ActionToolBar.qml")), uri, 2, 5, "ActionToolBar");
-    qmlRegisterUncreatableType<ScenePositionAttached>(uri, 2, 5, "ScenePosition", QStringLiteral("Cannot create objects of type ScenePosition, use it as an attached property"));
+    qmlRegisterUncreatableType<ScenePositionAttached>(uri,
+                                                      2,
+                                                      5,
+                                                      "ScenePosition",
+                                                      QStringLiteral("Cannot create objects of type ScenePosition, use it as an attached property"));
 
-    //2.6
+    // 2.6
     qmlRegisterType(componentUrl(QStringLiteral("AboutPage.qml")), uri, 2, 6, "AboutPage");
     qmlRegisterType(componentUrl(QStringLiteral("LinkButton.qml")), uri, 2, 6, "LinkButton");
     qmlRegisterType(componentUrl(QStringLiteral("UrlButton.qml")), uri, 2, 6, "UrlButton");
     qmlRegisterSingletonType<CopyHelperPrivate>("org.kde.kirigami.private", 2, 6, "CopyHelperPrivate", singleton<CopyHelperPrivate>());
 
-    //2.7
+    // 2.7
     qmlRegisterType<ColumnView>(uri, 2, 7, "ColumnView");
     qmlRegisterType(componentUrl(QStringLiteral("ActionTextField.qml")), uri, 2, 7, "ActionTextField");
 
-    //2.8
+    // 2.8
     qmlRegisterType(componentUrl(QStringLiteral("SearchField.qml")), uri, 2, 8, "SearchField");
     qmlRegisterType(componentUrl(QStringLiteral("PasswordField.qml")), uri, 2, 8, "PasswordField");
 
-    //2.9
+    // 2.9
     qmlRegisterType<WheelHandler>(uri, 2, 9, "WheelHandler");
     qmlRegisterUncreatableType<KirigamiWheelEvent>(uri, 2, 9, "WheelEvent", QStringLiteral("Cannot create objects of type WheelEvent."));
 
-    //2.10
+    // 2.10
     qmlRegisterType(componentUrl(QStringLiteral("ListSectionHeader.qml")), uri, 2, 10, "ListSectionHeader");
 
     // 2.11
     qmlRegisterType<PagePool>(uri, 2, 11, "PagePool");
     qmlRegisterType(componentUrl(QStringLiteral("PagePoolAction.qml")), uri, 2, 11, "PagePoolAction");
 
-    //TODO: remove
+    // TODO: remove
     qmlRegisterType(componentUrl(QStringLiteral("SwipeListItem2.qml")), uri, 2, 11, "SwipeListItem2");
 
     // 2.12
@@ -250,7 +265,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     // 2.16
     qmlRegisterType<Kirigami::BasicThemeDefinition>(uri, 2, 16, "BasicThemeDefinition");
-
 
     qmlProtectModule(uri, 2);
 }

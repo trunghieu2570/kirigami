@@ -5,8 +5,8 @@
  */
 
 #include "formlayoutattached.h"
-#include <QQuickItem>
 #include <QDebug>
+#include <QQuickItem>
 
 FormLayoutAttached::FormLayoutAttached(QObject *parent)
     : QObject(parent)
@@ -35,17 +35,17 @@ QString FormLayoutAttached::label() const
 
 void FormLayoutAttached::setLabelAlignment(int section)
 {
-	if (m_labelAlignment == section) {
-		return;
-	}
+    if (m_labelAlignment == section) {
+        return;
+    }
 
-	m_labelAlignment = section;
-	Q_EMIT labelAlignmentChanged();
+    m_labelAlignment = section;
+    Q_EMIT labelAlignmentChanged();
 }
 
 int FormLayoutAttached::labelAlignment() const
 {
-	return m_labelAlignment;
+    return m_labelAlignment;
 }
 
 void FormLayoutAttached::setIsSection(bool section)

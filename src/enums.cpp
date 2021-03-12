@@ -15,7 +15,7 @@ bool DisplayHint::displayHintSet(DisplayHints values, Hint hint)
     return isDisplayHintSet(values, hint);
 }
 
-bool DisplayHint::displayHintSet(QObject* object, DisplayHint::Hint hint)
+bool DisplayHint::displayHintSet(QObject *object, DisplayHint::Hint hint)
 {
     if (!object) {
         return false;
