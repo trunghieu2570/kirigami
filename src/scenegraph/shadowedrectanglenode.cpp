@@ -9,7 +9,10 @@
 
 QColor premultiply(const QColor &color)
 {
-    return QColor::fromRgbF(color.redF() * color.alphaF(), color.greenF() * color.alphaF(), color.blueF() * color.alphaF(), color.alphaF());
+    return QColor::fromRgbF(color.redF() * color.alphaF(), //
+                            color.greenF() * color.alphaF(),
+                            color.blueF() * color.alphaF(),
+                            color.alphaF());
 }
 
 ShadowedRectangleNode::ShadowedRectangleNode()
@@ -167,11 +170,16 @@ void ShadowedRectangleNode::updateGeometry()
 {
     auto rect = m_rect;
     if (m_shaderType == ShadowedRectangleMaterial::ShaderType::Standard) {
-        rect = rect.adjusted(-m_size * m_aspect.x(), -m_size * m_aspect.y(), m_size * m_aspect.x(), m_size * m_aspect.y());
+        rect = rect.adjusted(-m_size * m_aspect.x(), //
+                             -m_size * m_aspect.y(),
+                             m_size * m_aspect.x(),
+                             m_size * m_aspect.y());
 
         auto offsetLength = m_offset.length();
-
-        rect = rect.adjusted(-offsetLength * m_aspect.x(), -offsetLength * m_aspect.y(), offsetLength * m_aspect.x(), offsetLength * m_aspect.y());
+        rect = rect.adjusted(-offsetLength * m_aspect.x(), //
+                             -offsetLength * m_aspect.y(),
+                             offsetLength * m_aspect.x(),
+                             offsetLength * m_aspect.y());
     }
 
     QSGGeometry::updateTexturedRectGeometry(m_geometry, rect, QRectF{0.0, 0.0, 1.0, 1.0});

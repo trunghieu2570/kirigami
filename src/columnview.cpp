@@ -57,6 +57,7 @@ QmlComponentsPool::QmlComponentsPool(QQmlEngine *engine)
 {
     QQmlComponent *component = new QQmlComponent(engine, this);
 
+    /* clang-format off */
     component->setData(QByteArrayLiteral(R"(
 import QtQuick 2.7
 import org.kde.kirigami 2.7 as Kirigami
@@ -81,8 +82,8 @@ QtObject {
         anchors.bottom: column.bottom
     }
 }
-)"),
-                       QUrl(QStringLiteral("columnview.cpp")));
+)"), QUrl(QStringLiteral("columnview.cpp")));
+    /* clang-format on */
 
     m_instance = component->create();
     // qWarning()<<component->errors();
@@ -355,12 +356,16 @@ void ContentItem::snapToItem()
     QQuickItem *nextItem = childAt(firstItem->x() + firstItem->width() + 1, 0);
 
     // need to make the last item visible?
-    if (nextItem && ((m_view->dragging() && m_lastDragDelta < 0) || (!m_view->dragging() && width() - (viewportRight()) < viewportLeft() - firstItem->x()))) {
+    if (nextItem && //
+        ((m_view->dragging() && m_lastDragDelta < 0) //
+         || (!m_view->dragging() //
+             && (width() - viewportRight()) < (viewportLeft() - firstItem->x())))) {
         m_viewAnchorItem = nextItem;
         animateX(-nextItem->x() + m_leftPinnedSpace);
 
         // The first one found?
-    } else if ((m_view->dragging() && m_lastDragDelta >= 0) || (!m_view->dragging() && viewportLeft() <= firstItem->x() + firstItem->width() / 2)
+    } else if ((m_view->dragging() && m_lastDragDelta >= 0) //
+               || (!m_view->dragging() && (viewportLeft() <= (firstItem->x() + (firstItem->width() / 2)))) //
                || !nextItem) {
         m_viewAnchorItem = firstItem;
         animateX(-firstItem->x() + m_leftPinnedSpace);
@@ -843,7 +848,10 @@ void ColumnView::setCurrentIndex(int index)
 
         // m_contentItem->m_slideAnim->stop();
 
-        QRectF contentsRect(m_contentItem->m_leftPinnedSpace, 0, width() - m_contentItem->m_rightPinnedSpace - m_contentItem->m_leftPinnedSpace, height());
+        QRectF contentsRect(m_contentItem->m_leftPinnedSpace, //
+                            0,
+                            width() - m_contentItem->m_rightPinnedSpace - m_contentItem->m_leftPinnedSpace,
+                            height());
 
         m_contentItem->m_shouldAnimate = true;
 
@@ -1105,7 +1113,9 @@ void ColumnView::insertItem(int pos, QQuickItem *item)
 
 void ColumnView::moveItem(int from, int to)
 {
-    if (m_contentItem->m_items.isEmpty() || from < 0 || from >= m_contentItem->m_items.length() || to < 0 || to >= m_contentItem->m_items.length()) {
+    if (m_contentItem->m_items.isEmpty() //
+        || from < 0 || from >= m_contentItem->m_items.length() //
+        || to < 0 || to >= m_contentItem->m_items.length()) {
         return;
     }
 
@@ -1168,7 +1178,8 @@ QQuickItem *ColumnView::removeItem(QQuickItem *item)
 
 QQuickItem *ColumnView::removeItem(int pos)
 {
-    if (m_contentItem->m_items.isEmpty() || pos < 0 || pos >= m_contentItem->m_items.length()) {
+    if (m_contentItem->m_items.isEmpty() //
+        || pos < 0 || pos >= m_contentItem->m_items.length()) {
         return nullptr;
     }
 
@@ -1592,7 +1603,12 @@ void ColumnView::contentChildren_clear(QQmlListProperty<QQuickItem> *prop)
 
 QQmlListProperty<QQuickItem> ColumnView::contentChildren()
 {
-    return QQmlListProperty<QQuickItem>(this, nullptr, contentChildren_append, contentChildren_count, contentChildren_at, contentChildren_clear);
+    return QQmlListProperty<QQuickItem>(this, //
+                                        nullptr,
+                                        contentChildren_append,
+                                        contentChildren_count,
+                                        contentChildren_at,
+                                        contentChildren_clear);
 }
 
 void ColumnView::contentData_append(QQmlListProperty<QObject> *prop, QObject *object)
@@ -1662,7 +1678,12 @@ void ColumnView::contentData_clear(QQmlListProperty<QObject> *prop)
 
 QQmlListProperty<QObject> ColumnView::contentData()
 {
-    return QQmlListProperty<QObject>(this, nullptr, contentData_append, contentData_count, contentData_at, contentData_clear);
+    return QQmlListProperty<QObject>(this, //
+                                     nullptr,
+                                     contentData_append,
+                                     contentData_count,
+                                     contentData_at,
+                                     contentData_clear);
 }
 
 #include "moc_columnview.cpp"

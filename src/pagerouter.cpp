@@ -24,7 +24,10 @@ ParsedRoute *parseRoute(QJSValue value)
         auto map = value.toVariant().value<QVariantMap>();
         map.remove(QStringLiteral("route"));
         map.remove(QStringLiteral("data"));
-        return new ParsedRoute{value.property(QStringLiteral("route")).toString(), value.property(QStringLiteral("data")).toVariant(), map, false};
+        return new ParsedRoute{value.property(QStringLiteral("route")).toString(), //
+                               value.property(QStringLiteral("data")).toVariant(),
+                               map,
+                               false};
     }
 }
 

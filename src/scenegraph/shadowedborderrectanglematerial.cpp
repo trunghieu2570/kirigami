@@ -30,7 +30,10 @@ int ShadowedBorderRectangleMaterial::compare(const QSGMaterial *other) const
     auto material = static_cast<const ShadowedBorderRectangleMaterial *>(other);
 
     auto result = ShadowedRectangleMaterial::compare(other);
-    if (result == 0 && material->borderColor == borderColor && qFuzzyCompare(material->borderWidth, borderWidth)) {
+    /* clang-format off */
+    if (result == 0
+        && material->borderColor == borderColor
+        && qFuzzyCompare(material->borderWidth, borderWidth)) { /* clang-format on */
         return 0;
     }
 

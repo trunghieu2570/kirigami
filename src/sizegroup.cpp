@@ -49,7 +49,12 @@ void SizeGroup::connectItem(QQuickItem *item)
 
 QQmlListProperty<QQuickItem> SizeGroup::items()
 {
-    return QQmlListProperty<QQuickItem>(this, nullptr, appendItem, itemCount, itemAt, clearItems);
+    return QQmlListProperty<QQuickItem>(this, //
+                                        nullptr,
+                                        appendItem,
+                                        itemCount,
+                                        itemAt,
+                                        clearItems);
 }
 
 void SizeGroup::relayout()

@@ -98,11 +98,17 @@ bool GlobalWheelFilter::eventFilter(QObject *watched, QEvent *event)
 void GlobalWheelFilter::manageWheel(QQuickItem *target, QWheelEvent *event)
 {
     // Duck typing: accept everyhint that has all the properties we need
-    if (target->metaObject()->indexOfProperty("contentX") == -1 || target->metaObject()->indexOfProperty("contentY") == -1
-        || target->metaObject()->indexOfProperty("contentWidth") == -1 || target->metaObject()->indexOfProperty("contentHeight") == -1
-        || target->metaObject()->indexOfProperty("topMargin") == -1 || target->metaObject()->indexOfProperty("bottomMargin") == -1
-        || target->metaObject()->indexOfProperty("leftMargin") == -1 || target->metaObject()->indexOfProperty("rightMargin") == -1
-        || target->metaObject()->indexOfProperty("originX") == -1 || target->metaObject()->indexOfProperty("originY") == -1) {
+    /* clang-format off */
+    if (target->metaObject()->indexOfProperty("contentX") == -1
+        || target->metaObject()->indexOfProperty("contentY") == -1
+        || target->metaObject()->indexOfProperty("contentWidth") == -1
+        || target->metaObject()->indexOfProperty("contentHeight") == -1
+        || target->metaObject()->indexOfProperty("topMargin") == -1
+        || target->metaObject()->indexOfProperty("bottomMargin") == -1
+        || target->metaObject()->indexOfProperty("leftMargin") == -1
+        || target->metaObject()->indexOfProperty("rightMargin") == -1
+        || target->metaObject()->indexOfProperty("originX") == -1
+        || target->metaObject()->indexOfProperty("originY") == -1) { /* clang-format on */
         return;
     }
 

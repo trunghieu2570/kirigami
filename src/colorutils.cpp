@@ -162,7 +162,10 @@ QColor ColorUtils::adjustColor(const QColor &color, const QJSValue &adjustments)
         copy.setGreen(copy.green() + adjusts.green);
         copy.setBlue(copy.blue() + adjusts.blue);
     } else if (adjusts.hue || adjusts.saturation || adjusts.value) {
-        copy.setHsl(std::fmod(copy.hue() + adjusts.hue, 360.0), copy.saturation() + adjusts.saturation, copy.value() + adjusts.value, copy.alpha());
+        copy.setHsl(std::fmod(copy.hue() + adjusts.hue, 360.0), //
+                    copy.saturation() + adjusts.saturation, //
+                    copy.value() + adjusts.value,
+                    copy.alpha());
     }
 
     return copy;

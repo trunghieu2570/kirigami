@@ -75,7 +75,12 @@ public:
     }
     bool equals(const ParsedRoute *rhs, bool countItem = false)
     {
-        return name == rhs->name && data == rhs->data && (!countItem || item == rhs->item) && cache == rhs->cache;
+        /* clang-format off */
+        return name == rhs->name
+            && data == rhs->data
+            && (!countItem || item == rhs->item)
+            && cache == rhs->cache;
+        /* clang-format on */
     }
 };
 
@@ -380,7 +385,8 @@ class PageRouter : public QObject, public QQmlParserStatus
     Q_PROPERTY(int preloadedPoolCapacity READ preloadedPoolCapacity WRITE setPreloadedPoolCapacity)
 
     /**
-     * Exposes the data of all pages on the stack, preferring pages on the top (e.g. most recently pushed) to pages pushed on the bottom (least recently
+     * Exposes the data of all pages on the stack, preferring pages on the top
+     * (e.g. most recently pushed) to pages pushed on the bottom (least recently
      * pushed).
      */
     Q_PROPERTY(QQmlPropertyMap *params READ params CONSTANT)

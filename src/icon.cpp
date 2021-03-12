@@ -61,7 +61,8 @@ void Icon::setSource(const QVariant &icon)
 
     if (icon.type() == QVariant::String) {
         const QString iconSource = icon.toString();
-        m_isMaskHeuristic = (iconSource.endsWith(QLatin1String("-symbolic")) || iconSource.endsWith(QLatin1String("-symbolic-rtl"))
+        m_isMaskHeuristic = (iconSource.endsWith(QLatin1String("-symbolic")) //
+                             || iconSource.endsWith(QLatin1String("-symbolic-rtl")) //
                              || iconSource.endsWith(QLatin1String("-symbolic-ltr")));
         Q_EMIT isMaskChanged();
     }
@@ -304,8 +305,10 @@ void Icon::updatePolish()
             m_icon.fill(Qt::transparent);
         }
 
-        const QColor tintColor =
-            !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor()) : m_color;
+        const QColor tintColor = //
+            !m_color.isValid() || m_color == Qt::transparent //
+            ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor())
+            : m_color;
 
         // TODO: initialize m_isMask with icon.isMask()
         if (tintColor.alpha() > 0 && (isMask() || guessMonochrome(m_icon))) {
@@ -441,7 +444,8 @@ QImage Icon::findIcon(const QSize &size)
             : m_color;
 
             if (m_isMask || icon.isMask() || iconSource.endsWith(QLatin1String("-symbolic")) || iconSource.endsWith(QLatin1String("-symbolic-rtl")) ||
-            iconSource.endsWith(QLatin1String("-symbolic-ltr")) || guessMonochrome(img)) { QPainter p(&img);
+            iconSource.endsWith(QLatin1String("-symbolic-ltr")) || guessMonochrome(img)) { //
+                QPainter p(&img);
                 p.setCompositionMode(QPainter::CompositionMode_SourceIn);
                 p.fillRect(img.rect(), tintColor);
                 p.end();

@@ -185,9 +185,13 @@ inline int squareDistance(QRgb color1, QRgb color2)
     // https://en.wikipedia.org/wiki/Color_difference
     // Using RGB distance for performance, as CIEDE2000 istoo complicated
     if (qRed(color1) - qRed(color2) < 128) {
-        return 2 * pow(qRed(color1) - qRed(color2), 2) + 4 * pow(qGreen(color1) - qGreen(color2), 2) + 3 * pow(qBlue(color1) - qBlue(color2), 2);
+        return 2 * pow(qRed(color1) - qRed(color2), 2) //
+            + 4 * pow(qGreen(color1) - qGreen(color2), 2) //
+            + 3 * pow(qBlue(color1) - qBlue(color2), 2);
     } else {
-        return 3 * pow(qRed(color1) - qRed(color2), 2) + 4 * pow(qGreen(color1) - qGreen(color2), 2) + 2 * pow(qBlue(color1) - qBlue(color2), 2);
+        return 3 * pow(qRed(color1) - qRed(color2), 2) //
+            + 4 * pow(qGreen(color1) - qGreen(color2), 2) //
+            + 2 * pow(qBlue(color1) - qBlue(color2), 2);
     }
 }
 
@@ -312,7 +316,9 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
         entry[QStringLiteral("ratio")] = stat.ratio;
 
         QColor contrast = QColor(255 - color.red(), 255 - color.green(), 255 - color.blue());
-        contrast.setHsl(contrast.hslHue(), contrast.hslSaturation(), 128 + (128 - contrast.lightness()));
+        contrast.setHsl(contrast.hslHue(), //
+                        contrast.hslSaturation(), //
+                        128 + (128 - contrast.lightness()));
         QColor tempContrast;
         int minimumDistance = 4681800; // max distance: 4*3*2*3*255*255
         for (const auto &stat : qAsConst(imageData.m_clusters)) {
@@ -373,80 +379,108 @@ QVariantList ImageColors::palette() const
 
 ColorUtils::Brightness ImageColors::paletteBrightness() const
 {
-    return_fallback(m_fallbackPaletteBrightness) return qGray(m_imageData.m_dominant.rgb()) < 128 ? ColorUtils::Dark : ColorUtils::Light;
+    /* clang-format off */
+    return_fallback(m_fallbackPaletteBrightness)
+
+    return qGray(m_imageData.m_dominant.rgb()) < 128 ? ColorUtils::Dark : ColorUtils::Light;
+    /* clang-format on */
 }
 
 QColor ImageColors::average() const
 {
-    return_fallback_finally(m_fallbackAverage, linkBackgroundColor) return m_imageData.m_average;
+    /* clang-format off */
+    return_fallback_finally(m_fallbackAverage, linkBackgroundColor)
+
+    return m_imageData.m_average;
+    /* clang-format on */
 }
 
 QColor ImageColors::dominant() const
 {
-    return_fallback_finally(m_fallbackDominant, linkBackgroundColor) return m_imageData.m_dominant;
+    /* clang-format off */
+    return_fallback_finally(m_fallbackDominant, linkBackgroundColor)
+
+    return m_imageData.m_dominant;
+    /* clang-format on */
 }
 
 QColor ImageColors::dominantContrast() const
 {
-    return_fallback_finally(m_fallbackDominantContrasting, linkBackgroundColor) return m_imageData.m_dominantContrast;
+    /* clang-format off */
+    return_fallback_finally(m_fallbackDominantContrasting, linkBackgroundColor)
+
+    return m_imageData.m_dominantContrast;
+    /* clang-format on */
 }
 
 QColor ImageColors::foreground() const
 {
-    return_fallback_finally(m_fallbackForeground, textColor) if (paletteBrightness() == ColorUtils::Dark)
+    /* clang-format off */
+    return_fallback_finally(m_fallbackForeground, textColor)
+
+    if (paletteBrightness() == ColorUtils::Dark)
     {
         if (qGray(m_imageData.m_closestToWhite.rgb()) < 200) {
             return QColor(230, 230, 230);
         }
         return m_imageData.m_closestToWhite;
-    }
-    else
-    {
+    } else {
         if (qGray(m_imageData.m_closestToBlack.rgb()) > 80) {
             return QColor(20, 20, 20);
         }
         return m_imageData.m_closestToBlack;
     }
+    /* clang-format on */
 }
 
 QColor ImageColors::background() const
 {
-    return_fallback_finally(m_fallbackBackground, backgroundColor) if (paletteBrightness() == ColorUtils::Dark)
-    {
+    /* clang-format off */
+    return_fallback_finally(m_fallbackBackground, backgroundColor)
+
+    if (paletteBrightness() == ColorUtils::Dark) {
         if (qGray(m_imageData.m_closestToBlack.rgb()) > 80) {
             return QColor(20, 20, 20);
         }
         return m_imageData.m_closestToBlack;
-    }
-    else
-    {
+    } else {
         if (qGray(m_imageData.m_closestToWhite.rgb()) < 200) {
             return QColor(230, 230, 230);
         }
         return m_imageData.m_closestToWhite;
     }
+    /* clang-format on */
 }
 
 QColor ImageColors::highlight() const
 {
-    return_fallback_finally(m_fallbackHighlight, linkColor) return m_imageData.m_highlight;
+    /* clang-format off */
+    return_fallback_finally(m_fallbackHighlight, linkColor)
+
+    return m_imageData.m_highlight;
+    /* clang-format on */
 }
 
 QColor ImageColors::closestToWhite() const
 {
-    return_fallback(Qt::white) if (qGray(m_imageData.m_closestToWhite.rgb()) < 200)
-    {
+    /* clang-format off */
+    return_fallback(Qt::white)
+    if (qGray(m_imageData.m_closestToWhite.rgb()) < 200) {
         return QColor(230, 230, 230);
     }
+    /* clang-format on */
+
     return m_imageData.m_closestToWhite;
 }
 
 QColor ImageColors::closestToBlack() const
 {
-    return_fallback(Qt::black) if (qGray(m_imageData.m_closestToBlack.rgb()) > 80)
-    {
+    /* clang-format off */
+    return_fallback(Qt::black)
+    if (qGray(m_imageData.m_closestToBlack.rgb()) > 80) {
         return QColor(20, 20, 20);
     }
+    /* clang-format on */
     return m_imageData.m_closestToBlack;
 }
 

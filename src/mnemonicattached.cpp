@@ -15,7 +15,11 @@ QHash<QKeySequence, MnemonicAttached *> MnemonicAttached::s_sequenceToObject = Q
 // followed only by non-alphanumerics, then "(X)" gets removed.
 static QString removeReducedCJKAccMark(const QString &label, int pos)
 {
-    if (pos > 0 && pos + 1 < label.length() && label[pos - 1] == QLatin1Char('(') && label[pos + 1] == QLatin1Char(')') && label[pos].isLetterOrNumber()) {
+    /* clang-format off */
+    if (pos > 0 && pos + 1 < label.length()
+        && label[pos - 1] == QLatin1Char('(')
+        && label[pos + 1] == QLatin1Char(')')
+        && label[pos].isLetterOrNumber()) { /* clang-format on */
         // Check if at start or end, ignoring non-alphanumerics.
         int len = label.length();
         int p1 = pos - 2;
@@ -203,7 +207,11 @@ void MnemonicAttached::calculateWeights()
         }
 
         // try to preserve the wanted accelerators
-        if (c == QLatin1Char('&') && (pos != m_label.length() - 1 && m_label[pos + 1] != QLatin1Char('&') && m_label[pos + 1].isLetterOrNumber())) {
+        /* clang-format off */
+        if (c == QLatin1Char('&')
+            && (pos != m_label.length() - 1
+                && m_label[pos + 1] != QLatin1Char('&')
+                && m_label[pos + 1].isLetterOrNumber())) { /* clang-format on */
             wanted_character = true;
             ++pos;
             continue;

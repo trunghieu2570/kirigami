@@ -63,40 +63,48 @@ QString NameUtils::initialsFromString(const QString &string)
     }
 }
 
-const QMap<QString, QList<QColor>> c_colors = {{QStringLiteral("default"),
-                                                {
-                                                    QColor("#e93a9a"),
-                                                    QColor("#e93d58"),
-                                                    QColor("#e9643a"),
-                                                    QColor("#ef973c"),
-                                                    QColor("#e8cb2d"),
-                                                    QColor("#b6e521"),
-                                                    QColor("#3dd425"),
-                                                    QColor("#00d485"),
-                                                    QColor("#00d3b8"),
-                                                    QColor("#3daee9"),
-                                                    QColor("#b875dc"),
-                                                    QColor("#926ee4"),
-                                                }},
-                                               {QStringLiteral("Material"),
-                                                {
-                                                    QColor("#f44336"),
-                                                    QColor("#e91e63"),
-                                                    QColor("#9c27b0"),
-                                                    QColor("#673ab7"),
-                                                    QColor("#3f51b5"),
-                                                    QColor("#2196f3"),
-                                                    QColor("#03a9f4"),
-                                                    QColor("#00bcd4"),
-                                                    QColor("#009688"),
-                                                    QColor("#4caf50"),
-                                                    QColor("#8bc34a"),
-                                                    QColor("#cddc39"),
-                                                    QColor("#ffeb3b"),
-                                                    QColor("#ffc107"),
-                                                    QColor("#ff9800"),
-                                                    QColor("#ff5722"),
-                                                }}};
+/* clang-format off */
+const QMap<QString,QList<QColor>> c_colors = {
+    {
+        QStringLiteral("default"),
+        {
+            QColor("#e93a9a"),
+            QColor("#e93d58"),
+            QColor("#e9643a"),
+            QColor("#ef973c"),
+            QColor("#e8cb2d"),
+            QColor("#b6e521"),
+            QColor("#3dd425"),
+            QColor("#00d485"),
+            QColor("#00d3b8"),
+            QColor("#3daee9"),
+            QColor("#b875dc"),
+            QColor("#926ee4"),
+        }
+    },
+    {
+        QStringLiteral("Material"),
+        {
+            QColor("#f44336"),
+            QColor("#e91e63"),
+            QColor("#9c27b0"),
+            QColor("#673ab7"),
+            QColor("#3f51b5"),
+            QColor("#2196f3"),
+            QColor("#03a9f4"),
+            QColor("#00bcd4"),
+            QColor("#009688"),
+            QColor("#4caf50"),
+            QColor("#8bc34a"),
+            QColor("#cddc39"),
+            QColor("#ffeb3b"),
+            QColor("#ffc107"),
+            QColor("#ff9800"),
+            QColor("#ff5722"),
+        }
+    }
+};
+/* clang-format on */
 
 QList<QColor> grabColors()
 {

@@ -35,9 +35,11 @@ class PagePool : public QObject
     Q_PROPERTY(QQuickItem *lastLoadedItem READ lastLoadedItem NOTIFY lastLoadedItemChanged)
 
     /**
-     * If true (default) the pages will be kept around, will have C++ ownership and only one instance per page will be created.
-     * If false the pages will have Javascript ownership (thus deleted on pop by the page stacks) and each call to loadPage will create a new page instance.
-     * When cachePages is false, Components gets cached never the less
+     * If true (default) the pages will be kept around, will have C++ ownership and
+     * only one instance per page will be created.
+     * If false the pages will have Javascript ownership (thus deleted on pop by the
+     * page stacks) and each call to loadPage will create a new page instance. When
+     * cachePages is false, Components get cached nevertheless.
      */
     Q_PROPERTY(bool cachePages READ cachePages WRITE setCachePages NOTIFY cachePagesChanged)
 
@@ -53,16 +55,20 @@ public:
 
     /**
      * Returns the instance of the item defined in the QML file identified
-     * by url, only one instance will be made per url if cachePAges is true. If the url is remote (i.e. http) don't rely on the return value but us the async
-     * callback instead
-     * @param url full url of the item: it can be a well formed Url,
-     *       an absolute path
-     *       or a relative one to the path of the qml file the PagePool is instantiated from
-     * @param callback If we are loading a remote url, we can't have the item immediately but will be passed as a parameter to the provided callback.
-     * Normally, don't set a callback, use it only in case of remote urls.
+     * by url, only one instance will be made per url if cachePAges is true.
+     * If the url is remote (i.e. http) don't rely on the return value but
+     * us the async callback instead.
+     *
+     * @param url full url of the item: it can be a well formed Url, an
+     * absolute path or a relative one to the path of the qml file the
+     * PagePool is instantiated from
+     * @param callback If we are loading a remote url, we can't have the
+     * item immediately but will be passed as a parameter to the provided
+     * callback. Normally, don't set a callback, use it only in case of
+     * remote urls
      * @returns the page instance that will have been created if necessary.
-     *          If the url is remote it will return null,
-     *          as well will return null if the callback has been provided
+     * If the url is remote it will return null, as well will return null
+     * if the callback has been provided
      */
     Q_INVOKABLE QQuickItem *loadPage(const QString &url, QJSValue callback = QJSValue());
 
