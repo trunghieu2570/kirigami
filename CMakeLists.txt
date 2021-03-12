@@ -19,6 +19,7 @@ option(BUILD_SHARED_LIBS "Build a shared module" ON)
 option(DESKTOP_ENABLED "Build and install The Desktop style" ON)
 option(BUILD_EXAMPLES "Build and install examples" OFF)
 option(DISABLE_DBUS "Build without D-Bus support" OFF)
+option(UBUNTU_TOUCH "Build for Ubuntu Touch" OFF)
 if(DEFINED STATIC_LIBRARY)
     message(FATAL_ERROR "Use the BUILD_SHARED_LIBS=OFF option to build a static library, STATIC_LIBRARY is no longer a supported option")
 endif()
@@ -101,6 +102,10 @@ ecm_setup_version(${KF_VERSION}
 if (UNIX AND NOT ANDROID AND NOT(APPLE) AND NOT(DISABLE_DBUS))
     find_package(Qt5DBus)
     add_definitions(-DKIRIGAMI_ENABLE_DBUS)
+endif()
+
+if (UBUNTU_TOUCH)
+    add_definitions(-DUBUNTU_TOUCH)
 endif()
 
 if(BUILD_EXAMPLES AND ANDROID)

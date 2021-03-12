@@ -48,7 +48,7 @@ Settings::Settings(QObject *parent)
                 setTabletMode(tabletMode);
             });
 
-#if defined(Q_OS_ANDROID) || defined(Q_OS_IOS)
+#if defined(Q_OS_ANDROID) || defined(Q_OS_IOS) || defined(UBUNTU_TOUCH)
     m_mobile = true;
     m_hasTouchScreen = true;
 #else
