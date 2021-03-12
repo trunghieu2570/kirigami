@@ -19,6 +19,11 @@ import QtGraphicalEffects 1.0
  * of AbstractApplicationWidnow
  * @see AbstractApplicationWidnow
  *
+ * Setting a width and height property on the ApplicationWindow
+ * will set its initial size, but it won't set it as an automatically binding.
+ * to resize programmatically the ApplicationWindow they need to
+ * be assigned again in an imperative fashion
+ * 
  * Example usage:
  * @code
  * import org.kde.kirigami 2.4 as Kirigami

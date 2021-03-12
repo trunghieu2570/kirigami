@@ -24,6 +24,12 @@ import QtGraphicalEffects 1.0
  * a top ApplicationHeader, as well as basic support for the
  * Android back button
  *
+ * Setting a width and height property on the ApplicationWindow
+ * will set its initial size, but it won't set it as an automatically binding.
+ * to resize programmatically the ApplicationWindow they need to
+ * be assigned again in an imperative fashion
+ * 
+ *
  * Example usage:
  * @code
  * import org.kde.kirigami 2.4 as Kirigami
@@ -322,6 +328,7 @@ QQC2.ApplicationWindow {
         // if the bindings are active, after this the window is resized by the
         // compositor and then the bindings are reevaluated, then the window
         // size would reset ignoring what the compositor asked.
+        // see BUG 433849
         root.width = root.width;
         root.height = root.height;
     }
