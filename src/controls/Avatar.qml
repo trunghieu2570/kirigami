@@ -203,7 +203,6 @@ QQC2.Control {
     contentItem: Item {
         Text {
             id: avatarText
-            font.pointSize: 999 // Maximum point size, not actual point size
             fontSizeMode: Text.Fit
             visible: avatarRoot.initialsMode == Kirigami.Avatar.InitialsMode.UseInitials &&
                     !__private.showImage &&
