@@ -100,7 +100,14 @@ Item {
         property int knownItemsImplicitWidth: {
             var hint = 0;
             for (var i in knownItems) {
-                hint = Math.max(hint, knownItems[i].Layout.preferredWidth > 0 ? knownItems[i].Layout.preferredWidth : knownItems[i].implicitWidth);
+                let actualWidth = knownItems[i].implicitWidth
+                if (knownItems[i].Layout.preferredWidth > 0) {
+                    actualWidth = knownItems[i].Layout.preferredWidth
+                }
+                actualWidth = Math.min(actualWidth, knownItems[i].Layout.maximumWidth)
+                actualWidth = Math.max(actualWidth, knownItems[i].Layout.minimumWidth)
+
+                hint = Math.max(hint, actualWidth);
             }
             return hint;
         }
