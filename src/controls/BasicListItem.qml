@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.1
+import QtQuick 2.8
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0 as QQC2
 import org.kde.kirigami 2.12
@@ -208,7 +208,10 @@ AbstractListItem {
     contentItem: Item {
         id: contItem
         implicitWidth: (listItem.leading || {implicitWidth: 0}).implicitWidth + layout.implicitWidth + (listItem.trailing || {implicitWidth: 0}).implicitWidth
-        implicitHeight: layout.implicitHeight + (subtitleItem.text === "" && listItem.reserveSpaceForSubtitle ? subtitleItem.implicitHeight : 0)
+        Binding on implicitHeight {
+            value: layout.implicitHeight + (subtitleItem.text === "" && listItem.reserveSpaceForSubtitle ? subtitleItem.implicitHeight : 0)
+            delayed: true
+        }
 
         RowLayout {
             id: layout
