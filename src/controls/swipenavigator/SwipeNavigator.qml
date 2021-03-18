@@ -207,6 +207,12 @@ Item {
                 Component.onCompleted: {
                     columnView.currentIndex = swipeNavigatorRoot.initialIndex
                 }
+                // We only want the current page to be focusable, so we
+                // disable the inactive pages.
+                onCurrentIndexChanged: {
+                    Array.from(swipeNavigatorRoot.pages).forEach(item => item.enabled = false)
+                    swipeNavigatorRoot.pages[currentIndex].enabled = true
+                }
             }
         }
         popEnter: Transition {
