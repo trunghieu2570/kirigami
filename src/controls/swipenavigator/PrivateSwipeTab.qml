@@ -9,24 +9,24 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 import org.kde.kirigami 2.12 as Kirigami
 
-Rectangle {
+FixedTab {
     id: tabRoot
-    property bool vertical: false
-    signal indexChanged(real xPos, real tabWidth)
 
-    Keys.onPressed: {
-        if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
-            columnView.currentIndex = index
-        }
-    }
-    activeFocusOnTab: true
-    implicitWidth: vertical ? verticalTitleRow.implicitWidth : horizontalTitleRow.implicitWidth
-    implicitHeight: vertical ? verticalTitleRow.implicitHeight : horizontalTitleRow.implicitHeight
+    active: index === columnView.currentIndex
+    title: modelData.title
+    progress: modelData.progress
+    needsAttention: modelData.needsAttention
+    icon: modelData.icon
+
+    signal indexChanged(real xPos, real tabWidth)
 
     onActiveFocusChanged: {
         if (activeFocus) {
             tabRoot.indexChanged(tabRoot.x, tabRoot.width)
         }
+    }
+    onClicked: {
+        columnView.currentIndex = index
     }
     Connections {
         target: columnView
@@ -36,134 +36,4 @@ Rectangle {
             }
         }
     }
-
-    Accessible.name: modelData.title
-    Accessible.description: {
-        if (!!modelData.progress) {
-            if (index == columnView.currentIndex) {
-                //: Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
-                return qsTr("Current page. Progress: %1 percent.").arg(Math.round(modelData.progress*100))
-            } else {
-                //: Accessibility text for a page tab. Keep the text as concise as possible.
-                return qsTr("Navigate to %1. Progress: %2 percent.").arg(modelData.title).arg(Math.round(modelData.progress*100))
-            }
-        } else {
-            if (index == columnView.currentIndex) {
-                //: Accessibility text for a page tab. Keep the text as concise as possible.
-                return qsTr("Current page.")
-            } else if (modelData.needsAttention) {
-                //: Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-                return qsTr("Navigate to %1. Demanding attention.", modelData.title)
-            } else {
-                //: Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-                return qsTr("Navigate to %1.", modelData.title)
-            }
-        }
-    }
-    Accessible.role: Accessible.PageTab
-    Accessible.focusable: true
-    Accessible.onPressAction: columnView.currentIndex = index
-
-    border {
-        width: activeFocus ? 2 : 0
-        color: Kirigami.Theme.textColor
-    }
-    color: {
-        if (index == columnView.currentIndex) {
-            return Kirigami.ColorUtils.adjustColor(Kirigami.Theme.activeTextColor, {"alpha": 0.2*255})
-        } else if (modelData.needsAttention) {
-            return Kirigami.ColorUtils.adjustColor(Kirigami.Theme.negativeTextColor, {"alpha": 0.2*255})
-        } else {
-            return "transparent"
-        }
-    }
-
-    PrivateSwipeHighlight {
-        states: [
-            State { name: "highlighted"; when: index == columnView.currentIndex },
-            State { name: "requestingAttention"; when: modelData.needsAttention }
-        ]
-    }
-
-    PrivateSwipeProgress {
-        anchors.fill: parent
-        visible: modelData.progress != undefined
-        progress: modelData.progress
-    }
-
-    RowLayout {
-        id: verticalTitleRow
-        anchors.fill: parent
-        Accessible.ignored: true
-        visible: vertical
-
-        ColumnLayout {
-            Layout.margins: Kirigami.Settings.isMobile ? Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing
-            Layout.alignment: Qt.AlignCenter
-
-            Kirigami.Icon {
-                visible: !!modelData.icon.name
-                source: modelData.icon.name
-
-                Layout.preferredHeight: swipeNavigatorRoot.big
-                    ? Kirigami.Units.iconSizes.medium
-                    : (Kirigami.Settings.isMobile ? Kirigami.Units.iconSizes.smallMedium : Kirigami.Units.iconSizes.small)
-                Layout.preferredWidth: Layout.preferredHeight
-
-                Layout.alignment: (Qt.AlignHCenter | Qt.AlignBottom)
-            }
-            Kirigami.Heading {
-                level: swipeNavigatorRoot.big ? 2 : 5
-                text: modelData.title
-                horizontalAlignment: Text.AlignHCenter
-                elide: Text.ElideRight
-
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
-            }
-        }
-    }
-
-    RowLayout {
-        id: horizontalTitleRow
-        anchors.fill: parent
-        Accessible.ignored: true
-        visible: !vertical
-
-        RowLayout {
-            Layout.margins: swipeNavigatorRoot.big ? Kirigami.Units.largeSpacing*2 : Kirigami.Units.largeSpacing
-            Layout.alignment: Qt.AlignVCenter
-
-            Kirigami.Icon {
-                visible: !!modelData.icon.name
-                source: modelData.icon.name
-
-                Layout.preferredHeight: swipeNavigatorRoot.big
-                    ? Kirigami.Units.iconSizes.medium
-                    : (Kirigami.Settings.isMobile ? Kirigami.Units.iconSizes.smallMedium : Kirigami.Units.iconSizes.small)
-                Layout.preferredWidth: Layout.preferredHeight
-
-                Layout.alignment: (Qt.AlignLeft | Qt.AlignVCenter)
-            }
-            Kirigami.Heading {
-                level: swipeNavigatorRoot.big ? 1 : 2
-                text: modelData.title
-
-                Layout.fillWidth: true
-                Layout.alignment: (Qt.AlignLeft | Qt.AlignVCenter)
-            }
-        }
-    }
-
-    MouseArea {
-        id: mouse
-        anchors.fill: parent
-        Accessible.ignored: true
-        onClicked: {
-            columnView.currentIndex = index
-        }
-    }
-
-    Layout.fillHeight: true
-    Layout.alignment: Qt.AlignHCenter
 }

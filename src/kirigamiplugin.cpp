@@ -271,6 +271,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     // 2.17
     qmlRegisterType(componentUrl(QStringLiteral("swipenavigator/TabViewLayout.qml")), uri, 2, 17, "TabViewLayout");
+    qmlRegisterType(componentUrl(QStringLiteral("swipenavigator/PageTab.qml")), uri, 2, 17, "PageTab");
 
 
     qmlProtectModule(uri, 2);
