@@ -142,19 +142,12 @@ Item {
             }
         }
 
-        initialItem: GridLayout {
-            id: swipeNavigatorGrid
-            rowSpacing: 0
-            columns: 1
-
-            ToolBar {
+        initialItem: TabViewLayout {
+            bar: ToolBar {
                 id: topToolBar
 
                 padding: 0
                 bottomPadding: 1
-                position: Kirigami.Settings.isMobile ? ToolBar.Footer : ToolBar.Header
-
-                Layout.row: Kirigami.Settings.isMobile ? 1 : 0
 
                 GridLayout {
                     id: _grid
@@ -188,13 +181,9 @@ Item {
                     Loader { id: _footer; sourceComponent: swipeNavigatorRoot.footer; Layout.row: 1; Layout.column: 2 }
                 }
 
-                Layout.fillWidth: true
-
                 Accessible.role: Accessible.PageTabList
             }
-
-
-            Kirigami.ColumnView {
+            body: Kirigami.ColumnView {
                 id: columnView
                 Layout.fillWidth: true
                 Layout.fillHeight: true

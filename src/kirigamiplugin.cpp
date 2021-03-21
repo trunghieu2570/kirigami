@@ -269,6 +269,10 @@ void KirigamiPlugin::registerTypes(const char *uri)
     // 2.16
     qmlRegisterType<Kirigami::BasicThemeDefinition>(uri, 2, 16, "BasicThemeDefinition");
 
+    // 2.17
+    qmlRegisterType(componentUrl(QStringLiteral("swipenavigator/TabViewLayout.qml")), uri, 2, 17, "TabViewLayout");
+
+
     qmlProtectModule(uri, 2);
 }
 
