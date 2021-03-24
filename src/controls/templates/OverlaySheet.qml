@@ -137,11 +137,11 @@ QtObject {
 
 
     function open() {
-        contentItemParent.forceActiveFocus();
         openAnimation.running = true;
         root.sheetOpen = true;
         contentLayout.initialHeight = contentLayout.height
         mainItem.visible = true;
+        mainItem.forceActiveFocus();
     }
 
     function close() {
@@ -197,7 +197,7 @@ QtObject {
         }
     }
 
-    readonly property Item rootItem: MouseArea {
+    readonly property Item rootItem: FocusScope {
         id: mainItem
         Theme.colorSet: root.Theme.colorSet
         Theme.inherit: root.Theme.inherit
@@ -216,9 +216,29 @@ QtObject {
         anchors.fill: parent
 
         visible: false
-        drag.filterChildren: true
-        hoverEnabled: true
         clip: true
+
+        MouseArea{
+            anchors.fill: parent
+            drag.filterChildren: true
+            hoverEnabled: true
+
+            onPressed: {
+                let pos = mapToItem(contentLayout, mouse.x, mouse.y);
+                if (contentLayout.contains(pos) && mouseHover.hovered) { // only on mouse event, not touch
+                    // disable dragging the sheet with a mouse
+                    outerFlickable.interactive = false
+                }
+            }
+            onReleased: {
+                let pos = mapToItem(contentLayout, mouse.x, mouse.y);
+                if (!contentLayout.contains(pos)) {
+                    root.close();
+                }
+                // enable dragging of sheet once mouse is not clicked
+                outerFlickable.interactive = true
+            }
+        }
 
         // differentiate between mouse and touch
         HoverHandler {
@@ -226,20 +246,12 @@ QtObject {
             acceptedDevices: PointerDevice.Mouse
         }
 
-        onPressed: {
-            let pos = mapToItem(contentLayout, mouse.x, mouse.y);
-            if (contentLayout.contains(pos) && mouseHover.hovered) { // only on mouse event, not touch
-                // disable dragging the sheet with a mouse
-                outerFlickable.interactive = false
-            }
-        }
-        onReleased: {
-            let pos = mapToItem(contentLayout, mouse.x, mouse.y);
-            if (!contentLayout.contains(pos)) {
+        Keys.onEscapePressed: {
+            if (root.sheetOpen) {
                 root.close();
+            } else {
+                event.accepted = false;
             }
-            // enable dragging of sheet once mouse is not clicked
-            outerFlickable.interactive = true
         }
 
         readonly property int contentItemPreferredWidth: root.contentItem.Layout.preferredWidth > 0 ? root.contentItem.Layout.preferredWidth : root.contentItem.implicitWidth
@@ -351,7 +363,7 @@ QtObject {
                 (2 + (outerFlickable.contentHeight - outerFlickable.contentY - outerFlickable.topMargin - outerFlickable.bottomMargin)/outerFlickable.height))
         }
 
-        FocusScope {
+        Item {
             id: flickableContents
 
             readonly property real listHeaderHeight: scrollView.flickableItem ? -scrollView.flickableItem.originY : 0
@@ -371,7 +383,7 @@ QtObject {
                 }
             }
 
-            FocusScope {
+            Item {
                 id: contentItemParent
                 anchors {
                     fill: parent
@@ -380,14 +392,6 @@ QtObject {
                     rightMargin: rightPadding
                     bottomMargin: bottomPadding
                 }
-            }
-        }
-
-        Keys.onEscapePressed: {
-            if (root.sheetOpen) {
-                root.close()
-            } else {
-                event.accepted = false
             }
         }
 
@@ -631,6 +635,8 @@ QtObject {
                     property bool userInteracting: false
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+
+                    focus: false
 
                     implicitHeight: flickableItem.contentHeight
                     Layout.maximumHeight: flickableItem.contentHeight
