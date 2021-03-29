@@ -269,7 +269,7 @@ Item {
                     }
                     Behavior on color {
                         ColorAnimation {
-                            duration: Units.longDuration
+                            duration: Units.shortDuration
                             easing.type: Easing.InOutQuad
                         }
                     }
@@ -300,7 +300,7 @@ Item {
                     color: pressed ? baseColor : Theme.backgroundColor
                     Behavior on color {
                         ColorAnimation {
-                            duration: Units.longDuration
+                            duration: Units.shortDuration
                             easing.type: Easing.InOutQuad
                         }
                     }
@@ -346,7 +346,7 @@ Item {
                     color: pressed ? baseColor : Theme.backgroundColor
                     Behavior on color {
                         ColorAnimation {
-                            duration: Units.longDuration
+                            duration: Units.shortDuration
                             easing.type: Easing.InOutQuad
                         }
                     }
@@ -430,7 +430,7 @@ Item {
             }
             Behavior on color {
                 ColorAnimation {
-                    duration: Units.longDuration
+                    duration: Units.shortDuration
                     easing.type: Easing.InOutQuad
                 }
             }
