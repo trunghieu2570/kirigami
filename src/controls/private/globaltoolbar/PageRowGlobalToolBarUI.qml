@@ -29,6 +29,7 @@ Kirigami.AbstractApplicationHeader {
     maximumHeight: globalToolBar.maximumHeight
     separatorVisible: globalToolBar.separatorVisible
 
+    Kirigami.Theme.colorSet: globalToolBar.colorSet
     Kirigami.Theme.textColor: currentItem ? currentItem.Kirigami.Theme.textColor : parent.Kirigami.Theme.textColor
 
     RowLayout {

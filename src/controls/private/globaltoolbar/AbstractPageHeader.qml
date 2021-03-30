@@ -21,6 +21,8 @@ AbstractApplicationHeader {
 
     separatorVisible: pageRow ? pageRow.globalToolBar.separatorVisible : true
 
+    Theme.colorSet: pageRow ? pageRow.globalToolBar.colorSet : Theme.Header
+
     leftPadding: pageRow ? (Math.min(Qt.application.layoutDirection == Qt.LeftToRight
                             ? Math.max(page.title.length > 0 ? Units.gridUnit : 0, pageRow.ScenePosition.x - page.ScenePosition.x + pageRow.globalToolBar.leftReservedSpace + Units.smallSpacing)
                             : Math.max(page.title.length > 0 ? Units.gridUnit : 0, -pageRow.width + pageRow.ScenePosition.x + page.ScenePosition.x + page.width + pageRow.globalToolBar.leftReservedSpace),

@@ -5,7 +5,7 @@
  */
 
 import QtQuick 2.1
-import org.kde.kirigami 2.4 as Kirigami
+import org.kde.kirigami 2.14 as Kirigami
 
 QtObject {
     id: globalToolBar
@@ -27,8 +27,11 @@ QtObject {
         }
     }
 
+
     property var showNavigationButtons: (style != Kirigami.ApplicationHeaderStyle.TabBar && (!Kirigami.Settings.isMobile || Qt.platform.os == "ios")) ? (Kirigami.ApplicationHeaderStyle.ShowBackButton | Kirigami.ApplicationHeaderStyle.ShowForwardButton) : Kirigami.ApplicationHeaderStyle.NoNavigationButtons
     property bool separatorVisible: true
+    //Unfortunately we can't access pageRow.globalToolbar.Kirigami.Theme directly in a declarative way
+    property int colorSet: Kirigami.Theme.Header
     /**
      * If true, when any kind of toolbar is shown, the drawer handles will be shown inside the toolbar, if they're present
      */
