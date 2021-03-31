@@ -54,6 +54,16 @@ public:
     Q_INVOKABLE ColorUtils::Brightness brightnessForColor(const QColor &color);
 
     /**
+     * Same Algorythm as brightnessForColor but returns a 0 to 1 value for an
+     * estimate of the equivalent gray light value (luma).
+     * 0 as full black, 1 as full white and 0.5 equivalent to a 50% gray.
+     *
+     * @since 5.81
+     * @since org.kde.kirigami 2.16
+     */
+    Q_INVOKABLE qreal grayForColor(const QColor &color);
+
+    /**
      * Returns the result of overlaying the foreground color on the background
      * color.
      *

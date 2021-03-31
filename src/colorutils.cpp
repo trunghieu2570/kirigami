@@ -25,6 +25,11 @@ ColorUtils::Brightness ColorUtils::brightnessForColor(const QColor &color)
     return luma(color) > 0.5 ? ColorUtils::Brightness::Light : ColorUtils::Brightness::Dark;
 }
 
+qreal ColorUtils::grayForColor(const QColor &color)
+{
+    return (0.299 * color.red() + 0.587 * color.green() + 0.114 * color.blue()) / 255;
+}
+
 QColor ColorUtils::alphaBlend(const QColor &foreground, const QColor &background)
 {
     const auto foregroundAlpha = foreground.alpha();
