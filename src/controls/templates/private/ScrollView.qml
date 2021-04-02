@@ -5,6 +5,7 @@
  */
 import QtQuick 2.7
 import QtQuick.Controls 2.0
+import QtQml 2.15
 import org.kde.kirigami 2.9 as Kirigami
 
 MouseArea {
@@ -75,6 +76,7 @@ MouseArea {
         target: root.flickableItem
         property: "interactive"
         value: Kirigami.Settings.hasTransientTouchInput
+        restoreMode: Binding.RestoreBinding
     }
     Timer {
         id: scrollBarCreationTimer
