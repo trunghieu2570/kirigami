@@ -5,7 +5,7 @@ set(KF_DEP_VERSION "5.81.0") # handled by release scripts
 
 project(kirigami2 VERSION ${KF_VERSION})
 
-set(REQUIRED_QT_VERSION 5.14.0)
+set(REQUIRED_QT_VERSION 5.15.0)
 
 SET(CMAKE_CXX_STANDARD 11)
 
@@ -116,7 +116,7 @@ endif()
 
 ecm_find_qmlmodule(QtGraphicalEffects 1.0)
 
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050e00)
+add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f00)
 add_subdirectory(src)
 if (NOT ANDROID)
     add_subdirectory(templates)
