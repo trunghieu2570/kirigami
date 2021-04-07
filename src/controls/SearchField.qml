@@ -65,8 +65,12 @@ Kirigami.ActionTextField
             icon.name: root.LayoutMirroring.enabled ? "edit-clear-locationbar-ltr" : "edit-clear-locationbar-rtl"
             visible: root.text.length > 0
             onTriggered: {
-                root.text = ""
-                root.accepted()
+                root.text = "";
+                // Since we are always sending the accepted signal here (whether or not the user has requested
+                // that the accepted signal be delayed), stop the delay timer that gets started by the text changing
+                // above, so that we don't end up sending two of those in rapid succession.
+                fireSearchDelay.stop();
+                root.accepted();
             }
         }
     ]
