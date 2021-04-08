@@ -37,10 +37,19 @@ Controls.Action {
      */
     property alias iconSource: root.icon.source
 
-     /**
-     * A tooltip text to be shown when hovering the control bound to this action. Not all controls support tooltips on all platforms
+    /**
+     * A tooltip text to be shown when hovering the control bound to this action.
+     *
+     * @warning Not all controls support tooltips on all platforms
      */
     property string tooltip
+
+    /**
+     * This property holds the action's "What's This?" help text.
+     * 
+     * @warning Not all controls support whatsThis on all platforms.
+     */
+    property string whatsThis
 
     /**
      * \property list<Action> Action::children

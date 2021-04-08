@@ -88,10 +88,27 @@ Controls.ToolButton {
         }
     }
 
+    // Otherwise we don't get key events
+    onHoveredChanged: if (hovered) {
+        forceActiveFocus();
+    }
+
+    readonly property string shortcutText: action ? (action.shortcut ? " (" + action.shortcut + ")" : "") : ""
+    readonly property string whatsThis: action && action.whatsThis ? action.whatsThis : ""
+    readonly property string whatsThisDisplayedText: whatsThis.length > 0 ? "<br />" + (showWhatsThis ? whatsThis : "<small><font color=\"" + Theme.disabledTextColor + "\">" + qsTr("Press <b>shift</b> to learn more") + "</font></small>") : ""
+
+    property bool showWhatsThis: false
+
     Controls.ToolTip.visible: control.hovered && Controls.ToolTip.text.length > 0 && !(menu && menu.visible) && !control.pressed
-    Controls.ToolTip.text: action ? (action.tooltip && action.tooltip.length ? action.tooltip : action.text) : ""
+    Controls.ToolTip.text: (action ? "<b>" + (action.tooltip && action.tooltip.length ? action.tooltip : action.text) + "</b>" : "") + shortcutText + whatsThisDisplayedText
     Controls.ToolTip.delay: Units.toolTipDelay
     Controls.ToolTip.timeout: 5000
+    Keys.onPressed: if (event.key === Qt.Key_Shift) {
+        showWhatsThis = true;
+    }
+    Keys.onReleased: if (event.key === Qt.Key_Shift) {
+        showWhatsThis = false;
+    }
 
     // This is slightly ugly but saves us from needing to recreate the entire
     // contents of the toolbutton. When using QQC2-desktop-style, the background
