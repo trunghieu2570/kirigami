@@ -32,6 +32,7 @@ set(kirigami_SRCS
     avatar.cpp
     toolbarlayout.cpp
     toolbarlayoutdelegate.cpp
+    shifthandler.cpp
     sizegroup.cpp
     scenegraph/managedtexturenode.cpp
     scenegraph/shadowedrectanglenode.cpp

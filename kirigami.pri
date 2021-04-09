@@ -28,6 +28,7 @@ HEADERS     += $$PWD/src/kirigamiplugin.h \
                $$PWD/src/shadowedtexture.h \
                $$PWD/src/sizegroup.h \
                $$PWD/src/pagerouter.h \
+               $$PWD/src/shifthandler.h \
                $$PWD/src/pagepool.h \
                $$PWD/src/avatar.h \
                $$PWD/src/toolbarlayout.h \

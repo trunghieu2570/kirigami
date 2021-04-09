@@ -331,6 +331,8 @@ QQC2.ApplicationWindow {
         // see BUG 433849
         root.width = root.width;
         root.height = root.height;
+
+        ShiftHandler.target = root;
     }
 
     QtObject {

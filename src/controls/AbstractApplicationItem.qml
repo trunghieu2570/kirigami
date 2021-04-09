@@ -454,4 +454,6 @@ Item {
         id: internal
         property QtObject __passiveNotification
     }
+
+    Component.onCompleted: ShiftHandler.target = root;
 }

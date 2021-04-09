@@ -22,6 +22,7 @@
 #include "settings.h"
 #include "shadowedrectangle.h"
 #include "shadowedtexture.h"
+#include "shifthandler.h"
 #include "sizegroup.h"
 #include "toolbarlayout.h"
 #include "wheelhandler.h"
@@ -131,6 +132,9 @@ void KirigamiPlugin::registerTypes(const char *uri)
         return new Kirigami::BasicThemeDefinition{};
     });
 
+    qmlRegisterSingletonType<ShiftHandler>(uri, 2, 0, "ShiftHandler", [](QQmlEngine *e, QJSEngine *) -> QObject * {
+        return new ShiftHandler();
+    });
     qmlRegisterSingletonType(componentUrl(QStringLiteral("Units.qml")), uri, 2, 0, "Units");
 
     qmlRegisterType(componentUrl(QStringLiteral("Action.qml")), uri, 2, 0, "Action");
