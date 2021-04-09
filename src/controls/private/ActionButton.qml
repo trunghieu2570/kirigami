@@ -8,7 +8,7 @@ import QtQuick 2.1
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0 as Controls
 import QtGraphicalEffects 1.0
-import org.kde.kirigami 2.7
+import org.kde.kirigami 2.16
 
 import "../templates/private"
 
@@ -133,6 +133,7 @@ Item {
                 drawerShowAdjust = 0;
             }
             onReleased: {
+                tooltipHider.restart();
                 if (root.hasGlobalDrawer) globalDrawer.peeking = false;
                 if (root.hasContextDrawer) contextDrawer.peeking = false;
                 //pixel/second
@@ -203,7 +204,20 @@ Item {
 
                 //if an action has been assigned, show a message like a tooltip
                 if (actionUnderMouse && actionUnderMouse.text && Settings.tabletMode) {
-                    Controls.ToolTip.show(actionUnderMouse.text, 3000)
+                    tooltipHider.stop();
+                    Controls.ToolTip.show(actionUnderMouse.text);
+                    // The tooltip is shown perpetually while we are pressed and held, and
+                    // we start tooltipHider below when the press is released. This ensures
+                    // that the user can have as much time as they want to read the tooltip,
+                    // and also that the tooltip is hidden in a pleasant manner that does
+                    // not feel overly urgent.
+                }
+            }
+            Timer {
+                id: tooltipHider
+                interval: Units.humanMoment
+                onTriggered: {
+                    Controls.ToolTip.hide();
                 }
             }
             Connections {

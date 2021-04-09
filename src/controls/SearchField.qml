@@ -6,7 +6,7 @@
 
 import QtQuick 2.6
 import QtQuick.Controls 2.1 as Controls
-import org.kde.kirigami 2.7 as Kirigami
+import org.kde.kirigami 2.16 as Kirigami
 
 /**
  * This is a standard textfield following KDE HIG. Using Ctrl+F as focus
@@ -77,14 +77,7 @@ Kirigami.ActionTextField
 
     Timer {
         id: fireSearchDelay
-        // The 2.5 second delay here is based on the "Human Moment" concept, where things
-        // are supposed to feel like they take too long if it's longer than three seconds.
-        // While this research is up for debate, it's the best we've got at the moment, so
-        // until something better comes along, we can just go with a "less than three
-        // seconds" type rule.
-        // For non-delayed situations, we still delay by shortDuration to ensure we're not
-        // unnecessarily filtering everything.
-        interval: root.delaySearch ? 2500 : Kirigami.Units.shortDuration
+        interval: root.delaySearch ? Kirigami.Units.humanMoment : Kirigami.Units.shortDuration
         running: false; repeat: false;
         onTriggered: {
             root.accepted();
