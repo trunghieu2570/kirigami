@@ -128,6 +128,11 @@ QtObject {
      * (the actual paper is hidden behind an academic paywall and consequently not readily
      * available to us, so the source will have to be the blog entry above)
      *
+     * \note This should __not__ be used as an animation duration, as it is deliberately not scaled according
+     * to the animation settings. This is specifically for determining when something has taken too long and
+     * the user should expect some kind of feedback. See veryShortDuration, shortDuration, longDuration, and
+     * veryLongDuration for animation duration choices.
+     *
      * @since 5.81
      * @since org.kde.kirigami 2.16
      */
