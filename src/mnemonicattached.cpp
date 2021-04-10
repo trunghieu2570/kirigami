@@ -305,11 +305,10 @@ void MnemonicAttached::updateSequence()
 
     if (!m_sequence.isEmpty()) {
         Q_EMIT sequenceChanged();
-    } else {
-        m_actualRichTextLabel = text;
-        m_actualRichTextLabel = removeAcceleratorMarker(m_actualRichTextLabel);
-        m_mnemonicLabel = m_actualRichTextLabel;
     }
+    m_actualRichTextLabel = text;
+    m_actualRichTextLabel = removeAcceleratorMarker(m_actualRichTextLabel);
+    m_mnemonicLabel = m_actualRichTextLabel;
 
     Q_EMIT richTextLabelChanged();
     Q_EMIT mnemonicLabelChanged();
