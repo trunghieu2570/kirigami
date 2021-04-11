@@ -6,8 +6,10 @@ else()
     set(KIRIGAMI_STATIC_FILES
         libkirigami/basictheme.cpp
         libkirigami/platformtheme.cpp
+        libkirigami/styleselector.cpp
         libkirigami/tabletmodewatcher.cpp
-        libkirigami/kirigamipluginfactory.cpp)
+        libkirigami/kirigamipluginfactory.cpp
+        ${CMAKE_CURRENT_BINARY_DIR}/libkirigami/loggingcategory.cpp)
 endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libkirigami ${CMAKE_CURRENT_BINARY_DIR}/libkirigami)
