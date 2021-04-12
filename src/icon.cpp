@@ -227,14 +227,17 @@ void Icon::handleRedirect(QNetworkReply *reply)
         request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
         m_networkReply = qnam->get(request);
         connect(m_networkReply.data(), &QNetworkReply::finished, this, [this]() {
-            if (m_networkReply)
-                handleFinished(m_networkReply);
+            handleFinished(m_networkReply);
         });
     }
 }
 
 void Icon::handleFinished(QNetworkReply *reply)
 {
+    if (!reply) {
+        return;
+    }
+
     reply->deleteLater();
     if (!reply->attribute(QNetworkRequest::RedirectionTargetAttribute).isNull()) {
         handleRedirect(reply);
@@ -414,8 +417,7 @@ QImage Icon::findIcon(const QSize &size)
             request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
             m_networkReply = qnam->get(request);
             connect(m_networkReply.data(), &QNetworkReply::finished, this, [this]() {
-                if (m_networkReply)
-                    handleFinished(m_networkReply);
+                handleFinished(m_networkReply);
             });
         }
         // Temporary icon while we wait for the real image to load...
