@@ -6,6 +6,7 @@
 
 #include "toolbarlayoutdelegate.h"
 
+#include "loggingcategory.h"
 #include "toolbarlayout.h"
 
 ToolBarDelegateIncubator::ToolBarDelegateIncubator(QQmlComponent *component, QQmlContext *context)
@@ -46,10 +47,10 @@ void ToolBarDelegateIncubator::setInitialState(QObject *object)
 void ToolBarDelegateIncubator::statusChanged(QQmlIncubator::Status status)
 {
     if (status == QQmlIncubator::Error) {
-        qWarning() << "Could not create delegate for ToolBarLayout";
+        qCWarning(KirigamiLog) << "Could not create delegate for ToolBarLayout";
         const auto e = errors();
         for (const auto &error : e) {
-            qWarning() << error;
+            qCWarning(KirigamiLog) << error;
         }
         m_finished = true;
     }
@@ -120,10 +121,10 @@ void ToolBarLayoutDelegate::createItems(QQmlComponent *fullComponent, QQmlCompon
     m_fullIncubator->setStateCallback(callback);
     m_fullIncubator->setCompletedCallback([this](ToolBarDelegateIncubator *incubator) {
         if (incubator->isError()) {
-            qWarning() << "Could not create delegate for ToolBarLayout";
+            qCWarning(KirigamiLog) << "Could not create delegate for ToolBarLayout";
             const auto errors = incubator->errors();
             for (const auto &error : errors) {
-                qWarning() << error;
+                qCWarning(KirigamiLog) << error;
             }
             return;
         }
@@ -150,10 +151,10 @@ void ToolBarLayoutDelegate::createItems(QQmlComponent *fullComponent, QQmlCompon
     m_iconIncubator->setStateCallback(callback);
     m_iconIncubator->setCompletedCallback([this](ToolBarDelegateIncubator *incubator) {
         if (incubator->isError()) {
-            qWarning() << "Could not create delegate for ToolBarLayout";
+            qCWarning(KirigamiLog) << "Could not create delegate for ToolBarLayout";
             const auto errors = incubator->errors();
             for (const auto &error : errors) {
-                qWarning() << error;
+                qCWarning(KirigamiLog) << error;
             }
             return;
         }

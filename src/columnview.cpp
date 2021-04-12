@@ -7,6 +7,7 @@
 #include "columnview.h"
 #include "columnview_p.h"
 
+#include "loggingcategory.h"
 #include <QAbstractItemModel>
 #include <QDebug>
 #include <QGuiApplication>
@@ -86,7 +87,7 @@ QtObject {
     /* clang-format on */
 
     m_instance = component->create();
-    // qWarning()<<component->errors();
+    // qCWarning(KirigamiLog)<<component->errors();
     Q_ASSERT(m_instance);
 
     m_separatorComponent = m_instance->property("separator").value<QQmlComponent *>();
@@ -1113,12 +1114,12 @@ void ColumnView::insertItem(int pos, QQuickItem *item)
 void ColumnView::replaceItem(int pos, QQuickItem *item)
 {
     if (pos < 0 || pos >= m_contentItem->m_items.length()) {
-        qWarning() << "Position" << pos << "passed to ColumnView::replaceItem is out of range.";
+        qCWarning(KirigamiLog) << "Position" << pos << "passed to ColumnView::replaceItem is out of range.";
         return;
     }
 
     if (!item) {
-        qWarning() << "Null item passed to ColumnView::replaceItem.";
+        qCWarning(KirigamiLog) << "Null item passed to ColumnView::replaceItem.";
         return;
     }
 

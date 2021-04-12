@@ -12,6 +12,8 @@
 #include <QQmlEngine>
 #include <QQmlProperty>
 
+#include "loggingcategory.h"
+
 PagePool::PagePool(QObject *parent)
     : QObject(parent)
 {
@@ -98,7 +100,7 @@ QQuickItem *PagePool::loadPageWithProperties(const QString &url, const QVariantM
 
         connect(component, &QQmlComponent::statusChanged, this, [this, component, callback, properties](QQmlComponent::Status status) mutable {
             if (status != QQmlComponent::Ready) {
-                qWarning() << component->errors();
+                qCWarning(KirigamiLog) << component->errors();
                 m_componentForUrl.remove(component->url());
                 component->deleteLater();
                 return;
@@ -119,7 +121,7 @@ QQuickItem *PagePool::loadPageWithProperties(const QString &url, const QVariantM
         return nullptr;
 
     } else if (component->status() != QQmlComponent::Ready) {
-        qWarning() << component->errors();
+        qCWarning(KirigamiLog) << component->errors();
         return nullptr;
     }
 
@@ -160,11 +162,11 @@ QQuickItem *PagePool::createFromComponent(QQmlComponent *component, const QVaria
     for (auto it = properties.constBegin(); it != properties.constEnd(); ++it) {
         QQmlProperty p(obj, it.key(), ctx);
         if (!p.isValid()) {
-            qWarning() << "Invalid property " << it.key();
+            qCWarning(KirigamiLog) << "Invalid property " << it.key();
             continue;
         }
         if (!p.write(it.value())) {
-            qWarning() << "Could not set property " << it.key();
+            qCWarning(KirigamiLog) << "Could not set property " << it.key();
             continue;
         }
     }

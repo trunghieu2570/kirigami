@@ -7,6 +7,7 @@
 
 #include "delegaterecycler.h"
 
+#include "loggingcategory.h"
 #include <QDebug>
 #include <QQmlComponent>
 #include <QQmlContext>
@@ -188,7 +189,7 @@ QQmlComponent *DelegateRecycler::sourceComponent() const
 void DelegateRecycler::setSourceComponent(QQmlComponent *component)
 {
     if (component && component->parent() == this) {
-        qWarning() << "Error: source components cannot be declared inside DelegateRecycler";
+        qCWarning(KirigamiLog) << "Error: source components cannot be declared inside DelegateRecycler";
         return;
     }
     if (m_sourceComponent == component) {

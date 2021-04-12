@@ -5,6 +5,7 @@
  */
 
 #include "pagerouter.h"
+#include "loggingcategory.h"
 #include <QJSEngine>
 #include <QJSValue>
 #include <QJsonObject>
@@ -105,8 +106,9 @@ void PageRouter::classBegin()
 void PageRouter::componentComplete()
 {
     if (m_pageStack == nullptr) {
-        qCritical() << "PageRouter should be created with a ColumnView. Not doing so is undefined behaviour, and is likely to result in a crash upon further "
-                       "interaction.";
+        qCCritical(KirigamiLog)
+            << "PageRouter should be created with a ColumnView. Not doing so is undefined behaviour, and is likely to result in a crash upon further "
+               "interaction.";
     } else {
         Q_EMIT pageStackChanged();
         m_currentRoutes.clear();
@@ -179,7 +181,7 @@ void PageRouter::push(ParsedRoute *route)
 {
     Q_ASSERT(route);
     if (!routesContainsKey(route->name)) {
-        qCritical() << "Route" << route->name << "not defined";
+        qCCritical(KirigamiLog) << "Route" << route->name << "not defined";
         return;
     }
     if (routesCacheForKey(route->name)) {
@@ -218,7 +220,7 @@ void PageRouter::push(ParsedRoute *route)
         item->setParent(this);
         auto qqItem = qobject_cast<QQuickItem *>(item);
         if (!qqItem) {
-            qCritical() << "Route" << route->name << "is not an item! This is undefined behaviour and will likely crash your application.";
+            qCCritical(KirigamiLog) << "Route" << route->name << "is not an item! This is undefined behaviour and will likely crash your application.";
         }
         for (auto it = route->properties.begin(); it != route->properties.end(); it++) {
             qqItem->setProperty(qUtf8Printable(it.key()), it.value());
@@ -241,12 +243,12 @@ void PageRouter::push(ParsedRoute *route)
         connect(component, &QQmlComponent::statusChanged, [=](QQmlComponent::Status status) {
             // Loading can only go to Ready or Error.
             if (status != QQmlComponent::Ready) {
-                qCritical() << "Failed to push route:" << component->errors();
+                qCCritical(KirigamiLog) << "Failed to push route:" << component->errors();
             }
             createAndPush();
         });
     } else {
-        qCritical() << "Failed to push route:" << component->errors();
+        qCCritical(KirigamiLog) << "Failed to push route:" << component->errors();
     }
 }
 
@@ -321,7 +323,7 @@ void PageRouter::bringToView(QJSValue route)
             }
             index++;
         }
-        qWarning() << "Route" << parsed->name << "with data" << parsed->data << "is not on the current stack of routes.";
+        qCWarning(KirigamiLog) << "Route" << parsed->name << "with data" << parsed->data << "is not on the current stack of routes.";
     }
 }
 
@@ -407,7 +409,7 @@ bool PageRouter::isActive(QObject *object)
         }
         pointer = pointer->parent();
     }
-    qWarning() << "Object" << object << "not in current routes";
+    qCWarning(KirigamiLog) << "Object" << object << "not in current routes";
     return false;
 }
 
@@ -467,7 +469,7 @@ void PageRouter::preload(ParsedRoute *route)
         }
     }
     if (!routesContainsKey(route->name)) {
-        qCritical() << "Route" << route->name << "not defined";
+        qCCritical(KirigamiLog) << "Route" << route->name << "not defined";
         delete route;
         return;
     }
@@ -478,7 +480,7 @@ void PageRouter::preload(ParsedRoute *route)
         item->setParent(this);
         auto qqItem = qobject_cast<QQuickItem *>(item);
         if (!qqItem) {
-            qCritical() << "Route" << route->name << "is not an item! This is undefined behaviour and will likely crash your application.";
+            qCCritical(KirigamiLog) << "Route" << route->name << "is not an item! This is undefined behaviour and will likely crash your application.";
         }
         for (auto it = route->properties.begin(); it != route->properties.end(); it++) {
             qqItem->setProperty(qUtf8Printable(it.key()), it.value());
@@ -489,7 +491,7 @@ void PageRouter::preload(ParsedRoute *route)
         attached->m_router = this;
         component->completeCreate();
         if (!route->cache) {
-            qCritical() << "Route" << route->name << "is being preloaded despite it not having caching enabled.";
+            qCCritical(KirigamiLog) << "Route" << route->name << "is being preloaded despite it not having caching enabled.";
             delete route;
             return;
         }
@@ -504,12 +506,12 @@ void PageRouter::preload(ParsedRoute *route)
         connect(component, &QQmlComponent::statusChanged, [=](QQmlComponent::Status status) {
             // Loading can only go to Ready or Error.
             if (status != QQmlComponent::Ready) {
-                qCritical() << "Failed to push route:" << component->errors();
+                qCCritical(KirigamiLog) << "Failed to push route:" << component->errors();
             }
             createAndCache();
         });
     } else {
-        qCritical() << "Failed to push route:" << component->errors();
+        qCCritical(KirigamiLog) << "Failed to push route:" << component->errors();
     }
 }
 
@@ -531,7 +533,7 @@ void PageRouter::unpreload(ParsedRoute *route)
 void PreloadRouteGroup::handleChange()
 {
     if (!(m_parent->m_router)) {
-        qCritical() << "PreloadRouteGroup does not have a parent PageRouter";
+        qCCritical(KirigamiLog) << "PreloadRouteGroup does not have a parent PageRouter";
         return;
     }
     auto r = m_parent->m_router;
@@ -572,7 +574,7 @@ void PageRouterAttached::navigateToRoute(QJSValue route)
     if (m_router) {
         m_router->navigateToRoute(route);
     } else {
-        qCritical() << "PageRouterAttached does not have a parent PageRouter";
+        qCCritical(KirigamiLog) << "PageRouterAttached does not have a parent PageRouter";
         return;
     }
 }
@@ -582,7 +584,7 @@ bool PageRouterAttached::routeActive(QJSValue route)
     if (m_router) {
         return m_router->routeActive(route);
     } else {
-        qCritical() << "PageRouterAttached does not have a parent PageRouter";
+        qCCritical(KirigamiLog) << "PageRouterAttached does not have a parent PageRouter";
         return false;
     }
 }
@@ -592,7 +594,7 @@ void PageRouterAttached::pushRoute(QJSValue route)
     if (m_router) {
         m_router->pushRoute(route);
     } else {
-        qCritical() << "PageRouterAttached does not have a parent PageRouter";
+        qCCritical(KirigamiLog) << "PageRouterAttached does not have a parent PageRouter";
         return;
     }
 }
@@ -602,7 +604,7 @@ void PageRouterAttached::popRoute()
     if (m_router) {
         m_router->popRoute();
     } else {
-        qCritical() << "PageRouterAttached does not have a parent PageRouter";
+        qCCritical(KirigamiLog) << "PageRouterAttached does not have a parent PageRouter";
         return;
     }
 }
@@ -612,7 +614,7 @@ void PageRouterAttached::bringToView(QJSValue route)
     if (m_router) {
         m_router->bringToView(route);
     } else {
-        qCritical() << "PageRouterAttached does not have a parent PageRouter";
+        qCCritical(KirigamiLog) << "PageRouterAttached does not have a parent PageRouter";
         return;
     }
 }
@@ -622,7 +624,7 @@ QVariant PageRouterAttached::data() const
     if (m_router) {
         return m_router->dataFor(parent());
     } else {
-        qCritical() << "PageRouterAttached does not have a parent PageRouter";
+        qCCritical(KirigamiLog) << "PageRouterAttached does not have a parent PageRouter";
         return QVariant();
     }
 }
@@ -632,7 +634,7 @@ bool PageRouterAttached::isCurrent() const
     if (m_router) {
         return m_router->isActive(parent());
     } else {
-        qCritical() << "PageRouterAttached does not have a parent PageRouter";
+        qCCritical(KirigamiLog) << "PageRouterAttached does not have a parent PageRouter";
         return false;
     }
 }
@@ -642,7 +644,7 @@ bool PageRouterAttached::watchedRouteActive()
     if (m_router) {
         return m_router->routeActive(m_watchedRoute);
     } else {
-        qCritical() << "PageRouterAttached does not have a parent PageRouter";
+        qCCritical(KirigamiLog) << "PageRouterAttached does not have a parent PageRouter";
         return false;
     }
 }
@@ -663,7 +665,7 @@ void PageRouterAttached::pushFromHere(QJSValue route)
     if (m_router) {
         m_router->pushFromObject(parent(), route);
     } else {
-        qCritical() << "PageRouterAttached does not have a parent PageRouter";
+        qCCritical(KirigamiLog) << "PageRouterAttached does not have a parent PageRouter";
     }
 }
 
@@ -672,7 +674,7 @@ void PageRouterAttached::replaceFromHere(QJSValue route)
     if (m_router) {
         m_router->pushFromObject(parent(), route, true);
     } else {
-        qCritical() << "PageRouterAttached does not have a parent PageRouter";
+        qCCritical(KirigamiLog) << "PageRouterAttached does not have a parent PageRouter";
     }
 }
 
@@ -681,7 +683,7 @@ void PageRouterAttached::popFromHere()
     if (m_router) {
         m_router->pushFromObject(parent(), QJSValue());
     } else {
-        qCritical() << "PageRouterAttached does not have a parent PageRouter";
+        qCCritical(KirigamiLog) << "PageRouterAttached does not have a parent PageRouter";
     }
 }
 
@@ -731,7 +733,7 @@ void PageRouter::pushFromObject(QObject *object, QJSValue inputRoute, bool repla
             return;
         }
     }
-    qWarning() << "Object" << object << "not in current routes";
+    qCWarning(KirigamiLog) << "Object" << object << "not in current routes";
 }
 
 QJSValue PageRouter::currentRoutes() const

@@ -23,6 +23,7 @@
 #include <QTimer>
 #include <QtConcurrent>
 
+#include "loggingcategory.h"
 #include <cmath>
 
 #define return_fallback(value)                                                                                                                                 \
@@ -373,7 +374,7 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
 QVariantList ImageColors::palette() const
 {
     if (m_futureImageData)
-        qWarning() << m_futureImageData->future().isFinished();
+        qCWarning(KirigamiLog) << m_futureImageData->future().isFinished();
     return_fallback(m_fallbackPalette) return m_imageData.m_palette;
 }
 

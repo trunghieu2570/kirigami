@@ -43,6 +43,7 @@ set(kirigami_SRCS
     scenegraph/shadowedtexturenode.cpp
     scenegraph/shadowedtexturematerial.cpp
     scenegraph/shadowedbordertexturematerial.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/libkirigami/loggingcategory.cpp
     ${kirigami_QM_LOADER}
     ${KIRIGAMI_STATIC_FILES}
     )

@@ -14,6 +14,7 @@
 #include <QTimer>
 
 #include "enums.h"
+#include "loggingcategory.h"
 #include "toolbarlayoutdelegate.h"
 
 ToolBarLayoutAttached::ToolBarLayoutAttached(QObject *parent)
@@ -333,7 +334,7 @@ void ToolBarLayout::updatePolish()
 void ToolBarLayout::Private::performLayout()
 {
     if (!fullDelegate || !iconDelegate || !moreButton) {
-        qWarning() << "ToolBarLayout: Unable to layout, required properties are not set";
+        qCWarning(KirigamiLog) << "ToolBarLayout: Unable to layout, required properties are not set";
         return;
     }
 

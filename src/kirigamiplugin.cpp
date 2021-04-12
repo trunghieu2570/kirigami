@@ -35,6 +35,7 @@
 #include "libkirigami/basictheme_p.h"
 #include "libkirigami/platformtheme.h"
 #include "libkirigami/styleselector_p.h"
+#include "loggingcategory.h"
 
 static QString s_selectedStyle;
 
@@ -124,7 +125,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     // old legacy retrocompatible Theme
     qmlRegisterSingletonType<Kirigami::BasicThemeDefinition>(uri, 2, 0, "Theme", [](QQmlEngine *, QJSEngine *) {
-        qWarning() << "The Theme singleton is deprecated (since 5.39). Import Kirigami 2.2 or higher and use the attached property instead.";
+        qCWarning(KirigamiLog) << "The Theme singleton is deprecated (since 5.39). Import Kirigami 2.2 or higher and use the attached property instead.";
         return new Kirigami::BasicThemeDefinition{};
     });
 

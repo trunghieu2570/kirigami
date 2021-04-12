@@ -6,6 +6,7 @@
 
 #include "colorutils.h"
 
+#include "loggingcategory.h"
 #include <QIcon>
 #include <QtMath>
 #include <cmath>
@@ -124,7 +125,7 @@ ParsedAdjustments parseAdjustments(const QJSValue &value)
     }
 
     if ((parsed.red || parsed.green || parsed.blue) && (parsed.hue || parsed.saturation || parsed.value)) {
-        qCritical() << "It is an error to have both RGB and HSL values in an adjustment.";
+        qCCritical(KirigamiLog) << "It is an error to have both RGB and HSL values in an adjustment.";
     }
 
     return parsed;
@@ -135,25 +136,25 @@ QColor ColorUtils::adjustColor(const QColor &color, const QJSValue &adjustments)
     auto adjusts = parseAdjustments(adjustments);
 
     if (qBound(-360.0, adjusts.hue, 360.0) != adjusts.hue) {
-        qCritical() << "Hue is out of bounds";
+        qCCritical(KirigamiLog) << "Hue is out of bounds";
     }
     if (qBound(-255.0, adjusts.red, 255.0) != adjusts.red) {
-        qCritical() << "Red is out of bounds";
+        qCCritical(KirigamiLog) << "Red is out of bounds";
     }
     if (qBound(-255.0, adjusts.green, 255.0) != adjusts.green) {
-        qCritical() << "Green is out of bounds";
+        qCCritical(KirigamiLog) << "Green is out of bounds";
     }
     if (qBound(-255.0, adjusts.blue, 255.0) != adjusts.blue) {
-        qCritical() << "Green is out of bounds";
+        qCCritical(KirigamiLog) << "Green is out of bounds";
     }
     if (qBound(-255.0, adjusts.saturation, 255.0) != adjusts.saturation) {
-        qCritical() << "Saturation is out of bounds";
+        qCCritical(KirigamiLog) << "Saturation is out of bounds";
     }
     if (qBound(-255.0, adjusts.value, 255.0) != adjusts.value) {
-        qCritical() << "Value is out of bounds";
+        qCCritical(KirigamiLog) << "Value is out of bounds";
     }
     if (qBound(-255.0, adjusts.alpha, 255.0) != adjusts.alpha) {
-        qCritical() << "Alpha is out of bounds";
+        qCCritical(KirigamiLog) << "Alpha is out of bounds";
     }
 
     auto copy = color;
@@ -182,26 +183,26 @@ QColor ColorUtils::scaleColor(const QColor &color, const QJSValue &adjustments)
     auto copy = color;
 
     if (qBound(-100.0, adjusts.red, 100.00) != adjusts.red) {
-        qCritical() << "Red is out of bounds";
+        qCCritical(KirigamiLog) << "Red is out of bounds";
     }
     if (qBound(-100.0, adjusts.green, 100.00) != adjusts.green) {
-        qCritical() << "Green is out of bounds";
+        qCCritical(KirigamiLog) << "Green is out of bounds";
     }
     if (qBound(-100.0, adjusts.blue, 100.00) != adjusts.blue) {
-        qCritical() << "Blue is out of bounds";
+        qCCritical(KirigamiLog) << "Blue is out of bounds";
     }
     if (qBound(-100.0, adjusts.saturation, 100.00) != adjusts.saturation) {
-        qCritical() << "Saturation is out of bounds";
+        qCCritical(KirigamiLog) << "Saturation is out of bounds";
     }
     if (qBound(-100.0, adjusts.value, 100.00) != adjusts.value) {
-        qCritical() << "Value is out of bounds";
+        qCCritical(KirigamiLog) << "Value is out of bounds";
     }
     if (qBound(-100.0, adjusts.alpha, 100.00) != adjusts.alpha) {
-        qCritical() << "Alpha is out of bounds";
+        qCCritical(KirigamiLog) << "Alpha is out of bounds";
     }
 
     if (adjusts.hue != 0) {
-        qCritical() << "Hue cannot be scaled";
+        qCCritical(KirigamiLog) << "Hue cannot be scaled";
     }
 
     auto shiftToAverage = [](double current, double factor) {
