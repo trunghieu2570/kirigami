@@ -103,7 +103,7 @@ void SizeGroup::adjustItems(Mode whatChanged)
             continue;
         }
 
-        if (!qmlEngine(item)) {
+        if (!qmlEngine(item) || !qmlContext(item)) {
             continue;
         }
 
