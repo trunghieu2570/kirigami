@@ -37,7 +37,7 @@ import org.kde.kirigami 2.10 as Kirigami
  * @endcode
  *
  */
-AbstractListItem {
+Kirigami.AbstractListItem {
     id: listSection
 
     /**
