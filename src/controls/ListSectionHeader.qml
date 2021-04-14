@@ -41,7 +41,7 @@ AbstractListItem {
     id: listSection
 
     /**
-     * string: bool
+     * label: string
      * A single text label the list section header will contain
      */
     property alias label: listSection.text
