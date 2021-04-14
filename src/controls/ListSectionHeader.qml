@@ -55,7 +55,6 @@ AbstractListItem {
     separatorVisible: false
     sectionDelegate: true
     hoverEnabled: false
-    supportsMouseEvents: false
 
     contentItem: RowLayout {
         id: rowLayout
