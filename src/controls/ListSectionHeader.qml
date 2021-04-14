@@ -7,7 +7,7 @@
 import QtQuick 2.5
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.4 as QQC2
-import org.kde.kirigami 2.10
+import org.kde.kirigami 2.10 as Kirigami
 
 /**
  * A section delegate for the primitive ListView component.
@@ -49,9 +49,9 @@ AbstractListItem {
 
     default property alias _contents: rowLayout.data
 
-    backgroundColor: Theme.backgroundColor
-    Theme.inherit: false
-    Theme.colorSet: Theme.Window
+    backgroundColor: Kirigami.Theme.backgroundColor
+    Kirigami.Theme.inherit: false
+    Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
     separatorVisible: false
     sectionDelegate: true
@@ -61,7 +61,7 @@ AbstractListItem {
     contentItem: RowLayout {
         id: rowLayout
 
-        Heading {
+        Kirigami.Heading {
             level: 3
             text: listSection.text
             Layout.fillWidth: rowLayout.children.length === 1
