@@ -382,7 +382,12 @@ T.Control {
 
         // Replace topmost page.
         var pageItem = pagesLogic.initPage(page, properties);
-        columnView.replaceItem(depth - 1, pageItem);
+        if (depth > 0)
+            columnView.replaceItem(depth - 1, pageItem);
+        else {
+            console.log("Calling replace on empty PageRow", pageItem)
+            columnView.addItem(pageItem)
+        }
         pagePushed(pageItem);
 
         // Push any extra defined pages onto the stack.
