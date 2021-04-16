@@ -217,9 +217,9 @@ AbstractListItem {
             id: layout
             spacing: LayoutMirroring.enabled ? listItem.rightPadding : listItem.leftPadding
             anchors.left: contItem.left
-            anchors.leftMargin: listItem.leadingPadding
+            anchors.leftMargin: listItem.leading ? listItem.leadingPadding : 0
             anchors.right: contItem.right
-            anchors.rightMargin: listItem.trailingPadding
+            anchors.rightMargin: listItem.trailing ? listItem.trailingPadding : 0
             anchors.verticalCenter: parent.verticalCenter
 
             Icon {
