@@ -276,7 +276,9 @@ void WheelHandler::setTarget(QQuickItem *target)
 
     m_target = target;
 
-    GlobalWheelFilter::self()->setItemHandlerAssociation(target, this);
+    if (target) {
+        GlobalWheelFilter::self()->setItemHandlerAssociation(target, this);
+    }
 
     Q_EMIT targetChanged();
 }
