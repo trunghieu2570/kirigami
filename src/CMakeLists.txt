@@ -127,7 +127,8 @@ if (BUILD_SHARED_LIBS)
     ecm_generate_pri_file(BASE_NAME Kirigami2 LIB_NAME KF5Kirigami2 DEPS "core qml quick svg" FILENAME_VAR PRI_FILENAME )
     install(FILES ${PRI_FILENAME}
             DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
-
+else()
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami.2)
 endif()
 
 install(TARGETS kirigamiplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami.2)
