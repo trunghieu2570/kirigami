@@ -128,6 +128,10 @@ if (BUILD_SHARED_LIBS)
     install(FILES ${PRI_FILENAME}
             DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
 else()
+    target_include_directories(kirigamiplugin
+        PUBLIC
+        ${CMAKE_CURRENT_BINARY_DIR}/libkirigami # for loggingcategory.h in the plugin
+    )
     install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami.2)
 endif()
 

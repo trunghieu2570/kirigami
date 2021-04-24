@@ -15,6 +15,7 @@
 #include <QQmlExtensionPlugin>
 
 #ifdef KIRIGAMI_BUILD_TYPE_STATIC
+#include "loggingcategory.h"
 #include <QDebug>
 #endif
 
