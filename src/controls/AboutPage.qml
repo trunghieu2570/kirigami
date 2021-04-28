@@ -6,6 +6,7 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 2.4 as QQC2
+import QtQuick.Window 2.15
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.6
 
@@ -70,12 +71,14 @@ ScrollablePage
 
         RowLayout {
             height: implicitHeight + (Units.smallSpacing * 2)
+            property bool hasRemoteAvatar: (typeof(modelData.ocsUsername) !== "undefined" && modelData.ocsUsername.length > 0)
 
             spacing: Units.smallSpacing * 2
             Icon {
                 width: Units.iconSizes.smallMedium
                 height: width
-                source: "user"
+                fallback: "user"
+                source: hasRemoteAvatar && remoteAvatars.checked ? "https://store.kde.org/avatar/%1?s=%2".arg(modelData.ocsUsername).arg(width * Screen.devicePixelRatio) : "user"
             }
             QQC2.Label {
                 text: modelData.name
@@ -84,7 +87,16 @@ ScrollablePage
                 // Group action buttons together
                 spacing: 0
                 QQC2.ToolButton {
-                    visible: modelData.emailAddress
+                    visible: typeof(modelData.ocsUsername) !== "undefined" && modelData.ocsUsername.length > 0
+                    width: height
+                    icon.name: "get-hot-new-stuff"
+                    QQC2.ToolTip.delay: Units.toolTipDelay
+                    QQC2.ToolTip.visible: hovered
+                    QQC2.ToolTip.text: qsTr("Visit %1's KDE Store page").arg(modelData.name)
+                    onClicked: Qt.openUrlExternally("https://store.kde.org/u/%1".arg(modelData.ocsUsername))
+                }
+                QQC2.ToolButton {
+                    visible: typeof(modelData.emailAddress) !== "undefined" && modelData.emailAddress.length > 0
                     width: height
                     icon.name: "mail-sent"
                     QQC2.ToolTip.delay: Units.toolTipDelay
@@ -93,12 +105,12 @@ ScrollablePage
                     onClicked: Qt.openUrlExternally("mailto:%1".arg(modelData.emailAddress))
                 }
                 QQC2.ToolButton {
-                    visible: modelData.webAddress
+                    visible: typeof(modelData.webAddress) !== "undefined" && modelData.webAddress.length > 0
                     width: height
                     icon.name: "globe"
                     QQC2.ToolTip.delay: Units.toolTipDelay
                     QQC2.ToolTip.visible: hovered
-                    QQC2.ToolTip.text: modelData.webAddress
+                    QQC2.ToolTip.text: (typeof(modelData.webAddress) === "undefined" && modelData.webAddress.length > 0) ? "" : modelData.webAddress
                     onClicked: Qt.openUrlExternally(modelData.webAddress)
                 }
             }
@@ -221,9 +233,34 @@ ScrollablePage
             text: qsTr("Authors")
             visible: aboutData.authors.length > 0
         }
+        QQC2.CheckBox {
+            id: remoteAvatars
+            visible: authorsRepeater.hasAnyRemoteAvatars
+            checked: false
+            text: qsTr("Show author photos")
+            Timer {
+                id: remotesThrottle
+                repeat: false
+                interval: 1
+                onTriggered: {
+                    var hasAnyRemotes = false;
+                    for (var i = 0; i < authorsRepeater.count; ++i) {
+                        var itm = authorsRepeater.itemAt(i);
+                        if (itm.hasRemoteAvatar) {
+                            hasAnyRemotes = true;
+                            break;
+                        }
+                    }
+                    authorsRepeater.hasAnyRemoteAvatars = hasAnyRemotes;
+                }
+            }
+        }
         Repeater {
+            id: authorsRepeater
             model: aboutData.authors
+            property bool hasAnyRemoteAvatars
             delegate: personDelegate
+            onCountChanged: remotesThrottle.start()
         }
         Heading {
             height: visible ? implicitHeight : 0
