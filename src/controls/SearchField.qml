@@ -83,6 +83,9 @@ Kirigami.ActionTextField
             root.accepted();
         }
     }
+    onAccepted: {
+        fireSearchDelay.running = false
+    }
     onTextChanged: {
         if (root.autoAccept) {
             fireSearchDelay.restart();
