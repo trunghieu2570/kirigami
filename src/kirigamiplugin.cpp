@@ -86,8 +86,10 @@ QUrl KirigamiPlugin::componentUrl(const QString &fileName) const
     return Kirigami::StyleSelector::componentUrl(fileName);
 }
 
+using SingletonCreationFunction = QObject *(*)(QQmlEngine *, QJSEngine *);
+
 template<typename T>
-inline std::function<QObject *(QQmlEngine *, QJSEngine *)> singleton()
+inline SingletonCreationFunction singleton()
 {
     return [](QQmlEngine *, QJSEngine *) -> QObject * {
         return new T;
