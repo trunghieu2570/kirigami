@@ -29,7 +29,7 @@ Kirigami.ActionTextField
     id: root
     /**
      * Determines whether the accepted signal will be fired automatically
-     * when the text is changed. Setting this to true will require that
+     * when the text is changed. Setting this to false will require that
      * the user presses return or enter (the same way a QML.TextInput
      * works).
      *
