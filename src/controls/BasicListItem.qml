@@ -201,6 +201,16 @@ AbstractListItem {
      */
     property bool reserveSpaceForSubtitle: false
 
+    /**
+     * textSpacing: real
+     * 
+     * The spacing between the label row and subtitle row.
+     * 
+     * @since 5.83
+     * @since org.kde.kirigami 2.15
+     */
+    property alias textSpacing: labelColumn.spacing
+
     default property alias _basicDefault: layout.data
 
     icon: action ? action.icon.name || action.icon.source : undefined
