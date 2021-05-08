@@ -246,7 +246,8 @@ AbstractListItem {
                 visible: source != undefined
             }
             ColumnLayout {
-                spacing: 0
+                id: labelColumn
+                spacing: Units.smallSpacing
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
                 QQC2.Label {
