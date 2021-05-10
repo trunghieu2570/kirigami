@@ -3,6 +3,7 @@
 set(libkirigami_SRCS
     platformtheme.cpp
     basictheme.cpp
+    formfactorinfo.cpp
     kirigamipluginfactory.cpp
     tabletmodewatcher.cpp
     styleselector.cpp
