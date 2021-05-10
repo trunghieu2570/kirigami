@@ -78,9 +78,11 @@ ToolBarLayoutDelegate::~ToolBarLayoutDelegate()
         delete m_iconIncubator;
     }
     if (m_full) {
+        m_full->disconnect(this);
         delete m_full;
     }
     if (m_icon) {
+        m_icon->disconnect(this);
         delete m_icon;
     }
 }
