@@ -211,6 +211,16 @@ AbstractListItem {
      */
     property alias textSpacing: labelColumn.spacing
 
+    /**
+     * Whether to make the icon and labels have a disabled look. Defaults to
+     * false. Can be used to tweak whether the content elements are visually
+     * active while preserving an active appearance for any leading or trailing
+     * items.
+     * @since 5.83
+     * @since org.kde.kirigami 2.15
+     */
+    property bool fadeContent: false
+
     default property alias _basicDefault: layout.data
 
     icon: action ? action.icon.name || action.icon.source : undefined
@@ -252,7 +262,7 @@ AbstractListItem {
                 Layout.minimumWidth: size
                 Layout.maximumWidth: size
                 selected: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents))
-                opacity: 1
+                opacity: listItem.fadeContent ? 0.4 : 1.0
                 visible: source != undefined
             }
             ColumnLayout {
@@ -267,7 +277,7 @@ AbstractListItem {
                     color: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? listItem.activeTextColor : listItem.textColor
                     elide: Text.ElideRight
                     font.weight: listItem.bold ? Font.Bold : Font.Normal
-                    opacity: 1
+                    opacity: listItem.fadeContent ? 0.4 : 1.0
                 }
                 QQC2.Label {
                     id: subtitleItem
@@ -275,7 +285,9 @@ AbstractListItem {
                     color: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? listItem.activeTextColor : listItem.textColor
                     elide: Text.ElideRight
                     font: Theme.smallFont
-                    opacity: listItem.bold ? 0.9 : 0.7
+                    opacity: listItem.bold
+                        ? (listItem.fadeContent ? 0.3 : 0.9)
+                        : (listItem.fadeContent ? 0.1 : 0.7)
                     visible: text.length > 0
                 }
             }
