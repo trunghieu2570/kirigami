@@ -50,13 +50,13 @@ public:
     Q_DECLARE_FLAGS(ScreenTypes, ScreenType)
     Q_FLAG(ScreenTypes)
 
-    enum InputType {
+    enum InputType { //TODO RFC: use QInputDevice::DeviceType instead? this has the advantage it can be used as a flag
         NoInput = 0x0,
         PointingDevice = 0x1, /*We can't realistically distinguish between mouse and touchpas i guess, also, api simplicity*/
         Touch = 0x2,
-        Pen, /*not yet?*/
         Keyboard = 0x4,
-        RemoteControl = 0x8
+        RemoteControl = 0x8,
+        // Pen = 0x16
     };
     Q_ENUM(InputType)
     Q_DECLARE_FLAGS(InputTypes, InputType)

@@ -136,24 +136,11 @@ FormFactorInfo::FormFactorInfo(QWindow *parent)
     , d(new FormFactorInfoPrivate(this))
 {
     d->m_window = parent;
-    if (Kirigami::TabletModeWatcher::self()->isTabletModeAvailable()) {
-        d->m_availableScreenTypes |= Tablet;
-    }
 
-    connect(Kirigami::TabletModeWatcher::self(), &Kirigami::TabletModeWatcher::tabletModeAvailableChanged, this, [this](bool tabletModeAvailable) {
-        if (tabletModeAvailable) {
-            d->addAvailableScreenType(Tablet);
-        } else {
-            d->removeAvailableScreenType(Tablet);
-        }
-    });
-
-    if (Kirigami::TabletModeWatcher::self()->isTabletMode()) {
-        d->m_screenType = Tablet;
-        d->m_primaryInputType = Touch;
-    }
+    bool fixedInputType = false;
 
 #if defined(Q_OS_ANDROID) || defined(Q_OS_IOS) || defined(UBUNTU_TOUCH)
+    fixedInputType = true;
     d->m_screenType = Handheld; //TODO: phone/tablet difference on Android too
     d->m_primaryInputType = Touch;
     d->m_availableScreenTypes = Handheld;
@@ -164,13 +151,15 @@ FormFactorInfo::FormFactorInfo(QWindow *parent)
     // such as Plasma Mobile
     if (qEnvironmentVariableIsSet("QT_QUICK_CONTROLS_MOBILE")) {
         if (QByteArrayList{"1", "true"}.contains(qgetenv("QT_QUICK_CONTROLS_MOBILE"))) {
+            fixedInputType = true;
             d->m_screenType = Handheld;
             d->m_primaryInputType = Touch;
             d->m_availableScreenTypes = Handheld;
             d->m_availableInputTypes = Touch;
         }
 
-    } else if ("KDE_KIRIGAMI_SCREEN_TYPE") {
+    } else if (qEnvironmentVariableIsSet("KDE_KIRIGAMI_SCREEN_TYPE")
+                || qEnvironmentVariableIsSet("KDE_KIRIGAMI_INPUT_TYPE")) {
         const QByteArray screenType = qgetenv("KDE_KIRIGAMI_SCREEN_TYPE");
         if (screenType == "handheld") {
             d->m_screenType = Handheld;
@@ -186,10 +175,55 @@ FormFactorInfo::FormFactorInfo(QWindow *parent)
             d->m_availableScreenTypes = TV;
         }
 
-    } else {
+        const QByteArray inputType = qgetenv("KDE_KIRIGAMI_INPUT_TYPE");
+        if (screenType == "pointingdevice") {
+            fixedInputType = true;
+            d->m_primaryInputType = PointingDevice;
+            d->m_availableInputTypes = PointingDevice;
+        } else if (screenType == "touch") {
+            fixedInputType = true;
+            d->m_primaryInputType = Touch;
+            d->m_availableInputTypes = Touch;
+        } else if (screenType == "keyboard") {
+            fixedInputType = true;
+            d->m_primaryInputType = Keyboard;
+            d->m_availableInputTypes = Keyboard;
+        } else if (screenType == "remotecontrol") {
+            fixedInputType = true;
+            d->m_primaryInputType = RemoteControl;
+            d->m_availableInputTypes = RemoteControl;
+        }
+    }
+
+
+
+    if (!fixedInputType) {
+        if (Kirigami::TabletModeWatcher::self()->isTabletModeAvailable()) {
+            d->m_availableScreenTypes |= Tablet;
+        }
+
+        connect(Kirigami::TabletModeWatcher::self(), &Kirigami::TabletModeWatcher::tabletModeAvailableChanged, this, [this](bool tabletModeAvailable) {
+            if (tabletModeAvailable) {
+                d->addAvailableScreenType(Tablet);
+            } else {
+                d->removeAvailableScreenType(Tablet);
+            }
+        });
+
+        if (Kirigami::TabletModeWatcher::self()->isTabletMode()) {
+            d->m_screenType = Tablet;
+            d->m_primaryInputType = Touch;
+        }
         connect(Kirigami::TabletModeWatcher::self(), &Kirigami::TabletModeWatcher::tabletModeChanged, this, [this](bool tabletMode) {
-            d->setScreenType(Tablet);
-            d->setPrimaryInputType(Touch);
+            if (tabletMode) {
+                if (d->m_screenType != Handheld) {
+                    d->setScreenType(Tablet);
+                }
+                d->setPrimaryInputType(Touch);
+            } else {
+                d->setScreenType(Desktop);
+                d->setPrimaryInputType(PointingDevice);
+            }
         });
     }
 
@@ -200,13 +234,22 @@ FormFactorInfo::FormFactorInfo(QWindow *parent)
             break;
         }
     }
-    if (d->m_availableInputTypes & Touch) { //TODO: we need to always filter
+
+    if (d->m_window) {
+        d->m_window->installEventFilter(this);
+    } else {
+        if (QGuiApplication::focusWindow()) {
+            d->m_window = QGuiApplication::focusWindow();
+            d->m_window->installEventFilter(this);
+        }
         connect(qApp, &QGuiApplication::focusWindowChanged, this, [this](QWindow *win) {
             if (win) {
+                d->m_window = win;
                 win->installEventFilter(this);
             }
         });
     }
+
 #endif
 }
 
