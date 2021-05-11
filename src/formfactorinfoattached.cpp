@@ -100,18 +100,38 @@ void FormFactorInfoAttached::setFormFactorInfo(Kirigami::FormFactorInfo *info)
     }
 }
 
+void FormFactorInfoAttached::syncFormFactorInfo()
+{
+    QQuickItem *item = qobject_cast<QQuickItem *>(parent());
+    if (!item) {
+        return;
+    }
+
+    QWindow *window = item->window();
+    if (window) {
+        if (!s_infoForWindow.contains(window)) {
+            Kirigami::FormFactorInfo *info = new Kirigami::FormFactorInfo(window, window);
+            s_infoForWindow[window] = info;
+        }
+        setFormFactorInfo(s_infoForWindow[window]);
+    }
+}
+
 FormFactorInfoAttached *FormFactorInfoAttached::qmlAttachedProperties(QObject *object)
 {
     FormFactorInfoAttached *attached = new FormFactorInfoAttached(object);
 
     QQuickItem *item = qobject_cast<QQuickItem *>(object);
-    if (item && item->window()) {
+    if (item) {
         QWindow *window = item->window();
-        if (!s_infoForWindow.contains(window)) {
-            Kirigami::FormFactorInfo *info = new Kirigami::FormFactorInfo(window, window);
-            s_infoForWindow[window] = info;
+        if (window) {
+            if (!s_infoForWindow.contains(window)) {
+                Kirigami::FormFactorInfo *info = new Kirigami::FormFactorInfo(window, window);
+                s_infoForWindow[window] = info;
+            }
+            attached->setFormFactorInfo(s_infoForWindow[window]);
         }
-        attached->setFormFactorInfo(s_infoForWindow[window]);
+        connect(item, &QQuickItem::windowChanged, attached, &FormFactorInfoAttached::syncFormFactorInfo);
     }
 
     return attached;

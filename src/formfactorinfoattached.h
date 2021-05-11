@@ -48,6 +48,7 @@ public:
     Kirigami::FormFactorInfo::InputTypes availableInputTypes() const;
 
     void setFormFactorInfo(Kirigami::FormFactorInfo *info);
+    void syncFormFactorInfo();
 
     // QML attached property
     static FormFactorInfoAttached *qmlAttachedProperties(QObject *object);

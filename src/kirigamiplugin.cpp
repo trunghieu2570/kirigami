@@ -271,7 +271,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType<Kirigami::BasicThemeDefinition>(uri, 2, 16, "BasicThemeDefinition");
 
     // 2.17
-    qmlRegisterUncreatableType<FormFactorInfoAttached>(uri, 2, 17, "FormFactorInfoAttached", QStringLiteral("FormFactorInfoAttached is an attached property that cannot be created directly"));
+    qmlRegisterUncreatableType<FormFactorInfoAttached>(uri, 2, 17, "FormFactorInfo", QStringLiteral("FormFactorInfo is an attached property that cannot be created directly"));
 
     qmlProtectModule(uri, 2);
 }
