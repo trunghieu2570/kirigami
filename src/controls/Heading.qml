@@ -39,20 +39,40 @@ QQC2.Label {
     id: heading
 
     /**
-     * level: int
      * The level determines how big the section header is display, values
-     * between 1 (big) and 5 (small) are accepted
+     * between 1 (big) and 5 (small) are accepted. (default: 1)
      */
     property int level: 1
 
     /**
-     * step: int
-     * adjust the point size in between a level and another.
+     * Adjust the point size in between a level and another. (default: 0)
      * @deprecated
      */
     property int step: 0
 
+    enum Type {
+        Normal,
+        Primary,
+        Secondary
+    }
+
+    /**
+     * The type of the heading. This can be:
+     *
+     * * Kirigami.Heading.Type.Normal: Create a normal heading (default)
+     * * Kirigami.Heading.Type.Primary: Makes the heading more prominent. Useful
+     *   when making the heading bigger is not enough.
+     * * Kirigami.Heading.Type.Secondary: Makes the heading less prominent.
+     *   Useful when an heading is for a less important section in an application.
+     *
+     * @since 5.82
+     */
+    property int type: Heading.Type.Normal
+
     font.pointSize: headerPointSize(level)
+    font.weight: type === Heading.Type.Primary ? Font.DemiBold : Font.Normal
+
+    opacity: type === Heading.Type.Secondary ? 0.7 : 1
 
     Accessible.role: Accessible.Heading
 
