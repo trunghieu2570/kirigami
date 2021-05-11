@@ -243,6 +243,9 @@ FormFactorInfo::FormFactorInfo(QWindow *parent)
             d->m_window->installEventFilter(this);
         }
         connect(qApp, &QGuiApplication::focusWindowChanged, this, [this](QWindow *win) {
+            if (d->m_window) {
+                d->m_window->removeEventFilter(this);
+            }
             if (win) {
                 d->m_window = win;
                 win->installEventFilter(this);
