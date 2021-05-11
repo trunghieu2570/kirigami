@@ -235,6 +235,8 @@ FormFactorInfo::FormFactorInfo(QWindow *parent)
         }
     }
 
+    // if a window was passed to ctor always monitor that, otherwise monitor
+    // the active one
     if (d->m_window) {
         d->m_window->installEventFilter(this);
     } else {
