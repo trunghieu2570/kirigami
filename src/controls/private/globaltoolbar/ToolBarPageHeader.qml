@@ -56,27 +56,42 @@ AbstractPageHeader {
             heightMode: ToolBarLayout.ConstrainIfLarger
 
             actions: {
+                if (!page) {
+                    return []
+                }
+
                 var result = []
 
-                if (page) {
-                    if (page.actions.main) {
-                        page.actions.main.displayHint |= DisplayHint.KeepVisible
-                        result.push(page.actions.main)
-                    }
-                    if (page.actions.left) {
-                        page.actions.left.displayHint |= DisplayHint.KeepVisible
-                        result.push(page.actions.left)
-                    }
-                    if (page.actions.right) {
-                        page.actions.right.displayHint |= DisplayHint.KeepVisible
-                        result.push(page.actions.right)
-                    }
-                    if (page.actions.contextualActions.length > 0) {
-                        result = result.concat(Array.prototype.map.call(page.actions.contextualActions, function(item) { return item }))
-                    }
+                if (page.actions.main) {
+                    result.push(page.actions.main)
+                }
+                if (page.actions.left) {
+                    result.push(page.actions.left)
+                }
+                if (page.actions.right) {
+                    result.push(page.actions.right)
+                }
+                if (page.actions.contextualActions.length > 0) {
+                    result = result.concat(Array.prototype.map.call(page.actions.contextualActions, function(item) { return item }))
                 }
 
                 return result
+            }
+
+            Binding {
+                target: page.actions.main
+                property: "displayHint"
+                value: page.actions.main ? (page.actions.main.displayHint | DisplayHint.KeepVisible) : null
+            }
+            Binding {
+                target: page.actions.left
+                property: "displayHint"
+                value: page.actions.left ? (page.actions.left.displayHint | DisplayHint.KeepVisible) : null
+            }
+            Binding {
+                target: page.actions.right
+                property: "displayHint"
+                value: page.actions.right ? (page.actions.right.displayHint | DisplayHint.KeepVisible) : null
             }
         }
     }
