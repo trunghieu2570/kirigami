@@ -8,6 +8,10 @@
 
 #include <QObject>
 
+#ifndef KIRIGAMI_BUILD_TYPE_STATIC
+#include <kirigami2_export.h>
+#endif
+
 class QWindow;
 
 namespace Kirigami
@@ -18,7 +22,11 @@ class FormFactorInfoPrivate;
  * @since 5.83
  * @since org.kde.kirigami 2.17
  */
+#ifdef KIRIGAMI_BUILD_TYPE_STATIC
 class FormFactorInfo : public QObject
+#else
+class KIRIGAMI2_EXPORT FormFactorInfo : public QObject
+#endif
 {
     Q_OBJECT
 
@@ -62,7 +70,7 @@ public:
     Q_DECLARE_FLAGS(InputTypes, InputType)
     Q_FLAG(InputTypes)
 
-    FormFactorInfo(QWindow *window);
+    FormFactorInfo(QWindow *window, QObject *parent = 0);
     ~FormFactorInfo();
 
     QWindow *window() const;

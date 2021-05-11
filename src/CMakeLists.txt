@@ -3,6 +3,7 @@ if (BUILD_SHARED_LIBS)
 else()
     set(KIRIGAMI_STATIC_FILES
         libkirigami/basictheme.cpp
+        libkirigami/formfactorinfo.cpp
         libkirigami/platformtheme.cpp
         libkirigami/styleselector.cpp
         libkirigami/tabletmodewatcher.cpp
@@ -17,6 +18,7 @@ set(kirigami_SRCS
     columnview.cpp
     enums.cpp
     delegaterecycler.cpp
+    formfactorinfoattached.cpp
     icon.cpp
     settings.cpp
     formlayoutattached.cpp

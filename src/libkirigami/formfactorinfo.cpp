@@ -7,7 +7,6 @@
 #include "formfactorinfo.h"
 
 #include <QDebug>
-#include <QFile>
 #include <QGuiApplication>
 #include <QMouseEvent>
 #include <QStandardPaths>
@@ -131,11 +130,11 @@ void FormFactorInfoPrivate::removeAvailableInputType(FormFactorInfo::InputType t
 
 //////////////////////////////////////////////////////////
 
-FormFactorInfo::FormFactorInfo(QWindow *parent)
+FormFactorInfo::FormFactorInfo(QWindow *window, QObject *parent)
     : QObject(parent)
     , d(new FormFactorInfoPrivate(this))
 {
-    d->m_window = parent;
+    d->m_window = window;
 
     bool fixedInputType = false;
 

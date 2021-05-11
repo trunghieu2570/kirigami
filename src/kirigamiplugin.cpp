@@ -12,6 +12,7 @@
 #include "columnview.h"
 #include "delegaterecycler.h"
 #include "enums.h"
+#include "formfactorinfoattached.h"
 #include "formlayoutattached.h"
 #include "icon.h"
 #include "imagecolors.h"
@@ -268,6 +269,9 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     // 2.16
     qmlRegisterType<Kirigami::BasicThemeDefinition>(uri, 2, 16, "BasicThemeDefinition");
+
+    // 2.17
+    qmlRegisterUncreatableType<FormFactorInfoAttached>(uri, 2, 17, "FormFactorInfoAttached", QStringLiteral("FormFactorInfoAttached is an attached property that cannot be created directly"));
 
     qmlProtectModule(uri, 2);
 }
