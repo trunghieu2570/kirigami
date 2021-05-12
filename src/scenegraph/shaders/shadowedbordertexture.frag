@@ -63,9 +63,6 @@ void main()
     // Render the inner rectangle.
     col = sdf_render(inner_rect, col, color);
 
-    // Slightly increase the size of the inner rectangle, to avoid issues with anti-aliasing.
-    inner_rect = inner_rect - 0.005;
-
     // Sample the texture, then blend it on top of the background color.
     lowp vec2 texture_uv = ((uv / aspect) + (1.0 * inverse_scale)) / (2.0 * inverse_scale);
     lowp vec4 texture_color = texture(textureSource, texture_uv);
