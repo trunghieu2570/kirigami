@@ -54,7 +54,7 @@ Kirigami.ActionTextField
      */
     property bool delaySearch: false
 
-    placeholderText: qsTr("Search...")
+    placeholderText: qsTr("Search…")
 
     Accessible.name: qsTr("Search")
     Accessible.searchEdit: true
