@@ -211,6 +211,7 @@ Kirigami.ApplicationWindow
                                 color: Kirigami.Theme.neutralTextColor
                             }
                         }
+                        leadingFillVertically: false
                         icon: "edit-bomb"
                         text: "Boom!"
                         subtitle: "smaller boom"

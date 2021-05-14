@@ -50,8 +50,9 @@ AbstractListItem {
         if (!!listItem.leading) {
             listItem.leading.parent = contItem
             listItem.leading.anchors.left = listItem.leading.parent.left
-            listItem.leading.anchors.top = listItem.leading.parent.top
-            listItem.leading.anchors.bottom = listItem.leading.parent.bottom
+            listItem.leading.anchors.top = listItem.leadingFillVertically ? listItem.leading.parent.top : undefined
+            listItem.leading.anchors.bottom = listItem.leadingFillVertically ? listItem.leading.parent.bottom : undefined
+            listItem.leading.anchors.verticalCenter = listItem.leadingFillVertically ? undefined : listItem.leading.parent.verticalCenter
             layout.anchors.left = listItem.leading.right
             layout.anchors.leftMargin = Qt.binding(function() { return listItem.leadingPadding })
         } else {
@@ -70,6 +71,21 @@ AbstractListItem {
     property real leadingPadding: Units.largeSpacing
 
     /**
+     * TODO KF6: remove this property and instead implement leading and trailing
+     * item positioning in such a way that they fill vertically, but a fixed
+     * height can be manually specified without needing to wrap it in an Item
+     *
+     * leadingFillVertically: bool
+     * Whether or not to stretch the leading item to fit all available vertical space.
+     * Defaults to true. If false, you will be responsible for setting a height for the
+     * item or ensuring that its default height works.
+     *
+     * @since 5.83
+     * @since org.kde.kirigami 2.15
+     */
+    property bool leadingFillVertically: true
+
+    /**
      * trailing: Item
      *
      * An item that will be displayed after the title and subtitle. Note that the
@@ -77,13 +93,15 @@ AbstractListItem {
      *
      * @since org.kde.kirigami 2.15
      */
+
     property Item trailing
     onTrailingChanged: {
         if (!!listItem.trailing) {
             listItem.trailing.parent = contItem
             listItem.trailing.anchors.right = listItem.trailing.parent.right
-            listItem.trailing.anchors.top = listItem.trailing.parent.top
-            listItem.trailing.anchors.bottom = listItem.trailing.parent.bottom
+            listItem.trailing.anchors.top = listItem.trailingFillVertically ? listItem.trailing.parent.top : undefined
+            listItem.trailing.anchors.bottom = listItem.trailingFillVertically ? listItem.trailing.parent.bottom : undefined
+            listItem.trailing.anchors.verticalCenter = listItem.trailingFillVertically ? undefined : listItem.trailing.parent.verticalCenter
             layout.anchors.right = listItem.trailing.left
             layout.anchors.rightMargin = Qt.binding(function() { return listItem.trailingPadding })
         } else {
@@ -100,6 +118,21 @@ AbstractListItem {
      * @since org.kde.kirigami 2.15
      */
     property real trailingPadding: Units.largeSpacing
+
+    /**
+     * TODO KF6: remove this property and instead implement leading and trailing
+     * item positioning in such a way that they fill vertically, but a fixed
+     * height can be manually specified without needing to wrap it in an Item
+     *
+     * trailingFillVertically: bool
+     * Whether or not to stretch the trailing item to fit all available vertical space.
+     * Defaults to true. If false, you will be responsible for setting a height for the
+     * item or ensuring that its default height works.
+     *
+     * @since 5.83
+     * @since org.kde.kirigami 2.15
+     */
+    property bool trailingFillVertically: true
 
     /**
      * bold: bool
