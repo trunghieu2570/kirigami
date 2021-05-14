@@ -229,7 +229,7 @@ AbstractListItem {
         id: contItem
         implicitWidth: (listItem.leading || {implicitWidth: 0}).implicitWidth + layout.implicitWidth + (listItem.trailing || {implicitWidth: 0}).implicitWidth
         Binding on implicitHeight {
-            value: layout.implicitHeight + (subtitleItem.text === "" && listItem.reserveSpaceForSubtitle ? (subtitleItem.implicitHeight + labelColumn.spacing): 0)
+            value: layout.implicitHeight + (!subtitleItem.visible && listItem.reserveSpaceForSubtitle ? (subtitleItem.implicitHeight + labelColumn.spacing): 0)
             delayed: true
         }
 
