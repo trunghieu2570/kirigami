@@ -229,7 +229,7 @@ AbstractListItem {
         id: contItem
         implicitWidth: (listItem.leading || {implicitWidth: 0}).implicitWidth + layout.implicitWidth + (listItem.trailing || {implicitWidth: 0}).implicitWidth
         Binding on implicitHeight {
-            value: layout.implicitHeight + (!subtitleItem.visible && listItem.reserveSpaceForSubtitle ? (subtitleItem.implicitHeight + labelColumn.spacing): 0)
+            value: Math.max(iconItem.size, (!subtitleItem.visible && listItem.reserveSpaceForSubtitle ? (labelItem.implicitHeight + labelColumn.spacing + subtitleItem.implicitHeight): labelColumn.implicitHeight) )
             delayed: true
         }
 
@@ -256,7 +256,7 @@ AbstractListItem {
                     }
                     return listItem.icon;
                 }
-                property int size: Units.iconSizes.smallMedium
+                property int size: subtitleItem.visible || reserveSpaceForSubtitle ? Units.iconSizes.medium : Units.iconSizes.smallMedium
                 Layout.minimumHeight: size
                 Layout.maximumHeight: size
                 Layout.minimumWidth: size
