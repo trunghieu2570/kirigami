@@ -50,7 +50,8 @@ AbstractListItem {
         if (!!listItem.leading) {
             listItem.leading.parent = contItem
             listItem.leading.anchors.left = listItem.leading.parent.left
-            listItem.leading.anchors.verticalCenter = listItem.leading.parent.verticalCenter
+            listItem.leading.anchors.top = listItem.leading.parent.top
+            listItem.leading.anchors.bottom = listItem.leading.parent.bottom
             layout.anchors.left = listItem.leading.right
             layout.anchors.leftMargin = Qt.binding(function() { return listItem.leadingPadding })
         } else {
@@ -81,7 +82,8 @@ AbstractListItem {
         if (!!listItem.trailing) {
             listItem.trailing.parent = contItem
             listItem.trailing.anchors.right = listItem.trailing.parent.right
-            listItem.trailing.anchors.verticalCenter = listItem.trailing.parent.verticalCenter
+            listItem.trailing.anchors.top = listItem.trailing.parent.top
+            listItem.trailing.anchors.bottom = listItem.trailing.parent.bottom
             layout.anchors.right = listItem.trailing.left
             layout.anchors.rightMargin = Qt.binding(function() { return listItem.trailingPadding })
         } else {
