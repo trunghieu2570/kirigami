@@ -46,7 +46,7 @@ set(kirigami_SRCS
     ${KIRIGAMI_STATIC_FILES}
     )
 
-qt5_add_resources(SHADERS scenegraph/shaders/shaders.qrc)
+qt_add_resources(SHADERS scenegraph/shaders/shaders.qrc)
 
 add_subdirectory(libkirigami)
 
@@ -65,12 +65,12 @@ if(NOT BUILD_SHARED_LIBS)
 
     # When using the static library, all QML files need to be shipped within the
     # .a file.
-    qt5_add_resources(
+    qt_add_resources(
         RESOURCES ${CMAKE_CURRENT_BINARY_DIR}/../kirigami.qrc
     )
 
     if (UNIX AND NOT ANDROID AND NOT(APPLE) AND NOT(DISABLE_DBUS))
-        qt5_add_dbus_interface(kirigami_SRCS libkirigami/org.kde.KWin.TabletModeManager.xml tabletmodemanager_interface)
+        qt_add_dbus_interface(kirigami_SRCS libkirigami/org.kde.KWin.TabletModeManager.xml tabletmodemanager_interface)
     endif()
 endif()
 

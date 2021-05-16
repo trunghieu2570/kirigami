@@ -6,7 +6,7 @@ set(minimal_SRCS
     main.cpp
     )
 
-qt5_add_resources(RESOURCES kirigami-icons.qrc resources.qrc)
+qt_add_resources(RESOURCES kirigami-icons.qrc resources.qrc)
 
 if (ANDROID)
     set(minimal_EXTRA_LIBS Qt5::AndroidExtras

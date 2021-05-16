@@ -10,7 +10,7 @@ set(libkirigami_SRCS
 
 #use dbus on linux, bsd etc, but not andoid and apple stuff
 if (UNIX AND NOT ANDROID AND NOT(APPLE) AND NOT(DISABLE_DBUS))
-    qt5_add_dbus_interface(libkirigami_SRCS org.kde.KWin.TabletModeManager.xml tabletmodemanager_interface)
+    qt_add_dbus_interface(libkirigami_SRCS org.kde.KWin.TabletModeManager.xml tabletmodemanager_interface)
     set(LIBKIRIGAMKI_EXTRA_LIBS Qt5::DBus)
 endif()
 
