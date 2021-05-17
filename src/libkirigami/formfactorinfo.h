@@ -22,11 +22,7 @@ class FormFactorInfoPrivate;
  * @since 5.83
  * @since org.kde.kirigami 2.17
  */
-#ifdef KIRIGAMI_BUILD_TYPE_STATIC
-class FormFactorInfo : public QObject
-#else
 class KIRIGAMI2_EXPORT FormFactorInfo : public QObject
-#endif
 {
     Q_OBJECT
 
