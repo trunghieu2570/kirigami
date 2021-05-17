@@ -42,9 +42,9 @@ public:
     QWindow *m_window;
     FormFactorInfo::ScreenType m_screenType = FormFactorInfo::Desktop;
     FormFactorInfo::ScreenTypes m_availableScreenTypes = FormFactorInfo::Desktop;
-    FormFactorInfo::InputType m_primaryInputType = FormFactorInfo::PointingDevice;
-    FormFactorInfo::FormFactorInfo::InputType m_transientInputType = FormFactorInfo::PointingDevice;
-    FormFactorInfo::InputTypes m_availableInputTypes = FormFactorInfo::PointingDevice | FormFactorInfo::Keyboard;
+    FormFactorInfo::InputType m_primaryInputType = FormFactorInfo::Mouse;
+    FormFactorInfo::FormFactorInfo::InputType m_transientInputType = FormFactorInfo::Mouse;
+    FormFactorInfo::InputTypes m_availableInputTypes = FormFactorInfo::Mouse | FormFactorInfo::Keyboard;
 };
 
 FormFactorInfoPrivate::FormFactorInfoPrivate(FormFactorInfo *parent)
@@ -141,9 +141,9 @@ FormFactorInfo::FormFactorInfo(QWindow *window, QObject *parent)
 #if defined(Q_OS_ANDROID) || defined(Q_OS_IOS) || defined(UBUNTU_TOUCH)
     fixedInputType = true;
     d->m_screenType = Handheld; //TODO: phone/tablet difference on Android too
-    d->m_primaryInputType = Touch;
+    d->m_primaryInputType = TouchScreen;
     d->m_availableScreenTypes = Handheld;
-    d->m_availableInputTypes = Touch;
+    d->m_availableInputTypes = TouchScreen;
 #else
     // Environment variables which fix everyhting to a single formfactor
     // Mostly for debug purposes and for platforms which are always mobile,
@@ -152,9 +152,9 @@ FormFactorInfo::FormFactorInfo(QWindow *window, QObject *parent)
         if (QByteArrayList{"1", "true"}.contains(qgetenv("QT_QUICK_CONTROLS_MOBILE"))) {
             fixedInputType = true;
             d->m_screenType = Handheld;
-            d->m_primaryInputType = Touch;
+            d->m_primaryInputType = TouchScreen;
             d->m_availableScreenTypes = Handheld;
-            d->m_availableInputTypes = Touch;
+            d->m_availableInputTypes = TouchScreen;
         }
 
     } else if (qEnvironmentVariableIsSet("KDE_KIRIGAMI_SCREEN_TYPE")
@@ -177,12 +177,12 @@ FormFactorInfo::FormFactorInfo(QWindow *window, QObject *parent)
         const QByteArray inputType = qgetenv("KDE_KIRIGAMI_INPUT_TYPE");
         if (screenType == "pointingdevice") {
             fixedInputType = true;
-            d->m_primaryInputType = PointingDevice;
-            d->m_availableInputTypes = PointingDevice;
+            d->m_primaryInputType = Mouse;
+            d->m_availableInputTypes = Mouse;
         } else if (screenType == "touch") {
             fixedInputType = true;
-            d->m_primaryInputType = Touch;
-            d->m_availableInputTypes = Touch;
+            d->m_primaryInputType = TouchScreen;
+            d->m_availableInputTypes = TouchScreen;
         } else if (screenType == "keyboard") {
             fixedInputType = true;
             d->m_primaryInputType = Keyboard;
@@ -211,17 +211,17 @@ FormFactorInfo::FormFactorInfo(QWindow *window, QObject *parent)
 
         if (Kirigami::TabletModeWatcher::self()->isTabletMode()) {
             d->m_screenType = Tablet;
-            d->m_primaryInputType = Touch;
+            d->m_primaryInputType = TouchScreen;
         }
         connect(Kirigami::TabletModeWatcher::self(), &Kirigami::TabletModeWatcher::tabletModeChanged, this, [this](bool tabletMode) {
             if (tabletMode) {
                 if (d->m_screenType != Handheld) {
                     d->setScreenType(Tablet);
                 }
-                d->setPrimaryInputType(Touch);
+                d->setPrimaryInputType(TouchScreen);
             } else {
                 d->setScreenType(Desktop);
-                d->setPrimaryInputType(PointingDevice);
+                d->setPrimaryInputType(Mouse);
             }
         });
     }
@@ -229,7 +229,7 @@ FormFactorInfo::FormFactorInfo(QWindow *window, QObject *parent)
     const auto touchDevices = QTouchDevice::devices();
     for (const auto &device : touchDevices) {
         if (device->type() == QTouchDevice::TouchScreen) {
-            d->m_availableInputTypes |= Touch;
+            d->m_availableInputTypes |= TouchScreen;
             break;
         }
     }
@@ -297,18 +297,18 @@ bool FormFactorInfo::eventFilter(QObject *watched, QEvent *event)
     Q_UNUSED(watched)
     switch (event->type()) {
     case QEvent::TouchBegin:
-        d->setTransientInputType(Touch);
+        d->setTransientInputType(TouchScreen);
         break;
     case QEvent::MouseButtonPress:
     case QEvent::MouseMove: {
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
         if (me->source() == Qt::MouseEventNotSynthesized) {
-            d->setTransientInputType(PointingDevice);
+            d->setTransientInputType(Mouse);
         }
         break;
     }
     case QEvent::Wheel:
-        d->setTransientInputType(PointingDevice);
+        d->setTransientInputType(Mouse);
     default:
         break;
     }

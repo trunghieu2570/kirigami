@@ -42,7 +42,7 @@ Kirigami::FormFactorInfo::ScreenTypes FormFactorInfoAttached::availableScreenTyp
 Kirigami::FormFactorInfo::InputType FormFactorInfoAttached::primaryInputType() const
 {
     if (!m_formFactorInfo) {
-        return Kirigami::FormFactorInfo::PointingDevice;
+        return Kirigami::FormFactorInfo::Mouse;
     }
     return m_formFactorInfo->primaryInputType();
 }
@@ -50,7 +50,7 @@ Kirigami::FormFactorInfo::InputType FormFactorInfoAttached::primaryInputType() c
 Kirigami::FormFactorInfo::InputType FormFactorInfoAttached::transientInputType() const
 {
     if (!m_formFactorInfo) {
-        return Kirigami::FormFactorInfo::PointingDevice;
+        return Kirigami::FormFactorInfo::Mouse;
     }
     return m_formFactorInfo->transientInputType();
 }
@@ -58,7 +58,7 @@ Kirigami::FormFactorInfo::InputType FormFactorInfoAttached::transientInputType()
 Kirigami::FormFactorInfo::InputTypes FormFactorInfoAttached::availableInputTypes() const
 {
     if (!m_formFactorInfo) {
-        return Kirigami::FormFactorInfo::PointingDevice;
+        return Kirigami::FormFactorInfo::Mouse;
     }
     return m_formFactorInfo->availableInputTypes();
 }
