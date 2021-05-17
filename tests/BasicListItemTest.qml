@@ -76,6 +76,45 @@ Kirigami.ApplicationWindow
             }
         }
 
+        // Icon + Label + leading and trailing items
+        ColumnLayout {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            Kirigami.Heading {
+                text: "Icon + Label + leading and trailing items"
+                level: 3
+                Layout.fillWidth: true
+                wrapMode: Text.Wrap
+            }
+            QQC2.ScrollView {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                Component.onCompleted: {
+                    background.visible = true;
+                }
+                ListView {
+                    model: 3
+                    delegate: Kirigami.BasicListItem {
+                        leading: Rectangle {
+                            radius: width * 0.5
+                            implicitWidth: Kirigami.Units.largeSpacing
+                            implicitHeight: Kirigami.Units.largeSpacing
+                            Kirigami.Theme.colorSet: Kirigami.Theme.View
+                            color: Kirigami.Theme.neutralTextColor
+                        }
+                        icon: "edit-bomb"
+                        text: "Boom!"
+                        trailing: QQC2.Button {
+                            text: "Defuse the bomb!"
+                            icon.name: "edit-delete"
+                        }
+                    }
+                }
+            }
+        }
+
         // Icon + Label + subtitle
         ColumnLayout {
             Layout.fillWidth: true
@@ -100,36 +139,6 @@ Kirigami.ApplicationWindow
                         icon: "edit-bomb"
                         text: "Boom!"
                         subtitle: "smaller boom"
-                    }
-                }
-            }
-        }
-
-        // Icon + Label + subtitle + one bold item
-        ColumnLayout {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
-            Kirigami.Heading {
-                text: "Icon + Label + subtitle + one bold item"
-                level: 3
-                Layout.fillWidth: true
-                wrapMode: Text.Wrap
-            }
-            QQC2.ScrollView {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-
-                Component.onCompleted: {
-                    background.visible = true;
-                }
-                ListView {
-                    model: 3
-                    delegate: Kirigami.BasicListItem {
-                        icon: "edit-bomb"
-                        text: "Boom!"
-                        subtitle: "smaller boom"
-                        bold: index == 1
                     }
                 }
             }
