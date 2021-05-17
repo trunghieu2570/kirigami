@@ -97,12 +97,17 @@ Kirigami.ApplicationWindow
                 ListView {
                     model: 3
                     delegate: Kirigami.BasicListItem {
-                        leading: Rectangle {
-                            radius: width * 0.5
+                        // Workaround to make rectangle not vertically stretch
+                        leading: Item {
                             implicitWidth: Kirigami.Units.largeSpacing
-                            implicitHeight: Kirigami.Units.largeSpacing
-                            Kirigami.Theme.colorSet: Kirigami.Theme.View
-                            color: Kirigami.Theme.neutralTextColor
+                            Rectangle {
+                                anchors.centerIn: parent
+                                radius: width * 0.5
+                                width: Kirigami.Units.largeSpacing
+                                height: Kirigami.Units.largeSpacing
+                                Kirigami.Theme.colorSet: Kirigami.Theme.View
+                                color: Kirigami.Theme.neutralTextColor
+                            }
                         }
                         icon: "edit-bomb"
                         text: "Boom!"
@@ -194,12 +199,17 @@ Kirigami.ApplicationWindow
                 ListView {
                     model: 3
                     delegate: Kirigami.BasicListItem {
-                        leading: Rectangle {
-                            radius: width * 0.5
+                        // Workaround to make rectangle not vertically stretch
+                        leading: Item {
                             implicitWidth: Kirigami.Units.largeSpacing
-                            implicitHeight: Kirigami.Units.largeSpacing
-                            Kirigami.Theme.colorSet: Kirigami.Theme.View
-                            color: Kirigami.Theme.neutralTextColor
+                            Rectangle {
+                                anchors.centerIn: parent
+                                radius: width * 0.5
+                                width: Kirigami.Units.largeSpacing
+                                height: Kirigami.Units.largeSpacing
+                                Kirigami.Theme.colorSet: Kirigami.Theme.View
+                                color: Kirigami.Theme.neutralTextColor
+                            }
                         }
                         icon: "edit-bomb"
                         text: "Boom!"
