@@ -316,10 +316,7 @@ OverlayDrawer {
                         }
                     }
                     //leftPadding: root.collapsible ? collapseButton.width + Units.smallSpacing*2 : topPadding
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: root.bannerClicked()
-                    }
+                    TapHandler { onTapped: root.bannerClicked() }
                     EdgeShadow {
                         edge: Qt.BottomEdge
                         visible: bannerImageSource != ""

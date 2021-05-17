@@ -103,11 +103,8 @@ Controls.TextField
 
                 source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
                 visible: modelData.visible
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: modelData.trigger()
-                    cursorShape: Qt.PointingHandCursor
-                }
+                HoverHandler { cursorShape: Qt.PointingHandCursor }
+                TapHandler { onTapped: modelData.trigger() }
             }
         }
     }
@@ -129,14 +126,11 @@ Controls.TextField
                 anchors.verticalCenter: parent.verticalCenter
 
                 source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
-                active: actionArea.containsPress
+                active: tapHandler.pressed
                 visible: modelData.visible
-                MouseArea {
-                    id: actionArea
-                    anchors.fill: parent
-                    onClicked: modelData.trigger()
-                    cursorShape: Qt.PointingHandCursor
-                }
+
+                HoverHandler { cursorShape: Qt.PointingHandCursor }
+                TapHandler { id: tapHandler; onTapped: modelData.trigger() }
             }
         }
     }

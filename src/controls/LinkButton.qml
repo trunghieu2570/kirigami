@@ -32,6 +32,7 @@ QQC2.Label {
     property alias acceptedButtons: area.acceptedButtons
     /**
      * @var MouseArea ara
+     * @deprecated
      * Mouse area element covering the button.
      */
     property alias mouseArea: area
@@ -51,6 +52,7 @@ QQC2.Label {
 
     signal pressed(QtObject mouse)
     signal clicked(QtObject mouse)
+    // TODO KF6: yeet this and replace it with a hoverhandler and taphandler
     MouseArea {
         id: area
         anchors.fill: parent

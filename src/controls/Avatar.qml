@@ -148,22 +148,10 @@ QQC2.Control {
             visible: avatarRoot.focus
         }
 
-        MouseArea {
-            id: primaryMouse
-
-            anchors.fill: parent
-            hoverEnabled: true
-            property bool mouseInCircle: {
-                let x = avatarRoot.width / 2, y = avatarRoot.height / 2
-                let xPrime = mouseX, yPrime = mouseY
-
-                let distance = (x - xPrime) ** 2 + (y - yPrime) ** 2
-                let radiusSquared = (Math.min(avatarRoot.width, avatarRoot.height) / 2) ** 2
-
-                return distance < radiusSquared
-            }
-
-            onClicked: {
+        HoverHandler { id: hoverHandler; cursorShape: Qt.PointingHandCursor }
+        TapHandler {
+            onTapped: {
+                const mouseY = eventPoint.position.y
                 if (mouseY > avatarRoot.height - secondaryRect.height && !!avatarRoot.actions.secondary) {
                     avatarRoot.actions.secondary.trigger()
                     return
@@ -179,7 +167,7 @@ QQC2.Control {
             states: [
                 State {
                     name: "secondaryRevealed"
-                    when: (!Kirigami.Settings.isMobile) && (!!avatarRoot.actions.secondary) && (primaryMouse.containsMouse && primaryMouse.mouseInCircle)
+                    when: (!Kirigami.Settings.isMobile) && (!!avatarRoot.actions.secondary) && hoverHandler.hovered
                     PropertyChanges {
                         target: secondaryRect
                         visible: true

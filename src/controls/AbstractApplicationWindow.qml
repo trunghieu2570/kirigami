@@ -243,23 +243,21 @@ QQC2.ApplicationWindow {
 
     color: Theme.backgroundColor
 
-    MouseArea {
-        parent: contentItem.parent
-        z: 0
+    // scrim to dismiss reachability mode
+    Rectangle {
         anchors.fill: parent
-        onClicked: root.reachableMode = false;
+        color: Qt.rgba(0, 0, 0, 0.3)
+        opacity: 0.15
         visible: root.reachableMode && root.reachableModeEnabled
-        Rectangle {
-            anchors.fill: parent
-            color: Qt.rgba(0, 0, 0, 0.3)
-            opacity: 0.15
-            Icon {
-                anchors.horizontalCenter: parent.horizontalCenter
-                y: x
-                width: Units.iconSizes.large
-                height: width
-                source: "go-up"
-            }
+
+        TapHandler { onTapped: root.reachableMode = false }
+
+        Icon {
+            anchors.horizontalCenter: parent.horizontalCenter
+            y: x
+            width: Units.iconSizes.large
+            height: width
+            source: "go-up"
         }
     }
 
