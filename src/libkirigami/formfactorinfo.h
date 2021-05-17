@@ -60,7 +60,7 @@ public:
 
     enum InputType { //TODO RFC: use QInputDevice::DeviceType instead? this has the advantage it can be used as a flag
         NoInput = 0x0,
-        PointingDevice = 0x1, /*We can't realistically distinguish between mouse and touchpas i guess, also, api simplicity*/
+        PointingDevice = 0x1, /*We can't realistically distinguish between mouse and touchpads I guess, also, API simplicity*/
         Touch = 0x2,
         Keyboard = 0x4,
         RemoteControl = 0x8,
