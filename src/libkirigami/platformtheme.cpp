@@ -197,8 +197,8 @@ public:
     inline void notifyWatchers(PlatformTheme *sender, const T &oldValue, const T &newValue)
     {
         for (auto object : qAsConst(watchers)) {
-            auto event = new PlatformThemeEvents::PropertyChangedEvent<T>(sender, oldValue, newValue);
-            QCoreApplication::postEvent(object, event);
+            PlatformThemeEvents::PropertyChangedEvent<T> event(sender, oldValue, newValue);
+            QCoreApplication::sendEvent(object, &event);
         }
     }
 
