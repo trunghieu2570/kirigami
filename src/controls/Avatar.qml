@@ -128,13 +128,7 @@ QQC2.Control {
     background: Rectangle {
         radius: parent.width / 2
 
-        readonly property Gradient colouredGradient: Gradient {
-            GradientStop { position: 0.0; color: Qt.lighter(avatarRoot.color, 1.2) }
-            GradientStop { position: 1.0; color: Qt.darker(avatarRoot.color, 1.3) }
-        }
-
-        color: __private.showImage ? Kirigami.Theme.backgroundColor : "white"
-        gradient: __private.showImage ? undefined : colouredGradient
+        color: __private.showImage ? Kirigami.Theme.backgroundColor : avatarRoot.color
 
         Rectangle {
             anchors.fill: parent
