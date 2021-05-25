@@ -103,6 +103,7 @@ Controls.TextField
 
                 source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
                 visible: modelData.visible
+                enabled: modelData.enabled
                 MouseArea {
                     anchors.fill: parent
                     onClicked: modelData.trigger()
@@ -131,6 +132,7 @@ Controls.TextField
                 source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
                 active: actionArea.containsPress
                 visible: modelData.visible
+                enabled: modelData.enabled
                 MouseArea {
                     id: actionArea
                     anchors.fill: parent
