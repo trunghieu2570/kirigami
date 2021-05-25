@@ -97,20 +97,18 @@ Kirigami.ApplicationWindow
                 ListView {
                     model: 3
                     delegate: Kirigami.BasicListItem {
-                        // Workaround to make rectangle not vertically stretch
-                        leading: Item {
-                            implicitWidth: Kirigami.Units.largeSpacing
-                            Rectangle {
-                                anchors.centerIn: parent
-                                radius: width * 0.5
-                                width: Kirigami.Units.largeSpacing
-                                height: Kirigami.Units.largeSpacing
-                                Kirigami.Theme.colorSet: Kirigami.Theme.View
-                                color: Kirigami.Theme.neutralTextColor
-                            }
+                        leading: Rectangle {
+                            radius: width * 0.5
+                            width: Kirigami.Units.largeSpacing
+                            height: Kirigami.Units.largeSpacing
+                            Kirigami.Theme.colorSet: Kirigami.Theme.View
+                            color: Kirigami.Theme.neutralTextColor
                         }
+                        leadingFillVertically: false
+
                         icon: "edit-bomb"
                         text: "Boom!"
+
                         trailing: QQC2.Button {
                             text: "Defuse the bomb!"
                             icon.name: "edit-delete"
@@ -199,22 +197,19 @@ Kirigami.ApplicationWindow
                 ListView {
                     model: 3
                     delegate: Kirigami.BasicListItem {
-                        // Workaround to make rectangle not vertically stretch
-                        leading: Item {
-                            implicitWidth: Kirigami.Units.largeSpacing
-                            Rectangle {
-                                anchors.centerIn: parent
-                                radius: width * 0.5
-                                width: Kirigami.Units.largeSpacing
-                                height: Kirigami.Units.largeSpacing
-                                Kirigami.Theme.colorSet: Kirigami.Theme.View
-                                color: Kirigami.Theme.neutralTextColor
-                            }
+                        leading: Rectangle {
+                            radius: width * 0.5
+                            width: Kirigami.Units.largeSpacing
+                            height: Kirigami.Units.largeSpacing
+                            Kirigami.Theme.colorSet: Kirigami.Theme.View
+                            color: Kirigami.Theme.neutralTextColor
                         }
                         leadingFillVertically: false
+
                         icon: "edit-bomb"
                         text: "Boom!"
                         subtitle: "smaller boom"
+
                         trailing: QQC2.Button {
                             text: "Defuse the bomb!"
                             icon.name: "edit-delete"
