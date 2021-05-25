@@ -68,8 +68,8 @@ Controls.TextField
 
     hoverEnabled: true
 
-    leftPadding: leftActionsRow.width
-    rightPadding: rightActionsRow.width
+    leftPadding: leftActionsRow.width + Kirigami.Units.smallSpacing
+    rightPadding: rightActionsRow.width + Kirigami.Units.smallSpacing
 
     Shortcut {
         id: focusShortcut
