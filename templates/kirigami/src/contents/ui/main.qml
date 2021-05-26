@@ -3,38 +3,37 @@
     SPDX-FileCopyrightText: %{CURRENT_YEAR} %{AUTHOR} <%{EMAIL}>
 */
 
-import QtQuick 2.1
-import org.kde.kirigami 2.4 as Kirigami
+import QtQuick 2.6
 import QtQuick.Controls 2.0 as Controls
+import QtQuick.Layouts 1.2
+import org.kde.kirigami 2.13 as Kirigami
 
 Kirigami.ApplicationWindow {
     id: root
 
     title: i18n("%{APPNAME}")
 
+    minimumWidth: Kirigami.Units.gridUnit * 20
+    minimumHeight: Kirigami.Units.gridUnit * 20
+
+    property int counter: 0
+
     globalDrawer: Kirigami.GlobalDrawer {
         title: i18n("%{APPNAME}")
         titleIcon: "applications-graphics"
+        isMenu: !root.isMobile
         actions: [
             Kirigami.Action {
-                text: i18n("View")
-                icon.name: "view-list-icons"
-                Kirigami.Action {
-                    text: i18n("View Action 1")
-                    onTriggered: showPassiveNotification(i18n("View Action 1 clicked"))
-                }
-                Kirigami.Action {
-                    text: i18n("View Action 2")
-                    onTriggered: showPassiveNotification(i18n("View Action 2 clicked"))
+                text: i18n("Plus One")
+                icon.name: "list-add"
+                onTriggered: {
+                    counter += 1
                 }
             },
             Kirigami.Action {
-                text: i18n("Action 1")
-                onTriggered: showPassiveNotification(i18n("Action 1 clicked"))
-            },
-            Kirigami.Action {
-                text: i18n("Action 2")
-                onTriggered: showPassiveNotification(i18n("Action 2 clicked"))
+                text: i18n("Quit")
+                icon.name: "gtk-quit"
+                onTriggered: Qt.quit()
             }
         ]
     }
@@ -43,39 +42,38 @@ Kirigami.ApplicationWindow {
         id: contextDrawer
     }
 
-    pageStack.initialPage: mainPageComponent
+    pageStack.initialPage: page
 
-    Component {
-        id: mainPageComponent
+    Kirigami.Page {
+        id: page
 
-        Kirigami.Page {
-            title: i18n("%{APPNAME}")
+        Layout.fillWidth: true
 
-            actions {
-                main: Kirigami.Action {
-                    icon.name: "go-home"
-                    onTriggered: showPassiveNotification(i18n("Main action triggered"))
-                }
-                left: Kirigami.Action {
-                    icon.name: "go-previous"
-                    onTriggered: showPassiveNotification(i18n("Left action triggered"))
-                }
-                right: Kirigami.Action {
-                    icon.name: "go-next"
-                    onTriggered: showPassiveNotification(i18n("Right action triggered"))
-                }
-                contextualActions: [
-                    Kirigami.Action {
-                        text: i18n("Contextual Action 1")
-                        icon.name: "bookmarks"
-                        onTriggered: showPassiveNotification(i18n("Contextual action 1 clicked"))
-                    },
-                    Kirigami.Action {
-                        text: i18n("Contextual Action 2")
-                        icon.name: "folder"
-                        enabled: false
-                    }
-                ]
+        title: i18n("Main Page")
+
+        actions.main: Kirigami.Action {
+            text: i18n("Plus One")
+            icon.name: "list-add"
+            tooltip: i18n("Add one to the counter")
+            onTriggered: {
+                counter += 1
+            }
+        }
+
+        ColumnLayout {
+            width: page.width
+
+            anchors.centerIn: parent
+
+            Kirigami.Heading {
+                Layout.alignment: Qt.AlignCenter
+                text: counter == 0 ? i18n("Hello, World!") : counter
+            }
+
+            Controls.Button {
+                Layout.alignment: Qt.AlignHCenter
+                text: "+ 1"
+                onClicked: counter += 1
             }
         }
     }
