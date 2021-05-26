@@ -28,11 +28,7 @@ Controls.ToolButton {
     visible: applicationWindow().pageStack.layers.depth > 1 || (applicationWindow().pageStack.contentItem.contentWidth > applicationWindow().pageStack.width + Units.gridUnit && (button.showNavButtons === true || (button.showNavButtons & ApplicationHeaderStyle.ShowBackButton)))
 
     onClicked: {
-        if (applicationWindow().pageStack.layers && applicationWindow().pageStack.layers.depth > 1) {
-            applicationWindow().pageStack.layers.pop();
-        } else {
-            applicationWindow().pageStack.goBack();
-        }
+        applicationWindow().pageStack.goBack();
     }
 
     Controls.ToolTip {

@@ -129,8 +129,8 @@ AbstractApplicationWindow {
 
         function goBack() {
             //NOTE: drawers are handling the back button by themselves
-            var backEvent = {accepted: false}
-            if (root.pageStack.layers.depth > 1) {
+            let backEvent = {accepted: false}
+            if (root.pageStack.hasOwnProperty("layers") && root.pageStack.layers && root.pageStack.layers.depth > 1) {
                 root.pageStack.layers.currentItem.backRequested(backEvent);
                 if (!backEvent.accepted) {
                     root.pageStack.layers.pop();
