@@ -12,7 +12,7 @@ Item {
 
     enum Position {
         Top,
-        Bottom,
+        Bottom
     }
 
     /**
@@ -22,22 +22,22 @@ Item {
      *
      * Defaults to Position.Bottom on mobile, and Position.Top otherwise.
      */
-    property int position: Kirigami.Settings.isMobile ? Position.Bottom : Position.Top
+    property int position: Kirigami.Settings.isMobile ? TabViewLayout.Position.Bottom : TabViewLayout.Position.Top
 
     required property Item bar
     onBarChanged: {
         bar.parent = __grid
-        bar.Layout.row = Qt.binding(() => (__root.position === Position.Bottom) ? 1 : 0)
+        bar.Layout.row = Qt.binding(() => (__root.position === TabViewLayout.Position.Bottom) ? 1 : 0)
         bar.Layout.fillWidth = true
         if (bar instanceof ToolBar) {
-            bar.position = Qt.binding(() => (__root.position === Position.Bottom) ? ToolBar.Footer : ToolBar.Header)
+            bar.position = Qt.binding(() => (__root.position === TabViewLayout.Position.Bottom) ? ToolBar.Footer : ToolBar.Header)
         }
     }
 
     required property Item contentItem
     onContentItemChanged: {
         contentItem.parent = __grid
-        contentItem.Layout.row = Qt.binding(() => (__root.position === Position.Bottom) ? 0 : 1)
+        contentItem.Layout.row = Qt.binding(() => (__root.position === TabViewLayout.Position.Bottom) ? 0 : 1)
         contentItem.Layout.fillWidth = true
         contentItem.Layout.fillHeight = true
     }

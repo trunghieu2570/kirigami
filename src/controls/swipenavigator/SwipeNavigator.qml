@@ -183,7 +183,7 @@ Item {
 
                 Accessible.role: Accessible.PageTabList
             }
-            body: Kirigami.ColumnView {
+            contentItem: Kirigami.ColumnView {
                 id: columnView
                 Layout.fillWidth: true
                 Layout.fillHeight: true

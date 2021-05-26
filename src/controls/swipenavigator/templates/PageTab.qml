@@ -12,12 +12,12 @@ import org.kde.kirigami 2.12 as Kirigami
 import "../../private" as Private
 
 // TODO?: refactor into abstractbutton
-QQC2.TabButton {
+QQC2.Control {
     id: control
 
     enum Presentation {
         Normal,
-        Large,
+        Large
     }
 
     property string title
