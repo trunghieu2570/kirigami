@@ -96,8 +96,9 @@ Controls.TextField
         Repeater {
             model: root.leftActions
             Kirigami.Icon {
-                implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                // this is Kirigami.Units.iconSizes.small, but avoids being scaled x1.5 on mobile
+                implicitWidth: Kirigami.Units.iconSizes.sizeForLabels
+                implicitHeight: Kirigami.Units.iconSizes.sizeForLabels
 
                 anchors.verticalCenter: parent.verticalCenter
 
@@ -123,9 +124,9 @@ Controls.TextField
         height: root.implicitHeight - 2 * Kirigami.Units.smallSpacing
         Repeater {
             model: root.rightActions
-            Kirigami.Icon  {
-                implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                implicitHeight: Kirigami.Units.iconSizes.smallMedium
+            Kirigami.Icon {
+                implicitWidth: Kirigami.Units.iconSizes.sizeForLabels
+                implicitHeight: Kirigami.Units.iconSizes.sizeForLabels
 
                 anchors.verticalCenter: parent.verticalCenter
 
