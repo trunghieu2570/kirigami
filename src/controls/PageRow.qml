@@ -549,12 +549,6 @@ T.Control {
                     duration: Units.longDuration
                     easing.type: Easing.InOutCubic
                 }
-                YAnimator {
-                    from: height/2
-                    to: 0
-                    duration: Units.longDuration
-                    easing.type: Easing.OutCubic
-                }
             }
         }
 
@@ -565,12 +559,6 @@ T.Control {
                     to: 0
                     duration: Units.longDuration
                     easing.type: Easing.InCubic
-                }
-                YAnimator {
-                    from: 0
-                    to: -height/2
-                    duration: Units.longDuration
-                    easing.type: Easing.InOutCubic
                 }
             }
         }
