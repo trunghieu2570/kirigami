@@ -63,6 +63,7 @@ include(ECMQtDeclareLoggingCategory)
 include(ECMAddQch)
 include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(KDEPackageAppTemplates)
+include(ECMGenerateQmlTypes)
 
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Kirigami2")
 
