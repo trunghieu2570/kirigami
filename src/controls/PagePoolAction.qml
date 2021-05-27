@@ -130,22 +130,34 @@ Kirigami.Action {
                 pageStack_.pop(basePage);
 
             } else if (!useLayers) {
-                pageStack_.clear();
+                pageStack.clear();
+                pageStack.layers.clear();
             }
 
-            pageStack_.push(initialProperties ?
-                               pagePool.loadPageWithProperties(page, initialProperties) :
-                               pagePool.loadPage(page));
-                               
+            if (useLayers && pageStack_.depth > 1) {
+                pageStack_.replace(initialProperties ?
+                                   pagePool.loadPageWithProperties(page, initialProperties) :
+                                   pagePool.loadPage(page));
+
+            } else {
+                pageStack_.push(initialProperties ?
+                                   pagePool.loadPageWithProperties(page, initialProperties) :
+                                   pagePool.loadPage(page));
+            }
         } else {
             var callback = function(item) {
                 if (basePage) {
                     pageStack_.pop(basePage);
 
                 } else if (!useLayers) {
-                    pageStack_.clear();
+                    pageStack.clear();
+                    pageStack.layers.clear();
                 }
-                pageStack_.push(item);
+                if (useLayers && pageStack_.depth > 1) {
+                    pageStack_.replace(item);
+                } else {
+                    pageStack_.push(item);
+                }
             };
 
             if (initialProperties) {
