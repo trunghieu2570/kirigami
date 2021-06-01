@@ -68,6 +68,8 @@ T.ItemDelegate {
     bottomPadding: contentItemParent.children.length > 0 ? Kirigami.Units.largeSpacing : 0
     rightPadding: Kirigami.Units.largeSpacing
 
+    width: ListView.view ? ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin : undefined
+
     GridLayout {
         id: mainLayout
         rowSpacing: root.topPadding
