@@ -37,6 +37,10 @@ ScrollView {
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.OutExpo
             }
+            Kirigami.SizeGroup {
+                items: bar.children
+                mode: Kirigami.SizeGroup.Width
+            }
             onIndexChanged: {
                 if (xPos > (bar.width)/2) {
                     bar.targetDestination = (1-view.ScrollBar.horizontal.size) * ((xPos+tabWidth) / bar.width)
@@ -48,12 +52,16 @@ ScrollView {
             }
 
             property Item layouter: Item {
-                Row {
+                RowLayout {
                     id: expandedLayouter
                     Repeater {
                         model: swipeNavigatorRoot.pages
                         delegate: PrivateSwipeTab { vertical: false }
                     }
+                }
+                Kirigami.SizeGroup {
+                    items: expandedLayouter.children
+                    mode: Kirigami.SizeGroup.Width
                 }
             }
 

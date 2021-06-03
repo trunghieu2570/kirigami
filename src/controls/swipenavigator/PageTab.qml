@@ -22,9 +22,7 @@ T.PageTab {
             color: Kirigami.Theme.textColor
         }
         color: {
-            if (control.active) {
-                return Kirigami.ColorUtils.adjustColor(Kirigami.Theme.activeTextColor, {"alpha": 0.2*255})
-            } else if (control.needsAttention) {
+            if (control.needsAttention) {
                 return Kirigami.ColorUtils.adjustColor(Kirigami.Theme.negativeTextColor, {"alpha": 0.2*255})
             } else {
                 return "transparent"
@@ -86,7 +84,7 @@ T.PageTab {
 
         RowLayout {
             Layout.margins: (control.presentation === T.PageTab.Presentation.Large) ? Kirigami.Units.largeSpacing*2 : Kirigami.Units.largeSpacing
-            Layout.alignment: Qt.AlignVCenter
+            Layout.alignment: Qt.AlignCenter
 
             Kirigami.Icon {
                 visible: !!control.icon.name
@@ -103,7 +101,6 @@ T.PageTab {
                 level: (control.presentation === T.PageTab.Presentation.Large) ? 1 : 2
                 text: control.title
 
-                Layout.fillWidth: true
                 Layout.alignment: (Qt.AlignLeft | Qt.AlignVCenter)
             }
         }
