@@ -22,9 +22,7 @@ T.PageTab {
             color: Kirigami.Theme.textColor
         }
         color: {
-            if (control.active) {
-                return Kirigami.ColorUtils.adjustColor(Kirigami.Theme.activeTextColor, {"alpha": 0.2*255})
-            } else if (control.needsAttention) {
+            if (control.needsAttention) {
                 return Kirigami.ColorUtils.adjustColor(Kirigami.Theme.negativeTextColor, {"alpha": 0.2*255})
             } else {
                 return "transparent"
