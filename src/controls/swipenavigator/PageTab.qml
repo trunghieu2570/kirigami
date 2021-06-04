@@ -24,10 +24,16 @@ T.PageTab {
         color: {
             if (control.needsAttention) {
                 return Kirigami.ColorUtils.adjustColor(Kirigami.Theme.negativeTextColor, {"alpha": 0.2*255})
+            } else if (tappy.pressed) {
+                return Kirigami.ColorUtils.adjustColor(Kirigami.Theme.activeTextColor, {"alpha": 0.2*255})
             } else {
                 return "transparent"
             }
         }
+    }
+
+    TapHandler {
+        id: tappy
     }
 
     PrivateSwipeHighlight {
