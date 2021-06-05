@@ -1,0 +1,200 @@
+# Xəyyam <xxmn77@gmail.com>, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"PO-Revision-Date: 2021-05-30 10:34+0400\n"
+"Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
+"Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
+"Language: az\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Qt-Contexts: true\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 21.04.0\n"
+
+#: controls/AboutPage.qml:67
+msgctxt "AboutPage|"
+msgid "About"
+msgstr "Haqqında"
+
+#: controls/AboutPage.qml:95
+#, qt-format
+msgctxt "AboutPage|"
+msgid "Visit %1's KDE Store page"
+msgstr "\"%1-n KDE Mağazası səhifəsini ziyarət edin"
+
+#: controls/AboutPage.qml:104
+#, qt-format
+msgctxt "AboutPage|"
+msgid "Send an email to %1"
+msgstr "%1 -ə e-poçt göndərin"
+
+#: controls/AboutPage.qml:153
+msgctxt "AboutPage|"
+msgid "Copyright"
+msgstr "Müəllif hüquqları"
+
+#: controls/AboutPage.qml:191
+msgctxt "AboutPage|"
+msgid "License:"
+msgstr "Lisenziya:"
+
+#: controls/AboutPage.qml:208
+#, qt-format
+msgctxt "AboutPage|"
+msgid "License: %1"
+msgstr "Lisenziya: %1"
+
+#: controls/AboutPage.qml:219
+msgctxt "AboutPage|"
+msgid "Libraries in use"
+msgstr "İstifadə olunan kitabxana"
+
+#: controls/AboutPage.qml:233
+msgctxt "AboutPage|"
+msgid "Authors"
+msgstr "Müəlliflər"
+
+#: controls/AboutPage.qml:240
+msgctxt "AboutPage|"
+msgid "Show author photos"
+msgstr "Müəllifin şəklini göstərmək"
+
+#: controls/AboutPage.qml:268
+msgctxt "AboutPage|"
+msgid "Credits"
+msgstr "Minnətdarlıq"
+
+#: controls/AboutPage.qml:279
+msgctxt "AboutPage|"
+msgid "Translators"
+msgstr "Tərcüməçilər"
+
+#: controls/AbstractApplicationWindow.qml:343
+msgctxt "AbstractApplicationWindow|"
+msgid "Quit"
+msgstr "Çıxış"
+
+#: controls/ActionToolBar.qml:144
+msgctxt "ActionToolBar|"
+msgid "More Actions"
+msgstr "Daha Çox Fəaliyyətlər"
+
+#: controls/Avatar.qml:120
+#, qt-format
+msgctxt "Avatar|"
+msgid "%1 — %2"
+msgstr "%1 — %2"
+
+#: controls/ContextDrawer.qml:66
+msgctxt "ContextDrawer|"
+msgid "Actions"
+msgstr "Əməllər"
+
+#: controls/GlobalDrawer.qml:471
+msgctxt "GlobalDrawer|"
+msgid "Back"
+msgstr "Geriyə"
+
+#: controls/GlobalDrawer.qml:558
+msgctxt "GlobalDrawer|"
+msgid "Close Sidebar"
+msgstr "Yandakı paneli bağla"
+
+#: controls/PasswordField.qml:32
+msgctxt "PasswordField|"
+msgid "Password"
+msgstr "Şifrə"
+
+#: controls/SearchField.qml:57
+msgctxt "SearchField|"
+msgid "Search…"
+msgstr "Axtarış"
+
+#: controls/SearchField.qml:59
+msgctxt "SearchField|"
+msgid "Search"
+msgstr "Axtarış"
+
+#. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
+#: controls/swipenavigator/templates/PageTab.qml:39
+#, qt-format
+msgctxt "PageTab|"
+msgid "Current page. Progress: %1 percent."
+msgstr "Cari səhifə. Gedişat: %1 faiz."
+
+#. Accessibility text for a page tab. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:42
+#, qt-format
+msgctxt "PageTab|"
+msgid "Navigate to %1. Progress: %2 percent."
+msgstr "İstiqamət %1. Gedişat: %2 faiz."
+
+#. Accessibility text for a page tab. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:47
+msgctxt "PageTab|"
+msgid "Current page."
+msgstr "Cari səhifə."
+
+#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:50
+#, qt-format
+msgctxt "PageTab|"
+msgid "Navigate to %1. Demanding attention."
+msgstr "İstiqamət %1. Diqqət tələb olunur."
+
+#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:53
+#, qt-format
+msgctxt "PageTab|"
+msgid "Navigate to %1."
+msgstr "İstiqamət %1."
+
+#: controls/templates/OverlayDrawer.qml:107
+msgctxt "OverlayDrawer|"
+msgid "Close"
+msgstr "Bağlamaq"
+
+#: controls/templates/OverlayDrawer.qml:113
+msgctxt "OverlayDrawer|"
+msgid "Open"
+msgstr "Açmaq"
+
+#: controls/templates/private/BackButton.qml:36
+msgctxt "BackButton|"
+msgid "Navigate Back"
+msgstr "Geriyə hərəkət"
+
+#: controls/templates/private/ForwardButton.qml:34
+msgctxt "ForwardButton|"
+msgid "Navigate Forward"
+msgstr "İrəli hərəkət"
+
+#: controls/ToolBarApplicationHeader.qml:113
+msgctxt "ToolBarApplicationHeader|"
+msgid "More Actions"
+msgstr "Bir çox işlər"
+
+#: controls/UrlButton.qml:45
+msgctxt "UrlButton|"
+msgid "Copy link address"
+msgstr "Keçid ünvanını kopyalamaq"
+
+#: settings.cpp:200
+#, qt-format
+msgctxt "Settings|"
+msgid "KDE Frameworks %1"
+msgstr "KDE Frameworks %1"
+
+#: settings.cpp:202
+#, qt-format
+msgctxt "Settings|"
+msgid "The %1 windowing system"
+msgstr "%1 qrafik server platforması"
+
+#: settings.cpp:203
+#, qt-format
+msgctxt "Settings|"
+msgid "Qt %2 (built against %3)"
+msgstr "Qt %2 (%3 versiyadan yığılıb)"
