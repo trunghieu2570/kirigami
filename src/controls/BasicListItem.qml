@@ -254,6 +254,24 @@ AbstractListItem {
      */
     property bool fadeContent: false
 
+    /**
+     * The label item, for accessing the usual Text properties.
+     *
+     * @property QtQuick.Controls.Label labelItem
+     * @since 5.84
+     * @since org.kde.kirigami 2.16
+     */
+    property alias labelItem: labelItem
+
+    /**
+     * The subtitle item, for accessing the usual Text properties.
+     *
+     * @property QtQuick.Controls.Label subtitleItem
+     * @since 5.84
+     * @since org.kde.kirigami 2.16
+     */
+    property alias subtitleItem: subtitleItem
+
     default property alias _basicDefault: layout.data
 
     icon: action ? action.icon.name || action.icon.source : undefined
