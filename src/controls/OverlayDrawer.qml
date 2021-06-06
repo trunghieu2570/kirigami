@@ -68,7 +68,8 @@ T.OverlayDrawer {
 
                 visible: !parent.parent.handleAnchor || !parent.parent.handleAnchor.visible
 
-                width: Units.iconSizes.smallMedium + Units.smallSpacing * 2
+                // sizeForLabels * 1.375 = smallMedium (but won't be scaled up on mobile x1.5)
+                width: Units.iconSizes.sizeForLabels * 1.375 + Units.smallSpacing * 2
                 height: width
                 radius: Units.devicePixelRatio * 2
                 Behavior on color {
@@ -81,7 +82,7 @@ T.OverlayDrawer {
             Loader {
                 anchors.centerIn: handleGraphics
                 width: height
-                height: Units.iconSizes.smallMedium
+                height: Units.iconSizes.sizeForLabels * 1.375 // sizeForLabels * 1.375 = smallMedium (but won't be scaled up on mobile x1.5)
 
                 Theme.colorSet: handleGraphics.Theme.colorSet
                 Theme.backgroundColor: handleGraphics.Theme.backgroundColor
