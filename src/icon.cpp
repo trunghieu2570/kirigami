@@ -337,12 +337,8 @@ QImage Icon::findIcon(const QSize &size)
             QCoreApplication::instance()->testAttribute(Qt::AA_UseHighDpiPixmaps) ? (window() ? window()->devicePixelRatio() : qGuiApp->devicePixelRatio()) : 1;
         QUrl iconUrl(iconSource);
         QString iconProviderId = iconUrl.host();
-        QString iconId = iconUrl.path();
-
-        // QRC paths are not correctly handled by .path()
-        if (iconId.size() >= 2 && iconId.startsWith(QLatin1String("/:"))) {
-            iconId.remove(0, 1);
-        }
+        // QUrl path has the  "/" prefix while iconId does not
+        QString iconId = iconUrl.path().remove(0, 1);
 
         QSize actualSize;
         QQuickImageProvider *imageProvider = dynamic_cast<QQuickImageProvider *>(qmlEngine(this)->imageProvider(iconProviderId));
@@ -352,9 +348,15 @@ QImage Icon::findIcon(const QSize &size)
         switch (imageProvider->imageType()) {
         case QQmlImageProviderBase::Image:
             img = imageProvider->requestImage(iconId, &actualSize, size * multiplier);
+            if (!img.isNull()) {
+                setStatus(Ready);
+            }
             break;
         case QQmlImageProviderBase::Pixmap:
             img = imageProvider->requestPixmap(iconId, &actualSize, size * multiplier).toImage();
+            if (!img.isNull()) {
+                setStatus(Ready);
+            }
             break;
         case QQmlImageProviderBase::ImageResponse: {
             if (!m_loadedImage.isNull()) {
