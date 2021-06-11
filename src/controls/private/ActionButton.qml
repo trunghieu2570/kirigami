@@ -56,8 +56,8 @@ Item {
 
         anchors.bottom: edgeMouseArea.bottom
 
-        implicitWidth: implicitHeight + Units.iconSizes.smallMedium*2 + Units.gridUnit
-        implicitHeight: Units.iconSizes.medium + Units.largeSpacing * 2
+        implicitWidth: implicitHeight + Units.iconSizes.medium*2 + Units.gridUnit
+        implicitHeight: Units.iconSizes.large + Units.largeSpacing*2
 
 
         onXChanged: {
@@ -275,7 +275,7 @@ Item {
                     Icon {
                         id: icon
                         anchors.centerIn: parent
-                        width: Units.iconSizes.smallMedium
+                        width: Units.iconSizes.medium
                         height: width
                         source: root.action && root.action.icon.name ? root.action.icon.name : ""
                         selected: true
@@ -305,7 +305,7 @@ Item {
                     }
                     enabled: root.leftAction && root.leftAction.enabled
                     radius: Units.devicePixelRatio*2
-                    height: Units.iconSizes.smallMedium + Units.smallSpacing * 2
+                    height: Units.iconSizes.medium + Units.smallSpacing * 2
                     width: height + (root.action ? Units.gridUnit*2 : 0)
                     visible: root.leftAction
 
@@ -329,7 +329,7 @@ Item {
                     }
                     Icon {
                         source: root.leftAction && root.leftAction.icon.name ? root.leftAction.icon.name : ""
-                        width: Units.iconSizes.smallMedium
+                        width: Units.iconSizes.medium
                         height: width
                         selected: leftButtonGraphics.pressed
                         color: root.leftAction && root.leftAction.icon && root.leftAction.icon.color && root.leftAction.icon.color.a > 0 ? root.leftAction.icon.color : (selected ? Theme.highlightedTextColor : Theme.textColor)
@@ -352,7 +352,7 @@ Item {
                     }
                     enabled: root.rightAction && root.rightAction.enabled
                     radius: Units.devicePixelRatio*2
-                    height: Units.iconSizes.smallMedium + Units.smallSpacing * 2
+                    height: Units.iconSizes.medium + Units.smallSpacing * 2
                     width: height + (root.action ? Units.gridUnit*2 : 0)
                     visible: root.rightAction
                     readonly property bool pressed: root.rightAction && root.rightAction.enabled && ((mouseArea.actionUnderMouse == root.rightAction && mouseArea.pressed) || root.rightAction.checked)
@@ -375,7 +375,7 @@ Item {
                     }
                     Icon {
                         source: root.rightAction && root.rightAction.icon.name ? root.rightAction.icon.name : ""
-                        width: Units.iconSizes.smallMedium
+                        width: Units.iconSizes.medium
                         height: width
                         selected: rightButtonGraphics.pressed
                         color: root.rightAction && root.rightAction.icon && root.rightAction.icon.color && root.rightAction.icon.color.a > 0 ? root.rightAction.icon.color : (selected ? Theme.highlightedTextColor : Theme.textColor)
@@ -417,7 +417,7 @@ Item {
             //using internal pagerow api
             && (root.page && root.page.parent ? root.page.ColumnView.level < applicationWindow().pageStack.depth-1 : false)
 
-        width: Units.iconSizes.smallMedium + Units.smallSpacing*2
+        width: Units.iconSizes.medium + Units.smallSpacing*2
         height: width
 
 
@@ -437,7 +437,7 @@ Item {
             radius: Units.devicePixelRatio
             Icon {
                 anchors.centerIn: parent
-                width: Units.iconSizes.smallMedium
+                width: Units.iconSizes.medium
                 selected: fakeContextMenuButton.pressed
                 height: width
                 source: "overflow-menu"
