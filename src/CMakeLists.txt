@@ -136,3 +136,10 @@ else()
 endif()
 
 install(TARGETS kirigamiplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami.2)
+
+if (ANDROID)
+    install(FILES KF5Kirigami2-android-dependencies.xml
+        DESTINATION ${KDE_INSTALL_LIBDIR}
+        RENAME KF5Kirigami2_${CMAKE_ANDROID_ARCH_ABI}-android-dependencies.xml
+    )
+endif()

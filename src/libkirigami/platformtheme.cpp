@@ -857,21 +857,33 @@ PlatformTheme *PlatformTheme::qmlAttachedProperties(QObject *object)
 #else
         const auto libraryPaths = QCoreApplication::libraryPaths();
         for (const QString &path : libraryPaths) {
+#ifdef Q_OS_ANDROID
+            QDir dir(path);
+#else
             QDir dir(path + QStringLiteral("/kf5/kirigami"));
+#endif
             const auto fileNames = dir.entryList(QDir::Files);
-            for (const QString &fileName : fileNames) {
-                // TODO: env variable?
-                if (!QQuickStyle::name().isEmpty() && fileName.startsWith(QQuickStyle::name())) {
-                    QPluginLoader loader(dir.absoluteFilePath(fileName));
-                    QObject *plugin = loader.instance();
-                    // TODO: load actually a factory as plugin
 
-                    KirigamiPluginFactory *factory = qobject_cast<KirigamiPluginFactory *>(plugin);
-                    if (factory) {
-                        PlatformThemePrivate::s_pluginFactory = factory;
-                        return factory->createPlatformTheme(object);
+            for (const QString &fileName : fileNames) {
+
+#ifdef Q_OS_ANDROID
+                if (fileName.startsWith(QStringLiteral("libplugins_kf5_kirigami_")) && QLibrary::isLibrary(fileName)) {
+#endif
+                    // TODO: env variable?
+                    if (!QQuickStyle::name().isEmpty() && fileName.contains(QQuickStyle::name())) {
+                        QPluginLoader loader(dir.absoluteFilePath(fileName));
+                        QObject *plugin = loader.instance();
+                        // TODO: load actually a factory as plugin
+
+                        KirigamiPluginFactory *factory = qobject_cast<KirigamiPluginFactory *>(plugin);
+                        if (factory) {
+                            PlatformThemePrivate::s_pluginFactory = factory;
+                            return factory->createPlatformTheme(object);
+                        }
                     }
+#ifdef Q_OS_ANDROID
                 }
+#endif
             }
         }
 #endif
