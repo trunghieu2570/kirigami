@@ -90,7 +90,7 @@ Controls.ToolButton {
 
     readonly property string shortcutText: action ? (action.shortcut ? " (" + action.shortcut + ")" : "") : ""
     readonly property string whatsThis: action && action.whatsThis ? action.whatsThis : ""
-    readonly property string whatsThisDisplayedText: whatsThis.length > 0 ? "<br />" + (ShiftHandler.shiftPressed ? whatsThis : "<small><font color=\"" + Theme.disabledTextColor + "\">" + qsTr("Press <b>shift</b> to learn more") + "</font></small>") : ""
+    readonly property string whatsThisDisplayedText: whatsThis.length > 0 ? "<br />" + (ShiftHandler.shiftPressed ? whatsThis : "<small><font color=\"" + Theme.disabledTextColor + "\">" + qsTr("Press <b>Shift</b> for more Info.") + "</font></small>") : ""
 
     Controls.ToolTip.visible: control.hovered && Controls.ToolTip.text.length > 0 && !(menu && menu.visible) && !control.pressed
     Controls.ToolTip.text: (action ? (action.tooltip && action.tooltip.length ? action.tooltip : action.text) : "") + shortcutText + whatsThisDisplayedText
