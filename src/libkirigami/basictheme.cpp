@@ -117,7 +117,7 @@ BasicThemeDefinition::BasicThemeDefinition(QObject *parent)
 void BasicThemeDefinition::syncToQml(PlatformTheme *object)
 {
     auto item = qobject_cast<QQuickItem *>(object->parent());
-    if (item) {
+    if (item && qmlAttachedPropertiesObject<PlatformTheme>(item, false) == object) {
         Q_EMIT sync(item);
     }
 }
