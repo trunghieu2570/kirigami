@@ -70,7 +70,7 @@ class MnemonicAttached : public QObject
      * @since 5.72
      * @since 2.15
      */
-    Q_PROPERTY(bool active READ active NOTIFY activeChanged)
+    Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
 
 public:
     enum ControlType {
@@ -99,6 +99,7 @@ public:
 
     QKeySequence sequence();
 
+    void setActive(bool active);
     bool active() const;
 
     // QML attached property
@@ -119,6 +120,8 @@ Q_SIGNALS:
 
 private:
     void calculateWeights();
+    bool installEventFilterForWindow(QQuickWindow *wnd);
+    bool removeEventFilterForWindow(QQuickWindow *wnd);
 
     // TODO: to have support for DIALOG_BUTTON_EXTRA_WEIGHT etc, a type enum should be exported
     enum {

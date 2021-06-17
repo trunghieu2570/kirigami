@@ -108,24 +108,9 @@ MnemonicAttached::MnemonicAttached(QObject *parent)
             m_window->installEventFilter(this);
         }
         connect(parentItem, &QQuickItem::windowChanged, this, [this](QQuickWindow *window) {
-            if (m_window) {
-                QWindow *renderWindow = QQuickRenderControl::renderWindowFor(m_window);
-                if (renderWindow) {
-                    renderWindow->removeEventFilter(this);
-                } else {
-                    m_window->removeEventFilter(this);
-                }
-            }
+            removeEventFilterForWindow(m_window);
             m_window = window;
-            if (m_window) {
-                QWindow *renderWindow = QQuickRenderControl::renderWindowFor(m_window);
-                // renderWindow means the widget is rendering somewhere else, like a QQuickWidget
-                if (renderWindow && renderWindow != m_window) {
-                    renderWindow->installEventFilter(this);
-                } else {
-                    m_window->installEventFilter(this);
-                }
-            }
+            installEventFilterForWindow(m_window);
         });
     }
 }
@@ -234,6 +219,35 @@ void MnemonicAttached::calculateWeights()
     } else {
         m_weight = m_baseWeight + (m_weights.cend() - 1).key();
     }
+}
+
+bool MnemonicAttached::installEventFilterForWindow(QQuickWindow *wnd)
+{
+    if (!wnd) {
+        return false;
+    }
+    QWindow *renderWindow = QQuickRenderControl::renderWindowFor(wnd);
+    // renderWindow means the widget is rendering somewhere else, like a QQuickWidget
+    if (renderWindow && renderWindow != m_window) {
+        renderWindow->installEventFilter(this);
+    } else {
+        wnd->installEventFilter(this);
+    }
+    return true;
+}
+
+bool MnemonicAttached::removeEventFilterForWindow(QQuickWindow *wnd)
+{
+    if (!wnd) {
+        return false;
+    }
+    QWindow *renderWindow = QQuickRenderControl::renderWindowFor(wnd);
+    if (renderWindow) {
+        renderWindow->removeEventFilter(this);
+    } else {
+        wnd->removeEventFilter(this);
+    }
+    return true;
 }
 
 void MnemonicAttached::updateSequence()
@@ -408,6 +422,33 @@ bool MnemonicAttached::active() const
 MnemonicAttached *MnemonicAttached::qmlAttachedProperties(QObject *object)
 {
     return new MnemonicAttached(object);
+}
+
+void MnemonicAttached::setActive(bool active)
+{
+    // We can't rely on previous value when it's true since it can be
+    // caused by Alt key press and we need to remove the event filter
+    // additionally. False should be ok as it's a default state.
+    if (!m_active && m_active == active)
+        return;
+
+    m_active = active;
+
+    if (m_active) {
+        removeEventFilterForWindow(m_window);
+        if (m_actualRichTextLabel != m_richTextLabel) {
+            m_actualRichTextLabel = m_richTextLabel;
+            Q_EMIT richTextLabelChanged();
+        }
+
+    } else {
+        installEventFilterForWindow(m_window);
+        m_actualRichTextLabel = m_label;
+        m_actualRichTextLabel = removeAcceleratorMarker(m_actualRichTextLabel);
+        Q_EMIT richTextLabelChanged();
+    }
+
+    Q_EMIT activeChanged();
 }
 
 #include "moc_mnemonicattached.cpp"
