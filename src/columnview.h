@@ -153,7 +153,7 @@ class ColumnView : public QQuickItem
      * the enum can have the following values:
      * * FixedColumns: every column is fixed at the same width of the columnWidth property
      * * DynamicColumns: columns take their width from their implicitWidth
-     * * SingleColumn: only one column at a time is shown, as wide as the viewport, eventual reservedSpace on the column's atttached property is ignored
+     * * SingleColumn: only one column at a time is shown, as wide as the viewport, eventual reservedSpace on the column's attached property is ignored
      */
     Q_PROPERTY(ColumnResizeMode columnResizeMode READ columnResizeMode WRITE setColumnResizeMode NOTIFY columnResizeModeChanged)
 
@@ -207,7 +207,7 @@ class ColumnView : public QQuickItem
     Q_PROPERTY(int scrollDuration READ scrollDuration WRITE setScrollDuration NOTIFY scrollDurationChanged)
 
     /**
-     * True if columns should be visually separed by a separator line
+     * True if columns should be visually separated by a separator line
      */
     Q_PROPERTY(bool separatorVisible READ separatorVisible WRITE setSeparatorVisible NOTIFY separatorVisibleChanged)
 
@@ -295,7 +295,7 @@ public:
 
     QQuickItem *currentItem();
 
-    // NOTE: It's a QList<QObject *> as QML can't corectly build an Array out of QList<QQuickItem*>
+    // NOTE: It's a QList<QObject *> as QML can't correctly build an Array out of QList<QQuickItem*>
     QList<QObject *> visibleItems() const;
     QQuickItem *firstVisibleItem() const;
     QQuickItem *lastVisibleItem() const;

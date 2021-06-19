@@ -304,7 +304,7 @@ ContentItem::ContentItem(ColumnView *parent)
     m_slideAnim = new QPropertyAnimation(this);
     m_slideAnim->setTargetObject(this);
     m_slideAnim->setPropertyName("x");
-    // NOTE: the duration will be taked from kirigami units upon classBegin
+    // NOTE: the duration will be taken from kirigami units upon classBegin
     m_slideAnim->setDuration(0);
     m_slideAnim->setEasingCurve(QEasingCurve(QEasingCurve::InOutQuad));
     connect(m_slideAnim, &QPropertyAnimation::finished, this, [this]() {
@@ -714,7 +714,7 @@ void ContentItem::syncItemsOrder()
     }
 
     m_items = childItems();
-    // NOTE: polish() here sometimes gets indefinitely delayed and items chaging order isn't seen
+    // NOTE: polish() here sometimes gets indefinitely delayed and items changing order isn't seen
     layoutItems();
 }
 
@@ -1315,7 +1315,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
             setCurrentIndex(m_contentItem->m_items.indexOf(candidateItem));
         }
 
-        // if !m_acceptsMouse we don't dra gwith mouse
+        // if !m_acceptsMouse we don't drag with mouse
         if (!m_acceptsMouse && me->source() == Qt::MouseEventNotSynthesized) {
             event->setAccepted(false);
             return false;
