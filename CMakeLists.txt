@@ -7,8 +7,6 @@ project(kirigami2 VERSION ${KF_VERSION})
 
 set(REQUIRED_QT_VERSION 5.15.0)
 
-SET(CMAKE_CXX_STANDARD 11)
-
 ################# Disallow in-source build #################
 
 if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
