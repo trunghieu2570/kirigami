@@ -63,7 +63,7 @@ Item {
 
     /**
      * twinFormLayouts: list<FormLayout>
-     * If for some implementation reason multiple FormLayouts has to appear
+     * If for some implementation reason multiple FormLayouts have to appear
      * on the same page, they can have each other in twinFormLayouts,
      * so they will vertically align each other perfectly
      * @since 5.53
