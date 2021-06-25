@@ -10,14 +10,8 @@
 #define KIRIGAMIPLUGIN_H
 
 #include <QUrl>
-
 #include <QQmlEngine>
 #include <QQmlExtensionPlugin>
-
-#ifdef KIRIGAMI_BUILD_TYPE_STATIC
-#include "loggingcategory.h"
-#include <QDebug>
-#endif
 
 class KirigamiPlugin : public QQmlExtensionPlugin
 {
@@ -30,23 +24,8 @@ public:
     void initializeEngine(QQmlEngine *engine, const char *uri) override;
 
 #ifdef KIRIGAMI_BUILD_TYPE_STATIC
-    static KirigamiPlugin &getInstance()
-    {
-        static KirigamiPlugin instance;
-        return instance;
-    }
-
-    static void registerTypes(QQmlEngine *engine = nullptr)
-    {
-        Q_INIT_RESOURCE(shaders);
-        if (engine) {
-            engine->addImportPath(QLatin1String(":/"));
-        } else {
-            qCWarning(KirigamiLog)
-                << "Registering Kirigami on a null QQmlEngine instance - you likely want to pass a valid engine, or you will want to manually add the "
-                   "qrc root path :/ to your import paths list so the engine is able to load the plugin";
-        }
-    }
+    static KirigamiPlugin& getInstance();
+    static void registerTypes(QQmlEngine* engine = nullptr);
 #endif
 
 Q_SIGNALS:

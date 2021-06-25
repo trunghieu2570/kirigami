@@ -61,6 +61,14 @@ ecm_generate_headers(Kirigami2_HEADERS
     REQUIRED_HEADERS Kirigami2_HEADERS
 )
 
+if(NOT BUILD_SHARED_LIBS)
+    ecm_generate_headers(Kirigami2_HEADERS
+        HEADER_NAMES KirigamiPlugin
+        REQUIRED_HEADERS Kirigami2_HEADERS
+        RELATIVE ..
+    )
+endif()
+
 install(TARGETS KF5Kirigami2
         EXPORT KF5Kirigami2Targets
         ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})

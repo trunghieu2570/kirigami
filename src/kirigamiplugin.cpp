@@ -39,9 +39,10 @@
 
 static QString s_selectedStyle;
 
-// Q_INIT_RESOURCE(kirigami);
 #ifdef KIRIGAMI_BUILD_TYPE_STATIC
 #include <qrc_kirigami.cpp>
+#include "loggingcategory.h"
+#include <QDebug>
 #endif
 
 class CopyHelperPrivate : public QObject
@@ -282,5 +283,26 @@ void KirigamiPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
     Q_UNUSED(uri);
     connect(this, &KirigamiPlugin::languageChangeEvent, engine, &QQmlEngine::retranslate);
 }
+
+#ifdef KIRIGAMI_BUILD_TYPE_STATIC
+KirigamiPlugin& KirigamiPlugin::getInstance()
+{
+    static KirigamiPlugin instance;
+    return instance;
+}
+
+void KirigamiPlugin::registerTypes(QQmlEngine* engine)
+{
+    Q_INIT_RESOURCE(shaders);
+    if (engine) {
+        engine->addImportPath(QLatin1String(":/"));
+    }
+    else {
+        qCWarning(KirigamiLog)
+            << "Registering Kirigami on a null QQmlEngine instance - you likely want to pass a valid engine, or you will want to manually add the "
+            "qrc root path :/ to your import paths list so the engine is able to load the plugin";
+    }
+}
+#endif
 
 #include "kirigamiplugin.moc"
