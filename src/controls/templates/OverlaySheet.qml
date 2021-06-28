@@ -15,13 +15,16 @@ import "private"
 import "../private"
 
 /**
- * An overlay sheet that covers the current Page content.
+ * @brief An overlay sheet that covers the current Page content.
+ * 
  * Its contents can be scrolled up or down, scrolling all the way up or
  * all the way down, dismisses it.
  * Use this for big, modal dialogs or information display, that can't be
  * logically done as a new separate Page, even if potentially
  * are taller than the screen space.
- * @inherits: QtQuick.QtObject
+ *
+ * @since 2.0
+ * @inherit QtQml.QtObject
  */
 QtObject {
     id: root
@@ -30,7 +33,6 @@ QtObject {
     Theme.inherit: false
 
     /**
-     * contentItem: Item
      * This property holds the visual content item.
      *
      * Note: The content item is automatically resized inside the
@@ -42,100 +44,98 @@ QtObject {
     default property Item contentItem
 
     /**
-     * sheetOpen: bool
      * If true the sheet is open showing the contents of the OverlaySheet
      * component.
      */
     property bool sheetOpen
 
     /**
-     * leftPadding: int
-     * default contents padding at left
+     * This property holds the left padding. Unless explicitly set,
+     * the value is equal to Units::largeSpacing
      */
     property int leftPadding: Units.largeSpacing
 
     /**
-     * topPadding: int
-     * default contents padding at top
+     * This property holds the top padding. Unless explicitly set,
+     * the value is equal to Units::largeSpacing
      */
     property int topPadding: Units.largeSpacing
 
     /**
-     * rightPadding: int
-     * default contents padding at right
+     * This property holds the right padding. Unless explicitly set,
+     * the value is equal to Units::largeSpacing
      */
     property int rightPadding: Units.largeSpacing
 
     /**
-     * bottomPadding: int
-     * default contents padding at bottom
+     * This property holds the bottom padding. Unless explicitly set,
+     * the value is equal to Units::largeSpacing
      */
     property int bottomPadding: Units.largeSpacing
 
     /**
-     * leftInset: real
-     * padding that gets applied to both the content *and* the background
+     * This property holds the left inset for the background. The
+     * inset gets applied to both the content *and* the background.
      * @since 2.12
      */
     property real leftInset: 0
 
     /**
-     * topInset: real
-     * padding that gets applied to both the content *and* the background
+     * This property holds the top inset for the background. The
+     * inset gets applied to both the content *and* the background.
      * @since 2.12
      */
     property real topInset: 0
 
     /**
-     * rightInset: real
-     * padding that gets applied to both the content *and* the background
+     * This property holds the right inset for the background. The
+     * inset gets applied to both the content *and* the background.
      * @since 2.12
      */
     property real rightInset: 0
 
     /**
-     * bottomInset: real
-     * padding that gets applied to both the content *and* the background
+     * This property holds the bottom inset for the background. The
+     * inset gets applied to both the content *and* the background.
      * @since 2.12
      */
     property real bottomInset: 0
 
     /**
-     * header: Item
-     * an optional item which will be used as the sheet's header,
-     * always kept on screen
+     * An optional item which will be used as the sheet's header,
+     * always kept on screen.
      * @since 5.43
      */
     property Item header
 
     /**
-     * header: Item
-     * an optional item which will be used as the sheet's footer,
-     * always kept on screen
+     * An optional item which will be used as the sheet's footer,
+     * always kept on screen.
      * @since 5.43
      */
     property Item footer
+
     /**
-     * background: Item
      * This property holds the background item.
      *
-     * Note: If the background item has no explicit size specified,
-     * it automatically follows the control's size.
-     * In most cases, there is no need to specify width or
-     * height for a background item.
+     * @note If the background item has no explicit size specified,
+     * it automatically follows the control's size. In most cases,
+     * there is no need to specify width or height for a background item.
      */
     property Item background
 
     /**
-     * showCloseButton: bool
-     * whether to show the close button in the top-right corner
+     * Whether to show the close button in the top-right corner.
+     * By default only show on desktop.
      * @since 5.44
      */
     property bool showCloseButton: !Settings.isMobile
 
     property Item parent
 
-
+    /**
+     * Open the overlay sheet.
+     */
     function open() {
         openAnimation.running = true;
         root.sheetOpen = true;
@@ -144,9 +144,12 @@ QtObject {
         mainItem.forceActiveFocus();
     }
 
+    /**
+     * Close the overlay sheet.
+     */
     function close() {
         if (root.sheetOpen) {
-            root.sheetOpen = false
+            root.sheetOpen = false;
         }
     }
 
