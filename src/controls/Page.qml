@@ -15,42 +15,40 @@ import QtQuick.Controls 2.1 as QQC2
  * Page is a container for all the app pages: everything pushed to the
  * ApplicationWindow's pageStack should be a Page.
  *
- * For content that should be scrollable, such as ListViews, use ScrollablePage instead.
- *
  * @see ScrollablePage
+ * For content that should be scrollable, such as ListViews, use ScrollablePage instead.
  * @inherit QtQuick.Controls.Page
  */
 QQC2.Page {
     id: root
 
     /**
-     * padding: real
-     * 
      * The default content padding is 1 gridUnit.
+     * // TODO this is not displayed in the generated api doc.
      */
     padding: Kirigami.Units.gridUnit
 
     /**
-     * bottomPadding: real
-     * 
      * The bottom content padding. Bound to verticalPadding or the height of floating action buttons (when present) by default.
+     * // TODO this is not displayed in the generated api doc.
      */
     bottomPadding: actionButtons.item ? actionButtons.height : verticalPadding
 
     /**
-     * flickable: Flickable
-     * if the central element of the page is a Flickable
+     * @brief If the central element of the page is a Flickable
      * (ListView and Gridview as well) you can set it there.
-     * normally, you wouldn't need to do that, but just use the
-     * ScrollablePage element instead
+     *
+     * Normally, you wouldn't need to do that, but just use the
+     * ScrollablePage element instead.
+     *
      * @see ScrollablePage
-     * Use this if your flickable has some non standard properties, such as not covering the whole Page
+     * Use this if your flickable has some non standard properties, such as not covering the whole Page.
      */
     property Flickable flickable
 
     /**
-     * actions.contextualActions: list<QtObject>
-     * Defines the contextual actions for the page:
+     * @property list<QtQml.QtObject> actions.contextualActions
+     * @brief Defines the contextual actions for the page:
      * an easy way to assign actions in the right sliding panel
      *
      * Example usage:
@@ -95,8 +93,8 @@ QQC2.Page {
     property alias contextualActions: actionsGroup.contextualActions
 
     /**
-     * actions.main: Action
-     * An optional single action for the action button.
+     * @property Action mainAction
+     * @brief An optional single action for the action button.
      * it can be a Kirigami.Action or a QAction
      *
      * Example usage:
@@ -117,8 +115,8 @@ QQC2.Page {
     property alias mainAction: actionsGroup.main
 
     /**
-     * actions.left: Action
-     * An optional extra action at the left of the main action button.
+     * @property Action leftAction
+     * @brief An optional extra action at the left of the main action button.
      * it can be a Kirigami.Action or a QAction
      *
      * Example usage:
@@ -139,8 +137,8 @@ QQC2.Page {
     property alias leftAction: actionsGroup.left
 
     /**
-     * actions.right: Action
-     * An optional extra action at the right of the main action button.
+     * @property Action leftAction
+     * @brief An optional extra action at the right of the main action button.
      * it can be a Kirigami.Action or a QAction
      *
      * Example usage:
@@ -181,7 +179,6 @@ QQC2.Page {
     readonly property alias actions: actionsGroup
 
     /**
-     * contextualActionsAboutToShow: signal
      * Emitted when a visualization for the actions is about to be shown,
      * such as the toolbar menu or the contextDrawer
      * @since 2.7
@@ -189,8 +186,6 @@ QQC2.Page {
     signal contextualActionsAboutToShow
 
     /**
-     * isCurrentPage: bool
-     *
      * Specifies if it's the currently selected page in the window's pages row, or if layers
      * are used whether this is the topmost item on the layers stack. If the page is
      * not attached to either a column view or a stack view, expect this to be true.
@@ -204,7 +199,7 @@ QQC2.Page {
                 : true)
 
     /**
-     * overlay: Item
+     * @property Item overlay
      * an item which stays on top of every other item in the page,
      * if you want to make sure some elements are completely in a
      * layer on top of the whole content, parent items to this one.
@@ -214,21 +209,19 @@ QQC2.Page {
     readonly property alias overlay: overlayItem
 
     /**
-     * icon: variant
+     * @property variant icon
      *
      * The icon that represents this page.
      */
     property ActionIconGroup icon: ActionIconGroup {}
 
     /**
-     * needsAttention: bool
-     *
      * Whether this page needs user attention.
      */
     property bool needsAttention
 
     /**
-     * progress: real
+     * @property real progress
      *
      * Progress of a task this page is doing. Set to undefined to indicate
      * that there are no ongoing tasks.
@@ -236,7 +229,6 @@ QQC2.Page {
     property var progress: undefined
 
     /**
-     * titleDelegate: Component
      * The delegate which will be used to draw the page title. It can be customized to put any kind of Item in there.
      * @since 2.7
      */
@@ -255,7 +247,7 @@ QQC2.Page {
     }
 
     /**
-     * emitted When the application requests a Back action
+     * Emitted when the application requests a Back action
      * For instance a global "back" shortcut or the Android
      * Back button has been pressed.
      * The page can manage the back event by itself,
@@ -279,7 +271,6 @@ QQC2.Page {
     }
 
     /**
-     * globalToolBarItem: Item
      * The item used as global toolbar for the page
      * present only if we are in a PageRow as a page or as a layer,
      * and the style is either Titles or ToolBar
