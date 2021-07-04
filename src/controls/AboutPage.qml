@@ -83,6 +83,10 @@ ScrollablePage
             QQC2.Label {
                 text: modelData.name
             }
+            QQC2.Label {
+                visible: typeof(modelData.task) !== "undefined" && modelData.task.length > 0
+                text: qsTr("(%1)").arg(modelData.task)
+            }
             Row {
                 // Group action buttons together
                 spacing: 0
