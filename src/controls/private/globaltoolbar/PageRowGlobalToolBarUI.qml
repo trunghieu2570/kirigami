@@ -20,8 +20,8 @@ Kirigami.AbstractApplicationHeader {
     readonly property alias rightHandleAnchor: rightHandleAnchor
 
     readonly property bool breadcrumbVisible: layerIsMainRow && breadcrumbLoader.active
-    readonly property bool layerIsMainRow: root.layers.currentItem == root.contentItem
-    readonly property Item currentItem: layerIsMainRow ? root.currentItem : root.layers.currentItem
+    readonly property bool layerIsMainRow: (root.layers.currentItem.hasOwnProperty("columnView")) ? root.layers.currentItem.columnView == root.columnView : true
+    readonly property Item currentItem: layerIsMainRow ? root.columnView : root.layers.currentItem
 
     height: visible ? implicitHeight : 0
     minimumHeight: globalToolBar.minimumHeight

@@ -157,6 +157,50 @@ T.Control {
      */
     readonly property alias globalToolBar: globalToolBar
 
+    /**
+     * Assign a drawer as an internal left sidebar for this PageRow.
+     * In this case, when open and not modal, the drawer contents will be in the same layer as the base pagerow.
+     * Pushing any other layer on top will cover the sidebar.
+     *
+     * @since 5.84
+     */
+    // TODO KF6: globaldrawer should use action al so used by this sidebar instead of reparenting globaldrawer contents?
+    property OverlayDrawer leftSidebar
+
+    onLeftSidebarChanged: {
+        if (leftSidebar && !leftSidebar.modal) {
+            modalConnection.onModalChanged();
+        }
+    }
+
+    Connections {
+        id: modalConnection
+        target: root.leftSidebar
+        function onModalChanged() {
+            if (leftSidebar.modal) {
+                let sidebar = sidebarControl.contentItem;
+                let background = sidebarControl.background;
+                sidebarControl.contentItem = null;
+                leftSidebar.contentItem = sidebar;
+                sidebarControl.background = null;
+                leftSidebar.background = background;
+
+                sidebar.visible = true;
+                background.visible = true;
+            } else {
+                let sidebar = leftSidebar.contentItem
+                let background = leftSidebar.background
+                leftSidebar.contentItem=null
+                sidebarControl.contentItem = sidebar
+                leftSidebar.background=null
+                sidebarControl.background = background
+
+                sidebar.visible = true;
+                background.visible = true;
+            }
+        }
+    }
+
     implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding
     implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
 //END PROPERTIES
@@ -477,7 +521,7 @@ T.Control {
             fill: parent
         }
         //placeholder as initial item
-        initialItem: columnView
+        initialItem: columnViewLayout
 
         function clear () {
             //don't let it kill the main page row
@@ -640,20 +684,36 @@ T.Control {
         }
     }
 
-    ColumnView {
-        id: columnView
+    RowLayout {
+        id: columnViewLayout
+        spacing: 1
+        readonly property alias columnView: columnView
+        QQC2.Control {
+            id: sidebarControl
+            Layout.fillHeight: true
+            visible: contentItem !== null && root.leftDrawer && root.leftDrawer.visible
+            leftPadding: root.leftSidebar ? root.leftSidebar.leftPadding : 0
+            topPadding: root.leftSidebar ? root.leftSidebar.topPadding : 0
+            rightPadding: root.leftSidebar ? root.leftSidebar.rightPadding : 0
+            bottomPadding: root.leftSidebar ? root.leftSidebar.bottomPadding : 0
+        }
+        ColumnView {
+            id: columnView
+            Layout.fillWidth: true
+            Layout.fillHeight: true
 
-        topPadding: globalToolBarUI.item && globalToolBarUI.item.breadcrumbVisible
-                    ? globalToolBarUI.height : 0
+            topPadding: globalToolBarUI.item && globalToolBarUI.item.breadcrumbVisible
+                        ? globalToolBarUI.height : 0
 
-        // Internal hidden api for Page
-        readonly property Item __pageRow: root
-        acceptsMouse: Settings.isMobile
-        columnResizeMode: root.wideMode ? ColumnView.FixedColumns : ColumnView.SingleColumn
-        columnWidth: root.defaultColumnWidth
+            // Internal hidden api for Page
+            readonly property Item __pageRow: root
+            acceptsMouse: Settings.isMobile
+            columnResizeMode: root.wideMode ? ColumnView.FixedColumns : ColumnView.SingleColumn
+            columnWidth: root.defaultColumnWidth
 
-        onItemInserted: root.pageInserted(position, item);
-        onItemRemoved: root.pageRemoved(item);
+            onItemInserted: root.pageInserted(position, item);
+            onItemRemoved: root.pageRemoved(item);
+        }
     }
 
     Rectangle {
