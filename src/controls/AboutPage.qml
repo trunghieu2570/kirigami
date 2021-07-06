@@ -64,7 +64,7 @@ ScrollablePage
      */
     property var aboutData
 
-    title: qsTr("About")
+    title: qsTr("About %1").arg(page.aboutData.displayName)
 
     Component {
         id: personDelegate
