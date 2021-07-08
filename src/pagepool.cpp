@@ -33,6 +33,17 @@ QQuickItem *PagePool::lastLoadedItem() const
     return m_lastLoadedItem;
 }
 
+QList<QObject *> PagePool::items() const
+{
+    auto items = m_itemForUrl.values();
+    return QList<QObject *>(items.cbegin(), items.cend());
+}
+
+QList<QUrl> PagePool::urls() const
+{
+    return m_urlForItem.values();
+}
+
 void PagePool::setCachePages(bool cache)
 {
     if (cache == m_cachePages) {
@@ -126,24 +137,34 @@ QQuickItem *PagePool::loadPageWithProperties(const QString &url, const QVariantM
     }
 
     QQuickItem *item = createFromComponent(component, properties);
+    if (!item)
+        return nullptr;
+
     if (m_cachePages) {
         component->deleteLater();
+        QQmlEngine::setObjectOwnership(item, QQmlEngine::CppOwnership);
+        m_itemForUrl[component->url()] = item;
+        m_urlForItem[item] = component->url();
+        Q_EMIT itemsChanged();
+        Q_EMIT urlsChanged();
+
     } else {
         m_componentForUrl[component->url()] = component;
+        QQmlEngine::setObjectOwnership(item, QQmlEngine::JavaScriptOwnership);
     }
+
+    m_lastLoadedUrl = actualUrl;
+    m_lastLoadedItem = item;
+    Q_EMIT lastLoadedUrlChanged();
+    Q_EMIT lastLoadedItemChanged();
 
     if (callback.isCallable()) {
         QJSValueList args = {qmlEngine(this)->newQObject(item)};
         callback.call(args);
-        m_lastLoadedUrl = actualUrl;
-        Q_EMIT lastLoadedUrlChanged();
         // We could return the item, but for api coherence return null
         return nullptr;
-    } else {
-        m_lastLoadedUrl = actualUrl;
-        Q_EMIT lastLoadedUrlChanged();
-        return item;
     }
+    return item;
 }
 
 QQuickItem *PagePool::createFromComponent(QQmlComponent *component, const QVariantMap &properties)
@@ -151,45 +172,21 @@ QQuickItem *PagePool::createFromComponent(QQmlComponent *component, const QVaria
     QQmlContext *ctx = QQmlEngine::contextForObject(this);
     Q_ASSERT(ctx);
 
-    // TODO:  As soon as we can depend on Qt 5.14, use QQmlComponent::createWithInitialProperties
-    QObject *obj = component->beginCreate(ctx);
+    QObject *obj = component->createWithInitialProperties(properties, ctx);
 
-    // Error?
-    if (!obj) {
+    if (!obj || component->isError()) {
+        qCWarning(KirigamiLog) << component->errors();
+        if (obj)
+            obj->deleteLater();
         return nullptr;
     }
-
-    for (auto it = properties.constBegin(); it != properties.constEnd(); ++it) {
-        QQmlProperty p(obj, it.key(), ctx);
-        if (!p.isValid()) {
-            qCWarning(KirigamiLog) << "Invalid property " << it.key();
-            continue;
-        }
-        if (!p.write(it.value())) {
-            qCWarning(KirigamiLog) << "Could not set property " << it.key();
-            continue;
-        }
-    }
-
-    component->completeCreate();
 
     QQuickItem *item = qobject_cast<QQuickItem *>(obj);
     if (!item) {
+        qCWarning(KirigamiLog) << "Storing Non-QQuickItem in PagePool not supported";
         obj->deleteLater();
         return nullptr;
     }
-
-    // Always cache just the last one
-    m_lastLoadedItem = item;
-
-    if (m_cachePages) {
-        QQmlEngine::setObjectOwnership(item, QQmlEngine::CppOwnership);
-        m_itemForUrl[component->url()] = item;
-    } else {
-        QQmlEngine::setObjectOwnership(item, QQmlEngine::JavaScriptOwnership);
-    }
-
-    Q_EMIT lastLoadedItemChanged();
 
     return item;
 }
@@ -226,9 +223,11 @@ bool PagePool::contains(const QVariant &page) const
 {
     if (page.canConvert<QQuickItem *>()) {
         return m_urlForItem.contains(page.value<QQuickItem *>());
+
     } else if (page.canConvert<QString>()) {
         const QUrl actualUrl = resolvedUrl(page.value<QString>());
         return m_itemForUrl.contains(actualUrl);
+
     } else {
         return false;
     }
@@ -268,6 +267,9 @@ void PagePool::deletePage(const QVariant &page)
     m_itemForUrl.remove(url);
     m_urlForItem.remove(item);
     item->deleteLater();
+
+    Q_EMIT itemsChanged();
+    Q_EMIT urlsChanged();
 }
 
 void PagePool::clear()
@@ -285,13 +287,14 @@ void PagePool::clear()
         QQmlEngine::setObjectOwnership(i, QQmlEngine::JavaScriptOwnership);
     }
     m_itemForUrl.clear();
-
     m_urlForItem.clear();
     m_lastLoadedUrl = QUrl();
     m_lastLoadedItem = nullptr;
 
     Q_EMIT lastLoadedUrlChanged();
     Q_EMIT lastLoadedItemChanged();
+    Q_EMIT itemsChanged();
+    Q_EMIT urlsChanged();
 }
 
 #include "moc_pagepool.cpp"

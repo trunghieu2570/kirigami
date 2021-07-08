@@ -103,13 +103,74 @@ TestCase {
         pageStack: mainWindow.pageStack
         page: "TestPage.qml?action=loadPageActionPropDoesNotExist"
         initialProperties: {
-            return { propDoesNotExist: "PROP-NON-EXISTANT" }
+            return { propDoesNotExist: "PROP-NON-EXISTENT" }
         }
     }
 
-    function test_loadPageInitialPropertyNotExistOkay () {
+    function test_loadPageInitialPropertyNotExistFails () {
         var expectedUrl = "TestPage.qml?action=loadPageActionPropDoesNotExist"
         loadPageActionPropDoesNotExist.trigger()
-        verify(pool.lastLoadedUrl.toString().endsWith(expectedUrl))
+        verify(!pool.lastLoadedUrl.toString().endsWith(expectedUrl))
+    }
+    
+    function test_contains () {
+        const page = "TestPage.qml?action=contains"
+        let item = pool.loadPage(page)
+        verify(item !== null, "valid item returned from loadPage")
+        verify(pool.contains(page), "pool contains page")
+        verify(pool.contains(item), "pool contains item")
+    }
+    
+    function test_deletePageByUrl () {
+        const urlPage = "TestPage.qml?action=deletePageByUrl"
+        pool.loadPage(urlPage)
+        verify(pool.contains(urlPage), "pool contains page before deletion")
+        pool.deletePage(urlPage)
+        verify(!pool.contains(urlPage), "pool does not contain page after deletion")
+    }
+    
+    function test_deletePageByItem () {
+        const itemPage = "TestPage.qml?action=deletePageByItem"
+        let item = pool.loadPage(itemPage)
+        verify(pool.contains(item), "pool contains item before deletion")
+        pool.deletePage(item)
+        verify(!pool.contains(itemPage), "pool does not contain page after deletion")
+    }
+    
+    function test_iterateAndDeleteByItem () {
+        const pages = []
+        for (let i = 1; i <= 5; ++i) {
+            const page = "TestPage.qml?page=" + i
+            pool.loadPage(page)
+            verify(pool.contains(page), "pool contains page " + page)
+            pages.push(page)
+        }
+        verify(pool.items.length == 5, "pool contains 5 items")
+        for (const item of pool.items) {
+            const url = pool.urlForPage(item)
+            const found = pages.find(page => url.toString().endsWith(page))
+            verify(found, "pool.items contains page " + found)
+            pool.deletePage(item)
+        }
+        verify(pool.items.length == 0, "all items have been deleted")
+    }
+    
+    function test_iterateAndDeleteByUrl () {
+        const pages = []
+        for (let i = 1; i <= 5; ++i) {
+            const page = "TestPage.qml?page=" + i
+            pool.loadPage(page)
+            verify(pool.contains(page), "pool contains page " + page)
+            pages.push(page)
+        }
+        verify(pool.urls.length == 5, "pool contains 5 urls")
+        for (const url of pool.urls) {
+            const found = pages.find(page => url.toString().endsWith(page))
+            verify(found, "pool.urls contains page " + found)
+        }
+        for (const page of pages) {
+            pool.deletePage(page)
+        }
+        verify(pool.urls.length == 0, "all urls have been deleted")
     }
 }

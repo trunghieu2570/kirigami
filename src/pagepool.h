@@ -33,6 +33,18 @@ class PagePool : public QObject
      * The last item that was loaded with @loadPage.
      */
     Q_PROPERTY(QQuickItem *lastLoadedItem READ lastLoadedItem NOTIFY lastLoadedItemChanged)
+    
+    /**
+     * All items loaded/managed by the PagePool.
+     * @since 5.84
+     */
+    Q_PROPERTY(QList<QObject *> items READ items NOTIFY itemsChanged)
+
+    /**
+     * All page URLs loaded/managed by the PagePool.
+     * @since 5.84
+     */
+    Q_PROPERTY(QList<QUrl> urls READ urls NOTIFY urlsChanged)
 
     /**
      * If true (default) the pages will be kept around, will have C++ ownership and
@@ -49,6 +61,8 @@ public:
 
     QUrl lastLoadedUrl() const;
     QQuickItem *lastLoadedItem() const;
+    QList<QObject *> items() const;
+    QList<QUrl> urls() const;
 
     void setCachePages(bool cache);
     bool cachePages() const;
@@ -115,6 +129,8 @@ public:
 Q_SIGNALS:
     void lastLoadedUrlChanged();
     void lastLoadedItemChanged();
+    void itemsChanged();
+    void urlsChanged();
     void cachePagesChanged();
 
 private:
