@@ -24,7 +24,7 @@ T2.Drawer {
 
 //BEGIN Properties
     /**
-     * true when the drawer is open and visible
+     * This property holds whether the drawer is open and visible.
      */
     property bool drawerOpen: false
 
@@ -34,50 +34,63 @@ T2.Drawer {
     property bool enabled: true
 
     /**
-     * When true the drawer is in a state between open and closed. the drawer is visible but not completely open.
-     * This is usually the case when the user is dragging the drawer from a screen
-     * edge, so the user is "peeking" what's in the drawer
+     * @brief This property holds whether the drawer is in a state between open
+     * and closed.
+     *
+     * The drawer is visible but not completely open. This is usually the case when
+     * the user is dragging the drawer from a screen edge, so the user is "peeking"
+     * what's in the drawer.
      */
     property bool peeking: false
 
     /**
-     * True during an animation of a drawer either opening or closing
+     * This property holds whether the drawer is currently opening or closing itself.
      */
     readonly property bool animating : enterAnimation.animating || exitAnimation.animating || positionResetAnim.running
 
     /**
-     * When true, the drawer can be collapsed to a very thin, usually icon only sidebar.
-     * Only modal drawers are collapsible.
-     * Collapsible is not supported in Mobile mode
+     * @brief This property holds whether the drawer can be collapsed to a
+     * very thin, usually icon only sidebar.
+     *
+     * Only modal drawers are collapsible. Collapsible is not supported in
+     * the mobile mode.
      * @since 2.5
      */
     property bool collapsible: false
 
     /**
+     * @brief This property holds whether the drawer is collapsed to a
+     * very thin sidebar, usually icon only.
+     *
      * When true, the drawer will be collapsed to a very thin sidebar,
      * usually icon only.
-     * Only collapsible drawers can be collapsed
+     * @see collapsible Only collapsible drawers can be collapsed.
      */
     property bool collapsed: false
 
     /**
-     * When collapsed, the drawer will be resized to this size
-     * (which may be width for vertical drawers or height for
-     * horizontal drawers).
+     * This property holds the size of the collapsed drawer.
+     *
+     * For vertical drawers this will be the width of the drawer and for horizontal
+     * drawers this will be the height of the drawer.
+     *
      * By default it's just enough to accommodate medium sized icons
      */
     property int collapsedSize: Units.iconSizes.medium
 
     /**
-     * A grouped property describing an optional icon.
+     * This property holds the options for handle's open icon. This is a grouped
+     * property with following components:
+     *
      * * source: The source of the icon, a freedesktop-compatible icon name is recommended.
      * * color: An optional tint color for the icon.
      *
-     * If no custom icon is set, a menu icon is shown for the application  globalDrawer
+     * If no custom icon is set, a menu icon is shown for the application globalDrawer
      * and an overflow menu icon is shown for the contextDrawer.
      * That's the default for the GlobalDrawer and ContextDrawer components respectively.
      *
-     * For OverlayDrawer the default is view-right-close or view-left-close depending on the drawer location
+     * For OverlayDrawer the default is view-right-close or view-left-close depending on
+     * the drawer location
      * @since 2.5
      */
     readonly property IconPropertiesGroup handleOpenIcon: IconPropertiesGroup {
@@ -85,14 +98,17 @@ T2.Drawer {
     }
 
     /**
-     * A grouped property describing an optional icon.
+     * This property holds the options for the handle's close icon. This is a
+     * grouped property with the following components:
+     *
      * * source: The source of the icon, a freedesktop-compatible icon name is recommended.
      * * color: An optional tint color for the icon.
      *
      * If no custom icon is set, an X icon is shown,
-     * which will morph into the Menu or overflow icons
+     * which will morph into the Menu or overflow icons.
      *
-     * For OverlayDrawer the default is view-right-new or view-left-new depending on the drawer location
+     * For OverlayDrawer the default is view-right-new or view-left-new depending on
+     * the drawer location.
      * @since 2.5
      */
     property IconPropertiesGroup handleClosedIcon: IconPropertiesGroup {
@@ -101,27 +117,27 @@ T2.Drawer {
     }
 
     /**
-     * The tooltip displayed when the drawer is open.
+     * This property holds the tooltip displayed when the drawer is open.
      * @since 2.15
      */
     property string handleOpenToolTip: qsTr("Close")
 
     /**
-     * The tooltip displayed when the drawer is closed.
+     * This property holds the tooltip displayed when the drawer is closed.
      * @since 2.15
      */
     property string handleClosedToolTip: qsTr("Open")
 
     /**
-     * If true, a little handle will be visible to make opening the drawer easier
-     * Currently supported only on left and right drawers
+     * This property holds whether the handle is visible, to make opening the
+     * drawer easier. Currently supported only on left and right drawers.
      */
     property bool handleVisible: typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true
 
     /**
      * Readonly property that points to the item that will act as a physical
      * handle for the Drawer
-     * @var MouseArea handle
+     * @property MouseArea handle
      **/
     readonly property Item handle: MouseArea {
         id: drawerHandle

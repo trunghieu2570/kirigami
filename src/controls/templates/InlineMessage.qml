@@ -58,34 +58,35 @@ import "private"
  * @endcode
  *
  * @since 5.45
+ * @inherit QtQuick.Controls.Control
  */
-
 T2.Control {
     id: root
 
     visible: false
 
     /**
-     * Emitted when a link is hovered in the message text.
+     * This signal is emitted when a link is hovered in the message text.
      * @param The hovered link.
      */
     signal linkHovered(string link)
 
     /**
-     * Emitted when a link is clicked or tapped in the message text.
+     * This signal is emitted when a link is clicked or tapped in the message text.
      * @param The clicked or tapped link.
      */
     signal linkActivated(string link)
 
     /**
-     * The message type. One of Information, Positive, Warning or Error.
+     * This property holds the message type. One of Information, Positive, Warning or Error.
      *
      * The default is Kirigami.MessageType.Information.
      */
     property int type: Kirigami.MessageType.Information
 
     /**
-     * A grouped property describing an optional icon.
+     * This grouped property holds the description of an optional icon.
+     *
      * * source: The source of the icon, a freedesktop-compatible icon name is recommended.
      * * color: An optional tint color for the icon.
      *
@@ -95,25 +96,26 @@ T2.Control {
     property IconPropertiesGroup icon: IconPropertiesGroup {}
 
     /**
-     * The message text.
+     * This property holds the message text.
      */
     property string text
 
     /**
-     * When enabled, a close button is shown.
+     * This property holds whether the close button is displayed.
+     *
      * The default is false.
      */
     property bool showCloseButton: false
 
     /**
-     * The list of actions to show. Actions are added from left to
+     * This property holds the list of actions to show. Actions are added from left to
      * right. If more actions are set than can fit, an overflow menu is
      * provided.
      */
     property list<QtObject> actions
 
     /**
-     * True while the message item is animating.
+     * This property holds whether the current message item is animating.
      */
     readonly property bool animating: root.hasOwnProperty("_animating") && _animating
 

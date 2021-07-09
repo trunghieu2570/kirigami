@@ -24,7 +24,7 @@ ScrollablePage
 {
     id: page
     /**
-     * An object with the same shape of KAboutData
+     * This property holds an object with the same shape as KAboutData.
      *
      * For example:
      * @code

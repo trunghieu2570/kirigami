@@ -73,7 +73,7 @@ Page {
     /**
      * \property bool ScrollablePage::supportsRefreshing
      * If true the list supports the "pull down to refresh" behavior.
-     * default is false.
+     * By default it is false.
      */
     property alias supportsRefreshing: scrollView.supportsRefreshing
 
@@ -98,7 +98,7 @@ Page {
     /**
      * The main content Item of this page.
      * In the case of a ListView or GridView, both contentItem and flickable
-     * will be a pointer to the ListView (or GridView)
+     * will be a pointer to the ListView (or GridView).
      * @note This can't be contentItem as Page's contentItem is final.
      */
     default property QtObject mainItem
