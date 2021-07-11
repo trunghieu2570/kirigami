@@ -231,6 +231,13 @@ ScrollablePage
                 text: modelData
             }
         }
+        Repeater {
+            model: aboutData.components
+            delegate: QQC2.Label {
+                Layout.leftMargin: Units.gridUnit
+                text: modelData.name + (modelData.version === "" ? "" : " %1".arg(modelData.version))
+            }
+        }
         Heading {
             Layout.fillWidth: true
             FormData.isSection: visible
