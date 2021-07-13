@@ -15,7 +15,7 @@ case $1 in
 esac
 
 if [[ ! -d ${kirigami_dir}/${BREEZEICONS_DIR} ]]; then
-	echo "could not find ${BREEZEICONS_DIR}, please clone breeze-icons frist into ${BREEZEICONS_DIR}:"
+	echo "could not find ${BREEZEICONS_DIR}, please clone breeze-icons first into ${BREEZEICONS_DIR}:"
 	echo "cd ${kirigami_dir} && git clone --depth 1 https://invent.kde.org/frameworks/breeze-icons.git ${BREEZEICONS_DIR}"
 	exit 1
 fi

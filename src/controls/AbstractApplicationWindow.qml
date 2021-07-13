@@ -127,7 +127,7 @@ QQC2.ApplicationWindow {
    /**
     * header: ApplicationHeader
     * An item that can be used as a title for the application.
-    * Scrolling the main page will make it taller or shorter (trough the point of going away)
+    * Scrolling the main page will make it taller or shorter (through the point of going away)
     * It's a behavior similar to the typical mobile web browser addressbar
     * the minimum, preferred and maximum heights of the item can be controlled with
     * * Layout.minimumHeight: default is 0, i.e. hidden

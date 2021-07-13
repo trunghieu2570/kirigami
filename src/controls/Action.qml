@@ -65,7 +65,7 @@ Controls.Action {
     property bool separator: false
 
     /**
-     * When true, actions in globalDrawers and contextDrawers will become titles displaying te child actions as sub items
+     * When true, actions in globalDrawers and contextDrawers will become titles displaying the child actions as sub items
      * @since 2.6
      */
     property bool expandible: false
@@ -140,7 +140,7 @@ Controls.Action {
     /**
      * Hints for implementations using Actions indicating preferences about how to display the action.
      *
-     * @deprected since 2.14, use Kirigami.DisplayHint instead.
+     * @deprecated since 2.14, use Kirigami.DisplayHint instead.
      */
     enum DisplayHint {
         /**

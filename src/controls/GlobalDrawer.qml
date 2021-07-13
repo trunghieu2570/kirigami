@@ -123,7 +123,7 @@ OverlayDrawer {
      * an item that will stay on top of the drawer,
      * and if the drawer contents can be scrolled,
      * this item will stay still and won't scroll.
-     * Indended mainly for toolbars
+     * Intended mainly for toolbars
      * @since 2.12
      */
     property Item header

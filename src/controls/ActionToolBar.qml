@@ -39,7 +39,7 @@ Controls.Control {
     onHiddenActionsChanged: print("ActionToolBar::hiddenActions is deprecated, use the AlwaysHide hint on your actions instead")
 
     /**
-     * Wether we want our buttons to have a flat appearance. Default: true
+     * Whether we want our buttons to have a flat appearance. Default: true
      */
     property bool flat: true
 

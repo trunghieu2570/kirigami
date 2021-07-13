@@ -54,7 +54,7 @@ public:
     Q_INVOKABLE ColorUtils::Brightness brightnessForColor(const QColor &color);
 
     /**
-     * Same Algorythm as brightnessForColor but returns a 0 to 1 value for an
+     * Same Algorithm as brightnessForColor but returns a 0 to 1 value for an
      * estimate of the equivalent gray light value (luma).
      * 0 as full black, 1 as full white and 0.5 equivalent to a 50% gray.
      *
@@ -146,7 +146,7 @@ public:
      *
      * @param adjustments The adjustments to apply to the color. Each value must
      * be between `-100.0` and `100.0`. This indicates how far the property should
-     * be scaled from its original to the maximum if positive or to the minumum if
+     * be scaled from its original to the maximum if positive or to the minimum if
      * negative.
      *
      * @note `value` and `lightness` are aliases for the same value.

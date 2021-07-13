@@ -150,7 +150,7 @@ bool MnemonicAttached::eventFilter(QObject *watched, QEvent *e)
     return false;
 }
 
-// Algorythm adapted from KAccelString
+// Algorithm adapted from KAccelString
 void MnemonicAttached::calculateWeights()
 {
     m_weights.clear();

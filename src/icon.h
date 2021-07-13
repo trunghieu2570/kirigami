@@ -124,7 +124,7 @@ class Icon : public QQuickItem
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
 
     /**
-     * Whether the icon is correctly loaded, is asyncronously loading or there was an error.
+     * Whether the icon is correctly loaded, is asynchronously loading or there was an error.
      * Note that image loading will not be initiated until the item is shown, so if the Icon is not visible,
      * it can only have Null or Loading states.
      * @since 5.15

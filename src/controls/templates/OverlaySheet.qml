@@ -408,7 +408,7 @@ QtObject {
                         open();
                     } else {
                         // repositioning is relevant only when the content height is less than the viewport height.
-                        // In that case the sheet looks like a dialog and shouldbe centered. there is also a corner case when now is bigger then the viewport but prior to the
+                        // In that case the sheet looks like a dialog and should be centered. there is also a corner case when now is bigger then the viewport but prior to the
                         // resize event it was smaller, also in this case we need repositioning
                         if (scrollView.animatedContentHeight < outerFlickable.height
                             || scrollView.flickableItem.oldContentHeight < outerFlickable.height
@@ -542,7 +542,7 @@ QtObject {
 
                 onContentHeightChanged: {
                     // repositioning is relevant only when the content height is less than the viewport height.
-                    // In that case the sheet looks like a dialog and shouldbe centered. there is also a corner case when now is bigger then the viewport but prior to the
+                    // In that case the sheet looks like a dialog and should be centered. there is also a corner case when now is bigger then the viewport but prior to the
                     // resize event it was smaller, also in this case we need repositioning
                     if (contentHeight < height || oldContentHeight < height) {
                         adjustPosition();

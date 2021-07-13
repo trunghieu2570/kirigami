@@ -32,7 +32,7 @@ public:
 
 /**
  * This is an attached property to every item that is inserted in the ColumnView,
- * used to access the view and page information such as the position and informations for layouting, such as fillWidth
+ * used to access the view and page information such as the position and information for layouting, such as fillWidth
  * @since 2.7
  */
 class ColumnViewAttached : public QObject

@@ -52,7 +52,7 @@ add_subdirectory(libkirigami)
 
 if(NOT BUILD_SHARED_LIBS)
     # `rcc` is a bit dumb and isn't designed to use auto generated files, to
-    # avoid poluting the source directory, use absolute paths
+    # avoid polluting the source directory, use absolute paths
     set(kirigami_QML_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../)
 
     # First, pre-process the QRC to add the files associated with the right Qt

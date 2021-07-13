@@ -97,7 +97,7 @@ ecm_setup_version(${KF_VERSION}
     SOVERSION 5
 )
 
-#use dbus on linux, bsd etc, but not andoid and apple stuff
+#use dbus on linux, bsd etc, but not android and apple stuff
 if (UNIX AND NOT ANDROID AND NOT(APPLE) AND NOT(DISABLE_DBUS))
     find_package(Qt5DBus)
     add_definitions(-DKIRIGAMI_ENABLE_DBUS)

@@ -425,7 +425,7 @@ QSet<QObject *> flatParentTree(QObject *object)
     static const QMetaObject *metaObject = QMetaType::metaObjectForType(QMetaType::type("QQuickItem*"));
     QSet<QObject *> ret;
     // Use an inline struct type so that climbItemParents and climbObjectParents
-    // can call eachother
+    // can call each other
     struct Climber {
         void climbItemParents(QSet<QObject *> &out, QQuickItem *item)
         {

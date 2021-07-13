@@ -18,7 +18,7 @@ import "private"
  * so cellHeight must be manually set to a value in which the content fits
  * for every item.
  * If possible use cards only when you don't need to instantiate a lot
- * and use CardsLayout intead.
+ * and use CardsLayout instead.
  * @inherit QtQuick.GridView
  * @see CardsLayout
  * @since 2.4
