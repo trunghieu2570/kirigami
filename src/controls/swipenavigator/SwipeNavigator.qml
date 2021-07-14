@@ -72,6 +72,45 @@ Item {
      */
     property alias currentIndex: columnView.currentIndex
 
+    /**
+     * Pushes a page as a new dialog on desktop and as a layer on mobile.
+     * @param page The page can be defined as a component, item or string. If an item is
+     *             used then the page will get re-parented. If a string is used then it
+     *             is interpreted as a url that is used to load a page component.
+     * @param properties The properties given when initializing the page.
+     * @param windowProperties The properties given to the initialized window on desktop.
+     * @return The new created page
+     */
+    function pushDialogLayer(page, properties = {}, windowProperties = {}) {
+        let item;
+        if (Settings.isMobile) {
+            item = layers.push(page, properties);
+        } else {
+            const windowComponent = Qt.createComponent(Qt.resolvedUrl("./ApplicationWindow.qml"));
+            if (!windowProperties.modality) {
+                windowProperties.modality = Qt.WindowModal;
+            }
+            if (!windowProperties.height) {
+                windowProperties.height = Units.gridUnit * 30;
+            }
+            if (!windowProperties.width) {
+                windowProperties.width = Units.gridUnit * 50;
+            }
+            if (!windowProperties.minimumWidth) {
+                windowProperties.minimumWidth = Units.gridUnit * 20;
+            }
+            if (!windowProperties.minimumHeight) {
+                windowProperties.minimumHeight = Units.gridUnit * 15;
+            }
+            if (!windowProperties.flags) {
+                windowProperties.flags = Qt.Dialog | Qt.WindowCloseButtonHint;
+            }
+            const window = windowComponent.createObject(swipeNavigatorRoot, windowProperties);
+            item = window.pageStack.push(page, properties);
+        }
+        return item;
+    }
+
     QtObject {
         id: _gridManager
         readonly property bool tall: (_header.width + __main.implicitWidth + Math.abs(__main.offset) + _footer.width) > swipeNavigatorRoot.width

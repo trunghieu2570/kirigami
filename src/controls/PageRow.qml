@@ -235,6 +235,139 @@ T.Control {
     }
 
     /**
+     * Pushes a page as a new dialog on desktop and as a layer on mobile.
+     * @param page The page can be defined as a component, item or string. If an item is
+     *             used then the page will get re-parented. If a string is used then it
+     *             is interpreted as a url that is used to load a page component. Once
+     *             pushed the page gains the methods `closeDialog` allowing to close itself.
+     *             Kirigami only supports calling `closeDialog` once.
+     * @param properties The properties given when initializing the page.
+     * @param windowProperties The properties given to the initialized window on desktop.
+     * @return The new created page
+     */
+    function pushDialogLayer(page, properties = {}, windowProperties = {}) {
+        let item;
+        if (Settings.isMobile) {
+            if (QQC2.ApplicationWindow.window.width > Units.gridUnit * 40) {
+                // open as a QQC2.Dialog
+                const dialog = Qt.createQmlObject('
+                    import QtQuick 2.15;
+                    import QtQuick.Controls 2.15;
+                    import QtQuick.Layouts 1.15;
+                    import org.kde.kirigami 2.15 as Kirigami;
+                    Dialog {
+                        id: dialog
+                        modal: true;
+                        leftPadding: 0; rightPadding: 0; topPadding: 0; bottomPadding: 0;
+                        header: Kirigami.AbstractApplicationHeader {
+                            pageRow: null
+                            page: null
+                            minimumHeight: Units.gridUnit * 1.6
+                            maximumHeight: Units.gridUnit * 1.6
+                            preferredHeight: Units.gridUnit * 1.6
+
+                            Keys.onEscapePressed: {
+                                if (dialog.opened) {
+                                    dialog.close();
+                                } else {
+                                    event.accepted = false;
+                                }
+                            }
+
+                            contentItem: RowLayout {
+                                width: parent.width
+                                Kirigami.Heading {
+                                    Layout.leftMargin: Kirigami.Units.largeSpacing
+                                    text: dialog.title
+                                    elide: Text.ElideRight
+                                }
+                                Item {
+                                    Layout.fillWidth: true;
+                                }
+                                Kirigami.Icon {
+                                    id: closeIcon
+                                    Layout.alignment: Qt.AlignVCenter
+                                    Layout.rightMargin: Kirigami.Units.largeSpacing
+                                    Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
+                                    Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
+                                    source: closeMouseArea.containsMouse ? "window-close" : "window-close-symbolic"
+                                    active: closeMouseArea.containsMouse
+                                    MouseArea {
+                                        id: closeMouseArea
+                                        hoverEnabled: true
+                                        anchors.fill: parent
+                                        onClicked: dialog.close();
+                                    }
+                                }
+                            }
+                        }
+                    }', root);
+                dialog.parent = root;
+                dialog.width = Qt.binding(() => QQC2.ApplicationWindow.window.width - Units.gridUnit * 5);
+                dialog.height = Qt.binding(() => QQC2.ApplicationWindow.window.height - Units.gridUnit * 5);
+                dialog.x = Units.gridUnit * 2.5;
+                dialog.y = Units.gridUnit * 2.5;
+                let item;
+                if (typeof page === "string") {
+                    // url => load component and then load item from component
+                    const component = Qt.createComponent(Qt.resolvedUrl(page));
+                    item = component.createObject(dialog);
+                } else if (page instanceof Component) {
+                    item = component.createObject(dialog);
+                } else if (page instanceof Item) {
+                    item = page;
+                    page.parent = dialog.contentItem;
+                }
+                dialog.contentItem = item;
+                dialog.title = Qt.binding(() => dialog.contentItem.title);
+                Object.defineProperty(item, 'closeDialog', {
+                    value: function() {
+                        dialog.close();
+                    }
+                });
+                dialog.open();
+            } else {
+                // open as a layer
+                item = layers.push(page, properties);
+                Object.defineProperty(item, 'closeDialog', {
+                    value: function() {
+                        layers.pop();
+                    }
+                 });
+            }
+        } else {
+            // open as a new window
+            if (!windowProperties.modality) {
+                windowProperties.modality = Qt.WindowModal;
+            }
+            if (!windowProperties.height) {
+                windowProperties.height = Units.gridUnit * 30;
+            }
+            if (!windowProperties.width) {
+                windowProperties.width = Units.gridUnit * 50;
+            }
+            if (!windowProperties.minimumWidth) {
+                windowProperties.minimumWidth = Units.gridUnit * 20;
+            }
+            if (!windowProperties.minimumHeight) {
+                windowProperties.minimumHeight = Units.gridUnit * 15;
+            }
+            if (!windowProperties.flags) {
+                windowProperties.flags = Qt.Dialog | Qt.WindowCloseButtonHint;
+            }
+            const windowComponent = Qt.createComponent(Qt.resolvedUrl("./ApplicationWindow.qml"));
+            const window = windowComponent.createObject(root, windowProperties);
+            item = window.pageStack.push(page, properties);
+            Object.defineProperty(item, 'closeDialog', {
+                value: function() {
+                    window.close();
+                }
+            });
+        }
+        return item;
+    }
+
+    /**
      * Inserts a new page or a list of new at an arbitrary position
      * The page can be defined as a component, item or string.
      * If an item is used then the page will get re-parented.
