@@ -167,7 +167,7 @@ T2.SwipeDelegate {
     QtObject {
         id: internal
 
-        property Flickable view: listItem.ListView.view || (listItem.parent ? (listItem.parent.ListView.view || listItem.parent) : null)
+        property Flickable view: listItem.ListView.view || (listItem.parent ? (listItem.parent.ListView.view || listItem.parent instanceof Flickable ? listItem.parent : null) : null)
 
         readonly property QtObject swipeFilterItem: (view && view.parent && view.parent.parent && view.parent.parent._swipeFilter) ? view.parent.parent._swipeFilter : null
 
