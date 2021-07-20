@@ -63,6 +63,7 @@ ScrollablePage
      * @see KAboutData
      */
     property var aboutData
+    property url getInvolvedUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://community.kde.org/Get_Involved" : ""
 
     title: qsTr("About %1").arg(page.aboutData.displayName)
 
@@ -129,7 +130,7 @@ ScrollablePage
             Layout.fillWidth: true
 
             Icon {
-                Layout.rowSpan: 2
+                Layout.rowSpan: 3
                 Layout.preferredHeight: Units.iconSizes.huge
                 Layout.preferredWidth: height
                 Layout.maximumWidth: page.width / 3;
@@ -145,6 +146,11 @@ ScrollablePage
                 level: 2
                 wrapMode: Text.WordWrap
                 text: page.aboutData.shortDescription
+            }
+            UrlButton {
+                text: qsTr("Get Involved")
+                url: page.getInvolvedUrl
+                visible: url !== ""
             }
         }
 
