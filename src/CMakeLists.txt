@@ -70,7 +70,7 @@ target_sources(KirigamiPlugin PRIVATE
 
     scenegraph/shaders/shaders.qrc
 )
-if (NOT KF6_PORTING_TODO)
+if (HAVE_QTGUI_OPENGL AND NOT KF6_PORTING_TODO)
     target_sources(KirigamiPlugin PRIVATE
         scenegraph/shadowedborderrectanglematerial.cpp
         scenegraph/shadowedborderrectanglematerial.h

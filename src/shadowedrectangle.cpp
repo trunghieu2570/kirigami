@@ -11,7 +11,7 @@
 #include <QSGRendererInterface>
 
 #include "scenegraph/paintedrectangleitem.h"
-#ifndef KF6_PORTING_TODO
+#if QT_CONFIG(opengl) && !defined(KF6_PORTING_TODO)
 #include "scenegraph/shadowedrectanglenode.h"
 #endif
 
@@ -305,7 +305,7 @@ QSGNode *ShadowedRectangle::updatePaintNode(QSGNode *node, QQuickItem::UpdatePai
 {
     Q_UNUSED(data);
 
-#ifndef KF6_PORTING_TODO
+#if QT_CONFIG(opengl) && !defined(KF6_PORTING_TODO)
     auto shadowNode = static_cast<ShadowedRectangleNode *>(node);
 
     if (!shadowNode) {
@@ -330,6 +330,7 @@ QSGNode *ShadowedRectangle::updatePaintNode(QSGNode *node, QQuickItem::UpdatePai
     shadowNode->updateGeometry();
     return shadowNode;
 #else
+    Q_UNUSED(node)
     return nullptr;
 #endif
 }
