@@ -64,6 +64,7 @@ ScrollablePage
      */
     property var aboutData
     property url getInvolvedUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://community.kde.org/Get_Involved" : ""
+    default property alias _content: form.data
 
     title: qsTr("About %1").arg(page.aboutData.displayName)
 
