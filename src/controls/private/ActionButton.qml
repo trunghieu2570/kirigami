@@ -54,10 +54,15 @@ Item {
         id: button
         x: root.width/2 - button.width/2
 
+        // We have a mismatch in releases in removing the mobile x1.5 sizing (kirigami is part of frameworks, but styles are part of plasma releases)
+        // Remove after Plasma 5.23 is released, and switch back to Units.iconSizes.medium/large
+        property int mediumIconSizing: Units.iconSizes.sizeForLabels * 2
+        property int largeIconSizing: Units.iconSizes.sizeForLabels * 3
+        
         anchors.bottom: edgeMouseArea.bottom
 
-        implicitWidth: implicitHeight + Units.iconSizes.medium*2 + Units.gridUnit
-        implicitHeight: Units.iconSizes.large + Units.largeSpacing*2
+        implicitWidth: implicitHeight + mediumIconSizing*2 + Units.gridUnit
+        implicitHeight: largeIconSizing + Units.largeSpacing*2
 
 
         onXChanged: {
@@ -275,7 +280,7 @@ Item {
                     Icon {
                         id: icon
                         anchors.centerIn: parent
-                        width: Units.iconSizes.medium
+                        width: button.mediumIconSizing
                         height: width
                         source: root.action && root.action.icon.name ? root.action.icon.name : ""
                         selected: true
@@ -305,7 +310,7 @@ Item {
                     }
                     enabled: root.leftAction && root.leftAction.enabled
                     radius: Units.devicePixelRatio*2
-                    height: Units.iconSizes.medium + Units.smallSpacing * 2
+                    height: button.mediumIconSizing + Units.smallSpacing * 2
                     width: height + (root.action ? Units.gridUnit*2 : 0)
                     visible: root.leftAction
 
@@ -329,7 +334,7 @@ Item {
                     }
                     Icon {
                         source: root.leftAction && root.leftAction.icon.name ? root.leftAction.icon.name : ""
-                        width: Units.iconSizes.medium
+                        width: button.mediumIconSizing
                         height: width
                         selected: leftButtonGraphics.pressed
                         color: root.leftAction && root.leftAction.icon && root.leftAction.icon.color && root.leftAction.icon.color.a > 0 ? root.leftAction.icon.color : (selected ? Theme.highlightedTextColor : Theme.textColor)
@@ -352,7 +357,7 @@ Item {
                     }
                     enabled: root.rightAction && root.rightAction.enabled
                     radius: Units.devicePixelRatio*2
-                    height: Units.iconSizes.medium + Units.smallSpacing * 2
+                    height: button.mediumIconSizing + Units.smallSpacing * 2
                     width: height + (root.action ? Units.gridUnit*2 : 0)
                     visible: root.rightAction
                     readonly property bool pressed: root.rightAction && root.rightAction.enabled && ((mouseArea.actionUnderMouse == root.rightAction && mouseArea.pressed) || root.rightAction.checked)
@@ -375,7 +380,7 @@ Item {
                     }
                     Icon {
                         source: root.rightAction && root.rightAction.icon.name ? root.rightAction.icon.name : ""
-                        width: Units.iconSizes.medium
+                        width: button.mediumIconSizing
                         height: width
                         selected: rightButtonGraphics.pressed
                         color: root.rightAction && root.rightAction.icon && root.rightAction.icon.color && root.rightAction.icon.color.a > 0 ? root.rightAction.icon.color : (selected ? Theme.highlightedTextColor : Theme.textColor)
@@ -417,7 +422,7 @@ Item {
             //using internal pagerow api
             && (root.page && root.page.parent ? root.page.ColumnView.level < applicationWindow().pageStack.depth-1 : false)
 
-        width: Units.iconSizes.medium + Units.smallSpacing*2
+        width: button.mediumIconSizing + Units.smallSpacing*2
         height: width
 
 
@@ -437,7 +442,7 @@ Item {
             radius: Units.devicePixelRatio
             Icon {
                 anchors.centerIn: parent
-                width: Units.iconSizes.medium
+                width: button.mediumIconSizing
                 selected: fakeContextMenuButton.pressed
                 height: width
                 source: "overflow-menu"

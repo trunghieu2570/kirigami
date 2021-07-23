@@ -27,7 +27,12 @@ AbstractListItem {
             id: iconItem
             color: modelData.icon.color
             source: modelData.icon.name || modelData.icon.source
-            property int size: Settings.isMobile ? Units.iconSizes.medium : Units.iconSizes.smallMedium
+            
+            // We have a mismatch in releases in removing the mobile x1.5 sizing (kirigami is part of frameworks, but styles are part of plasma releases)
+            // Remove after Plasma 5.23 is released, and switch back to Units.iconSizes.medium/large
+            property int mediumIconSizing: Units.iconSizes.sizeForLabels * 2
+            
+            property int size: Settings.isMobile ? mediumIconSizing : Units.iconSizes.smallMedium
             Layout.minimumHeight: size
             Layout.maximumHeight: size
             Layout.minimumWidth: size
