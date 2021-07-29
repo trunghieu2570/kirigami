@@ -68,6 +68,20 @@ ScrollablePage
 
     title: qsTr("About %1").arg(page.aboutData.displayName)
 
+    actions.main: Action {
+        text: qsTr("Report Bug…")
+        icon.name: "tools-report-bug"
+        onTriggered: {
+            var component = page.aboutData.productName ? page.aboutData.productName.replace(`${page.aboutData.componentName}/`, '') : page.aboutData.componentName
+
+            if (page.aboutData.bugAddress === "submit@bugs.kde.org") {
+                Qt.openUrlExternally("https://bugs.kde.org/enter_bug.cgi")
+            } else {
+                Qt.openUrlExternally(`${page.aboutData.bugAddress}&component=${component}&version=${page.aboutData.version}`)
+            }
+        }
+    }
+
     Component {
         id: personDelegate
 
