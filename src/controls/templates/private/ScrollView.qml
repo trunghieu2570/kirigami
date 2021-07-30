@@ -30,6 +30,10 @@ MouseArea {
     Keys.onDownPressed: scroll(-Kirigami.Units.gridUnit * 2)
 
     function scroll(y) {
+        // Don't scroll if the view isn't scrollable!
+        if (flickableItem.contentHeight < flickableItem.height + flickableItem.contentY) {
+            return;
+        }
         const minYExtent = flickableItem.topMargin - flickableItem.originY;
         const maxYExtent = flickableItem.height - (flickableItem.contentHeight + flickableItem.bottomMargin + flickableItem.originY);
 
