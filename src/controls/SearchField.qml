@@ -60,6 +60,7 @@ Kirigami.ActionTextField
     Accessible.searchEdit: true
 
     focusSequence: "Ctrl+F"
+    inputMethodHints: Qt.ImhNoPredictiveText
     rightActions: [
         Kirigami.Action {
             icon.name: root.LayoutMirroring.enabled ? "edit-clear-locationbar-ltr" : "edit-clear-locationbar-rtl"
