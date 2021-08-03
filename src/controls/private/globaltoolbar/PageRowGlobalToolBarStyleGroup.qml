@@ -32,6 +32,10 @@ QtObject {
     property bool separatorVisible: true
     //Unfortunately we can't access pageRow.globalToolbar.Kirigami.Theme directly in a declarative way
     property int colorSet: Kirigami.Theme.Header
+    // whether or not the header should be
+    // "pushed" back when scrolling using the
+    // touch screen
+    property bool hideWhenTouchScrolling: true
     /**
      * If true, when any kind of toolbar is shown, the drawer handles will be shown inside the toolbar, if they're present
      */

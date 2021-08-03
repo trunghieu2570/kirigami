@@ -42,6 +42,10 @@ Item {
     property int rightPadding: 0
     property int bottomPadding: 0
     property bool separatorVisible: true
+    // whether or not the header should be
+    // "pushed" back when scrolling using the
+    // touch screen
+    property bool hideWhenTouchScrolling: root.pageRow ? root.pageRow.globalToolBar.hideWhenTouchScrolling : true
 
     LayoutMirroring.enabled: Qt.application.layoutDirection == Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
@@ -117,6 +121,10 @@ Item {
         height: __appWindow && __appWindow.reachableMode && __appWindow.reachableModeEnabled ? root.maximumHeight : (root.minimumHeight > 0 ? Math.max(root.height, root.minimumHeight) : Math.max(root.height, root.preferredHeight))
 
         function scrollIntentHandler(event) {
+            if (!root.hideWhenTouchScrolling) {
+                return
+            }
+
             if (root.pageRow
                 && root.pageRow.globalToolBar.actualStyle !== ApplicationHeaderStyle.TabBar
                 && root.pageRow.globalToolBar.actualStyle !== ApplicationHeaderStyle.Breadcrumb) {
