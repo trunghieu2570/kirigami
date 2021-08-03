@@ -45,7 +45,7 @@ Item {
     // whether or not the header should be
     // "pushed" back when scrolling using the
     // touch screen
-    property bool hideWhenTouchScrolling: root.pageRow ? root.pageRow.globalToolBar.hideWhenTouchScrolling : true
+    property bool hideWhenTouchScrolling: root.pageRow ? root.pageRow.globalToolBar.hideWhenTouchScrolling : false
 
     LayoutMirroring.enabled: Qt.application.layoutDirection == Qt.RightToLeft
     LayoutMirroring.childrenInherit: true

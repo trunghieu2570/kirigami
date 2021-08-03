@@ -35,7 +35,7 @@ QtObject {
     // whether or not the header should be
     // "pushed" back when scrolling using the
     // touch screen
-    property bool hideWhenTouchScrolling: true
+    property bool hideWhenTouchScrolling: false
     /**
      * If true, when any kind of toolbar is shown, the drawer handles will be shown inside the toolbar, if they're present
      */
