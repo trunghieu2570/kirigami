@@ -181,7 +181,7 @@ T2.Control {
 
         implicitHeight: {
             if (actionsLayout.atBottom) {
-                return text.implicitHeight + actionsLayout.height + Kirigami.Units.largeSpacing
+                return text.implicitHeight + actionsLayout.height + Kirigami.Units.gridUnit
             } else {
                 return Math.max(icon.implicitHeight, text.implicitHeight, closeButton.implicitHeight, actionsLayout.height)
             }
@@ -278,7 +278,7 @@ T2.Control {
             anchors {
                 left: parent.left
                 top: atBottom ? textArea.bottom : parent.top
-                topMargin: atBottom ? Kirigami.Units.largeSpacing : 0
+                topMargin: atBottom ? Kirigami.Units.gridUnit : 0
                 right: (!atBottom && closeButton.visible) ? closeButton.left : parent.right
                 rightMargin: !atBottom && closeButton.visible ? Kirigami.Units.smallSpacing : 0
             }
