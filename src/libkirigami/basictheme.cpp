@@ -134,7 +134,11 @@ BasicThemeDefinition &BasicThemeInstance::themeDefinition(QQmlEngine *engine)
     }
 
     auto componentUrl = StyleSelector::componentUrl(QStringLiteral("Theme.qml"));
-    QFile themeFile{componentUrl.toLocalFile()};
+    QString path{componentUrl.toLocalFile()};
+    if (path.isEmpty() && componentUrl.scheme() == QLatin1String("qrc")) {
+        path = QLatin1Char(':') + componentUrl.path();
+    }
+    QFile themeFile{path};
     if (themeFile.open(QIODevice::ReadOnly)) {
         auto data = themeFile.readAll();
 
