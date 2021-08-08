@@ -106,7 +106,8 @@ target_link_libraries(kirigamiplugin
     )
 
 if (BUILD_SHARED_LIBS)
-    add_custom_target(copy_to_bin ALL
+    add_custom_command(
+        TARGET kirigamiplugin POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E
                 make_directory ${CMAKE_BINARY_DIR}/bin/org/kde/kirigami.2/
         COMMAND ${CMAKE_COMMAND} -E
