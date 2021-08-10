@@ -14,14 +14,47 @@
 #include <QQmlEngine>
 #include <QStyleHints>
 
+#include <chrono>
 #include <cmath>
 
 #include "loggingcategory.h"
 
 namespace Kirigami {
+using clock = std::chrono::steady_clock;
 
+const clock::duration rateLimit = std::chrono::seconds(1);
 
+/* Print a deprecation warning that is rate limited to only display once in
+ * every time period as determined by rateLimit. We keep track of how often this
+ * is called and display that if it is larger than 0.
+ *
+ * This is done to prevent flooding the logs with "X is deprecated" messages
+ * that are all the same and don't provide any new information after the first.
+ */
+void rateLimitWarning(const char *method, const char *since, const char *message)
+{
+    static QMap<QString, QPair<clock::time_point, int>> messages;
 
+    auto methodString = QString::fromUtf8(method);
+
+    if (!messages.contains(methodString)) {
+        messages.insert(methodString, qMakePair(clock::time_point{}, 0));
+    }
+
+    auto entry = messages.value(methodString);
+    if (clock::now() - entry.first < rateLimit) {
+        messages[methodString].second += 1;
+        return;
+    }
+
+    qCWarning(KirigamiLog) << method << "is deprecated (since" << since << "):" << message;
+
+    if (entry.second > 0) {
+        qCWarning(KirigamiLog) << "Previous message repeats" << entry.second << "times.";
+    }
+
+    messages[methodString] = qMakePair(clock::now(), 0);
+}
 
 class UnitsPrivate
 {
@@ -135,8 +168,7 @@ Units::Units(QObject *parent)
 
 qreal Units::devicePixelRatio() const
 {
-    qCWarning(KirigamiLog) << "Units.devicePixelRatio is deprecated";
-
+    rateLimitWarning("Units.devicePixelRatio", "5.86", "This returns 1 when using Qt HiDPI scaling.");
     const int pixelSize = QGuiApplication::font().pixelSize();
     const qreal pointSize = QGuiApplication::font().pointSize();
 
@@ -284,6 +316,7 @@ void Units::setToolTipDelay(int delay)
 #if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
 int Units::wheelScrollLines() const
 {
+    rateLimitWarning("Units.wheelScrollLines", "5.86", "Use Qt.styleHints.wheelScrollLines instead");
     return d->wheelScrollLines;
 }
 
@@ -307,6 +340,7 @@ IconSizes *Units::iconSizes() const
 #if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
 QObject *Units::fontMetrics() const
 {
+    rateLimitWarning("Units.fontMetrics", "5.86", "Create your own FontMetrics object instead.");
     if (!d->qmlFontMetrics) {
         d->qmlFontMetrics = d->createQmlFontMetrics(qmlEngine(this));
     }
