@@ -192,8 +192,9 @@ QQC2.Page {
      *
      * @since 2.1
      */
+    //TODO KF6: remove this or at least all the assumptions about the internal tree structure of items
     readonly property bool isCurrentPage: Kirigami.ColumnView.view
-            ? (Kirigami.ColumnView.index == Kirigami.ColumnView.view.currentIndex && Kirigami.ColumnView.view.parent.currentItem === Kirigami.ColumnView.view)
+            ? (Kirigami.ColumnView.index == Kirigami.ColumnView.view.currentIndex && Kirigami.ColumnView.view.parent.parent.currentItem === Kirigami.ColumnView.view.parent)
             : (parent && parent instanceof QQC2.StackView
                 ? parent.currentItem === root
                 : true)
