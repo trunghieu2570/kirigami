@@ -48,7 +48,7 @@ class UnitsPrivate
 
 public:
     explicit UnitsPrivate(Units *units)
-#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 83)
+#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
         : qmlFontMetrics(nullptr)
 #endif
         // Cache font so we don't have to go through QVariant and property every time
@@ -62,7 +62,7 @@ public:
         , veryShortDuration(50)
         , humanMoment(2000)
         , toolTipDelay(700)
-#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 83)
+#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
         , wheelScrollLines(QGuiApplication::styleHints()->wheelScrollLines())
 #endif
         , iconSizes(new IconSizes(units))
@@ -71,7 +71,7 @@ public:
 
     // Only stored for QML API compatiblity
     // TODO KF6 drop
-#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 83)
+#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
     QObject *qmlFontMetrics;
 #endif
 
@@ -92,7 +92,7 @@ public:
     int humanMoment;
     int toolTipDelay;
 
-#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 83)
+#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
     int wheelScrollLines;
 #endif
 
@@ -102,7 +102,7 @@ public:
     bool customUnitsSet = false;
     bool customWheelScrollLinesSet = false;
 
-#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 83)
+#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
     QObject *createQmlFontMetrics(QQmlEngine *engine)
     {
         QQmlComponent component(engine);
@@ -300,7 +300,7 @@ void Units::setToolTipDelay(int delay)
     Q_EMIT toolTipDelayChanged();
 }
 
-#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 83)
+#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
 int Units::wheelScrollLines() const
 {
     return d->wheelScrollLines;
@@ -323,7 +323,7 @@ IconSizes *Units::iconSizes() const
     return d->iconSizes;
 }
 
-#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 83)
+#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
 QObject *Units::fontMetrics() const
 {
     if (!d->qmlFontMetrics) {

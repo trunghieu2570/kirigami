@@ -30,7 +30,7 @@ add_library(KF5::Kirigami2 ALIAS KF5Kirigami2)
 ecm_generate_export_header(KF5Kirigami2
     VERSION ${KF_VERSION}
     BASE_NAME Kirigami2
-    DEPRECATION_VERSIONS 5.80 5.83
+    DEPRECATION_VERSIONS 5.80 5.86
 )
 
 target_include_directories(KF5Kirigami2
