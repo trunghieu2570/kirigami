@@ -15,6 +15,7 @@
 #include "styleselector_p.h"
 #include "units.h"
 
+#include "loggingcategory.h"
 
 namespace Kirigami {
 
@@ -67,14 +68,24 @@ KirigamiPluginFactory *KirigamiPluginFactory::findPlugin()
                         QObject *plugin = loader.instance();
                         // TODO: load actually a factory as plugin
 
+                        qCDebug(KirigamiLog) << "Loading style plugin from" << dir.absoluteFilePath(fileName);
+
                         KirigamiPluginFactory *factory = qobject_cast<KirigamiPluginFactory *>(plugin);
                         if (factory) {
                             pluginFactory = factory;
+                            break;
                         }
                     }
                     #ifdef Q_OS_ANDROID
                 }
                 #endif
+            }
+
+            // Ensure we only load the first plugin from the first plugin location.
+            // If we do not break here, we may end up loading a different plugin
+            // in place of the first one.
+            if (pluginFactory) {
+                break;
             }
         }
         #endif
