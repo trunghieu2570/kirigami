@@ -20,27 +20,8 @@
 
 namespace Kirigami {
 
-static inline bool parseMobileEnvironmentVariable()
-{
-    if (qEnvironmentVariableIsSet("QT_QUICK_CONTROLS_MOBILE")) {
-        const QByteArray str = qgetenv("QT_QUICK_CONTROLS_MOBILE");
-        return str == "1" || str == "true";
-    }
 
-    return false;
-}
 
-// TODO KF6 move settings into public API with a new interface that is able
-// to accomodate different form factors, and drop this duplication
-bool isMobile()
-{
-#if defined(Q_OS_ANDROID) || defined(Q_OS_IOS)
-    return true;
-#else
-    static const bool mobile = parseMobileEnvironmentVariable();
-    return mobile;
-#endif
-}
 
 class UnitsPrivate
 {
@@ -364,11 +345,6 @@ int IconSizes::roundedIconSize(int size) const
     return size;
 }
 
-float IconSizes::iconScaleFactor() const
-{
-    return isMobile() ? 1.5 : 1;
-}
-
 int IconSizes::sizeForLabels() const
 {
     // gridUnit is the height of textMetrics
@@ -377,32 +353,32 @@ int IconSizes::sizeForLabels() const
 
 int IconSizes::small() const
 {
-    return roundedIconSize(16 * iconScaleFactor());
+    return 16;
 }
 
 int IconSizes::smallMedium() const
 {
-    return roundedIconSize(22 * iconScaleFactor());
+    return 22;
 }
 
 int IconSizes::medium() const
 {
-    return roundedIconSize(32 * iconScaleFactor());
+    return 32;
 }
 
 int IconSizes::large() const
 {
-    return roundedIconSize(48 * iconScaleFactor());
+    return 48;
 }
 
 int IconSizes::huge() const
 {
-    return roundedIconSize(64 * iconScaleFactor());
+    return 64;
 }
 
 int IconSizes::enormous() const
 {
-    return std::floor(128 * iconScaleFactor());
+    return 128;
 }
 
 }
