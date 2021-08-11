@@ -840,7 +840,9 @@ PlatformTheme *PlatformTheme::qmlAttachedProperties(QObject *object)
 {
     auto plugin = KirigamiPluginFactory::findPlugin();
     if (plugin) {
-        return plugin->createPlatformTheme(object);
+        if (auto theme = plugin->createPlatformTheme(object)) {
+            return theme;
+        }
     }
 
     return new BasicTheme(object);
