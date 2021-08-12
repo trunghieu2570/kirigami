@@ -8,7 +8,7 @@ import QtQuick 2.1
 import QtQuick.Controls 2.4 as QQC2
 import QtQuick.Window 2.15
 import QtQuick.Layouts 1.3
-import org.kde.kirigami 2.6
+import org.kde.kirigami 2.19
 
 /**
  * An about page that is ready to integrate in a kirigami app
@@ -26,45 +26,11 @@ ScrollablePage
     /**
      * This property holds an object with the same shape as KAboutData.
      *
-     * For example:
-     * @code
-     * aboutData: {
-        "displayName" : "KirigamiApp",
-        "productName" : "kirigami/app",
-        "componentName" : "kirigamiapp",
-        "shortDescription" : "A Kirigami example",
-        "homepage" : "",
-        "bugAddress" : "submit@bugs.kde.org",
-        "version" : "5.14.80",
-        "otherText" : "",
-        "authors" : [
-            {
-                "name" : "...",
-                "task" : "",
-                "emailAddress" : "somebody@kde.org",
-                "webAddress" : "",
-                "ocsUsername" : ""
-            }
-        ],
-        "credits" : [],
-        "translators" : [],
-        "licenses" : [
-            {
-                "name" : "GPL v2",
-                "text" : "long, boring, license text",
-                "spdx" : "GPL-2.0"
-            }
-        ],
-        "copyrightStatement" : "© 2010-2018 Plasma Development Team",
-        "desktopFileName" : "org.kde.kirigamiapp"
-        }
-        @endcode
-     *
-     * @see KAboutData
+     * @see AboutComponent
      */
-    property var aboutData
-    property url getInvolvedUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://community.kde.org/Get_Involved" : ""
-    default property alias _content: form.data
+    property alias aboutData: aboutItem.aboutData
+    property alias getInvolvedUrl: aboutItem.getInvolvedUrl
+    default property alias _content: aboutItem._content
 
     title: qsTr("About %1").arg(page.aboutData.displayName)
 
@@ -82,239 +48,11 @@ ScrollablePage
         }
     }
 
-    Component {
-        id: personDelegate
+    AboutItem {
+        id: aboutItem
 
-        RowLayout {
-            height: implicitHeight + (Units.smallSpacing * 2)
-            property bool hasRemoteAvatar: (typeof(modelData.ocsUsername) !== "undefined" && modelData.ocsUsername.length > 0)
+        _usePageStack: applicationWindow().pageStack ? true : false
 
-            spacing: Units.smallSpacing * 2
-            Icon {
-                width: Units.iconSizes.smallMedium
-                height: width
-                fallback: "user"
-                source: hasRemoteAvatar && remoteAvatars.checked ? "https://store.kde.org/avatar/%1?s=%2".arg(modelData.ocsUsername).arg(width * Screen.devicePixelRatio) : "user"
-            }
-            QQC2.Label {
-                text: modelData.name
-            }
-            QQC2.Label {
-                visible: typeof(modelData.task) !== "undefined" && modelData.task.length > 0
-                text: qsTr("(%1)").arg(modelData.task)
-            }
-            Row {
-                // Group action buttons together
-                spacing: 0
-                QQC2.ToolButton {
-                    visible: typeof(modelData.ocsUsername) !== "undefined" && modelData.ocsUsername.length > 0
-                    width: height
-                    icon.name: "get-hot-new-stuff"
-                    QQC2.ToolTip.delay: Units.toolTipDelay
-                    QQC2.ToolTip.visible: hovered
-                    QQC2.ToolTip.text: qsTr("Visit %1's KDE Store page").arg(modelData.name)
-                    onClicked: Qt.openUrlExternally("https://store.kde.org/u/%1".arg(modelData.ocsUsername))
-                }
-                QQC2.ToolButton {
-                    visible: typeof(modelData.emailAddress) !== "undefined" && modelData.emailAddress.length > 0
-                    width: height
-                    icon.name: "mail-sent"
-                    QQC2.ToolTip.delay: Units.toolTipDelay
-                    QQC2.ToolTip.visible: hovered
-                    QQC2.ToolTip.text: qsTr("Send an email to %1").arg(modelData.emailAddress)
-                    onClicked: Qt.openUrlExternally("mailto:%1".arg(modelData.emailAddress))
-                }
-                QQC2.ToolButton {
-                    visible: typeof(modelData.webAddress) !== "undefined" && modelData.webAddress.length > 0
-                    width: height
-                    icon.name: "globe"
-                    QQC2.ToolTip.delay: Units.toolTipDelay
-                    QQC2.ToolTip.visible: hovered
-                    QQC2.ToolTip.text: (typeof(modelData.webAddress) === "undefined" && modelData.webAddress.length > 0) ? "" : modelData.webAddress
-                    onClicked: Qt.openUrlExternally(modelData.webAddress)
-                }
-            }
-        }
-    }
-
-    FormLayout {
-        id: form
-
-        GridLayout {
-            columns: 2
-            Layout.fillWidth: true
-
-            Icon {
-                Layout.rowSpan: 3
-                Layout.preferredHeight: Units.iconSizes.huge
-                Layout.preferredWidth: height
-                Layout.maximumWidth: page.width / 3;
-                Layout.rightMargin: Units.largeSpacing
-                source: Settings.applicationWindowIcon || page.aboutData.programLogo || page.aboutData.programIconName || page.aboutData.componentName
-            }
-            Heading {
-                Layout.fillWidth: true
-                text: page.aboutData.displayName + " " + page.aboutData.version
-            }
-            Heading {
-                Layout.fillWidth: true
-                level: 2
-                wrapMode: Text.WordWrap
-                text: page.aboutData.shortDescription
-            }
-            UrlButton {
-                text: qsTr("Get Involved")
-                url: page.getInvolvedUrl
-                visible: url !== ""
-            }
-        }
-
-        Separator {
-            Layout.fillWidth: true
-        }
-
-        Heading {
-            FormData.isSection: true
-            text: qsTr("Copyright")
-        }
-        QQC2.Label {
-            Layout.leftMargin: Units.gridUnit
-            text: aboutData.otherText
-            visible: text.length > 0
-        }
-        QQC2.Label {
-            Layout.leftMargin: Units.gridUnit
-            text: aboutData.copyrightStatement
-            visible: text.length > 0
-        }
-        UrlButton {
-            Layout.leftMargin: Units.gridUnit
-            url: aboutData.homepage
-            visible: url.length > 0
-        }
-
-        OverlaySheet {
-            id: licenseSheet
-            property alias text: bodyLabel.text
-            property alias name: heading.text
-
-            header: Heading {
-                id: heading
-            }
-
-            contentItem: QQC2.Label {
-                id: bodyLabel
-                text: licenseSheet.text
-            }
-        }
-
-        Component {
-            id: licenseLinkButton
-
-            RowLayout {
-                Layout.leftMargin: Units.smallSpacing
-                QQC2.Label { text: qsTr("License:") }
-                LinkButton {
-                    text: modelData.name
-                    onClicked: {
-                        licenseSheet.text = modelData.text
-                        licenseSheet.name = modelData.name
-                        licenseSheet.open()
-                    }
-                }
-            }
-        }
-
-        Component {
-            id: licenseTextItem
-
-            RowLayout {
-                Layout.leftMargin: Units.smallSpacing
-                QQC2.Label { text: qsTr("License: %1").arg(modelData.name) }
-            }
-        }
-
-        Repeater {
-            model: aboutData.licenses
-            delegate: applicationWindow().pageStack ? licenseLinkButton : licenseTextItem
-        }
-
-        Heading {
-            FormData.isSection: visible
-            text: qsTr("Libraries in use")
-            visible: Settings.information
-        }
-        Repeater {
-            model: Settings.information
-            delegate: QQC2.Label {
-                Layout.leftMargin: Units.gridUnit
-                id: libraries
-                text: modelData
-            }
-        }
-        Repeater {
-            model: aboutData.components
-            delegate: QQC2.Label {
-                Layout.leftMargin: Units.gridUnit
-                text: modelData.name + (modelData.version === "" ? "" : " %1".arg(modelData.version))
-            }
-        }
-        Heading {
-            Layout.fillWidth: true
-            FormData.isSection: visible
-            text: qsTr("Authors")
-            visible: aboutData.authors.length > 0
-        }
-        QQC2.CheckBox {
-            id: remoteAvatars
-            visible: authorsRepeater.hasAnyRemoteAvatars
-            checked: false
-            text: qsTr("Show author photos")
-            Timer {
-                id: remotesThrottle
-                repeat: false
-                interval: 1
-                onTriggered: {
-                    var hasAnyRemotes = false;
-                    for (var i = 0; i < authorsRepeater.count; ++i) {
-                        var itm = authorsRepeater.itemAt(i);
-                        if (itm.hasRemoteAvatar) {
-                            hasAnyRemotes = true;
-                            break;
-                        }
-                    }
-                    authorsRepeater.hasAnyRemoteAvatars = hasAnyRemotes;
-                }
-            }
-        }
-        Repeater {
-            id: authorsRepeater
-            model: aboutData.authors
-            property bool hasAnyRemoteAvatars
-            delegate: personDelegate
-            onCountChanged: remotesThrottle.start()
-        }
-        Heading {
-            height: visible ? implicitHeight : 0
-            FormData.isSection: visible
-            text: qsTr("Credits")
-            visible: repCredits.count > 0
-        }
-        Repeater {
-            id: repCredits
-            model: aboutData.credits
-            delegate: personDelegate
-        }
-        Heading {
-            height: visible ? implicitHeight : 0
-            FormData.isSection: visible
-            text: qsTr("Translators")
-            visible: repTranslators.count > 0
-        }
-        Repeater {
-            id: repTranslators
-            model: aboutData.translators
-            delegate: personDelegate
-        }
+        anchors.fill: parnet
     }
 }
