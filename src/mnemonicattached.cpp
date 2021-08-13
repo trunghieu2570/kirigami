@@ -429,8 +429,9 @@ void MnemonicAttached::setActive(bool active)
     // We can't rely on previous value when it's true since it can be
     // caused by Alt key press and we need to remove the event filter
     // additionally. False should be ok as it's a default state.
-    if (!m_active && m_active == active)
+    if (!m_active && m_active == active) {
         return;
+    }
 
     m_active = active;
 

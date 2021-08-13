@@ -23,8 +23,9 @@ bool contains(const QString &str, QChar::Script s)
 QString NameUtils::initialsFromString(const QString &string)
 {
     // "" -> ""
-    if (string.isEmpty())
+    if (string.isEmpty()) {
         return {};
+    }
 
     auto normalized = string.normalized(QString::NormalizationForm_D);
 

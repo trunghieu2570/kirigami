@@ -69,10 +69,12 @@ void SizeGroup::componentComplete()
 
 void SizeGroup::adjustItems(Mode whatChanged)
 {
-    if (m_mode == Mode::Width && whatChanged == Mode::Height)
+    if (m_mode == Mode::Width && whatChanged == Mode::Height) {
         return;
-    if (m_mode == Mode::Height && whatChanged == Mode::Width)
+    }
+    if (m_mode == Mode::Height && whatChanged == Mode::Width) {
         return;
+    }
 
     qreal maxHeight = 0.0;
     qreal maxWidth = 0.0;

@@ -346,8 +346,9 @@ QImage Icon::findIcon(const QSize &size)
 
         QSize actualSize;
         QQuickImageProvider *imageProvider = dynamic_cast<QQuickImageProvider *>(qmlEngine(this)->imageProvider(iconProviderId));
-        if (!imageProvider)
+        if (!imageProvider) {
             return img;
+        }
         switch (imageProvider->imageType()) {
         case QQmlImageProviderBase::Image:
             img = imageProvider->requestImage(iconId, &actualSize, size * multiplier);

@@ -119,8 +119,9 @@ void PageRouter::componentComplete()
 bool PageRouter::routesContainsKey(const QString &key) const
 {
     for (auto route : m_routes) {
-        if (route->name() == key)
+        if (route->name() == key) {
             return true;
+        }
     }
     return false;
 }
@@ -128,8 +129,9 @@ bool PageRouter::routesContainsKey(const QString &key) const
 QQmlComponent *PageRouter::routesValueForKey(const QString &key) const
 {
     for (auto route : m_routes) {
-        if (route->name() == key)
+        if (route->name() == key) {
             return route->component();
+        }
     }
     return nullptr;
 }
@@ -137,8 +139,9 @@ QQmlComponent *PageRouter::routesValueForKey(const QString &key) const
 bool PageRouter::routesCacheForKey(const QString &key) const
 {
     for (auto route : m_routes) {
-        if (route->name() == key)
+        if (route->name() == key) {
             return route->cache();
+        }
     }
     return false;
 }
@@ -146,8 +149,9 @@ bool PageRouter::routesCacheForKey(const QString &key) const
 int PageRouter::routesCostForKey(const QString &key) const
 {
     for (auto route : m_routes) {
-        if (route->name() == key)
+        if (route->name() == key) {
             return route->cost();
+        }
     }
     return -1;
 }

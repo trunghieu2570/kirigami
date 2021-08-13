@@ -373,8 +373,9 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
 
 QVariantList ImageColors::palette() const
 {
-    if (m_futureImageData)
+    if (m_futureImageData) {
         qCWarning(KirigamiLog) << m_futureImageData->future().isFinished();
+    }
     return_fallback(m_fallbackPalette) return m_imageData.m_palette;
 }
 

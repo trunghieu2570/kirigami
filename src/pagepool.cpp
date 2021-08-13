@@ -137,8 +137,9 @@ QQuickItem *PagePool::loadPageWithProperties(const QString &url, const QVariantM
     }
 
     QQuickItem *item = createFromComponent(component, properties);
-    if (!item)
+    if (!item) {
         return nullptr;
+    }
 
     if (m_cachePages) {
         component->deleteLater();
@@ -176,8 +177,9 @@ QQuickItem *PagePool::createFromComponent(QQmlComponent *component, const QVaria
 
     if (!obj || component->isError()) {
         qCWarning(KirigamiLog) << component->errors();
-        if (obj)
+        if (obj) {
             obj->deleteLater();
+        }
         return nullptr;
     }
 
