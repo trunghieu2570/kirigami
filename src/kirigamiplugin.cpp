@@ -306,6 +306,9 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/CategorizedSettings.qml")), uri, 2, 18, "CategorizedSettings");
     qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/GenericSettingsPage.qml")), uri, 2, 18, "GenericSettingsPage");
     qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/SettingAction.qml")), uri, 2, 18, "SettingAction");
+    qmlRegisterType(componentUrl(QStringLiteral("Sidebar.qml")), uri, 2, 18, "Sidebar");
+
+>>>>>>> 2a3f85b3 (Add sidebar component)
 
     qmlProtectModule(uri, 2);
 }

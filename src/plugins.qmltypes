@@ -1575,6 +1575,50 @@ Module {
         Property { name: "__internal"; type: "QObject"; isPointer: true }
     }
     Component {
+        prototype: "QQuickDrawer"
+        name: "org.kde.kirigami/Sidebar 2.19"
+        exports: ["org.kde.kirigami/Sidebar 2.19"]
+        exportMetaObjectRevisions: [0]
+        isComposite: true
+        defaultProperty: "content"
+        Property { name: "actions"; type: "QObject"; isList: true; isReadonly: true }
+        Property { name: "header"; type: "QQuickItem"; isPointer: true }
+        Property { name: "bannerVisible"; type: "bool" }
+        Property { name: "showContentWhenCollapsed"; type: "bool" }
+        Property { name: "showTopContentWhenCollapsed"; type: "bool" }
+        Property { name: "showHeaderWhenCollapsed"; type: "bool" }
+        Property { name: "resetMenuOnTriggered"; type: "bool" }
+        Property { name: "currentSubMenu"; type: "Action_QMLTYPE_13"; isReadonly: true; isPointer: true }
+        Property { name: "isMenu"; type: "bool" }
+        Property { name: "collapseButtonVisible"; type: "bool" }
+        Property { name: "title"; type: "string" }
+        Property { name: "titleIcon"; type: "QVariant" }
+        Property { name: "bannerImageSource"; type: "QUrl" }
+        Property { name: "content"; type: "QObject"; isList: true; isReadonly: true }
+        Property { name: "topContent"; type: "QObject"; isList: true; isReadonly: true }
+        Signal { name: "bannerClicked" }
+        Method { name: "resetMenu"; type: "QVariant" }
+        Property { name: "drawerOpen"; type: "bool" }
+        Property { name: "enabled"; type: "bool" }
+        Property { name: "peeking"; type: "bool" }
+        Property { name: "animating"; type: "bool"; isReadonly: true }
+        Property { name: "collapsible"; type: "bool" }
+        Property { name: "collapsed"; type: "bool" }
+        Property { name: "collapsedSize"; type: "int" }
+        Property {
+            name: "handleOpenIcon"
+            type: "IconPropertiesGroup_QMLTYPE_94"
+            isReadonly: true
+            isPointer: true
+        }
+        Property { name: "handleClosedIcon"; type: "IconPropertiesGroup_QMLTYPE_94"; isPointer: true }
+        Property { name: "handleOpenToolTip"; type: "string" }
+        Property { name: "handleClosedToolTip"; type: "string" }
+        Property { name: "handleVisible"; type: "bool" }
+        Property { name: "handle"; type: "QQuickItem"; isReadonly: true; isPointer: true }
+        Property { name: "__internal"; type: "QObject"; isPointer: true }
+    }
+    Component {
         prototype: "QQuickLabel"
         name: "org.kde.kirigami/Heading 2.0"
         exports: ["org.kde.kirigami/Heading 2.0"]

@@ -56,3 +56,4 @@ PlaceholderMessage 2.12 PlaceholderMessage.qml
 CheckableListItem 2.14 CheckableListItem.qml
 CategorizedSettings 2.18 CategorizedSettings.qml
 SettingAction 2.18 SettingAction.qml
+Sidebar 2.18 Sidebar.qml
