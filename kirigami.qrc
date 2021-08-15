@@ -65,7 +65,6 @@
         <file alias="templates/SwipeListItem.qml">src/controls/templates/SwipeListItem.qml</file>
         <file alias="templates/ApplicationHeader.qml">src/controls/templates/ApplicationHeader.qml</file>
         <file alias="templates/AbstractApplicationHeader.qml">src/controls/templates/AbstractApplicationHeader.qml</file>
-        <file alias="Units.qml">src/controls/Units.qml</file>
         <file alias="SwipeListItem.qml">src/controls/SwipeListItem.qml</file>
         <file alias="ApplicationWindow.qml">src/controls/ApplicationWindow.qml</file>
         <file alias="AbstractApplicationItem.qml">src/controls/AbstractApplicationItem.qml</file>

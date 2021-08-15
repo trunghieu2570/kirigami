@@ -65,7 +65,6 @@
         <file alias="templates/SwipeListItem.qml">@kirigami_QML_DIR@/src/controls/templates/SwipeListItem.qml</file>
         <file alias="templates/ApplicationHeader.qml">@kirigami_QML_DIR@/src/controls/templates/ApplicationHeader.qml</file>
         <file alias="templates/AbstractApplicationHeader.qml">@kirigami_QML_DIR@/src/controls/templates/AbstractApplicationHeader.qml</file>
-        <file alias="Units.qml">@kirigami_QML_DIR@/src/controls/Units.qml</file>
         <file alias="SwipeListItem.qml">@kirigami_QML_DIR@/src/controls/SwipeListItem.qml</file>
         <file alias="ApplicationWindow.qml">@kirigami_QML_DIR@/src/controls/ApplicationWindow.qml</file>
 	<file alias="AbstractApplicationItem.qml">@kirigami_QML_DIR@/src/controls/AbstractApplicationItem.qml</file>

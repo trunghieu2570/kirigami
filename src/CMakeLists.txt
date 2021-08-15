@@ -76,8 +76,11 @@ if(NOT BUILD_SHARED_LIBS)
     endif()
 endif()
 
-
-add_library(kirigamiplugin ${kirigami_SRCS} ${RESOURCES} ${SHADERS})
+if (BUILD_SHARED_LIBS)
+    add_library(kirigamiplugin ${kirigami_SRCS} ${RESOURCES} ${SHADERS})
+else()
+    add_library(kirigamiplugin STATIC ${kirigami_SRCS} ${RESOURCES} ${SHADERS})
+endif()
 
 if(NOT BUILD_SHARED_LIBS)
     SET_TARGET_PROPERTIES(kirigamiplugin PROPERTIES

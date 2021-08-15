@@ -44,8 +44,8 @@
 static QString s_selectedStyle;
 
 #ifdef KIRIGAMI_BUILD_TYPE_STATIC
-#include <qrc_kirigami.cpp>
 #include "loggingcategory.h"
+#include "qrc_kirigami.cpp"
 #include <QDebug>
 #endif
 
@@ -137,6 +137,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
     });
 
     qmlRegisterSingletonType<Kirigami::Units>(uri, 2, 0, "Units", [] (QQmlEngine *engine, QJSEngine *) {
+#ifndef KIRIGAMI_BUILD_TYPE_STATIC
         auto plugin = Kirigami::KirigamiPluginFactory::findPlugin();
         if (plugin) {
             // Check if the plugin implements units
@@ -155,7 +156,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
         } else {
             qWarning(KirigamiLog) << "Failed to find a Kirigami platform plugin";
         }
-
+#endif
         // Fall back to the default units implementation
         return new Kirigami::Units(engine);
     });
