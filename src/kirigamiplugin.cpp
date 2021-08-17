@@ -303,6 +303,9 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     // 2.18
     qmlRegisterType<SpellCheckingAttached>(uri, 2, 18, "SpellChecking");
+    qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/CategorizedSettings.qml")), uri, 2, 18, "CategorizedSettings");
+    qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/GenericSettingsPage.qml")), uri, 2, 18, "GenericSettingsPage");
+    qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/SettingAction.qml")), uri, 2, 18, "SettingAction");
 
     qmlProtectModule(uri, 2);
 }
