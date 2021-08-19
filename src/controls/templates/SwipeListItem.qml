@@ -390,74 +390,74 @@ T2.SwipeDelegate {
     }
 
 
-        RowLayout {
-            id: actionsLayout
-            anchors {
-                    right: parent.right
-                    top: parent.top
-                    bottom: parent.bottom
-                    rightMargin: Kirigami.Units.smallSpacing
-                }
-            visible: parent != listItem
-            parent: !listItem.alwaysVisibleActions && Kirigami.Settings.tabletMode
-                    ? listItem.swipe.leftItem || listItem.swipe.rightItem || listItem
-                    : overlayLoader
+    RowLayout {
+        id: actionsLayout
+        anchors {
+                right: parent.right
+                top: parent.top
+                bottom: parent.bottom
+                rightMargin: Kirigami.Units.smallSpacing
+            }
+        visible: parent != listItem
+        parent: !listItem.alwaysVisibleActions && Kirigami.Settings.tabletMode
+                ? listItem.swipe.leftItem || listItem.swipe.rightItem || listItem
+                : overlayLoader
 
-            property bool hasVisibleActions: false
-            function updateVisibleActions(definitelyVisible) {
-                if (definitelyVisible === undefined) {
-                    definitelyVisible = false
-                }
-
-                if (definitelyVisible) {
-                    hasVisibleActions = true;
-                } else {
-                    var actionCount = listItem.actions.length;
-                    for (var i = 0; i < actionCount; i++) {
-                        // Assuming that visible is only false if it is explicitly false, and not just falsy
-                        if (listItem.actions[i].visible === false) {
-                            continue;
-                        }
-                        hasVisibleActions = true;
-                        break;
-                    }
-                }
+        property bool hasVisibleActions: false
+        function updateVisibleActions(definitelyVisible) {
+            if (definitelyVisible === undefined) {
+                definitelyVisible = false
             }
 
-            Repeater {
-                model: {
-                    if (listItem.actions.length === 0) {
-                        return null;
-                    } else {
-                        return listItem.actions[0].text !== undefined &&
-                            listItem.actions[0].trigger !== undefined ?
-                                listItem.actions :
-                                listItem.actions[0];
+            if (definitelyVisible) {
+                hasVisibleActions = true;
+            } else {
+                var actionCount = listItem.actions.length;
+                for (var i = 0; i < actionCount; i++) {
+                    // Assuming that visible is only false if it is explicitly false, and not just falsy
+                    if (listItem.actions[i].visible === false) {
+                        continue;
                     }
-                }
-                delegate: Controls.ToolButton {
-                    icon.name: modelData.iconName !== "" ? modelData.iconName : ""
-                    icon.source: modelData.iconSource !== "" ? modelData.iconSource : ""
-                    enabled: (modelData && modelData.enabled !== undefined) ? modelData.enabled : true;
-                    visible: (modelData && modelData.visible !== undefined) ? modelData.visible : true;
-                    onVisibleChanged: actionsLayout.updateVisibleActions(visible);
-                    Component.onCompleted: actionsLayout.updateVisibleActions(visible);
-                    Component.onDestruction: actionsLayout.updateVisibleActions(visible);
-                    Controls.ToolTip.delay: Kirigami.Units.toolTipDelay
-                    Controls.ToolTip.timeout: 5000
-                    Controls.ToolTip.visible: listItem.visible && (Kirigami.Settings.tabletMode ? pressed : hovered) && Controls.ToolTip.text.length > 0
-                    Controls.ToolTip.text: modelData.tooltip || modelData.text
-
-                    onClicked: {
-                        if (modelData && modelData.trigger !== undefined) {
-                            modelData.trigger();
-                        }
-                        slideAnim.to = 0;
-                        slideAnim.restart();
-                    }
+                    hasVisibleActions = true;
+                    break;
                 }
             }
         }
+
+        Repeater {
+            model: {
+                if (listItem.actions.length === 0) {
+                    return null;
+                } else {
+                    return listItem.actions[0].text !== undefined &&
+                        listItem.actions[0].trigger !== undefined ?
+                            listItem.actions :
+                            listItem.actions[0];
+                }
+            }
+            delegate: Controls.ToolButton {
+                icon.name: modelData.iconName !== "" ? modelData.iconName : ""
+                icon.source: modelData.iconSource !== "" ? modelData.iconSource : ""
+                enabled: (modelData && modelData.enabled !== undefined) ? modelData.enabled : true;
+                visible: (modelData && modelData.visible !== undefined) ? modelData.visible : true;
+                onVisibleChanged: actionsLayout.updateVisibleActions(visible);
+                Component.onCompleted: actionsLayout.updateVisibleActions(visible);
+                Component.onDestruction: actionsLayout.updateVisibleActions(visible);
+                Controls.ToolTip.delay: Kirigami.Units.toolTipDelay
+                Controls.ToolTip.timeout: 5000
+                Controls.ToolTip.visible: listItem.visible && (Kirigami.Settings.tabletMode ? pressed : hovered) && Controls.ToolTip.text.length > 0
+                Controls.ToolTip.text: modelData.tooltip || modelData.text
+
+                onClicked: {
+                    if (modelData && modelData.trigger !== undefined) {
+                        modelData.trigger();
+                    }
+                    slideAnim.to = 0;
+                    slideAnim.restart();
+                }
+            }
+        }
+    }
 
 
     background: DefaultListItemBackground {}
