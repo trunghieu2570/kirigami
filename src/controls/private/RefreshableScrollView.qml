@@ -31,6 +31,13 @@ P.ScrollView {
     property bool supportsRefreshing: false
 
     /**
+     * Warning: These duplicate the padding properties from P.ScrollView. This
+     * is apparently allowed by QML but very unexpected.
+     *
+     * TODO KF6: Fix this.
+     */
+
+    /**
      * leftPadding: int
      * default contents padding at left
      */
@@ -169,6 +176,7 @@ P.ScrollView {
                 target: root.contentItem
                 property: "width"
                 value: root.flickableItem.width
+                when: root.horizontalScrollBarPolicy == Qt.ScrollBarAlwaysOff
             }
         }
     ]

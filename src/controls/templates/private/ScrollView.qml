@@ -14,14 +14,18 @@ MouseArea {
     property Flickable flickableItem
     clip: true
 
-    //TODO: horizontalScrollBarPolicy is completely noop just for compatibility right now
     property int horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
     property int verticalScrollBarPolicy: Qt.ScrollBarAsNeeded
     property int topPadding: 0
     property int leftPadding: 0
-    property int rightPadding: !Kirigami.Settings.hasTransientTouchInput && flickableItem.ScrollBar.vertical && flickableItem.ScrollBar.vertical.visible ? flickableItem.ScrollBar.vertical.width : 0
     property int bottomPadding: 0
+    property int rightPadding: 0
     property bool canFlickWithMouse: false
+
+    // Note: These are used because RefreshableScrollView overrides right and
+    // bottom padding properties.
+    property int rightSpacing: !Kirigami.Settings.hasTransientTouchInput && flickableItem.ScrollBar.vertical && flickableItem.ScrollBar.vertical.visible ? flickableItem.ScrollBar.vertical.width : 0
+    property int bottomSpacing: !Kirigami.Settings.hasTransientTouchInput && flickableItem.ScrollBar.horizontal && flickableItem.ScrollBar.horizontal.visible ? flickableItem.ScrollBar.horizontal.height : 0
 
     Accessible.onScrollDownAction: flickableItem.Accessible.onScrollDownAction
     Accessible.onScrollUpAction: flickableItem.Accessible.onScrollUpAction
@@ -44,15 +48,9 @@ MouseArea {
 
     onPressed: mouse.accepted = mouse.source !== Qt.MouseEventNotSynthesized
     onVerticalScrollBarPolicyChanged: {
-        if (flickableItem.ScrollBar.vertical) {
-            flickableItem.ScrollBar.vertical.visible = verticalScrollBarPolicy != Qt.ScrollBarAlwaysOff;
-        }
         scrollBarCreationTimer.restart();
     }
     onHorizontalScrollBarPolicyChanged: {
-        if (flickableItem.ScrollBar.horizontal) {
-            flickableItem.ScrollBar.horizontal.visible = horizontalScrollBarPolicy != Qt.ScrollBarAlwaysOff;
-        }
         scrollBarCreationTimer.restart();
     }
 
@@ -116,8 +114,8 @@ MouseArea {
             fill: parent
             leftMargin: root.leftPadding
             topMargin: root.topPadding
-            rightMargin: root.rightPadding
-            bottomMargin: root.bottomPadding
+            rightMargin: root.rightPadding + root.rightSpacing
+            bottomMargin: root.bottomPadding + root.bottomSpacing
         }
     }
     Component {
@@ -134,14 +132,14 @@ MouseArea {
         id: verticalScrollComponent
         ScrollBar {
             z: flickableParent.z + 1
-            visible: root.contentItem.visible && size < 1
+            visible: root.verticalScrollBarPolicy != Qt.ScrollBarAlwaysOff && root.contentItem.visible && size < 1
             interactive: !Kirigami.Settings.hasTransientTouchInput
 
-            //NOTE: use this instead of anchors as crashes on some Qt 5.8 checkouts
-            height: parent.height
             anchors {
                 right: parent.right
                 top: parent.top
+                bottom: parent.bottom
+                bottomMargin: root.bottomSpacing
             }
         }
     }
@@ -149,15 +147,14 @@ MouseArea {
         id: horizontalScrollComponent
         ScrollBar {
             z: flickableParent.z + 1
-            visible: root.contentItem.visible && size < 1
+            visible: root.horizontalScrollBarPolicy != Qt.ScrollBarAlwaysOff && root.contentItem.visible && size < 1
             interactive: !Kirigami.Settings.hasTransientTouchInput
 
-            //NOTE: use this instead of anchors as crashes on some Qt 5.8 checkouts
-            height: parent.height - anchors.topMargin
             anchors {
                 left: parent.left
                 right: parent.right
                 bottom: parent.bottom
+                rightMargin: root.rightSpacing
             }
         }
     }
