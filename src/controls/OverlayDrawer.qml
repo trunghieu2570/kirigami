@@ -7,7 +7,7 @@
 import QtQuick 2.1
 import QtGraphicalEffects 1.0
 import QtQuick.Templates 2.0 as T2
-import org.kde.kirigami 2.5
+import org.kde.kirigami 2.15
 
 import "private"
 import "templates" as T
@@ -43,17 +43,7 @@ T.OverlayDrawer {
             parent: root.handle
             anchors.fill: parent
 
-            DropShadow {
-                anchors.fill: handleGraphics
-                visible: !parent.parent.handleAnchor || !parent.parent.handleAnchor.visible || root.handle.pressed || (root.modal && root.position > 0)
-                horizontalOffset: 0
-                verticalOffset: Units.devicePixelRatio
-                radius: Units.gridUnit /2
-                samples: 16
-                color: Qt.rgba(0, 0, 0, root.handle.pressed ? 0.6 : 0.4)
-                source: handleGraphics
-            }
-            Rectangle {
+            ShadowedRectangle {
                 id: handleGraphics
                 anchors.centerIn: parent
 
@@ -66,7 +56,11 @@ T.OverlayDrawer {
                 Theme.inherit: false
                 color: root.handle.pressed ? Theme.highlightColor : Theme.backgroundColor
 
-                visible: !parent.parent.handleAnchor || !parent.parent.handleAnchor.visible
+                visible: !parent.parent.handleAnchor || !parent.parent.handleAnchor.visible || root.handle.pressed || (root.modal && root.position > 0)
+
+                shadow.color: Qt.rgba(0, 0, 0, root.handle.pressed ? 0.6 : 0.4)
+                shadow.yOffset: 1
+                shadow.size: Units.gridUnit / 2
 
                 width: Units.iconSizes.smallMedium + Units.smallSpacing * 2
                 height: width
