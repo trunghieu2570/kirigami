@@ -330,6 +330,7 @@ QQC2.Page {
         headerChanged();
         parentChanged(root.parent);
         globalToolBar.syncSource();
+        actionButtons.pageComplete = true
     }
 
     onParentChanged: {
@@ -427,12 +428,44 @@ QQC2.Page {
             //It should be T2.Page, Qt 5.7 doesn't like it
             property Item page: root
             height: item ? item.implicitHeight : 0
-            active: typeof applicationWindow !== "undefined" && (!globalToolBar.row || root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar) &&
-                    root.actions && (root.actions.main || root.actions.left || root.actions.right || root.actions.contextualActions.length) &&
-                //Legacy
-                    (typeof applicationWindow === "undefined" ||
-                    (!applicationWindow().header || applicationWindow().header.toString().indexOf("ToolBarApplicationHeader") === -1) &&
-                    (!applicationWindow().footer || applicationWindow().footer.toString().indexOf("ToolBarApplicationHeader") === -1))
+
+            property bool pageComplete: false
+
+            active: {
+                // Important! Do not do anything until the page has been
+                // completed, so we are sure what the globalToolBarStyle is,
+                // otherwise we risk creating the content and then discarding it.
+                if (!pageComplete) {
+                    return false;
+                }
+
+                // Note: Do not use root.globalToolBarStyle here as it is
+                // evaluated too late and will cause active to be true for a
+                // brief period, triggering the loading process.
+                if (globalToolBar.row.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.ToolBar) {
+                    return false;
+                }
+
+                if (!root.actions.main && !root.actions.left && !root.actions.right && root.actions.contextualActions.length == 0) {
+                    return false;
+                }
+
+                // Legacy
+                if (typeof applicationWindow === "undefined") {
+                    return true;
+                }
+
+                if (applicationWindow().header && applicationWindow().header.toString().indexOf("ToolBarApplicationHeader") !== -1) {
+                    return false;
+                }
+
+                if (applicationWindow().footer && applicationWindow().footer.toString().indexOf("ToolBarApplicationHeader") !== -1) {
+                    return false;
+                }
+
+                return true;
+            }
+
             source: Qt.resolvedUrl("./private/ActionButton.qml")
         }
     ]
