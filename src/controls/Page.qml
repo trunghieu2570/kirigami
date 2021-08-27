@@ -137,7 +137,7 @@ QQC2.Page {
     property alias leftAction: actionsGroup.left
 
     /**
-     * @property Action leftAction
+     * @property Action rightAction
      * @brief An optional extra action at the right of the main action button.
      * it can be a Kirigami.Action or a QAction
      *
