@@ -28,7 +28,7 @@ QQuickItem *SizeGroup::itemAt(QQmlListProperty<QQuickItem> *prop, int index)
 
 void SizeGroup::clearItems(QQmlListProperty<QQuickItem> *prop)
 {
-    for (const auto &item : qAsConst(pThis->m_items)) {
+    for (const auto &item : std::as_const(pThis->m_items)) {
         QObject::disconnect(pThis->m_connections[item].first);
         QObject::disconnect(pThis->m_connections[item].second);
     }
@@ -79,7 +79,7 @@ void SizeGroup::adjustItems(Mode whatChanged)
     qreal maxHeight = 0.0;
     qreal maxWidth = 0.0;
 
-    for (const auto &item : qAsConst(m_items)) {
+    for (const auto &item : std::as_const(m_items)) {
         if (item == nullptr) {
             continue;
         }
@@ -100,7 +100,7 @@ void SizeGroup::adjustItems(Mode whatChanged)
         }
     }
 
-    for (const auto &item : qAsConst(m_items)) {
+    for (const auto &item : std::as_const(m_items)) {
         if (item == nullptr) {
             continue;
         }

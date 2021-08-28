@@ -99,7 +99,7 @@ struct LRU {
     int totalCosts()
     {
         int ret = 0;
-        for (auto cost : qAsConst(costs)) {
+        for (auto cost : std::as_const(costs)) {
             ret += cost;
         }
         return ret;

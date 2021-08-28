@@ -182,7 +182,7 @@ BasicThemeDefinition &BasicThemeInstance::themeDefinition(QQmlEngine *engine)
 
 void BasicThemeInstance::onDefinitionChanged()
 {
-    for (auto watcher : qAsConst(watchers)) {
+    for (auto watcher : std::as_const(watchers)) {
         watcher->sync();
     }
 }

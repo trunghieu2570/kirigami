@@ -256,7 +256,7 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
             b = 0;
             c = 0;
 
-            for (auto color : qAsConst(stat.colors)) {
+            for (auto color : std::as_const(stat.colors)) {
                 c++;
                 r += qRed(color);
                 g += qGreen(color);
@@ -270,7 +270,7 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
             stat.colors = QList<QRgb>({stat.centroid});
         }
 
-        for (auto color : qAsConst(imageData.m_samples)) {
+        for (auto color : std::as_const(imageData.m_samples)) {
             positionColor(color, imageData.m_clusters);
         }
     }
@@ -297,7 +297,7 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
             }
         }
     }
-    for (const auto &i : qAsConst(itemsToDelete)) {
+    for (const auto &i : std::as_const(itemsToDelete)) {
         imageData.m_clusters.erase(i);
     }
 
@@ -310,7 +310,7 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
 
     bool first = true;
 
-    for (const auto &stat : qAsConst(imageData.m_clusters)) {
+    for (const auto &stat : std::as_const(imageData.m_clusters)) {
         QVariantMap entry;
         const QColor color(stat.centroid);
         entry[QStringLiteral("color")] = color;
@@ -322,7 +322,7 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
                         128 + (128 - contrast.lightness()));
         QColor tempContrast;
         int minimumDistance = 4681800; // max distance: 4*3*2*3*255*255
-        for (const auto &stat : qAsConst(imageData.m_clusters)) {
+        for (const auto &stat : std::as_const(imageData.m_clusters)) {
             const int distance = squareDistance(contrast.rgb(), stat.centroid);
 
             if (distance < minimumDistance) {

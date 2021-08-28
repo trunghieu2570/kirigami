@@ -297,7 +297,7 @@ void PageRouter::navigateToRoute(QJSValue route)
         }
     }
 
-    for (const auto &route : qAsConst(m_currentRoutes)) {
+    for (const auto &route : std::as_const(m_currentRoutes)) {
         if (!resolvedRoutes.contains(route)) {
             placeInCache(route);
         }
@@ -305,7 +305,7 @@ void PageRouter::navigateToRoute(QJSValue route)
 
     m_pageStack->clear();
     m_currentRoutes.clear();
-    for (auto toPush : qAsConst(resolvedRoutes)) {
+    for (auto toPush : std::as_const(resolvedRoutes)) {
         push(toPush);
     }
     reevaluateParamMapProperties();
@@ -320,7 +320,7 @@ void PageRouter::bringToView(QJSValue route)
     } else {
         auto parsed = parseRoute(route);
         auto index = 0;
-        for (auto currentRoute : qAsConst(m_currentRoutes)) {
+        for (auto currentRoute : std::as_const(m_currentRoutes)) {
             if (currentRoute->name == parsed->name && currentRoute->data == parsed->data) {
                 m_pageStack->setCurrentIndex(index);
                 return;
@@ -370,13 +370,13 @@ QVariant PageRouter::dataFor(QObject *object)
     auto pointer = object;
     auto qqiPointer = qobject_cast<QQuickItem *>(object);
     QHash<QQuickItem *, ParsedRoute *> routes;
-    for (auto route : qAsConst(m_cache.items)) {
+    for (auto route : std::as_const(m_cache.items)) {
         routes[route->item] = route;
     }
-    for (auto route : qAsConst(m_preload.items)) {
+    for (auto route : std::as_const(m_preload.items)) {
         routes[route->item] = route;
     }
-    for (auto route : qAsConst(m_currentRoutes)) {
+    for (auto route : std::as_const(m_currentRoutes)) {
         routes[route->item] = route;
     }
     while (qqiPointer != nullptr) {
@@ -405,7 +405,7 @@ bool PageRouter::isActive(QObject *object)
     auto pointer = object;
     while (pointer != nullptr) {
         auto index = 0;
-        for (auto route : qAsConst(m_currentRoutes)) {
+        for (auto route : std::as_const(m_currentRoutes)) {
             if (route->item == pointer) {
                 return m_pageStack->currentIndex() == index;
             }
@@ -466,7 +466,7 @@ QSet<QObject *> flatParentTree(QObject *object)
 
 void PageRouter::preload(ParsedRoute *route)
 {
-    for (auto preloaded : qAsConst(m_preload.items)) {
+    for (auto preloaded : std::as_const(m_preload.items)) {
         if (preloaded->equals(route)) {
             delete route;
             return;
@@ -522,7 +522,7 @@ void PageRouter::preload(ParsedRoute *route)
 void PageRouter::unpreload(ParsedRoute *route)
 {
     ParsedRoute *toDelete = nullptr;
-    for (auto preloaded : qAsConst(m_preload.items)) {
+    for (auto preloaded : std::as_const(m_preload.items)) {
         if (preloaded->equals(route)) {
             toDelete = preloaded;
         }
@@ -710,7 +710,7 @@ void PageRouter::pushFromObject(QObject *object, QJSValue inputRoute, bool repla
 
     for (const auto &obj : objects) {
         bool popping = false;
-        for (auto route : qAsConst(m_currentRoutes)) {
+        for (auto route : std::as_const(m_currentRoutes)) {
             if (popping) {
                 m_currentRoutes.removeAll(route);
                 reevaluateParamMapProperties();

@@ -196,7 +196,7 @@ public:
     template<typename T>
     inline void notifyWatchers(PlatformTheme *sender, const T &oldValue, const T &newValue)
     {
-        for (auto object : qAsConst(watchers)) {
+        for (auto object : std::as_const(watchers)) {
             PlatformThemeEvents::PropertyChangedEvent<T> event(sender, oldValue, newValue);
             QCoreApplication::sendEvent(object, &event);
         }
