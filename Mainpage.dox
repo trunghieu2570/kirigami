@@ -29,7 +29,7 @@ A tutorial for Kirigami is available on <a href="https://develop.kde.org/docs/ki
 - \link PageRouter  PageRouter \endlink
 - \link PageRoute  PageRoute \endlink
 - \link org::kde::kirigami::Theme Theme  \endlink
-- \link org::kde::kirigami::Units  Units \endlink
+- \link Kirigami::Units  Units \endlink
 - \link Icon Icon  \endlink
 - \link org::kde::kirigami::AbstractApplicationHeader AbstractApplicationHeader  \endlink
 - \link org::kde::kirigami::AbstractApplicationWindow AbstractApplicationWindow  \endlink

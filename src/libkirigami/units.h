@@ -18,6 +18,9 @@ namespace Kirigami {
 class Units;
 class UnitsPrivate;
 
+/**
+ * Provides access to platform-dependent icon sizing
+ */
 class KIRIGAMI2_EXPORT IconSizes : public QObject
 {
     Q_OBJECT
@@ -59,6 +62,9 @@ Q_SIGNALS:
 };
 
 
+/**
+ * A set of values to define semantically sizes and durations.
+ */
 class KIRIGAMI2_EXPORT Units : public QObject
 {
     Q_OBJECT
