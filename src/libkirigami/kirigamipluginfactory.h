@@ -57,6 +57,10 @@ public:
 };
 
 // TODO KF6 unify KirigamiPluginFactory and KirigamiPluginFactoryV2 again
+/**
+ * This class provides an extended version of KirigamiPluginFactory.
+ * Plugins that support Units need to implement it instead of KirigamiPluginFactory.
+ */
 #ifdef KIRIGAMI_BUILD_TYPE_STATIC
 class KirigamiPluginFactoryV2 : public KirigamiPluginFactory
 #else
