@@ -188,21 +188,21 @@ class KIRIGAMI2_EXPORT Units : public QObject
      */
     Q_PROPERTY(int toolTipDelay READ toolTipDelay WRITE setToolTipDelay NOTIFY toolTipDelayChanged)
 
+#if KIRIGAMI2_ENABLE_DEPRECATED_SINCE(5, 86)
     /**
      * How much the mouse scroll wheel scrolls, expressed in lines of text.
      * Note: this is strictly for classical mouse wheels, touchpads 2 figer scrolling won't be affected
      */
-#if KIRIGAMI2_ENABLE_DEPRECATED_SINCE(5, 86)
     Q_PROPERTY(int wheelScrollLines READ wheelScrollLines NOTIFY wheelScrollLinesChanged)
 #endif
 
+#if KIRIGAMI2_ENABLE_DEPRECATED_SINCE(5, 86)
     /**
      * metrics used by the default font
      *
      * @deprecated since 5.86.0, Create your own TextMetrics object if needed.
      * For the roundedIconSize function, use Units.iconSizes.roundedIconSize instead
      */
-#if KIRIGAMI2_ENABLE_DEPRECATED_SINCE(5, 86)
     Q_PROPERTY(QObject *fontMetrics READ fontMetrics CONSTANT)
 #endif
 
