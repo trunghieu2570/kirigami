@@ -109,6 +109,8 @@ Kirigami.AbstractApplicationHeader {
             opacity: layerIsMainRow && active
             enabled: opacity > 0
 
+            asynchronous: true
+
             active: (globalToolBar.actualStyle == Kirigami.ApplicationHeaderStyle.TabBar || globalToolBar.actualStyle == Kirigami.ApplicationHeaderStyle.Breadcrumb) && currentItem && currentItem.globalToolBarStyle != Kirigami.ApplicationHeaderStyle.None
 
             //TODO: different implementation?

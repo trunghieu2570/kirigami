@@ -41,6 +41,8 @@ AbstractPageHeader {
             Layout.preferredWidth: item ? item.Layout.preferredWidth : undefined
             Layout.maximumWidth: item ? item.Layout.maximumWidth : undefined
 
+            asynchronous: true
+
             sourceComponent: page ? page.titleDelegate : null
         }
 

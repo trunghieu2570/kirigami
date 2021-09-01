@@ -197,6 +197,7 @@ AbstractApplicationHeader {
     Repeater {
         model: pageRow.layers.depth -1
         delegate: Loader {
+            asynchronous: true
             sourceComponent: header.pageDelegate
             readonly property Page page: pageRow.layers.get(modelData+1)
             readonly property bool current: true;

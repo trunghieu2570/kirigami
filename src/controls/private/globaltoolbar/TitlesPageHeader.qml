@@ -26,6 +26,8 @@ AbstractPageHeader {
             ? (item.Layout.preferredHeight > 0 ? item.Layout.preferredHeight : item.implicitHeight)
             : 0)
 
+        asynchronous: true
+
         sourceComponent: page ? page.titleDelegate : null
     }
 }

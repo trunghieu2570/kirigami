@@ -765,6 +765,7 @@ T.Control {
         active: globalToolBar.actualStyle != ApplicationHeaderStyle.None || (firstVisibleItem && firstVisibleItem.globalToolBarStyle == ApplicationHeaderStyle.ToolBar)
         visible: active
         height: active ? implicitHeight : 0
+        asynchronous: true
         source: Qt.resolvedUrl("private/globaltoolbar/PageRowGlobalToolBarUI.qml");
     }
 

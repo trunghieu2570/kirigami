@@ -382,6 +382,7 @@ QQC2.Page {
             property T2.StackView stack
 
             visible: active
+            asynchronous: true
             active: (root.titleDelegate !== defaultTitleDelegate || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.Titles)
             onActiveChanged: {
                 if (active) {
@@ -428,6 +429,8 @@ QQC2.Page {
             //It should be T2.Page, Qt 5.7 doesn't like it
             property Item page: root
             height: item ? item.implicitHeight : 0
+
+            asynchronous: true
 
             property bool pageComplete: false
 

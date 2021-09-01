@@ -81,6 +81,8 @@ T.OverlayDrawer {
                 Theme.backgroundColor: handleGraphics.Theme.backgroundColor
                 Theme.textColor: handleGraphics.Theme.textColor
 
+                asynchronous: true
+
                 source: {
                     var edge = root.edge;
                     if (Qt.application.layoutDirection == Qt.RightToLeft) {
