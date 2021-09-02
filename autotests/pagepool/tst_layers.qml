@@ -57,6 +57,10 @@ TestCase {
         for (var spy of [stackSpy, layerSpy, checkSpy_A, checkSpy_B, checkSpy_C, checkSpy_D, checkSpy_E]) {
             spy.clear()
         }
+
+        // Give mainWindow a bit of room to breathe so it can process item
+        // deletion and other delayed signals.
+        wait(10)
     }
 
     ActionGroup {
