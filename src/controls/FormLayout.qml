@@ -240,7 +240,7 @@ Item {
                 : (item.Kirigami.FormData.buddyFor.height > height * 2 ? Qt.AlignTop : Qt.AlignVCenter)
 
             if (item.Kirigami.FormData.isSection) {
-                return Qt.AlignLeft
+                return Qt.AlignHCenter
             } else {
                 if (root.wideMode) {
                     return Qt.AlignRight | verticalAlignment
@@ -377,7 +377,7 @@ Item {
             Kirigami.MnemonicData.label: item.Kirigami.FormData.label
             text: Kirigami.MnemonicData.richTextLabel
 
-            level: item.Kirigami.FormData.isSection ? 3 : 5
+            level: item.Kirigami.FormData.isSection ? 2 : 5
 
             Layout.columnSpan: item.Kirigami.FormData.isSection ? lay.columns : 1
             Layout.preferredHeight: {
@@ -449,7 +449,7 @@ Item {
             }
             contentItem: Kirigami.Heading {
                 id: labelItemHeading
-                level: labelItem.item.Kirigami.FormData.isSection ? 3 : 5
+                level: labelItem.item.Kirigami.FormData.isSection ? 2 : 5
                 text: labelItem.text
                 verticalAlignment: temp.effectiveTextLayout(labelItem.item)
                 enabled: labelItem.item.Kirigami.FormData.enabled
