@@ -1,0 +1,229 @@
+# enolp <enolp@softastur.org>, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"PO-Revision-Date: 2021-04-20 02:13+0200\n"
+"Last-Translator: enolp <enolp@softastur.org>\n"
+"Language-Team: Asturian <alministradores@softastur.org>\n"
+"Language: ast\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Qt-Contexts: true\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 21.03.90\n"
+
+#: controls/AboutPage.qml:69
+#, fuzzy, qt-format
+#| msgctxt "AboutPage|"
+#| msgid "About"
+msgctxt "AboutPage|"
+msgid "About %1"
+msgstr "Tocante a"
+
+#: controls/AboutPage.qml:72
+msgctxt "AboutPage|"
+msgid "Report Bug…"
+msgstr ""
+
+#: controls/AboutPage.qml:104
+#, qt-format
+msgctxt "AboutPage|"
+msgid "(%1)"
+msgstr ""
+
+#: controls/AboutPage.qml:115
+#, qt-format
+msgctxt "AboutPage|"
+msgid "Visit %1's KDE Store page"
+msgstr ""
+
+#: controls/AboutPage.qml:124
+#, qt-format
+msgctxt "AboutPage|"
+msgid "Send an email to %1"
+msgstr "Unviar un corréu a %1"
+
+#: controls/AboutPage.qml:166
+msgctxt "AboutPage|"
+msgid "Get Involved"
+msgstr ""
+
+#: controls/AboutPage.qml:178
+msgctxt "AboutPage|"
+msgid "Copyright"
+msgstr "Copyright"
+
+#: controls/AboutPage.qml:216
+msgctxt "AboutPage|"
+msgid "License:"
+msgstr "Llicencia:"
+
+#: controls/AboutPage.qml:233
+#, qt-format
+msgctxt "AboutPage|"
+msgid "License: %1"
+msgstr "Llicencia: %1"
+
+#: controls/AboutPage.qml:244
+msgctxt "AboutPage|"
+msgid "Libraries in use"
+msgstr "Biblioteques n'usu"
+
+#: controls/AboutPage.qml:265
+msgctxt "AboutPage|"
+msgid "Authors"
+msgstr "Autores"
+
+#: controls/AboutPage.qml:272
+msgctxt "AboutPage|"
+msgid "Show author photos"
+msgstr ""
+
+#: controls/AboutPage.qml:300
+msgctxt "AboutPage|"
+msgid "Credits"
+msgstr "Creitos"
+
+#: controls/AboutPage.qml:311
+msgctxt "AboutPage|"
+msgid "Translators"
+msgstr "Traductores"
+
+#: controls/AbstractApplicationWindow.qml:343
+msgctxt "AbstractApplicationWindow|"
+msgid "Quit"
+msgstr "Colar"
+
+#: controls/ActionToolBar.qml:144
+msgctxt "ActionToolBar|"
+msgid "More Actions"
+msgstr "Más aiciones"
+
+#: controls/Avatar.qml:120
+#, qt-format
+msgctxt "Avatar|"
+msgid "%1 — %2"
+msgstr "%1 — %2"
+
+#: controls/ContextDrawer.qml:66
+msgctxt "ContextDrawer|"
+msgid "Actions"
+msgstr "Aiciones"
+
+#: controls/GlobalDrawer.qml:471
+msgctxt "GlobalDrawer|"
+msgid "Back"
+msgstr "Atrás"
+
+#: controls/GlobalDrawer.qml:558
+msgctxt "GlobalDrawer|"
+msgid "Close Sidebar"
+msgstr "Zarrar la barra llateral"
+
+#: controls/PasswordField.qml:32
+msgctxt "PasswordField|"
+msgid "Password"
+msgstr "Contraseña"
+
+#: controls/SearchField.qml:57
+#, fuzzy
+#| msgctxt "SearchField|"
+#| msgid "Search"
+msgctxt "SearchField|"
+msgid "Search…"
+msgstr "Buscar…"
+
+#: controls/SearchField.qml:59
+msgctxt "SearchField|"
+msgid "Search"
+msgstr "Buscar…"
+
+#: controls/settingscomponents/CategorizedSettings.qml:51
+msgctxt "CategorizedSettings|"
+msgid "Settings"
+msgstr ""
+
+#. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
+#: controls/swipenavigator/templates/PageTab.qml:39
+#, qt-format
+msgctxt "PageTab|"
+msgid "Current page. Progress: %1 percent."
+msgstr ""
+
+#. Accessibility text for a page tab. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:42
+#, qt-format
+msgctxt "PageTab|"
+msgid "Navigate to %1. Progress: %2 percent."
+msgstr ""
+
+#. Accessibility text for a page tab. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:47
+msgctxt "PageTab|"
+msgid "Current page."
+msgstr ""
+
+#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:50
+#, qt-format
+msgctxt "PageTab|"
+msgid "Navigate to %1. Demanding attention."
+msgstr ""
+
+#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:53
+#, fuzzy, qt-format
+#| msgctxt "ForwardButton|"
+#| msgid "Navigate Forward"
+msgctxt "PageTab|"
+msgid "Navigate to %1."
+msgstr "Navegar p'alantre"
+
+#: controls/templates/OverlayDrawer.qml:123
+msgctxt "OverlayDrawer|"
+msgid "Close"
+msgstr ""
+
+#: controls/templates/OverlayDrawer.qml:129
+msgctxt "OverlayDrawer|"
+msgid "Open"
+msgstr ""
+
+#: controls/templates/private/BackButton.qml:36
+msgctxt "BackButton|"
+msgid "Navigate Back"
+msgstr "Navegar p'atrás"
+
+#: controls/templates/private/ForwardButton.qml:34
+msgctxt "ForwardButton|"
+msgid "Navigate Forward"
+msgstr "Navegar p'alantre"
+
+#: controls/ToolBarApplicationHeader.qml:113
+msgctxt "ToolBarApplicationHeader|"
+msgid "More Actions"
+msgstr "Más aiciones"
+
+#: controls/UrlButton.qml:45
+msgctxt "UrlButton|"
+msgid "Copy link address"
+msgstr "Copiar la direición del enllaz"
+
+#: settings.cpp:210
+#, qt-format
+msgctxt "Settings|"
+msgid "KDE Frameworks %1"
+msgstr "KDE Frameworks %1"
+
+#: settings.cpp:212
+#, qt-format
+msgctxt "Settings|"
+msgid "The %1 windowing system"
+msgstr "El sistema de ventanes %1"
+
+#: settings.cpp:213
+#, qt-format
+msgctxt "Settings|"
+msgid "Qt %2 (built against %3)"
+msgstr "Qt %2 (compilóse con %3)"

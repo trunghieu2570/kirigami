@@ -1,0 +1,229 @@
+# Kiszel Kristóf <kiszel.kristof@gmail.com>, 2017, 2018, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"PO-Revision-Date: 2020-12-19 14:19+0100\n"
+"Last-Translator: Kristóf Kiszel <kiszel.kristof@gmail.com>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Qt-Contexts: true\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 21.03.70\n"
+
+#: controls/AboutPage.qml:69
+#, fuzzy, qt-format
+#| msgctxt "AboutPage|"
+#| msgid "About"
+msgctxt "AboutPage|"
+msgid "About %1"
+msgstr "Névjegy"
+
+#: controls/AboutPage.qml:72
+msgctxt "AboutPage|"
+msgid "Report Bug…"
+msgstr ""
+
+#: controls/AboutPage.qml:104
+#, qt-format
+msgctxt "AboutPage|"
+msgid "(%1)"
+msgstr ""
+
+#: controls/AboutPage.qml:115
+#, qt-format
+msgctxt "AboutPage|"
+msgid "Visit %1's KDE Store page"
+msgstr ""
+
+#: controls/AboutPage.qml:124
+#, qt-format
+msgctxt "AboutPage|"
+msgid "Send an email to %1"
+msgstr "E-mail küldése neki: %1"
+
+#: controls/AboutPage.qml:166
+msgctxt "AboutPage|"
+msgid "Get Involved"
+msgstr ""
+
+#: controls/AboutPage.qml:178
+msgctxt "AboutPage|"
+msgid "Copyright"
+msgstr "Copyright"
+
+#: controls/AboutPage.qml:216
+msgctxt "AboutPage|"
+msgid "License:"
+msgstr "Licenc:"
+
+#: controls/AboutPage.qml:233
+#, qt-format
+msgctxt "AboutPage|"
+msgid "License: %1"
+msgstr "Licenc: %1"
+
+#: controls/AboutPage.qml:244
+msgctxt "AboutPage|"
+msgid "Libraries in use"
+msgstr "Felhasznált függvénykönyvtárak"
+
+#: controls/AboutPage.qml:265
+msgctxt "AboutPage|"
+msgid "Authors"
+msgstr "Szerzők"
+
+#: controls/AboutPage.qml:272
+msgctxt "AboutPage|"
+msgid "Show author photos"
+msgstr ""
+
+#: controls/AboutPage.qml:300
+msgctxt "AboutPage|"
+msgid "Credits"
+msgstr "Köszönetnyilvánítás"
+
+#: controls/AboutPage.qml:311
+msgctxt "AboutPage|"
+msgid "Translators"
+msgstr "Fordítók"
+
+#: controls/AbstractApplicationWindow.qml:343
+msgctxt "AbstractApplicationWindow|"
+msgid "Quit"
+msgstr "Kilépés"
+
+#: controls/ActionToolBar.qml:144
+msgctxt "ActionToolBar|"
+msgid "More Actions"
+msgstr "További műveletek"
+
+#: controls/Avatar.qml:120
+#, qt-format
+msgctxt "Avatar|"
+msgid "%1 — %2"
+msgstr ""
+
+#: controls/ContextDrawer.qml:66
+msgctxt "ContextDrawer|"
+msgid "Actions"
+msgstr "Műveletek"
+
+#: controls/GlobalDrawer.qml:471
+msgctxt "GlobalDrawer|"
+msgid "Back"
+msgstr "Vissza"
+
+#: controls/GlobalDrawer.qml:558
+msgctxt "GlobalDrawer|"
+msgid "Close Sidebar"
+msgstr "Oldalsáv bezárása"
+
+#: controls/PasswordField.qml:32
+msgctxt "PasswordField|"
+msgid "Password"
+msgstr "Jelszó"
+
+#: controls/SearchField.qml:57
+#, fuzzy
+#| msgctxt "SearchField|"
+#| msgid "Search"
+msgctxt "SearchField|"
+msgid "Search…"
+msgstr "Keresés"
+
+#: controls/SearchField.qml:59
+msgctxt "SearchField|"
+msgid "Search"
+msgstr "Keresés"
+
+#: controls/settingscomponents/CategorizedSettings.qml:51
+msgctxt "CategorizedSettings|"
+msgid "Settings"
+msgstr ""
+
+#. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
+#: controls/swipenavigator/templates/PageTab.qml:39
+#, qt-format
+msgctxt "PageTab|"
+msgid "Current page. Progress: %1 percent."
+msgstr ""
+
+#. Accessibility text for a page tab. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:42
+#, qt-format
+msgctxt "PageTab|"
+msgid "Navigate to %1. Progress: %2 percent."
+msgstr ""
+
+#. Accessibility text for a page tab. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:47
+msgctxt "PageTab|"
+msgid "Current page."
+msgstr ""
+
+#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:50
+#, qt-format
+msgctxt "PageTab|"
+msgid "Navigate to %1. Demanding attention."
+msgstr ""
+
+#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:53
+#, fuzzy, qt-format
+#| msgctxt "ForwardButton|"
+#| msgid "Navigate Forward"
+msgctxt "PageTab|"
+msgid "Navigate to %1."
+msgstr "Előre"
+
+#: controls/templates/OverlayDrawer.qml:123
+msgctxt "OverlayDrawer|"
+msgid "Close"
+msgstr ""
+
+#: controls/templates/OverlayDrawer.qml:129
+msgctxt "OverlayDrawer|"
+msgid "Open"
+msgstr ""
+
+#: controls/templates/private/BackButton.qml:36
+msgctxt "BackButton|"
+msgid "Navigate Back"
+msgstr "Vissza"
+
+#: controls/templates/private/ForwardButton.qml:34
+msgctxt "ForwardButton|"
+msgid "Navigate Forward"
+msgstr "Előre"
+
+#: controls/ToolBarApplicationHeader.qml:113
+msgctxt "ToolBarApplicationHeader|"
+msgid "More Actions"
+msgstr "További műveletek"
+
+#: controls/UrlButton.qml:45
+msgctxt "UrlButton|"
+msgid "Copy link address"
+msgstr "Hivatkozás címének másolása"
+
+#: settings.cpp:210
+#, qt-format
+msgctxt "Settings|"
+msgid "KDE Frameworks %1"
+msgstr "KDE Frameworks %1"
+
+#: settings.cpp:212
+#, qt-format
+msgctxt "Settings|"
+msgid "The %1 windowing system"
+msgstr "A(z) %1 ablakkezelő rendszer"
+
+#: settings.cpp:213
+#, qt-format
+msgctxt "Settings|"
+msgid "Qt %2 (built against %3)"
+msgstr "Qt %2 (fordítva ezzel: %3)"
