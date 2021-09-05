@@ -27,7 +27,7 @@ Item {
             fill: parent
             margins: Units.smallSpacing
         }
-        property int thickness: Math.floor(Units.devicePixelRatio)*2
+        property int thickness: 2
         Rectangle {
             anchors {
                 horizontalCenter: parent.horizontalCenter

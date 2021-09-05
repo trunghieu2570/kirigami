@@ -461,7 +461,7 @@ Item {
                 anchors.right: labelItemHeading.right
                 anchors.top: labelItemHeading.bottom
                 anchors.leftMargin: labelItemHeading.leftPadding
-                height: 1 * Kirigami.Units.devicePixelRatio
+                height: 1
                 color: Kirigami.Theme.highlightColor
                 visible: labelItem.activeFocus && labelItem.indicator.visible
             }

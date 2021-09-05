@@ -19,8 +19,8 @@ import org.kde.kirigami 2.12
 
 Rectangle {
     id: root
-    implicitHeight: Math.floor(Units.devicePixelRatio)
-    implicitWidth: Math.floor(Units.devicePixelRatio)
+    implicitHeight: 1
+    implicitWidth: 1
     Accessible.role: Accessible.Separator
 
     enum Weight {

@@ -26,7 +26,7 @@ Kirigami.ApplicationWindow {
         anchors.bottom: parent.bottom
 
         x: columnWidth - (width / 2)
-        width: Kirigami.Units.devicePixelRatio * 2
+        width: 2
 
         property int dragRange: (Kirigami.Units.gridUnit * 5)
         property int _lastX: -1

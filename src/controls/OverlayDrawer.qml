@@ -64,7 +64,7 @@ T.OverlayDrawer {
 
                 width: Units.iconSizes.smallMedium + Units.smallSpacing * 2
                 height: width
-                radius: Units.devicePixelRatio * 2
+                radius: 2
                 Behavior on color {
                     ColorAnimation {
                         duration: Units.longDuration

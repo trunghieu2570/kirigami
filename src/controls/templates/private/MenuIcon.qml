@@ -26,7 +26,7 @@ Item {
             fill: parent
             margins: Units.smallSpacing
         }
-        readonly property int thickness: Math.floor(Units.devicePixelRatio)*2
+        readonly property int thickness: 2
         readonly property real drawerPosition: drawer ? drawer.position : 0
 
         Rectangle {

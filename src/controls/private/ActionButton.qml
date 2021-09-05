@@ -309,7 +309,7 @@ Item {
                         bottomMargin: Units.smallSpacing
                     }
                     enabled: root.leftAction && root.leftAction.enabled
-                    radius: Units.devicePixelRatio*2
+                    radius: 2
                     height: button.mediumIconSizing + Units.smallSpacing * 2
                     width: height + (root.action ? Units.gridUnit*2 : 0)
                     visible: root.leftAction
@@ -356,7 +356,7 @@ Item {
                         bottomMargin: Units.smallSpacing
                     }
                     enabled: root.rightAction && root.rightAction.enabled
-                    radius: Units.devicePixelRatio*2
+                    radius: 2
                     height: button.mediumIconSizing + Units.smallSpacing * 2
                     width: height + (root.action ? Units.gridUnit*2 : 0)
                     visible: root.rightAction
@@ -396,7 +396,7 @@ Item {
             DropShadow {
                 anchors.fill: background
                 horizontalOffset: 0
-                verticalOffset: Units.devicePixelRatio
+                verticalOffset: 1
                 radius: Units.gridUnit /2
                 samples: 16
                 color: Qt.rgba(0, 0, 0, mouseArea.pressed ? 0.6 : 0.4)
@@ -429,7 +429,7 @@ Item {
         DropShadow {
             anchors.fill: handleGraphics
             horizontalOffset: 0
-            verticalOffset: Units.devicePixelRatio
+            verticalOffset: 1
             radius: Units.gridUnit /2
             samples: 16
             color: Qt.rgba(0, 0, 0, fakeContextMenuButton.pressed ? 0.6 : 0.4)
@@ -439,7 +439,7 @@ Item {
             id: handleGraphics
             anchors.fill: parent
             color: fakeContextMenuButton.pressed ? Theme.highlightColor : Theme.backgroundColor
-            radius: Units.devicePixelRatio
+            radius: 1
             Icon {
                 anchors.centerIn: parent
                 width: button.mediumIconSizing
