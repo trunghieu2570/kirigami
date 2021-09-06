@@ -60,7 +60,7 @@ TestCase {
 
         // Give mainWindow a bit of room to breathe so it can process item
         // deletion and other delayed signals.
-        wait(10)
+        wait(50)
     }
 
     ActionGroup {
