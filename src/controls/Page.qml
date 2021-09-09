@@ -445,7 +445,7 @@ QQC2.Page {
                 // Note: Do not use root.globalToolBarStyle here as it is
                 // evaluated too late and will cause active to be true for a
                 // brief period, triggering the loading process.
-                if (globalToolBar.row.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.ToolBar) {
+                if (globalToolBar.row && globalToolBar.row.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.ToolBar) {
                     return false;
                 }
 
