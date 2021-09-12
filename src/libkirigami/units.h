@@ -111,6 +111,11 @@ class KIRIGAMI2_EXPORT Units : public QObject
     Q_PROPERTY(int largeSpacing READ largeSpacing WRITE setLargeSpacing NOTIFY largeSpacingChanged)
 
     /**
+     * Units.cornerRadius is the standard corner radius for rounded rectangles.
+     */
+    Q_PROPERTY(qreal cornerRadius READ cornerRadius WRITE setCornerRadius RESET resetCornerRadius NOTIFY cornerRadiusChanged)
+
+    /**
      * The ratio between physical and device-independent pixels. This value does not depend on the \
      * size of the configured font. If you want to take font sizes into account when scaling elements,
      * use theme.mSize(theme.defaultFont), units.smallSpacing and units.largeSpacing.
@@ -219,6 +224,10 @@ public:
     int largeSpacing() const;
     void setLargeSpacing(int size);
 
+    qreal cornerRadius() const;
+    void setCornerRadius(qreal radius);
+    void resetCornerRadius();
+
 #if KIRIGAMI2_ENABLE_DEPRECATED_SINCE(5, 86)
     // TODO KF6 remove
     KIRIGAMI2_DEPRECATED_VERSION(5, 86, "When using Qt scaling, this would return a value of 1")
@@ -256,6 +265,7 @@ Q_SIGNALS:
     void gridUnitChanged();
     void smallSpacingChanged();
     void largeSpacingChanged();
+    void cornerRadiusChanged();
     void devicePixelRatioChanged();
     void veryLongDurationChanged();
     void longDurationChanged();

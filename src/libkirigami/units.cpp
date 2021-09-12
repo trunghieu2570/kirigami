@@ -70,6 +70,7 @@ public:
         , gridUnit(fontMetrics.height())
         , smallSpacing(std::floor(gridUnit / 4))
         , largeSpacing(smallSpacing * 2)
+        , cornerRadius(3)
         , veryLongDuration(400)
         , longDuration(200)
         , shortDuration(100)
@@ -97,6 +98,7 @@ public:
     int gridUnit;
     int smallSpacing;
     int largeSpacing;
+    qreal cornerRadius;
 
     // durations
     int veryLongDuration;
@@ -221,6 +223,26 @@ void Kirigami::Units::setLargeSpacing(int size)
     d->largeSpacing = size;
     d->customUnitsSet = true;
     Q_EMIT largeSpacingChanged();
+}
+
+qreal Units::cornerRadius() const
+{
+    return d->smallSpacing;
+}
+
+void Kirigami::Units::setCornerRadius(qreal radius)
+{
+    if (d->cornerRadius == radius) {
+        return;
+    }
+
+    d->cornerRadius = radius;
+    Q_EMIT cornerRadiusChanged();
+}
+
+void Kirigami::Units::resetCornerRadius()
+{
+    setCornerRadius(3);
 }
 
 int Units::veryLongDuration() const
