@@ -1564,7 +1564,7 @@ void ColumnView::mouseUngrabEvent()
 void ColumnView::classBegin()
 {
     auto syncColumnWidth = [this]() {
-        m_contentItem->m_columnWidth = privateQmlComponentsPoolSelf->instance(qmlEngine(this))->m_units->property("gridUnit").toInt() * 20;
+        m_contentItem->m_columnWidth = privateQmlComponentsPoolSelf->instance(qmlEngine(this))->m_units->gridUnit() * 20;
         Q_EMIT columnWidthChanged();
     };
 
@@ -1572,7 +1572,7 @@ void ColumnView::classBegin()
     syncColumnWidth();
 
     auto syncDuration = [this]() {
-        m_contentItem->m_slideAnim->setDuration(QmlComponentsPoolSingleton::instance(qmlEngine(this))->m_units->property("longDuration").toInt());
+        m_contentItem->m_slideAnim->setDuration(QmlComponentsPoolSingleton::instance(qmlEngine(this))->m_units->longDuration());
         Q_EMIT scrollDurationChanged();
     };
 
