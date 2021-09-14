@@ -472,6 +472,12 @@ OverlayDrawer {
 
                             separatorVisible: false
                             onClicked: stackView.pop()
+
+                            Keys.onEnterPressed: stackView.pop()
+                            Keys.onReturnPressed: stackView.pop()
+
+                            Keys.onDownPressed: nextItemInFocusChain().focus = true
+                            Keys.onUpPressed: nextItemInFocusChain(false).focus = true
                         }
                         Shortcut {
                             sequence: backItem.MnemonicData.sequence

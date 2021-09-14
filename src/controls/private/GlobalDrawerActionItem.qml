@@ -143,7 +143,12 @@ AbstractListItem {
             }
         }
     }
-    onClicked: {
+
+    onClicked: trigger()
+    Keys.onEnterPressed: trigger()
+    Keys.onReturnPressed: trigger()
+
+    function trigger() {
         if (!supportsMouseEvents) {
             return;
         }
@@ -167,4 +172,7 @@ AbstractListItem {
         }
         checked = Qt.binding(function() { return modelData.checked || (actionsMenu && actionsMenu.visible) });
     }
+
+    Keys.onDownPressed: nextItemInFocusChain().focus = true
+    Keys.onUpPressed: nextItemInFocusChain(false).focus = true
 }
