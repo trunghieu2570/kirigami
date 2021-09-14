@@ -56,6 +56,8 @@ Kirigami.AbstractListItem {
     sectionDelegate: true
     hoverEnabled: false
 
+    activeFocusOnTab: false
+
     contentItem: RowLayout {
         id: rowLayout
 
