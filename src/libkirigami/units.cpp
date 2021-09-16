@@ -140,7 +140,7 @@ Units::~Units() = default;
 
 Units::Units(QObject *parent)
     : QObject(parent)
-    , d(std::unique_ptr<UnitsPrivate>(new UnitsPrivate(this)))
+    , d(std::make_unique<UnitsPrivate>(this))
 {
     connect(QGuiApplication::styleHints(), &QStyleHints::wheelScrollLinesChanged, this, [this](int scrollLines) {
         if (d->customWheelScrollLinesSet) {

@@ -188,9 +188,9 @@ QVector4D CornersGroup::toVector4D(float all) const
 
 ShadowedRectangle::ShadowedRectangle(QQuickItem *parentItem)
     : QQuickItem(parentItem)
-    , m_border(new BorderGroup)
-    , m_shadow(new ShadowGroup)
-    , m_corners(new CornersGroup)
+    , m_border(std::make_unique<BorderGroup>())
+    , m_shadow(std::make_unique<ShadowGroup>())
+    , m_corners(std::make_unique<CornersGroup>())
 {
     setFlag(QQuickItem::ItemHasContents, true);
 

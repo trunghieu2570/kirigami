@@ -83,7 +83,7 @@ public:
 
 ToolBarLayout::ToolBarLayout(QQuickItem *parent)
     : QQuickItem(parent)
-    , d(new Private{this})
+    , d(std::make_unique<Private>(this))
 {
     d->actionsProperty = ActionsProperty(this, this, Private::appendAction, Private::actionCount, Private::action, Private::clearActions);
 

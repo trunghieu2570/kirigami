@@ -163,16 +163,16 @@ BasicThemeDefinition &BasicThemeInstance::themeDefinition(QQmlEngine *engine)
             }
 
             qCWarning(KirigamiLog) << "Invalid Theme file, using default Basic theme.";
-            m_themeDefinition.reset(new BasicThemeDefinition);
+            m_themeDefinition = std::make_unique<BasicThemeDefinition>();
         } else if (qobject_cast<BasicThemeDefinition *>(result)) {
             m_themeDefinition.reset(qobject_cast<BasicThemeDefinition *>(result));
         } else {
             qCWarning(KirigamiLog) << "Warning: Theme implementations should use Kirigami.BasicThemeDefinition for its root item";
-            m_themeDefinition.reset(new CompatibilityThemeDefinition(result));
+            m_themeDefinition = std::make_unique<CompatibilityThemeDefinition>(result);
         }
     } else {
         qCDebug(KirigamiLog) << "No Theme file found, using default Basic theme";
-        m_themeDefinition.reset(new BasicThemeDefinition);
+        m_themeDefinition = std::make_unique<BasicThemeDefinition>();
     }
 
     connect(m_themeDefinition.get(), &BasicThemeDefinition::changed, this, &BasicThemeInstance::onDefinitionChanged);

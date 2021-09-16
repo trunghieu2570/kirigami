@@ -287,7 +287,7 @@ public:
     inline void setColor(PlatformTheme *theme, PlatformThemeData::ColorRole color, const QColor &value)
     {
         if (!localOverrides) {
-            localOverrides.reset(new PlatformThemeData::ColorMap{});
+            localOverrides = std::make_unique<PlatformThemeData::ColorMap>();
         }
 
         if (!value.isValid()) {
