@@ -24,6 +24,13 @@ endif()
 find_package(ECM 5.90.0 NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
+if (NOT ${BUILD_SHARED_LIBS})
+    # Examples and tests are not supported when building a static library, so
+    # force them to OFF.
+    set(BUILD_TESTING OFF)
+    set(BUILD_EXAMPLES OFF)
+endif()
+
 # Make CPack available to easy generate binary packages
 include(CPack)
 include(FeatureSummary)
@@ -119,11 +126,11 @@ if (NOT ANDROID)
     add_subdirectory(templates)
 endif()
 
-if (BUILD_EXAMPLES AND BUILD_SHARED_LIBS)
+if (BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif()
 
-if (BUILD_TESTING AND BUILD_SHARED_LIBS)
+if (BUILD_TESTING)
     add_subdirectory(autotests)
 endif()
 
