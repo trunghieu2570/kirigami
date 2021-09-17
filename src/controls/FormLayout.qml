@@ -371,7 +371,7 @@ Item {
             property var item
             property int index
             enabled: item.enabled && item.Kirigami.FormData.enabled
-            visible: item.visible
+            visible: item.visible && (root.wideMode || text.length > 0)
             Kirigami.MnemonicData.enabled: item.Kirigami.FormData.buddyFor && item.Kirigami.FormData.buddyFor.activeFocusOnTab
             Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
             Kirigami.MnemonicData.label: item.Kirigami.FormData.label
