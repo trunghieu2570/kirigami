@@ -1,6 +1,9 @@
 set(KIRIGAMI_INSTALL_INCLUDEDIR "${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami2")
 
-set(libkirigami_SRCS
+add_library(KF5Kirigami2 ${libkirigami_SRCS})
+add_library(KF5::Kirigami2 ALIAS KF5Kirigami2)
+
+target_sources(KF5Kirigami2 PRIVATE
     platformtheme.cpp
     basictheme.cpp
     kirigamipluginfactory.cpp
@@ -10,24 +13,21 @@ set(libkirigami_SRCS
     virtualkeyboardwatcher.cpp
 )
 
+set(libkirigami_extra_sources "")
+
 #use dbus on linux, bsd etc, but not android and apple stuff
 if (UNIX AND NOT ANDROID AND NOT(APPLE) AND NOT(DISABLE_DBUS))
-    qt_add_dbus_interface(libkirigami_SRCS org.kde.KWin.TabletModeManager.xml tabletmodemanager_interface)
-    qt_add_dbus_interface(libkirigami_SRCS org.kde.KWin.VirtualKeyboard.xml virtualkeyboard_interface)
+    qt_add_dbus_interface(libkirigami_extra_sources org.kde.KWin.TabletModeManager.xml tabletmodemanager_interface)
+    qt_add_dbus_interface(libkirigami_extra_sources org.kde.KWin.VirtualKeyboard.xml virtualkeyboard_interface)
     set(LIBKIRIGAMKI_EXTRA_LIBS Qt${QT_MAJOR_VERSION}::DBus)
 endif()
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
-
-ecm_qt_declare_logging_category(libkirigami_SRCS
+ecm_qt_declare_logging_category(libkirigami_extra_sources
     HEADER loggingcategory.h
     IDENTIFIER KirigamiLog
     CATEGORY_NAME kf.kirigami
     DEFAULT_SEVERITY Warning
 )
-
-add_library(KF5Kirigami2 ${libkirigami_SRCS})
-add_library(KF5::Kirigami2 ALIAS KF5Kirigami2)
 
 ecm_generate_export_header(KF5Kirigami2
     VERSION ${KF_VERSION}
@@ -35,7 +35,10 @@ ecm_generate_export_header(KF5Kirigami2
     DEPRECATION_VERSIONS 5.80 5.86
 )
 
+target_sources(KF5Kirigami2 PRIVATE ${libkirigami_extra_sources})
+
 target_include_directories(KF5Kirigami2
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
     INTERFACE "$<INSTALL_INTERFACE:${KIRIGAMI_INSTALL_INCLUDEDIR}>"
 )
 
