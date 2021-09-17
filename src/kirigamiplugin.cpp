@@ -46,7 +46,6 @@ static QString s_selectedStyle;
 
 #ifdef KIRIGAMI_BUILD_TYPE_STATIC
 #include "loggingcategory.h"
-#include "qrc_kirigami.cpp"
 #include <QDebug>
 #endif
 
@@ -341,6 +340,8 @@ KirigamiPlugin& KirigamiPlugin::getInstance()
 void KirigamiPlugin::registerTypes(QQmlEngine* engine)
 {
     Q_INIT_RESOURCE(shaders);
+    Q_INIT_RESOURCE(KirigamiPlugin);
+
     if (engine) {
         engine->addImportPath(QLatin1String(":/"));
     }
