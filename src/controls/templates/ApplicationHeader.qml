@@ -74,6 +74,7 @@ AbstractApplicationHeader {
 
             Heading {
                 id: title
+                level: 2 // best text size in the context of the toolbar
                 width: Math.min(parent.width, Math.min(titleList.width, implicitWidth)) + Units.smallSpacing
                 anchors.verticalCenter: parent.verticalCenter
                 opacity: current ? 1 : 0.4

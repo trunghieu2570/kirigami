@@ -73,6 +73,7 @@ Flickable {
                     }
                     Kirigami.Heading {
                         Layout.leftMargin: Kirigami.Units.largeSpacing
+                        level: 2 // best text size in the context of the toolbar
                         color: Kirigami.Theme.textColor
                         verticalAlignment: Text.AlignVCenter
                         wrapMode: Text.NoWrap
