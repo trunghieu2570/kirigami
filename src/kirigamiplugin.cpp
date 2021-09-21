@@ -150,8 +150,8 @@ void KirigamiPlugin::registerTypes(const char *uri)
                     qWarning(KirigamiLog) << "The style returned a nullptr Units*, falling back to defaults";
                 }
             } else {
-                qWarning(KirigamiLog) << "The style does not provide a C++ Units implementation"
-                                      << "QML Units implementations are not longer supported";
+                qWarning(KirigamiLog) << "The style does not provide a C++ Units implementation."
+                                      << "QML Units implementations are no longer supported.";
             }
         } else {
             qWarning(KirigamiLog) << "Failed to find a Kirigami platform plugin";
