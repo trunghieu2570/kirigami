@@ -47,14 +47,12 @@ QQC2.ApplicationWindow {
             icon.name: "document-save"
             text: `test ${tabIndex + 1}`
             QQC2.ButtonGroup.group: navTabBar.tabGroup
-            onClicked: checked = true
         }
         Kirigami.NavigationTabButton {
             visible: false
             icon.name: "document-send"
             text: `test ${tabIndex + 1}`
             QQC2.ButtonGroup.group: navTabBar.tabGroup
-            onClicked: checked = true
         }
         actions: [
             Kirigami.Action {
@@ -64,27 +62,23 @@ QQC2.ApplicationWindow {
                 icon.width: 32
                 text: `test 3`
                 checked: true
-                onTriggered: checked = true
             },
             Kirigami.Action {
                 visible: true
                 icon.name: "edit-cut"
                 text: `test 4`
                 checkable: true
-                onTriggered: checked = true
             },
             Kirigami.Action {
                 visible: false
                 icon.name: "edit-paste"
                 text: `test 5`
-                onTriggered: checked = true
             },
             Kirigami.Action {
                 visible: true
                 icon.source: "../logo.png"
                 text: `test 6`
                 checkable: true
-                onTriggered: checked = true
             }
         ]
     }
