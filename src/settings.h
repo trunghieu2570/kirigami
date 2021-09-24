@@ -18,54 +18,58 @@ class Settings : public QObject
     Q_OBJECT
 
     /**
-     * True if the system can dynamically enter in tablet mode
+     * This property holds whether the system can dynamically enter and exit tablet mode
      * (or the device is actually a tablet).
-     * such as transformable laptops that support keyboard detachment
+     * This is the case for foldable convertibles and transformable laptops that support
+     * keyboard detachment.
      */
     Q_PROPERTY(bool tabletModeAvailable READ isTabletModeAvailable NOTIFY tabletModeAvailableChanged)
 
     /**
-     * True if we are running on a small mobile device such as a mobile phone
-     * This is used when we want to do specific adaptations to our UI for
-     * small screen form factors, such as having bigger touch areas.
+     * This property holds whether the application is running on a small mobile device
+     * such as a mobile phone. This is used when we want to do specific adaptations to
+     * the UI for small screen form factors, such as having bigger touch areas.
      */
     Q_PROPERTY(bool isMobile READ isMobile NOTIFY isMobileChanged)
 
     /**
-     * True if the device we are running on is behaving like a tablet:
-     * Note that this doesn't mean exactly a tablet form factor, but
+     * This property holds whether the application is running on a device that is
+     * behaving like a tablet.
+     * 
+     * @note This doesn't mean exactly a tablet form factor, but
      * that the preferred input mode for the device is the touch screen
      * and that pointer and keyboard are either secondary or not available.
      */
     Q_PROPERTY(bool tabletMode READ tabletMode NOTIFY tabletModeChanged)
 
     /**
-     * True if the system has a platform menu bar; e.g. a user is on macOS
-     * or has a global menu on KDE Plasma.
+     * This property holds whether the system has a platform menu bar; e.g. a user is
+     * on macOS or has a global menu on KDE Plasma.
      *
      * @warning Android has a platform menu bar; which may not be what you expected.
      */
     Q_PROPERTY(bool hasPlatformMenuBar READ hasPlatformMenuBar CONSTANT)
 
     /**
-     * True if the user in this moment is interacting with the app with the touch screen
+     * This property holds whether the user in this moment is interacting with the app
+     * with the touch screen.
      */
     Q_PROPERTY(bool hasTransientTouchInput READ hasTransientTouchInput NOTIFY hasTransientTouchInputChanged)
 
     /**
-     * name of the QtQuickControls2 style we are using,
+     * This property holds the name of the QtQuickControls2 style the application is using,
      * for instance org.kde.desktop, Plasma, Material, Universal etc
      */
     Q_PROPERTY(QString style READ style CONSTANT)
 
     // TODO: make this adapt without file watchers?
     /**
-     * How many lines of text the mouse wheel should scroll
+     * This property holds the number of lines of text the mouse wheel should scroll.
      */
     Q_PROPERTY(int mouseWheelScrollLines READ mouseWheelScrollLines CONSTANT)
 
     /**
-     * @returns runtime information about the libraries in use
+     * This property holds the runtime information about the libraries in use.
      *
      * @since 5.52
      * @since org.kde.kirigami 2.6
@@ -73,7 +77,8 @@ class Settings : public QObject
     Q_PROPERTY(QStringList information READ information CONSTANT)
 
     /**
-     * @returns application window icon, basically \QApplication::windowIcon()
+     * This property holds the name of the application window icon.
+     * @see QGuiApplication::windowIcon()
      *
      * @since 5.62
      * @since org.kde.kirigami 2.10
