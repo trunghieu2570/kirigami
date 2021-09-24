@@ -108,7 +108,7 @@ QtObject {
      * @since 5.43
      */
     property Item header: Heading {
-        level: 2
+        level: 1
         text: root.title
         elide: Text.ElideRight
         
