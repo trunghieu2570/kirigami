@@ -236,7 +236,7 @@ QQC2.Page {
     property Component titleDelegate: Component {
         id: defaultTitleDelegate
         Kirigami.Heading {
-            level: 2 // best text size in the context of the toolbar
+            level: 1
             Layout.fillWidth: true
             Layout.maximumWidth: implicitWidth + 1 // The +1 is to make sure we do not trigger eliding at max width
             Layout.minimumWidth: 0
