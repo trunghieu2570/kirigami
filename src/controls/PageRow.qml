@@ -766,7 +766,9 @@ T.Control {
                 (globalToolBar.actualStyle != ApplicationHeaderStyle.None || (firstVisibleItem && firstVisibleItem.globalToolBarStyle == ApplicationHeaderStyle.ToolBar))
         visible: active
         height: active ? implicitHeight : 0
-        asynchronous: true
+        // If load is asynchronous, it will fail to compute the initial implicitHeight
+        // https://bugs.kde.org/show_bug.cgi?id=442660
+        asynchronous: false
         source: Qt.resolvedUrl("private/globaltoolbar/PageRowGlobalToolBarUI.qml");
     }
 
