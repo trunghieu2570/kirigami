@@ -52,7 +52,11 @@ T.TabButton {
     Kirigami.Theme.colorSet: Kirigami.Theme.Window
     Kirigami.Theme.inherit: false
 
-    hoverEnabled: true
+    // not using the hover handler built into control, since it seems to misbehave and 
+    // permanently report hovered after a touch event
+    HoverHandler {
+        id: hoverHandler
+    }
 
     padding: Kirigami.Units.smallSpacing
     spacing: Kirigami.Units.smallSpacing
@@ -64,7 +68,7 @@ T.TabButton {
     background: Rectangle {
         implicitHeight: Kirigami.Units.gridUnit * 3 + Kirigami.Units.smallSpacing * 2
         color: control.down ? Qt.rgba(0, 0, 0, 0.2)
-            : (control.hovered ? Qt.rgba(0, 0, 0, 0.1)
+            : (hoverHandler.hovered ? Qt.rgba(0, 0, 0, 0.1)
             : "transparent")
         Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
         // top highlight rectangle (if control is selected)
