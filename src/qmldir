@@ -58,3 +58,4 @@ CategorizedSettings 2.18 CategorizedSettings.qml
 SettingAction 2.18 SettingAction.qml
 NavigationTabBar 2.19 NavigationTabBar.qml
 NavigationTabButton 2.19 NavigationTabButton.qml
+SystemDialog 2.19 SystemDialog.qml
