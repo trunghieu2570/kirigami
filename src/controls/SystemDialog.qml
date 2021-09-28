@@ -160,212 +160,221 @@ Kirigami.AbstractApplicationWindow {
      */
     property int layout: actions.length > 3 ? 1 : 0
     
-    RectangularGlow {
-        anchors.topMargin: 1 
-        anchors.fill: control
-        cached: true
-        glowRadius: 2
-        cornerRadius: Kirigami.Units.gridUnit
-        spread: 0.1
-        color: Qt.rgba(0, 0, 0, 0.4)
-    }
-    
-    Control {
-        id: control
-        anchors.centerIn: parent
-        anchors.margins: Kirigami.Units.gridUnit * 2
-    
-        background: Item {
-            Rectangle {
-                anchors.fill: parent
-                anchors.margins: -1
-                radius: dialogCornerRadius
-                Kirigami.Theme.colorSet: Kirigami.Theme.Window
-                Kirigami.Theme.inherit: false
-                color: Qt.darker(Kirigami.Theme.backgroundColor, 1.2)
-            }
-            Rectangle {
-                anchors.fill: parent
-                radius: dialogCornerRadius
-                
-                Kirigami.Theme.colorSet: Kirigami.Theme.Window
-                Kirigami.Theme.inherit: false
-                color: Kirigami.Theme.backgroundColor
-            }
-        }
+    // load in async to speed up load times (especially on embedded devices)
+    Loader {
+        id: loader
+        anchors.fill: parent
+        asynchronous: true
         
-        topPadding: 0
-        bottomPadding: 0
-        rightPadding: 0
-        leftPadding: 0
-        
-        contentItem: ColumnLayout {
-            spacing: 0
-            
-            // header
-            Control {
-                id: header
-                Layout.fillWidth: true
-                Layout.maximumWidth: root.maximumWidth
-                Layout.preferredWidth: root.preferredWidth
-                
-                Layout.bottomMargin: Kirigami.Units.largeSpacing
-                
-                topPadding: Kirigami.Units.largeSpacing
-                leftPadding: Kirigami.Units.largeSpacing
-                rightPadding: Kirigami.Units.largeSpacing
-                bottomPadding: Kirigami.Units.largeSpacing
-                
-                background: Item {}
-                
-                contentItem: RowLayout {
-                    Layout.topMargin: Kirigami.Units.largeSpacing
-                    spacing: 0
-                    
-                    Kirigami.Heading {
-                        Layout.fillWidth: true
-                        Layout.alignment: Qt.AlignVCenter
-                        level: 2
-                        text: root.title
-                        wrapMode: Text.Wrap
-                        elide: Text.ElideRight
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-                }
+        sourceComponent: Item {
+            RectangularGlow {
+                anchors.topMargin: 1 
+                anchors.fill: control
+                cached: true
+                glowRadius: 2
+                cornerRadius: Kirigami.Units.gridUnit
+                spread: 0.1
+                color: Qt.rgba(0, 0, 0, 0.4)
             }
             
-            // content
             Control {
-                id: content
-                
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.maximumWidth: root.maximumWidth
-                Layout.preferredWidth: root.preferredWidth
-                
-                leftPadding: 0
-                rightPadding: 0
-                topPadding: Kirigami.Units.smallSpacing
-                bottomPadding: 0
-                
-                background: Item {}
-                
-                contentItem: ColumnLayout {
-                    spacing: 0
-                    Label {
-                        Layout.fillWidth: true
-                        Layout.leftMargin: Kirigami.Units.gridUnit * 3
-                        Layout.rightMargin: Kirigami.Units.gridUnit * 3
-                        Layout.bottomMargin: Kirigami.Units.largeSpacing
-                        visible: root.subtitle !== ""
-                        horizontalAlignment: Text.AlignHCenter
-                        text: root.subtitle
-                        wrapMode: Label.Wrap
-                    }
-                    Control {
-                        Layout.preferredWidth: root.preferredWidth
-                        Layout.fillWidth: true
-                        leftPadding: root.leftPadding; rightPadding: root.rightPadding
-                        topPadding: root.topPadding; bottomPadding: root.bottomPadding
-                        contentItem: root.mainItem
-                    }
-                }
-            }
+                id: control
+                anchors.centerIn: parent
+                anchors.margins: Kirigami.Units.gridUnit * 2
             
-            Kirigami.Separator {
-                Layout.fillWidth: true
-            }
-            
-            // footer
-            Control {
-                id: footer
-                Layout.fillWidth: true
-                Layout.maximumWidth: root.maximumWidth
-                Layout.preferredWidth: root.preferredWidth
-                
-                background: Kirigami.ShadowedRectangle {
-                    Kirigami.Theme.colorSet: Kirigami.Theme.Window
-                    Kirigami.Theme.inherit: false
-                    color: Kirigami.Theme.backgroundColor
-                    corners.bottomRightRadius: dialogCornerRadius
-                    corners.bottomLeftRadius: dialogCornerRadius
+                background: Item {
+                    Rectangle {
+                        anchors.fill: parent
+                        anchors.margins: -1
+                        radius: dialogCornerRadius
+                        Kirigami.Theme.colorSet: Kirigami.Theme.Window
+                        Kirigami.Theme.inherit: false
+                        color: Qt.darker(Kirigami.Theme.backgroundColor, 1.2)
+                    }
+                    Rectangle {
+                        anchors.fill: parent
+                        radius: dialogCornerRadius
+                        
+                        Kirigami.Theme.colorSet: Kirigami.Theme.Window
+                        Kirigami.Theme.inherit: false
+                        color: Kirigami.Theme.backgroundColor
+                    }
                 }
                 
                 topPadding: 0
                 bottomPadding: 0
-                leftPadding: 0
                 rightPadding: 0
-            
-                Component {
-                    id: horizontalButtons
-                    RowLayout {
-                        id: horizontalRowLayout
-                        spacing: 0
-                        
-                        Repeater {
-                            model: actions
-                            
-                            delegate: RowLayout {
-                                spacing: 0
-                                Layout.fillHeight: true
-                                
-                                Kirigami.Separator {
-                                    id: separator
-                                    property real fullWidth: width
-                                    visible: model.index !== 0
-                                    Layout.fillHeight: true
-                                }
-                                
-                                Private.SystemDialogButton {
-                                    Layout.fillWidth: true
-                                    // ensure consistent widths for all buttons
-                                    Layout.maximumWidth: (horizontalRowLayout.width - Math.max(0, root.actions.length - 1) * separator.fullWidth) / root.actions.length
-                                    
-                                    corners.bottomLeftRadius: model.index === 0 ? root.dialogCornerRadius : 0
-                                    corners.bottomRightRadius: model.index === root.actions.length - 1 ? root.dialogCornerRadius : 0
-                                    
-                                    text: modelData.text
-                                    icon: modelData.icon
-                                    onClicked: modelData.trigger()
-                                }
-                            }
-                        }
-                    }
-                }
+                leftPadding: 0
                 
-                Component {
-                    id: verticalButtons
-                    ColumnLayout {
-                        spacing: 0
+                contentItem: ColumnLayout {
+                    spacing: 0
+                    
+                    // header
+                    Control {
+                        id: header
+                        Layout.fillWidth: true
+                        Layout.maximumWidth: root.maximumWidth
+                        Layout.preferredWidth: root.preferredWidth
                         
-                        Repeater {
-                            model: actions
+                        Layout.bottomMargin: Kirigami.Units.largeSpacing
+                        
+                        topPadding: Kirigami.Units.largeSpacing
+                        leftPadding: Kirigami.Units.largeSpacing
+                        rightPadding: Kirigami.Units.largeSpacing
+                        bottomPadding: Kirigami.Units.largeSpacing
+                        
+                        background: Item {}
+                        
+                        contentItem: RowLayout {
+                            Layout.topMargin: Kirigami.Units.largeSpacing
+                            spacing: 0
                             
-                            delegate: ColumnLayout {
-                                spacing: 0
+                            Kirigami.Heading {
                                 Layout.fillWidth: true
-                                
-                                Kirigami.Separator {
-                                    visible: model.index !== 0
-                                    Layout.fillWidth: true
-                                }
-                                
-                                Private.SystemDialogButton {
-                                    Layout.fillWidth: true
-                                    corners.bottomLeftRadius: model.index === root.actions.length - 1 ? root.dialogCornerRadius : 0
-                                    corners.bottomRightRadius: model.index === root.actions.length - 1 ? root.dialogCornerRadius : 0
-                                    text: modelData.text
-                                    icon: modelData.icon
-                                    onClicked: modelData.trigger()
-                                }
+                                Layout.alignment: Qt.AlignVCenter
+                                level: 2
+                                text: root.title
+                                wrapMode: Text.Wrap
+                                elide: Text.ElideRight
+                                horizontalAlignment: Text.AlignHCenter
                             }
                         }
                     }
-                }
-            
-                contentItem: Loader {
-                    active: true
-                    sourceComponent: layout === 0 ? horizontalButtons : verticalButtons
+                    
+                    // content
+                    Control {
+                        id: content
+                        
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        Layout.maximumWidth: root.maximumWidth
+                        Layout.preferredWidth: root.preferredWidth
+                        
+                        leftPadding: 0
+                        rightPadding: 0
+                        topPadding: Kirigami.Units.smallSpacing
+                        bottomPadding: 0
+                        
+                        background: Item {}
+                        
+                        contentItem: ColumnLayout {
+                            spacing: 0
+                            Label {
+                                Layout.fillWidth: true
+                                Layout.leftMargin: Kirigami.Units.gridUnit * 3
+                                Layout.rightMargin: Kirigami.Units.gridUnit * 3
+                                Layout.bottomMargin: Kirigami.Units.largeSpacing
+                                visible: root.subtitle !== ""
+                                horizontalAlignment: Text.AlignHCenter
+                                text: root.subtitle
+                                wrapMode: Label.Wrap
+                            }
+                            Control {
+                                Layout.preferredWidth: root.preferredWidth
+                                Layout.fillWidth: true
+                                leftPadding: root.leftPadding; rightPadding: root.rightPadding
+                                topPadding: root.topPadding; bottomPadding: root.bottomPadding
+                                contentItem: root.mainItem
+                            }
+                        }
+                    }
+                    
+                    Kirigami.Separator {
+                        Layout.fillWidth: true
+                    }
+                    
+                    // footer
+                    Control {
+                        id: footer
+                        Layout.fillWidth: true
+                        Layout.maximumWidth: root.maximumWidth
+                        Layout.preferredWidth: root.preferredWidth
+                        
+                        background: Kirigami.ShadowedRectangle {
+                            Kirigami.Theme.colorSet: Kirigami.Theme.Window
+                            Kirigami.Theme.inherit: false
+                            color: Kirigami.Theme.backgroundColor
+                            corners.bottomRightRadius: dialogCornerRadius
+                            corners.bottomLeftRadius: dialogCornerRadius
+                        }
+                        
+                        topPadding: 0
+                        bottomPadding: 0
+                        leftPadding: 0
+                        rightPadding: 0
+                    
+                        Component {
+                            id: horizontalButtons
+                            RowLayout {
+                                id: horizontalRowLayout
+                                spacing: 0
+                                
+                                Repeater {
+                                    model: actions
+                                    
+                                    delegate: RowLayout {
+                                        spacing: 0
+                                        Layout.fillHeight: true
+                                        
+                                        Kirigami.Separator {
+                                            id: separator
+                                            property real fullWidth: width
+                                            visible: model.index !== 0
+                                            Layout.fillHeight: true
+                                        }
+                                        
+                                        Private.SystemDialogButton {
+                                            Layout.fillWidth: true
+                                            // ensure consistent widths for all buttons
+                                            Layout.maximumWidth: (horizontalRowLayout.width - Math.max(0, root.actions.length - 1) * separator.fullWidth) / root.actions.length
+                                            
+                                            corners.bottomLeftRadius: model.index === 0 ? root.dialogCornerRadius : 0
+                                            corners.bottomRightRadius: model.index === root.actions.length - 1 ? root.dialogCornerRadius : 0
+                                            
+                                            text: modelData.text
+                                            icon: modelData.icon
+                                            onClicked: modelData.trigger()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        Component {
+                            id: verticalButtons
+                            ColumnLayout {
+                                spacing: 0
+                                
+                                Repeater {
+                                    model: actions
+                                    
+                                    delegate: ColumnLayout {
+                                        spacing: 0
+                                        Layout.fillWidth: true
+                                        
+                                        Kirigami.Separator {
+                                            visible: model.index !== 0
+                                            Layout.fillWidth: true
+                                        }
+                                        
+                                        Private.SystemDialogButton {
+                                            Layout.fillWidth: true
+                                            corners.bottomLeftRadius: model.index === root.actions.length - 1 ? root.dialogCornerRadius : 0
+                                            corners.bottomRightRadius: model.index === root.actions.length - 1 ? root.dialogCornerRadius : 0
+                                            text: modelData.text
+                                            icon: modelData.icon
+                                            onClicked: modelData.trigger()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    
+                        contentItem: Loader {
+                            active: true
+                            sourceComponent: layout === 0 ? horizontalButtons : verticalButtons
+                        }
+                    }
                 }
             }
         }
