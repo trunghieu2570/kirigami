@@ -1,3 +1,9 @@
+/*
+ *  SPDX-FileCopyrightText: 2021 Devin Lin <espidev@gmail.com>
+ *
+ *  SPDX-License-Identifier: LGPL-2.0-or-later
+ */
+
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
@@ -18,7 +24,7 @@ Kirigami.AbstractApplicationWindow {
     Kirigami.Theme.inherit: false
     color: visible ? Qt.rgba(0, 0, 0, 0.5) : "transparent"
     
-    Behavior on color { 
+    Behavior on color {
         ColorAnimation { 
             duration: 500
             easing.type: Easing.InOutQuad
@@ -95,14 +101,29 @@ Kirigami.AbstractApplicationWindow {
      */
     property real preferredWidth: -1
     
+    /**
+     * This property holds the default padding of the content.
+     */
     property real padding: Kirigami.Units.smallSpacing
     
+    /**
+     * This property holds the left padding of the content. If not specified, it uses `padding`.
+     */
     property real leftPadding: padding
     
+    /**
+     * This property holds the right padding of the content. If not specified, it uses `padding`.
+     */
     property real rightPadding: padding
     
+    /**
+     * This property holds the top padding of the content. If not specified, it uses `padding`.
+     */
     property real topPadding: padding
     
+    /**
+     * This property holds the bottom padding of the content. If not specified, it uses `padding`.
+     */
     property real bottomPadding: padding
     
     /**
@@ -130,7 +151,14 @@ Kirigami.AbstractApplicationWindow {
         Column
     }
     
-    property int layout: 0 // default row layout
+    /**
+     * The layout of the action buttons in the footer of the dialog.
+     * 
+     * By default, if there are more than 3 actions, it will have `SystemDialog.Column`.
+     * 
+     * Otherwise, with zero to 2 actions, it will have `SystemDialog.Row`.
+     */
+    property int layout: actions.length > 3 ? 1 : 0
     
     RectangularGlow {
         anchors.topMargin: 1 
