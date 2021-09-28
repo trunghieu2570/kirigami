@@ -7,7 +7,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-import QtQuick.Window 2.2
+import QtQuick.Window 2.15
 import QtGraphicalEffects 1.12
 import org.kde.kirigami 2.18 as Kirigami
 import "private" as Private
@@ -22,7 +22,11 @@ Kirigami.AbstractApplicationWindow {
     flags: Qt.FramelessWindowHint | Qt.Dialog
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
-    color: visible ? Qt.rgba(0, 0, 0, 0.5) : "transparent"
+    color: visible && visibility === 5 ? Qt.rgba(0, 0, 0, 0.5) : "transparent" // darken when fullscreen
+    
+    x: root.transientParent.x + root.transientParent.width / 2 - root.width / 2
+    y: root.transientParent.y + root.transientParent.height / 2 - root.height / 2
+    modality: visibility !== 5 ? Qt.WindowModal : Qt.NonModal // darken parent window when not fullscreen
     
     Behavior on color {
         ColorAnimation { 
@@ -160,6 +164,9 @@ Kirigami.AbstractApplicationWindow {
      */
     property int layout: actions.length > 3 ? 1 : 0
     
+    width: loader.item.implicitWidth
+    height: loader.item.implicitWidth
+    
     // load in async to speed up load times (especially on embedded devices)
     Loader {
         id: loader
@@ -167,6 +174,9 @@ Kirigami.AbstractApplicationWindow {
         asynchronous: true
         
         sourceComponent: Item {
+            implicitWidth: control.implicitWidth + Kirigami.Units.gridUnit * 2
+            implicitHeight: control.implicitHeight + Kirigami.Units.gridUnit * 2
+            
             RectangularGlow {
                 anchors.topMargin: 1 
                 anchors.fill: control
@@ -180,7 +190,6 @@ Kirigami.AbstractApplicationWindow {
             Control {
                 id: control
                 anchors.centerIn: parent
-                anchors.margins: Kirigami.Units.gridUnit * 2
             
                 background: Item {
                     Rectangle {
