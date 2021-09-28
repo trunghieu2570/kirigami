@@ -13,7 +13,7 @@ Kirigami.AbstractApplicationWindow {
     id: root
     visible: false
     
-    flags: Qt.FramelessWindowHint
+    flags: Qt.FramelessWindowHint | Qt.Dialog
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
     color: visible ? Qt.rgba(0, 0, 0, 0.5) : "transparent"
@@ -26,7 +26,7 @@ Kirigami.AbstractApplicationWindow {
     }
     
     /**
-     * The dialog's contents.
+     * This property holds the dialog's contents.
      * 
      * The initial height and width of the dialog is calculated from the 
      * `implicitWidth` and `implicitHeight` of this item.
@@ -34,8 +34,8 @@ Kirigami.AbstractApplicationWindow {
     default property Item mainItem
     
     /**
-     * The absolute maximum height the dialog can be (including the header 
-     * and footer).
+     * This property holds the absolute maximum height the dialog can be
+     * (including the header and footer).
      * 
      * The height restriction is solely applied on the content, so if the
      * maximum height given is not larger than the height of the header and
@@ -47,7 +47,7 @@ Kirigami.AbstractApplicationWindow {
     readonly property real absoluteMaximumHeight: height - Kirigami.Units.gridUnit * 2
     
     /**
-     * The absolute maximum width the dialog can be.
+     * This property holds the absolute maximum width the dialog can be.
      * 
      * By default, it is the window width, subtracted by largeSpacing on both 
      * the top and bottom.
@@ -55,8 +55,8 @@ Kirigami.AbstractApplicationWindow {
     readonly property real absoluteMaximumWidth: width - Kirigami.Units.gridUnit * 2
     
     /**
-     * The maximum height the dialog can be (including the header 
-     * and footer).
+     * This property holds the maximum height the dialog can be (including
+     * the header and footer).
      * 
      * The height restriction is solely enforced on the content, so if the
      * maximum height given is not larger than the height of the header and
@@ -67,14 +67,14 @@ Kirigami.AbstractApplicationWindow {
     property real maximumHeight: absoluteMaximumHeight
     
     /**
-     * The maximum width the dialog can be.
+     * This property holds the maximum width the dialog can be.
      * 
      * By default, this is `absoluteMaximumWidth`.
      */
     property real maximumWidth: absoluteMaximumWidth
     
     /**
-     * Specify the preferred height of the dialog.
+     * This property holds the preferred height of the dialog.
      * 
      * The content will receive a hint for how tall it should be to have
      * the dialog to be this height.
@@ -85,7 +85,7 @@ Kirigami.AbstractApplicationWindow {
     property real preferredHeight: -1
     
     /**
-     * Specify the preferred width of the dialog.
+     * This property holds the preferred width of the dialog.
      * 
      * The content will receive a hint for how wide it should be to have
      * the dialog be this wide.
@@ -117,6 +117,12 @@ Kirigami.AbstractApplicationWindow {
     
     property real dialogCornerRadius: Kirigami.Units.smallSpacing * 2
     
+    /**
+     * This property holds the list of actions for this dialog.
+     *
+     * Each action will be rendered as a button that the user will be able
+     * to click.
+     */
     property list<Kirigami.Action> actions
     
     enum ActionLayout {
