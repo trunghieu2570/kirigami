@@ -11,6 +11,7 @@ import QtQuick.Window 2.15
 import QtGraphicalEffects 1.12
 import org.kde.kirigami 2.18 as Kirigami
 import "private" as Private
+import "templates/private" as TPrivate
 
 /**
  * Component to create fullscreen dialogs that come from the system.
@@ -29,7 +30,7 @@ Kirigami.AbstractApplicationWindow {
     modality: visibility !== 5 ? Qt.WindowModal : Qt.NonModal // darken parent window when not fullscreen
     
     Behavior on color {
-        ColorAnimation { 
+        ColorAnimation {
             duration: 500
             easing.type: Easing.InOutQuad
         } 
@@ -54,7 +55,7 @@ Kirigami.AbstractApplicationWindow {
      * This is the window height, subtracted by largeSpacing on both the top 
      * and bottom.
      */
-    readonly property real absoluteMaximumHeight: height - Kirigami.Units.gridUnit * 2
+    readonly property real absoluteMaximumHeight: Screen.height - Kirigami.Units.gridUnit * 2
     
     /**
      * This property holds the absolute maximum width the dialog can be.
@@ -62,7 +63,7 @@ Kirigami.AbstractApplicationWindow {
      * By default, it is the window width, subtracted by largeSpacing on both 
      * the top and bottom.
      */
-    readonly property real absoluteMaximumWidth: width - Kirigami.Units.gridUnit * 2
+    readonly property real absoluteMaximumWidth: Screen.width - Kirigami.Units.gridUnit * 2
     
     /**
      * This property holds the maximum height the dialog can be (including
@@ -268,7 +269,9 @@ Kirigami.AbstractApplicationWindow {
                         
                         contentItem: ColumnLayout {
                             spacing: 0
+                            
                             Label {
+                                id: subtitleLabel
                                 Layout.fillWidth: true
                                 Layout.leftMargin: Kirigami.Units.gridUnit * 3
                                 Layout.rightMargin: Kirigami.Units.gridUnit * 3
@@ -278,12 +281,63 @@ Kirigami.AbstractApplicationWindow {
                                 text: root.subtitle
                                 wrapMode: Label.Wrap
                             }
-                            Control {
-                                Layout.preferredWidth: root.preferredWidth
-                                Layout.fillWidth: true
-                                leftPadding: root.leftPadding; rightPadding: root.rightPadding
-                                topPadding: root.topPadding; bottomPadding: root.bottomPadding
+                            
+                            TPrivate.ScrollView {
+                                id: contentControl
+            
+                                // we cannot have contentItem inside a sub control (allowing for content padding within the scroll area),
+                                // because if the contentItem is a Flickable (ex. ListView), the ScrollView needs it to be top level in order
+                                // to decorate it
                                 contentItem: root.mainItem
+                                canFlickWithMouse: true
+
+                                // ensure window colour scheme, and background color
+                                Kirigami.Theme.inherit: false
+                                Kirigami.Theme.colorSet: Kirigami.Theme.Window
+                                
+                                // needs to explicitly be set for each side to work
+                                leftPadding: root.leftPadding; topPadding: root.topPadding
+                                rightPadding: root.rightPadding; bottomPadding: root.bottomPadding
+                                
+                                // height of everything else in the dialog other than the content
+                                property real otherHeights: header.height + subtitleLabel.height + footer.height + root.topPadding + root.bottomPadding;
+                                
+                                property real calculatedMaximumWidth: root.maximumWidth > root.absoluteMaximumWidth ? root.absoluteMaximumWidth : root.maximumWidth
+                                property real calculatedMaximumHeight: root.maximumHeight > root.absoluteMaximumHeight ? root.absoluteMaximumHeight : root.maximumHeight
+                                property real calculatedImplicitWidth: root.mainItem ? (root.mainItem.implicitWidth ? root.mainItem.implicitWidth : root.mainItem.width) + root.leftPadding + root.rightPadding : 0
+                                property real calculatedImplicitHeight: root.mainItem ? (root.mainItem.implicitHeight ? root.mainItem.implicitHeight : root.mainItem.height) + root.topPadding + root.bottomPadding : 0
+                                
+                                // don't enforce preferred width and height if not set
+                                Layout.preferredWidth: root.preferredWidth >= 0 ? root.preferredWidth : calculatedImplicitWidth + contentControl.rightSpacing
+                                Layout.preferredHeight: root.preferredHeight >= 0 ? root.preferredHeight - otherHeights : calculatedImplicitHeight + contentControl.bottomSpacing
+                                
+                                Layout.fillWidth: true
+                                Layout.maximumWidth: calculatedMaximumWidth
+                                Layout.maximumHeight: calculatedMaximumHeight >= otherHeights ? calculatedMaximumHeight - otherHeights : 0 // we enforce maximum height solely from the content
+                                
+                                // give an implied width and height to the contentItem so that features like word wrapping/eliding work
+                                // cannot placed directly in contentControl as a child, so we must use a property
+                                property var widthHint: Binding {
+                                    target: root.mainItem
+                                    property: "width"
+                                    // we want to avoid horizontal scrolling, so we apply maximumWidth as a hint if necessary
+                                    property real preferredWidthHint: contentControl.Layout.preferredWidth - root.leftPadding - root.rightPadding - contentControl.rightSpacing
+                                    property real maximumWidthHint: contentControl.calculatedMaximumWidth - root.leftPadding - root.rightPadding - contentControl.rightSpacing
+                                    value: maximumWidthHint < preferredWidthHint ? maximumWidthHint : preferredWidthHint
+                                }
+                                property var heightHint: Binding {
+                                    target: root.mainItem
+                                    property: "height"
+                                    // we are okay with overflow, if it exceeds maximumHeight we will allow scrolling
+                                    value: contentControl.Layout.preferredHeight - root.topPadding - root.bottomPadding - contentControl.bottomSpacing
+                                }
+                                
+                                // give explicit warnings since the maximumHeight is ignored when negative, so developers aren't confused
+                                Component.onCompleted: {
+                                    if (contentControl.Layout.maximumHeight < 0 || contentControl.Layout.maximumHeight === Infinity) {
+                                        console.log("Dialog Warning: the calculated maximumHeight for the content is " + contentControl.Layout.maximumHeight + ", ignoring...");
+                                    }
+                                }
                             }
                         }
                     }
@@ -312,6 +366,7 @@ Kirigami.AbstractApplicationWindow {
                         leftPadding: 0
                         rightPadding: 0
                     
+                        // footer buttons (horizontal layout)
                         Component {
                             id: horizontalButtons
                             RowLayout {
@@ -349,6 +404,7 @@ Kirigami.AbstractApplicationWindow {
                             }
                         }
                         
+                        // footer buttons (column layout)
                         Component {
                             id: verticalButtons
                             ColumnLayout {
