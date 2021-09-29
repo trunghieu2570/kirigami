@@ -285,7 +285,7 @@ Kirigami.AbstractApplicationWindow {
                             // separator when scrolling
                             Kirigami.Separator {
                                 Layout.fillWidth: true
-                                opacity: contentControl.flickableItem.contentY !== 0 ? 1 : 0 // always maintain same height (as opposed to visible)
+                                opacity: root.mainItem && contentControl.flickableItem.contentY !== 0 ? 1 : 0 // always maintain same height (as opposed to visible)
                             }
                             
                             // mainItem is in scrollview, in case of overflow
@@ -350,12 +350,14 @@ Kirigami.AbstractApplicationWindow {
                     }
                     
                     Kirigami.Separator {
+                        visible: root.actions.length > 0
                         Layout.fillWidth: true
                     }
                     
                     // footer
                     Control {
                         id: footer
+                        visible: root.actions.length > 0
                         Layout.fillWidth: true
                         Layout.maximumWidth: root.maximumWidth
                         Layout.preferredWidth: root.preferredWidth
