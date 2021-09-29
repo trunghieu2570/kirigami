@@ -282,6 +282,13 @@ Kirigami.AbstractApplicationWindow {
                                 wrapMode: Label.Wrap
                             }
                             
+                            // separator when scrolling
+                            Kirigami.Separator {
+                                Layout.fillWidth: true
+                                opacity: contentControl.flickableItem.contentY !== 0 ? 1 : 0 // always maintain same height (as opposed to visible)
+                            }
+                            
+                            // mainItem is in scrollview, in case of overflow
                             TPrivate.ScrollView {
                                 id: contentControl
             
