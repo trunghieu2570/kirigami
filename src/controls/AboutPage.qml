@@ -53,6 +53,6 @@ ScrollablePage
 
         _usePageStack: applicationWindow().pageStack ? true : false
 
-        anchors.fill: parnet
+        anchors.centerIn: parent
     }
 }
