@@ -16,8 +16,8 @@ import QtGraphicalEffects 1.0
  * It's based around the PageRow component, the application will be
  * about pages adding and removal.
  * For most of the usages, this class should be used instead
- * of AbstractApplicationWidnow
- * @see AbstractApplicationWidnow
+ * of AbstractApplicationWindow
+ * @see AbstractApplicationWindow
  *
  * Setting a width and height property on the ApplicationWindow
  * will set its initial size, but it won't set it as an automatically binding.
