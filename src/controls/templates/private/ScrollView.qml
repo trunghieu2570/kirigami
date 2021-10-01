@@ -24,8 +24,8 @@ MouseArea {
 
     // Note: These are used because RefreshableScrollView overrides right and
     // bottom padding properties.
-    property int rightSpacing: !Kirigami.Settings.hasTransientTouchInput && flickableItem.ScrollBar.vertical && flickableItem.ScrollBar.vertical.visible ? flickableItem.ScrollBar.vertical.width : 0
-    property int bottomSpacing: !Kirigami.Settings.hasTransientTouchInput && flickableItem.ScrollBar.horizontal && flickableItem.ScrollBar.horizontal.visible ? flickableItem.ScrollBar.horizontal.height : 0
+    property int rightSpacing: !Kirigami.Settings.hasTransientTouchInput && flickableItem && flickableItem.ScrollBar.vertical && flickableItem.ScrollBar.vertical.visible ? flickableItem.ScrollBar.vertical.width : 0
+    property int bottomSpacing: !Kirigami.Settings.hasTransientTouchInput && flickableItem && flickableItem.ScrollBar.horizontal && flickableItem.ScrollBar.horizontal.visible ? flickableItem.ScrollBar.horizontal.height : 0
 
     Accessible.onScrollDownAction: flickableItem.Accessible.onScrollDownAction
     Accessible.onScrollUpAction: flickableItem.Accessible.onScrollUpAction

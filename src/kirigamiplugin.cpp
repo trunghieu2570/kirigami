@@ -314,7 +314,9 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(QStringLiteral("NavigationTabBar.qml")), uri, 2, 19, "NavigationTabBar");
     qmlRegisterType(componentUrl(QStringLiteral("NavigationTabButton.qml")), uri, 2, 19, "NavigationTabButton");
 
-    qmlRegisterType(componentUrl(QStringLiteral("SystemDialog.qml")), uri, 2, 19, "SystemDialog");
+    qmlRegisterType(componentUrl(QStringLiteral("systemdialogs/SystemDialog.qml")), uri, 2, 19, "SystemDialog");
+    qmlRegisterType(componentUrl(QStringLiteral("systemdialogs/MobileSystemDialog.qml")), uri, 2, 19, "MobileSystemDialog");
+    qmlRegisterType(componentUrl(QStringLiteral("systemdialogs/DesktopSystemDialog.qml")), uri, 2, 19, "DesktopSystemDialog");
 
     qmlProtectModule(uri, 2);
 }
