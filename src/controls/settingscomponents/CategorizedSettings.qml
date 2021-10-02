@@ -24,7 +24,9 @@ PageRow {
 
     property list<PagePoolAction> actions
     property alias stack: pageSettingStack
-    property alias pool: pageSettingsPool
+    property PagePool pool: PagePool {}
+
+    readonly property string title: pageSettingStack.depth < 2 ? qsTr("Settings") : qsTr("Settings — %1").arg(pageSettingStack.get(1).title)
 
     bottomPadding: 0
     leftPadding: 0
@@ -42,9 +44,8 @@ PageRow {
             pageSettingStack.pop();
         }
     }
-
-    PagePool {
-        id: pageSettingsPool
+    onWidthChanged: if (pageSettingStack.depth < 2 && pageSettingStack.width >= Units.gridUnit * 40) {
+        actions[0].trigger();
     }
 
     initialPage: ScrollablePage {
@@ -58,6 +59,8 @@ PageRow {
             id: listview
             Component.onCompleted: if (pageSettingStack.width >= Units.gridUnit * 40) {
                 actions[0].trigger();
+            } else {
+                listview.currentIndex = -1;
             }
             model: pageSettingStack.actions
             delegate: pageSettingStack.wideMode ? desktopStyle : mobileStyle
@@ -69,7 +72,6 @@ PageRow {
 
         QQC2.ItemDelegate {
             width: parent && parent.width > 0 ? parent.width : implicitWidth
-            height: visible ? implicitHeight : 0
             implicitWidth: contentItem.implicitWidth + Units.smallSpacing * 4
             implicitHeight: contentItem.implicitHeight + Units.smallSpacing * 2
             highlighted: ListView.isCurrentItem
@@ -105,6 +107,9 @@ PageRow {
 
         BasicListItem {
             action: modelData
+            onClicked: {
+                listview.currentIndex = index;
+            }
         }
     }
 }

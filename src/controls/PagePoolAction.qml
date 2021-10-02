@@ -136,7 +136,6 @@ Kirigami.Action {
             pageStack_.push(initialProperties ?
                                pagePool.loadPageWithProperties(page, initialProperties) :
                                pagePool.loadPage(page));
-                               
         } else {
             var callback = function(item) {
                 if (basePage) {

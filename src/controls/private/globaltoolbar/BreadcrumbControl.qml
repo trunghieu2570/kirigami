@@ -68,7 +68,8 @@ Flickable {
                 RowLayout {
                     id: delegateLayout
                     anchors.fill: parent
-                    readonly property Kirigami.Page page: mainRepeater.useLayers ? pageRow.layers.get(modelData + 1) : pageRow.get(modelData)
+                    // We can't use Kirigami.Page here instead of Item since we now accept pushing PageRow to a new layer
+                    readonly property Item page: mainRepeater.useLayers ? pageRow.layers.get(modelData + 1) : pageRow.get(modelData)
                     spacing: 0
 
                     Kirigami.Icon {

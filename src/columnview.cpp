@@ -9,7 +9,6 @@
 
 #include "loggingcategory.h"
 #include <QAbstractItemModel>
-#include <QDebug>
 #include <QGuiApplication>
 #include <QPropertyAnimation>
 #include <QQmlComponent>
@@ -1431,9 +1430,9 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
 
         m_mouseDown = false;
 
-        m_contentItem->snapToItem();
-        m_contentItem->m_lastDragDelta = 0;
         if (m_dragging) {
+            m_contentItem->snapToItem();
+            m_contentItem->m_lastDragDelta = 0;
             m_dragging = false;
             Q_EMIT draggingChanged();
         }

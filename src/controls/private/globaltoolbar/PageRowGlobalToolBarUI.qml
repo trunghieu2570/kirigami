@@ -64,7 +64,7 @@ Kirigami.AbstractApplicationHeader {
             Layout.leftMargin: Kirigami.Units.smallSpacing
 
             action: Kirigami.Action {
-                children: applicationWindow().globalDrawer ? applicationWindow().globalDrawer.actions : []
+                children: applicationWindow().globalDrawer && applicationWindow().globalDrawer.actions ? applicationWindow().globalDrawer.actions : []
             }
         }
 

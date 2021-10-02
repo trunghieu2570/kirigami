@@ -259,6 +259,7 @@ T.Control {
                         id: dialog
                         modal: true;
                         leftPadding: 0; rightPadding: 0; topPadding: 0; bottomPadding: 0;
+                        clip: true
                         header: Kirigami.AbstractApplicationHeader {
                             pageRow: null
                             page: null
@@ -301,8 +302,7 @@ T.Control {
                                 }
                             }
                         }
-                    }', root);
-                dialog.parent = root;
+                    }', QQC2.ApplicationWindow.overlay);
                 dialog.width = Qt.binding(() => QQC2.ApplicationWindow.window.width - Units.gridUnit * 5);
                 dialog.height = Qt.binding(() => QQC2.ApplicationWindow.window.height - Units.gridUnit * 5);
                 dialog.x = Units.gridUnit * 2.5;
@@ -320,6 +320,11 @@ T.Control {
                 }
                 dialog.contentItem = item;
                 dialog.title = Qt.binding(() => dialog.contentItem.title);
+
+                // Pushing a PageRow is supported but without PageRow toolbar
+                if (item.globalToolBar && item.globalToolBar.style) {
+                    item.globalToolBar.style = ApplicationHeaderStyle.None
+                }
                 Object.defineProperty(item, 'closeDialog', {
                     value: function() {
                         dialog.close();
