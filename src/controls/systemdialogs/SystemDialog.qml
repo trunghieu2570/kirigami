@@ -10,29 +10,13 @@ import QtQuick.Layouts 1.15
 import QtQuick.Window 2.15
 import QtGraphicalEffects 1.12
 import org.kde.kirigami 2.18 as Kirigami
+import "private"
 
 /**
  * Component to create fullscreen dialogs that come from the system.
  */
-Kirigami.AbstractApplicationWindow {
+Item {
     id: root
-    visible: false
-    
-    flags: Qt.FramelessWindowHint | Qt.Dialog
-    Kirigami.Theme.colorSet: Kirigami.Theme.View
-    Kirigami.Theme.inherit: false
-    color: darkenBackground && visible && visibility === 5 ? Qt.rgba(0, 0, 0, 0.5) : "transparent" // darken when fullscreen
-    
-    x: root.transientParent.x + root.transientParent.width / 2 - root.width / 2
-    y: root.transientParent.y + root.transientParent.height / 2 - root.height / 2
-    modality: darkenBackground && visibility !== 5 ? Qt.WindowModal : Qt.NonModal // darken parent window when not fullscreen
-    
-    Behavior on color {
-        ColorAnimation {
-            duration: 500
-            easing.type: Easing.InOutQuad
-        } 
-    }
     
     /**
      * This property holds the dialog's contents.
@@ -40,7 +24,7 @@ Kirigami.AbstractApplicationWindow {
      * The initial height and width of the dialog is calculated from the 
      * `implicitWidth` and `implicitHeight` of this item.
      */
-    default property Item bodyItem
+    default property Item contentItem
     
     /**
      * This property holds the absolute maximum height the dialog can be
@@ -104,83 +88,153 @@ Kirigami.AbstractApplicationWindow {
      */
     property real preferredWidth: -1
 
-    property bool darkenBackground: true
+    /**
+     * This property holds whether the background should be darkened when the dialog opens.
+     * 
+     * Background refers to the window itself if the dialog is opened with `open()`, and 
+     * the whole screen when opened with `openFullScreen()`.
+     * 
+     * By default, it's false when the dialog is of desktop types, and true when it's mobile.
+     */
+    property bool darkenBackground: root.type === 0 ? false : true
     
+    /**
+     * This property holds whether the close button is shown. Only applicable for desktop.
+     */
     property bool showCloseButton: false
     
-    property real dialogCornerRadius: Kirigami.Units.smallSpacing * 2
+    /**
+     * Title of the dialog.
+     */
+    property string title: ""
     
-    width: loader.item.implicitWidth
-    height: loader.item.implicitWidth
+    /**
+     * Subtitle of the dialog.
+     */
+    property string subtitle: ""
     
-    // load in async to speed up load times (especially on embedded devices)
+    /**
+     * This property holds the icon used in the dialog. Only applicable for desktop.
+     */
+    property string iconName: ""
+    
+    /**
+     * This property holds the default padding of the content.
+     */
+    property real padding: Kirigami.Units.smallSpacing
+    
+    /**
+     * This property holds the left padding of the content. If not specified, it uses `padding`.
+     */
+    property real leftPadding: padding
+    
+    /**
+     * This property holds the right padding of the content. If not specified, it uses `padding`.
+     */
+    property real rightPadding: padding
+    
+    /**
+     * This property holds the top padding of the content. If not specified, it uses `padding`.
+     */
+    property real topPadding: padding
+    
+    /**
+     * This property holds the bottom padding of the content. If not specified, it uses `padding`.
+     */
+    property real bottomPadding: padding
+    
+    /**
+     * This property holds the list of actions for this dialog.
+     *
+     * Each action will be rendered as a button that the user will be able
+     * to click.
+     */
+    property list<Kirigami.Action> actions
+    
+    enum Type {
+        Desktop,
+        MobileRow,
+        MobileColumn
+    }
+    
+    /**
+     * This property holds the type of dialog style. You may either choose from Desktop, MobileRow and MobileColumn styles.
+     */
+    property int type: 0
+    
+    visible: loader.item.visible
+    
+    function open() {
+        loader.item.show();
+    }
+    
+    function openFullScreen() {
+        loader.item.showFullScreen();
+    }
+    
+    function close() {
+        loader.item.close();
+    }
+    
     Loader {
         id: loader
-        anchors.fill: parent
-        asynchronous: true
         
-        sourceComponent: Item {
-            // margins for shadow
-            implicitWidth: control.implicitWidth + Kirigami.Units.gridUnit * 2
-            implicitHeight: control.implicitHeight + Kirigami.Units.gridUnit * 2
-            
-            // shadow
-            RectangularGlow {
-                anchors.topMargin: 1 
-                anchors.fill: control
-                cached: true
-                glowRadius: 2
-                cornerRadius: Kirigami.Units.gridUnit
-                spread: 0.1
-                color: Qt.rgba(0, 0, 0, 0.4)
-            }
-            
-            // actual window
-            Control {
-                id: control
-                anchors.centerIn: parent
-                topPadding: 0
-                bottomPadding: 0
-                rightPadding: 0
-                leftPadding: 0
-            
-                background: Item {
-                    Rectangle { // border
-                        anchors.fill: parent
-                        anchors.margins: -1
-                        radius: dialogCornerRadius + 1
-                        color: Qt.darker(Kirigami.Theme.backgroundColor, 1.5)
-                    }
-                    Rectangle { // background colour
-                        anchors.fill: parent
-                        radius: dialogCornerRadius
-                        color: Kirigami.Theme.backgroundColor
-                    }
-                    
-                    Kirigami.Icon { // close button
-                        id: closeIcon
-                        z: 1
-                        anchors.top: parent.top
-                        anchors.right: parent.right
-                        anchors.margins: Kirigami.Units.smallSpacing * 2
-                        visible: root.showCloseButton
-                        
-                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                        implicitWidth: implicitHeight
-                        
-                        source: closeMouseArea.containsMouse ? "window-close" : "window-close-symbolic"
-                        active: closeMouseArea.containsMouse
-                        MouseArea {
-                            id: closeMouseArea
-                            hoverEnabled: Qt.styleHints.useHoverEffects
-                            anchors.fill: parent
-                            onClicked: root.close()
-                        }
-                    }
-                }
+        property var window: Window.window
+        
+        Component {
+            id: desktop
+            DesktopSystemDialog {
+                mainItem: root.contentItem
                 
-                contentItem: root.bodyItem
+                maximumHeight: root.maximumHeight
+                maximumWidth: root.maximumWidth
+                preferredHeight: root.preferredHeight
+                preferredWidth: root.preferredWidth
+                
+                darkenBackground: root.darkenBackground
+                showCloseButton: root.showCloseButton
+                
+                title: root.title
+                subtitle: root.subtitle
+                iconName: root.iconName
+                
+                padding: root.padding
+                leftPadding: root.leftPadding
+                rightPadding: root.rightPadding
+                topPadding: root.topPadding
+                bottomPadding: root.bottomPadding
+                
+                actions: root.actions
             }
         }
+        
+        Component {
+            id: mobile
+            MobileSystemDialog {
+                mainItem: root.contentItem
+                
+                maximumHeight: root.maximumHeight
+                maximumWidth: root.maximumWidth
+                preferredHeight: root.preferredHeight
+                preferredWidth: root.preferredWidth
+                
+                darkenBackground: root.darkenBackground
+                
+                title: root.title
+                subtitle: root.subtitle
+                
+                padding: root.padding
+                leftPadding: root.leftPadding
+                rightPadding: root.rightPadding
+                topPadding: root.topPadding
+                bottomPadding: root.bottomPadding
+                
+                actions: root.actions
+                layout: root.type === 1 ? MobileSystemDialog.Row : MobileSystemDialog.Column
+            }
+        }
+        
+        sourceComponent: root.type === 0 ? desktop : mobile
     }
 }
+

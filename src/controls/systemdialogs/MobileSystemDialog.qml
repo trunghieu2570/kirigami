@@ -13,7 +13,7 @@ import org.kde.kirigami 2.18 as Kirigami
 import "private" as Private
 import "../templates/private" as TPrivate
 
-SystemDialog {
+Private.AbstractSystemDialog {
     id: root
     
     default property Item mainItem
@@ -74,7 +74,6 @@ SystemDialog {
      * Otherwise, with zero to 2 actions, it will have `SystemDialog.Row`.
      */
     property int layout: actions.length > 3 ? 1 : 0
-    
     
     bodyItem: ColumnLayout {
         spacing: 0
@@ -255,7 +254,7 @@ SystemDialog {
                                     Layout.fillHeight: true
                                 }
                                 
-                                Private.SystemDialogButton {
+                                Private.MobileSystemDialogButton {
                                     Layout.fillWidth: true
                                     // ensure consistent widths for all buttons
                                     Layout.maximumWidth: (horizontalRowLayout.width - Math.max(0, root.actions.length - 1) * separator.fullWidth) / root.actions.length
@@ -290,7 +289,7 @@ SystemDialog {
                                     Layout.fillWidth: true
                                 }
                                 
-                                Private.SystemDialogButton {
+                                Private.MobileSystemDialogButton {
                                     Layout.fillWidth: true
                                     corners.bottomLeftRadius: model.index === root.actions.length - 1 ? root.dialogCornerRadius : 0
                                     corners.bottomRightRadius: model.index === root.actions.length - 1 ? root.dialogCornerRadius : 0

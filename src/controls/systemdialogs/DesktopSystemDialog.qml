@@ -13,7 +13,7 @@ import org.kde.kirigami 2.18 as Kirigami
 import "private" as Private
 import "../templates/private" as TPrivate
 
-SystemDialog {
+Private.AbstractSystemDialog {
     id: root
     
     default property Item mainItem
@@ -68,10 +68,20 @@ SystemDialog {
         spacing: 0
         
         RowLayout {
-            Layout.margins: Kirigami.Units.gridUnit
+            Layout.maximumWidth: root.maximumWidth
+            Layout.maximumHeight: root.maximumHeight - footer.height
+            Layout.preferredWidth: root.preferredWidth
+            Layout.preferredHeight: root.preferredHeight - footer.height
+            
+            Layout.topMargin: Kirigami.Units.gridUnit
+            Layout.bottomMargin: Kirigami.Units.gridUnit
+            Layout.leftMargin: Kirigami.Units.gridUnit
+            Layout.rightMargin: Kirigami.Units.largeSpacing
+            
             spacing: Kirigami.Units.gridUnit
             
             Kirigami.Icon {
+                visible: root.iconName
                 source: root.iconName
                 Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                 implicitWidth: Kirigami.Units.iconSizes.large
@@ -79,10 +89,10 @@ SystemDialog {
             }
             
             ColumnLayout {
+                Layout.fillWidth: true
                 spacing: Kirigami.Units.largeSpacing
                 Kirigami.Heading {
                     Layout.fillWidth: true
-                    Layout.rightMargin: Kirigami.Units.largeSpacing
                     level: 2
                     text: root.title
                     wrapMode: Text.Wrap
@@ -90,7 +100,6 @@ SystemDialog {
                 }
                 Label {
                     Layout.fillWidth: true
-                    Layout.rightMargin: Kirigami.Units.largeSpacing
                     Layout.alignment: Qt.AlignVCenter
                     text: root.subtitle
                     wrapMode: Text.Wrap
@@ -101,7 +110,6 @@ SystemDialog {
                     rightPadding: 0
                     bottomPadding: 0
                     topPadding: 0
-                    Layout.rightMargin: Kirigami.Units.largeSpacing
                     Layout.fillWidth: true
                     contentItem: root.mainItem
                 }
@@ -109,7 +117,11 @@ SystemDialog {
         }
         
         RowLayout {
-            Layout.margins: Kirigami.Units.largeSpacing
+            id: footer
+            Layout.maximumWidth: root.maximumWidth
+            Layout.bottomMargin: Kirigami.Units.largeSpacing
+            Layout.rightMargin: Kirigami.Units.largeSpacing
+            Layout.leftMargin: Kirigami.Units.largeSpacing
             
             spacing: Kirigami.Units.smallSpacing
             Item { Layout.fillWidth: true }
