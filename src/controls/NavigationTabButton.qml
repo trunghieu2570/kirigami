@@ -100,6 +100,7 @@ T.TabButton {
 
     contentItem: ColumnLayout {
         spacing: control.spacing
+
         Kirigami.Icon {
             source: control.icon.name || control.icon.source
             isMask: true
@@ -111,7 +112,11 @@ T.TabButton {
             Behavior on opacity { NumberAnimation {} }
         }
         QQC2.Label {
-            text: control.text
+            Kirigami.MnemonicData.enabled: control.enabled && control.visible
+            Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem
+            Kirigami.MnemonicData.label: control.text
+
+            text: Kirigami.MnemonicData.richTextLabel
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideMiddle

@@ -165,7 +165,7 @@ T.ToolBar {
      * If the index set is out of bounds, or the triggered signal did not change any checked property of an action, the index
      * will remain the same.
      */
-    property int currentIndex: tabGroup.buttons.length > 0 ? tabGroup.checkedButton.tabIndex : -1
+    property int currentIndex: tabGroup.checkedButton && tabGroup.buttons.length > 0 ? tabGroup.checkedButton.tabIndex : -1
 
     /**
      * This property holds the number of tab buttons.
