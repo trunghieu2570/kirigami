@@ -23,8 +23,8 @@ Kirigami.AbstractApplicationWindow {
     Kirigami.Theme.inherit: false
     color: darkenBackground && visible && visibility === 5 ? Qt.rgba(0, 0, 0, 0.5) : "transparent" // darken when fullscreen
     
-    x: root.transientParent.x + root.transientParent.width / 2 - root.width / 2
-    y: root.transientParent.y + root.transientParent.height / 2 - root.height / 2
+    x: root.transientParent ? root.transientParent.x + root.transientParent.width / 2 - root.width / 2 : 0
+    y: root.transientParent ? root.transientParent.y + root.transientParent.height / 2 - root.height / 2 : 0
     modality: darkenBackground && visibility !== 5 ? Qt.WindowModal : Qt.NonModal // darken parent window when not fullscreen
     
     Behavior on color {
@@ -112,6 +112,17 @@ Kirigami.AbstractApplicationWindow {
     
     width: loader.item.implicitWidth
 //     height: loader.item.implicitHeight
+
+    signal opened()
+    signal closed()
+
+    onVisibleChanged: {
+        if (visible) {
+            root.opened();
+        } else {
+            root.closed();
+        }
+    }
     
     // load in async to speed up load times (especially on embedded devices)
     Loader {
