@@ -65,7 +65,7 @@ set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Kirigami2")
 option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
 add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
 
-option(QUICK_COMPILER "Use QtQuick compiler to improve performance" TRUE)
+option(QUICK_COMPILER "Use QtQuick compiler to improve performance" OFF)
 add_feature_info(QUICK_COMPILER ${QUICK_COMPILER} "Precompiles all the QML sources in the QRC resource system, for faster startup time and performance.")
 
 configure_package_config_file(
