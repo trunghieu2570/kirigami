@@ -29,6 +29,11 @@ ecm_qt_declare_logging_category(libkirigami_SRCS
 add_library(KF5Kirigami2 ${libkirigami_SRCS})
 add_library(KF5::Kirigami2 ALIAS KF5Kirigami2)
 
+if(QUICK_COMPILER)
+    add_definitions(-DQUICK_COMPILER)
+    target_compile_definitions(KF5Kirigami2 PUBLIC QUICK_COMPILER)
+endif()
+
 ecm_generate_export_header(KF5Kirigami2
     VERSION ${KF_VERSION}
     BASE_NAME Kirigami2
