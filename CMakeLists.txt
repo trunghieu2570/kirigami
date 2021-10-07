@@ -65,6 +65,9 @@ set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Kirigami2")
 option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
 add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
 
+option(QUICK_COMPILER "Use QtQuick compiler to improve performance" FALSE)
+add_feature_info(QUICK_COMPILER ${QUICK_COMPILER} "Precompiles all the QML sources in the QRC resource system, for faster startup time and performance.")
+
 configure_package_config_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/KF5Kirigami2Config.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/KF5Kirigami2Config.cmake"
@@ -108,6 +111,13 @@ if(BUILD_EXAMPLES AND ANDROID)
     find_package(Qt${QT_MAJOR_VERSION}AndroidExtras ${REQUIRED_QT_VERSION} REQUIRED)
 endif()
 
+if(QUICK_COMPILER)
+        find_package(Qt5QuickCompiler)
+        set_package_properties(Qt5QuickCompiler PROPERTIES
+                DESCRIPTION "Compile QML at build time"
+                TYPE OPTIONAL
+        )
+endif()
 
 ecm_find_qmlmodule(QtGraphicalEffects 1.0)
 

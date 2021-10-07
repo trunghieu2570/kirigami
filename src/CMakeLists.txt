@@ -85,8 +85,21 @@ set(kirigami_SRCS
     ${kirigami_QM_LOADER}
     ${KIRIGAMI_STATIC_FILES}
     )
+    
+if(QUICK_COMPILER)
+    # First, pre-process the QRC to add the files associated with the right Qt
+    # version.
+    configure_file(
+        ${CMAKE_CURRENT_SOURCE_DIR}/../kirigami.qrc.in
+        ${CMAKE_CURRENT_BINARY_DIR}/../kirigami.qrc
+        @ONLY
+    )
 
-qt_add_resources(SHADERS scenegraph/shaders/shaders.qrc)
+    qtquick_compiler_add_resources(RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/../kirigami.qrc)
+    qtquick_compiler_add_resources(SHADERS scenegraph/shaders/shaders.qrc)
+else()
+    qt_add_resources(SHADERS scenegraph/shaders/shaders.qrc)
+endif()
 
 add_subdirectory(libkirigami)
 

@@ -102,7 +102,7 @@ QString StyleSelector::resolveFilePath(const QString &path)
 
 QString StyleSelector::resolveFileUrl(const QString &path)
 {
-#if defined(KIRIGAMI_BUILD_TYPE_STATIC)
+#if defined(KIRIGAMI_BUILD_TYPE_STATIC) || defined(QUICK_COMPILER)
     return QStringLiteral("qrc:/org/kde/kirigami.2/") + path;
 #elif defined(Q_OS_ANDROID)
     return QStringLiteral("qrc:/android_rcc_bundle/qml/org/kde/kirigami.2/") + path;
