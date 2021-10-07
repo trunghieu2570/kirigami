@@ -174,8 +174,12 @@ if (BUILD_SHARED_LIBS)
                 copy $<TARGET_FILE:kirigamiplugin> ${CMAKE_BINARY_DIR}/bin/org/kde/kirigami.2/
     )
 
-    install(DIRECTORY controls/ DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami.2)
-
+    if(QUICK_COMPILER)
+        install(FILES controls/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami.2)
+    else()
+        install(DIRECTORY controls/ DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami.2)
+    endif()
+    
     if (DESKTOP_ENABLED)
         install(DIRECTORY styles/org.kde.desktop DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami.2/styles)
     endif()
