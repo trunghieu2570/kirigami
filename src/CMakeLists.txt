@@ -133,6 +133,11 @@ else()
     add_library(kirigamiplugin STATIC ${kirigami_SRCS} ${RESOURCES} ${SHADERS})
 endif()
 
+if(QUICK_COMPILER)
+    add_definitions(-DQUICK_COMPILER)
+    target_compile_definitions(kirigamiplugin PUBLIC QUICK_COMPILER)
+endif()
+
 if(NOT BUILD_SHARED_LIBS)
     SET_TARGET_PROPERTIES(kirigamiplugin PROPERTIES
         AUTOMOC_MOC_OPTIONS -Muri=org.kde.kirigami)
