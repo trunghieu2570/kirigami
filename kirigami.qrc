@@ -38,7 +38,6 @@
         <file alias="private/globaltoolbar/BreadcrumbControl.qml">src/controls/private/globaltoolbar/BreadcrumbControl.qml</file>
         <file alias="private/globaltoolbar/PageRowGlobalToolBarStyleGroup.qml">src/controls/private/globaltoolbar/PageRowGlobalToolBarStyleGroup.qml</file>
         <file alias="private/globaltoolbar/PageRowGlobalToolBarUI.qml">src/controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml</file>
-        <file alias="private/PrivateActionToolButton.qml">src/controls/private/PrivateActionToolButton.qml</file>
         <file alias="private/globaltoolbar/TabBarControl.qml">src/controls/private/globaltoolbar/TabBarControl.qml</file>
         <file alias="private/globaltoolbar/TitlesPageHeader.qml">src/controls/private/globaltoolbar/TitlesPageHeader.qml</file>
         <file alias="private/globaltoolbar/ToolBarPageHeader.qml">src/controls/private/globaltoolbar/ToolBarPageHeader.qml</file>
