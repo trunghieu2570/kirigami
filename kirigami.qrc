@@ -91,5 +91,7 @@
         <file alias="styles/org.kde.desktop/AbstractApplicationHeader.qml">src/styles/org.kde.desktop/AbstractApplicationHeader.qml</file>
         <file alias="PlaceholderMessage.qml">src/controls/PlaceholderMessage.qml</file>
         <file alias="ShadowedImage.qml">src/controls/ShadowedImage.qml</file>
+        <file alias="NavigationTabButton.qml">src/controls/NavigationTabButton.qml</file>
+        <file alias="NavigationTabBar.qml">src/controls/NavigationTabBar.qml</file>
     </qresource>
 </RCC>
