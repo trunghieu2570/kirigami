@@ -51,7 +51,15 @@ AbstractListItem {
             // Work around Qt bug where NativeRendering breaks for non-integer scale factors
             // https://bugreports.qt.io/browse/QTBUG-67007
             renderType: Screen.devicePixelRatio % 1 !== 0 ? Text.QtRendering : Text.NativeRendering
-            opacity: !root.collapsed
+            opacity: {
+                if (root.collapsed) {
+                    return 0;
+                } else if (!listItem.enabled) {
+                    return 0.6;
+                } else {
+                    return 1.0;
+                }
+            }
             Behavior on opacity {
                 NumberAnimation {
                     duration: Units.longDuration/2
