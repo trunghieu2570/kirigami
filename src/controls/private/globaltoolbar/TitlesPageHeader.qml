@@ -30,5 +30,10 @@ AbstractPageHeader {
 
         sourceComponent: page ? page.titleDelegate : null
     }
+    
+    Component.onCompleted: {
+        // pageRow is only loaded after
+        pageRow.globalToolBar.showNavigationButtons = Qt.binding(() => pageRow.currentIndex > 0 ? ApplicationHeaderStyle.ShowBackButton : ApplicationHeaderStyle.NoNavigationButtons);
+    }    
 }
 
