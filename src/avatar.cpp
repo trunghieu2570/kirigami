@@ -6,7 +6,6 @@
 #include <QDebug>
 #include <QMap>
 #include <QQuickStyle>
-#include <QStringRef>
 #include <QTextBoundaryFinder>
 #include <QVector>
 
@@ -43,7 +42,12 @@ QString NameUtils::initialsFromString(const QString &string)
     normalized = normalized.trimmed();
     if (normalized.contains(QLatin1Char(' '))) {
         // "FirstName Name Name LastName" -> "FirstName" "Name" "Name" "LastName"
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        const auto split = QStringView(normalized).split(QLatin1Char(' '));
+#else
         const auto split = normalized.splitRef(QLatin1Char(' '));
+#endif
+
         // "FirstName"
         auto first = split.first();
         // "LastName"
