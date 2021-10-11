@@ -103,8 +103,8 @@ Item {
         property var knownItems: []
         property var buddies: []
         property int knownItemsImplicitWidth: {
-            var hint = 0;
-            for (var i in knownItems) {
+            let hint = 0;
+            for (let i in knownItems) {
                 let actualWidth = knownItems[i].implicitWidth
                 if (knownItems[i].Layout.preferredWidth > 0) {
                     actualWidth = knownItems[i].Layout.preferredWidth
@@ -117,8 +117,8 @@ Item {
             return hint;
         }
         property int buddiesImplicitWidth: {
-            var hint = 0;
-            for (var i in buddies) {
+            let hint = 0;
+            for (let i in buddies) {
                 if (buddies[i].visible && !buddies[i].item.Kirigami.FormData.isSection) {
                     hint = Math.max(hint, buddies[i].implicitWidth);
                 }
@@ -127,7 +127,7 @@ Item {
         }
         readonly property var actualTwinFormLayouts: {
             // We need to copy that array by value
-            let list = lay.reverseTwins.slice();
+            const list = lay.reverseTwins.slice();
             for (let i in twinFormLayouts) {
                 let parentLay = twinFormLayouts[i];
                 if (!parentLay || !parentLay.hasOwnProperty("children")) {
@@ -158,8 +158,8 @@ Item {
 
         Item {
             Layout.preferredWidth: {
-                var hint = lay.buddiesImplicitWidth;
-                for (var i in lay.actualTwinFormLayouts) {
+                let hint = lay.buddiesImplicitWidth;
+                for (let i in lay.actualTwinFormLayouts) {
                     if (lay.actualTwinFormLayouts[i] && lay.actualTwinFormLayouts[i].hasOwnProperty("children")) {
                         hint = Math.max(hint, lay.actualTwinFormLayouts[i].children[0].buddiesImplicitWidth);
                     }
@@ -170,8 +170,8 @@ Item {
         }
         Item {
             Layout.preferredWidth: {
-                var hint = Math.min(root.width, lay.knownItemsImplicitWidth);
-                for (var i in lay.actualTwinFormLayouts) {
+                let hint = Math.min(root.width, lay.knownItemsImplicitWidth);
+                for (let i in lay.actualTwinFormLayouts) {
                     if (lay.actualTwinFormLayouts[i] && lay.actualTwinFormLayouts[i].hasOwnProperty("children")) {
                         hint = Math.max(hint, lay.actualTwinFormLayouts[i].children[0].knownItemsImplicitWidth);
                     }
@@ -203,20 +203,18 @@ Item {
          * @returns {number}
          */
         function effectiveLayout(item) {
-            let verticalAlignment =
-                item.Kirigami.FormData.labelAlignment != 0
+            const verticalAlignment =
+                item.Kirigami.FormData.labelAlignment !== 0
                 ? item.Kirigami.FormData.labelAlignment
-                : (item.Kirigami.FormData.buddyFor.height > height * 2 ? Qt.AlignTop : Qt.AlignVCenter)
+                : Qt.AlignTop
 
             if (item.Kirigami.FormData.isSection) {
                 return Qt.AlignHCenter
-            } else {
-                if (root.wideMode) {
-                    return Qt.AlignRight | verticalAlignment
-                } else {
-                    return Qt.AlignLeft | Qt.AlignBottom
-                }
             }
+            if (root.wideMode) {
+                return Qt.AlignRight | verticalAlignment
+            }
+            return Qt.AlignLeft | Qt.AlignBottom
         }
 
         /**
@@ -236,10 +234,10 @@ Item {
         id: relayoutTimer
         interval: 0
         onTriggered: {
-            var __items = children;
+            let __items = children;
             //exclude the layout and temp
-            for (var i = 2; i < __items.length; ++i) {
-                var item = __items[i];
+            for (let i = 2; i < __items.length; ++i) {
+                const item = __items[i];
 
                 //skip items that are already there
                 if (lay.knownItems.indexOf(item) != -1 ||
@@ -250,20 +248,20 @@ Item {
                 }
                 lay.knownItems.push(item);
 
-                var itemContainer = itemComponent.createObject(temp, {"item": item})
+                const itemContainer = itemComponent.createObject(temp, {item: item})
 
                 //if section, label goes after the separator
                 if (item.Kirigami.FormData.isSection) {
                     //put an extra spacer
-                    var placeHolder = placeHolderComponent.createObject(lay, {"item": item});
+                    var placeHolder = placeHolderComponent.createObject(lay, {item: item});
                     itemContainer.parent = lay;
                 }
 
-                var buddy;
+                let buddy;
                 if (item.Kirigami.FormData.checkable) {
-                    buddy = checkableBuddyComponent.createObject(lay, {"item": item})
+                    buddy = checkableBuddyComponent.createObject(lay, {item: item})
                 } else {
-                    buddy = buddyComponent.createObject(lay, {"item": item, "index": i - 2})
+                    buddy = buddyComponent.createObject(lay, {item: item, index: i - 2})
                 }
 
                 itemContainer.parent = lay;
@@ -337,7 +335,7 @@ Item {
         Kirigami.Heading {
             id: labelItem
 
-            property var item
+            property Item item
             property int index
             enabled: item.enabled && item.Kirigami.FormData.enabled
             visible: item.visible && (root.wideMode || text.length > 0)
@@ -351,14 +349,12 @@ Item {
             Layout.columnSpan: item.Kirigami.FormData.isSection ? lay.columns : 1
             Layout.preferredHeight: {
                 if (item.Kirigami.FormData.label.length > 0) {
-                    if (root.wideMode) {
+                    if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof TextArea)) {
                         return Math.max(implicitHeight, item.Kirigami.FormData.buddyFor.height)
-                    } else {
-                        return implicitHeight
                     }
-                } else {
-                    Kirigami.Units.smallSpacing
+                    return implicitHeight
                 }
+                return Kirigami.Units.smallSpacing;
             }
 
             Layout.alignment: temp.effectiveLayout(item)
@@ -367,7 +363,18 @@ Item {
             Layout.fillWidth: !root.wideMode
             wrapMode: Text.Wrap
 
-            Layout.topMargin: root.wideMode && item.Kirigami.FormData.buddyFor.parent != root ? item.Kirigami.FormData.buddyFor.y : ((index === 0 || root.wideMode) ? 0 : Kirigami.Units.smallSpacing)
+            Layout.topMargin: {
+                if (root.wideMode && item.Kirigami.FormData.buddyFor.parent !== root) {
+                    return item.Kirigami.FormData.buddyFor.y;
+                }
+                if (root.wideMode && (item.Kirigami.FormData.buddyFor instanceof TextArea)) {
+                    return Kirigami.Units.smallSpacing;
+                }
+                if (index === 0 || root.wideMode) {
+                    return 0;
+                }
+                return Kirigami.Units.smallSpacing;
+            }
             onItemChanged: {
                 if (!item) {
                     labelItem.destroy();
@@ -383,7 +390,7 @@ Item {
         id: checkableBuddyComponent
         CheckBox {
             id: labelItem
-            property var item
+            property Item item
             visible: item.visible
             Kirigami.MnemonicData.enabled: item.Kirigami.FormData.buddyFor && item.Kirigami.FormData.buddyFor.activeFocusOnTab
             Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
