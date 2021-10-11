@@ -27,19 +27,20 @@ QString NameUtils::initialsFromString(const QString &string)
         return {};
     }
 
-    auto normalized = string.normalized(QString::NormalizationForm_D);
+    QString normalized = string.normalized(QString::NormalizationForm_D);
 
     if (normalized.startsWith(QLatin1Char('#')) || normalized.startsWith(QLatin1Char('@'))) {
-        normalized = normalized.remove(0, 1);
+        normalized.remove(0, 1);
     }
 
     // Names written with Han and Hangul characters generally can be initialised by taking the
     // first character
     if (contains(normalized, QChar::Script_Han) || contains(normalized, QChar::Script_Hangul)) {
-        return QString(normalized[0]);
+        return normalized.at(0);
     }
 
     // "FirstName Name Name LastName"
+    normalized = normalized.trimmed();
     if (normalized.contains(QLatin1Char(' '))) {
         // "FirstName Name Name LastName" -> "FirstName" "Name" "Name" "LastName"
         const auto split = normalized.splitRef(QLatin1Char(' '));
