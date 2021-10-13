@@ -33,6 +33,7 @@ kirigami_add_tests(
     tst_avatar.qml
     tst_theme.qml
     tst_mnemonicdata.qml
+    tst_scrollhandler.qml
     pagepool/tst_pagepool.qml
     pagepool/tst_layers.qml
 )

@@ -19,6 +19,7 @@
 #include "pagepool.h"
 #include "pagerouter.h"
 #include "scenepositionattached.h"
+#include "scrollhandler.h"
 #include "settings.h"
 #include "shadowedrectangle.h"
 #include "shadowedtexture.h"
@@ -311,6 +312,9 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(QStringLiteral("AboutItem.qml")), uri, 2, 19, "AboutItem");
     qmlRegisterType(componentUrl(QStringLiteral("NavigationTabBar.qml")), uri, 2, 19, "NavigationTabBar");
     qmlRegisterType(componentUrl(QStringLiteral("NavigationTabButton.qml")), uri, 2, 19, "NavigationTabButton");
+
+    // 2.20
+    qmlRegisterType<ScrollHandler>(uri, 2, 20, "ScrollHandler");
 
     qmlProtectModule(uri, 2);
 }

@@ -35,6 +35,7 @@ set(kirigami_SRCS
     toolbarlayoutdelegate.cpp
     sizegroup.cpp
     spellcheckinghint.cpp
+    scrollhandler.cpp
     scenegraph/managedtexturenode.cpp
     scenegraph/shadowedrectanglenode.cpp
     scenegraph/shadowedrectanglematerial.cpp
