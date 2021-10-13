@@ -14,6 +14,7 @@ else()
         libkirigami/tabletmodewatcher.h
         libkirigami/units.cpp
         libkirigami/units.h
+        libkirigami/virtualkeyboardwatcher.cpp
         ${CMAKE_CURRENT_BINARY_DIR}/libkirigami/loggingcategory.cpp)
 endif()
 
@@ -79,6 +80,7 @@ set(kirigami_SRCS
     toolbarlayout.h
     wheelhandler.cpp
     wheelhandler.h
+    inputmethod.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/libkirigami/loggingcategory.cpp
     ${kirigami_QM_LOADER}
     ${KIRIGAMI_STATIC_FILES}

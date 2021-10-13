@@ -15,6 +15,7 @@
 #include "formlayoutattached.h"
 #include "icon.h"
 #include "imagecolors.h"
+#include "inputmethod.h"
 #include "mnemonicattached.h"
 #include "pagepool.h"
 #include "pagerouter.h"
@@ -25,8 +26,8 @@
 #include "sizegroup.h"
 #include "spellcheckinghint.h"
 #include "toolbarlayout.h"
-#include "wheelhandler.h"
 #include "units.h"
+#include "wheelhandler.h"
 
 #include <QClipboard>
 #include <QGuiApplication>
@@ -314,6 +315,10 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(QStringLiteral("Dialog.qml")), uri, 2, 19, "Dialog");
     qmlRegisterType(componentUrl(QStringLiteral("MenuDialog.qml")), uri, 2, 19, "MenuDialog");
     qmlRegisterType(componentUrl(QStringLiteral("PromptDialog.qml")), uri, 2, 19, "PromptDialog");
+
+    qmlRegisterSingletonType<InputMethod>(uri, 2, 19, "InputMethod", [](QQmlEngine *, QJSEngine *) {
+        return new InputMethod{};
+    });
 
     qmlProtectModule(uri, 2);
 }
