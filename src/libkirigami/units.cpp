@@ -47,7 +47,7 @@ void rateLimitWarning(const char *method, const char *since, const char *message
         return;
     }
 
-    qCWarning(KirigamiLog) << method << "is deprecated (since" << since << "):" << message;
+    qCWarning(KirigamiLog).nospace() << method << " is deprecated (since " << since << "): " << message;
 
     if (entry.second > 0) {
         qCWarning(KirigamiLog) << "Previous message repeats" << entry.second << "times.";
