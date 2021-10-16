@@ -50,9 +50,23 @@ Kirigami.Action {
     property Controls.Page basePage
 
     /**
-      * initialProperties: JavaScript Object
-      * The initialProperties object specifies a map of initial property values for the created page
+      * @property QVariantMap initialProperties
+      *
+      * This property holds a function that generate the property values for the created page
       * when it is pushed onto the Kirigami.PagePool.
+      *
+      * @code{.qml}
+      * Kirigami.PagePoolAction {
+      *     text: i18n("Security")
+      *     icon.name: "security-low"
+      *     page: Qt.resolvedUrl("Security.qml")
+      *     initialProperties: {
+      *         return {
+      *             room: root.room
+      *         }
+      *     }
+      * }
+      * @endcode
       */
     property var initialProperties
 
