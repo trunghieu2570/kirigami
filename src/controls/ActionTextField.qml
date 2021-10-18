@@ -55,14 +55,14 @@ Controls.TextField
     /**
      * leftActions: list<QtObject>
      * This property hold the action that is left in the field. By default this
-     * field is null.
+     * list is empty.
      */
     property list<QtObject> leftActions
 
     /**
      * rightActions: list<QtObject>
      * This property hold the action that is right in the field. By default this
-     * field is null.
+     * list is empty.
      */
     property list<QtObject> rightActions
 
