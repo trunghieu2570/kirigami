@@ -307,7 +307,7 @@ T.Control {
                 dialog.height = Qt.binding(() => QQC2.ApplicationWindow.window.height - Units.gridUnit * 5);
                 dialog.x = Units.gridUnit * 2.5;
                 dialog.y = Units.gridUnit * 2.5;
-                let item;
+
                 if (typeof page === "string") {
                     // url => load component and then load item from component
                     const component = Qt.createComponent(Qt.resolvedUrl(page));
