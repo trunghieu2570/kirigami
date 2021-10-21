@@ -93,6 +93,11 @@ Item {
         columns: root.wideMode ? 2 : 1
         rowSpacing: Kirigami.Units.smallSpacing
         columnSpacing: Kirigami.Units.smallSpacing
+        width: root.wideMode ? undefined : root.width
+        anchors {
+            horizontalCenter: root.wideMode ? root.horizontalCenter : undefined
+            left: root.wideMode ? undefined : root.left
+        }
 
         property var reverseTwins: []
         property var knownItems: []
@@ -139,42 +144,6 @@ Item {
             return list;
         }
 
-        states: [
-            State {
-                when: root.wideMode
-                AnchorChanges {
-                    target: lay
-                    anchors {
-                        left: undefined
-                        right: undefined
-                        horizontalCenter: root.horizontalCenter
-                    }
-                }
-                PropertyChanges {
-                    target: lay
-                    width: undefined
-                }
-            },
-            State {
-                when: !root.wideMode
-                AnchorChanges {
-                    target: lay
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        horizontalCenter: undefined
-                    }
-                }
-                PropertyChanges {
-                    target: lay
-                    implicitWidth: root.width
-                    width: Math.min(implicitWidth, parent.width)
-                }
-
-            }
-        ]
-
-        width: Math.min(implicitWidth, parent.width)
         Timer {
             id: hintCompression
             interval: 0
