@@ -45,11 +45,15 @@ QmlComponentsPool *QmlComponentsPoolSingleton::instance(QQmlEngine *engine)
 
     componentPool = new QmlComponentsPool(engine);
 
-    QObject::connect(componentPool, &QObject::destroyed, engine, [engine]() {
+    const auto removePool = [engine]() {
+        // NB: do not derefence engine. it may be dangling already!
         if (privateQmlComponentsPoolSelf) {
             privateQmlComponentsPoolSelf->m_instances.remove(engine);
         }
-    });
+    };
+    QObject::connect(engine, &QObject::destroyed, engine, removePool);
+    QObject::connect(componentPool, &QObject::destroyed, componentPool, removePool);
+
     privateQmlComponentsPoolSelf->m_instances[engine] = componentPool;
     return componentPool;
 }
