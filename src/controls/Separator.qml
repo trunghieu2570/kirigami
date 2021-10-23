@@ -10,13 +10,12 @@ import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.12
 
 /**
- * A visual separator
+ * @brief A visual separator.
  *
  * Useful for splitting one set of items from another.
  *
  * @inherit QtQuick.Rectangle
  */
-
 Rectangle {
     id: root
     implicitHeight: 1
@@ -29,14 +28,13 @@ Rectangle {
     }
 
     /**
-     * weight: int
-     * The visual weight of the separator.
+     * This property holds the visual weight of the separator.
      * 
      * Weight values:
-     * * Separator.Weight.Light
-     * * Separator.Weight.Normal
+     * * `Separator.Weight.Light`
+     * * `Separator.Weight.Normal`
      * 
-     * default: Separator.Weight.Normal
+     * The default is `Separator.Weight.Normal`
      * 
      * @since 5.72
      * @since org.kde.kirigami 2.12

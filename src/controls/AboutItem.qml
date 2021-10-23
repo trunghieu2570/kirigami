@@ -27,44 +27,54 @@ Item
      * This property holds an object with the same shape as KAboutData.
      *
      * For example:
-     * @code
+     * @code{json}
      * aboutData: {
-        "displayName" : "KirigamiApp",
-        "productName" : "kirigami/app",
-        "componentName" : "kirigamiapp",
-        "shortDescription" : "A Kirigami example",
-        "homepage" : "",
-        "bugAddress" : "submit@bugs.kde.org",
-        "version" : "5.14.80",
-        "otherText" : "",
-        "authors" : [
-            {
-                "name" : "...",
-                "task" : "",
-                "emailAddress" : "somebody@kde.org",
-                "webAddress" : "",
-                "ocsUsername" : ""
-            }
-        ],
-        "credits" : [],
-        "translators" : [],
-        "licenses" : [
-            {
-                "name" : "GPL v2",
-                "text" : "long, boring, license text",
-                "spdx" : "GPL-2.0"
-            }
-        ],
-        "copyrightStatement" : "© 2010-2018 Plasma Development Team",
-        "desktopFileName" : "org.kde.kirigamiapp"
-        }
-        @endcode
+          "displayName" : "KirigamiApp",
+          "productName" : "kirigami/app",
+          "componentName" : "kirigamiapp",
+          "shortDescription" : "A Kirigami example",
+          "homepage" : "",
+          "bugAddress" : "submit@bugs.kde.org",
+          "version" : "5.14.80",
+          "otherText" : "",
+          "authors" : [
+              {
+                  "name" : "...",
+                  "task" : "",
+                  "emailAddress" : "somebody@kde.org",
+                  "webAddress" : "",
+                  "ocsUsername" : ""
+              }
+          ],
+          "credits" : [],
+          "translators" : [],
+          "licenses" : [
+              {
+                  "name" : "GPL v2",
+                  "text" : "long, boring, license text",
+                  "spdx" : "GPL-2.0"
+              }
+          ],
+          "copyrightStatement" : "© 2010-2018 Plasma Development Team",
+          "desktopFileName" : "org.kde.kirigamiapp"
+       }
+       @endcode
      *
      * @see KAboutData
      */
     property var aboutData
+
+    /**
+     * This property holds a link to a "Get Involved" page. By default link to
+     * "https://community.kde.org/Get_Involved" when your application application
+     * id starts with "org.kde.", otherwise is empty.
+     */
     property url getInvolvedUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://community.kde.org/Get_Involved" : ""
+
+    /** @internal */
     property bool _usePageStack: false
+
+    /** @internal */
     default property alias _content: form.data
 
     Component {

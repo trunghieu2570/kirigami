@@ -61,14 +61,13 @@ Item {
     id: root
 
     /**
-     * pageStack: StackView
+     * This property holds the stack used to allocate the pages and to manage the
+     * transitions between them.
      * 
-     * The stack used to allocate the pages and to manage the transitions
-     * between them.
-     * 
-     * Put a container here, such as QQuickControls StackView
+     * Put a container here, such as QtQuick.Controls.StackView.
      */
     property Item pageStack
+
     LayoutMirroring.enabled: Qt.application.layoutDirection == Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
@@ -134,22 +133,16 @@ Item {
     }
 
     /**
-     * font: font
-     * 
      * This property holds the font for this item.
      */
     property font font: Theme.defaultFont
 
     /**
-     * palette: palette
-     * 
      * This property holds the palette for this item.
      */
     property var palette: Theme.palette
 
     /**
-     * locale: Locale
-     * 
      * This property holds the locale for this item.
      */
     property Locale locale
@@ -174,11 +167,10 @@ Item {
     }
 
     /**
-     * menuBar: Item
-     * 
-     * An item that can be used as a menuBar for the application.
+     * This property holds an item that can be used as a menuBar for the application.
      */
-    property Item menuBar
+    property Item menuBar // TODO KF6 restrict type to QQC2.MenuBar
+
     onMenuBarChanged: {
         menuBar.parent = root.contentItem
         if (menuBar.z === undefined) {
@@ -197,9 +189,9 @@ Item {
     }
 
    /**
-    * header: ApplicationHeader
+    * \property org::kde:kirigami::ApplicationHeader header
     * 
-    * An item that can be used as a title for the application.
+    * This property holds an item that can be used as a title for the application.
     * 
     * Scrolling the main page will make it taller or shorter (through the point of going away).
     * 
@@ -213,7 +205,8 @@ Item {
     *
     * To achieve a titlebar that stays completely fixed, just set the 3 sizes as the same.
     */
-    property Item header
+    property Item header // TODO KF6 restrict the type to Kirigami.ApplicationHeader
+
     onHeaderChanged: {
         header.parent = root.contentItem
         if (header.z === undefined) {
@@ -231,9 +224,7 @@ Item {
     }
 
     /**
-     * footer: Item
-     * 
-     * An item that can be used as a footer for the application.
+     * This property holds an item that can be used as a footer for the application.
      */
     property Item footer
     onFooterChanged: {
@@ -253,8 +244,6 @@ Item {
     }
 
     /**
-     * controlsVisible: bool
-     * 
      * This property controls whether the standard chrome of the app, such
      * as the Action button, the drawer handles and the application
      * header should be visible or not.
@@ -262,29 +251,26 @@ Item {
     property bool controlsVisible: true
 
     /**
-     * globalDrawer: OverlayDrawer
-     * 
-     * The drawer for global actions, that will be opened by sliding from the
-     * left screen edge or by dragging the ActionButton to the right.
+     * This property holds the drawer for global actions, that will be opened by
+     * sliding from the left screen edge or by dragging the ActionButton to the right.
      * 
      * It is recommended to use the GlobalDrawer class here.
      */
     property OverlayDrawer globalDrawer
 
     /**
-     * wideScreen: bool
-     * 
-     * If true the application is considered to be in "widescreen" mode, such as on desktops or horizontal tablets.
+     * This property holds whether the application is considered to be in "widescreen" mode,
+     * such as on desktops or horizontal tablets.
+     *
      * Different styles can have their own logic for deciding this.
      */
     property bool wideScreen: width >= Units.gridUnit * 60
 
     /**
-     * contextDrawer: OverlayDrawer
-     * 
-     * The drawer for context-dependent actions, that will be opened by sliding from the
-     * right screen edge or by dragging the ActionButton to the left.
+     * This property holds the drawer for context-dependent actions, that will be opened by
+     * sliding from the right screen edge or by dragging the ActionButton to the left.
      * It is recommended to use the ContextDrawer class here.
+     *
      * The contents of the context drawer should depend from what page is
      * loaded in the main pageStack
      *
@@ -332,9 +318,7 @@ Item {
     property OverlayDrawer contextDrawer
 
     /**
-     * reachableMode: bool
-     * 
-     * When true the application is in reachable mode for single hand use.
+     * This property holds whether the application is in reachable mode for single hand use.
      * 
      * The whole content of the application is moved down the screen to be
      * reachable with the thumb. If wideScreen is true, or reachableModeEnabled is false,
@@ -343,7 +327,7 @@ Item {
     property bool reachableMode: false
 
     /**
-     * When true the application will go into reachable mode on pull down
+     * This property holds whether the application will go into reachable mode on pull down.
      */
     property bool reachableModeEnabled: true
 
@@ -368,15 +352,13 @@ Item {
     }
 
     /**
-     * __data: list<Object>
+     * \property list<Object> __data
      * 
-     * This holds the list of all children of this item.
+     * This property holds the list of all children of this item.
      */
     default property alias __data: contentItemRoot.data
 
     /**
-     * contentItem: Item
-     * 
      * This property holds the Item of the main part of the Application UI
      */
     readonly property Item contentItem: Item {
@@ -403,15 +385,11 @@ Item {
     }
 
     /**
-     * color: color
-     * 
      * This property holds the color for the background.
      */
     property color color: Theme.backgroundColor
 
     /**
-     * background: Item
-     * 
      * This property holds the background of the Application UI
      */
     property Item background

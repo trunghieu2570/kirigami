@@ -75,12 +75,10 @@ QQC2.ApplicationWindow {
     id: root
 
     /**
-     * pageStack: StackView
+     * This property holds the stack used to allocate the pages and to manage the
+     * transitions between them.
      * 
-     * The stack used to allocate the pages and to manage the transitions
-     * between them.
-     * 
-     * Put a container here, such as QQuickControls StackView
+     * Put a container here, such as QtQuick.Controls.StackView.
      */
     property Item pageStack
     LayoutMirroring.enabled: Qt.application.layoutDirection == Qt.RightToLeft
@@ -140,7 +138,6 @@ QQC2.ApplicationWindow {
     //header: undefined
 
     /**
-     * controlsVisible: bool
      * This property controls whether the standard chrome of the app, such
      * as the Action button, the drawer handles and the application
      * header should be visible or not.
@@ -148,25 +145,26 @@ QQC2.ApplicationWindow {
     property bool controlsVisible: true
 
     /**
-     * globalDrawer: OverlayDrawer
-     * The drawer for global actions, that will be opened by sliding from the
+     * This property holds the drawer for global actions, that will be opened by sliding from the
      * left screen edge or by dragging the ActionButton to the right.
-     * It is recommended to use the GlobalDrawer class here
+     *
+     * It is recommended to use the GlobalDrawer class here.
      */
     property OverlayDrawer globalDrawer
 
     /**
-     * wideScreen: bool
-     * If true the application is considered to be in "widescreen" mode, such as on desktops or horizontal tablets.
-     * Different styles can have an own logic for deciding this
+     * This property holds whether the application is considered to be in "widescreen" mode, such
+     * as on desktops or horizontal tablets.
+     *
+     * Different styles can have an own logic for deciding this.
      */
     property bool wideScreen: width >= Units.gridUnit * 60
 
     /**
-     * contextDrawer: OverlayDrawer
      * The drawer for context-dependent actions, that will be opened by sliding from the
      * right screen edge or by dragging the ActionButton to the left.
      * It is recommended to use the ContextDrawer class here.
+     *
      * The contents of the context drawer should depend from what page is
      * loaded in the main pageStack
      *
@@ -214,8 +212,7 @@ QQC2.ApplicationWindow {
     property OverlayDrawer contextDrawer
 
     /**
-     * reachableMode: bool
-     * When true the application is in reachable mode for single hand use.
+     * This property holds whether the application is in reachable mode for single hand use.
      * the whole content of the application is moved down the screen to be
      * reachable with the thumb. if wideScreen is true, or reachableModeEnabled is false,
      * tis property has no effect.
@@ -223,13 +220,14 @@ QQC2.ApplicationWindow {
     property bool reachableMode: false
 
     /**
-     * When true the application will go into reachable mode on pull down
+     * This property holds whether the application will go into reachable mode on pull down.
      */
     property bool reachableModeEnabled: true
 
     /**
-     * A standard action that will quit the application when triggered. Its properties have the
-     * following values:
+     * This property holds a standard action that will quit the application when triggered.
+     * Its properties have the following values:
+     *
      * @code
      * Action {
      *     text: "Quit"

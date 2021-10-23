@@ -11,7 +11,7 @@ import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.19
 
 /**
- * An about page that is ready to integrate in a kirigami app
+ * An about page that is ready to integrate in a kirigami app.
  *
  * Allows to have a page that will show the copyright notice of the application
  * together with the contributors and some information of which platform it's
@@ -26,10 +26,52 @@ ScrollablePage
     /**
      * This property holds an object with the same shape as KAboutData.
      *
-     * @see AboutComponent
+     * For example:
+     * @code{json}
+     * aboutData: {
+          "displayName" : "KirigamiApp",
+          "productName" : "kirigami/app",
+          "componentName" : "kirigamiapp",
+          "shortDescription" : "A Kirigami example",
+          "homepage" : "",
+          "bugAddress" : "submit@bugs.kde.org",
+          "version" : "5.14.80",
+          "otherText" : "",
+          "authors" : [
+              {
+                  "name" : "...",
+                  "task" : "",
+                  "emailAddress" : "somebody@kde.org",
+                  "webAddress" : "",
+                  "ocsUsername" : ""
+              }
+          ],
+          "credits" : [],
+          "translators" : [],
+          "licenses" : [
+              {
+                  "name" : "GPL v2",
+                  "text" : "long, boring, license text",
+                  "spdx" : "GPL-2.0"
+              }
+          ],
+          "copyrightStatement" : "© 2010-2018 Plasma Development Team",
+          "desktopFileName" : "org.kde.kirigamiapp"
+       }
+       @endcode
+     *
+     * @see KAboutData
      */
     property alias aboutData: aboutItem.aboutData
+
+    /**
+     * This property holds a link to a "Get Involved" page. By default link to
+     * "https://community.kde.org/Get_Involved" when your application application
+     * id starts with "org.kde.", otherwise is empty.
+     */
     property alias getInvolvedUrl: aboutItem.getInvolvedUrl
+
+    /** @internal */
     default property alias _content: aboutItem._content
 
     title: qsTr("About %1").arg(page.aboutData.displayName)
@@ -38,7 +80,7 @@ ScrollablePage
         text: qsTr("Report Bug…")
         icon.name: "tools-report-bug"
         onTriggered: {
-            var component = page.aboutData.productName ? page.aboutData.productName.replace(`${page.aboutData.componentName}/`, '') : page.aboutData.componentName
+            const component = page.aboutData.productName ? page.aboutData.productName.replace(`${page.aboutData.componentName}/`, '') : page.aboutData.componentName
 
             if (page.aboutData.bugAddress === "submit@bugs.kde.org") {
                 Qt.openUrlExternally("https://bugs.kde.org/enter_bug.cgi")
