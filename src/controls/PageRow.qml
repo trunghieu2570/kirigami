@@ -302,6 +302,7 @@ T.Control {
                                 }
                             }
                         }
+                        contentItem: Control { topPadding: 0; leftPadding: 0; rightPadding: 0; bottomPadding: 0; }
                     }', QQC2.ApplicationWindow.overlay);
                 dialog.width = Qt.binding(() => QQC2.ApplicationWindow.window.width - Units.gridUnit * 5);
                 dialog.height = Qt.binding(() => QQC2.ApplicationWindow.window.height - Units.gridUnit * 5);
@@ -311,15 +312,16 @@ T.Control {
                 if (typeof page === "string") {
                     // url => load component and then load item from component
                     const component = Qt.createComponent(Qt.resolvedUrl(page));
-                    item = component.createObject(dialog);
+                    item = component.createObject(dialog.contentItem, properties);
+                    dialog.contentItem.contentItem = item
                 } else if (page instanceof Component) {
-                    item = component.createObject(dialog);
+                    item = page.createObject(dialog.contentItem, properties);
+                    dialog.contentItem.contentItem = item
                 } else if (page instanceof Item) {
                     item = page;
                     page.parent = dialog.contentItem;
                 }
-                dialog.contentItem = item;
-                dialog.title = Qt.binding(() => dialog.contentItem.title);
+                dialog.title = Qt.binding(() => item.title);
 
                 // Pushing a PageRow is supported but without PageRow toolbar
                 if (item.globalToolBar && item.globalToolBar.style) {
@@ -338,7 +340,7 @@ T.Control {
                     value: function() {
                         layers.pop();
                     }
-                 });
+                });
             }
         } else {
             // open as a new window
