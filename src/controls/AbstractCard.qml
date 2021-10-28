@@ -1,13 +1,15 @@
+
+
 /*
  *  SPDX-FileCopyrightText: 2018 Marco Martin <mart@kde.org>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.6
 import org.kde.kirigami 2.12
 import "templates" as T
 import "private"
+
 
 /**
  * A AbstractCard is the base for cards. A Card is a visual object that serves
@@ -28,18 +30,11 @@ T.AbstractCard {
     background: DefaultCardBackground {
         id: bg
 
-        readonly property color pressedColor: ColorUtils.tintWithAlpha(Theme.backgroundColor, Theme.highlightColor, 0.3)
-        readonly property color hoverColor: ColorUtils.tintWithAlpha(Theme.backgroundColor, Theme.highlightColor, 0.1)
-
-        color: {
-            if (root.showClickFeedback || highlighted) {
-                if (root.highlighted || root.down) {
-                    return bg.pressedColor
-                } else if (root.hovered) {
-                    return bg.hoverColor
-                }
-            }
-            return Theme.backgroundColor
-        }
+        readonly property color pressedColor: ColorUtils.tintWithAlpha(
+                                                  Theme.backgroundColor,
+                                                  Theme.highlightColor, 0.3)
+        readonly property color hoverColor: ColorUtils.tintWithAlpha(
+                                                Theme.backgroundColor,
+                                                Theme.highlightColor, 0.1)
     }
 }
