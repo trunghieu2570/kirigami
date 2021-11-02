@@ -376,6 +376,17 @@ using ColorGroupChangedEvent = PropertyChangedEvent<PlatformTheme::ColorGroup>;
 using ColorChangedEvent = PropertyChangedEvent<QColor>;
 using FontChangedEvent = PropertyChangedEvent<QFont>;
 
+template<>
+KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::DataChangedEvent::type;
+template<>
+KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::ColorSetChangedEvent::type;
+template<>
+KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::ColorGroupChangedEvent::type;
+template<>
+KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::ColorChangedEvent::type;
+template<>
+KIRIGAMI2_EXPORT QEvent::Type PlatformThemeEvents::FontChangedEvent::type;
+
 }
 
 } // namespace Kirigami
