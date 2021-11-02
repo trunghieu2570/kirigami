@@ -208,7 +208,7 @@ class KIRIGAMI2_EXPORT Units : public QObject
 
 public:
     explicit Units(QObject *parent = nullptr);
-    ~Units();
+    ~Units() override;
 
     int gridUnit() const;
     void setGridUnit(int size);

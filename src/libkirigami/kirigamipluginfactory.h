@@ -35,7 +35,7 @@ class KIRIGAMI2_EXPORT KirigamiPluginFactory : public QObject
 
 public:
     explicit KirigamiPluginFactory(QObject *parent = nullptr);
-    ~KirigamiPluginFactory();
+    ~KirigamiPluginFactory() override;
 
     /**
      * Creates an instance of PlatformTheme which can come out from
@@ -71,7 +71,7 @@ class KIRIGAMI2_EXPORT KirigamiPluginFactoryV2 : public KirigamiPluginFactory
 
 public:
     explicit KirigamiPluginFactoryV2(QObject *parent = nullptr);
-    ~KirigamiPluginFactoryV2();
+    ~KirigamiPluginFactoryV2() override;
 
     /**
      * Creates an instance of Units which can come from an implementation

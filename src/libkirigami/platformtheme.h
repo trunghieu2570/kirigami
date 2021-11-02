@@ -202,7 +202,7 @@ public:
     Q_ENUM(ColorGroup)
 
     explicit PlatformTheme(QObject *parent = nullptr);
-    ~PlatformTheme();
+    ~PlatformTheme() override;
 
     void setColorSet(PlatformTheme::ColorSet);
     PlatformTheme::ColorSet colorSet() const;

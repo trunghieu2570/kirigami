@@ -22,7 +22,7 @@ public:
     ScrollIntentionEvent()
     {
     }
-    ~ScrollIntentionEvent()
+    ~ScrollIntentionEvent() override
     {
     }
 
@@ -80,7 +80,7 @@ class ColumnViewAttached : public QObject
 
 public:
     ColumnViewAttached(QObject *parent = nullptr);
-    ~ColumnViewAttached();
+    ~ColumnViewAttached() override;
 
     void setIndex(int index);
     int index() const;
@@ -267,7 +267,7 @@ public:
     Q_ENUM(ColumnResizeMode)
 
     ColumnView(QQuickItem *parent = nullptr);
-    ~ColumnView();
+    ~ColumnView() override;
 
     // QML property accessors
     ColumnResizeMode columnResizeMode() const;

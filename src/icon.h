@@ -156,7 +156,7 @@ public:
     Q_ENUM(Status)
 
     Icon(QQuickItem *parent = nullptr);
-    ~Icon();
+    ~Icon() override;
 
     void setSource(const QVariant &source);
     QVariant source() const;

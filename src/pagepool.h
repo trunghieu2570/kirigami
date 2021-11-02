@@ -57,7 +57,7 @@ class PagePool : public QObject
 
 public:
     PagePool(QObject *parent = nullptr);
-    ~PagePool();
+    ~PagePool() override;
 
     QUrl lastLoadedUrl() const;
     QQuickItem *lastLoadedItem() const;

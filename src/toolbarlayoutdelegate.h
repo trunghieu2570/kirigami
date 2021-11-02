@@ -50,7 +50,7 @@ class ToolBarLayoutDelegate : public QObject
     Q_OBJECT
 public:
     ToolBarLayoutDelegate(ToolBarLayout *parent);
-    ~ToolBarLayoutDelegate();
+    ~ToolBarLayoutDelegate() override;
 
     QObject *action() const;
     void setAction(QObject *action);

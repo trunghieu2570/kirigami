@@ -211,7 +211,7 @@ class ImageColors : public QObject
 
 public:
     explicit ImageColors(QObject *parent = nullptr);
-    ~ImageColors();
+    ~ImageColors() override;
 
     void setSource(const QVariant &source);
     QVariant source() const;

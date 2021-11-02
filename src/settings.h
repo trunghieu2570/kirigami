@@ -87,7 +87,7 @@ class Settings : public QObject
 
 public:
     Settings(QObject *parent = nullptr);
-    ~Settings();
+    ~Settings() override;
 
     void setTabletModeAvailable(bool mobile);
     bool isTabletModeAvailable() const;

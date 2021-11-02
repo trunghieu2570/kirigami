@@ -107,7 +107,7 @@ class KirigamiWheelEvent : public QObject
 
 public:
     KirigamiWheelEvent(QObject *parent = nullptr);
-    ~KirigamiWheelEvent();
+    ~KirigamiWheelEvent() override;
 
     void initializeFromEvent(QWheelEvent *event);
 
@@ -138,7 +138,7 @@ class GlobalWheelFilter : public QObject
 
 public:
     GlobalWheelFilter(QObject *parent = nullptr);
-    ~GlobalWheelFilter();
+    ~GlobalWheelFilter() override;
 
     static GlobalWheelFilter *self();
 

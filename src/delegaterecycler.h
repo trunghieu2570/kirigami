@@ -17,7 +17,7 @@ class DelegateRecyclerAttached : public QObject
 
 public:
     DelegateRecyclerAttached(QObject *parent = nullptr);
-    ~DelegateRecyclerAttached();
+    ~DelegateRecyclerAttached() override;
 
 Q_SIGNALS:
     void pooled();
@@ -54,7 +54,7 @@ class DelegateRecycler : public QQuickItem
 
 public:
     DelegateRecycler(QQuickItem *parent = nullptr);
-    ~DelegateRecycler();
+    ~DelegateRecycler() override;
 
     QQmlComponent *sourceComponent() const;
     void setSourceComponent(QQmlComponent *component);

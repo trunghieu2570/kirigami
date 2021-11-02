@@ -143,7 +143,7 @@ public:
     Q_ENUM(HeightMode)
 
     ToolBarLayout(QQuickItem *parent = nullptr);
-    ~ToolBarLayout();
+    ~ToolBarLayout() override;
 
     ActionsProperty actionsProperty() const;
     /**

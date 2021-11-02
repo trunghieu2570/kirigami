@@ -177,7 +177,7 @@ class BasicTheme : public PlatformTheme
 
 public:
     explicit BasicTheme(QObject *parent = nullptr);
-    ~BasicTheme();
+    ~BasicTheme() override;
 
     void sync();
 

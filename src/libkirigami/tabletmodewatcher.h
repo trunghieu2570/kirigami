@@ -36,7 +36,7 @@ class KIRIGAMI2_EXPORT TabletModeWatcher : public QObject
     Q_PROPERTY(bool tabletMode READ isTabletMode NOTIFY tabletModeChanged)
 
 public:
-    ~TabletModeWatcher();
+    ~TabletModeWatcher() override;
     static TabletModeWatcher *self();
 
     /**

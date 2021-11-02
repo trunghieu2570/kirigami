@@ -53,7 +53,7 @@ public:
     {
         setItem(item);
     }
-    virtual ~ParsedRoute()
+    ~ParsedRoute() override
     {
         if (item) {
             item->deleteLater();
@@ -171,7 +171,7 @@ class PreloadRouteGroup : public QObject
     PageRouterAttached *m_parent;
 
 public:
-    ~PreloadRouteGroup();
+    ~PreloadRouteGroup() override;
     void setRoute(QJSValue route)
     {
         m_route = route;
@@ -517,7 +517,7 @@ protected:
 
 public:
     PageRouter(QQuickItem *parent = nullptr);
-    ~PageRouter();
+    ~PageRouter() override;
 
     QQmlListProperty<PageRoute> routes();
 

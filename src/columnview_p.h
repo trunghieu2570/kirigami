@@ -23,7 +23,7 @@ class QmlComponentsPool : public QObject
 
 public:
     QmlComponentsPool(QQmlEngine *engine);
-    ~QmlComponentsPool();
+    ~QmlComponentsPool() override;
 
     QQmlComponent *m_separatorComponent = nullptr;
     QQmlComponent *m_rightSeparatorComponent = nullptr;
@@ -43,7 +43,7 @@ class ContentItem : public QQuickItem
 
 public:
     ContentItem(ColumnView *parent = nullptr);
-    ~ContentItem();
+    ~ContentItem() override;
 
     void layoutItems();
     void layoutPinnedItems();
