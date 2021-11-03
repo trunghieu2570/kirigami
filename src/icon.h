@@ -225,7 +225,7 @@ private:
     QImage m_loadedImage;
     QColor m_color = Qt::transparent;
     QString m_fallback = QStringLiteral("unknown");
-    QString m_placeholder = QStringLiteral("image-x-icon");
+    QString m_placeholder = QStringLiteral("image-png");
     qreal m_paintedWidth = 0.0;
     qreal m_paintedHeight = 0.0;
 
