@@ -35,6 +35,10 @@ kirigami_add_tests(
     tst_mnemonicdata.qml
     pagepool/tst_pagepool.qml
     pagepool/tst_layers.qml
+    wheelhandler/tst_filterMouseEvents.qml
+    wheelhandler/tst_invokables.qml
+    wheelhandler/tst_onWheel.qml
+    wheelhandler/tst_scrolling.qml
 )
 
 set_tests_properties(tst_theme.qml PROPERTIES
