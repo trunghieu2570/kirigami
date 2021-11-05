@@ -1,3 +1,3 @@
-Kirgami.Icon {
+Kirigami.Icon {
     source: "qrc:/kirigami.svg"
 }
