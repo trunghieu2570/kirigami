@@ -360,7 +360,7 @@ T.Control {
                 windowProperties.minimumHeight = Units.gridUnit * 15;
             }
             if (!windowProperties.flags) {
-                windowProperties.flags = Qt.Dialog | Qt.WindowCloseButtonHint;
+                windowProperties.flags = Qt.Dialog | Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowCloseButtonHint;
             }
             const windowComponent = Qt.createComponent(Qt.resolvedUrl("./ApplicationWindow.qml"));
             const window = windowComponent.createObject(root, windowProperties);
