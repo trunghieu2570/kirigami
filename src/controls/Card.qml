@@ -12,11 +12,14 @@ import "private"
 
 /**
  * This is the standard layout of a Card.
+ *
  * It is recommended to use this class when the concept of Cards is needed
  * in the application.
+ *
  * This Card has default items as header and footer. The header is an
  * image that can contain an optional title and icon, accessible via the
  * banner grouped property.
+ *
  * The footer will show a series of toolbuttons (and eventual overflow menu)
  * representing the actions list accessible with the list property actions.
  * It is possible even tough is discouraged to override the footer:
@@ -29,25 +32,33 @@ Kirigami.AbstractCard {
     id: root
 
     /**
+     * @brief This property holds the clickable actions that will be available in the footer
+     * of the card.
+     *
+     * The actions will be represented by a list of ToolButtons with an optional overflow
+     * menu, when not all of them will fit in the available Card width.
+     *
+     * Internally this is using a org::kde:kirigami:ActionToolBar.
+     *
      * @property list<org::kde::kirigami::Action> Card::actions
-     * if the card should provide clickable actions, put them in this property,
-     * they will be put in the footer as a list of ToolButtons plus an optional
-     * overflow menu, when not all of them will fit in the available Card width.
      */
     property list<QtObject> actions
 
     /**
+     * This property holds the list of actions that you always want in the menu, even
+     * if there is enough space.
+     *
+     * @depracted Use actions with a `Kirigami.DisplayHint.AlwaysHide` as displayHint.
      * @property list<org::kde::kirigami::Action> hiddenActions
-     * This list of actions is for those you always want in the menu, even if there
-     * is enough space.
      * @since 2.6
      */
     property alias hiddenActions: actionsToolBar.hiddenActions
 
     /**
-     * @property Image Card::banner
-     * Groupped property to control the banner image present in the header, it
-     * has the following sub properties:
+     * @brief This property holds a grouped property that controls the banner image present in the header.
+     *
+     * This grouped property has the following sub-properties:
+     *
      * * url source: the source for the image, it understands any url
      *                    valid for an Image component
      * * string title: the title for the banner, shown as contrasting
@@ -62,6 +73,8 @@ Kirigami.AbstractCard {
      * * titleWrapMode: if the header should be able to do wrapping
      *
      * It also has the full set of properties a QML Image has, such as sourceSize and fillMode
+     *
+     * @property Image Card::banner
      */
     readonly property alias banner: bannerImage
 
