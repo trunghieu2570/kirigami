@@ -44,15 +44,6 @@ QQC2.Control {
     property alias source: avatarImage.source
 
     /**
-     * This property holds the source of the internal Kirigami.Icon used. It is displayed
-     * when using an icon with `Avatar.InitialsMode.UseIcon` and `Avatar.ImageNode.AlwaysShowInitials`
-     * enabled.
-     *
-     * By default this is a generic user icon.
-     */
-    property alias iconSource: avatarIcon.source
-
-    /**
      * This property holds how the button should represent the user when there is no image available.
      *
      * Possible values are:
