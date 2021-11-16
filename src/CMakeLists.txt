@@ -3,46 +3,82 @@ if (BUILD_SHARED_LIBS)
 else()
     set(KIRIGAMI_STATIC_FILES
         libkirigami/basictheme.cpp
-        libkirigami/platformtheme.cpp
-        libkirigami/styleselector.cpp
-        libkirigami/tabletmodewatcher.cpp
+        libkirigami/basictheme_p.h
         libkirigami/kirigamipluginfactory.cpp
+        libkirigami/kirigamipluginfactory.h
+        libkirigami/platformtheme.cpp
+        libkirigami/platformtheme.h
+        libkirigami/styleselector.cpp
+        libkirigami/styleselector_p.h
+        libkirigami/tabletmodewatcher.cpp
+        libkirigami/tabletmodewatcher.h
         libkirigami/units.cpp
+        libkirigami/units.h
         ${CMAKE_CURRENT_BINARY_DIR}/libkirigami/loggingcategory.cpp)
 endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libkirigami ${CMAKE_CURRENT_BINARY_DIR}/libkirigami)
 
 set(kirigami_SRCS
-    kirigamiplugin.cpp
-    columnview.cpp
-    enums.cpp
-    delegaterecycler.cpp
-    icon.cpp
-    settings.cpp
-    formlayoutattached.cpp
-    pagepool.cpp
-    imagecolors.cpp
-    scenepositionattached.cpp
-    mnemonicattached.cpp
-    wheelhandler.cpp
-    shadowedrectangle.cpp
-    shadowedtexture.cpp
-    colorutils.cpp
-    pagerouter.cpp
     avatar.cpp
+    avatar.h
+    colorutils.cpp
+    colorutils.h
+    columnview.cpp
+    columnview.h
+    columnview_p.h
+    delegaterecycler.cpp
+    delegaterecycler.h
+    enums.cpp
+    enums.h
+    formlayoutattached.cpp
+    formlayoutattached.h
+    icon.cpp
+    icon.h
+    imagecolors.cpp
+    imagecolors.h
+    kirigamiplugin.cpp
+    kirigamiplugin.h
+    mnemonicattached.cpp
+    mnemonicattached.h
+    pagepool.cpp
+    pagepool.h
+    pagerouter.cpp
+    pagerouter.h
+    scenegraph/managedtexturenode.cpp
+    scenegraph/managedtexturenode.h
+    scenegraph/paintedrectangleitem.cpp
+    scenegraph/paintedrectangleitem.h
+    scenegraph/shadowedborderrectanglematerial.cpp
+    scenegraph/shadowedborderrectanglematerial.h
+    scenegraph/shadowedbordertexturematerial.cpp
+    scenegraph/shadowedbordertexturematerial.h
+    scenegraph/shadowedrectanglematerial.cpp
+    scenegraph/shadowedrectanglematerial.h
+    scenegraph/shadowedrectanglenode.cpp
+    scenegraph/shadowedrectanglenode.h
+    scenegraph/shadowedtexturematerial.cpp
+    scenegraph/shadowedtexturematerial.h
+    scenegraph/shadowedtexturenode.cpp
+    scenegraph/shadowedtexturenode.h
+    scenepositionattached.cpp
+    scenepositionattached.h
+    settings.cpp
+    settings.h
+    shadowedrectangle.cpp
+    shadowedrectangle.h
+    shadowedtexture.cpp
+    shadowedtexture.h
+    sizegroup.cpp
+    sizegroup.h
+    spellcheckinghint.cpp
+    spellcheckinghint.h
     toolbarlayout.cpp
     toolbarlayoutdelegate.cpp
-    sizegroup.cpp
-    spellcheckinghint.cpp
-    scenegraph/managedtexturenode.cpp
-    scenegraph/shadowedrectanglenode.cpp
-    scenegraph/shadowedrectanglematerial.cpp
-    scenegraph/shadowedborderrectanglematerial.cpp
-    scenegraph/paintedrectangleitem.cpp
-    scenegraph/shadowedtexturenode.cpp
-    scenegraph/shadowedtexturematerial.cpp
-    scenegraph/shadowedbordertexturematerial.cpp
+    toolbarlayoutdelegate.h
+    toolbarlayout.h
+    wheelhandler.cpp
+    wheelhandler.h
     ${CMAKE_CURRENT_BINARY_DIR}/libkirigami/loggingcategory.cpp
     ${kirigami_QM_LOADER}
     ${KIRIGAMI_STATIC_FILES}
