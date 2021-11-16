@@ -30,14 +30,25 @@ CardsGridViewPrivate {
     id: root
 
     /**
+     * Fill first row with columns even when there is not enough delegates
+     * to fully fill the row (width). When true it will automatically fill
+     * the row with columns, when false there will be as many columns as
+     * there are delegates when on enough space.
+     * default: true
+     */
+    property bool extraColumns: true
+
+    /**
      * This property holds the the number of columns the gridview has.
      * @since 2.5
      */
-    readonly property int columns: Math.max(1,
-                        Math.min(maximumColumns > 0 ? maximumColumns : Infinity,
-                                 Math.floor(width/minimumColumnWidth),
-                                 Math.ceil(width/maximumColumnWidth))
-                       );
+    readonly property int columns: {
+        var maxColumns = maximumColumns > 0 ? maximumColumns : Infinity
+        var minFromWidth = Math.floor(width / minimumColumnWidth)
+        var maxFromWidth = Math.ceil(width / maximumColumnWidth)
+        var extraCount = extraColumns ? Infinity : count
+        return Math.max(1,Math.min(maxColumns,minFromWidth,maxFromWidth,extraCount))
+    }
 
     /**
      * This property holds the maximum number of columns.
