@@ -106,8 +106,8 @@ Kirigami.AbstractApplicationHeader {
             Layout.preferredHeight: -1
             property Kirigami.PageRow pageRow: root
 
-            visible: layerIsMainRow && active
-            enabled: visible
+            opacity: layerIsMainRow && active
+            enabled: opacity > 0
 
             asynchronous: true
 
@@ -115,6 +115,13 @@ Kirigami.AbstractApplicationHeader {
 
             //TODO: different implementation?
             source: globalToolBar.actualStyle == Kirigami.ApplicationHeaderStyle.TabBar ? Qt.resolvedUrl("TabBarControl.qml") : Qt.resolvedUrl("BreadcrumbControl.qml")
+
+            Behavior on opacity {
+                OpacityAnimator {
+                    duration: Kirigami.Units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
+            }
         }
 
         Item {
@@ -130,6 +137,6 @@ Kirigami.AbstractApplicationHeader {
             Layout.preferredWidth: height
         }
     }
-    background.visible: breadcrumbLoader.visible
+    background.opacity: breadcrumbLoader.opacity
 }
 
