@@ -200,7 +200,7 @@ Controls.Popup {
                 }
                 radius: Kirigami.Units.smallSpacing * 2
                 color: Kirigami.Theme.backgroundColor
-                opacity: 0.6
+                opacity: 0.9
             }
         }
     }
