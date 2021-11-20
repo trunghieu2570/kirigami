@@ -315,12 +315,12 @@ Loader {
                     rightPadding: 0; bottomPadding: 0
 
                     // height of everything else in the dialog other than the content
-                    property real otherHeights: mobileDialog.header.height + mobileDialog.footer.height + mobileDialog.topPadding + mobileDialog.bottomPadding;
+                    property real otherHeights: dialogMobile.header.height + dialogMobile.footer.height + dialogMobile.topPadding + dialogMobile.bottomPadding;
 
-                    property real calculatedMaximumWidth: mobileDialog.maximumWidth > mobileDialog.absoluteMaximumWidth ? mobileDialog.absoluteMaximumWidth : mobileDialog.maximumWidth
-                    property real calculatedMaximumHeight: mobileDialog.maximumHeight > mobileDialog.absoluteMaximumHeight ? mobileDialog.absoluteMaximumHeight : mobileDialog.maximumHeight
-                    property real calculatedImplicitWidth: (mobileDialog.mainItem.implicitWidth ? mobileDialog.mainItem.implicitWidth : mobileDialog.mainItem.width) + leftPadding + rightPadding
-                    property real calculatedImplicitHeight: (mobileDialog.mainItem.implicitHeight ? mobileDialog.mainItem.implicitHeight : mobileDialog.mainItem.height) + topPadding + bottomPadding
+                    property real calculatedMaximumWidth: root.maximumWidth > root.absoluteMaximumWidth ? root.absoluteMaximumWidth : root.maximumWidth
+                    property real calculatedMaximumHeight: root.maximumHeight > root.absoluteMaximumHeight ? root.absoluteMaximumHeight : root.maximumHeight
+                    property real calculatedImplicitWidth: (root.mainItem.implicitWidth ? root.mainItem.implicitWidth : root.mainItem.width) + leftPadding + rightPadding
+                    property real calculatedImplicitHeight: (root.mainItem.implicitHeight ? root.mainItem.implicitHeight : root.mainItem.height) + topPadding + bottomPadding
 
                     // don't enforce preferred width and height if not set
                     Layout.preferredWidth: root.preferredWidth >= 0 ? root.preferredWidth : calculatedImplicitWidth
@@ -633,4 +633,7 @@ Loader {
 
     asynchronous: true
     sourceComponent: Kirigami.Settings.isMobile ? mobileDialog : desktopDialog
+    onActiveChanged: if (Kirigami.Settings.isMobile && active) {
+        item.open()
+    }
 }
