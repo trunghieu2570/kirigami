@@ -84,6 +84,7 @@ Item
         id: personDelegate
 
         RowLayout {
+            Layout.fillWidth: true
             height: implicitHeight + (Units.smallSpacing * 2)
             property bool hasRemoteAvatar: (typeof(modelData.ocsUsername) !== "undefined" && modelData.ocsUsername.length > 0)
 
@@ -95,42 +96,38 @@ Item
                 source: hasRemoteAvatar && remoteAvatars.checked ? "https://store.kde.org/avatar/%1?s=%2".arg(modelData.ocsUsername).arg(width * Screen.devicePixelRatio) : "user"
             }
             QQC2.Label {
-                text: modelData.name
+                Layout.fillWidth: true
+                readonly property bool withTask: typeof(modelData.task) !== "undefined" && modelData.task.length > 0
+                text: withTask ? qsTr("%1 (%2)").arg(modelData.name).arg(modelData.task) : modelData.name
+                wrapMode: Text.WordWrap
             }
-            QQC2.Label {
-                visible: typeof(modelData.task) !== "undefined" && modelData.task.length > 0
-                text: qsTr("(%1)").arg(modelData.task)
+
+            QQC2.ToolButton {
+                visible: typeof(modelData.ocsUsername) !== "undefined" && modelData.ocsUsername.length > 0
+                width: height
+                icon.name: "get-hot-new-stuff"
+                QQC2.ToolTip.delay: Units.toolTipDelay
+                QQC2.ToolTip.visible: hovered
+                QQC2.ToolTip.text: qsTr("Visit %1's KDE Store page").arg(modelData.name)
+                onClicked: Qt.openUrlExternally("https://store.kde.org/u/%1".arg(modelData.ocsUsername))
             }
-            Row {
-                // Group action buttons together
-                spacing: 0
-                QQC2.ToolButton {
-                    visible: typeof(modelData.ocsUsername) !== "undefined" && modelData.ocsUsername.length > 0
-                    width: height
-                    icon.name: "get-hot-new-stuff"
-                    QQC2.ToolTip.delay: Units.toolTipDelay
-                    QQC2.ToolTip.visible: hovered
-                    QQC2.ToolTip.text: qsTr("Visit %1's KDE Store page").arg(modelData.name)
-                    onClicked: Qt.openUrlExternally("https://store.kde.org/u/%1".arg(modelData.ocsUsername))
-                }
-                QQC2.ToolButton {
-                    visible: typeof(modelData.emailAddress) !== "undefined" && modelData.emailAddress.length > 0
-                    width: height
-                    icon.name: "mail-sent"
-                    QQC2.ToolTip.delay: Units.toolTipDelay
-                    QQC2.ToolTip.visible: hovered
-                    QQC2.ToolTip.text: qsTr("Send an email to %1").arg(modelData.emailAddress)
-                    onClicked: Qt.openUrlExternally("mailto:%1".arg(modelData.emailAddress))
-                }
-                QQC2.ToolButton {
-                    visible: typeof(modelData.webAddress) !== "undefined" && modelData.webAddress.length > 0
-                    width: height
-                    icon.name: "globe"
-                    QQC2.ToolTip.delay: Units.toolTipDelay
-                    QQC2.ToolTip.visible: hovered
-                    QQC2.ToolTip.text: (typeof(modelData.webAddress) === "undefined" && modelData.webAddress.length > 0) ? "" : modelData.webAddress
-                    onClicked: Qt.openUrlExternally(modelData.webAddress)
-                }
+            QQC2.ToolButton {
+                visible: typeof(modelData.emailAddress) !== "undefined" && modelData.emailAddress.length > 0
+                width: height
+                icon.name: "mail-sent"
+                QQC2.ToolTip.delay: Units.toolTipDelay
+                QQC2.ToolTip.visible: hovered
+                QQC2.ToolTip.text: qsTr("Send an email to %1").arg(modelData.emailAddress)
+                onClicked: Qt.openUrlExternally("mailto:%1".arg(modelData.emailAddress))
+            }
+            QQC2.ToolButton {
+                visible: typeof(modelData.webAddress) !== "undefined" && modelData.webAddress.length > 0
+                width: height
+                icon.name: "globe"
+                QQC2.ToolTip.delay: Units.toolTipDelay
+                QQC2.ToolTip.visible: hovered
+                QQC2.ToolTip.text: (typeof(modelData.webAddress) === "undefined" && modelData.webAddress.length > 0) ? "" : modelData.webAddress
+                onClicked: Qt.openUrlExternally(modelData.webAddress)
             }
         }
     }
@@ -155,6 +152,7 @@ Item
             Heading {
                 Layout.fillWidth: true
                 text: aboutItem.aboutData.displayName + " " + aboutItem.aboutData.version
+                wrapMode: Text.WordWrap
             }
             Heading {
                 Layout.fillWidth: true
@@ -181,16 +179,22 @@ Item
             Layout.leftMargin: Units.gridUnit
             text: aboutData.otherText
             visible: text.length > 0
+            wrapMode: Text.WordWrap
+            Layout.fillWidth: true
         }
         QQC2.Label {
             Layout.leftMargin: Units.gridUnit
             text: aboutData.copyrightStatement
             visible: text.length > 0
+            wrapMode: Text.WordWrap
+            Layout.fillWidth: true
         }
         UrlButton {
             Layout.leftMargin: Units.gridUnit
             url: aboutData.homepage
             visible: url.length > 0
+            wrapMode: Text.WordWrap
+            Layout.fillWidth: true
         }
 
         OverlaySheet {
@@ -215,6 +219,8 @@ Item
                 Layout.leftMargin: Units.smallSpacing
                 QQC2.Label { text: qsTr("License:") }
                 LinkButton {
+                    Layout.fillWidth: true
+                    wrapMode: Text.WordWrap
                     text: modelData.name
                     onClicked: {
                         licenseSheet.text = modelData.text
@@ -227,10 +233,11 @@ Item
 
         Component {
             id: licenseTextItem
-
-            RowLayout {
+            QQC2.Label {
                 Layout.leftMargin: Units.smallSpacing
-                QQC2.Label { text: qsTr("License: %1").arg(modelData.name) }
+                Layout.fillWidth: true
+                wrapMode: Text.WordWrap
+                text: qsTr("License: %1").arg(modelData.name)
             }
         }
 
@@ -242,12 +249,16 @@ Item
         Heading {
             FormData.isSection: visible
             text: qsTr("Libraries in use")
+            Layout.fillWidth: true
+            wrapMode: Text.WordWrap
             visible: Settings.information
         }
         Repeater {
             model: Settings.information
             delegate: QQC2.Label {
                 Layout.leftMargin: Units.gridUnit
+                Layout.fillWidth: true
+                wrapMode: Text.WordWrap
                 id: libraries
                 text: modelData
             }
@@ -255,6 +266,8 @@ Item
         Repeater {
             model: aboutData.components
             delegate: QQC2.Label {
+                Layout.fillWidth: true
+                wrapMode: Text.WordWrap
                 Layout.leftMargin: Units.gridUnit
                 text: modelData.name + (modelData.version === "" ? "" : " %1".arg(modelData.version))
             }
@@ -263,6 +276,7 @@ Item
             Layout.fillWidth: true
             FormData.isSection: visible
             text: qsTr("Authors")
+            wrapMode: Text.WordWrap
             visible: aboutData.authors.length > 0
         }
         QQC2.CheckBox {
