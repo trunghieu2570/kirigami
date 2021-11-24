@@ -94,7 +94,5 @@ ScrollablePage
         id: aboutItem
 
         _usePageStack: applicationWindow().pageStack ? true : false
-
-        anchors.centerIn: parent
     }
 }

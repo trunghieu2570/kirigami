@@ -77,6 +77,9 @@ Item
     /** @internal */
     default property alias _content: form.data
 
+    implicitHeight: form.implicitHeight
+    implicitWidth: form.implicitWidth
+
     Component {
         id: personDelegate
 
