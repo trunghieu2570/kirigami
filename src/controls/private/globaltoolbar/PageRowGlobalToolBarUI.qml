@@ -56,7 +56,7 @@ Kirigami.AbstractApplicationHeader {
         Private.PrivateActionToolButton {
             id: menuButton
             visible: !Kirigami.Settings.isMobile && applicationWindow().globalDrawer && "isMenu" in applicationWindow().globalDrawer && applicationWindow().globalDrawer.isMenu
-            icon.name: "application-menu"
+            icon.name: "open-menu-symbolic"
             showMenuArrow: false
 
             Layout.preferredHeight: Math.min(backButton.implicitHeight, parent.height)

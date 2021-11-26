@@ -24,4 +24,4 @@ target_link_libraries(minimal kirigamiplugin Qt5::Core  Qt5::Qml Qt5::Quick Qt5:
 
 #install(TARGETS minimal ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
-kirigami_package_breeze_icons(ICONS application-menu document-decrypt folder-sync go-next go-previous go-up handle-left handle-right view-list-icons applications-graphics media-record-symbolic)
+kirigami_package_breeze_icons(ICONS open-menu-symbolic document-decrypt folder-sync go-next go-previous go-up handle-left handle-right view-list-icons applications-graphics media-record-symbolic)
