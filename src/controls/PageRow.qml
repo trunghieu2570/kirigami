@@ -371,6 +371,7 @@ T.Control {
                 }
             });
         }
+        item.Keys.escapePressed.connect(function() { item.closeDialog() });
         return item;
     }
 

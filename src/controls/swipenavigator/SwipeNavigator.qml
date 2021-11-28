@@ -108,6 +108,7 @@ Item {
             const window = windowComponent.createObject(swipeNavigatorRoot, windowProperties);
             item = window.pageStack.push(page, properties);
         }
+        item.Keys.escapePressed.connect(function() { item.closeDialog() });
         return item;
     }
 
