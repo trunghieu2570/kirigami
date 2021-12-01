@@ -69,17 +69,32 @@ QQC2.Label {
      */
     property int type: Heading.Type.Normal
 
-    font.pointSize: headerPointSize(level)
+    font.pointSize: __headerPointSize(level)
     font.weight: type === Heading.Type.Primary ? Font.DemiBold : Font.Normal
 
     opacity: type === Heading.Type.Secondary ? 0.7 : 1
 
     Accessible.role: Accessible.Heading
 
+    // TODO KF6: Remove this public method
     function headerPointSize(l) {
-        var n = Theme.defaultFont.pointSize;
-        var s;
-        switch (l) {
+        console.warn("org.kde.plasma.extras/Heading::headerPointSize() is deprecated. Use font.pointSize directly instead");
+        return __headerPointSize(l);
+    }
+
+    //
+    //  W A R N I N G
+    //  -------------
+    //
+    // This method is not part of the Kirigami API.  It exists purely as an
+    // implementation detail.  It may change from version to
+    // version without notice, or even be removed.
+    //
+    // We mean it.
+    //
+    function __headerPointSize(level) {
+        const n = Theme.defaultFont.pointSize;
+        switch (level) {
         case 1:
             return n * 1.35 + step;
         case 2:
