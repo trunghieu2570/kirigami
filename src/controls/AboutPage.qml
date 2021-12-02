@@ -80,12 +80,15 @@ ScrollablePage
         text: qsTr("Report Bug…")
         icon.name: "tools-report-bug"
         onTriggered: {
-            const component = page.aboutData.productName ? page.aboutData.productName.replace(`${page.aboutData.componentName}/`, '') : page.aboutData.componentName
-
             if (page.aboutData.bugAddress === "submit@bugs.kde.org") {
-                Qt.openUrlExternally("https://bugs.kde.org/enter_bug.cgi")
+                const elements = page.aboutData.productName.split('/');
+                let url = `https://bugs.kde.org/enter_bug.cgi?format=guided&product=${elements[0]}&version=${page.aboutData.version}`;
+                if (elements.length === 2) {
+                    url += "&component=" + elements[1]
+                }
+                Qt.openUrlExternally(url)
             } else {
-                Qt.openUrlExternally(`${page.aboutData.bugAddress}&component=${component}&version=${page.aboutData.version}`)
+                Qt.openUrlExternally(page.aboutData.bugAddress)
             }
         }
     }
