@@ -17,7 +17,7 @@ import "../private"
 
 /**
  * @brief An overlay sheet that covers the current Page content.
- * 
+ *
  * Its contents can be scrolled up or down, scrolling all the way up or
  * all the way down, dismisses it.
  * Use this for big, modal dialogs or information display, that can't be
@@ -111,7 +111,7 @@ QtObject {
         level: 1
         text: root.title
         elide: Text.ElideRight
-        
+
         // use tooltip for long text that is elided
         ToolTip.visible: truncated && titleHoverHandler.hovered
         ToolTip.text: root.title
@@ -146,12 +146,12 @@ QtObject {
     /**
      * title: string
      * This property holds the sheet title.
-     * 
+     *
      * Note: If the header property is set, this will have no effect as the heading will be replaced by the header.
      * @since 5.84
      */
     property string title
-    
+
     property Item parent
 
     /**
@@ -601,7 +601,7 @@ QtObject {
                         Theme.colorSet: Theme.Header
                         Theme.inherit: false
                         color: Theme.backgroundColor
-                        
+
                         function initHeader() {
                             if (header) {
                                 header.parent = headerParent;
@@ -610,7 +610,7 @@ QtObject {
                                 //TODO: special case for actual ListViews
                             }
                         }
-                        
+
                         Item {
                             id: headerParent
                             implicitHeight: header ? header.implicitHeight : 0
@@ -622,11 +622,11 @@ QtObject {
                             }
                         }
                         Icon {
+                            id: closeIcon
                             // We want to position the close button in the top-right
                             // corner if the header is very tall, but we want to
                             // vertically center it in a short header
                             readonly property bool tallHeader: headerItem.height > (Units.iconSizes.smallMedium + Units.largeSpacing + Units.largeSpacing)
-                            id: closeIcon
                             anchors {
                                 right: parent.right
                                 rightMargin: Units.largeSpacing
