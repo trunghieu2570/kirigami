@@ -4,11 +4,12 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.7
-import QtQuick.Window 2.2
+import QtQuick 2.15
+import QtQuick.Window 2.15
 import QtQuick.Controls 2.0 as QQC2
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.2
+import QtQml 2.15
 import org.kde.kirigami 2.4
 import "../templates/private" as P
 
@@ -175,6 +176,7 @@ P.ScrollView {
             Binding {
                 target: root.contentItem
                 property: "width"
+                restoreMode: Binding.RestoreBinding
                 value: root.flickableItem.width
                 when: root.horizontalScrollBarPolicy == Qt.ScrollBarAlwaysOff
             }
