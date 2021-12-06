@@ -623,18 +623,33 @@ QtObject {
                         }
                         Icon {
                             id: closeIcon
-                            // We want to position the close button in the top-right
-                            // corner if the header is very tall, but we want to
-                            // vertically center it in a short header
+
                             readonly property bool tallHeader: headerItem.height > (Units.iconSizes.smallMedium + Units.largeSpacing + Units.largeSpacing)
+
                             anchors {
                                 right: parent.right
                                 rightMargin: Units.largeSpacing
-                                top: tallHeader ? parent.top : undefined
-                                topMargin: tallHeader ? Units.largeSpacing : undefined
-                                verticalCenter: tallHeader ? undefined : headerItem.verticalCenter
+                                verticalCenter: headerItem.verticalCenter
                                 margins: Units.smallSpacing
                             }
+
+                            // Apply the changes to the anchors imperatively, to first disable an anchor point
+                            // before setting the new one, so the icon don't grow unexpectedly
+                            onTallHeaderChanged: {
+                                if (tallHeader) {
+                                    // We want to position the close button in the top-right corner if the header is very tall
+                                    anchors.verticalCenter = undefined
+                                    anchors.topMargin = Units.largeSpacing
+                                    anchors.top = headerItem.top
+                                } else {
+                                    // but we want to vertically center it in a short header
+                                    anchors.top = undefined
+                                    anchors.topMargin = undefined
+                                    anchors.verticalCenter = headerItem.verticalCenter
+                                }
+                            }
+                            Component.onCompleted: tallHeaderChanged()
+
                             z: 3
                             visible: root.showCloseButton
                             width: Units.iconSizes.smallMedium
