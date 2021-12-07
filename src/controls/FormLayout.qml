@@ -353,7 +353,7 @@ Item {
                     if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof TextArea)) {
                         return Math.max(implicitHeight, item.Kirigami.FormData.buddyFor.height)
                     }
-                    return implicitHeight
+                    //return implicitHeight
                 }
                 return Kirigami.Units.smallSpacing;
             }
