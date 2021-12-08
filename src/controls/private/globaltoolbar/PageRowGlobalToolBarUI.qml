@@ -13,7 +13,9 @@ import "../" as Private
 
 Kirigami.AbstractApplicationHeader {
     id: header
-    readonly property int leftReservedSpace: (buttonsLayout.visible && buttonsLayout.visibleChildren.length > 0 ? buttonsLayout.width : 0) + (leftHandleAnchor.visible ? leftHandleAnchor.width  : 0) + (menuButton.visible ? menuButton.width  : 0)
+    readonly property int leftReservedSpace: (buttonsLayout.visible && buttonsLayout.visibleChildren.length > 0 ? buttonsLayout.width : 0)
+        + (leftHandleAnchor.visible ? leftHandleAnchor.width : 0)
+        + (menuButton.visible ? menuButton.width : 0)
     readonly property int rightReservedSpace: rightHandleAnchor.visible ? backButton.background.implicitHeight : 0
 
     readonly property alias leftHandleAnchor: leftHandleAnchor
@@ -75,7 +77,8 @@ Kirigami.AbstractApplicationHeader {
 
             Layout.leftMargin: leftHandleAnchor.visible ? Kirigami.Units.smallSpacing : 0
 
-            visible: (globalToolBar.showNavigationButtons != Kirigami.ApplicationHeaderStyle.NoNavigationButtons || root.layers.depth > 1) && (globalToolBar.actualStyle != Kirigami.ApplicationHeaderStyle.None)
+            visible: (globalToolBar.showNavigationButtons != Kirigami.ApplicationHeaderStyle.NoNavigationButtons || root.layers.depth > 1)
+                && globalToolBar.actualStyle != Kirigami.ApplicationHeaderStyle.None
 
             Layout.maximumWidth: visibleChildren.length > 0 ? Layout.preferredWidth : 0
 
@@ -122,11 +125,10 @@ Kirigami.AbstractApplicationHeader {
                     applicationWindow().contextDrawer.handleVisible &&
                     applicationWindow().contextDrawer.handle.handleAnchor == rightHandleAnchor &&
                     (globalToolBar.canContainHandles || (breadcrumbLoader.pageRow && breadcrumbLoader.pageRow.lastVisibleItem &&
-            breadcrumbLoader.pageRow.lastVisibleItem.globalToolBarStyle == Kirigami.ApplicationHeaderStyle.ToolBar)))
+                        breadcrumbLoader.pageRow.lastVisibleItem.globalToolBarStyle == Kirigami.ApplicationHeaderStyle.ToolBar)))
             Layout.fillHeight: true
             Layout.preferredWidth: height
         }
     }
     background.opacity: breadcrumbLoader.active ? 1 : 0
 }
-

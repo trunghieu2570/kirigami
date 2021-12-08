@@ -9,8 +9,6 @@ import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.4
 
-
-
 AbstractPageHeader {
     id: root
 
@@ -27,8 +25,6 @@ AbstractPageHeader {
             : 0)
 
         asynchronous: true
-
         sourceComponent: page ? page.titleDelegate : null
     }
 }
-

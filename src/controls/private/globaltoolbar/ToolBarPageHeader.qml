@@ -11,7 +11,6 @@ import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.14
 import "../" as Private
 
-
 AbstractPageHeader {
     id: root
 
@@ -42,7 +41,6 @@ AbstractPageHeader {
             Layout.maximumWidth: item ? item.Layout.maximumWidth : undefined
 
             asynchronous: true
-
             sourceComponent: page ? page.titleDelegate : null
         }
 
@@ -98,4 +96,3 @@ AbstractPageHeader {
         }
     }
 }
-

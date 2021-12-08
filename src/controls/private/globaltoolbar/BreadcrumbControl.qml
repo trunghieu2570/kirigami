@@ -9,8 +9,6 @@ import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.4 as Kirigami
 
-
-
 Flickable {
     id: root
 
@@ -24,9 +22,9 @@ Flickable {
     boundsBehavior: Flickable.StopAtBounds
     interactive: Kirigami.Settings.hasTransientTouchInput
 
-    contentX: Math.max( 0,
+    contentX: Math.max(0,
         Math.min(currentItem.x + currentItem.width/2 - root.width/2,
-        root.contentWidth - root.width))
+                 root.contentWidth - root.width))
 
     RowLayout {
         id: mainLayout
@@ -92,5 +90,3 @@ Flickable {
         }
     }
 }
-
-
