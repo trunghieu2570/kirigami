@@ -11,7 +11,7 @@ QtObject {
     id: globalToolBar
     property int style: Kirigami.ApplicationHeaderStyle.None
     readonly property int actualStyle: {
-        if (style == Kirigami.ApplicationHeaderStyle.Auto) {
+        if (style === Kirigami.ApplicationHeaderStyle.Auto) {
             //Legacy: if ApplicationHeader or ToolbarApplicationHeader are in the header or footer, disable the toolbar here
             if (typeof applicationWindow !== "undefined" && applicationWindow().header && applicationWindow().header.toString().indexOf("ApplicationHeader") !== -1) {
                 return Kirigami.ApplicationHeaderStyle.None
@@ -27,7 +27,7 @@ QtObject {
         }
     }
 
-    property var showNavigationButtons: (style != Kirigami.ApplicationHeaderStyle.TabBar && (!Kirigami.Settings.isMobile || Qt.platform.os == "ios"))
+    property int/*flags NavigationButtons*/ showNavigationButtons: (style !== Kirigami.ApplicationHeaderStyle.TabBar && (!Kirigami.Settings.isMobile || Qt.platform.os === "ios"))
         ? (Kirigami.ApplicationHeaderStyle.ShowBackButton | Kirigami.ApplicationHeaderStyle.ShowForwardButton)
         : Kirigami.ApplicationHeaderStyle.NoNavigationButtons
     property bool separatorVisible: true
@@ -45,7 +45,7 @@ QtObject {
 
     property int minimumHeight: 0
     // FIXME: Figure out the exact standard size of a Toolbar
-    property int preferredHeight: (actualStyle == Kirigami.ApplicationHeaderStyle.ToolBar
+    property int preferredHeight: (actualStyle === Kirigami.ApplicationHeaderStyle.ToolBar
                     ? Kirigami.Units.iconSizes.medium
                     : Kirigami.Units.gridUnit * 1.8) + Kirigami.Units.smallSpacing * 2
     property int maximumHeight: preferredHeight
