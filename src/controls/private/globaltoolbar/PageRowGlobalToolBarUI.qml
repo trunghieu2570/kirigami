@@ -22,7 +22,7 @@ Kirigami.AbstractApplicationHeader {
     readonly property alias rightHandleAnchor: rightHandleAnchor
 
     readonly property bool breadcrumbVisible: layerIsMainRow && breadcrumbLoader.active
-    readonly property bool layerIsMainRow: (root.layers.currentItem.hasOwnProperty("columnView")) ? root.layers.currentItem.columnView == root.columnView : false
+    readonly property bool layerIsMainRow: (root.layers.currentItem.hasOwnProperty("columnView")) ? root.layers.currentItem.columnView === root.columnView : false
     readonly property Item currentItem: layerIsMainRow ? root.columnView : root.layers.currentItem
 
     height: visible ? implicitHeight : 0
@@ -46,9 +46,9 @@ Kirigami.AbstractApplicationHeader {
         Item {
             id: leftHandleAnchor
             visible: (typeof applicationWindow() !== "undefined" && applicationWindow().globalDrawer && applicationWindow().globalDrawer.enabled && applicationWindow().globalDrawer.handleVisible &&
-            applicationWindow().globalDrawer.handle.handleAnchor == leftHandleAnchor) &&
+            applicationWindow().globalDrawer.handle.handleAnchor === leftHandleAnchor) &&
             (globalToolBar.canContainHandles || (breadcrumbLoader.pageRow.firstVisibleItem &&
-            breadcrumbLoader.pageRow.firstVisibleItem.globalToolBarStyle == Kirigami.ApplicationHeaderStyle.ToolBar))
+            breadcrumbLoader.pageRow.firstVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar))
 
 
             Layout.preferredHeight: Math.min(backButton.implicitHeight, parent.height)
@@ -77,8 +77,9 @@ Kirigami.AbstractApplicationHeader {
 
             Layout.leftMargin: leftHandleAnchor.visible ? Kirigami.Units.smallSpacing : 0
 
+            // TODO KF6: make showNavigationButtons an int, and replace with strict === equality
             visible: (globalToolBar.showNavigationButtons != Kirigami.ApplicationHeaderStyle.NoNavigationButtons || root.layers.depth > 1)
-                && globalToolBar.actualStyle != Kirigami.ApplicationHeaderStyle.None
+                && globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None
 
             Layout.maximumWidth: visibleChildren.length > 0 ? Layout.preferredWidth : 0
 
@@ -111,10 +112,10 @@ Kirigami.AbstractApplicationHeader {
 
             asynchronous: true
 
-            active: (globalToolBar.actualStyle == Kirigami.ApplicationHeaderStyle.TabBar || globalToolBar.actualStyle == Kirigami.ApplicationHeaderStyle.Breadcrumb) && currentItem && currentItem.globalToolBarStyle != Kirigami.ApplicationHeaderStyle.None
+            active: (globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.TabBar || globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.Breadcrumb) && currentItem && currentItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.None
 
             //TODO: different implementation?
-            source: globalToolBar.actualStyle == Kirigami.ApplicationHeaderStyle.TabBar ? Qt.resolvedUrl("TabBarControl.qml") : Qt.resolvedUrl("BreadcrumbControl.qml")
+            source: globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.TabBar ? Qt.resolvedUrl("TabBarControl.qml") : Qt.resolvedUrl("BreadcrumbControl.qml")
         }
 
         Item {
@@ -123,9 +124,9 @@ Kirigami.AbstractApplicationHeader {
                     applicationWindow().contextDrawer &&
                     applicationWindow().contextDrawer.enabled &&
                     applicationWindow().contextDrawer.handleVisible &&
-                    applicationWindow().contextDrawer.handle.handleAnchor == rightHandleAnchor &&
+                    applicationWindow().contextDrawer.handle.handleAnchor === rightHandleAnchor &&
                     (globalToolBar.canContainHandles || (breadcrumbLoader.pageRow && breadcrumbLoader.pageRow.lastVisibleItem &&
-                        breadcrumbLoader.pageRow.lastVisibleItem.globalToolBarStyle == Kirigami.ApplicationHeaderStyle.ToolBar)))
+                        breadcrumbLoader.pageRow.lastVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar)))
             Layout.fillHeight: true
             Layout.preferredWidth: height
         }

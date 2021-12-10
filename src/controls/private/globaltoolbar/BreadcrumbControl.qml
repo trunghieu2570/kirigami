@@ -75,7 +75,7 @@ Flickable {
                         verticalAlignment: Text.AlignVCenter
                         wrapMode: Text.NoWrap
                         text: delegateLayout.page ? delegateLayout.page.title : ""
-                        opacity: modelData == pageRow.currentIndex ? 1 : 0.4
+                        opacity: modelData === pageRow.currentIndex ? 1 : 0.4
                         rightPadding: Kirigami.Units.largeSpacing
                     }
                 }
