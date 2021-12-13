@@ -90,10 +90,23 @@ Item
             spacing: Units.smallSpacing * 2
 
             Icon {
+                id: avatarIcon
+
                 implicitWidth: Units.iconSizes.medium
                 implicitHeight: implicitWidth
+
                 fallback: "user"
                 source: hasRemoteAvatar && remoteAvatars.checked ? "https://store.kde.org/avatar/%1?s=%2".arg(modelData.ocsUsername).arg(width) : "user"
+                visible: status !== Icon.Loading
+            }
+
+            // So it's clear that something is happening while avatar images are loaded
+            QQC2.BusyIndicator {
+                implicitWidth: Units.iconSizes.medium
+                implicitHeight: implicitWidth
+
+                visible: avatarIcon.status === Icon.Loading
+                running: visible
             }
 
             QQC2.Label {
