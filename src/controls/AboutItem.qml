@@ -92,7 +92,7 @@ Item
                 implicitWidth: Units.iconSizes.medium
                 implicitHeight: implicitWidth
                 fallback: "user"
-                source: hasRemoteAvatar && remoteAvatars.checked ? "https://store.kde.org/avatar/%1?s=%2".arg(modelData.ocsUsername).arg(width * Screen.devicePixelRatio) : "user"
+                source: hasRemoteAvatar && remoteAvatars.checked ? "https://store.kde.org/avatar/%1?s=%2".arg(modelData.ocsUsername).arg(width) : "user"
             }
             QQC2.Label {
                 Layout.fillWidth: true
