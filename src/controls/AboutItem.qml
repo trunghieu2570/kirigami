@@ -85,13 +85,12 @@ Item
 
         RowLayout {
             Layout.fillWidth: true
-            height: implicitHeight + (Units.smallSpacing * 2)
             property bool hasRemoteAvatar: (typeof(modelData.ocsUsername) !== "undefined" && modelData.ocsUsername.length > 0)
 
             spacing: Units.smallSpacing * 2
             Icon {
-                width: Units.iconSizes.smallMedium
-                height: width
+                implicitWidth: Units.iconSizes.medium
+                implicitHeight: implicitWidth
                 fallback: "user"
                 source: hasRemoteAvatar && remoteAvatars.checked ? "https://store.kde.org/avatar/%1?s=%2".arg(modelData.ocsUsername).arg(width * Screen.devicePixelRatio) : "user"
             }
@@ -104,7 +103,6 @@ Item
 
             QQC2.ToolButton {
                 visible: typeof(modelData.ocsUsername) !== "undefined" && modelData.ocsUsername.length > 0
-                width: height
                 icon.name: "get-hot-new-stuff"
                 QQC2.ToolTip.delay: Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
@@ -113,7 +111,6 @@ Item
             }
             QQC2.ToolButton {
                 visible: typeof(modelData.emailAddress) !== "undefined" && modelData.emailAddress.length > 0
-                width: height
                 icon.name: "mail-sent"
                 QQC2.ToolTip.delay: Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
@@ -122,7 +119,6 @@ Item
             }
             QQC2.ToolButton {
                 visible: typeof(modelData.webAddress) !== "undefined" && modelData.webAddress.length > 0
-                width: height
                 icon.name: "globe"
                 QQC2.ToolTip.delay: Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
