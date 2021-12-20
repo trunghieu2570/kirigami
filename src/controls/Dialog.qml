@@ -341,13 +341,6 @@ T.Dialog {
                 // we are okay with overflow, if it exceeds maximumHeight we will allow scrolling
                 value: contentControl.Layout.preferredHeight - contentControl.topPadding - contentControl.bottomPadding
             }
-            
-            // give explicit warnings since the maximumHeight is ignored when negative, so developers aren't confused
-            Component.onCompleted: {
-                if (contentControl.Layout.maximumHeight < 0 || contentControl.Layout.maximumHeight === Infinity) {
-                    console.log("Dialog Warning: the calculated maximumHeight for the content is less than zero, ignoring...");
-                }
-            }
         }
     }
     
