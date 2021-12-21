@@ -345,12 +345,8 @@ T.Dialog {
     }
     
     header: T.Control {
-        // we restrict the header width to the one preferred by the content (to let the 
-        // user decide how wide the dialog should be, rather than forcing header's implicit width)
-        property real maxWidth: contentItem.implicitWidth + root.leftPadding + root.rightPadding
-        
-        implicitWidth: Math.min(maxWidth, 
-                                Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding))
+        implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
+                                implicitContentWidth + leftPadding + rightPadding)
         implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
                                 implicitContentHeight + topPadding + bottomPadding)
         
