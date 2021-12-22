@@ -216,10 +216,49 @@ class ShadowedRectangle : public QQuickItem
      */
     Q_PROPERTY(CornersGroup *corners READ corners CONSTANT)
 
+    /**
+     * Render type of the rectangle and shadow.
+     *
+     * The default is Auto.
+     */
+    Q_PROPERTY(RenderType renderType READ renderType WRITE setRenderType CONSTANT)
+
     Q_PROPERTY(bool softwareRendering READ isSoftwareRendering NOTIFY softwareRenderingChanged)
 public:
     ShadowedRectangle(QQuickItem *parent = nullptr);
     ~ShadowedRectangle() override;
+
+    /**
+     * Available rendering types for ShadowedRectangle.
+     */
+    enum RenderType {
+        /**
+         * Automatically determine the optimal rendering type.
+         * This will use the highest rendering quality possible, falling back to
+         * lower quality if the hardware doesn't support it. It will use software
+         * rendering if the QtQuick scene graph is set to use software rendering.
+         */
+        Auto,
+        /**
+         * Use the highest rendering quality possible, even if the hardware might
+         * not be able to handle it normally.
+         */
+        HighQuality,
+        /**
+         * Use the lowest rendering quality, even if the hardware could handle 
+         * higher quality rendering. This might result in certain effects being
+         * omitted, like shadows.
+         */
+        LowQuality,
+        /**
+         * Always use software rendering for this rectangle.
+         * Software rendering is intended as a fallback when the QtQuick scene 
+         * graph is configured to use software rendering. It will result in 
+         * a number of missing features, like shadows and multiple corner radii.
+         */
+        Software 
+    };
+    Q_ENUM(RenderType)
 
     BorderGroup *border() const;
     ShadowGroup *shadow() const;
@@ -232,6 +271,10 @@ public:
     QColor color() const;
     void setColor(const QColor &newColor);
     Q_SIGNAL void colorChanged();
+
+    RenderType renderType() const;
+    void setRenderType(RenderType renderType);
+    Q_SIGNAL void renderTypeChanged();
 
     void componentComplete() override;
 
@@ -252,5 +295,6 @@ private:
     const std::unique_ptr<CornersGroup> m_corners;
     qreal m_radius = 0.0;
     QColor m_color = Qt::white;
+    RenderType m_renderType = RenderType::Auto;
     PaintedRectangleItem *m_softwareItem = nullptr;
 };

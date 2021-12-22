@@ -283,6 +283,7 @@ T.Dialog {
         Kirigami.Theme.inherit: false
         color: Kirigami.Theme.backgroundColor
         radius: Kirigami.Units.smallSpacing
+        renderType: Kirigami.ShadowedRectangle.HighQuality
         shadow {
             color: Qt.rgba(0,0,0,0.2)
             size: 15

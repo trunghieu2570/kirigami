@@ -254,6 +254,21 @@ void ShadowedRectangle::setColor(const QColor &newColor)
     Q_EMIT colorChanged();
 }
 
+ShadowedRectangle::RenderType ShadowedRectangle::renderType() const
+{
+    return m_renderType;
+}
+
+void ShadowedRectangle::setRenderType(RenderType renderType)
+{
+    if (renderType == m_renderType) {
+        return;
+    }
+    m_renderType = renderType;
+    update();
+    Q_EMIT renderTypeChanged();
+}
+
 void ShadowedRectangle::componentComplete()
 {
     QQuickItem::componentComplete();
@@ -263,7 +278,7 @@ void ShadowedRectangle::componentComplete()
 
 bool ShadowedRectangle::isSoftwareRendering() const
 {
-    return window() && window()->rendererInterface()->graphicsApi() == QSGRendererInterface::Software;
+    return (window() && window()->rendererInterface()->graphicsApi() == QSGRendererInterface::Software) || m_renderType == RenderType::Software;
 }
 
 PaintedRectangleItem *ShadowedRectangle::softwareItem() const
@@ -291,7 +306,7 @@ QSGNode *ShadowedRectangle::updatePaintNode(QSGNode *node, QQuickItem::UpdatePai
 
         // Cache lowPower state so we only execute the full check once.
         static bool lowPower = QByteArrayList{"1", "true"}.contains(qgetenv("KIRIGAMI_LOWPOWER_HARDWARE").toLower());
-        if (lowPower) {
+        if (m_renderType == RenderType::LowQuality || (m_renderType == RenderType::Auto && lowPower)) {
             shadowNode->setShaderType(ShadowedRectangleMaterial::ShaderType::LowPower);
         }
     }
