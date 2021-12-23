@@ -7,9 +7,9 @@
 
 #include "basictheme_p.h"
 
-#include <QGuiApplication>
-
 #include "styleselector_p.h"
+#include <QFile>
+#include <QGuiApplication>
 
 #include "loggingcategory.h"
 
