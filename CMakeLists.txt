@@ -21,14 +21,16 @@ option(UBUNTU_TOUCH "Build for Ubuntu Touch" OFF)
 if(DEFINED STATIC_LIBRARY)
     message(FATAL_ERROR "Use the BUILD_SHARED_LIBS=OFF option to build a static library, STATIC_LIBRARY is no longer a supported option")
 endif()
+find_package(ECM 5.89.0 NO_MODULE)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
 # Make CPack available to easy generate binary packages
 include(CPack)
 include(FeatureSummary)
-
-find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Core Quick Gui Svg QuickControls2 Concurrent)
+include(KDEInstallDirs)
+find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Core Quick Gui Svg QuickControls2 Concurrent)
 if (BUILD_TESTING)
-    find_package(Qt5QuickTest ${REQUIRED_QT_VERSION} CONFIG QUIET)
+    find_package(Qt${QT_MAJOR_VERSION}QuickTest ${REQUIRED_QT_VERSION} CONFIG QUIET)
 endif()
 set(CMAKE_AUTOMOC ON)
 set(AUTOMOC_MOC_OPTIONS -Muri=org.kde.kirigami)
@@ -42,11 +44,9 @@ endif()
 
 ################# set KDE specific information #################
 
-find_package(ECM 5.89.0 NO_MODULE)
-set_package_properties(ECM PROPERTIES TYPE REQUIRED DESCRIPTION "Extra CMake Modules." URL "https://commits.kde.org/extra-cmake-modules")
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
+set_package_properties(ECM PROPERTIES TYPE REQUIRED DESCRIPTION "Extra CMake Modules." URL "https://commits.kde.org/extra-cmake-modules")
 
 include(ECMGenerateExportHeader)
 include(ECMSetupVersion)
@@ -54,7 +54,6 @@ include(ECMGenerateHeaders)
 include(CMakePackageConfigHelpers)
 include(ECMPoQmTools)
 include(ECMQMLModules)
-include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDEGitCommitHooks)
 include(ECMQtDeclareLoggingCategory)
@@ -99,7 +98,7 @@ ecm_setup_version(${KF_VERSION}
 
 #use dbus on linux, bsd etc, but not android and apple stuff
 if (UNIX AND NOT ANDROID AND NOT(APPLE) AND NOT(DISABLE_DBUS))
-    find_package(Qt5DBus)
+    find_package(Qt${QT_MAJOR_VERSION}DBus)
     add_definitions(-DKIRIGAMI_ENABLE_DBUS)
 endif()
 
@@ -108,7 +107,7 @@ if (UBUNTU_TOUCH)
 endif()
 
 if(BUILD_EXAMPLES AND ANDROID)
-    find_package(Qt5AndroidExtras ${REQUIRED_QT_VERSION} REQUIRED)
+    find_package(Qt${QT_MAJOR_VERSION}AndroidExtras ${REQUIRED_QT_VERSION} REQUIRED)
 endif()
 
 
