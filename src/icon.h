@@ -46,6 +46,12 @@ class Icon : public QQuickItem
      * by resource URL.
      *
      * @note Use `fallback` to provide a fallback theme name for icons.
+     *
+     * @note Cuttlefish is a KDE application that lets you view all the icons that
+     * you can use for your application. It offers a number of useful features such
+     * as previews of their appearance across different installed themes, previews
+     * at different sizes, and more. You might find it a useful tool when deciding
+     * on which icons to use in your application.
      */
     Q_PROPERTY(QVariant source READ source WRITE setSource NOTIFY sourceChanged)
 
