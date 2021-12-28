@@ -101,7 +101,7 @@ OverlayDrawer {
 
     /**
      * footer: Component
-     * Arbitrary content that will go on top of the list (by default is empty)
+     * Arbitrary content that will go to the bottom of the list (by default is empty)
      * @since 2.7
      */
     property alias footer: menu.footer
