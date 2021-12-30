@@ -76,8 +76,13 @@ public:
     QElapsedTimer performanceTimer;
 
     static void appendAction(ToolBarLayout::ActionsProperty *list, QObject *action);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     static int actionCount(ToolBarLayout::ActionsProperty *list);
     static QObject *action(ToolBarLayout::ActionsProperty *list, int index);
+#else
+    static qsizetype actionCount(ToolBarLayout::ActionsProperty *list);
+    static QObject *action(ToolBarLayout::ActionsProperty *list, qsizetype index);
+#endif
     static void clearActions(ToolBarLayout::ActionsProperty *list);
 };
 
@@ -672,12 +677,20 @@ void ToolBarLayout::Private::appendAction(ToolBarLayout::ActionsProperty *list, 
     layout->addAction(action);
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 int ToolBarLayout::Private::actionCount(ToolBarLayout::ActionsProperty *list)
+#else
+qsizetype ToolBarLayout::Private::actionCount(ToolBarLayout::ActionsProperty *list)
+#endif
 {
     return reinterpret_cast<ToolBarLayout *>(list->data)->d->actions.count();
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 QObject *ToolBarLayout::Private::action(ToolBarLayout::ActionsProperty *list, int index)
+#else
+QObject *ToolBarLayout::Private::action(ToolBarLayout::ActionsProperty *list, qsizetype index)
+#endif
 {
     return reinterpret_cast<ToolBarLayout *>(list->data)->d->actions.at(index);
 }

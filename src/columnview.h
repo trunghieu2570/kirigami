@@ -448,13 +448,23 @@ Q_SIGNALS:
 
 private:
     static void contentChildren_append(QQmlListProperty<QQuickItem> *prop, QQuickItem *object);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     static int contentChildren_count(QQmlListProperty<QQuickItem> *prop);
     static QQuickItem *contentChildren_at(QQmlListProperty<QQuickItem> *prop, int index);
+#else
+    static qsizetype contentChildren_count(QQmlListProperty<QQuickItem> *prop);
+    static QQuickItem *contentChildren_at(QQmlListProperty<QQuickItem> *prop, qsizetype index);
+#endif
     static void contentChildren_clear(QQmlListProperty<QQuickItem> *prop);
 
     static void contentData_append(QQmlListProperty<QObject> *prop, QObject *object);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     static int contentData_count(QQmlListProperty<QObject> *prop);
     static QObject *contentData_at(QQmlListProperty<QObject> *prop, int index);
+#else
+    static qsizetype contentData_count(QQmlListProperty<QObject> *prop);
+    static QObject *contentData_at(QQmlListProperty<QObject> *prop, qsizetype index);
+#endif
     static void contentData_clear(QQmlListProperty<QObject> *prop);
 
     QList<QObject *> m_contentData;

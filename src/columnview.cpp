@@ -1646,7 +1646,11 @@ void ColumnView::contentChildren_append(QQmlListProperty<QQuickItem> *prop, QQui
     item->setParentItem(view->m_contentItem);
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 int ColumnView::contentChildren_count(QQmlListProperty<QQuickItem> *prop)
+#else
+qsizetype ColumnView::contentChildren_count(QQmlListProperty<QQuickItem> *prop)
+#endif
 {
     ColumnView *view = static_cast<ColumnView *>(prop->object);
     if (!view) {
@@ -1656,7 +1660,11 @@ int ColumnView::contentChildren_count(QQmlListProperty<QQuickItem> *prop)
     return view->m_contentItem->m_items.count();
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 QQuickItem *ColumnView::contentChildren_at(QQmlListProperty<QQuickItem> *prop, int index)
+#else
+QQuickItem *ColumnView::contentChildren_at(QQmlListProperty<QQuickItem> *prop, qsizetype index)
+#endif
 {
     ColumnView *view = static_cast<ColumnView *>(prop->object);
     if (!view) {
@@ -1721,7 +1729,11 @@ void ColumnView::contentData_append(QQmlListProperty<QObject> *prop, QObject *ob
     }
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 int ColumnView::contentData_count(QQmlListProperty<QObject> *prop)
+#else
+qsizetype ColumnView::contentData_count(QQmlListProperty<QObject> *prop)
+#endif
 {
     ColumnView *view = static_cast<ColumnView *>(prop->object);
     if (!view) {
@@ -1731,7 +1743,11 @@ int ColumnView::contentData_count(QQmlListProperty<QObject> *prop)
     return view->m_contentData.count();
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 QObject *ColumnView::contentData_at(QQmlListProperty<QObject> *prop, int index)
+#else
+QObject *ColumnView::contentData_at(QQmlListProperty<QObject> *prop, qsizetype index)
+#endif
 {
     ColumnView *view = static_cast<ColumnView *>(prop->object);
     if (!view) {
