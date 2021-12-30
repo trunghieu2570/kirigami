@@ -706,11 +706,19 @@ void ContentItem::itemChange(QQuickItem::ItemChange change, const QQuickItem::It
     QQuickItem::itemChange(change, value);
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void ContentItem::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
 {
     updateVisibleItems();
     QQuickItem::geometryChanged(newGeometry, oldGeometry);
 }
+#else
+void ContentItem::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
+{
+    updateVisibleItems();
+    QQuickItem::geometryChange(newGeometry, oldGeometry);
+}
+#endif
 
 void ContentItem::syncItemsOrder()
 {
@@ -1286,7 +1294,11 @@ ColumnViewAttached *ColumnView::qmlAttachedProperties(QObject *object)
     return new ColumnViewAttached(object);
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void ColumnView::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
+#else
+void ColumnView::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
+#endif
 {
     m_contentItem->setY(m_topPadding);
     m_contentItem->setHeight(newGeometry.height() - m_topPadding - m_bottomPadding);
@@ -1294,7 +1306,11 @@ void ColumnView::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeo
     polish();
 
     m_contentItem->updateVisibleItems();
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QQuickItem::geometryChanged(newGeometry, oldGeometry);
+#else
+    QQuickItem::geometryChange(newGeometry, oldGeometry);
+#endif
 }
 
 bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)

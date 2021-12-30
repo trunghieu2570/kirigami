@@ -310,12 +310,20 @@ void ToolBarLayout::componentComplete()
     relayout();
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void ToolBarLayout::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
+#else
+void ToolBarLayout::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
+#endif
 {
     if (newGeometry != oldGeometry) {
         relayout();
     }
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QQuickItem::geometryChanged(newGeometry, oldGeometry);
+#else
+    QQuickItem::geometryChange(newGeometry, oldGeometry);
+#endif
 }
 
 void ToolBarLayout::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &data)
