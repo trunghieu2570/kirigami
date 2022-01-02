@@ -12,7 +12,7 @@ set(libkirigami_SRCS
 #use dbus on linux, bsd etc, but not android and apple stuff
 if (UNIX AND NOT ANDROID AND NOT(APPLE) AND NOT(DISABLE_DBUS))
     qt_add_dbus_interface(libkirigami_SRCS org.kde.KWin.TabletModeManager.xml tabletmodemanager_interface)
-    set(LIBKIRIGAMKI_EXTRA_LIBS Qt${QT_MAJOR_VERSION}::DBus)
+    set(LIBKIRIGAMKI_EXTRA_LIBS Qt5::DBus)
 endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
@@ -39,11 +39,11 @@ target_include_directories(KF5Kirigami2
 
 target_link_libraries(KF5Kirigami2
     PUBLIC
-        Qt${QT_MAJOR_VERSION}::Core
+        Qt5::Core
     PRIVATE
-        Qt${QT_MAJOR_VERSION}::Qml
-        Qt${QT_MAJOR_VERSION}::Quick
-        Qt${QT_MAJOR_VERSION}::QuickControls2
+        Qt5::Qml
+        Qt5::Quick
+        Qt5::QuickControls2
         ${LIBKIRIGAMKI_EXTRA_LIBS}
 )
 

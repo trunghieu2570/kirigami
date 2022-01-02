@@ -1,10 +1,10 @@
-if(NOT TARGET Qt${QT_MAJOR_VERSION}::QuickTest)
-    message(STATUS "Qt${QT_MAJOR_VERSION}QuickTest not found, autotests will not be built.")
+if(NOT Qt5QuickTest_FOUND)
+    message(STATUS "Qt5QuickTest not found, autotests will not be built.")
     return()
 endif()
 
 add_executable(qmltest qmltest.cpp)
-target_link_libraries(qmltest Qt${QT_MAJOR_VERSION}::QuickTest)
+target_link_libraries(qmltest Qt5::QuickTest)
 
 macro(kirigami_add_tests)
     if (WIN32)

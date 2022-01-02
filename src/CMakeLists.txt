@@ -122,7 +122,7 @@ if(NOT BUILD_SHARED_LIBS)
     SET_TARGET_PROPERTIES(kirigamiplugin PROPERTIES
         AUTOMOC_MOC_OPTIONS -Muri=org.kde.kirigami)
     if (UNIX AND NOT ANDROID AND NOT(APPLE) AND NOT(DISABLE_DBUS))
-        set(Kirigami_EXTRA_LIBS Qt${QT_MAJOR_VERSION}::DBus)
+        set(Kirigami_EXTRA_LIBS Qt5::DBus)
     else()
         set(Kirigami_EXTRA_LIBS "")
     endif()
@@ -136,9 +136,9 @@ endif()
 
 target_link_libraries(kirigamiplugin
         PUBLIC
-            Qt${QT_MAJOR_VERSION}::Core
+            Qt5::Core
         PRIVATE
-            ${Kirigami_EXTRA_LIBS} Qt${QT_MAJOR_VERSION}::GuiPrivate Qt${QT_MAJOR_VERSION}::Qml Qt${QT_MAJOR_VERSION}::Quick Qt${QT_MAJOR_VERSION}::QuickControls2 Qt${QT_MAJOR_VERSION}::Concurrent
+            ${Kirigami_EXTRA_LIBS} Qt5::GuiPrivate Qt5::Qml Qt5::Quick Qt5::QuickControls2 Qt5::Concurrent
     )
 
 if (BUILD_SHARED_LIBS)
