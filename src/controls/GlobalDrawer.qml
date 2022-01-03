@@ -8,7 +8,6 @@ import QtQuick 2.12
 import QtQuick.Templates 2.3 as T2
 import QtQuick.Controls 2.2 as QQC2
 import QtQuick.Layouts 1.2
-import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.13
 
 import "private"

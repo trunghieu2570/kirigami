@@ -8,7 +8,6 @@ import QtQuick.Templates 2.15 as T
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
-import QtGraphicalEffects 1.15
 
 T.TabButton {
     id: control

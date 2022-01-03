@@ -7,7 +7,6 @@
 import QtQuick 2.5
 import "templates/private"
 import org.kde.kirigami 2.4 as Kirigami
-import QtGraphicalEffects 1.0
 
 /**
  * A window that provides some basic features needed for all apps

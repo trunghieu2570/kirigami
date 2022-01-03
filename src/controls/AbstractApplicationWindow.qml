@@ -9,7 +9,6 @@ import QtQuick.Controls 2.0 as QQC2
 import QtQuick.Window 2.5
 import "templates/private"
 import org.kde.kirigami 2.4
-import QtGraphicalEffects 1.0
 
 /**
  * A window that provides some basic features needed for all apps

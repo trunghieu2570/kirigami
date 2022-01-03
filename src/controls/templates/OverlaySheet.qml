@@ -10,7 +10,6 @@ import QtQuick.Layouts 1.2
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.15
 import org.kde.kirigami 2.14
-import QtGraphicalEffects 1.0
 import QtQuick.Templates 2.0 as T2
 import "private"
 import "../private"
