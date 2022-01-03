@@ -34,7 +34,7 @@ ecm_generate_export_header(KF5Kirigami2
 )
 
 target_include_directories(KF5Kirigami2
-    INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/Kirigami2>"
+    INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami2>"
 )
 
 target_link_libraries(KF5Kirigami2
@@ -80,7 +80,7 @@ if(BUILD_SHARED_LIBS)
 endif()
 
 install(FILES ${Kirigami2_HEADERS}
-        DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/Kirigami2
+        DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami2
         COMPONENT Devel)
 
 if(BUILD_QCH)
@@ -105,7 +105,7 @@ if(BUILD_QCH)
 endif()
 
 include(ECMGeneratePriFile)
-ecm_generate_pri_file(BASE_NAME Kirigami2 LIB_NAME KF5Kirigami2 DEPS "core" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF5}/Kirigami2)
+ecm_generate_pri_file(BASE_NAME Kirigami2 LIB_NAME KF5Kirigami2 DEPS "core" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami2)
 install(FILES ${PRI_FILENAME}
         DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
 
