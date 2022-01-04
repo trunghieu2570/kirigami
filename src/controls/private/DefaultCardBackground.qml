@@ -24,7 +24,7 @@ Kirigami.ShadowedRectangle {
                                     color, Kirigami.Theme.textColor, 0.2)
 
     color: {
-        if (clickFeedback && parent.down)
+        if (clickFeedback && (parent.down || parent.highlighted))
             return root.pressedColor
         else if (hoverFeedback && parent.hovered)
             return root.hoverColor
