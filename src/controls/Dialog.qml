@@ -9,6 +9,8 @@ import QtQuick.Layouts 1.2
 import QtQuick.Templates 2.15 as T
 import QtQuick.Controls 2.15 as Controls
 import org.kde.kirigami 2.12 as Kirigami
+import QtGraphicalEffects 1.12
+
 import "templates/private" as Private
 
 /**
@@ -277,16 +279,23 @@ T.Dialog {
     }
     
     // dialog view background
-    background: Kirigami.ShadowedRectangle {
-        Kirigami.Theme.colorSet: Kirigami.Theme.View
-        Kirigami.Theme.inherit: false
-        color: Kirigami.Theme.backgroundColor
-        radius: Kirigami.Units.smallSpacing
-        renderType: Kirigami.ShadowedRectangle.HighQuality
-        shadow {
-            color: Qt.rgba(0,0,0,0.2)
-            size: 15
-            yOffset: 3
+    background: Item {
+        RectangularGlow {
+            anchors.fill: rect
+            anchors.topMargin: 1
+            cornerRadius: rect.radius * 2
+            glowRadius: 2
+            spread: 0.2
+            color: Qt.rgba(0, 0, 0, 0.3)
+        }
+        
+        Rectangle {
+            id: rect
+            anchors.fill: parent
+            Kirigami.Theme.colorSet: Kirigami.Theme.View
+            Kirigami.Theme.inherit: false
+            color: Kirigami.Theme.backgroundColor
+            radius: Kirigami.Units.smallSpacing
         }
     }
     
