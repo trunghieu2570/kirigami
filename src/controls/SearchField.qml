@@ -59,6 +59,19 @@ Kirigami.ActionTextField
     Accessible.name: qsTr("Search")
     Accessible.searchEdit: true
 
+    leftPadding: searchIcon.width + Kirigami.Units.smallSpacing * 3 //padding to accommodate search icon nicely
+
+    Kirigami.Icon {
+        id: searchIcon
+        anchors.left: parent.left
+        anchors.leftMargin: Kirigami.Units.smallSpacing * 2
+        anchors.verticalCenter: parent.verticalCenter
+
+        implicitWidth: Kirigami.Units.iconSizes.small
+        implicitHeight: Kirigami.Units.iconSizes.small
+        source: "search"
+    }
+
     focusSequence: "Ctrl+F"
     inputMethodHints: Qt.ImhNoPredictiveText
     rightActions: [
