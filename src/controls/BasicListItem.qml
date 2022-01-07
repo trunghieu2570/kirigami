@@ -326,4 +326,7 @@ AbstractListItem {
             }
         }
     }
+
+    Keys.onEnterPressed: action ? action.trigger() : clicked()
+    Keys.onReturnPressed: action ? action.trigger() : clicked()
 }
