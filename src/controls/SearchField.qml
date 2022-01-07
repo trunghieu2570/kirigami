@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2019 Carl-Lucien Schwan <carl@carlschwan.eu>
+ *  SPDX-FileCopyrightText: 2022 Felipe Kinoshita <kinofhek@gmail.com>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -53,6 +54,38 @@ Kirigami.ActionTextField
      * @since org.kde.kirigami 2.16
      */
     property bool delaySearch: false
+
+    // padding to accommodate search icon nicely
+    leftPadding: if (Qt.application.layoutDirection === Qt.RightToLeft) {
+        return _rightActionsRow.width + Kirigami.Units.smallSpacing
+    } else {
+        return (activeFocus || root.text.length > 0 ? 0 : searchIcon.width) + _leftActionsRow.width
+    }
+    rightPadding: if (Qt.application.layoutDirection === Qt.RightToLeft) {
+        return (activeFocus || root.text.length > 0 ? 0 : searchIcon.width) + _leftActionsRow.width
+    } else {
+        return _rightActionsRow.width + Kirigami.Units.smallSpacing
+    }
+
+    Kirigami.Icon {
+        id: searchIcon
+        opacity: parent.activeFocus || text.length > 0 ? 0 : 1
+        anchors.left: parent.left
+        anchors.leftMargin: Kirigami.Units.smallSpacing * 2
+        anchors.top: parent.top
+        anchors.topMargin: parent.topPadding
+        anchors.bottomMargin: parent.bottomPadding
+        anchors.bottom: parent.bottom
+
+        source: "search"
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
+    }
 
     placeholderText: qsTr("Search…")
 

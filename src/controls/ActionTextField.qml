@@ -64,10 +64,36 @@ Controls.TextField
      */
     property list<QtObject> rightActions
 
+    property alias _leftActionsRow: leftActionsRow
+    property alias _rightActionsRow: rightActionsRow
+
     hoverEnabled: true
 
-    leftPadding: leftActionsRow.width + Kirigami.Units.smallSpacing
-    rightPadding: rightActionsRow.width + Kirigami.Units.smallSpacing
+    leftPadding: if (Qt.application.layoutDirection === Qt.RightToLeft) {
+        return _rightActionsRow.width + Kirigami.Units.smallSpacing
+    } else {
+        return _leftActionsRow.width + Kirigami.Units.smallSpacing
+    }
+    rightPadding: if (Qt.application.layoutDirection === Qt.RightToLeft) {
+        return _leftActionsRow.width + Kirigami.Units.smallSpacing
+    } else {
+        return _rightActionsRow.width + Kirigami.Units.smallSpacing
+    }
+
+    Behavior on leftPadding {
+        NumberAnimation {
+            duration: Kirigami.Units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+    }
+
+    Behavior on rightPadding {
+        NumberAnimation {
+            duration: Kirigami.Units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+    }
+
 
     Shortcut {
         id: focusShortcut
@@ -89,15 +115,19 @@ Controls.TextField
         padding: Kirigami.Units.smallSpacing
         anchors.left: parent.left
         anchors.leftMargin: Kirigami.Units.smallSpacing
-        anchors.verticalCenter: parent.verticalCenter
-        height: root.implicitHeight - 2 * Kirigami.Units.smallSpacing
+        anchors.top: parent.top
+        anchors.topMargin: parent.topPadding
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: parent.bottomPadding
         Repeater {
             model: root.leftActions
             Kirigami.Icon {
-                implicitWidth: Kirigami.Units.iconSizes.small
-                implicitHeight: Kirigami.Units.iconSizes.small
+                implicitWidth: Kirigami.Units.iconSizes.sizeForLabels
+                implicitHeight: Kirigami.Units.iconSizes.sizeForLabels
 
                 anchors.verticalCenter: parent.verticalCenter
+                anchors.bottomMargin: root.bottomPadding
+                anchors.bottom: parent.bottom
 
                 source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
                 visible: modelData.visible
@@ -117,13 +147,15 @@ Controls.TextField
         layoutDirection: Qt.RightToLeft
         anchors.right: parent.right
         anchors.rightMargin: Kirigami.Units.smallSpacing
-        anchors.verticalCenter: parent.verticalCenter
-        height: root.implicitHeight - 2 * Kirigami.Units.smallSpacing
+        anchors.top: parent.top
+        anchors.topMargin: parent.topPadding
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: parent.bottomPadding
         Repeater {
             model: root.rightActions
             Kirigami.Icon {
-                implicitWidth: Kirigami.Units.iconSizes.small
-                implicitHeight: Kirigami.Units.iconSizes.small
+                implicitWidth: Kirigami.Units.iconSizes.sizeForLabels
+                implicitHeight: Kirigami.Units.iconSizes.sizeForLabels
 
                 anchors.verticalCenter: parent.verticalCenter
 
