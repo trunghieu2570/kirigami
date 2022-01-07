@@ -8,11 +8,12 @@
 #include <QUrl>
 #include <QtQml>
 
+#include "about.h"
+#include "app.h"
+#include "version-%{APPNAMELC}.h"
 #include <KAboutData>
 #include <KLocalizedContext>
 #include <KLocalizedString>
-#include "about.h"
-#include "version-%{APPNAMELC}.h"
 
 #include "%{APPNAMELC}config.h"
 
@@ -45,7 +46,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     qmlRegisterSingletonInstance("org.kde.%{APPNAME}", 1, 0, "Config", config);
 
-    qmlRegisterSingletonInstance("org.kde.%{APPNAME}", 1, 0, "AboutType", new AboutType);
+    AboutType about;
+    qmlRegisterSingletonInstance("org.kde.%{APPNAME}", 1, 0, "AboutType", &about);
+
+    App application;
+    qmlRegisterSingletonInstance("org.kde.%{APPNAME}", 1, 0, "App", &application);
 
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
