@@ -18,6 +18,8 @@ namespace Kirigami
 class TabletModeWatcherPrivate;
 
 /**
+ * @class TabletModeWatcher tabletmodewatcher.h <Kirigami/TabletModeWatcher>
+ *
  * This class reports on the status of certain transformable
  * devices which can be both tablets and laptops at the same time,
  * with a detachable keyboard.

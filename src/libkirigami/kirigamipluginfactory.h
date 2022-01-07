@@ -20,7 +20,7 @@ namespace Kirigami {
 class Units;
 
 /**
- * @class KirigamiPluginFactory kirigamipluginfactory.h KirigamiPluginFactory
+ * @class KirigamiPluginFactory kirigamipluginfactory.h <Kirigami/KirigamiPluginFactory>
  *
  * This class is reimpleented by plugins to provide different implementations
  * of PlatformTheme

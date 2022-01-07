@@ -19,6 +19,8 @@ class Units;
 class UnitsPrivate;
 
 /**
+ * @class IconSizes units.h <Kirigami/Units>
+ *
  * Provides access to platform-dependent icon sizing
  */
 class KIRIGAMI2_EXPORT IconSizes : public QObject
@@ -61,8 +63,9 @@ Q_SIGNALS:
     void enormousChanged();
 };
 
-
 /**
+ * @class Units units.h <Kirigami/Units>
+ *
  * A set of values to define semantically sizes and durations.
  */
 class KIRIGAMI2_EXPORT Units : public QObject
