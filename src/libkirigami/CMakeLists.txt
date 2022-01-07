@@ -1,4 +1,4 @@
-
+set(KIRIGAMI_INSTALL_INCLUDEDIR "${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami2")
 
 set(libkirigami_SRCS
     platformtheme.cpp
@@ -36,7 +36,7 @@ ecm_generate_export_header(KF5Kirigami2
 )
 
 target_include_directories(KF5Kirigami2
-    INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami2>"
+    INTERFACE "$<INSTALL_INTERFACE:${KIRIGAMI_INSTALL_INCLUDEDIR}>"
 )
 
 target_link_libraries(KF5Kirigami2
@@ -55,7 +55,7 @@ set_target_properties(KF5Kirigami2 PROPERTIES
     EXPORT_NAME "Kirigami2"
 )
 
-ecm_generate_headers(Kirigami2_HEADERS
+ecm_generate_headers(Kirigami2_CamelCase_HEADERS
     HEADER_NAMES
     PlatformTheme
     KirigamiPluginFactory
@@ -63,6 +63,7 @@ ecm_generate_headers(Kirigami2_HEADERS
     Units
     VirtualKeyboardWatcher
 
+    PREFIX Kirigami
     REQUIRED_HEADERS Kirigami2_HEADERS
 )
 
@@ -83,8 +84,46 @@ if(BUILD_SHARED_LIBS)
 endif()
 
 install(FILES ${Kirigami2_HEADERS}
-        DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami2
+        DESTINATION ${KIRIGAMI_INSTALL_INCLUDEDIR}/kirigami # prefix matching C++ namespace
         COMPONENT Devel)
+install(FILES ${Kirigami2_CamelCase_HEADERS}
+        DESTINATION ${KIRIGAMI_INSTALL_INCLUDEDIR}/Kirigami # prefix matching C++ namespace
+        COMPONENT Devel)
+
+# provide compat headers for old broken C++ namespaceless include path
+if(NOT EXCLUDE_DEPRECATED_BEFORE_AND_AT STREQUAL "CURRENT" AND
+   EXCLUDE_DEPRECATED_BEFORE_AND_AT VERSION_LESS 5.91.0)
+
+    function(generate_compat_headers)
+        foreach(classname ${ARGV})
+            string(TOLOWER ${classname} classname_lc)
+            set(HEADER_NAME "${classname_lc}.h")
+            # normal header
+            set(compat_header "${CMAKE_CURRENT_BINARY_DIR}/compat/${HEADER_NAME}")
+            set(NEW_INCLUDE "kirigami/${HEADER_NAME}")
+            configure_file(compatheader.h.in ${compat_header} @ONLY)
+            install(FILES ${compat_header}
+                DESTINATION ${KIRIGAMI_INSTALL_INCLUDEDIR}
+                COMPONENT Devel
+            )
+            # CamelCase header
+            set(compat_header "${CMAKE_CURRENT_BINARY_DIR}/compat/${classname}")
+            set(NEW_INCLUDE "Kirigami/${classname}")
+            configure_file(compatheader.h.in ${compat_header} @ONLY)
+            install(FILES ${compat_header}
+                DESTINATION ${KIRIGAMI_INSTALL_INCLUDEDIR}
+                COMPONENT Devel
+            )
+        endforeach()
+    endfunction()
+
+    generate_compat_headers(
+        PlatformTheme
+        KirigamiPluginFactory
+        TabletModeWatcher
+        Units
+    )
+endif()
 
 if(BUILD_QCH)
     ecm_add_qch(
@@ -108,7 +147,12 @@ if(BUILD_QCH)
 endif()
 
 include(ECMGeneratePriFile)
-ecm_generate_pri_file(BASE_NAME Kirigami2 LIB_NAME KF5Kirigami2 DEPS "core" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami2)
+ecm_generate_pri_file(BASE_NAME Kirigami2
+    LIB_NAME KF5Kirigami2
+    DEPS "core"
+    FILENAME_VAR PRI_FILENAME
+    INCLUDE_INSTALL_DIR ${KIRIGAMI_INSTALL_INCLUDEDIR}
+)
 install(FILES ${PRI_FILENAME}
         DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
 
