@@ -13,7 +13,7 @@
 #include <QPalette>
 #include <QQuickItem>
 
-#include <kirigami2_export.h>
+#include "kirigami2_export.h"
 
 namespace Kirigami
 {

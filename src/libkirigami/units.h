@@ -10,7 +10,7 @@
 #include <QObject>
 #include <memory>
 
-#include <kirigami2_export.h>
+#include "kirigami2_export.h"
 
 class QQmlEngine;
 
