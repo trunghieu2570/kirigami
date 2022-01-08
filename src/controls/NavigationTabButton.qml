@@ -27,9 +27,14 @@ T.TabButton {
         return -1
     }
 
-    property color foregroundColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.7)
-    property color highlightForegroundColor: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.highlightColor, Kirigami.Theme.textColor, 0.5)
+    property color foregroundColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.85)
+    property color highlightForegroundColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.85)
     property color highlightBarColor: Kirigami.Theme.highlightColor
+
+    property color pressedColor: Qt.rgba(highlightBarColor.r, highlightBarColor.g, highlightBarColor.b, 0.3)
+    property color hoverSelectColor: Qt.rgba(highlightBarColor.r, highlightBarColor.g, highlightBarColor.b, 0.2)
+    property color checkedBorderColor: Qt.rgba(highlightBarColor.r, highlightBarColor.g, highlightBarColor.b, 0.7)
+    property color pressedBorderColor: Qt.rgba(highlightBarColor.r, highlightBarColor.g, highlightBarColor.b, 0.9)
 
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
                             implicitContentWidth + leftPadding + rightPadding)
@@ -66,35 +71,26 @@ T.TabButton {
     icon.color: control.checked ? control.highlightForegroundColor : control.foregroundColor
 
     background: Rectangle {
+        Kirigami.Theme.colorSet: Kirigami.Theme.Button
+        Kirigami.Theme.inherit: false
+
         implicitHeight: Kirigami.Units.gridUnit * 3 + Kirigami.Units.smallSpacing * 2
-        color: control.down ? Qt.rgba(0, 0, 0, 0.2)
-            : (hoverHandler.hovered ? Qt.rgba(0, 0, 0, 0.1)
-            : "transparent")
-        Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
-        // top highlight rectangle (if control is selected)
+
+        color: "transparent"
+
         Rectangle {
-            id: highlightRectangle
-            opacity: control.checked ? 1 : 0
-            color: control.highlightBarColor
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: 2
-            Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration } }
-        }
-        Rectangle {
-            id: highlightShadow
-            visible: opacity === 0
-            opacity: control.checked ? 0.3 : 0
-            anchors.top: highlightRectangle.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: 2
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: highlightRectangle.color }
-                GradientStop { position: 1.0; color: "transparent" }
-            }
-            Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration } }
+            width: parent.width - Kirigami.Units.largeSpacing
+            height: parent.height - Kirigami.Units.largeSpacing
+            anchors.centerIn: parent
+
+            radius: Kirigami.Units.smallSpacing
+            color: control.pressed ? pressedColor : (control.checked || hoverHandler.hovered ? hoverSelectColor : "transparent")
+
+            border.color: control.checked ? checkedBorderColor : (control.pressed ? pressedBorderColor : color)
+            border.width: 1
+
+            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
+            Behavior on border.color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
         }
     }
 
@@ -124,7 +120,6 @@ T.TabButton {
             wrapMode: Text.Wrap
             elide: Text.ElideMiddle
             color: control.checked ? control.highlightForegroundColor : control.foregroundColor
-            
             font.bold: control.checked
             font.family: Kirigami.Theme.smallFont.family
             font.pointSize: Kirigami.Theme.smallFont.pointSize
