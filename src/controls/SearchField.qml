@@ -14,7 +14,7 @@ import org.kde.kirigami 2.16 as Kirigami
  * sequence and "Search..." as placeholder text.
  *
  * Example usage for the search field component:
- * @code
+ * @code{.qml}
  * import org.kde.kirigami 2.8 as Kirigami
  *
  * Kirigami.SearchField {
@@ -25,8 +25,7 @@ import org.kde.kirigami 2.16 as Kirigami
  *
  * @inherit org::kde::kirigami::ActionTextField
  */
-Kirigami.ActionTextField
-{
+Kirigami.ActionTextField {
     id: root
     /**
      * Determines whether the accepted signal will be fired automatically
@@ -92,22 +91,20 @@ Kirigami.ActionTextField
     Accessible.name: qsTr("Search")
     Accessible.searchEdit: true
 
-    focusSequence: "Ctrl+F"
+    focusSequence: StandardKey.Find
     inputMethodHints: Qt.ImhNoPredictiveText
-    rightActions: [
-        Kirigami.Action {
-            icon.name: root.LayoutMirroring.enabled ? "edit-clear-locationbar-ltr" : "edit-clear-locationbar-rtl"
-            visible: root.text.length > 0
-            onTriggered: {
-                root.text = "";
-                // Since we are always sending the accepted signal here (whether or not the user has requested
-                // that the accepted signal be delayed), stop the delay timer that gets started by the text changing
-                // above, so that we don't end up sending two of those in rapid succession.
-                fireSearchDelay.stop();
-                root.accepted();
-            }
+    rightActions: Kirigami.Action {
+        icon.name: root.LayoutMirroring.enabled ? "edit-clear-locationbar-ltr" : "edit-clear-locationbar-rtl"
+        visible: root.text.length > 0
+        onTriggered: {
+            root.text = "";
+            // Since we are always sending the accepted signal here (whether or not the user has requested
+            // that the accepted signal be delayed), stop the delay timer that gets started by the text changing
+            // above, so that we don't end up sending two of those in rapid succession.
+            fireSearchDelay.stop();
+            root.accepted();
         }
-    ]
+    }
 
     Timer {
         id: fireSearchDelay

@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.6
+import QtQuick 2.15
 import QtQuick.Controls 2.1 as Controls
 import org.kde.kirigami 2.7 as Kirigami
 
@@ -41,8 +41,7 @@ import org.kde.kirigami 2.7 as Kirigami
  *
  * @inherit QtQuick.Controls.TextField
  */
-Controls.TextField
-{
+Controls.TextField {
     id: root
 
     /**
@@ -103,6 +102,23 @@ Controls.TextField
             root.forceActiveFocus()
             root.selectAll()
         }
+
+        // here to make it private
+        component ActionIcon: Kirigami.Icon {
+            implicitWidth: Kirigami.Units.iconSizes.sizeForLabels
+            implicitHeight: Kirigami.Units.iconSizes.sizeForLabels
+
+            anchors.verticalCenter: parent.verticalCenter
+
+            source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
+            visible: modelData.visible
+            enabled: modelData.enabled
+            TapHandler {
+                onTapped: modelData.trigger()
+                cursorShape: Qt.PointingHandCursor
+            }
+        }
+
     }
 
     Controls.ToolTip {
@@ -121,23 +137,7 @@ Controls.TextField
         anchors.bottomMargin: parent.bottomPadding
         Repeater {
             model: root.leftActions
-            Kirigami.Icon {
-                implicitWidth: Kirigami.Units.iconSizes.sizeForLabels
-                implicitHeight: Kirigami.Units.iconSizes.sizeForLabels
-
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.bottomMargin: root.bottomPadding
-                anchors.bottom: parent.bottom
-
-                source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
-                visible: modelData.visible
-                enabled: modelData.enabled
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: modelData.trigger()
-                    cursorShape: Qt.PointingHandCursor
-                }
-            }
+            ActionIcon { }
         }
     }
 
@@ -153,23 +153,7 @@ Controls.TextField
         anchors.bottomMargin: parent.bottomPadding
         Repeater {
             model: root.rightActions
-            Kirigami.Icon {
-                implicitWidth: Kirigami.Units.iconSizes.sizeForLabels
-                implicitHeight: Kirigami.Units.iconSizes.sizeForLabels
-
-                anchors.verticalCenter: parent.verticalCenter
-
-                source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
-                active: actionArea.containsPress
-                visible: modelData.visible
-                enabled: modelData.enabled
-                MouseArea {
-                    id: actionArea
-                    anchors.fill: parent
-                    onClicked: modelData.trigger()
-                    cursorShape: Qt.PointingHandCursor
-                }
-            }
+            ActionIcon { }
         }
     }
 }

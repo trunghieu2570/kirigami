@@ -12,7 +12,7 @@ import org.kde.kirigami 2.7 as Kirigami
  * This is a standard password text field.
  *
  * Example usage for the password field component:
- * @code
+ * @code{.qml}
  * import org.kde.kirigami 2.8 as Kirigami
  *
  * Kirigami.PasswordField {
@@ -23,18 +23,21 @@ import org.kde.kirigami 2.7 as Kirigami
  *
  * @inherit org::kde::kirgami::ActionTextField
  */
-Kirigami.ActionTextField
-{
+Kirigami.ActionTextField {
     id: root
 
+    /**
+     * This property holds whether we show the clear text password.
+     *
+     * By default, it's false.
+     */
     property bool showPassword: false
+
     echoMode: root.showPassword ? TextInput.Normal : TextInput.Password
     placeholderText: qsTr("Password")
     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText | Qt.ImhSensitiveData
-    rightActions: [
-        Kirigami.Action {
-            icon.name: root.showPassword ? "password-show-off" : "password-show-on"
-            onTriggered: root.showPassword = !root.showPassword
-        }
-    ]
+    rightActions: Kirigami.Action {
+        icon.name: root.showPassword ? "password-show-off" : "password-show-on"
+        onTriggered: root.showPassword = !root.showPassword
+    }
 }
