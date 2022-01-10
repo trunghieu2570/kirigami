@@ -72,10 +72,11 @@ Kirigami.ActionTextField
         opacity: parent.activeFocus || text.length > 0 ? 0 : 1
         anchors.left: parent.left
         anchors.leftMargin: Kirigami.Units.smallSpacing * 2
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: Math.round((parent.implicitHeight - implicitHeight) / 2 + (parent.bottomPadding - parent.topPadding) / 2)
         implicitHeight: Kirigami.Units.iconSizes.sizeForLabels
         implicitWidth: Kirigami.Units.iconSizes.sizeForLabels
-        color: Kirigami.Theme.disabledTextColor
+        color: root.placeholderTextColor
 
         source: "search"
 
