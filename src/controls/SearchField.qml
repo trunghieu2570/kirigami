@@ -59,10 +59,10 @@ Kirigami.ActionTextField
     leftPadding: if (Qt.application.layoutDirection === Qt.RightToLeft) {
         return _rightActionsRow.width + Kirigami.Units.smallSpacing
     } else {
-        return (activeFocus || root.text.length > 0 ? 0 : searchIcon.width) + _leftActionsRow.width
+        return (activeFocus || root.text.length > 0 ? 0 : (searchIcon.width + Kirigami.Units.smallSpacing)) + _leftActionsRow.width
     }
     rightPadding: if (Qt.application.layoutDirection === Qt.RightToLeft) {
-        return (activeFocus || root.text.length > 0 ? 0 : searchIcon.width) + _leftActionsRow.width
+        return (activeFocus || root.text.length > 0 ? 0 : (searchIcon.width + Kirigami.Units.smallSpacing)) + _leftActionsRow.width
     } else {
         return _rightActionsRow.width + Kirigami.Units.smallSpacing
     }
@@ -72,10 +72,10 @@ Kirigami.ActionTextField
         opacity: parent.activeFocus || text.length > 0 ? 0 : 1
         anchors.left: parent.left
         anchors.leftMargin: Kirigami.Units.smallSpacing * 2
-        anchors.top: parent.top
-        anchors.topMargin: parent.topPadding
-        anchors.bottomMargin: parent.bottomPadding
-        anchors.bottom: parent.bottom
+        anchors.verticalCenter: parent.verticalCenter
+        implicitHeight: Kirigami.Units.iconSizes.sizeForLabels
+        implicitWidth: Kirigami.Units.iconSizes.sizeForLabels
+        color: Kirigami.Theme.disabledTextColor
 
         source: "search"
 
