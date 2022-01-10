@@ -113,9 +113,10 @@ Controls.TextField {
             source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
             visible: modelData.visible
             enabled: modelData.enabled
-            TapHandler {
-                onTapped: modelData.trigger()
+            MouseArea {
+                onClicked: modelData.trigger()
                 cursorShape: Qt.PointingHandCursor
+                anchors.fill: parent
             }
         }
 
