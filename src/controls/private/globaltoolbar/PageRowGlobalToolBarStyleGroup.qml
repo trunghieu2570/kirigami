@@ -10,9 +10,13 @@ import org.kde.kirigami 2.19 as Kirigami
 QtObject {
     id: globalToolBar
     property int style: Kirigami.ApplicationHeaderStyle.None
+    onStyleChanged: if (style === Kirigami.ApplicationHeaderStyle.TabBar) {
+        console.warn("TabBar header style is deprecated.")
+    }
     readonly property int actualStyle: {
         if (style === Kirigami.ApplicationHeaderStyle.Auto) {
-            //Legacy: if ApplicationHeader or ToolbarApplicationHeader are in the header or footer, disable the toolbar here
+            // TODO KF6
+            // Legacy: if ApplicationHeader or ToolbarApplicationHeader are in the header or footer, disable the toolbar here
             if (typeof applicationWindow !== "undefined" && applicationWindow().header && applicationWindow().header.toString().indexOf("ApplicationHeader") !== -1) {
                 return Kirigami.ApplicationHeaderStyle.None
             }
@@ -21,10 +25,8 @@ QtObject {
             return (Kirigami.Settings.isMobile
                     ? (root.wideMode ? Kirigami.ApplicationHeaderStyle.Titles : Kirigami.ApplicationHeaderStyle.Breadcrumb)
                     : Kirigami.ApplicationHeaderStyle.ToolBar)
-        } else {
-            //forbid ToolBar on mobile systems
-            return style;
         }
+        return style;
     }
 
     // TODO KF6: remove bool support.
