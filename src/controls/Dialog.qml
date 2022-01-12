@@ -275,7 +275,15 @@ T.Dialog {
     
     // black background, fades in and out
     Controls.Overlay.modal: Rectangle {
-        color: Qt.rgba(0, 0, 0, 0.3 * root.opacity)
+        color: Qt.rgba(0, 0, 0, 0.3)
+        
+        // the opacity of the item is changed internally by QQuickPopup on open/close
+        Behavior on opacity {
+            OpacityAnimator {
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
     }
     
     // dialog view background
@@ -445,6 +453,10 @@ T.Dialog {
                 Layout.alignment: dialogButtonBox.alignment
                 
                 position: Controls.DialogButtonBox.Footer
+                
+                // ensure themes don't add a background, since it can lead to visual inconsistencies
+                // with the rest of the dialog
+                background: null
                 
                 // we need to hook all of the buttonbox events to the dialog events
                 onAccepted: root.accept()
