@@ -179,7 +179,7 @@ class ShadowedRectangle : public QQuickItem
 {
     Q_OBJECT
     /**
-     * Corner radius of the rectangle.
+     * This property holds the corner radius of the rectangle.
      *
      * This is the amount of rounding to apply to all of the rectangle's
      * corners, in pixels. Individual corners can have a different radius, see
@@ -189,19 +189,33 @@ class ShadowedRectangle : public QQuickItem
      */
     Q_PROPERTY(qreal radius READ radius WRITE setRadius NOTIFY radiusChanged)
     /**
-     * The color of the rectangle.
+     * This property holds the color of the rectangle.
      *
      * Full RGBA colors are supported. The default is fully opaque white.
      */
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
     /**
-     * Border properties.
+     * This property holds the border's properties.
      *
+     * @code
+     * Kirigami.ShadowedRectangle {
+     *     border.width: 2
+     *     border.color: Kirigami.Theme.textColor
+     * }
+     * @endcode
      * \sa BorderGroup
      */
     Q_PROPERTY(BorderGroup *border READ border CONSTANT)
     /**
-     * Shadow properties.
+     * This property holds the shadow's properties.
+     *
+     * @code
+     * Kirigami.ShadowedRectangle {
+     *     shadow.size: 20
+     *     shadow.xOffset: 5
+     *     shadow.yOffset: 5
+     * }
+     * @endcode
      *
      * \sa ShadowGroup
      */
@@ -211,15 +225,22 @@ class ShadowedRectangle : public QQuickItem
      *
      * Note that the values from this group override \property radius for the
      * corner they affect.
+     * @code
+     * Kirigami.ShadowedRectangle {
+     *     corners.topLeftRadius: 4
+     *     corners.topRightRadius: 5
+     *     corners.bottomLeftRadius: 2
+     *     corners.bottomRightRadius: 10
+     * @endcode
      *
-     * \sa CornerGroup
+     * \sa CornersGroup
      */
     Q_PROPERTY(CornersGroup *corners READ corners CONSTANT)
 
     /**
-     * Render type of the rectangle and shadow.
+     * This property holds the render type of the rectangle and shadow.
      *
-     * The default is Auto.
+     * The default is RenderType::Auto.
      */
     Q_PROPERTY(RenderType renderType READ renderType WRITE setRenderType CONSTANT)
 
@@ -245,18 +266,18 @@ public:
          */
         HighQuality,
         /**
-         * Use the lowest rendering quality, even if the hardware could handle 
+         * Use the lowest rendering quality, even if the hardware could handle
          * higher quality rendering. This might result in certain effects being
          * omitted, like shadows.
          */
         LowQuality,
         /**
          * Always use software rendering for this rectangle.
-         * Software rendering is intended as a fallback when the QtQuick scene 
-         * graph is configured to use software rendering. It will result in 
+         * Software rendering is intended as a fallback when the QtQuick scene
+         * graph is configured to use software rendering. It will result in
          * a number of missing features, like shadows and multiple corner radii.
          */
-        Software 
+        Software
     };
     Q_ENUM(RenderType)
 
