@@ -51,6 +51,7 @@ Kirigami.BasicListItem {
     checkable: true
     activeBackgroundColor: "transparent"
     activeTextColor: Kirigami.Theme.textColor
+    iconSelected: false
 
     leading: QQC2.CheckBox {
         checked: checkableListItem.checked

@@ -190,6 +190,18 @@ AbstractListItem {
     property alias iconColor: iconItem.color
 
     /**
+     * This property holds whether or not the icon has a "selected" appearance.
+     *
+     * Can be used to override the icon coloration if the list item's background and
+     * text are also being overridden, to ensure that the icon never becomes invisible.
+     *
+     * @since 5.91
+     * @since org.kde.kirigami 2.19
+     * @property bool iconSelected
+     */
+    property alias iconSelected: iconItem.selected
+
+    /**
      * This property holds whether or not to reserve space for the icon, even if there is no icon.
      *
      * @image html BasicListItemReserve.svg "Left: reserveSpaceForIcon: false. Right: reserveSpaceForIcon: true" width=50%
