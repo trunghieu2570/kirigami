@@ -17,6 +17,8 @@
 namespace Kirigami
 {
 /**
+ * @class VirtualKeyboardWatcher virtualkeyboardwatcher.h <Kirigami/VirtualKeyboardWatcher>
+ *
  * This class reports on the status of KWin's VirtualKeyboard DBus interface.
  */
 class KIRIGAMI2_EXPORT VirtualKeyboardWatcher : public QObject
