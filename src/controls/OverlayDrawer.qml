@@ -71,18 +71,6 @@ T.OverlayDrawer {
                     }
                 }
             }
-
-            Rectangle {
-                visible: root.handle.activeFocus
-                anchors.centerIn: parent
-                width: Units.iconSizes.smallMedium + Units.smallSpacing * 2
-                height: width
-                color: "transparent"
-                radius: 3
-                border.color: Theme.focusColor
-                border.width: 1
-            }
-
             Loader {
                 anchors.centerIn: handleGraphics
                 width: height

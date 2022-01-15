@@ -4,8 +4,9 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.1
+import QtQuick 2.15
 import QtQuick.Templates 2.2 as T2
+import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.11
 import "private"
 
@@ -140,20 +141,20 @@ T2.Drawer {
      * @property MouseArea handle
      **/
     readonly property Item handle: MouseArea {
-        // TODO KF6 this should be a ToolButton to have propert automatic keyboard navigation
-        // and consistent styling with the other elements in the toolbar
         id: drawerHandle
         z: root.modal ? applicationWindow().overlay.z + (root.position > 0 ? +1 : -1) : root.background.parent.z + 1
         preventStealing: true
         hoverEnabled: handleAnchor && handleAnchor.visible
         parent: applicationWindow().overlay.parent
 
-        // Ensure keyboard navigation works
-        Accessible.role: Accessible.Button
-        Accessible.name: root.drawerOpen ? handleOpenToolTip : handleClosedToolTip
-        Accessible.onPressAction: root.drawerOpen = !root.drawerOpen;
-        activeFocusOnTab: true
-        Keys.onSpacePressed: root.drawerOpen = !root.drawerOpen;
+        QQC2.ToolButton {
+            anchors.centerIn: parent
+            width: parent.height - Units.smallSpacing * 1.5
+            height: parent.height - Units.smallSpacing * 1.5
+            onClicked: root.drawerOpen = !root.drawerOpen;
+            Accessible.name: root.drawerOpen ? root.handleOpenToolTip : root.handleClosedToolTip
+            visible: !Settings.tabletMode && !Settings.hasTransientTouchInput
+        }
 
         T2.ToolTip.visible: containsMouse
         T2.ToolTip.text: root.drawerOpen ? handleOpenToolTip : handleClosedToolTip
