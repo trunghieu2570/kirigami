@@ -120,13 +120,13 @@ T2.Drawer {
      * This property holds the tooltip displayed when the drawer is open.
      * @since 2.15
      */
-    property string handleOpenToolTip: qsTr("Close")
+    property string handleOpenToolTip: qsTr("Close drawer")
 
     /**
      * This property holds the tooltip displayed when the drawer is closed.
      * @since 2.15
      */
-    property string handleClosedToolTip: qsTr("Open")
+    property string handleClosedToolTip: qsTr("Open drawer")
 
     /**
      * This property holds whether the handle is visible, to make opening the
@@ -140,11 +140,20 @@ T2.Drawer {
      * @property MouseArea handle
      **/
     readonly property Item handle: MouseArea {
+        // TODO KF6 this should be a ToolButton to have propert automatic keyboard navigation
+        // and consistent styling with the other elements in the toolbar
         id: drawerHandle
         z: root.modal ? applicationWindow().overlay.z + (root.position > 0 ? +1 : -1) : root.background.parent.z + 1
         preventStealing: true
         hoverEnabled: handleAnchor && handleAnchor.visible
         parent: applicationWindow().overlay.parent
+
+        // Ensure keyboard navigation works
+        Accessible.role: Accessible.Button
+        Accessible.name: root.drawerOpen ? handleOpenToolTip : handleClosedToolTip
+        Accessible.onPressAction: root.drawerOpen = !root.drawerOpen;
+        activeFocusOnTab: true
+        Keys.onSpacePressed: root.drawerOpen = !root.drawerOpen;
 
         T2.ToolTip.visible: containsMouse
         T2.ToolTip.text: root.drawerOpen ? handleOpenToolTip : handleClosedToolTip
