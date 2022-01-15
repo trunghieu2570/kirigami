@@ -19,7 +19,7 @@ namespace Kirigami
 {
 Q_GLOBAL_STATIC(VirtualKeyboardWatcher, virtualKeyboardWatcherSelf)
 
-class VirtualKeyboardWatcher::Private
+class Q_DECL_HIDDEN VirtualKeyboardWatcher::Private
 {
 public:
     Private(VirtualKeyboardWatcher *qq)
