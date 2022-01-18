@@ -96,10 +96,9 @@ if(QUICK_COMPILER)
     )
 
     qtquick_compiler_add_resources(RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/../kirigami.qrc)
-    qtquick_compiler_add_resources(SHADERS scenegraph/shaders/shaders.qrc)
-else()
-    qt_add_resources(SHADERS scenegraph/shaders/shaders.qrc)
 endif()
+
+qt_add_resources(SHADERS scenegraph/shaders/shaders.qrc)
 
 add_subdirectory(libkirigami)
 
