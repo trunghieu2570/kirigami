@@ -188,6 +188,8 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.19 SOURCES
     controls/Dialog.qml
     controls/MenuDialog.qml
     controls/PromptDialog.qml
+    controls/AbstractChip.qml
+    controls/Chip.qml
 )
 
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private SOURCES
