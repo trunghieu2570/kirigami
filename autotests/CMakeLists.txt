@@ -4,7 +4,12 @@ if(NOT TARGET Qt${QT_MAJOR_VERSION}::QuickTest)
 endif()
 
 add_executable(qmltest qmltest.cpp)
-target_link_libraries(qmltest Qt${QT_MAJOR_VERSION}::QuickTest)
+target_link_libraries(qmltest PRIVATE Qt::Qml Qt${QT_MAJOR_VERSION}::QuickTest)
+
+if (NOT BUILD_SHARED_LIBS)
+    target_compile_definitions(qmltest PRIVATE STATIC_MODULE)
+    target_link_libraries(qmltest PRIVATE KirigamiPlugin)
+endif()
 
 macro(kirigami_add_tests)
     if (WIN32)

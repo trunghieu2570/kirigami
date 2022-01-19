@@ -25,9 +25,8 @@ find_package(ECM 5.90.0 NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
 if (NOT ${BUILD_SHARED_LIBS})
-    # Examples and tests are not supported when building a static library, so
-    # force them to OFF.
-    set(BUILD_TESTING OFF)
+    # Examples are not supported when building a static library, so force them
+    # to OFF.
     set(BUILD_EXAMPLES OFF)
 endif()
 
