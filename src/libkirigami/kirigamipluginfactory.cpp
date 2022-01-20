@@ -54,7 +54,7 @@ KirigamiPluginFactory *KirigamiPluginFactory::findPlugin()
             QDir dir(path);
             #else
             QDir dir(path + QStringLiteral("/kf" QT_STRINGIFY(QT_VERSION_MAJOR) "/kirigami"));
-#endif
+            #endif
             const auto fileNames = dir.entryList(QDir::Files);
 
             for (const QString &fileName : fileNames) {
