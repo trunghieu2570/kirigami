@@ -6,3 +6,8 @@ include:
   - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/android.yml
   - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/freebsd.yml
   - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/linux-qt6.yml
+
+suse_tumbleweed_qt515_static:
+    extends: suse_tumbleweed_qt515
+    script: python3 -u ci-utilities/run-ci-build.py --project $CI_PROJECT_NAME --branch $CI_COMMIT_REF_NAME --platform Linux --extra-cmake-args="-DBUILD_SHARED_LIBS=OFF" --skip-publishing
+
