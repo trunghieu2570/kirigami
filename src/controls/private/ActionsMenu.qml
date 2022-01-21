@@ -39,8 +39,8 @@ Controls.Menu
                         item = theMenu.separatorDelegate.createObject(null, { action: action });
                     }
                     else if (action.displayComponent) {
-                        item = theMenu.loaderDelegate.createObject(null,
-                                { action: action, sourceComponent: action.displayComponent });
+                        item = action.displayComponent.createObject(null,
+                                { action: action });
                     }
                     else {
                         item = theMenu.itemDelegate.createObject(null, { action: action });
