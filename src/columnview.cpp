@@ -614,7 +614,7 @@ void ContentItem::forgetItem(QQuickItem *item)
     m_view->polish();
 
     if (index <= m_view->currentIndex()) {
-        m_view->setCurrentIndex(qBound(0, index - 1, m_items.count() - 1));
+        m_view->setCurrentIndex(m_items.isEmpty() ? 0 : qBound(0, index - 1, m_items.count() - 1));
     }
     Q_EMIT m_view->countChanged();
 }
