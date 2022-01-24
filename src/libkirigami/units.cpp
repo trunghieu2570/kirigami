@@ -69,6 +69,7 @@ public:
         , fontMetrics(QFontMetricsF(QGuiApplication::font()))
         , gridUnit(fontMetrics.height())
         , smallSpacing(std::floor(gridUnit / 4))
+        , mediumSpacing(std::round(smallSpacing * 1.5))
         , largeSpacing(smallSpacing * 2)
         , veryLongDuration(400)
         , longDuration(200)
@@ -96,6 +97,7 @@ public:
     // units
     int gridUnit;
     int smallSpacing;
+    int mediumSpacing;
     int largeSpacing;
 
     // durations
@@ -160,6 +162,8 @@ Units::Units(QObject *parent)
         Q_EMIT gridUnitChanged();
         d->smallSpacing = std::floor(d->gridUnit / 4);
         Q_EMIT smallSpacingChanged();
+        d->mediumSpacing = std::round(d->smallSpacing * 1.5);
+        Q_EMIT mediumSpacingChanged();
         d->largeSpacing = d->smallSpacing * 2;
         Q_EMIT largeSpacingChanged();
         Q_EMIT d->iconSizes->sizeForLabelsChanged();
@@ -205,6 +209,22 @@ void Kirigami::Units::setSmallSpacing(int size)
     d->smallSpacing = size;
     d->customUnitsSet = true;
     Q_EMIT smallSpacingChanged();
+}
+
+int Units::mediumSpacing() const
+{
+    return d->mediumSpacing;
+}
+
+void Kirigami::Units::setMediumSpacing(int size)
+{
+    if (d->mediumSpacing == size) {
+        return;
+    }
+
+    d->mediumSpacing = size;
+    d->customUnitsSet = true;
+    Q_EMIT mediumSpacingChanged();
 }
 
 int Units::largeSpacing() const
