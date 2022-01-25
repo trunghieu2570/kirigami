@@ -129,49 +129,6 @@ AbstractApplicationWindow {
         //FIXME
         onCurrentIndexChanged: root.reachableMode = false;
 
-        function goBack() {
-            //NOTE: drawers are handling the back button by themselves
-            let backEvent = {accepted: false}
-            if (root.pageStack.hasOwnProperty("layers") && root.pageStack.layers && root.pageStack.layers.depth > 1) {
-                root.pageStack.layers.currentItem.backRequested(backEvent);
-                if (!backEvent.accepted) {
-                    root.pageStack.layers.pop();
-                    backEvent.accepted = true;
-                }
-            } else {
-                root.pageStack.currentItem.backRequested(backEvent);
-                if (root.pageStack.currentIndex >= 1) {
-                    if (!backEvent.accepted) {
-                        root.pageStack.flickBack();
-                        backEvent.accepted = true;
-                    }
-                }
-            }
-
-            if (Kirigami.Settings.isMobile && !backEvent.accepted && Qt.platform.os !== "ios") {
-                Qt.quit();
-            }
-        }
-        function goForward() {
-            root.pageStack.currentIndex = Math.min(root.pageStack.depth-1, root.pageStack.currentIndex + 1);
-        }
-        Keys.onBackPressed: {
-            goBack();
-            event.accepted = true
-        }
-        Shortcut {
-            sequence: "Forward"
-            onActivated: __pageStack.goForward();
-        }
-        Shortcut {
-            sequence: StandardKey.Forward
-            onActivated: __pageStack.goForward();
-        }
-        Shortcut {
-            sequence: StandardKey.Back
-            onActivated: __pageStack.goBack();
-        }
-
         focus: true
     }
 }

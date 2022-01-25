@@ -618,6 +618,70 @@ T.Control {
     }
 
     /**
+     * Acts as if you had pressed the "back" button on Android or did Alt-Left on desktop,
+     * "going back" in the layers and page row. Results in a layer being popped if available,
+     * or the currentIndex being set to currentIndex-1 if not available.
+     *
+     * @param event Optional, an event that will be accepted if a page is successfully
+     * "backed" on
+     */
+    function goBack(event = null) {
+        const backEvent = {accepted: false}
+
+        if (layersStack.depth >= 1) {
+            try { // app code might be screwy, but we still want to continue functioning if it throws an exception
+                layersStack.currentItem.backRequested(backEvent)
+            } catch (error) {}
+
+            if (!backEvent.accepted) {
+                if (layersStack.depth > 1) {
+                    layersStack.pop()
+                    if (event) event.accepted = true
+                    return
+                }
+            }
+        }
+
+        if (root.currentIndex >= 1) {
+            try { // app code might be screwy, but we still want to continue functioning if it throws an exception
+                root.currentItem.backRequested(backEvent)
+            } catch (error) {}
+
+            if (!backEvent.accepted) {
+                if (root.depth > 1) {
+                    root.currentIndex = Math.max(0, root.currentIndex - 1)
+                    if (event) event.accepted = true
+                }
+            }
+        }
+    }
+
+    /**
+     * Acts as if you had pressed the "forward" shortcut on desktop,
+     * "going forward" in the page row. Results in the active page
+     * becoming the next page in the row from the current active page,
+     * i.e. currentIndex + 1.
+     */
+    function goForward() {
+        root.currentIndex = Math.min(root.depth-1, root.currentIndex + 1)
+    }
+
+    Shortcut {
+        sequence: StandardKey.Back
+        onActivated: root.goBack()
+    }
+    Shortcut {
+        sequence: StandardKey.Forward
+        onActivated: root.goForward()
+    }
+
+    Keys.onReleased: {
+        if (event.key == Qt.Key_Back) {
+            this.goBack(event)
+        }
+    }
+
+    /**
      * @var QtQuick.Controls.StackView layers
      * Access to the modal layers.
      * Sometimes an application needs a modal page that always covers all the rows.
