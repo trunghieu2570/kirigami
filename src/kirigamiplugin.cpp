@@ -262,16 +262,21 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(QStringLiteral("SwipeListItem2.qml")), uri, 2, 11, "SwipeListItem2");
 
     // 2.12
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     qmlRegisterType<ShadowedRectangle>(uri, 2, 12, "ShadowedRectangle");
     qmlRegisterType<ShadowedTexture>(uri, 2, 12, "ShadowedTexture");
     qmlRegisterType(componentUrl(QStringLiteral("ShadowedImage.qml")), uri, 2, 12, "ShadowedImage");
+#endif
     qmlRegisterType(componentUrl(QStringLiteral("PlaceholderMessage.qml")), uri, 2, 12, "PlaceholderMessage");
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     qmlRegisterUncreatableType<BorderGroup>(uri, 2, 12, "BorderGroup", QStringLiteral("Used as grouped property"));
     qmlRegisterUncreatableType<ShadowGroup>(uri, 2, 12, "ShadowGroup", QStringLiteral("Used as grouped property"));
+#endif
     qmlRegisterSingletonType<ColorUtils>(uri, 2, 12, "ColorUtils", singleton<ColorUtils>());
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     qmlRegisterUncreatableType<CornersGroup>(uri, 2, 12, "CornersGroup", QStringLiteral("Used as grouped property"));
+#endif
     qmlRegisterType<PageRouter>(uri, 2, 12, "PageRouter");
     qmlRegisterType<PageRoute>(uri, 2, 12, "PageRoute");
     qmlRegisterUncreatableType<PageRouterAttached>(uri, 2, 12, "PageRouterAttached", QStringLiteral("PageRouterAttached cannot be created"));

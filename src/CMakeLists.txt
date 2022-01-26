@@ -46,10 +46,6 @@ target_sources(KirigamiPlugin PRIVATE
     scenepositionattached.h
     settings.cpp
     settings.h
-    shadowedrectangle.cpp
-    shadowedrectangle.h
-    shadowedtexture.cpp
-    shadowedtexture.h
     sizegroup.cpp
     sizegroup.h
     spellcheckinghint.cpp
@@ -61,9 +57,18 @@ target_sources(KirigamiPlugin PRIVATE
     wheelhandler.cpp
     wheelhandler.h
     inputmethod.cpp
-
     scenegraph/managedtexturenode.cpp
     scenegraph/managedtexturenode.h
+    ${CMAKE_CURRENT_BINARY_DIR}/libkirigami/loggingcategory.cpp
+
+)
+
+if (QT_MAJOR_VERSION STREQUAL "5")
+target_sources(KirigamiPlugin PRIVATE
+    shadowedrectangle.cpp
+    shadowedrectangle.h
+    shadowedtexture.cpp
+    shadowedtexture.h
     scenegraph/paintedrectangleitem.cpp
     scenegraph/paintedrectangleitem.h
     scenegraph/shadowedborderrectanglematerial.cpp
@@ -78,12 +83,11 @@ target_sources(KirigamiPlugin PRIVATE
     scenegraph/shadowedtexturematerial.h
     scenegraph/shadowedtexturenode.cpp
     scenegraph/shadowedtexturenode.h
-
-    ${CMAKE_CURRENT_BINARY_DIR}/libkirigami/loggingcategory.cpp
-
     scenegraph/shaders/shaders.qrc
 )
-
+else()
+    MESSAGE(STATUS "scenegraph commented in qt6 until porting it to qt6")
+endif()
 ecm_target_qml_sources(KirigamiPlugin SOURCES
     controls/Action.qml
     controls/AbstractApplicationHeader.qml
