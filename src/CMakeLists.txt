@@ -66,23 +66,26 @@ target_sources(KirigamiPlugin PRIVATE
     scenegraph/managedtexturenode.h
     scenegraph/paintedrectangleitem.cpp
     scenegraph/paintedrectangleitem.h
-    scenegraph/shadowedborderrectanglematerial.cpp
-    scenegraph/shadowedborderrectanglematerial.h
-    scenegraph/shadowedbordertexturematerial.cpp
-    scenegraph/shadowedbordertexturematerial.h
-    scenegraph/shadowedrectanglematerial.cpp
-    scenegraph/shadowedrectanglematerial.h
-    scenegraph/shadowedrectanglenode.cpp
-    scenegraph/shadowedrectanglenode.h
-    scenegraph/shadowedtexturematerial.cpp
-    scenegraph/shadowedtexturematerial.h
-    scenegraph/shadowedtexturenode.cpp
-    scenegraph/shadowedtexturenode.h
-
     ${CMAKE_CURRENT_BINARY_DIR}/libkirigami/loggingcategory.cpp
 
     scenegraph/shaders/shaders.qrc
 )
+if (NOT KF6_PORTING_TODO)
+    target_sources(KirigamiPlugin PRIVATE
+        scenegraph/shadowedborderrectanglematerial.cpp
+        scenegraph/shadowedborderrectanglematerial.h
+        scenegraph/shadowedbordertexturematerial.cpp
+        scenegraph/shadowedbordertexturematerial.h
+        scenegraph/shadowedrectanglematerial.cpp
+        scenegraph/shadowedrectanglematerial.h
+        scenegraph/shadowedrectanglenode.cpp
+        scenegraph/shadowedrectanglenode.h
+        scenegraph/shadowedtexturematerial.cpp
+        scenegraph/shadowedtexturematerial.h
+        scenegraph/shadowedtexturenode.cpp
+        scenegraph/shadowedtexturenode.h
+    )
+endif()
 
 ecm_target_qml_sources(KirigamiPlugin SOURCES
     controls/Action.qml

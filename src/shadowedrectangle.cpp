@@ -11,7 +11,9 @@
 #include <QSGRendererInterface>
 
 #include "scenegraph/paintedrectangleitem.h"
+#ifndef KF6_PORTING_TODO
 #include "scenegraph/shadowedrectanglenode.h"
+#endif
 
 BorderGroup::BorderGroup(QObject *parent)
     : QObject(parent)
@@ -278,7 +280,11 @@ void ShadowedRectangle::componentComplete()
 
 bool ShadowedRectangle::isSoftwareRendering() const
 {
+#ifndef KF6_PORTING_TODO
     return (window() && window()->rendererInterface()->graphicsApi() == QSGRendererInterface::Software) || m_renderType == RenderType::Software;
+#else
+    return true;
+#endif
 }
 
 PaintedRectangleItem *ShadowedRectangle::softwareItem() const
@@ -299,6 +305,7 @@ QSGNode *ShadowedRectangle::updatePaintNode(QSGNode *node, QQuickItem::UpdatePai
 {
     Q_UNUSED(data);
 
+#ifndef KF6_PORTING_TODO
     auto shadowNode = static_cast<ShadowedRectangleNode *>(node);
 
     if (!shadowNode) {
@@ -322,6 +329,9 @@ QSGNode *ShadowedRectangle::updatePaintNode(QSGNode *node, QQuickItem::UpdatePai
     shadowNode->setBorderColor(m_border->color());
     shadowNode->updateGeometry();
     return shadowNode;
+#else
+    return nullptr;
+#endif
 }
 
 void ShadowedRectangle::checkSoftwareItem()
