@@ -118,7 +118,7 @@ Item {
         }
         property int buddiesImplicitWidth: {
             let hint = 0;
-            
+
             // HACK: we use var instead of let here, since it seems to trigger a very obscure bug
             // see: https://invent.kde.org/teams/plasma-mobile/issues/-/issues/88
             for (var i in buddies) {
@@ -347,7 +347,7 @@ Item {
             Kirigami.MnemonicData.label: item.Kirigami.FormData.label
             text: Kirigami.MnemonicData.richTextLabel
             font.weight: root.wideMode || item.Kirigami.FormData.isSection ? Font.Normal : Font.Bold // use bold in narrow layouts for contrast
-                                                                    
+
             level: item.Kirigami.FormData.isSection ? 2 : 5
 
             Layout.columnSpan: item.Kirigami.FormData.isSection ? lay.columns : 1
