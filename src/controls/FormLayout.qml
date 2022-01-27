@@ -244,10 +244,7 @@ Item {
                 const item = __items[i];
 
                 //skip items that are already there
-                if (lay.knownItems.indexOf(item) != -1 ||
-                    //exclude Repeaters
-                    //NOTE: this is an heuristic but there are't better ways
-                    (item.hasOwnProperty("model") && item.model !== undefined && item.children.length === 0)) {
+                if (lay.knownItems.indexOf(item) != -1 || item instanceof Repeater) {
                     continue;
                 }
                 lay.knownItems.push(item);
