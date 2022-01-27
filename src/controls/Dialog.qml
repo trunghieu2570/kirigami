@@ -329,8 +329,8 @@ T.Dialog {
             // height of everything else in the dialog other than the content
             property real otherHeights: root.header.height + root.footer.height + root.topPadding + root.bottomPadding;
             
-            property real calculatedMaximumWidth: root.maximumWidth > root.absoluteMaximumWidth ? root.absoluteMaximumWidth : root.maximumWidth
-            property real calculatedMaximumHeight: root.maximumHeight > root.absoluteMaximumHeight ? root.absoluteMaximumHeight : root.maximumHeight
+            property real calculatedMaximumWidth: (root.maximumWidth > root.absoluteMaximumWidth ? root.absoluteMaximumWidth : root.maximumWidth) - root.leftPadding - root.rightPadding
+            property real calculatedMaximumHeight: (root.maximumHeight > root.absoluteMaximumHeight ? root.absoluteMaximumHeight : root.maximumHeight) - root.topPadding - root.bottomPadding
             property real calculatedImplicitWidth: (root.mainItem.implicitWidth ? root.mainItem.implicitWidth : root.mainItem.width) + leftPadding + rightPadding
             property real calculatedImplicitHeight: (root.mainItem.implicitHeight ? root.mainItem.implicitHeight : root.mainItem.height) + topPadding + bottomPadding
             
