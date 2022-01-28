@@ -253,7 +253,7 @@ QtObject {
 
         readonly property int contentItemPreferredWidth: root.contentItem.Layout.preferredWidth > 0 ? root.contentItem.Layout.preferredWidth : root.contentItem.implicitWidth
 
-        readonly property int absoluteContentItemMaximumWidth: Math.round(width - Units.largeSpacing * 2)
+        readonly property int absoluteContentItemMaximumWidth: width <= 0 ? contentItemPreferredWidth : Math.round(width - Units.largeSpacing * 2)
         readonly property int contentItemMaximumWidth: root.contentItem.Layout.maximumWidth > 0 ? Math.min(root.contentItem.Layout.maximumWidth, absoluteContentItemMaximumWidth) : width > Units.gridUnit * 30 ? width * 0.95 : absoluteContentItemMaximumWidth
 
         onHeightChanged: {
