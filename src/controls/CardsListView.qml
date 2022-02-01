@@ -33,4 +33,17 @@ ListView {
     reuseItems: true
 
     headerPositioning: ListView.OverlayHeader
+
+    Keys.onPressed: {
+        if (event.key === Qt.Key_Home) {
+            positionViewAtBeginning();
+            currentIndex = 0;
+            event.accepted = true;
+        }
+        else if (event.key === Qt.Key_End) {
+            positionViewAtEnd();
+            currentIndex = count - 1;
+            event.accepted = true;
+        }
+    }
 }
