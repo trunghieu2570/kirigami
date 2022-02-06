@@ -165,6 +165,9 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.12 SOURCES
 
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.13 SOURCES
     controls/Avatar.qml
+)
+
+ecm_target_qml_sources(KirigamiPlugin VERSION 2.13 PATH swipenavigator SOURCES
     controls/swipenavigator/SwipeNavigator.qml
 )
 
@@ -174,12 +177,12 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.14 SOURCES
     controls/Hero.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.17 SOURCES
+ecm_target_qml_sources(KirigamiPlugin VERSION 2.17 PATH swipenavigator SOURCES
     controls/swipenavigator/TabViewLayout.qml
     controls/swipenavigator/PageTab.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.18 SOURCES
+ecm_target_qml_sources(KirigamiPlugin VERSION 2.18 PATH settingscomponents SOURCES
     controls/settingscomponents/CategorizedSettings.qml
     controls/settingscomponents/SettingAction.qml
 )
