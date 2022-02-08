@@ -56,6 +56,8 @@ Kirigami.BasicListItem {
     leading: QQC2.CheckBox {
         checked: checkableListItem.checked
         onToggled: {
+            checkableListItem.checked = !checkableListItem.checked
+
             // TODO(Qt6): rephrase as `checkableListItem.action?.trigger();`
             if (checkableListItem.action) {
                 checkableListItem.action.trigger();
