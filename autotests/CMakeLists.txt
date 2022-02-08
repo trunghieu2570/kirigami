@@ -3,31 +3,18 @@ if(NOT TARGET Qt${QT_MAJOR_VERSION}::QuickTest)
     return()
 endif()
 
-add_executable(qmltest qmltest.cpp)
-target_link_libraries(qmltest PRIVATE Qt::Qml Qt${QT_MAJOR_VERSION}::QuickTest)
+include(ECMQmlTests)
 
+ecm_create_qml_test_runner(
+    HEADER_CODE "#ifdef STATIC_MODULE\n#include \"kirigamiplugin.h\"\nQ_IMPORT_PLUGIN(KirigamiPlugin)\n#endif"
+    ENGINE_AVAILABLE_CODE "#ifdef STATIC_MODULE\nKirigamiPlugin::getInstance().registerTypes(engine);\n#endif"
+)
 if (NOT BUILD_SHARED_LIBS)
-    target_compile_definitions(qmltest PRIVATE STATIC_MODULE)
-    target_link_libraries(qmltest PRIVATE KirigamiPlugin)
+    target_compile_definitions(ecm_qml_test_runner PRIVATE STATIC_MODULE)
+    target_link_libraries(ecm_qml_test_runner PRIVATE KirigamiPlugin)
 endif()
 
-macro(kirigami_add_tests)
-    if (WIN32)
-        set(_extra_args -platform offscreen)
-    endif()
-
-    foreach(test ${ARGV})
-        add_test(NAME ${test}
-                 COMMAND qmltest
-                        ${_extra_args}
-                        -import ${CMAKE_BINARY_DIR}/bin
-                        -input ${test}
-                 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        )
-    endforeach()
-endmacro()
-
-kirigami_add_tests(
+ecm_add_qml_tests(TESTS
     tst_keynavigation.qml
     tst_listskeynavigation.qml
     tst_pagerow.qml
@@ -48,4 +35,57 @@ kirigami_add_tests(
 
 set_tests_properties(tst_theme.qml PROPERTIES
     ENVIRONMENT "QT_QUICK_CONTROLS_STYLE=default;KIRIGAMI_FORCE_STYLE=1"
+)
+
+# Simple instantiation tests to make sure all items work correctly.
+# Don't add any items that are already handled by more comprehensive tests above.
+# Also, some items implicitly test their underlying items - like
+# ApplicationWindow which is an AbstractApplicationWindow, making an
+# instantiation test of AbstractApplicationWindow redundant.
+ecm_add_qml_instantiation_tests(MODULE "org.kde.kirigami" VERSION "2.19" TESTS
+    AboutPage
+    ApplicationWindow
+    CardsGridView
+    CardsLayout
+    CardsListView
+    CheckableListItem
+    Chip
+    ContextDrawer
+    Dialog
+    FlexColumn
+    FormLayout
+    GlobalDrawer
+    Heading
+    Hero
+    InlineMessage
+    LinkButton
+    ListItemDragHandle
+    ListSectionHeader
+    MenuDialog
+    NavigationTabBar
+    NavigationTabButton
+    Page
+    PagePoolAction
+    PasswordField
+    PlaceholderMessage
+    PromptDialog
+    RouterWindow
+    ScrollablePage
+    SearchField
+    Separator
+    ShadowedImage
+    SwipeListItem
+    UrlButton
+
+    # C++ Items added by the plugin
+    ShadowedRectangle
+    ShadowedTexture
+
+    # Settings
+    CategorizedSettings
+    SettingAction
+
+    # Swipe Navigator
+    SwipeNavigator
+    PageTab
 )
