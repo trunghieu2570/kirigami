@@ -208,6 +208,7 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private SOURCES
     controls/private/ContextDrawerActionItem.qml
     controls/private/CornerShadow.qml
     controls/private/DefaultCardBackground.qml
+    controls/private/DefaultChipBackground.qml
     controls/private/DefaultListItemBackground.qml
     controls/private/EdgeShadow.qml
     controls/private/GlobalDrawerActionItem.qml
@@ -233,12 +234,16 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH swipenavigator SOURCES
     controls/swipenavigator/PrivateSwipeStack.qml
     controls/swipenavigator/PrivateSwipeTab.qml
     controls/swipenavigator/PrivateSwipeTabBar.qml
+)
+
+ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH swipenavigator/templates SOURCES
     controls/swipenavigator/templates/PageTab.qml
 )
 
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates SOURCES
     controls/templates/AbstractApplicationHeader.qml
     controls/templates/AbstractCard.qml
+    controls/templates/AbstractChip.qml
     controls/templates/AbstractListItem.qml
     controls/templates/ApplicationHeader.qml
     controls/templates/InlineMessage.qml
