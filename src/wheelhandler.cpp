@@ -7,6 +7,7 @@
 #include "wheelhandler.h"
 #include "settings.h"
 #include <QWheelEvent>
+#include <QQuickWindow>
 
 KirigamiWheelEvent::KirigamiWheelEvent(QObject *parent)
     : QObject(parent)
@@ -340,6 +341,8 @@ bool WheelHandler::scrollFlickable(QPointF pixelDelta, QPointF angleDelta, Qt::K
     const qreal originY = m_flickable->property("originY").toReal();
     const qreal pageWidth = width - leftMargin - rightMargin;
     const qreal pageHeight = height - topMargin - bottomMargin;
+    const auto window = m_flickable->window();
+    const qreal devicePixelRatio = window != nullptr ? window->devicePixelRatio() : qGuiApp->devicePixelRatio();
 
     // HACK: Only transpose deltas when not using xcb in order to not conflict with xcb's own delta transposing
     if (modifiers & m_defaultHorizontalScrollModifiers && qGuiApp->platformName() != QLatin1String("xcb")) {
@@ -370,6 +373,12 @@ bool WheelHandler::scrollFlickable(QPointF pixelDelta, QPointF angleDelta, Qt::K
         qreal maxXExtent = width - (contentWidth + rightMargin + originX);
 
         qreal newContentX = qBound(-minXExtent, contentX - xChange, -maxXExtent);
+        // Flickable::pixelAligned rounds the position, so round to mimic that behavior.
+        // Rounding prevents fractional positioning from causing text to be
+        // clipped off on the top and bottom.
+        // Multiply by devicePixelRatio before rounding and divide by devicePixelRatio
+        // after to make position match pixels on the screen more closely.
+        newContentX = std::round(newContentX * devicePixelRatio) / devicePixelRatio;
         if (contentX != newContentX) {
             scrolled = true;
             m_flickable->setProperty("contentX", newContentX);
@@ -392,6 +401,12 @@ bool WheelHandler::scrollFlickable(QPointF pixelDelta, QPointF angleDelta, Qt::K
         qreal maxYExtent = height - (contentHeight + bottomMargin + originY);
 
         qreal newContentY = qBound(-minYExtent, contentY - yChange, -maxYExtent);
+        // Flickable::pixelAligned rounds the position, so round to mimic that behavior.
+        // Rounding prevents fractional positioning from causing text to be
+        // clipped off on the top and bottom.
+        // Multiply by devicePixelRatio before rounding and divide by devicePixelRatio
+        // after to make position match pixels on the screen more closely.
+        newContentY = std::round(newContentY * devicePixelRatio) / devicePixelRatio;
         if (contentY != newContentY) {
             scrolled = true;
             m_flickable->setProperty("contentY", newContentY);
