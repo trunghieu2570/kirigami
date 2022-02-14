@@ -59,6 +59,9 @@ struct ImageData {
     QColor m_closestToWhite;
 };
 
+/**
+ * Extracts the dominant colors from an element or an image and exports it to a color palette.
+ */
 class ImageColors : public QObject
 {
     Q_OBJECT
