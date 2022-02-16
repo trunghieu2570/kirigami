@@ -374,7 +374,7 @@ Item {
                 if (index === 0 || root.wideMode) {
                     return 0;
                 }
-                return Kirigami.Units.smallSpacing;
+                return Kirigami.Units.largeSpacing * 2;
             }
             onItemChanged: {
                 if (!item) {
