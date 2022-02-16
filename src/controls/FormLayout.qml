@@ -344,7 +344,6 @@ Item {
             Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
             Kirigami.MnemonicData.label: item.Kirigami.FormData.label
             text: Kirigami.MnemonicData.richTextLabel
-            font.weight: root.wideMode || item.Kirigami.FormData.isSection ? Font.Normal : Font.Bold // use bold in narrow layouts for contrast
 
             level: item.Kirigami.FormData.isSection ? 2 : 5
 
