@@ -344,8 +344,9 @@ Item {
             Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
             Kirigami.MnemonicData.label: item.Kirigami.FormData.label
             text: Kirigami.MnemonicData.richTextLabel
+            type: item.Kirigami.FormData.isSection ? Kirigami.Heading.Type.Primary : Kirigami.Heading.Type.Normal
 
-            level: item.Kirigami.FormData.isSection ? 2 : 5
+            level: item.Kirigami.FormData.isSection ? 3 : 5
 
             Layout.columnSpan: item.Kirigami.FormData.isSection ? lay.columns : 1
             Layout.preferredHeight: {
@@ -426,8 +427,9 @@ Item {
             }
             contentItem: Kirigami.Heading {
                 id: labelItemHeading
-                level: labelItem.item.Kirigami.FormData.isSection ? 2 : 5
+                level: labelItem.item.Kirigami.FormData.isSection ? 3 : 5
                 text: labelItem.text
+                type: item.Kirigami.FormData.isSection ? Kirigami.Heading.Type.Primary : Kirigami.Heading.Type.Normal
                 verticalAlignment: temp.effectiveTextLayout(labelItem.item)
                 enabled: labelItem.item.Kirigami.FormData.enabled
                 leftPadding: height//parent.indicator.width
