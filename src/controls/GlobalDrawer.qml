@@ -56,6 +56,7 @@ OverlayDrawer {
     handleClosedIcon.source: null
     handleOpenIcon.source: null
     handleVisible: (modal || !drawerOpen) && (typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true) && (!isMenu || Settings.isMobile)
+    interactive: Settings.hasTransientTouchInput || Settings.isMobile
 
     enabled: !isMenu || Settings.isMobile
 

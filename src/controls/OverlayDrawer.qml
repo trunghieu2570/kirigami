@@ -28,6 +28,7 @@ T.OverlayDrawer {
     drawerOpen: !modal
     closePolicy: modal ? T2.Popup.CloseOnEscape | T2.Popup.CloseOnReleaseOutside : T2.Popup.NoAutoClose
     handleVisible: interactive && (modal || !drawerOpen) && (typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true)
+    interactive: Settings.hasTransientTouchInput || Settings.isMobile
 
     onPositionChanged: {
         if (!modal && !root.peeking && !root.animating) {
