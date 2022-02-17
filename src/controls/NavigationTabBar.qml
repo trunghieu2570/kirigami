@@ -232,6 +232,9 @@ T.ToolBar {
         buttons: root.contentItem.children
         
         onCheckedButtonChanged: {
+            if (!checkedButton) {
+                return
+            }
             if (root.currentIndex !== checkedButton.tabIndex) {
                 root.currentIndex = checkedButton.tabIndex;
             }
