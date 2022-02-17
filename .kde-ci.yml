@@ -1,5 +1,5 @@
 Dependencies:
-- 'on': ['Linux', 'FreeBSD', 'Windows', 'Android', 'iOS']
+- 'on': ['Linux', 'Windows', 'Android', 'iOS']
   'require':
     'frameworks/extra-cmake-modules': '@same'
 
