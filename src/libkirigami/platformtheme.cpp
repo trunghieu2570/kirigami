@@ -92,6 +92,7 @@ public:
         // there are and is used for the storage array below.
         ColorRoleCount,
     };
+    Q_ENUM(ColorRole);
 
     using ColorMap = std::unordered_map<std::underlying_type<ColorRole>::type, QColor>;
 
