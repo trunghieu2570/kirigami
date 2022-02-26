@@ -411,8 +411,6 @@ T.Control {
 
         position = Math.max(0, Math.min(depth, position));
 
-        columnView.pop(columnView.currentItem);
-
         // figure out if more than one page is being pushed
         var pages;
         var propsArray = [];
