@@ -301,11 +301,11 @@ QQC2.Page {
     //NOTE: contentItem will be created if not existing (and contentChildren of Page would become its children) This with anchors enforces the geometry we want, where globalToolBar is a super-header, on top of header
     contentItem: Item {
         anchors {
-            top: (root.header && root.header.visible)
+            top: root.header
                     ? root.header.bottom
                     : (globalToolBar.visible ? globalToolBar.bottom : parent.top)
             topMargin: root.topPadding + root.spacing
-            bottom: (root.footer && root.footer.visible) ? root.footer.top : parent.bottom
+            bottom: root.footer ? root.footer.top : parent.bottom
             bottomMargin: root.bottomPadding + root.spacing
         }
     }
@@ -314,7 +314,7 @@ QQC2.Page {
         color: Kirigami.Theme.backgroundColor
     }
 
-    implicitHeight: ((header && feader.visible) ? header.implicitHeight : 0) + ((footer && footer.visible) ? footer.implicitHeight : 0) + contentItem.implicitHeight + topPadding + bottomPadding
+    implicitHeight: (header ? header.implicitHeight : 0) + (footer ? footer.implicitHeight : 0) + contentItem.implicitHeight + topPadding + bottomPadding
     implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding
 
     //FIXME: on material the shadow would bleed over
