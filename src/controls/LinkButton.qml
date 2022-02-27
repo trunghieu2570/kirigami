@@ -14,7 +14,7 @@ import QtQuick.Controls 2.1 as QQC2
  * Uses the link color settings and allows to trigger an action when clicked.
  *
  * Maps to the Command Link in the HIG:
- * https://hig.kde.org/components/navigation/commandlink.html
+ * https://develop.kde.org/hig/components/navigation/commandlink/
  *
  * @since 5.52
  * @since org.kde.kirigami 2.6
