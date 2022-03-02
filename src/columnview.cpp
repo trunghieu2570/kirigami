@@ -1231,7 +1231,6 @@ QQuickItem *ColumnView::removeItem(QQuickItem *item)
     }
 
     m_contentItem->forgetItem(item);
-    item->setVisible(false);
 
     ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, false));
 
