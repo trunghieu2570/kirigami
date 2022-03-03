@@ -235,13 +235,9 @@ T.Dialog {
     
     // calculate dimensions 
     implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding // maximum width enforced from our content (one source of truth) to avoid binding loops
-    implicitHeight: {
-        let backgroundHeight = implicitBackgroundHeight + topInset + bottomInset,
-            contentHeight = contentItem.implicitHeight + topPadding + bottomPadding
-                            + (implicitHeaderHeight > 0 ? implicitHeaderHeight + spacing : 0)
-                            + (implicitFooterHeight > 0 ? implicitFooterHeight + spacing : 0);
-        return Math.ceil(Math.min(root.maximumHeight, Math.max(backgroundHeight, contentHeight)));
-    }
+    implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
+                    + (implicitHeaderHeight > 0 ? implicitHeaderHeight + spacing : 0)
+                    + (implicitFooterHeight > 0 ? implicitFooterHeight + spacing : 0);
     
     // misc. dialog settings
     closePolicy: Controls.Popup.CloseOnEscape | Controls.Popup.CloseOnReleaseOutside
@@ -325,13 +321,21 @@ T.Dialog {
             // height of everything else in the dialog other than the content
             property real otherHeights: root.header.height + root.footer.height + root.topPadding + root.bottomPadding;
             
-            property real calculatedMaximumWidth: (root.maximumWidth > root.absoluteMaximumWidth ? root.absoluteMaximumWidth : root.maximumWidth) - root.leftPadding - root.rightPadding
-            property real calculatedMaximumHeight: (root.maximumHeight > root.absoluteMaximumHeight ? root.absoluteMaximumHeight : root.maximumHeight) - root.topPadding - root.bottomPadding
-            property real calculatedImplicitWidth: (root.mainItem.implicitWidth ? root.mainItem.implicitWidth : root.mainItem.width) + leftPadding + rightPadding
+            property real calculatedMaximumWidth: Math.min(root.absoluteMaximumWidth, root.maximumWidth) - root.leftPadding - root.rightPadding
+            property real calculatedMaximumHeight: Math.min(root.absoluteMaximumHeight, root.maximumHeight) - root.topPadding - root.bottomPadding
+            property real calculatedImplicitWidth: (root.mainItem.implicitWidth ? root.mainItem.implicitWidth : root.mainItem.width) + contentControl.rightSpacing + leftPadding + rightPadding
             property real calculatedImplicitHeight: (root.mainItem.implicitHeight ? root.mainItem.implicitHeight : root.mainItem.height) + topPadding + bottomPadding
             
+            // how do we deal with the scrollbar width?
+            // - case 1: the dialog itself has the preferredWidth set 
+            //   -> we hint a width to the content so it shrinks to give space to the scrollbar
+            // - case 2: preferredWidth not set, so we are using the content's implicit width 
+            //   -> we expand the dialog's width to accommodate the scrollbar width (to respect the content's desired width)
+            
+            // note: the scrollbar width is accessed through "contentControl.rightSpacing"
+            
             // don't enforce preferred width and height if not set
-            Layout.preferredWidth: root.preferredWidth >= 0 ? root.preferredWidth : calculatedImplicitWidth
+            Layout.preferredWidth: (root.preferredWidth >= 0 ? root.preferredWidth : calculatedImplicitWidth)
             Layout.preferredHeight: root.preferredHeight >= 0 ? root.preferredHeight - otherHeights : calculatedImplicitHeight
             
             Layout.fillWidth: true
@@ -343,9 +347,12 @@ T.Dialog {
             property var widthHint: Binding {
                 target: root.mainItem
                 property: "width"
+                
                 // we want to avoid horizontal scrolling, so we apply maximumWidth as a hint if necessary
-                property real preferredWidthHint: contentControl.Layout.preferredWidth - contentControl.leftPadding - contentControl.rightPadding
-                property real maximumWidthHint: contentControl.calculatedMaximumWidth - contentControl.leftPadding - contentControl.rightPadding
+                property real preferredWidthHint: contentControl.Layout.preferredWidth - contentControl.leftPadding - contentControl.rightPadding 
+                                                  - (root.preferredWidth >= 0 ? contentControl.rightSpacing : 0) // hint the scrollbar width with conditions stated above
+                property real maximumWidthHint: contentControl.calculatedMaximumWidth - contentControl.leftPadding - contentControl.rightPadding - contentControl.rightSpacing
+                
                 value: maximumWidthHint < preferredWidthHint ? maximumWidthHint : preferredWidthHint
             }
             property var heightHint: Binding {
