@@ -24,7 +24,7 @@ import "private"
  *     }
  * }
  * @endcode
- * 
+ *
  * @warning Do not put a ScrollView inside of a ScrollablePage; children of a ScrollablePage are already inside a ScrollView.
  *
  * Another behavior added by this class is a "scroll down to refresh" behavior
@@ -113,7 +113,7 @@ Page {
     property bool keyboardNavigationEnabled: true
 
     contentHeight: root.flickable.contentHeight
-    implicitHeight: (header ? header.implicitHeight : 0) + (footer ? footer.implicitHeight : 0) + contentHeight + topPadding + bottomPadding
+    implicitHeight: ((header && header.visible) ? header.implicitHeight : 0) + ((footer && footer.visible) ? footer.implicitHeight : 0) + contentHeight + topPadding + bottomPadding
     implicitWidth: root.flickable.contentItem ? root.flickable.contentItem.implicitWidth : contentItem.implicitWidth + leftPadding + rightPadding
 
     Theme.inherit: false
@@ -131,12 +131,12 @@ Page {
         rightPadding: root.rightPadding
         bottomPadding: contentItem == flickableItem ? 0 : root.bottomPadding
         anchors {
-            top: root.header
+            top: (root.header && root.header.visible)
                     ? root.header.bottom
                     //FIXME: for nowassuming globalToolBarItem is in a Loader, which needs to be got rid of
                     : (globalToolBarItem && globalToolBarItem.parent && globalToolBarItem.visible ?
                     globalToolBarItem.parent.bottom : parent.top)
-            bottom: root.footer ? root.footer.top : parent.bottom
+            bottom: (root.footer && root.footer.visible) ? root.footer.top : parent.bottom
             left: parent.left
             right: parent.right
         }
