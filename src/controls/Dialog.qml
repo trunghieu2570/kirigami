@@ -234,11 +234,7 @@ T.Dialog {
     standardButtons: Controls.Dialog.Close
     
     // calculate dimensions 
-    implicitWidth: {
-        let backgroundWidth = implicitBackgroundWidth + leftInset + rightInset,
-            contentWidth = contentItem.implicitWidth + leftPadding + rightPadding;
-        return Math.ceil(Math.min(root.maximumWidth, Math.max(backgroundWidth, contentWidth, implicitHeaderWidth, implicitFooterWidth)));
-    }
+    implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding // maximum width enforced from our content (one source of truth) to avoid binding loops
     implicitHeight: {
         let backgroundHeight = implicitBackgroundHeight + topInset + bottomInset,
             contentHeight = contentItem.implicitHeight + topPadding + bottomPadding
@@ -262,8 +258,8 @@ T.Dialog {
     }
     
     // center dialog
-    x: Math.round((parent.width - implicitWidth) / 2)
-    y: Math.round((parent.height - implicitHeight) / 2) + Kirigami.Units.gridUnit * 2 * (1 - opacity) // move animation
+    x: Math.round((parent.width - width) / 2)
+    y: Math.round((parent.height - height) / 2) + Kirigami.Units.gridUnit * 2 * (1 - opacity) // move animation
     
     // dialog enter and exit transitions
     enter: Transition {
