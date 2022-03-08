@@ -199,6 +199,8 @@ ColumnLayout {
     spacing: Kirigami.Units.largeSpacing
 
     Kirigami.Icon {
+        visible: source != undefined
+        opacity: 0.5
 
         Layout.alignment: Qt.AlignHCenter
         Layout.preferredWidth: Kirigami.Units.iconSizes.huge
@@ -212,9 +214,6 @@ ColumnLayout {
             }
             return undefined
         }
-
-        visible: source != undefined
-        opacity: 0.5
     }
 
     Kirigami.Heading {
