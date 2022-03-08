@@ -244,6 +244,7 @@ QQC2.Page {
             maximumLineCount: 1
             elide: Text.ElideRight
             text: root.title
+            textFormat: Text.PlainText
         }
     }
 
