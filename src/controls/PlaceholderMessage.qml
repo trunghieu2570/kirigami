@@ -219,7 +219,7 @@ ColumnLayout {
 
     Kirigami.Heading {
         text: root.text
-        visible: root.text !== ""
+        visible: text.length > 0
 
         level: 2
         opacity: 0.5
