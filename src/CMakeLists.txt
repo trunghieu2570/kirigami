@@ -281,6 +281,9 @@ if (DESKTOP_ENABLED)
         styles/org.kde.desktop/SwipeListItem.qml
         styles/org.kde.desktop/Theme.qml
     )
+    ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH styles/org.kde.desktop/private SOURCES
+        styles/org.kde.desktop/private/DefaultListItemBackground.qml
+    )
 endif()
 
 target_link_libraries(KirigamiPlugin
