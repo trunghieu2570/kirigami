@@ -62,9 +62,10 @@ Kirigami.AbstractListItem {
         id: rowLayout
 
         Kirigami.Heading {
+            Layout.fillWidth: rowLayout.children.length === 1
+            Layout.alignment: Qt.AlignVCenter
             level: 3
             text: listSection.text
-            Layout.fillWidth: rowLayout.children.length === 1
         }
     }
 }
