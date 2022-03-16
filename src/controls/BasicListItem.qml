@@ -312,13 +312,14 @@ AbstractListItem {
             }
             ColumnLayout {
                 id: labelColumn
-                spacing: Units.smallSpacing
+                spacing: 0
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
                 QQC2.Label {
                     id: labelItem
                     text: listItem.text
                     Layout.fillWidth: true
+                    Layout.alignment: subtitleItem.visible ? Qt.AlignLeft | Qt.AlignBottom : Qt.AlignLeft | Qt.AlignVCenter
                     color: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? listItem.activeTextColor : listItem.textColor
                     elide: Text.ElideRight
                     font.weight: listItem.bold ? Font.Bold : Font.Normal
@@ -327,6 +328,7 @@ AbstractListItem {
                 QQC2.Label {
                     id: subtitleItem
                     Layout.fillWidth: true
+                    Layout.alignment: subtitleItem.visible ? Qt.AlignLeft | Qt.AlignTop : Qt.AlignLeft | Qt.AlignVCenter
                     color: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? listItem.activeTextColor : listItem.textColor
                     elide: Text.ElideRight
                     font: Theme.smallFont
