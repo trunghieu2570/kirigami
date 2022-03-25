@@ -198,6 +198,10 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.19 SOURCES
     controls/Chip.qml
 )
 
+ecm_target_qml_sources(KirigamiPlugin VERSION 2.20 SOURCES
+    controls/StackView.qml
+)
+
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private SOURCES
     controls/private/ActionButton.qml
     controls/private/ActionIconGroup.qml

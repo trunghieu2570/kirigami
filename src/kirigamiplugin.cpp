@@ -321,6 +321,9 @@ void KirigamiPlugin::registerTypes(const char *uri)
         return new InputMethod{};
     });
 
+    // 2.20
+    qmlRegisterType(componentUrl(QStringLiteral("StackView.qml")), uri, 2, 20, "StackView");
+
     qmlProtectModule(uri, 2);
 }
 
