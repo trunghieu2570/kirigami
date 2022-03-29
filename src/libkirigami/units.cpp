@@ -87,7 +87,7 @@ public:
     // Only stored for QML API compatiblity
     // TODO KF6 drop
 #if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
-    QObject *qmlFontMetrics;
+    std::unique_ptr<QObject> qmlFontMetrics = nullptr;
 #endif
 
     // Font metrics used for Units.
@@ -119,7 +119,7 @@ public:
     bool customWheelScrollLinesSet = false;
 
 #if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
-    QObject *createQmlFontMetrics(QQmlEngine *engine)
+    std::unique_ptr<QObject> createQmlFontMetrics(QQmlEngine *engine)
     {
         QQmlComponent component(engine);
         component.setData(QByteArrayLiteral(
@@ -133,7 +133,7 @@ public:
             "}\n"
         ), QUrl(QStringLiteral("units.cpp")));
 
-        return component.create();
+        return std::unique_ptr<QObject>(component.create());
     }
 #endif
 };
@@ -364,7 +364,7 @@ QObject *Units::fontMetrics() const
     if (!d->qmlFontMetrics) {
         d->qmlFontMetrics = d->createQmlFontMetrics(qmlEngine(this));
     }
-    return d->qmlFontMetrics;
+    return d->qmlFontMetrics.get();
 }
 #endif
 
