@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.5
+import QtQuick 2.15
 import QtQuick.Layouts 1.2
 import QtQml.Models 2.2
 import QtQuick.Templates 2.0 as T
@@ -667,11 +667,11 @@ T.Control {
     }
 
     Shortcut {
-        sequence: StandardKey.Back
+        sequences: [ StandardKey.Back ]
         onActivated: root.goBack()
     }
     Shortcut {
-        sequence: StandardKey.Forward
+        sequences: [ StandardKey.Forward ]
         onActivated: root.goForward()
     }
 
