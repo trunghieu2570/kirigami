@@ -267,6 +267,10 @@ T2.Control {
             alignment: Qt.AlignRight
 
             property bool atBottom: {
+                if (root.actions.length === 0) {
+                    return false
+                }
+
                 var remainingWidth = parent.width - text.implicitWidth - Kirigami.Units.smallSpacing * 2 - icon.width
                 if (closeButton.visible) {
                     remainingWidth -= closeButton.width - Kirigami.Units.smallSpacing
