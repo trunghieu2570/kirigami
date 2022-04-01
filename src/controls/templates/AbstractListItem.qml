@@ -137,7 +137,17 @@ T2.ItemDelegate {
 
     opacity: enabled ? 1 : 0.6
 
-    height: visible ? implicitHeight : 0
+    height: implicitHeight
+
+    onVisibleChanged: {
+        if (visible) {
+            height = Qt.binding(() => { return implicitHeight; })
+        } else {
+            if (ListView.view && ListView.view.visible) {
+                height = 0;
+            }
+        }
+    }
 
     hoverEnabled: true
 
