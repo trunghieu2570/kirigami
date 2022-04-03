@@ -14,8 +14,6 @@ import org.kde.kirigami 2.11 as Kirigami
  * in a PageRow or QtQuickControls2 StackView
  *
  * @see PagePool
- *
- * @inherit Action
  */
 Kirigami.Action {
     id: root
