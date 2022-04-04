@@ -74,6 +74,8 @@ Item
     /** @internal */
     property bool _usePageStack: false
 
+    property alias wideMode: form.wideMode
+
     /** @internal */
     default property alias _content: form.data
 

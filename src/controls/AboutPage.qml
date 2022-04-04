@@ -95,6 +95,7 @@ ScrollablePage
 
     AboutItem {
         id: aboutItem
+        wideMode: page.width >= aboutItem.implicitWidth
 
         _usePageStack: applicationWindow().pageStack ? true : false
     }
