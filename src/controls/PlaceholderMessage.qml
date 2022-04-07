@@ -146,6 +146,22 @@ import "private"
 ColumnLayout {
     id: root
 
+    enum Type {
+        Actionable,
+        Informational
+    }
+
+    /**
+     * The type of the message. This can be:
+     *
+     * * Kirigami.PlaceholderMessage.Type.Actionable: Makes it more attention-getting. Useful when the user is expected to interact with the message.
+     * * Kirigami.PlaceholderMessage.Type.Informational: Makes it less prominent. Useful when the message in only informational.
+     *
+     * By default if an helpfulAction is provided this will be of type Actionable otherwise of type Informational.
+     * @since 5.94
+     */
+    property int type: actionButton.action && actionButton.action.enabled ? PlaceholderMessage.Type.Actionable : PlaceholderMessage.Type.Informational
+
     /**
      * text: string
      * The text to show as a placeholder label
@@ -203,8 +219,8 @@ ColumnLayout {
         opacity: 0.5
 
         Layout.alignment: Qt.AlignHCenter
-        Layout.preferredWidth: Kirigami.Units.iconSizes.huge
-        Layout.preferredHeight: Kirigami.Units.iconSizes.huge
+        Layout.preferredWidth: Math.round(Kirigami.Units.iconSizes.huge * 1.5)
+        Layout.preferredHeight: Math.round(Kirigami.Units.iconSizes.huge * 1.5)
 
         source: {
             if (root.icon.source && root.icon.source.length > 0) {
@@ -220,8 +236,9 @@ ColumnLayout {
         text: root.text
         visible: text.length > 0
 
-        level: 2
-        opacity: 0.5
+        type: Kirigami.Heading.Primary
+        opacity: root.type == PlaceholderMessage.Type.Actionable ? 1 : 0.65
+
 
         Layout.fillWidth: true
         horizontalAlignment: Qt.AlignHCenter
@@ -232,8 +249,7 @@ ColumnLayout {
     QQC2.Label {
         text: root.explanation
         visible:  root.explanation !== ""
-
-        opacity: 0.5
+        opacity: root.type == PlaceholderMessage.Type.Actionable ? 1 : 0.65
 
         horizontalAlignment: Qt.AlignHCenter
         wrapMode: Text.WordWrap
@@ -245,6 +261,7 @@ ColumnLayout {
         id: actionButton
 
         Layout.alignment: Qt.AlignHCenter
+        Layout.topMargin: Kirigami.Units.gridUnit
 
         visible: action && action.enabled
     }
