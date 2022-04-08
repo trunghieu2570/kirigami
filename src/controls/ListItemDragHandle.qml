@@ -110,7 +110,6 @@ Item {
             target: listItem
             axis: Drag.YAxis
             minimumY: 0
-            maximumY: listView.height - listItem.height
         }
         cursorShape: pressed ? Qt.ClosedHandCursor : Qt.OpenHandCursor
 
@@ -120,13 +119,14 @@ Item {
             property int startY
             property int mouseDownY
             property Item originalParent
-            property int autoScrollThreshold: (listView.contentHeight > listView.height) ? listItem.height * 3 : 0
             opacity: mouseArea.pressed || (!Kirigami.Settings.tabletMode && listItem.hovered) ? 1 : 0.6
+            property int listItemLastY
+            property bool draggingUp
 
             function arrangeItem() {
-                var newIndex = listView.indexAt(1, listView.contentItem.mapFromItem(listItem, 0, 0).y + internal.mouseDownY);
+                var newIndex = listView.indexAt(1, listView.contentItem.mapFromItem(mouseArea, 0, internal.mouseDownY).y);
 
-                if (newIndex > -1 && newIndex !== index) {
+                if (newIndex > -1 && ((internal.draggingUp && newIndex < index) || (!internal.draggingUp && newIndex > index))) {
                     root.moveRequested(index, newIndex);
                 }
             }
@@ -142,18 +142,27 @@ Item {
             listItem.y = internal.originalParent.mapToItem(listItem.parent, listItem.x, listItem.y).y;
             internal.originalParent.z = 99;
             internal.startY = listItem.y;
+            internal.listItemLastY = listItem.y;
             internal.mouseDownY = mouse.y;
+            // while dragging listItem's height could change
+            // we want a const maximumY during the dragging time
+            mouseArea.drag.maximumY = listView.height - listItem.height;
         }
 
         onPositionChanged: {
-            if (!pressed) {
+            if (!pressed || listItem.y === internal.listItemLastY) {
                 return;
             }
+
+            internal.draggingUp = listItem.y < internal.listItemLastY
+            internal.listItemLastY = listItem.y;
+
             internal.arrangeItem();
 
-            scrollTimer.interval = 500 * Math.max(0.1, (1-Math.max(internal.autoScrollThreshold - listItem.y, listItem.y - listView.height + internal.autoScrollThreshold + listItem.height) / internal.autoScrollThreshold));
-            scrollTimer.running = (listItem.y < internal.autoScrollThreshold ||
-                        listItem.y > listView.height - internal.autoScrollThreshold);
+             // autoscroll when the dragging item reaches the listView's top/bottom boundary
+            scrollTimer.running = (listView.contentHeight > listView.height)
+                               && ( (listItem.y === 0 && !listView.atYBeginning) ||
+                                    (listItem.y === mouseArea.drag.maximumY && !listView.atYEnd) );
         }
         onReleased: {
             listItem.y = internal.originalParent.mapFromItem(listItem, 0, 0).y;
@@ -180,13 +189,21 @@ Item {
         }
         Timer {
             id: scrollTimer
-            interval: 500
+            interval: 50
             repeat: true
             onTriggered: {
-                if (listItem.y < internal.autoScrollThreshold) {
-                    listView.contentY = Math.max(0, listView.contentY - Kirigami.Units.gridUnit)
+                if (internal.draggingUp) {
+                    listView.contentY -= Kirigami.Units.gridUnit;
+                    if (listView.atYBeginning) {
+                        listView.positionViewAtBeginning();
+                        stop();
+                    }
                 } else {
-                    listView.contentY = Math.min(listView.contentHeight - listView.height, listView.contentY + Kirigami.Units.gridUnit)
+                    listView.contentY += Kirigami.Units.gridUnit;
+                    if (listView.atYEnd) {
+                        listView.positionViewAtEnd();
+                        stop();
+                    }
                 }
                 internal.arrangeItem();
             }
