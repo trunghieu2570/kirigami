@@ -53,7 +53,6 @@ Kirigami.PlaceholderMessage {
     property alias progressBar: _progressBar
 
     text: qsTr("Loading…")
-    explanation: qsTr("Still loading, please wait.")
 
     QQC2.ProgressBar {
         id: _progressBar
