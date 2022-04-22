@@ -441,8 +441,14 @@ void ToolBarLayout::Private::performLayout()
             moreButtonInstance->setX(0.0);
         }
 
-        if (heightMode == AlwaysFill || (heightMode == ConstrainIfLarger && moreButtonInstance->height() > maxHeight)) {
+        if (heightMode == AlwaysFill) {
             moreButtonInstance->setHeight(q->height());
+        } else if (heightMode == ConstrainIfLarger) {
+            if (moreButtonInstance->implicitHeight() > maxHeight) {
+                moreButtonInstance->setHeight(maxHeight);
+            } else {
+                moreButtonInstance->setHeight(moreButtonInstance->implicitHeight());
+            }
         }
 
         moreButtonInstance->setY(qRound((maxHeight - moreButtonInstance->height()) / 2.0));
@@ -459,8 +465,14 @@ void ToolBarLayout::Private::performLayout()
             continue;
         }
 
-        if (heightMode == AlwaysFill || (heightMode == ConstrainIfLarger && entry->height() > maxHeight)) {
+        if (heightMode == AlwaysFill) {
             entry->setHeight(q->height());
+        } else if (heightMode == ConstrainIfLarger) {
+            if (entry->implicitHeight() > maxHeight) {
+                entry->setHeight(maxHeight);
+            } else {
+                entry->setHeight(entry->implicitHeight());
+            }
         }
 
         qreal y = qRound((maxHeight - entry->height()) / 2.0);
