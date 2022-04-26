@@ -1241,6 +1241,7 @@ QQuickItem *ColumnView::removeItem(QQuickItem *item)
         item->setParentItem(attached ? attached->originalParent() : nullptr);
     }
 
+    Q_EMIT contentChildrenChanged();
     Q_EMIT itemRemoved(item);
 
     return item;
