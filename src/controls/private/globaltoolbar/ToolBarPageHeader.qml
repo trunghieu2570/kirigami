@@ -35,10 +35,10 @@ AbstractPageHeader {
             id: titleLoader
 
             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-            Layout.fillWidth: item ? item.Layout.fillWidth : undefined
-            Layout.minimumWidth: item ? item.Layout.minimumWidth : undefined
-            Layout.preferredWidth: item ? item.Layout.preferredWidth : undefined
-            Layout.maximumWidth: item ? item.Layout.maximumWidth : undefined
+            Layout.fillWidth: item ? item.Layout.fillWidth : false
+            Layout.minimumWidth: item ? item.Layout.minimumWidth : -1
+            Layout.preferredWidth: item ? item.Layout.preferredWidth : -1
+            Layout.maximumWidth: item ? item.Layout.maximumWidth : -1
 
             asynchronous: true
             sourceComponent: page ? page.titleDelegate : null
