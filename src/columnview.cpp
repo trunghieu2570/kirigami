@@ -92,6 +92,7 @@ QtObject {
     m_instance = component->create();
     // qCWarning(KirigamiLog)<<component->errors();
     Q_ASSERT(m_instance);
+    m_instance->setParent(this);
 
     m_separatorComponent = m_instance->property("separator").value<QQmlComponent *>();
     Q_ASSERT(m_separatorComponent);
