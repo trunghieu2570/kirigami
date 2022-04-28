@@ -1105,7 +1105,7 @@ void ColumnView::insertItem(int pos, QQuickItem *item)
     ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
     attached->setOriginalParent(item->parentItem());
     attached->setShouldDeleteOnRemove(item->parentItem() == nullptr && QQmlEngine::objectOwnership(item) == QQmlEngine::JavaScriptOwnership);
-    item->setParentItem(m_contentItem);
+    item->setParentItem(this);
 
     item->forceActiveFocus();
 
