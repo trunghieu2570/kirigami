@@ -89,8 +89,8 @@ Item {
             anchors.fill: parent
             color: "black"
             visible: globalDrawer && globalDrawer.modal
-            parent: contextDrawer ? globalDrawer.background.parent.parent : overlayRoot
-            opacity: contextDrawer ? globalDrawer.position * 0.6 : 0
+            parent: globalDrawer ? globalDrawer.background.parent.parent : overlayRoot
+            opacity: globalDrawer ? globalDrawer.position * 0.6 : 0
         }
         Item {
             id: overlayRoot
