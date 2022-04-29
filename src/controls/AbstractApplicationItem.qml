@@ -63,7 +63,7 @@ Item {
     /**
      * This property holds the stack used to allocate the pages and to manage the
      * transitions between them.
-     * 
+     *
      * Put a container here, such as QtQuick.Controls.StackView.
      */
     property Item pageStack
@@ -159,7 +159,7 @@ Item {
 
     /**
      * @returns a pointer to this item.
-     * 
+     *
      * It can be used anywhere in the application.
      */
     function applicationWindow() {
@@ -190,15 +190,15 @@ Item {
 
    /**
     * \property org::kde:kirigami::ApplicationHeader header
-    * 
+    *
     * This property holds an item that can be used as a title for the application.
-    * 
+    *
     * Scrolling the main page will make it taller or shorter (through the point of going away).
-    * 
+    *
     * It's a behavior similar to the typical mobile web browser addressbar.
-    * 
+    *
     * The minimum, preferred and maximum heights of the item can be controlled with
-    * 
+    *
     * * Layout.minimumHeight: default is 0, i.e. hidden
     * * Layout.preferredHeight: default is Units.gridUnit * 1.6
     * * Layout.maximumHeight: default is Units.gridUnit * 3
@@ -253,7 +253,7 @@ Item {
     /**
      * This property holds the drawer for global actions, that will be opened by
      * sliding from the left screen edge or by dragging the ActionButton to the right.
-     * 
+     *
      * It is recommended to use the GlobalDrawer class here.
      */
     property OverlayDrawer globalDrawer
@@ -319,7 +319,7 @@ Item {
 
     /**
      * This property holds whether the application is in reachable mode for single hand use.
-     * 
+     *
      * The whole content of the application is moved down the screen to be
      * reachable with the thumb. If wideScreen is true, or reachableModeEnabled is false,
      * this property has no effect.
@@ -353,7 +353,7 @@ Item {
 
     /**
      * \property list<Object> __data
-     * 
+     *
      * This property holds the list of all children of this item.
      */
     default property alias __data: contentItemRoot.data
