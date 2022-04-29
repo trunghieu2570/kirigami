@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.1
+import QtQuick 2.15
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0 as Controls
 import QtGraphicalEffects 1.0
@@ -40,11 +40,51 @@ Item {
 
     transform: Translate {
         id: translateTransform
-        y: mouseArea.internalVisibility ? 0 : button.height
-        Behavior on y {
+    }
+
+    states: [
+        State {
+            when: mouseArea.internalVisibility
+            PropertyChanges {
+                target: translateTransform
+                y: 0
+            }
+            PropertyChanges {
+                target: root
+                opacity: 1
+            }
+            PropertyChanges {
+                target: root
+                visible: true
+            }
+        },
+        State {
+            when: !mouseArea.internalVisibility
+            PropertyChanges {
+                target: translateTransform
+                y: button.height
+            }
+            PropertyChanges {
+                target: root
+                opacity: 0
+            }
+            PropertyChanges {
+                target: root
+                visible: false
+            }
+        }
+    ]
+    transitions: Transition {
+        ParallelAnimation {
             NumberAnimation {
+                target: translateTransform
+                property: "y"
                 duration: Units.longDuration
                 easing.type: mouseArea.internalVisibility == true ? Easing.InQuad : Easing.OutQuad
+            }
+            OpacityAnimator {
+                duration: Units.longDuration
+                easing.type: Easing.InOutQuad
             }
         }
     }
