@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.5
+import QtQuick 2.15
 import "templates/private"
 import org.kde.kirigami 2.4 as Kirigami
 
@@ -139,15 +139,11 @@ AbstractApplicationItem {
             event.accepted = true;
         }
         Shortcut {
-            sequence: "Forward"
+            sequences: [StandardKey.Forward]
             onActivated: __pageStack.goForward();
         }
         Shortcut {
-            sequence: StandardKey.Forward
-            onActivated: __pageStack.goForward();
-        }
-        Shortcut {
-            sequence: StandardKey.Back
+            sequences: [StandardKey.Back]
             onActivated: __pageStack.goBack();
         }
 
