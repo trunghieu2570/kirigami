@@ -68,7 +68,7 @@ Item {
      */
     property Item pageStack
 
-    LayoutMirroring.enabled: Qt.application.layoutDirection == Qt.RightToLeft
+    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
     property alias overlay: overlayRoot
@@ -125,7 +125,7 @@ Item {
      */
     function showPassiveNotification(message, timeout, actionText, callBack) {
         if (!internal.__passiveNotification) {
-            var component = Qt.createComponent("templates/private/PassiveNotification.qml");
+            const component = Qt.createComponent("templates/private/PassiveNotification.qml");
             internal.__passiveNotification = component.createObject(root);
         }
 
