@@ -18,8 +18,6 @@
 
 #include "units.h"
 
-QHash<QObject *, ColumnViewAttached *> ColumnView::m_attachedObjects = QHash<QObject *, ColumnViewAttached *>();
-
 class QmlComponentsPoolSingleton
 {
 public:

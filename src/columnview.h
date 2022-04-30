@@ -472,7 +472,6 @@ private:
     ContentItem *m_contentItem;
     QPointer<QQuickItem> m_currentItem;
 
-    static QHash<QObject *, ColumnViewAttached *> m_attachedObjects;
     qreal m_oldMouseX = -1.0;
     qreal m_startMouseX = -1.0;
     qreal m_oldMouseY = -1.0;
