@@ -19,7 +19,6 @@ import org.kde.kirigami 2.4 as Kirigami
  * import org.kde.kirigami 2.4 as Kirigami
  *
  * Kirigami.ApplicationItem {
- *  [...]
  *     globalDrawer: Kirigami.GlobalDrawer {
  *         actions: [
  *            Kirigami.Action {
@@ -69,9 +68,8 @@ import org.kde.kirigami 2.4 as Kirigami
  *                 }
  *             }
  *         ]
- *       [...]
+ *         // ...
  *     }
- *  [...]
  * }
  * @endcode
  *
@@ -95,11 +93,11 @@ AbstractApplicationItem {
     property alias pageStack: __pageStack // TODO KF6 make readonly
 
     // Redefines here as here we can know a pointer to PageRow
-    wideScreen: width >= applicationWindow().pageStack.defaultColumnWidth*2
+    wideScreen: width >= applicationWindow().pageStack.defaultColumnWidth * 2
 
     Component.onCompleted: {
         if (pageStack.currentItem) {
-            pageStack.currentItem.forceActiveFocus()
+            pageStack.currentItem.forceActiveFocus();
         }
     }
 
@@ -120,7 +118,7 @@ AbstractApplicationItem {
 
         function goBack() {
             //NOTE: drawers are handling the back button by themselves
-            var backEvent = {accepted: false}
+            const backEvent = {accepted: false}
             if (root.pageStack.currentIndex >= 1) {
                 root.pageStack.currentItem.backRequested(backEvent);
                 if (!backEvent.accepted) {
@@ -134,11 +132,11 @@ AbstractApplicationItem {
             }
         }
         function goForward() {
-            root.pageStack.currentIndex = Math.min(root.pageStack.depth-1, root.pageStack.currentIndex + 1);
+            root.pageStack.currentIndex = Math.min(root.pageStack.depth - 1, root.pageStack.currentIndex + 1);
         }
         Keys.onBackPressed: {
             goBack();
-            event.accepted = true
+            event.accepted = true;
         }
         Shortcut {
             sequence: "Forward"
