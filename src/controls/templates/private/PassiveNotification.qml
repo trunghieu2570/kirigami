@@ -188,6 +188,31 @@ Controls.Popup {
                             delegate.callBack();
                         }
                     }
+
+                    contentItem: RowLayout {
+                        Controls.Label {
+                            Layout.alignment: Qt.AlignHCenter
+                            Layout.leftMargin: Kirigami.Units.largeSpacing
+                            Layout.rightMargin: Kirigami.Units.largeSpacing
+                            text: actionButton.text
+
+                            Kirigami.Theme.inherit: false
+                            Kirigami.Theme.colorSet: root.Kirigami.Theme.colorSet
+                            color: Kirigami.Theme.textColor
+                        }
+                    }
+
+                    background: Rectangle {
+                        property color active: Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.8)
+                        property color passive: Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.2)
+
+                        implicitWidth: Kirigami.Units.gridUnit * 5
+                        implicitHeight: Kirigami.Units.gridUnit * 2
+                        color: actionButton.pressed ? active : "transparent"
+                        border.width: 1
+                        border.color: actionButton.hovered ? active : passive
+                        radius: 3
+                    }
                 }
             }
             background: Kirigami.ShadowedRectangle {
