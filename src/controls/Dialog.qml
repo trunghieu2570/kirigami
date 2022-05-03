@@ -233,6 +233,17 @@ T.Dialog {
     // default standard button
     standardButtons: Controls.Dialog.Close
 
+    function standardButton(button): T.AbstractButton {
+        // in case a footer is redefined
+        if (footer instanceof T.DialogButtonBox) {
+            return footer.standardButton(button);
+        } else if (footer === footerToolBar) {
+            return dialogButtonBox.standardButton(button);
+        } else {
+            return null;
+        }
+    }
+
     // calculate dimensions
     implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding // maximum width enforced from our content (one source of truth) to avoid binding loops
     implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
