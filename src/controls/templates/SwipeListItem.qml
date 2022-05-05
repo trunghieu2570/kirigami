@@ -95,6 +95,14 @@ T2.SwipeDelegate {
     property list<Controls.Action> actions
 
     /**
+     * Defines the width of the overlay. The value can represent
+     * the width of the handle component or the action layout.
+     * @var real overlayWidth
+     * @since 2.19
+     */
+    readonly property alias overlayWidth: overlayLoader.width
+
+    /**
      * textColor: color
      * Color for the text in the item
      *
