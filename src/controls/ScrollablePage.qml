@@ -4,10 +4,12 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.1
-import QtQuick.Controls 2.1
-import QtQuick.Layouts 1.2
-import org.kde.kirigami 2.4
+import QtQuick 2.15
+import QtQuick.Templates 2.15 as T
+import QtQuick.Layouts 1.15
+
+import org.kde.kirigami 2.19
+import org.kde.kirigami.templates 2.2 as KT
 import "private"
 
 /**
@@ -126,16 +128,17 @@ Page {
         property QtObject oldMainItem
         page: root
         clip: true
-        topPadding: contentItem == flickableItem ? 0 : root.topPadding
+        topPadding: contentItem === flickableItem ? 0 : root.topPadding
         leftPadding: root.leftPadding
         rightPadding: root.rightPadding
-        bottomPadding: contentItem == flickableItem ? 0 : root.bottomPadding
+        bottomPadding: contentItem === flickableItem ? 0 : root.bottomPadding
         anchors {
             top: (root.header && root.header.visible)
                     ? root.header.bottom
-                    //FIXME: for nowassuming globalToolBarItem is in a Loader, which needs to be got rid of
-                    : (globalToolBarItem && globalToolBarItem.parent && globalToolBarItem.visible ?
-                    globalToolBarItem.parent.bottom : parent.top)
+                    //FIXME: for now assuming globalToolBarItem is in a Loader, which needs to be got rid of
+                    : (globalToolBarItem && globalToolBarItem.parent && globalToolBarItem.visible
+                        ? globalToolBarItem.parent.bottom
+                        : parent.top)
             bottom: (root.footer && root.footer.visible) ? root.footer.top : parent.bottom
             left: parent.left
             right: parent.right
@@ -152,23 +155,23 @@ Page {
     //HACK to get the mainItem as the last one, all the other eventual items as an overlay
     //no idea if is the way the user expects
     onMainItemChanged: {
-        //Duck type for Item
-         if (mainItem.hasOwnProperty("anchors") && mainItem.hasOwnProperty("antialiasing")) {
-             scrollView.contentItem = mainItem
-             mainItem.focus = true
-         //don't try to reparent drawers
-         } else if (mainItem.hasOwnProperty("dragMargin")) {
-             return;
-        //reparent sheets
-        } else if (mainItem.hasOwnProperty("sheetOpen")) {
+        if (mainItem instanceof Item) {
+            scrollView.contentItem = mainItem
+            mainItem.focus = true
+        } else if (mainItem instanceof T.Drawer) {
+            //don't try to reparent drawers
+            return;
+        } else if (mainItem instanceof KT.OverlaySheet) {
+            //reparent sheets
             if (mainItem.parent === root || mainItem.parent === null) {
                 mainItem.parent = root;
             }
-             root.data.push(mainItem);
-             return;
+            root.data.push(mainItem);
+            return;
         }
 
-        if (scrollView.oldMainItem && scrollView.oldMainItem instanceof Item && (typeof applicationWindow == 'undefined' || scrollView.oldMainItem.parent !== applicationWindow().overlay)) {
+        if (scrollView.oldMainItem && scrollView.oldMainItem instanceof Item
+            && (typeof applicationWindow === 'undefined'|| scrollView.oldMainItem.parent !== applicationWindow().overlay)) {
             scrollView.oldMainItem.parent = overlay
         }
         scrollView.oldMainItem = mainItem
