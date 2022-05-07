@@ -322,6 +322,9 @@ void KirigamiPlugin::registerTypes(const char *uri)
         return new InputMethod{};
     });
 
+    // 2.20
+    qmlRegisterType(componentUrl(QStringLiteral("SelectableLabel.qml")), uri, 2, 20, "SelectableLabel");
+
     qmlProtectModule(uri, 2);
 }
 
