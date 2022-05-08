@@ -5,6 +5,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as Controls
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
+import org.kde.%{APPNAME} 1.0
 
 Kirigami.ApplicationWindow {
     id: root
@@ -14,12 +15,14 @@ Kirigami.ApplicationWindow {
     minimumWidth: Kirigami.Units.gridUnit * 20
     minimumHeight: Kirigami.Units.gridUnit * 20
 
-    onClosing: Controller.saveWindowGeometry(root)
+    onClosing: App.saveWindowGeometry(root)
 
     onWidthChanged: saveWindowGeometryTimer.restart()
     onHeightChanged: saveWindowGeometryTimer.restart()
     onXChanged: saveWindowGeometryTimer.restart()
     onYChanged: saveWindowGeometryTimer.restart()
+
+    Component.onCompleted: App.restoreWindowGeometry(root)
 
     // This timer allows to batch update the window size change to reduce
     // the io load and also work around the fact that x/y/width/height are
@@ -28,7 +31,7 @@ Kirigami.ApplicationWindow {
     Timer {
         id: saveWindowGeometryTimer
         interval: 1000
-        onTriggered: Controller.saveWindowGeometry(root)
+        onTriggered: App.saveWindowGeometry(root)
     }
 
     property int counter: 0
