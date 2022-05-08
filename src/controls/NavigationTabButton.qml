@@ -98,11 +98,13 @@ T.TabButton {
         spacing: label.lineCount > 1 ? 0 : control.spacing
 
         Kirigami.Icon {
+            id: icon
             source: control.icon.name || control.icon.source
             isMask: true
             Layout.alignment: Qt.AlignHCenter | (label.lineCount > 1 ? 0 : Qt.AlignBottom)
-            implicitHeight: control.icon.height
-            implicitWidth: control.icon.width
+            implicitHeight: source ? control.icon.height : 0
+            implicitWidth: source ? control.icon.width : 0
+            visible: control.icon.name !== '' && control.icon.source !== ''
             color: control.icon.color
             Behavior on color { ColorAnimation {} }
             Behavior on opacity { NumberAnimation {} }
@@ -112,9 +114,9 @@ T.TabButton {
             Kirigami.MnemonicData.enabled: control.enabled && control.visible
             Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem
             Kirigami.MnemonicData.label: control.text
-            
+
             text: Kirigami.MnemonicData.richTextLabel
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+            Layout.alignment: icon.visible ? Qt.AlignHCenter | Qt.AlignTop : Qt.AlignCenter
             horizontalAlignment: Text.AlignHCenter
 
             wrapMode: Text.Wrap
@@ -122,16 +124,16 @@ T.TabButton {
             color: control.checked ? control.highlightForegroundColor : control.foregroundColor
             font.bold: control.checked
             font.family: Kirigami.Theme.smallFont.family
-            font.pointSize: Kirigami.Theme.smallFont.pointSize
-            
+            font.pointSize: icon.visible ? Kirigami.Theme.smallFont.pointSize : Kirigami.Theme.defaultFont.pointSize * 1.20 // 1.20 is equivalent to level 2 heading
+
             Behavior on color { ColorAnimation {} }
             Behavior on opacity { NumberAnimation {} }
-            
+
             // Work around bold text changing implicit size
             Layout.preferredWidth: boldMetrics.implicitWidth
             Layout.preferredHeight: boldMetrics.implicitHeight * label.lineCount
             Layout.fillWidth: true
-            
+
             QQC2.Label {
                 id: boldMetrics
                 visible: false
