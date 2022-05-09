@@ -53,7 +53,7 @@ AbstractPageHeader {
 
             visible: actions.length > 0
             alignment: pageRow ? pageRow.globalToolBar.toolbarActionAlignment : Qt.AlignRight
-            heightMode: ToolBarLayout.ConstrainIfLarger
+            heightMode: pageRow ? pageRow.globalToolBar.toolbarActionHeightMode : ToolBarLayout.ConstrainIfLarger
 
             actions: {
                 if (!page) {

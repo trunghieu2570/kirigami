@@ -46,6 +46,7 @@ QtObject {
      */
     property bool canContainHandles: true
     property int toolbarActionAlignment: Qt.AlignRight
+    property int toolbarActionHeightMode: Kirigami.ToolBarLayout.ConstrainIfLarger
 
     property int minimumHeight: 0
     // FIXME: Figure out the exact standard size of a Toolbar
