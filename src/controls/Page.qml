@@ -323,7 +323,7 @@ QQC2.Page {
 
     onHeaderChanged: {
         if (header) {
-            header.anchors.top = Qt.binding(function() {return globalToolBar.visible ? globalToolBar.bottom : root.top});
+            header.anchors.top = Qt.binding(() => globalToolBar.visible ? globalToolBar.bottom : root.top);
         }
     }
 
@@ -400,19 +400,23 @@ QQC2.Page {
                     root.titleDelegate !== defaultTitleDelegate) {
                     sourceComponent = root.titleDelegate;
                 } else if (active) {
-                    setSource(Qt.resolvedUrl(root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar ? "private/globaltoolbar/ToolBarPageHeader.qml" : "private/globaltoolbar/TitlesPageHeader.qml"),
+                    const url = root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar
+                        ? "private/globaltoolbar/ToolBarPageHeader.qml"
+                        : "private/globaltoolbar/TitlesPageHeader.qml";
                     //TODO: find container reliably, remove assumption
-                    {"pageRow": Qt.binding(function() {return row}),
-                    "page": root,
-                    "current": Qt.binding(function() {
-                        if (!row && !stack) {
-                            return true;
-                        } else if (stack) {
-                            return stack;
-                        } else {
-                            return row.currentIndex === root.Kirigami.ColumnView.level;
-                        }
-                    })});
+                    setSource(Qt.resolvedUrl(url), {
+                        pageRow: Qt.binding(() => row),
+                        page: root,
+                        current: Qt.binding(() => {
+                            if (!row && !stack) {
+                                return true;
+                            } else if (stack) {
+                                return stack;
+                            } else {
+                                return row.currentIndex === root.Kirigami.ColumnView.level;
+                            }
+                        }),
+                    });
                 }
             }
         },
