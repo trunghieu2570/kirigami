@@ -106,6 +106,7 @@ ecm_target_qml_sources(KirigamiPlugin SOURCES
     controls/OverlaySheet.qml
     controls/Page.qml
     controls/ScrollablePage.qml
+    controls/ScrollablePage2.qml
     controls/SwipeListItem.qml
 )
 
