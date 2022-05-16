@@ -626,6 +626,7 @@ QQuickItem *ContentItem::ensureSeparator(QQuickItem *item)
         separatorItem = qobject_cast<QQuickItem *>(
             privateQmlComponentsPoolSelf->instance(qmlEngine(item))->m_separatorComponent->beginCreate(QQmlEngine::contextForObject(item)));
         if (separatorItem) {
+            separatorItem->setParent(this);
             separatorItem->setParentItem(item);
             separatorItem->setZ(9999);
             separatorItem->setProperty("column", QVariant::fromValue(item));
@@ -645,6 +646,7 @@ QQuickItem *ContentItem::ensureRightSeparator(QQuickItem *item)
         separatorItem = qobject_cast<QQuickItem *>(
             QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_rightSeparatorComponent->beginCreate(QQmlEngine::contextForObject(item)));
         if (separatorItem) {
+            separatorItem->setParent(this);
             separatorItem->setParentItem(item);
             separatorItem->setZ(9999);
             separatorItem->setProperty("column", QVariant::fromValue(item));
