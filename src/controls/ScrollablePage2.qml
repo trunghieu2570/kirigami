@@ -8,6 +8,7 @@ import QtQuick 2.15
 import QtQuick.Templates 2.15 as T
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
+import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.19
 import org.kde.kirigami.templates 2.2 as KT
@@ -81,10 +82,10 @@ Page {
     property bool supportsRefreshing: false
 
     /**
-     * \property QtQuick.Flickable ScrollablePage2::flickable
+     * \property QtQuick.Flickable ScrollablePage::flickable
      * The main Flickable item of this page.
      */
- //   property alias flickable: scrollView.flickableItem
+    readonly property Flickable flickable: itemsParent.flickable
 
     /**
      * \property QtQuick.Controls.ScrollBar ScrollablePage2::verticalScrollBar
@@ -100,7 +101,6 @@ Page {
 
     default property alias pageData: itemsParent.data
     property alias pageChildren: itemsParent.children
-    property Flickable view
 
     /**
      * If true, and if flickable is an item view, like a ListView or
@@ -111,9 +111,11 @@ Page {
      */
     property bool keyboardNavigationEnabled: true
 
-    contentHeight: root.flickable.contentHeight
+    contentHeight: flickable ? flickable.contentHeight : 0
     implicitHeight: ((header && header.visible) ? header.implicitHeight : 0) + ((footer && footer.visible) ? footer.implicitHeight : 0) + contentHeight + topPadding + bottomPadding
-    implicitWidth: root.flickable.contentItem ? root.flickable.contentItem.implicitWidth : contentItem.implicitWidth + leftPadding + rightPadding
+    implicitWidth: flickable
+        ? (flickable.contentItem ? flickable.contentItem.implicitWidth : contentItem.implicitWidth + leftPadding + rightPadding)
+        : 0
 
     Theme.inherit: false
     Theme.colorSet: flickable && flickable.hasOwnProperty("model") ? Theme.View : Theme.Window
@@ -135,49 +137,110 @@ Page {
                 right: parent.right
             }
 
-            property bool supportsRefreshing;
-            property bool refreshing
             property alias flickableItem: scrollView.contentItem
 
-            //contentData: root.view ? null : root.actualData
-        // contentItem: root.view || null
             QQC2.ScrollBar.horizontal.policy: Qt.ScrollBarAlwaysOff
-            property int blap: itemsParent.children.count
         }
     }
-    data: Item {
-        z: 9999
-        parent: root//.view || !scrollView.contentItem ? root : scrollView.contentItem.contentItem
-        // anchors.fill: parent
-
-        implicitHeight: itemsParent.children.length === 1 ? itemsParent.children[0].implicitHeight : undefined
-        implicitWidth: itemsParent.children.length === 1 ? itemsParent.children[0].implicitWidth : undefined
+    data: [
         Item {
-            id: itemsParent
-            anchors {
-               fill: parent
-               leftMargin: root.leftPadding || root.padding
-               topMargin: root.topPadding || root.padding
-               rightMargin: root.rightPadding || root.padding
-               bottomMargin: root.bottomPadding || root.padding
+            //z: 9999
+            parent: root
+
+            implicitHeight: itemsParent.children.length === 1 ? itemsParent.children[0].implicitHeight : 0
+            implicitWidth: itemsParent.children.length === 1 ? itemsParent.children[0].implicitWidth : 0
+            Item {
+                id: itemsParent
+                property Flickable flickable
+                anchors {
+                fill: parent
+                leftMargin: root.leftPadding || root.padding
+                topMargin: root.topPadding || root.padding
+                rightMargin: root.rightPadding || root.padding
+                bottomMargin: root.bottomPadding || root.padding
+                }
+            }
+        },
+        Item {
+            id: busyIndicatorFrame
+            z: 99
+            y: root.flickable.verticalLayoutDirection === ListView.BottomToTop
+                ? -root.flickable.contentY+root.flickable.originY+height
+                : -root.flickable.contentY+root.flickable.originY-height
+            width: root.flickable.width
+            height: busyIndicator.height + Units.gridUnit * 2
+            QQC2.BusyIndicator {
+                id: busyIndicator
+                z: 1
+                anchors.centerIn: parent
+                running: root.refreshing
+                visible: root.refreshing
+                //Android busywidget QQC seems to be broken at custom sizes
+            }
+            Rectangle {
+                id: spinnerProgress
+                anchors {
+                    fill: busyIndicator
+                    margins: Math.ceil(Units.smallSpacing)
+                }
+                radius: width
+                visible: supportsRefreshing && !refreshing && progress > 0
+                color: "transparent"
+                opacity: 0.8
+                border.color: Theme.backgroundColor
+                border.width: Math.ceil(Units.smallSpacing)
+                property real progress: supportsRefreshing && !refreshing ? (parent.y/busyIndicatorFrame.height) : 0
+            }
+            ConicalGradient {
+                source: spinnerProgress
+                visible: spinnerProgress.visible
+                anchors.fill: spinnerProgress
+                gradient: Gradient {
+                    GradientStop { position: 0.00; color: Theme.highlightColor }
+                    GradientStop { position: spinnerProgress.progress; color: Theme.highlightColor }
+                    GradientStop { position: spinnerProgress.progress + 0.01; color: "transparent" }
+                    GradientStop { position: 1.00; color: "transparent" }
+                }
+            }
+
+            onYChanged: {
+                if (!supportsRefreshing) {
+                    return;
+                }
+
+                if (!root.refreshing && y > busyIndicatorFrame.height/2 + topPadding) {
+                    refreshTriggerTimer.running = true;
+                } else {
+                    refreshTriggerTimer.running = false;
+                }
+            }
+            Timer {
+                id: refreshTriggerTimer
+                interval: 500
+                onTriggered: {
+                    if (!root.refreshing && parent.y > busyIndicatorFrame.height/2 + topPadding) {
+                        root.refreshing = true;
+                    }
+                }
             }
         }
-    }
+        ]
     Component.onCompleted: {
-        let flickable = null
         for (let i in itemsParent.children) {
             let child = itemsParent.children[i];
             if (child instanceof Flickable) {
-                flickable = child;
+                itemsParent.flickable = child;
                 break;
             }
         }
 
-        if (flickable) {
-            root.contentItem = root.scrollView = scrollViewComponent.createObject(root, {"contentData": [flickable]});
+        if (itemsParent.flickable) {
+            root.contentItem = root.scrollView = scrollViewComponent.createObject(root, {"contentData": [itemsParent.flickable]});
             flickable.parent = root.scrollView;
         } else {
             root.contentItem = root.scrollView = scrollViewComponent.createObject(root, {"contentData": [itemsParent.parent]});
+            itemsParent.flickable = root.scrollView.contentItem;
         }
+        itemsParent.flickable.interactive = true
     }
 }
