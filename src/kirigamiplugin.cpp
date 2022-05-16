@@ -324,6 +324,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     // 2.20
     qmlRegisterType(componentUrl(QStringLiteral("SelectableLabel.qml")), uri, 2, 20, "SelectableLabel");
+    qmlRegisterType(componentUrl(QStringLiteral("ScrollablePage2.qml")), uri, 2, 20, "ScrollablePage2");
 
     qmlProtectModule(uri, 2);
 }
