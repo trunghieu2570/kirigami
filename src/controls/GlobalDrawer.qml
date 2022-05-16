@@ -562,6 +562,10 @@ OverlayDrawer {
                     onClicked: root.collapsed = !root.collapsed
                     visible: root.collapsible && root.collapseButtonVisible
                     text: root.collapsed ? "" : qsTr("Close Sidebar")
+
+                    QQC2.ToolTip.visible: root.collapsed && hovered
+                    QQC2.ToolTip.text: qsTr("Open Sidebar")
+                    QQC2.ToolTip.delay: Units.toolTipDelay
                 }
             }
         }
