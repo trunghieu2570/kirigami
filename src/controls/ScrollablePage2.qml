@@ -144,8 +144,6 @@ Page {
                 }
             }
 
-            property alias flickableItem: scrollView.contentItem
-
             QQC2.ScrollBar.horizontal.policy: Qt.ScrollBarAlwaysOff
         }
     }
