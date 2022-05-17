@@ -135,6 +135,13 @@ Page {
                 bottom: (root.footer && root.footer.visible) ? root.footer.top : parent.bottom
                 left: parent.left
                 right: parent.right
+                topMargin: root.refreshing ? busyIndicatorFrame.height : 0
+                Behavior on topMargin {
+                    NumberAnimation {
+                        easing.type: Easing.InOutQuad
+                        duration: Kirigami.Units.longDuration 
+                    }
+                }
             }
 
             property alias flickableItem: scrollView.contentItem
@@ -153,11 +160,11 @@ Page {
                 id: itemsParent
                 property Flickable flickable
                 anchors {
-                fill: parent
-                leftMargin: root.leftPadding || root.padding
-                topMargin: root.topPadding || root.padding
-                rightMargin: root.rightPadding || root.padding
-                bottomMargin: root.bottomPadding || root.padding
+                    fill: parent
+                    leftMargin: root.leftPadding || root.padding
+                    topMargin: root.topPadding || root.padding
+                    rightMargin: root.rightPadding || root.padding
+                    bottomMargin: root.bottomPadding || root.padding
                 }
             }
         },
@@ -165,8 +172,8 @@ Page {
             id: busyIndicatorFrame
             z: 99
             y: root.flickable.verticalLayoutDirection === ListView.BottomToTop
-                ? -root.flickable.contentY+root.flickable.originY+height
-                : -root.flickable.contentY+root.flickable.originY-height
+                ? -root.flickable.contentY + root.flickable.originY + height
+                : -root.flickable.contentY + root.flickable.originY - height + root.scrollView.y
             width: root.flickable.width
             height: busyIndicator.height + Units.gridUnit * 2
             QQC2.BusyIndicator {
