@@ -91,13 +91,25 @@ Page {
      * \property QtQuick.Controls.ScrollBar ScrollablePage2::verticalScrollBar
      * The vertical scrollbar.
      */
-    readonly property QQC2.ScrollBar verticalScrollBar: scrollView.QQC2.ScrollBar.vertical
+    readonly property QQC2.ScrollBar verticalScrollBar: scrollView ? scrollView.QQC2.ScrollBar.vertical : null
 
     /**
      * \property QtQuick.Controls.ScrollBar ScrollablePage2::horizontalScrollBar
      * The horizontal scrollbar.
      */
-    readonly property QQC2.ScrollBar horizontalScrollBar: scrollView.QQC2.ScrollBar.horizontal
+    readonly property QQC2.ScrollBar horizontalScrollBar: scrollView ? scrollView.QQC2.ScrollBar.horizontal : null
+
+        /**
+     * \property Qt.ScrollBarPolicy ScrollablePage::verticalScrollBarPolicy
+     * The vertical scrollbar policy.
+     */
+    property int verticalScrollBarPolicy
+
+    /**
+     * \property Qt.ScrollBarPolicy ScrollablePage::horizontalScrollBarPolicy
+     * The horizontal scrollbar policy.
+     */
+    property int horizontalScrollBarPolicy
 
     default property alias pageData: itemsParent.data
     property alias pageChildren: itemsParent.children
@@ -149,20 +161,35 @@ Page {
     }
     data: [
         Item {
-            //z: 9999
             parent: root
+            width: root.flickable.width
+            height: Math.max(root.flickable.height, implicitHeight)
+            implicitHeight: {
+                let impl = 0;
+                for (let i in itemsParent.children) {
+                    let child = itemsParent.children[i];
+                    impl = Math.max(impl, child.implicitHeight);
+                }
+                return impl + itemsParent.anchors.topMargin + itemsParent.anchors.bottomMargin;
+            }
+            implicitWidth: {
+                let impl = 0;
+                for (let i in itemsParent.children) {
+                    let child = itemsParent.children[i];
+                    impl = Math.max(impl, child.implicitWidth);
+                }
+                return impl + itemsParent.anchors.leftMargin + itemsParent.anchors.rightMargin;
+            }
 
-            implicitHeight: itemsParent.children.length === 1 ? itemsParent.children[0].implicitHeight : 0
-            implicitWidth: itemsParent.children.length === 1 ? itemsParent.children[0].implicitWidth : 0
             Item {
                 id: itemsParent
                 property Flickable flickable
                 anchors {
                     fill: parent
-                    leftMargin: root.leftPadding || root.padding
-                    topMargin: root.topPadding || root.padding
-                    rightMargin: root.rightPadding || root.padding
-                    bottomMargin: root.bottomPadding || root.padding
+                    leftMargin: root.leftPadding
+                    topMargin: root.topPadding
+                    rightMargin: root.rightPadding
+                    bottomMargin: root.bottomPadding
                 }
             }
         },
@@ -234,8 +261,14 @@ Page {
         for (let i in itemsParent.children) {
             let child = itemsParent.children[i];
             if (child instanceof Flickable) {
-                itemsParent.flickable = child;
-                break;
+                if (!itemsParent.flickable) {
+                    itemsParent.flickable = child;
+                    child.keyNavigationEnabled = true;
+                    child.keyNavigationWraps = false;
+                }
+            } else {
+                child.anchors.left = itemsParent.left;
+                child.anchors.right = itemsParent.right;
             }
         }
 
@@ -246,6 +279,6 @@ Page {
             root.contentItem = root.scrollView = scrollViewComponent.createObject(root, {"contentData": [itemsParent.parent]});
             itemsParent.flickable = root.scrollView.contentItem;
         }
-        itemsParent.flickable.interactive = true
+        itemsParent.flickable.flickableDirection = Flickable.VerticalFlick;
     }
 }
