@@ -88,18 +88,6 @@ Page {
     readonly property Flickable flickable: itemsParent.flickable
 
     /**
-     * \property QtQuick.Controls.ScrollBar ScrollablePage2::verticalScrollBar
-     * The vertical scrollbar.
-     */
-    readonly property QQC2.ScrollBar verticalScrollBar: scrollView ? scrollView.QQC2.ScrollBar.vertical : null
-
-    /**
-     * \property QtQuick.Controls.ScrollBar ScrollablePage2::horizontalScrollBar
-     * The horizontal scrollbar.
-     */
-    readonly property QQC2.ScrollBar horizontalScrollBar: scrollView ? scrollView.QQC2.ScrollBar.horizontal : null
-
-        /**
      * \property Qt.ScrollBarPolicy ScrollablePage::verticalScrollBarPolicy
      * The vertical scrollbar policy.
      */
@@ -109,7 +97,7 @@ Page {
      * \property Qt.ScrollBarPolicy ScrollablePage::horizontalScrollBarPolicy
      * The horizontal scrollbar policy.
      */
-    property int horizontalScrollBarPolicy
+    property int horizontalScrollBarPolicy: QQC2.ScrollBar.AlwaysOff
 
     default property alias pageData: itemsParent.data
     property alias pageChildren: itemsParent.children
@@ -156,7 +144,8 @@ Page {
                 }
             }
 
-            QQC2.ScrollBar.horizontal.policy: Qt.ScrollBarAlwaysOff
+            QQC2.ScrollBar.horizontal.policy: root.horizontalScrollBarPolicy
+            QQC2.ScrollBar.vertical.policy: root.verticalScrollBarPolicy
         }
     }
     data: [
