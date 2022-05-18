@@ -54,7 +54,7 @@ AbstractListItem {
             layout.anchors.left = listItem.leading.right
             layout.anchors.leftMargin = Qt.binding(function() { return listItem.leadingPadding })
         } else {
-            layout.anchors.left = contentItem.left
+            layout.anchors.left = contItem.left
             layout.anchors.leftMargin = 0
         }
     }
@@ -99,7 +99,7 @@ AbstractListItem {
             layout.anchors.right = listItem.trailing.left
             layout.anchors.rightMargin = Qt.binding(function() { return listItem.trailingPadding })
         } else {
-            layout.anchors.right = contentItem.right
+            layout.anchors.right = contItem.right
             layout.anchors.rightMargin = 0
         }
     }
