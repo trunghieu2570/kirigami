@@ -8,7 +8,7 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.2
 import QtQuick.Window 2.2
-import QtQuick.Controls 2.15
+import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14
 import QtQuick.Templates 2.0 as T2
 import "private"
@@ -24,9 +24,9 @@ import "../private"
  * are taller than the screen space.
  *
  * @since 2.0
- * @inherit QtQml.QtObject
+ * @inherit QtQuick.Item
  */
-QtObject {
+Item {
     id: root
 
     Theme.colorSet: Theme.View
@@ -112,8 +112,8 @@ QtObject {
         elide: Text.ElideRight
 
         // use tooltip for long text that is elided
-        ToolTip.visible: truncated && titleHoverHandler.hovered
-        ToolTip.text: root.title
+        QQC2.ToolTip.visible: truncated && titleHoverHandler.hovered
+        QQC2.ToolTip.text: root.title
         HoverHandler {
             id: titleHoverHandler
         }
@@ -151,8 +151,6 @@ QtObject {
      */
     property string title
 
-    property Item parent
-
     /**
      * Open the overlay sheet.
      */
@@ -183,11 +181,15 @@ QtObject {
         if (contentItem instanceof Flickable) {
             scrollView.flickableItem = contentItem;
             contentItem.parent = scrollView;
-            contentItem.anchors.fill = scrollView;
             scrollView.contentItem = contentItem;
+            scrollView.viewContent = contentItem.contentItem;
         } else {
             contentItem.parent = contentItemParent;
-            scrollView.contentItem = flickableContents;
+            flickableContents.parent = scrollView.flickableItem.contentItem;
+            flickableContents.anchors.top = scrollView.flickableItem.contentItem.top;
+            flickableContents.anchors.left = scrollView.flickableItem.contentItem.left;
+            flickableContents.anchors.right = scrollView.flickableItem.contentItem.right;
+            scrollView.viewContent = flickableContents;
             contentItem.anchors.left = contentItemParent.left;
             contentItem.anchors.right = contentItemParent.right;
         }
@@ -392,7 +394,7 @@ QtObject {
 
                 width: mainItem.contentItemPreferredWidth <= 0 ? mainItem.width : (mainItem.contentItemMaximumWidth > 0 ? Math.min( mainItem.contentItemMaximumWidth, Math.max( mainItem.width/2, mainItem.contentItemPreferredWidth ) ) : Math.max( mainItem.width / 2, mainItem.contentItemPreferredWidth ) ) + leftPadding + rightPadding
 
-                implicitHeight: scrollView.contentItem == flickableContents ? root.contentItem.height + topPadding + bottomPadding : 0
+                implicitHeight: scrollView.viewContent === flickableContents ? root.contentItem.height + topPadding + bottomPadding : 0
                 Connections {
                     target: enabled ? flickableContents.Window.activeFocusItem : null
                     enabled: flickableContents.focus && flickableContents.Window.activeFocusItem && flickableContents.Window.activeFocusItem.hasOwnProperty("text")
@@ -671,15 +673,17 @@ QtObject {
                         }
                     }
 
-                    ScrollView {
+                    QQC2.ScrollView {
                         id: scrollView
 
                         //Don't do the automatic interactive enable/disable
-                        canFlickWithMouse: true
-                        property real animatedContentHeight: contentItem ? flickableItem.contentHeight : 0
+                        //canFlickWithMouse: true
+                        property Item viewContent
+                        property real animatedContentHeight: flickableItem.contentHeight
                         property bool userInteracting: false
                         Layout.fillWidth: true
                         Layout.fillHeight: true
+                        property alias flickableItem: scrollView.contentItem
 
                         focus: false
 

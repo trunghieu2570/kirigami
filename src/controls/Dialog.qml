@@ -109,12 +109,22 @@ T.Dialog {
     id: root
 
     /**
-     * The dialog's contents.
+     * @deprecated will be removed on next Frameworks major release
+     */
+    property Item mainItem: contentControl.contentChildren.length > 0 ? contentControl.contentChildren[0] : null
+
+    /**
+     * The dialog's contents, includes Items and QtObjects.
+     */
+    default property alias dialogData: contentControl.contentData
+
+    /**
+     * The dialogcontsnt Items
      *
      * The initial height and width of the dialog is calculated from the
-     * `implicitWidth` and `implicitHeight` of this item.
+     * `implicitWidth` and `implicitHeight` of the content.
      */
-    default property Item mainItem
+    property alias dialogChildren: contentControl.contentChildren
 
     /**
      * The absolute maximum height the dialog can be (including the header
@@ -312,38 +322,32 @@ T.Dialog {
 
     // dialog content
     contentItem: ColumnLayout {
-        Private.ScrollView {
+        Controls.ScrollView {
             id: contentControl
-
-            // we cannot have contentItem inside a sub control (allowing for content padding within the scroll area),
-            // because if the contentItem is a Flickable (ex. ListView), the ScrollView needs it to be top level in order
-            // to decorate it
-            contentItem: root.mainItem
-            canFlickWithMouse: true
 
             // ensure view colour scheme, and background color
             Kirigami.Theme.inherit: false
             Kirigami.Theme.colorSet: Kirigami.Theme.View
 
-            // needs to explicitly be set for each side to work
-            leftPadding: 0; topPadding: 0
-            rightPadding: 0; bottomPadding: 0
+            Controls.ScrollBar.horizontal.policy: Controls.ScrollBar.AlwaysOff
 
             // height of everything else in the dialog other than the content
             property real otherHeights: root.header.height + root.footer.height + root.topPadding + root.bottomPadding;
 
             property real calculatedMaximumWidth: Math.min(root.absoluteMaximumWidth, root.maximumWidth) - root.leftPadding - root.rightPadding
             property real calculatedMaximumHeight: Math.min(root.absoluteMaximumHeight, root.maximumHeight) - root.topPadding - root.bottomPadding
-            property real calculatedImplicitWidth: (root.mainItem.implicitWidth ? root.mainItem.implicitWidth : root.mainItem.width) + contentControl.rightSpacing + leftPadding + rightPadding
-            property real calculatedImplicitHeight: (root.mainItem.implicitHeight ? root.mainItem.implicitHeight : root.mainItem.height) + topPadding + bottomPadding
+            property real calculatedImplicitWidth: (contentChildren.length === 1 && contentChildren[0].implicitWidth > 0
+                ? contentChildren[0].implicitWidth
+                : (contentItem.implicitWidth > 0 ? contentItem.implicitWidth : contentItem.width)) + leftPadding + rightPadding
+            property real calculatedImplicitHeight: (contentChildren.length === 1 && contentChildren[0].implicitHeight > 0
+                ? contentChildren[0].implicitHeight
+                : (contentItem.implicitHeight > 0 ? contentItem.implicitHeight : contentItem.height)) + topPadding + bottomPadding
 
             // how do we deal with the scrollbar width?
             // - case 1: the dialog itself has the preferredWidth set
             //   -> we hint a width to the content so it shrinks to give space to the scrollbar
             // - case 2: preferredWidth not set, so we are using the content's implicit width
             //   -> we expand the dialog's width to accommodate the scrollbar width (to respect the content's desired width)
-
-            // note: the scrollbar width is accessed through "contentControl.rightSpacing"
 
             // don't enforce preferred width and height if not set
             Layout.preferredWidth: (root.preferredWidth >= 0 ? root.preferredWidth : calculatedImplicitWidth)
@@ -356,21 +360,17 @@ T.Dialog {
             // give an implied width and height to the contentItem so that features like word wrapping/eliding work
             // cannot placed directly in contentControl as a child, so we must use a property
             property var widthHint: Binding {
-                target: root.mainItem
+                target: contentControl.contentChildren[0]
+                when: contentControl.contentChildren.length === 1
                 property: "width"
 
                 // we want to avoid horizontal scrolling, so we apply maximumWidth as a hint if necessary
-                property real preferredWidthHint: contentControl.Layout.preferredWidth - contentControl.leftPadding - contentControl.rightPadding
-                                                  - (root.preferredWidth >= 0 ? contentControl.rightSpacing : 0) // hint the scrollbar width with conditions stated above
-                property real maximumWidthHint: contentControl.calculatedMaximumWidth - contentControl.leftPadding - contentControl.rightPadding - contentControl.rightSpacing
+                property real preferredWidthHint: contentControl.contentItem.width
+                /*contentControl.Layout.preferredWidth - contentControl.leftPadding - contentControl.rightPadding
+                                                  - (root.preferredWidth >= 0 ? contentControl.rightSpacing : 0) // hint the scrollbar width with conditions stated above*/
+                property real maximumWidthHint: contentControl.calculatedMaximumWidth - contentControl.leftPadding - contentControl.rightPadding
 
-                value: maximumWidthHint < preferredWidthHint ? maximumWidthHint : preferredWidthHint
-            }
-            property var heightHint: Binding {
-                target: root.mainItem
-                property: "height"
-                // we are okay with overflow, if it exceeds maximumHeight we will allow scrolling
-                value: contentControl.Layout.preferredHeight - contentControl.topPadding - contentControl.bottomPadding
+                value: Math.min(maximumWidthHint,preferredWidthHint)
             }
         }
     }

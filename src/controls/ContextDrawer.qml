@@ -6,6 +6,7 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.2
+import QtQuick.Controls 2.2 as QQC2
 import org.kde.kirigami 2.4
 
 import "private"
@@ -118,7 +119,7 @@ OverlayDrawer {
             page.contextualActionsAboutToShow();
         }
     }
-    contentItem: ScrollView {
+    contentItem: QQC2.ScrollView {
         //this just to create the attached property
         Theme.inherit: true
         implicitWidth: Units.gridUnit * 20

@@ -106,7 +106,6 @@ ecm_target_qml_sources(KirigamiPlugin SOURCES
     controls/OverlaySheet.qml
     controls/Page.qml
     controls/ScrollablePage.qml
-    controls/ScrollablePage2.qml
     controls/SwipeListItem.qml
 )
 
@@ -220,7 +219,6 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private SOURCES
     controls/private/GlobalDrawerActionItem.qml
     controls/private/PageActionPropertyGroup.qml
     controls/private/PrivateActionToolButton.qml
-    controls/private/RefreshableScrollView.qml
     controls/private/SwipeItemEventFilter.qml
 )
 
@@ -269,7 +267,6 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates/private SOURCES
     controls/templates/private/IconPropertiesGroup.qml
     controls/templates/private/MenuIcon.qml
     controls/templates/private/PassiveNotification.qml
-    controls/templates/private/ScrollView.qml
 )
 
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH styles/Material SOURCES
