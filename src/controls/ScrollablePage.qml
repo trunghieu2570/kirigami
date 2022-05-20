@@ -278,6 +278,12 @@ Page {
         if (itemsParent.flickable) {
             root.contentItem = root.scrollView = scrollViewComponent.createObject(root, {"contentData": [itemsParent.flickable]});
             flickable.parent = root.scrollView;
+            // Some existing code incorrectly uses anchors
+            flickable.anchors.fill = undefined;
+            flickable.anchors.left = undefined;
+            flickable.anchors.right = undefined;
+            flickable.anchors.top = undefined;
+            flickable.anchors.bottom = undefined;
         } else {
             root.contentItem = root.scrollView = scrollViewComponent.createObject(root, {"contentData": [itemsParent.parent]});
             itemsParent.flickable = root.scrollView.contentItem;
