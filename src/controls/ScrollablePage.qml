@@ -144,7 +144,7 @@ Page {
                 Behavior on topMargin {
                     NumberAnimation {
                         easing.type: Easing.InOutQuad
-                        duration: Kirigami.Units.longDuration 
+                        duration: Units.longDuration 
                     }
                 }
             }
@@ -264,11 +264,11 @@ Page {
         for (let i in itemsParent.children) {
             let child = itemsParent.children[i];
             if (child instanceof Flickable) {
-                if (!itemsParent.flickable) {
-                    itemsParent.flickable = child;
-                    child.keyNavigationEnabled = true;
-                    child.keyNavigationWraps = false;
-                }
+                // If there were more flickable children, take the last one, as behavior compatibility
+                // with old internal ScrollView
+                itemsParent.flickable = child;
+                child.keyNavigationEnabled = true;
+                child.keyNavigationWraps = false;
             } else {
                 child.anchors.left = itemsParent.left;
                 child.anchors.right = itemsParent.right;
@@ -287,6 +287,7 @@ Page {
         } else {
             root.contentItem = root.scrollView = scrollViewComponent.createObject(root, {"contentData": [itemsParent.parent]});
             itemsParent.flickable = root.scrollView.contentItem;
+            itemsParent.parent.parent = root.scrollView.contentItem.contentItem;
         }
         itemsParent.flickable.flickableDirection = Flickable.VerticalFlick;
     }
