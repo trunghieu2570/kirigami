@@ -20,7 +20,6 @@
 #include <QSGSimpleTextureNode>
 #include <QSGTexture>
 #include <QScreen>
-#include <QSharedPointer>
 #include <QtQml>
 
 Q_GLOBAL_STATIC(ImageTexturesCache, s_iconImageCache)
