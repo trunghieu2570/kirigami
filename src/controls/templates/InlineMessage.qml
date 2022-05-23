@@ -187,7 +187,9 @@ T2.Control {
             }
         }
 
-        property bool multiline: text.lineCount > 1 || actionsLayout.atBottom
+        readonly property int remainingWidth: width - (text.implicitWidth + icon.width + Kirigami.Units.smallSpacing * 2)
+                                                - (closeButton.visible ? closeButton.width + Kirigami.Units.smallSpacing : 0)
+        readonly property bool multiline: remainingWidth <= 0 || actionsLayout.atBottom
 
         Kirigami.Icon {
             id: icon
@@ -231,13 +233,13 @@ T2.Control {
                 right: closeButton.visible ? closeButton.left : parent.right
                 rightMargin: closeButton.visible ? Kirigami.Units.smallSpacing : 0
                 top: parent.top
-                bottom: actionsLayout.atBottom ? undefined : parent.bottom
+                bottom: contentLayout.multiline ? undefined : parent.bottom
             }
 
             cursorShape: text.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
 
             implicitWidth: text.implicitWidth
-            height: actionsLayout.atBottom ? text.implicitHeight : implicitHeight
+            height: contentLayout.multiline ? text.implicitHeight : implicitHeight
 
             Controls.Label {
                 id: text
@@ -266,18 +268,7 @@ T2.Control {
             visible: root.actions.length
             alignment: Qt.AlignRight
 
-            property bool atBottom: {
-                if (root.actions.length === 0) {
-                    return false
-                }
-
-                var remainingWidth = parent.width - text.implicitWidth - Kirigami.Units.smallSpacing * 2 - icon.width
-                if (closeButton.visible) {
-                    remainingWidth -= closeButton.width - Kirigami.Units.smallSpacing
-                }
-
-                return text.lineCount > 1 || implicitWidth > remainingWidth
-            }
+            readonly property bool atBottom: (root.actions.length > 0) && (text.lineCount > 1 || implicitWidth > contentLayout.remainingWidth)
 
             anchors {
                 left: parent.left
