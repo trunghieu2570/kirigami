@@ -471,9 +471,14 @@ QtObject {
 
                 function adjustPosition() {
                     if(layoutMovingGuard) return;
-                    openAnimation.running = false;
-                    resetAnimation.running = false;
-                    contentY = openPosition;
+
+                    if (openAnimation.running) {
+                        openAnimation.running = false;
+                        open()
+                    } else {
+                        resetAnimation.running = false;
+                        contentY = openPosition;
+                    }
                 }
 
                 // disable dragging the sheet with a mouse on header bar
