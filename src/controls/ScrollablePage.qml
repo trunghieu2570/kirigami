@@ -256,6 +256,11 @@ Page {
                 itemsParent.flickable = child;
                 child.keyNavigationEnabled = true;
                 child.keyNavigationWraps = false;
+            } else if (child instanceof KT.OverlaySheet) {
+                //reparent sheets
+                if (child.parent === itemsParent || child.parent === null) {
+                    child.parent = root;
+                }
             } else {
                 child.anchors.left = itemsParent.left;
                 child.anchors.right = itemsParent.right;
@@ -273,7 +278,7 @@ Page {
             flickable.anchors.bottom = undefined;
         } else {
             itemsParent.flickable = scrollView.contentItem;
-            scrollingArea = scrollView.contentItem.contentItem;
+            scrollingArea.parent = scrollView.contentItem.contentItem;
         }
         itemsParent.flickable.flickableDirection = Flickable.VerticalFlick;
     }
