@@ -125,44 +125,39 @@ Page {
     Theme.inherit: false
     Theme.colorSet: flickable && flickable.hasOwnProperty("model") ? Theme.View : Theme.Window
 
-Component.onDestruction: print("DESTROYING"+root)
-
     contentItem: QQC2.ScrollView {
-            id: scrollView
-           // parent: root
-            anchors {
-                top: (root.header && root.header.visible)
-                        ? root.header.bottom
-                        //FIXME: for now assuming globalToolBarItem is in a Loader, which needs to be got rid of
-                        : (globalToolBarItem && globalToolBarItem.parent && globalToolBarItem.visible
-                            ? globalToolBarItem.parent.bottom
-                            : parent.top)
-                bottom: (root.footer && root.footer.visible) ? root.footer.top : parent.bottom
-                left: parent.left
-                right: parent.right
-                topMargin: root.refreshing ? busyIndicatorFrame.height : 0
-                Behavior on topMargin {
-                    NumberAnimation {
-                        easing.type: Easing.InOutQuad
-                        duration: Units.longDuration
-                    }
+        id: scrollView
+        anchors {
+            top: (root.header && root.header.visible)
+                    ? root.header.bottom
+                    //FIXME: for now assuming globalToolBarItem is in a Loader, which needs to be got rid of
+                    : (globalToolBarItem && globalToolBarItem.parent && globalToolBarItem.visible
+                        ? globalToolBarItem.parent.bottom
+                        : parent.top)
+            bottom: (root.footer && root.footer.visible) ? root.footer.top : parent.bottom
+            left: parent.left
+            right: parent.right
+            topMargin: root.refreshing ? busyIndicatorFrame.height : 0
+            Behavior on topMargin {
+                NumberAnimation {
+                    easing.type: Easing.InOutQuad
+                    duration: Units.longDuration
                 }
             }
-Component.onCompleted: print("compl2")
-            QQC2.ScrollBar.horizontal.policy: root.horizontalScrollBarPolicy
-            QQC2.ScrollBar.vertical.policy: root.verticalScrollBarPolicy
         }
+        QQC2.ScrollBar.horizontal.policy: root.horizontalScrollBarPolicy
+        QQC2.ScrollBar.vertical.policy: root.verticalScrollBarPolicy
+    }
 
     data: [
-
         Item {
-           // parent: root
+            id: scrollingArea
             width: itemsParent.flickable.width
             height: Math.max(root.flickable.height, implicitHeight)
             implicitHeight: {
                 let impl = 0;
-                for (let i in itemsParent.children) {
-                    let child = itemsParent.children[i];
+                for (let i in itemsParent.visibleChildren) {
+                    let child = itemsParent.visibleChildren[i];
                     impl = Math.max(impl, child.implicitHeight);
                 }
                 return impl + itemsParent.anchors.topMargin + itemsParent.anchors.bottomMargin;
@@ -186,7 +181,6 @@ Component.onCompleted: print("compl2")
                     bottomMargin: root.bottomPadding
                 }
             }
-            Component.onDestruction:print("destroying itemsParent")
         },
 
         Item {
@@ -278,9 +272,8 @@ Component.onCompleted: print("compl2")
             flickable.anchors.top = undefined;
             flickable.anchors.bottom = undefined;
         } else {
-            print(scrollView.contentItem)//fixme
             itemsParent.flickable = scrollView.contentItem;
-            itemsParent.parent.parent = scrollView.contentItem.contentItem;
+            scrollingArea = scrollView.contentItem.contentItem;
         }
         itemsParent.flickable.flickableDirection = Flickable.VerticalFlick;
     }
