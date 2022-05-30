@@ -127,12 +127,9 @@ Page {
 
 Component.onDestruction: print("DESTROYING"+root)
 
-    property QQC2.ScrollView scrollView
-   /* Component {
-        id: scrollViewComponent*/
-        QQC2.ScrollView {
+    contentItem: QQC2.ScrollView {
             id: scrollView
-            parent: root
+           // parent: root
             anchors {
                 top: (root.header && root.header.visible)
                         ? root.header.bottom
@@ -147,108 +144,57 @@ Component.onDestruction: print("DESTROYING"+root)
                 Behavior on topMargin {
                     NumberAnimation {
                         easing.type: Easing.InOutQuad
-                        duration: Units.longDuration 
+                        duration: Units.longDuration
                     }
                 }
             }
 Component.onCompleted: print("compl2")
             QQC2.ScrollBar.horizontal.policy: root.horizontalScrollBarPolicy
             QQC2.ScrollBar.vertical.policy: root.verticalScrollBarPolicy
-            data: Item {
-                //parent: root
-                width: itemsParent.flickable.width
-                height: Math.max(root.flickable.height, implicitHeight)
-                implicitHeight: {
-                    let impl = 0;
-                    for (let i in itemsParent.children) {
-                        let child = itemsParent.children[i];
-                        impl = Math.max(impl, child.implicitHeight);
-                    }
-                    return impl + itemsParent.anchors.topMargin + itemsParent.anchors.bottomMargin;
-                }
-                implicitWidth: {
-                    let impl = 0;
-                    for (let i in itemsParent.children) {
-                        let child = itemsParent.children[i];
-                        impl = Math.max(impl, child.implicitWidth);
-                    }
-                    return impl + itemsParent.anchors.leftMargin + itemsParent.anchors.rightMargin;
-                }
-                Item {
-                    id: itemsParent
-                    property Flickable flickable
-                    anchors {
-                        fill: parent
-                        leftMargin: root.leftPadding
-                        topMargin: root.topPadding
-                        rightMargin: root.rightPadding
-                        bottomMargin: root.bottomPadding
-                    }
-                    onChildrenChanged: {
-                        let child = children[children.length-1];
-                        if (child instanceof KT.OverlaySheet) {
-                            //reparent sheets
-                            if (child.parent === itemsParent || child.parent === null) {
-                                child.parent = root;
-                            }
-                        } else if (child instanceof Flickable) {
-                            if (0&&!flickable) {
-                                flickable = child;
-                                scrollView.contentData.push(child);
-                                child.parent = scrollView
-                                child.anchors.fill = undefined;
-                                child.anchors.left = undefined;
-                                child.anchors.right = undefined;
-                                child.anchors.top = undefined;
-                                child.anchors.bottom = undefined;
-                                //scrollView.data.push(child)
-                                //print("foucnd a flickable"+child)
-                            }
-                        } else {
-                            child.anchors.left = itemsParent.left;
-                            child.anchors.right = itemsParent.right;
-                        }
-                       // print("childrenchanged"+scrollView.contentItem)
-                    }
-                    Component.onCompleted: {
-                        /*if (!flickable) {
-                            flickable = scrollView.contentItem;
-                        }*/
-                       // print("compl1"+scrollView.contentItem)
-                        for (let i in itemsParent.children) {
-                            let child = itemsParent.children[i];
-                            if (child instanceof Flickable) {
-                                print("AAAA found flickable" + child)
-                                itemsParent.flickable = child;
-                            }
-                        }
-                        if (itemsParent.flickable) {
-                            itemsParent.parent.parent = root
-                            root.contentItem = root.scrollView = scrollView
-                            scrollView.contentData.push(itemsParent.flickable);
-                            itemsParent.flickable.parent = scrollView
-                        } else {
-                            root.contentItem = root.scrollView = scrollView
-                            scrollView.contentData.push(itemsParent.parent);
-                            itemsParent.flickable = root.scrollView.contentItem;
-                            itemsParent.parent.parent = root.scrollView.contentItem.contentItem;
-                        }
-                    }
-                }
-            }
         }
-    //}
+
     data: [
 
-
-
+        Item {
+           // parent: root
+            width: itemsParent.flickable.width
+            height: Math.max(root.flickable.height, implicitHeight)
+            implicitHeight: {
+                let impl = 0;
+                for (let i in itemsParent.children) {
+                    let child = itemsParent.children[i];
+                    impl = Math.max(impl, child.implicitHeight);
+                }
+                return impl + itemsParent.anchors.topMargin + itemsParent.anchors.bottomMargin;
+            }
+            implicitWidth: {
+                let impl = 0;
+                for (let i in itemsParent.children) {
+                    let child = itemsParent.children[i];
+                    impl = Math.max(impl, child.implicitWidth);
+                }
+                return impl + itemsParent.anchors.leftMargin + itemsParent.anchors.rightMargin;
+            }
+            Item {
+                id: itemsParent
+                property Flickable flickable
+                anchors {
+                    fill: parent
+                    leftMargin: root.leftPadding
+                    topMargin: root.topPadding
+                    rightMargin: root.rightPadding
+                    bottomMargin: root.bottomPadding
+                }
+            }
+            Component.onDestruction:print("destroying itemsParent")
+        },
 
         Item {
             id: busyIndicatorFrame
             z: 99
             y: root.flickable.verticalLayoutDirection === ListView.BottomToTop
                 ? -root.flickable.contentY + root.flickable.originY + height
-                : -root.flickable.contentY + root.flickable.originY - height + root.scrollView.y
+                : -root.flickable.contentY + root.flickable.originY - height + scrollView.y
             width: root.flickable.width
             height: busyIndicator.height + Units.gridUnit * 2
             QQC2.BusyIndicator {
@@ -306,8 +252,8 @@ Component.onCompleted: print("compl2")
                 }
             }
         }
-        ]
-    Component.onCompleted: {return;
+    ]
+    Component.onCompleted: {
         for (let i in itemsParent.children) {
             let child = itemsParent.children[i];
             if (child instanceof Flickable) {
@@ -323,8 +269,8 @@ Component.onCompleted: print("compl2")
         }
 
         if (itemsParent.flickable) {
-            root.contentItem = root.scrollView = scrollView//scrollViewComponent.createObject(root, {"contentData": [itemsParent.flickable]});
-            flickable.parent = root.scrollView;
+            scrollView.contentItem = flickable;
+            flickable.parent = scrollView;
             // Some existing code incorrectly uses anchors
             flickable.anchors.fill = undefined;
             flickable.anchors.left = undefined;
@@ -332,9 +278,9 @@ Component.onCompleted: print("compl2")
             flickable.anchors.top = undefined;
             flickable.anchors.bottom = undefined;
         } else {
-            root.contentItem = root.scrollView = scrollView//scrollViewComponent.createObject(root, {"contentData": [itemsParent.parent]});
-            itemsParent.flickable = root.scrollView.contentItem;
-            itemsParent.parent.parent = root.scrollView.contentItem.contentItem;
+            print(scrollView.contentItem)//fixme
+            itemsParent.flickable = scrollView.contentItem;
+            itemsParent.parent.parent = scrollView.contentItem.contentItem;
         }
         itemsParent.flickable.flickableDirection = Flickable.VerticalFlick;
     }
