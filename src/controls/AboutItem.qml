@@ -230,6 +230,7 @@ Item
             contentItem: QQC2.Label {
                 id: bodyLabel
                 text: licenseSheet.text
+                wrapMode: Text.Wrap
             }
         }
 
