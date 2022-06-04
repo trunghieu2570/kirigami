@@ -87,7 +87,7 @@ class Icon : public QQuickItem
      *
      * @image html icon/active.png
      *
-     * The color differences under the default KDE color palette, Breeze. Note
+     * The colors differ under the default KDE color palette, Breeze. Note
      * that a dull highlight background is typically displayed behind active icons and
      * it is recommended to add one if you are creating a custom component.
      */
