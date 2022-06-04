@@ -75,16 +75,12 @@ Controls.TextField
 
     hoverEnabled: true
 
-    leftPadding: if (Qt.application.layoutDirection === Qt.RightToLeft) {
-        return _rightActionsRow.width + Kirigami.Units.smallSpacing
-    } else {
-        return _leftActionsRow.width + Kirigami.Units.smallSpacing
-    }
-    rightPadding: if (Qt.application.layoutDirection === Qt.RightToLeft) {
-        return _leftActionsRow.width + Kirigami.Units.smallSpacing
-    } else {
-        return _rightActionsRow.width + Kirigami.Units.smallSpacing
-    }
+    horizontalAlignment: Qt.AlignLeft
+    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+    LayoutMirroring.childrenInherit: true
+
+    leftPadding: Kirigami.Units.smallSpacing + (LayoutMirroring.enabled ? rightActionsRow : leftActionsRow).width
+    rightPadding: Kirigami.Units.smallSpacing + (LayoutMirroring.enabled ? leftActionsRow : rightActionsRow).width
 
     Behavior on leftPadding {
         NumberAnimation {
@@ -99,7 +95,6 @@ Controls.TextField
             easing.type: Easing.InOutQuad
         }
     }
-
 
     Shortcut {
         id: focusShortcut
@@ -118,7 +113,9 @@ Controls.TextField
 
     Row {
         id: leftActionsRow
-        padding: root.leftActions.length > 0 ? Kirigami.Units.smallSpacing : 0
+        padding: Kirigami.Units.smallSpacing
+        spacing: Kirigami.Units.smallSpacing
+        layoutDirection: Qt.LeftToRight
         anchors.left: parent.left
         anchors.leftMargin: Kirigami.Units.smallSpacing
         anchors.top: parent.top
@@ -132,13 +129,13 @@ Controls.TextField
                 implicitHeight: Kirigami.Units.iconSizes.sizeForLabels
 
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.bottomMargin: root.bottomPadding
-                anchors.bottom: parent.bottom
 
                 source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
+                active: leftActionArea.containsPress
                 visible: modelData.visible
                 enabled: modelData.enabled
                 MouseArea {
+                    id: leftActionArea
                     anchors.fill: parent
                     onClicked: modelData.trigger()
                     cursorShape: Qt.PointingHandCursor
@@ -149,7 +146,8 @@ Controls.TextField
 
     Row {
         id: rightActionsRow
-        padding: root.rightActions.length > 0 ? Kirigami.Units.smallSpacing : 0
+        padding: Kirigami.Units.smallSpacing
+        spacing: Kirigami.Units.smallSpacing
         layoutDirection: Qt.RightToLeft
         anchors.right: parent.right
         anchors.rightMargin: Kirigami.Units.smallSpacing
@@ -166,11 +164,11 @@ Controls.TextField
                 anchors.verticalCenter: parent.verticalCenter
 
                 source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
-                active: actionArea.containsPress
+                active: rightActionArea.containsPress
                 visible: modelData.visible
                 enabled: modelData.enabled
                 MouseArea {
-                    id: actionArea
+                    id: rightActionArea
                     anchors.fill: parent
                     onClicked: modelData.trigger()
                     cursorShape: Qt.PointingHandCursor
