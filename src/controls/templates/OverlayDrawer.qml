@@ -322,6 +322,23 @@ T2.Drawer {
     implicitWidth: contentWidth + leftPadding + rightPadding
     implicitHeight: contentHeight + topPadding + bottomPadding
 
+    //this is a workaround for the height not being propagated automatically only sometimes
+    // see https://bugs.kde.org/show_bug.cgi?id=398163
+    //NOTE: this is NOT a binding, otherwise it causes a binding loop in implicitHeight
+    Connections {
+        target: parent
+        function onWidthChanged() {
+            if (edge === Qt.TopEdge || edge === Qt.BottomEdge) {
+                width = parent.width;
+            }
+        }
+        function onHeightChanged() {
+            if (edge === Qt.LeftEdge || edge === Qt.RightEdge) {
+                height = parent.height;
+            }
+        }
+    }
+
     enter: Transition {
         SequentialAnimation {
             id: enterAnimation
