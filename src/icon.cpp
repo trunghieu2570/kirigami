@@ -539,7 +539,7 @@ bool Icon::guessMonochrome(const QImage &img)
         ++it;
     }
 
-    // Arbitrarly low values of entropy and colored pixels
+    // Arbitrarily low values of entropy and colored pixels
     m_monochromeHeuristics[stdSize] = saturatedPixels <= (img.size().width() * img.size().height() - transparentPixels) * 0.3 && entropy <= 0.3;
     return m_monochromeHeuristics[stdSize];
 }
