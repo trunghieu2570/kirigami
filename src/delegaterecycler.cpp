@@ -127,7 +127,7 @@ DelegateRecycler::~DelegateRecycler()
 void DelegateRecycler::syncIndex()
 {
     const QVariant newIndex = m_propertiesTracker->property("trackedIndex");
-    if (!m_item || !newIndex.isValid()) {
+    if (!newIndex.isValid()) {
         return;
     }
     QQmlContext *ctx = QQmlEngine::contextForObject(m_item)->parentContext();
@@ -137,7 +137,7 @@ void DelegateRecycler::syncIndex()
 void DelegateRecycler::syncModel()
 {
     const QVariant newModel = m_propertiesTracker->property("trackedModel");
-    if (!m_item || !newModel.isValid()) {
+    if (!newModel.isValid()) {
         return;
     }
     QQmlContext *ctx = QQmlEngine::contextForObject(m_item)->parentContext();
@@ -156,7 +156,7 @@ void DelegateRecycler::syncModel()
 void DelegateRecycler::syncModelProperties()
 {
     const QVariant model = m_propertiesTracker->property("trackedModel");
-    if (!m_item || !model.isValid()) {
+    if (!model.isValid()) {
         return;
     }
     QQmlContext *ctx = QQmlEngine::contextForObject(m_item)->parentContext();
@@ -174,7 +174,7 @@ void DelegateRecycler::syncModelProperties()
 void DelegateRecycler::syncModelData()
 {
     const QVariant newModelData = m_propertiesTracker->property("trackedModelData");
-    if (!m_item || !newModelData.isValid()) {
+    if (!newModelData.isValid()) {
         return;
     }
     QQmlContext *ctx = QQmlEngine::contextForObject(m_item)->parentContext();
