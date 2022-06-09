@@ -241,7 +241,10 @@ QtObject {
     if (!m_item) {
         QQuickItem *candidate = parentItem();
         QQmlContext *ctx = nullptr;
-        while (candidate) {
+        if (component->creationContext()) {
+            ctx = new QQmlContext(component->creationContext());
+        }
+        while (!ctx && candidate) {
             QQmlContext *parentCtx = QQmlEngine::contextForObject(candidate);
             if (parentCtx) {
                 ctx = new QQmlContext(parentCtx, candidate);
