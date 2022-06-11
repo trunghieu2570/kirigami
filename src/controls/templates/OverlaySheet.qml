@@ -754,10 +754,12 @@ QtObject {
                     color: Theme.backgroundColor
 
                     //Show an extra margin when:
-                    //* the application is in mobile mode (no toolbarapplicationheader)
+                    //* the application is in mobile mode
+                    //* it doesn't use toolbarapplicationheader
                     //* the bottom screen controls are visible
                     //* the sheet is displayed *under* the controls
                     property int extraMargin: (!root.parent ||
+                        !Settings.isMobile ||
                         typeof applicationWindow === "undefined" ||
                         (root.parent === applicationWindow().overlay) ||
                         !applicationWindow().controlsVisible ||
