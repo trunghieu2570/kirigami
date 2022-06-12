@@ -112,7 +112,7 @@ Controls.TextField
 
     Row {
         id: leftActionsRow
-        padding: Kirigami.Units.smallSpacing
+        padding: root.leftActions.length > 0 ? Kirigami.Units.smallSpacing : 0
         anchors.left: parent.left
         anchors.leftMargin: Kirigami.Units.smallSpacing
         anchors.top: parent.top
@@ -143,7 +143,7 @@ Controls.TextField
 
     Row {
         id: rightActionsRow
-        padding: Kirigami.Units.smallSpacing
+        padding: root.rightActions.length > 0 ? Kirigami.Units.smallSpacing : 0
         layoutDirection: Qt.RightToLeft
         anchors.right: parent.right
         anchors.rightMargin: Kirigami.Units.smallSpacing

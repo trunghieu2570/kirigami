@@ -59,10 +59,10 @@ Kirigami.ActionTextField
     leftPadding: if (Qt.application.layoutDirection === Qt.RightToLeft) {
         return _rightActionsRow.width + Kirigami.Units.smallSpacing
     } else {
-        return (activeFocus || root.text.length > 0 ? 0 : (searchIcon.width + Kirigami.Units.smallSpacing)) + _leftActionsRow.width
+        return (activeFocus || root.text.length > 0 ? 0 : (searchIcon.width + Kirigami.Units.smallSpacing)) + Kirigami.Units.smallSpacing * 2
     }
     rightPadding: if (Qt.application.layoutDirection === Qt.RightToLeft) {
-        return (activeFocus || root.text.length > 0 ? 0 : (searchIcon.width + Kirigami.Units.smallSpacing)) + _leftActionsRow.width
+        return (activeFocus || root.text.length > 0 ? 0 : (searchIcon.width + Kirigami.Units.smallSpacing)) + Kirigami.Units.smallSpacing * 2
     } else {
         return _rightActionsRow.width + Kirigami.Units.smallSpacing
     }

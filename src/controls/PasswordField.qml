@@ -37,4 +37,12 @@ Kirigami.ActionTextField
             onTriggered: root.showPassword = !root.showPassword
         }
     ]
+
+    Keys.onPressed: {
+        if (event.matches(StandardKey.Undo)) {
+            // Disable undo action for security reasons
+            // See QTBUG-103934
+            event.accepted = true
+        }
+    }
 }
