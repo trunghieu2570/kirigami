@@ -236,11 +236,9 @@ QQC2.Page {
     property Component titleDelegate: Component {
         id: defaultTitleDelegate
         Kirigami.Heading {
-            level: 1
             Layout.fillWidth: true
             Layout.maximumWidth: implicitWidth + 1 // The +1 is to make sure we do not trigger eliding at max width
             Layout.minimumWidth: 0
-            opacity: root.isCurrentPage ? 1 : 0.4
             maximumLineCount: 1
             elide: Text.ElideRight
             text: root.title
