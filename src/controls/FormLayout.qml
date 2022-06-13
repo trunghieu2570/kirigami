@@ -110,7 +110,7 @@ Item {
             for (let i in knownItems) {
                 let actualWidth = knownItems[i].implicitWidth
                 if (!knownItems[i].Layout) {
-                    continue;
+                    continue
                 }
                 if (knownItems[i].Layout.preferredWidth > 0) {
                     actualWidth = knownItems[i].Layout.preferredWidth
