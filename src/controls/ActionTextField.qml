@@ -4,18 +4,19 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.6
-import QtQuick.Controls 2.1 as Controls
-import org.kde.kirigami 2.7 as Kirigami
+import QtQuick 2.15
+import QtQuick.Controls 2.15 as Controls
+
+import org.kde.kirigami 2.20 as Kirigami
 
 /**
  * This is advanced textfield. It is recommended to use this class when there
- * is a need to create a create a textfield with action buttons(e.g a clear
+ * is a need to create a create a textfield with action buttons (e.g a clear
  * action).
  *
  * Example usage for a search field:
  * @code
- * import org.kde.kirigami 2.7 as Kirigami
+ * import org.kde.kirigami 2.20 as Kirigami
  *
  * Kirigami.ActionTextField {
  *     id: searchField
@@ -24,16 +25,14 @@ import org.kde.kirigami 2.7 as Kirigami
  *
  *     focusSequence: "Ctrl+F"
  *
- *     rightActions: [
- *         Kirigami.Action {
- *             icon.name: "edit-clear"
- *             visible: searchField.text !== ""
- *             onTriggered: {
- *                 searchField.text = ""
- *                 searchField.accepted()
- *             }
+ *     rightActions: Kirigami.Action {
+ *         icon.name: "edit-clear"
+ *         visible: searchField.text !== ""
+ *         onTriggered: {
+ *             searchField.text = ""
+ *             searchField.accepted()
  *         }
- *     ]
+ *     }
  *
  *     onAccepted: console.log("Search text is " + searchField.text)
  * }
