@@ -38,6 +38,7 @@ import org.kde.kirigami 2.20 as Kirigami
  * }
  * @endcode
  *
+ * @since 5.56
  * @inherit QtQuick.Controls.TextField
  */
 Controls.TextField
@@ -46,6 +47,8 @@ Controls.TextField
 
     /**
      * This property holds a shortcut sequence that will focus the text field.
+     *
+     * @since 5.56
      */
     property string focusSequence
 
@@ -53,6 +56,8 @@ Controls.TextField
      * This property holds a list of actions that will be displayed on the left side of the text field.
      *
      * By default this list is empty.
+     *
+     * @since 5.56
      */
     property list<QtObject> leftActions
 
@@ -60,6 +65,8 @@ Controls.TextField
      * This property holds a list of actions that will be displayed on the right side of the text field.
      *
      * By default this list is empty.
+     *
+     * @since 5.56
      */
     property list<QtObject> rightActions
 
