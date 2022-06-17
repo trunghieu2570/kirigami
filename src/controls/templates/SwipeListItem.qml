@@ -164,8 +164,9 @@ T2.SwipeDelegate {
 
     padding: !listItem.alwaysVisibleActions && Kirigami.Settings.tabletMode ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
 
-    leftPadding: padding * 2 + (mirrored ? overlayLoader.paddingOffset : 0)
-    rightPadding: padding * 2 + (mirrored ? 0 : overlayLoader.paddingOffset)
+    leftPadding: padding * 2
+
+    rightPadding: padding * 2 +  (overlayLoader.visible ? overlayLoader.width : 0) + Kirigami.Units.smallSpacing
 
     topPadding: padding
     bottomPadding: padding
@@ -215,16 +216,12 @@ T2.SwipeDelegate {
 //BEGIN Items
     Loader {
         id: overlayLoader
-        readonly property int paddingOffset: (visible ? width : 0) + Kirigami.Units.smallSpacing
         anchors {
-            right: (Qt.application.layoutDirection == Qt.RightToLeft) ? undefined : (contentItem ? contentItem.right : undefined)
-            rightMargin: -paddingOffset
-            left: (Qt.application.layoutDirection == Qt.LeftToRight) ? undefined : (contentItem ? contentItem.left : undefined)
-            leftMargin: -paddingOffset
+            right: contentItem ? contentItem.right : undefined
             top: parent.top
             bottom: parent.bottom
+            rightMargin: -listItem.rightPadding + Kirigami.Units.smallSpacing
         }
-        LayoutMirroring.enabled: false
 
         parent: listItem
         z: contentItem ? contentItem.z + 1 : 0
