@@ -265,7 +265,7 @@ T2.Drawer {
             }
         }
 
-        visible: root.enabled && (root.edge === Qt.LeftEdge || root.edge === Qt.RightEdge)
+        visible: root.enabled && (root.edge === Qt.LeftEdge || root.edge === Qt.RightEdge) && opacity > 0
         width: handleAnchor && handleAnchor.visible ? handleAnchor.width : Units.iconSizes.smallMedium + Units.smallSpacing*2
         height: handleAnchor && handleAnchor.visible ? handleAnchor.height : width
         opacity: root.handleVisible ? 1 : 0
