@@ -399,7 +399,15 @@ Item {
             Kirigami.MnemonicData.label: item.Kirigami.FormData.label
 
             Layout.columnSpan: item.Kirigami.FormData.isSection ? lay.columns : 1
-            Layout.preferredHeight: item.Kirigami.FormData.label.length > 0 ? implicitHeight : Kirigami.Units.smallSpacing
+            Layout.preferredHeight: {
+                if (item.Kirigami.FormData.label.length > 0) {
+                    if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof TextArea)) {
+                        return Math.max(implicitHeight, item.Kirigami.FormData.buddyFor.height)
+                    }
+                    return implicitHeight
+                }
+                return Kirigami.Units.smallSpacing;
+            }
 
             Layout.alignment: temp.effectiveLayout(this)
             Layout.topMargin: item.Kirigami.FormData.buddyFor.height > implicitHeight * 2 ? Kirigami.Units.smallSpacing/2 : 0
@@ -428,7 +436,7 @@ Item {
             contentItem: Kirigami.Heading {
                 id: labelItemHeading
                 level: labelItem.item.Kirigami.FormData.isSection ? 3 : 5
-                text: labelItem.text
+                text: labelItem.Kirigami.MnemonicData.richTextLabel
                 type: item.Kirigami.FormData.isSection ? Kirigami.Heading.Type.Primary : Kirigami.Heading.Type.Normal
                 verticalAlignment: temp.effectiveTextLayout(labelItem.item)
                 enabled: labelItem.item.Kirigami.FormData.enabled
