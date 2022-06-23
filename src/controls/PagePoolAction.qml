@@ -39,7 +39,7 @@ Kirigami.Action {
      * By default this property is binded to ApplicationWindow's global
      * pageStack, which is a PageRow by default.
      */
-    property Item pageStack: typeof applicationWindow != undefined ? applicationWindow().pageStack : null
+    property Item pageStack: typeof applicationWindow !== 'undefined' ? applicationWindow().pageStack : null
 
     /**
      * The page of pageStack new pages will be pushed after.
