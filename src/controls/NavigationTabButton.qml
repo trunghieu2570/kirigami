@@ -9,6 +9,62 @@ import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
 
+/**
+ * Navigation buttons to be used for the NavigationTabBar component.
+ * 
+ * Alternative way to the "actions" property on NavigationTabBar, as it can be used
+ * with Repeater to generate buttons from models.
+ * 
+ * Example:
+ * @code{.qml}
+ * Kirigami.NavigationTabBar {
+ *      id: navTabBar
+ *      Kirigami.NavigationTabButton {
+ *          visible: true
+ *          icon.name: "document-save"
+ *          text: `test ${tabIndex + 1}`
+ *          QQC2.ButtonGroup.group: navTabBar.tabGroup
+ *      }
+ *      Kirigami.NavigationTabButton {
+ *          visible: false
+ *          icon.name: "document-send"
+ *          text: `test ${tabIndex + 1}`
+ *          QQC2.ButtonGroup.group: navTabBar.tabGroup
+ *      }
+ *      actions: [
+ *          Kirigami.Action {
+ *              visible: true
+ *              icon.name: "edit-copy"
+ *              icon.height: 32
+ *              icon.width: 32
+ *              text: `test 3`
+ *              checked: true
+ *          },
+ *          Kirigami.Action {
+ *              visible: true
+ *              icon.name: "edit-cut"
+ *              text: `test 4`
+ *              checkable: true
+ *          },
+ *          Kirigami.Action {
+ *              visible: false
+ *              icon.name: "edit-paste"
+ *              text: `test 5`
+ *          },
+ *          Kirigami.Action {
+ *              visible: true
+ *              icon.source: "../logo.png"
+ *              text: `test 6`
+ *              checkable: true
+ *          }
+ *      ]
+ *  }
+ * @endcode
+ * 
+ * @inherit QtQuick.Templates.TabButton
+ * @since 5.87
+ * @since org.kde.kirigami 2.19
+ */
 T.TabButton {
     id: control
 
@@ -26,6 +82,13 @@ T.TabButton {
         }
         return -1
     }
+    
+    /**
+     * Whether the icon colors should be masked with a single color.
+     * 
+     * @since 5.96
+     */
+    property bool recolorIcon: true
 
     property color foregroundColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.85)
     property color highlightForegroundColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.85)
@@ -100,7 +163,7 @@ T.TabButton {
         Kirigami.Icon {
             id: icon
             source: control.icon.name || control.icon.source
-            isMask: true
+            isMask: control.recolorIcon
             Layout.alignment: Qt.AlignHCenter | (label.lineCount > 1 ? 0 : Qt.AlignBottom)
             implicitHeight: source ? control.icon.height : 0
             implicitWidth: source ? control.icon.width : 0
