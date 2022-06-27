@@ -194,7 +194,7 @@ QQC2.Page {
      */
     //TODO KF6: remove this or at least all the assumptions about the internal tree structure of items
     readonly property bool isCurrentPage: Kirigami.ColumnView.view
-            ? (Kirigami.ColumnView.index == Kirigami.ColumnView.view.currentIndex && Kirigami.ColumnView.view.parent.parent.currentItem === Kirigami.ColumnView.view.parent)
+            ? (Kirigami.ColumnView.index === Kirigami.ColumnView.view.currentIndex && Kirigami.ColumnView.view.parent.parent.currentItem === Kirigami.ColumnView.view.parent)
             : (parent && parent instanceof QQC2.StackView
                 ? parent.currentItem === root
                 : true)
@@ -317,7 +317,7 @@ QQC2.Page {
     implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding
 
     //FIXME: on material the shadow would bleed over
-    clip: root.header != null;
+    clip: root.header !== null;
 
     onHeaderChanged: {
         if (header) {
@@ -455,7 +455,7 @@ QQC2.Page {
                     return false;
                 }
 
-                if (!root.actions.main && !root.actions.left && !root.actions.right && root.actions.contextualActions.length == 0) {
+                if (!root.actions.main && !root.actions.left && !root.actions.right && root.actions.contextualActions.length === 0) {
                     return false;
                 }
 

@@ -67,11 +67,11 @@ T.InlineMessage {
         id: bgBorderRect
 
         color: {
-            if (root.type == Kirigami.MessageType.Positive) {
+            if (root.type === Kirigami.MessageType.Positive) {
                 return Kirigami.Theme.positiveTextColor;
-            } else if (root.type == Kirigami.MessageType.Warning) {
+            } else if (root.type === Kirigami.MessageType.Warning) {
                 return Kirigami.Theme.neutralTextColor;
-            } else if (root.type == Kirigami.MessageType.Error) {
+            } else if (root.type === Kirigami.MessageType.Error) {
                 return Kirigami.Theme.negativeTextColor;
             }
 

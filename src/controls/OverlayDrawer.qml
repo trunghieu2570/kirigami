@@ -85,7 +85,7 @@ T.OverlayDrawer {
 
                 source: {
                     var edge = root.edge;
-                    if (Qt.application.layoutDirection == Qt.RightToLeft) {
+                    if (Qt.application.layoutDirection === Qt.RightToLeft) {
                         if (edge === Qt.LeftEdge) {
                             edge = Qt.RightEdge;
                         } else {
@@ -96,9 +96,9 @@ T.OverlayDrawer {
                     if ((root.handleClosedIcon.source || root.handleClosedIcon.name)
                         && (root.handleOpenIcon.source || root.handleOpenIcon.name)) {
                         return Qt.resolvedUrl("templates/private/GenericDrawerIcon.qml");
-                    } else if (edge == Qt.LeftEdge ) {
+                    } else if (edge === Qt.LeftEdge ) {
                         return Qt.resolvedUrl("templates/private/MenuIcon.qml");
-                    } else if(edge == Qt.RightEdge && root.hasOwnProperty("actions")) {
+                    } else if(edge === Qt.RightEdge && root.hasOwnProperty("actions")) {
                         return Qt.resolvedUrl("templates/private/ContextIcon.qml");
                     }else {
                         return "";
@@ -118,10 +118,10 @@ T.OverlayDrawer {
             LayoutMirroring.enabled: false
            // LayoutMirroring.childrenInherit: true
             anchors {
-                right: root.edge == Qt.RightEdge ? parent.left : (root.edge == Qt.LeftEdge ? undefined : parent.right)
-                left: root.edge == Qt.LeftEdge ? parent.right : (root.edge == Qt.RightEdge ? undefined : parent.left)
-                top: root.edge == Qt.TopEdge ? parent.bottom : (root.edge == Qt.BottomEdge ? undefined : parent.top)
-                bottom: root.edge == Qt.BottomEdge ? parent.top : (root.edge == Qt.TopEdge ? undefined : parent.bottom)
+                right: root.edge === Qt.RightEdge ? parent.left : (root.edge === Qt.LeftEdge ? undefined : parent.right)
+                left: root.edge === Qt.LeftEdge ? parent.right : (root.edge === Qt.RightEdge ? undefined : parent.left)
+                top: root.edge === Qt.TopEdge ? parent.bottom : (root.edge === Qt.BottomEdge ? undefined : parent.top)
+                bottom: root.edge === Qt.BottomEdge ? parent.top : (root.edge === Qt.TopEdge ? undefined : parent.bottom)
             }
             visible: !root.modal
         }
@@ -130,13 +130,13 @@ T.OverlayDrawer {
             visible: root.modal
             edge: root.edge
             anchors {
-                right: root.edge == Qt.RightEdge ? parent.left : (root.edge == Qt.LeftEdge ? undefined : parent.right)
-                left: root.edge == Qt.LeftEdge ? parent.right : (root.edge == Qt.RightEdge ? undefined : parent.left)
-                top: root.edge == Qt.TopEdge ? parent.bottom : (root.edge == Qt.BottomEdge ? undefined : parent.top)
-                bottom: root.edge == Qt.BottomEdge ? parent.top : (root.edge == Qt.TopEdge ? undefined : parent.bottom)
+                right: root.edge === Qt.RightEdge ? parent.left : (root.edge === Qt.LeftEdge ? undefined : parent.right)
+                left: root.edge === Qt.LeftEdge ? parent.right : (root.edge === Qt.RightEdge ? undefined : parent.left)
+                top: root.edge === Qt.TopEdge ? parent.bottom : (root.edge === Qt.BottomEdge ? undefined : parent.top)
+                bottom: root.edge === Qt.BottomEdge ? parent.top : (root.edge === Qt.TopEdge ? undefined : parent.bottom)
             }
 
-            opacity: root.position == 0 ? 0 : 1
+            opacity: root.position === 0 ? 0 : 1
 
             Behavior on opacity {
                 NumberAnimation {

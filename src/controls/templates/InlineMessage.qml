@@ -139,11 +139,11 @@ T2.Control {
 
     onVisibleChanged: {
         if (!visible) {
-            contentLayout.opacity = 0.0;
+            contentLayout.opacity = 0;
         }
     }
 
-    opacity: visible ? 1.0 : 0.0
+    opacity: visible ? 1 : 0
 
     Behavior on opacity {
         enabled: !root.visible
@@ -152,10 +152,10 @@ T2.Control {
     }
 
     onOpacityChanged: {
-        if (opacity == 0.0) {
-            contentLayout.opacity = 0.0;
-        } else if (opacity == 1.0) {
-            contentLayout.opacity = 1.0;
+        if (opacity === 0) {
+            contentLayout.opacity = 0;
+        } else if (opacity === 1) {
+            contentLayout.opacity = 1;
         }
     }
 
@@ -210,11 +210,11 @@ T2.Control {
                     return root.icon.source;
                 }
 
-                if (root.type == Kirigami.MessageType.Positive) {
+                if (root.type === Kirigami.MessageType.Positive) {
                     return "dialog-positive";
-                } else if (root.type == Kirigami.MessageType.Warning) {
+                } else if (root.type === Kirigami.MessageType.Warning) {
                     return "dialog-warning";
-                } else if (root.type == Kirigami.MessageType.Error) {
+                } else if (root.type === Kirigami.MessageType.Error) {
                     return "dialog-error";
                 }
 

@@ -89,7 +89,7 @@ OverlayDrawer {
             (typeof applicationWindow() === "undefined" || !applicationWindow().pageStack.globalToolBar ||
             (applicationWindow().pageStack.lastVisibleItem && applicationWindow().pageStack.lastVisibleItem.globalToolBarStyle !== ApplicationHeaderStyle.ToolBar) ||
             (applicationWindow().pageStack.layers && applicationWindow().pageStack.layers.depth > 1 && applicationWindow().pageStack.layers.currentItem && applicationWindow().pageStack.layers.currentItem.globalToolBarStyle !== ApplicationHeaderStyle.ToolBar))
-    edge: Qt.application.layoutDirection == Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
+    edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
     drawerOpen: false
 
     /**
@@ -111,7 +111,7 @@ OverlayDrawer {
     rightPadding: 0
     bottomPadding: 0
 
-    handleVisible: applicationWindow == undefined ? false : applicationWindow().controlsVisible
+    handleVisible: applicationWindow === undefined ? false : applicationWindow().controlsVisible
 
     onPeekingChanged: {
         if (page) {
@@ -126,7 +126,7 @@ OverlayDrawer {
             id: menu
             interactive: contentHeight > height
             model: {
-                if (typeof root.actions == "undefined") {
+                if (typeof root.actions === "undefined") {
                     return null;
                 }
                 if (root.actions.length === 0) {

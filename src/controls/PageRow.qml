@@ -404,7 +404,7 @@ T.Control {
             return null
         }
         //don't push again things already there
-        if (page.createObject === undefined && typeof page != "string" && columnView.containsItem(page)) {
+        if (page.createObject === undefined && typeof page !== "string" && columnView.containsItem(page)) {
             print("The item " + page + " is already in the PageRow");
             return null;
         }
@@ -420,7 +420,7 @@ T.Control {
             pages = page;
             page = pages.pop();
             //compatibility with pre-qqc1 api, can probably be removed
-            if (page.createObject === undefined && page.parent === undefined && typeof page != "string") {
+            if (page.createObject === undefined && page.parent === undefined && typeof page !== "string") {
                 properties = properties || page.properties;
                 page = page.page;
             }
@@ -439,7 +439,7 @@ T.Control {
                 var tPage = pages[i];
                 var tProps = propsArray[i];
                 //compatibility with pre-qqc1 api, can probably be removed
-                if (tPage.createObject === undefined && tPage.parent === undefined && typeof tPage != "string") {
+                if (tPage.createObject === undefined && tPage.parent === undefined && typeof tPage !== "string") {
                     if (columnView.containsItem(tPage)) {
                         print("The item " + page + " is already in the PageRow");
                         continue;
@@ -478,7 +478,7 @@ T.Control {
      * @since 2.7
      */
     function removePage(page) {
-        if (depth == 0) {
+        if (depth === 0) {
             return null;
         }
 
@@ -493,7 +493,7 @@ T.Control {
      * @return The page instance that was popped off the stack.
      */
     function pop(page) {
-        if (depth == 0) {
+        if (depth === 0) {
             return null;
         }
 
@@ -676,7 +676,7 @@ T.Control {
     }
 
     Keys.onReleased: {
-        if (event.key == Qt.Key_Back) {
+        if (event.key === Qt.Key_Back) {
             this.goBack(event)
         }
     }
@@ -834,8 +834,8 @@ T.Control {
         }
         z: 100
         property T.Control pageRow: root
-        active: (!firstVisibleItem || firstVisibleItem.globalToolBarStyle != ApplicationHeaderStyle.None) && 
-                (globalToolBar.actualStyle != ApplicationHeaderStyle.None || (firstVisibleItem && firstVisibleItem.globalToolBarStyle == ApplicationHeaderStyle.ToolBar))
+        active: (!firstVisibleItem || firstVisibleItem.globalToolBarStyle !== ApplicationHeaderStyle.None) &&
+                (globalToolBar.actualStyle !== ApplicationHeaderStyle.None || (firstVisibleItem && firstVisibleItem.globalToolBarStyle === ApplicationHeaderStyle.ToolBar))
         visible: active
         height: active ? implicitHeight : 0
         // If load is asynchronous, it will fail to compute the initial implicitHeight
@@ -854,7 +854,7 @@ T.Control {
             if (page.createObject) {
                 // page defined as component
                 pageComp = page;
-            } else if (typeof page == "string") {
+            } else if (typeof page === "string") {
                 // page defined as string (a url)
                 pageComp = pagesLogic.componentCache[page];
                 if (!pageComp) {

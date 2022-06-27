@@ -35,7 +35,7 @@ LinkButton
 
     QQC2.ToolTip {
         // If button's text has been overridden, show a tooltip to expose the raw URL
-        visible: button.text != button.url && button.mouseArea.containsMouse
+        visible: button.text !== button.url && button.mouseArea.containsMouse
         text: url
     }
 

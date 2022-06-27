@@ -217,12 +217,12 @@ QQC2.Control {
 
     QtObject {
         id: __private
-        property color textColor: Kirigami.ColorUtils.brightnessForColor(avatarRoot.color) == Kirigami.ColorUtils.Light
+        property color textColor: Kirigami.ColorUtils.brightnessForColor(avatarRoot.color) === Kirigami.ColorUtils.Light
                                 ? "black"
                                 : "white"
         property bool showImage: {
-            return (avatarRoot.imageMode == Kirigami.Avatar.ImageMode.AlwaysShowImage) ||
-                   (avatarImage.status == Image.Ready && avatarRoot.imageMode == Kirigami.Avatar.ImageMode.AdaptiveImageOrInitals)
+            return (avatarRoot.imageMode === Kirigami.Avatar.ImageMode.AlwaysShowImage) ||
+                   (avatarImage.status === Image.Ready && avatarRoot.imageMode === Kirigami.Avatar.ImageMode.AdaptiveImageOrInitals)
         }
     }
 
@@ -230,7 +230,7 @@ QQC2.Control {
         Text {
             id: avatarText
             fontSizeMode: Text.Fit
-            visible: avatarRoot.initialsMode == Kirigami.Avatar.InitialsMode.UseInitials &&
+            visible: avatarRoot.initialsMode === Kirigami.Avatar.InitialsMode.UseInitials &&
                     !__private.showImage &&
                     !Kirigami.NameUtils.isStringUnsuitableForInitials(avatarRoot.name) &&
                     avatarRoot.width > Kirigami.Units.gridUnit
@@ -249,7 +249,7 @@ QQC2.Control {
         }
         Kirigami.Icon {
             id: avatarIcon
-            visible: (avatarRoot.initialsMode == Kirigami.Avatar.InitialsMode.UseIcon && !__private.showImage) ||
+            visible: (avatarRoot.initialsMode === Kirigami.Avatar.InitialsMode.UseIcon && !__private.showImage) ||
                     (Kirigami.NameUtils.isStringUnsuitableForInitials(avatarRoot.name) && !__private.showImage)
 
             source: "user"

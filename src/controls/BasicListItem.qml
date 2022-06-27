@@ -144,7 +144,7 @@ AbstractListItem {
      *     height: int,
      *     color:  color,
      * }
-     * 
+     *
      * type Icon = string | IconGroup | URL
      * @endcode
      *
@@ -230,7 +230,7 @@ AbstractListItem {
 
     /**
      * This property holds the spacing between the label row and subtitle row.
-     * 
+     *
      * @since 5.83
      * @since org.kde.kirigami 2.15
      * @property real textSpacing
@@ -308,7 +308,7 @@ AbstractListItem {
                 Layout.maximumWidth: size
                 selected: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents))
                 opacity: listItem.fadeContent ? 0.4 : 1.0
-                visible: source != undefined
+                visible: source !== undefined
             }
             ColumnLayout {
                 id: labelColumn

@@ -29,10 +29,10 @@ Rectangle {
                                                && !listItem.pressed
                                                && !listItem.checked
                                                // ...Unless the colored rectangle is transparent
-                                               && (!listItem.hovered || listItem.activeBackgroundColor.a == 0)
+                                               && (!listItem.hovered || listItem.activeBackgroundColor.a === 0)
                                                // It would touch the section header
                                                && !listItem.sectionDelegate
-                                               && (!!listItem.ListView.view ? listItem.ListView.nextSection == listItem.ListView.section : true)
+                                               && (!!listItem.ListView.view ? listItem.ListView.nextSection === listItem.ListView.section : true)
                                                // This is the last item in the list
                                                // TODO: implement this
 

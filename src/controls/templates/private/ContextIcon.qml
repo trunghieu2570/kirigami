@@ -34,7 +34,7 @@ Item {
                 //horizontalCenterOffset: -parent.width/2
                 topMargin: (parent.height/2 - iconRoot.thickness/2) * drawer.position
             }
-            antialiasing: drawer.position != 0
+            antialiasing: drawer.position !== 0
             transformOrigin: Item.Center
             width: (1 - drawer.position) * height + drawer.position * (Math.sqrt(2*(parent.width*parent.width)))
             height: iconRoot.thickness
@@ -57,7 +57,7 @@ Item {
              //   topMargin: -iconRoot.thickness/2 * drawer.position
                 bottomMargin: (parent.height/2 - iconRoot.thickness/2) * drawer.position
             }
-            antialiasing: drawer.position != 0
+            antialiasing: drawer.position !== 0
             transformOrigin: Item.Center
             width: (1 - drawer.position) * height + drawer.position * (Math.sqrt(2*(parent.width*parent.width)))
             height: iconRoot.thickness

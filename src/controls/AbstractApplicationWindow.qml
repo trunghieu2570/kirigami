@@ -27,7 +27,7 @@ import org.kde.kirigami 2.4
  * will set its initial size, but it won't set it as an automatically binding.
  * to resize programmatically the ApplicationWindow they need to
  * be assigned again in an imperative fashion
- * 
+ *
  *
  * Example usage:
  * @code
@@ -76,11 +76,11 @@ QQC2.ApplicationWindow {
     /**
      * This property holds the stack used to allocate the pages and to manage the
      * transitions between them.
-     * 
+     *
      * Put a container here, such as QtQuick.Controls.StackView.
      */
     property Item pageStack
-    LayoutMirroring.enabled: Qt.application.layoutDirection == Qt.RightToLeft
+    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
     /**

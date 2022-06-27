@@ -47,7 +47,7 @@ Item {
     // touch screen
     property bool hideWhenTouchScrolling: root.pageRow ? root.pageRow.globalToolBar.hideWhenTouchScrolling : false
 
-    LayoutMirroring.enabled: Qt.application.layoutDirection == Qt.RightToLeft
+    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
     Theme.inherit: true

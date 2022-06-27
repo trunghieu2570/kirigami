@@ -82,20 +82,20 @@ ApplicationHeader {
 
             PrivateActionToolButton {
                 Layout.alignment: Qt.AlignVCenter
-                kirigamiAction: page && page.actions ? page.actions.left : null
-                showText: !parent.toobig
+                action: page && page.actions ? page.actions.left : null
+                display: parent.toobig ? Controls.AbstractButton.IconOnly : Controls.AbstractButton.TextBesideIcon
             }
             PrivateActionToolButton {
                 Layout.alignment: Qt.AlignVCenter
                 Layout.rightMargin: Units.smallSpacing
-                kirigamiAction: page && page.actions ? page.actions.main : null
-                showText: !parent.toobig
+                action: page && page.actions ? page.actions.main : null
+                display: parent.toobig ? Controls.AbstractButton.IconOnly : Controls.AbstractButton.TextBesideIcon
                 flat: false
             }
             PrivateActionToolButton {
                 Layout.alignment: Qt.AlignVCenter
-                kirigamiAction: page && page.actions ? page.actions.right : null
-                showText: !parent.toobig
+                action: page && page.actions ? page.actions.right : null
+                display: parent.toobig ? Controls.AbstractButton.IconOnly : Controls.AbstractButton.TextBesideIcon
             }
         }
 
@@ -115,7 +115,7 @@ ApplicationHeader {
                 children: page && page.actions.contextualActions ? page.actions.contextualActions : null
             }
 
-            kirigamiAction: page && page.actions.contextualActions.length === 1 ? page.actions.contextualActions[0] : overflowAction
+            action: page && page.actions.contextualActions.length === 1 ? page.actions.contextualActions[0] : overflowAction
         }
     }
 }

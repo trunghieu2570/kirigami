@@ -58,7 +58,7 @@ MouseArea {
     onContentItemChanged: {
         if (contentItem.hasOwnProperty("contentY")) {
             flickableItem = contentItem;
-            if (typeof(flickableItem.keyNavigationEnabled) != "undefined") {
+            if (typeof flickableItem.keyNavigationEnabled !== "undefined") {
                 flickableItem.keyNavigationEnabled = true;
                 flickableItem.keyNavigationWraps = false;
             }
@@ -86,19 +86,19 @@ MouseArea {
         onTriggered: {
             //create or destroy the vertical scrollbar
             if ((!flickableItem.ScrollBar.vertical) &&
-                verticalScrollBarPolicy != Qt.ScrollBarAlwaysOff) {
+                verticalScrollBarPolicy !== Qt.ScrollBarAlwaysOff) {
                 flickableItem.ScrollBar.vertical = verticalScrollComponent.createObject(root);
             } else if (flickableItem.ScrollBar.vertical &&
-                verticalScrollBarPolicy == Qt.ScrollBarAlwaysOff) {
+                verticalScrollBarPolicy === Qt.ScrollBarAlwaysOff) {
                 flickableItem.ScrollBar.vertical.destroy();
             }
 
             //create or destroy the horizontal scrollbar
             if ((!flickableItem.ScrollBar.horizontal) &&
-                horizontalScrollBarPolicy != Qt.ScrollBarAlwaysOff) {
+                horizontalScrollBarPolicy !== Qt.ScrollBarAlwaysOff) {
                 flickableItem.ScrollBar.horizontal = horizontalScrollComponent.createObject(root);
             } else if (flickableItem.ScrollBar.horizontal &&
-                horizontalScrollBarPolicy == Qt.ScrollBarAlwaysOff) {
+                horizontalScrollBarPolicy === Qt.ScrollBarAlwaysOff) {
                 flickableItem.ScrollBar.horizontal.destroy();
             }
         }
@@ -132,7 +132,7 @@ MouseArea {
         id: verticalScrollComponent
         ScrollBar {
             z: flickableParent.z + 1
-            visible: root.verticalScrollBarPolicy != Qt.ScrollBarAlwaysOff && root.contentItem.visible && size < 1
+            visible: root.verticalScrollBarPolicy !== Qt.ScrollBarAlwaysOff && root.contentItem.visible && size < 1
             interactive: !Kirigami.Settings.hasTransientTouchInput
 
             anchors {
@@ -147,7 +147,7 @@ MouseArea {
         id: horizontalScrollComponent
         ScrollBar {
             z: flickableParent.z + 1
-            visible: root.horizontalScrollBarPolicy != Qt.ScrollBarAlwaysOff && root.contentItem.visible && size < 1
+            visible: root.horizontalScrollBarPolicy !== Qt.ScrollBarAlwaysOff && root.contentItem.visible && size < 1
             interactive: !Kirigami.Settings.hasTransientTouchInput
 
             anchors {

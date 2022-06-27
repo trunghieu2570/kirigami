@@ -237,9 +237,9 @@ T2.SwipeDelegate {
             return want
         }
         anchors {
-            right: validate((Qt.application.layoutDirection == Qt.RightToLeft) ? undefined : (contentItem ? contentItem.right : undefined), contentItem ? contentItem.right : undefined)
+            right: validate((Qt.application.layoutDirection === Qt.RightToLeft) ? undefined : (contentItem ? contentItem.right : undefined), contentItem ? contentItem.right : undefined)
             rightMargin: validate(-paddingOffset, 0)
-            left: validate((Qt.application.layoutDirection == Qt.LeftToRight) ? undefined : (contentItem ? contentItem.left : undefined), undefined)
+            left: validate((Qt.application.layoutDirection === Qt.LeftToRight) ? undefined : (contentItem ? contentItem.left : undefined), undefined)
             leftMargin: validate(-paddingOffset, 0)
             top: parent.top
             bottom: parent.bottom

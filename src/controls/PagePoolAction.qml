@@ -68,12 +68,12 @@ Kirigami.Action {
      */
     property var initialProperties
 
-    /** 
+    /**
       * @since 5.70
       * @since org.kde.kirigami 2.12
       * When true the PagePoolAction will use the layers property of the pageStack.
       * This is intended for use with PageRow layers to allow PagePoolActions to
-      * push context-specific pages onto the layers stack. 
+      * push context-specific pages onto the layers stack.
       */
     property bool useLayers: false
 
@@ -109,7 +109,7 @@ Kirigami.Action {
     checkable: true
 
     onTriggered: {
-        if (page.length == 0 || !pagePool || !pageStack) {
+        if (page.length === 0 || !pagePool || !pageStack) {
             return;
         }
 
@@ -179,7 +179,7 @@ Kirigami.Action {
         function clearLayers() {
             pageStack.layers.clear()
         }
-        
+
         property list<Connections> connections: [
             Connections {
                 target: pageStack
@@ -207,7 +207,7 @@ Kirigami.Action {
                         _private.setChecked(root.layerContainsPage());
 
                     } else {
-                        if (pageStack.layers.depth == 1 && root.stackContainsPage()) {
+                        if (pageStack.layers.depth === 1 && root.stackContainsPage()) {
                             _private.setChecked(true)
                         }
                     }

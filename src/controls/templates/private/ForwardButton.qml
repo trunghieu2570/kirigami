@@ -25,7 +25,7 @@ Controls.ToolButton {
         }
     }
     // The gridUnit wiggle room is used to not flicker the button visibility during an animated resize for instance due to a sidebar collapse
-    visible: applicationWindow().pageStack.layers.depth == 1 && applicationWindow().pageStack.contentItem.contentWidth > applicationWindow().pageStack.width + Units.gridUnit && (showNavButtons === true || (showNavButtons & ApplicationHeaderStyle.ShowForwardButton))
+    visible: applicationWindow().pageStack.layers.depth === 1 && applicationWindow().pageStack.contentItem.contentWidth > applicationWindow().pageStack.width + Units.gridUnit && (showNavButtons === true || (showNavButtons & ApplicationHeaderStyle.ShowForwardButton))
 
     onClicked: applicationWindow().pageStack.goForward();
 

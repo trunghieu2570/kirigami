@@ -29,7 +29,7 @@ Kirigami.PageTab {
     Connections {
         target: columnView
         function onCurrentIndexChanged() {
-            if (index == columnView.currentIndex) {
+            if (index === columnView.currentIndex) {
                 tabRoot.indexChanged(tabRoot.x, tabRoot.width)
             }
         }

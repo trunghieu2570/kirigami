@@ -82,19 +82,19 @@ Kirigami.AbstractCard {
         id: bannerImage
         anchors.leftMargin: -root.leftPadding + root.background.border.width
         anchors.topMargin: -root.topPadding + root.background.border.width
-        anchors.rightMargin: root.headerOrientation == Qt.Vertical ? -root.rightPadding + root.background.border.width : 0
-        anchors.bottomMargin: root.headerOrientation == Qt.Horizontal ? -root.bottomPadding + root.background.border.width : 0
+        anchors.rightMargin: root.headerOrientation === Qt.Vertical ? -root.rightPadding + root.background.border.width : 0
+        anchors.bottomMargin: root.headerOrientation === Qt.Horizontal ? -root.bottomPadding + root.background.border.width : 0
         //height: Layout.preferredHeight
-        implicitWidth: root.headerOrientation == Qt.Horizontal ? sourceSize.width : Layout.preferredWidth
-        Layout.preferredHeight: (source != "" ? width / (sourceSize.width / sourceSize.height) : Layout.minimumHeight) + anchors.topMargin + anchors.bottomMargin
+        implicitWidth: root.headerOrientation === Qt.Horizontal ? sourceSize.width : Layout.preferredWidth
+        Layout.preferredHeight: (source.toString() !== "" ? width / (sourceSize.width / sourceSize.height) : Layout.minimumHeight) + anchors.topMargin + anchors.bottomMargin
 
         readonly property real widthWithBorder: width + root.background.border.width * 2
         readonly property real heightWithBorder: height + root.background.border.width * 2
         readonly property real radiusFromBackground: root.background.radius - root.background.border.width
 
         corners.topLeftRadius: radiusFromBackground
-        corners.topRightRadius: (root.headerOrientation == Qt.Horizontal && widthWithBorder < root.width) ? 0 : radiusFromBackground
-        corners.bottomLeftRadius: (root.headerOrientation != Qt.Horizontal && heightWithBorder < root.height) ? 0 : radiusFromBackground
+        corners.topRightRadius: (root.headerOrientation === Qt.Horizontal && widthWithBorder < root.width) ? 0 : radiusFromBackground
+        corners.bottomLeftRadius: (root.headerOrientation !== Qt.Horizontal && heightWithBorder < root.height) ? 0 : radiusFromBackground
         corners.bottomRightRadius: heightWithBorder < root.height ? 0 : radiusFromBackground
     }
 
@@ -103,16 +103,16 @@ Kirigami.AbstractCard {
             return;
         }
 
-        header.anchors.leftMargin = Qt.binding(function() {return -root.leftPadding});
-        header.anchors.topMargin = Qt.binding(function() {return  -root.topPadding});
-        header.anchors.rightMargin = Qt.binding(function() {return root.headerOrientation == Qt.Vertical ? -root.rightPadding : 0});
-        header.anchors.bottomMargin = Qt.binding(function() {return root.headerOrientation == Qt.Horizontal ? -root.bottomPadding : 0});
+        header.anchors.leftMargin = Qt.binding(() => -root.leftPadding);
+        header.anchors.topMargin = Qt.binding(() =>  -root.topPadding);
+        header.anchors.rightMargin = Qt.binding(() => root.headerOrientation === Qt.Vertical ? -root.rightPadding : 0);
+        header.anchors.bottomMargin = Qt.binding(() => root.headerOrientation === Qt.Horizontal ? -root.bottomPadding : 0);
     }
 
     footer: Kirigami.ActionToolBar {
         id: actionsToolBar
         actions: root.actions
         position: Controls.ToolBar.Footer
-        visible: root.footer == actionsToolBar
+        visible: root.footer === actionsToolBar
     }
 }

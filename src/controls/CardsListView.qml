@@ -27,7 +27,7 @@ import "private"
 ListView {
     id: root
     spacing: Kirigami.Units.largeSpacing * 2
-    topMargin: headerPositioning != ListView.InlineHeader ? spacing : 0
+    topMargin: headerPositioning !== ListView.InlineHeader ? spacing : 0
     rightMargin: Kirigami.Units.largeSpacing * 2
     leftMargin: Kirigami.Units.largeSpacing * 2
     reuseItems: true

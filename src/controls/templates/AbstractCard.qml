@@ -58,7 +58,7 @@ T.ItemDelegate {
 
     hoverEnabled: !Kirigami.Settings.tabletMode && showClickFeedback
     //if it's in a CardLayout, try to expand horizontal cards to both columns
-    Layout.columnSpan: headerOrientation == Qt.Horizontal && parent.hasOwnProperty("columns") ? parent.columns : 1
+    Layout.columnSpan: headerOrientation === Qt.Horizontal && parent.hasOwnProperty("columns") ? parent.columns : 1
 
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.View
@@ -84,7 +84,7 @@ T.ItemDelegate {
             bottom:parent.bottom
             bottomMargin: root.bottomPadding
         }
-        columns: headerOrientation == Qt.Vertical ? 1 : 2
+        columns: headerOrientation === Qt.Vertical ? 1 : 2
         function preferredHeight(item) {
             if (!item) {
                 return 0;
@@ -97,10 +97,10 @@ T.ItemDelegate {
         Item {
             id: headerParent
             Layout.fillWidth: true
-            Layout.fillHeight: root.headerOrientation == Qt.Horizontal
-            Layout.rowSpan: root.headerOrientation == Qt.Vertical ? 1 : 2
+            Layout.fillHeight: root.headerOrientation === Qt.Horizontal
+            Layout.rowSpan: root.headerOrientation === Qt.Vertical ? 1 : 2
             Layout.preferredWidth: header ? header.implicitWidth : 0
-            Layout.preferredHeight: root.headerOrientation == Qt.Vertical ? mainLayout.preferredHeight(header) : -1
+            Layout.preferredHeight: root.headerOrientation === Qt.Vertical ? mainLayout.preferredHeight(header) : -1
             visible: children.length > 0
         }
         Item {

@@ -41,7 +41,7 @@ AbstractApplicationHeader {
      * backButtonEnabled: bool
      * if true, there will be a back button present that will make the pagerow scroll back when clicked
      */
-    property bool backButtonEnabled: (!titleList.isTabBar && (!Settings.isMobile || Qt.platform.os == "ios"))
+    property bool backButtonEnabled: (!titleList.isTabBar && (!Settings.isMobile || Qt.platform.os === "ios"))
 
     onBackButtonEnabledChanged: {
         if (backButtonEnabled && !titleList.backButton) {
@@ -64,7 +64,7 @@ AbstractApplicationHeader {
 
             Icon {
                 //in tabbar mode this is just a spacer
-                visible: !titleList.wideMode && ((typeof(modelData) != "undefined" && modelData > 0) || titleList.internalHeaderStyle == ApplicationHeaderStyle.TabBar)
+                visible: !titleList.wideMode && ((typeof modelData !== "undefined" && modelData > 0) || titleList.internalHeaderStyle === ApplicationHeaderStyle.TabBar)
                 anchors.verticalCenter: parent.verticalCenter
                 height: Units.iconSizes.small
                 width: height
@@ -119,7 +119,7 @@ AbstractApplicationHeader {
         anchors {
             fill: parent
             leftMargin: navButtons.width
-            rightMargin: __appWindow.contextDrawer && __appWindow.contextDrawer.handleVisible && __appWindow.contextDrawer.handle && __appWindow.contextDrawer.handle.y == 0 ? __appWindow.contextDrawer.handle.width : 0
+            rightMargin: __appWindow.contextDrawer && __appWindow.contextDrawer.handleVisible && __appWindow.contextDrawer.handle && __appWindow.contextDrawer.handle.y === 0 ? __appWindow.contextDrawer.handle.width : 0
         }
         initialItem: titleList
 
@@ -224,12 +224,12 @@ AbstractApplicationHeader {
     Flickable {
         id: titleList
         readonly property bool wideMode: pageRow.hasOwnProperty("wideMode") ? pageRow.wideMode : __appWindow.wideScreen
-        property int internalHeaderStyle: header.headerStyle == ApplicationHeaderStyle.Auto ? (titleList.wideMode ? ApplicationHeaderStyle.Titles : ApplicationHeaderStyle.Breadcrumb) : header.headerStyle
+        property int internalHeaderStyle: header.headerStyle === ApplicationHeaderStyle.Auto ? (titleList.wideMode ? ApplicationHeaderStyle.Titles : ApplicationHeaderStyle.Breadcrumb) : header.headerStyle
         //if scrolling the titlebar should scroll also the pages and vice versa
-        property bool scrollingLocked: (header.headerStyle == ApplicationHeaderStyle.Titles || titleList.wideMode)
+        property bool scrollingLocked: (header.headerStyle === ApplicationHeaderStyle.Titles || titleList.wideMode)
         //uses this to have less strings comparisons
         property bool scrollMutex
-        property bool isTabBar: header.headerStyle == ApplicationHeaderStyle.TabBar
+        property bool isTabBar: header.headerStyle === ApplicationHeaderStyle.TabBar
 
         property Item backButton
         property Item forwardButton
@@ -320,7 +320,7 @@ AbstractApplicationHeader {
                     width: {
                         //more columns shown?
                         if (titleList.scrollingLocked && delegateLoader.page) {
-                            return delegateLoader.page.width - (index == 0 ? navButtons.width : 0) - (index == pageRow.depth-1  ? stack.anchors.rightMargin : 0);
+                            return delegateLoader.page.width - (index === 0 ? navButtons.width : 0) - (index === pageRow.depth-1  ? stack.anchors.rightMargin : 0);
                         } else {
                             return Math.min(titleList.width, delegateLoader.implicitWidth + Units.smallSpacing);
                         }
@@ -346,7 +346,7 @@ AbstractApplicationHeader {
                     Loader {
                         id: delegateLoader
                         height: parent.height
-                        x: titleList.wideMode || headerStyle == ApplicationHeaderStyle.Titles ? (Math.min(delegate.width - implicitWidth, Math.max(0, titleList.contentX - delegate.x))) : 0
+                        x: titleList.wideMode || headerStyle === ApplicationHeaderStyle.Titles ? (Math.min(delegate.width - implicitWidth, Math.max(0, titleList.contentX - delegate.x))) : 0
                         width: parent.width - x
 
                         Connections {

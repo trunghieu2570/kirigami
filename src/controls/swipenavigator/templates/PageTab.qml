@@ -59,7 +59,7 @@ QQC2.Control {
     Accessible.onPressAction: control.clicked()
 
     Keys.onPressed: {
-        if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
+        if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
             control.clicked()
         }
     }

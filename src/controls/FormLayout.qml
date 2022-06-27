@@ -85,7 +85,9 @@ Item {
 
     Component.onDestruction: {
         for (let i in twinFormLayouts) {
-            twinFormLayouts[i].children[0].reverseTwins = twinFormLayouts[i].children[0].reverseTwins.filter(function(value, index, arr){ return value != root;})
+            const twin = twinFormLayouts[i];
+            const child = twin.children[0];
+            child.reverseTwins = child.reverseTwins.filter((value, index, arr) => value !== root)
         }
     }
     GridLayout {
@@ -228,7 +230,7 @@ Item {
          */
         function effectiveTextLayout(item) {
             if (root.wideMode) {
-                return item.Kirigami.FormData.labelAlignment != 0 ? item.Kirigami.FormData.labelAlignment : Text.AlignVCenter
+                return item.Kirigami.FormData.labelAlignment !== 0 ? item.Kirigami.FormData.labelAlignment : Text.AlignVCenter
             }
             return Text.AlignBottom
         }
@@ -244,7 +246,7 @@ Item {
                 const item = __items[i];
 
                 //skip items that are already there
-                if (lay.knownItems.indexOf(item) != -1 || item instanceof Repeater) {
+                if (lay.knownItems.indexOf(item) !== -1 || item instanceof Repeater) {
                     continue;
                 }
                 lay.knownItems.push(item);

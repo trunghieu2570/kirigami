@@ -191,7 +191,7 @@ Controls.Control {
             }
 
             menuActions: {
-                if (root.hiddenActions.length == 0) {
+                if (root.hiddenActions.length === 0) {
                     return root.actions
                 } else {
                     result = []

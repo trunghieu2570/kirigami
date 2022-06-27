@@ -390,7 +390,7 @@ T.Dialog {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
                 level: 2
-                text: root.title == "" ? " " : root.title // always have text to ensure header height
+                text: root.title === "" ? " " : root.title // always have text to ensure header height
                 elide: Text.ElideRight
 
                 // use tooltip for long text that is elided

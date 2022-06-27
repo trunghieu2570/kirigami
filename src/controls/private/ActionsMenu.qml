@@ -4,9 +4,10 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.3
-import QtQuick.Controls 2.4 as Controls
-import org.kde.kirigami 2.4 as Kirigami
+import QtQuick 2.15
+import QtQuick.Controls 2.15 as Controls
+
+import org.kde.kirigami 2.20 as Kirigami
 
 Controls.Menu
 {

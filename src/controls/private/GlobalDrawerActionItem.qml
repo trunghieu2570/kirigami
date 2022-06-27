@@ -27,18 +27,18 @@ AbstractListItem {
             id: iconItem
             color: modelData.icon.color
             source: modelData.icon.name || modelData.icon.source
-            
+
             // We have a mismatch in releases in removing the mobile x1.5 sizing (kirigami is part of frameworks, but styles are part of plasma releases)
             // Remove after Plasma 5.23 is released, and switch back to Units.iconSizes.medium/large
             property int mediumIconSizing: Units.iconSizes.sizeForLabels * 2
-            
+
             property int size: Settings.isMobile ? mediumIconSizing : Units.iconSizes.smallMedium
             Layout.minimumHeight: size
             Layout.maximumHeight: size
             Layout.minimumWidth: size
             Layout.maximumWidth: size
             selected: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents))
-            visible: source != undefined
+            visible: source !== undefined
         }
         QQC2Impl.MnemonicLabel {
             id: labelItem

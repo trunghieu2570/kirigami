@@ -161,8 +161,8 @@ T2.Drawer {
         T2.ToolTip.delay: Units.toolTipDelay
 
         property Item handleAnchor: (applicationWindow().pageStack && applicationWindow().pageStack.globalToolBar)
-                ? ((root.edge === Qt.LeftEdge && Qt.application.layoutDirection == Qt.LeftToRight)
-                   || (root.edge === Qt.RightEdge && Qt.application.layoutDirection == Qt.RightToLeft)
+                ? ((root.edge === Qt.LeftEdge && Qt.application.layoutDirection === Qt.LeftToRight)
+                   || (root.edge === Qt.RightEdge && Qt.application.layoutDirection === Qt.RightToLeft)
                    ? applicationWindow().pageStack.globalToolBar.leftHandleAnchor
                    : applicationWindow().pageStack.globalToolBar.rightHandleAnchor)
                 : (applicationWindow().header && applicationWindow().header.toString().indexOf("ToolBarApplicationHeader") !== -1 ? applicationWindow().header : null)
@@ -307,7 +307,7 @@ T2.Drawer {
 
     y: modal ? 0 : ((T2.ApplicationWindow.menuBar ? T2.ApplicationWindow.menuBar.height : 0) + (T2.ApplicationWindow.header ? T2.ApplicationWindow.header.height : 0))
 
-    height: parent && (root.edge == Qt.LeftEdge || root.edge == Qt.RightEdge) ? (modal ? parent.height : (parent.height - y - (T2.ApplicationWindow.footer ? T2.ApplicationWindow.footer.height : 0))) : implicitHeight
+    height: parent && (root.edge === Qt.LeftEdge || root.edge === Qt.RightEdge) ? (modal ? parent.height : (parent.height - y - (T2.ApplicationWindow.footer ? T2.ApplicationWindow.footer.height : 0))) : implicitHeight
 
     parent: modal || edge === Qt.LeftEdge || edge === Qt.RightEdge ? T2.ApplicationWindow.overlay : T2.ApplicationWindow.contentItem
 
@@ -483,7 +483,7 @@ T2.Drawer {
             }
             ScriptAction {
                 script: {
-                    root.drawerOpen = internalAnim.to != 0;
+                    root.drawerOpen = internalAnim.to !== 0;
                 }
             }
         }

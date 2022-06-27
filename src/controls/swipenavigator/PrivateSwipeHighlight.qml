@@ -20,9 +20,9 @@ Rectangle {
     }
 
     color: {
-        if (state == "highlighted") {
+        if (state === "highlighted") {
             return Kirigami.Theme.activeTextColor
-        } else if (state == "requestingAttention") {
+        } else if (state === "requestingAttention") {
             return Kirigami.Theme.negativeTextColor
         }
         return "transparent"

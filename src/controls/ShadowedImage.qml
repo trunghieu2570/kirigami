@@ -125,6 +125,6 @@ Item {
         id: shadowRectangle
         anchors.fill: parent
 
-        source: image.status == Image.Ready ? image : null
+        source: image.status === Image.Ready ? image : null
     }
 }

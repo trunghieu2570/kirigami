@@ -223,7 +223,7 @@ QtObject {
         z: 101
         //we want to be over any possible OverlayDrawers, including handles
         parent: {
-            if (root.parent && root.parent.ColumnView.view && (root.parent.ColumnView.view == root.parent || root.parent.ColumnView.view == root.parent.parent)) {
+            if (root.parent && root.parent.ColumnView.view && (root.parent.ColumnView.view === root.parent || root.parent.ColumnView.view === root.parent.parent)) {
                 return root.parent.ColumnView.view.parent;
             } else if (root.parent && root.parent.overlay) {
                 root.parent.overlay;
@@ -388,11 +388,11 @@ QtObject {
 
                 readonly property real listHeaderHeight: scrollView.flickableItem ? -scrollView.flickableItem.originY : 0
 
-                y: (scrollView.contentItem != flickableContents ? -scrollView.flickableItem.contentY - listHeaderHeight  - (headerItem.visible ? headerItem.height : 0): 0)
+                y: (scrollView.contentItem !== flickableContents ? -scrollView.flickableItem.contentY - listHeaderHeight  - (headerItem.visible ? headerItem.height : 0): 0)
 
                 width: mainItem.contentItemPreferredWidth <= 0 ? mainItem.width : (mainItem.contentItemMaximumWidth > 0 ? Math.min( mainItem.contentItemMaximumWidth, Math.max( mainItem.width/2, mainItem.contentItemPreferredWidth ) ) : Math.max( mainItem.width / 2, mainItem.contentItemPreferredWidth ) ) + leftPadding + rightPadding
 
-                implicitHeight: scrollView.contentItem == flickableContents ? root.contentItem.height + topPadding + bottomPadding : 0
+                implicitHeight: scrollView.contentItem === flickableContents ? root.contentItem.height + topPadding + bottomPadding : 0
                 Connections {
                     target: enabled ? flickableContents.Window.activeFocusItem : null
                     enabled: flickableContents.focus && flickableContents.Window.activeFocusItem && flickableContents.Window.activeFocusItem.hasOwnProperty("text")

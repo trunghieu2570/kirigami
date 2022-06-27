@@ -127,14 +127,14 @@ Item {
     }
 
     function open() {
-        if (source != null && destination != null && !heroAnimation.running) {
+        if (source !== null && destination !== null && !heroAnimation.running) {
             heroAnimation.source = source
             heroAnimation.destination = destination
             heroAnimation.restart()
         }
     }
     function close() {
-        if (source != null && destination != null && !heroAnimation.running) {
+        if (source !== null && destination !== null && !heroAnimation.running) {
             // doing a switcheroo simplifies the code
             heroAnimation.source = destination
             heroAnimation.destination = source

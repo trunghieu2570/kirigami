@@ -22,7 +22,7 @@ import org.kde.kirigami 2.4 as Kirigami
  * will set its initial size, but it won't set it as an automatically binding.
  * to resize programmatically the ApplicationWindow they need to
  * be assigned again in an imperative fashion
- * 
+ *
  * Example usage:
  * @code
  * import org.kde.kirigami 2.4 as Kirigami
@@ -119,7 +119,7 @@ AbstractApplicationWindow {
         anchors {
             fill: parent
             //HACK: workaround a bug in android iOS keyboard management
-            bottomMargin: ((Qt.platform.os == "android" || Qt.platform.os == "ios") || !Qt.inputMethod.visible) ? 0 : Qt.inputMethod.keyboardRectangle.height
+            bottomMargin: ((Qt.platform.os === "android" || Qt.platform.os === "ios") || !Qt.inputMethod.visible) ? 0 : Qt.inputMethod.keyboardRectangle.height
             onBottomMarginChanged: {
                 if (__pageStack.anchors.bottomMargin > 0) {
                     root.reachableMode = false;

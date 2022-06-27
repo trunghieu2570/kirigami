@@ -41,12 +41,12 @@ Kirigami.AbstractItemViewHeader {
             asynchronous: true
         }
         EdgeShadow {
-            edge: root.view.headerPositioning == ListView.InlineHeader ? Qt.BottomEdge : Qt.TopEdge
+            edge: root.view.headerPositioning === ListView.InlineHeader ? Qt.BottomEdge : Qt.TopEdge
             anchors {
                 right: parent.right
                 left: parent.left
-                top: root.view.headerPositioning == ListView.InlineHeader ? undefined : parent.bottom
-                bottom: root.view.headerPositioning == ListView.InlineHeader ? parent.top : undefined
+                top: root.view.headerPositioning === ListView.InlineHeader ? undefined : parent.bottom
+                bottom: root.view.headerPositioning === ListView.InlineHeader ? parent.top : undefined
             }
         }
 

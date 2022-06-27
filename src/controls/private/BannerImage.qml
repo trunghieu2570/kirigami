@@ -59,7 +59,7 @@ Kirigami.ShadowedImage {
     Layout.fillWidth: true
 
     Layout.preferredWidth: titleLayout.implicitWidth || sourceSize.width
-    Layout.preferredHeight: titleLayout.completed && source != "" ? width/(sourceSize.width / sourceSize.height) : Layout.minimumHeight
+    Layout.preferredHeight: titleLayout.completed && source.toString() !== "" ? width/(sourceSize.width / sourceSize.height) : Layout.minimumHeight
     Layout.minimumHeight: titleLayout.implicitHeight > 0 ? titleLayout.implicitHeight + Kirigami.Units.smallSpacing * 2 : 0
     property int implicitWidth: Layout.preferredWidth
 
@@ -88,7 +88,7 @@ Kirigami.ShadowedImage {
         opacity: 0.5
         color: "black"
 
-        visible: root.source != "" && root.title != "" && ((root.titleAlignment & Qt.AlignTop) || (root.titleAlignment & Qt.AlignBottom))
+        visible: root.source.toString() !== "" && root.title !== "" && ((root.titleAlignment & Qt.AlignTop) || (root.titleAlignment & Qt.AlignBottom))
 
         corners.topLeftRadius: root.titleAlignment & Qt.AlignTop ? root.corners.topLeftRadius : 0
         corners.topRightRadius: root.titleAlignment & Qt.AlignTop ? root.corners.topRightRadius : 0
@@ -128,7 +128,7 @@ Kirigami.ShadowedImage {
             verticalAlignment: Text.AlignVCenter
             visible: text.length > 0
             level: 1
-            color: source != "" ? "white" : Kirigami.Theme.textColor
+            color: root.source.toString() !== "" ? "white" : Kirigami.Theme.textColor
             wrapMode: Text.NoWrap
             elide: Text.ElideRight
         }

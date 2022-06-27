@@ -36,7 +36,7 @@ import "private"
  *         anchors.centerIn: parent
  *         width: parent.width - (Kirigami.Units.largeSpacing * 4)
  *
- *         visible: listView.count == 0
+ *         visible: listView.count === 0
  *
  *         text: "There are no items in this list"
  *     }
@@ -55,7 +55,7 @@ import "private"
  *         anchors.centerIn: parent
  *         width: parent.width - (Kirigami.Units.largeSpacing * 4)
  *
- *         visible: listView.count == 0
+ *         visible: listView.count === 0
  *
  *         text: "Add an item to proceed"
  *
@@ -215,7 +215,7 @@ ColumnLayout {
     spacing: Kirigami.Units.largeSpacing
 
     Kirigami.Icon {
-        visible: source != undefined
+        visible: source !== undefined
         opacity: 0.5
 
         Layout.alignment: Qt.AlignHCenter
@@ -223,9 +223,9 @@ ColumnLayout {
         Layout.preferredHeight: Math.round(Kirigami.Units.iconSizes.huge * 1.5)
 
         source: {
-            if (root.icon.source && root.icon.source.length > 0) {
+            if (root.icon.source.length > 0) {
                 return root.icon.source
-            } else if (root.icon.name && root.icon.name.length > 0) {
+            } else if (root.icon.name.length > 0) {
                 return root.icon.name
             }
             return undefined
@@ -237,7 +237,7 @@ ColumnLayout {
         visible: text.length > 0
 
         type: Kirigami.Heading.Primary
-        opacity: root.type == PlaceholderMessage.Type.Actionable ? 1 : 0.65
+        opacity: root.type === PlaceholderMessage.Type.Actionable ? 1 : 0.65
 
 
         Layout.fillWidth: true
@@ -249,7 +249,7 @@ ColumnLayout {
     QQC2.Label {
         text: root.explanation
         visible:  root.explanation !== ""
-        opacity: root.type == PlaceholderMessage.Type.Actionable ? 1 : 0.65
+        opacity: root.type === PlaceholderMessage.Type.Actionable ? 1 : 0.65
 
         horizontalAlignment: Qt.AlignHCenter
         wrapMode: Text.WordWrap

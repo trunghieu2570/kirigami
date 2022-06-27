@@ -15,9 +15,9 @@ import org.kde.kirigami 2.12 as Kirigami
  * PassiveNotification is a type for small, passive and inline
 notifications in the app.
  * used to show messages of limited importance that make sense only when
- * the user is using the application and wouldn't be suited as a global 
+ * the user is using the application and wouldn't be suited as a global
  * system-wide notification.
- * This is not a full-fledged notification system. the applciation should 
+ * This is not a full-fledged notification system. the applciation should
  * use this with care and only one notification should be visible at once per app.
 */
 Controls.Popup {
@@ -49,9 +49,9 @@ Controls.Popup {
 
         let interval = 7000;
 
-        if (timeout == "short") {
+        if (timeout === "short") {
             interval = 4000;
-        } else if (timeout == "long") {
+        } else if (timeout === "long") {
             interval = 12000;
         } else if (timeout > 0) {
             interval = timeout;
@@ -79,7 +79,7 @@ Controls.Popup {
 
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
-    
+
     background: Item {}
 
     contentItem: GridLayout {
@@ -195,7 +195,7 @@ Controls.Popup {
                 Kirigami.Theme.colorSet: root.Kirigami.Theme.colorSet
                 shadow {
                     size: Kirigami.Units.gridUnit/2
-                    color: Qt.rgba(0, 0, 0, 0.4) 
+                    color: Qt.rgba(0, 0, 0, 0.4)
                     yOffset: 2
                 }
                 radius: Kirigami.Units.smallSpacing * 2

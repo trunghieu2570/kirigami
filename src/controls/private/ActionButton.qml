@@ -80,7 +80,7 @@ Item {
                 target: translateTransform
                 property: "y"
                 duration: Units.longDuration
-                easing.type: mouseArea.internalVisibility == true ? Easing.InQuad : Easing.OutQuad
+                easing.type: mouseArea.internalVisibility ? Easing.InQuad : Easing.OutQuad
             }
             OpacityAnimator {
                 duration: Units.longDuration
@@ -98,7 +98,7 @@ Item {
         // Remove after Plasma 5.23 is released, and switch back to Units.iconSizes.medium/large
         property int mediumIconSizing: Units.iconSizes.sizeForLabels * 2
         property int largeIconSizing: Units.iconSizes.sizeForLabels * 3
-        
+
         anchors.bottom: edgeMouseArea.bottom
 
         implicitWidth: implicitHeight + mediumIconSizing*2 + Units.gridUnit
@@ -132,7 +132,7 @@ Item {
             id: mouseArea
             anchors.fill: parent
 
-            visible: action != null || leftAction != null || rightAction != null
+            visible: action !== null || leftAction !== null || rightAction !== null
             property bool internalVisibility: (!root.hasApplicationWindow || (applicationWindow().controlsVisible && applicationWindow().height > root.height*2)) && (root.action === null || root.action.visible === undefined || root.action.visible)
             preventStealing: true
 
@@ -304,8 +304,8 @@ Item {
                     width: height
                     enabled: root.action && root.action.enabled
                     visible: root.action
-                    readonly property bool pressed: root.action && root.action.enabled && ((root.action == mouseArea.actionUnderMouse && mouseArea.pressed) || root.action.checked)
-                    property color baseColor: root.action && root.action.icon && root.action.icon.color && root.action.icon.color != undefined && root.action.icon.color.a > 0 ? root.action.icon.color : Theme.highlightColor
+                    readonly property bool pressed: root.action && root.action.enabled && ((root.action === mouseArea.actionUnderMouse && mouseArea.pressed) || root.action.checked)
+                    property color baseColor: root.action && root.action.icon && root.action.icon.color && root.action.icon.color !== undefined && root.action.icon.color.a > 0 ? root.action.icon.color : Theme.highlightColor
                     color: pressed ? Qt.darker(baseColor, 1.3) : baseColor
 
                     ActionsMenu {
@@ -354,8 +354,8 @@ Item {
                     width: height + (root.action ? Units.gridUnit*2 : 0)
                     visible: root.leftAction
 
-                    readonly property bool pressed: root.leftAction && root.leftAction.enabled && ((mouseArea.actionUnderMouse == root.leftAction && mouseArea.pressed) || root.leftAction.checked)
-                    property color baseColor: root.leftAction && root.leftAction.icon && root.leftAction.icon.color && root.leftAction.icon.color != undefined && root.leftAction.icon.color.a > 0 ? root.leftAction.icon.color : Theme.highlightColor
+                    readonly property bool pressed: root.leftAction && root.leftAction.enabled && ((mouseArea.actionUnderMouse === root.leftAction && mouseArea.pressed) || root.leftAction.checked)
+                    property color baseColor: root.leftAction && root.leftAction.icon && root.leftAction.icon.color && root.leftAction.icon.color !== undefined && root.leftAction.icon.color.a > 0 ? root.leftAction.icon.color : Theme.highlightColor
                     color: pressed ? baseColor : Theme.backgroundColor
                     Behavior on color {
                         ColorAnimation {
@@ -400,8 +400,8 @@ Item {
                     height: button.mediumIconSizing + Units.smallSpacing * 2
                     width: height + (root.action ? Units.gridUnit*2 : 0)
                     visible: root.rightAction
-                    readonly property bool pressed: root.rightAction && root.rightAction.enabled && ((mouseArea.actionUnderMouse == root.rightAction && mouseArea.pressed) || root.rightAction.checked)
-                    property color baseColor: root.rightAction && root.rightAction.icon && root.rightAction.icon.color && root.rightAction.icon.color != undefined && root.rightAction.icon.color.a > 0 ? root.rightAction.icon.color : Theme.highlightColor
+                    readonly property bool pressed: root.rightAction && root.rightAction.enabled && ((mouseArea.actionUnderMouse === root.rightAction && mouseArea.pressed) || root.rightAction.checked)
+                    property color baseColor: root.rightAction && root.rightAction.icon && root.rightAction.icon.color && root.rightAction.icon.color !== undefined && root.rightAction.icon.color.a > 0 ? root.rightAction.icon.color : Theme.highlightColor
                     color: pressed ? baseColor : Theme.backgroundColor
                     Behavior on color {
                         ColorAnimation {

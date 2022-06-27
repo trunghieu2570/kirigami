@@ -115,10 +115,10 @@ P.ScrollView {
             onYChanged: {
                 //it's overshooting enough and not reachable: start countdown for reachability
 
-                if (y > root.topPadding + Units.gridUnit && (typeof(applicationWindow) == "undefined" || !applicationWindow().reachableMode)) {
+                if (y > root.topPadding + Units.gridUnit && (typeof applicationWindow === "undefined" || !applicationWindow().reachableMode)) {
                     overshootResetTimer.running = true;
                 //not reachable and not overshooting enough, stop reachability countdown
-                } else if (typeof(applicationWindow) == "undefined" || !applicationWindow().reachableMode) {
+                } else if (typeof applicationWindow === "undefined" || !applicationWindow().reachableMode) {
                     //it's important it doesn't restart
                     overshootResetTimer.running = false;
                 }
@@ -178,7 +178,7 @@ P.ScrollView {
                 property: "width"
                 restoreMode: Binding.RestoreBinding
                 value: root.flickableItem.width
-                when: root.horizontalScrollBarPolicy == Qt.ScrollBarAlwaysOff
+                when: root.horizontalScrollBarPolicy === Qt.ScrollBarAlwaysOff
             }
         }
     ]
@@ -187,8 +187,8 @@ P.ScrollView {
     onRightPaddingChanged: leftPaddingChanged()
     onLeftPaddingChanged: {
         //for gridviews do apply margins
-        if (root.contentItem == root.flickableItem) {
-            if (typeof root.flickableItem.cellWidth != "undefined") {
+        if (root.contentItem === root.flickableItem) {
+            if (typeof root.flickableItem.cellWidth !== "undefined") {
                 flickableItem.anchors.leftMargin = leftPadding;
                 flickableItem.anchors.rightMargin = rightPadding;
             } else {
