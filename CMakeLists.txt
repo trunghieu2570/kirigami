@@ -74,6 +74,7 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(KDEPackageAppTemplates)
 include(ECMGenerateQmlTypes)
 include(ECMQmlModule)
+include(ECMDeprecationSettings)
 
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Kirigami2")
 
@@ -126,8 +127,10 @@ endif()
 
 ecm_find_qmlmodule(QtGraphicalEffects 1.0)
 
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f02)
-add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055900)
+ecm_set_disabled_deprecation_versions(
+    QT 5.15.2
+    KF 5.95
+)
 
 # temporary Qt6 porting scafolding until branching
 # (this is intentional made to fail if we forget it for KF6)
