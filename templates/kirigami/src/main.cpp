@@ -37,7 +37,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
                          KAboutLicense::GPL,
                          // Copyright Statement.
                          i18n("(c) %{CURRENT_YEAR}"));
-    aboutData.addAuthor(i18nc("@info:credit", "AUTHOR"), i18nc("@info:credit", "Author Role"), QStringLiteral("%{EMAIL}"), QStringLiteral("https://yourwebsite.com"));
+    aboutData.addAuthor(i18nc("@info:credit", "%{AUTHOR}"),
+                        i18nc("@info:credit", "Author Role"),
+                        QStringLiteral("%{EMAIL}"),
+                        QStringLiteral("https://yourwebsite.com"));
     KAboutData::setApplicationData(aboutData);
 
     QQmlApplicationEngine engine;
