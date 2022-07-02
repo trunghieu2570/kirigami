@@ -17,6 +17,9 @@ Kirigami.ApplicationWindow {
         Kirigami.Page {
             id: page
 
+            // Don't remove, used in autotests
+            readonly property alias lastKey: see.text
+
             Label {
                 id: see
                 anchors.centerIn: parent
