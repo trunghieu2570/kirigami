@@ -42,7 +42,7 @@ LinkButton
     QQC2.Menu {
         id: menu
         QQC2.MenuItem {
-            text: qsTr("Copy link address")
+            text: qsTr("Copy Link to Clipboard")
             onClicked: KirigamiPrivate.CopyHelperPrivate.copyTextToClipboard(button.url)
         }
     }
