@@ -860,6 +860,12 @@ T.Control {
                 if (!pageComp) {
                     pageComp = pagesLogic.componentCache[page] = Qt.createComponent(page);
                 }
+            } else if (typeof page === "object" && !(page instanceof Item) && page.toString !== undefined) {
+                // page defined as url (QML value type, not a string)
+                pageComp = pagesLogic.componentCache[page.toString()];
+                if (!pageComp) {
+                    pageComp = pagesLogic.componentCache[page.toString()] = Qt.createComponent(page.toString());
+                }
             }
 
             return pageComp
