@@ -23,7 +23,7 @@ import "templates/private" as Private
  * `title` property.
  *
  * By default, the footer consists of a row of buttons specified by
- * the `footerActions` and `customFooterActions` properties.
+ * the `standardButtons` and `customFooterActions` properties.
  *
  * The `implicitHeight` and `implicitWidth` of the dialog contentItem is
  * the primary hint used for the dialog size. The dialog will be the

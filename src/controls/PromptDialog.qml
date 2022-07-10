@@ -27,7 +27,7 @@ import org.kde.kirigami 2.19 as Kirigami
  * Kirigami.PromptDialog {
  *     title: "Reset settings?"
  *     subtitle: "The stored settings for the application will be deleted, with the defaults restored."
- *     footerActions: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
+ *     standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
  *     
  *     onAccepted: console.log("Accepted")
  *     onRejected: console.log("Rejected")
