@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QMap>
 #include <QQuickStyle>
+#include <QRegularExpression>
 #include <QTextBoundaryFinder>
 #include <QVector>
 
@@ -38,9 +39,30 @@ QString NameUtils::initialsFromString(const QString &string)
         return normalized.at(0);
     }
 
+    // Remove anything that is in parentheses
+    static const QRegularExpression s_parenthesesExp(QStringLiteral(R"([\(\[\{].*[\)\[\{])"));
+    normalized.remove(s_parenthesesExp);
+
     // "FirstName Name Name LastName"
     normalized = normalized.trimmed();
-    if (normalized.contains(QLatin1Char(' '))) {
+
+    if (normalized.contains(QLatin1Char(','))) {
+        // "LastName, FirstName Name Name"
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        const auto split = QStringView(normalized).split(QLatin1Char(','));
+#else
+        const auto split = normalized.splitRef(QLatin1Char(','));
+#endif
+
+        Q_ASSERT(split.count() >= 2);
+
+        // "LastName"
+        auto last = split.first();
+        // "FirstName"
+        auto first = split.at(1);
+
+        return QString(first.front()) + last.front();
+    } else if (normalized.contains(QLatin1Char(' '))) {
         // "FirstName Name Name LastName" -> "FirstName" "Name" "Name" "LastName"
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         const auto split = QStringView(normalized).split(QLatin1Char(' '));
