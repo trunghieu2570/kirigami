@@ -59,7 +59,7 @@ QString NameUtils::initialsFromString(const QString &string)
         // "LastName"
         auto last = split.first();
         // "FirstName"
-        auto first = split.at(1);
+        auto first = split.at(1).trimmed();
 
         return QString(first.front()) + last.front();
     } else if (normalized.contains(QLatin1Char(' '))) {
