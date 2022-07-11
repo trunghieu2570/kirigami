@@ -112,8 +112,8 @@ Kirigami.Dialog {
         bottomPadding: contentBottomPadding
         leftPadding: contentLeftPadding
         rightPadding: contentRightPadding
-        
-        contentItem: Controls.Label {
+
+        contentItem: Kirigami.SelectableLabel {
             text: subtitle
             wrapMode: Controls.Label.Wrap
         }

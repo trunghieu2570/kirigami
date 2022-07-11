@@ -45,6 +45,7 @@ QQC2.TextArea {
 
     readOnly: true
     wrapMode: Text.WordWrap
+    textFormat: TextEdit.AutoText
     verticalAlignment: TextEdit.AlignTop
 
     Accessible.selectableText: true
