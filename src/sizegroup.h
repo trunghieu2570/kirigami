@@ -23,21 +23,6 @@ class SizeGroup : public QObject, public QQmlParserStatus
     Q_INTERFACES(QQmlParserStatus)
 
 public:
-    enum Mode {
-        None = 0, /// SizeGroup does nothing
-        Width = 1, /// SizeGroup syncs item widths
-        Height = 2, /// SizeGroup syncs item heights
-        Both = 3, /// SizeGroup syncs both item widths and heights
-    };
-    Q_ENUM(Mode)
-    Q_DECLARE_FLAGS(Modes, Mode)
-
-private:
-    Mode m_mode = None;
-    QList<QPointer<QQuickItem>> m_items;
-    QMap<QQuickItem *, QPair<QMetaObject::Connection, QMetaObject::Connection>> m_connections;
-
-public:
     /**
      * Which dimensions this SizeGroup should adjust
      */
@@ -49,6 +34,15 @@ public:
      */
     Q_PROPERTY(QQmlListProperty<QQuickItem> items READ items CONSTANT)
     QQmlListProperty<QQuickItem> items();
+
+    enum Mode {
+        None = 0, /// SizeGroup does nothing
+        Width = 1, /// SizeGroup syncs item widths
+        Height = 2, /// SizeGroup syncs item heights
+        Both = 3, /// SizeGroup syncs both item widths and heights
+    };
+    Q_ENUM(Mode)
+    Q_DECLARE_FLAGS(Modes, Mode)
 
     void adjustItems(Mode whatChanged);
     void connectItem(QQuickItem *item);
@@ -76,4 +70,8 @@ private:
     static QQuickItem *itemAt(QQmlListProperty<QQuickItem> *prop, qsizetype index);
 #endif
     static void clearItems(QQmlListProperty<QQuickItem> *prop);
+
+    Mode m_mode = None;
+    QList<QPointer<QQuickItem>> m_items;
+    QMap<QQuickItem *, QPair<QMetaObject::Connection, QMetaObject::Connection>> m_connections;
 };
