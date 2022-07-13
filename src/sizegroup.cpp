@@ -92,19 +92,11 @@ void SizeGroup::adjustItems(Mode whatChanged)
             continue;
         }
 
-        switch (m_mode) {
-        case Mode::Width:
+        if (m_mode & Mode::Width) {
             maxWidth = qMax(maxWidth, item->implicitWidth());
-            break;
-        case Mode::Height:
+        }
+        if (m_mode & Mode::Height) {
             maxHeight = qMax(maxHeight, item->implicitHeight());
-            break;
-        case Mode::Both:
-            maxWidth = qMax(maxWidth, item->implicitWidth());
-            maxHeight = qMax(maxHeight, item->implicitHeight());
-            break;
-        case Mode::None:
-            break;
         }
     }
 
@@ -117,19 +109,11 @@ void SizeGroup::adjustItems(Mode whatChanged)
             continue;
         }
 
-        switch (m_mode) {
-        case Mode::Width:
+        if (m_mode & Mode::Width) {
             QQmlProperty(item, QStringLiteral("Layout.preferredWidth"), qmlContext(item)).write(maxWidth);
-            break;
-        case Mode::Height:
+        }
+        if (m_mode & Mode::Height) {
             QQmlProperty(item, QStringLiteral("Layout.preferredHeight"), qmlContext(item)).write(maxHeight);
-            break;
-        case Mode::Both:
-            QQmlProperty(item, QStringLiteral("Layout.preferredWidth"), qmlContext(item)).write(maxWidth);
-            QQmlProperty(item, QStringLiteral("Layout.preferredHeight"), qmlContext(item)).write(maxHeight);
-            break;
-        case Mode::None:
-            break;
         }
     }
 }
