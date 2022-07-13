@@ -7,13 +7,11 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
 
 /**
- * This is the standard layout of a Chip.
- *
- * A component that can be used to display
- * predetermined options
+ * A compact element that represents an attribute, action or filter.
+ * Should be used in a group of multiples elements. e.g when displaying tags in a image viewer.
  *
  *  * @code
- * import org.kde.kirigami 2.4 as Kirigami
+ * import org.kde.kirigami 2.19 as Kirigami
  *
  * Flow {
  *     Repeater {
