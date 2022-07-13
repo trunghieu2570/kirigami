@@ -84,8 +84,8 @@ void SizeGroup::adjustItems(Mode whatChanged)
         return;
     }
 
-    qreal maxHeight = 0.0;
-    qreal maxWidth = 0.0;
+    m_maxWidth = 0.0;
+    m_maxHeight = 0.0;
 
     for (const auto &item : std::as_const(m_items)) {
         if (item == nullptr) {
@@ -93,12 +93,15 @@ void SizeGroup::adjustItems(Mode whatChanged)
         }
 
         if (m_mode & Mode::Width) {
-            maxWidth = qMax(maxWidth, item->implicitWidth());
+            m_maxWidth = qMax(m_maxWidth, item->implicitWidth());
         }
         if (m_mode & Mode::Height) {
-            maxHeight = qMax(maxHeight, item->implicitHeight());
+            m_maxHeight = qMax(m_maxHeight, item->implicitHeight());
         }
     }
+
+    Q_EMIT maxWidthChanged();
+    Q_EMIT maxHeightChanged();
 
     for (const auto &item : std::as_const(m_items)) {
         if (item == nullptr) {
@@ -110,10 +113,10 @@ void SizeGroup::adjustItems(Mode whatChanged)
         }
 
         if (m_mode & Mode::Width) {
-            QQmlProperty(item, QStringLiteral("Layout.preferredWidth"), qmlContext(item)).write(maxWidth);
+            QQmlProperty(item, QStringLiteral("Layout.preferredWidth"), qmlContext(item)).write(m_maxWidth);
         }
         if (m_mode & Mode::Height) {
-            QQmlProperty(item, QStringLiteral("Layout.preferredHeight"), qmlContext(item)).write(maxHeight);
+            QQmlProperty(item, QStringLiteral("Layout.preferredHeight"), qmlContext(item)).write(m_maxHeight);
         }
     }
 }

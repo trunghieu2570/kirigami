@@ -30,6 +30,22 @@ public:
     Q_SIGNAL void modeChanged();
 
     /**
+     * Width of the widest item in a group.
+     *
+     * Only updated when the mode is set to either Width or Both. Defaults to 0.
+     */
+    Q_PROPERTY(qreal maxWidth MEMBER m_maxWidth NOTIFY maxWidthChanged)
+    Q_SIGNAL void maxWidthChanged();
+
+    /**
+     * Height of the tallest item in a group.
+     *
+     * Only updated when the mode is set to either Height or Both. Defaults to 0.
+     */
+    Q_PROPERTY(qreal maxHeight MEMBER m_maxHeight NOTIFY maxHeightChanged)
+    Q_SIGNAL void maxHeightChanged();
+
+    /**
      * Which items this SizeGroup should adjust
      */
     Q_PROPERTY(QQmlListProperty<QQuickItem> items READ items CONSTANT)
@@ -72,6 +88,8 @@ private:
     static void clearItems(QQmlListProperty<QQuickItem> *prop);
 
     Mode m_mode = None;
+    qreal m_maxWidth = 0.0;
+    qreal m_maxHeight = 0.0;
     QList<QPointer<QQuickItem>> m_items;
     QMap<QQuickItem *, QPair<QMetaObject::Connection, QMetaObject::Connection>> m_connections;
 };
