@@ -20,6 +20,10 @@
 class SizeGroup : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
+    Q_PROPERTY(Modes mode READ mode WRITE setMode NOTIFY modeChanged)
+    Q_PROPERTY(qreal maxWidth MEMBER m_maxWidth NOTIFY maxWidthChanged REVISION 21)
+    Q_PROPERTY(qreal maxHeight MEMBER m_maxHeight NOTIFY maxHeightChanged REVISION 21)
+    Q_PROPERTY(QQmlListProperty<QQuickItem> items READ items CONSTANT)
     Q_INTERFACES(QQmlParserStatus)
 
 public:
@@ -29,29 +33,19 @@ public:
         Height = 2, /// SizeGroup syncs item heights
         Both = 3, /// SizeGroup syncs both item widths and heights
     };
-    Q_ENUM(Mode)
     Q_DECLARE_FLAGS(Modes, Mode)
+    Q_FLAG(Modes)
 
-private:
-    Mode m_mode = None;
-    QList<QPointer<QQuickItem>> m_items;
-    QMap<QQuickItem *, QPair<QMetaObject::Connection, QMetaObject::Connection>> m_connections;
-
-public:
     /**
      * Which dimensions this SizeGroup should adjust
      */
-    Q_PROPERTY(Mode mode MEMBER m_mode NOTIFY modeChanged)
-    Q_SIGNAL void modeChanged();
+    Modes mode() const;
+    void setMode(Modes mode);
 
     /**
      * Which items this SizeGroup should adjust
      */
-    Q_PROPERTY(QQmlListProperty<QQuickItem> items READ items CONSTANT)
     QQmlListProperty<QQuickItem> items();
-
-    void adjustItems(Mode whatChanged);
-    void connectItem(QQuickItem *item);
 
     /**
      * Forces the SizeGroup to relayout items.
@@ -66,7 +60,33 @@ public:
     }
     void componentComplete() override;
 
+Q_SIGNALS:
+    void modeChanged();
+
+    /**
+     * Width of the widest item in a group.
+     *
+     * Only updated when the mode is set to either Width or Both. Defaults to 0.
+     *
+     * @since 5.97
+     */
+    Q_REVISION(21) void maxWidthChanged();
+
+    /**
+     * Height of the tallest item in a group.
+     *
+     * Only updated when the mode is set to either Height or Both. Defaults to 0.
+     *
+     * @since 5.97
+     */
+    Q_REVISION(21) void maxHeightChanged();
+
 private:
+    void connectItem(QQuickItem *item);
+    void disconnectItem(QQuickItem *item);
+    void resetItem(QQuickItem *item, Modes forMode);
+    void adjustItems(Modes whatChanged);
+
     static void appendItem(QQmlListProperty<QQuickItem> *prop, QQuickItem *value);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     static int itemCount(QQmlListProperty<QQuickItem> *prop);
@@ -76,4 +96,10 @@ private:
     static QQuickItem *itemAt(QQmlListProperty<QQuickItem> *prop, qsizetype index);
 #endif
     static void clearItems(QQmlListProperty<QQuickItem> *prop);
+
+    Modes m_mode = None;
+    qreal m_maxWidth = 0.0;
+    qreal m_maxHeight = 0.0;
+    QList<QPointer<QQuickItem>> m_items;
+    QMap<QQuickItem *, QPair<QMetaObject::Connection, QMetaObject::Connection>> m_connections;
 };
