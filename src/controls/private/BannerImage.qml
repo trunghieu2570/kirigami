@@ -67,6 +67,9 @@ Kirigami.ShadowedImage {
                                   source.toString().length === 0 && // QUrl
                                   !titleIcon                        // QVariant hanled by Kirigami.Icon
 
+    onTitleAlignmentChanged: {
+        titleLayout.implicitWidthChanged()
+    }
     fillMode: Image.PreserveAspectCrop
     asynchronous: true
 
