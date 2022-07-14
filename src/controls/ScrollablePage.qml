@@ -6,7 +6,9 @@
 
 import QtQuick 2.15
 import QtQuick.Templates 2.15 as T
+import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
+import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.19
 import org.kde.kirigami.templates 2.2 as KT
@@ -70,40 +72,44 @@ Page {
      * This signals the application logic to start its refresh procedure.
      * The application itself will have to set back this property to false when done.
      */
-    property alias refreshing: scrollView.refreshing
+    property bool refreshing: false
 
     /**
      * \property bool ScrollablePage::supportsRefreshing
      * If true the list supports the "pull down to refresh" behavior.
      * By default it is false.
      */
-    property alias supportsRefreshing: scrollView.supportsRefreshing
+    property bool supportsRefreshing: false
 
     /**
      * \property QtQuick.Flickable ScrollablePage::flickable
      * The main Flickable item of this page.
      */
-    property alias flickable: scrollView.flickableItem
+    readonly property Flickable flickable: itemsParent.flickable
 
     /**
      * \property Qt.ScrollBarPolicy ScrollablePage::verticalScrollBarPolicy
      * The vertical scrollbar policy.
      */
-    property alias verticalScrollBarPolicy: scrollView.verticalScrollBarPolicy
+    property int verticalScrollBarPolicy
 
     /**
      * \property Qt.ScrollBarPolicy ScrollablePage::horizontalScrollBarPolicy
      * The horizontal scrollbar policy.
      */
-    property alias horizontalScrollBarPolicy: scrollView.horizontalScrollBarPolicy
+    property int horizontalScrollBarPolicy: QQC2.ScrollBar.AlwaysOff
+
+    default property alias scrollablePageData: itemsParent.data
+    property alias scrollablePageChildren: itemsParent.children
 
     /**
-     * The main content Item of this page.
-     * In the case of a ListView or GridView, both contentItem and flickable
-     * will be a pointer to the ListView (or GridView).
-     * @note This can't be contentItem as Page's contentItem is final.
+     * @deprecated here for compatibility, will be removed in next Frameworks release
      */
-    default property QtObject mainItem
+    property QtObject mainItem
+    onMainItemChanged: {
+        print("Warning: the mainItem property is deprecated");
+        scrollablePageData.push(mainItem);
+    }
 
     /**
      * If true, and if flickable is an item view, like a ListView or
@@ -114,24 +120,48 @@ Page {
      */
     property bool keyboardNavigationEnabled: true
 
-    contentHeight: root.flickable.contentHeight
-    implicitHeight: ((header && header.visible) ? header.implicitHeight : 0) + ((footer && footer.visible) ? footer.implicitHeight : 0) + contentHeight + topPadding + bottomPadding
-    implicitWidth: root.flickable.contentItem ? root.flickable.contentItem.implicitWidth : contentItem.implicitWidth + leftPadding + rightPadding
+    contentHeight: flickable ? flickable.contentHeight : 0
+    implicitHeight: {
+        let height = contentHeight + topPadding + bottomPadding;
+        if (header && header.visible) {
+            height += header.implicitHeight;
+        }
+        if (footer && footer.visible) {
+            height += footer.implicitHeight;
+        }
+        return height;
+    }
+
+    implicitWidth: {
+        let width = 0;
+        if (flickable) {
+            if (flickable.contentItem) {
+                return flickable.contentItem.implicitWidth;
+            } else {
+                return contentItem.implicitWidth + leftPadding + rightPadding;
+            }
+        } else {
+            return 0;
+        }
+    }
 
     Theme.inherit: false
     Theme.colorSet: flickable && flickable.hasOwnProperty("model") ? Theme.View : Theme.Window
 
-    clip: true
-    contentItem: RefreshableScrollView {
+    Keys.forwardTo: {
+        if (root.keyboardNavigationEnabled && root.flickable) {
+            if (("currentItem" in root.flickable) && root.flickable.currentItem) {
+                return [ root.flickable.currentItem, root.flickable ];
+            } else {
+                return [ root.flickable ];
+            }
+        } else {
+            return [];
+        }
+    }
+
+    contentItem: QQC2.ScrollView {
         id: scrollView
-        //NOTE: here to not expose it to public api
-        property QtObject oldMainItem
-        page: root
-        clip: true
-        topPadding: contentItem === flickableItem ? 0 : root.topPadding
-        leftPadding: root.leftPadding
-        rightPadding: root.rightPadding
-        bottomPadding: contentItem === flickableItem ? 0 : root.bottomPadding
         anchors {
             top: (root.header && root.header.visible)
                     ? root.header.bottom
@@ -142,38 +172,168 @@ Page {
             bottom: (root.footer && root.footer.visible) ? root.footer.top : parent.bottom
             left: parent.left
             right: parent.right
+            topMargin: root.refreshing ? busyIndicatorLoader.height : 0
+            Behavior on topMargin {
+                NumberAnimation {
+                    easing.type: Easing.InOutQuad
+                    duration: Units.longDuration
+                }
+            }
         }
+        QQC2.ScrollBar.horizontal.policy: root.horizontalScrollBarPolicy
+        QQC2.ScrollBar.vertical.policy: root.verticalScrollBarPolicy
     }
 
-    anchors.topMargin: 0
-
-    Keys.forwardTo: root.keyboardNavigationEnabled && root.flickable
-                        ? (("currentItem" in root.flickable) && root.flickable.currentItem ?
-                           [ root.flickable.currentItem, root.flickable ] : [ root.flickable ])
-                        : []
-
-    //HACK to get the mainItem as the last one, all the other eventual items as an overlay
-    //no idea if is the way the user expects
-    onMainItemChanged: {
-        if (mainItem instanceof Item) {
-            scrollView.contentItem = mainItem
-            mainItem.focus = true
-        } else if (mainItem instanceof T.Drawer) {
-            //don't try to reparent drawers
-            return;
-        } else if (mainItem instanceof KT.OverlaySheet) {
-            //reparent sheets
-            if (mainItem.parent === root || mainItem.parent === null) {
-                mainItem.parent = root;
+    data: [
+        // Has to be a MouseArea that accepts events otherwise touch events on Wayland will get lost
+        MouseArea {
+            id: scrollingArea
+            width: itemsParent.flickable.width
+            height: Math.max(root.flickable.height, implicitHeight)
+            implicitHeight: {
+                let impl = 0;
+                for (let i in itemsParent.visibleChildren) {
+                    let child = itemsParent.visibleChildren[i];
+                    impl = Math.max(impl, child.implicitHeight);
+                }
+                return impl + itemsParent.anchors.topMargin + itemsParent.anchors.bottomMargin;
             }
-            root.data.push(mainItem);
-            return;
+            Item {
+                id: itemsParent
+                property Flickable flickable
+                anchors {
+                    fill: parent
+                    leftMargin: root.leftPadding
+                    topMargin: root.topPadding
+                    rightMargin: root.rightPadding
+                    bottomMargin: root.bottomPadding
+                }
+                onChildrenChanged: {
+                    let child = children[children.length - 1];
+                    if (child instanceof QQC2.ScrollView) {
+                        print("Warning: it's not supported to have ScrollViews inside a ScrollablePage")
+                    }
+                }
+            }
+            Binding {
+                target: root.flickable
+                property: "bottomMargin"
+                value: root.bottomPadding
+            }
+        },
+
+        Loader {
+            id: busyIndicatorLoader
+            z: 99
+            y: root.flickable.verticalLayoutDirection === ListView.BottomToTop
+                ? -root.flickable.contentY + root.flickable.originY + height
+                : -root.flickable.contentY + root.flickable.originY - height + scrollView.y
+            width: root.flickable.width
+            height: Units.gridUnit * 4
+            active: root.supportsRefreshing
+
+            sourceComponent: Item {
+                id: busyIndicatorFrame
+
+                QQC2.BusyIndicator {
+                    id: busyIndicator
+                    z: 1
+                    anchors.centerIn: parent
+                    running: root.refreshing
+                    visible: root.refreshing
+                    //Android busywidget QQC seems to be broken at custom sizes
+                }
+                Rectangle {
+                    id: spinnerProgress
+                    anchors {
+                        fill: busyIndicator
+                        margins: Math.ceil(Units.smallSpacing)
+                    }
+                    radius: width
+                    visible: supportsRefreshing && !refreshing && progress > 0
+                    color: "transparent"
+                    opacity: 0.8
+                    border.color: Theme.backgroundColor
+                    border.width: Math.ceil(Units.smallSpacing)
+                    property real progress: supportsRefreshing && !refreshing ? (busyIndicatorLoader.y/busyIndicatorFrame.height) : 0
+                }
+                ConicalGradient {
+                    source: spinnerProgress
+                    visible: spinnerProgress.visible
+                    anchors.fill: spinnerProgress
+                    gradient: Gradient {
+                        GradientStop { position: 0.00; color: Theme.highlightColor }
+                        GradientStop { position: spinnerProgress.progress; color: Theme.highlightColor }
+                        GradientStop { position: spinnerProgress.progress + 0.01; color: "transparent" }
+                        GradientStop { position: 1.00; color: "transparent" }
+                    }
+                }
+
+                Connections {
+                    target: busyIndicatorLoader
+                    function onYChanged() {
+                        if (!supportsRefreshing) {
+                            return;
+                        }
+
+                        if (!root.refreshing && busyIndicatorLoader.y > busyIndicatorFrame.height/2 + topPadding) {
+                            refreshTriggerTimer.running = true;
+                        } else {
+                            refreshTriggerTimer.running = false;
+                        }
+                    }
+                }
+                Timer {
+                    id: refreshTriggerTimer
+                    interval: 500
+                    onTriggered: {
+                        if (!root.refreshing && busyIndicatorLoader.y > busyIndicatorFrame.height/2 + topPadding) {
+                            root.refreshing = true;
+                        }
+                    }
+                }
+            }
+        }
+    ]
+
+    Component.onCompleted: {
+        for (let i in itemsParent.data) {
+            let child = itemsParent.data[i];
+            if (child instanceof Flickable) {
+                // If there were more flickable children, take the last one, as behavior compatibility
+                // with old internal ScrollView
+                child.activeFocusOnTab = true;
+                itemsParent.flickable = child;
+                child.keyNavigationEnabled = true;
+                child.keyNavigationWraps = false;
+            } else if (child instanceof Item) {
+                child.anchors.left = itemsParent.left;
+                child.anchors.right = itemsParent.right;
+            } else if (child instanceof KT.OverlaySheet) {
+                // Reparent sheets, needs to be done before Component.onCompleted
+                if (child.parent === itemsParent || child.parent === null) {
+                    child.parent = root;
+                }
+            }
         }
 
-        if (scrollView.oldMainItem && scrollView.oldMainItem instanceof Item
-            && (typeof applicationWindow === 'undefined'|| scrollView.oldMainItem.parent !== applicationWindow().overlay)) {
-            scrollView.oldMainItem.parent = overlay
+        if (itemsParent.flickable) {
+            scrollView.contentItem = flickable;
+            flickable.parent = scrollView;
+            // The flickable needs focus only if the page didn't already explicitly set focus to some other control (eg a text field in the header)
+            Qt.callLater( () => {if (root.activeFocus) itemsParent.flickable.forceActiveFocus()});
+            // Some existing code incorrectly uses anchors
+            flickable.anchors.fill = undefined;
+            flickable.anchors.left = undefined;
+            flickable.anchors.right = undefined;
+            flickable.anchors.top = undefined;
+            flickable.anchors.bottom = undefined;
+        } else {
+            itemsParent.flickable = scrollView.contentItem;
+            scrollingArea.parent = itemsParent.flickable.contentItem;
+            itemsParent.flickable.contentHeight = Qt.binding(() => { return scrollingArea.implicitHeight - itemsParent.flickable.topMargin - itemsParent.flickable.bottomMargin });
+            itemsParent.flickable.contentWidth = Qt.binding(() => { return scrollingArea.implicitWidth });
         }
-        scrollView.oldMainItem = mainItem
+        itemsParent.flickable.flickableDirection = Flickable.VerticalFlick;
     }
 }
