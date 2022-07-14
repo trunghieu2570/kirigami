@@ -99,7 +99,8 @@ Kirigami.ShadowedImage {
     Layout.minimumHeight: titleLayout.implicitHeight > 0 ? titleLayout.implicitHeight + Kirigami.Units.smallSpacing * 2 : 0
 
     onTitleAlignmentChanged: {
-        titleLayout.implicitWidthChanged()
+        Qt.callLater(titleLayout.implicitWidthChanged)
+        Qt.callLater(titleLayout.implicitHeightChanged)
     }
     fillMode: Image.PreserveAspectCrop
     asynchronous: true
