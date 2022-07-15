@@ -290,16 +290,16 @@ void Units::setShortDuration(int duration)
 
 int Units::veryShortDuration() const
 {
-    return d->veryLongDuration;
+    return d->veryShortDuration;
 }
 
 void Units::setVeryShortDuration(int duration)
 {
-    if (d->veryLongDuration == duration) {
+    if (d->veryShortDuration == duration) {
         return;
     }
 
-    d->veryLongDuration = duration;
+    d->veryShortDuration = duration;
     Q_EMIT veryShortDurationChanged();
 }
 
