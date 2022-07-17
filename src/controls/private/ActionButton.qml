@@ -381,7 +381,7 @@ Item {
                         anchors {
                             left: parent.left
                             verticalCenter: parent.verticalCenter
-                            margins: Units.smallSpacing * 2
+                            margins: root.action ? Units.smallSpacing * 2 : Units.smallSpacing
                         }
                     }
                 }
@@ -427,7 +427,7 @@ Item {
                         anchors {
                             right: parent.right
                             verticalCenter: parent.verticalCenter
-                            margins: Units.smallSpacing * 2
+                            margins: root.action ? Units.smallSpacing * 2 : Units.smallSpacing
                         }
                     }
                 }
