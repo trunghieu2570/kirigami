@@ -194,7 +194,11 @@ Page {
                 let impl = 0;
                 for (let i in itemsParent.visibleChildren) {
                     let child = itemsParent.visibleChildren[i];
-                    impl = Math.max(impl, child.implicitHeight);
+                    if (child.implicitHeight <= 0) {
+                        impl = Math.max(impl, child.height);
+                    } else {
+                        impl = Math.max(impl, child.implicitHeight);
+                    }
                 }
                 return impl + itemsParent.anchors.topMargin + itemsParent.anchors.bottomMargin;
             }
