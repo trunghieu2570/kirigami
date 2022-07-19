@@ -7,8 +7,8 @@
 import QtQuick 2.1
 import QtQuick.Layouts 1.0
 import org.kde.kirigami 2.4
-//NOTE: This must stay at 2.0 until KF6 due to retrocompatibility of the "icon" property
-import QtQuick.Templates 2.0 as T2
+//NOTE: This must stay at 2.2 until KF6 due to retrocompatibility of the "icon" property
+import QtQuick.Templates 2.2 as T2
 import QtQuick.Templates 2.4 as QQC2
 
 /**
