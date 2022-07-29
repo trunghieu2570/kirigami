@@ -705,6 +705,9 @@ QtObject {
 
                         Layout.alignment: Qt.AlignTop
 
+                        // HACK: Hide unnecessary horizontal scrollbar (https://bugreports.qt.io/browse/QTBUG-83890)
+                        QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+
                         Behavior on animatedContentHeight {
                             NumberAnimation {
                                 duration: Units.shortDuration
