@@ -375,6 +375,7 @@ QImage Icon::findIcon(const QSize &size)
                     QQuickTextureFactory *textureFactory = response->textureFactory();
                     if (textureFactory) {
                         m_loadedImage = textureFactory->image();
+                        delete textureFactory;
                     }
                     if (m_loadedImage.isNull()) {
                         // broken image from data, inform the user of this with some useful broken-image thing...
@@ -386,6 +387,7 @@ QImage Icon::findIcon(const QSize &size)
                     }
                     polish();
                 }
+                response->deleteLater();
             });
             // Temporary icon while we wait for the real image to load...
             const QIcon icon = QIcon::fromTheme(m_placeholder);
