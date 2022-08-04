@@ -12,10 +12,15 @@ import org.kde.kirigami 2.18 as Kirigami
 
 /**
  * This is the base class for Form layouts conforming to the
- * Kirigami Human interface guidelines. The layout will
- * be divided in two columns: on the right there will be a column
- * of fields, on the left their labels specified in the FormData attached
- * property.
+ * Kirigami Human Interface Guidelines. The layout consists
+ * of two columns: the left column contains only right-aligned
+ * labels provided by a Kirigami.FormData attached property,
+ * the right column contains left-aligned child types.
+ *
+ * Child types can be sectioned using an
+ * <a href="https://doc.qt.io/qt-6/qml-qtquick-item.html">Item</a>
+ * or org::kde::kirigami::Separator with a Kirigami.FormData
+ * attached property, see FormLayoutAttached::isSection for details.
  *
  * Example:
  * @code
@@ -35,6 +40,7 @@ import org.kde.kirigami 2.18 as Kirigami
  *    }
  * }
  * @endcode
+ * @see FormLayoutAttached
  * @inherit QtQuick.Item
  * @since 2.3
  */
@@ -42,14 +48,16 @@ Item {
     id: root
 
     /**
-     * wideMode: bool
-     * If true the layout will be optimized for a wide screen, such as
+     * If true, the layout will be optimized for a wide screen, such as
      * a desktop machine (the labels will be on a left column,
      * the fields on a right column beside it), if false (such as on a phone)
      * everything is laid out in a single column.
-     * by default this will be based on whether the application is
-     * wide enough for the layout of being in such mode.
-     * It can be overridden by reassigning the property
+     *
+     * By default this property automatically adjusts the layout
+     * if there is enough screen space.
+     *
+     * Set this to true for a convergent design,
+     * set this to false for a mobile-only design.
      */
     property bool wideMode: width >= lay.wideImplicitWidth
 
@@ -63,14 +71,12 @@ Item {
     }
 
     /**
-     * twinFormLayouts: list<FormLayout>
      * If for some implementation reason multiple FormLayouts have to appear
      * on the same page, they can have each other in twinFormLayouts,
-     * so they will vertically align each other perfectly
+     * so they will vertically align with each other perfectly
      * @since 5.53
      */
-    //should be list<FormLayout> but we can't have a recursive declaration
-    property list<Item> twinFormLayouts
+    property list<Item> twinFormLayouts //should be list<FormLayout> but we can't have a recursive declaration
 
     Layout.fillWidth: true
 
