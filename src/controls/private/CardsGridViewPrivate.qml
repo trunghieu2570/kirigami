@@ -14,13 +14,37 @@ GridView {
     id: root
 
     property Component _delegateComponent
+
+
+    QtObject {
+        id: calculations
+
+        // initialize array so length property can be read
+        property var leftMargins: []
+        readonly property int delegateWidth: Math.min(cellWidth, maximumColumnWidth) - Kirigami.Units.largeSpacing * 2
+    }
+
     delegate: Kirigami.DelegateRecycler {
-        width: Math.min(root.cellWidth, root.maximumColumnWidth) - Kirigami.Units.largeSpacing * 2
+        width: calculations.delegateWidth
 
         //in grid views align the cells in the middle
         anchors.left: parent.left
-        anchors.leftMargin: (width + Kirigami.Units.largeSpacing*2) * (index % root.columns ) + root.width/2 - (root.columns*(width + Kirigami.Units.largeSpacing*2))/2
 
         sourceComponent: root._delegateComponent
+        onWidthChanged: {
+            let columnIndex = index % root.columns
+            if (index < root.columns) {
+                // calulate left margin per column
+                calculations.leftMargins[columnIndex] = (width + Kirigami.Units.largeSpacing * 2)
+                        * (columnIndex) + root.width / 2
+                        - (root.columns * (width + Kirigami.Units.largeSpacing * 2)) / 2;
+            }
+            anchors.leftMargin = calculations.leftMargins[columnIndex];
+        }
+    }
+    onWidthChanged: {
+        if (calculations.leftMargins.length !== root.columns) {
+            calculations.leftMargins = new Array(root.columns);
+        }
     }
 }
