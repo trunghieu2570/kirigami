@@ -46,14 +46,13 @@ Controls.TextField
     id: root
 
     /**
-     * This property holds a shortcut sequence that will focus the text field.
-     *
+     * @brief This property holds a shortcut sequence that will focus the text field.
      * @since 5.56
      */
     property string focusSequence
 
     /**
-     * This property holds a list of actions that will be displayed on the left side of the text field.
+     * @brief This property holds a list of actions that will be displayed on the left side of the text field.
      *
      * By default this list is empty.
      *
@@ -62,7 +61,7 @@ Controls.TextField
     property list<QtObject> leftActions
 
     /**
-     * This property holds a list of actions that will be displayed on the right side of the text field.
+     * @brief This property holds a list of actions that will be displayed on the right side of the text field.
      *
      * By default this list is empty.
      *
