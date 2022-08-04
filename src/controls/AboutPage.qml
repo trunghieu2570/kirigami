@@ -11,7 +11,7 @@ import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.19
 
 /**
- * An about page that is ready to integrate in a kirigami app.
+ * @brief An "About" page that is ready to integrate in a Kirigami app.
  *
  * Allows to have a page that will show the copyright notice of the application
  * together with the contributors and some information of which platform it's
@@ -19,12 +19,13 @@ import org.kde.kirigami 2.19
  *
  * @since 5.52
  * @since org.kde.kirigami 2.6
+ * @inherit org::kde::kirigami::ScrollablePage
  */
 ScrollablePage
 {
     id: page
     /**
-     * This property holds an object with the same shape as KAboutData.
+     * @brief This property holds an object with the same shape as KAboutData.
      *
      * For example:
      * @code{json}
@@ -61,13 +62,19 @@ ScrollablePage
        @endcode
      *
      * @see KAboutData
+     * @see org::kde::kirigami::AboutItem::aboutData
+     * @property KAboutData aboutData
      */
     property alias aboutData: aboutItem.aboutData
 
     /**
-     * This property holds a link to a "Get Involved" page. By default link to
+     * @brief This property holds a link to a "Get Involved" page.
+     *
+     * By default, this links to
      * "https://community.kde.org/Get_Involved" when your application application
      * id starts with "org.kde.", otherwise is empty.
+     *
+     * @property url getInvolvedUrl
      */
     property alias getInvolvedUrl: aboutItem.getInvolvedUrl
 
