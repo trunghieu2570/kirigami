@@ -9,7 +9,7 @@ import "private"
 import "templates" as T
 
 /**
- * An item delegate for the primitive ListView component.
+ * @brief An item delegate for the primitive ListView component.
  *
  * It's intended to make all listviews look coherent.
  *

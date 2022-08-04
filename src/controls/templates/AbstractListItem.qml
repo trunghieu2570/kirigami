@@ -7,12 +7,12 @@
 import QtQuick 2.1
 import QtQuick.Layouts 1.0
 import org.kde.kirigami 2.4
-//NOTE: This must stay at 2.2 until KF6 due to retrocompatibility of the "icon" property
+// NOTE: This must stay at 2.2 until KF6 due to retrocompatibility of the "icon" property
 import QtQuick.Templates 2.2 as T2
 import QtQuick.Templates 2.4 as QQC2
 
 /**
- * An item delegate for the primitive ListView component.
+ * @brief An item delegate for the primitive ListView component.
  *
  * It's intended to make all listviews look coherent.
  *
@@ -22,82 +22,97 @@ T2.ItemDelegate {
     id: listItem
 
     /**
-     * @deprecated
-     * Holds if the item emits signals related to mouse interaction.
+     * @brief Holds if the item emits signals related to mouse interaction.
+     *
      * The default value is false.
+     *
+     * @deprecated This will be removed in KF6.
      */
-    property bool supportsMouseEvents: hoverEnabled // TODO KF6 remove
+    property bool supportsMouseEvents: hoverEnabled
 
     /**
-     * @var bool containsMouse
-     * True when the user hovers the mouse over the list item
-     * NOTE: on mobile touch devices this will be true only when pressed is also true
+     * @brief True when the user hovers the cursor over the list item.
+     *
+     * On mobile touch devices this will be true only when pressed
+     *
+     * @see QtQuick::Templates::ItemDelegate::hovered
+     * @deprecated This will be removed in KF6.
+     * @property bool containsMouse
      */
-    property alias containsMouse: listItem.hovered // TODO KF6 remove.
+    property alias containsMouse: listItem.hovered
 
     /**
-     * If true the background of the list items will be alternating between two
+     * @brief If true the background of the list items will be alternating between two
      * colors, helping readability with multiple column views.
+     *
      * Use it only when implementing a view which shows data visually in multiple columns
-     * @ since 2.7
+     *
+     * @since 2.7
      */
     property bool alternatingBackground: false
 
     /**
-     * If true the item will be a delegate for a section, so will look like a
+     * @brief If true the item will be a delegate for a section, so will look like a
      * "title" for the items under it.
      */
     property bool sectionDelegate: false
 
     /**
-     * True if the separator between items is visible
+     * @brief True if the separator between items is visible.
+     *
      * default: true
      */
     property bool separatorVisible: true
 
     /**
-     * Color for the text in the item
+     * @brief Color for the text in the item.
+     *
      * It is advised to leave the default value (Theme.textColor)
      *
-     * Note: if custom text elements are inserted in an AbstractListItem,
+     * If custom text elements are inserted in an AbstractListItem,
      * their color property will have to be manually bound with this property
      */
     property color textColor: Theme.textColor
 
     /**
-     * Color for the background of the item
+     * @brief Color for the background of the item.
+     *
      * It is advised to leave the default value (Theme.viewBackgroundColor)
      */
     property color backgroundColor: "transparent"
 
     /**
-     * The background color to use if alternatingBackground is true.
+     * @brief The background color to use if alternatingBackground is true.
+     *
      * It is advised to leave the default.
+     *
      * @since 2.7
      */
     property color alternateBackgroundColor: Theme.alternateBackgroundColor
 
     /**
-     * Color for the text in the item when pressed or selected
+     * @brief Color for the text in the item when pressed or selected.
+     *
      * It is advised to leave the default value (Theme.highlightedTextColor)
      *
-     * Note: if custom text elements are inserted in an AbstractListItem,
+     * If custom text elements are inserted in an AbstractListItem,
      * their color property will have to be manually bound with this property
      */
     property color activeTextColor: Theme.highlightedTextColor
 
     /**
-     * Color for the background of the item when pressed or selected
+     * @brief Color for the background of the item when pressed or selected.
+     *
      * It is advised to leave the default value (Theme.highlightColor)
      */
     property color activeBackgroundColor: Theme.highlightColor
 
     default property alias _default: listItem.contentItem
 
-    // Overrides action property of newer import versions which we can't use
+    // NOTE: Overrides action property of newer import versions which we can't use
     /**
-     * This property holds the item action.
-     * \property QtQuick.Controls.Action AbstractListItem::action
+     * @brief This property holds the item action.
+     * @property QtQuick::Controls::Action action
      */
     property QQC2.Action action
 
