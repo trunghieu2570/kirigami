@@ -9,9 +9,9 @@ import "templates/private"
 import org.kde.kirigami 2.4 as Kirigami
 
 /**
- * An item that provides the features of ApplicationWindow without the window itself.
- * This allows embedding into a larger application.
+ * @brief An item that provides the features of ApplicationWindow without the window itself.
  *
+ * This allows embedding into a larger application.
  * It's based around the PageRow component that allows adding/removing of pages.
  *
  * Example usage:
@@ -72,14 +72,11 @@ import org.kde.kirigami 2.4 as Kirigami
  *     }
  * }
  * @endcode
- *
 */
 AbstractApplicationItem {
     id: root
 
     /**
-     * @property QtQuick.StackView ApplicationItem::pageStack
-     *
      * @brief This property holds the PageRow used to allocate the pages and
      * manage the transitions between them.
      *
@@ -89,6 +86,7 @@ AbstractApplicationItem {
      * fullscreen column, a tablet device would have many tiled columns.
      *
      * @warning This property is readonly.
+     * @property QtQuick.StackView ApplicationItem::pageStack
      */
     property alias pageStack: __pageStack // TODO KF6 make readonly
 
@@ -105,7 +103,7 @@ AbstractApplicationItem {
         id: __pageStack
         anchors {
             fill: parent
-            //HACK: workaround a bug in android iOS keyboard management
+            // HACK: workaround a bug in android iOS keyboard management
             bottomMargin: ((Qt.platform.os === "android" || Qt.platform.os === "ios") || !Qt.inputMethod.visible) ? 0 : Qt.inputMethod.keyboardRectangle.height
             onBottomMarginChanged: {
                 if (bottomMargin > 0) {
@@ -113,11 +111,11 @@ AbstractApplicationItem {
                 }
             }
         }
-        //FIXME
+        // FIXME
         onCurrentIndexChanged: root.reachableMode = false;
 
         function goBack() {
-            //NOTE: drawers are handling the back button by themselves
+            // NOTE: drawers are handling the back button by themselves
             const backEvent = {accepted: false}
             if (root.pageStack.currentIndex >= 1) {
                 root.pageStack.currentItem.backRequested(backEvent);
