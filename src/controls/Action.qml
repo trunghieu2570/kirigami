@@ -7,19 +7,17 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.4 as Controls
 import "private"
-
 import org.kde.kirigami 2.14 as Kirigami
 
 /**
- * An item that represents an abstract Action
- *
+ * @brief An item that represents an abstract Action
  * @inherit QtQuick.Controls.Action
  */
 Controls.Action {
     id: root
 
     /**
-     * This property holds whether the graphic representation of the action
+     * @brief This property holds whether the graphic representation of the action
      * is supposed to be visible.
      *
      * It's up to the action representation to honor this property.
@@ -29,25 +27,24 @@ Controls.Action {
     property bool visible: true
 
     /**
-     * This property holds the icon name for the action. This will pick the icon with the given name from the current theme.
-     *
-     * @property string Action::iconName
+     * @brief This property holds the icon name for the action. This will pick the icon with the given name from the current theme.
      * @deprecated Use icon.name instead.
+     * @property string iconName
      */
     property alias iconName: root.icon.name
 
     /**
-     * This property holds an url to an icon file or resource url for the action.
+     * @brief This property holds an url to an icon file or resource url for the action.
      *
      * By default this is an empty URL. Use this if you want a specific file rather than an icon from the theme
      *
-     * @property url Action::iconSource
      * @deprecated Use icon.name instead.
+     * @property url iconSource
      */
     property alias iconSource: root.icon.source
 
     /**
-     * This property holds the tooltip text to be shown when hovering the control bound to this
+     * @brief This property holds the tooltip text to be shown when hovering the control bound to this
      * action.
      *
      * @warning Not all controls support tooltips on all platforms.
@@ -55,23 +52,24 @@ Controls.Action {
     property string tooltip
 
     /**
-     * This property holds whether the action is a separator action.
+     * @brief This property holds whether the action is a separator action.
      *
      * The default value is `false`.
      */
     property bool separator: false
 
     /**
-     * This property holds whether the actions in globalDrawers and contextDrawers will
+     * @brief This property holds whether the actions in globalDrawers and contextDrawers will
      * become titles displaying the child actions as sub items.
      *
      * The default value is `false`.
+     *
      * @since 2.6
      */
     property bool expandible: false
 
     /**
-     * This property holds the parent action of this action.
+     * @brief This property holds the parent action of this action.
      */
     property Controls.Action parent
 
@@ -83,23 +81,21 @@ Controls.Action {
      * By default there is no display hint (`DisplayHint.NoPreference`).
      *
      * @note This property contains only preferences, implementations may choose to disregard them.
-     *
+     * @see org::kde::kirigami::DisplayHint
      * @since 2.12
      */
     property int displayHint: Kirigami.DisplayHint.NoPreference
 
     /**
-     * Helper function to check if a certain display hint has been set.
+     * @brief Helper function to check if a certain display hint has been set.
      *
      * This function is mostly convenience to enforce the mutual exclusivity of KeepVisible and AlwaysHide.
      *
      * @param hint The display hint to check if it is set.
-     *
-     * @return true if the hint was set for this action, false if not.
-     *
-     * @since 2.12
-     *
+     * @see org::kde::kirigami::DisplayHint
      * @deprecated since 2.14, Use DisplayHint.displayHintSet(action, hint) instead.
+     * @return true if the hint was set for this action, false if not.
+     * @since 2.12
      */
     function displayHintSet(hint) {
         print("Action::displayHintSet is deprecated, use DisplayHint.displayHintSet(action, hint)")
@@ -107,7 +103,7 @@ Controls.Action {
     }
 
     /**
-     * This property holds the component that should be preferred for displaying this Action.
+     * @brief This property holds the component that should be preferred for displaying this Action.
      *
      * This can be used to display custom components in the toolbar.
      *
@@ -117,7 +113,7 @@ Controls.Action {
     property Component displayComponent: null
 
     /**
-     * This property holds a list of child actions.
+     * @brief This property holds a list of child actions.
      *
      * This is useful for tree-like menus, such as the GlobalDrawer.
      *
@@ -132,7 +128,7 @@ Controls.Action {
      *    }
      * }
      * @endcode
-     * @property list<Action> Action::children
+     * @property list<Action> children
      */
     default property alias children: root.__children
 
@@ -150,9 +146,8 @@ Controls.Action {
     }
 
     /**
-     * This property holds the child actions that are visible.
-     *
-     * @property list<Action> Action::visibleChildren
+     * @brief This property holds the child actions that are visible.
+     * @property list<Action> visibleChildren
      */
     readonly property var visibleChildren: {
         let visible = [];
@@ -166,8 +161,8 @@ Controls.Action {
     }
 
     /**
-     * Hints for implementations using Actions indicating preferences about how to display the action.
-     *
+     * @brief Hints for implementations using Actions indicating preferences about how to display the action.
+     * @see org::kde::kirigami::DisplayHint
      * @deprecated since 2.14, use Kirigami.DisplayHint instead.
      */
     enum DisplayHint {
