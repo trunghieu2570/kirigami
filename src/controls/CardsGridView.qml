@@ -30,16 +30,17 @@ CardsGridViewPrivate {
     id: root
 
     /**
-     * Fill first row with columns even when there is not enough delegates
-     * to fully fill the row (width). When true it will automatically fill
-     * the row with columns, when false there will be as many columns as
-     * there are delegates when on enough space.
+     * @brief Should the view fill the (first) row with columns even when there is not enough space.
+     *
+     * Set this to true if you want to stop the view from filling the first row with columns,
+     * even when delegates can't even fill the first row.
+     *
      * default: true
      */
     property bool extraColumns: true
 
     /**
-     * This property holds the the number of columns the gridview has.
+     * @brief This property holds the the number of columns the gridview has.
      * @since 2.5
      */
     readonly property int columns: {
@@ -51,7 +52,7 @@ CardsGridViewPrivate {
     }
 
     /**
-     * This property holds the maximum number of columns.
+     * @brief This property holds the maximum number of columns.
      *
      * By default there is not limit.
      *
@@ -74,7 +75,7 @@ CardsGridViewPrivate {
     property int maximumColumnWidth: Kirigami.Units.gridUnit * 20
 
     /**
-     * This property holds the minimum width the columns may have.
+     * @brief This property holds the minimum width the columns may have.
      *
      * The cards will never become smaller than this size.
      *
@@ -92,8 +93,7 @@ CardsGridViewPrivate {
     cellHeight: Math.max(Kirigami.Units.gridUnit * 15, Math.min(cellWidth, maximumColumnWidth) / 1.2)
 
     /**
-     * This property holds the delegate of the CardsGridView.
-     *
+     * @brief This property holds the delegate of the CardsGridView.
      * @see QtQuick.ListView::delegate
      */
     default property alias delegate: root._delegateComponent
