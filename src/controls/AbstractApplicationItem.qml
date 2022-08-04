@@ -61,7 +61,7 @@ Item {
     id: root
 
     /**
-     * This property holds the stack used to allocate the pages and to manage the
+     * @brief This property holds the stack used to allocate the pages and to manage the
      * transitions between them.
      *
      * Put a container here, such as QtQuick.Controls.StackView.
@@ -108,12 +108,12 @@ Item {
     }
 
     /**
-     * This property exists for compatibility with Applicationwindow
+     * @brief This property exists for compatibility with Applicationwindow.
      */
     readonly property Item activeFocusItem: Window.activeFocusItem
 
     /**
-     * Shows a little passive notification at the bottom of the app window
+     * @brief Shows a little passive notification at the bottom of the app window
      * lasting for few seconds, with an optional action button.
      *
      * @param message The text message to be shown to the user.
@@ -133,22 +133,22 @@ Item {
     }
 
     /**
-     * This property holds the font for this item.
+     * @brief This property holds the font for this item.
      */
     property font font: Theme.defaultFont
 
     /**
-     * This property holds the palette for this item.
+     * @brief This property holds the palette for this item.
      */
     property var palette: Theme.palette
 
     /**
-     * This property holds the locale for this item.
+     * @brief This property holds the locale for this item.
      */
     property Locale locale
 
    /**
-    * Hide the passive notification, if any is shown
+    * @brief Hide the passive notification, if any is shown.
     */
     function hidePassiveNotification() {
         if(internal.__passiveNotification) {
@@ -156,18 +156,17 @@ Item {
         }
     }
 
-
     /**
+     * @brief Get application window object anywhere in the application.
      * @returns a pointer to this item.
-     *
-     * It can be used anywhere in the application.
      */
     function applicationWindow() {
         return root;
     }
 
     /**
-     * This property holds an item that can be used as a menuBar for the application.
+     * @brief This property holds an item that can be used as a menuBar for the application.
+     * @note This will be restricted to QQC2.MenuBar in KF6.
      */
     property Item menuBar // TODO KF6 restrict type to QQC2.MenuBar
 
@@ -184,14 +183,12 @@ Item {
             menuBar.position = T.DialogButtonBox.Footer
         }
         menuBar.width = Qt.binding(() => root.contentItem.width)
-        //FIXME: (root.header.height ?? 0) when we can depend from 5.15
+        // FIXME: (root.header.height ?? 0) when we can depend from 5.15
         menuBar.y = Qt.binding(() => -menuBar.height - (root.header.height ? root.header.height : 0))
     }
 
    /**
-    * \property org::kde:kirigami::ApplicationHeader header
-    *
-    * This property holds an item that can be used as a title for the application.
+    * @brief This property holds an item that can be used as a title for the application.
     *
     * Scrolling the main page will make it taller or shorter (through the point of going away).
     *
@@ -204,6 +201,9 @@ Item {
     * * Layout.maximumHeight: default is Units.gridUnit * 3
     *
     * To achieve a titlebar that stays completely fixed, just set the 3 sizes as the same.
+    *
+    * @note This will be restricted to Kirigami.ApplicationHeader in KF6.
+    * @property org::kde:kirigami::ApplicationHeader header
     */
     property Item header // TODO KF6 restrict the type to Kirigami.ApplicationHeader
 
@@ -224,7 +224,7 @@ Item {
     }
 
     /**
-     * This property holds an item that can be used as a footer for the application.
+     * @brief This property holds an item that can be used as a footer for the application.
      */
     property Item footer
     onFooterChanged: {
@@ -254,7 +254,8 @@ Item {
      * This property holds the drawer for global actions, that will be opened by
      * sliding from the left screen edge or by dragging the ActionButton to the right.
      *
-     * It is recommended to use the GlobalDrawer class here.
+     * @note It is recommended to use the GlobalDrawer class here.
+     * @property org::kde::kirigami::OverlayDrawer globalDrawer
      */
     property OverlayDrawer globalDrawer
 
@@ -262,7 +263,7 @@ Item {
      * This property holds whether the application is considered to be in "widescreen" mode,
      * such as on desktops or horizontal tablets.
      *
-     * Different styles can have their own logic for deciding this.
+     * @note Different styles can have their own logic for deciding this.
      */
     property bool wideScreen: width >= Units.gridUnit * 60
 
@@ -314,11 +315,13 @@ Item {
      *
      * When this page will be the current one, the context drawer will visualize
      * contextualActions defined as property in that page.
+     *
+     * @property org::kde::kirigami::OverlayDrawer contextDrawer
      */
     property OverlayDrawer contextDrawer
 
     /**
-     * This property holds whether the application is in reachable mode for single hand use.
+     * @brief This property holds whether the application is in reachable mode for single hand use.
      *
      * The whole content of the application is moved down the screen to be
      * reachable with the thumb. If wideScreen is true, or reachableModeEnabled is false,
@@ -327,7 +330,7 @@ Item {
     property bool reachableMode: false
 
     /**
-     * This property holds whether the application will go into reachable mode on pull down.
+     * @brief This property holds whether the application will go into reachable mode on pull down.
      */
     property bool reachableModeEnabled: true
 
@@ -352,14 +355,15 @@ Item {
     }
 
     /**
-     * \property list<Object> __data
-     *
-     * This property holds the list of all children of this item.
+     * @brief This property holds the list of all children of this item.
+     * @internal
+     * @property list<Object> __data
      */
     default property alias __data: contentItemRoot.data
 
     /**
-     * This property holds the Item of the main part of the Application UI
+     * @brief This property holds the Item of the main part of the Application UI.
+     * @property Item contentItem
      */
     readonly property Item contentItem: Item {
         id: contentItemRoot
@@ -385,12 +389,12 @@ Item {
     }
 
     /**
-     * This property holds the color for the background.
+     * @brief This property holds the color for the background.
      */
     property color color: Theme.backgroundColor
 
     /**
-     * This property holds the background of the Application UI
+     * @brief This property holds the background of the Application UI.
      */
     property Item background
     onBackgroundChanged: {
@@ -401,7 +405,7 @@ Item {
         background.anchors.fill = background.parent
     }
 
-    //Don't want overscroll in landscape mode
+    // NOTE: Don't want overscroll in landscape mode
     onWidthChanged: {
         if (width > height) {
             root.reachableMode = false;
