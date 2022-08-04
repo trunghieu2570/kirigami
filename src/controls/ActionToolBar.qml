@@ -6,12 +6,12 @@
 
 import QtQuick 2.7
 import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.4 as Controls
+import QtQuick.Controls 2.4 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
 import "private"
 
 /**
- * A toolbar built out of a list of actions.
+ * @brief A toolbar built out of a list of actions.
  *
  * The default representation for visible actions is a QtQuick.Controls.ToolButton, but
  * it can be changed by setting the `Action.displayComponent` for an action.
@@ -26,10 +26,10 @@ import "private"
  * @inherit QtQuick.Controls.Control
  * @since 2.5
  */
-Controls.Control {
+QQC2.Control {
     id: root
     /**
-     * @brief This property holds a list of action that will appear in the ActionToolBar.
+     * @brief This property holds a list of visible actions.
      *
      * The ActionToolBar will try to display as many actions as possible.
      * Those that won't fit will go into an overflow menu.
@@ -39,8 +39,9 @@ Controls.Control {
     property alias actions: layout.actions
 
     /**
-     * This property holds a list of actions that will always be displayed in the overflow
-     * menu even if there is enough place.
+     * @brief This property holds a list of hidden actions.
+     *
+     * These actions will always be displayed in the overflow menu, even if there is enough space.
      *
      * @deprecated since 2.14, use the AlwaysHide hint on actions instead.
      * @property list<Action> hiddenActions
@@ -53,8 +54,6 @@ Controls.Control {
      * @brief This property holds whether the buttons will have a flat appearance.
      *
      * The default value is true.
-     *
-     * @property bool flat
      */
     property bool flat: true
 
@@ -66,12 +65,12 @@ Controls.Control {
      * * `Button.TextBesideIcon`
      * * `Button.TextUnderIcon`
      *
-     * By default the text is display beside the icon.
+     * By default, the text is displayed beside the icon.
      *
      * @see QtQuick.Controls.AbstractButton
      * @property int display
      */
-    property int display: Controls.Button.TextBesideIcon
+    property int display: QQC2.Button.TextBesideIcon
 
     /**
      * @brief This property holds the alignment of the buttons.
@@ -79,9 +78,13 @@ Controls.Control {
      * When there is more space available than required by the visible delegates,
      * we need to determine how to place the delegates.
      *
-     * The default value is right-aligned buttons (`Qt.AlignRight`).
+     * When there is more space available than required by the visible action delegates,
+     * we need to determine where to position them.
      *
-     * @property Qt::Alignment alignment
+     * The default value is right-aligned (`Qt.AlignRight`).
+     *
+     * @see Qt::AlignmentFlag
+     * @property int alignment
      */
     property alias alignment: layout.alignment
 
@@ -90,16 +93,15 @@ Controls.Control {
      *
      * If this ActionToolBar is the contentItem of a QQC2 Toolbar, the position is bound to the ToolBar's position
      *
-     * Permitted values are:
-     *
-     * * ToolBar.Header: The toolbar is at the top, as a window or page header.
-     * * ToolBar.Footer: The toolbar is at the bottom, as a window or page footer.
+     * @note Permitted values are:
+     * * `ToolBar.Header`: The toolbar is at the top, as a window or page header.
+     * * `ToolBar.Footer`: The toolbar is at the bottom, as a window or page footer.
      *
      * @property int position
      */
     property int position: parent && parent.hasOwnProperty("position")
             ? parent.position
-            : Controls.ToolBar.Header
+            : QQC2.ToolBar.Header
 
     /**
      * @brief This property holds the maximum width of the content of this ToolBar.
@@ -118,7 +120,6 @@ Controls.Control {
      *
      * By default this is "overflow-menu".
      *
-     * @property string overflowIconName
      * @since 5.65
      * @since 2.12
      */
@@ -140,7 +141,7 @@ Controls.Control {
      *
      * @see ToolBarLayout::heightMode
      * @see ToolBarLayout::HeightMode
-     * @property org::kde::kirigami::ToolBarLayout::heightMode heightMode
+     * @property ToolBarLayout::HeightMode heightMode
      */
     property alias heightMode: layout.heightMode
 
@@ -169,7 +170,7 @@ Controls.Control {
 
         iconDelegate: PrivateActionToolButton {
             flat: root.flat
-            display: Controls.Button.IconOnly
+            display: QQC2.Button.IconOnly
             action: Kirigami.ToolBarLayout.action
 
             showMenuArrow: false
@@ -229,7 +230,7 @@ Controls.Control {
                              && (action.visible === undefined || action.visible)
                 }
 
-                separatorDelegate: Controls.MenuSeparator {
+                separatorDelegate: QQC2.MenuSeparator {
                     property var action
                     visible: layout.hiddenActions.includes(action)
                              && (action.visible === undefined || action.visible)
