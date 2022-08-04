@@ -9,12 +9,10 @@ import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.13 as QQC2
 import QtGraphicalEffects 1.0
 import org.kde.kirigami.private 2.14
-
 import "templates/private" as P
 
 /**
- * An element that represents a user, either with initials, an icon, or a profile image.
- *
+ * @biref An element that represents a user, either with initials, an icon, or a profile image.
  * @inherit QtQuick.Controls.Control
  */
 QQC2.Control {
@@ -31,7 +29,7 @@ QQC2.Control {
     }
 
     /**
-     * This property holds the given name of a user.
+     * @brief This property holds the given name of a user.
      *
      * The user's name will be used for generating initials and to provide the
      * accessible name for assistive technology.
@@ -39,7 +37,9 @@ QQC2.Control {
     property string name
 
     /**
-     * This property holds the source of the user's profile picture; an image.
+     * @brief This property holds the source of the user's profile picture; an image.
+     * @see QtQuick::Image::source
+     * @property url source
      */
     property alias source: avatarImage.source
 
@@ -49,19 +49,26 @@ QQC2.Control {
      * enabled.
      *
      * By default this is a generic user icon.
+     *
+     * @see org::kde::kirigami::Icon::source
+     * @property var iconSource
      */
     property alias iconSource: avatarIcon.source
 
     /**
-     * This property holds how the button should represent the user when there is no image available.
+     * @brief This property holds how the button should represent the user when there is no image available.
      *
      * Possible values are:
      * * `Avatar.InitialsMode.UseInitials` - Use initials when the image is not available
      * * `Avatar.InitialsMode.UseIcon` - Use an icon of a user when the image is not available
+     *
+     * @see org::kde::kirigami::Avatar::InitialsMode
      */
     property int initialsMode: Kirigami.Avatar.InitialsMode.UseInitials
 
     /**
+     * @brief This property holds how the avatar should be shown.
+     *
      * This property holds whether the button should always show the image; show the image if one is
      * available and show initials when it is not; or always show initials.
      *
@@ -69,30 +76,34 @@ QQC2.Control {
      * * `Avatar.ImageMode.AlwaysShowImage`: Always try to show the image; even if it hasn't loaded yet or is undefined.
      * * `Avatar.ImageMode.AdaptiveImageOrInitals`: Show the image if it is valid; or show initials if it is not
      * * `Avatar.ImageMode.AlwaysShowInitials`: Always show initials
+     *
+     * @see org::kde::kirigami::Avatar::ImageMode
      */
     property int imageMode: Kirigami.Avatar.ImageMode.AdaptiveImageOrInitals
 
     /**
-     * This property holds whether or not the image loaded from the provided source should be cached.
-     *
+     * @brief This property holds whether or not the image loaded from the provided source should be cached.
+     * @see QtQuick::Image::cache
      * @property bool cache
      */
     property alias cache: avatarImage.cache
 
     /**
-     * This property holds the source size of the user's profile picture.
-     *
+     * @brief This property holds the source size of the user's profile picture.
+     * @see QtQuick::Image::sourceSize
      * @property int sourceSize
      */
     property alias sourceSize: avatarImage.sourceSize
 
     /**
-     * This property holds whether or not the image loaded from the provided source should be smoothed.
+     * @brief This property holds whether or not the image loaded from the provided source should be smoothed.
+     * @see QtQuick::Image::smooth
+     * @property bool smooth
      */
     property alias smooth: avatarImage.smooth
 
     /**
-     * This property holds the color to use for this avatar.
+     * @brief This property holds the color to use for this avatar.
      *
      * If not explicitly set, this defaults to generating a colour from the name.
      *
@@ -103,9 +114,7 @@ QQC2.Control {
     // as undefined, which will result in a generated colour being used.
 
     /**
-     * This property holds the main and secondary actions associated
-     * with this avatar.
-     *
+     * @brief This property holds the main and secondary actions associated with this avatar.
      * @code
      * Kirigami.Avatar {
      *     actions.main: Kirigami.Action {}
@@ -121,8 +130,7 @@ QQC2.Control {
     property AvatarGroup actions: AvatarGroup {}
 
     /**
-     * This property holds the border properties.
-     *
+     * @brief This property holds the border properties.
      * @code
      * Kirigami.Avatar {
      *     border.width: 10
