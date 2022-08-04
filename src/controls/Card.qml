@@ -11,7 +11,7 @@ import org.kde.kirigami 2.12 as Kirigami
 import "private"
 
 /**
- * This is the standard layout of a Card.
+ * @brief This is the standard layout of a Card.
  *
  * It is recommended to use this class when the concept of Cards is needed
  * in the application.
@@ -49,6 +49,7 @@ Kirigami.AbstractCard {
      * if there is enough space.
      *
      * @depracted Use actions with a `Kirigami.DisplayHint.AlwaysHide` as displayHint.
+     * @see org::kde::kirigami::DisplayHint
      * @property list<org::kde::kirigami::Action> hiddenActions
      * @since 2.6
      */
@@ -74,6 +75,7 @@ Kirigami.AbstractCard {
      *
      * It also has the full set of properties a QML Image has, such as sourceSize and fillMode
      *
+     * @see org::kde::kirigami::private::BannerImage
      * @property Image Card::banner
      */
     readonly property alias banner: bannerImage
