@@ -61,15 +61,17 @@ OverlayDrawer {
     handleClosedIcon.source: null
     handleOpenIcon.source: null
     /**
-     * title: string
-     * A title for the action list that will be shown to the user when opens the drawer
+     * @brief A title for the action list that will be shown to the user when opens the drawer
      */
     property string title: qsTr("Actions")
 
     /**
-     * actions: list<Action>
      * This can be any type of object that a ListView can accept as model.
      * It expects items compatible with either QAction or Kirigami Action
+     *
+     * @see QtQuick.Action
+     * @see org::kde::kirigami::Action
+     * @property list<Action> actions
      */
     property var actions: page ? page.contextualActions : []
 
@@ -94,20 +96,20 @@ OverlayDrawer {
     drawerOpen: false
 
     /**
-     * header: Component
-     * Arbitrary content that will go on top of the list (by default is the title)
+     * @brief Arbitrary content that will go on top of the list (by default is the title)
+     * @property Component header
      * @since 2.7
      */
     property alias header: menu.header
 
     /**
-     * footer: Component
-     * Arbitrary content that will go to the bottom of the list (by default is empty)
+     * @brief Arbitrary content that will go to the bottom of the list (by default is empty)
+     * @property Component footer
      * @since 2.7
      */
     property alias footer: menu.footer
 
-    //list items go to edges, have their own padding
+    // list items go to edges, have their own padding
     leftPadding: 0
     rightPadding: 0
     bottomPadding: 0
@@ -120,7 +122,7 @@ OverlayDrawer {
         }
     }
     contentItem: QQC2.ScrollView {
-        //this just to create the attached property
+        // this just to create the attached property
         Theme.inherit: true
         implicitWidth: Units.gridUnit * 20
         ListView {

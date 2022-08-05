@@ -12,7 +12,8 @@ import "templates" as T
 
 
 /**
- * An item that can be used as a title for the application.
+ * @brief An item that can be used as a title for the application.
+ *
  * Scrolling the main page will make it taller or shorter (through the point of going away)
  * It's a behavior similar to the typical mobile web browser addressbar
  * the minimum, preferred and maximum heights of the item can be controlled with
@@ -21,6 +22,7 @@ import "templates" as T
  * * maximumHeight: default is Units.gridUnit * 3
  *
  * To achieve a titlebar that stays completely fixed just set the 3 sizes as the same
+ *
  * @inherit org::kde::kirigami::templates::AbstractApplicationHeader
  */
 T.AbstractApplicationHeader {

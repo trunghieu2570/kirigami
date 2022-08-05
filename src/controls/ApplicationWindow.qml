@@ -9,7 +9,7 @@ import "templates/private"
 import org.kde.kirigami 2.4 as Kirigami
 
 /**
- * A window that provides some basic features needed for all apps
+ * @brief A window that provides some basic features needed for all apps
  *
  * It's usually used as a root QML component for the application.
  * It's based around the PageRow component, the application will be
@@ -100,8 +100,9 @@ AbstractApplicationWindow {
      * fullscreen column, a tablet device would have many tiled columns.
      *
      * @warning This property is not currently readonly, but it should be treated like it is readonly.
+     * @property PageRow pageStack
      */
-    property alias pageStack: __pageStack // TODO KF6 make readonly
+    property alias pageStack: __pageStack  // TODO KF6 make readonly
 
     // Redefined here as here we can know a pointer to PageRow.
     // We negate the canBeEnabled check because we don't want to factor in the automatic drawer provided by Kirigami for page actions for our calculations
@@ -118,7 +119,7 @@ AbstractApplicationWindow {
         globalToolBar.style: Kirigami.ApplicationHeaderStyle.Auto
         anchors {
             fill: parent
-            //HACK: workaround a bug in android iOS keyboard management
+            // HACK: workaround a bug in android iOS keyboard management
             bottomMargin: ((Qt.platform.os === "android" || Qt.platform.os === "ios") || !Qt.inputMethod.visible) ? 0 : Qt.inputMethod.keyboardRectangle.height
             onBottomMarginChanged: {
                 if (__pageStack.anchors.bottomMargin > 0) {
@@ -126,7 +127,7 @@ AbstractApplicationWindow {
                 }
             }
         }
-        //FIXME
+        // FIXME
         onCurrentIndexChanged: root.reachableMode = false;
 
         focus: true

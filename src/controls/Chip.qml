@@ -7,7 +7,8 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
 
 /**
- * A compact element that represents an attribute, action or filter.
+ * @brief A compact element that represents an attribute, action or filter.
+ *
  * Should be used in a group of multiples elements. e.g when displaying tags in a image viewer.
  *
  *  * @code
@@ -44,8 +45,7 @@ Kirigami.AbstractChip {
     checkable: !closable
 
     /**
-     * This property holds the label item, for accessing the usual Text properties.
-     *
+     * @brief This property holds the label item, for accessing the usual Text properties.
      * @property QtQuick.Controls.Label labelItem
      */
     property alias labelItem: label

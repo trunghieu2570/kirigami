@@ -8,11 +8,13 @@ import "templates" as T
 import "private"
 
 /**
- * A AbstractCard is the base for chips. A Chip is a visual object that provides
- * an very friendly way to display predetermined options.
+ * @brief An AbstractChip is the base for chips.
+ *
+ * A Chip is a visual object that provides
+ * a very friendly way to display predetermined options.
  * providing just the look and the base properties and signals for an AbstractButton.
  *
- * @see Chip
+ * @see org::kde::kirigami::Chip
  * @inherit org::kde::kirigami::templates::AbstractChip
  * @since 2.19
  */

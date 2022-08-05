@@ -74,9 +74,10 @@ Item {
      * If for some implementation reason multiple FormLayouts have to appear
      * on the same page, they can have each other in twinFormLayouts,
      * so they will vertically align with each other perfectly
+     *
      * @since 5.53
      */
-    property list<Item> twinFormLayouts //should be list<FormLayout> but we can't have a recursive declaration
+    property list<Item> twinFormLayouts  // should be list<FormLayout> but we can't have a recursive declaration
 
     Layout.fillWidth: true
 
@@ -211,8 +212,7 @@ Item {
 
         /**
          * @param {Item} item
-         *
-         * @returns {number}
+         * @returns {Qt::Alignment}
          */
         function effectiveLayout(item) {
             const verticalAlignment =
@@ -231,8 +231,7 @@ Item {
 
         /**
          * @param {Item} item
-         *
-         * @returns {number}
+         * @returns vertical alignment of the item passed as an argument.
          */
         function effectiveTextLayout(item) {
             if (root.wideMode) {
@@ -247,11 +246,11 @@ Item {
         interval: 0
         onTriggered: {
             let __items = children;
-            //exclude the layout and temp
+            // exclude the layout and temp
             for (let i = 2; i < __items.length; ++i) {
                 const item = __items[i];
 
-                //skip items that are already there
+                // skip items that are already there
                 if (lay.knownItems.indexOf(item) !== -1 || item instanceof Repeater) {
                     continue;
                 }
@@ -259,9 +258,9 @@ Item {
 
                 const itemContainer = itemComponent.createObject(temp, {item: item})
 
-                //if section, label goes after the separator
+                // if section, label goes after the separator
                 if (item.Kirigami.FormData.isSection) {
-                    //put an extra spacer
+                    // put an extra spacer
                     var placeHolder = placeHolderComponent.createObject(lay, {item: item});
                     itemContainer.parent = lay;
                 }
@@ -292,7 +291,7 @@ Item {
             enabled: item.enabled
             visible: item.visible
 
-            //NOTE: work around a  GridLayout quirk which doesn't lay out items with null size hints causing things to be laid out incorrectly in some cases
+            // NOTE: work around a  GridLayout quirk which doesn't lay out items with null size hints causing things to be laid out incorrectly in some cases
             implicitWidth: Math.max(item.implicitWidth, 1)
             implicitHeight: Math.max(item.implicitHeight, 1)
             Layout.preferredWidth: Math.max(1, item.Layout.preferredWidth > 0 ? item.Layout.preferredWidth : item.implicitWidth)
@@ -313,7 +312,7 @@ Item {
                 }
             }
             onXChanged: item.x = x + lay.x;
-            //Assume lay.y is always 0
+            // Assume lay.y is always 0
             onYChanged: item.y = y + lay.y;
             onWidthChanged: item.width = width;
             Component.onCompleted: item.x = x + lay.x;
@@ -421,8 +420,8 @@ Item {
             Layout.topMargin: item.Kirigami.FormData.buddyFor.height > implicitHeight * 2 ? Kirigami.Units.smallSpacing/2 : 0
 
             activeFocusOnTab: indicator.visible && indicator.enabled
-            //HACK: desktop style checkboxes have also the text in the background item
-            //text: labelItem.Kirigami.MnemonicData.richTextLabel
+            // HACK: desktop style checkboxes have also the text in the background item
+            // text: labelItem.Kirigami.MnemonicData.richTextLabel
             enabled: labelItem.item.Kirigami.FormData.enabled
             checked: labelItem.item.Kirigami.FormData.checked
 
@@ -448,7 +447,7 @@ Item {
                 type: item.Kirigami.FormData.isSection ? Kirigami.Heading.Type.Primary : Kirigami.Heading.Type.Normal
                 verticalAlignment: temp.effectiveTextLayout(labelItem.item)
                 enabled: labelItem.item.Kirigami.FormData.enabled
-                leftPadding: height//parent.indicator.width
+                leftPadding: height  // parent.indicator.width
             }
             Rectangle {
                 enabled: labelItem.indicator.enabled
