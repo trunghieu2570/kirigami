@@ -10,11 +10,10 @@ import QtQuick.Templates 2.15 as T
 import QtQuick.Controls 2.15 as Controls
 import org.kde.kirigami 2.12 as Kirigami
 import QtGraphicalEffects 1.12
-
 import "templates/private" as Private
 
 /**
- * Popup dialog that is used for short tasks and user interaction.
+ * @brief Popup dialog that is used for short tasks and user interaction.
  *
  * Dialog consists of three components: the header, the content,
  * and the footer.
@@ -73,7 +72,7 @@ import "templates/private" as Private
  * }
  * @endcode
  *
- * Example with scrolling (ListView scrolling behaviour is handled by Dialog):
+ * Example with scrolling (ListView scrolling behaviour is handled by the Dialog):
  *
  * @code{.qml}
  * Kirigami.Dialog {
@@ -97,7 +96,7 @@ import "templates/private" as Private
  * }
  * @endcode
  *
- * There are also sub-components of Dialog that target specific usecases,
+ * There are also sub-components of the Dialog that target specific usecases,
  * and can reduce boilerplate code if used:
  *
  * @see PromptDialog
@@ -108,21 +107,25 @@ import "templates/private" as Private
 T.Dialog {
     id: root
 
+    // TODO KF6: remove this property
     /**
-     * @deprecated will be removed on next Frameworks major release
+     * @deprecated This property will be removed in the next major frameworks release (KF6)
      */
     property Item mainItem: contentControl.contentChildren.length > 0 ? contentControl.contentChildren[0] : null
 
     /**
-     * The dialog's contents, includes Items and QtObjects.
+     * @brief The dialog's contents, includes Items and QtObjects.
+     * @property list<QtObject> dialogData
      */
     default property alias dialogData: contentControl.contentData
 
     /**
-     * The content items of the dialog.
+     * @brief The content items of the dialog.
      *
      * The initial height and width of the dialog is calculated from the
      * `implicitWidth` and `implicitHeight` of the content.
+     *
+     * @property list<Item> dialogChildren
      */
     property alias dialogChildren: contentControl.contentChildren
 
@@ -140,7 +143,7 @@ T.Dialog {
     readonly property real absoluteMaximumHeight: parent.height - Kirigami.Units.largeSpacing * 2
 
     /**
-     * The absolute maximum width the dialog can be.
+     * @brief The absolute maximum width the dialog can be.
      *
      * By default, it is the window width, subtracted by largeSpacing on both
      * the top and bottom.
@@ -148,7 +151,7 @@ T.Dialog {
     readonly property real absoluteMaximumWidth: parent.width - Kirigami.Units.largeSpacing * 2
 
     /**
-     * The maximum height the dialog can be (including the header
+     * @brief The maximum height the dialog can be (including the header
      * and footer).
      *
      * The height restriction is solely enforced on the content, so if the
@@ -160,14 +163,14 @@ T.Dialog {
     property real maximumHeight: absoluteMaximumHeight
 
     /**
-     * The maximum width the dialog can be.
+     * @brief The maximum width the dialog can be.
      *
      * By default, this is `absoluteMaximumWidth`.
      */
     property real maximumWidth: absoluteMaximumWidth
 
     /**
-     * Specify the preferred height of the dialog.
+     * @brief Specify the preferred height of the dialog.
      *
      * The content will receive a hint for how tall it should be to have
      * the dialog to be this height.
@@ -178,7 +181,7 @@ T.Dialog {
     property real preferredHeight: -1
 
     /**
-     * Specify the preferred width of the dialog.
+     * @brief Specify the preferred width of the dialog.
      *
      * The content will receive a hint for how wide it should be to have
      * the dialog be this wide.
@@ -190,27 +193,27 @@ T.Dialog {
 
 
     /**
-     * The component before the footer buttons.
+     * @brief The component before the footer buttons.
      */
     property Component footerLeadingComponent
 
     /**
-     * The component after the footer buttons.
+     * @brief The component after the footer buttons.
      */
     property Component footerTrailingComponent
 
     /**
-     * Whether or not to show the close button in the header.
+     * @brief Whether or not to show the close button in the header.
      */
     property bool showCloseButton: true
 
     /**
-     * Whether or not the footer button style should be flat instead of raised.
+     * @brief Whether or not the footer button style should be flat instead of raised.
      */
     property bool flatFooterButtons: false
 
     /**
-     * Define a list of custom actions in the footer.
+     * @brief Define a list of custom actions in the footer.
      *
      * @code{.qml}
      * import QtQuick 2.15
@@ -236,7 +239,7 @@ T.Dialog {
      * }
      * @endcode
      *
-     * @see Action
+     * @see org::kde::kirigami::Action
      */
     property list<Kirigami.Action> customFooterActions
 
