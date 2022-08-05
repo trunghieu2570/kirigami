@@ -10,7 +10,7 @@ import QtQuick.Controls 2.0 as QQC2
 import org.kde.kirigami 2.12
 
 /**
- * A BasicListItem provides a simple list item design that can handle the
+ * @brief A BasicListItem provides a simple list item design that can handle the
  * most common list item usecases.
  *
  * @image html BasicListItemTypes.svg "The styles of the BasicListItem. From left to right top to bottom: light icon + title + subtitle, dark icon + title + subtitle, light icon + label, dark icon + label, light label, dark label." width=50%
@@ -37,7 +37,7 @@ AbstractListItem {
     property alias subtitle: subtitleItem.text
 
     /**
-     * This property holds an item that will be displayed before the title and subtitle.
+     * @brief This property holds an item that will be displayed before the title and subtitle.
      *
      * @note The leading item is allowed to expand infinitely horizontally, and should be bounded by the user.
      *
@@ -60,34 +60,31 @@ AbstractListItem {
     }
 
     /**
-     * This property holds a the padding after the leading item.
-     *
+     * @brief This property holds the padding after the leading item.
      * @since org.kde.kirigami 2.15
      */
     property real leadingPadding: Units.largeSpacing
 
+    // TODO KF6: remove this property and instead implement leading and trailing
+    // item positioning in such a way that they fill vertically, but a fixed
+    // height can be manually specified without needing to wrap it in an Item
     /**
-     * TODO KF6: remove this property and instead implement leading and trailing
-     * item positioning in such a way that they fill vertically, but a fixed
-     * height can be manually specified without needing to wrap it in an Item
+     * @brief Whether or not to stretch the leading item to fit all available vertical space.
      *
-     * leadingFillVertically: bool
-     * Whether or not to stretch the leading item to fit all available vertical space.
      * Defaults to true. If false, you will be responsible for setting a height for the
      * item or ensuring that its default height works.
      *
+     * @warning This property will likely be removed in KF6
      * @since 5.83
      * @since org.kde.kirigami 2.15
      */
     property bool leadingFillVertically: true
 
     /**
-     * This property holds an item that will be displayed after the title and subtitle. Note that the
-     * trailing item is allowed to expand infinitely horizontally, and should be bounded by the user.
-     *
+     * @brief This property holds an item that will be displayed after the title and subtitle
+     * @note The trailing item is allowed to expand infinitely horizontally, and should be bounded by the user.
      * @since org.kde.kirigami 2.15
      */
-
     property Item trailing
     onTrailingChanged: {
         if (!!listItem.trailing) {
@@ -105,22 +102,21 @@ AbstractListItem {
     }
 
     /**
-     * This property holds the padding before the trailing item.
-     *
+     * @brief This property holds the padding before the trailing item.
      * @since org.kde.kirigami 2.15
      */
     property real trailingPadding: Units.largeSpacing
 
+    // TODO KF6: remove this property and instead implement leading and trailing
+    // item positioning in such a way that they fill vertically, but a fixed
+    // height can be manually specified without needing to wrap it in an Item
     /**
-     * TODO KF6: remove this property and instead implement leading and trailing
-     * item positioning in such a way that they fill vertically, but a fixed
-     * height can be manually specified without needing to wrap it in an Item
+     * @brief Whether or not to stretch the trailing item to fit all available vertical space.
      *
-     * trailingFillVertically: bool
-     * Whether or not to stretch the trailing item to fit all available vertical space.
      * Defaults to true. If false, you will be responsible for setting a height for the
      * item or ensuring that its default height works.
      *
+     * @warning This property will likely be removed in KF6
      * @since 5.83
      * @since org.kde.kirigami 2.15
      */
@@ -170,8 +166,9 @@ AbstractListItem {
     property var icon
 
     /**
-     * This property holds the size at which the icon will render. This will not affect icon lookup,
-     * unlike the icon group's width and height properties, which will.
+     * @brief This property holds the size at which the icon will render.
+     *
+     * This will not affect icon lookup, unlike the icon group's width and height properties, which will.
      *
      * @property int iconSize
      * @since 2.5
@@ -179,18 +176,18 @@ AbstractListItem {
     property alias iconSize: iconItem.size
 
     /**
-     * This property holds the color of the icon.
+     * @brief This property holds the color of the icon.
      *
      * If the icon's original colors should be left intact, set this to the default value, "transparent".
      * Note that this colour will only be applied if the icon can be recoloured, (e.g. you can use Kirigami.Theme.foregroundColor to change the icon's colour.)
      *
-     * @since 2.7
      * @property color iconColor
+     * @since 2.7
      */
     property alias iconColor: iconItem.color
 
     /**
-     * This property holds whether or not the icon has a "selected" appearance.
+     * @brief This property holds whether or not the icon has a "selected" appearance.
      *
      * Can be used to override the icon coloration if the list item's background and
      * text are also being overridden, to ensure that the icon never becomes invisible.
@@ -202,7 +199,7 @@ AbstractListItem {
     property alias iconSelected: iconItem.selected
 
     /**
-     * This property holds whether or not to reserve space for the icon, even if there is no icon.
+     * @brief This property holds whether or not to reserve space for the icon, even if there is no icon.
      *
      * @image html BasicListItemReserve.svg "Left: reserveSpaceForIcon: false. Right: reserveSpaceForIcon: true" width=50%
      * @property bool reserveSpaceForIcon
@@ -210,7 +207,7 @@ AbstractListItem {
     property alias reserveSpaceForIcon: iconItem.visible
 
     /**
-     * This property holds whether or not the label of the list item should fill width.
+     * @brief This property holds whether or not the label of the list item should fill width.
      *
      * Setting this to false is useful if you have other items in the list item
      * that should fill width instead of the label.
@@ -229,7 +226,7 @@ AbstractListItem {
     property bool reserveSpaceForSubtitle: false
 
     /**
-     * This property holds the spacing between the label row and subtitle row.
+     * @brief This property holds the spacing between the label row and subtitle row.
      *
      * @since 5.83
      * @since org.kde.kirigami 2.15
@@ -249,7 +246,7 @@ AbstractListItem {
     property bool fadeContent: false
 
     /**
-     * This property holds the label item, for accessing the usual Text properties.
+     * @brief This property holds the label item, for accessing the usual Text properties.
      *
      * @property QtQuick.Controls.Label labelItem
      * @since 5.84
@@ -258,7 +255,7 @@ AbstractListItem {
     property alias labelItem: labelItem
 
     /**
-     * This property holds the subtitle item, for accessing the usual Text properties.
+     * @brief This property holds the subtitle item, for accessing the usual Text properties.
      *
      * @property QtQuick.Controls.Label subtitleItem
      * @since 5.84
