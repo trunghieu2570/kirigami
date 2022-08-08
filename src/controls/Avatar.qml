@@ -38,7 +38,7 @@ QQC2.Control {
 
     /**
      * @brief This property holds the source of the user's profile picture; an image.
-     * @see QtQuick::Image::source
+     * @see QtQuick.Image::source
      * @property url source
      */
     property alias source: avatarImage.source
@@ -83,21 +83,21 @@ QQC2.Control {
 
     /**
      * @brief This property holds whether or not the image loaded from the provided source should be cached.
-     * @see QtQuick::Image::cache
+     * @see QtQuick.Image::cache
      * @property bool cache
      */
     property alias cache: avatarImage.cache
 
     /**
      * @brief This property holds the source size of the user's profile picture.
-     * @see QtQuick::Image::sourceSize
+     * @see QtQuick.Image::sourceSize
      * @property int sourceSize
      */
     property alias sourceSize: avatarImage.sourceSize
 
     /**
      * @brief This property holds whether or not the image loaded from the provided source should be smoothed.
-     * @see QtQuick::Image::smooth
+     * @see QtQuick.Image::smooth
      * @property bool smooth
      */
     property alias smooth: avatarImage.smooth
