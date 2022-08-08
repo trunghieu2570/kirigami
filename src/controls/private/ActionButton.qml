@@ -166,10 +166,10 @@ Item {
             Controls.ToolTip.delay: Units.toolTipDelay
 
             onPressed: {
-                //search if we have a page to set to current
+                // search if we have a page to set to current
                 if (root.hasApplicationWindow && applicationWindow().pageStack.currentIndex !== undefined && root.page.ColumnView.level !== undefined) {
-                    //search the button parent's parent, that is the page parent
-                    //this will make the context drawer open for the proper page
+                    // search the button parent's parent, that is the page parent
+                    // this will make the context drawer open for the proper page
                     applicationWindow().pageStack.currentIndex = root.page.ColumnView.level;
                 }
                 downTimestamp = (new Date()).getTime();
@@ -181,12 +181,12 @@ Item {
                 tooltipHider.restart();
                 if (root.hasGlobalDrawer) globalDrawer.peeking = false;
                 if (root.hasContextDrawer) contextDrawer.peeking = false;
-                //pixel/second
+                // pixel/second
                 var x = button.x + button.width/2;
                 var speed = ((x - startX) / ((new Date()).getTime() - downTimestamp) * 1000);
                 drawerShowAdjust = 0;
 
-                //project where it would be a full second in the future
+                // project where it would be a full second in the future
                 if (root.hasContextDrawer && root.hasGlobalDrawer && globalDrawer.modal && x + speed > Math.min(root.width/4*3, root.width/2 + globalDrawer.contentItem.width/2)) {
                     globalDrawer.open();
                     contextDrawer.close();
@@ -205,11 +205,11 @@ Item {
                         contextDrawer.close();
                     }
                 }
-                //Don't rely on native onClicked, but fake it here:
-                //Qt.startDragDistance is not adapted to devices dpi in case
-                //of Android, so consider the button "clicked" when:
-                //*the button has been dragged less than a gridunit
-                //*the finger is still on the button
+                // Don't rely on native onClicked, but fake it here:
+                // Qt.startDragDistance is not adapted to devices dpi in case
+                // of Android, so consider the button "clicked" when:
+                // *the button has been dragged less than a gridunit
+                // *the finger is still on the button
                 if (Math.abs((button.x + button.width/2) - startX) < Units.gridUnit &&
                     mouse.y > 0) {
 
@@ -247,7 +247,7 @@ Item {
                     return;
                 }
 
-                //if an action has been assigned, show a message like a tooltip
+                // if an action has been assigned, show a message like a tooltip
                 if (actionUnderMouse && actionUnderMouse.text && Settings.tabletMode) {
                     tooltipHider.stop();
                     Controls.ToolTip.show(actionUnderMouse.text);
@@ -339,7 +339,7 @@ Item {
                         }
                     }
                 }
-                //left button
+                // left button
                 Rectangle {
                     id: leftButtonGraphics
                     z: -1
@@ -391,7 +391,7 @@ Item {
                     z: -1
                     anchors {
                         right: parent.right
-                        //verticalCenter: parent.verticalCenter
+                        // verticalCenter: parent.verticalCenter
                         bottom: parent.bottom
                         bottomMargin: Units.smallSpacing
                     }
@@ -459,7 +459,7 @@ Item {
             maximumX: root.hasGlobalDrawer && globalDrawer.enabled && globalDrawer.modal ? root.width : root.width/2 - button.width/2
         }
         visible: root.page.actions && root.page.actions.contextualActions.length > 0 && (applicationWindow === undefined || applicationWindow().wideScreen)
-            //using internal pagerow api
+            // using internal pagerow api
             && (root.page && root.page.parent ? root.page.ColumnView.level < applicationWindow().pageStack.depth-1 : false)
 
         width: button.mediumIconSizing + Units.smallSpacing*2
