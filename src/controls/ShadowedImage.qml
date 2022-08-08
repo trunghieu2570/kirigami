@@ -9,13 +9,14 @@ import QtQuick 2.1
 import org.kde.kirigami 2.12
 
 /**
- * An image with a shadow.
+ * @brief An image with a shadow.
  *
  * This item will render a image, with a shadow below it. The rendering is done
  * using distance fields, which provide greatly improved performance. The shadow is
  * rendered outside of the item's bounds, so the item's width and height are the
  * don't include the shadow.
  *
+ * Example usage:
  * @code
  * import org.kde.kirigami 2.19
  *
@@ -38,53 +39,54 @@ import org.kde.kirigami 2.12
  * }
  * @endcode
  *
- * @since 5.69 / 2.12
- * @inherit ShadowedTexture
+ * @since 5.69
+ * @since 2.12
+ * @inherit Item
  */
 Item {
+
+//BEGIN properties
     /**
-     * This property holds the color that will be underneath the image.
+     * @brief This property holds the color that will be underneath the image.
      *
      * This will be visible if the image has transparancy.
      *
-     * \sa ShadowedRectangle::radius
+     * @see org::kde::kirigami::ShadowedRectangle::radius
+     * @property color color
      */
     property alias color: shadowRectangle.color
 
     /**
-     * This propery holds the corner radius of the image.
-     *
-     * \sa ShadowedRectangle::radius
+     * @brief This propery holds the corner radius of the image.
+     * @see org::kde::kirigami::ShadowedRectangle::radius
+     * @property real radius
      */
     property alias radius: shadowRectangle.radius
 
     /**
-     * This propery holds the shadow's properties of the image.
-     *
-     * \sa ShadowedRectangle::shadow
-     * \sa CornerGroup
+     * @brief This propery holds the shadow's properties of the image.
+     * @see org::kde::kirigami::ShadowedRectangle::shadow
+     * @property org::kde::kirigami::ShadowedRectangle::ShadowGroup shadow
      */
     property alias shadow: shadowRectangle.shadow
 
     /**
-     * This propery holds the border's properties of the image.
-     *
-     * \sa ShadowedRectangle::border
+     * @brief This propery holds the border's properties of the image.
+     * @see org::kde::kirigami::ShadowedRectangle::border
+     * @property org::kde::kirigami::ShadowedRectangle::BorderGroup border
      */
     property alias border: shadowRectangle.border
 
     /**
-     * This propery holds the corner radius properties of the image.
-     *
-     * \sa ShadowedRectangle::corners
-     * \sa CornersGroup
+     * @brief This propery holds the corner radius properties of the image.
+     * @see org::kde::kirigami::ShadowedRectangle::corners
+     * @property org::kde::kirigami::ShadowedRectangle::CornersGroup corners
      */
     property alias corners: shadowRectangle.corners
 
     /**
-     * This propery holds the source of the image.
-     *
-     * \sa QtQuick.Image::source
+     * @brief This propery holds the source of the image.
+     * @brief QtQuick.Image::source
      */
     property alias source: image.source
 
@@ -96,24 +98,25 @@ Item {
      * a responsive user interface is more desirable than having images
      * immediately visible.
      *
-     * \sa QtQuick.Image::asynchronous
+     * @see QtQuick.Image::asynchronous
+     * @property bool asynchronous
      */
     property alias asynchronous: image.asynchronous
 
     /**
-     * This property defines what happens when the source image has a different
+     * @brief This property defines what happens when the source image has a different
      * size than the item.
-     *
-     * \sa QtQuick.Image::fillMode
+     * @see QtQuick.Image::fillMode
+     * @property int fillMode
      */
     property alias fillMode: image.fillMode
 
     /**
-     * This property holds the scaled width and height of the full-frame image.
-     *
-     * \sa QtQuick.Image::sourceSize
+     * @brief This property holds the scaled width and height of the full-frame image.
+     * @see QtQuick.Image::sourceSize
      */
     property alias sourceSize: image.sourceSize
+//END properties
 
     Image {
         id: image
