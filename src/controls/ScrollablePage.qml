@@ -15,13 +15,15 @@ import org.kde.kirigami.templates 2.2 as KT
 import "private"
 
 /**
- * ScrollablePage is a Page that holds scrollable content, such as ListViews.
+ * @brief ScrollablePage is a Page that holds scrollable content, such as a ListView.
+ *
  * Scrolling and scrolling indicators will be automatically managed.
  *
+ * Example usage:
  * @code
  * ScrollablePage {
  *     id: root
- *     //The rectangle will automatically be scrollable
+ *     // The page will automatically be scrollable
  *     Rectangle {
  *         width: root.width
  *         height: 99999
@@ -38,6 +40,7 @@ import "private"
  *
  * Implementations should handle the refresh themselves as follows
  *
+ * Example usage:
  * @code
  * Kirigami.ScrollablePage {
  *     id: view
@@ -60,50 +63,53 @@ import "private"
  * }
  * [...]
  * @endcode
- *
  */
 Page {
     id: root
 
+//BEGIN properties
     /**
-     * \property bool ScrollablePage::refreshing
-     * If true the list is asking for refresh and will show a loading spinner.
-     * it will automatically be set to true when the user pulls down enough the list.
-     * This signals the application logic to start its refresh procedure.
-     * The application itself will have to set back this property to false when done.
+     * @brief This property tells whether the list is asking for a refresh.
+     *
+     * This property will automatically be set to true when the user pulls the list down enough,
+     * which in return, shows a loading spinner. When this is set to true, it signals
+     * the application logic to start its refresh procedure.
+     *
+     * default: ``false``
+     *
+     * @note The application itself will have to set back this property to false when done.
      */
     property bool refreshing: false
 
     /**
-     * \property bool ScrollablePage::supportsRefreshing
-     * If true the list supports the "pull down to refresh" behavior.
-     * By default it is false.
+     * @brief This property sets whether scrollable page supports "pull down to refresh" behaviour.
+     *
+     * default: ``false``
      */
     property bool supportsRefreshing: false
 
     /**
-     * \property QtQuick.Flickable ScrollablePage::flickable
-     * The main Flickable item of this page.
+     * @brief This property holds the main Flickable item of this page.
      */
     readonly property Flickable flickable: itemsParent.flickable
 
     /**
-     * \property Qt.ScrollBarPolicy ScrollablePage::verticalScrollBarPolicy
-     * The vertical scrollbar policy.
+     * @brief This property sets the vertical scrollbar policy.
+     * @property Qt::ScrollBarPolicy verticalScrollBarPolicy
      */
     property int verticalScrollBarPolicy
 
     /**
-     * \property Qt.ScrollBarPolicy ScrollablePage::horizontalScrollBarPolicy
-     * The horizontal scrollbar policy.
+     * @brief This property sets the horizontal scrollbar policy.
+     * @property Qt::ScrollBarPolicy horizontalScrollBarPolicy
      */
     property int horizontalScrollBarPolicy: QQC2.ScrollBar.AlwaysOff
 
     default property alias scrollablePageData: itemsParent.data
     property alias scrollablePageChildren: itemsParent.children
 
-    /**
-     * @deprecated here for compatibility, will be removed in next Frameworks release
+    /*
+     * @deprecated here for compatibility; will be removed in KF6.
      */
     property QtObject mainItem
     onMainItemChanged: {
@@ -112,13 +118,16 @@ Page {
     }
 
     /**
-     * If true, and if flickable is an item view, like a ListView or
-     * a GridView, it will be possible to navigate the list current item
-     * to next and previous items with keyboard up/down arrow buttons.
+     * @brief This property sets whether it is possible to navigate the items in a view that support it.
+     *
+     * If true, and if flickable is an item view (e.g. ListView, GridView), it will be possible
+     * to navigate the view current items with keyboard up/down arrow buttons.
      * Also, any key event will be forwarded to the current list item.
-     * default is true.
+     *
+     * default: ``true``
      */
     property bool keyboardNavigationEnabled: true
+//END properties
 
     contentHeight: flickable ? flickable.contentHeight : 0
     implicitHeight: {
@@ -165,7 +174,7 @@ Page {
         anchors {
             top: (root.header && root.header.visible)
                     ? root.header.bottom
-                    //FIXME: for now assuming globalToolBarItem is in a Loader, which needs to be got rid of
+                    // FIXME: for now assuming globalToolBarItem is in a Loader, which needs to be get rid of
                     : (globalToolBarItem && globalToolBarItem.parent && globalToolBarItem.visible
                         ? globalToolBarItem.parent.bottom
                         : parent.top)
@@ -245,7 +254,7 @@ Page {
                     anchors.centerIn: parent
                     running: root.refreshing
                     visible: root.refreshing
-                    //Android busywidget QQC seems to be broken at custom sizes
+                    // Android busywidget QQC seems to be broken at custom sizes
                 }
                 Rectangle {
                     id: spinnerProgress
