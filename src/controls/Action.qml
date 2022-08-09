@@ -16,13 +16,14 @@ import org.kde.kirigami 2.14 as Kirigami
 Controls.Action {
     id: root
 
+//BEGIN properties
     /**
      * @brief This property holds whether the graphic representation of the action
      * is supposed to be visible.
      *
      * It's up to the action representation to honor this property.
      *
-     * The default value is `true`.
+     * default: ``true``
      */
     property bool visible: true
 
@@ -35,26 +36,25 @@ Controls.Action {
 
     /**
      * @brief This property holds an url to an icon file or resource url for the action.
-     *
-     * By default this is an empty URL. Use this if you want a specific file rather than an icon from the theme
-     *
+     * @note Use this if you want a specific file rather than an icon from the theme.
      * @deprecated Use icon.name instead.
      * @property url iconSource
      */
     property alias iconSource: root.icon.source
 
     /**
-     * @brief This property holds the tooltip text to be shown when hovering the control bound to this
-     * action.
+     * @brief This property holds the tooltip text that is shown when the cursor is hovering over the control.
      *
-     * @warning Not all controls support tooltips on all platforms.
+     * Leaving this undefined or setting it to an empty string means that no tooltip will be shown when
+     * the cursor is hovering over the control that triggers the tooltip.
+     * @warning Tooltips may not be supported on all platforms.
      */
     property string tooltip
 
     /**
-     * @brief This property holds whether the action is a separator action.
+     * @brief This sets whether the action is a separator action.
      *
-     * The default value is `false`.
+     * default: ``false``
      */
     property bool separator: false
 
@@ -62,23 +62,24 @@ Controls.Action {
      * @brief This property holds whether the actions in globalDrawers and contextDrawers will
      * become titles displaying the child actions as sub items.
      *
-     * The default value is `false`.
+     * default: ``false``
      *
      * @since 2.6
      */
     property bool expandible: false
 
     /**
-     * @brief This property holds the parent action of this action.
+     * @brief This property holds the parent action.
      */
     property Controls.Action parent
 
     /**
-     * This property holds a combination of values from the Action.DisplayHint enum.
+     * @brief This property sets this action's display type.
+     *
      * These are provided to implementations to indicate a preference for certain display
      * styles.
      *
-     * By default there is no display hint (`DisplayHint.NoPreference`).
+     * default: ``DisplayHint.NoPreference``
      *
      * @note This property contains only preferences, implementations may choose to disregard them.
      * @see org::kde::kirigami::DisplayHint
@@ -87,7 +88,7 @@ Controls.Action {
     property int displayHint: Kirigami.DisplayHint.NoPreference
 
     /**
-     * @brief Helper function to check if a certain display hint has been set.
+     * @brief This is a helper function to check if a certain display hint has been set.
      *
      * This function is mostly convenience to enforce the mutual exclusivity of KeepVisible and AlwaysHide.
      *
@@ -103,10 +104,8 @@ Controls.Action {
     }
 
     /**
-     * @brief This property holds the component that should be preferred for displaying this Action.
-     *
-     * This can be used to display custom components in the toolbar.
-     *
+     * @brief This property holds the component that should be used for displaying this action.
+     * @note This can be used to display custom components in the toolbar.
      * @since 5.65
      * @since 2.12
      */
@@ -117,6 +116,7 @@ Controls.Action {
      *
      * This is useful for tree-like menus, such as the GlobalDrawer.
      *
+     * Example usage:
      * @code
      * Action {
      *    text: "Tools"
@@ -131,6 +131,7 @@ Controls.Action {
      * @property list<Action> children
      */
     default property list<QtObject> children
+//END properties
 
     onChildrenChanged: {
         var child;
