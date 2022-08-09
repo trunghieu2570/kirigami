@@ -22,15 +22,18 @@ import QtQuick.Controls 2.1 as QQC2
 QQC2.Page {
     id: root
 
+//BEGIN properties
     /**
-     * The default content padding is 1 gridUnit.
-     * // TODO this is not displayed in the generated api doc.
+     * @brief The default content padding is 1 gridUnit.
+     * // TODO: check if  this is not displayed in the generated api doc.
      */
     padding: Kirigami.Units.gridUnit
 
     /**
-     * The bottom content padding. Bound to verticalPadding or the height of floating action buttons (when present) by default.
-     * // TODO this is not displayed in the generated api doc.
+     * @brief The bottom content padding.
+     *
+     * default: `this is bound to the height of the floating action buttons when present; if not, then verticalPadding.`
+     * // TODO: check if this is not displayed in the generated api doc.
      */
     bottomPadding: actionButtons.item ? actionButtons.height : verticalPadding
 
@@ -41,13 +44,13 @@ QQC2.Page {
      * Normally, you wouldn't need to do that, but just use the
      * ScrollablePage element instead.
      *
-     * @see ScrollablePage
      * Use this if your flickable has some non standard properties, such as not covering the whole Page.
+     *
+     * @see ScrollablePage
      */
     property Flickable flickable
 
     /**
-     * @property list<QtQml.QtObject> actions.contextualActions
      * @brief Defines the contextual actions for the page:
      * an easy way to assign actions in the right sliding panel
      *
@@ -88,17 +91,17 @@ QQC2.Page {
      *   [...]
      * }
      * @endcode
+     *
+     * @warning This will likely be removed someday.
+     * @property list<QtQml.QtObject> contextualActions
      */
-    //TODO: remove
+    // TODO: remove
     property alias contextualActions: actionsGroup.contextualActions
 
     /**
-     * @property Action mainAction
      * @brief An optional single action for the action button.
-     * it can be a Kirigami.Action or a QAction
      *
      * Example usage:
-     *
      * @code
      * import org.kde.kirigami 2.4 as Kirigami
      * Kirigami.Page {
@@ -110,14 +113,14 @@ QQC2.Page {
      *     }
      * }
      * @endcode
+     * @warning This will likely be removed someday.
+     * @property Action mainAction
      */
     //TODO: remove
     property alias mainAction: actionsGroup.main
 
     /**
-     * @property Action leftAction
      * @brief An optional extra action at the left of the main action button.
-     * it can be a Kirigami.Action or a QAction
      *
      * Example usage:
      *
@@ -132,17 +135,16 @@ QQC2.Page {
      *     }
      * }
      * @endcode
+     * @warning This will likely be removed someday.
+     * @property Action leftAction
      */
-    //TODO: remove
+    // TODO: remove
     property alias leftAction: actionsGroup.left
 
     /**
-     * @property Action rightAction
      * @brief An optional extra action at the right of the main action button.
-     * it can be a Kirigami.Action or a QAction
      *
      * Example usage:
-     *
      * @code
      * import org.kde.kirigami 2.4 as Kirigami
      * Kirigami.Page {
@@ -154,13 +156,14 @@ QQC2.Page {
      *     }
      * }
      * @endcode
+     * @warning This will likely be removed someday.
+     * @property Action rightAction
      */
-    //TODO: remove
+    // TODO: remove
     property alias rightAction: actionsGroup.right
 
     /**
-     * Actions properties are grouped.
-     *
+     * @brief This property holds the actions group.
      * @code
      * import org.kde.kirigami 2.4 as Kirigami
      * Kirigami.Page {
@@ -175,17 +178,21 @@ QQC2.Page {
      *     }
      * }
      * @endcode
+     * @property org::kde::kirigami::private::PageActionPropertyGroup actions
      */
     readonly property alias actions: actionsGroup
 
     /**
      * Emitted when a visualization for the actions is about to be shown,
-     * such as the toolbar menu or the contextDrawer
+     * such as the toolbar menu or the contextDrawer.
+     *
      * @since 2.7
      */
     signal contextualActionsAboutToShow
 
     /**
+     * @brief This property tells us if it is the currently active page.
+     *
      * Specifies if it's the currently selected page in the window's pages row, or if layers
      * are used whether this is the topmost item on the layers stack. If the page is
      * not attached to either a column view or a stack view, expect this to be true.
@@ -200,37 +207,43 @@ QQC2.Page {
                 : true)
 
     /**
-     * @property Item overlay
-     * an item which stays on top of every other item in the page,
+     * An item which stays on top of every other item in the page,
      * if you want to make sure some elements are completely in a
      * layer on top of the whole content, parent items to this one.
      * It's a "local" version of ApplicationWindow's overlay
+     *
+     * @property Item overlay
      * @since 2.5
      */
     readonly property alias overlay: overlayItem
 
     /**
-     * @property variant icon
-     *
-     * The icon that represents this page.
+     * @brief This holds the icon that represents this page.
+     * @property var icon
      */
     property ActionIconGroup icon: ActionIconGroup {}
 
     /**
-     * Whether this page needs user attention.
+     * @brief Whether this page needs user attention.
      */
     property bool needsAttention
 
     /**
-     * @property real progress
+     * @brief Progress of a task this page is doing.
      *
-     * Progress of a task this page is doing. Set to undefined to indicate
-     * that there are no ongoing tasks.
+     * Set to undefined to indicate that there are no ongoing tasks.
+     *
+     * default: ``undefined``
+     *
+     * @property real progress
      */
     property var progress: undefined
 
     /**
-     * The delegate which will be used to draw the page title. It can be customized to put any kind of Item in there.
+     * @brief The delegate which will be used to draw the page title.
+     *
+     * It can be customized to put any kind of Item in there.
+     *
      * @since 2.7
      */
     property Component titleDelegate: Component {
@@ -247,33 +260,10 @@ QQC2.Page {
     }
 
     /**
-     * Emitted when the application requests a Back action
-     * For instance a global "back" shortcut or the Android
-     * Back button has been pressed.
-     * The page can manage the back event by itself,
-     * and if it set event.accepted = true, it will stop the main
-     * application to manage the back event.
-     */
-    signal backRequested(var event);
-
-
-    // Look for sheets and cose them
-    //FIXME: port Sheets to Popup?
-    onBackRequested: {
-        for(var i in root.resources) {
-            var item = root.resources[i];
-            if (item.hasOwnProperty("close") && item.hasOwnProperty("sheetOpen") && item.sheetOpen) {
-                item.close()
-                event.accepted = true;
-                return;
-            }
-        }
-    }
-
-    /**
      * The item used as global toolbar for the page
      * present only if we are in a PageRow as a page or as a layer,
-     * and the style is either Titles or ToolBar
+     * and the style is either Titles or ToolBar.
+     *
      * @since 2.5
      */
     readonly property Item globalToolBarItem: globalToolBar.item
@@ -296,8 +286,35 @@ QQC2.Page {
             return Kirigami.ApplicationHeaderStyle.None;
         }
     }
+//END properties
 
-    //NOTE: contentItem will be created if not existing (and contentChildren of Page would become its children) This with anchors enforces the geometry we want, where globalToolBar is a super-header, on top of header
+//BEGIN signal and signal handlers
+    /**
+     * @brief Emitted when the application requests a Back action.
+     *
+     * For instance a global "back" shortcut or the Android
+     * Back button has been pressed.
+     * The page can manage the back event by itself,
+     * and if it set event.accepted = true, it will stop the main
+     * application to manage the back event.
+     */
+    signal backRequested(var event);
+
+
+    // Look for sheets and cose them
+    // FIXME: port Sheets to Popup?
+    onBackRequested: {
+        for(var i in root.resources) {
+            var item = root.resources[i];
+            if (item.hasOwnProperty("close") && item.hasOwnProperty("sheetOpen") && item.sheetOpen) {
+                item.close()
+                event.accepted = true;
+                return;
+            }
+        }
+    }
+
+    // NOTE: contentItem will be created if not existing (and contentChildren of Page would become its children) This with anchors enforces the geometry we want, where globalToolBar is a super-header, on top of header
     contentItem: Item {
         anchors {
             top: (root.header && root.header.visible)
@@ -316,7 +333,7 @@ QQC2.Page {
     implicitHeight: ((header && header.visible) ? header.implicitHeight : 0) + ((footer && footer.visible) ? footer.implicitHeight : 0) + contentItem.implicitHeight + topPadding + bottomPadding
     implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding
 
-    //FIXME: on material the shadow would bleed over
+    // FIXME: on material the shadow would bleed over
     clip: root.header !== null;
 
     onHeaderChanged: {
@@ -351,8 +368,9 @@ QQC2.Page {
             globalToolBar.syncSource();
         }
     }
+//END signals and signal handlers
 
-    //in data in order for them to not be considered for contentItem, contentChildren, contentData
+    // in data in order for them to not be considered for contentItem, contentChildren, contentData
     data: [
         PageActionPropertyGroup {
             id: actionsGroup
@@ -367,7 +385,7 @@ QQC2.Page {
                 topMargin: globalToolBar.height
             }
         },
-        //global top toolbar if we are in a PageRow (in the row or as a layer)
+        // global top toolbar if we are in a PageRow (in the row or as a layer)
         Loader {
             id: globalToolBar
             z: 9999
@@ -401,7 +419,7 @@ QQC2.Page {
                     const url = root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar
                         ? "private/globaltoolbar/ToolBarPageHeader.qml"
                         : "private/globaltoolbar/TitlesPageHeader.qml";
-                    //TODO: find container reliably, remove assumption
+                    // TODO: find container reliably, remove assumption
                     setSource(Qt.resolvedUrl(url), {
                         pageRow: Qt.binding(() => row),
                         page: root,
@@ -418,7 +436,7 @@ QQC2.Page {
                 }
             }
         },
-        //bottom action buttons
+        // bottom action buttons
         Loader {
             id: actionButtons
             z: 9999
@@ -428,11 +446,11 @@ QQC2.Page {
                 right: parent.right
                 bottom: parent.bottom
             }
-            //if the page doesn't inherit, assume it has custom colors we want to use them here too
+            // if the page doesn't inherit, assume it has custom colors we want to use them here too
             Kirigami.Theme.inherit: !root.Kirigami.Theme.inherit
             Kirigami.Theme.colorSet: Kirigami.Theme.Button
 
-            //It should be T2.Page, Qt 5.7 doesn't like it
+            // It should be T2.Page, Qt 5.7 doesn't like it
             property Item page: root
             height: item ? item.implicitHeight : 0
 
