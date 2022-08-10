@@ -16,6 +16,7 @@ import "private"
  * For example in Okular Mobile, an Overlay Drawer is used to display
  * thumbnails of all pages within a document along with a search field.
  * This is used for the distinct task of navigating to another page.
+ *
  * @inherit QtQuick.Controls.Drawer
  */
 T2.Drawer {
@@ -23,29 +24,37 @@ T2.Drawer {
 
     z: modal ? (Math.round((position * 10000000)) ): 100
 
-//BEGIN Properties
+//BEGIN properties
     /**
-     * This property holds whether the drawer is open and visible.
+     * @brief This property tells whether the drawer is open and visible.
+     *
+     * default: ``false``
      */
     property bool drawerOpen: false
 
     /**
-     * This property holds whether the item receives mouse and keyboard events. By default this is true.
+     * @brief This property sets whether the drawer receives mouse and keyboard events.
+     *
+     * default: ``true``
+     *
+     * @see QtQuick.Item::enabled
      */
     property bool enabled: true
 
     /**
-     * @brief This property holds whether the drawer is in a state between open
+     * @brief This property tells whether the drawer is in a state between open
      * and closed.
      *
      * The drawer is visible but not completely open. This is usually the case when
      * the user is dragging the drawer from a screen edge, so the user is "peeking"
-     * what's in the drawer.
+     * at what's in the drawer.
+     *
+     * default: ``false``
      */
     property bool peeking: false
 
     /**
-     * This property holds whether the drawer is currently opening or closing itself.
+     * @brief This property tells whether the drawer is currently opening or closing itself.
      */
     readonly property bool animating : enterAnimation.animating || exitAnimation.animating || positionResetAnim.running
 
@@ -55,36 +64,41 @@ T2.Drawer {
      *
      * Only modal drawers are collapsible. Collapsible is not supported in
      * the mobile mode.
+     *
      * @since 2.5
      */
     property bool collapsible: false
 
     /**
-     * @brief This property holds whether the drawer is collapsed to a
+     * @brief This property tells whether the drawer is collapsed to a
      * very thin sidebar, usually icon only.
      *
      * When true, the drawer will be collapsed to a very thin sidebar,
      * usually icon only.
+     *
+     * default: ``false``
+     *
      * @see collapsible Only collapsible drawers can be collapsed.
      */
     property bool collapsed: false
 
     /**
-     * This property holds the size of the collapsed drawer.
+     * @brief This property holds the size of the collapsed drawer.
      *
      * For vertical drawers this will be the width of the drawer and for horizontal
      * drawers this will be the height of the drawer.
      *
-     * By default it's just enough to accommodate medium sized icons
+     * default: ``Units.iconSizes.medium``, just enough to accommodate medium sized icons
      */
     property int collapsedSize: Units.iconSizes.medium
 
     /**
-     * This property holds the options for handle's open icon. This is a grouped
-     * property with following components:
+     * @brief This property holds the options for handle's open icon.
      *
-     * * source: The source of the icon, a freedesktop-compatible icon name is recommended.
-     * * color: An optional tint color for the icon.
+     * This is a grouped property with following components:
+     *
+     * * ``source: var``: The name of a freedesktop-compatible icon.
+     * * ``color: color``: An optional tint color for the icon.
      *
      * If no custom icon is set, a menu icon is shown for the application globalDrawer
      * and an overflow menu icon is shown for the contextDrawer.
@@ -92,6 +106,7 @@ T2.Drawer {
      *
      * For OverlayDrawer the default is view-right-close or view-left-close depending on
      * the drawer location
+     *
      * @since 2.5
      */
     readonly property IconPropertiesGroup handleOpenIcon: IconPropertiesGroup {
@@ -99,17 +114,18 @@ T2.Drawer {
     }
 
     /**
-     * This property holds the options for the handle's close icon. This is a
-     * grouped property with the following components:
+     * @brief This property holds the options for the handle's close icon.
      *
-     * * source: The source of the icon, a freedesktop-compatible icon name is recommended.
-     * * color: An optional tint color for the icon.
+     * This is a grouped property with the following components:
+     * * ``source: var``: The name of a freedesktop-compatible icon.
+     * * ``color: color``: An optional tint color for the icon.
      *
      * If no custom icon is set, an X icon is shown,
      * which will morph into the Menu or overflow icons.
      *
      * For OverlayDrawer the default is view-right-new or view-left-new depending on
      * the drawer location.
+     *
      * @since 2.5
      */
     property IconPropertiesGroup handleClosedIcon: IconPropertiesGroup {
@@ -118,26 +134,28 @@ T2.Drawer {
     }
 
     /**
-     * This property holds the tooltip displayed when the drawer is open.
+     * @brief This property holds the tooltip displayed when the drawer is open.
      * @since 2.15
      */
     property string handleOpenToolTip: qsTr("Close drawer")
 
     /**
-     * This property holds the tooltip displayed when the drawer is closed.
+     * @brief This property holds the tooltip displayed when the drawer is closed.
      * @since 2.15
      */
     property string handleClosedToolTip: qsTr("Open drawer")
 
     /**
-     * This property holds whether the handle is visible, to make opening the
-     * drawer easier. Currently supported only on left and right drawers.
+     * @brief This property holds whether the handle is visible, to make opening the
+     * drawer easier.
+     *
+     * Currently supported only on left and right drawers.
      */
     property bool handleVisible: typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true
 
     /**
-     * Readonly property that points to the item that will act as a physical
-     * handle for the Drawer
+     * @brief Readonly property that points to the item that will act as a physical
+     * handle for the Drawer.
      * @property MouseArea handle
      **/
     readonly property Item handle: MouseArea {
@@ -245,7 +263,7 @@ T2.Drawer {
                     item = applicationWindow().pageStack.contentItem.itemAt(applicationWindow().pageStack.contentItem.contentX + drawerHandle.x, 0);
                 }
 
-                //try to take the last item
+                // try to take the last item
                 if (!item) {
                     item = applicationWindow().pageStack.lastItem;
                 }
@@ -286,6 +304,7 @@ T2.Drawer {
             }
         }
     }
+//END properties
 
     interactive: modal
 
@@ -295,8 +314,6 @@ T2.Drawer {
         contentItem.Theme.colorSet = Theme.colorSet
         background.Theme.colorSet = Theme.colorSet
     }
-//END Properties
-
 
 //BEGIN reassign properties
     //default paddings
@@ -325,7 +342,7 @@ T2.Drawer {
     enter: Transition {
         SequentialAnimation {
             id: enterAnimation
-            /*NOTE: why this? the running status of the enter transition is not relaible and
+            /* NOTE: why this? the running status of the enter transition is not relaible and
              * the SmoothedAnimation is always marked as non running,
              * so the only way to get to a reliable animating status is with this
              */
@@ -333,7 +350,7 @@ T2.Drawer {
             ScriptAction {
                 script: {
                     enterAnimation.animating = true
-                    //on non modal dialog we don't want drawers in the overlay
+                    // on non modal dialog we don't want drawers in the overlay
                     if (!root.modal) {
                         root.background.parent.parent = applicationWindow().overlay.parent
                     }
@@ -424,7 +441,7 @@ T2.Drawer {
         }
     }
     onDrawerOpenChanged: {
-        //sync this property only when the component is properly loaded
+        // sync this property only when the component is properly loaded
         if (!__internal.completed) {
             return;
         }
@@ -437,7 +454,7 @@ T2.Drawer {
     }
 
     Component.onCompleted: {
-        //if defined as drawerOpen by default in QML, don't animate
+        // if defined as drawerOpen by default in QML, don't animate
         if (root.drawerOpen) {
             root.enter.enabled = false;
             root.visible = true;
@@ -450,7 +467,7 @@ T2.Drawer {
     }
 //END signal handlers
 
-    //this is as hidden as it can get here
+    // this is as hidden as it can get here
     property QtObject __internal: QtObject {
         //here in order to not be accessible from outside
         property bool completed: false

@@ -7,7 +7,6 @@
 import QtQuick 2.1
 import QtQuick.Templates 2.0 as T2
 import org.kde.kirigami 2.15
-
 import "private"
 import "templates" as T
 
@@ -17,6 +16,7 @@ import "templates" as T
  * For example in Okular Mobile, an Overlay Drawer is used to display
  * thumbnails of all pages within a document along with a search field.
  * This is used for the distinct task of navigating to another page.
+ *
  * @inherit org::kde::kirigami::templates::OverlayDrawer
  */
 T.OverlayDrawer {
@@ -116,7 +116,7 @@ T.OverlayDrawer {
 
         Separator {
             LayoutMirroring.enabled: false
-           // LayoutMirroring.childrenInherit: true
+            // LayoutMirroring.childrenInherit: true
             anchors {
                 right: root.edge === Qt.RightEdge ? parent.left : (root.edge === Qt.LeftEdge ? undefined : parent.right)
                 left: root.edge === Qt.LeftEdge ? parent.right : (root.edge === Qt.RightEdge ? undefined : parent.left)
