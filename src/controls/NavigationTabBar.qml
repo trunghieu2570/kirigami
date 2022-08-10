@@ -120,8 +120,9 @@ import QtGraphicalEffects 1.12
 T.ToolBar {
     id: root
 
+//BEGIN properties
     /**
-     * @brief This property holds the list of actions in the toolbar.
+     * @brief This property holds the list of actions displayed in the toolbar.
      */
     property list<Kirigami.Action> actions
 
@@ -193,6 +194,7 @@ T.ToolBar {
      * @since 5.96
      */
     property bool recolorIcons: true
+//END properties
 
     onCurrentIndexChanged: {
         if (currentIndex === -1) {
