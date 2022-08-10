@@ -7,8 +7,9 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
 
 /**
- * A placeholder for loading pages.
+ * @brief A placeholder for loading pages.
  *
+ * Example usage:
  * @code{.qml}
  *     Kirigami.Page {
  *         Kirigami.LoadingPlaceholder {
@@ -25,7 +26,6 @@ import org.kde.kirigami 2.19 as Kirigami
  *         }
  *     }
  * @endcode
- *
  * @inherit org::kde::kirigami::PlaceholderMessage
  */
 Kirigami.PlaceholderMessage {
@@ -38,17 +38,16 @@ Kirigami.PlaceholderMessage {
      * This should be true if you want to display the actual
      * percentage when it's loading.
      *
-     * The default value is `false`.
-     *
+     * default: ``false``
      */
     property bool determinate: false
 
     /**
-     * @brief This property holds an progress bar.
+     * @brief This property holds a progress bar.
      *
-     * This should be used to access the progress bar
-     * to change it's value.
+     * This should be used to access the progress bar to change its value.
      *
+     * @property QtQuick.Controls.ProgressBar _progressBar
      */
     property alias progressBar: _progressBar
 
