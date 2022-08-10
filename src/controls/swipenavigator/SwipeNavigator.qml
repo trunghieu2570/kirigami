@@ -10,76 +10,69 @@ import QtQuick.Controls 2.12
 import org.kde.kirigami 2.13 as Kirigami
 
 /**
- * SwipeNavigator is a control providing for lateral navigation.
- * 
+ * @brief SwipeNavigator is a control providing for lateral navigation.
  * @include swipenavigator/main.qml
  * @inherit QtQuick.Item
  */
 Item {
     id: swipeNavigatorRoot
 
-    implicitWidth: stackView.implicitWidth
-    implicitHeight: stackView.implicitHeight
-    
+//BEGIN properties
     /**
-     * pages: list<Kirigami.Page>
-     *
-     * A list of pages to swipe between.
+     * @brief This property holds the pages to swipe between.
      */
     default property list<Kirigami.Page> pages
 
     /**
-     * layers: StackView
+     * @brief This property holds the StackView that is holding the core item,
+     * which allows users of SwipeNavigator to push pages on top of it.
      *
-     * The StackView holding the core item, allowing users of a SwipeNavigator
-     * in order to push pages on top of the SwipeNavigator.
+     * @property QtQuick.Controls.StackView stackView
      */
     property alias layers: stackView
 
     /**
-     * big: bool
+     * @brief This property sets whether SwipeNavigator should be presented in large format,
+     * which is suitable for televisions.
      *
-     * Whether or not to present the SwipeNavigator in a larger format
-     * suitable for rendering on televisions.
+     * default: ``false``
      */
     property bool big: false
 
     /**
-     * header: Item
-     *
-     * The item that will be displayed before the tabs.
+     * @brief This property holds the item that will be displayed before the tabs.
+     * @property Item header
      */
     property Component header: Item {visible: false}
 
     /**
-     * footer: Item
-     *
-     * The item that will be displayed after the tabs.
+     * @brief This property holds the item that will be displayed after the tabs.
+     * @property Item footer
      */
     property Component footer: Item {visible: false}
 
     /**
-     * initialIndex: int
+     * @brief This property holds the initial tab index of the SwipeNavigator.
      *
-     * The initial tab index of the SwipeNavigator.
+     * default: ``0``
      */
     property int initialIndex: 0
 
     /**
-     * currentIndex: int
-     *
-     * The currently displayed index of the SwipeNavigator.
+     * @brief This property holds the currently displayed page in the SwipeNavigator.
+     * @property int currentIndex
      */
     property alias currentIndex: columnView.currentIndex
+//END properties
 
     /**
-     * Pushes a page as a new dialog on desktop and as a layer on mobile.
+     * @brief Pushes a page as a new dialog on desktop and as a layer on mobile.
      * @param page The page can be defined as a component, item or string. If an item is
      *             used then the page will get re-parented. If a string is used then it
      *             is interpreted as a url that is used to load a page component.
      * @param properties The properties given when initializing the page.
      * @param windowProperties The properties given to the initialized window on desktop.
-     * @return The new created page
+     * @return The newly created page
      */
     function pushDialogLayer(page, properties = {}, windowProperties = {}) {
         let item;
@@ -111,6 +104,9 @@ Item {
         item.Keys.escapePressed.connect(function() { item.closeDialog() });
         return item;
     }
+
+    implicitWidth: stackView.implicitWidth
+    implicitHeight: stackView.implicitHeight
 
     QtObject {
         id: _gridManager
@@ -175,7 +171,7 @@ Item {
         anchors.fill: parent
 
         function clear() {
-            //don't let it kill the main page row
+            // don't let it kill the main page row
             var d = stackView.depth;
             for (var i = 1; i < d; ++i) {
                 pop();
@@ -271,7 +267,7 @@ Item {
 
         pushEnter: Transition {
             ParallelAnimation {
-                //NOTE: It's a PropertyAnimation instead of an Animator because with an animator the item will be visible for an instant before starting to fade
+                // NOTE: It's a PropertyAnimation instead of an Animator because with an animator the item will be visible for an instant before starting to fade
                 PropertyAnimation {
                     property: "opacity"
                     from: 0
