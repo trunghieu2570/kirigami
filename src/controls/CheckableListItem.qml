@@ -15,13 +15,12 @@ import org.kde.kirigami 2.14 as Kirigami
  * of the checkbox.
  *
  * When the list item or its checkbox is clicked, the QQC2 action specified in
- * the' list item's actions: property will be triggered.
+ * the list item's actions: property will be triggered.
  *
  * @note Due to the way BasicListItem works, the QQC2 action MUST contain the
  * line "checked = !checked" as the first line within its "onTriggered:" handler.
  *
  * Example usage:
- *
  * @code{.qml}
  * import org.kde.kirigami 2.14 as Kirigami
  *
