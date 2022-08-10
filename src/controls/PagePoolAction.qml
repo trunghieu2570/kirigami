@@ -11,24 +11,25 @@ import org.kde.kirigami 2.11 as Kirigami
 
 /**
  * An action used to load Pages coming from a common PagePool
- * in a PageRow or QtQuickControls2 StackView
+ * in a PageRow or QtQuickControls2 StackView.
  *
  * @see PagePool
  */
 Kirigami.Action {
     id: root
 
+//BEGIN properties
     /**
-     * Url or filename of the page this action will load
+     * @brief This property holds the url or filename of the page that this action will load.
      */
     property string page
 
     /**
-     * The PagePool used by this PagePoolAction.
+     * @brief This property holds the PagePool object used by this PagePoolAction.
+     *
      * PagePool will make sure only one instance of the page identified by the page url will be created and reused.
-     * PagePool's lastLoaderUrl property will be used to control the mutual
-     * exclusivity of the checked state of the PagePoolAction instances
-     * sharing the same PagePool
+     * PagePool's lastLoaderUrl property will be used to control the mutual exclusivity of the checked
+     * state of the PagePoolAction instances sharing the same PagePool.
      */
     property Kirigami.PagePool pagePool
 
@@ -36,23 +37,24 @@ Kirigami.Action {
      * The pageStack property accepts either a Kirigami.PageRow or a QtQuickControls2 StackView.
      * The component that will instantiate the pages, which has to work with a stack logic.
      * Kirigami.PageRow is recommended, but will work with QtQuicControls2 StackView as well.
-     * By default this property is binded to ApplicationWindow's global
-     * pageStack, which is a PageRow by default.
+     *
+     * default: `bound to ApplicationWindow's global pageStack, which is a PageRow by default`
      */
     property Item pageStack: typeof applicationWindow !== 'undefined' ? applicationWindow().pageStack : null
 
     /**
-     * The page of pageStack new pages will be pushed after.
+     * @brief This property sets the page in the pageStack after which
+     * new pages will be pushed.
+     *
      * All pages present after the given basePage will be removed from the pageStack
      */
     property Controls.Page basePage
 
     /**
-     * @property QVariantMap initialProperties
-     *
      * This property holds a function that generate the property values for the created page
      * when it is pushed onto the Kirigami.PagePool.
      *
+     * Example usage:
      * @code{.qml}
      * Kirigami.PagePoolAction {
      *     text: i18n("Security")
@@ -65,17 +67,24 @@ Kirigami.Action {
      *     }
      * }
      * @endcode
+     * @property QVariantMap initialProperties
      */
     property var initialProperties
 
     /**
-      * @since 5.70
-      * @since org.kde.kirigami 2.12
-      * When true the PagePoolAction will use the layers property of the pageStack.
+      * @brief This property sets whether PagePoolAction will use the layers property
+      * implemented by the pageStack.
+      *
       * This is intended for use with PageRow layers to allow PagePoolActions to
       * push context-specific pages onto the layers stack.
+      *
+      * default: ``false``
+      *
+      * @since 5.70
+      * @since org.kde.kirigami 2.12
       */
     property bool useLayers: false
+//END properties
 
     /**
       * @returns the page item held in the PagePool or null if it has not been loaded yet.
