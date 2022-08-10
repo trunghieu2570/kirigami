@@ -10,12 +10,12 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
 
 /**
- * Navigation buttons to be used for the NavigationTabBar component.
+ * @brief Navigation buttons to be used for the NavigationTabBar component.
  * 
  * Alternative way to the "actions" property on NavigationTabBar, as it can be used
  * with Repeater to generate buttons from models.
  * 
- * Example:
+ * Example usage:
  * @code{.qml}
  * Kirigami.NavigationTabBar {
  *      id: navTabBar
@@ -61,15 +61,15 @@ import org.kde.kirigami 2.19 as Kirigami
  *  }
  * @endcode
  * 
- * @inherit QtQuick.Templates.TabButton
  * @since 5.87
  * @since org.kde.kirigami 2.19
+ * @inherit QtQuick.Templates.TabButton
  */
 T.TabButton {
     id: control
 
     /**
-     * The index of this tab within the tab bar.
+     * @brief This property tells the index of this tab within the tab bar.
      */
     readonly property int tabIndex: {
         let tabIdx = 0
@@ -84,8 +84,10 @@ T.TabButton {
     }
     
     /**
-     * Whether the icon colors should be masked with a single color.
-     * 
+     * @brief This property sets whether the icon colors should be masked with a single color.
+     *
+     * default: ``true``
+     *
      * @since 5.96
      */
     property bool recolorIcon: true
