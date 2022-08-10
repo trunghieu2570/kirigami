@@ -13,7 +13,7 @@ import QtQml 2.1
  */
 QtObject {
     /**
-     * @brief This property holds the name of the icon to use.
+     * @brief This property holds icon name.
      *
      * The icon will be loaded from the platform theme. If the icon is found
      * in the theme, it will always be used; even if icon.source is also set.
@@ -22,7 +22,7 @@ QtObject {
     property string name
     
     /**
-     * @brief This property holds the name of the icon to use.
+     * @brief This property holds the icon source.
      *
      * The icon will be loaded as a regular image.
      *
@@ -31,7 +31,7 @@ QtObject {
     property var source
 
     /**
-     * @brief This property holds the color of the icon.
+     * @brief This property holds the icon tint color.
      *
      * The icon is tinted with the specified color, unless the color is set to "transparent".
      */
