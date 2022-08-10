@@ -9,9 +9,9 @@ import org.kde.kirigami 2.14
 import QtQuick.Controls 2.1 as QQC2
 
 /**
- * Shows a Button that looks like a link
+ * @brief A button that looks like a link.
  *
- * Uses the link color settings and allows to trigger an action when clicked.
+ * It uses the link color settings and triggers an action when clicked.
  *
  * Maps to the Command Link in the HIG:
  * https://develop.kde.org/hig/components/navigation/commandlink/
@@ -24,17 +24,20 @@ QQC2.Label {
     id: control
 
     property Action action: null
+
     /**
-     * @var Qt::MouseButtons acceptedButtons
-     * This property holds the mouse buttons that the mouse area reacts to.
-     * See <a href="https://doc.qt.io/qt-5/qml-qtquick-mousearea.html#acceptedButtons-prop">Qt documentation</a>.
+     * @brief This property holds the mouse buttons that the mouse area reacts to.
+     * @see QtQuick.MouseArea::acceptedButtons
+     * @property Qt::MouseButtons acceptedButtons
      */
     property alias acceptedButtons: area.acceptedButtons
+
     /**
-     * @var MouseArea ara
-     * Mouse area element covering the button.
+     * @brief This property holds the mouse area element covering the button.
+     * @property MouseArea area
      */
     property alias mouseArea: area
+
     Accessible.role: Accessible.Button
     Accessible.name: text
     Accessible.onPressAction: control.clicked(null)
