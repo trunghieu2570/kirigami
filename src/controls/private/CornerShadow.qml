@@ -11,11 +11,15 @@ import org.kde.kirigami 2.4
 RadialGradient {
     id: shadow
     /**
-     * corner: enumeration
-     * This property holds the corner of the shadow that will determine
+     * @brief This property holds the corner of the shadow that will determine
      * the direction of the gradient.
+     *
      * The acceptable values are:
      * Qt.TopLeftCorner, TopRightCorner, BottomLeftCorner, BottomRightCorner
+     *
+     * default: ``Qt.TopRightCorner``
+     *
+     * @see Qt::Corner
      */
     property int corner: Qt.TopRightCorner
 
