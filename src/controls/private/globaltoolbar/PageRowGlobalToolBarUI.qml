@@ -114,7 +114,7 @@ Kirigami.AbstractApplicationHeader {
 
             active: (globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.TabBar || globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.Breadcrumb) && currentItem && currentItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.None
 
-            //TODO: different implementation?
+            // TODO: different implementation?
             source: globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.TabBar ? Qt.resolvedUrl("TabBarControl.qml") : Qt.resolvedUrl("BreadcrumbControl.qml")
         }
 
