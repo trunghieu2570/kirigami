@@ -12,6 +12,8 @@ import "templates" as T
  * An item delegate Intended to support extra actions obtainable
  * by uncovering them by dragging away the item with the handle
  * This acts as a container for normal list items.
+ *
+ * Example usage:
  * @code
  * ListView {
  *     model: myModel

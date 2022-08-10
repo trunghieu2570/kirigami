@@ -13,9 +13,12 @@ import "../private"
 
 /**
  * An item delegate intended to support extra actions obtainable
- * by uncovering them by dragging away the item with the handle
+ * by uncovering them by dragging away the item with the handle.
+ *
  * This acts as a container for normal list items.
  * Any subclass of AbstractListItem can be assigned as the contentItem property.
+ *
+ * Example usage:
  * @code
  * ListView {
  *     model: myModel
@@ -42,44 +45,59 @@ import "../private"
 T2.SwipeDelegate {
     id: listItem
 
+//BEGIN properties
     /**
-     * Holds if the item emits signals related to mouse interaction.
-     * The default value is false.
-     * @var bool supportsMouseEvents
+     * @brief This property sets whether the item should emit signals related to mouse interaction.
+     *
+     * default: ``false``, ``true`` when cursor goes over the item.
+     *
      * @deprcated Use hoverEnabled instead.
+     * @property bool supportsMouseEvents
      */
     property alias supportsMouseEvents: listItem.hoverEnabled
 
     /**
-     * True when the user hover the mouse over the list item
-     * NOTE: on mobile touch devices this will be true only when pressed is also true
-     * @var bool containsMouse
+     * @brief This property holds whether the cursor is currently hovering over the item.
+     * @note on mobile touch devices this will be true only when pressed is also true
      * @deprecated Use hovered instead.
+     * @property bool containsMouse
      */
     property alias containsMouse: listItem.hovered
 
     /**
-     * If true the background of the list items will be alternating between two
-     * colors, helping readability with multiple column views.
-     * Use it only when implementing a view which shows data visually in multiple columns
-     * @ since 2.7
+     * @brief This property sets whether items' backgrounds alternate between two colors, which helps with readability.
+     *
+     * It is suggested to use this only when implementing a view with multiple columns.
+     *
+     * default: ``false``
+     *
+     * @since 2.7
      */
     property bool alternatingBackground: false
 
     /**
-     * If true the item will be a delegate for a section, so will look like a
-     * "title" for the items under it.
+     * @brief This property sets whether this item is a section delegate.
+     *
+     * If true, this item will look like a title for items under it.
+     *
+     * default: ``false``
      */
     property bool sectionDelegate: false
 
     /**
-     * True if the separator between items is visible
-     * default: true
+     * @brief This property sets whether the separator is visible.
+     *
+     * The separator is a line between this and the item under it.
+     *
+     * default: ``true``
      */
     property bool separatorVisible: true
 
     /**
+     * @brief This property tells whether actions are accessible.
+     *
      * True if it's possible to see and access the item actions.
+     *
      * Actions should go completely out of the way for instance during
      * the editing of an item.
      * @since 2.5
@@ -87,73 +105,86 @@ T2.SwipeDelegate {
     readonly property bool actionsVisible: actionsLayout.hasVisibleActions
 
     /**
-     * @var list<QtQuick.Controls.Action> actions
-     * Defines the actions for the list item: at most 4 buttons will
-     * contain the actions for the item, that can be revealed by
-     * sliding away the list item.
+     * @brief This property holds actions for the list item.
+     *
+     * At most 4 actions can be revealed when sliding away the list item,
+     * others will be shown in the overflow menu.
+     *
+     * @property list<QtQuick.Controls.Action> actions
      */
     property list<Controls.Action> actions
 
     /**
-     * Defines the width of the overlay. The value can represent
-     * the width of the handle component or the action layout.
-     * @var real overlayWidth
+     * @brief This property holds the width of the overlay.
+     *
+     * The value can represent the width of the handle component or the action layout.
+     *
      * @since 2.19
+     * @property real overlayWidth
      */
     readonly property alias overlayWidth: overlayLoader.width
 
     /**
-     * textColor: color
-     * Color for the text in the item
+     * @brief This property holds the color for the text in the item.
      *
-     * Note: if custom text elements are inserted in an AbstractListItem,
+     * @note if custom text elements are inserted in an AbstractListItem,
      * their color property will have to be manually bound with this property.
+     *
+     * default: ``Kirigami.Theme.textColor``
      */
     property color textColor: Kirigami.Theme.textColor
 
     /**
-     * backgroundColor: color
-     * Color for the background of the item
+     * @brief This property holds the color for the background item.
+     *
+     * default: ``Kirigami.Theme.backgroundColor``
      */
     property color backgroundColor: Kirigami.Theme.backgroundColor
 
     /**
-     * alternateBackgroundColor: color
-     * The background color to use if alternatingBackground is true.
-     * It is advised to leave the default.
+     * @brief This property holds the alternate background color used for
+     * alternating list items when the alternatingBackground property is
+     * set to true.
+     *
+     * It is advised to use the default value.
+     * default: ``Kirigami.Theme.alternateBackgroundColor``
+     *
      * @since 2.7
      */
     property color alternateBackgroundColor: Kirigami.Theme.alternateBackgroundColor
 
     /**
-     * activeTextColor: color
-     * Color for the text in the item when pressed or selected
-     * It is advised to leave the default value (Theme.highlightedTextColor)
-     *
-     * Note: if custom text elements are inserted in an AbstractListItem,
+     * @brief This property holds the color of the text when the item is pressed or selected.
+     * @note if custom text elements are inserted in an AbstractListItem,
      * their color property will have to be manually bound with this property
+     *
+     * It is advised to use the default value.
+     * default: ``Kirigami.Theme.highlightedTextColor``
      */
     property color activeTextColor: Kirigami.Theme.highlightedTextColor
 
     /**
-     * activeBackgroundColor: color
-     * Color for the background of the item when pressed or selected
-     * It is advised to leave the default value (Theme.highlightColor)
+     * @brief This property holds the color of the background when the item is pressed or selected.
+     *
+     * It is advised to use the default value.
+     * default: ``Kirigami.Theme.highlightColor``
      */
     property color activeBackgroundColor: Kirigami.Theme.highlightColor
 
     /**
-     * alwaysVisibleActions: bool
-     * If true, the actions behind this SwipeListItem will be always visible.
-     * Valid both in tablet and desktop modes
+     * @brief This property sets whether actions behind this SwipeListItem will always be visible.
+     *
+     * default: `true in desktop and tablet mode`
+     *
      * @since 2.15
      */
     property bool alwaysVisibleActions: !Kirigami.Settings.isMobile
 
-    //TODO KF6 remove this super wrong thing
+    // TODO KF6 remove this super wrong thing
     /// @private
     /// @deprecated This property will be removed in KDE Framework 6. Use contentItem instead.
     default property alias _default: listItem.contentItem
+//END properties
 
     LayoutMirroring.childrenInherit: true
 
@@ -182,7 +213,7 @@ T2.SwipeDelegate {
 
         property bool indicateActiveFocus: listItem.pressed || Kirigami.Settings.tabletMode || listItem.activeFocus || (view ? view.activeFocus : false)
 
-        //install the SwipeItemEventFilter
+        // install the SwipeItemEventFilter
         onViewChanged: {
             if (listItem.alwaysVisibleActions || !Kirigami.Settings.tabletMode) {
                 return;
@@ -212,7 +243,7 @@ T2.SwipeDelegate {
         }
     }
 
-//BEGIN Items
+//BEGIN items
     Loader {
         id: overlayLoader
         readonly property int paddingOffset: (visible ? width : 0) + Kirigami.Units.smallSpacing
@@ -380,7 +411,7 @@ T2.SwipeDelegate {
         }
     }
 
-    //TODO: expose in API?
+    // TODO: expose in API?
     Component {
         id: actionsBackgroundDelegate
         MouseArea {
@@ -507,6 +538,6 @@ T2.SwipeDelegate {
         property: "position"
         from: listItem.swipe.position
     }
-//END Items
+//END items
 }
 
