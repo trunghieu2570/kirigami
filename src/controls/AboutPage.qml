@@ -24,6 +24,8 @@ import org.kde.kirigami 2.19
 ScrollablePage
 {
     id: page
+
+//BEGIN properties
     /**
      * @brief This property holds an object with the same shape as KAboutData.
      *
@@ -70,9 +72,7 @@ ScrollablePage
     /**
      * @brief This property holds a link to a "Get Involved" page.
      *
-     * By default, this links to
-     * "https://community.kde.org/Get_Involved" when your application application
-     * id starts with "org.kde.", otherwise is empty.
+     * default: `"https://community.kde.org/Get_Involved" when your application id starts with "org.kde.", otherwise is empty`
      *
      * @property url getInvolvedUrl
      */
@@ -80,6 +80,7 @@ ScrollablePage
 
     /** @internal */
     default property alias _content: aboutItem._content
+//END properties
 
     title: qsTr("About %1").arg(page.aboutData.displayName)
 
