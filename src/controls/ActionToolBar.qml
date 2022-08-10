@@ -28,6 +28,8 @@ import "private"
  */
 QQC2.Control {
     id: root
+
+//BEGIN properties
     /**
      * @brief This property holds a list of visible actions.
      *
@@ -53,19 +55,20 @@ QQC2.Control {
     /**
      * @brief This property holds whether the buttons will have a flat appearance.
      *
-     * The default value is true.
+     * default: ``true``
      */
     property bool flat: true
 
     /**
      * @brief This property determines how the icon and text are displayed within the button.
      *
-     * * `Button.IconOnly`
-     * * `Button.TextOnly`
-     * * `Button.TextBesideIcon`
-     * * `Button.TextUnderIcon`
+     * Permitted values are:
+     * * ``Button.IconOnly``
+     * * ``Button.TextOnly``
+     * * ``Button.TextBesideIcon``
+     * * ``Button.TextUnderIcon``
      *
-     * By default, the text is displayed beside the icon.
+     * default: ``Controls.Button.TextBesideIcon``
      *
      * @see QtQuick.Controls.AbstractButton
      * @property int display
@@ -81,7 +84,7 @@ QQC2.Control {
      * When there is more space available than required by the visible action delegates,
      * we need to determine where to position them.
      *
-     * The default value is right-aligned (`Qt.AlignRight`).
+     * default: ``Qt.AlignRight``
      *
      * @see Qt::AlignmentFlag
      * @property int alignment
@@ -93,9 +96,9 @@ QQC2.Control {
      *
      * If this ActionToolBar is the contentItem of a QQC2 Toolbar, the position is bound to the ToolBar's position
      *
-     * @note Permitted values are:
-     * * `ToolBar.Header`: The toolbar is at the top, as a window or page header.
-     * * `ToolBar.Footer`: The toolbar is at the bottom, as a window or page footer.
+     * Permitted values are:
+     * * ``ToolBar.Header``: The toolbar is at the top, as a window or page header.
+     * * ``ToolBar.Footer``: The toolbar is at the bottom, as a window or page footer.
      *
      * @property int position
      */
@@ -118,7 +121,7 @@ QQC2.Control {
     /**
      * @brief This property holds the name of the icon to use for the overflow menu button.
      *
-     * By default this is "overflow-menu".
+     * default: ``"overflow-menu"``
      *
      * @since 5.65
      * @since 2.12
@@ -126,24 +129,30 @@ QQC2.Control {
     property string overflowIconName: "overflow-menu"
 
     /**
-     * @brief This property holds the combined width of the visible delegates.
+     * @brief This property holds the combined width of all visible delegates.
      * @property int visibleWidth
      */
     property alias visibleWidth: layout.visibleWidth
 
     /**
-     * @brief This propery holds how to handle items that do not match the toolbar's height.
+     * @brief This property sets the handling method for items that do not match the toolbar's height.
      *
      * When toolbar items do not match the height of the toolbar, there are
      * several ways we can deal with this. This property sets the preferred way.
      *
-     * The default is HeightMode::ConstrainIfLarger .
+     * Permitted values are:
+     * * ``HeightMode.AlwaysCenter``
+     * * ``HeightMode.AlwaysFill``
+     * * ``AlwaysFill.ConstrainIfLarger``
+     *
+     * default: ``HeightMode::ConstrainIfLarger``
      *
      * @see ToolBarLayout::heightMode
      * @see ToolBarLayout::HeightMode
      * @property ToolBarLayout::HeightMode heightMode
      */
     property alias heightMode: layout.heightMode
+//END properties
 
     implicitHeight: layout.implicitHeight
     implicitWidth: layout.implicitWidth
