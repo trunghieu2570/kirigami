@@ -9,6 +9,9 @@ import QtQuick.Controls 2.15 as Controls
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
 
+/**
+ * @warning This will probably be deprecated in KF6.
+ */
 // TODO KF6 deprecated
 Controls.TabBar {
     id: root
