@@ -6,21 +6,26 @@ import org.kde.kirigami 2.12 as Kirigami
 /**
  * Control for dynamically moving a bar above or below a content item,
  * e.g. to move tabs to the bottom on mobile.
+ *
+ * @inherit QtQuick.Item
  */
 Item {
     id: __root
 
+    /**
+     * @brief Position options for TabViewLayout.
+     */
     enum Position {
         Top,
         Bottom
     }
 
     /**
-     * position: Position.Top | Position.Bottom
+     * @brief The position of the bar in relation to the contentItem.
      *
-     * The position of the bar in relation to the contentItem.
+     * default: `Position.Bottom on mobile, and Position.Top otherwise`
      *
-     * Defaults to Position.Bottom on mobile, and Position.Top otherwise.
+     * @see org::kde::kirigami::TabViewLayout::Position
      */
     property int position: Kirigami.Settings.isMobile ? TabViewLayout.Position.Bottom : TabViewLayout.Position.Top
 
