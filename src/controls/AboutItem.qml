@@ -11,7 +11,7 @@ import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.18
 
 /**
- * An about item that displays the about data
+ * @brief An about item that displays the about data
  *
  * Allows to show the copyright notice of the application
  * together with the contributors and some information of which platform it's
@@ -24,9 +24,9 @@ Item
 {
     id: aboutItem
     /**
-     * This property holds an object with the same shape as KAboutData.
+     * @brief This property holds an object with the same shape as KAboutData.
      *
-     * For example:
+     * Example usage:
      * @code{json}
      * aboutData: {
           "displayName" : "KirigamiApp",
@@ -65,15 +65,19 @@ Item
     property var aboutData
 
     /**
-     * This property holds a link to a "Get Involved" page. By default link to
-     * "https://community.kde.org/Get_Involved" when your application application
-     * id starts with "org.kde.", otherwise is empty.
+     * @brief This property holds a link to a "Get Involved" page.
+     *
+     * default: `"https://community.kde.org/Get_Involved" when application id stard with "org.kde.", otherwise is empty.`
      */
     property url getInvolvedUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://community.kde.org/Get_Involved" : ""
 
     /** @internal */
     property bool _usePageStack: false
 
+    /**
+     * @see org::kde::kirigami::FormLayout::wideMode
+     * @property bool wideMode
+     */
     property alias wideMode: form.wideMode
 
     /** @internal */
