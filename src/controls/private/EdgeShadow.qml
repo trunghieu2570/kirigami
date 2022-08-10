@@ -11,14 +11,14 @@ import org.kde.kirigami 2.4
 LinearGradient {
     id: shadow
     /**
-     * edge: enumeration
-     * This property holds the edge of the shadow that will determine
-     * the direction of the gradient.
+     * @brief This property holds the edge of the shadow that will determine the direction of the gradient.
      * The acceptable values are:
-     * Qt.TopEdge: The top edge of the content item.
-     * Qt.LeftEdge: The left edge of the content item (default).
-     * Qt.RightEdge: The right edge of the content item.
-     * Qt.BottomEdge: The bottom edge of the content item.
+     * * ``Qt.TopEdge``: The top edge of the content item.
+     * * ``Qt.LeftEdge``: The left edge of the content item
+     * * ``Qt.RightEdge``: The right edge of the content item.
+     * * ``Qt.BottomEdge``: The bottom edge of the content item.
+     *
+     * @see Qt::Edges
      */
     property int edge: Qt.LeftEdge
 
