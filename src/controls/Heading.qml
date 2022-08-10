@@ -38,17 +38,18 @@ QQC2.Label {
     id: heading
 
     /**
-     * @brief This property holds the heading level.
+     * @brief This property holds the level of the heading, which determines its size.
      *
-     * The level determines how big the section header is displayed; values
-     * between 1 (big) and 5 (small) are accepted.
+     * This property holds the level, which determines how large the header is.
+     * 
+     * Acceptable values range from 1 (big) to 5 (small).
      *
      * default: ``1``
      */
     property int level: 1
 
     /**
-     * @brief This property holds the point size between levels.
+     * @brief This property holds the point size between heading levels.
      *
      * default: ``0``
      *
@@ -57,7 +58,7 @@ QQC2.Label {
     property int step: 0
 
     /**
-     * @brief These are heading types.
+     * @brief This enumeration defines heading types.
      *
      * This enum helps with heading visibility (making it less or more important).
      */
