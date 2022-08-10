@@ -89,8 +89,6 @@ AbstractApplicationWindow {
     id: root
 
     /**
-     * @property QtQuick.StackView ApplicationItem::pageStack
-     *
      * @brief This property holds the stack used to allocate the pages and to
      * manage the transitions between them.
      *
@@ -100,7 +98,7 @@ AbstractApplicationWindow {
      * fullscreen column, a tablet device would have many tiled columns.
      *
      * @warning This property is not currently readonly, but it should be treated like it is readonly.
-     * @property PageRow pageStack
+     * @property org::kde::kirigami::PageRow pageStack
      */
     property alias pageStack: __pageStack  // TODO KF6 make readonly
 
