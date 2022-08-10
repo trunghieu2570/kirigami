@@ -52,15 +52,15 @@ Controls.Action {
     property string tooltip
 
     /**
-     * @brief This sets whether the action is a separator action.
+     * @brief This property sets whether this action is a separator action.
      *
      * default: ``false``
      */
     property bool separator: false
 
     /**
-     * @brief This property holds whether the actions in globalDrawers and contextDrawers will
-     * become titles displaying the child actions as sub items.
+     * @brief This property sets whether this action  becomes a title displaying
+     * its child actions as sub-items in GlobalDrawers and ContextDrawers.
      *
      * default: ``false``
      *
@@ -144,7 +144,7 @@ Controls.Action {
     }
 
     /**
-     * @brief This property holds the child actions that are visible.
+     * @brief This property holds the action's visible child actions.
      * @property list<Action> visibleChildren
      */
     readonly property var visibleChildren: {
