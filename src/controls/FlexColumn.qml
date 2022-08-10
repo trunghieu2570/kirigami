@@ -18,24 +18,27 @@ ColumnLayout {
     default property alias columnChildren: __inner.children
 
     /**
-     * @brief The column's offset from the cross axis.
+     * @brief This property holds the column's offset from the cross axis.
      *
      * Note that padding is applied on both sides
      * when the column is aligned to a centered cross axis.
      *
-     * default: Kirigami.Units.largeSpacing
+     * default: ``Kirigami.Units.largeSpacing``
      */
     property real padding: Kirigami.Units.largeSpacing
 
     /**
      * @brief This property holds maximum column width.
      *
-     * default: Kirigami.Units.gridUnit * 50
+     * default: ``Kirigami.Units.gridUnit * 50``
      */
     property real maximumWidth: Kirigami.Units.gridUnit * 50
 
     /**
-     * @brief Set column alignment when it hits its maximum width.
+     * @brief This property sets column's alignment when it hits its maximum width.
+     *
+     * default: ``Qt.AlignHCenter | Qt.AlignTop``
+     *
      * @property Qt::Alignment alignment
      */
     property int alignment: Qt.AlignHCenter | Qt.AlignTop
