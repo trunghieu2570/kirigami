@@ -17,12 +17,11 @@ import org.kde.kirigami 2.18 as Kirigami
  * labels provided by a Kirigami.FormData attached property,
  * the right column contains left-aligned child types.
  *
- * Child types can be sectioned using an
- * <a href="https://doc.qt.io/qt-6/qml-qtquick-item.html">Item</a>
- * or org::kde::kirigami::Separator with a Kirigami.FormData
+ * Child types can be sectioned using an QtQuick.Item
+ * or Kirigami.Separator with a Kirigami.FormData
  * attached property, see FormLayoutAttached::isSection for details.
  *
- * Example:
+ * Example usage:
  * @code
  * import org.kde.kirigami 2.3 as Kirigami
  * Kirigami.FormLayout {
@@ -41,13 +40,15 @@ import org.kde.kirigami 2.18 as Kirigami
  * }
  * @endcode
  * @see FormLayoutAttached
- * @inherit QtQuick.Item
  * @since 2.3
+ * @inherit QtQuick.Item
  */
 Item {
     id: root
 
     /**
+     * @brief This property tells whether the form layout is in wide mode.
+     *
      * If true, the layout will be optimized for a wide screen, such as
      * a desktop machine (the labels will be on a left column,
      * the fields on a right column beside it), if false (such as on a phone)
@@ -61,15 +62,6 @@ Item {
      */
     property bool wideMode: width >= lay.wideImplicitWidth
 
-    implicitWidth: lay.wideImplicitWidth
-    implicitHeight: lay.implicitHeight
-    Layout.preferredHeight: lay.implicitHeight
-    Accessible.role: Accessible.Form
-
-    Component.onCompleted: {
-        relayoutTimer.triggered()
-    }
-
     /**
      * If for some implementation reason multiple FormLayouts have to appear
      * on the same page, they can have each other in twinFormLayouts,
@@ -78,8 +70,6 @@ Item {
      * @since 5.53
      */
     property list<Item> twinFormLayouts  // should be list<FormLayout> but we can't have a recursive declaration
-
-    Layout.fillWidth: true
 
     onTwinFormLayoutsChanged: {
         for (let i in twinFormLayouts) {
@@ -90,6 +80,10 @@ Item {
         }
     }
 
+    Component.onCompleted: {
+        relayoutTimer.triggered()
+    }
+
     Component.onDestruction: {
         for (let i in twinFormLayouts) {
             const twin = twinFormLayouts[i];
@@ -97,6 +91,13 @@ Item {
             child.reverseTwins = child.reverseTwins.filter((value, index, arr) => value !== root)
         }
     }
+
+    implicitWidth: lay.wideImplicitWidth
+    implicitHeight: lay.implicitHeight
+    Layout.preferredHeight: lay.implicitHeight
+    Layout.fillWidth: true
+    Accessible.role: Accessible.Form
+
     GridLayout {
         id: lay
         property int wideImplicitWidth
