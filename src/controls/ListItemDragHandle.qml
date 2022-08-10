@@ -64,28 +64,28 @@ import org.kde.kirigami 2.4 as Kirigami
  *   ...
  * @endcode
  *
- * @inherit QtQuick.Item
  * @since 2.5
+ * @inherit QtQuick.Item
  */
 Item {
     id: root
 
     /**
-     * listItem: Item
-     * The id of the delegate that we want to drag around, which *must*
-     * be a child of the actual ListView's delegate
+     * @brief This property holds the delegate that will be dragged around.
+     *
+     * This item *must* be a child of the actual ListView's delegate.
      */
     property Item listItem
 
     /**
-     * listView: Listview
-     * The id of the ListView the delegates belong to.
+     * @brief This property holds the ListView that the delegate belong to.
      */
     property ListView listView
 
     /**
-     * Emitted when the drag handle wants to move the item in the model
-     * The following example does the move in the case a ListModel is used
+     * @brief This signal is emitted when the drag handle wants to move the item in the model.
+     *
+     * The following example does the move in the case a ListModel is used:
      * @code
      *  onMoveRequested: listModel.move(oldIndex, newIndex, 1)
      * @endcode
@@ -95,8 +95,8 @@ Item {
     signal moveRequested(int oldIndex, int newIndex)
 
     /**
-     * Emitted when the drag operation is complete and the item has been
-     * dropped in the new final position
+     * @brief This signal is emitted when the drag operation is complete and the item has been
+     * dropped in the new final position.
      */
     signal dropped()
 
