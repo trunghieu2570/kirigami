@@ -37,7 +37,7 @@ StackView {
 
     pushEnter: Transition {
         ParallelAnimation {
-            //NOTE: It's a PropertyAnimation instead of an Animator because with an animator the item will be visible for an instant before starting to fade
+            // NOTE: It's a PropertyAnimation instead of an Animator because with an animator the item will be visible for an instant before starting to fade
             PropertyAnimation {
                 property: "opacity"
                 from: 0
