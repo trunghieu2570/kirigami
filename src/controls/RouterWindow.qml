@@ -8,7 +8,7 @@ import QtQuick 2.5
 import org.kde.kirigami 2.12 as Kirigami
 
 /**
- * @brief An org::kde::kirigami::ApplicationWindow with a preconfigured PageRouter.
+ * @brief An ApplicationWindow with a preconfigured PageRouter.
  *
  * In order to call functions on the PageRouter, use @link PageRouterAttached  the attached Kirigami.PageRouter object @endlink.
  *
@@ -30,7 +30,7 @@ Kirigami.ApplicationWindow {
     property alias initialRoute: __kirigamiPageRouter.initialRoute
 
     /**
-     * @brief This property point to the PageRouter of this window.
+     * @brief This property holds this window's PageRouter.
      * @property org::kde::kirigami::PageRouter
      */
     property alias router: __kirigamiPageRouter
