@@ -11,7 +11,8 @@ import org.kde.kirigami 2.14
 import QtQuick.Controls 2.4 as Controls
 
 /**
- * An item that can be used as a title for the application.
+ * @brief An item that can be used as a title for the application.
+ *
  * Scrolling the main page will make it taller or shorter (through the point of going away)
  * It's a behavior similar to the typical mobile web browser addressbar
  * the minimum, preferred and maximum heights of the item can be controlled with
@@ -20,6 +21,7 @@ import QtQuick.Controls 2.4 as Controls
  * * preferredHeight: default is Units.gridUnit * 3
  *
  * To achieve a titlebar that stays completely fixed just set the 3 sizes as the same
+ *
  * @inherit QtQuick.Item
  */
 Item {
@@ -52,15 +54,14 @@ Item {
 
     Theme.inherit: true
 
-    //FIXME: remove
+    // FIXME: remove
     property QtObject __appWindow: typeof applicationWindow !== "undefined" ? applicationWindow() : null;
     implicitHeight: preferredHeight
     height: Layout.preferredHeight
 
     /**
-     * background: Item
-     * This property holds the background item.
-     * Note: the background will be automatically sized as the whole control
+     * @brief This property holds the background item.
+     * @note the background will be automatically sized to fill the whole control
      */
     property Item background
 
