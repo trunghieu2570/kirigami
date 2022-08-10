@@ -32,7 +32,7 @@ import "templates" as T
  * Actions are added from left to right. If more actions are set than
  * can fit, an overflow menu is provided.
  *
- * Example:
+ * Example usage:
  * @code
  * InlineMessage {
  *     type: Kirigami.MessageType.Error
