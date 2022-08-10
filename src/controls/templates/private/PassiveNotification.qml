@@ -14,7 +14,7 @@ import org.kde.kirigami 2.12 as Kirigami
 /*
  * PassiveNotification is a type for small, passive and inline
 notifications in the app.
- * used to show messages of limited importance that make sense only when
+ * It is used to show messages of limited importance that make sense only when
  * the user is using the application and wouldn't be suited as a global
  * system-wide notification.
  * This is not a full-fledged notification system. the applciation should
