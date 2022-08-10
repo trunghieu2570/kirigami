@@ -18,6 +18,7 @@ import org.kde.kirigami 2.11
  *
  * @since 5.86
  * @since org.kde.kirigami 2.18
+ * @inherit kde::org::kirigami::PageRow
  */
 PageRow {
     id: pageSettingStack
