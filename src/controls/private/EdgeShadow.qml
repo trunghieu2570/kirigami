@@ -13,10 +13,10 @@ LinearGradient {
     /**
      * @brief This property holds the edge of the shadow that will determine the direction of the gradient.
      * The acceptable values are:
-     * * ``Qt.TopEdge``: The top edge of the content item.
-     * * ``Qt.LeftEdge``: The left edge of the content item
-     * * ``Qt.RightEdge``: The right edge of the content item.
-     * * ``Qt.BottomEdge``: The bottom edge of the content item.
+     * * ``Qt.TopEdge``: the top edge of the content item.
+     * * ``Qt.LeftEdge``: the left edge of the content item
+     * * ``Qt.RightEdge``: the right edge of the content item.
+     * * ``Qt.BottomEdge``: the bottom edge of the content item.
      *
      * @see Qt::Edges
      */
