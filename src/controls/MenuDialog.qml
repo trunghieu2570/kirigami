@@ -12,11 +12,7 @@ import org.kde.kirigami 2.19 as Kirigami
  * A dialog that prompts users with a context menu, with
  * list items that perform actions.
  *
- * @see Dialog
- * @see PromptDialog
- *
  * Example usage:
- *
  * @code{.qml}
  * Kirigami.MenuDialog {
  *     title: i18n("Track Options")
@@ -52,24 +48,30 @@ import org.kde.kirigami 2.19 as Kirigami
  * }
  * @endcode
  *
- * @inherit Dialog
+ * @see Dialog
+ * @see PromptDialog
+ * @inherit org::kde::kirigami::Dialog
  */
 Kirigami.Dialog {
 
     /**
-     * The list of actions to show in the context menu.
+     * @brief This property holds the actions displayed in the context menu.
      */
     property list<QtObject> actions
 
     /**
-     * The content header, which appears above the actions
+     * @brief This property holds the content header, which appears above the actions.
      * but below the header bar.
      */
     property Item contentHeader
 
     /**
-     * Provides access to the content header QtQuick.Control,
-     * which can allow for setting its padding (ex. `contentHeaderControl.topPadding`).
+     * @brief This property holds the content header.
+     *
+     * This makes it possible to access its internal properties to, for example, change its padding:
+     * ``contentHeaderControl.topPadding``
+     *
+     * @property QtQuick.Controls.Control contentHeaderControl
      */
     property alias contentHeaderControl: columnHeader
 
