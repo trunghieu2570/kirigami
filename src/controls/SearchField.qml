@@ -10,8 +10,8 @@ import QtQuick.Controls 2.1 as Controls
 import org.kde.kirigami 2.16 as Kirigami
 
 /**
- * This is a standard textfield following KDE HIG. Using Ctrl+F as focus
- * sequence and "Search..." as placeholder text.
+ * @brief This is a standard TextField following the KDE HIG, which, by default,
+ * uses Ctrl+F as the focus keyboard shortcut and "Search…" as a placeholder text.
  *
  * Example usage for the search field component:
  * @code
@@ -29,26 +29,30 @@ Kirigami.ActionTextField
 {
     id: root
     /**
-     * Determines whether the accepted signal will be fired automatically
-     * when the text is changed. Setting this to false will require that
-     * the user presses return or enter (the same way a QML.TextInput
-     * works).
+     * @brief This property sets whether the accepted signal is fired automatically
+     * when the text is changed.
      *
-     * The default value is true
+     * Setting this to false will require that the user presses return or enter
+     * (the same way a QtQuick.Controls.TextInput works).
+     *
+     * default: ``true``
      *
      * @since 5.81
      * @since org.kde.kirigami 2.16
      */
     property bool autoAccept: true
+
     /**
-     * Delays the automatic acceptance of the input further (by 2.5 seconds).
-     * Set this to true if your search is expensive (such as for online
-     * operations or in exceptionally slow data sets).
+     * @brief This property sets whether to delay automatic acceptance of the search input.
      *
-     * \note If you must have immediate feedback (filter-style), use the
+     * Set this to true if your search is expensive (such as for online
+     * operations or in exceptionally slow data sets) and want to delay it
+     * for 2.5 seconds.
+     *
+     * @note If you must have immediate feedback (filter-style), use the
      * text property directly instead of accepted()
      *
-     * The default value is false
+     * default: ``false``
      *
      * @since 5.81
      * @since org.kde.kirigami 2.16
