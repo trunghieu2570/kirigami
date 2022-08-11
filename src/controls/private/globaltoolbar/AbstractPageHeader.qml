@@ -11,7 +11,7 @@ import org.kde.kirigami 2.19
 
 AbstractApplicationHeader {
     id: root
-   // anchors.fill: parent
+    // anchors.fill: parent
     property Item container
     property bool current
 
