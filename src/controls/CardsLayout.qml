@@ -59,7 +59,7 @@ GridLayout {
      * The layout will try to dispose of items
      * in a number of columns that will respect this size constraint.
      *
-     * defualt: ``12 * Kirigami.Units.gridUnit``
+     * default: ``12 * Kirigami.Units.gridUnit``
      *
      * @since 2.5
      */
