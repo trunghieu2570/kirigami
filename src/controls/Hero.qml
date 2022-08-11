@@ -15,21 +15,22 @@ import org.kde.kirigami 2.13 as Kirigami
 Item {
     id: root
 
+//BEGIN properties
     /**
-     * @brief The item to animate from in the hero animation.
+     * @brief This property holds the item to animate from in the Hero animation.
      */
     property Item source
 
     /**
-     * @brief The item to animate to in the hero animation.
+     * @brief This property holds the item to animate to in the Hero animation.
      */
     property Item destination
 
     /**
-     * Whether or not the source item will reappear in its original visual
-     * position when the hero animation completes.
+     * @brief This property sets whether the source item will reappear
+     * in the original position when the Hero animation completes.
      *
-     * default: true
+     * default: ``true``
      */
     property bool restore: true
 
@@ -37,51 +38,53 @@ Item {
      * Group of properties related to the mask of the object when performing a hero animation.
      * This contains the default mask as well as the properties required to create a custom mask.
      *
-     * The default mask of the hero will transition from a circle to a rectangle on open(), and
+     * The default mask of the Hero will transition from a circle to a rectangle on open(), and
      * from a rectangle to a circle on close().
      *
-     * * ``sourceProgress: real`` The progress of the animation, where 0 is the start and 1 is the end.
-     * * ``destinationProgress: real`` The progress of the animation, where 1 is the start and 0 is the end.
-     * * ``mask.sourceHeight: real`` The height of the source item.
-     * * ``mask.sourceWidth: real`` The width of the source item.
-     * * ``mask.destinationWidth: real`` The width of the destination item.
-     * * ``mask.destinationHeight: real`` The height of the destination item.
-     * * ``item: Rectangle`` The item used to mask the hero during animation. This should bind to the sourceProgress and destinationProgress to change as the animation progresses.
+     * * ``sourceProgress: real`` the progress of the animation, where 0 is the start and 1 is the end.
+     * * ``destinationProgress: real`` the progress of the animation, where 1 is the start and 0 is the end.
+     * * ``mask.sourceHeight: real`` the height of the source item.
+     * * ``mask.sourceWidth: real`` the width of the source item.
+     * * ``mask.destinationWidth: real`` the width of the destination item.
+     * * ``mask.destinationHeight: real`` the height of the destination item.
+     * * ``item: Rectangle`` the item used to mask the Hero during animation. This should bind to the sourceProgress and destinationProgress to change as the animation progresses.
      *
      */
     readonly property QtObject mask: QtObject {
         /**
-         * @brief The progress of the animation, where 0 is the start and 1 is the end.
+         * @brief This property holds the progress of the animation,
+         * where 0 is the start and 1 is the end.
          */
         readonly property real sourceProgress: sourceEffect.progress
 
         /**
-         * @brief The progress of the animation, where 1 is the start and 0 is the end.
+         * @brief This property holds the progress of the animation,
+         * where 1 is the start and 0 is the end.
          */
         readonly property real destinationProgress: destinationEffect.progress
 
         /**
-         * @brief The height of the source item.
+         * @brief This property holds the height of the source item.
          */
         readonly property real sourceHeight: sourceEffect.height
 
         /**
-        * @brief The width of the source item.
+        * @brief This property holds the width of the source item.
         */
         readonly property real sourceWidth: sourceEffect.width
 
         /**
-         * @brief The width of the destination item.
+         * @brief This property holds the width of the destination item.
          */
         readonly property real destinationWidth: destinationEffect.width
 
         /**
-         * @brief The height of the destination item.
+         * @brief This property holds the height of the destination item.
          */
         readonly property real destinationHeight: destinationEffect.height
 
         /**
-         * @brief This property holds the item used to mask the hero during animation.
+         * @brief This property holds the item used to mask the Hero during animation.
          *
          * This should bind to the sourceProgress and destinationProgress to change as the animation progresses.
          */
@@ -106,6 +109,7 @@ Item {
         property alias period: sourceAni.easing.period
         property alias type: sourceAni.easing.type
     }
+//END properties
 
     function open() {
         if (source !== null && destination !== null && !heroAnimation.running) {
