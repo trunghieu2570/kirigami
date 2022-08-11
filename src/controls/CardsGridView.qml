@@ -11,7 +11,8 @@ import org.kde.kirigami 2.4 as Kirigami
 import "private"
 
 /**
- * CardsGridView is used to display a grid of Cards generated from any model.
+ * @brief CardsGridView is used to display a grid of Cards generated from any model.
+ *
  * The behavior is same as CardsLayout, and it allows cards to be put in one or two
  * columns depending on the available width.
  *
@@ -22,20 +23,22 @@ import "private"
  * If possible use cards only when you don't need to instantiate a lot
  * and use CardsLayout instead.
  *
- * @inherit QtQuick.GridView
  * @see CardsLayout
+ * @see CardsListView
+ * @inherit QtQuick.GridView
  * @since 2.4
  */
 CardsGridViewPrivate {
     id: root
 
     /**
-     * @brief Should the view fill the (first) row with columns even when there is not enough space.
+     * @brief This property sets whether the view should fill the first row with columns
+     * even when there is not enough space.
      *
      * Set this to true if you want to stop the view from filling the first row with columns,
      * even when delegates can't even fill the first row.
      *
-     * default: true
+     * default: ``true``
      */
     property bool extraColumns: true
 
@@ -54,7 +57,7 @@ CardsGridViewPrivate {
     /**
      * @brief This property holds the maximum number of columns.
      *
-     * By default there is not limit.
+     * default: ``Infinity``
      *
      * @since 2.5
      */
@@ -70,7 +73,7 @@ CardsGridViewPrivate {
      * it is advised to express this unit as a multiple
      * of Kirigami.Units.gridUnit.
      *
-     * By default this is 20 * Kirigami.Units.gridUnit.
+     * default: ``20 * Kirigami.Units.gridUnit``
      */
     property int maximumColumnWidth: Kirigami.Units.gridUnit * 20
 
@@ -83,7 +86,7 @@ CardsGridViewPrivate {
      * it is advised to express this unit as a multiple
      * of Kirigami.Units.gridUnit.
      *
-     * By default this is 12 * Kirigami.Units.gridUnit.
+     * default: ``12 * Kirigami.Units.gridUnit``
      *
      * @since 2.5
      */
@@ -94,7 +97,7 @@ CardsGridViewPrivate {
 
     /**
      * @brief This property holds the delegate of the CardsGridView.
-     * @see QtQuick.ListView::delegate
+     * @see QtQuick.GridView::delegate
      */
     default property alias delegate: root._delegateComponent
 
