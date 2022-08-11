@@ -9,7 +9,7 @@ import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.10 as Kirigami
 
 /**
- * A section delegate for the primitive ListView component.
+ * @brief A section delegate for the primitive ListView component.
  *
  * It's intended to make all listviews look coherent.
  *
@@ -35,14 +35,13 @@ import org.kde.kirigami 2.10 as Kirigami
  *  [...]
  * }
  * @endcode
- *
  */
 Kirigami.AbstractListItem {
     id: listSection
 
     /**
-     * label: string
-     * A single text label the list section header will contain
+     * @brief This property sets the text of the ListView's section header.
+     * @property string label
      */
     property alias label: listSection.text
 
