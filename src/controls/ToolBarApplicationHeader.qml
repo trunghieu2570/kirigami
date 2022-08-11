@@ -12,8 +12,9 @@ import org.kde.kirigami 2.4
 
 
 /**
- * This Application header represents a toolbar that
+ * @brief ToolBarApplicationHeader represents a toolbar that
  * will display the actions of the current page.
+ *
  * Both Contextual actions and the main, left and right actions
  */
 ApplicationHeader {
@@ -23,7 +24,7 @@ ApplicationHeader {
     maximumHeight: preferredHeight
     headerStyle: ApplicationHeaderStyle.Titles
 
-    //FIXME: needs a property definition to have its own type in qml
+    // FIXME: needs a property definition to have its own type in qml
     property string _internal: ""
 
     Component.onCompleted: print("Warning: ToolbarApplicationHeader is deprecated, remove and use the automatic internal toolbar instead.")
