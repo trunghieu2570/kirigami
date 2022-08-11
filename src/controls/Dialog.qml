@@ -114,13 +114,13 @@ T.Dialog {
     property Item mainItem: contentControl.contentChildren.length > 0 ? contentControl.contentChildren[0] : null
 
     /**
-     * @brief The dialog's contents, includes Items and QtObjects.
+     * @brief This property holds the dialog's contents; includes Items and QtObjects.
      * @property list<QtObject> dialogData
      */
     default property alias dialogData: contentControl.contentData
 
     /**
-     * @brief The content items of the dialog.
+     * @brief This property holds the content items of the dialog.
      *
      * The initial height and width of the dialog is calculated from the
      * `implicitWidth` and `implicitHeight` of the content.
@@ -130,8 +130,7 @@ T.Dialog {
     property alias dialogChildren: contentControl.contentChildren
 
     /**
-     * The absolute maximum height the dialog can be (including the header
-     * and footer).
+     * @brief This property sets the absolute maximum height the dialog can have.
      *
      * The height restriction is solely applied on the content, so if the
      * maximum height given is not larger than the height of the header and
@@ -143,7 +142,7 @@ T.Dialog {
     readonly property real absoluteMaximumHeight: parent.height - Kirigami.Units.largeSpacing * 2
 
     /**
-     * @brief The absolute maximum width the dialog can be.
+     * @brief This property holds the absolute maximum width the dialog can have.
      *
      * By default, it is the window width, subtracted by largeSpacing on both
      * the top and bottom.
@@ -151,8 +150,8 @@ T.Dialog {
     readonly property real absoluteMaximumWidth: parent.width - Kirigami.Units.largeSpacing * 2
 
     /**
-     * @brief The maximum height the dialog can be (including the header
-     * and footer).
+     * @brief This property holds the maximum height the dialog can have
+     * (including the header and footer).
      *
      * The height restriction is solely enforced on the content, so if the
      * maximum height given is not larger than the height of the header and
@@ -163,14 +162,14 @@ T.Dialog {
     property real maximumHeight: absoluteMaximumHeight
 
     /**
-     * @brief The maximum width the dialog can be.
+     * @brief This property holds the maximum width the dialog can have.
      *
      * By default, this is `absoluteMaximumWidth`.
      */
     property real maximumWidth: absoluteMaximumWidth
 
     /**
-     * @brief Specify the preferred height of the dialog.
+     * @brief This property holds the preferred height of the dialog.
      *
      * The content will receive a hint for how tall it should be to have
      * the dialog to be this height.
@@ -181,7 +180,7 @@ T.Dialog {
     property real preferredHeight: -1
 
     /**
-     * @brief Specify the preferred width of the dialog.
+     * @brief This property holds the preferred width of the dialog.
      *
      * The content will receive a hint for how wide it should be to have
      * the dialog be this wide.
@@ -193,28 +192,29 @@ T.Dialog {
 
 
     /**
-     * @brief The component before the footer buttons.
+     * @brief This property holds the component to the left of the footer buttons.
      */
     property Component footerLeadingComponent
 
     /**
-     * @brief The component after the footer buttons.
+     * @brief his property holds the component to the right of the footer buttons.
      */
     property Component footerTrailingComponent
 
     /**
-     * @brief Whether or not to show the close button in the header.
+     * @brief This property sets whether to show the close button in the header.
      */
     property bool showCloseButton: true
 
     /**
-     * @brief Whether or not the footer button style should be flat instead of raised.
+     * @brief This property sets whether the footer button style should be flat.
      */
     property bool flatFooterButtons: false
 
     /**
-     * @brief Define a list of custom actions in the footer.
+     * @brief This property holds the custom actions displayed in the footer.
      *
+     * Example usage:
      * @code{.qml}
      * import QtQuick 2.15
      * import QtQuick.Controls 2.15 as Controls
