@@ -108,7 +108,7 @@ AbstractListItem {
         }
     }
 
-    //TODO: animate the hide by collapse
+    // TODO: animate the hide by collapse
     visible: (model ? model.visible || model.visible===undefined : modelData.visible) && opacity > 0
     opacity: !root.collapsed || iconItem.source.length > 0
     Behavior on opacity {
@@ -163,7 +163,7 @@ AbstractListItem {
         modelData.trigger();
         if (modelData.hasOwnProperty("children") && modelData.children!==undefined && modelData.children.length > 0) {
             if (root.collapsed) {
-                //fallbacks needed for Qt 5.9
+                // fallbacks needed for Qt 5.9
                 if ((!listItem.actionsMenu.hasOwnProperty("count") || listItem.actionsMenu.count>0) && !listItem.actionsMenu.visible) {
                     stackView.openSubMenu = listItem.actionsMenu;
                     if (listItem.actionsMenu.hasOwnProperty("popup")) {
