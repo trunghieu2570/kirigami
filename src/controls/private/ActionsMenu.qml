@@ -15,7 +15,7 @@ Controls.Menu
     z: 999999999
     property alias actions: actionsInstantiator.model
     property Component submenuComponent
-    //renamed to work on both Qt 5.9 and 5.10
+    // renamed to work on both Qt 5.9 and 5.10
     property Component itemDelegate: ActionMenuItem {}
     property Component separatorDelegate: Controls.MenuSeparator { property var action }
     property Component loaderDelegate: Loader { property var action }
