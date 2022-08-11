@@ -27,7 +27,6 @@ GridView {
     delegate: Kirigami.DelegateRecycler {
         width: calculations.delegateWidth
 
-        //in grid views align the cells in the middle
         anchors.left: parent.left
 
         sourceComponent: root._delegateComponent
