@@ -38,17 +38,16 @@ Kirigami.AbstractCard {
      * The actions will be represented by a list of ToolButtons with an optional overflow
      * menu, when not all of them will fit in the available Card width.
      *
-     * Internally this is using a org::kde:kirigami:ActionToolBar.
-     *
      * @property list<org::kde::kirigami::Action> Card::actions
      */
     property list<QtObject> actions
 
     /**
-     * This property holds the list of actions that you always want in the menu, even
-     * if there is enough space.
+     * @brief This property holds hidden actions that will be available in the footer.
      *
-     * @depracted Use actions with a `Kirigami.DisplayHint.AlwaysHide` as displayHint.
+     * These actions will only be shown in the overflow menu, even when there is enough space.
+     *
+     * @deprecated Use actions with a ``Kirigami.DisplayHint.AlwaysHide`` as displayHint.
      * @see org::kde::kirigami::DisplayHint
      * @property list<org::kde::kirigami::Action> hiddenActions
      * @since 2.6
@@ -56,27 +55,22 @@ Kirigami.AbstractCard {
     property alias hiddenActions: actionsToolBar.hiddenActions
 
     /**
-     * @brief This property holds a grouped property that controls the banner image present in the header.
+     * @brief This grouped property controls the banner image present in the header.
      *
      * This grouped property has the following sub-properties:
+     * * ``source: url``: The source for the image. It understands any URL valid for an Image component.
+     * * ``title: string``: The title for the banner, shown as contrasting text over the image.
+     * * ``titleAlignment: Qt::Alignment``: The alignment of the title inside the image.
+     * A combination of flags is supported (default: ``Qt.AlignTop | Qt.AlignLeft``)
+     * * ``titleIcon: string``: The optional icon to put in the banner, either a freedesktop-compatible
+     * icon name (recommended) or any URL supported by QtQuick.Image.
+     * * ``titleLevel: int``: The Kirigami Heading level for the title, which controls the font size. Default: ``1``, which is the largest size.
+     * * ``titleWrapMode: QtQuick.Text::wrapMode`` Whether the header test should be able to wrap. Default: ``Text.NoWrap``
      *
-     * * url source: the source for the image, it understands any url
-     *                    valid for an Image component
-     * * string title: the title for the banner, shown as contrasting
-     *                 text over the image
-     * * Qt.Alignment titleAlignment: the alignment of the title inside the image,
-     *                           a combination of flags is supported
-     *                           (default: Qt.AlignTop | Qt.AlignLeft)
-     * * string titleIcon: the optional icon to put in the banner:
-     *                      it can be either a freedesktop-compatible icon name (recommended)
-     *                      or any url supported by Image
-     * * titleLevel: The Kirigami Heading level for the title, it controls the font size, default 1
-     * * titleWrapMode: if the header should be able to do wrapping
-     *
-     * It also has the full set of properties a QML Image has, such as sourceSize and fillMode
+     * It also has the full set of properties that QtQuick.Image has, such as sourceSize and fillMode.
      *
      * @see org::kde::kirigami::private::BannerImage
-     * @property Image Card::banner
+     * @property Image banner
      */
     readonly property alias banner: bannerImage
 
