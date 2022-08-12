@@ -14,200 +14,190 @@ import "private/globaltoolbar" as GlobalToolBar
 import "templates" as KT
 
 /**
- * @inherits QtQuick.Controls.Control
  * PageRow implements a row-based navigation model, which can be used
  * with a set of interlinked information pages. Items are pushed in the
  * back of the row and the view scrolls until that row is visualized.
  * A PageRow can show a single page or a multiple set of columns, depending
  * on the window width: on a phone a single column should be fullscreen,
  * while on a tablet or a desktop more than one column should be visible.
- * @inherit QtQuick.Control
+ *
+ * @inherits QtQuick.Controls.Control
  */
 T.Control {
     id: root
 
 //BEGIN PROPERTIES
     /**
-     * This property holds the number of items currently pushed onto the view.
-     * @var int depth
+     * @brief This property holds the number of items currently pushed onto the view.
+     * @property int depth
      */
     property alias depth: columnView.count
 
     /**
-     * The last Page in the Row.
+     * @brief This property holds the last page in the row.
+     * @property Page lastItem
      */
     readonly property Item lastItem: columnView.contentChildren.length > 0 ?  columnView.contentChildren[columnView.contentChildren.length - 1] : null
 
     /**
-     * The currently visible Item.
-     * @var Item currentItem
+     * @brief This property holds the currently visible/active page.
+     *
+     * Because of the ability to display multiple pages, it will hold the currently active page.
+     *
+     * @property Page currentItem
      */
     property alias currentItem: columnView.currentItem
 
     /**
-     * The index of the currently visible Item.
-     * @var int currentIndex
+     * @brief This property holds the index of the currently active page.
+     * @see currentItem
+     * @property int currentIndex
      */
     property alias currentIndex: columnView.currentIndex
 
     /**
-     * The initial item when this PageRow is created.
-     * @var Page initialPage
+     * @brief This property sets the initial page for this PageRow.
+     * @property Page initialPage
      */
     property variant initialPage
 
     /**
-     * The main ColumnView of this Row.
-     * @var Item contentItem
+     * @brief This property holds the main ColumnView of this Row.
+     * @property ColumnView contentItem
      */
     contentItem: columnView
 
     /**
-     * @var ColumnView columnView
+     * @brief This property holds the ColumnView that this PageRow owns.
      *
-     * The ColumnView that this PageRow owns.
-     * Generally, you shouldn't need to change
-     * the value of this.
+     * Generally, you shouldn't need to change the value of this property.
      *
+     * @property ColumnView columnView
      * @since 2.12
      */
     property alias columnView: columnView
 
     /**
-     * @var list<Item> items
-     * All the items that are present in the PageRow.
+     * @brief This property holds the present pages in the PageRow.
+     * @property list<Page> items
      * @since 2.6
      */
     property alias items: columnView.contentChildren;
 
     /**
-     * @var list<Item> visibleItems
-     * All pages which are visible in the PageRow, excluding those which are scrolled away
+     * @brief This property holds all visible pages in the PageRow,
+     * excluding those which are scrolled away.
+     * @property list<Page> visibleItems
      * @since 2.6
      */
     property alias visibleItems: columnView.visibleItems
 
     /**
-     * @var Item firstVisibleItem
-     * The first at least partially visible page in the PageRow, pages before that one will be out of the viewport
+     * @brief This property holds the first page in the PageRow that is at least partially visible.
+     * @note Pages before that one (the one contained in the property) will be out of the viewport.
+     * @see ColumnView::firstVisibleItem
+     * @property Item firstVisibleItem
      * @since 2.6
      */
     property alias firstVisibleItem: columnView.firstVisibleItem
 
     /**
-     * @var Item lastVisibleItem
-     * The last at least partially visible page in the PageRow, pages after that one will be out of the viewport
+     * @brief This property holds the last page in the PageRow that is at least partially visible.
+     * @note Pages after that one (the one contained in the property) will be out of the viewport.
+     * @see ColumnView::lastVisibleItem
+     * @property Item lastVisibleItem
      * @since 2.6
      */
     property alias lastVisibleItem: columnView.lastVisibleItem
 
     /**
-     * The default width for a column
-     * default is wide enough for 30 grid units.
-     * Pages can override it with their Layout.fillWidth,
-     * implicitWidth Layout.minimumWidth etc.
+     * @brief This property holds the default width for a column.
+     *
+     * default: ``20 * Kirigami.Units.gridUnit``
+     *
+     * @note Pages can override it using implicitWidth, Layout.fillWidth, Layout.minimumWidth etc.
      */
     property int defaultColumnWidth: Units.gridUnit * 20
 
     /**
-     * @var bool interactive
-     * If true it will be possible to go back/forward by dragging the
-     * content themselves with a gesture.
-     * Otherwise the only way to go back will be programmatically
-     * default: true
+     * @brief This property sets whether it is possible to go back/forward
+     * by swiping with a gesture on the content view.
+     *
+     * default: ``true``
+     *
+     * @property bool interactive
      */
     property alias interactive: columnView.interactive
 
     /**
-     * If true, the PageRow is wide enough that willshow more than one column at once
+     * @brief This property tells whether the PageRow is wide enough to show multiple pages.
      * @since 5.37
      */
     readonly property bool wideMode: root.width >= root.defaultColumnWidth*2 && depth >= 2
 
     /**
-     * @var bool separatorVisible
-     * True if the separator between pages should be visible
-     * default: true
+     * @brief This property sets whether the separators between pages should be displayed.
+     *
+     * default: ``true``
+     *
+     * @property bool separatorVisible
      * @since 5.38
      */
     property alias separatorVisible: columnView.separatorVisible
 
     /**
-     * globalToolBar: grouped property
-     * Controls the appearance of an optional global toolbar for the whole PageRow.
+     * @brief This property sets the appearance of an optional global toolbar for the whole PageRow.
+     *
      * It's a grouped property comprised of the following properties:
-     * * style (Kirigami.ApplicationHeaderStyle): can have the following values:
-     *  * Auto: depending on application formfactor, it can behave automatically like other values, such as a Breadcrumb on mobile and ToolBar on desktop
-     *  * Breadcrumb: it will show a breadcrumb of all the page titles in the stack, for easy navigation
-     *  * Titles: each page will only have its own tile on top
-     *  * TabBar: the global toolbar will look like a TabBar to select the pages
-     *  * ToolBar: each page will have the title on top together buttons and menus to represent all of the page actions: not available on Mobile systems.
-     *  * None: no global toolbar will be shown
+     * * style (``Kirigami.ApplicationHeaderStyle``): can have the following values:
+     *  * ``Auto``: Depending on application formfactor, it can behave automatically like other values, such as a Breadcrumb on mobile and ToolBar on desktop.
+     *  * ``Breadcrumb``: It will show a breadcrumb of all the page titles in the stack, for easy navigation.
+     *  * ``Titles``: Each page will only have its own title on top.
+     *  * ``TabBar``: The global toolbar will look like a TabBar for choosing which page to display.
+     *  * ``ToolBar``: Each page will have the title on top together buttons and menus to represent all of the page actions. Not available on Mobile systems.
+     *  * ``None``: No global toolbar will be shown.
      *
-     * * actualStyle: this will represent the actual style of the toolbar: it can be different from style in the case style is Auto
-     * * showNavigationButtons: OR flags combination of ApplicationHeaderStyle.ShowBackButton and ApplicationHeaderStyle.ShowForwardButton
-     * * toolbarActionAlignment: How to horizontally align the actions when using the ToolBar style. Note that anything but Qt.AlignRight will cause the title to be hidden (default: Qt.AlignRight)
-     * * minimumHeight (int): minimum height of the header, which will be resized when scrolling, only in Mobile mode (default: preferredHeight, sliding but no scaling)
-     * * preferredHeight (int): the height the toolbar will usually have
-     * * maximumHeight (int): the height the toolbar will have in mobile mode when the app is in reachable mode (default: preferredHeight * 1.5)
-     * * leftReservedSpace (int, readonly): how many pixels are reserved at the left of the page toolbar (for navigation buttons or drawer handle)
-     * * rightReservedSpace (int, readonly): how many pixels are reserved at the right of the page toolbar (drawer handle)
+     * * ``actualStyle``: This will represent the actual style of the toolbar; it can be different from style in the case style is Auto.
+     * * ``showNavigationButtons``: OR flags combination of ApplicationHeaderStyle.ShowBackButton and ApplicationHeaderStyle.ShowForwardButton.
+     * * ``toolbarActionAlignment: Qt::Alignment``: How to horizontally align the actions when using the ToolBar style. Note that anything but Qt.AlignRight will cause the title to be hidden (default: ``Qt.AlignRight``).
+     * * ``minimumHeight: int`` Minimum height of the header, which will be resized when scrolling. Only in Mobile mode (default: ``preferredHeight``, sliding but no scaling).
+     * * ``preferredHeight: int`` The height the toolbar will usually have.
+     * * ``maximumHeight: int `` The height the toolbar will have in mobile mode when the app is in reachable mode (default: preferredHeight * 1.5).
+     * * ``leftReservedSpace: int, readonly`` How many pixels of extra space are reserved at the left of the page toolbar (typically for navigation buttons or a drawer handle).
+     * * ``rightReservedSpace: int, readonly`` How many pixels of extra space  are reserved at the right of the page toolbar (typically for a drawer handle).
      *
+     * @property org::kde::kirigami::private::globaltoolbar::PageRowGlobalToolBarStyleGroup globalToolBar
      * @since 5.48
      */
     readonly property alias globalToolBar: globalToolBar
 
     /**
-     * Assign a drawer as an internal left sidebar for this PageRow.
+     * @brief This property assigns a drawer as an internal left sidebar for this PageRow.
+     *
      * In this case, when open and not modal, the drawer contents will be in the same layer as the base pagerow.
      * Pushing any other layer on top will cover the sidebar.
      *
      * @since 5.84
      */
-    // TODO KF6: globaldrawer should use action al so used by this sidebar instead of reparenting globaldrawer contents?
+    // TODO KF6: globaldrawer should use actions also used by this sidebar instead of reparenting globaldrawer contents?
     property OverlayDrawer leftSidebar
 
-    onLeftSidebarChanged: {
-        if (leftSidebar && !leftSidebar.modal) {
-            modalConnection.onModalChanged();
-        }
-    }
-
-    Connections {
-        id: modalConnection
-        target: root.leftSidebar
-        function onModalChanged() {
-            if (leftSidebar.modal) {
-                let sidebar = sidebarControl.contentItem;
-                let background = sidebarControl.background;
-                sidebarControl.contentItem = null;
-                leftSidebar.contentItem = sidebar;
-                sidebarControl.background = null;
-                leftSidebar.background = background;
-
-                sidebar.visible = true;
-                background.visible = true;
-            } else {
-                let sidebar = leftSidebar.contentItem
-                let background = leftSidebar.background
-                leftSidebar.contentItem=null
-                sidebarControl.contentItem = sidebar
-                leftSidebar.background=null
-                sidebarControl.background = background
-
-                sidebar.visible = true;
-                background.visible = true;
-            }
-        }
-    }
-
-    implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding
-    implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
+    /**
+     * @brief This property holds the modal layers.
+     *
+     * Sometimes an application needs a modal page that always covers all the rows.
+     * For instance the full screen image of an image viewer or a settings page.
+     *
+     * @property QtQuick.Controls.StackView layers
+     * @since 5.38
+     */
+    property alias layers: layersStack
 //END PROPERTIES
 
 //BEGIN FUNCTIONS
     /**
-     * Pushes a page on the stack.
+     * @brief Pushes a page on the stack.
+     *
      * The page can be defined as a component, item or string.
      * If an item is used then the page will get re-parented.
      * If a string is used then it is interpreted as a url that is used to load a page
@@ -235,7 +225,7 @@ T.Control {
     }
 
     /**
-     * Pushes a page as a new dialog on desktop and as a layer on mobile.
+     * @brief Pushes a page as a new dialog on desktop and as a layer on mobile.
      * @param page The page can be defined as a component, item or string. If an item is
      *             used then the page will get re-parented. If a string is used then it
      *             is interpreted as a url that is used to load a page component. Once
@@ -376,7 +366,8 @@ T.Control {
     }
 
     /**
-     * Inserts a new page or a list of new at an arbitrary position
+     * @brief Inserts a new page or a list of new pages at an arbitrary position.
+     *
      * The page can be defined as a component, item or string.
      * If an item is used then the page will get re-parented.
      * If a string is used then it is interpreted as a url that is used to load a page
@@ -472,7 +463,7 @@ T.Control {
     }
 
     /**
-     * Remove the given page
+     * @brief Remove the given page.
      * @param page The page can be given both as integer position or by reference
      * @return The page that has just been removed
      * @since 2.7
@@ -486,10 +477,9 @@ T.Control {
     }
 
     /**
-     * Pops a page off the stack.
+     * @brief Pops a page off the stack.
      * @param page If page is specified then the stack is unwound to that page,
-     * to unwind to the first page specify
-     * page as null.
+     * to unwind to the first page specify page as null.
      * @return The page instance that was popped off the stack.
      */
     function pop(page) {
@@ -501,30 +491,7 @@ T.Control {
     }
 
     /**
-     * Emitted when a page has been inserted anywhere
-     * @param position where the page has been inserted
-     * @param page the new page
-     * @since 2.7
-     */
-    signal pageInserted(int position, Item page)
-
-    /**
-     * Emitted when a page has been pushed to the bottom
-     * @param page the new page
-     * @since 2.5
-     */
-    signal pagePushed(Item page)
-
-    /**
-     * Emitted when a page has been removed from the row.
-     * @param page the page that has been removed: at this point it's still valid,
-     *           but may be auto deleted soon.
-     * @since 2.5
-     */
-    signal pageRemoved(Item page)
-
-    /**
-     * Replaces a page on the stack.
+     * @brief Replaces a page on the stack.
      * @param page The page can also be given as an array of pages.
      *     In this case all those pages will
      *     be pushed onto the stack. The items in the stack can be components, items or
@@ -593,7 +560,8 @@ T.Control {
     }
 
     /**
-     * Clears the page stack.
+     * @brief Clears the page stack.
+     *
      * Destroy (or reparent) all the pages contained.
      */
     function clear() {
@@ -665,14 +633,36 @@ T.Control {
     function goForward() {
         root.currentIndex = Math.min(root.depth-1, root.currentIndex + 1)
     }
+//END FUNCTIONS
 
-    Shortcut {
-        sequences: [ StandardKey.Back ]
-        onActivated: root.goBack()
-    }
-    Shortcut {
-        sequences: [ StandardKey.Forward ]
-        onActivated: root.goForward()
+//BEGIN signals & signal handlers
+    /**
+     * @brief Emitted when a page has been inserted anywhere.
+     * @param position where the page has been inserted
+     * @param page the new page
+     * @since 2.7
+     */
+    signal pageInserted(int position, Item page)
+
+    /**
+     * @brief Emitted when a page has been pushed to the bottom.
+     * @param page the new page
+     * @since 2.5
+     */
+    signal pagePushed(Item page)
+
+    /**
+     * @brief Emitted when a page has been removed from the row.
+     * @param page the page that has been removed: at this point it's still valid,
+     *           but may be auto deleted soon.
+     * @since 2.5
+     */
+    signal pageRemoved(Item page)
+
+    onLeftSidebarChanged: {
+        if (leftSidebar && !leftSidebar.modal) {
+            modalConnection.onModalChanged();
+        }
     }
 
     Keys.onReleased: {
@@ -680,16 +670,6 @@ T.Control {
             this.goBack(event)
         }
     }
-
-    /**
-     * @var QtQuick.Controls.StackView layers
-     * Access to the modal layers.
-     * Sometimes an application needs a modal page that always covers all the rows.
-     * For instance the full screen image of an image viewer or a settings page.
-     * @since 5.38
-     */
-    property alias layers: layersStack
-//END FUNCTIONS
 
     onInitialPageChanged: {
         if (initialPage) {
@@ -708,6 +688,48 @@ T.Control {
         }
     }
 */
+//END signals & signal handlers
+
+    Connections {
+        id: modalConnection
+        target: root.leftSidebar
+        function onModalChanged() {
+            if (leftSidebar.modal) {
+                let sidebar = sidebarControl.contentItem;
+                let background = sidebarControl.background;
+                sidebarControl.contentItem = null;
+                leftSidebar.contentItem = sidebar;
+                sidebarControl.background = null;
+                leftSidebar.background = background;
+
+                sidebar.visible = true;
+                background.visible = true;
+            } else {
+                let sidebar = leftSidebar.contentItem
+                let background = leftSidebar.background
+                leftSidebar.contentItem=null
+                sidebarControl.contentItem = sidebar
+                leftSidebar.background=null
+                sidebarControl.background = background
+
+                sidebar.visible = true;
+                background.visible = true;
+            }
+        }
+    }
+
+    implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding
+    implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
+
+    Shortcut {
+        sequences: [ StandardKey.Back ]
+        onActivated: root.goBack()
+    }
+    Shortcut {
+        sequences: [ StandardKey.Forward ]
+        onActivated: root.goForward()
+    }
+
     Keys.forwardTo: [currentItem]
 
     GlobalToolBar.PageRowGlobalToolBarStyleGroup {
@@ -725,11 +747,11 @@ T.Control {
         anchors {
             fill: parent
         }
-        //placeholder as initial item
+        // placeholder as initial item
         initialItem: columnViewLayout
 
         function clear () {
-            //don't let it kill the main page row
+            // don't let it kill the main page row
             var d = layersStack.depth;
             for (var i = 1; i < d; ++i) {
                 pop();
@@ -763,7 +785,7 @@ T.Control {
 
         pushEnter: Transition {
             ParallelAnimation {
-                //NOTE: It's a PropertyAnimation instead of an Animator because with an animator the item will be visible for an instant before starting to fade
+                // NOTE: It's a PropertyAnimation instead of an Animator because with an animator the item will be visible for an instant before starting to fade
                 PropertyAnimation {
                     property: "opacity"
                     from: 0
