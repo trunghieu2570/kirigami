@@ -189,7 +189,7 @@ QQC2.Control {
                     return [action]
                 }
 
-                if (action.children.length > 0) {
+                if (action.hasOwnProperty("children") && action.children.length > 0) {
                     return Array.prototype.map.call(action.children, i => i)
                 }
 
