@@ -8,13 +8,11 @@ import "templates" as T
 import "private"
 
 /**
- * @brief An AbstractChip is the base for chips.
+ * AbstractChip is a visual object based on AbstractButton
+ * that provides a way to display predetermined elements
+ * with the visual styling of "tags" or "tokens". It provides
+ * the look, the base properties, and signals for an AbstractButton.
  *
- * A Chip is a visual object that provides
- * a very friendly way to display predetermined options.
- * providing just the look and the base properties and signals for an AbstractButton.
- *
- * @see org::kde::kirigami::Chip
  * @inherit org::kde::kirigami::templates::AbstractChip
  * @since 2.19
  */
