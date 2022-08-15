@@ -8,10 +8,9 @@ import QtQuick 2.15
 import org.kde.kirigami 2.20 as Kirigami
 
 /**
- * This is a standard password text field.
+ * @brief This is a standard password text field.
  *
- * Example usage for the password field component:
- *
+ * Example usage:
  * @code{.qml}
  * import org.kde.kirigami 2.20 as Kirigami
  *
@@ -23,8 +22,8 @@ import org.kde.kirigami 2.20 as Kirigami
  * }
  * @endcode
  *
- * @since 5.57
  * @inherit org::kde::kirgami::ActionTextField
+ * @since 5.57
  * @author Carl Schwan <carl@carlschwan.eu>
  */
 Kirigami.ActionTextField
@@ -32,9 +31,10 @@ Kirigami.ActionTextField
     id: root
 
     /**
-     * This property holds whether we show the clear text password.
+     * @brief This property tells whether the password will be displayed in cleartext rather than obfuscated.
      *
-     * By default, it's false.
+     * default: ``false``
+     *
      * @since 5.57
      */
     property bool showPassword: false
