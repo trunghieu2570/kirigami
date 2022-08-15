@@ -12,48 +12,42 @@ import org.kde.kirigami 2.4
 
 
 /**
- * An item that can be used as a title for the application.
+ * @brief An item that can be used as a title for the application.
+ *
  * Scrolling the main page will make it taller or shorter (through the point of going away)
  * It's a behavior similar to the typical mobile web browser addressbar
  * the minimum, preferred and maximum heights of the item can be controlled with
- * * minimumHeight: default is 0, i.e. hidden
- * * preferredHeight: default is Units.gridUnit * 1.6
- * * maximumHeight: default is Units.gridUnit * 3
+ * * ``minimumHeight``: Default is 0, i.e. hidden
+ * * ``preferredHeight``: Default is Units.gridUnit * 1.6
+ * * ``maximumHeight``: Default is Units.gridUnit * 3
  *
- * To achieve a titlebar that stays completely fixed just set the 3 sizes as the same
+ * To achieve a titlebar that stays completely fixed just set the 3 sizes to the same value.
  */
 AbstractApplicationHeader {
     id: header
 
+//BEGIN properties
     /**
-     * headerStyle: int
-     * The way the separator between pages should be drawn in the header.
+     * @brief This property sets the way the separator between pages should be drawn in the header.
+     *
      * Allowed values are:
-     * * Breadcrumb: the pages are hierarchical and the separator will look like a >
-     * * TabBar: the pages are intended to behave like tabbar pages
-     *    and the separator will look limke a dot.
+     * * ``Kirigami.ApplicationHeaderStyle.Breadcrumb``: The pages are hierarchical, separated by an arrow.
+     * * ``Kirigami.ApplicationHeaderStyle.TabBar``: The pages are intended to behave like pages of a tabbed view.
+     * and the separator will look limke a dot.
      *
      * When the header is in wide screen mode, no separator will be drawn.
+     *
+     * default: ``ApplicationHeaderStyle.Auto``
      */
     property int headerStyle: ApplicationHeaderStyle.Auto
 
     /**
-     * backButtonEnabled: bool
-     * if true, there will be a back button present that will make the pagerow scroll back when clicked
+     * @brief This property sets whether the back button is enabled.
+     *
+     * default: `when true, there will be a back button present that will make the pagerow scroll back when clicked`
      */
     property bool backButtonEnabled: (!titleList.isTabBar && (!Settings.isMobile || Qt.platform.os === "ios"))
 
-    onBackButtonEnabledChanged: {
-        if (backButtonEnabled && !titleList.backButton) {
-            var component = Qt.createComponent(Qt.resolvedUrl("private/BackButton.qml"));
-            titleList.backButton = component.createObject(navButtons);
-            component = Qt.createComponent(Qt.resolvedUrl("private/ForwardButton.qml"));
-            titleList.forwardButton = component.createObject(navButtons, {"headerFlickable": titleList});
-        } else if (titleList.backButton) {
-            titleList.backButton.destroy();
-            titleList.forwardButton.destroy();
-        }
-    }
     property Component pageDelegate: Component {
         Row {
             height: parent.height
@@ -63,7 +57,7 @@ AbstractApplicationHeader {
             x: Units.smallSpacing
 
             Icon {
-                //in tabbar mode this is just a spacer
+                // in tabbar mode this is just a spacer
                 visible: !titleList.wideMode && ((typeof modelData !== "undefined" && modelData > 0) || titleList.internalHeaderStyle === ApplicationHeaderStyle.TabBar)
                 anchors.verticalCenter: parent.verticalCenter
                 height: Units.iconSizes.small
@@ -77,7 +71,7 @@ AbstractApplicationHeader {
                 width: Math.min(parent.width, Math.min(titleList.width, implicitWidth)) + Units.smallSpacing
                 anchors.verticalCenter: parent.verticalCenter
                 opacity: current ? 1 : 0.4
-                //Scaling animate NativeRendering is too slow
+                // Scaling animate NativeRendering is too slow
                 renderType: Text.QtRendering
                 color: header.background && header.background.color && header.background.color === Theme.highlightColor ? Theme.highlightedTextColor : Theme.textColor
                 elide: Text.ElideRight
@@ -100,8 +94,23 @@ AbstractApplicationHeader {
             }
         }
     }
+//END properties
+
+//BEGIN signal handlers
+    onBackButtonEnabledChanged: {
+        if (backButtonEnabled && !titleList.backButton) {
+            var component = Qt.createComponent(Qt.resolvedUrl("private/BackButton.qml"));
+            titleList.backButton = component.createObject(navButtons);
+            component = Qt.createComponent(Qt.resolvedUrl("private/ForwardButton.qml"));
+            titleList.forwardButton = component.createObject(navButtons, {"headerFlickable": titleList});
+        } else if (titleList.backButton) {
+            titleList.backButton.destroy();
+            titleList.forwardButton.destroy();
+        }
+    }
 
     Component.onCompleted: print("Warning: ApplicationHeader is deprecated, remove and use the automatic internal toolbar instead.")
+//END signal handlers
 
     Rectangle {
         anchors {
@@ -225,7 +234,7 @@ AbstractApplicationHeader {
         id: titleList
         readonly property bool wideMode: pageRow.hasOwnProperty("wideMode") ? pageRow.wideMode : __appWindow.wideScreen
         property int internalHeaderStyle: header.headerStyle === ApplicationHeaderStyle.Auto ? (titleList.wideMode ? ApplicationHeaderStyle.Titles : ApplicationHeaderStyle.Breadcrumb) : header.headerStyle
-        //if scrolling the titlebar should scroll also the pages and vice versa
+        // if scrolling the titlebar should scroll also the pages and vice versa
         property bool scrollingLocked: (header.headerStyle === ApplicationHeaderStyle.Titles || titleList.wideMode)
         //uses this to have less strings comparisons
         property bool scrollMutex
@@ -245,7 +254,7 @@ AbstractApplicationHeader {
         readonly property int count: mainRepeater.count
 
         function gotoIndex(idx) {
-            //don't actually scroll in widescreen mode
+            // don't actually scroll in widescreen mode
             if (titleList.wideMode || contentItem.children.length < 2) {
                 return;
             }
@@ -318,7 +327,7 @@ AbstractApplicationHeader {
                     clip: true
 
                     width: {
-                        //more columns shown?
+                        // more columns shown?
                         if (titleList.scrollingLocked && delegateLoader.page) {
                             return delegateLoader.page.width - (index === 0 ? navButtons.width : 0) - (index === pageRow.depth-1  ? stack.anchors.rightMargin : 0);
                         } else {
@@ -329,7 +338,7 @@ AbstractApplicationHeader {
                     height: titleList.height
                     onClicked: {
                         if (pageRow.currentIndex === modelData) {
-                            //scroll up if current otherwise make current
+                            // scroll up if current otherwise make current
                             if (!pageRow.currentItem.flickable) {
                                 return;
                             }
@@ -357,9 +366,9 @@ AbstractApplicationHeader {
                         sourceComponent: header.pageDelegate
 
                         readonly property Page page: pageRow.get(modelData)
-                        //NOTE: why not use ListViewCurrentIndex? because listview itself resets
-                        //currentIndex in some situations (since here we are using an int as a model,
-                        //even more often) so the property binding gets broken
+                        // NOTE: why not use ListViewCurrentIndex? because listview itself resets
+                        // currentIndex in some situations (since here we are using an int as a model,
+                        // even more often) so the property binding gets broken
                         readonly property bool current: pageRow.currentIndex === index
                         readonly property int index: parent.currentIndex
                         readonly property var modelData: parent.currentModelData
