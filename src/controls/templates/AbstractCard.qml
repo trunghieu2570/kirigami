@@ -49,7 +49,8 @@ T.ItemDelegate {
     /**
      * @brief This property holds an item that serves as a footer.
      *
-     * This item will be positioned at the bottom of the card.
+     * This item will be positioned at the bottom if headerOrientation is ``Qt.Vertical``
+     * or on the right if it is ``Qt.Horizontal``.
      */
     property Item footer
 
@@ -66,7 +67,6 @@ T.ItemDelegate {
     Layout.fillWidth: true
 
     implicitWidth: Math.max(background.implicitWidth, mainLayout.implicitWidth) + leftPadding + rightPadding
-
     implicitHeight: mainLayout.implicitHeight + topPadding + bottomPadding
 
     hoverEnabled: !Kirigami.Settings.tabletMode && showClickFeedback
@@ -94,7 +94,7 @@ T.ItemDelegate {
             leftMargin: root.leftPadding
             topMargin: root.topPadding
             rightMargin: root.rightPadding
-            bottom:parent.bottom
+            bottom: parent.bottom
             bottomMargin: root.bottomPadding
         }
         columns: headerOrientation === Qt.Vertical ? 1 : 2
