@@ -13,8 +13,8 @@ import "private"
 import "templates/private"
 
 /**
- * A drawer specialization that will show a list of actions that are
- * specific of the current page shown by the application
+ * A specialized type of drawer that will show a list of actions
+ * relevant to the application's current page.
  *
  * Example usage:
  * @code
@@ -54,26 +54,47 @@ import "templates/private"
  * }
  * @endcode
  *
- * @inherit AbstractDrawer
+ * @inherit OverlayDrawer
  */
 OverlayDrawer {
     id: root
     handleClosedIcon.source: null
     handleOpenIcon.source: null
+
     /**
      * @brief A title for the action list that will be shown to the user when opens the drawer
+     *
+     * default: ``qsTr("Actions")``
      */
     property string title: qsTr("Actions")
 
     /**
      * This can be any type of object that a ListView can accept as model.
-     * It expects items compatible with either QAction or Kirigami Action
+     * It expects items compatible with either QtQuick.Action or Kirigami.Action
      *
      * @see QtQuick.Action
      * @see org::kde::kirigami::Action
      * @property list<Action> actions
      */
     property var actions: page ? page.contextualActions : []
+
+    /**
+     * @brief Arbitrary content to show above the list view.
+     * 
+     * default: `an Item containing a Kirigami.Heading that displays a title whose text is
+     * controlled by the title property.` 
+     * 
+     * @property Component header
+     * @since 2.7
+     */
+    property alias header: menu.header
+
+    /**
+     * @brief Arbitrary content to show below the list view.
+     * @property Component footer
+     * @since 2.7
+     */
+    property alias footer: menu.footer
 
     property Page page: {
         if (applicationWindow().pageStack.layers && applicationWindow().pageStack.layers.depth > 1 && applicationWindow().pageStack.layers.currentItem.hasOwnProperty("contextualActions")) {
@@ -94,20 +115,6 @@ OverlayDrawer {
             (applicationWindow().pageStack.layers && applicationWindow().pageStack.layers.depth > 1 && applicationWindow().pageStack.layers.currentItem && applicationWindow().pageStack.layers.currentItem.globalToolBarStyle !== ApplicationHeaderStyle.ToolBar))
     edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
     drawerOpen: false
-
-    /**
-     * @brief Arbitrary content that will go on top of the list (by default is the title)
-     * @property Component header
-     * @since 2.7
-     */
-    property alias header: menu.header
-
-    /**
-     * @brief Arbitrary content that will go to the bottom of the list (by default is empty)
-     * @property Component footer
-     * @since 2.7
-     */
-    property alias footer: menu.footer
 
     // list items go to edges, have their own padding
     leftPadding: 0
