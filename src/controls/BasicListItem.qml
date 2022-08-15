@@ -18,8 +18,9 @@ import org.kde.kirigami 2.12
 AbstractListItem {
     id: listItem
 
+//BEGIN properties
     /**
-     * @brief This property holds label of this list item.
+     * @brief This property holds the text of this list item's label.
      *
      * If a subtitle is provided, the label will behave as a title and will be styled
      * accordingly. Every list item should have a label.
@@ -30,7 +31,6 @@ AbstractListItem {
 
     /**
      * @brief This property holds an optional subtitle that can appear under the label.
-     *
      * @since 5.70
      * @since org.kde.kirigami 2.12
      */
@@ -38,26 +38,10 @@ AbstractListItem {
 
     /**
      * @brief This property holds an item that will be displayed before the title and subtitle.
-     *
      * @note The leading item is allowed to expand infinitely horizontally, and should be bounded by the user.
-     *
      * @since org.kde.kirigami 2.15
      */
     property Item leading
-    onLeadingChanged: {
-        if (!!listItem.leading) {
-            listItem.leading.parent = contItem
-            listItem.leading.anchors.left = listItem.leading.parent.left
-            listItem.leading.anchors.top = listItem.leadingFillVertically ? listItem.leading.parent.top : undefined
-            listItem.leading.anchors.bottom = listItem.leadingFillVertically ? listItem.leading.parent.bottom : undefined
-            listItem.leading.anchors.verticalCenter = listItem.leadingFillVertically ? undefined : listItem.leading.parent.verticalCenter
-            layout.anchors.left = listItem.leading.right
-            layout.anchors.leftMargin = Qt.binding(function() { return listItem.leadingPadding })
-        } else {
-            layout.anchors.left = contentItem.left
-            layout.anchors.leftMargin = 0
-        }
-    }
 
     /**
      * @brief This property holds the padding after the leading item.
@@ -69,10 +53,12 @@ AbstractListItem {
     // item positioning in such a way that they fill vertically, but a fixed
     // height can be manually specified without needing to wrap it in an Item
     /**
-     * @brief Whether or not to stretch the leading item to fit all available vertical space.
+     * @brief This property sets whether or not to stretch the leading item to fit all available vertical space.
      *
-     * Defaults to true. If false, you will be responsible for setting a height for the
+     * If false, you will be responsible for setting a height for the
      * item or ensuring that its default height works.
+     *
+     * default: ``true``
      *
      * @warning This property will likely be removed in KF6
      * @since 5.83
@@ -86,20 +72,6 @@ AbstractListItem {
      * @since org.kde.kirigami 2.15
      */
     property Item trailing
-    onTrailingChanged: {
-        if (!!listItem.trailing) {
-            listItem.trailing.parent = contItem
-            listItem.trailing.anchors.right = listItem.trailing.parent.right
-            listItem.trailing.anchors.top = listItem.trailingFillVertically ? listItem.trailing.parent.top : undefined
-            listItem.trailing.anchors.bottom = listItem.trailingFillVertically ? listItem.trailing.parent.bottom : undefined
-            listItem.trailing.anchors.verticalCenter = listItem.trailingFillVertically ? undefined : listItem.trailing.parent.verticalCenter
-            layout.anchors.right = listItem.trailing.left
-            layout.anchors.rightMargin = Qt.binding(function() { return listItem.trailingPadding })
-        } else {
-            layout.anchors.right = contentItem.right
-            layout.anchors.rightMargin = 0
-        }
-    }
 
     /**
      * @brief This property holds the padding before the trailing item.
@@ -111,10 +83,12 @@ AbstractListItem {
     // item positioning in such a way that they fill vertically, but a fixed
     // height can be manually specified without needing to wrap it in an Item
     /**
-     * @brief Whether or not to stretch the trailing item to fit all available vertical space.
+     * @brief This propery sets whether or not to stretch the trailing item to fit all available vertical space.
      *
-     * Defaults to true. If false, you will be responsible for setting a height for the
+     * If false, you will be responsible for setting a height for the
      * item or ensuring that its default height works.
+     *
+     * default: ``true``
      *
      * @warning This property will likely be removed in KF6
      * @since 5.83
@@ -123,8 +97,9 @@ AbstractListItem {
     property bool trailingFillVertically: true
 
     /**
-     * This property holds whether the list item's text (both label and subtitle, if provided) should
-     * render in bold.
+     * @brief This property sets whether list item's text should render in bold.
+     *
+     * default: ``false``
      *
      * @since 5.71
      * @since org.kde.kirigami 2.13
@@ -148,12 +123,6 @@ AbstractListItem {
      *
      * This can either be an icon name, a URL, or an object with the following properties:
      *
-     * - `name`: string
-     * - `source`: string
-     * - `width`: int
-     * - `height`: int
-     * - `color`: color
-     *
      * If the type of the icon is a string containing an icon name, the icon will be looked up from the
      * platform icon theme.
      *
@@ -166,7 +135,7 @@ AbstractListItem {
     property var icon
 
     /**
-     * @brief This property holds the size at which the icon will render.
+     * @brief This property sets the size at which the icon will render.
      *
      * This will not affect icon lookup, unlike the icon group's width and height properties, which will.
      *
@@ -187,7 +156,7 @@ AbstractListItem {
     property alias iconColor: iconItem.color
 
     /**
-     * @brief This property holds whether or not the icon has a "selected" appearance.
+     * @brief This property sets whether or not the icon has a "selected" appearance.
      *
      * Can be used to override the icon coloration if the list item's background and
      * text are also being overridden, to ensure that the icon never becomes invisible.
@@ -199,15 +168,14 @@ AbstractListItem {
     property alias iconSelected: iconItem.selected
 
     /**
-     * @brief This property holds whether or not to reserve space for the icon, even if there is no icon.
-     *
+     * @brief This property sets whether or not to reserve space for the icon, even if there is no icon.
      * @image html BasicListItemReserve.svg "Left: reserveSpaceForIcon: false. Right: reserveSpaceForIcon: true" width=50%
      * @property bool reserveSpaceForIcon
      */
     property alias reserveSpaceForIcon: iconItem.visible
 
     /**
-     * @brief This property holds whether or not the label of the list item should fill width.
+     * @brief This property sets whether or not the label of the list item should fill width.
      *
      * Setting this to false is useful if you have other items in the list item
      * that should fill width instead of the label.
@@ -217,8 +185,10 @@ AbstractListItem {
     property alias reserveSpaceForLabel: labelItem.visible
 
     /**
-     * This property holds whether or not the list item's height should account for
-     * the presence of a subtitle, even if one is not present.
+     * @brief This property holds whether the list item's height should account for
+     * the presence of a subtitle.
+     *
+     * default: ``false``
      *
      * @since 5.77
      * @since org.kde.kirigami 2.15
@@ -227,7 +197,6 @@ AbstractListItem {
 
     /**
      * @brief This property holds the spacing between the label row and subtitle row.
-     *
      * @since 5.83
      * @since org.kde.kirigami 2.15
      * @property real textSpacing
@@ -235,10 +204,12 @@ AbstractListItem {
     property alias textSpacing: labelColumn.spacing
 
     /**
-     * This property holds whether to make the icon and labels have a disabled look. Defaults to
-     * false. Can be used to tweak whether the content elements are visually
-     * active while preserving an active appearance for any leading or trailing
-     * items.
+     * @brief This property holds sets whether to make the icon and labels have a disabled look.
+     *
+     * This can be used to tweak whether the content elements are visually active
+     * while preserving an active appearance for any leading or trailing items.
+     *
+     * default: ``false``
      *
      * @since 5.83
      * @since org.kde.kirigami 2.15
@@ -247,7 +218,6 @@ AbstractListItem {
 
     /**
      * @brief This property holds the label item, for accessing the usual Text properties.
-     *
      * @property QtQuick.Controls.Label labelItem
      * @since 5.84
      * @since org.kde.kirigami 2.16
@@ -256,7 +226,6 @@ AbstractListItem {
 
     /**
      * @brief This property holds the subtitle item, for accessing the usual Text properties.
-     *
      * @property QtQuick.Controls.Label subtitleItem
      * @since 5.84
      * @since org.kde.kirigami 2.16
@@ -264,6 +233,42 @@ AbstractListItem {
     property alias subtitleItem: subtitleItem
 
     default property alias _basicDefault: layout.data
+//END properties
+
+//BEGIN signal handlers
+    onLeadingChanged: {
+        if (!!listItem.leading) {
+            listItem.leading.parent = contItem
+            listItem.leading.anchors.left = listItem.leading.parent.left
+            listItem.leading.anchors.top = listItem.leadingFillVertically ? listItem.leading.parent.top : undefined
+            listItem.leading.anchors.bottom = listItem.leadingFillVertically ? listItem.leading.parent.bottom : undefined
+            listItem.leading.anchors.verticalCenter = listItem.leadingFillVertically ? undefined : listItem.leading.parent.verticalCenter
+            layout.anchors.left = listItem.leading.right
+            layout.anchors.leftMargin = Qt.binding(function() { return listItem.leadingPadding })
+        } else {
+            layout.anchors.left = contentItem.left
+            layout.anchors.leftMargin = 0
+        }
+    }
+
+    onTrailingChanged: {
+        if (!!listItem.trailing) {
+            listItem.trailing.parent = contItem
+            listItem.trailing.anchors.right = listItem.trailing.parent.right
+            listItem.trailing.anchors.top = listItem.trailingFillVertically ? listItem.trailing.parent.top : undefined
+            listItem.trailing.anchors.bottom = listItem.trailingFillVertically ? listItem.trailing.parent.bottom : undefined
+            listItem.trailing.anchors.verticalCenter = listItem.trailingFillVertically ? undefined : listItem.trailing.parent.verticalCenter
+            layout.anchors.right = listItem.trailing.left
+            layout.anchors.rightMargin = Qt.binding(function() { return listItem.trailingPadding })
+        } else {
+            layout.anchors.right = contentItem.right
+            layout.anchors.rightMargin = 0
+        }
+    }
+
+    Keys.onEnterPressed: action ? action.trigger() : clicked()
+    Keys.onReturnPressed: action ? action.trigger() : clicked()
+//END signal handlers
 
     icon: action ? action.icon.name || action.icon.source : undefined
 
@@ -337,7 +342,4 @@ AbstractListItem {
             }
         }
     }
-
-    Keys.onEnterPressed: action ? action.trigger() : clicked()
-    Keys.onReturnPressed: action ? action.trigger() : clicked()
 }
