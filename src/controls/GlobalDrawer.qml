@@ -14,9 +14,9 @@ import "private"
 import "templates/private"
 
 /**
- * A drawer specialization intended for the global actions of the application
- * valid regardless of the application state (think about the menubar
- * of a desktop application).
+ * A specialized form of the Drawer intended for showing an application's
+ * always-available global actions. Think of it like a mobile version of
+ * a desktop application's menubar.
  *
  * Example usage:
  * @code
@@ -60,29 +60,32 @@ OverlayDrawer {
 
     enabled: !isMenu || Settings.isMobile
 
+//BEGIN properties
     /**
-     * @var string title
-     * A title to be displayed on top of the drawer
+     * @brief This property holds the title displayed at the top of the drawer.
+     * @see org::kde::kirigami::private::BannerImage::title
+     * @property string title
      */
     property alias title: bannerImage.title
 
     /**
-     * @var var icon
-     * An icon to be displayed alongside the title.
-     * It can be a QIcon, a fdo-compatible icon name, or any url understood by Image
+     * @brief This property holds an icon to be displayed alongside the title.
+     * @see org::kde::kirigami::private::BannerImage::titleIcon
+     * @see org::kde::kirigami::Icon::source
+     * @property var titleIcon
      */
     property alias titleIcon: bannerImage.titleIcon
 
     /**
-     * @var string bannerImageSource
-     * An image to be used as background for the title and icon for
-     * a decorative purpose.
-     * It accepts any url format supported by Image
+     * @brief This property holds the banner image source.
+     * @see org::kde::kirigami::ShadowedImage::source
+     * @property url bannerImageSource
      */
     property alias bannerImageSource: bannerImage.source
 
     /**
-     * @var list<Action> actions
+     * @brief This property holds the actions displayed in the drawer.
+     *
      * The list of actions can be nested having a tree structure.
      * A tree depth bigger than 2 is discouraged.
      *
@@ -116,55 +119,34 @@ OverlayDrawer {
      *  [...]
      * }
      * @endcode
+     * @property list<Action> actions
      */
     property list<QtObject> actions
 
     /**
-     * an item that will stay on top of the drawer,
-     * and if the drawer contents can be scrolled,
-     * this item will stay still and won't scroll.
-     * Intended mainly for toolbars
+     * @brief This property holds an item that will always be displayed at the top of the drawer.
+     *
+     * If the drawer contents can be scrolled, this item will stay still and won't scroll.
+     *
+     * @note This property is mainly intended for toolbars.
      * @since 2.12
      */
     property Item header
 
     /**
-     * if true the banner area, which can contain an image,
-     * an icon and a title will be visible.
-     * By default the banner will be visible only on mobile platforms
+     * @brief This property sets drawers banner visibility.
+     *
+     * If true, the banner area (which can contain an image,
+     * an icon, and a title) will be visible.
+     *
+     * default: `the banner will be visible only on mobile platforms`
+     *
      * @since 2.12
      */
     property bool bannerVisible: Settings.isMobile
-    /**
-     * @var list<Item> content
-     * Any random Item can be instantiated inside the drawer and
-     * will be displayed underneath the actions list.
-     *
-     * This is the default property.
-     *
-     * Example usage:
-     * @code
-     * import org.kde.kirigami 2.4 as Kirigami
-     *
-     * Kirigami.ApplicationWindow {
-     *  [...]
-     *     globalDrawer: Kirigami.GlobalDrawer {
-     *         actions: [...]
-     *         Button {
-     *             text: "Button"
-     *             onClicked: //do stuff
-     *         }
-     *     }
-     *  [...]
-     * }
-     * @endcode
-     */
-    default property alias content: mainContent.data
 
     /**
-     * @var list<Item> topContent
-     * Items that will be instantiated inside the drawer and
-     * will be displayed on top of the actions list.
+     * @brief This property holds items that are displayed above the actions.
      *
      * Example usage:
      * @code
@@ -182,63 +164,108 @@ OverlayDrawer {
      *  [...]
      * }
      * @endcode
+     * @property list<QtObject> topContent
      */
     property alias topContent: topContent.data
 
     /**
-     * If true, when the drawer is collapsed as a sidebar, the content items
-     * at the bottom will be hidden (default false).
-     * If you want to keep some items visible and some invisible, set this to
-     * false and control the visibility/opacity of individual items,
-     * binded to the collapsed property
-     * @since 2.5
+     * @brief This property holds items that are displayed under the actions.
+     *
+     * Example usage:
+     * @code
+     * import org.kde.kirigami 2.4 as Kirigami
+     *
+     * Kirigami.ApplicationWindow {
+     *  [...]
+     *     globalDrawer: Kirigami.GlobalDrawer {
+     *         actions: [...]
+     *         Button {
+     *             text: "Button"
+     *             onClicked: //do stuff
+     *         }
+     *     }
+     *  [...]
+     * }
+     * @endcode
+     * @note This is a `default` property.
+     * @property list<QtObject> content
      */
-    property bool showContentWhenCollapsed: false
+    default property alias content: mainContent.data
 
     /**
-     * If true, when the drawer is collapsed as a sidebar, the top content items
-     * at the top will be hidden (default false).
+     * @brief This property sets whether content items at the top should be shown.
+     * when the drawer is collapsed as a sidebar.
+     *
      * If you want to keep some items visible and some invisible, set this to
      * false and control the visibility/opacity of individual items,
      * binded to the collapsed property
+     *
+     * default: ``false``
+     *
      * @since 2.5
      */
     property bool showTopContentWhenCollapsed: false
 
-    //TODO
+    /**
+     * @brief This property sets whether content items at the bottom should be shown.
+     * when the drawer is collapsed as a sidebar.
+     *
+     * If you want to keep some items visible and some invisible, set this to
+     * false and control the visibility/opacity of individual items,
+     * binded to the collapsed property
+     *
+     * default: ``false``
+     *
+     * @see content
+     * @since 2.5
+     */
+    property bool showContentWhenCollapsed: false
+
+    // TODO
     property bool showHeaderWhenCollapsed: false
 
     /**
-     * On the actions menu, whenever a leaf action is triggered, the menu
-     * will reset to its parent.
+     * @brief This property sets whether activating a leaf action resets the
+     * menu to show leaf's parent actions.
+     * 
+     * A leaf action is an action without any child actions.
+     *
+     * default: ``true``
      */
     property bool resetMenuOnTriggered: true
 
     /**
-     * Points to the action acting as a submenu
+     * @brief This property points to the action acting as a submenu
      */
     readonly property Action currentSubMenu: stackView.currentItem ? stackView.currentItem.current: null
 
     /**
-     * When true the global drawer becomes a menu on the desktop. Defauls to false.
+     * @brief This property sets whether the drawer becomes a menu on the desktop.
+     *
+     * default: ``false``
+     *
      * @since 2.11
      */
     property bool isMenu: false
 
     /**
-     * Notifies that the banner has been clicked
+     * @brief This property sets the visibility of the collapse button
+     * when the drawer collapsible.
+     *
+     * default: ``true``
+     *
+     * @since 2.12
+     */
+    property bool collapseButtonVisible: true
+//END properties
+
+    /**
+     * @brief This signal notifies that the banner has been clicked.
      */
     signal bannerClicked()
 
     /**
-     * When the sidebar is collapsible, this controls the visibility of
-     * the collapse button
-     * @since 2.12
-     */
-    property bool collapseButtonVisible: true
-
-    /**
-     * Reverts the menu back to its initial state
+     * @brief This function reverts the menu back to its initial state
      */
     function resetMenu() {
         stackView.pop(stackView.get(0, T2.StackView.DontLoad));
@@ -247,7 +274,7 @@ OverlayDrawer {
         }
     }
 
-    //rightPadding: !Settings.isMobile && mainFlickable.contentHeight > mainFlickable.height ? Units.gridUnit : Units.smallSpacing
+    // rightPadding: !Settings.isMobile && mainFlickable.contentHeight > mainFlickable.height ? Units.gridUnit : Units.smallSpacing
 
     Theme.colorSet: modal ? Theme.Window : Theme.View
 
@@ -299,7 +326,7 @@ OverlayDrawer {
                 y: bannerImage.visible ? Math.max(headerContainer.height, -mainFlickable.contentY) - height : 0
 
                 Layout.fillWidth: true
-                //visible: !bannerImage.empty || root.collapsible
+                // visible: !bannerImage.empty || root.collapsible
 
                 BannerImage {
                     id: bannerImage
@@ -315,7 +342,7 @@ OverlayDrawer {
                             easing.type: Easing.InOutQuad
                         }
                     }
-                    //leftPadding: root.collapsible ? collapseButton.width + Units.smallSpacing*2 : topPadding
+                    // leftPadding: root.collapsible ? collapseButton.width + Units.smallSpacing*2 : topPadding
                     MouseArea {
                         anchors.fill: parent
                         onClicked: root.bannerClicked()
@@ -341,7 +368,7 @@ OverlayDrawer {
                     Layout.preferredHeight: implicitHeight <= 0 || opacity === 1 ? -1 : implicitHeight * opacity
                     opacity: !root.collapsed || showHeaderWhenCollapsed
                     Behavior on opacity {
-                        //not an animator as is binded
+                        // not an animator as is binded
                         NumberAnimation {
                             duration: Units.longDuration
                             easing.type: Easing.InOutQuad
@@ -368,13 +395,13 @@ OverlayDrawer {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.preferredHeight: implicitHeight * opacity
-                    //NOTE: why this? just Layout.fillWidth: true doesn't seem sufficient
-                    //as items are added only after this column creation
+                    // NOTE: why this? just Layout.fillWidth: true doesn't seem sufficient
+                    // as items are added only after this column creation
                     Layout.minimumWidth: parent.width - root.leftPadding - root.rightPadding
                     visible: children.length > 0 && childrenRect.height > 0 && opacity > 0
                     opacity: !root.collapsed || showTopContentWhenCollapsed
                     Behavior on opacity {
-                        //not an animator as is binded
+                        // not an animator as is binded
                         NumberAnimation {
                             duration: Units.longDuration
                             easing.type: Easing.InOutQuad
@@ -390,9 +417,9 @@ OverlayDrawer {
                     Layout.maximumHeight: Layout.minimumHeight
                     property ActionsMenu openSubMenu
                     initialItem: menuComponent
-                    //NOTE: it's important those are NumberAnimation and not XAnimators
+                    // NOTE: it's important those are NumberAnimation and not XAnimators
                     // as while the animation is running the drawer may close, and
-                    //the animator would stop when not drawing see BUG 381576
+                    // the animator would stop when not drawing see BUG 381576
                     popEnter: Transition {
                         NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * -stackView.width; to: 0; duration: Units.veryLongDuration; easing.type: Easing.OutCubic }
                     }
@@ -430,8 +457,8 @@ OverlayDrawer {
                     Layout.rightMargin: root.rightPadding
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    //NOTE: why this? just Layout.fillWidth: true doesn't seem sufficient
-                    //as items are added only after this column creation
+                    // NOTE: why this? just Layout.fillWidth: true doesn't seem sufficient
+                    // as items are added only after this column creation
                     Layout.minimumWidth: parent.width - root.leftPadding - root.rightPadding
                     visible: children.length > 0 && (opacity > 0 || mainContentAnimator.running)
                     opacity: !root.collapsed || showContentWhenCollapsed
