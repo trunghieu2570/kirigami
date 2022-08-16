@@ -17,39 +17,68 @@ import org.kde.kirigami 2.12 as Kirigami
 Kirigami.ShadowedImage {
     id: root
 
+//BEGIN properties
     /*
      * FIXME: compatibility
+     *
+     * @deprecated Please use `source` property instead!
      */
     property alias imageSource: root.source
+
+    /*
+     * FIXME: compatibility
+     *
+     * @deprecated Please use `titleIcon` property instead!
+     */
     property alias iconSource: root.titleIcon
 
     /**
-     * title: string
-     * A title to be displayed on top of the image
-     */
-    property alias title: heading.text
-
-    /**
-     * icon: var
-     * An icon to be displayed alongside the title.
-     * It can be a QIcon, a fdo-compatible icon name, or any url understood by Image
+     * @brief This property holds an icon to be displayed alongside the title.
+     *
+     * It can be a QIcon, a FreeDesktop-compatible icon name, or any URL understood by QtQuick.Image.
+     *
+     * @property var titleIcon
      */
     property alias titleIcon: headingIcon.source
 
     /**
-     * titleAlignment: Qt.Alignment
+     * @brief This property holds the title's text which is to be displayed on top.
+     * of the image.
+     * @see QtQuick.Text::text
+     * @property string title
+     */
+    property alias title: heading.text
+
+    /**
+     * @brief This property holds title's position.
+     *
+     * default: ``Qt.AlignTop | Qt.AlignLeft``
+     *
+     * @property Qt::Alignment titleAlignment
      */
     property int titleAlignment: Qt.AlignTop | Qt.AlignLeft
 
     /**
-     * titleLevel: a Kirigami Heading level, default 1
+     * @brief This property holds the title's level.
+     * @note Available text size values range from 1 (largest) to 5 (smallest).
+     *
+     * default: ``1``
+     *
+     * @see org::kde::kirigami::Heading::level
+     * @property int titleLevel
      */
     property alias titleLevel: heading.level
 
     /**
-     * wrapMode: if the header should be able to do wrapping
+     * @brief This property holds the title's wrap mode.
+     *
+     * default: ``Text.NoWrap``
+     *
+     * @see QtQuick.Text::wrapMode
+     * @property int titleWrapMode
      */
     property alias titleWrapMode: heading.wrapMode
+//END properties
 
     property int leftPadding: headingIcon.valid ? Kirigami.Units.smallSpacing * 2 : Kirigami.Units.largeSpacing
     property int topPadding: headingIcon.valid ? Kirigami.Units.smallSpacing * 2 : Kirigami.Units.largeSpacing
