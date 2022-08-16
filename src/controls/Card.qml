@@ -59,13 +59,15 @@ Kirigami.AbstractCard {
      *
      * This grouped property has the following sub-properties:
      * * ``source: url``: The source for the image. It understands any URL valid for an Image component.
-     * * ``title: string``: The title for the banner, shown as contrasting text over the image.
-     * * ``titleAlignment: Qt::Alignment``: The alignment of the title inside the image.
-     * A combination of flags is supported (default: ``Qt.AlignTop | Qt.AlignLeft``)
      * * ``titleIcon: string``: The optional icon to put in the banner, either a freedesktop-compatible
      * icon name (recommended) or any URL supported by QtQuick.Image.
-     * * ``titleLevel: int``: The Kirigami Heading level for the title, which controls the font size. Default: ``1``, which is the largest size.
-     * * ``titleWrapMode: QtQuick.Text::wrapMode`` Whether the header test should be able to wrap. Default: ``Text.NoWrap``
+     * * ``title: string``: The title for the banner, shown as contrasting text over the image.
+     * * ``titleAlignment: Qt::Alignment``: The alignment of the title inside the image.
+     * default: ``Qt.AlignTop | Qt.AlignLeft``
+     * * ``titleLevel: int``: The Kirigami.Heading level for the title, which controls the font size.
+     * default: ``1``, which is the largest size.
+     * * ``titleWrapMode: QtQuick.Text::wrapMode``: Whether the header text should be able to wrap.
+     * default: ``Text.NoWrap``
      *
      * It also has the full set of properties that QtQuick.Image has, such as sourceSize and fillMode.
      *
@@ -73,6 +75,7 @@ Kirigami.AbstractCard {
      * @property Image banner
      */
     readonly property alias banner: bannerImage
+
 
     header: BannerImage {
         id: bannerImage

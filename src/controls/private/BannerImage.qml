@@ -50,7 +50,7 @@ Kirigami.ShadowedImage {
     property alias title: heading.text
 
     /**
-     * @brief This property holds title's position.
+     * @brief This property holds the title's position.
      *
      * default: ``Qt.AlignTop | Qt.AlignLeft``
      *
@@ -60,7 +60,8 @@ Kirigami.ShadowedImage {
 
     /**
      * @brief This property holds the title's level.
-     * @note Available text size values range from 1 (largest) to 5 (smallest).
+     *
+     * Available text size values range from 1 (largest) to 5 (smallest).
      *
      * default: ``1``
      *
@@ -78,23 +79,24 @@ Kirigami.ShadowedImage {
      * @property int titleWrapMode
      */
     property alias titleWrapMode: heading.wrapMode
-//END properties
 
     property int leftPadding: headingIcon.valid ? Kirigami.Units.smallSpacing * 2 : Kirigami.Units.largeSpacing
     property int topPadding: headingIcon.valid ? Kirigami.Units.smallSpacing * 2 : Kirigami.Units.largeSpacing
     property int rightPadding: headingIcon.valid ? Kirigami.Units.smallSpacing * 2 : Kirigami.Units.largeSpacing
     property int bottomPadding: headingIcon.valid ? Kirigami.Units.smallSpacing * 2 : Kirigami.Units.largeSpacing
 
-    Layout.fillWidth: true
-
-    Layout.preferredWidth: titleLayout.implicitWidth || sourceSize.width
-    Layout.preferredHeight: titleLayout.completed && source.toString() !== "" ? width/(sourceSize.width / sourceSize.height) : Layout.minimumHeight
-    Layout.minimumHeight: titleLayout.implicitHeight > 0 ? titleLayout.implicitHeight + Kirigami.Units.smallSpacing * 2 : 0
     property int implicitWidth: Layout.preferredWidth
 
     readonly property bool empty: title.length === 0 &&             // string
                                   source.toString().length === 0 && // QUrl
                                   !titleIcon                        // QVariant hanled by Kirigami.Icon
+//END properties
+
+    Layout.fillWidth: true
+
+    Layout.preferredWidth: titleLayout.implicitWidth || sourceSize.width
+    Layout.preferredHeight: titleLayout.completed && source.toString() !== "" ? width/(sourceSize.width / sourceSize.height) : Layout.minimumHeight
+    Layout.minimumHeight: titleLayout.implicitHeight > 0 ? titleLayout.implicitHeight + Kirigami.Units.smallSpacing * 2 : 0
 
     onTitleAlignmentChanged: {
         titleLayout.implicitWidthChanged()
