@@ -33,10 +33,10 @@ QtObject {
     Theme.inherit: false
 
     /**
-     * This property holds the visual content item.
+     * @brief This property holds the visual content item.
+     * @note The content item is automatically resized to fill the
+     * sheet's view area.
      *
-     * Note: The content item is automatically resized inside the
-     * padding of the control.
      * Conversely, the Sheet will be sized based on the size hints
      * of the contentItem, so if you need a custom size sheet,
      * redefine contentWidth and contentHeight of your contentItem
@@ -44,66 +44,85 @@ QtObject {
     default property Item contentItem
 
     /**
-     * If true the sheet is open showing the contents of the OverlaySheet
-     * component.
+     * @brief This property tells whether the sheet is open and displaying its contents.
      */
     property bool sheetOpen
 
     /**
-     * This property holds the left padding. Unless explicitly set,
-     * the value is equal to Units::largeSpacing
+     * @brief This property holds the left padding.
+     *
+     * default: ``Kirigami.Units.largeSpacing``
      */
     property int leftPadding: Units.largeSpacing
 
     /**
-     * This property holds the top padding. Unless explicitly set,
-     * the value is equal to Units::largeSpacing
+     * @brief This property holds the top padding.
+     *
+     * default: ``Kirigami.Units.largeSpacing``
      */
     property int topPadding: Units.largeSpacing
 
     /**
-     * This property holds the right padding. Unless explicitly set,
-     * the value is equal to Units::largeSpacing
+     * @brief This property holds the right padding.
+     *
+     * default: ``Kirigami.Units.largeSpacing``
      */
     property int rightPadding: Units.largeSpacing
 
     /**
-     * This property holds the bottom padding. Unless explicitly set,
-     * the value is equal to Units::largeSpacing
+     * @brief This property holds the bottom padding.
+     *
+     * default: ``Kirigami.Units.largeSpacing``
      */
     property int bottomPadding: Units.largeSpacing
 
     /**
-     * This property holds the left inset for the background. The
-     * inset gets applied to both the content *and* the background.
+     * @brief This property holds the left inset for the background.
+     *
+     * The inset gets applied to both the content and the background.
+     *
+     * default: ``0``
+     *
      * @since 2.12
      */
     property real leftInset: 0
 
     /**
-     * This property holds the top inset for the background. The
-     * inset gets applied to both the content *and* the background.
+     * @brief This property holds the top inset for the background.
+     *
+     * The inset gets applied to both the content and the background.
+     *
+     * default: ``0``
+     *
      * @since 2.12
      */
     property real topInset: 0
 
     /**
-     * This property holds the right inset for the background. The
-     * inset gets applied to both the content *and* the background.
+     * @brief This property holds the right inset for the background.
+     *
+     * The inset gets applied to both the content and the background.
+     *
+     * default: ``0``
+     *
      * @since 2.12
      */
     property real rightInset: 0
 
     /**
-     * This property holds the bottom inset for the background. The
-     * inset gets applied to both the content *and* the background.
+     * @brief This property holds the bottom inset for the background.
+     *
+     * The inset gets applied to both the content and the background.
+     *
+     * default: ``0``
+     *
      * @since 2.12
      */
     property real bottomInset: 0
 
     /**
-     * An optional item which will be used as the sheet's header,
-     * always kept on screen.
+     * @brief This property holds an optional item which will be used as the sheet's header,
+     * and will always be displayed.
      * @since 5.43
      */
     property Item header: Heading {
@@ -120,14 +139,14 @@ QtObject {
     }
 
     /**
-     * An optional item which will be used as the sheet's footer,
+     * @brief An optional item which will be used as the sheet's footer,
      * always kept on screen.
      * @since 5.43
      */
     property Item footer
 
     /**
-     * This property holds the background item.
+     * @brief This property holds the background item.
      *
      * @note If the background item has no explicit size specified,
      * it automatically follows the control's size. In most cases,
@@ -136,17 +155,17 @@ QtObject {
     property Item background
 
     /**
-     * Whether to show the close button in the top-right corner.
-     * By default only show on desktop.
+     * @brief This property sets the visibility of the close button in the top-right corner.
+     *
+     * default: `Only shown in desktop mode`
+     *
      * @since 5.44
      */
     property bool showCloseButton: !Settings.isMobile
 
     /**
-     * title: string
-     * This property holds the sheet title.
-     *
-     * Note: If the header property is set, this will have no effect as the heading will be replaced by the header.
+     * @brief This property holds the sheet's title.
+     * @note If the header property is set, this will have no effect as the heading will be replaced by the header.
      * @since 5.84
      */
     property string title
@@ -154,7 +173,7 @@ QtObject {
     property Item parent
 
     /**
-     * Open the overlay sheet.
+     * @brief This function opens the overlay sheet.
      */
     function open() {
         openAnimation.running = true;
@@ -165,7 +184,7 @@ QtObject {
     }
 
     /**
-     * Close the overlay sheet.
+     * @brief This function closes the overlay sheet.
      */
     function close() {
         if (root.sheetOpen) {
@@ -229,7 +248,7 @@ QtObject {
         Theme.colorSet: root.Theme.colorSet
         Theme.inherit: root.Theme.inherit
         z: 101
-        //we want to be over any possible OverlayDrawers, including handles
+        // we want to be over any possible OverlayDrawers, including handles
         parent: {
             if (root.parent && root.parent.ColumnView.view && (root.parent.ColumnView.view === root.parent || root.parent.ColumnView.view === root.parent.parent)) {
                 return root.parent.ColumnView.view.parent;
@@ -273,8 +292,8 @@ QtObject {
                 return;
             }
 
-            //NOTE: there is no function to know if an item is descended from another,
-            //so we have to walk the parent hierarchy by hand
+            // NOTE: there is no function to know if an item is descended from another,
+            // so we have to walk the parent hierarchy by hand
             var isDescendent = false;
             var candidate = focusItem.parent;
             while (candidate) {
@@ -295,7 +314,7 @@ QtObject {
 
 
             var pos = focusItem.mapToItem(flickableContents, 0, cursorY - Units.gridUnit*3);
-            //focused item already visible? add some margin for the space of the action buttons
+            // focused item already visible? add some margin for the space of the action buttons
             if (pos.y >= scrollView.flickableItem.contentY && pos.y <= scrollView.flickableItem.contentY + scrollView.flickableItem.height - Units.gridUnit * 8) {
                 return;
             }
@@ -455,7 +474,7 @@ QtObject {
                 // +1: we need the flickable to be always interactive
                 contentHeight: Math.max(height+1, scrollView.animatedContentHeight + topEmptyArea)
 
-                //readonly property int topEmptyArea: Math.max(height-scrollView.animatedContentHeight, Units.gridUnit * 3)
+                // readonly property int topEmptyArea: Math.max(height-scrollView.animatedContentHeight, Units.gridUnit * 3)
                 readonly property int topEmptyArea: Math.max(height-scrollView.animatedContentHeight, Units.gridUnit * 3)
 
                 readonly property real openPosition: Math.max(0, outerFlickable.height - outerFlickable.contentHeight + headerItem.height + footerItem.height) + height/2 - contentLayout.height/2;
@@ -621,7 +640,7 @@ QtObject {
                                 header.parent = headerParent;
                                 header.anchors.fill = headerParent;
 
-                                //TODO: special case for actual ListViews
+                                // TODO: special case for actual ListViews
                             }
                         }
 
@@ -689,8 +708,8 @@ QtObject {
                     QQC2.ScrollView {
                         id: scrollView
 
-                        //Don't do the automatic interactive enable/disable
-                        //canFlickWithMouse: true
+                        // Don't do the automatic interactive enable/disable
+                        // canFlickWithMouse: true
                         property Item viewContent
                         property real animatedContentHeight: flickableItem.contentHeight
                         property bool userInteracting: false
@@ -768,11 +787,11 @@ QtObject {
                     Theme.inherit: false
                     color: Theme.backgroundColor
 
-                    //Show an extra margin when:
-                    //* the application is in mobile mode
-                    //* it doesn't use toolbarapplicationheader
-                    //* the bottom screen controls are visible
-                    //* the sheet is displayed *under* the controls
+                    // Show an extra margin when:
+                    // * the application is in mobile mode
+                    // * it doesn't use toolbarapplicationheader
+                    // * the bottom screen controls are visible
+                    // * the sheet is displayed *under* the controls
                     property int extraMargin: (!root.parent ||
                         !Settings.isMobile ||
                         typeof applicationWindow === "undefined" ||
