@@ -25,6 +25,7 @@
 
 #include "loggingcategory.h"
 #include <cmath>
+#include <vector>
 
 #define return_fallback(value)                                                                                                                                 \
     if (m_imageData.m_samples.size() == 0) {                                                                                                                   \
@@ -281,7 +282,8 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
 
     // compress blocks that became too similar
     auto sourceIt = imageData.m_clusters.end();
-    QList<QList<ImageData::colorStat>::iterator> itemsToDelete;
+    // Use index instead of iterator, because QList::erase may invalidate iterator.
+    std::vector<int> itemsToDelete;
     while (sourceIt != imageData.m_clusters.begin()) {
         sourceIt--;
         for (auto destIt = imageData.m_clusters.begin(); destIt != imageData.m_clusters.end() && destIt != sourceIt; destIt++) {
@@ -292,13 +294,13 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
                 const int b = ratio * qreal(qBlue((*sourceIt).centroid)) + (1 - ratio) * qreal(qBlue((*destIt).centroid));
                 (*destIt).ratio += (*sourceIt).ratio;
                 (*destIt).centroid = qRgb(r, g, b);
-                itemsToDelete << sourceIt;
+                itemsToDelete.push_back(std::distance(imageData.m_clusters.begin(), sourceIt));
                 break;
             }
         }
     }
-    for (const auto &i : std::as_const(itemsToDelete)) {
-        imageData.m_clusters.erase(i);
+    for (auto i : std::as_const(itemsToDelete)) {
+        imageData.m_clusters.removeAt(i);
     }
 
     imageData.m_highlight = QColor();
