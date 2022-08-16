@@ -295,8 +295,8 @@ Item {
             // NOTE: work around a  GridLayout quirk which doesn't lay out items with null size hints causing things to be laid out incorrectly in some cases
             implicitWidth: Math.max(item.implicitWidth, 1)
             implicitHeight: Math.max(item.implicitHeight, 1)
-            Layout.preferredWidth: Math.max(1, item.Layout.preferredWidth > 0 ? item.Layout.preferredWidth : item.implicitWidth)
-            Layout.preferredHeight: Math.max(1, item.Layout.preferredHeight > 0 ? item.Layout.preferredHeight : item.implicitHeight)
+            Layout.preferredWidth: Math.max(1, item.Layout.preferredWidth > 0 ? item.Layout.preferredWidth : Math.ceil(item.implicitWidth))
+            Layout.preferredHeight: Math.max(1, item.Layout.preferredHeight > 0 ? item.Layout.preferredHeight : Math.ceil(item.implicitHeight))
 
             Layout.minimumWidth: item.Layout.minimumWidth
             Layout.minimumHeight: item.Layout.minimumHeight
