@@ -1,3 +1,9 @@
+/*
+ *  SPDX-FileCopyrightText: 2022 Connor Carney <hello@connorcarney.com>
+ *
+ *  SPDX-License-Identifier: LGPL-2.0-or-later
+ */
+
 import QtQuick 2.1
 import QtQuick.Window 2.0
 import QtQuick.Layouts 1.3
