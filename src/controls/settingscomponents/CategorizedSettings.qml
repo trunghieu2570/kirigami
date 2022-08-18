@@ -36,7 +36,7 @@ PageRow {
 
     columnView.columnWidth: Units.gridUnit * 7 // So it's the same size as the kxmlgui settings dialogs
     globalToolBar.showNavigationButtons: ApplicationHeaderStyle.NoNavigationButtons
-    globalToolBar.style: ApplicationHeaderStyle.None
+    globalToolBar.style: Settings.isMobile ? ApplicationHeaderStyle.Breadcrumb : ApplicationHeaderStyle.None
 
     signal backRequested(var event)
     onBackRequested: {
