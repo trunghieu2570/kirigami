@@ -140,6 +140,7 @@ void ImageColors::update()
     if (m_futureImageData) {
         m_futureImageData->cancel();
         m_futureImageData->deleteLater();
+        m_futureImageData = nullptr;
     }
     auto runUpdate = [this]() {
         QFuture<ImageData> future = QtConcurrent::run([this]() {
