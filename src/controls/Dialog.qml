@@ -279,8 +279,9 @@ T.Dialog {
     }
 
     // center dialog
-    x: Math.round((parent.width - width) / 2)
-    y: Math.round((parent.height - height) / 2) + Kirigami.Units.gridUnit * 2 * (1 - opacity) // move animation
+    // use implicitWidth and implicitHeight to avoid binding loops
+    x: Math.round((parent.width - implicitWidth) / 2)
+    y: Math.round((parent.height - implicitHeight) / 2) + Kirigami.Units.gridUnit * 2 * (1 - opacity) // move animation
 
     // dialog enter and exit transitions
     enter: Transition {
