@@ -7,7 +7,7 @@
 import QtQuick 2.6
 import QtQuick.Layouts 1.4
 import QtQuick.Controls 2.4 as Controls
-import QtQuick.Templates 2.4 as T2
+import QtQuick.Templates 2.4 as T
 import org.kde.kirigami 2.11 as Kirigami
 import "../private"
 
@@ -41,8 +41,9 @@ import "../private"
  * }
  * @endcode
  *
+ * @inherit QtQuick.Templates.SwipeDelegate
  */
-T2.SwipeDelegate {
+T.SwipeDelegate {
     id: listItem
 
 //BEGIN properties
@@ -51,7 +52,7 @@ T2.SwipeDelegate {
      *
      * default: ``false``, ``true`` when cursor goes over the item.
      *
-     * @deprcated Use hoverEnabled instead.
+     * @deprecated Use hoverEnabled instead.
      * @property bool supportsMouseEvents
      */
     property alias supportsMouseEvents: listItem.hoverEnabled
@@ -81,6 +82,8 @@ T2.SwipeDelegate {
      * If true, this item will look like a title for items under it.
      *
      * default: ``false``
+     *
+     * @see ListSectionHeader
      */
     property bool sectionDelegate: false
 
@@ -100,6 +103,7 @@ T2.SwipeDelegate {
      *
      * Actions should go completely out of the way for instance during
      * the editing of an item.
+     *
      * @since 2.5
      */
     readonly property bool actionsVisible: actionsLayout.hasVisibleActions
@@ -109,8 +113,6 @@ T2.SwipeDelegate {
      *
      * At most 4 actions can be revealed when sliding away the list item,
      * others will be shown in the overflow menu.
-     *
-     * @property list<QtQuick.Controls.Action> actions
      */
     property list<Controls.Action> actions
 
@@ -127,7 +129,7 @@ T2.SwipeDelegate {
     /**
      * @brief This property holds the color for the text in the item.
      *
-     * @note if custom text elements are inserted in an AbstractListItem,
+     * @note If custom text elements are inserted in an AbstractListItem,
      * their color property will have to be manually bound with this property.
      *
      * default: ``Kirigami.Theme.textColor``
