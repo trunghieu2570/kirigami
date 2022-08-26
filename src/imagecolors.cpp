@@ -20,6 +20,7 @@
 #include "platformtheme.h"
 
 #include <QDebug>
+#include <QGuiApplication>
 #include <QTimer>
 #include <QtConcurrent>
 
@@ -213,7 +214,7 @@ void ImageColors::positionColor(QRgb rgb, QList<ImageData::colorStat> &clusters)
     clusters << stat;
 }
 
-ImageData ImageColors::generatePalette(const QImage &sourceImage)
+ImageData ImageColors::generatePalette(const QImage &sourceImage) const
 {
     ImageData imageData;
 
@@ -235,6 +236,10 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
             if (sampleColor.alpha() == 0) {
                 continue;
             }
+            if (ColorUtils::chroma(sampleColor) < 20) {
+                continue;
+            }
+
             QRgb rgb = sampleColor.rgb();
             c++;
             r += qRed(rgb);
@@ -277,8 +282,8 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
         }
     }
 
-    std::sort(imageData.m_clusters.begin(), imageData.m_clusters.end(), [](const ImageData::colorStat &a, const ImageData::colorStat &b) {
-        return a.colors.size() > b.colors.size();
+    std::sort(imageData.m_clusters.begin(), imageData.m_clusters.end(), [this](const ImageData::colorStat &a, const ImageData::colorStat &b) {
+        return getClusterScore(a) > getClusterScore(b);
     });
 
     // compress blocks that became too similar
@@ -371,7 +376,64 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
         imageData.m_palette << entry;
     }
 
+    postProcess(imageData);
+
     return imageData;
+}
+
+double ImageColors::getClusterScore(const ImageData::colorStat &stat) const
+{
+    return stat.ratio * ColorUtils::chroma(QColor(stat.centroid));
+}
+
+void ImageColors::postProcess(ImageData &imageData) const
+{
+    constexpr short unsigned WCAG_NON_TEXT_CONTRAST_RATIO = 3;
+    constexpr qreal WCAG_TEXT_CONTRAST_RATIO = 4.5;
+    const QColor backgroundColor = static_cast<Kirigami::PlatformTheme *>(qmlAttachedPropertiesObject<Kirigami::PlatformTheme>(this, true))->backgroundColor();
+    const qreal backgroundLum = ColorUtils::luminance(backgroundColor);
+    qreal lowerLum, upperLum;
+    // 192 is from kcm_colors
+    if (qGray(backgroundColor.rgb()) < 192) {
+        // (lowerLum + 0.05) / (backgroundLum + 0.05) >= 3
+        lowerLum = WCAG_NON_TEXT_CONTRAST_RATIO * (backgroundLum + 0.05) - 0.05;
+        upperLum = 0.95;
+    } else {
+        // For light themes, still prefer lighter colors
+        // (lowerLum + 0.05) / (textLum + 0.05) >= 4.5
+        const QColor textColor = static_cast<Kirigami::PlatformTheme *>(qmlAttachedPropertiesObject<Kirigami::PlatformTheme>(this, true))->textColor();
+        const qreal textLum = ColorUtils::luminance(textColor);
+        lowerLum = WCAG_TEXT_CONTRAST_RATIO * (textLum + 0.05) - 0.05;
+        upperLum = backgroundLum;
+    }
+
+    auto adjustSaturation = [](QColor &color) {
+        // Adjust saturation to make the color more vibrant
+        if (color.hsvSaturationF() < 0.5) {
+            const qreal h = color.hsvHueF();
+            const qreal v = color.valueF();
+            color.setHsvF(h, 0.5, v);
+        }
+    };
+    adjustSaturation(imageData.m_dominant);
+    adjustSaturation(imageData.m_highlight);
+    adjustSaturation(imageData.m_average);
+
+    auto adjustLightness = [lowerLum, upperLum](QColor &color) {
+        short unsigned colorOperationCount = 0;
+        const qreal h = color.hslHueF();
+        const qreal s = color.hslSaturationF();
+        const qreal l = color.lightnessF();
+        while (ColorUtils::luminance(color.rgb()) < lowerLum && colorOperationCount++ < 10) {
+            color.setHslF(h, s, std::min(1.0, l + colorOperationCount * 0.03));
+        }
+        while (ColorUtils::luminance(color.rgb()) > upperLum && colorOperationCount++ < 10) {
+            color.setHslF(h, s, std::max(0.0, l - colorOperationCount * 0.03));
+        }
+    };
+    adjustLightness(imageData.m_dominant);
+    adjustLightness(imageData.m_highlight);
+    adjustLightness(imageData.m_average);
 }
 
 QVariantList ImageColors::palette() const
