@@ -215,4 +215,6 @@ public:
 
     // Not for QML, returns the comvertion from srgb of a QColor and Lab colorspace
     static ColorUtils::LabColor colorToLab(const QColor &color);
+
+    static qreal luminance(const QColor &color);
 };

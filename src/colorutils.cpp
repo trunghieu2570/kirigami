@@ -305,3 +305,10 @@ qreal ColorUtils::chroma(const QColor &color)
     // Chroma is hypotenuse of a and b
     return sqrt(pow(labColor.a, 2) + pow(labColor.b, 2));
 }
+
+qreal ColorUtils::luminance(const QColor &color)
+{
+    const auto &xyz = colorToXYZ(color);
+    // Luminance is equal to Y
+    return xyz.y;
+}
