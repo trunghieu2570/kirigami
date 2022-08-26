@@ -291,7 +291,7 @@ ColorUtils::LabColor ColorUtils::colorToLab(const QColor &color)
     pivot(z);
 
     LabColor labColor;
-    labColor.l = (116 * y) - 16;
+    labColor.l = std::max(0.0, (116 * y) - 16);
     labColor.a = 500 * (x - y);
     labColor.b = 200 * (y - z);
 
