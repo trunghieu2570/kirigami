@@ -90,8 +90,10 @@ Page {
 
     /**
      * @brief This property holds the main Flickable item of this page.
+     * @deprecated here for compatibility; will be removed in KF6.
      */
-    readonly property Flickable flickable: itemsParent.flickable
+    property Flickable flickable: Flickable {} // FIXME KF6: this empty flickable exists for compatibility reasons. some apps assume flickable exists right from the beginning but ScrollView internally assumes it does not
+    onFlickableChanged: scrollView.contentItem = flickable;
 
     /**
      * @brief This property sets the vertical scrollbar policy.
@@ -197,7 +199,7 @@ Page {
         // Has to be a MouseArea that accepts events otherwise touch events on Wayland will get lost
         MouseArea {
             id: scrollingArea
-            width: itemsParent.flickable.width
+            width: root.flickable.width
             height: Math.max(root.flickable.height, implicitHeight)
             implicitHeight: {
                 let impl = 0;
@@ -310,15 +312,19 @@ Page {
     ]
 
     Component.onCompleted: {
+        let flickableFound = false;
         for (let i in itemsParent.data) {
             let child = itemsParent.data[i];
             if (child instanceof Flickable) {
                 // If there were more flickable children, take the last one, as behavior compatibility
                 // with old internal ScrollView
                 child.activeFocusOnTab = true;
-                itemsParent.flickable = child;
-                child.keyNavigationEnabled = true;
-                child.keyNavigationWraps = false;
+                root.flickable = child;
+                flickableFound = true;
+                if (child instanceof ListView) {
+                    child.keyNavigationEnabled = true;
+                    child.keyNavigationWraps = false;
+                }
             } else if (child instanceof Item) {
                 child.anchors.left = itemsParent.left;
                 child.anchors.right = itemsParent.right;
@@ -330,23 +336,23 @@ Page {
             }
         }
 
-        if (itemsParent.flickable) {
-            scrollView.contentItem = flickable;
-            flickable.parent = scrollView;
+        if (flickableFound) {
+            scrollView.contentItem = root.flickable;
+            root.flickable.parent = scrollView;
             // The flickable needs focus only if the page didn't already explicitly set focus to some other control (eg a text field in the header)
-            Qt.callLater( () => {if (root.activeFocus) itemsParent.flickable.forceActiveFocus()});
+            Qt.callLater( () => {if (root.activeFocus) root.flickable.forceActiveFocus()});
             // Some existing code incorrectly uses anchors
-            flickable.anchors.fill = undefined;
-            flickable.anchors.left = undefined;
-            flickable.anchors.right = undefined;
-            flickable.anchors.top = undefined;
-            flickable.anchors.bottom = undefined;
+            root.flickable.anchors.fill = undefined;
+            root.flickable.anchors.left = undefined;
+            root.flickable.anchors.right = undefined;
+            root.flickable.anchors.top = undefined;
+            root.flickable.anchors.bottom = undefined;
         } else {
-            itemsParent.flickable = scrollView.contentItem;
-            scrollingArea.parent = itemsParent.flickable.contentItem;
-            itemsParent.flickable.contentHeight = Qt.binding(() => { return scrollingArea.implicitHeight - itemsParent.flickable.topMargin - itemsParent.flickable.bottomMargin });
-            itemsParent.flickable.contentWidth = Qt.binding(() => { return scrollingArea.implicitWidth });
+            scrollView.contentItem = root.flickable;
+            scrollingArea.parent = root.flickable.contentItem;
+            root.flickable.contentHeight = Qt.binding(() => { return scrollingArea.implicitHeight - root.flickable.topMargin - root.flickable.bottomMargin });
+            root.flickable.contentWidth = Qt.binding(() => { return scrollingArea.implicitWidth });
         }
-        itemsParent.flickable.flickableDirection = Flickable.VerticalFlick;
+        root.flickable.flickableDirection = Flickable.VerticalFlick;
     }
 }
