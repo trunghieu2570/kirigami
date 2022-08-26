@@ -20,6 +20,7 @@
 #include "platformtheme.h"
 
 #include <QDebug>
+#include <QGuiApplication>
 #include <QTimer>
 #include <QtConcurrent>
 
@@ -135,6 +136,23 @@ QQuickItem *ImageColors::sourceItem() const
     return m_sourceItem;
 }
 
+void ImageColors::setStyle(int style)
+{
+    if (style == m_style) {
+        return;
+    }
+
+    m_style = static_cast<Style>(style);
+    Q_EMIT styleChanged();
+
+    update();
+}
+
+int ImageColors::style() const
+{
+    return m_style;
+}
+
 void ImageColors::update()
 {
     if (m_futureImageData) {
@@ -212,7 +230,7 @@ void ImageColors::positionColor(QRgb rgb, QList<ImageData::colorStat> &clusters)
     clusters << stat;
 }
 
-ImageData ImageColors::generatePalette(const QImage &sourceImage)
+ImageData ImageColors::generatePalette(const QImage &sourceImage) const
 {
     ImageData imageData;
 
@@ -234,6 +252,10 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
             if (sampleColor.alpha() == 0) {
                 continue;
             }
+            if (!pixelCondition(sampleColor)) {
+                continue;
+            }
+
             QRgb rgb = sampleColor.rgb();
             c++;
             r += qRed(rgb);
@@ -276,8 +298,8 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
         }
     }
 
-    std::sort(imageData.m_clusters.begin(), imageData.m_clusters.end(), [](const ImageData::colorStat &a, const ImageData::colorStat &b) {
-        return a.colors.size() > b.colors.size();
+    std::sort(imageData.m_clusters.begin(), imageData.m_clusters.end(), [this](const ImageData::colorStat &a, const ImageData::colorStat &b) {
+        return getClusterScore(a) > getClusterScore(b);
     });
 
     // compress blocks that became too similar
@@ -370,7 +392,91 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
         imageData.m_palette << entry;
     }
 
+    postProcess(imageData);
+
     return imageData;
+}
+
+bool ImageColors::pixelCondition(const QColor &color) const
+{
+    switch (m_style) {
+    case Breeze:
+        return ColorUtils::chroma(color) >= 20;
+    case Default:
+        return true;
+    default:
+        Q_UNREACHABLE();
+    }
+}
+
+double ImageColors::getClusterScore(const ImageData::colorStat &stat) const
+{
+    switch (m_style) {
+    case Breeze:
+        return stat.ratio * ColorUtils::chroma(QColor(stat.centroid));
+    case Default:
+        return stat.colors.size();
+    default:
+        Q_UNREACHABLE();
+    }
+}
+
+void ImageColors::postProcess(ImageData &imageData) const
+{
+    switch (m_style) {
+    case Breeze: {
+        constexpr short unsigned WCAG_NON_TEXT_CONTRAST_RATIO = 3;
+        constexpr double WCAG_TEXT_CONTRAST_RATIO = 4.5;
+        // 192 is from kcm_colors
+        const QRgb windowColor = qGuiApp->palette().window().color().rgb();
+        const double backgroundLum = ColorUtils::luminance(windowColor);
+        qreal lowerLum, upperLum;
+        if (qGray(windowColor) < 192) {
+            // (lowerLum + 0.05) / (backgroundLum + 0.05) >= 3
+            lowerLum = WCAG_NON_TEXT_CONTRAST_RATIO * (backgroundLum + 0.05) - 0.05;
+            upperLum = 0.95;
+        } else {
+            // For light themes, still prefer lighter colors
+            // Assuming the luminance of text is 0, so (lowerLum + 0.05) / (0 + 0.05) >= 4.5
+            lowerLum = WCAG_TEXT_CONTRAST_RATIO * 0.05 - 0.05;
+            upperLum = backgroundLum;
+        }
+
+        auto adjustSaturation = [](QColor &color) {
+            // Adjust saturation to make the color more vibrant
+            if (color.hsvSaturationF() < 0.5) {
+                const double h = color.hsvHueF();
+                const double v = color.valueF();
+                color.setHsvF(h, 0.5, v);
+            }
+        };
+        adjustSaturation(imageData.m_dominant);
+        adjustSaturation(imageData.m_highlight);
+        adjustSaturation(imageData.m_average);
+
+        auto adjustLightness = [lowerLum, upperLum](QColor &color) {
+            short unsigned colorOperationCount = 0;
+            const double h = color.hslHueF();
+            const double s = color.hslSaturationF();
+            const double l = color.lightnessF();
+            while (ColorUtils::luminance(color.rgb()) < lowerLum && colorOperationCount++ < 10) {
+                color.setHslF(h, s, std::min(1.0, l + colorOperationCount * 0.03));
+            }
+            while (ColorUtils::luminance(color.rgb()) > upperLum && colorOperationCount++ < 10) {
+                color.setHslF(h, s, std::max(0.0, l - colorOperationCount * 0.03));
+            }
+        };
+        adjustLightness(imageData.m_dominant);
+        adjustLightness(imageData.m_highlight);
+        adjustLightness(imageData.m_average);
+
+        return;
+    }
+    case Default:
+        return;
+    default:
+        Q_UNREACHABLE();
+    }
 }
 
 QVariantList ImageColors::palette() const

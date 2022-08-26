@@ -50,7 +50,7 @@ struct ImageData {
     QVariantList m_palette;
 
     bool m_darkPalette = true;
-    QColor m_dominant;
+    QColor m_dominant = Qt::transparent;
     QColor m_dominantContrast;
     QColor m_average;
     QColor m_highlight;
@@ -77,6 +77,13 @@ class ImageColors : public QObject
      * Note that an Item's color palette will only be extracted once unless you * call `update()`, regardless of how the item hanges.
      */
     Q_PROPERTY(QVariant source READ source WRITE setSource NOTIFY sourceChanged)
+
+    /**
+     * The color style used when generating palettes from images.
+     *
+     * @since 5.99
+     */
+    Q_PROPERTY(int style READ style WRITE setStyle NOTIFY styleChanged)
 
     /**
      * A list of colors and related information about then.
@@ -213,6 +220,14 @@ class ImageColors : public QObject
     Q_PROPERTY(QColor fallbackBackground MEMBER m_fallbackBackground NOTIFY fallbackBackgroundChanged)
 
 public:
+    enum Style {
+        Default /**< No extra processing on extracted colors like in previous Kirigami versions **/,
+        Breeze, /**< Filter the original pixels by chroma, choose the dominant color based on
+                     ratio and chroma, and adjust color lightness to meet WCAG contrast criterion.
+                     @since 5.99 @unstable **/
+    };
+    Q_ENUM(Style)
+
     explicit ImageColors(QObject *parent = nullptr);
     ~ImageColors() override;
 
@@ -224,6 +239,9 @@ public:
 
     void setSourceItem(QQuickItem *source);
     QQuickItem *sourceItem() const;
+
+    void setStyle(int style);
+    int style() const;
 
     Q_INVOKABLE void update();
 
@@ -240,6 +258,7 @@ public:
 
 Q_SIGNALS:
     void sourceChanged();
+    void styleChanged();
     void paletteChanged();
     void fallbackPaletteChanged();
     void fallbackPaletteBrightnessChanged();
@@ -252,7 +271,11 @@ Q_SIGNALS:
 
 private:
     static inline void positionColor(QRgb rgb, QList<ImageData::colorStat> &clusters);
-    static ImageData generatePalette(const QImage &sourceImage);
+    ImageData generatePalette(const QImage &sourceImage) const;
+
+    bool pixelCondition(const QColor &color) const;
+    double getClusterScore(const ImageData::colorStat &stat) const;
+    void postProcess(ImageData &imageData) const;
 
     // Arbitrary number that seems to work well
     static const int s_minimumSquareDistance = 32000;
@@ -261,6 +284,7 @@ private:
     QPointer<QQuickItem> m_sourceItem;
     QSharedPointer<QQuickItemGrabResult> m_grabResult;
     QImage m_sourceImage;
+    Style m_style = Style::Default;
 
     QTimer *m_imageSyncTimer;
 
