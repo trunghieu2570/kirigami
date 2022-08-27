@@ -242,7 +242,7 @@ Page {
             z: 99
             y: root.flickable.verticalLayoutDirection === ListView.BottomToTop
                 ? -root.flickable.contentY + root.flickable.originY + height
-                : -root.flickable.contentY + root.flickable.originY - height + scrollView.y
+                : -root.flickable.contentY + root.flickable.originY - height
             width: root.flickable.width
             height: Units.gridUnit * 4
             active: root.supportsRefreshing
