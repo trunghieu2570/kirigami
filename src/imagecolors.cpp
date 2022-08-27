@@ -507,11 +507,13 @@ QColor ImageColors::average() const
 
 QColor ImageColors::dominant() const
 {
-    /* clang-format off */
-    return_fallback_finally(m_fallbackDominant, linkBackgroundColor)
+    if (m_style != Breeze) {
+        /* clang-format off */
+        return_fallback_finally(m_fallbackDominant, linkBackgroundColor)
+        /* clang-format on */
+    }
 
     return m_imageData.m_dominant;
-    /* clang-format on */
 }
 
 QColor ImageColors::dominantContrast() const
