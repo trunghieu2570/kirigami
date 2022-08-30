@@ -79,13 +79,6 @@ class ImageColors : public QObject
     Q_PROPERTY(QVariant source READ source WRITE setSource NOTIFY sourceChanged)
 
     /**
-     * The color style used when generating palettes from images.
-     *
-     * @since 5.99
-     */
-    Q_PROPERTY(int style READ style WRITE setStyle NOTIFY styleChanged)
-
-    /**
      * A list of colors and related information about then.
      *
      * Each list item has the following properties:
@@ -159,7 +152,7 @@ class ImageColors : public QObject
      * On light items, this will be the color closest to white
      * in the image if it's light enough, or a bright gray otherwise.
      */
-    Q_PROPERTY(QColor background READ background NOTIFY paletteChanged)
+    Q_PROPERTY(QColor background READ background WRITE setBackground NOTIFY paletteChanged)
 
     /**
      * The lightest color of the source image.
@@ -220,14 +213,6 @@ class ImageColors : public QObject
     Q_PROPERTY(QColor fallbackBackground MEMBER m_fallbackBackground NOTIFY fallbackBackgroundChanged)
 
 public:
-    enum Style {
-        Default /**< No extra processing on extracted colors like in previous Kirigami versions **/,
-        Breeze, /**< Filter the original pixels by chroma, choose the dominant color based on
-                     ratio and chroma, and adjust color lightness to meet WCAG contrast criterion.
-                     @since 5.99 @unstable **/
-    };
-    Q_ENUM(Style)
-
     explicit ImageColors(QObject *parent = nullptr);
     ~ImageColors() override;
 
@@ -240,9 +225,6 @@ public:
     void setSourceItem(QQuickItem *source);
     QQuickItem *sourceItem() const;
 
-    void setStyle(int style);
-    int style() const;
-
     Q_INVOKABLE void update();
 
     QVariantList palette() const;
@@ -253,12 +235,12 @@ public:
     QColor highlight() const;
     QColor foreground() const;
     QColor background() const;
+    void setBackground(const QColor &background);
     QColor closestToWhite() const;
     QColor closestToBlack() const;
 
 Q_SIGNALS:
     void sourceChanged();
-    void styleChanged();
     void paletteChanged();
     void fallbackPaletteChanged();
     void fallbackPaletteBrightnessChanged();
@@ -284,7 +266,6 @@ private:
     QPointer<QQuickItem> m_sourceItem;
     QSharedPointer<QQuickItemGrabResult> m_grabResult;
     QImage m_sourceImage;
-    Style m_style = Style::Default;
 
     QTimer *m_imageSyncTimer;
 
@@ -299,4 +280,6 @@ private:
     QColor m_fallbackHighlight;
     QColor m_fallbackForeground;
     QColor m_fallbackBackground;
+
+    QColor m_customBackgroundColor;
 };
