@@ -7,9 +7,28 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
 
 Rectangle {
+    /**
+     * @brief This property holds the color of the Chip's background when it is being pressed.
+     * @see QtQuick.AbstractButton::pressed
+     */
     property color pressedColor: Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.3)
+
+    /**
+     * @brief This property holds the color of the Chip's background when it is checked.
+     * @see QtQuick.AbstractButton::checked
+     */
     property color hoverSelectColor: Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.2)
+
+    /**
+     * @brief This property holds the color of the Chip's border when it is checked.
+     * @see QtQuick.AbstractButton::checked
+     */
     property color checkedBorderColor: Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.7)
+
+    /**
+     * @brief This property holds the color of the Chip's border when it is being pressed.
+     * @see QtQuick.AbstractButton::pressed
+     */
     property color pressedBorderColor: Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.9)
 
     Kirigami.Theme.colorSet:Kirigami.Theme.Header
