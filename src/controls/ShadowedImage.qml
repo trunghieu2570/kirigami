@@ -64,7 +64,7 @@ Item {
     property alias radius: shadowRectangle.radius
 
     /**
-     * @brief This propery holds the shadow's properties of the image.
+     * @brief This property holds shadow's properties group.
      * @see org::kde::kirigami::ShadowedRectangle::shadow
      * @property org::kde::kirigami::ShadowedRectangle::ShadowGroup shadow
      */
@@ -91,12 +91,12 @@ Item {
     property alias source: image.source
 
     /**
-     * This property specifies that images on the local filesystem should be loaded
-     * asynchronously in a separate thread. The default value is false,
-     * causing the user interface thread to block while the image is
-     * loaded. Setting asynchronous to true is useful where maintaining
-     * a responsive user interface is more desirable than having images
-     * immediately visible.
+     * @brief This property sets whether this image should be loaded asynchronously.
+     *
+     * Set this to false if you want the main thread to load the image, which
+     * blocks it until the image is loaded. Setting this to true loads the
+     * image in a separate thread which is useful when maintaining a responsive
+     * user interface is more desirable than having images immediately visible.
      *
      * @see QtQuick.Image::asynchronous
      * @property bool asynchronous
