@@ -23,21 +23,21 @@ T2.ItemDelegate {
 
 //BEGIN properties
     /**
-     * @brief This property holds if the item emits signals related to mouse interaction.
+     * @brief This property sets whether the item should emit signals related to mouse interaction.
      *
-     * default: ``false``
+     * default: ``true``
      *
      * @deprecated This will be removed in KF6.
      */
     property bool supportsMouseEvents: hoverEnabled
 
     /**
-     * @brief This property tells whether the cursor is currently hovered over the list item.
+     * @brief This property tells whether the cursor is currently hovering over the item.
      *
      * On mobile touch devices, this will be true only when pressed.
      *
      * @see QtQuick.Templates.ItemDelegate::hovered
-     * @deprecated This will be removed in KF6.
+     * @deprecated This will be removed in KF6; use the ``hovered``  property instead.
      * @property bool containsMouse
      */
     property alias containsMouse: listItem.hovered
@@ -46,7 +46,7 @@ T2.ItemDelegate {
      * @brief This property sets whether instances of this list item will alternate
      * between two colors, helping readability.
      *
-     * Use it only when implementing a view which shows data visually in multiple columns.
+     * It is suggested to use this only when implementing a view with multiple columns.
      *
      * default: ``false``
      *
@@ -55,68 +55,74 @@ T2.ItemDelegate {
     property bool alternatingBackground: false
 
     /**
-     * @brief This property sets if the item is a delegate for a section.
+     * @brief This property sets whether this item is a section delegate.
      *
      * Setting this to true will make the list item look like a "title" for items under it.
      *
      * default: ``false``
+     *
+     * @see ListSectionHeader
      */
     property bool sectionDelegate: false
 
     /**
-     * @brief This property sets the separator visibility.
+     * @brief This property sets whether the separator is visible.
+     *
+     * The separator is a line between this and the item under it.
      *
      * default: ``true``
      */
     property bool separatorVisible: true
 
     /**
-     * @brief This property holds the color for the text in the item.
+     * @brief This property holds list item's background color.
      *
-     * It is advised to leave the default value.
-     * default: ``Theme.textColor``
-     *
-     * If custom text elements are inserted in an AbstractListItem,
-     * their color property will have to be manually bound with this property
-     */
-    property color textColor: Theme.textColor
-
-    /**
-     * @brief This property holds the color for the background of the item.
-     *
-     * It is advised to leave the default value
+     * It is advised to use the default value.
      * default: ``"transparent"``
      */
     property color backgroundColor: "transparent"
 
     /**
-     * @brief This property holds the background color to use if background alternating is enabled.
+     * @brief This property holds the background color to be used when
+     * background alternating is enabled.
      *
-     * It is advised to leave the default.
-     * default: ``Theme.alternateBackgroundColor``
+     * It is advised to use the default value.
+     * default: ``Kirigami.Theme.alternateBackgroundColor``
      *
      * @since 2.7
      */
     property color alternateBackgroundColor: Theme.alternateBackgroundColor
 
     /**
-     * @brief This property holds the color for the text in the item when it is pressed or selected.
+     * @brief This property holds the color of the background
+     * when the item is pressed or selected.
      *
-     * It is advised to leave the default value.
-     * default: ``Theme.highlightedTextColor``
-     *
-     * If custom text elements are inserted in an AbstractListItem,
-     * their color property will have to be manually bound with this property
-     */
-    property color activeTextColor: Theme.highlightedTextColor
-
-    /**
-     * @brief This property holds the color for the background when the item is pressed or selected.
-     *
-     * It is advised to leave the default value
-     * default: ``Theme.highlightColor``
+     * It is advised to use the default value.
+     * default: ``Kirigami.Theme.highlightColor``
      */
     property color activeBackgroundColor: Theme.highlightColor
+
+    /**
+     * @brief This property holds the color of the text in the item.
+     *
+     * It is advised to use the default value.
+     * default: ``Theme.textColor``
+     *
+     * If custom text elements are inserted in an AbstractListItem,
+     * their color will have to be manually set with this property.
+     */
+    property color textColor: Theme.textColor
+
+    /**
+     * @brief This property holds the color of the text when the item is pressed or selected.
+     *
+     * It is advised to use the default value.
+     * default: ``Kirigami.Theme.highlightedTextColor``
+     *
+     * If custom text elements are inserted in an AbstractListItem,
+     * their color will have to be manually set with this property.
+     */
+    property color activeTextColor: Theme.highlightedTextColor
 
     default property alias _default: listItem.contentItem
 

@@ -50,7 +50,7 @@ T.SwipeDelegate {
     /**
      * @brief This property sets whether the item should emit signals related to mouse interaction.
      *
-     * default: ``false``, ``true`` when cursor goes over the item.
+     * default: ``true``
      *
      * @deprecated Use hoverEnabled instead.
      * @property bool supportsMouseEvents
@@ -58,15 +58,19 @@ T.SwipeDelegate {
     property alias supportsMouseEvents: listItem.hoverEnabled
 
     /**
-     * @brief This property holds whether the cursor is currently hovering over the item.
-     * @note on mobile touch devices this will be true only when pressed is also true
-     * @deprecated Use hovered instead.
+     * @brief This property tells whether the cursor is currently hovering over the item.
+     *
+     * On mobile touch devices, this will be true only when pressed.
+     *
+     * @see QtQuick.Templates.ItemDelegate::hovered
+     * @deprecated This will be removed in KF6; use the ``hovered`` property instead.
      * @property bool containsMouse
      */
     property alias containsMouse: listItem.hovered
 
     /**
-     * @brief This property sets whether items' backgrounds alternate between two colors, which helps with readability.
+     * @brief This property sets whether instances of this list item will alternate
+     * between two colors, helping readability.
      *
      * It is suggested to use this only when implementing a view with multiple columns.
      *
@@ -79,7 +83,7 @@ T.SwipeDelegate {
     /**
      * @brief This property sets whether this item is a section delegate.
      *
-     * If true, this item will look like a title for items under it.
+     * Setting this to true will make the list item look like a "title" for items under it.
      *
      * default: ``false``
      *
@@ -97,21 +101,79 @@ T.SwipeDelegate {
     property bool separatorVisible: true
 
     /**
-     * @brief This property tells whether actions are accessible.
+     * @brief This property holds the background color of the list item.
      *
-     * True if it's possible to see and access the item actions.
+     * It is advised to use the default value.
+     * default: ``Kirigami.Theme.backgroundColor``
+     */
+    property color backgroundColor: Kirigami.Theme.backgroundColor
+
+    /**
+     * @brief This property holds the background color to be used when
+     * background alternating is enabled.
      *
-     * Actions should go completely out of the way for instance during
-     * the editing of an item.
+     * It is advised to use the default value.
+     * default: ``Kirigami.Theme.alternateBackgroundColor``
+     *
+     * @since 2.7
+     */
+    property color alternateBackgroundColor: Kirigami.Theme.alternateBackgroundColor
+
+    /**
+     * @brief This property holds the color of the background
+     * when the item is pressed or selected.
+     *
+     * It is advised to use the default value.
+     * default: ``Kirigami.Theme.highlightColor``
+     */
+    property color activeBackgroundColor: Kirigami.Theme.highlightColor
+
+    /**
+     * @brief This property holds the color of the text in the item.
+     *
+     * It is advised to use the default value.
+     * default: ``Theme.textColor``
+     *
+     * If custom text elements are inserted in an AbstractListItem,
+     * their color will have to be manually set with this property.
+     */
+    property color textColor: Kirigami.Theme.textColor
+
+    /**
+     * @brief This property holds the color of the text when the item is pressed or selected.
+     *
+     * It is advised to use the default value.
+     * default: ``Kirigami.Theme.highlightedTextColor``
+     *
+     * If custom text elements are inserted in an AbstractListItem,
+     * their color property will have to be manually bound with this property
+     */
+    property color activeTextColor: Kirigami.Theme.highlightedTextColor
+
+    /**
+     * @brief This property tells whether actions are visible and interactive.
+     *
+     * True if it's possible to see and interact with the item's actions.
+     *
+     * Actions become hidden while editing of an item, for example.
      *
      * @since 2.5
      */
     readonly property bool actionsVisible: actionsLayout.hasVisibleActions
 
     /**
-     * @brief This property holds actions for the list item.
+     * @brief This property sets whether actions behind this SwipeListItem will always be visible.
      *
-     * At most 4 actions can be revealed when sliding away the list item,
+     * default: `true in desktop and tablet mode`
+     *
+     * @since 2.15
+     */
+    property bool alwaysVisibleActions: !Kirigami.Settings.isMobile
+
+    /**
+     * @brief This property holds actions of the list item.
+     *
+     * At most 4 actions can be revealed when sliding away the list item;
      * others will be shown in the overflow menu.
      */
     property list<Controls.Action> actions
@@ -125,62 +187,6 @@ T.SwipeDelegate {
      * @property real overlayWidth
      */
     readonly property alias overlayWidth: overlayLoader.width
-
-    /**
-     * @brief This property holds the color for the text in the item.
-     *
-     * @note If custom text elements are inserted in an AbstractListItem,
-     * their color property will have to be manually bound with this property.
-     *
-     * default: ``Kirigami.Theme.textColor``
-     */
-    property color textColor: Kirigami.Theme.textColor
-
-    /**
-     * @brief This property holds the color for the background item.
-     *
-     * default: ``Kirigami.Theme.backgroundColor``
-     */
-    property color backgroundColor: Kirigami.Theme.backgroundColor
-
-    /**
-     * @brief This property holds the alternate background color used for
-     * alternating list items when the alternatingBackground property is
-     * set to true.
-     *
-     * It is advised to use the default value.
-     * default: ``Kirigami.Theme.alternateBackgroundColor``
-     *
-     * @since 2.7
-     */
-    property color alternateBackgroundColor: Kirigami.Theme.alternateBackgroundColor
-
-    /**
-     * @brief This property holds the color of the text when the item is pressed or selected.
-     * @note if custom text elements are inserted in an AbstractListItem,
-     * their color property will have to be manually bound with this property
-     *
-     * It is advised to use the default value.
-     * default: ``Kirigami.Theme.highlightedTextColor``
-     */
-    property color activeTextColor: Kirigami.Theme.highlightedTextColor
-
-    /**
-     * @brief This property holds the color of the background when the item is pressed or selected.
-     *
-     * It is advised to use the default value.
-     * default: ``Kirigami.Theme.highlightColor``
-     */
-    property color activeBackgroundColor: Kirigami.Theme.highlightColor
-
-    /**
-     * @brief This property sets whether actions behind this SwipeListItem will always be visible.
-     *
-     * default: `true in desktop and tablet mode`
-     *
-     * @since 2.15
-     */
-    property bool alwaysVisibleActions: !Kirigami.Settings.isMobile
 
     // TODO KF6 remove this super wrong thing
     /// @private
