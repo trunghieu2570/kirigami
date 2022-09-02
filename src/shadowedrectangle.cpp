@@ -11,7 +11,7 @@
 #include <QSGRendererInterface>
 
 #include "scenegraph/paintedrectangleitem.h"
-#if QT_CONFIG(opengl) && !defined(KF6_PORTING_TODO)
+#if QT_CONFIG(opengl) || QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include "scenegraph/shadowedrectanglenode.h"
 #endif
 
@@ -280,11 +280,7 @@ void ShadowedRectangle::componentComplete()
 
 bool ShadowedRectangle::isSoftwareRendering() const
 {
-#ifndef KF6_PORTING_TODO
     return (window() && window()->rendererInterface()->graphicsApi() == QSGRendererInterface::Software) || m_renderType == RenderType::Software;
-#else
-    return true;
-#endif
 }
 
 PaintedRectangleItem *ShadowedRectangle::softwareItem() const
@@ -305,7 +301,7 @@ QSGNode *ShadowedRectangle::updatePaintNode(QSGNode *node, QQuickItem::UpdatePai
 {
     Q_UNUSED(data);
 
-#if QT_CONFIG(opengl) && !defined(KF6_PORTING_TODO)
+#if QT_CONFIG(opengl) || QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     auto shadowNode = static_cast<ShadowedRectangleNode *>(node);
 
     if (!shadowNode) {

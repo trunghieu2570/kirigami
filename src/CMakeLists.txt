@@ -86,6 +86,7 @@ if (HAVE_QTGUI_OPENGL AND NOT KF6_PORTING_TODO)
         scenegraph/shadowedtexturenode.h
     )
 endif()
+add_subdirectory(scenegraph/shaders6)
 
 ecm_target_qml_sources(KirigamiPlugin SOURCES
     controls/Action.qml

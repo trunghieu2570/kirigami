@@ -35,6 +35,9 @@ include(CPack)
 include(FeatureSummary)
 include(KDEInstallDirs)
 find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Core Quick Gui Svg QuickControls2 Concurrent)
+if (QT_MAJOR_VERSION EQUAL "6")
+    find_package(Qt6 REQUIRED NO_MODULE COMPONENTS ShaderTools)
+endif()
 if (BUILD_TESTING)
     find_package(Qt${QT_MAJOR_VERSION}QuickTest ${REQUIRED_QT_VERSION} CONFIG QUIET)
 endif()
@@ -131,14 +134,6 @@ ecm_set_disabled_deprecation_versions(
     QT 5.15.2
     KF 5.95
 )
-
-# temporary Qt6 porting scafolding until branching
-# (this is intentional made to fail if we forget it for KF6)
-if (TARGET Qt6::Core AND KF_VERSION VERSION_LESS 6.0)
-    message(WARNING "TODO: port shadow shaders to Qt6!")
-    set(KF6_PORTING_TODO TRUE)
-    add_definitions(-DKF6_PORTING_TODO)
-endif()
 
 add_subdirectory(src)
 if (NOT ANDROID)

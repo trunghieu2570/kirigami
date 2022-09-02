@@ -10,7 +10,7 @@
 #include <QSGRectangleNode>
 #include <QSGRendererInterface>
 
-#if QT_CONFIG(opengl) && !defined(KF6_PORTING_TODO)
+#if QT_CONFIG(opengl) || QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include "scenegraph/shadowedtexturenode.h"
 #endif
 
@@ -49,7 +49,7 @@ void ShadowedTexture::setSource(QQuickItem *newSource)
 QSGNode *ShadowedTexture::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData *data)
 {
     Q_UNUSED(data)
-#if QT_CONFIG(opengl) && !defined(KF6_PORTING_TODO)
+#if QT_CONFIG(opengl) || QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
     auto shadowNode = static_cast<ShadowedRectangleNode *>(node);
 
