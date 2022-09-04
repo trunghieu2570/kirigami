@@ -241,7 +241,9 @@ T2.Control {
                 bottom: contentLayout.multiline ? undefined : parent.bottom
             }
 
-            cursorShape: label.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+            acceptedButtons: Qt.NoButton
+            cursorShape: label.hoveredLink.length > 0 ? Qt.PointingHandCursor : undefined
+            propagateComposedEvents: true
 
             implicitWidth: label.implicitWidth
             height: contentLayout.multiline ? label.implicitHeight : implicitHeight
