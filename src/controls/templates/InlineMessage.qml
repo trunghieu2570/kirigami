@@ -78,6 +78,11 @@ T2.Control {
     signal linkActivated(string link)
 
     /**
+     * This property holds the link embedded in the message text that the user is hovering over.
+     */
+    readonly property string hoveredLink: label.hoveredLink
+
+    /**
      * This property holds the message type. One of Information, Positive, Warning or Error.
      *
      * The default is Kirigami.MessageType.Information.
@@ -181,13 +186,13 @@ T2.Control {
 
         implicitHeight: {
             if (actionsLayout.atBottom) {
-                return text.implicitHeight + actionsLayout.height + Kirigami.Units.gridUnit
+                return label.implicitHeight + actionsLayout.height + Kirigami.Units.gridUnit
             } else {
-                return Math.max(icon.implicitHeight, text.implicitHeight, closeButton.implicitHeight, actionsLayout.height)
+                return Math.max(icon.implicitHeight, label.implicitHeight, closeButton.implicitHeight, actionsLayout.height)
             }
         }
 
-        readonly property int remainingWidth: width - (text.implicitWidth + icon.width + Kirigami.Units.smallSpacing * 2)
+        readonly property int remainingWidth: width - (label.implicitWidth + icon.width + Kirigami.Units.smallSpacing * 2)
                                                 - (closeButton.visible ? closeButton.width + Kirigami.Units.smallSpacing : 0)
         readonly property bool multiline: remainingWidth <= 0 || actionsLayout.atBottom
 
@@ -225,7 +230,7 @@ T2.Control {
         }
 
         MouseArea {
-            id: textArea
+            id: labelArea
 
             anchors {
                 left: icon.right
@@ -236,13 +241,13 @@ T2.Control {
                 bottom: contentLayout.multiline ? undefined : parent.bottom
             }
 
-            cursorShape: text.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+            cursorShape: label.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
 
-            implicitWidth: text.implicitWidth
-            height: contentLayout.multiline ? text.implicitHeight : implicitHeight
+            implicitWidth: label.implicitWidth
+            height: contentLayout.multiline ? label.implicitHeight : implicitHeight
 
             Controls.Label {
-                id: text
+                id: label
 
                 width: parent.width
                 height: parent.height
@@ -268,11 +273,11 @@ T2.Control {
             visible: root.actions.length
             alignment: Qt.AlignRight
 
-            readonly property bool atBottom: (root.actions.length > 0) && (text.lineCount > 1 || implicitWidth > contentLayout.remainingWidth)
+            readonly property bool atBottom: (root.actions.length > 0) && (label.lineCount > 1 || implicitWidth > contentLayout.remainingWidth)
 
             anchors {
                 left: parent.left
-                top: atBottom ? textArea.bottom : parent.top
+                top: atBottom ? labelArea.bottom : parent.top
                 topMargin: atBottom ? Kirigami.Units.gridUnit : 0
                 right: (!atBottom && closeButton.visible) ? closeButton.left : parent.right
                 rightMargin: !atBottom && closeButton.visible ? Kirigami.Units.smallSpacing : 0
