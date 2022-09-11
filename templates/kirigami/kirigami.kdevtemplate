@@ -1,7 +1,21 @@
 # KDE Config File
 [General]
 Name=Kirigami Application
+Name[ca]=Aplicació de Kirigami
+Name[ca@valencia]=Aplicació de Kirigami
+Name[en_GB]=Kirigami Application
+Name[eu]=Kirigami aplikazioa
+Name[nl]=Kirigami-toepassing
+Name[tr]=Kirigami Uygulaması
+Name[x-test]=xxKirigami Applicationxx
 Comment=Convergent application using Qt Quick Controls 2 and Kirigami
+Comment[ca]=Aplicació convergent que usa els Qt Quick Controls 2 i el Kirigami
+Comment[ca@valencia]=Aplicació convergent que utilitza els Qt Quick Controls 2 i Kirigami
+Comment[en_GB]=Convergent application using Qt Quick Controls 2 and Kirigami
+Comment[eu]=«Qt Quick Controls 2» eta Kirigami erabiltzen dituen aplikazio konbergente bat
+Comment[nl]=Convergente toepassing met Qt Quick Controls 2 en Kirigami
+Comment[tr]=Qt Quick Controls 2 ve Kirigami kullanan yakınsak uygulama
+Comment[x-test]=xxConvergent application using Qt Quick Controls 2 and Kirigamixx
 
 Category=Qt/Graphical
 Icon=kirigami-app.png
