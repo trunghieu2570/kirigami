@@ -253,7 +253,7 @@ QtObject {
             if (root.parent && root.parent.ColumnView.view && (root.parent.ColumnView.view === root.parent || root.parent.ColumnView.view === root.parent.parent)) {
                 return root.parent.ColumnView.view.parent;
             } else if (root.parent && root.parent.overlay) {
-                root.parent.overlay;
+                return root.parent.overlay;
             } else {
                 return root.parent;
             }
@@ -534,7 +534,7 @@ QtObject {
                     if (endPos - pos > 0) {
                         contentLayout.y = Math.round(Math.max(root.topInset, scrollView.flickableItem.topMargin - pos - flickableContents.listHeaderHeight));
                     } else if (scrollView.flickableItem.topMargin - pos < 0) {
-                    contentLayout.y = Math.round(endPos - pos + root.topInset);
+                        contentLayout.y = Math.round(endPos - pos + root.topInset);
                     }
                     layoutMovingGuard = false;
 
