@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2017 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2022 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -116,14 +117,22 @@ Item {
         property int knownItemsImplicitWidth: {
             let hint = 0;
             for (let i in knownItems) {
-                let actualWidth = knownItems[i].implicitWidth;
-                if (knownItems[i].Layout.preferredWidth > 0) {
-                    actualWidth = knownItems[i].Layout.preferredWidth;
+                const item = knownItems[i];
+                if (typeof item.Layout === "undefined") {
+                    // Items may have been dynamically destroyed. Even
+                    // printing such zombie wrappers results in a
+                    // meaningless "TypeError: Type error". Normally they
+                    // should be cleaned up from the array, but it would
+                    // trigger a binding loop if done here.
+                    //
+                    // This is, so far, the only way to detect them.
+                    continue;
                 }
-                actualWidth = Math.min(actualWidth, knownItems[i].Layout.maximumWidth);
-                actualWidth = Math.max(actualWidth, knownItems[i].Layout.minimumWidth);
+                const actualWidth = item.Layout.preferredWidth > 0
+                    ? item.Layout.preferredWidth
+                    : item.implicitWidth;
 
-                hint = Math.max(hint, actualWidth);
+                hint = Math.max(hint, item.Layout.minimumWidth, Math.min(actualWidth, item.Layout.maximumWidth));
             }
             return hint;
         }
@@ -133,7 +142,7 @@ Item {
             // HACK: we use var instead of let here, since it seems to trigger a very obscure bug
             // see: https://invent.kde.org/teams/plasma-mobile/issues/-/issues/88
             for (var i in buddies) {
-                if (buddies[i].visible && !buddies[i].item.Kirigami.FormData.isSection) {
+                if (buddies[i].visible && buddies[i].item !== null && !buddies[i].item.Kirigami.FormData.isSection) {
                     hint = Math.max(hint, buddies[i].implicitWidth);
                 }
             }
@@ -216,6 +225,9 @@ Item {
          * @returns {Qt::Alignment}
          */
         function effectiveLayout(item) {
+            if (!item) {
+                return 0;
+            }
             const verticalAlignment =
                 item.Kirigami.FormData.labelAlignment !== 0
                 ? item.Kirigami.FormData.labelAlignment
@@ -235,6 +247,9 @@ Item {
          * @returns vertical alignment of the item passed as an argument.
          */
         function effectiveTextLayout(item) {
+            if (!item) {
+                return 0;
+            }
             if (root.wideMode) {
                 return item.Kirigami.FormData.labelAlignment !== 0 ? item.Kirigami.FormData.labelAlignment : Text.AlignVCenter;
             }
@@ -246,7 +261,7 @@ Item {
         id: relayoutTimer
         interval: 0
         onTriggered: {
-            let __items = children;
+            let __items = root.children;
             // exclude the layout and temp
             for (let i = 2; i < __items.length; ++i) {
                 const item = __items[i];
@@ -287,37 +302,41 @@ Item {
 
             property Item item
 
-            enabled: item.enabled
-            visible: item.visible
+            enabled: item !== null && item.enabled
+            visible: item !== null && item.visible
 
             // NOTE: work around a  GridLayout quirk which doesn't lay out items with null size hints causing things to be laid out incorrectly in some cases
-            implicitWidth: Math.max(item.implicitWidth, 1)
-            implicitHeight: Math.max(item.implicitHeight, 1)
-            Layout.preferredWidth: Math.max(1, item.Layout.preferredWidth > 0 ? item.Layout.preferredWidth : Math.ceil(item.implicitWidth))
-            Layout.preferredHeight: Math.max(1, item.Layout.preferredHeight > 0 ? item.Layout.preferredHeight : Math.ceil(item.implicitHeight))
+            implicitWidth: item !== null ? Math.max(item.implicitWidth, 1) : 0
+            implicitHeight: item !== null ? Math.max(item.implicitHeight, 1) : 0
+            Layout.preferredWidth: item !== null ? Math.max(1, item.Layout.preferredWidth > 0 ? item.Layout.preferredWidth : Math.ceil(item.implicitWidth)) : 0
+            Layout.preferredHeight: item !== null ? Math.max(1, item.Layout.preferredHeight > 0 ? item.Layout.preferredHeight : Math.ceil(item.implicitHeight)) : 0
 
-            Layout.minimumWidth: item.Layout.minimumWidth
-            Layout.minimumHeight: item.Layout.minimumHeight
+            Layout.minimumWidth: item !== null ? item.Layout.minimumWidth : 0
+            Layout.minimumHeight: item !== null ? item.Layout.minimumHeight : 0
 
-            Layout.maximumWidth: item.Layout.maximumWidth
-            Layout.maximumHeight: item.Layout.maximumHeight
+            Layout.maximumWidth: item !== null ? item.Layout.maximumWidth : 0
+            Layout.maximumHeight: item !== null ? item.Layout.maximumHeight : 0
 
             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-            Layout.fillWidth: item instanceof TextInput || item.Layout.fillWidth || item.Kirigami.FormData.isSection
-            Layout.columnSpan: item.Kirigami.FormData.isSection ? lay.columns : 1
+            Layout.fillWidth: item !== null && (item instanceof TextInput || item.Layout.fillWidth || item.Kirigami.FormData.isSection)
+            Layout.columnSpan: item !== null && item.Kirigami.FormData.isSection ? lay.columns : 1
             onItemChanged: {
                 if (!item) {
                     container.destroy();
                 }
             }
-            onXChanged: item.x = x + lay.x;
+            onXChanged: if (item !== null) { item.x = x + lay.x; }
             // Assume lay.y is always 0
-            onYChanged: item.y = y + lay.y;
-            onWidthChanged: item.width = width;
+            onYChanged: if (item !== null) { item.y = y + lay.y; }
+            onWidthChanged: if (item !== null) { item.width = width; }
             Component.onCompleted: item.x = x + lay.x;
             Connections {
                 target: lay
-                function onXChanged() { item.x = x + lay.x; }
+                function onXChanged() {
+                    if (item !== null) {
+                        item.x = x + lay.x;
+                    }
+                }
             }
         }
     }
@@ -326,12 +345,12 @@ Item {
         Item {
             property Item item
 
-            enabled: item.enabled
-            visible: item.visible
+            enabled: item !== null && item.enabled
+            visible: item !== null && item.visible
 
             width: Kirigami.Units.smallSpacing
             height: Kirigami.Units.smallSpacing
-            Layout.topMargin: item.height > 0 ? Kirigami.Units.smallSpacing : 0
+            Layout.topMargin: item !== null && item.height > 0 ? Kirigami.Units.smallSpacing : 0
             onItemChanged: {
                 if (!item) {
                     labelItem.destroy();
@@ -347,18 +366,21 @@ Item {
             property Item item
             property int index
 
-            enabled: item.enabled && item.Kirigami.FormData.enabled
-            visible: item.visible && (root.wideMode || text.length > 0)
-            Kirigami.MnemonicData.enabled: item.Kirigami.FormData.buddyFor && item.Kirigami.FormData.buddyFor.activeFocusOnTab
+            enabled: item !== null && item.enabled && item.Kirigami.FormData.enabled
+            visible: item !== null && item.visible && (root.wideMode || text.length > 0)
+            Kirigami.MnemonicData.enabled: item !== null && item.Kirigami.FormData.buddyFor && item.Kirigami.FormData.buddyFor.activeFocusOnTab
             Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
-            Kirigami.MnemonicData.label: item.Kirigami.FormData.label
+            Kirigami.MnemonicData.label: item !== null ? item.Kirigami.FormData.label : ""
             text: Kirigami.MnemonicData.richTextLabel
-            type: item.Kirigami.FormData.isSection ? Kirigami.Heading.Type.Primary : Kirigami.Heading.Type.Normal
+            type: item !== null && item.Kirigami.FormData.isSection ? Kirigami.Heading.Type.Primary : Kirigami.Heading.Type.Normal
 
-            level: item.Kirigami.FormData.isSection ? 3 : 5
+            level: item !== null && item.Kirigami.FormData.isSection ? 3 : 5
 
-            Layout.columnSpan: item.Kirigami.FormData.isSection ? lay.columns : 1
+            Layout.columnSpan: item !== null && item.Kirigami.FormData.isSection ? lay.columns : 1
             Layout.preferredHeight: {
+                if (!item) {
+                    return 0;
+                }
                 if (item.Kirigami.FormData.label.length > 0) {
                     if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof TextArea)) {
                         return Math.max(implicitHeight, item.Kirigami.FormData.buddyFor.height)
@@ -375,6 +397,9 @@ Item {
             wrapMode: Text.Wrap
 
             Layout.topMargin: {
+                if (!item) {
+                    return 0;
+                }
                 if (root.wideMode && item.Kirigami.FormData.buddyFor.parent !== root) {
                     return item.Kirigami.FormData.buddyFor.y;
                 }
@@ -404,13 +429,16 @@ Item {
 
             property Item item
 
-            visible: item.visible
-            Kirigami.MnemonicData.enabled: item.Kirigami.FormData.buddyFor && item.Kirigami.FormData.buddyFor.activeFocusOnTab
+            visible: item !== null && item.visible
+            Kirigami.MnemonicData.enabled: item !== null && item.Kirigami.FormData.buddyFor && item.Kirigami.FormData.buddyFor.activeFocusOnTab
             Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
-            Kirigami.MnemonicData.label: item.Kirigami.FormData.label
+            Kirigami.MnemonicData.label: item !== null ? item.Kirigami.FormData.label : ""
 
-            Layout.columnSpan: item.Kirigami.FormData.isSection ? lay.columns : 1
+            Layout.columnSpan: item !== null && item.Kirigami.FormData.isSection ? lay.columns : 1
             Layout.preferredHeight: {
+                if (!item) {
+                    return 0;
+                }
                 if (item.Kirigami.FormData.label.length > 0) {
                     if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof TextArea)) {
                         return Math.max(implicitHeight, item.Kirigami.FormData.buddyFor.height);
@@ -421,13 +449,13 @@ Item {
             }
 
             Layout.alignment: temp.effectiveLayout(this)
-            Layout.topMargin: item.Kirigami.FormData.buddyFor.height > implicitHeight * 2 ? Kirigami.Units.smallSpacing/2 : 0
+            Layout.topMargin: item !== null && item.Kirigami.FormData.buddyFor.height > implicitHeight * 2 ? Kirigami.Units.smallSpacing/2 : 0
 
             activeFocusOnTab: indicator.visible && indicator.enabled
             // HACK: desktop style checkboxes have also the text in the background item
             // text: Kirigami.MnemonicData.richTextLabel
-            enabled: item.Kirigami.FormData.enabled
-            checked: item.Kirigami.FormData.checked
+            enabled: item !== null && item.Kirigami.FormData.enabled
+            checked: item !== null && item.Kirigami.FormData.checked
 
             onItemChanged: {
                 if (!item) {
@@ -446,11 +474,11 @@ Item {
             }
             contentItem: Kirigami.Heading {
                 id: labelItemHeading
-                level: labelItem.item.Kirigami.FormData.isSection ? 3 : 5
+                level: labelItem.item !== null && labelItem.item.Kirigami.FormData.isSection ? 3 : 5
                 text: labelItem.Kirigami.MnemonicData.richTextLabel
-                type: labelItem.item.Kirigami.FormData.isSection ? Kirigami.Heading.Type.Primary : Kirigami.Heading.Type.Normal
+                type: labelItem.item !== null && labelItem.item.Kirigami.FormData.isSection ? Kirigami.Heading.Type.Primary : Kirigami.Heading.Type.Normal
                 verticalAlignment: temp.effectiveTextLayout(labelItem.item)
-                enabled: labelItem.item.Kirigami.FormData.enabled
+                enabled: labelItem.item !== null && labelItem.item.Kirigami.FormData.enabled
                 leftPadding: height  // parent.indicator.width
             }
             Rectangle {
