@@ -754,9 +754,8 @@ QtObject {
                             if (diff > 0) {
                                 contentLayout.y = Math.max(root.topInset,  contentLayout.y - diff);
                             } else if (scrollView.flickableItem.contentY < outerFlickable.topEmptyArea + headerItem.height) {
-                                contentLayout.y = Math.min(outerFlickable.topEmptyArea,  contentLayout.y + (contentLayout.y - diff)) + root.topInset;
+                                contentLayout.y = Math.min(outerFlickable.topEmptyArea + root.topInset,  contentLayout.y - diff);
                             }
-
                             oldContentY = scrollView.flickableItem.contentY;
                             scrollView.userInteracting = false;
                         }
