@@ -81,14 +81,14 @@ Item {
     }
 
     Component.onCompleted: {
-        relayoutTimer.triggered()
+        relayoutTimer.triggered();
     }
 
     Component.onDestruction: {
         for (let i in twinFormLayouts) {
             const twin = twinFormLayouts[i];
             const child = twin.children[0];
-            child.reverseTwins = child.reverseTwins.filter((value, index, arr) => value !== root)
+            child.reverseTwins = child.reverseTwins.filter(value => value !== root);
         }
     }
 
@@ -116,12 +116,12 @@ Item {
         property int knownItemsImplicitWidth: {
             let hint = 0;
             for (let i in knownItems) {
-                let actualWidth = knownItems[i].implicitWidth
+                let actualWidth = knownItems[i].implicitWidth;
                 if (knownItems[i].Layout.preferredWidth > 0) {
-                    actualWidth = knownItems[i].Layout.preferredWidth
+                    actualWidth = knownItems[i].Layout.preferredWidth;
                 }
-                actualWidth = Math.min(actualWidth, knownItems[i].Layout.maximumWidth)
-                actualWidth = Math.max(actualWidth, knownItems[i].Layout.minimumWidth)
+                actualWidth = Math.min(actualWidth, knownItems[i].Layout.maximumWidth);
+                actualWidth = Math.max(actualWidth, knownItems[i].Layout.minimumWidth);
 
                 hint = Math.max(hint, actualWidth);
             }
@@ -180,7 +180,7 @@ Item {
                 }
                 return hint;
             }
-            Layout.preferredHeight:2
+            Layout.preferredHeight: 2
         }
         Item {
             Layout.preferredWidth: {
@@ -192,7 +192,7 @@ Item {
                 }
                 return hint;
             }
-            Layout.preferredHeight:2
+            Layout.preferredHeight: 2
         }
     }
 
@@ -219,15 +219,15 @@ Item {
             const verticalAlignment =
                 item.Kirigami.FormData.labelAlignment !== 0
                 ? item.Kirigami.FormData.labelAlignment
-                : Qt.AlignTop
+                : Qt.AlignTop;
 
             if (item.Kirigami.FormData.isSection) {
-                return Qt.AlignHCenter
+                return Qt.AlignHCenter;
             }
             if (root.wideMode) {
-                return Qt.AlignRight | verticalAlignment
+                return Qt.AlignRight | verticalAlignment;
             }
-            return Qt.AlignLeft | Qt.AlignBottom
+            return Qt.AlignLeft | Qt.AlignBottom;
         }
 
         /**
@@ -236,9 +236,9 @@ Item {
          */
         function effectiveTextLayout(item) {
             if (root.wideMode) {
-                return item.Kirigami.FormData.labelAlignment !== 0 ? item.Kirigami.FormData.labelAlignment : Text.AlignVCenter
+                return item.Kirigami.FormData.labelAlignment !== 0 ? item.Kirigami.FormData.labelAlignment : Text.AlignVCenter;
             }
-            return Text.AlignBottom
+            return Text.AlignBottom;
         }
     }
 
@@ -257,21 +257,17 @@ Item {
                 }
                 lay.knownItems.push(item);
 
-                const itemContainer = itemComponent.createObject(temp, {item: item})
+                const itemContainer = itemComponent.createObject(temp, { item });
 
                 // if section, label goes after the separator
                 if (item.Kirigami.FormData.isSection) {
                     // put an extra spacer
-                    var placeHolder = placeHolderComponent.createObject(lay, {item: item});
-                    itemContainer.parent = lay;
+                    placeHolderComponent.createObject(lay, { item });
                 }
 
-                let buddy;
-                if (item.Kirigami.FormData.checkable) {
-                    buddy = checkableBuddyComponent.createObject(lay, {item: item})
-                } else {
-                    buddy = buddyComponent.createObject(lay, {item: item, index: i - 2})
-                }
+                const buddy = item.Kirigami.FormData.checkable
+                    ? checkableBuddyComponent.createObject(lay, { item })
+                    : buddyComponent.createObject(lay, { item, index: i - 2 });
 
                 itemContainer.parent = lay;
                 lay.buddies.push(buddy);
@@ -288,7 +284,9 @@ Item {
         id: itemComponent
         Item {
             id: container
-            property var item
+
+            property Item item
+
             enabled: item.enabled
             visible: item.visible
 
@@ -319,16 +317,18 @@ Item {
             Component.onCompleted: item.x = x + lay.x;
             Connections {
                 target: lay
-                function onXChanged() { item.x = x + lay.x }
+                function onXChanged() { item.x = x + lay.x; }
             }
         }
     }
     Component {
         id: placeHolderComponent
         Item {
-            property var item
+            property Item item
+
             enabled: item.enabled
             visible: item.visible
+
             width: Kirigami.Units.smallSpacing
             height: Kirigami.Units.smallSpacing
             Layout.topMargin: item.height > 0 ? Kirigami.Units.smallSpacing : 0
@@ -346,6 +346,7 @@ Item {
 
             property Item item
             property int index
+
             enabled: item.enabled && item.Kirigami.FormData.enabled
             visible: item.visible && (root.wideMode || text.length > 0)
             Kirigami.MnemonicData.enabled: item.Kirigami.FormData.buddyFor && item.Kirigami.FormData.buddyFor.activeFocusOnTab
@@ -362,7 +363,7 @@ Item {
                     if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof TextArea)) {
                         return Math.max(implicitHeight, item.Kirigami.FormData.buddyFor.height)
                     }
-                    return implicitHeight
+                    return implicitHeight;
                 }
                 return Kirigami.Units.smallSpacing;
             }
@@ -392,7 +393,7 @@ Item {
             }
             Shortcut {
                 sequence: labelItem.Kirigami.MnemonicData.sequence
-                onActivated: item.Kirigami.FormData.buddyFor.forceActiveFocus()
+                onActivated: labelItem.item.Kirigami.FormData.buddyFor.forceActiveFocus()
             }
         }
     }
@@ -400,7 +401,9 @@ Item {
         id: checkableBuddyComponent
         CheckBox {
             id: labelItem
+
             property Item item
+
             visible: item.visible
             Kirigami.MnemonicData.enabled: item.Kirigami.FormData.buddyFor && item.Kirigami.FormData.buddyFor.activeFocusOnTab
             Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
@@ -410,9 +413,9 @@ Item {
             Layout.preferredHeight: {
                 if (item.Kirigami.FormData.label.length > 0) {
                     if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof TextArea)) {
-                        return Math.max(implicitHeight, item.Kirigami.FormData.buddyFor.height)
+                        return Math.max(implicitHeight, item.Kirigami.FormData.buddyFor.height);
                     }
-                    return implicitHeight
+                    return implicitHeight;
                 }
                 return Kirigami.Units.smallSpacing;
             }
@@ -422,9 +425,9 @@ Item {
 
             activeFocusOnTab: indicator.visible && indicator.enabled
             // HACK: desktop style checkboxes have also the text in the background item
-            // text: labelItem.Kirigami.MnemonicData.richTextLabel
-            enabled: labelItem.item.Kirigami.FormData.enabled
-            checked: labelItem.item.Kirigami.FormData.checked
+            // text: Kirigami.MnemonicData.richTextLabel
+            enabled: item.Kirigami.FormData.enabled
+            checked: item.Kirigami.FormData.checked
 
             onItemChanged: {
                 if (!item) {
@@ -434,18 +437,18 @@ Item {
             Shortcut {
                 sequence: labelItem.Kirigami.MnemonicData.sequence
                 onActivated: {
-                    checked = !checked
-                    item.Kirigami.FormData.buddyFor.forceActiveFocus()
+                    checked = !checked;
+                    item.Kirigami.FormData.buddyFor.forceActiveFocus();
                 }
             }
             onCheckedChanged: {
-                item.Kirigami.FormData.checked = checked
+                item.Kirigami.FormData.checked = checked;
             }
             contentItem: Kirigami.Heading {
                 id: labelItemHeading
                 level: labelItem.item.Kirigami.FormData.isSection ? 3 : 5
                 text: labelItem.Kirigami.MnemonicData.richTextLabel
-                type: item.Kirigami.FormData.isSection ? Kirigami.Heading.Type.Primary : Kirigami.Heading.Type.Normal
+                type: labelItem.item.Kirigami.FormData.isSection ? Kirigami.Heading.Type.Primary : Kirigami.Heading.Type.Normal
                 verticalAlignment: temp.effectiveTextLayout(labelItem.item)
                 enabled: labelItem.item.Kirigami.FormData.enabled
                 leftPadding: height  // parent.indicator.width
