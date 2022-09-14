@@ -13,7 +13,7 @@ import "templates/private" as P
 
 //TODO KF6: generic enough or belongs to a different framework?
 /**
- * @biref An element that represents a user, either with initials, an icon, or a profile image.
+ * @brief An element that represents a user, either with initials, an icon, or a profile image.
  * @inherit QtQuick.Controls.Control
  */
 QQC2.Control {
