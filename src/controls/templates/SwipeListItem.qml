@@ -219,8 +219,6 @@ T.SwipeDelegate {
 
         readonly property bool edgeEnabled: swipeFilterItem ? swipeFilterItem.currentItem === listItem || swipeFilterItem.currentItem === listItem.parent : false
 
-        property bool indicateActiveFocus: listItem.pressed || Kirigami.Settings.tabletMode || listItem.activeFocus || (view ? view.activeFocus : false)
-
         // install the SwipeItemEventFilter
         onViewChanged: {
             if (listItem.alwaysVisibleActions || !Kirigami.Settings.tabletMode) {

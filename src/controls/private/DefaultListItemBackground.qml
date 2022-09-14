@@ -16,7 +16,6 @@ Rectangle {
     visible: listItem.ListView.view ? listItem.ListView.view.highlight === null : true
     Rectangle {
         id: internal
-        property bool indicateActiveFocus: listItem.pressed || Settings.tabletMode || listItem.activeFocus || (listItem.ListView.view ? listItem.ListView.view.activeFocus : false)
         anchors.fill: parent
         visible: !Settings.tabletMode && listItem.supportsMouseEvents
         color: listItem.activeBackgroundColor
