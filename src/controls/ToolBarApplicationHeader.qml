@@ -11,6 +11,7 @@ import "private"
 import org.kde.kirigami 2.4
 
 
+// TODO KF6: Remove!
 /**
  * @brief ToolBarApplicationHeader represents a toolbar that
  * will display the actions of the current page.

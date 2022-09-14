@@ -11,6 +11,7 @@ import QtGraphicalEffects 1.0
 import org.kde.kirigami.private 2.14
 import "templates/private" as P
 
+//TODO KF6: generic enough or belongs to a different framework?
 /**
  * @biref An element that represents a user, either with initials, an icon, or a profile image.
  * @inherit QtQuick.Controls.Control

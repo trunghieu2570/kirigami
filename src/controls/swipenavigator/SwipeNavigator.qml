@@ -9,6 +9,8 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 import org.kde.kirigami 2.13 as Kirigami
 
+
+//TODO KF6: remove all of this?
 /**
  * @brief SwipeNavigator is a control providing for lateral navigation.
  * @include swipenavigator/main.qml

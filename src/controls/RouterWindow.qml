@@ -7,6 +7,10 @@
 import QtQuick 2.5
 import org.kde.kirigami 2.12 as Kirigami
 
+//TODO KF6: this seems to have ended up barely used if at all. can be removed?
+// Investigate why almost identical api is used a lot on different frameworks
+// like Flutter but not in plamo apps.
+
 /**
  * @brief An ApplicationWindow with a preconfigured PageRouter.
  *

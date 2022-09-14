@@ -14,6 +14,8 @@ import org.kde.kirigami 2.19
 import org.kde.kirigami.templates 2.2 as KT
 import "private"
 
+// TODO KF6: undo many workarounds to make existing code work?
+
 /**
  * @brief ScrollablePage is a Page that holds scrollable content, such as a ListView.
  *

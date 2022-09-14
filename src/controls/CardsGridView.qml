@@ -10,6 +10,8 @@ import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.4 as Kirigami
 import "private"
 
+
+//TODO KF6: remove the whole class?
 /**
  * @brief CardsGridView is used to display a grid of Cards generated from any model.
  *

@@ -7,7 +7,7 @@
 import QtQuick 2.5
 import "templates" as T
 
-
+//TODO KF6: remove
 /**
  * @brief An item that can be used as a title for the application.
  *

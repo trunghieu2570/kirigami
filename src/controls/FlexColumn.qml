@@ -8,6 +8,7 @@ import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import org.kde.kirigami 2.13 as Kirigami
 
+//TODO KF6: how much is this used? can be removed?
 /**
  * @brief FlexColumn is a column that grows in width to a fixed cap.
  * @inherit QtQuick.Layouts.ColumnLayout

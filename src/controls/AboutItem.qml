@@ -10,6 +10,7 @@ import QtQuick.Window 2.15
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.18
 
+//TODO: Kf6: move somewhere else which can depend from KAboutData?
 /**
  * @brief An about item that displays the about data
  *

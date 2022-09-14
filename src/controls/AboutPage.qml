@@ -10,6 +10,7 @@ import QtQuick.Window 2.15
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.19
 
+//TODO KF6: move somewhere else? kirigami addons?
 /**
  * @brief An "About" page that is ready to integrate in a Kirigami app.
  *

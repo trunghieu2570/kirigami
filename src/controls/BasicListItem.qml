@@ -9,6 +9,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0 as QQC2
 import org.kde.kirigami 2.12
 
+//TODO KF6: this needs to become a layout inside a Delegate rather than its own listItem
 /**
  * @brief A BasicListItem provides a simple list item design that can handle the
  * most common list item usecases.

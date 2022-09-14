@@ -8,6 +8,7 @@ import QtQuick 2.1
 import "private"
 import "templates" as T
 
+//TODO KF6: not have list items at all (except perhaps swipelistitem which is an unuque ui) but rather have a set of layouts for lists items to be put inside standard QQC2 Delegate
 /**
  * @brief An item delegate for the primitive ListView component.
  *

@@ -9,6 +9,7 @@ import QtQuick.Window 2.2
 import org.kde.kirigami 2.4
 import QtQuick.Controls 2.0 as Controls
 
+// TODO KF6: Remove!
 /**
  * This is a label which uses the current Theme.
  *
