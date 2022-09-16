@@ -46,7 +46,7 @@ QQC2.Label {
     enabled: !action || action.enabled
     onClicked: if (action) action.trigger()
 
-    font.underline: control.enabled && area.containsMouse
+    font.underline: control.enabled
     color: enabled ? Theme.linkColor : Theme.textColor
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
