@@ -80,7 +80,7 @@ endif()
 
 install(TARGETS KF5Kirigami2
         EXPORT KF5Kirigami2Targets
-        ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+        ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 if(BUILD_SHARED_LIBS)
     list(APPEND Kirigami2_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kirigami2_export.h)
