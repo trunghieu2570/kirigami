@@ -5,6 +5,7 @@
  */
 
 import QtQuick 2.15
+import QtQml 2.15
 import QtQuick.Templates 2.15 as T
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
@@ -236,6 +237,7 @@ Page {
                 target: root.flickable
                 property: "bottomMargin"
                 value: root.bottomPadding
+                restoreMode: Binding.RestoreBinding
             }
         },
 

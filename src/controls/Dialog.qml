@@ -5,6 +5,7 @@
 */
 
 import QtQuick 2.15
+import QtQml 2.15
 import QtQuick.Layouts 1.2
 import QtQuick.Templates 2.15 as T
 import QtQuick.Controls 2.15 as Controls
@@ -372,6 +373,8 @@ T.Dialog {
                 property real maximumWidthHint: contentControl.calculatedMaximumWidth - contentControl.leftPadding - contentControl.rightPadding
 
                 value: Math.min(maximumWidthHint,preferredWidthHint)
+
+                restoreMode: Binding.RestoreBinding
             }
         }
     }

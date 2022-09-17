@@ -5,6 +5,7 @@
  */
 
 import QtQuick 2.12
+import QtQml 2.15
 import QtQuick.Controls 2.0 as QQC2
 import QtQuick.Window 2.5
 import "templates/private"
@@ -276,18 +277,21 @@ QQC2.ApplicationWindow {
         target: menuBar
         property: "x"
         value: -contentItem.x
+        restoreMode: Binding.RestoreBinding
     }
     Binding {
         when: header !== undefined
         target: header
         property: "x"
         value: -contentItem.x
+        restoreMode: Binding.RestoreBinding
     }
     Binding {
         when: footer !== undefined
         target: footer
         property: "x"
         value: -contentItem.x
+        restoreMode: Binding.RestoreBinding
     }
 
     contentItem.transform: Translate {
@@ -311,12 +315,14 @@ QQC2.ApplicationWindow {
         target: globalDrawer
         property: "parent"
         value: overlay
+        restoreMode: Binding.RestoreBinding
     }
     Binding {
         when: contextDrawer !== undefined && root.visible
         target: contextDrawer
         property: "parent"
         value: overlay
+        restoreMode: Binding.RestoreBinding
     }
     onPageStackChanged: pageStack.parent = contentItem;
 

@@ -5,6 +5,7 @@
  */
 
 import QtQuick 2.15
+import QtQml 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15 as Controls
 import QtQuick.Layouts 1.15
@@ -82,16 +83,19 @@ AbstractPageHeader {
                 target: page.actions.main
                 property: "displayHint"
                 value: page.actions.main ? (page.actions.main.displayHint | DisplayHint.KeepVisible) : null
+                restoreMode: Binding.RestoreBinding
             }
             Binding {
                 target: page.actions.left
                 property: "displayHint"
                 value: page.actions.left ? (page.actions.left.displayHint | DisplayHint.KeepVisible) : null
+                restoreMode: Binding.RestoreBinding
             }
             Binding {
                 target: page.actions.right
                 property: "displayHint"
                 value: page.actions.right ? (page.actions.right.displayHint | DisplayHint.KeepVisible) : null
+                restoreMode: Binding.RestoreBinding
             }
         }
     }
