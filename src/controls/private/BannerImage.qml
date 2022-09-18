@@ -123,7 +123,7 @@ Kirigami.ShadowedImage {
         opacity: 0.5
         color: "black"
 
-        visible: root.source.toString() !== "" && root.title !== "" && ((root.titleAlignment & Qt.AlignTop) || (root.titleAlignment & Qt.AlignBottom))
+        visible: root.source.toString() !== "" && root.title !== "" && ((root.titleAlignment & Qt.AlignTop) || (root.titleAlignment & Qt.AlignVCenter) || (root.titleAlignment & Qt.AlignBottom))
 
         corners.topLeftRadius: root.titleAlignment & Qt.AlignTop ? root.corners.topLeftRadius : 0
         corners.topRightRadius: root.titleAlignment & Qt.AlignTop ? root.corners.topRightRadius : 0
