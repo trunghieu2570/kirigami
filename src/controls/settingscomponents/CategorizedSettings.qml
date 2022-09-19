@@ -45,8 +45,10 @@ PageRow {
             pageSettingStack.pop();
         }
     }
-    onWidthChanged: if (pageSettingStack.depth < 2 && pageSettingStack.width >= Units.gridUnit * 40) {
-        actions[0].trigger();
+    onWidthChanged: {
+        if (pageSettingStack.depth < 2 && pageSettingStack.width >= Units.gridUnit * 40) {
+            actions[0].trigger();
+        }
     }
 
     initialPage: ScrollablePage {
@@ -55,14 +57,19 @@ PageRow {
         leftPadding: 0
         rightPadding: 0
         topPadding: 0
+
         Theme.colorSet: Theme.View
+
         ListView {
             id: listview
-            Component.onCompleted: if (pageSettingStack.width >= Units.gridUnit * 40) {
-                actions[0].trigger();
-            } else {
-                listview.currentIndex = -1;
+
+            Component.onCompleted: {
+                if (pageSettingStack.width >= Units.gridUnit * 40)
+                    actions[0].trigger();
+                else
+                    listview.currentIndex = -1;
             }
+
             model: pageSettingStack.actions
             delegate: pageSettingStack.wideMode ? desktopStyle : mobileStyle
         }
@@ -72,13 +79,14 @@ PageRow {
         id: desktopStyle
 
         QQC2.ItemDelegate {
-            width: parent && parent.width > 0 ? parent.width : implicitWidth
+            width: parent !== null && parent.width > 0 ? parent.width : implicitWidth
             implicitWidth: contentItem.implicitWidth + Units.smallSpacing * 4
             implicitHeight: contentItem.implicitHeight + Units.smallSpacing * 2
 
             action: modelData
             highlighted: listview.currentIndex === index
-            onClicked: listview.currentIndex = index
+            onClicked: listview.currentIndex = index;
+
             contentItem: ColumnLayout {
                 spacing: Units.smallSpacing
 
@@ -99,7 +107,6 @@ PageRow {
                     horizontalAlignment: Text.AlignHCenter
                 }
             }
-
         }
     }
 
@@ -108,10 +115,7 @@ PageRow {
 
         BasicListItem {
             action: modelData
-            onClicked: {
-                listview.currentIndex = index;
-            }
+            onClicked: listview.currentIndex = index;
         }
     }
 }
-
