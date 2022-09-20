@@ -1432,10 +1432,6 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
     case QEvent::MouseButtonRelease: {
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
 
-        if (!m_acceptsMouse && me->source() == Qt::MouseEventNotSynthesized) {
-            return false;
-        }
-
         if (me->button() == Qt::BackButton && m_currentIndex > 0) {
             setCurrentIndex(m_currentIndex - 1);
             me->accept();
@@ -1444,6 +1440,10 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
             setCurrentIndex(m_currentIndex + 1);
             me->accept();
             return true;
+        }
+
+        if (!m_acceptsMouse && me->source() == Qt::MouseEventNotSynthesized) {
+            return false;
         }
 
         if (me->button() != Qt::LeftButton) {
