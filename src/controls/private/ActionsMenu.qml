@@ -33,6 +33,7 @@ Controls.Menu
         delegate: QtObject {
             readonly property Controls.Action action: modelData
             property QtObject item: null
+            property bool isSubMenu: false
 
             function create() {
                 if (!action.hasOwnProperty("children") && !action.children || action.children.length === 0) {
@@ -53,14 +54,16 @@ Controls.Menu
                     theMenu.insertMenu(theMenu.count, item)
                     item.parentItem = theMenu.contentData[theMenu.contentData.length-1]
                     item.parentItem.icon = action.icon
+                    isSubMenu = true
                 }
             }
             function remove() {
-                if (!action.hasOwnProperty("children") && !action.children || action.children.length === 0) {
-                    theMenu.removeItem(item)
-                } else if (theMenu.submenuComponent) {
+                if (isSubMenu) {
                     theMenu.removeMenu(item)
+                } else {
+                    theMenu.removeItem(item)
                 }
+                item.destroy()
             }
         }
 
