@@ -233,7 +233,7 @@ T.Control {
      *             Kirigami only supports calling `closeDialog` once.
      * @param properties The properties given when initializing the page.
      * @param windowProperties The properties given to the initialized window on desktop.
-     * @return The new created page
+     * @return Returns a newly created page.
      */
     function pushDialogLayer(page, properties = {}, windowProperties = {}) {
         let item;
