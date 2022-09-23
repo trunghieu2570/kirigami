@@ -27,7 +27,7 @@ GridView {
     delegate: Kirigami.DelegateRecycler {
         width: calculations.delegateWidth
 
-        anchors.left: parent.left
+        anchors.left: GridView.view.contentItem.left
 
         sourceComponent: root._delegateComponent
         onWidthChanged: {
