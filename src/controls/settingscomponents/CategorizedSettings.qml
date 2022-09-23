@@ -29,12 +29,44 @@ PageRow {
 
     readonly property string title: pageSettingStack.depth < 2 ? qsTr("Settings") : qsTr("Settings — %1").arg(pageSettingStack.get(1).title)
 
+    property bool completed: false
+
     bottomPadding: 0
     leftPadding: 0
     rightPadding: 0
     topPadding: 0
 
-    columnView.columnWidth: Units.gridUnit * 7 // So it's the same size as the kxmlgui settings dialogs
+    // With this, we get the longest word's width
+    TextMetrics {
+        id: maxWordMetrics
+    }
+    columnView.columnWidth: {
+        if(!pageSettingStack.completed) {
+            return Units.gridUnit * 6  // we return the min width if the component isn't completed
+        }
+        let longestWord = "";
+        for (let i = 0; i < actions.length; i++) {
+            let words = actions[i].text.split(" ");
+
+            for (let j = 0; j < words.length; j++) {
+
+                if (words[j].length > longestWord.length)
+                    longestWord = words[j];
+            }
+        }
+        // set the TextMetric's text to the longest word, to get the word's width.
+        maxWordMetrics.text = longestWord;
+
+        // fix words getting wrapped weirdly when the vertical scrollbar is shown
+        let vScrollBarWidth = initialPage.contentItem.QQC2.ScrollBar.vertical.width;
+
+        // we need to add spacing from ListView's item delegate and it's items
+        let calcWidth = maxWordMetrics.width + Units.smallSpacing * 6 + vScrollBarWidth;
+        let minWidth = Units.gridUnit * 6;
+        let maxWidth = Units.gridUnit * 8.5;
+
+        return Math.max(minWidth, Math.min(calcWidth, maxWidth));
+    }
     globalToolBar.showNavigationButtons: ApplicationHeaderStyle.NoNavigationButtons
     globalToolBar.style: Settings.isMobile ? ApplicationHeaderStyle.Breadcrumb : ApplicationHeaderStyle.None
 
@@ -57,19 +89,14 @@ PageRow {
         leftPadding: 0
         rightPadding: 0
         topPadding: 0
-
         Theme.colorSet: Theme.View
-
         ListView {
             id: listview
-
-            Component.onCompleted: {
-                if (pageSettingStack.width >= Units.gridUnit * 40)
-                    actions[0].trigger();
-                else
-                    listview.currentIndex = -1;
+            Component.onCompleted: if (pageSettingStack.width >= Units.gridUnit * 40) {
+                actions[0].trigger();
+            } else {
+                listview.currentIndex = -1;
             }
-
             model: pageSettingStack.actions
             delegate: pageSettingStack.wideMode ? desktopStyle : mobileStyle
         }
@@ -79,14 +106,13 @@ PageRow {
         id: desktopStyle
 
         QQC2.ItemDelegate {
-            width: parent !== null && parent.width > 0 ? parent.width : implicitWidth
+            width: parent && parent.width > 0 ? parent.width : implicitWidth
             implicitWidth: contentItem.implicitWidth + Units.smallSpacing * 4
             implicitHeight: contentItem.implicitHeight + Units.smallSpacing * 2
 
             action: modelData
             highlighted: listview.currentIndex === index
-            onClicked: listview.currentIndex = index;
-
+            onClicked: listview.currentIndex = index
             contentItem: ColumnLayout {
                 spacing: Units.smallSpacing
 
@@ -107,6 +133,7 @@ PageRow {
                     horizontalAlignment: Text.AlignHCenter
                 }
             }
+
         }
     }
 
@@ -115,7 +142,14 @@ PageRow {
 
         BasicListItem {
             action: modelData
-            onClicked: listview.currentIndex = index;
+            onClicked: {
+                listview.currentIndex = index;
+            }
         }
     }
+
+    Component.onCompleted: {
+        pageSettingStack.completed = true;
+    }
 }
+
