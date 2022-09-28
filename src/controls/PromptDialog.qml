@@ -41,7 +41,7 @@ import org.kde.kirigami 2.20 as Kirigami
  *     id: textPromptDialog
  *     title: "New Folder"
  *
- *     standardButtons: Kirigami.Dialog.None
+ *     standardButtons: Kirigami.Dialog.NoButton
  *     customFooterActions: [
  *         Kirigami.Action {
  *             text: qsTr("Create Folder")
