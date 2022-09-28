@@ -184,11 +184,6 @@ T2.ItemDelegate {
 
     hoverEnabled: true
 
-    QtObject {
-        id: internal
-        property Flickable view: listItem.ListView.view || (listItem.parent ? listItem.parent.ListView.view : null)
-    }
-
     Accessible.role: Accessible.ListItem
     highlighted: focus && ListView.isCurrentItem && ListView.view && ListView.view.keyNavigationEnabled
 }
