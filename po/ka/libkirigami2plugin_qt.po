@@ -1,0 +1,244 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: \n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Qt-Contexts: true\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: controls/AboutItem.qml:122
+#, qt-format
+msgctxt "AboutItem|"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: controls/AboutItem.qml:131
+#, qt-format
+msgctxt "AboutItem|"
+msgid "Visit %1's KDE Store page"
+msgstr "ეწვიეთ %1-ის KDE მაღაზიის გვერდს"
+
+#: controls/AboutItem.qml:140
+#, qt-format
+msgctxt "AboutItem|"
+msgid "Send an email to %1"
+msgstr "%1-სთვის ელფოსტის გაგზავნა"
+
+#: controls/AboutItem.qml:187
+msgctxt "AboutItem|"
+msgid "Get Involved"
+msgstr "შემოგვიერთდით"
+
+#: controls/AboutItem.qml:199
+msgctxt "AboutItem|"
+msgid "Copyright"
+msgstr "საავტორო უფლებები"
+
+#: controls/AboutItem.qml:248
+msgctxt "AboutItem|"
+msgid "License:"
+msgstr "ლიცენზია:"
+
+#: controls/AboutItem.qml:270
+#, qt-format
+msgctxt "AboutItem|"
+msgid "License: %1"
+msgstr "ლიცენზია: %1"
+
+#: controls/AboutItem.qml:281
+msgctxt "AboutItem|"
+msgid "Libraries in use"
+msgstr "გამოყენებული ბიბლიოთეკები"
+
+#: controls/AboutItem.qml:311
+msgctxt "AboutItem|"
+msgid "Authors"
+msgstr "ავტორები"
+
+#: controls/AboutItem.qml:320
+msgctxt "AboutItem|"
+msgid "Show author photos"
+msgstr "ავტორის ფოტოების ჩვენება"
+
+#: controls/AboutItem.qml:351
+msgctxt "AboutItem|"
+msgid "Credits"
+msgstr "კრედიტები"
+
+#: controls/AboutItem.qml:364
+msgctxt "AboutItem|"
+msgid "Translators"
+msgstr "მთარგმნელები"
+
+#: controls/AboutPage.qml:86
+#, qt-format
+msgctxt "AboutPage|"
+msgid "About %1"
+msgstr "%1-ის შესახებ"
+
+#: controls/AboutPage.qml:89
+msgctxt "AboutPage|"
+msgid "Report Bug…"
+msgstr "შეცდომის ანგარიში…"
+
+#: controls/AbstractApplicationWindow.qml:350
+msgctxt "AbstractApplicationWindow|"
+msgid "Quit"
+msgstr "დასრულება"
+
+#: controls/ActionToolBar.qml:205
+msgctxt "ActionToolBar|"
+msgid "More Actions"
+msgstr "მეტი ქმედება"
+
+#: controls/Avatar.qml:162
+#, qt-format
+msgctxt "Avatar|"
+msgid "%1 — %2"
+msgstr "%1 — %2"
+
+#: controls/Chip.qml:82
+msgctxt "Chip|"
+msgid "Remove Tag"
+msgstr "ჭდის წაშლა"
+
+#: controls/ContextDrawer.qml:69
+msgctxt "ContextDrawer|"
+msgid "Actions"
+msgstr "ქმედებები"
+
+#: controls/GlobalDrawer.qml:498
+msgctxt "GlobalDrawer|"
+msgid "Back"
+msgstr "უკან"
+
+#: controls/GlobalDrawer.qml:591
+msgctxt "GlobalDrawer|"
+msgid "Close Sidebar"
+msgstr "გვერდითი ზოლის დახურვა"
+
+#: controls/GlobalDrawer.qml:594
+msgctxt "GlobalDrawer|"
+msgid "Open Sidebar"
+msgstr "გვერდითი ზოლის გახსნა"
+
+#: controls/LoadingPlaceholder.qml:54
+msgctxt "LoadingPlaceholder|"
+msgid "Loading…"
+msgstr "ჩატვირთვა…"
+
+#: controls/PasswordField.qml:43
+msgctxt "PasswordField|"
+msgid "Password"
+msgstr "პაროლი"
+
+#: controls/SearchField.qml:95
+msgctxt "SearchField|"
+msgid "Search…"
+msgstr "ძებნა…"
+
+#: controls/SearchField.qml:97
+msgctxt "SearchField|"
+msgid "Search"
+msgstr "ძებნა"
+
+#: controls/settingscomponents/CategorizedSettings.qml:30
+#: controls/settingscomponents/CategorizedSettings.qml:87
+msgctxt "CategorizedSettings|"
+msgid "Settings"
+msgstr "&მორგება"
+
+#: controls/settingscomponents/CategorizedSettings.qml:30
+#, qt-format
+msgctxt "CategorizedSettings|"
+msgid "Settings — %1"
+msgstr "პარამეტრები — %1"
+
+#. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
+#: controls/swipenavigator/templates/PageTab.qml:39
+#, qt-format
+msgctxt "PageTab|"
+msgid "Current page. Progress: %1 percent."
+msgstr "მიმდინარე გვერდი. პროგრესი: %1 პროცენტი."
+
+#. Accessibility text for a page tab. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:42
+#, qt-format
+msgctxt "PageTab|"
+msgid "Navigate to %1. Progress: %2 percent."
+msgstr "%1-ზეგადასვლა. პროგრესი: %2 პროცენტი."
+
+#. Accessibility text for a page tab. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:47
+msgctxt "PageTab|"
+msgid "Current page."
+msgstr "მიმდინარე გვერდი."
+
+#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:50
+#, qt-format
+msgctxt "PageTab|"
+msgid "Navigate to %1. Demanding attention."
+msgstr "%1-ზე გადასვლა. საჭიროა ყურადღება."
+
+#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:53
+#, qt-format
+msgctxt "PageTab|"
+msgid "Navigate to %1."
+msgstr "%1-ზე გადასვლა."
+
+#: controls/templates/OverlayDrawer.qml:140
+msgctxt "OverlayDrawer|"
+msgid "Close drawer"
+msgstr "უჯრის დახურვა"
+
+#: controls/templates/OverlayDrawer.qml:146
+msgctxt "OverlayDrawer|"
+msgid "Open drawer"
+msgstr "უჯრის გახსნა"
+
+#: controls/templates/private/BackButton.qml:36
+msgctxt "BackButton|"
+msgid "Navigate Back"
+msgstr "უკან გადასვლა"
+
+#: controls/templates/private/ForwardButton.qml:34
+msgctxt "ForwardButton|"
+msgid "Navigate Forward"
+msgstr "წინ გადასვლა"
+
+#: controls/ToolBarApplicationHeader.qml:115
+msgctxt "ToolBarApplicationHeader|"
+msgid "More Actions"
+msgstr "მეტი ქმედება"
+
+#: controls/UrlButton.qml:47
+msgctxt "UrlButton|"
+msgid "Copy Link to Clipboard"
+msgstr "ბმულის ბმულის ბაფერში კოპირება"
+
+#: settings.cpp:220
+#, qt-format
+msgctxt "Settings|"
+msgid "KDE Frameworks %1"
+msgstr "KDE Frameworks %1"
+
+#: settings.cpp:222
+#, qt-format
+msgctxt "Settings|"
+msgid "The %1 windowing system"
+msgstr "ფანჯრული სისტემა: %1"
+
+#: settings.cpp:223
+#, qt-format
+msgctxt "Settings|"
+msgid "Qt %2 (built against %3)"
+msgstr "Qt %2 (აგებულია %3-ით)"
