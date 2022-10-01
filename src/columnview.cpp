@@ -1427,7 +1427,6 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
         me->setAccepted(m_dragging);
 
         return m_dragging && !verticalScrollIntercepted;
-        break;
     }
     case QEvent::MouseButtonRelease: {
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
@@ -1471,7 +1470,6 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
 
         me->setAccepted(block);
         return block;
-        break;
     }
     default:
         break;
