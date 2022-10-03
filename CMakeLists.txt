@@ -123,11 +123,6 @@ if (UBUNTU_TOUCH)
     add_definitions(-DUBUNTU_TOUCH)
 endif()
 
-if(BUILD_EXAMPLES AND ANDROID)
-    find_package(Qt${QT_MAJOR_VERSION}AndroidExtras ${REQUIRED_QT_VERSION} REQUIRED)
-endif()
-
-
 ecm_find_qmlmodule(QtGraphicalEffects 1.0)
 
 ecm_set_disabled_deprecation_versions(
