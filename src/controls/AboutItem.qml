@@ -8,7 +8,7 @@ import QtQuick 2.1
 import QtQuick.Controls 2.4 as QQC2
 import QtQuick.Window 2.15
 import QtQuick.Layouts 1.3
-import org.kde.kirigami 2.18
+import org.kde.kirigami 2.20
 
 //TODO: Kf6: move somewhere else which can depend from KAboutData?
 /**
@@ -227,7 +227,7 @@ Item
             id: licenseSheet
             property alias text: bodyLabel.text
 
-            contentItem: QQC2.Label {
+            contentItem: SelectableLabel {
                 id: bodyLabel
                 text: licenseSheet.text
                 wrapMode: Text.Wrap
