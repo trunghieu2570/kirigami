@@ -226,11 +226,6 @@ Item
         OverlaySheet {
             id: licenseSheet
             property alias text: bodyLabel.text
-            property alias name: heading.text
-
-            header: Heading {
-                id: heading
-            }
 
             contentItem: QQC2.Label {
                 id: bodyLabel
@@ -253,7 +248,7 @@ Item
                     text: modelData.name
                     onClicked: {
                         licenseSheet.text = modelData.text
-                        licenseSheet.name = modelData.name
+                        licenseSheet.title = modelData.name
                         licenseSheet.open()
                     }
                 }
