@@ -45,7 +45,7 @@ msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Dereitos de copia"
 
-#: controls/AboutItem.qml:248
+#: controls/AboutItem.qml:243
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "License:"
@@ -53,7 +53,7 @@ msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Licenza:"
 
-#: controls/AboutItem.qml:270
+#: controls/AboutItem.qml:265
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "License: %1"
@@ -61,7 +61,7 @@ msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Licenza: %1"
 
-#: controls/AboutItem.qml:281
+#: controls/AboutItem.qml:276
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Libraries in use"
@@ -69,7 +69,7 @@ msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Bibliotecas usadas"
 
-#: controls/AboutItem.qml:311
+#: controls/AboutItem.qml:306
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Authors"
@@ -77,12 +77,12 @@ msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autores"
 
-#: controls/AboutItem.qml:320
+#: controls/AboutItem.qml:315
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr ""
 
-#: controls/AboutItem.qml:351
+#: controls/AboutItem.qml:346
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Credits"
@@ -90,7 +90,7 @@ msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Recoñecementos"
 
-#: controls/AboutItem.qml:364
+#: controls/AboutItem.qml:359
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Translators"

@@ -42,38 +42,38 @@ msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Авторско право"
 
-#: controls/AboutItem.qml:248
+#: controls/AboutItem.qml:243
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Лиценз:"
 
-#: controls/AboutItem.qml:270
+#: controls/AboutItem.qml:265
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Лиценз: %1"
 
-#: controls/AboutItem.qml:281
+#: controls/AboutItem.qml:276
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Използвани библиотеки"
 
-#: controls/AboutItem.qml:311
+#: controls/AboutItem.qml:306
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Автори"
 
-#: controls/AboutItem.qml:320
+#: controls/AboutItem.qml:315
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Показване на снимки на автора"
 
-#: controls/AboutItem.qml:351
+#: controls/AboutItem.qml:346
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Кредити"
 
-#: controls/AboutItem.qml:364
+#: controls/AboutItem.qml:359
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Преводачи"

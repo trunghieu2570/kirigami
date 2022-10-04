@@ -50,38 +50,38 @@ msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Drets d'autor"
 
-#: controls/AboutItem.qml:248
+#: controls/AboutItem.qml:243
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Llicència:"
 
-#: controls/AboutItem.qml:270
+#: controls/AboutItem.qml:265
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Llicència: %1"
 
-#: controls/AboutItem.qml:281
+#: controls/AboutItem.qml:276
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Biblioteques en ús"
 
-#: controls/AboutItem.qml:311
+#: controls/AboutItem.qml:306
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autors"
 
-#: controls/AboutItem.qml:320
+#: controls/AboutItem.qml:315
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Mostra les fotos dels autors"
 
-#: controls/AboutItem.qml:351
+#: controls/AboutItem.qml:346
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Atribucions"
 
-#: controls/AboutItem.qml:364
+#: controls/AboutItem.qml:359
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Traductors"

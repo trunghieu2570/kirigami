@@ -40,38 +40,38 @@ msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "xxCopyrightxx"
 
-#: controls/AboutItem.qml:248
+#: controls/AboutItem.qml:243
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "xxLicense:xx"
 
-#: controls/AboutItem.qml:270
+#: controls/AboutItem.qml:265
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "xxLicense: %1xx"
 
-#: controls/AboutItem.qml:281
+#: controls/AboutItem.qml:276
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "xxLibraries in usexx"
 
-#: controls/AboutItem.qml:311
+#: controls/AboutItem.qml:306
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "xxAuthorsxx"
 
-#: controls/AboutItem.qml:320
+#: controls/AboutItem.qml:315
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "xxShow author photosxx"
 
-#: controls/AboutItem.qml:351
+#: controls/AboutItem.qml:346
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "xxCreditsxx"
 
-#: controls/AboutItem.qml:364
+#: controls/AboutItem.qml:359
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "xxTranslatorsxx"
