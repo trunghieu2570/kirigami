@@ -202,7 +202,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
                                                         QStringLiteral("Cannot create objects of type Theme, use it as an attached property"));
 
     // 2.3
-    qmlRegisterType(componentUrl(QStringLiteral("FormLayout.qml")), uri, 2, 3, "FormLayout");
+    qmlRegisterType(componentUrl(QStringLiteral("MobileFormLayout.qml")), uri, 2, 3, "FormLayout");
     qmlRegisterUncreatableType<FormLayoutAttached>(uri,
                                                    2,
                                                    3,

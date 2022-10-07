@@ -119,6 +119,7 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.1 SOURCES
 
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.3 SOURCES
     controls/FormLayout.qml
+    controls/MobileFormLayout.qml
 )
 
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.4 SOURCES
