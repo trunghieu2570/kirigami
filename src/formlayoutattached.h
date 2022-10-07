@@ -40,6 +40,10 @@ class FormLayoutAttached : public QObject
      */
     Q_PROPERTY(QString label READ label WRITE setLabel NOTIFY labelChanged)
     /**
+     * An optional extra desctiption ofr the fields: not all form factors will display this
+     */
+    Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
+    /**
      * The alignment for the label of a org::kde::kirigami::FormLayout field
      */
     Q_PROPERTY(int labelAlignment READ labelAlignment WRITE setLabelAlignment NOTIFY labelAlignmentChanged)
@@ -145,6 +149,9 @@ public:
     void setLabel(const QString &text);
     QString label() const;
 
+    void setDescription(const QString &text);
+    QString description() const;
+
     void setIsSection(bool section);
     bool isSection() const;
 
@@ -168,6 +175,7 @@ public:
 
 Q_SIGNALS:
     void labelChanged();
+    void descriptionChanged();
     void isSectionChanged();
     void checkableChanged();
     void checkedChanged();
@@ -177,6 +185,7 @@ Q_SIGNALS:
 
 private:
     QString m_label;
+    QString m_description;
     QString m_actualDecoratedLabel;
     QString m_decoratedLabel;
     QPointer<QQuickItem> m_buddyFor;

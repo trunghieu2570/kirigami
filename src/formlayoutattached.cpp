@@ -33,6 +33,21 @@ QString FormLayoutAttached::label() const
     return m_label;
 }
 
+void FormLayoutAttached::setDescription(const QString &text)
+{
+    if (m_description == text) {
+        return;
+    }
+
+    m_description = text;
+    Q_EMIT descriptionChanged();
+}
+
+QString FormLayoutAttached::description() const
+{
+    return m_description;
+}
+
 void FormLayoutAttached::setLabelAlignment(int alignment)
 {
     if (m_labelAlignment == alignment) {

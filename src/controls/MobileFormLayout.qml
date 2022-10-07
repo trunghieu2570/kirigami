@@ -324,6 +324,10 @@ Item {
                 spacing: 0
                 Control {
                     id: buddyParent
+                    leftPadding: 0
+                    topPadding: 0
+                    rightPadding: 0
+                    bottomPadding: 0
                     Layout.fillWidth: true
                     Layout.maximumHeight: contentItem && contentItem.visible ? implicitHeight : 0
                     visible: contentItem
@@ -331,8 +335,19 @@ Item {
                 Control {
                     id: itemParent
                     enabled: container.item.enabled
+                    leftPadding: 0
+                    topPadding: 0
+                    rightPadding: 0
+                    bottomPadding: 0
                     Layout.fillWidth: true
                     visible: container.item && !(container.item instanceof Kirigami.Separator)
+                }
+                Label {
+                    Layout.fillWidth: true
+                    text: item.Kirigami.FormData.description
+                    visible: text.length > 0
+                    horizontalAlignment: Text.AlignRight
+                    font.pointSize: Kirigami.Units.fontMetrics.pointSize * 0.8
                 }
             }
             // NOTE: work around a  GridLayout quirk which doesn't lay out items with null size hints causing things to be laid out incorrectly in some cases
