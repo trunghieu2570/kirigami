@@ -310,7 +310,7 @@ AbstractListItem {
                 Layout.minimumWidth: size
                 Layout.maximumWidth: size
                 selected: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.hoverEnabled))
-                opacity: listItem.fadeContent ? 0.4 : 1.0
+                opacity: listItem.fadeContent ? 0.6 : 1.0
                 visible: source !== undefined
             }
             ColumnLayout {
@@ -326,7 +326,7 @@ AbstractListItem {
                     color: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.hoverEnabled)) ? listItem.activeTextColor : listItem.textColor
                     elide: Text.ElideRight
                     font.weight: listItem.bold ? Font.Bold : Font.Normal
-                    opacity: listItem.fadeContent ? 0.4 : 1.0
+                    opacity: listItem.fadeContent ? 0.6 : 1.0
                 }
                 QQC2.Label {
                     id: subtitleItem
@@ -335,9 +335,7 @@ AbstractListItem {
                     color: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.hoverEnabled)) ? listItem.activeTextColor : listItem.textColor
                     elide: Text.ElideRight
                     font: Theme.smallFont
-                    opacity: listItem.bold
-                        ? (listItem.fadeContent ? 0.3 : 0.9)
-                        : (listItem.fadeContent ? 0.1 : 0.7)
+                    opacity: listItem.fadeContent ? 0.6 : (listItem.bold ? 0.9 : 0.7)
                     visible: text.length > 0
                 }
             }
