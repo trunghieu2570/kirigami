@@ -7,7 +7,8 @@
  */
 
 import QtQuick 2.7
-import org.kde.kirigami 2.5 as Kirigami
+import org.kde.kirigami 2.19 as Kirigami
+import "private"
 import "templates" as T
 
 /**
@@ -62,41 +63,52 @@ T.InlineMessage {
     id: root
 
     background: Rectangle {
-        id: bgBorderRect
+        radius: Kirigami.Units.smallSpacing
 
-        color: {
-            if (root.type === Kirigami.MessageType.Positive) {
-                return Kirigami.Theme.positiveTextColor;
-            } else if (root.type === Kirigami.MessageType.Warning) {
-                return Kirigami.Theme.neutralTextColor;
-            } else if (root.type === Kirigami.MessageType.Error) {
-                return Kirigami.Theme.negativeTextColor;
+        color: switch (root.type) {
+            case Kirigami.MessageType.Positive:
+                return Qt.rgba(
+                    Kirigami.Theme.positiveTextColor.r,
+                    Kirigami.Theme.positiveTextColor.g,
+                    Kirigami.Theme.positiveTextColor.b,
+                    0.1
+                )
+            case Kirigami.MessageType.Error:
+                return Qt.rgba(
+                    Kirigami.Theme.negativeTextColor.r,
+                    Kirigami.Theme.negativeTextColor.g,
+                    Kirigami.Theme.negativeTextColor.b,
+                    0.1
+                )
+            case Kirigami.MessageType.Warning:
+                return Qt.rgba(
+                    Kirigami.Theme.neutralTextColor.r,
+                    Kirigami.Theme.neutralTextColor.g,
+                    Kirigami.Theme.neutralTextColor.b,
+                    0.1
+                )
+        }
+        Kirigami.ShadowedRectangle {
+            anchors {
+                left: parent.left
+                top: parent.top
+                bottom: parent.bottom
             }
-
-            return Kirigami.Theme.activeTextColor;
-        }
-
-        radius: Kirigami.Units.smallSpacing / 2
-
-        Rectangle {
-            id: bgFillRect
-
-            anchors.fill: parent
-            anchors.margins: 1
-
-            color: Kirigami.Theme.backgroundColor
-
-            radius: bgBorderRect.radius * 0.60
-        }
-
-        Rectangle {
-            anchors.fill: bgFillRect
-
-            color: bgBorderRect.color
-
-            opacity: 0.20
-
-            radius: bgFillRect.radius
+            corners {
+                bottomLeftRadius: Kirigami.Units.smallSpacing
+                topLeftRadius: Kirigami.Units.smallSpacing
+                topRightRadius: 0
+                bottomRightRadius: 0
+            }
+            color: switch (root.type) {
+                case Kirigami.MessageType.Positive:
+                    return Kirigami.Theme.positiveTextColor;
+                case Kirigami.MessageType.Error:
+                    return Kirigami.Theme.negativeTextColor;
+                case Kirigami.MessageType.Warning:
+                    return Kirigami.Theme.neutralTextColor;
+            }
+            width: Kirigami.Units.smallSpacing
         }
     }
 }

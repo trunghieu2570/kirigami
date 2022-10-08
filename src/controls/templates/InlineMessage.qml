@@ -128,10 +128,10 @@ T2.Control {
 
     property bool _animating: false
 
-    leftPadding: background.border.width + Kirigami.Units.smallSpacing
-    topPadding: background.border.width + Kirigami.Units.smallSpacing
-    rightPadding: background.border.width + Kirigami.Units.smallSpacing
-    bottomPadding: background.border.width + Kirigami.Units.smallSpacing
+    leftPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+    topPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+    bottomPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+    rightPadding: Kirigami.Units.gridUnit
 
     Behavior on implicitHeight {
         enabled: !root.visible
@@ -234,7 +234,7 @@ T2.Control {
 
             anchors {
                 left: icon.right
-                leftMargin: Kirigami.Units.smallSpacing
+                leftMargin: Kirigami.Units.largeSpacing
                 right: closeButton.visible ? closeButton.left : parent.right
                 rightMargin: closeButton.visible ? Kirigami.Units.smallSpacing : 0
                 top: parent.top
