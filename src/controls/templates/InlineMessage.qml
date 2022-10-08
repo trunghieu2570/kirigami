@@ -216,11 +216,11 @@ T2.Control {
                 }
 
                 if (root.type === Kirigami.MessageType.Positive) {
-                    return "dialog-positive";
+                    return "data-success";
                 } else if (root.type === Kirigami.MessageType.Warning) {
-                    return "dialog-warning";
+                    return "data-warning";
                 } else if (root.type === Kirigami.MessageType.Error) {
-                    return "dialog-error";
+                    return "data-error";
                 }
 
                 return "dialog-information";
