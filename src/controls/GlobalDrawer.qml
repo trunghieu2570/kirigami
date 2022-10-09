@@ -489,7 +489,6 @@ OverlayDrawer {
                         BasicListItem {
                             id: backItem
                             visible: level > 0
-                            supportsMouseEvents: true
                             icon: (LayoutMirroring.enabled ? "go-previous-symbolic-rtl" : "go-previous-symbolic")
 
                             label: MnemonicData.richTextLabel

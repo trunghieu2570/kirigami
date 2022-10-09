@@ -12,7 +12,7 @@ Rectangle {
     color: {
         if (listItem.alternatingBackground && index % 2)
             return listItem.alternateBackgroundColor
-        else if (listItem.checked || listItem.highlighted || (listItem.supportsMouseEvents && listItem.pressed && !listItem.checked && !listItem.sectionDelegate))
+        else if (listItem.checked || listItem.highlighted || (listItem.hoverEnabled && listItem.pressed && !listItem.checked && !listItem.sectionDelegate))
             return listItem.activeBackgroundColor
         return listItem.backgroundColor
     }
@@ -21,7 +21,7 @@ Rectangle {
     Rectangle {
         id: internal
         anchors.fill: parent
-        visible: !Settings.tabletMode && listItem.supportsMouseEvents
+        visible: !Settings.tabletMode && listItem.hoverEnabled
         color: listItem.activeBackgroundColor
         opacity: {
             if ((listItem.highlighted || listItem.ListView.isCurrentItem) && !listItem.pressed) {

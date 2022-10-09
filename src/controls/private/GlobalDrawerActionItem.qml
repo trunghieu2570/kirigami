@@ -13,7 +13,7 @@ import org.kde.kirigami 2.5
 
 AbstractListItem {
     id: listItem
-    supportsMouseEvents: (!isExpandible || root.collapsed)
+
     readonly property bool wideMode: width > height * 2
     readonly property bool isSeparator: modelData.hasOwnProperty("separator") && modelData.separator
 
@@ -37,7 +37,7 @@ AbstractListItem {
             Layout.maximumHeight: size
             Layout.minimumWidth: size
             Layout.maximumWidth: size
-            selected: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents))
+            selected: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.hoverEnabled))
             visible: source !== undefined
         }
         QQC2Impl.MnemonicLabel {
@@ -45,7 +45,7 @@ AbstractListItem {
             text:  width > height * 2 ? listItem.MnemonicData.mnemonicLabel : ""
             Layout.fillWidth: true
             mnemonicVisible: listItem.MnemonicData.active
-            color: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? listItem.activeTextColor : listItem.textColor
+            color: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.hoverEnabled)) ? listItem.activeTextColor : listItem.textColor
             elide: Text.ElideRight
             font: listItem.font
             // Work around Qt bug where NativeRendering breaks for non-integer scale factors
@@ -157,7 +157,7 @@ AbstractListItem {
     Keys.onReturnPressed: trigger()
 
     function trigger() {
-        if (!supportsMouseEvents) {
+        if (!listItem.hoverEnabled) {
             return;
         }
         modelData.trigger();
