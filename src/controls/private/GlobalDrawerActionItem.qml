@@ -46,9 +46,6 @@ AbstractListItem {
             color: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.hoverEnabled)) ? listItem.activeTextColor : listItem.textColor
             elide: Text.ElideRight
             font: listItem.font
-            // Work around Qt bug where NativeRendering breaks for non-integer scale factors
-            // https://bugreports.qt.io/browse/QTBUG-67007
-            renderType: Screen.devicePixelRatio % 1 !== 0 ? Text.QtRendering : Text.NativeRendering
             opacity: {
                 if (root.collapsed) {
                     return 0;
