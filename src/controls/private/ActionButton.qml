@@ -94,10 +94,8 @@ Item {
         id: button
         x: root.width/2 - button.width/2
 
-        // We have a mismatch in releases in removing the mobile x1.5 sizing (kirigami is part of frameworks, but styles are part of plasma releases)
-        // Remove after Plasma 5.23 is released, and switch back to Units.iconSizes.medium/large
-        property int mediumIconSizing: Units.iconSizes.sizeForLabels * 2
-        property int largeIconSizing: Units.iconSizes.sizeForLabels * 3
+        property int mediumIconSizing: Units.iconSizes.medium * 2
+        property int largeIconSizing: Units.iconSizes.large * 3
 
         anchors.bottom: edgeMouseArea.bottom
 
