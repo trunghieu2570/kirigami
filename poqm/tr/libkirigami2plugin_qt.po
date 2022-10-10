@@ -116,17 +116,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Eylemler"
 
-#: controls/GlobalDrawer.qml:498
+#: controls/GlobalDrawer.qml:497
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Geri"
 
-#: controls/GlobalDrawer.qml:591
+#: controls/GlobalDrawer.qml:590
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Kenar Çubuğunu Kapat"
 
-#: controls/GlobalDrawer.qml:594
+#: controls/GlobalDrawer.qml:593
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Kenar Çubuğunu Aç"
