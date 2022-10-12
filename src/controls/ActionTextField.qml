@@ -23,7 +23,7 @@ import org.kde.kirigami 2.20 as Kirigami
  *
  *     placeholderText: i18n("Search...")
  *
- *     focusSequence: "Ctrl+F"
+ *     focusSequence: StandardKey.Find
  *
  *     rightActions: Kirigami.Action {
  *         icon.name: "edit-clear"
