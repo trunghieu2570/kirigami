@@ -73,11 +73,11 @@ Kirigami.ActionTextField {
 
     Kirigami.Icon {
         id: searchIcon
-        opacity: parent.activeFocus || text.length > 0 ? 0 : 1
-        anchors.left: parent.left
+        opacity: root.activeFocus || text.length > 0 ? 0 : 1
+        anchors.left: root.left
         anchors.leftMargin: Kirigami.Units.smallSpacing * 2
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: Math.round((parent.implicitHeight - implicitHeight) / 2 + (parent.bottomPadding - parent.topPadding) / 2)
+        anchors.verticalCenter: root.verticalCenter
+        anchors.verticalCenterOffset: Math.round((root.topPadding - root.bottomPadding) / 2)
         implicitHeight: Kirigami.Units.iconSizes.sizeForLabels
         implicitWidth: Kirigami.Units.iconSizes.sizeForLabels
         color: root.placeholderTextColor
