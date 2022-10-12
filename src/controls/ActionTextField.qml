@@ -29,12 +29,12 @@ import org.kde.kirigami 2.20 as Kirigami
  *         icon.name: "edit-clear"
  *         visible: searchField.text !== ""
  *         onTriggered: {
- *             searchField.text = ""
- *             searchField.accepted()
+ *             searchField.clear();
+ *             searchField.accepted();
  *         }
  *     }
  *
- *     onAccepted: console.log("Search text is " + searchField.text)
+ *     onAccepted: console.log("Search text is " + searchField.text);
  * }
  * @endcode
  *
