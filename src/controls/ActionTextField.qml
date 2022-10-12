@@ -41,8 +41,7 @@ import org.kde.kirigami 2.20 as Kirigami
  * @since 5.56
  * @inherit QtQuick.Controls.TextField
  */
-Controls.TextField
-{
+Controls.TextField {
     id: root
 
     /**

@@ -5,9 +5,10 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.6
-import QtQuick.Controls 2.1 as Controls
-import org.kde.kirigami 2.16 as Kirigami
+import QtQuick 2.15
+import QtQuick.Controls 2.15 as Controls
+
+import org.kde.kirigami 2.20 as Kirigami
 
 /**
  * @brief This is a standard TextField following the KDE HIG, which, by default,
@@ -15,7 +16,7 @@ import org.kde.kirigami 2.16 as Kirigami
  *
  * Example usage for the search field component:
  * @code
- * import org.kde.kirigami 2.8 as Kirigami
+ * import org.kde.kirigami 2.20 as Kirigami
  *
  * Kirigami.SearchField {
  *     id: searchField
@@ -25,8 +26,7 @@ import org.kde.kirigami 2.16 as Kirigami
  *
  * @inherit org::kde::kirigami::ActionTextField
  */
-Kirigami.ActionTextField
-{
+Kirigami.ActionTextField {
     id: root
     /**
      * @brief This property sets whether the accepted signal is fired automatically
