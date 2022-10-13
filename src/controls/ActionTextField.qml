@@ -73,12 +73,11 @@ Controls.TextField {
 
     hoverEnabled: true
 
-    horizontalAlignment: Qt.AlignLeft
-    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
-    LayoutMirroring.childrenInherit: true
+    // Manually setting this fixes alignment in RTL layouts
+    horizontalAlignment: TextInput.AlignLeft
 
-    leftPadding: Kirigami.Units.smallSpacing + (LayoutMirroring.enabled ? rightActionsRow : leftActionsRow).width
-    rightPadding: Kirigami.Units.smallSpacing + (LayoutMirroring.enabled ? leftActionsRow : rightActionsRow).width
+    leftPadding: Kirigami.Units.smallSpacing + (root.effectiveHorizontalAlignment === TextInput.AlignRight ? rightActionsRow : leftActionsRow).width
+    rightPadding: Kirigami.Units.smallSpacing + (root.effectiveHorizontalAlignment === TextInput.AlignRight ? leftActionsRow : rightActionsRow).width
 
     Behavior on leftPadding {
         NumberAnimation {
@@ -114,6 +113,7 @@ Controls.TextField {
         padding: Kirigami.Units.smallSpacing
         spacing: Kirigami.Units.smallSpacing
         layoutDirection: Qt.LeftToRight
+        LayoutMirroring.enabled: root.effectiveHorizontalAlignment === TextInput.AlignRight
         anchors.left: parent.left
         anchors.leftMargin: Kirigami.Units.smallSpacing
         anchors.top: parent.top
@@ -147,6 +147,7 @@ Controls.TextField {
         padding: Kirigami.Units.smallSpacing
         spacing: Kirigami.Units.smallSpacing
         layoutDirection: Qt.RightToLeft
+        LayoutMirroring.enabled: root.effectiveHorizontalAlignment === TextInput.AlignRight
         anchors.right: parent.right
         anchors.rightMargin: Kirigami.Units.smallSpacing
         anchors.top: parent.top

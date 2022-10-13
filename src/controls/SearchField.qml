@@ -60,12 +60,12 @@ Kirigami.ActionTextField {
     property bool delaySearch: false
 
     // padding to accommodate search icon nicely
-    leftPadding: if (Qt.application.layoutDirection === Qt.RightToLeft) {
+    leftPadding: if (effectiveHorizontalAlignment === TextInput.AlignRight) {
         return _rightActionsRow.width + Kirigami.Units.smallSpacing
     } else {
         return (activeFocus || root.text.length > 0 ? 0 : (searchIcon.width + Kirigami.Units.smallSpacing)) + Kirigami.Units.smallSpacing * 2
     }
-    rightPadding: if (Qt.application.layoutDirection === Qt.RightToLeft) {
+    rightPadding: if (effectiveHorizontalAlignment === TextInput.AlignRight) {
         return (activeFocus || root.text.length > 0 ? 0 : (searchIcon.width + Kirigami.Units.smallSpacing)) + Kirigami.Units.smallSpacing * 2
     } else {
         return _rightActionsRow.width + Kirigami.Units.smallSpacing
@@ -74,6 +74,7 @@ Kirigami.ActionTextField {
     Kirigami.Icon {
         id: searchIcon
         opacity: root.activeFocus || text.length > 0 ? 0 : 1
+        LayoutMirroring.enabled: root.effectiveHorizontalAlignment === TextInput.AlignRight
         anchors.left: root.left
         anchors.leftMargin: Kirigami.Units.smallSpacing * 2
         anchors.verticalCenter: root.verticalCenter
@@ -101,7 +102,8 @@ Kirigami.ActionTextField {
     inputMethodHints: Qt.ImhNoPredictiveText
     rightActions: [
         Kirigami.Action {
-            icon.name: root.LayoutMirroring.enabled ? "edit-clear-locationbar-ltr" : "edit-clear-locationbar-rtl"
+            //ltr confusingly refers to the direction of the arrow in the icon, not the text direction which it should be used in
+            icon.name: root.effectiveHorizontalAlignment === TextInput.AlignRight ? "edit-clear-locationbar-ltr" : "edit-clear-locationbar-rtl"
             visible: root.text.length > 0
             onTriggered: {
                 root.clear();
