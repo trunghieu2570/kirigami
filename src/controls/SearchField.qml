@@ -121,7 +121,9 @@ Kirigami.ActionTextField {
         interval: root.delaySearch ? Kirigami.Units.humanMoment : Kirigami.Units.shortDuration
         running: false; repeat: false;
         onTriggered: {
-            root.accepted();
+            if (root.acceptableInput) {
+                root.accepted();
+            }
         }
     }
     onAccepted: {
