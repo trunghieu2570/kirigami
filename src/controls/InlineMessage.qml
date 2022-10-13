@@ -62,8 +62,18 @@ import "templates" as T
 T.InlineMessage {
     id: root
 
-    background: Rectangle {
+    background: Kirigami.ShadowedRectangle {
         radius: Kirigami.Units.smallSpacing
+        border {
+            width: 1
+            color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.2)
+        }
+
+        shadow {
+            size: Kirigami.Units.smallSpacing
+            color: Qt.rgba(0, 0, 0, 0.2)
+            //yOffset: 2
+        }
 
         color: switch (root.type) {
             case Kirigami.MessageType.Positive:
