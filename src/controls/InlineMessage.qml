@@ -72,10 +72,16 @@ T.InlineMessage {
         shadow {
             size: Kirigami.Units.smallSpacing
             color: Qt.rgba(0, 0, 0, 0.2)
-            //yOffset: 2
         }
 
         color: switch (root.type) {
+            case Kirigami.MessageType.Information:
+                return Qt.rgba(
+                    Kirigami.Theme.activeTextColor.r,
+                    Kirigami.Theme.activeTextColor.g,
+                    Kirigami.Theme.activeTextColor.b,
+                    0.1
+                )
             case Kirigami.MessageType.Positive:
                 return Qt.rgba(
                     Kirigami.Theme.positiveTextColor.r,
@@ -111,6 +117,8 @@ T.InlineMessage {
                 bottomRightRadius: 0
             }
             color: switch (root.type) {
+                case Kirigami.MessageType.Information:
+                    return Kirigami.Theme.activeTextColor;
                 case Kirigami.MessageType.Positive:
                     return Kirigami.Theme.positiveTextColor;
                 case Kirigami.MessageType.Error:
