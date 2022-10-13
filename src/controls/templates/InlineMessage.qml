@@ -131,7 +131,7 @@ T2.Control {
     leftPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
     topPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
     bottomPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
-    rightPadding: Kirigami.Units.gridUnit
+    rightPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
 
     Behavior on implicitHeight {
         enabled: !root.visible
@@ -186,7 +186,7 @@ T2.Control {
 
         implicitHeight: {
             if (actionsLayout.atBottom) {
-                return label.implicitHeight + actionsLayout.height + Kirigami.Units.gridUnit
+                return label.implicitHeight + actionsLayout.height + root.topPadding + root.bottomPadding;
             } else {
                 return Math.max(icon.implicitHeight, label.implicitHeight, closeButton.implicitHeight, actionsLayout.height)
             }
@@ -280,7 +280,7 @@ T2.Control {
             anchors {
                 left: parent.left
                 top: atBottom ? labelArea.bottom : parent.top
-                topMargin: atBottom ? Kirigami.Units.gridUnit : 0
+                topMargin: atBottom ? Kirigami.Units.largeSpacing : 0
                 right: (!atBottom && closeButton.visible) ? closeButton.left : parent.right
                 rightMargin: !atBottom && closeButton.visible ? Kirigami.Units.smallSpacing : 0
             }
