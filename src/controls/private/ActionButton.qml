@@ -94,8 +94,8 @@ Item {
         id: button
         x: root.width/2 - button.width/2
 
-        property int mediumIconSizing: Units.iconSizes.medium * 2
-        property int largeIconSizing: Units.iconSizes.large * 3
+        property int mediumIconSizing: Units.iconSizes.medium
+        property int largeIconSizing: Units.iconSizes.large
 
         anchors.bottom: edgeMouseArea.bottom
 

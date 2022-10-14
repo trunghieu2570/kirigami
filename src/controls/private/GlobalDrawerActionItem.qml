@@ -28,7 +28,7 @@ AbstractListItem {
             color: modelData.icon.color
             source: modelData.icon.name || modelData.icon.source
 
-            property int mediumIconSizing: Units.iconSizes.medium * 2
+            property int mediumIconSizing: Units.iconSizes.medium
 
             property int size: Settings.isMobile ? mediumIconSizing : Units.iconSizes.smallMedium
             Layout.minimumHeight: size
