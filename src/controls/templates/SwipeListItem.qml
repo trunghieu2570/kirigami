@@ -525,6 +525,9 @@ T.SwipeDelegate {
                     slideAnim.to = 0;
                     slideAnim.restart();
                 }
+
+                Accessible.name: modelData.text
+                Accessible.description: modelData.tooltip
             }
         }
     }
