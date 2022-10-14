@@ -142,12 +142,12 @@ msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Κωδικός πρόσβασης"
 
-#: controls/SearchField.qml:95
+#: controls/SearchField.qml:96
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Αναζήτηση…"
 
-#: controls/SearchField.qml:97
+#: controls/SearchField.qml:98
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "Αναζήτηση"

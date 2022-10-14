@@ -168,7 +168,7 @@ msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Slaptažodis"
 
-#: controls/SearchField.qml:95
+#: controls/SearchField.qml:96
 #, fuzzy
 #| msgctxt "SearchField|"
 #| msgid "Search..."
@@ -176,7 +176,7 @@ msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Ieškoti..."
 
-#: controls/SearchField.qml:97
+#: controls/SearchField.qml:98
 #, fuzzy
 #| msgctxt "SearchField|"
 #| msgid "Search..."

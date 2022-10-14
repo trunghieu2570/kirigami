@@ -144,12 +144,12 @@ msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Mot de passe"
 
-#: controls/SearchField.qml:95
+#: controls/SearchField.qml:96
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Rechercher…"
 
-#: controls/SearchField.qml:97
+#: controls/SearchField.qml:98
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "Rechercher"

@@ -140,12 +140,12 @@ msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Парола"
 
-#: controls/SearchField.qml:95
+#: controls/SearchField.qml:96
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Търсене…"
 
-#: controls/SearchField.qml:97
+#: controls/SearchField.qml:98
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "Търсене"

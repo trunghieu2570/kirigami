@@ -177,12 +177,12 @@ msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Heslo"
 
-#: controls/SearchField.qml:95
+#: controls/SearchField.qml:96
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Hľadať..."
 
-#: controls/SearchField.qml:97
+#: controls/SearchField.qml:98
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "Hľadať"

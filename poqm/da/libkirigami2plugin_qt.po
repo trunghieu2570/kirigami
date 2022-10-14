@@ -166,7 +166,7 @@ msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Adgangskode"
 
-#: controls/SearchField.qml:95
+#: controls/SearchField.qml:96
 #, fuzzy
 #| msgctxt "SearchField|"
 #| msgid "Search"
@@ -174,7 +174,7 @@ msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Søg"
 
-#: controls/SearchField.qml:97
+#: controls/SearchField.qml:98
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "Søg"
