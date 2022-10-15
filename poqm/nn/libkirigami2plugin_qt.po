@@ -46,38 +46,38 @@ msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr ""
 
-#: controls/AboutItem.qml:248
+#: controls/AboutItem.qml:243
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr ""
 
-#: controls/AboutItem.qml:270
+#: controls/AboutItem.qml:265
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr ""
 
-#: controls/AboutItem.qml:281
+#: controls/AboutItem.qml:276
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr ""
 
-#: controls/AboutItem.qml:311
+#: controls/AboutItem.qml:306
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr ""
 
-#: controls/AboutItem.qml:320
+#: controls/AboutItem.qml:315
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr ""
 
-#: controls/AboutItem.qml:351
+#: controls/AboutItem.qml:346
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr ""
 
-#: controls/AboutItem.qml:364
+#: controls/AboutItem.qml:359
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr ""
@@ -119,17 +119,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Handlingar"
 
-#: controls/GlobalDrawer.qml:498
+#: controls/GlobalDrawer.qml:497
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Tilbake"
 
-#: controls/GlobalDrawer.qml:591
+#: controls/GlobalDrawer.qml:590
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Lukk sidestolpen"
 
-#: controls/GlobalDrawer.qml:594
+#: controls/GlobalDrawer.qml:593
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr ""
@@ -144,12 +144,12 @@ msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Passord"
 
-#: controls/SearchField.qml:95
+#: controls/SearchField.qml:96
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr ""
 
-#: controls/SearchField.qml:97
+#: controls/SearchField.qml:98
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "Søk"
