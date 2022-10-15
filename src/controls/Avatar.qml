@@ -5,6 +5,7 @@
  */
 
 import QtQuick 2.13
+import QtQuick.Window 2.15
 import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.13 as QQC2
 import QtGraphicalEffects 1.0
@@ -276,8 +277,8 @@ QQC2.Control {
             mipmap: true
             smooth: true
             sourceSize {
-                width: avatarRoot.width
-                height: avatarRoot.height
+                width: avatarRoot.width * Screen.devicePixelRatio
+                height: avatarRoot.height * Screen.devicePixelRatio
             }
 
             fillMode: Image.PreserveAspectCrop
