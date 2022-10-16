@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-05-18 19:12+0300\n"
+"PO-Revision-Date: 2022-09-14 19:00+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 20.12.0\n"
 "X-Qt-Contexts: true\n"
 
 #: controls/AboutItem.qml:122
@@ -126,12 +126,9 @@ msgid "Close Sidebar"
 msgstr "Sulje sivupaneeli"
 
 #: controls/GlobalDrawer.qml:593
-#, fuzzy
-#| msgctxt "GlobalDrawer|"
-#| msgid "Close Sidebar"
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
-msgstr "Sulje sivupaneeli"
+msgstr "Avaa sivupaneeli"
 
 #: controls/LoadingPlaceholder.qml:54
 msgctxt "LoadingPlaceholder|"
@@ -227,7 +224,7 @@ msgstr "Lisää toimintoja"
 #: controls/UrlButton.qml:47
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
-msgstr ""
+msgstr "Kopioi linkki leikepöydälle"
 
 #: settings.cpp:220
 #, qt-format
