@@ -7,3 +7,4 @@ Options:
   test-before-installing: True
   require-passing-tests-on: [ 'FreeBSD' ]
   cmake-options: -DBUILD_EXAMPLES=ON
+  cppcheck-ignore-files: ['templates/']
