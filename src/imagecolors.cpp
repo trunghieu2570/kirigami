@@ -161,7 +161,7 @@ void ImageColors::update()
         m_futureImageData->setFuture(future);
     };
 
-    if (!m_sourceItem || !m_window) {
+    if (!m_sourceItem) {
         if (!m_sourceImage.isNull()) {
             runUpdate();
         }
