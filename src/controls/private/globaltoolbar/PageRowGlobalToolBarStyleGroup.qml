@@ -54,4 +54,7 @@ QtObject {
                     ? Kirigami.Units.iconSizes.medium
                     : Kirigami.Units.gridUnit * 1.8) + Kirigami.Units.smallSpacing * 2
     property int maximumHeight: preferredHeight
+
+    // Sets the minimum leading padding for the title in a page header
+    property int titleLeftPadding: Kirigami.Units.gridUnit
 }
