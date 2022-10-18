@@ -123,7 +123,7 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Veel toiminguid"
 
-#: controls/Avatar.qml:162
+#: controls/Avatar.qml:163
 #, qt-format
 msgctxt "Avatar|"
 msgid "%1 — %2"
