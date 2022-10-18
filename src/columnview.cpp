@@ -1430,6 +1430,9 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
     }
     case QEvent::MouseButtonRelease: {
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
+        if (item->property("preventStealing").toBool()) {
+            return false;
+        }
 
         if (me->button() == Qt::BackButton && m_currentIndex > 0) {
             setCurrentIndex(m_currentIndex - 1);
@@ -1456,10 +1459,6 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
             m_contentItem->m_lastDragDelta = 0;
             m_dragging = false;
             Q_EMIT draggingChanged();
-        }
-
-        if (item->property("preventStealing").toBool()) {
-            return false;
         }
 
         event->accept();
