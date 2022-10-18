@@ -253,10 +253,11 @@ T.SwipeDelegate {
     Loader {
         id: overlayLoader
         readonly property int paddingOffset: (visible ? width : 0) + Kirigami.Units.smallSpacing
-        readonly property int expectedLeftPadding: listItem.padding * 2 + (listItem.mirrored ? overlayLoader.paddingOffset : 0)
-        readonly property int expectedRightPadding: listItem.padding * 2 + (listItem.mirrored ? 0 : overlayLoader.paddingOffset)
         readonly property var theAlias: anchors
         function validate(want, defaultValue) {
+            const expectedLeftPadding = () => listItem.padding * 2 + (listItem.mirrored ? overlayLoader.paddingOffset : 0)
+            const expectedRightPadding = () => listItem.padding * 2 + (listItem.mirrored ? 0 : overlayLoader.paddingOffset)
+
             const warningText =
                 `Don't override the leftPadding or rightPadding on a SwipeListItem!\n` +
                 `This makes it impossible for me to adjust my layout as I need to for various usecases.\n` +
@@ -264,9 +265,9 @@ T.SwipeDelegate {
                 `If I can't fix the paddings, I'll fall back to a default layout, but it'll be slightly incorrect and lacks\n` +
                 `adaptations needed for touch screens and right-to-left languages, among other things.`
 
-            if (listItem.leftPadding != this.expectedLeftPadding || listItem.rightPadding != this.expectedRightPadding) {
-                listItem.leftPadding = Qt.binding(() => this.expectedLeftPadding)
-                listItem.rightPadding = Qt.binding(() => this.expectedRightPadding)
+            if (listItem.leftPadding != expectedLeftPadding() || listItem.rightPadding != expectedRightPadding()) {
+                listItem.leftPadding = Qt.binding(expectedLeftPadding)
+                listItem.rightPadding = Qt.binding(expectedRightPadding)
                 console.warn(warningText)
                 return defaultValue
             }
