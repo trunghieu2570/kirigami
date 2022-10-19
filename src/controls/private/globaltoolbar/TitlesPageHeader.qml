@@ -24,7 +24,9 @@ AbstractPageHeader {
             ? (item.Layout.preferredHeight > 0 ? item.Layout.preferredHeight : item.implicitHeight)
             : 0)
 
-        asynchronous: true
+        // Don't load async to prevent jumpy behaviour on slower devices as it loads in.
+        // If the title delegate really needs to load async, it should be its responsibility to do it itself.
+        asynchronous: false
         sourceComponent: page ? page.titleDelegate : null
     }
 }

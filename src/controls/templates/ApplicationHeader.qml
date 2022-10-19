@@ -206,7 +206,9 @@ AbstractApplicationHeader {
     Repeater {
         model: pageRow.layers.depth -1
         delegate: Loader {
-            asynchronous: true
+            // Don't load async to prevent jumpy behaviour on slower devices as it loads in.
+            // If the title delegate really needs to load async, it should be its responsibility to do it itself.
+            asynchronous: false
             sourceComponent: header.pageDelegate
             readonly property Page page: pageRow.layers.get(modelData+1)
             readonly property bool current: true;
