@@ -12,7 +12,7 @@ Rectangle {
     color: {
         if (listItem.alternatingBackground && index % 2)
             return listItem.alternateBackgroundColor
-        else if (listItem.checked || listItem.highlighted || (listItem.hoverEnabled && listItem.pressed && !listItem.checked && !listItem.sectionDelegate))
+        else if (listItem.checked || listItem.highlighted || (listItem.pressed && !listItem.checked && !listItem.sectionDelegate))
             return listItem.activeBackgroundColor
         return listItem.backgroundColor
     }

@@ -35,7 +35,7 @@ AbstractListItem {
             Layout.maximumHeight: size
             Layout.minimumWidth: size
             Layout.maximumWidth: size
-            selected: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.hoverEnabled))
+            selected: (listItem.highlighted || listItem.checked || listItem.pressed)
             visible: source !== undefined
         }
         QQC2Impl.MnemonicLabel {
@@ -43,7 +43,7 @@ AbstractListItem {
             text:  width > height * 2 ? listItem.MnemonicData.mnemonicLabel : ""
             Layout.fillWidth: true
             mnemonicVisible: listItem.MnemonicData.active
-            color: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.hoverEnabled)) ? listItem.activeTextColor : listItem.textColor
+            color: (listItem.highlighted || listItem.checked || listItem.pressed) ? listItem.activeTextColor : listItem.textColor
             elide: Text.ElideRight
             font: listItem.font
             opacity: {
@@ -152,9 +152,6 @@ AbstractListItem {
     Keys.onReturnPressed: trigger()
 
     function trigger() {
-        if (!listItem.hoverEnabled) {
-            return;
-        }
         modelData.trigger();
         if (modelData.hasOwnProperty("children") && modelData.children!==undefined && modelData.children.length > 0) {
             if (root.collapsed) {

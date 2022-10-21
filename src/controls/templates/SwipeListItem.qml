@@ -291,7 +291,7 @@ T.SwipeDelegate {
         visible: listItem.actionsVisible && opacity > 0
         asynchronous: true
         sourceComponent: handleComponent
-        opacity: listItem.alwaysVisibleActions || Kirigami.Settings.tabletMode || listItem.hovered || !listItem.hoverEnabled ? 1 : 0
+        opacity: listItem.alwaysVisibleActions || Kirigami.Settings.tabletMode || listItem.hovered ? 1 : 0
         Behavior on opacity {
             OpacityAnimator {
                 id: opacityAnim
