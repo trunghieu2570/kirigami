@@ -139,9 +139,7 @@ Item {
         property int buddiesImplicitWidth: {
             let hint = 0;
 
-            // HACK: we use var instead of let here, since it seems to trigger a very obscure bug
-            // see: https://invent.kde.org/teams/plasma-mobile/issues/-/issues/88
-            for (var i in buddies) {
+            for (let i in buddies) {
                 if (buddies[i].visible && buddies[i].item !== null && !buddies[i].item.Kirigami.FormData.isSection) {
                     hint = Math.max(hint, buddies[i].implicitWidth);
                 }
