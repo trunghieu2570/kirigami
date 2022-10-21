@@ -275,7 +275,11 @@ AbstractListItem {
 
     contentItem: Item {
         id: contItem
-        implicitWidth: (listItem.leading || {implicitWidth: 0}).implicitWidth + layout.implicitWidth + (listItem.trailing || {implicitWidth: 0}).implicitWidth
+
+        implicitWidth: layout.implicitWidth
+            + (listItem.leading !== null ? listItem.leading.implicitWidth : 0)
+            + (listItem.trailing !== null ? listItem.trailing.implicitWidth : 0)
+
         Binding on implicitHeight {
             value: Math.max(iconItem.size, (!subtitleItem.visible && listItem.reserveSpaceForSubtitle ? (labelItem.implicitHeight + labelColumn.spacing + subtitleItem.implicitHeight): labelColumn.implicitHeight) )
             delayed: true
