@@ -65,6 +65,7 @@ Kirigami.AbstractListItem {
             Layout.alignment: Qt.AlignVCenter
             level: 3
             text: listSection.text
+            elide: Text.ElideRight
         }
     }
 }
