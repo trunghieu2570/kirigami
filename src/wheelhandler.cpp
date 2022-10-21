@@ -110,7 +110,10 @@ WheelHandler::WheelHandler(QObject *parent)
     });
 }
 
-WheelHandler::~WheelHandler() = default;
+WheelHandler::~WheelHandler()
+{
+    delete m_filterItem;
+}
 
 QQuickItem *WheelHandler::target() const
 {
