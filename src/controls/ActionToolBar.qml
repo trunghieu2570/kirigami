@@ -211,7 +211,7 @@ QQC2.Control {
                 if (root.hiddenActions.length === 0) {
                     return root.actions
                 } else {
-                    result = []
+                    let result = []
                     result.concat(Array.prototype.map.call(root.actions, (i) => i))
                     result.concat(Array.prototype.map.call(hiddenActions, (i) => i))
                     return result
