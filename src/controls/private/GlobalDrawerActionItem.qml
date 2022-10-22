@@ -23,10 +23,13 @@ AbstractListItem {
     width: parent.width
 
     contentItem: RowLayout {
+        spacing: 0
+        
         Icon {
             id: iconItem
             color: modelData.icon.color
             source: modelData.icon.name || modelData.icon.source
+            Layout.rightMargin: Units.largeSpacing
 
             readonly property int size: Units.iconSizes.smallMedium
             Layout.minimumHeight: size
@@ -36,10 +39,12 @@ AbstractListItem {
             selected: (listItem.highlighted || listItem.checked || listItem.pressed)
             visible: source !== undefined
         }
+        
         QQC2Impl.MnemonicLabel {
             id: labelItem
             text:  width > height * 2 ? listItem.MnemonicData.mnemonicLabel : ""
             Layout.fillWidth: true
+            Layout.rightMargin: Units.largeSpacing
             mnemonicVisible: listItem.MnemonicData.active
             color: (listItem.highlighted || listItem.checked || listItem.pressed) ? listItem.activeTextColor : listItem.textColor
             elide: Text.ElideRight
@@ -60,6 +65,7 @@ AbstractListItem {
                 }
             }
         }
+        
         Separator {
             id: separatorAction
 
