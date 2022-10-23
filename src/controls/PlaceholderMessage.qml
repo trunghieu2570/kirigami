@@ -246,6 +246,7 @@ ColumnLayout {
 
         Layout.fillWidth: true
         horizontalAlignment: Qt.AlignHCenter
+        verticalAlignment: Qt.AlignVCenter
 
         wrapMode: Text.WordWrap
     }
