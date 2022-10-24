@@ -205,7 +205,6 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.20 SOURCES
 )
 
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private SOURCES
-    controls/private/ActionButton.qml
     controls/private/ActionIconGroup.qml
     controls/private/ActionMenuItem.qml
     controls/private/ActionsMenu.qml
