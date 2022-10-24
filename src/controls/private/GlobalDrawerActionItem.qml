@@ -28,7 +28,7 @@ AbstractListItem {
             color: modelData.icon.color
             source: modelData.icon.name || modelData.icon.source
 
-            property int size: Units.iconSizes.smallMedium
+            readonly property int size: Units.iconSizes.smallMedium
             Layout.minimumHeight: size
             Layout.maximumHeight: size
             Layout.minimumWidth: size
