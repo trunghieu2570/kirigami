@@ -70,9 +70,9 @@ T2.ItemDelegate {
      *
      * The separator is a line between this and the item under it.
      *
-     * default: ``true``
+     * default: ``false``
      */
-    property bool separatorVisible: true
+    property bool separatorVisible: false
 
     /**
      * @brief This property holds list item's background color.

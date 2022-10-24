@@ -96,9 +96,9 @@ T.SwipeDelegate {
      *
      * The separator is a line between this and the item under it.
      *
-     * default: ``true``
+     * default: ``false``
      */
-    property bool separatorVisible: true
+    property bool separatorVisible: false
 
     /**
      * @brief This property holds the background color of the list item.
