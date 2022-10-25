@@ -204,6 +204,10 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.20 SOURCES
     controls/SelectableLabel.qml
 )
 
+ecm_target_qml_sources(KirigamiPlugin VERSION 2.21 SOURCES
+    controls/FloatingActionButton.qml
+)
+
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private SOURCES
     controls/private/ActionButton.qml
     controls/private/ActionIconGroup.qml
