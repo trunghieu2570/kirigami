@@ -16,20 +16,18 @@ ScrollablePage {
 
     title: "Multiple Columns"
 
-    actions {
-        contextualActions: [
-            Action {
-                text:"Action for buttons"
-                icon.name: "bookmarks"
-                onTriggered: print("Action 1 clicked")
-            },
-            Action {
-                text:"Action 2"
-                icon.name: "folder"
-                enabled: false
-            }
-        ]
-    }
+    actions.contextualActions: [
+        Action {
+            text:"Action for buttons"
+            icon.name: "bookmarks"
+            onTriggered: print("Action 1 clicked")
+        },
+        Action {
+            text:"Action 2"
+            icon.name: "folder"
+            enabled: false
+        }
+    ]
 
     ColumnLayout {
         width: page.width

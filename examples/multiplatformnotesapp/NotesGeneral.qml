@@ -19,15 +19,13 @@ Kirigami.ApplicationWindow {
     Kirigami.ScrollablePage {
         id: iconView
         title: "Notes"
-        actions {
-            contextualActions: [
-                Kirigami.Action {
-                    id: sortAction
-                    icon.name: "view-sort-ascending-symbolic"
-                    tooltip: "Sort Ascending"
-                }
-            ]
-        }
+        actions.contextualActions: [
+            Kirigami.Action {
+                id: sortAction
+                icon.name: "view-sort-ascending-symbolic"
+                tooltip: "Sort Ascending"
+            }
+        ]
         background: Rectangle {
             color: Kirigami.Thmeme.backgroundColor
         }

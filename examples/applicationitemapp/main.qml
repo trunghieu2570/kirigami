@@ -47,16 +47,14 @@ Kirigami.ApplicationItem {
         id: mainPageComponent
         Kirigami.Page {
             title: "Hello"
-            actions {
-                contextualActions: [
-                    Kirigami.Action {
-                        text: "action 1"
-                    },
-                    Kirigami.Action {
-                        text: "action 2"
-                    }
-                ]
-            }
+            actions.contextualActions: [
+                Kirigami.Action {
+                    text: "action 1"
+                },
+                Kirigami.Action {
+                    text: "action 2"
+                }
+            ]
             Rectangle {
                 color: "red"
                 anchors.fill: parent

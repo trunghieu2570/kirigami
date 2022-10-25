@@ -42,7 +42,7 @@ Kirigami.ApplicationWindow {
             id: group
         }
 
-        contextualActions: [
+        actions.contextualActions: [
             Kirigami.Action {
                 text: "submenus"
                 icon.name: "kalgebra"
