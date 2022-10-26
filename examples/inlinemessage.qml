@@ -33,5 +33,18 @@ QQC2.ApplicationWindow {
             type: Kirigami.MessageType.Positive
             text: "You got it"
         }
+
+        Kirigami.InlineMessage {
+            id: indexingDisabledWarning
+            Layout.fillWidth: true
+            visible: true
+            type: Kirigami.MessageType.Warning
+            showCloseButton: true
+            text: "Do you want to delete the saved index data? %1 of space will be freed, but if indexing is re-enabled later, the entire index will have to be re-created from scratch. This may take some time, depending on how many files you have."
+            actions: Kirigami.Action {
+                text: i18n("Delete Index Data")
+                icon.name: "edit-delete"
+            }
+        }
     }
 }
