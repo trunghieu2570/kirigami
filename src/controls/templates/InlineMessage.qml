@@ -188,7 +188,7 @@ T2.Control {
             if (actionsLayout.atBottom) {
                 return label.implicitHeight + actionsLayout.height + root.topPadding + root.bottomPadding;
             } else {
-                return Math.max(icon.implicitHeight, label.implicitHeight, closeButton.implicitHeight, actionsLayout.height)
+                return Math.max(icon.implicitHeight, label.implicitHeight, closeButton.implicitHeight, actionsLayout.height) + root.bottomPadding;
             }
         }
 
