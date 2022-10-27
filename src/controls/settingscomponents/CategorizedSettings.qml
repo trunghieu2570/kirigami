@@ -95,7 +95,11 @@ PageRow {
             Component.onCompleted: if (pageSettingStack.width >= Units.gridUnit * 40) {
                 actions[0].trigger();
             } else {
-                listview.currentIndex = -1;
+                if (count > 0) {
+                    listview.currentIndex = 0;
+                } else {
+                    listview.currentIndex = -1;
+                }
             }
             model: pageSettingStack.actions
             delegate: pageSettingStack.wideMode ? desktopStyle : mobileStyle
