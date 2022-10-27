@@ -67,24 +67,41 @@ Kirigami.ShadowedRectangle {
      */
     property color borderColor: Kirigami.ColorUtils.tintWithAlpha(
                                     color, Kirigami.Theme.textColor, 0.2)
+    
 //END properties
-
+    
     color: {
-        if (clickFeedback && (parent.down || parent.highlighted))
+        if (root.clickFeedback && (root.parent.down || root.parent.highlighted))
             return root.pressedColor
-        else if (hoverFeedback && parent.hovered)
+        else if (root.hoverFeedback && root.parent.hovered)
             return root.hoverColor
-        return defaultColor
+        return root.defaultColor
     }
+
     radius: Kirigami.Units.smallSpacing
+    
+    border {
+        width: root.borderWidth
+        color: root.borderColor
+    }
     shadow {
-        size: Kirigami.Units.largeSpacing
-        color: Qt.rgba(0, 0, 0, 0.2)
+        size: Kirigami.Units.gridUnit
+        color: Qt.rgba(0, 0, 0, 0.05)
         yOffset: 2
     }
-
-    border {
-        width: borderWidth
-        color: borderColor
+    
+    // basic drop shadow
+    Rectangle {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.topMargin: Math.round(Kirigami.Units.smallSpacing / 4)
+        
+        radius: Kirigami.Units.smallSpacing
+        height: root.height
+        color: Qt.darker(Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.6), 1.1)
+        visible: !root.clickFeedback || !root.parent.down
+        
+        z: -1
     }
 }
