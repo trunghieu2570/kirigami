@@ -401,9 +401,6 @@ Item {
                 if (root.wideMode && item.Kirigami.FormData.buddyFor.parent !== root) {
                     return item.Kirigami.FormData.buddyFor.y;
                 }
-                if (root.wideMode && (item.Kirigami.FormData.buddyFor instanceof TextArea)) {
-                    return Kirigami.Units.smallSpacing;
-                }
                 if (index === 0 || root.wideMode) {
                     return 0;
                 }
