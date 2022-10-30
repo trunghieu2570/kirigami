@@ -291,21 +291,14 @@ Item {
      *            user clicks the button.
      */
     function showPassiveNotification(message, timeout, actionText, callBack) {
-        if (!internal.__passiveNotification) {
-            const component = Qt.createComponent("templates/private/PassiveNotification.qml");
-            internal.__passiveNotification = component.createObject(root);
-        }
-
-        internal.__passiveNotification.showNotification(message, timeout, actionText, callBack);
+        internal.notificationsObject.showNotification(message, timeout, actionText, callBack);
     }
 
-   /**
-    * @brief This function hides the passive notification, if any is shown.
-    */
+    /**
+     * @brief This function hides the passive notification, if any is shown.
+     */
     function hidePassiveNotification() {
-        if(internal.__passiveNotification) {
-           internal.__passiveNotification.hideNotification();
-        }
+        internal.notificationsObject.hideNotification();
     }
 
     /**
@@ -462,8 +455,8 @@ Item {
     implicitHeight: Units.gridUnit * 45
     visible: true
 
-    QtObject {
+    Item {
         id: internal
-        property QtObject __passiveNotification
+        property QtObject notificationsObject: Qt.createComponent("templates/private/PassiveNotification.qml").createObject(overlay.parent)
     }
 }

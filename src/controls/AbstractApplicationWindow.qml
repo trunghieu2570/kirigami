@@ -212,23 +212,15 @@ QQC2.ApplicationWindow {
      *            user clicks the button.
      */
     function showPassiveNotification(message, timeout, actionText, callBack) {
-        if (!internal.__passiveNotification) {
-            var component = Qt.createComponent("templates/private/PassiveNotification.qml");
-            internal.__passiveNotification = component.createObject(overlay.parent);
-        }
-
-        internal.__passiveNotification.showNotification(message, timeout, actionText, callBack);
+        internal.notificationsObject.showNotification(message, timeout, actionText, callBack);
     }
 
    /**
     * @brief This function hides the passive notification, if any is shown.
     */
     function hidePassiveNotification() {
-        if(internal.__passiveNotification) {
-           internal.__passiveNotification.hideNotification();
-        }
+        internal.notificationsObject.hideNotification();
     }
-
 
     /**
      * @brief This function returns application window's object anywhere in the application.
@@ -340,9 +332,9 @@ QQC2.ApplicationWindow {
         root.height = root.height;
     }
 
-    QtObject {
+    Item {
         id: internal
-        property QtObject __passiveNotification
+        property QtObject notificationsObject: Qt.createComponent("templates/private/PassiveNotification.qml").createObject(overlay.parent)
     }
 
     Action {
