@@ -77,11 +77,20 @@ Controls.Popup {
         }
     }
 
+    function hideNotification() {
+        // TODO KF6: use optional chaining
+        // replace with: `outerLayout.children[0]?.close()`
+        if (outerLayout.children[0])
+            outerLayout.children[0].close()
+    }
+
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
     background: Item {}
 
+    // FIXME: port away from GridLayout (https://invent.kde.org/frameworks/kirigami/-/issues/7)
+    // why is used GridLayout ? because we can position the oldest notification to the bottom without much hassle
     contentItem: GridLayout {
         id: outerLayout
         columns: 1
