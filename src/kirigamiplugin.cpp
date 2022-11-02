@@ -93,11 +93,14 @@ QUrl KirigamiPlugin::componentUrl(const QString &fileName) const
 
 using SingletonCreationFunction = QObject *(*)(QQmlEngine *, QJSEngine *);
 
-template<typename T>
+template<class T>
 inline SingletonCreationFunction singleton()
 {
-    return [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return new T;
+    static_assert(std::is_base_of<QObject, T>::value);
+    return [](QQmlEngine *engine, QJSEngine *) -> QObject * {
+        auto x = new T;
+        x->setParent(engine);
+        return x;
     };
 }
 
