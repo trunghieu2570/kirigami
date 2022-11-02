@@ -517,7 +517,7 @@ QVector<ToolBarLayoutDelegate *> ToolBarLayout::Private::createDelegates()
     for (auto action : std::as_const(actions)) {
         if (delegates.find(action) != delegates.end()) {
             result.append(delegates.at(action).get());
-        } else {
+        } else if (action) {
             auto delegate = std::unique_ptr<ToolBarLayoutDelegate>(createDelegate(action));
             if (delegate) {
                 result.append(delegate.get());
