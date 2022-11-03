@@ -34,8 +34,6 @@ Rectangle {
         }
     }
 
-    property var leadingWidth
-
     Kirigami.Separator {
         anchors {
             left: parent.left
