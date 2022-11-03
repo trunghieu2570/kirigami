@@ -6,8 +6,6 @@ import QtQuick.Controls 2.15 as Controls
 import QtQuick.Templates 2.15 as T
 import QtQuick.Layouts 1.2
 
-import QtGraphicalEffects 1.12
-
 import org.kde.kirigami 2.15 as Kirigami
 
 /**
@@ -53,24 +51,15 @@ T.RoundButton {
     anchors.bottom: parent.bottom
     anchors.bottomMargin: Kirigami.Units.largeSpacing
     
-    background: Item {
-        RectangularGlow {
-            anchors.fill: buttonBackground
-            anchors.topMargin: Kirigami.Units.smallSpacing
-            
-            cornerRadius: buttonBackground.radius * 2
-            cached: true
-            glowRadius: 3
-            spread: 0.8
-            color: Qt.darker(Kirigami.Theme.backgroundColor, 1.2)
-        }
+    background: Kirigami.ShadowedRectangle {
+        anchors.fill: parent
+        radius: root.radius
+        color: root.pressed ? Qt.darker(Kirigami.Theme.highlightColor, 1.2) : Kirigami.Theme.highlightColor
         
-        Rectangle {
-            id: buttonBackground
-            anchors.fill: parent
-            radius: root.radius
-            color: root.pressed ? Qt.darker(Kirigami.Theme.highlightColor, 1.2) : Kirigami.Theme.highlightColor
-        }
+        property color shadowColor: Qt.darker(Kirigami.Theme.backgroundColor, 1.5)
+        shadow.color: Qt.rgba(shadowColor.r, shadowColor.g, shadowColor.b, 0.5)
+        shadow.size: 7
+        shadow.yOffset: 2
     }
     
     contentItem: Item {
