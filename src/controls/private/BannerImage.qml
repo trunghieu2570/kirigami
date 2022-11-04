@@ -117,6 +117,7 @@ Kirigami.ShadowedImage {
             right: parent.right
             top: (root.titleAlignment & Qt.AlignTop) ? parent.top : undefined
             bottom: (root.titleAlignment & Qt.AlignBottom) ? parent.bottom : undefined
+            verticalCenter: (root.titleAlignment & Qt.AlignVCenter) ? parent.verticalCenter : undefined
         }
         height: Math.min(parent.height, titleLayout.height * 1.5)
 
