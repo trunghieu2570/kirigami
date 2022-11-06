@@ -6,7 +6,7 @@
 
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
-import QtQuick.Controls 2.12
+import QtQuick.Controls 2.12 as QQC2
 import org.kde.kirigami 2.13 as Kirigami
 
 
@@ -78,7 +78,7 @@ Item {
      */
     function pushDialogLayer(page, properties = {}, windowProperties = {}) {
         let item;
-        if (Settings.isMobile) {
+        if (Kirigami.Settings.isMobile) {
             item = layers.push(page, properties);
         } else {
             const windowComponent = Qt.createComponent(Qt.resolvedUrl("./ApplicationWindow.qml"));
@@ -86,16 +86,16 @@ Item {
                 windowProperties.modality = Qt.WindowModal;
             }
             if (!windowProperties.height) {
-                windowProperties.height = Units.gridUnit * 30;
+                windowProperties.height = Kirigami.Units.gridUnit * 30;
             }
             if (!windowProperties.width) {
-                windowProperties.width = Units.gridUnit * 50;
+                windowProperties.width = Kirigami.Units.gridUnit * 50;
             }
             if (!windowProperties.minimumWidth) {
-                windowProperties.minimumWidth = Units.gridUnit * 20;
+                windowProperties.minimumWidth = Kirigami.Units.gridUnit * 20;
             }
             if (!windowProperties.minimumHeight) {
-                windowProperties.minimumHeight = Units.gridUnit * 15;
+                windowProperties.minimumHeight = Kirigami.Units.gridUnit * 15;
             }
             if (!windowProperties.flags) {
                 windowProperties.flags = Qt.Dialog | Qt.WindowCloseButtonHint;
@@ -167,7 +167,7 @@ Item {
     }
 
 
-    StackView {
+    QQC2.StackView {
         id: stackView
 
         anchors.fill: parent
@@ -180,8 +180,8 @@ Item {
             }
         }
 
-        initialItem: TabViewLayout {
-            bar: ToolBar {
+        initialItem: Kirigami.TabViewLayout {
+            bar: QQC2.ToolBar {
                 id: topToolBar
 
                 padding: 0

@@ -6,11 +6,11 @@
 
 import QtQuick 2.13
 import QtQuick.Window 2.15
-import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.13 as QQC2
-import QtGraphicalEffects 1.0
-import org.kde.kirigami.private 2.14
-import "templates/private" as P
+import QtGraphicalEffects 1.0 as GE
+import org.kde.kirigami 2.14 as Kirigami
+import org.kde.kirigami.private 2.14 as KP
+import "templates/private" as TP
 
 //TODO KF6: generic enough or belongs to a different framework?
 /**
@@ -129,7 +129,7 @@ QQC2.Control {
      * @note The secondary action should only be used for shortcuts of actions
      * elsewhere in your application's UI, and cannot be accessed on mobile platforms.
      */
-    property AvatarGroup actions: AvatarGroup {}
+    property KP.AvatarGroup actions: KP.AvatarGroup {}
 
     /**
      * @brief This property holds the border properties group.
@@ -140,7 +140,7 @@ QQC2.Control {
      * }
      * @endcode
      */
-    property P.BorderPropertiesGroup border: P.BorderPropertiesGroup {
+    property TP.BorderPropertiesGroup border: TP.BorderPropertiesGroup {
         width: 0
         color: Qt.rgba(0,0,0,0.2)
     }
@@ -324,7 +324,7 @@ QQC2.Control {
         }
 
         layer.enabled: true
-        layer.effect: OpacityMask {
+        layer.effect: GE.OpacityMask {
             maskSource: Rectangle {
                 height: avatarRoot.height
                 width: avatarRoot.width

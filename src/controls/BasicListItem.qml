@@ -7,7 +7,7 @@
 import QtQuick 2.8
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0 as QQC2
-import org.kde.kirigami 2.12
+import org.kde.kirigami 2.12 as Kirigami
 
 //TODO KF6: this needs to become a layout inside a Delegate rather than its own listItem
 /**
@@ -16,7 +16,7 @@ import org.kde.kirigami 2.12
  *
  * @image html BasicListItemTypes.svg "The styles of the BasicListItem. From left to right top to bottom: light icon + title + subtitle, dark icon + title + subtitle, light icon + label, dark icon + label, light label, dark label." width=50%
  */
-AbstractListItem {
+Kirigami.AbstractListItem {
     id: listItem
 
 //BEGIN properties
@@ -48,7 +48,7 @@ AbstractListItem {
      * @brief This property holds the padding after the leading item.
      * @since org.kde.kirigami 2.15
      */
-    property real leadingPadding: Units.largeSpacing
+    property real leadingPadding: Kirigami.Units.largeSpacing
 
     // TODO KF6: remove this property and instead implement leading and trailing
     // item positioning in such a way that they fill vertically, but a fixed
@@ -78,7 +78,7 @@ AbstractListItem {
      * @brief This property holds the padding before the trailing item.
      * @since org.kde.kirigami 2.15
      */
-    property real trailingPadding: Units.largeSpacing
+    property real trailingPadding: Kirigami.Units.largeSpacing
 
     // TODO KF6: remove this property and instead implement leading and trailing
     // item positioning in such a way that they fill vertically, but a fixed
@@ -149,7 +149,7 @@ AbstractListItem {
      * @brief This property holds the color of the icon.
      *
      * If the icon's original colors should be left intact, set this to the default value, "transparent".
-     * Note that this colour will only be applied if the icon can be recoloured, (e.g. you can use Kirigami.Theme.foregroundColor to change the icon's colour.)
+     * Note that this colour will only be applied if the icon can be recoloured, (e.g. you can use Kirigami.Kirigami.Theme.foregroundColor to change the icon's colour.)
      *
      * @property color iconColor
      * @since 2.7
@@ -294,7 +294,7 @@ AbstractListItem {
             anchors.rightMargin: listItem.trailing ? listItem.trailingPadding : 0
             anchors.verticalCenter: parent.verticalCenter
 
-            Icon {
+            Kirigami.Icon {
                 id: iconItem
                 source: {
                     if (!listItem.icon) {
@@ -308,7 +308,7 @@ AbstractListItem {
                     }
                     return listItem.icon;
                 }
-                property int size: subtitleItem.visible || reserveSpaceForSubtitle ? Units.iconSizes.medium : Units.iconSizes.smallMedium
+                property int size: subtitleItem.visible || reserveSpaceForSubtitle ? Kirigami.Units.iconSizes.medium : Kirigami.Units.iconSizes.smallMedium
                 Layout.minimumHeight: size
                 Layout.maximumHeight: size
                 Layout.minimumWidth: size
@@ -338,7 +338,7 @@ AbstractListItem {
                     Layout.alignment: subtitleItem.visible ? Qt.AlignLeft | Qt.AlignTop : Qt.AlignLeft | Qt.AlignVCenter
                     color: (listItem.highlighted || listItem.checked || listItem.pressed) ? listItem.activeTextColor : listItem.textColor
                     elide: Text.ElideRight
-                    font: Theme.smallFont
+                    font: Kirigami.Theme.smallFont
                     opacity: listItem.fadeContent ? 0.6 : (listItem.bold ? 0.9 : 0.7)
                     visible: text.length > 0
                 }

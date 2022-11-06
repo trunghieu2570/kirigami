@@ -4,8 +4,7 @@
 */
 
 import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15 as Controls
+import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.20 as Kirigami
 
 /**
@@ -60,7 +59,7 @@ import org.kde.kirigami 2.20 as Kirigami
  *         }
  *     ]
  *
- *     Controls.TextField {
+ *     QQC2.TextField {
  *         placeholderText: qsTr("Folder name...")
  *     }
  * }
@@ -106,7 +105,7 @@ Kirigami.Dialog {
     padding: 0 // we want content padding, not padding of the scrollview
     preferredWidth: Kirigami.Units.gridUnit * 18
 
-    Controls.Control {
+    QQC2.Control {
         id: control
         topPadding: contentTopPadding
         bottomPadding: contentBottomPadding
@@ -115,7 +114,7 @@ Kirigami.Dialog {
 
         contentItem: Kirigami.SelectableLabel {
             text: subtitle
-            wrapMode: Controls.Label.Wrap
+            wrapMode: QQC2.Label.Wrap
         }
     }
 }

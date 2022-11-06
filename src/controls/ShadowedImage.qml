@@ -6,7 +6,7 @@
  */
 
 import QtQuick 2.1
-import org.kde.kirigami 2.12
+import org.kde.kirigami 2.12 as Kirigami
 
 /**
  * @brief An image with a shadow.
@@ -124,7 +124,7 @@ Item {
         visible: shadowRectangle.softwareRendering
     }
 
-    ShadowedTexture {
+    Kirigami.ShadowedTexture {
         id: shadowRectangle
         anchors.fill: parent
 

@@ -1,11 +1,8 @@
 // SPDX-FileCopyrightText: 2022 Felipe Kinoshita <kinofhek@gmail.com>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15 as QQC2
-import org.kde.kirigami 2.19 as Kirigami
 import "templates" as T
-import "private"
+import "private" as P
 
 /**
  * AbstractChip is a visual object based on AbstractButton
@@ -19,5 +16,5 @@ import "private"
 T.AbstractChip {
     id: root
 
-    background: DefaultChipBackground {}
+    background: P.DefaultChipBackground {}
 }

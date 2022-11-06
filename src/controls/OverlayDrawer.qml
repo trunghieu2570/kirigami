@@ -6,8 +6,8 @@
 
 import QtQuick 2.1
 import QtQuick.Templates 2.0 as T2
-import org.kde.kirigami 2.15
-import "private"
+import org.kde.kirigami 2.15 as Kirigami
+import "private" as P
 import "templates" as T
 
 /**
@@ -28,7 +28,7 @@ T.OverlayDrawer {
     drawerOpen: !modal
     closePolicy: modal ? T2.Popup.CloseOnEscape | T2.Popup.CloseOnReleaseOutside : T2.Popup.NoAutoClose
     handleVisible: interactive && (modal || !drawerOpen) && (typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true)
-    interactive: Settings.hasTransientTouchInput || Settings.isMobile
+    interactive: Kirigami.Settings.hasTransientTouchInput || Kirigami.Settings.isMobile
 
     onPositionChanged: {
         if (!modal && !root.peeking && !root.animating) {
@@ -37,37 +37,37 @@ T.OverlayDrawer {
     }
 
     background: Rectangle {
-        color: Theme.backgroundColor
+        color: Kirigami.Theme.backgroundColor
 
         Item {
             parent: root.handle
             anchors.fill: parent
 
-            ShadowedRectangle {
+            Kirigami.ShadowedRectangle {
                 id: handleGraphics
                 anchors.centerIn: parent
 
-                Theme.colorSet: parent.parent.handleAnchor && parent.parent.handleAnchor.visible ? parent.parent.handleAnchor.Theme.colorSet : Theme.Button
+                Kirigami.Theme.colorSet: parent.parent.handleAnchor && parent.parent.handleAnchor.visible ? parent.parent.handleAnchor.Kirigami.Theme.colorSet : Kirigami.Theme.Button
 
-                Theme.backgroundColor: parent.parent.handleAnchor && parent.parent.handleAnchor.visible ? parent.parent.handleAnchor.Theme.backgroundColor : undefined
+                Kirigami.Theme.backgroundColor: parent.parent.handleAnchor && parent.parent.handleAnchor.visible ? parent.parent.handleAnchor.Kirigami.Theme.backgroundColor : undefined
 
-                Theme.textColor: parent.parent.handleAnchor && parent.parent.handleAnchor.visible ? parent.parent.handleAnchor.Theme.textColor : undefined
+                Kirigami.Theme.textColor: parent.parent.handleAnchor && parent.parent.handleAnchor.visible ? parent.parent.handleAnchor.Kirigami.Theme.textColor : undefined
 
-                Theme.inherit: false
-                color: root.handle.pressed ? Theme.highlightColor : Theme.backgroundColor
+                Kirigami.Theme.inherit: false
+                color: root.handle.pressed ? Kirigami.Theme.highlightColor : Kirigami.Theme.backgroundColor
 
                 visible: !parent.parent.handleAnchor || !parent.parent.handleAnchor.visible || root.handle.pressed || (root.modal && root.position > 0)
 
                 shadow.color: Qt.rgba(0, 0, 0, root.handle.pressed ? 0.6 : 0.4)
                 shadow.yOffset: 1
-                shadow.size: Units.gridUnit / 2
+                shadow.size: Kirigami.Units.gridUnit / 2
 
-                width: Units.iconSizes.smallMedium + Units.smallSpacing * 2
+                width: Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.smallSpacing * 2
                 height: width
                 radius: 2
                 Behavior on color {
                     ColorAnimation {
-                        duration: Units.longDuration
+                        duration: Kirigami.Units.longDuration
                         easing.type: Easing.InOutQuad
                     }
                 }
@@ -75,11 +75,11 @@ T.OverlayDrawer {
             Loader {
                 anchors.centerIn: handleGraphics
                 width: height
-                height: Units.iconSizes.smallMedium
+                height: Kirigami.Units.iconSizes.smallMedium
 
-                Theme.colorSet: handleGraphics.Theme.colorSet
-                Theme.backgroundColor: handleGraphics.Theme.backgroundColor
-                Theme.textColor: handleGraphics.Theme.textColor
+                Kirigami.Theme.colorSet: handleGraphics.Kirigami.Theme.colorSet
+                Kirigami.Theme.backgroundColor: handleGraphics.Kirigami.Theme.backgroundColor
+                Kirigami.Theme.textColor: handleGraphics.Kirigami.Theme.textColor
 
                 asynchronous: true
 
@@ -107,14 +107,14 @@ T.OverlayDrawer {
                 onItemChanged: {
                     if(item) {
                         item.drawer = Qt.binding(function(){return root});
-                        item.color = Qt.binding(function(){return root.handle.pressed ? Theme.highlightedTextColor : Theme.textColor});
+                        item.color = Qt.binding(function(){return root.handle.pressed ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor});
                     }
                 }
             }
         }
 
 
-        Separator {
+        Kirigami.Separator {
             LayoutMirroring.enabled: false
             // LayoutMirroring.childrenInherit: true
             anchors {
@@ -125,7 +125,7 @@ T.OverlayDrawer {
             }
             visible: !root.modal
         }
-        EdgeShadow {
+        P.EdgeShadow {
             z: -2
             visible: root.modal
             edge: root.edge
@@ -140,7 +140,7 @@ T.OverlayDrawer {
 
             Behavior on opacity {
                 NumberAnimation {
-                    duration: Units.longDuration
+                    duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }

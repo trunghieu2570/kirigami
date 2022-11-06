@@ -7,10 +7,8 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12 as QQC2
-
 import org.kde.kirigami 2.12 as Kirigami
-
-import "private"
+import "private" as P
 
 /**
  * @brief A placeholder message indicating that a view is empty.
@@ -200,7 +198,7 @@ ColumnLayout {
      * @see org::kde::kirigami::private::ActionIconGroup
      * @since 5.70
      */
-    property ActionIconGroup icon: ActionIconGroup {}
+    property P.ActionIconGroup icon: P.ActionIconGroup {}
 
     /**
      * @brief This property holds an action that helps the user proceed.

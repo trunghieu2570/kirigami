@@ -8,8 +8,7 @@ import QtQuick 2.12
 import QtQml 2.15
 import QtQuick.Controls 2.0 as QQC2
 import QtQuick.Window 2.5
-import "templates/private"
-import org.kde.kirigami 2.4
+import org.kde.kirigami 2.4 as Kirigami
 
 /**
  * A window that provides some basic features needed for all apps
@@ -110,7 +109,7 @@ QQC2.ApplicationWindow {
      *
      * @note Different styles can have their own logic for deciding this.
      */
-    property bool wideScreen: width >= Units.gridUnit * 60
+    property bool wideScreen: width >= Kirigami.Units.gridUnit * 60
 
     /**
      * @brief This property holds the drawer for context-dependent actions.
@@ -243,7 +242,7 @@ QQC2.ApplicationWindow {
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    color: Theme.backgroundColor
+    color: Kirigami.Theme.backgroundColor
 
     MouseArea {
         parent: contentItem.parent
@@ -255,10 +254,10 @@ QQC2.ApplicationWindow {
             anchors.fill: parent
             color: Qt.rgba(0, 0, 0, 0.3)
             opacity: 0.15
-            Icon {
+            Kirigami.Icon {
                 anchors.horizontalCenter: parent.horizontalCenter
                 y: x
-                width: Units.iconSizes.large
+                width: Kirigami.Units.iconSizes.large
                 height: width
                 source: "go-up"
             }
@@ -297,7 +296,7 @@ QQC2.ApplicationWindow {
     contentItem.transform: Translate {
         Behavior on y {
             NumberAnimation {
-                duration: Units.longDuration
+                duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }
@@ -326,8 +325,8 @@ QQC2.ApplicationWindow {
     }
     onPageStackChanged: pageStack.parent = contentItem;
 
-    width: Settings.isMobile ? Units.gridUnit * 30 : Units.gridUnit * 55
-    height: Settings.isMobile ? Units.gridUnit * 45 : Units.gridUnit * 40
+    width: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 30 : Kirigami.Units.gridUnit * 55
+    height: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 45 : Kirigami.Units.gridUnit * 40
     visible: true
 
     Component.onCompleted: {

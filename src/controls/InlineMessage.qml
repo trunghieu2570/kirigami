@@ -8,8 +8,6 @@
 
 import QtQuick 2.7
 import org.kde.kirigami 2.5 as Kirigami
-import "private"
-
 import "templates" as T
 
 /**

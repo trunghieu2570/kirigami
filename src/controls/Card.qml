@@ -6,9 +6,9 @@
 
 import QtQuick 2.6
 import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0 as Controls
+import QtQuick.Controls 2.0 as QQC2
 import org.kde.kirigami 2.12 as Kirigami
-import "private"
+import "private" as P
 
 /**
  * @brief This is the standard layout of a Card.
@@ -77,7 +77,7 @@ Kirigami.AbstractCard {
     readonly property alias banner: bannerImage
 
 
-    header: BannerImage {
+    header: P.BannerImage {
         id: bannerImage
         anchors.leftMargin: -root.leftPadding + root.background.border.width
         anchors.topMargin: -root.topPadding + root.background.border.width
@@ -111,7 +111,7 @@ Kirigami.AbstractCard {
     footer: Kirigami.ActionToolBar {
         id: actionsToolBar
         actions: root.actions
-        position: Controls.ToolBar.Footer
+        position: QQC2.ToolBar.Footer
         visible: root.footer === actionsToolBar
     }
 }

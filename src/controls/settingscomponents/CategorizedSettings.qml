@@ -10,7 +10,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
-import org.kde.kirigami 2.11
+import org.kde.kirigami 2.11 as Kirigami
 
 /**
  * A container for setting actions showing them in a list view and displaying
@@ -20,12 +20,12 @@ import org.kde.kirigami 2.11
  * @since org.kde.kirigami 2.18
  * @inherit kde::org::kirigami::PageRow
  */
-PageRow {
+Kirigami.PageRow {
     id: pageSettingStack
 
-    property list<PagePoolAction> actions
+    property list<Kirigami.PagePoolAction> actions
     property alias stack: pageSettingStack
-    property PagePool pool: PagePool {}
+    property Kirigami.PagePool pool: Kirigami.PagePool {}
 
     readonly property string title: pageSettingStack.depth < 2 ? qsTr("Settings") : qsTr("Settings — %1").arg(pageSettingStack.get(1).title)
 
@@ -67,8 +67,8 @@ PageRow {
 
         return Math.max(minWidth, Math.min(calcWidth, maxWidth));
     }
-    globalToolBar.showNavigationButtons: ApplicationHeaderStyle.NoNavigationButtons
-    globalToolBar.style: Settings.isMobile ? ApplicationHeaderStyle.Breadcrumb : ApplicationHeaderStyle.None
+    globalToolBar.showNavigationButtons: Kirigami.ApplicationHeaderStyle.NoNavigationButtons
+    globalToolBar.style: Kirigami.Settings.isMobile ? Kirigami.ApplicationHeaderStyle.Breadcrumb : Kirigami.ApplicationHeaderStyle.None
 
     signal backRequested(var event)
     onBackRequested: {
@@ -78,21 +78,21 @@ PageRow {
         }
     }
     onWidthChanged: {
-        if (pageSettingStack.depth < 2 && pageSettingStack.width >= Units.gridUnit * 40) {
+        if (pageSettingStack.depth < 2 && pageSettingStack.width >= Kirigami.Units.gridUnit * 40) {
             actions[0].trigger();
         }
     }
 
-    initialPage: ScrollablePage {
+    initialPage: Kirigami.ScrollablePage {
         title: qsTr("Settings")
         bottomPadding: 0
         leftPadding: 0
         rightPadding: 0
         topPadding: 0
-        Theme.colorSet: Theme.View
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
         ListView {
             id: listview
-            Component.onCompleted: if (pageSettingStack.width >= Units.gridUnit * 40) {
+            Component.onCompleted: if (pageSettingStack.width >= Kirigami.Units.gridUnit * 40) {
                 actions[0].trigger();
             } else {
                 if (count > 0) {
@@ -111,29 +111,29 @@ PageRow {
 
         QQC2.ItemDelegate {
             width: parent && parent.width > 0 ? parent.width : implicitWidth
-            implicitWidth: contentItem.implicitWidth + Units.smallSpacing * 4
-            implicitHeight: contentItem.implicitHeight + Units.smallSpacing * 2
+            implicitWidth: contentItem.implicitWidth + Kirigami.Units.smallSpacing * 4
+            implicitHeight: contentItem.implicitHeight + Kirigami.Units.smallSpacing * 2
 
             action: modelData
             highlighted: listview.currentIndex === index
             onClicked: listview.currentIndex = index
             contentItem: ColumnLayout {
-                spacing: Units.smallSpacing
+                spacing: Kirigami.Units.smallSpacing
 
-                Icon {
+                Kirigami.Icon {
                     Layout.alignment: Qt.AlignHCenter
-                    Layout.preferredWidth: Units.iconSizes.medium
+                    Layout.preferredWidth: Kirigami.Units.iconSizes.medium
                     Layout.preferredHeight: width
                     source: modelData.icon.name
                 }
 
                 QQC2.Label {
                     Layout.fillWidth: true
-                    Layout.leftMargin: Units.smallSpacing
-                    Layout.rightMargin: Units.smallSpacing
+                    Layout.leftMargin: Kirigami.Units.smallSpacing
+                    Layout.rightMargin: Kirigami.Units.smallSpacing
                     text: modelData.text
                     wrapMode: Text.Wrap
-                    color: highlighted ? Theme.highlightedTextColor : Theme.textColor
+                    color: highlighted ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
                     horizontalAlignment: Text.AlignHCenter
                 }
             }
@@ -144,7 +144,7 @@ PageRow {
     Component {
         id: mobileStyle
 
-        BasicListItem {
+        Kirigami.BasicListItem {
             action: modelData
             onClicked: {
                 listview.currentIndex = index;

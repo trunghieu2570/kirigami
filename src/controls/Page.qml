@@ -6,10 +6,10 @@
 
 import QtQuick 2.5
 import QtQuick.Layouts 1.2
-import org.kde.kirigami 2.10 as Kirigami
-import "private"
 import QtQuick.Templates 2.1 as T2
 import QtQuick.Controls 2.1 as QQC2
+import org.kde.kirigami 2.10 as Kirigami
+import "private" as P
 
 /**
  * Page is a container for all the app pages: everything pushed to the
@@ -221,7 +221,7 @@ QQC2.Page {
      * @brief This holds the icon that represents this page.
      * @property var icon
      */
-    property ActionIconGroup icon: ActionIconGroup {}
+    property P.ActionIconGroup icon: P.ActionIconGroup {}
 
     /**
      * @brief Whether this page needs user attention.
@@ -373,7 +373,7 @@ QQC2.Page {
 
     // in data in order for them to not be considered for contentItem, contentChildren, contentData
     data: [
-        PageActionPropertyGroup {
+        P.PageActionPropertyGroup {
             id: actionsGroup
         },
 

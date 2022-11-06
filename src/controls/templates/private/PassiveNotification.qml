@@ -5,10 +5,10 @@
  */
 
 import QtQuick 2.12
-import QtQuick.Controls 2.3 as Controls
+import QtQuick.Controls 2.3 as QQC2
 import QtQuick.Layouts 1.2
 import QtQuick.Window 2.2
-import QtGraphicalEffects 1.0
+import QtGraphicalEffects 1.0 as GE
 import org.kde.kirigami 2.12 as Kirigami
 
 /*
@@ -20,7 +20,7 @@ notifications in the app.
  * This is not a full-fledged notification system. the applciation should
  * use this with care and only one notification should be visible at once per app.
 */
-Controls.Popup {
+QQC2.Popup {
     id: root
 
     x: Math.round(parent.width/2 - width/2)
@@ -38,7 +38,7 @@ Controls.Popup {
     bottomPadding: Kirigami.Units.smallSpacing
 
     modal: false
-    closePolicy: Controls.Popup.NoAutoClose
+    closePolicy: QQC2.Popup.NoAutoClose
     focus: false
     clip: false
 
@@ -89,7 +89,7 @@ Controls.Popup {
 
     Component {
         id: delegateComponent
-        Controls.Control {
+        QQC2.Control {
             id: delegate
             property alias text: label.text
             property alias actionText: actionButton.text
@@ -171,7 +171,7 @@ Controls.Popup {
                     onTriggered: delegate.close();
                 }
 
-                Controls.Label {
+                QQC2.Label {
                     id: label
                     Layout.maximumWidth: Math.min(root.parent.width - Kirigami.Units.largeSpacing * 4, implicitWidth)
                     elide: Text.ElideRight
@@ -179,7 +179,7 @@ Controls.Popup {
                     maximumLineCount: 4
                 }
 
-                Controls.Button {
+                QQC2.Button {
                     id: actionButton
                     visible: text.length > 0
                     onClicked: {
@@ -205,10 +205,10 @@ Controls.Popup {
         }
     }
 
-    Controls.Overlay.modal: Rectangle {
+    QQC2.Overlay.modal: Rectangle {
         color: Qt.rgba(0, 0, 0, 0.4)
     }
 
-    Controls.Overlay.modeless: Item {}
+    QQC2.Overlay.modeless: Item {}
 }
 

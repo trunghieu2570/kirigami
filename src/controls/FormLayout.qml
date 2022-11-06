@@ -7,8 +7,7 @@
 
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15
-
+import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.18 as Kirigami
 
 /**
@@ -380,7 +379,7 @@ Item {
                     return 0;
                 }
                 if (item.Kirigami.FormData.label.length > 0) {
-                    if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof TextArea)) {
+                    if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof QQC2.TextArea)) {
                         return Math.max(implicitHeight, item.Kirigami.FormData.buddyFor.height)
                     }
                     return implicitHeight;
@@ -419,7 +418,7 @@ Item {
     }
     Component {
         id: checkableBuddyComponent
-        CheckBox {
+        QQC2.CheckBox {
             id: labelItem
 
             property Item item
@@ -435,7 +434,7 @@ Item {
                     return 0;
                 }
                 if (item.Kirigami.FormData.label.length > 0) {
-                    if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof TextArea)) {
+                    if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof QQC2.TextArea)) {
                         return Math.max(implicitHeight, item.Kirigami.FormData.buddyFor.height);
                     }
                     return implicitHeight;

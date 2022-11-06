@@ -5,10 +5,10 @@
  */
 
 import QtQuick 2.1
-import QtGraphicalEffects 1.0
-import org.kde.kirigami 2.4
+import QtGraphicalEffects 1.0 as GE
+import org.kde.kirigami 2.4 as Kirigami
 
-LinearGradient {
+GE.LinearGradient {
     id: shadow
     /**
      * @brief This property holds the edge of the shadow that will determine the direction of the gradient.
@@ -22,7 +22,7 @@ LinearGradient {
      */
     property int edge: Qt.LeftEdge
 
-    property int radius: Units.gridUnit
+    property int radius: Kirigami.Units.gridUnit
     implicitWidth: radius
     implicitHeight: radius
 

@@ -4,8 +4,7 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.1
-import "private"
+import "private" as P
 import "templates" as T
 
 //TODO KF6: not have list items at all (except perhaps swipelistitem which is an unuque ui) but rather have a set of layouts for lists items to be put inside standard QQC2 Delegate
@@ -19,5 +18,5 @@ import "templates" as T
 T.AbstractListItem {
     id: listItem
 
-    background: DefaultListItemBackground {}
+    background: P.DefaultListItemBackground {}
 }

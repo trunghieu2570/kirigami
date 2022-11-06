@@ -5,12 +5,9 @@
  */
 
 import QtQuick 2.1
-import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.2 as QQC2
-import org.kde.kirigami 2.4
-
-import "private"
-import "templates/private"
+import org.kde.kirigami 2.4 as Kirigami
+import "private" as P
 
 /**
  * A specialized type of drawer that will show a list of actions
@@ -56,7 +53,7 @@ import "templates/private"
  *
  * @inherit OverlayDrawer
  */
-OverlayDrawer {
+Kirigami.OverlayDrawer {
     id: root
     handleClosedIcon.source: null
     handleOpenIcon.source: null
@@ -111,8 +108,8 @@ OverlayDrawer {
     // Disable for empty menus or when we have a global toolbar
     enabled: menu.count > 0 &&
             (typeof applicationWindow() === "undefined" || !applicationWindow().pageStack.globalToolBar ||
-            (applicationWindow().pageStack.lastVisibleItem && applicationWindow().pageStack.lastVisibleItem.globalToolBarStyle !== ApplicationHeaderStyle.ToolBar) ||
-            (applicationWindow().pageStack.layers && applicationWindow().pageStack.layers.depth > 1 && applicationWindow().pageStack.layers.currentItem && applicationWindow().pageStack.layers.currentItem.globalToolBarStyle !== ApplicationHeaderStyle.ToolBar))
+            (applicationWindow().pageStack.lastVisibleItem && applicationWindow().pageStack.lastVisibleItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar) ||
+            (applicationWindow().pageStack.layers && applicationWindow().pageStack.layers.depth > 1 && applicationWindow().pageStack.layers.currentItem && applicationWindow().pageStack.layers.currentItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar))
     edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
     drawerOpen: false
 
@@ -130,8 +127,8 @@ OverlayDrawer {
     }
     contentItem: QQC2.ScrollView {
         // this just to create the attached property
-        Theme.inherit: true
-        implicitWidth: Units.gridUnit * 20
+        Kirigami.Theme.inherit: true
+        implicitWidth: Kirigami.Units.gridUnit * 20
         ListView {
             id: menu
             interactive: contentHeight > height
@@ -166,12 +163,12 @@ OverlayDrawer {
             header: Item {
                 height: heading.height
                 width: menu.width
-                Heading {
+                Kirigami.Heading {
                     id: heading
                     anchors {
                         left: parent.left
                         right: parent.right
-                        margins: Units.largeSpacing
+                        margins: Kirigami.Units.largeSpacing
                     }
                     elide: Text.ElideRight
                     level: 2
@@ -180,14 +177,14 @@ OverlayDrawer {
             }
             delegate: Column {
                 width: parent.width
-                ContextDrawerActionItem {
+                P.ContextDrawerActionItem {
                     width: parent.width
                 }
                 Repeater {
                     model: modelData.hasOwnProperty("expandible") && modelData.expandible ? modelData.children : null
-                    delegate: ContextDrawerActionItem {
+                    delegate: P.ContextDrawerActionItem {
                         width: parent.width
-                        leftPadding: Units.largeSpacing * 2
+                        leftPadding: Kirigami.Units.largeSpacing * 2
                         opacity: !root.collapsed
                     }
                 }

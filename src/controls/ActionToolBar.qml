@@ -9,7 +9,7 @@ import QtQml 2.15
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.4 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
-import "private"
+import "private" as P
 
 /**
  * @brief A toolbar built out of a list of actions.
@@ -172,13 +172,13 @@ QQC2.Control {
         spacing: Kirigami.Units.smallSpacing
         layoutDirection: root.LayoutMirroring.enabled ? Qt.RightToLeft : Qt.LeftToRight
 
-        fullDelegate: PrivateActionToolButton {
+        fullDelegate: P.PrivateActionToolButton {
             flat: root.flat
             display: root.display
             action: Kirigami.ToolBarLayout.action
         }
 
-        iconDelegate: PrivateActionToolButton {
+        iconDelegate: P.PrivateActionToolButton {
             flat: root.flat
             display: QQC2.Button.IconOnly
             action: Kirigami.ToolBarLayout.action
@@ -198,7 +198,7 @@ QQC2.Control {
             }
         }
 
-        moreButton: PrivateActionToolButton {
+        moreButton: P.PrivateActionToolButton {
             flat: root.flat
 
             action: Kirigami.Action {
@@ -218,8 +218,8 @@ QQC2.Control {
                 }
             }
 
-            menuComponent: ActionsMenu {
-                submenuComponent: ActionsMenu {
+            menuComponent: P.ActionsMenu {
+                submenuComponent: P.ActionsMenu {
                     Binding {
                         target: parentItem
                         property: "visible"
@@ -229,7 +229,7 @@ QQC2.Control {
                     }
                 }
 
-                itemDelegate: ActionMenuItem {
+                itemDelegate: P.ActionMenuItem {
                     visible: layout.hiddenActions.includes(action)
                              && (action.visible === undefined || action.visible)
                 }

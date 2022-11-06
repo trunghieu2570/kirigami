@@ -5,11 +5,10 @@
  */
 
 import QtQuick 2.12
-import QtQuick.Layouts 1.12
-import QtQuick.Controls 2.12
+import QtQuick.Controls 2.12 as QQC2
 import org.kde.kirigami 2.12 as Kirigami
 
-StackView {
+QQC2.StackView {
     popEnter: Transition {
         OpacityAnimator {
             from: 0

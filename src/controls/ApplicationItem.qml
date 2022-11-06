@@ -5,7 +5,6 @@
  */
 
 import QtQuick 2.15
-import "templates/private"
 import org.kde.kirigami 2.4 as Kirigami
 
 /**
@@ -73,7 +72,7 @@ import org.kde.kirigami 2.4 as Kirigami
  * }
  * @endcode
 */
-AbstractApplicationItem {
+Kirigami.AbstractApplicationItem {
     id: root
 
     /**
@@ -99,7 +98,7 @@ AbstractApplicationItem {
         }
     }
 
-    PageRow {
+    Kirigami.PageRow {
         id: __pageStack
         anchors {
             fill: parent

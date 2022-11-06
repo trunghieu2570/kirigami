@@ -6,9 +6,9 @@
 
 import QtQuick 2.5
 import QtQuick.Templates 2.0 as T2
-import QtGraphicalEffects 1.0
+import QtGraphicalEffects 1.0 as GE
 import org.kde.kirigami 2.4 as Kirigami
-import "private"
+import "private" as P
 
 /**
  * An item that can be used as an header for a ListView.
@@ -45,7 +45,7 @@ Kirigami.AbstractItemViewHeader {
             fillMode: Image.PreserveAspectCrop
             asynchronous: true
         }
-        EdgeShadow {
+        P.EdgeShadow {
             edge: root.view.headerPositioning === ListView.InlineHeader ? Qt.BottomEdge : Qt.TopEdge
             anchors {
                 right: parent.right
@@ -95,7 +95,7 @@ Kirigami.AbstractItemViewHeader {
             elide: Text.ElideRight
 
             layer.enabled: root.backgroundImage.hasImage
-            layer.effect: DropShadow {
+            layer.effect: GE.DropShadow {
                 horizontalOffset: 0
                 verticalOffset: 2
                 radius: Kirigami.Units.smallSpacing*2

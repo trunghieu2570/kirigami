@@ -6,7 +6,7 @@
 
 import QtQuick 2.7
 import QtQml 2.7
-import QtQuick.Controls 2.5 as Controls
+import QtQuick.Controls 2.5 as QQC2
 import org.kde.kirigami 2.11 as Kirigami
 
 /**
@@ -48,7 +48,7 @@ Kirigami.Action {
      *
      * All pages present after the given basePage will be removed from the pageStack
      */
-    property Controls.Page basePage
+    property QQC2.Page basePage
 
     /**
      * This property holds a function that generate the property values for the created page

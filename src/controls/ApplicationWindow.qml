@@ -5,7 +5,6 @@
  */
 
 import QtQuick 2.5
-import "templates/private"
 import org.kde.kirigami 2.4 as Kirigami
 
 /**
@@ -85,7 +84,7 @@ import org.kde.kirigami 2.4 as Kirigami
  * @endcode
  *
 */
-AbstractApplicationWindow {
+Kirigami.AbstractApplicationWindow {
     id: root
 
     /**

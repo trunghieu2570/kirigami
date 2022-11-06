@@ -5,11 +5,10 @@
  */
 
 import QtQuick 2.15
-import QtQuick.Controls 2.15 as Controls
-
+import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.20 as Kirigami
 
-Controls.Menu
+QQC2.Menu
 {
     id: theMenu
     z: 999999999
@@ -17,10 +16,10 @@ Controls.Menu
     property Component submenuComponent
     // renamed to work on both Qt 5.9 and 5.10
     property Component itemDelegate: ActionMenuItem {}
-    property Component separatorDelegate: Controls.MenuSeparator { property var action }
+    property Component separatorDelegate: QQC2.MenuSeparator { property var action }
     property Component loaderDelegate: Loader { property var action }
-    property Controls.Action parentAction
-    property Controls.MenuItem parentItem
+    property QQC2.Action parentAction
+    property QQC2.MenuItem parentItem
 
     Item {
         id: invisibleItems
@@ -31,7 +30,7 @@ Controls.Menu
 
         active: theMenu.visible
         delegate: QtObject {
-            readonly property Controls.Action action: modelData
+            readonly property QQC2.Action action: modelData
             property QtObject item: null
             property bool isSubMenu: false
 

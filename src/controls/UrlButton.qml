@@ -18,7 +18,7 @@ import QtQuick.Controls 2.1 as QQC2
  * @since org.kde.kirigami 2.6
  * @inherit QtQuick.LinkButton
  */
-LinkButton {
+Kirigami.LinkButton {
     id: button
 
     property string url

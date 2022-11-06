@@ -5,9 +5,8 @@
  */
 
 import QtQuick 2.5
-import org.kde.kirigami 2.5
-
-import "private"
+import org.kde.kirigami 2.5 as Kirigami
+import "private" as P
 import "templates" as T
 
 
@@ -19,8 +18,8 @@ import "templates" as T
  * It's a behavior similar to the typical mobile web browser addressbar
  * the minimum, preferred and maximum heights of the item can be controlled with
  * * ``minimumHeight``: default is 0, i.e. hidden
- * * ``preferredHeight``: default is Units.gridUnit * 1.6
- * * ``maximumHeight``: default is Units.gridUnit * 3
+ * * ``preferredHeight``: default is Kirigami.Units.gridUnit * 1.6
+ * * ``maximumHeight``: default is Kirigami.Units.gridUnit * 3
  *
  * To achieve a titlebar that stays completely fixed just set the 3 sizes as the same
  *
@@ -29,12 +28,12 @@ import "templates" as T
 T.AbstractApplicationHeader {
     id: root
 
-    Theme.inherit: false
-    Theme.colorSet: Theme.Header
+    Kirigami.Theme.inherit: false
+    Kirigami.Theme.colorSet: Kirigami.Theme.Header
 
     background: Rectangle {
-        color: Theme.backgroundColor
-        EdgeShadow {
+        color: Kirigami.Theme.backgroundColor
+        P.EdgeShadow {
             id: shadow
             visible: root.separatorVisible
             anchors {
@@ -46,14 +45,14 @@ T.AbstractApplicationHeader {
             opacity: (!root.page.header || root.page.header.toString().indexOf("ToolBar") === -1)
             Behavior on opacity {
                 OpacityAnimator {
-                    duration: Units.longDuration
+                    duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }
         }
         Behavior on opacity {
             OpacityAnimator {
-                duration: Units.longDuration
+                duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }

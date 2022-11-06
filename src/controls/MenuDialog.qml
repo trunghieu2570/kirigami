@@ -5,7 +5,7 @@
 
 import QtQuick 2.15
 import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.15 as Controls
+import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.19 as Kirigami
 
 /**
@@ -82,7 +82,7 @@ Kirigami.Dialog {
         id: column
         spacing: 0
 
-        Controls.Control {
+        QQC2.Control {
             id: columnHeader
             topPadding: 0
             bottomPadding: 0
@@ -110,8 +110,8 @@ Kirigami.Dialog {
 
                 visible: modelData.visible
 
-                Controls.ToolTip.visible: modelData.tooltip !== "" && hoverHandler.hovered
-                Controls.ToolTip.text: modelData.tooltip
+                QQC2.ToolTip.visible: modelData.tooltip !== "" && hoverHandler.hovered
+                QQC2.ToolTip.text: modelData.tooltip
                 HoverHandler { id: hoverHandler }
             }
         }

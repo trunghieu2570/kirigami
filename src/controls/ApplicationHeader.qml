@@ -4,7 +4,6 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.5
 import "templates" as T
 
 //TODO KF6: remove
@@ -15,8 +14,8 @@ import "templates" as T
  * It's a behavior similar to the typical mobile web browser addressbar
  * the minimum, preferred and maximum heights of the item can be controlled with
  * * ``minimumHeight``: Default is 0, i.e. hidden
- * * ``preferredHeight``: Default is Units.gridUnit * 1.6
- * * ``maximumHeight``: Default is Units.gridUnit * 3
+ * * ``preferredHeight``: Default is Kirigami.Units.gridUnit * 1.6
+ * * ``maximumHeight``: Default is Kirigami.Units.gridUnit * 3
  *
  * To achieve a titlebar that stays completely fixed just set the 3 sizes as the same
  *

@@ -5,9 +5,9 @@
  */
 
 import QtQuick 2.7
-import QtQuick.Templates 2.0 as T2
-import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.0
+import QtQuick.Controls 2.0 as QQC2
+import QtQuick.Templates 2.0 as T2
 import org.kde.kirigami 2.5 as Kirigami
 import "private"
 
@@ -58,7 +58,7 @@ import "private"
  * @endcode
  *
  * @since 5.45
- * @inherit QtQuick.Controls.Control
+ * @inherit QtQuick.QQC2.Control
  */
 T2.Control {
     id: root
@@ -248,7 +248,7 @@ T2.Control {
             implicitWidth: label.implicitWidth
             height: contentLayout.multiline ? label.implicitHeight : implicitHeight
 
-            Controls.Label {
+            QQC2.Label {
                 id: label
 
                 width: parent.width
@@ -286,7 +286,7 @@ T2.Control {
             }
         }
 
-        Controls.ToolButton {
+        QQC2.ToolButton {
             id: closeButton
 
             visible: root.showCloseButton

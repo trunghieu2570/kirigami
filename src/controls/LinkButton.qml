@@ -5,8 +5,8 @@
  */
 
 import QtQuick 2.2
-import org.kde.kirigami 2.14
 import QtQuick.Controls 2.1 as QQC2
+import org.kde.kirigami 2.14 as Kirigami
 
 /**
  * @brief A button that looks like a link.
@@ -47,7 +47,7 @@ QQC2.Label {
     onClicked: if (action) action.trigger()
 
     font.underline: control.enabled
-    color: enabled ? Theme.linkColor : Theme.textColor
+    color: enabled ? Kirigami.Theme.linkColor : Kirigami.Theme.textColor
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     elide: Text.ElideRight

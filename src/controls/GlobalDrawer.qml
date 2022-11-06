@@ -8,10 +8,8 @@ import QtQuick 2.12
 import QtQuick.Templates 2.3 as T2
 import QtQuick.Controls 2.2 as QQC2
 import QtQuick.Layouts 1.2
-import org.kde.kirigami 2.13
-
-import "private"
-import "templates/private"
+import org.kde.kirigami 2.13 as Kirigami
+import "private" as P
 
 /**
  * A specialized form of the Drawer intended for showing an application's
@@ -55,10 +53,10 @@ OverlayDrawer {
     edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
     handleClosedIcon.source: null
     handleOpenIcon.source: null
-    handleVisible: (modal || !drawerOpen) && (typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true) && (!isMenu || Settings.isMobile)
-    interactive: Settings.hasTransientTouchInput || Settings.isMobile
+    handleVisible: (modal || !drawerOpen) && (typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true) && (!isMenu || Kirigami.Settings.isMobile)
+    interactive: Kirigami.Settings.hasTransientTouchInput || Kirigami.Settings.isMobile
 
-    enabled: !isMenu || Settings.isMobile
+    enabled: !isMenu || Kirigami.Settings.isMobile
 
 //BEGIN properties
     /**
@@ -143,7 +141,7 @@ OverlayDrawer {
      *
      * @since 2.12
      */
-    property bool bannerVisible: Settings.isMobile
+    property bool bannerVisible: Kirigami.Settings.isMobile
 
     /**
      * @brief This property holds items that are displayed above the actions.
@@ -274,9 +272,9 @@ OverlayDrawer {
         }
     }
 
-    // rightPadding: !Settings.isMobile && mainFlickable.contentHeight > mainFlickable.height ? Units.gridUnit : Units.smallSpacing
+    // rightPadding: !Kirigami.Settings.isMobile && mainFlickable.contentHeight > mainFlickable.height ? Kirigami.Units.gridUnit : Kirigami.Units.smallSpacing
 
-    Theme.colorSet: modal ? Theme.Window : Theme.View
+    Kirigami.Theme.colorSet: modal ? Kirigami.Theme.Window : Kirigami.Theme.View
 
     onHeaderChanged: {
         if (header) {
@@ -298,9 +296,9 @@ OverlayDrawer {
     contentItem: QQC2.ScrollView {
         id: scrollView
         //ensure the attached property exists
-        Theme.inherit: true
+        Kirigami.Theme.inherit: true
         anchors.fill: parent
-        implicitWidth: Math.min (Units.gridUnit * 20, root.parent.width * 0.8)
+        implicitWidth: Math.min (Kirigami.Units.gridUnit * 20, root.parent.width * 0.8)
         QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
         QQC2.ScrollBar.vertical.anchors {
             top: scrollView.top
@@ -328,7 +326,7 @@ OverlayDrawer {
                 Layout.fillWidth: true
                 // visible: !bannerImage.empty || root.collapsible
 
-                BannerImage {
+                P.BannerImage {
                     id: bannerImage
 
 
@@ -338,16 +336,16 @@ OverlayDrawer {
 
                     Behavior on opacity {
                         OpacityAnimator {
-                            duration: Units.longDuration
+                            duration: Kirigami.Units.longDuration
                             easing.type: Easing.InOutQuad
                         }
                     }
-                    // leftPadding: root.collapsible ? collapseButton.width + Units.smallSpacing*2 : topPadding
+                    // leftPadding: root.collapsible ? collapseButton.width + Kirigami.Units.smallSpacing*2 : topPadding
                     MouseArea {
                         anchors.fill: parent
                         onClicked: root.bannerClicked()
                     }
-                    EdgeShadow {
+                    P.EdgeShadow {
                         edge: Qt.BottomEdge
                         visible: bannerImageSource != ""
                         anchors {
@@ -359,8 +357,8 @@ OverlayDrawer {
                 }
                 RowLayout {
                     id: headerContainer
-                    Theme.inherit: false
-                    Theme.colorSet: Theme.Window
+                    Kirigami.Theme.inherit: false
+                    Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
                     Layout.fillWidth: true
                     visible: contentItem && opacity > 0
@@ -370,7 +368,7 @@ OverlayDrawer {
                     Behavior on opacity {
                         // not an animator as is binded
                         NumberAnimation {
-                            duration: Units.longDuration
+                            duration: Kirigami.Units.longDuration
                             easing.type: Easing.InOutQuad
                         }
                     }
@@ -390,7 +388,7 @@ OverlayDrawer {
                     Layout.alignment: Qt.AlignHCenter
                     Layout.leftMargin: root.leftPadding
                     Layout.rightMargin: root.rightPadding
-                    Layout.bottomMargin: Units.smallSpacing
+                    Layout.bottomMargin: Kirigami.Units.smallSpacing
                     Layout.topMargin: root.topPadding
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -403,7 +401,7 @@ OverlayDrawer {
                     Behavior on opacity {
                         // not an animator as is binded
                         NumberAnimation {
-                            duration: Units.longDuration
+                            duration: Kirigami.Units.longDuration
                             easing.type: Easing.InOutQuad
                         }
                     }
@@ -415,39 +413,39 @@ OverlayDrawer {
                     Layout.fillWidth: true
                     Layout.minimumHeight: currentItem ? currentItem.implicitHeight : 0
                     Layout.maximumHeight: Layout.minimumHeight
-                    property ActionsMenu openSubMenu
+                    property P.ActionsMenu openSubMenu
                     initialItem: menuComponent
                     // NOTE: it's important those are NumberAnimation and not XAnimators
                     // as while the animation is running the drawer may close, and
                     // the animator would stop when not drawing see BUG 381576
                     popEnter: Transition {
-                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * -stackView.width; to: 0; duration: Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * -stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
                     }
 
                     popExit: Transition {
-                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * stackView.width; duration: Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
                     }
 
                     pushEnter: Transition {
-                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
                     }
 
                     pushExit: Transition {
-                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
                     }
 
                     replaceEnter: Transition {
-                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
                     }
 
                     replaceExit: Transition {
-                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
                     }
                 }
                 Item {
                     Layout.fillWidth: true
                     Layout.fillHeight: root.actions.length>0
-                    Layout.minimumHeight: Units.smallSpacing
+                    Layout.minimumHeight: Kirigami.Units.smallSpacing
                 }
 
                 ColumnLayout {
@@ -465,13 +463,13 @@ OverlayDrawer {
                     Behavior on opacity {
                         OpacityAnimator {
                             id: mainContentAnimator
-                            duration: Units.longDuration
+                            duration: Kirigami.Units.longDuration
                             easing.type: Easing.InOutQuad
                         }
                     }
                 }
                 Item {
-                    Layout.minimumWidth: Units.smallSpacing
+                    Layout.minimumWidth: Kirigami.Units.smallSpacing
                     Layout.minimumHeight: root.bottomPadding
                 }
 
@@ -491,10 +489,10 @@ OverlayDrawer {
                             visible: level > 0
                             icon: (LayoutMirroring.enabled ? "go-previous-symbolic-rtl" : "go-previous-symbolic")
 
-                            label: MnemonicData.richTextLabel
-                            MnemonicData.enabled: backItem.enabled && backItem.visible
-                            MnemonicData.controlType: MnemonicData.MenuItem
-                            MnemonicData.label: qsTr("Back")
+                            label: Kirigami.MnemonicData.richTextLabel
+                            Kirigami.MnemonicData.enabled: backItem.enabled && backItem.visible
+                            Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem
+                            Kirigami.MnemonicData.label: qsTr("Back")
 
                             separatorVisible: false
                             onClicked: stackView.pop()
@@ -506,7 +504,7 @@ OverlayDrawer {
                             Keys.onUpPressed: nextItemInFocusChain(false).focus = true
                         }
                         Shortcut {
-                            sequence: backItem.MnemonicData.sequence
+                            sequence: backItem.Kirigami.MnemonicData.sequence
                             onActivated: backItem.clicked()
                         }
 
@@ -526,7 +524,7 @@ OverlayDrawer {
                             model: root.actions
                             delegate: Column {
                                 width: parent.width
-                                GlobalDrawerActionItem {
+                                P.GlobalDrawerActionItem {
                                     id: drawerItem
                                     visible: (modelData.hasOwnProperty("visible") && modelData.visible) && (root.collapsed || !(modelData.hasOwnProperty("expandible") && modelData.expandible))
                                     width: parent.width
@@ -536,21 +534,21 @@ OverlayDrawer {
                                             mainFlickable.contentY += height
                                         }
                                     }
-                                    Theme.colorSet: drawerItem.visible && !root.modal && !root.collapsed && actionsRepeater.withSections ? Theme.Window : parent.Theme.colorSet
-                                    backgroundColor: Theme.backgroundColor
+                                    Kirigami.Theme.colorSet: drawerItem.visible && !root.modal && !root.collapsed && actionsRepeater.withSections ? Kirigami.Theme.Window : parent.Kirigami.Theme.colorSet
+                                    backgroundColor: Kirigami.Theme.backgroundColor
                                 }
                                 Item {
                                     id: headerItem
                                     visible: !root.collapsed && (modelData.hasOwnProperty("expandible") && modelData.expandible && !!modelData.children && modelData.children.length > 0)
                                     height: sectionHeader.implicitHeight
                                     width: parent.width
-                                    ListSectionHeader {
+                                    Kirigami.ListSectionHeader {
                                         id: sectionHeader
                                         anchors.fill: parent
-                                        Theme.colorSet: root.modal ? Theme.View : Theme.Window
+                                        Kirigami.Theme.colorSet: root.modal ? Kirigami.Theme.View : Kirigami.Theme.Window
                                         contentItem: RowLayout {
-                                            Icon {
-                                                property int size: Units.iconSizes.smallMedium
+                                            Kirigami.Icon {
+                                                property int size: Kirigami.Units.iconSizes.smallMedium
                                                 Layout.minimumHeight: size
                                                 Layout.maximumHeight: size
                                                 Layout.minimumWidth: size
@@ -571,7 +569,7 @@ OverlayDrawer {
                                 Repeater {
                                     id: __repeater
                                     model: headerItem.visible ? modelData.children : null
-                                    delegate: GlobalDrawerActionItem {
+                                    delegate: P.GlobalDrawerActionItem {
                                         width: parent.width
                                         opacity: !root.collapsed
                                         leftPadding: actionsRepeater.withSections && !root.collapsed && !root.modal ? padding * 2 : padding * 4
@@ -591,7 +589,7 @@ OverlayDrawer {
 
                     QQC2.ToolTip.visible: root.collapsed && hovered
                     QQC2.ToolTip.text: qsTr("Open Sidebar")
-                    QQC2.ToolTip.delay: Units.toolTipDelay
+                    QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                 }
             }
         }

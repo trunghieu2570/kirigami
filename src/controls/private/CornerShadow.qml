@@ -5,10 +5,10 @@
  */
 
 import QtQuick 2.1
-import QtGraphicalEffects 1.0
-import org.kde.kirigami 2.4
+import QtGraphicalEffects 1.0 as GE
+import org.kde.kirigami 2.4 as Kirigami
 
-RadialGradient {
+GE.RadialGradient {
     id: shadow
     /**
      * @brief This property holds the corner of the shadow that will determine
@@ -25,7 +25,7 @@ RadialGradient {
 
     readonly property real margin: -Math.floor(radius/3)
 
-    property int radius: Units.gridUnit
+    property int radius: Kirigami.Units.gridUnit
 
     width: radius - margin
     height: radius - margin

@@ -5,15 +5,14 @@
  */
 
 import QtQuick 2.7
-import QtQuick.Controls 2.4 as Controls
-import "private"
+import QtQuick.Controls 2.4 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
 
 /**
  * @brief An item that represents an abstract Action
- * @inherit QtQuick.Controls.Action
+ * @inherit QtQuick.QQC2.Action
  */
-Controls.Action {
+QQC2.Action {
     id: root
 
 //BEGIN properties
@@ -71,7 +70,7 @@ Controls.Action {
     /**
      * @brief This property holds the parent action.
      */
-    property Controls.Action parent
+    property QQC2.Action parent
 
     /**
      * @brief This property sets this action's display type.
@@ -79,7 +78,7 @@ Controls.Action {
      * These are provided to implementations to indicate a preference for certain display
      * styles.
      *
-     * default: ``DisplayHint.NoPreference``
+     * default: ``Kirigami.DisplayHint.NoPreference``
      *
      * @note This property contains only preferences, implementations may choose to disregard them.
      * @see org::kde::kirigami::DisplayHint

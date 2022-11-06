@@ -8,10 +8,9 @@ import QtQuick 2.15
 import QtQml 2.15
 import QtQuick.Layouts 1.2
 import QtQuick.Templates 2.15 as T
-import QtQuick.Controls 2.15 as Controls
+import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.12 as Kirigami
-import QtGraphicalEffects 1.12
-import "templates/private" as Private
+import QtGraphicalEffects 1.12 as GE
 
 /**
  * @brief Popup dialog that is used for short tasks and user interaction.
@@ -245,7 +244,7 @@ T.Dialog {
     property list<Kirigami.Action> customFooterActions
 
     // default standard button
-    standardButtons: Controls.Dialog.Close
+    standardButtons: QQC2.Dialog.Close
 
     function standardButton(button): T.AbstractButton {
         // in case a footer is redefined
@@ -265,7 +264,7 @@ T.Dialog {
                     + (implicitFooterHeight > 0 ? implicitFooterHeight + spacing : 0);
 
     // misc. dialog settings
-    closePolicy: Controls.Popup.CloseOnEscape | Controls.Popup.CloseOnReleaseOutside
+    closePolicy: QQC2.Popup.CloseOnEscape | QQC2.Popup.CloseOnReleaseOutside
     modal: true
     clip: false
     padding: 0
@@ -291,7 +290,7 @@ T.Dialog {
     }
 
     // black background, fades in and out
-    Controls.Overlay.modal: Rectangle {
+    QQC2.Overlay.modal: Rectangle {
         color: Qt.rgba(0, 0, 0, 0.3)
 
         // the opacity of the item is changed internally by QQuickPopup on open/close
@@ -305,7 +304,7 @@ T.Dialog {
 
     // dialog view background
     background: Item {
-        RectangularGlow {
+        GE.RectangularGlow {
             anchors.fill: rect
             anchors.topMargin: 1
             cornerRadius: rect.radius * 2
@@ -326,14 +325,14 @@ T.Dialog {
 
     // dialog content
     contentItem: ColumnLayout {
-        Controls.ScrollView {
+        QQC2.ScrollView {
             id: contentControl
 
             // ensure view colour scheme, and background color
             Kirigami.Theme.inherit: false
             Kirigami.Theme.colorSet: Kirigami.Theme.View
 
-            Controls.ScrollBar.horizontal.policy: Controls.ScrollBar.AlwaysOff
+            QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
             // height of everything else in the dialog other than the content
             property real otherHeights: root.header.height + root.footer.height + root.topPadding + root.bottomPadding;
@@ -398,8 +397,8 @@ T.Dialog {
                 elide: Text.ElideRight
 
                 // use tooltip for long text that is elided
-                Controls.ToolTip.visible: truncated && titleHoverHandler.hovered
-                Controls.ToolTip.text: root.title
+                QQC2.ToolTip.visible: truncated && titleHoverHandler.hovered
+                QQC2.ToolTip.text: root.title
                 HoverHandler { id: titleHoverHandler }
             }
             Kirigami.Icon {
@@ -461,7 +460,7 @@ T.Dialog {
             }
 
             // footer buttons
-            Controls.DialogButtonBox {
+            QQC2.DialogButtonBox {
                 // we don't explicitly set padding, to let the style choose the padding
                 id: dialogButtonBox
                 standardButtons: root.standardButtons
@@ -470,7 +469,7 @@ T.Dialog {
                 Layout.fillWidth: true
                 Layout.alignment: dialogButtonBox.alignment
 
-                position: Controls.DialogButtonBox.Footer
+                position: QQC2.DialogButtonBox.Footer
 
                 // ensure themes don't add a background, since it can lead to visual inconsistencies
                 // with the rest of the dialog
@@ -488,7 +487,7 @@ T.Dialog {
                 Repeater {
                     model: root.customFooterActions
                     // we have to use Button instead of ToolButton, because ToolButton has no visual distinction when disabled
-                    delegate: Controls.Button {
+                    delegate: QQC2.Button {
                         flat: flatFooterButtons
                         action: modelData
                         visible: modelData.visible

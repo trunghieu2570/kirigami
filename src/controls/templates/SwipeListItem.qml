@@ -6,7 +6,7 @@
 
 import QtQuick 2.6
 import QtQuick.Layouts 1.4
-import QtQuick.Controls 2.4 as Controls
+import QtQuick.Controls 2.4 as QQC2
 import QtQuick.Templates 2.4 as T
 import org.kde.kirigami 2.11 as Kirigami
 import "../private"
@@ -176,7 +176,7 @@ T.SwipeDelegate {
      * At most 4 actions can be revealed when sliding away the list item;
      * others will be shown in the overflow menu.
      */
-    property list<Controls.Action> actions
+    property list<QQC2.Action> actions
 
     /**
      * @brief This property holds the width of the overlay.
@@ -425,7 +425,7 @@ T.SwipeDelegate {
 
             anchors.fill: parent
 
-            // Controls.SwipeDelegate.onPressedChanged is broken with touch
+            // QQC2.SwipeDelegate.onPressedChanged is broken with touch
             onClicked: {
                     slideAnim.to = 0;
                     slideAnim.restart();
@@ -505,7 +505,7 @@ T.SwipeDelegate {
                             listItem.actions[0];
                 }
             }
-            delegate: Controls.ToolButton {
+            delegate: QQC2.ToolButton {
                 icon.name: modelData.iconName !== "" ? modelData.iconName : ""
                 icon.source: modelData.iconSource !== "" ? modelData.iconSource : ""
                 enabled: (modelData && modelData.enabled !== undefined) ? modelData.enabled : true;
@@ -513,10 +513,10 @@ T.SwipeDelegate {
                 onVisibleChanged: actionsLayout.updateVisibleActions(visible);
                 Component.onCompleted: actionsLayout.updateVisibleActions(visible);
                 Component.onDestruction: actionsLayout.updateVisibleActions(visible);
-                Controls.ToolTip.delay: Kirigami.Units.toolTipDelay
-                Controls.ToolTip.timeout: 5000
-                Controls.ToolTip.visible: listItem.visible && (Kirigami.Settings.tabletMode ? pressed : hovered) && Controls.ToolTip.text.length > 0
-                Controls.ToolTip.text: modelData.tooltip || modelData.text
+                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+                QQC2.ToolTip.timeout: 5000
+                QQC2.ToolTip.visible: listItem.visible && (Kirigami.Settings.tabletMode ? pressed : hovered) && QQC2.ToolTip.text.length > 0
+                QQC2.ToolTip.text: modelData.tooltip || modelData.text
 
                 onClicked: {
                     if (modelData && modelData.trigger !== undefined) {

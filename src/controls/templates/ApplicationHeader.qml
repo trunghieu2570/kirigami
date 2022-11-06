@@ -7,8 +7,8 @@
 import QtQuick 2.5
 import QtQuick.Controls 2.0 as QQC2
 import QtQuick.Layouts 1.2
+import org.kde.kirigami 2.4 as Kirigami
 import "private"
-import org.kde.kirigami 2.4
 
 
 /**
@@ -18,8 +18,8 @@ import org.kde.kirigami 2.4
  * It's a behavior similar to the typical mobile web browser addressbar
  * the minimum, preferred and maximum heights of the item can be controlled with
  * * ``minimumHeight``: Default is 0, i.e. hidden
- * * ``preferredHeight``: Default is Units.gridUnit * 1.6
- * * ``maximumHeight``: Default is Units.gridUnit * 3
+ * * ``preferredHeight``: Default is Kirigami.Units.gridUnit * 1.6
+ * * ``maximumHeight``: Default is Kirigami.Units.gridUnit * 3
  *
  * To achieve a titlebar that stays completely fixed just set the 3 sizes to the same value.
  */
@@ -39,41 +39,41 @@ AbstractApplicationHeader {
      *
      * default: ``ApplicationHeaderStyle.Auto``
      */
-    property int headerStyle: ApplicationHeaderStyle.Auto
+    property int headerStyle: Kirigami.ApplicationHeaderStyle.Auto
 
     /**
      * @brief This property sets whether the back button is enabled.
      *
      * default: `when true, there will be a back button present that will make the pagerow scroll back when clicked`
      */
-    property bool backButtonEnabled: (!titleList.isTabBar && (!Settings.isMobile || Qt.platform.os === "ios"))
+    property bool backButtonEnabled: (!titleList.isTabBar && (!Kirigami.Settings.isMobile || Qt.platform.os === "ios"))
 
     property Component pageDelegate: Component {
         Row {
             height: parent.height
 
-            spacing: Units.smallSpacing
+            spacing: Kirigami.Units.smallSpacing
 
-            x: Units.smallSpacing
+            x: Kirigami.Units.smallSpacing
 
-            Icon {
+            Kirigami.Icon {
                 // in tabbar mode this is just a spacer
-                visible: !titleList.wideMode && ((typeof modelData !== "undefined" && modelData > 0) || titleList.internalHeaderStyle === ApplicationHeaderStyle.TabBar)
+                visible: !titleList.wideMode && ((typeof modelData !== "undefined" && modelData > 0) || titleList.internalHeaderStyle === Kirigami.ApplicationHeaderStyle.TabBar)
                 anchors.verticalCenter: parent.verticalCenter
-                height: Units.iconSizes.small
+                height: Kirigami.Units.iconSizes.small
                 width: height
-                selected: header.background && header.background.color && header.background.color === Theme.highlightColor
+                selected: header.background && header.background.color && header.background.color === Kirigami.Theme.highlightColor
                 source: titleList.isTabBar ? "" : (LayoutMirroring.enabled ? "go-next-symbolic-rtl" : "go-next-symbolic")
             }
 
             Heading {
                 id: title
-                width: Math.min(parent.width, Math.min(titleList.width, implicitWidth)) + Units.smallSpacing
+                width: Math.min(parent.width, Math.min(titleList.width, implicitWidth)) + Kirigami.Units.smallSpacing
                 anchors.verticalCenter: parent.verticalCenter
                 opacity: current ? 1 : 0.4
                 // Scaling animate NativeRendering is too slow
                 renderType: Text.QtRendering
-                color: header.background && header.background.color && header.background.color === Theme.highlightColor ? Theme.highlightedTextColor : Theme.textColor
+                color: header.background && header.background.color && header.background.color === Kirigami.Theme.highlightColor ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
                 elide: Text.ElideRight
                 text: page ? page.title : ""
                 font.pointSize: -1
@@ -86,7 +86,7 @@ AbstractApplicationHeader {
                         left: parent.left
                         right: parent.right
                     }
-                    height: Units.smallSpacing
+                    height: Kirigami.Units.smallSpacing
                     color: title.color
                     opacity: 0.6
                     visible: titleList.isTabBar && current
@@ -118,8 +118,8 @@ AbstractApplicationHeader {
         }
         visible: titleList.x > 0 && !titleList.atXBeginning
         height: parent.height * 0.7
-        color: Theme.highlightedTextColor
-        width: Math.ceil(Units.smallSpacing / 6)
+        color: Kirigami.Theme.highlightedTextColor
+        width: Math.ceil(Kirigami.Units.smallSpacing / 6)
         opacity: 0.4
     }
 
@@ -136,7 +136,7 @@ AbstractApplicationHeader {
             YAnimator {
                 from: -height
                 to: 0
-                duration: Units.longDuration
+                duration: Kirigami.Units.longDuration
                 easing.type: Easing.OutCubic
             }
         }
@@ -144,7 +144,7 @@ AbstractApplicationHeader {
             YAnimator {
                 from: 0
                 to: height
-                duration: Units.longDuration
+                duration: Kirigami.Units.longDuration
                 easing.type: Easing.OutCubic
             }
         }
@@ -153,7 +153,7 @@ AbstractApplicationHeader {
             YAnimator {
                 from: height
                 to: 0
-                duration: Units.longDuration
+                duration: Kirigami.Units.longDuration
                 easing.type: Easing.OutCubic
             }
         }
@@ -162,7 +162,7 @@ AbstractApplicationHeader {
             YAnimator {
                 from: 0
                 to: -height
-                duration: Units.longDuration
+                duration: Kirigami.Units.longDuration
                 easing.type: Easing.OutCubic
             }
         }
@@ -171,7 +171,7 @@ AbstractApplicationHeader {
             YAnimator {
                 from: height
                 to: 0
-                duration: Units.longDuration
+                duration: Kirigami.Units.longDuration
                 easing.type: Easing.OutCubic
             }
         }
@@ -180,7 +180,7 @@ AbstractApplicationHeader {
             YAnimator {
                 from: 0
                 to: -height
-                duration: Units.longDuration
+                duration: Kirigami.Units.longDuration
                 easing.type: Easing.OutCubic
             }
         }
@@ -223,8 +223,8 @@ AbstractApplicationHeader {
             left: parent.left
             top: parent.top
             bottom: parent.bottom
-            topMargin: Units.smallSpacing
-            bottomMargin: Units.smallSpacing
+            topMargin: Kirigami.Units.smallSpacing
+            bottomMargin: Kirigami.Units.smallSpacing
         }
         Item {
             height: parent.height
@@ -235,12 +235,12 @@ AbstractApplicationHeader {
     Flickable {
         id: titleList
         readonly property bool wideMode: pageRow.hasOwnProperty("wideMode") ? pageRow.wideMode : __appWindow.wideScreen
-        property int internalHeaderStyle: header.headerStyle === ApplicationHeaderStyle.Auto ? (titleList.wideMode ? ApplicationHeaderStyle.Titles : ApplicationHeaderStyle.Breadcrumb) : header.headerStyle
+        property int internalHeaderStyle: header.headerStyle === Kirigami.ApplicationHeaderStyle.Auto ? (titleList.wideMode ? Kirigami.ApplicationHeaderStyle.Titles : Kirigami.ApplicationHeaderStyle.Breadcrumb) : header.headerStyle
         // if scrolling the titlebar should scroll also the pages and vice versa
-        property bool scrollingLocked: (header.headerStyle === ApplicationHeaderStyle.Titles || titleList.wideMode)
+        property bool scrollingLocked: (header.headerStyle === Kirigami.ApplicationHeaderStyle.Titles || titleList.wideMode)
         //uses this to have less strings comparisons
         property bool scrollMutex
-        property bool isTabBar: header.headerStyle === ApplicationHeaderStyle.TabBar
+        property bool isTabBar: header.headerStyle === Kirigami.ApplicationHeaderStyle.TabBar
 
         property Item backButton
         property Item forwardButton
@@ -274,7 +274,7 @@ AbstractApplicationHeader {
             id: listScrollAnim
             target: titleList
             property: "contentX"
-            duration: Units.longDuration
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
         Timer {
@@ -312,7 +312,7 @@ AbstractApplicationHeader {
             target: pageRow.currentItem && pageRow.currentItem.flickable ? pageRow.currentItem.flickable : null
             property: "contentY"
             to: 0
-            duration: Units.longDuration
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
 
@@ -333,7 +333,7 @@ AbstractApplicationHeader {
                         if (titleList.scrollingLocked && delegateLoader.page) {
                             return delegateLoader.page.width - (index === 0 ? navButtons.width : 0) - (index === pageRow.depth-1  ? stack.anchors.rightMargin : 0);
                         } else {
-                            return Math.min(titleList.width, delegateLoader.implicitWidth + Units.smallSpacing);
+                            return Math.min(titleList.width, delegateLoader.implicitWidth + Kirigami.Units.smallSpacing);
                         }
                     }
 
@@ -357,7 +357,7 @@ AbstractApplicationHeader {
                     Loader {
                         id: delegateLoader
                         height: parent.height
-                        x: titleList.wideMode || headerStyle === ApplicationHeaderStyle.Titles ? (Math.min(delegate.width - implicitWidth, Math.max(0, titleList.contentX - delegate.x))) : 0
+                        x: titleList.wideMode || headerStyle === Kirigami.ApplicationHeaderStyle.Titles ? (Math.min(delegate.width - implicitWidth, Math.max(0, titleList.contentX - delegate.x))) : 0
                         width: parent.width - x
 
                         Connections {

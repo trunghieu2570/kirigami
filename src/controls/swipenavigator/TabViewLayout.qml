@@ -1,6 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
-import QtQuick.Controls 2.12
+import QtQuick.Controls 2.12 as QQC2
 import org.kde.kirigami 2.12 as Kirigami
 
 /**
@@ -34,8 +34,8 @@ Item {
         bar.parent = __grid
         bar.Layout.row = Qt.binding(() => (__root.position === TabViewLayout.Position.Bottom) ? 1 : 0)
         bar.Layout.fillWidth = true
-        if (bar instanceof ToolBar) {
-            bar.position = Qt.binding(() => (__root.position === TabViewLayout.Position.Bottom) ? ToolBar.Footer : ToolBar.Header)
+        if (bar instanceof QQC2.ToolBar) {
+            bar.position = Qt.binding(() => (__root.position === TabViewLayout.Position.Bottom) ? QQC2.ToolBar.Footer : QQC2.ToolBar.Header)
         }
     }
 

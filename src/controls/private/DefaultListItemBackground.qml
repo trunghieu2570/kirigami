@@ -5,7 +5,7 @@
  */
 
 import QtQuick 2.1
-import org.kde.kirigami 2.12
+import org.kde.kirigami 2.12 as Kirigami
 
 Rectangle {
     id: background
@@ -21,7 +21,7 @@ Rectangle {
     Rectangle {
         id: internal
         anchors.fill: parent
-        visible: !Settings.tabletMode && listItem.hoverEnabled
+        visible: !Kirigami.Settings.tabletMode && listItem.hoverEnabled
         color: listItem.activeBackgroundColor
         opacity: {
             if ((listItem.highlighted || listItem.ListView.isCurrentItem) && !listItem.pressed) {
@@ -36,13 +36,13 @@ Rectangle {
 
     property var leadingWidth
 
-    Separator {
+    Kirigami.Separator {
         anchors {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            leftMargin: Units.largeSpacing
-            rightMargin: Units.largeSpacing
+            leftMargin: Kirigami.Units.largeSpacing
+            rightMargin: Kirigami.Units.largeSpacing
         }
         visible: {
             // Whether there is visual feedback (do not show the separator)
@@ -61,7 +61,7 @@ Rectangle {
             return listItem.separatorVisible && !visualFeedback && bgTransparent
                 && !listItem.sectionDelegate && anotherSection && lastItem
         }
-        weight: Separator.Weight.Light
+        weight: Kirigami.Separator.Weight.Light
     }
 }
 

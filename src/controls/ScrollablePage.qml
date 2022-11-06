@@ -6,14 +6,12 @@
 
 import QtQuick 2.15
 import QtQml 2.15
-import QtQuick.Templates 2.15 as T
 import QtQuick.Controls 2.15 as QQC2
-import QtQuick.Layouts 1.15
-import QtGraphicalEffects 1.0
-
-import org.kde.kirigami 2.19
+import QtGraphicalEffects 1.0 as GE
+import org.kde.kirigami 2.19 as Kirigami
 import org.kde.kirigami.templates 2.2 as KT
 import "private"
+
 
 // TODO KF6: undo many workarounds to make existing code work?
 
@@ -158,8 +156,8 @@ Page {
         }
     }
 
-    Theme.inherit: false
-    Theme.colorSet: flickable && flickable.hasOwnProperty("model") ? Theme.View : Theme.Window
+    Kirigami.Theme.inherit: false
+    Kirigami.Theme.colorSet: flickable && flickable.hasOwnProperty("model") ? Kirigami.Theme.View : Kirigami.Theme.Window
 
     Keys.forwardTo: {
         if (root.keyboardNavigationEnabled && root.flickable) {
@@ -189,7 +187,7 @@ Page {
             Behavior on topMargin {
                 NumberAnimation {
                     easing.type: Easing.InOutQuad
-                    duration: Units.longDuration
+                    duration: Kirigami.Units.longDuration
                 }
             }
         }
@@ -247,7 +245,7 @@ Page {
                 ? -root.flickable.contentY + root.flickable.originY + height
                 : -root.flickable.contentY + root.flickable.originY - height
             width: root.flickable.width
-            height: Units.gridUnit * 4
+            height: Kirigami.Units.gridUnit * 4
             active: root.supportsRefreshing
 
             sourceComponent: Item {
@@ -265,23 +263,23 @@ Page {
                     id: spinnerProgress
                     anchors {
                         fill: busyIndicator
-                        margins: Math.ceil(Units.smallSpacing)
+                        margins: Math.ceil(Kirigami.Units.smallSpacing)
                     }
                     radius: width
                     visible: supportsRefreshing && !refreshing && progress > 0
                     color: "transparent"
                     opacity: 0.8
-                    border.color: Theme.backgroundColor
-                    border.width: Math.ceil(Units.smallSpacing)
+                    border.color: Kirigami.Theme.backgroundColor
+                    border.width: Math.ceil(Kirigami.Units.smallSpacing)
                     property real progress: supportsRefreshing && !refreshing ? (busyIndicatorLoader.y/busyIndicatorFrame.height) : 0
                 }
-                ConicalGradient {
+                GE.ConicalGradient {
                     source: spinnerProgress
                     visible: spinnerProgress.visible
                     anchors.fill: spinnerProgress
                     gradient: Gradient {
-                        GradientStop { position: 0.00; color: Theme.highlightColor }
-                        GradientStop { position: spinnerProgress.progress; color: Theme.highlightColor }
+                        GradientStop { position: 0.00; color: Kirigami.Theme.highlightColor }
+                        GradientStop { position: spinnerProgress.progress; color: Kirigami.Theme.highlightColor }
                         GradientStop { position: spinnerProgress.progress + 0.01; color: "transparent" }
                         GradientStop { position: 1.00; color: "transparent" }
                     }

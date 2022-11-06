@@ -4,8 +4,7 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.5
-import "private"
+import "private" as P
 import "templates" as T
 
 /**
@@ -40,5 +39,5 @@ import "templates" as T
 T.SwipeListItem {
     id: listItem
 
-    background: DefaultListItemBackground {}
+    background: P.DefaultListItemBackground {}
 }

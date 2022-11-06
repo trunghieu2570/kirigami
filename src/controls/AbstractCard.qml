@@ -4,10 +4,8 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.6
-import org.kde.kirigami 2.12
 import "templates" as T
-import "private"
+import "private" as P
 
 /**
  * @brief AbstractCard is the base for cards.
@@ -26,7 +24,7 @@ import "private"
 T.AbstractCard {
     id: root
 
-    background: DefaultCardBackground {
+    background: P.DefaultCardBackground {
         id: bg
 
         clickFeedback: root.showClickFeedback

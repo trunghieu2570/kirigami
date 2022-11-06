@@ -8,7 +8,7 @@ import QtQuick 2.1
 import QtQuick.Controls 2.4 as QQC2
 import QtQuick.Window 2.15
 import QtQuick.Layouts 1.3
-import org.kde.kirigami 2.19
+import org.kde.kirigami 2.19 as Kirigami
 
 //TODO KF6: move somewhere else? kirigami addons?
 /**
@@ -22,7 +22,7 @@ import org.kde.kirigami 2.19
  * @since org.kde.kirigami 2.6
  * @inherit org::kde::kirigami::ScrollablePage
  */
-ScrollablePage
+Kirigami.ScrollablePage
 {
     id: page
 
@@ -102,7 +102,7 @@ ScrollablePage
         }
     }
 
-    AboutItem {
+    Kirigami.AboutItem {
         id: aboutItem
         wideMode: page.width >= aboutItem.implicitWidth
 

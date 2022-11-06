@@ -5,15 +5,14 @@
  */
 
 import QtQuick 2.12
-
 import QtQuick.Layouts 1.12
-import QtQuick.Controls 2.12
+import QtQuick.Controls 2.12 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
 
-ScrollView {
+QQC2.ScrollView {
     id: view
     implicitWidth: bar.implicitWidth
-    ScrollBar.horizontal.visible: false
+    QQC2.ScrollBar.horizontal.visible: false
 
     Item {
         height: view.height
@@ -31,7 +30,7 @@ ScrollView {
             property real targetDestination
             NumberAnimation {
                 id: scrollAni
-                target: view.ScrollBar.horizontal
+                target: view.QQC2.ScrollBar.horizontal
                 property: "position"
                 to: bar.targetDestination
                 duration: Kirigami.Units.longDuration
@@ -39,10 +38,10 @@ ScrollView {
             }
             onIndexChanged: {
                 if (xPos > (bar.width)/2) {
-                    bar.targetDestination = (1-view.ScrollBar.horizontal.size) * ((xPos+tabWidth) / bar.width)
+                    bar.targetDestination = (1-view.QQC2.ScrollBar.horizontal.size) * ((xPos+tabWidth) / bar.width)
                     scrollAni.restart()
                 } else {
-                    bar.targetDestination = (1-view.ScrollBar.horizontal.size) * ((xPos) / bar.width)
+                    bar.targetDestination = (1-view.QQC2.ScrollBar.horizontal.size) * ((xPos) / bar.width)
                     scrollAni.restart()
                 }
             }

@@ -7,9 +7,9 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.2
 import QtQml.Models 2.2
-import QtQuick.Templates 2.0 as T
+import QtQuick.Templates 2.0 as QT
 import QtQuick.Controls 2.0 as QQC2
-import org.kde.kirigami 2.7
+import org.kde.kirigami 2.20 as Kirigami
 import "private/globaltoolbar" as GlobalToolBar
 import "templates" as KT
 
@@ -23,7 +23,7 @@ import "templates" as KT
  *
  * @inherits QtQuick.Controls.Control
  */
-T.Control {
+QT.Control {
     id: root
 
 //BEGIN PROPERTIES
@@ -113,11 +113,11 @@ T.Control {
     /**
      * @brief This property holds the default width for a column.
      *
-     * default: ``20 * Kirigami.Units.gridUnit``
+     * default: ``20 * Kirigami.Kirigami.Units.gridUnit``
      *
      * @note Pages can override it using implicitWidth, Layout.fillWidth, Layout.minimumWidth etc.
      */
-    property int defaultColumnWidth: Units.gridUnit * 20
+    property int defaultColumnWidth: Kirigami.Units.gridUnit * 20
 
     /**
      * @brief This property sets whether it is possible to go back/forward
@@ -158,7 +158,7 @@ T.Control {
      *  * ``None``: No global toolbar will be shown.
      *
      * * ``actualStyle``: This will represent the actual style of the toolbar; it can be different from style in the case style is Auto.
-     * * ``showNavigationButtons``: OR flags combination of ApplicationHeaderStyle.ShowBackButton and ApplicationHeaderStyle.ShowForwardButton.
+     * * ``showNavigationButtons``: OR flags combination of Kirigami.ApplicationHeaderStyle.ShowBackButton and Kirigami.ApplicationHeaderStyle.ShowForwardButton.
      * * ``toolbarActionAlignment: Qt::Alignment``: How to horizontally align the actions when using the ToolBar style. Note that anything but Qt.AlignRight will cause the title to be hidden (default: ``Qt.AlignRight``).
      * * ``minimumHeight: int`` Minimum height of the header, which will be resized when scrolling. Only in Mobile mode (default: ``preferredHeight``, sliding but no scaling).
      * * ``preferredHeight: int`` The height the toolbar will usually have.
@@ -237,15 +237,15 @@ T.Control {
      */
     function pushDialogLayer(page, properties = {}, windowProperties = {}) {
         let item;
-        if (Settings.isMobile) {
-            if (QQC2.ApplicationWindow.window.width > Units.gridUnit * 40) {
+        if (Kirigami.Settings.isMobile) {
+            if (QQC2.ApplicationWindow.window.width > Kirigami.Units.gridUnit * 40) {
                 // open as a QQC2.Dialog
                 const dialog = Qt.createQmlObject('
                     import QtQuick 2.15;
                     import QtQuick.Controls 2.15;
                     import QtQuick.Layouts 1.15;
                     import org.kde.kirigami 2.15 as Kirigami;
-                    Dialog {
+                    Kirigami.Dialog {
                         id: dialog
                         modal: true;
                         leftPadding: 0; rightPadding: 0; topPadding: 0; bottomPadding: 0;
@@ -253,9 +253,9 @@ T.Control {
                         header: Kirigami.AbstractApplicationHeader {
                             pageRow: null
                             page: null
-                            minimumHeight: Units.gridUnit * 1.6
-                            maximumHeight: Units.gridUnit * 1.6
-                            preferredHeight: Units.gridUnit * 1.6
+                            minimumHeight: Kirigami.Units.gridUnit * 1.6
+                            maximumHeight: Kirigami.Units.gridUnit * 1.6
+                            preferredHeight: Kirigami.Units.gridUnit * 1.6
 
                             Keys.onEscapePressed: {
                                 if (dialog.opened) {
@@ -268,7 +268,7 @@ T.Control {
                             contentItem: RowLayout {
                                 width: parent.width
                                 Kirigami.Heading {
-                                    Layout.leftMargin: Kirigami.Units.largeSpacing
+                                    Layout.leftMargin: Kirigami.Kirigami.Units.largeSpacing
                                     text: dialog.title
                                     elide: Text.ElideRight
                                 }
@@ -278,9 +278,9 @@ T.Control {
                                 Kirigami.Icon {
                                     id: closeIcon
                                     Layout.alignment: Qt.AlignVCenter
-                                    Layout.rightMargin: Kirigami.Units.largeSpacing
-                                    Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
-                                    Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
+                                    Layout.rightMargin: Kirigami.Kirigami.Units.largeSpacing
+                                    Layout.preferredHeight: Kirigami.Kirigami.Units.iconSizes.smallMedium
+                                    Layout.preferredWidth: Kirigami.Kirigami.Units.iconSizes.smallMedium
                                     source: closeMouseArea.containsMouse ? "window-close" : "window-close-symbolic"
                                     active: closeMouseArea.containsMouse
                                     MouseArea {
@@ -294,10 +294,10 @@ T.Control {
                         }
                         contentItem: Control { topPadding: 0; leftPadding: 0; rightPadding: 0; bottomPadding: 0; }
                     }', QQC2.ApplicationWindow.overlay);
-                dialog.width = Qt.binding(() => QQC2.ApplicationWindow.window.width - Units.gridUnit * 5);
-                dialog.height = Qt.binding(() => QQC2.ApplicationWindow.window.height - Units.gridUnit * 5);
-                dialog.x = Units.gridUnit * 2.5;
-                dialog.y = Units.gridUnit * 2.5;
+                dialog.width = Qt.binding(() => QQC2.ApplicationWindow.window.width - Kirigami.Units.gridUnit * 5);
+                dialog.height = Qt.binding(() => QQC2.ApplicationWindow.window.height - Kirigami.Units.gridUnit * 5);
+                dialog.x = Kirigami.Units.gridUnit * 2.5;
+                dialog.y = Kirigami.Units.gridUnit * 2.5;
 
                 if (typeof page === "string") {
                     // url => load component and then load item from component
@@ -315,7 +315,7 @@ T.Control {
 
                 // Pushing a PageRow is supported but without PageRow toolbar
                 if (item.globalToolBar && item.globalToolBar.style) {
-                    item.globalToolBar.style = ApplicationHeaderStyle.None
+                    item.globalToolBar.style = Kirigami.ApplicationHeaderStyle.None
                 }
                 Object.defineProperty(item, 'closeDialog', {
                     value: function() {
@@ -338,16 +338,16 @@ T.Control {
                 windowProperties.modality = Qt.WindowModal;
             }
             if (!windowProperties.height) {
-                windowProperties.height = Units.gridUnit * 30;
+                windowProperties.height = Kirigami.Units.gridUnit * 30;
             }
             if (!windowProperties.width) {
-                windowProperties.width = Units.gridUnit * 50;
+                windowProperties.width = Kirigami.Units.gridUnit * 50;
             }
             if (!windowProperties.minimumWidth) {
-                windowProperties.minimumWidth = Units.gridUnit * 20;
+                windowProperties.minimumWidth = Kirigami.Units.gridUnit * 20;
             }
             if (!windowProperties.minimumHeight) {
-                windowProperties.minimumHeight = Units.gridUnit * 15;
+                windowProperties.minimumHeight = Kirigami.Units.gridUnit * 15;
             }
             if (!windowProperties.flags) {
                 windowProperties.flags = Qt.Dialog | Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowCloseButtonHint;
@@ -760,7 +760,7 @@ T.Control {
             OpacityAnimator {
                 from: 0
                 to: 1
-                duration: Units.longDuration
+                duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutCubic
             }
         }
@@ -769,13 +769,13 @@ T.Control {
                 OpacityAnimator {
                     from: 1
                     to: 0
-                    duration: Units.longDuration
+                    duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutCubic
                 }
                 YAnimator {
                     from: 0
                     to: height/2
-                    duration: Units.longDuration
+                    duration: Kirigami.Units.longDuration
                     easing.type: Easing.InCubic
                 }
             }
@@ -788,13 +788,13 @@ T.Control {
                     property: "opacity"
                     from: 0
                     to: 1
-                    duration: Units.longDuration
+                    duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutCubic
                 }
                 YAnimator {
                     from: height/2
                     to: 0
-                    duration: Units.longDuration
+                    duration: Kirigami.Units.longDuration
                     easing.type: Easing.OutCubic
                 }
             }
@@ -805,7 +805,7 @@ T.Control {
             OpacityAnimator {
                 from: 1
                 to: 0
-                duration: Units.longDuration
+                duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutCubic
             }
         }
@@ -815,13 +815,13 @@ T.Control {
                 OpacityAnimator {
                     from: 0
                     to: 1
-                    duration: Units.longDuration
+                    duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutCubic
                 }
                 YAnimator {
                     from: height/2
                     to: 0
-                    duration: Units.longDuration
+                    duration: Kirigami.Units.longDuration
                     easing.type: Easing.OutCubic
                 }
             }
@@ -832,13 +832,13 @@ T.Control {
                 OpacityAnimator {
                     from: 1
                     to: 0
-                    duration: Units.longDuration
+                    duration: Kirigami.Units.longDuration
                     easing.type: Easing.InCubic
                 }
                 YAnimator {
                     from: 0
                     to: -height/2
-                    duration: Units.longDuration
+                    duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutCubic
                 }
             }
@@ -853,9 +853,9 @@ T.Control {
             right: parent.right
         }
         z: 100
-        property T.Control pageRow: root
-        active: (!firstVisibleItem || firstVisibleItem.globalToolBarStyle !== ApplicationHeaderStyle.None) &&
-                (globalToolBar.actualStyle !== ApplicationHeaderStyle.None || (firstVisibleItem && firstVisibleItem.globalToolBarStyle === ApplicationHeaderStyle.ToolBar))
+        property QT.Control pageRow: root
+        active: (!firstVisibleItem || firstVisibleItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.None) &&
+                (globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None || (firstVisibleItem && firstVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar))
         visible: active
         height: active ? implicitHeight : 0
         // If load is asynchronous, it will fail to compute the initial implicitHeight
@@ -933,7 +933,7 @@ T.Control {
             rightPadding: root.leftSidebar ? root.leftSidebar.rightPadding : 0
             bottomPadding: root.leftSidebar ? root.leftSidebar.bottomPadding : 0
         }
-        ColumnView {
+        Kirigami.ColumnView {
             id: columnView
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -943,8 +943,8 @@ T.Control {
 
             // Internal hidden api for Page
             readonly property Item __pageRow: root
-            acceptsMouse: Settings.isMobile
-            columnResizeMode: root.wideMode ? ColumnView.FixedColumns : ColumnView.SingleColumn
+            acceptsMouse: Kirigami.Settings.isMobile
+            columnResizeMode: root.wideMode ? Kirigami.ColumnView.FixedColumns : Kirigami.ColumnView.SingleColumn
             columnWidth: root.defaultColumnWidth
 
             onItemInserted: root.pageInserted(position, item);
@@ -954,10 +954,10 @@ T.Control {
 
     Rectangle {
         anchors.bottom: parent.bottom
-        height: Units.smallSpacing
+        height: Kirigami.Units.smallSpacing
         x: (columnView.width - width) * (columnView.contentX / (columnView.contentWidth - columnView.width))
         width: columnView.width * (columnView.width/columnView.contentWidth)
-        color: Theme.textColor
+        color: Kirigami.Theme.textColor
         opacity: 0
         onXChanged: {
             opacity = 0.3
@@ -965,13 +965,13 @@ T.Control {
         }
         Behavior on opacity {
             OpacityAnimator {
-                duration: Units.longDuration
+                duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }
         Timer {
             id: scrollIndicatorTimer
-            interval: Units.longDuration * 4
+            interval: Kirigami.Units.longDuration * 4
             onTriggered: parent.opacity = 0;
         }
     }

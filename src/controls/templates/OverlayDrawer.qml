@@ -7,8 +7,8 @@
 import QtQuick 2.15
 import QtQuick.Templates 2.2 as T2
 import QtQuick.Controls 2.15 as QQC2
-import org.kde.kirigami 2.11
-import "private"
+import org.kde.kirigami 2.11 as Kirigami
+import "private" as P
 
 /**
  * Overlay Drawers are used to expose additional UI elements needed for
@@ -90,7 +90,7 @@ T2.Drawer {
      *
      * default: ``Units.iconSizes.medium``, just enough to accommodate medium sized icons
      */
-    property int collapsedSize: Units.iconSizes.medium
+    property int collapsedSize: Kirigami.Units.iconSizes.medium
 
     /**
      * @brief This property holds the options for handle's open icon.
@@ -109,7 +109,7 @@ T2.Drawer {
      *
      * @since 2.5
      */
-    readonly property IconPropertiesGroup handleOpenIcon: IconPropertiesGroup {
+    readonly property P.IconPropertiesGroup handleOpenIcon: P.IconPropertiesGroup {
         source: root.edge === Qt.RightEdge ? "view-right-close" : "view-left-close"
     }
 
@@ -128,7 +128,7 @@ T2.Drawer {
      *
      * @since 2.5
      */
-    property IconPropertiesGroup handleClosedIcon: IconPropertiesGroup {
+    property P.IconPropertiesGroup handleClosedIcon: P.IconPropertiesGroup {
         id: handleClosedIconGroup
         source: root.edge === Qt.RightEdge ? "view-right-new" : "view-left-new"
     }
@@ -167,16 +167,16 @@ T2.Drawer {
 
         QQC2.ToolButton {
             anchors.centerIn: parent
-            width: parent.height - Units.smallSpacing * 1.5
-            height: parent.height - Units.smallSpacing * 1.5
+            width: parent.height - Kirigami.Units.smallSpacing * 1.5
+            height: parent.height - Kirigami.Units.smallSpacing * 1.5
             onClicked: root.drawerOpen = !root.drawerOpen;
             Accessible.name: root.drawerOpen ? root.handleOpenToolTip : root.handleClosedToolTip
-            visible: !Settings.tabletMode && !Settings.hasTransientTouchInput
+            visible: !Kirigami.SettingstabletMode && !Kirigami.SettingshasTransientTouchInput
         }
 
         T2.ToolTip.visible: containsMouse
         T2.ToolTip.text: root.drawerOpen ? handleOpenToolTip : handleClosedToolTip
-        T2.ToolTip.delay: Units.toolTipDelay
+        T2.ToolTip.delay: Kirigami.Units.toolTipDelay
 
         property Item handleAnchor: (applicationWindow().pageStack && applicationWindow().pageStack.globalToolBar)
                 ? ((root.edge === Qt.LeftEdge && Qt.application.layoutDirection === Qt.LeftToRight)
@@ -225,14 +225,14 @@ T2.Drawer {
         x: {
             switch(root.edge) {
             case Qt.LeftEdge:
-                return root.background.width * root.position + Units.smallSpacing;
+                return root.background.width * root.position + Kirigami.Units.smallSpacing;
             case Qt.RightEdge:
-                return drawerHandle.parent.width - (root.background.width * root.position) - width - Units.smallSpacing;
+                return drawerHandle.parent.width - (root.background.width * root.position) - width - Kirigami.Units.smallSpacing;
             default:
                 return 0;
             }
         }
-        y: handleAnchor && anchors.bottom ? handleAnchor.ScenePosition.y : 0
+        y: handleAnchor && anchors.bottom ? handleAnchor.Kirigami.ScenePosition.y : 0
 
         anchors {
             bottom: drawerHandle.handleAnchor && drawerHandle.handleAnchor.visible ? undefined : parent.bottom
@@ -243,11 +243,11 @@ T2.Drawer {
 
                 let margin = Units.smallSpacing;
                 if (applicationWindow().footer) {
-                    margin = applicationWindow().footer.height + Units.smallSpacing;
+                    margin = applicationWindow().footer.height + Kirigami.Units.smallSpacing;
                 }
 
                 if(root.parent && root.height < root.parent.height) {
-                    margin = root.parent.height - root.height - root.y + Units.smallSpacing;
+                    margin = root.parent.height - root.height - root.y + Kirigami.Units.smallSpacing;
                 }
 
                 if (!applicationWindow() || !applicationWindow().pageStack ||
@@ -277,19 +277,19 @@ T2.Drawer {
             }
             Behavior on bottomMargin {
                 NumberAnimation {
-                    duration: Units.shortDuration
+                    duration: Kirigami.Units.shortDuration
                     easing.type: Easing.InOutQuad
                 }
             }
         }
 
         visible: root.enabled && (root.edge === Qt.LeftEdge || root.edge === Qt.RightEdge) && opacity > 0
-        width: handleAnchor && handleAnchor.visible ? handleAnchor.width : Units.iconSizes.smallMedium + Units.smallSpacing*2
+        width: handleAnchor && handleAnchor.visible ? handleAnchor.width : Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.smallSpacing*2
         height: handleAnchor && handleAnchor.visible ? handleAnchor.height : width
         opacity: root.handleVisible ? 1 : 0
         Behavior on opacity {
             NumberAnimation {
-                duration: Units.longDuration
+                duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }
@@ -298,7 +298,7 @@ T2.Drawer {
             x: root.handleVisible ? 0 : (root.edge === Qt.LeftEdge ? -drawerHandle.width : drawerHandle.width)
             Behavior on x {
                 NumberAnimation {
-                    duration: Units.longDuration
+                    duration: Kirigami.Units.longDuration
                     easing.type: !root.handleVisible ? Easing.OutQuad : Easing.InQuad
                 }
             }
@@ -308,19 +308,19 @@ T2.Drawer {
 
     interactive: modal
 
-    Theme.inherit: false
-    Theme.colorSet: modal ? Theme.View : Theme.Window
-    Theme.onColorSetChanged: {
-        contentItem.Theme.colorSet = Theme.colorSet
-        background.Theme.colorSet = Theme.colorSet
+    Kirigami.Theme.inherit: false
+    Kirigami.Theme.colorSet: modal ? Kirigami.Theme.View : Kirigami.Theme.Window
+    Kirigami.Theme.onColorSetChanged: {
+        contentItem.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet
+        background.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet
     }
 
 //BEGIN reassign properties
     //default paddings
-    leftPadding: Units.smallSpacing
-    topPadding: Units.smallSpacing
-    rightPadding: Units.smallSpacing
-    bottomPadding: Units.smallSpacing
+    leftPadding: Kirigami.Units.smallSpacing
+    topPadding: Kirigami.Units.smallSpacing
+    rightPadding: Kirigami.Units.smallSpacing
+    bottomPadding: Kirigami.Units.smallSpacing
 
     y: modal ? 0 : ((T2.ApplicationWindow.menuBar ? T2.ApplicationWindow.menuBar.height : 0) + (T2.ApplicationWindow.header ? T2.ApplicationWindow.header.height : 0))
 
@@ -331,7 +331,7 @@ T2.Drawer {
     edge: Qt.LeftEdge
     modal: true
 
-    dragMargin: enabled && (edge === Qt.LeftEdge || edge === Qt.RightEdge) ? Math.min(Units.gridUnit, Qt.styleHints.startDragDistance) : 0
+    dragMargin: enabled && (edge === Qt.LeftEdge || edge === Qt.RightEdge) ? Math.min(Kirigami.Units.gridUnit, Qt.styleHints.startDragDistance) : 0
 
     contentWidth: contentItem.implicitWidth || (contentChildren.length === 1 ? contentChildren[0].implicitWidth : 0)
     contentHeight: contentItem.implicitHeight || (contentChildren.length === 1 ? contentChildren[0].implicitHeight : 0)
@@ -385,7 +385,7 @@ T2.Drawer {
 
 //BEGIN signal handlers
     onCollapsedChanged: {
-        if (Settings.isMobile) {
+        if (Kirigami.SettingsisMobile) {
             collapsed = false;
         }
         if (!__internal.completed) {
@@ -396,7 +396,7 @@ T2.Drawer {
         }
     }
     onCollapsibleChanged: {
-        if (Settings.isMobile) {
+        if (Kirigami.SettingsisMobile) {
             collapsible = false;
         }
         if (!__internal.completed) {
@@ -462,8 +462,8 @@ T2.Drawer {
             root.enter.enabled = true;
         }
         __internal.completed = true;
-        contentItem.Theme.colorSet = Theme.colorSet;
-        background.Theme.colorSet = Theme.colorSet;
+        contentItem.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet;
+        background.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet;
     }
 //END signal handlers
 
@@ -479,7 +479,7 @@ T2.Drawer {
                 target: root
                 to: drawerOpen ? 1 : 0
                 property: "position"
-                duration: (root.position)*Units.longDuration
+                duration: (root.position)*Kirigami.Units.longDuration
             }
             ScriptAction {
                 script: {
@@ -515,7 +515,7 @@ T2.Drawer {
                 reversible: true
                 NumberAnimation {
                     properties: root.edge === Qt.TopEdge || root.edge === Qt.BottomEdge ? "implicitHeight" : "implicitWidth"
-                    duration: Units.longDuration
+                    duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }

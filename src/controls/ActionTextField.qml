@@ -5,8 +5,7 @@
  */
 
 import QtQuick 2.15
-import QtQuick.Controls 2.15 as Controls
-
+import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.20 as Kirigami
 
 /**
@@ -41,7 +40,7 @@ import org.kde.kirigami 2.20 as Kirigami
  * @since 5.56
  * @inherit QtQuick.Controls.TextField
  */
-Controls.TextField {
+QQC2.TextField {
     id: root
 
     /**
@@ -103,7 +102,7 @@ Controls.TextField {
         }
     }
 
-    Controls.ToolTip {
+    QQC2.ToolTip {
         visible: root.focusSequence && root.text.length === 0 && !rightActionsRow.hovered && !leftActionsRow.hovered && hovered
         text: root.focusSequence ? root.focusSequence : ""
     }

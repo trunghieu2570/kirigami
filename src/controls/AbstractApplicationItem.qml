@@ -8,8 +8,8 @@ import QtQuick 2.12
 import QtQml 2.14
 import QtQuick.Templates 2.12 as T
 import QtQuick.Window 2.12
-import "templates/private"
-import org.kde.kirigami 2.14
+import org.kde.kirigami 2.14 as Kirigami
+import "templates/private" as TP
 
 /**
  * @brief An item that provides the features of AbstractApplicationWindow without the window itself.
@@ -80,16 +80,16 @@ Item {
     /**
      * @brief This property holds the font for this item.
      *
-     * default: ``Theme.defaultFont``
+     * default: ``Kirigami.Theme.defaultFont``
      */
-    property font font: Theme.defaultFont
+    property font font: Kirigami.Theme.defaultFont
 
     /**
      * @brief This property holds the palette for this item.
      *
-     * default: ``Theme.palette``
+     * default: ``Kirigami.Theme.palette``
      */
-    property var palette: Theme.palette
+    property var palette: Kirigami.Theme.palette
 
     /**
      * @brief This property holds the locale for this item.
@@ -112,8 +112,8 @@ Item {
     * The minimum, preferred and maximum heights of the item can be controlled with
     *
     * * ``Layout.minimumHeight``: default is 0, i.e. hidden
-    * * ``Layout.preferredHeight``: default is Units.gridUnit * 1.6
-    * * ``Layout.maximumHeight``: default is Units.gridUnit * 3
+    * * ``Layout.preferredHeight``: default is Kirigami.Units.gridUnit * 1.6
+    * * ``Layout.maximumHeight``: default is Kirigami.Units.gridUnit * 3
     *
     * To achieve a titlebar that stays completely fixed, just set the 3 sizes as the same.
     *
@@ -154,7 +154,7 @@ Item {
      *
      * @note Different styles can have their own logic for deciding this.
      */
-    property bool wideScreen: width >= Units.gridUnit * 60
+    property bool wideScreen: width >= Kirigami.Units.gridUnit * 60
 
     /**
      * @brief This property holds the drawer for context-dependent actions.
@@ -254,7 +254,7 @@ Item {
         transform: Translate {
             Behavior on y {
                 NumberAnimation {
-                    duration: Units.longDuration
+                    duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }
@@ -266,9 +266,9 @@ Item {
     /**
      * @brief This property holds the color for the background.
      *
-     * default: ``Theme.backgroundColor``
+     * default: ``Kirigami.Theme.backgroundColor``
      */
-    property color color: Theme.backgroundColor
+    property color color: Kirigami.Theme.backgroundColor
 
     /**
      * @brief This property holds the background of the Application UI.
@@ -436,7 +436,7 @@ Item {
             Icon {
                 anchors.horizontalCenter: parent.horizontalCenter
                 y: x
-                width: Units.iconSizes.large
+                width: Kirigami.Units.iconSizes.large
                 height: width
                 source: "go-up"
             }
@@ -458,8 +458,8 @@ Item {
         restoreMode: Binding.RestoreBinding
     }
 
-    implicitWidth: Units.gridUnit * 30
-    implicitHeight: Units.gridUnit * 45
+    implicitWidth: Kirigami.Units.gridUnit * 30
+    implicitHeight: Kirigami.Units.gridUnit * 45
     visible: true
 
     QtObject {

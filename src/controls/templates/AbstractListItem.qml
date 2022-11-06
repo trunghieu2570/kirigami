@@ -6,7 +6,7 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.0
-import org.kde.kirigami 2.4
+import org.kde.kirigami 2.4 as Kirigami
 // NOTE: This must stay at 2.2 until KF6 due to retrocompatibility of the "icon" property
 import QtQuick.Templates 2.2 as T2
 import QtQuick.Templates 2.4 as QQC2
@@ -91,7 +91,7 @@ T2.ItemDelegate {
      *
      * @since 2.7
      */
-    property color alternateBackgroundColor: Theme.alternateBackgroundColor
+    property color alternateBackgroundColor: Kirigami.Theme.alternateBackgroundColor
 
     /**
      * @brief This property holds the color of the background
@@ -100,18 +100,18 @@ T2.ItemDelegate {
      * It is advised to use the default value.
      * default: ``Kirigami.Theme.highlightColor``
      */
-    property color activeBackgroundColor: Theme.highlightColor
+    property color activeBackgroundColor: Kirigami.Theme.highlightColor
 
     /**
      * @brief This property holds the color of the text in the item.
      *
      * It is advised to use the default value.
-     * default: ``Theme.textColor``
+     * default: ``Kirigami.Theme.textColor``
      *
      * If custom text elements are inserted in an AbstractListItem,
      * their color will have to be manually set with this property.
      */
-    property color textColor: Theme.textColor
+    property color textColor: Kirigami.Theme.textColor
 
     /**
      * @brief This property holds the color of the text when the item is pressed or selected.
@@ -122,7 +122,7 @@ T2.ItemDelegate {
      * If custom text elements are inserted in an AbstractListItem,
      * their color will have to be manually set with this property.
      */
-    property color activeTextColor: Theme.highlightedTextColor
+    property color activeTextColor: Kirigami.Theme.highlightedTextColor
 
     default property alias _default: listItem.contentItem
 
@@ -151,9 +151,9 @@ T2.ItemDelegate {
         checked = Qt.binding(function() { return action.checked });
     }
     //Theme.inherit: false
-    //Theme.colorSet: Theme.View
+    //Theme.colorSet: Kirigami.Theme.View
 
-    padding: Settings.tabletMode ? Units.largeSpacing : Units.smallSpacing
+    padding: Kirigami.Settings.tabletMode ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
 
     leftPadding: padding*2
     topPadding: padding
@@ -161,7 +161,7 @@ T2.ItemDelegate {
     rightPadding: padding*2
     bottomPadding: padding
 
-    implicitWidth: contentItem ? contentItem.implicitWidth + leftPadding + rightPadding : Units.gridUnit * 12
+    implicitWidth: contentItem ? contentItem.implicitWidth + leftPadding + rightPadding : Kirigami.Units.gridUnit * 12
 
     implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
 
