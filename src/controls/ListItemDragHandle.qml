@@ -124,7 +124,7 @@ Item {
             property bool draggingUp
 
             function arrangeItem() {
-                var newIndex = listView.indexAt(1, listView.contentItem.mapFromItem(mouseArea, 0, internal.mouseDownY).y);
+                const newIndex = listView.indexAt(1, listView.contentItem.mapFromItem(mouseArea, 0, internal.mouseDownY).y);
 
                 if (newIndex > -1 && ((internal.draggingUp && newIndex < index) || (!internal.draggingUp && newIndex > index))) {
                     root.moveRequested(index, newIndex);

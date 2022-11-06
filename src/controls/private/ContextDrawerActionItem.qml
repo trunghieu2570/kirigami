@@ -53,7 +53,7 @@ BasicListItem {
         Layout.fillHeight: true
         sourceComponent: modelData.displayComponent
         onStatusChanged: {
-            for (let i in parent.children) {
+            for (const i in parent.children) {
                 const child = parent.children[i];
                 if (child === this) {
                     child.visible = status === Loader.Ready;

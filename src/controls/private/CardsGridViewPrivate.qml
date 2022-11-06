@@ -31,7 +31,7 @@ GridView {
 
         sourceComponent: root._delegateComponent
         onWidthChanged: {
-            let columnIndex = index % root.columns
+            const columnIndex = index % root.columns
             if (index < root.columns) {
                 // calulate left margin per column
                 calculations.leftMargins[columnIndex] = (width + Kirigami.Units.largeSpacing * 2)

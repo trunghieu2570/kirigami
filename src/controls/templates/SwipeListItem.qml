@@ -225,7 +225,7 @@ T.SwipeDelegate {
                 return;
             }
             if (internal.view && Kirigami.Settings.tabletMode && !internal.view.parent.parent._swipeFilter) {
-                var component = Qt.createComponent(Qt.resolvedUrl("../private/SwipeItemEventFilter.qml"));
+                const component = Qt.createComponent(Qt.resolvedUrl("../private/SwipeItemEventFilter.qml"));
                 internal.view.parent.parent._swipeFilter = component.createObject(internal.view.parent.parent);
             }
         }
@@ -236,7 +236,7 @@ T.SwipeDelegate {
         function onTabletModeChanged() {
             if (Kirigami.Settings.tabletMode) {
                 if (!internal.swipeFilterItem) {
-                    var component = Qt.createComponent(Qt.resolvedUrl("../private/SwipeItemEventFilter.qml"));
+                    const component = Qt.createComponent(Qt.resolvedUrl("../private/SwipeItemEventFilter.qml"));
                     listItem.ListView.view.parent.parent._swipeFilter = component.createObject(listItem.ListView.view.parent.parent);
                 }
             } else {
@@ -338,7 +338,7 @@ T.SwipeDelegate {
                 slideAnim.restart();
             }
             onPositionChanged: {
-                var pos = mapToItem(listItem, mouse.x, mouse.y);
+                const pos = mapToItem(listItem, mouse.x, mouse.y);
 
                 if (listItem.LayoutMirroring.enabled) {
                     listItem.swipe.position = Math.max(0, Math.min(openPosition, (pos.x / listItem.width)));
@@ -482,8 +482,8 @@ T.SwipeDelegate {
             if (definitelyVisible) {
                 hasVisibleActions = true;
             } else {
-                var actionCount = listItem.actions.length;
-                for (var i = 0; i < actionCount; i++) {
+                const actionCount = listItem.actions.length;
+                for (let i = 0; i < actionCount; i++) {
                     // Assuming that visible is only false if it is explicitly false, and not just falsy
                     if (listItem.actions[i].visible === false) {
                         continue;

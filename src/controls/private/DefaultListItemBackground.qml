@@ -46,17 +46,17 @@ Rectangle {
         }
         visible: {
             // Whether there is visual feedback (do not show the separator)
-            let visualFeedback = listItem.highlighted || listItem.pressed || listItem.checked || listItem.ListView.isCurrentItem
+            const visualFeedback = listItem.highlighted || listItem.pressed || listItem.checked || listItem.ListView.isCurrentItem
 
             // Show the separator when activeBackgroundColor is set to "transparent",
             // when the item is hovered. Check commit 344aec26.
-            let bgTransparent = !listItem.hovered || listItem.activeBackgroundColor.a === 0
+            const bgTransparent = !listItem.hovered || listItem.activeBackgroundColor.a === 0
 
             // Whether the next item is a section delegate or is from another section (do not show the separator)
-            let anotherSection = listItem.ListView.view === null || listItem.ListView.nextSection === listItem.ListView.section
+            const anotherSection = listItem.ListView.view === null || listItem.ListView.nextSection === listItem.ListView.section
 
             // Whether this item is the last item in the view (do not show the separator)
-            let lastItem = listItem.ListView.view === null || listItem.ListView.count - 1 !== index
+            const lastItem = listItem.ListView.view === null || listItem.ListView.count - 1 !== index
 
             return listItem.separatorVisible && !visualFeedback && bgTransparent
                 && !listItem.sectionDelegate && anotherSection && lastItem

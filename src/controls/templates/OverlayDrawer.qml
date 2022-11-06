@@ -199,7 +199,7 @@ T2.Drawer {
             if (!pressed) {
                 return;
             }
-            var pos = mapToItem(parent, mouse.x - startX, mouse.y);
+            const pos = mapToItem(parent, mouse.x - startX, mouse.y);
             switch(root.edge) {
             case Qt.LeftEdge:
                 root.position = pos.x/root.contentItem.width;
@@ -241,7 +241,7 @@ T2.Drawer {
                     return;
                 }
 
-                var margin = Units.smallSpacing;
+                let margin = Units.smallSpacing;
                 if (applicationWindow().footer) {
                     margin = applicationWindow().footer.height + Units.smallSpacing;
                 }
@@ -256,7 +256,7 @@ T2.Drawer {
                     return margin;
                 }
 
-                var item;
+                let item;
                 if (applicationWindow().pageStack.layers.depth > 1) {
                     item = applicationWindow().pageStack.layers.currentItem;
                 } else {
@@ -268,7 +268,7 @@ T2.Drawer {
                     item = applicationWindow().pageStack.lastItem;
                 }
 
-                var pageFooter = item && item.page ? item.page.footer : (item ? item.footer : undefined);
+                let pageFooter = item && item.page ? item.page.footer : (item ? item.footer : undefined);
                 if (pageFooter && root.parent) {
                     margin = root.height < root.parent.height ? margin : margin + pageFooter.height
                 }

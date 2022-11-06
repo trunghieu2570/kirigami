@@ -147,7 +147,6 @@ Page {
     }
 
     implicitWidth: {
-        let width = 0;
         if (flickable) {
             if (flickable.contentItem) {
                 return flickable.contentItem.implicitWidth;
@@ -206,8 +205,8 @@ Page {
             height: Math.max(root.flickable.height, implicitHeight)
             implicitHeight: {
                 let impl = 0;
-                for (let i in itemsParent.visibleChildren) {
-                    let child = itemsParent.visibleChildren[i];
+                for (const i in itemsParent.visibleChildren) {
+                    const child = itemsParent.visibleChildren[i];
                     if (child.implicitHeight <= 0) {
                         impl = Math.max(impl, child.height);
                     } else {
@@ -227,7 +226,7 @@ Page {
                     bottomMargin: root.bottomPadding
                 }
                 onChildrenChanged: {
-                    let child = children[children.length - 1];
+                    const child = children[children.length - 1];
                     if (child instanceof QQC2.ScrollView) {
                         print("Warning: it's not supported to have ScrollViews inside a ScrollablePage")
                     }
@@ -317,8 +316,8 @@ Page {
 
     Component.onCompleted: {
         let flickableFound = false;
-        for (let i in itemsParent.data) {
-            let child = itemsParent.data[i];
+        for (const i in itemsParent.data) {
+            const child = itemsParent.data[i];
             if (child instanceof Flickable) {
                 // If there were more flickable children, take the last one, as behavior compatibility
                 // with old internal ScrollView

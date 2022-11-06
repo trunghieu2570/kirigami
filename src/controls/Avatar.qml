@@ -191,11 +191,11 @@ QQC2.Control {
             anchors.fill: parent
             hoverEnabled: true
             property bool mouseInCircle: {
-                let x = avatarRoot.width / 2, y = avatarRoot.height / 2
-                let xPrime = mouseX, yPrime = mouseY
+                const x = avatarRoot.width / 2, y = avatarRoot.height / 2
+                const xPrime = mouseX, yPrime = mouseY
 
-                let distance = (x - xPrime) ** 2 + (y - yPrime) ** 2
-                let radiusSquared = (Math.min(avatarRoot.width, avatarRoot.height) / 2) ** 2
+                const distance = (x - xPrime) ** 2 + (y - yPrime) ** 2
+                const radiusSquared = (Math.min(avatarRoot.width, avatarRoot.height) / 2) ** 2
 
                 return distance < radiusSquared
             }

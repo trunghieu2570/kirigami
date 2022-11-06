@@ -319,9 +319,9 @@ Item
                 repeat: false
                 interval: 1
                 onTriggered: {
-                    var hasAnyRemotes = false;
-                    for (var i = 0; i < authorsRepeater.count; ++i) {
-                        var itm = authorsRepeater.itemAt(i);
+                    let hasAnyRemotes = false;
+                    for (let i = 0; i < authorsRepeater.count; ++i) {
+                        const itm = authorsRepeater.itemAt(i);
                         if (itm.hasRemoteAvatar) {
                             hasAnyRemotes = true;
                             break;

@@ -100,7 +100,7 @@ Kirigami.Action {
     function layerContainsPage() {
         if (!useLayers || !pageStack.hasOwnProperty("layers")) return false
 
-        var found = pageStack.layers.find((item, index) => {
+        const found = pageStack.layers.find((item, index) => {
             return item === pagePool.pageForUrl(page)
         })
         return found ? true: false
@@ -135,7 +135,7 @@ Kirigami.Action {
             }
         }
 
-        let pageStack_ = useLayers ? pageStack.layers : pageStack
+        const pageStack_ = useLayers ? pageStack.layers : pageStack
 
         if (initialProperties && typeof(initialProperties) !== "object") {
             console.warn("initialProperties must be of type object");
@@ -158,7 +158,7 @@ Kirigami.Action {
                                pagePool.loadPageWithProperties(page, initialProperties) :
                                pagePool.loadPage(page));
         } else {
-            var callback = function(item) {
+            const callback = function(item) {
                 if (basePage) {
                     pageStack_.pop(basePage);
 

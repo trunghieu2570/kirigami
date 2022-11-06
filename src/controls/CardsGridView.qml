@@ -49,10 +49,10 @@ CardsGridViewPrivate {
      * @since 2.5
      */
     readonly property int columns: {
-        var maxColumns = maximumColumns > 0 ? maximumColumns : Infinity
-        var minFromWidth = Math.floor(width / minimumColumnWidth)
-        var maxFromWidth = Math.ceil(width / maximumColumnWidth)
-        var extraCount = extraColumns ? Infinity : count
+        const maxColumns = maximumColumns > 0 ? maximumColumns : Infinity
+        const minFromWidth = Math.floor(width / minimumColumnWidth)
+        const maxFromWidth = Math.ceil(width / maximumColumnWidth)
+        const extraCount = extraColumns ? Infinity : count
         return Math.max(1,Math.min(maxColumns,minFromWidth,maxFromWidth,extraCount))
     }
 

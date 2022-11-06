@@ -63,7 +63,7 @@ AbstractPageHeader {
                     return []
                 }
 
-                var result = []
+                const result = []
 
                 if (page.actions.main) {
                     result.push(page.actions.main)
@@ -75,9 +75,8 @@ AbstractPageHeader {
                     result.push(page.actions.right)
                 }
                 if (page.actions.contextualActions.length > 0) {
-                    result = result.concat(Array.prototype.map.call(page.actions.contextualActions, function(item) { return item }))
+                    return result.concat(Array.prototype.map.call(page.actions.contextualActions, function(item) { return item }))
                 }
-
                 return result
             }
 

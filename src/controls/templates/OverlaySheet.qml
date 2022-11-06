@@ -284,9 +284,7 @@ QtObject {
         readonly property int contentItemMaximumWidth: root.contentItem.Layout.maximumWidth > 0 ? Math.min(root.contentItem.Layout.maximumWidth, absoluteContentItemMaximumWidth) : width > Units.gridUnit * 30 ? width * 0.95 : absoluteContentItemMaximumWidth
 
         onHeightChanged: {
-            var focusItem;
-
-            focusItem = Window.activeFocusItem;
+            const focusItem = Window.activeFocusItem;
 
             if (!focusItem) {
                 return;
@@ -294,8 +292,8 @@ QtObject {
 
             // NOTE: there is no function to know if an item is descended from another,
             // so we have to walk the parent hierarchy by hand
-            var isDescendent = false;
-            var candidate = focusItem.parent;
+            let isDescendent = false;
+            let candidate = focusItem.parent;
             while (candidate) {
                 if (candidate === root) {
                     isDescendent = true;
@@ -307,13 +305,13 @@ QtObject {
                 return;
             }
 
-            var cursorY = 0;
+            let cursorY = 0;
             if (focusItem.cursorPosition !== undefined) {
                 cursorY = focusItem.positionToRectangle(focusItem.cursorPosition).y;
             }
 
 
-            var pos = focusItem.mapToItem(flickableContents, 0, cursorY - Units.gridUnit*3);
+            const pos = focusItem.mapToItem(flickableContents, 0, cursorY - Units.gridUnit*3);
             // focused item already visible? add some margin for the space of the action buttons
             if (pos.y >= scrollView.flickableItem.contentY && pos.y <= scrollView.flickableItem.contentY + scrollView.flickableItem.height - Units.gridUnit * 8) {
                 return;
@@ -394,14 +392,14 @@ QtObject {
             hoverEnabled: true
 
             onPressed: {
-                let pos = mapToItem(contentLayout, mouse.x, mouse.y);
+                const pos = mapToItem(contentLayout, mouse.x, mouse.y);
                 if (contentLayout.contains(pos) && mouseHover.hovered) { // only on mouse event, not touch
                     // disable dragging the sheet with a mouse
                     outerFlickable.interactive = false
                 }
             }
             onReleased: {
-                let pos = mapToItem(contentLayout, mouse.x, mouse.y);
+                const pos = mapToItem(contentLayout, mouse.x, mouse.y);
                 if (!contentLayout.contains(pos)) {
                     root.close();
                 }
@@ -526,9 +524,9 @@ QtObject {
                         return;
                     }
 
-                    let startPos = -scrollView.flickableItem.topMargin - flickableContents.listHeaderHeight;
-                    let pos = contentY - topEmptyArea - flickableContents.listHeaderHeight;
-                    let endPos = scrollView.animatedContentHeight - scrollView.flickableItem.height + scrollView.flickableItem.bottomMargin - flickableContents.listHeaderHeight;
+                    const startPos = -scrollView.flickableItem.topMargin - flickableContents.listHeaderHeight;
+                    const pos = contentY - topEmptyArea - flickableContents.listHeaderHeight;
+                    const endPos = scrollView.animatedContentHeight - scrollView.flickableItem.height + scrollView.flickableItem.bottomMargin - flickableContents.listHeaderHeight;
 
                     layoutMovingGuard = true;
                     if (endPos - pos > 0) {
@@ -747,7 +745,7 @@ QtObject {
                             }
                             scrollView.userInteracting = true;
 
-                            let diff = scrollView.flickableItem.contentY - oldContentY
+                            const diff = scrollView.flickableItem.contentY - oldContentY
 
                             outerFlickable.contentY = outerFlickable.contentY + diff;
 

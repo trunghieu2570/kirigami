@@ -23,11 +23,11 @@ MouseArea {
     preventStealing: true
     width: Units.gridUnit
     onPressed: {
-        var mapped = mapToItem(parent.flickableItem.contentItem, mouse.x, mouse.y);
+        const mapped = mapToItem(parent.flickableItem.contentItem, mouse.x, mouse.y);
         currentItem = parent.flickableItem.itemAt(mapped.x, mapped.y);
     }
     onPositionChanged: {
-        var mapped = mapToItem(parent.flickableItem.contentItem, mouse.x, mouse.y);
+        const mapped = mapToItem(parent.flickableItem.contentItem, mouse.x, mouse.y);
         currentItem = parent.flickableItem.itemAt(mapped.x, mapped.y);
         peek = 1 - mapped.x / parent.flickableItem.contentItem.width;
     }

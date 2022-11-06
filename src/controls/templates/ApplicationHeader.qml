@@ -99,7 +99,7 @@ AbstractApplicationHeader {
 //BEGIN signal handlers
     onBackButtonEnabledChanged: {
         if (backButtonEnabled && !titleList.backButton) {
-            var component = Qt.createComponent(Qt.resolvedUrl("private/BackButton.qml"));
+            let component = Qt.createComponent(Qt.resolvedUrl("private/BackButton.qml"));
             titleList.backButton = component.createObject(navButtons);
             component = Qt.createComponent(Qt.resolvedUrl("private/ForwardButton.qml"));
             titleList.forwardButton = component.createObject(navButtons, {"headerFlickable": titleList});
@@ -261,8 +261,8 @@ AbstractApplicationHeader {
                 return;
             }
             listScrollAnim.running = false
-            var pos = titleList.contentX;
-            var destPos;
+            const pos = titleList.contentX;
+            let destPos;
             titleList.contentX = Math.max(((contentItem.children[idx] || {x: 0}).x + (contentItem.children[idx] || {width: 0}).width) - titleList.width, Math.min(titleList.contentX, (contentItem.children[idx] || {x: 0}).x));
             destPos = titleList.contentX;
             listScrollAnim.from = pos;

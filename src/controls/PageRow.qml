@@ -219,7 +219,7 @@ T.Control {
      * @return The new created page (or the last one if it was an array)
      */
     function push(page, properties) {
-        var item = insertPage(depth, page, properties);
+        const item = insertPage(depth, page, properties);
         currentIndex = depth - 1;
         return item;
     }
@@ -405,8 +405,8 @@ T.Control {
         columnView.pop(columnView.currentItem);
 
         // figure out if more than one page is being pushed
-        var pages;
-        var propsArray = [];
+        let pages;
+        let propsArray = [];
         if (page instanceof Array) {
             pages = page;
             page = pages.pop();
@@ -425,10 +425,9 @@ T.Control {
 
         // push any extra defined pages onto the stack
         if (pages) {
-            var i;
-            for (i = 0; i < pages.length; i++) {
-                var tPage = pages[i];
-                var tProps = propsArray[i];
+            for (let i = 0; i < pages.length; i++) {
+                let tPage = pages[i];
+                let tProps = propsArray[i];
                 //compatibility with pre-qqc1 api, can probably be removed
                 if (tPage.createObject === undefined && tPage.parent === undefined && typeof tPage !== "string") {
                     if (columnView.containsItem(tPage)) {
@@ -439,13 +438,13 @@ T.Control {
                     tPage = tPage.page;
                 }
 
-                var pageItem = pagesLogic.initAndInsertPage(position, tPage, tProps);
+                pagesLogic.initAndInsertPage(position, tPage, tProps);
                 ++position;
             }
         }
 
         // initialize the page
-        var pageItem = pagesLogic.initAndInsertPage(position, page, properties);
+        const pageItem = pagesLogic.initAndInsertPage(position, page, properties);
 
         pagePushed(pageItem);
 
@@ -519,8 +518,8 @@ T.Control {
         }
 
         // Figure out if more than one page is being pushed.
-        var pages;
-        var propsArray = [];
+        let pages;
+        let propsArray = [];
         if (page instanceof Array) {
             pages = page;
             page = pages.shift();
@@ -533,7 +532,7 @@ T.Control {
         }
 
         // Replace topmost page.
-        var pageItem = pagesLogic.initPage(page, properties);
+        let pageItem = pagesLogic.initPage(page, properties);
         if (depth > 0)
             columnView.replaceItem(depth - 1, pageItem);
         else {
@@ -544,12 +543,11 @@ T.Control {
 
         // Push any extra defined pages onto the stack.
         if (pages) {
-            var i;
-            for (i = 0; i < pages.length; i++) {
-                var tPage = pages[i];
-                var tProps = propsArray[i];
+            for (let i = 0; i < pages.length; i++) {
+                const tPage = pages[i];
+                const tProps = propsArray[i];
 
-                var pageItem = pagesLogic.initPage(tPage, tProps);
+                pageItem = pagesLogic.initPage(tPage, tProps);
                 columnView.addItem(pageItem);
                 pagePushed(pageItem);
             }
@@ -695,8 +693,8 @@ T.Control {
         target: root.leftSidebar
         function onModalChanged() {
             if (leftSidebar.modal) {
-                let sidebar = sidebarControl.contentItem;
-                let background = sidebarControl.background;
+                const sidebar = sidebarControl.contentItem;
+                const background = sidebarControl.background;
                 sidebarControl.contentItem = null;
                 leftSidebar.contentItem = sidebar;
                 sidebarControl.background = null;
@@ -705,8 +703,8 @@ T.Control {
                 sidebar.visible = true;
                 background.visible = true;
             } else {
-                let sidebar = leftSidebar.contentItem
-                let background = leftSidebar.background
+                const sidebar = leftSidebar.contentItem
+                const background = leftSidebar.background
                 leftSidebar.contentItem=null
                 sidebarControl.contentItem = sidebar
                 leftSidebar.background=null
@@ -752,8 +750,8 @@ T.Control {
 
         function clear () {
             // don't let it kill the main page row
-            var d = layersStack.depth;
-            for (var i = 1; i < d; ++i) {
+            const d = layersStack.depth;
+            for (let i = 1; i < d; ++i) {
                 pop();
             }
         }
@@ -871,7 +869,7 @@ T.Control {
         readonly property var componentCache: new Array()
 
         function getPageComponent(page) {
-            var pageComp;
+            let pageComp;
 
             if (page.createObject) {
                 // page defined as component
@@ -894,7 +892,7 @@ T.Control {
         }
 
         function initPage(page, properties) {
-            var pageComp = getPageComponent(page, properties);
+            const pageComp = getPageComponent(page, properties);
 
             if (pageComp) {
                 // instantiate page from component
@@ -906,7 +904,7 @@ T.Control {
                 }
             } else {
                 // copy properties to the page
-                for (var prop in properties) {
+                for (const prop in properties) {
                     if (properties.hasOwnProperty(prop)) {
                         page[prop] = properties[prop];
                     }

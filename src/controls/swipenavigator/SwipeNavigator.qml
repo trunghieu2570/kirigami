@@ -174,8 +174,8 @@ Item {
 
         function clear() {
             // don't let it kill the main page row
-            var d = stackView.depth;
-            for (var i = 1; i < d; ++i) {
+            const d = stackView.depth;
+            for (let i = 1; i < d; ++i) {
                 pop();
             }
         }

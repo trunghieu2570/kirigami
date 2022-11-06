@@ -514,8 +514,8 @@ OverlayDrawer {
                             id: actionsRepeater
 
                             readonly property bool withSections: {
-                                for (var i = 0; i < root.actions.length; i++) {
-                                    let action = root.actions[i];
+                                for (let i = 0; i < root.actions.length; i++) {
+                                    const action = root.actions[i];
                                     if (!(action.hasOwnProperty("expandible") && action.expandible)) {
                                         return false;
                                     }

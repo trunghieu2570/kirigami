@@ -180,8 +180,8 @@ Item {
                 if (root.hasGlobalDrawer) globalDrawer.peeking = false;
                 if (root.hasContextDrawer) contextDrawer.peeking = false;
                 // pixel/second
-                var x = button.x + button.width/2;
-                var speed = ((x - startX) / ((new Date()).getTime() - downTimestamp) * 1000);
+                const x = button.x + button.width/2;
+                const speed = ((x - startX) / ((new Date()).getTime() - downTimestamp) * 1000);
                 drawerShowAdjust = 0;
 
                 // project where it would be a full second in the future
@@ -217,7 +217,7 @@ Item {
                     }
 
                     if (actionUnderMouse && actionUnderMouse.hasOwnProperty("children") && actionUnderMouse.children.length > 0) {
-                        var subMenuUnderMouse;
+                        let subMenuUnderMouse;
                         switch (actionUnderMouse) {
                         case leftAction:
                             subMenuUnderMouse = leftActionSubMenu;
@@ -503,7 +503,7 @@ Item {
             if (contextDrawer) {
                 contextDrawer.peeking = false;
             }
-            var pos = root.mapFromItem(fakeContextMenuButton, mouse.x, mouse.y);
+            const pos = root.mapFromItem(fakeContextMenuButton, mouse.x, mouse.y);
             if (contextDrawer) {
                 if (pos.x < root.width/2) {
                     contextDrawer.open();

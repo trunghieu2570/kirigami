@@ -130,7 +130,7 @@ T.ToolBar {
      * @brief The property holds the maximum width of the toolbar actions, before margins are added.
      */
     property real maximumContentWidth: {
-        let minDelegateWidth = Kirigami.Units.gridUnit * 5;
+        const minDelegateWidth = Kirigami.Units.gridUnit * 5;
         // always have at least the width of 5 items (so small amounts of actions look natural)
         return Math.max(minDelegateWidth * actions.length, minDelegateWidth * 5);
     }

@@ -63,7 +63,7 @@ Controls.Popup {
             outerLayout.children[i].close();
         }
 
-        let delegate = delegateComponent.createObject(outerLayout, {
+        delegateComponent.createObject(outerLayout, {
             "text": message,
             "actionText": actionText || "",
             "callBack": callBack || (function(){}),
@@ -71,8 +71,8 @@ Controls.Popup {
         });
 
         // Reorder items to have the last on top
-        let children = outerLayout.children;
-        for (let i in children) {
+        const children = outerLayout.children;
+        for (const i in children) {
             children[i].Layout.row = children.length-1-i;
         }
     }

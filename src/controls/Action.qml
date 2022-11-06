@@ -134,8 +134,8 @@ Controls.Action {
 //END properties
 
     onChildrenChanged: {
-        var child;
-        for (var i in children) {
+        let child;
+        for (const i in children) {
             child = children[i];
             if (child.hasOwnProperty("parent")) {
                 child.parent = root
@@ -148,8 +148,8 @@ Controls.Action {
      * @property list<Action> visibleChildren
      */
     readonly property var visibleChildren: {
-        let visible = [];
-        for (let i in children) {
+        const visible = [];
+        for (const i in children) {
             const child = children[i];
             if (!child.hasOwnProperty("visible") || child.visible) {
                 visible.push(child);
