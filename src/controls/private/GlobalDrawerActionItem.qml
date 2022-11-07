@@ -23,7 +23,7 @@ Kirigami.AbstractListItem {
     width: parent.width
 
     contentItem: RowLayout {
-        spacing: Units.largeSpacing
+        spacing: Kirigami.Units.largeSpacing
 
         Kirigami.Icon {
             id: iconItem
