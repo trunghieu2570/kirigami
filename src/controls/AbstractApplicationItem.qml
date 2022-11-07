@@ -433,7 +433,7 @@ Item {
             anchors.fill: parent
             color: Qt.rgba(0, 0, 0, 0.3)
             opacity: 0.15
-            Icon {
+            Kirigami.Icon {
                 anchors.horizontalCenter: parent.horizontalCenter
                 y: x
                 width: Kirigami.Units.iconSizes.large
