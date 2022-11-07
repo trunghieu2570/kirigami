@@ -241,7 +241,7 @@ T2.Drawer {
                     return;
                 }
 
-                let margin = Units.smallSpacing;
+                let margin = Kirigami.Units.smallSpacing;
                 if (applicationWindow().footer) {
                     margin = applicationWindow().footer.height + Kirigami.Units.smallSpacing;
                 }

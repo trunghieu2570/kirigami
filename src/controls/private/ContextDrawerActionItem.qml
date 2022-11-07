@@ -69,7 +69,7 @@ Kirigami.BasicListItem {
     Kirigami.Icon {
         isMask: true
         Layout.alignment: Qt.AlignVCenter
-        Layout.preferredHeight: Units.iconSizes.small/2
+        Layout.preferredHeight: Kirigami.Units.iconSizes.small/2
         selected: listItem.checked || listItem.pressed
         Layout.preferredWidth: Layout.preferredHeight
         source: "go-up-symbolic"
