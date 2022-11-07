@@ -112,7 +112,7 @@ msgctxt "AboutPage|"
 msgid "Report Bug…"
 msgstr ""
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:349
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "ਬਾਹਰ"
@@ -133,22 +133,22 @@ msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr ""
 
-#: controls/ContextDrawer.qml:69
+#: controls/ContextDrawer.qml:66
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "ਕਾਰਵਾਈਆਂ"
 
-#: controls/GlobalDrawer.qml:497
+#: controls/GlobalDrawer.qml:495
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "ਪਿੱਛੇ"
 
-#: controls/GlobalDrawer.qml:590
+#: controls/GlobalDrawer.qml:588
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "ਬਾਹੀ ਬੰਦ ਕਰੋ"
 
-#: controls/GlobalDrawer.qml:593
+#: controls/GlobalDrawer.qml:591
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
@@ -166,7 +166,7 @@ msgctxt "PasswordField|"
 msgid "Password"
 msgstr "ਪਾਸਵਰਡ"
 
-#: controls/SearchField.qml:96
+#: controls/SearchField.qml:94
 #, fuzzy
 #| msgctxt "SearchField|"
 #| msgid "Search"
@@ -174,7 +174,7 @@ msgctxt "SearchField|"
 msgid "Search…"
 msgstr "ਖੋਜੋ"
 
-#: controls/SearchField.qml:98
+#: controls/SearchField.qml:96
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "ਖੋਜੋ"
@@ -192,7 +192,7 @@ msgid "Settings — %1"
 msgstr ""
 
 #. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
-#: controls/swipenavigator/templates/PageTab.qml:39
+#: controls/swipenavigator/templates/PageTab.qml:38
 #, fuzzy, qt-format
 #| msgctxt "PrivateSwipeTab|"
 #| msgid "Current page. Progress: %1 percent."
@@ -201,7 +201,7 @@ msgid "Current page. Progress: %1 percent."
 msgstr "ਮੌਜੂਦਾ ਸਫ਼ਾ। ਤਰੱਕੀ: %1 ਫ਼ੀਸਦੀ"
 
 #. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:42
+#: controls/swipenavigator/templates/PageTab.qml:41
 #, fuzzy, qt-format
 #| msgctxt "PrivateSwipeTab|"
 #| msgid "Navigate to %1. Progress: %2 percent."
@@ -210,7 +210,7 @@ msgid "Navigate to %1. Progress: %2 percent."
 msgstr "%1 ਉੱਤੇ ਜਾਓ। ਤਰੱਕੀ: %2 ਫ਼ੀਸਦੀ"
 
 #. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:47
+#: controls/swipenavigator/templates/PageTab.qml:46
 #, fuzzy
 #| msgctxt "PrivateSwipeTab|"
 #| msgid "Current page."
@@ -219,7 +219,7 @@ msgid "Current page."
 msgstr "ਮੌਜੂਦਾ ਸਫ਼ਾ।"
 
 #. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:50
+#: controls/swipenavigator/templates/PageTab.qml:49
 #, fuzzy, qt-format
 #| msgctxt "PrivateSwipeTab|"
 #| msgid "Navigate to %1. Demanding attention."
@@ -228,7 +228,7 @@ msgid "Navigate to %1. Demanding attention."
 msgstr "%1 ਉੱਤੇ ਜਾਓ। ਧਿਆਨ ਦੇਣ ਦੀ ਲੋੜ ਹੈ।"
 
 #. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:53
+#: controls/swipenavigator/templates/PageTab.qml:52
 #, fuzzy, qt-format
 #| msgctxt "PrivateSwipeTab|"
 #| msgid "Navigate to %1."
@@ -249,12 +249,12 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr ""
 
-#: controls/templates/private/BackButton.qml:36
+#: controls/templates/private/BackButton.qml:34
 msgctxt "BackButton|"
 msgid "Navigate Back"
 msgstr "ਪਿੱਛੇ ਜਾਓ"
 
-#: controls/templates/private/ForwardButton.qml:34
+#: controls/templates/private/ForwardButton.qml:32
 msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "ਅੱਗੇ ਜਾਓ"

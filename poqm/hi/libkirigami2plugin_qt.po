@@ -118,7 +118,7 @@ msgctxt "AboutPage|"
 msgid "Report Bug…"
 msgstr ""
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:349
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "बाहर जाएँ"
@@ -139,22 +139,22 @@ msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr ""
 
-#: controls/ContextDrawer.qml:69
+#: controls/ContextDrawer.qml:66
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "क्रियाएं"
 
-#: controls/GlobalDrawer.qml:497
+#: controls/GlobalDrawer.qml:495
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "पीछे"
 
-#: controls/GlobalDrawer.qml:590
+#: controls/GlobalDrawer.qml:588
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "बाजूपट्टी बंद करें"
 
-#: controls/GlobalDrawer.qml:593
+#: controls/GlobalDrawer.qml:591
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
@@ -172,12 +172,12 @@ msgctxt "PasswordField|"
 msgid "Password"
 msgstr "कूटशब्द"
 
-#: controls/SearchField.qml:96
+#: controls/SearchField.qml:94
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "खोजें…"
 
-#: controls/SearchField.qml:98
+#: controls/SearchField.qml:96
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "खोजें"
@@ -197,34 +197,34 @@ msgid "Settings — %1"
 msgstr "विन्यास"
 
 #. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
-#: controls/swipenavigator/templates/PageTab.qml:39
+#: controls/swipenavigator/templates/PageTab.qml:38
 #, qt-format
 msgctxt "PageTab|"
 msgid "Current page. Progress: %1 percent."
 msgstr "वर्तमान पृष्ठ। प्रगती : %1 प्रतिशत।"
 
 #. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:42
+#: controls/swipenavigator/templates/PageTab.qml:41
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1. Progress: %2 percent."
 msgstr "%1 पर जाएँ। प्रगती : %2 प्रतिशत।"
 
 #. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:47
+#: controls/swipenavigator/templates/PageTab.qml:46
 msgctxt "PageTab|"
 msgid "Current page."
 msgstr "वर्तमान पृष्ठ।"
 
 #. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:50
+#: controls/swipenavigator/templates/PageTab.qml:49
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1. Demanding attention."
 msgstr "%1 पर जाएँ। ध्यान देने की मांग कर रहा है।"
 
 #. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:53
+#: controls/swipenavigator/templates/PageTab.qml:52
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1."
@@ -243,12 +243,12 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr ""
 
-#: controls/templates/private/BackButton.qml:36
+#: controls/templates/private/BackButton.qml:34
 msgctxt "BackButton|"
 msgid "Navigate Back"
 msgstr "पीछे जाएँ"
 
-#: controls/templates/private/ForwardButton.qml:34
+#: controls/templates/private/ForwardButton.qml:32
 msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "आगे जाएँ"

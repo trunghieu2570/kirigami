@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
-"PO-Revision-Date: 2022-10-30 07:48\n"
+"PO-Revision-Date: 2022-11-06 01:06\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -90,7 +90,7 @@ msgctxt "AboutPage|"
 msgid "Report Bug…"
 msgstr "报告程序缺陷…"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:349
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "退出"
@@ -111,22 +111,22 @@ msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr "移除标签"
 
-#: controls/ContextDrawer.qml:69
+#: controls/ContextDrawer.qml:66
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "操作"
 
-#: controls/GlobalDrawer.qml:497
+#: controls/GlobalDrawer.qml:495
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "返回"
 
-#: controls/GlobalDrawer.qml:590
+#: controls/GlobalDrawer.qml:588
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "关闭侧栏"
 
-#: controls/GlobalDrawer.qml:593
+#: controls/GlobalDrawer.qml:591
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "打开侧边栏"
@@ -141,12 +141,12 @@ msgctxt "PasswordField|"
 msgid "Password"
 msgstr "密码"
 
-#: controls/SearchField.qml:96
+#: controls/SearchField.qml:94
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "搜索…"
 
-#: controls/SearchField.qml:98
+#: controls/SearchField.qml:96
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "搜索"
@@ -164,34 +164,34 @@ msgid "Settings — %1"
 msgstr "设置 — %1"
 
 #. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
-#: controls/swipenavigator/templates/PageTab.qml:39
+#: controls/swipenavigator/templates/PageTab.qml:38
 #, qt-format
 msgctxt "PageTab|"
 msgid "Current page. Progress: %1 percent."
 msgstr "当前页面。进度：百分之 %1。"
 
 #. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:42
+#: controls/swipenavigator/templates/PageTab.qml:41
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1. Progress: %2 percent."
 msgstr "前往 %1。进度：百分之 %2。"
 
 #. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:47
+#: controls/swipenavigator/templates/PageTab.qml:46
 msgctxt "PageTab|"
 msgid "Current page."
 msgstr "当前页面。"
 
 #. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:50
+#: controls/swipenavigator/templates/PageTab.qml:49
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1. Demanding attention."
 msgstr "前往 %1。要求关注。"
 
 #. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:53
+#: controls/swipenavigator/templates/PageTab.qml:52
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1."
@@ -207,12 +207,12 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "打开抽屉栏"
 
-#: controls/templates/private/BackButton.qml:36
+#: controls/templates/private/BackButton.qml:34
 msgctxt "BackButton|"
 msgid "Navigate Back"
 msgstr "后退"
 
-#: controls/templates/private/ForwardButton.qml:34
+#: controls/templates/private/ForwardButton.qml:32
 msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "前进"

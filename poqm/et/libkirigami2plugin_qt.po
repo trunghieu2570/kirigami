@@ -113,7 +113,7 @@ msgctxt "AboutPage|"
 msgid "Report Bug…"
 msgstr ""
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:349
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr ""
@@ -134,22 +134,22 @@ msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr ""
 
-#: controls/ContextDrawer.qml:69
+#: controls/ContextDrawer.qml:66
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Toimingud"
 
-#: controls/GlobalDrawer.qml:497
+#: controls/GlobalDrawer.qml:495
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Tagasi"
 
-#: controls/GlobalDrawer.qml:590
+#: controls/GlobalDrawer.qml:588
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Sulge külgriba"
 
-#: controls/GlobalDrawer.qml:593
+#: controls/GlobalDrawer.qml:591
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
@@ -167,7 +167,7 @@ msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Parool"
 
-#: controls/SearchField.qml:96
+#: controls/SearchField.qml:94
 #, fuzzy
 #| msgctxt "SearchField|"
 #| msgid "Search"
@@ -175,7 +175,7 @@ msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Otsi"
 
-#: controls/SearchField.qml:98
+#: controls/SearchField.qml:96
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "Otsi"
@@ -193,34 +193,34 @@ msgid "Settings — %1"
 msgstr ""
 
 #. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
-#: controls/swipenavigator/templates/PageTab.qml:39
+#: controls/swipenavigator/templates/PageTab.qml:38
 #, qt-format
 msgctxt "PageTab|"
 msgid "Current page. Progress: %1 percent."
 msgstr ""
 
 #. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:42
+#: controls/swipenavigator/templates/PageTab.qml:41
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1. Progress: %2 percent."
 msgstr ""
 
 #. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:47
+#: controls/swipenavigator/templates/PageTab.qml:46
 msgctxt "PageTab|"
 msgid "Current page."
 msgstr ""
 
 #. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:50
+#: controls/swipenavigator/templates/PageTab.qml:49
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1. Demanding attention."
 msgstr ""
 
 #. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:53
+#: controls/swipenavigator/templates/PageTab.qml:52
 #, fuzzy, qt-format
 #| msgctxt "ForwardButton|"
 #| msgid "Navigate Forward"
@@ -241,12 +241,12 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr ""
 
-#: controls/templates/private/BackButton.qml:36
+#: controls/templates/private/BackButton.qml:34
 msgctxt "BackButton|"
 msgid "Navigate Back"
 msgstr "Liigu tagasi"
 
-#: controls/templates/private/ForwardButton.qml:34
+#: controls/templates/private/ForwardButton.qml:32
 msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "Liigu edasi"
