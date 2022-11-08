@@ -220,7 +220,7 @@ msgctxt "ToolBarApplicationHeader|"
 msgid "More Actions"
 msgstr "더 많은 동작"
 
-#: controls/UrlButton.qml:47
+#: controls/UrlButton.qml:48
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "클립보드에 링크 복사"

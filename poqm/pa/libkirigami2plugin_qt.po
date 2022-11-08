@@ -264,7 +264,7 @@ msgctxt "ToolBarApplicationHeader|"
 msgid "More Actions"
 msgstr "ਹੋਰ ਕਾਰਵਾਈਆਂ"
 
-#: controls/UrlButton.qml:47
+#: controls/UrlButton.qml:48
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr ""

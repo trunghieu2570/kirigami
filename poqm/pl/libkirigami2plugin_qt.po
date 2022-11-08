@@ -221,7 +221,7 @@ msgctxt "ToolBarApplicationHeader|"
 msgid "More Actions"
 msgstr "Więcej działań"
 
-#: controls/UrlButton.qml:47
+#: controls/UrlButton.qml:48
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Skopiuj odnośnik do schowka"
