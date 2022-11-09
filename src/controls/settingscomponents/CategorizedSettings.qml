@@ -42,7 +42,7 @@ Kirigami.PageRow {
     }
     columnView.columnWidth: {
         if(!pageSettingStack.completed || actions.length === 0) {
-            return Units.gridUnit * 6  // we return the min width if the component isn't completed
+            return Kirigami.Units.gridUnit * 6  // we return the min width if the component isn't completed
         }
         let longestWord = "";
         for (let i = 0; i < actions.length; i++) {
@@ -61,9 +61,9 @@ Kirigami.PageRow {
         const vScrollBarWidth = initialPage.contentItem.QQC2.ScrollBar.vertical.width;
 
         // we need to add spacing from ListView's item delegate and it's items
-        const calcWidth = maxWordMetrics.width + Units.smallSpacing * 6 + vScrollBarWidth;
-        const minWidth = Units.gridUnit * 6;
-        const maxWidth = Units.gridUnit * 8.5;
+        const calcWidth = maxWordMetrics.width + Kirigami.Units.smallSpacing * 6 + vScrollBarWidth;
+        const minWidth = Kirigami.Units.gridUnit * 6;
+        const maxWidth = Kirigami.Units.gridUnit * 8.5;
 
         return Math.max(minWidth, Math.min(calcWidth, maxWidth));
     }
