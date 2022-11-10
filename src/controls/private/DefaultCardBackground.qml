@@ -71,7 +71,7 @@ Kirigami.ShadowedRectangle {
 //END properties
     
     color: {
-        if (root.clickFeedback && (root.parent.down || root.parent.highlighted))
+        if (root.parent.checked || (root.clickFeedback && (root.parent.down || root.parent.highlighted)))
             return root.pressedColor
         else if (root.hoverFeedback && root.parent.hovered)
             return root.hoverColor
