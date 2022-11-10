@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2021-2022 Devin Lin <espidev@gmail.com>
+// SPDX-FileCopyrightText: 2021 Devin Lin <espidev@gmail.com>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick 2.12
@@ -10,6 +10,7 @@ import QtGraphicalEffects 1.12
 
 import org.kde.kirigami 2.15 as Kirigami
 
+// floating round button for mobile actions
 /**
  * @brief Floating button that can be used on pages to trigger actions.
  * 
@@ -56,11 +57,10 @@ T.RoundButton {
     background: Item {
         RectangularGlow {
             anchors.fill: buttonBackground
-            anchors.topMargin: Kirigami.Units.smallSpacing
-            
+            anchors.topMargin: 5
             cornerRadius: buttonBackground.radius * 2
             cached: true
-            glowRadius: 3
+            glowRadius: 4
             spread: 0.8
             color: Qt.darker(Kirigami.Theme.backgroundColor, 1.2)
         }
