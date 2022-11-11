@@ -368,6 +368,8 @@ Item {
             Kirigami.MnemonicData.enabled: item !== null && item.Kirigami.FormData.buddyFor && item.Kirigami.FormData.buddyFor.activeFocusOnTab
             Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
             Kirigami.MnemonicData.label: item !== null ? item.Kirigami.FormData.label : ""
+            activeFocusOnTab: visible
+            font.bold: activeFocus
             text: Kirigami.MnemonicData.richTextLabel
             type: item !== null && item.Kirigami.FormData.isSection ? Kirigami.Heading.Type.Primary : Kirigami.Heading.Type.Normal
 
@@ -405,10 +407,55 @@ Item {
                 }
                 return Kirigami.Units.largeSpacing * 2;
             }
+            Binding on KeyNavigation.tab {
+                when: labelItem.visible && labelItem.text.length > 0
+                value: labelItem.findFirstAcceptFocusItem(labelItem.item)
+            }
+            Binding on KeyNavigation.backtab {
+                when: labelItem.index > 0 && labelItem.visible && labelItem.text.length > 0
+                value: {
+                    let lastLabel;
+                    for (let i = labelItem.index - 1; i >= 0; --i) {
+                        const backtabItem = labelItem.findLastAcceptFocusItem(lay.buddies[i].item);
+                        if (backtabItem) {
+                            return backtabItem;
+                        }
+                        if (lay.buddies[i].visible && lay.buddies[i].text.length > 0) {
+                            lastLabel = lay.buddies[i];
+                        }
+                    }
+                    return lastLabel;
+                }
+            }
+
             onItemChanged: {
                 if (!item) {
                     labelItem.destroy();
                 }
+            }
+            function findFirstAcceptFocusItem(currentItem: Item) {
+                if (currentItem.visible && currentItem.activeFocusOnTab) {
+                    return currentItem;
+                }
+                for (let i = 0; i < currentItem.children.length; ++i) {
+                    const newItem = findFirstAcceptFocusItem(currentItem.children[i]);
+                    if (newItem !== undefined) {
+                        return newItem;
+                    }
+                }
+                return undefined;
+            }
+            function findLastAcceptFocusItem(currentItem: Item) {
+                if (currentItem.visible && currentItem.activeFocusOnTab) {
+                    return currentItem;
+                }
+                for (let i = currentItem.children.length - 1; i >= 0; --i) {
+                    const newItem = findLastAcceptFocusItem(currentItem.children[i]);
+                    if (newItem !== undefined) {
+                        return newItem;
+                    }
+                }
+                return undefined;
             }
             Shortcut {
                 sequence: labelItem.Kirigami.MnemonicData.sequence
