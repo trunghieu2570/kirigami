@@ -68,7 +68,7 @@ Item
     /**
      * @brief This property holds a link to a "Get Involved" page.
      *
-     * default: `"https://community.kde.org/Get_Involved" when application id stard with "org.kde.", otherwise is empty.`
+     * default: `"https://community.kde.org/Get_Involved" when application id starts with "org.kde.", otherwise it is empty.`
      */
     property url getInvolvedUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://community.kde.org/Get_Involved" : ""
 
