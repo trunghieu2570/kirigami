@@ -79,6 +79,14 @@ Kirigami.ScrollablePage
      */
     property alias getInvolvedUrl: aboutItem.getInvolvedUrl
 
+    /**
+     * @brief This property holds a link to a "Donate" page.
+     * @since 5.101
+     *
+     * default: `"https://community.kde.org/donations" when application id starts with "org.kde.", otherwise it is empty.`
+     */
+    property url donateUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://community.kde.org/donations" : ""
+
     /** @internal */
     default property alias _content: aboutItem._content
 //END properties

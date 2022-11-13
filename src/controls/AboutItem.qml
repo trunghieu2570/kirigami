@@ -72,6 +72,13 @@ Item
      */
     property url getInvolvedUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://community.kde.org/Get_Involved" : ""
 
+    /**
+     * @brief This property holds a link to a "Donate" page.
+     *
+     * default: `"https://community.kde.org/donations" when application id starts with "org.kde.", otherwise it is empty.`
+     */
+    property url donateUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://community.kde.org/donations" : ""
+
     /** @internal */
     property bool _usePageStack: false
 
@@ -183,10 +190,20 @@ Item
                 text: aboutItem.aboutData.shortDescription
             }
 
-            UrlButton {
-                text: qsTr("Get Involved")
-                url: aboutItem.getInvolvedUrl
-                visible: url !== ""
+            RowLayout {
+                spacing: Kirigami.Units.largeSpacing
+
+                UrlButton {
+                    text: qsTr("Get Involved")
+                    url: aboutItem.getInvolvedUrl
+                    visible: url !== ""
+                }
+
+                UrlButton {
+                    text: qsTr("Donate")
+                    url: aboutItem.donateUrl
+                    visible: url !== ""
+                }
             }
         }
 
