@@ -191,7 +191,7 @@ Item
             }
 
             RowLayout {
-                spacing: Kirigami.Units.largeSpacing
+                spacing: Kirigami.Units.largeSpacing * 2
 
                 UrlButton {
                     text: qsTr("Get Involved")
@@ -203,6 +203,23 @@ Item
                     text: qsTr("Donate")
                     url: aboutItem.donateUrl
                     visible: url !== ""
+                }
+
+                UrlButton {
+                    readonly property string theUrl: {
+                        if (page.aboutData.bugAddress !== "submit@bugs.kde.org") {
+                            return page.aboutData.bugAddress
+                        }
+                        const elements = page.aboutData.productName.split('/');
+                        let url = `https://bugs.kde.org/enter_bug.cgi?format=guided&product=${elements[0]}&version=${page.aboutData.version}`;
+                        if (elements.length === 2) {
+                            url += "&component=" + elements[1];
+                        }
+                        return url;
+                    }
+                    text: qsTr("Report a Bug")
+                    url: theUrl
+                    visible: theUrl !== ""
                 }
             }
         }

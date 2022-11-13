@@ -93,23 +93,6 @@ Kirigami.ScrollablePage
 
     title: qsTr("About %1").arg(page.aboutData.displayName)
 
-    actions.main: Action {
-        text: qsTr("Report Bug…")
-        icon.name: "tools-report-bug"
-        onTriggered: {
-            if (page.aboutData.bugAddress === "submit@bugs.kde.org") {
-                const elements = page.aboutData.productName.split('/');
-                let url = `https://bugs.kde.org/enter_bug.cgi?format=guided&product=${elements[0]}&version=${page.aboutData.version}`;
-                if (elements.length === 2) {
-                    url += "&component=" + elements[1]
-                }
-                Qt.openUrlExternally(url)
-            } else {
-                Qt.openUrlExternally(page.aboutData.bugAddress)
-            }
-        }
-    }
-
     Kirigami.AboutItem {
         id: aboutItem
         wideMode: page.width >= aboutItem.implicitWidth
