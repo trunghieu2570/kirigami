@@ -205,11 +205,7 @@ Page {
                 let impl = 0;
                 for (const i in itemsParent.visibleChildren) {
                     const child = itemsParent.visibleChildren[i];
-                    if (child.implicitHeight <= 0) {
-                        impl = Math.max(impl, child.height);
-                    } else {
-                        impl = Math.max(impl, child.implicitHeight);
-                    }
+                    impl = Math.max(impl, child.height);
                 }
                 return impl + itemsParent.anchors.topMargin + itemsParent.anchors.bottomMargin;
             }
