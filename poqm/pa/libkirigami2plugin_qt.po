@@ -13,19 +13,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 20.08.1\n"
 
-#: controls/AboutItem.qml:122
+#: controls/AboutItem.qml:129
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr ""
 
-#: controls/AboutItem.qml:131
+#: controls/AboutItem.qml:138
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr ""
 
-#: controls/AboutItem.qml:140
+#: controls/AboutItem.qml:147
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "Send an email to %1"
@@ -33,12 +33,22 @@ msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "%1 ਨੂੰ ਈਮੇਲ ਭੇਜੋ"
 
-#: controls/AboutItem.qml:187
+#: controls/AboutItem.qml:197
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr ""
 
-#: controls/AboutItem.qml:199
+#: controls/AboutItem.qml:203
+msgctxt "AboutItem|"
+msgid "Donate"
+msgstr ""
+
+#: controls/AboutItem.qml:220
+msgctxt "AboutItem|"
+msgid "Report a Bug"
+msgstr ""
+
+#: controls/AboutItem.qml:233
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Copyright"
@@ -46,7 +56,7 @@ msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "ਕਾਪੀਰਾਈਟ"
 
-#: controls/AboutItem.qml:243
+#: controls/AboutItem.qml:277
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "License:"
@@ -54,7 +64,7 @@ msgctxt "AboutItem|"
 msgid "License:"
 msgstr "ਲਸੰਸ:"
 
-#: controls/AboutItem.qml:265
+#: controls/AboutItem.qml:299
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "License: %1"
@@ -62,7 +72,7 @@ msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "ਲਸੰਸ: %1"
 
-#: controls/AboutItem.qml:276
+#: controls/AboutItem.qml:310
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Libraries in use"
@@ -70,7 +80,7 @@ msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "ਵਰਤਣ ਲਈ ਲਾਇਬਰੇਰੀਆਂ"
 
-#: controls/AboutItem.qml:306
+#: controls/AboutItem.qml:340
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Authors"
@@ -78,12 +88,12 @@ msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "ਲੇਖਕ"
 
-#: controls/AboutItem.qml:315
+#: controls/AboutItem.qml:349
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr ""
 
-#: controls/AboutItem.qml:346
+#: controls/AboutItem.qml:380
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Credits"
@@ -91,7 +101,7 @@ msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "ਮਾਣ"
 
-#: controls/AboutItem.qml:359
+#: controls/AboutItem.qml:393
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Translators"
@@ -99,18 +109,13 @@ msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "ਉਲੱਥਾਕਾਰ"
 
-#: controls/AboutPage.qml:86
+#: controls/AboutPage.qml:94
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "About"
 msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "ਇਸ ਬਾਰੇ"
-
-#: controls/AboutPage.qml:89
-msgctxt "AboutPage|"
-msgid "Report Bug…"
-msgstr ""
 
 #: controls/AbstractApplicationWindow.qml:349
 msgctxt "AbstractApplicationWindow|"

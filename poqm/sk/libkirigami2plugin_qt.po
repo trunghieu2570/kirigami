@@ -18,13 +18,13 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: controls/AboutItem.qml:122
+#: controls/AboutItem.qml:129
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr ""
 
-#: controls/AboutItem.qml:131
+#: controls/AboutItem.qml:138
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "Visit %1's KDE Store page"
@@ -32,7 +32,7 @@ msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr "Navštívte stránku obchodu KDE %1"
 
-#: controls/AboutItem.qml:140
+#: controls/AboutItem.qml:147
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "Send an email to %1"
@@ -40,7 +40,7 @@ msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Odoslať email na adresu %1"
 
-#: controls/AboutItem.qml:187
+#: controls/AboutItem.qml:197
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Get Involved"
@@ -48,7 +48,20 @@ msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Zapojiť sa"
 
-#: controls/AboutItem.qml:199
+#: controls/AboutItem.qml:203
+msgctxt "AboutItem|"
+msgid "Donate"
+msgstr ""
+
+#: controls/AboutItem.qml:220
+#, fuzzy
+#| msgctxt "AboutPage|"
+#| msgid "Report Bug…"
+msgctxt "AboutItem|"
+msgid "Report a Bug"
+msgstr "Nahlásiť chybu..."
+
+#: controls/AboutItem.qml:233
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Copyright"
@@ -56,7 +69,7 @@ msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Copyright"
 
-#: controls/AboutItem.qml:243
+#: controls/AboutItem.qml:277
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "License:"
@@ -64,7 +77,7 @@ msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Licencia:"
 
-#: controls/AboutItem.qml:265
+#: controls/AboutItem.qml:299
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "License: %1"
@@ -72,7 +85,7 @@ msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Licencia: %1"
 
-#: controls/AboutItem.qml:276
+#: controls/AboutItem.qml:310
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Libraries in use"
@@ -80,7 +93,7 @@ msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Použité knižnice"
 
-#: controls/AboutItem.qml:306
+#: controls/AboutItem.qml:340
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Authors"
@@ -88,7 +101,7 @@ msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autori"
 
-#: controls/AboutItem.qml:315
+#: controls/AboutItem.qml:349
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Show author photos"
@@ -96,7 +109,7 @@ msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Zobraziť fotografie autora"
 
-#: controls/AboutItem.qml:346
+#: controls/AboutItem.qml:380
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Credits"
@@ -104,7 +117,7 @@ msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Zásluhy"
 
-#: controls/AboutItem.qml:359
+#: controls/AboutItem.qml:393
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Translators"
@@ -112,16 +125,11 @@ msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Preklady"
 
-#: controls/AboutPage.qml:86
+#: controls/AboutPage.qml:94
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "O  %1"
-
-#: controls/AboutPage.qml:89
-msgctxt "AboutPage|"
-msgid "Report Bug…"
-msgstr "Nahlásiť chybu..."
 
 #: controls/AbstractApplicationWindow.qml:349
 msgctxt "AbstractApplicationWindow|"

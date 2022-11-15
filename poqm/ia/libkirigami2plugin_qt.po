@@ -13,80 +13,88 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: controls/AboutItem.qml:122
+#: controls/AboutItem.qml:129
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controls/AboutItem.qml:131
+#: controls/AboutItem.qml:138
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr "Visita pagina %1 de KDE Store"
 
-#: controls/AboutItem.qml:140
+#: controls/AboutItem.qml:147
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Invia un message de e-posta a  %1"
 
-#: controls/AboutItem.qml:187
+#: controls/AboutItem.qml:197
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Sea involvite"
 
-#: controls/AboutItem.qml:199
+#: controls/AboutItem.qml:203
+msgctxt "AboutItem|"
+msgid "Donate"
+msgstr ""
+
+#: controls/AboutItem.qml:220
+#, fuzzy
+#| msgctxt "AboutPage|"
+#| msgid "Report Bug…"
+msgctxt "AboutItem|"
+msgid "Report a Bug"
+msgstr "Reporta Bug…"
+
+#: controls/AboutItem.qml:233
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Copyright"
 
-#: controls/AboutItem.qml:243
+#: controls/AboutItem.qml:277
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Licentia:"
 
-#: controls/AboutItem.qml:265
+#: controls/AboutItem.qml:299
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Licentia: %1"
 
-#: controls/AboutItem.qml:276
+#: controls/AboutItem.qml:310
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Bibliothecas in uso"
 
-#: controls/AboutItem.qml:306
+#: controls/AboutItem.qml:340
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autores"
 
-#: controls/AboutItem.qml:315
+#: controls/AboutItem.qml:349
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Monstra photos de autor"
 
-#: controls/AboutItem.qml:346
+#: controls/AboutItem.qml:380
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Gratias"
 
-#: controls/AboutItem.qml:359
+#: controls/AboutItem.qml:393
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Traductores"
 
-#: controls/AboutPage.qml:86
+#: controls/AboutPage.qml:94
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "A proposito de %1"
-
-#: controls/AboutPage.qml:89
-msgctxt "AboutPage|"
-msgid "Report Bug…"
-msgstr "Reporta Bug…"
 
 #: controls/AbstractApplicationWindow.qml:349
 msgctxt "AbstractApplicationWindow|"

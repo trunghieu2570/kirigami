@@ -14,30 +14,40 @@ msgstr ""
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
 "X-Generator: Poedit 2.2.4\n"
 
-#: controls/AboutItem.qml:122
+#: controls/AboutItem.qml:129
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr ""
 
-#: controls/AboutItem.qml:131
+#: controls/AboutItem.qml:138
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr ""
 
-#: controls/AboutItem.qml:140
+#: controls/AboutItem.qml:147
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr ""
 
-#: controls/AboutItem.qml:187
+#: controls/AboutItem.qml:197
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr ""
 
-#: controls/AboutItem.qml:199
+#: controls/AboutItem.qml:203
+msgctxt "AboutItem|"
+msgid "Donate"
+msgstr ""
+
+#: controls/AboutItem.qml:220
+msgctxt "AboutItem|"
+msgid "Report a Bug"
+msgstr ""
+
+#: controls/AboutItem.qml:233
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Copyright"
@@ -45,7 +55,7 @@ msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Autorių teisės"
 
-#: controls/AboutItem.qml:243
+#: controls/AboutItem.qml:277
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "License:"
@@ -53,7 +63,7 @@ msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Licencija:"
 
-#: controls/AboutItem.qml:265
+#: controls/AboutItem.qml:299
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "License: %1"
@@ -61,7 +71,7 @@ msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Licencija: %1"
 
-#: controls/AboutItem.qml:276
+#: controls/AboutItem.qml:310
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Libraries in use"
@@ -69,7 +79,7 @@ msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Naudojamos bibliotekos"
 
-#: controls/AboutItem.qml:306
+#: controls/AboutItem.qml:340
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Authors"
@@ -77,12 +87,12 @@ msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autoriai"
 
-#: controls/AboutItem.qml:315
+#: controls/AboutItem.qml:349
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr ""
 
-#: controls/AboutItem.qml:346
+#: controls/AboutItem.qml:380
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Credits"
@@ -90,7 +100,7 @@ msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Padėkos"
 
-#: controls/AboutItem.qml:359
+#: controls/AboutItem.qml:393
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Translators"
@@ -98,18 +108,13 @@ msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Vertėjai"
 
-#: controls/AboutPage.qml:86
+#: controls/AboutPage.qml:94
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "About"
 msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Apie"
-
-#: controls/AboutPage.qml:89
-msgctxt "AboutPage|"
-msgid "Report Bug…"
-msgstr ""
 
 #: controls/AbstractApplicationWindow.qml:349
 msgctxt "AbstractApplicationWindow|"

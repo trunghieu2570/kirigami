@@ -13,80 +13,88 @@ msgstr ""
 "X-Generator: Lokalize 21.12.3\n"
 "X-Qt-Contexts: true\n"
 
-#: controls/AboutItem.qml:122
+#: controls/AboutItem.qml:129
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controls/AboutItem.qml:131
+#: controls/AboutItem.qml:138
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr "%1의 KDE 스토어 페이지 방문"
 
-#: controls/AboutItem.qml:140
+#: controls/AboutItem.qml:147
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "%1(으)로 이메일 보내기"
 
-#: controls/AboutItem.qml:187
+#: controls/AboutItem.qml:197
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "참여하기"
 
-#: controls/AboutItem.qml:199
+#: controls/AboutItem.qml:203
+msgctxt "AboutItem|"
+msgid "Donate"
+msgstr ""
+
+#: controls/AboutItem.qml:220
+#, fuzzy
+#| msgctxt "AboutPage|"
+#| msgid "Report Bug…"
+msgctxt "AboutItem|"
+msgid "Report a Bug"
+msgstr "버그 보고…"
+
+#: controls/AboutItem.qml:233
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "저작권"
 
-#: controls/AboutItem.qml:243
+#: controls/AboutItem.qml:277
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "라이선스:"
 
-#: controls/AboutItem.qml:265
+#: controls/AboutItem.qml:299
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "라이선스: %1"
 
-#: controls/AboutItem.qml:276
+#: controls/AboutItem.qml:310
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "사용하는 라이브러리"
 
-#: controls/AboutItem.qml:306
+#: controls/AboutItem.qml:340
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "작성자"
 
-#: controls/AboutItem.qml:315
+#: controls/AboutItem.qml:349
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "작성자 사진 표시"
 
-#: controls/AboutItem.qml:346
+#: controls/AboutItem.qml:380
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "제작진"
 
-#: controls/AboutItem.qml:359
+#: controls/AboutItem.qml:393
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "번역자"
 
-#: controls/AboutPage.qml:86
+#: controls/AboutPage.qml:94
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "%1 정보"
-
-#: controls/AboutPage.qml:89
-msgctxt "AboutPage|"
-msgid "Report Bug…"
-msgstr "버그 보고…"
 
 #: controls/AbstractApplicationWindow.qml:349
 msgctxt "AbstractApplicationWindow|"
