@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kirigami\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"PO-Revision-Date: 2022-07-07 09:32+0200\n"
+"PO-Revision-Date: 2022-11-15 09:56+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -48,15 +48,12 @@ msgstr "Col·laboreu-hi"
 #: controls/AboutItem.qml:203
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Donatius"
 
 #: controls/AboutItem.qml:220
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Report Bug…"
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "Informa d'un error…"
+msgstr "Informa d'un error"
 
 #: controls/AboutItem.qml:233
 msgctxt "AboutItem|"

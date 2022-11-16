@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-07-07 11:19+0300\n"
+"PO-Revision-Date: 2022-11-15 04:44+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 22.08.3\n"
 "X-Qt-Contexts: true\n"
 "X-POOTLE-MTIME: 1497529432.000000\n"
 
@@ -41,15 +41,12 @@ msgstr "Katıl"
 #: controls/AboutItem.qml:203
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Bağış Yap"
 
 #: controls/AboutItem.qml:220
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Report Bug…"
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "Hata Bildir…"
+msgstr "Hata Bildir"
 
 #: controls/AboutItem.qml:233
 msgctxt "AboutItem|"
@@ -218,7 +215,7 @@ msgstr "Çekmeceyi aç"
 #: controls/templates/private/BackButton.qml:34
 msgctxt "BackButton|"
 msgid "Navigate Back"
-msgstr "Geriye Git"
+msgstr "Geri Git"
 
 #: controls/templates/private/ForwardButton.qml:32
 msgctxt "ForwardButton|"

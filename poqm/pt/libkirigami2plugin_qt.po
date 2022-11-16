@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libkirigami2plugin_qt\n"
-"PO-Revision-Date: 2022-07-07 11:09+0100\n"
+"PO-Revision-Date: 2022-11-15 09:11+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -41,15 +41,12 @@ msgstr "Envolva-se"
 #: controls/AboutItem.qml:203
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Doar"
 
 #: controls/AboutItem.qml:220
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Report Bug…"
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "Comunicar um Erro…"
+msgstr "Comunicar um Erro"
 
 #: controls/AboutItem.qml:233
 msgctxt "AboutItem|"

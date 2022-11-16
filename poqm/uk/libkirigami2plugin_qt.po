@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libkirigami2plugin_qt\n"
-"PO-Revision-Date: 2022-07-07 09:16+0300\n"
+"PO-Revision-Date: 2022-11-15 16:25+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -46,15 +46,12 @@ msgstr "Участь у команді"
 #: controls/AboutItem.qml:203
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Підтримати фінансово"
 
 #: controls/AboutItem.qml:220
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Report Bug…"
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "Повідомити про ваду…"
+msgstr "Повідомити про ваду"
 
 #: controls/AboutItem.qml:233
 msgctxt "AboutItem|"

@@ -1,6 +1,5 @@
 # Translation for libkirigami2plugin_qt.po to Euskara/Basque (eu).
-# Copyright (C) 2017-2018, Free Software Foundation.
-# Copyright (C) 2019-2022, This file is copyright:
+# Copyright (C) 2017-2022, This file is copyright:
 # This file is distributed under the same license as the original file.
 # KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
 #
@@ -9,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kirigami\n"
-"PO-Revision-Date: 2022-08-05 18:19+0200\n"
+"PO-Revision-Date: 2022-11-15 05:19+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: controls/AboutItem.qml:129
 #, qt-format
@@ -46,15 +45,12 @@ msgstr "Engaia zaitez"
 #: controls/AboutItem.qml:203
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Egin dohaintza"
 
 #: controls/AboutItem.qml:220
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Report Bug…"
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "Akatsa jakinarazi..."
+msgstr "Akats baten berri ematea"
 
 #: controls/AboutItem.qml:233
 msgctxt "AboutItem|"

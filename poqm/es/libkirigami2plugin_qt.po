@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libkirigamiplugin_qt\n"
-"PO-Revision-Date: 2022-07-08 02:13+0200\n"
+"PO-Revision-Date: 2022-11-16 01:24+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: controls/AboutItem.qml:129
 #, qt-format
@@ -39,15 +39,12 @@ msgstr "Involucrarse"
 #: controls/AboutItem.qml:203
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Donar"
 
 #: controls/AboutItem.qml:220
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Report Bug…"
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "Informar de fallo..."
+msgstr "Informar de fallo"
 
 #: controls/AboutItem.qml:233
 msgctxt "AboutItem|"
