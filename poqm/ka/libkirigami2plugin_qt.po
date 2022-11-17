@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2\n"
 
 #: controls/AboutItem.qml:129
 #, qt-format
@@ -39,15 +39,12 @@ msgstr "შემოგვიერთდით"
 #: controls/AboutItem.qml:203
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "შემოწირულობა"
 
 #: controls/AboutItem.qml:220
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Report Bug…"
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "შეცდომის ანგარიში…"
+msgstr "შეცდომის პატაკი"
 
 #: controls/AboutItem.qml:233
 msgctxt "AboutItem|"
