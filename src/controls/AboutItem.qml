@@ -75,9 +75,9 @@ Item
     /**
      * @brief This property holds a link to a "Donate" page.
      *
-     * default: `"https://community.kde.org/donations" when application id starts with "org.kde.", otherwise it is empty.`
+     * default: `"https://kde.org/community/donations" when application id starts with "org.kde.", otherwise it is empty.`
      */
-    property url donateUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://community.kde.org/donations" : ""
+    property url donateUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://kde.org/community/donations" : ""
 
     /** @internal */
     property bool _usePageStack: false
