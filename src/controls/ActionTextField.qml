@@ -111,7 +111,6 @@ QQC2.TextField {
         activeFocusOnTab: true
         cursorShape: Qt.PointingHandCursor
         hoverEnabled: true
-        Accessible.name: modelData.text
         Accessible.role: Accessible.Button
         Keys.onPressed: {
             switch (event.key) {
@@ -153,7 +152,13 @@ QQC2.TextField {
 
                 ActionIconMouseArea {
                     id: leftActionArea
+                    Accessible.name: modelData.text
                     onClicked: modelData.trigger()
+                }
+
+                QQC2.ToolTip {
+                    visible: rightActionArea.containsMouse || rightActionArea.activeFocus
+                    text: modelData.text
                 }
             }
         }
@@ -186,7 +191,13 @@ QQC2.TextField {
 
                 ActionIconMouseArea {
                     id: rightActionArea
+                    Accessible.name: modelData.text
                     onClicked: modelData.trigger()
+                }
+
+                QQC2.ToolTip {
+                    visible: rightActionArea.containsMouse || rightActionArea.activeFocus
+                    text: modelData.text
                 }
             }
         }
