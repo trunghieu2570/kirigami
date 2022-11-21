@@ -106,6 +106,26 @@ QQC2.TextField {
         text: focusShortcut.nativeText
     }
 
+    component ActionIconMouseArea: MouseArea {
+        anchors.fill: parent
+        activeFocusOnTab: true
+        cursorShape: Qt.PointingHandCursor
+        hoverEnabled: true
+        Accessible.name: modelData.text
+        Accessible.role: Accessible.Button
+        Keys.onPressed: {
+            switch (event.key) {
+            case Qt.Key_Space:
+            case Qt.Key_Enter:
+            case Qt.Key_Return:
+            case Qt.Key_Select:
+                clicked(null);
+                event.accepted = true;
+                break;
+            }
+        }
+    }
+
     Row {
         id: leftActionsRow
         padding: Kirigami.Units.smallSpacing
@@ -127,14 +147,13 @@ QQC2.TextField {
                 anchors.verticalCenter: parent.verticalCenter
 
                 source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
-                active: leftActionArea.containsPress
+                active: leftActionArea.containsPress || leftActionArea.activeFocus
                 visible: modelData.visible
                 enabled: modelData.enabled
-                MouseArea {
+
+                ActionIconMouseArea {
                     id: leftActionArea
-                    anchors.fill: parent
                     onClicked: modelData.trigger()
-                    cursorShape: Qt.PointingHandCursor
                 }
             }
         }
@@ -161,14 +180,13 @@ QQC2.TextField {
                 anchors.verticalCenter: parent.verticalCenter
 
                 source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
-                active: rightActionArea.containsPress
+                active: rightActionArea.containsPress || rightActionArea.activeFocus
                 visible: modelData.visible
                 enabled: modelData.enabled
-                MouseArea {
+
+                ActionIconMouseArea {
                     id: rightActionArea
-                    anchors.fill: parent
                     onClicked: modelData.trigger()
-                    cursorShape: Qt.PointingHandCursor
                 }
             }
         }
