@@ -47,7 +47,7 @@ QQC2.TextField {
      * @brief This property holds a shortcut sequence that will focus the text field.
      * @since 5.56
      */
-    property string focusSequence
+    property alias focusSequence: focusShortcut.sequence
 
     /**
      * @brief This property holds a list of actions that will be displayed on the left side of the text field.
@@ -95,7 +95,6 @@ QQC2.TextField {
     Shortcut {
         id: focusShortcut
         enabled: root.focusSequence
-        sequence: root.focusSequence
         onActivated: {
             root.forceActiveFocus()
             root.selectAll()
