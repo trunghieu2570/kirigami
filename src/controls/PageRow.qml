@@ -192,6 +192,16 @@ QT.Control {
      * @since 5.38
      */
     property alias layers: layersStack
+    
+    /**
+     * @brief This property holds whether to automatically pop pages at the top of the stack if they are not visible.
+     * 
+     * If a user navigates to a previous page on the stack (ex. pressing back button) and pages above
+     * it on the stack are not visible, they will be popped if this property is true.
+     * 
+     * @since 5.101
+     */
+    property bool popNotVisiblePagesAutomatically: false
 //END PROPERTIES
 
 //BEGIN FUNCTIONS
@@ -949,6 +959,14 @@ QT.Control {
 
             onItemInserted: root.pageInserted(position, item);
             onItemRemoved: root.pageRemoved(item);
+            
+            onVisibleItemsChanged: {
+                if (root.popNotVisiblePagesAutomatically) {
+                    while (root.lastItem != root.lastVisibleItem) {
+                        root.pop();
+                    }
+                }
+            }
         }
     }
 
