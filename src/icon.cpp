@@ -446,7 +446,7 @@ QImage Icon::findIcon(const QSize &size)
             }
         }
         if (!icon.isNull()) {
-            img = icon.pixmap(window(), icon.actualSize(size), iconMode(), QIcon::On).toImage();
+            img = icon.pixmap(window(), icon.actualSize(window(), size), iconMode(), QIcon::On).toImage();
 
             setStatus(Ready);
             /*const QColor tintColor = !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor())
