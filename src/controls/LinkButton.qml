@@ -38,22 +38,41 @@ QQC2.Label {
      */
     property alias mouseArea: area
 
+    activeFocusOnTab: true
     Accessible.role: Accessible.Button
     Accessible.name: text
-    Accessible.onPressAction: control.clicked(null)
+    Accessible.onPressAction: control.clicked({"button": Qt.LeftButton})
 
     text: action ? action.text : ""
     enabled: !action || action.enabled
     onClicked: if (action) action.trigger()
 
+    font.bold: activeFocus
     font.underline: control.enabled
     color: enabled ? Kirigami.Theme.linkColor : Kirigami.Theme.textColor
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     elide: Text.ElideRight
 
-    signal pressed(QtObject mouse)
-    signal clicked(QtObject mouse)
+    signal pressed(var mouse)
+    signal clicked(var mouse)
+
+    Keys.onPressed: {
+        switch (event.key) {
+        case Qt.Key_Space:
+        case Qt.Key_Enter:
+        case Qt.Key_Return:
+        case Qt.Key_Select:
+            control.clicked({"button": Qt.LeftButton});
+            event.accepted = true;
+            break;
+        case Qt.Key_Menu:
+            control.pressed({"button": Qt.RightButton});
+            event.accepted = true;
+            break;
+        }
+    }
+
     MouseArea {
         id: area
         anchors.fill: parent
