@@ -29,6 +29,9 @@ Kirigami.LinkButton {
     visible: text.length > 0
     acceptedButtons: Qt.LeftButton | Qt.RightButton
 
+    Accessible.name: button.text !== button.url ? button.text : button.url
+    Accessible.description: i18nc("@info:whatsthis", "Open link %1", button.text !== button.url ? button.url : "")
+
     onPressed: if (mouse.button === Qt.RightButton) {
         menu.popup()
     }
