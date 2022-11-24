@@ -453,9 +453,9 @@ Item {
             minimumX: root.hasContextDrawer && contextDrawer.enabled && contextDrawer.modal ? 0 : root.width/2 - button.width/2
             maximumX: root.hasGlobalDrawer && globalDrawer.enabled && globalDrawer.modal ? root.width : root.width/2 - button.width/2
         }
-        visible: root.page.actions && root.page.actions.contextualActions.length > 0 && (applicationWindow === undefined || applicationWindow().wideScreen)
+        visible: root.page.actions && root.page.actions.contextualActions.length > 0 && ((typeof applicationWindow === "undefined") || applicationWindow().wideScreen)
             // using internal pagerow api
-            && (root.page && root.page.parent ? root.page.Kirigami.ColumnView.level < applicationWindow().pageStack.depth-1 : false)
+            && ((typeof applicationWindow !== "undefined") && root.page && root.page.parent ? root.page.Kirigami.ColumnView.level < applicationWindow().pageStack.depth-1 : (typeof applicationWindow === "undefined"))
 
         width: button.mediumIconSizing + Kirigami.Units.smallSpacing*2
         height: width
@@ -494,29 +494,29 @@ Item {
             mouseArea.onPressed(mouse)
         }
         onReleased: {
-            if (globalDrawer) {
-                globalDrawer.peeking = false;
-            }
-            if (contextDrawer) {
-                contextDrawer.peeking = false;
-            }
             const pos = root.mapFromItem(fakeContextMenuButton, mouse.x, mouse.y);
-            if (contextDrawer) {
+
+            if ((typeof contextDrawer !== "undefined") && contextDrawer) {
+                contextDrawer.peeking = false;
+
                 if (pos.x < root.width/2) {
                     contextDrawer.open();
                 } else if (contextDrawer.drawerOpen && mouse.x > 0 && mouse.x < width) {
                     contextDrawer.close();
                 }
             }
-            if (globalDrawer) {
+
+            if ((typeof globalDrawer !== "undefined") && globalDrawer) {
+                globalDrawer.peeking = false;
+
                 if (globalDrawer.position > 0.5) {
                     globalDrawer.open();
                 } else {
                     globalDrawer.close();
                 }
             }
-            if (containsMouse && (!globalDrawer || !globalDrawer.drawerOpen || !globalDrawer.modal) &&
-                (!contextDrawer || !contextDrawer.drawerOpen || !contextDrawer.modal)) {
+            if (containsMouse && ((typeof globalDrawer === "undefined") || !globalDrawer || !globalDrawer.drawerOpen || !globalDrawer.modal) &&
+                ((typeof contextDrawer === "undefined") || !contextDrawer || !contextDrawer.drawerOpen || !contextDrawer.modal)) {
                 contextMenu.visible = !contextMenu.visible;
             }
         }
