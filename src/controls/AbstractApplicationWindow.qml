@@ -214,6 +214,7 @@ QQC2.ApplicationWindow {
         if (!internal.__passiveNotification) {
             const component = Qt.createComponent("templates/private/PassiveNotification.qml");
             internal.__passiveNotification = component.createObject(overlay.parent);
+            component.destroy();
         }
 
         internal.__passiveNotification.showNotification(message, timeout, actionText, callBack);
