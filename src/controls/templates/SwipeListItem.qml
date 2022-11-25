@@ -227,6 +227,7 @@ T.SwipeDelegate {
             if (internal.view && Kirigami.Settings.tabletMode && !internal.view.parent.parent._swipeFilter) {
                 const component = Qt.createComponent(Qt.resolvedUrl("../private/SwipeItemEventFilter.qml"));
                 internal.view.parent.parent._swipeFilter = component.createObject(internal.view.parent.parent);
+                component.destroy();
             }
         }
     }
@@ -238,6 +239,7 @@ T.SwipeDelegate {
                 if (!internal.swipeFilterItem) {
                     const component = Qt.createComponent(Qt.resolvedUrl("../private/SwipeItemEventFilter.qml"));
                     listItem.ListView.view.parent.parent._swipeFilter = component.createObject(listItem.ListView.view.parent.parent);
+                    component.destroy();
                 }
             } else {
                 if (listItem.ListView.view.parent.parent._swipeFilter) {
