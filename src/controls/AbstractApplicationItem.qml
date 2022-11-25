@@ -294,6 +294,7 @@ Item {
         if (!internal.__passiveNotification) {
             const component = Qt.createComponent("templates/private/PassiveNotification.qml");
             internal.__passiveNotification = component.createObject(root);
+            component.destroy();
         }
 
         internal.__passiveNotification.showNotification(message, timeout, actionText, callBack);
