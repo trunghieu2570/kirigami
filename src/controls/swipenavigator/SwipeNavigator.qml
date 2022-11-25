@@ -101,6 +101,7 @@ Item {
                 windowProperties.flags = Qt.Dialog | Qt.WindowCloseButtonHint;
             }
             const window = windowComponent.createObject(swipeNavigatorRoot, windowProperties);
+            windowComponent.destroy();
             item = window.pageStack.push(page, properties);
         }
         item.Keys.escapePressed.connect(function() { item.closeDialog() });
