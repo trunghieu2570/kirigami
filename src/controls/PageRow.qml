@@ -313,6 +313,7 @@ QT.Control {
                     // url => load component and then load item from component
                     const component = Qt.createComponent(Qt.resolvedUrl(page));
                     item = component.createObject(dialog.contentItem, properties);
+                    component.destroy();
                     dialog.contentItem.contentItem = item
                 } else if (page instanceof Component) {
                     item = page.createObject(dialog.contentItem, properties);
