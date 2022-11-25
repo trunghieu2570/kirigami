@@ -365,6 +365,7 @@ QT.Control {
             }
             const windowComponent = Qt.createComponent(Qt.resolvedUrl("./ApplicationWindow.qml"));
             const window = windowComponent.createObject(root, windowProperties);
+            windowComponent.destroy();
             item = window.pageStack.push(page, properties);
             Object.defineProperty(item, 'closeDialog', {
                 value: function() {
