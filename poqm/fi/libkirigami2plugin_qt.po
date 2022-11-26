@@ -97,7 +97,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Tietoa – %1"
 
-#: controls/AbstractApplicationWindow.qml:349
+#: controls/AbstractApplicationWindow.qml:350
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Lopeta"
@@ -229,7 +229,7 @@ msgctxt "ToolBarApplicationHeader|"
 msgid "More Actions"
 msgstr "Lisää toimintoja"
 
-#: controls/UrlButton.qml:48
+#: controls/UrlButton.qml:51
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Kopioi linkki leikepöydälle"

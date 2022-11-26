@@ -123,7 +123,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "%1 के बारे में"
 
-#: controls/AbstractApplicationWindow.qml:349
+#: controls/AbstractApplicationWindow.qml:350
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "बाहर जाएँ"
@@ -263,7 +263,7 @@ msgctxt "ToolBarApplicationHeader|"
 msgid "More Actions"
 msgstr "अधिक क्रियाएँ"
 
-#: controls/UrlButton.qml:48
+#: controls/UrlButton.qml:51
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr ""
