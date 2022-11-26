@@ -66,7 +66,7 @@ AbstractApplicationHeader {
                 source: titleList.isTabBar ? "" : (LayoutMirroring.enabled ? "go-next-symbolic-rtl" : "go-next-symbolic")
             }
 
-            Heading {
+            Kirigami.Heading {
                 id: title
                 width: Math.min(parent.width, Math.min(titleList.width, implicitWidth)) + Kirigami.Units.smallSpacing
                 anchors.verticalCenter: parent.verticalCenter
@@ -187,7 +187,7 @@ AbstractApplicationHeader {
             }
         }
     }
-    Separator {
+    Kirigami.Separator {
         id: separator
         height: parent.height * 0.6
         visible: navButtons.width > 0
@@ -196,7 +196,7 @@ AbstractApplicationHeader {
             left: navButtons.right
         }
     }
-    Separator {
+    Kirigami.Separator {
         height: parent.height * 0.6
         visible: stack.anchors.rightMargin > 0
         anchors {
@@ -212,7 +212,7 @@ AbstractApplicationHeader {
             // If the title delegate really needs to load async, it should be its responsibility to do it itself.
             asynchronous: false
             sourceComponent: header.pageDelegate
-            readonly property Page page: pageRow.layers.get(modelData+1)
+            readonly property Kirigami.Page page: pageRow.layers.get(modelData+1)
             readonly property bool current: true;
             Component.onCompleted: stack.push(this)
             Component.onDestruction: stack.pop()
@@ -369,7 +369,7 @@ AbstractApplicationHeader {
 
                         sourceComponent: header.pageDelegate
 
-                        readonly property Page page: pageRow.get(modelData)
+                        readonly property Kirigami.Page page: pageRow.get(modelData)
                         // NOTE: why not use ListViewCurrentIndex? because listview itself resets
                         // currentIndex in some situations (since here we are using an int as a model,
                         // even more often) so the property binding gets broken
