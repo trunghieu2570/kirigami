@@ -379,7 +379,7 @@ ContentItem::ContentItem(ColumnView *parent)
     m_slideAnim->setPropertyName("x");
     // NOTE: the duration will be taken from kirigami units upon classBegin
     m_slideAnim->setDuration(0);
-    m_slideAnim->setEasingCurve(QEasingCurve(QEasingCurve::InOutQuad));
+    m_slideAnim->setEasingCurve(QEasingCurve(QEasingCurve::OutExpo));
     connect(m_slideAnim, &QPropertyAnimation::finished, this, [this]() {
         if (!m_view->currentItem()) {
             m_view->setCurrentIndex(m_items.indexOf(m_viewAnchorItem));
@@ -1807,7 +1807,7 @@ void ColumnView::classBegin()
     syncColumnWidth();
 
     auto syncDuration = [this]() {
-        m_contentItem->m_slideAnim->setDuration(QmlComponentsPoolSingleton::instance(qmlEngine(this))->m_units->longDuration());
+        m_contentItem->m_slideAnim->setDuration(QmlComponentsPoolSingleton::instance(qmlEngine(this))->m_units->veryLongDuration());
         Q_EMIT scrollDurationChanged();
     };
 
