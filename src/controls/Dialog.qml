@@ -486,11 +486,36 @@ T.Dialog {
                 // add custom footer buttons
                 Repeater {
                     model: root.customFooterActions
-                    // we have to use Button instead of ToolButton, because ToolButton has no visual distinction when disabled
-                    delegate: QQC2.Button {
-                        flat: flatFooterButtons
-                        action: modelData
-                        visible: modelData.visible
+                    
+                    // HACK: DialogButtonBox doesn't seem to remove physical space if the button is not visible, even if we set width to 0
+                    // We workaround that by manually loading the buttons with a loader.
+                    delegate: Loader {
+                        active: modelData.visible
+                        property int index
+                        
+                        // we have to use Button instead of ToolButton, because ToolButton has no visual distinction when disabled
+                        sourceComponent: QQC2.Button {
+                            id: button
+                            flat: flatFooterButtons
+                            action: modelData
+                            parent: dialogButtonBox
+                            
+                            // used for checking button indices
+                            property int customIndex: model.index
+                            
+                            Component.onCompleted: {
+                                dialogButtonBox.addItem(button);
+
+                                // move button if it is not in the current spot
+                                for (let i = 0; i < dialogButtonBox.count - 1; i++) {
+                                    let item = dialogButtonBox.itemAt(i);
+                                    if (item instanceof QQC2.Button && 'customIndex' in item && item.customIndex > model.index) {
+                                        dialogButtonBox.moveItem(dialogButtonBox.count - 1, i);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
