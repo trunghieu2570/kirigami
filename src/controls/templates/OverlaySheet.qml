@@ -772,12 +772,12 @@ QtObject {
                 // corners to round, which we need here
                 Kirigami.ShadowedRectangle {
                     id: footerItem
-                    width: contentLayout.width - 2
+                    width: contentLayout.width
                     corners.bottomLeftRadius: Kirigami.Units.smallSpacing
                     corners.bottomRightRadius: Kirigami.Units.smallSpacing
                     parent: outerFlickable
-                    x: contentLayout.x + 1
-                    y: Math.min(parent.height, contentLayout.y + contentLayout.height  -1) - height
+                    x: contentLayout.x
+                    y: Math.min(parent.height, contentLayout.y + contentLayout.height) - height
                     visible: root.footer
                     implicitHeight: footerParent.implicitHeight + Kirigami.Units.smallSpacing * 2 + extraMargin
                     Kirigami.Theme.colorSet: Kirigami.Theme.Window
@@ -815,8 +815,6 @@ QtObject {
                             right: parent.right
                             left: parent.left
                             bottom: parent.top
-                            leftMargin: -1
-                            rightMargin: -1
                         }
                     }
                 }
