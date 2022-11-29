@@ -119,6 +119,20 @@ if (UNIX AND NOT ANDROID AND NOT(APPLE) AND NOT(DISABLE_DBUS))
     add_definitions(-DKIRIGAMI_ENABLE_DBUS)
 endif()
 
+find_package(OpenMP)
+set_package_properties(OpenMP
+    PROPERTIES DESCRIPTION "Multi-platform shared-memory parallel programming in C/C++ and Fortran"
+    TYPE OPTIONAL
+    PURPOSE "Accelerates palette generation in Kirigami.ImageColors"
+)
+if(OpenMP_CXX_FOUND)
+    set(HAVE_OpenMP TRUE)
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+endif()
+
+include_directories("${CMAKE_CURRENT_BINARY_DIR}")
+configure_file(config-OpenMP.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-OpenMP.h)
+
 if (UBUNTU_TOUCH)
     add_definitions(-DUBUNTU_TOUCH)
 endif()

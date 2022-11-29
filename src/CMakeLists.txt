@@ -299,6 +299,10 @@ target_link_libraries(KirigamiPlugin
     KF5Kirigami2
 )
 
+if (HAVE_OpenMP)
+target_link_libraries(KirigamiPlugin PRIVATE OpenMP::OpenMP_CXX)
+endif()
+
 ecm_finalize_qml_module(KirigamiPlugin DESTINATION ${KDE_INSTALL_QMLDIR})
 
 ecm_generate_qmltypes(org.kde.kirigami 2.0 DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami.2)

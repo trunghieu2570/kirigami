@@ -28,6 +28,11 @@
 #include <cmath>
 #include <vector>
 
+#include "config-OpenMP.h"
+#if HAVE_OpenMP
+#include <omp.h>
+#endif
+
 #define return_fallback(value)                                                                                                                                 \
     if (m_imageData.m_samples.size() == 0) {                                                                                                                   \
         return value;                                                                                                                                          \
@@ -233,38 +238,59 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage) const
     imageData.m_clusters.clear();
     imageData.m_samples.clear();
 
-    QColor sampleColor;
+#if HAVE_OpenMP
+    static const int numCore = std::min(8, omp_get_num_procs());
+    omp_set_num_threads(numCore);
+    std::vector<decltype(imageData.m_samples)> tempSamples(numCore, decltype(imageData.m_samples){});
+#endif
     int r = 0;
     int g = 0;
     int b = 0;
     int c = 0;
+
+#pragma omp parallel for collapse(2) reduction(+ : r) reduction(+ : g) reduction(+ : b) reduction(+ : c)
     for (int x = 0; x < sourceImage.width(); ++x) {
         for (int y = 0; y < sourceImage.height(); ++y) {
-            sampleColor = sourceImage.pixelColor(x, y);
+            const QColor sampleColor = sourceImage.pixelColor(x, y);
             if (sampleColor.alpha() == 0) {
                 continue;
             }
             if (ColorUtils::chroma(sampleColor) < 20) {
                 continue;
             }
-
             QRgb rgb = sampleColor.rgb();
-            c++;
+            ++c;
             r += qRed(rgb);
             g += qGreen(rgb);
             b += qBlue(rgb);
+#if HAVE_OpenMP
+            tempSamples[omp_get_thread_num()] << rgb;
+#else
             imageData.m_samples << rgb;
-            positionColor(rgb, imageData.m_clusters);
+#endif
         }
+    } // END omp parallel for
+
+#if HAVE_OpenMP
+    for (auto &s : tempSamples) {
+        imageData.m_samples << std::move(s);
     }
+#endif
 
     if (imageData.m_samples.isEmpty()) {
         return imageData;
     }
 
+    for (QRgb rgb : std::as_const(imageData.m_samples)) {
+        positionColor(rgb, imageData.m_clusters);
+    }
+
     imageData.m_average = QColor(r / c, g / c, b / c, 255);
 
     for (int iteration = 0; iteration < 5; ++iteration) {
+#ifndef _MSC_VER
+#pragma omp parallel for private(r, g, b, c)
+#endif
         for (auto &stat : imageData.m_clusters) {
             r = 0;
             g = 0;
@@ -283,7 +309,7 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage) const
             stat.centroid = qRgb(r, g, b);
             stat.ratio = qreal(stat.colors.count()) / qreal(imageData.m_samples.count());
             stat.colors = QList<QRgb>({stat.centroid});
-        }
+        } // END omp parallel for
 
         for (auto color : std::as_const(imageData.m_samples)) {
             positionColor(color, imageData.m_clusters);
