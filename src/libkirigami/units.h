@@ -217,6 +217,8 @@ class KIRIGAMI2_EXPORT Units : public QObject
     Q_PROPERTY(QObject *fontMetrics READ fontMetrics CONSTANT)
 #endif
 
+    Q_PROPERTY(int maximumInteger READ maximumInteger CONSTANT)
+
 public:
     explicit Units(QObject *parent = nullptr);
     ~Units() override;
@@ -265,6 +267,8 @@ public:
 #endif
 
     IconSizes *iconSizes() const;
+
+    int maximumInteger() const;
 
 Q_SIGNALS:
     void gridUnitChanged();

@@ -57,11 +57,11 @@ P.CardsGridViewPrivate {
     /**
      * @brief This property holds the maximum number of columns the gridview may have.
      *
-     * default: ``Infinity``
+     * default: ``Kirigami.Units.maximumInteger()``
      *
      * @since 2.5
      */
-    property int maximumColumns: Infinity
+    property int maximumColumns: Kirigami.Units.maximumInteger
 
     /**
      * @brief This property holds the maximum width that the columns may have.

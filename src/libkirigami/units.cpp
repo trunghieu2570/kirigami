@@ -333,6 +333,11 @@ void Units::setToolTipDelay(int delay)
     Q_EMIT toolTipDelayChanged();
 }
 
+int Units::maximumInteger() const
+{
+    return std::numeric_limits<int>::max();
+}
+
 #if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
 int Units::wheelScrollLines() const
 {
