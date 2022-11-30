@@ -62,7 +62,15 @@ void ImageColors::setSource(const QVariant &source)
     } else if (source.canConvert<QIcon>()) {
         setSourceImage(source.value<QIcon>().pixmap(128, 128).toImage());
     } else if (source.canConvert<QString>()) {
-        setSourceImage(QIcon::fromTheme(source.toString()).pixmap(128, 128).toImage());
+        const QString sourceString = source.toString();
+
+        if (QIcon::hasThemeIcon(sourceString)) {
+            setSourceImage(QIcon::fromTheme(sourceString).pixmap(128, 128).toImage());
+        } else if (auto url = QUrl(sourceString); url.isLocalFile()) {
+            setSourceImage(QImage(url.toLocalFile()));
+        } else {
+            setSourceImage(QImage(sourceString));
+        }
     } else {
         return;
     }
