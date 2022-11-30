@@ -250,6 +250,64 @@ void ImageColors::positionColor(QRgb rgb, QList<ImageData::colorStat> &clusters)
     clusters << stat;
 }
 
+void ImageColors::positionColorMP(const decltype(ImageData::m_samples) &samples, decltype(ImageData::m_clusters) &clusters, int numCore)
+{
+#if HAVE_OpenMP
+    if (samples.size() < 65536 /* 256^2 */ || numCore < 2) {
+#else
+    if (true) {
+#endif
+        // Fall back to single thread
+        for (auto color : samples) {
+            positionColor(color, clusters);
+        }
+        return;
+    }
+#if HAVE_OpenMP
+    // Split the whole samples into multiple parts
+    const int numSamplesPerThread = samples.size() / numCore;
+    std::vector<decltype(ImageData::m_clusters)> tempClusters(numCore, decltype(ImageData::m_clusters){});
+#pragma omp parallel for
+    for (int i = 0; i < numCore; ++i) {
+        decltype(ImageData::m_samples) samplePart;
+        const auto beginIt = std::next(samples.begin(), numSamplesPerThread * i);
+        const auto endIt = i < numCore - 1 ? std::next(samples.begin(), numSamplesPerThread * (i + 1)) : samples.end();
+
+        for (auto it = beginIt; it != endIt; it = std::next(it)) {
+            positionColor(*it, tempClusters[omp_get_thread_num()]);
+        }
+    } // END omp parallel for
+
+    // Restore clusters
+    // Don't use std::as_const as memory will grow significantly
+    for (const auto &clusterPart : tempClusters) {
+        clusters << clusterPart;
+    }
+    for (int i = 0; i < clusters.size() - 1; ++i) {
+        auto &clusterA = clusters[i];
+        if (clusterA.colors.empty()) {
+            continue; // Already merged
+        }
+        for (int j = i + 1; j < clusters.size(); ++j) {
+            auto &clusterB = clusters[j];
+            if (clusterB.colors.empty()) {
+                continue; // Already merged
+            }
+            if (squareDistance(clusterA.centroid, clusterB.centroid) < s_minimumSquareDistance) {
+                // Merge colors in clusterB into clusterA
+                clusterA.colors.append(clusterB.colors);
+                clusterB.colors.clear();
+            }
+        }
+    }
+
+    auto removeIt = std::remove_if(clusters.begin(), clusters.end(), [](const ImageData::colorStat &stat) {
+        return stat.colors.empty();
+    });
+    clusters.erase(removeIt, clusters.end());
+#endif
+}
+
 ImageData ImageColors::generatePalette(const QImage &sourceImage) const
 {
     ImageData imageData;
@@ -265,6 +323,8 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage) const
     static const int numCore = std::min(8, omp_get_num_procs());
     omp_set_num_threads(numCore);
     std::vector<decltype(imageData.m_samples)> tempSamples(numCore, decltype(imageData.m_samples){});
+#else
+    constexpr int numCore = 1;
 #endif
     int r = 0;
     int g = 0;
@@ -304,9 +364,7 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage) const
         return imageData;
     }
 
-    for (QRgb rgb : std::as_const(imageData.m_samples)) {
-        positionColor(rgb, imageData.m_clusters);
-    }
+    positionColorMP(imageData.m_samples, imageData.m_clusters, numCore);
 
     imageData.m_average = QColor(r / c, g / c, b / c, 255);
 
@@ -333,9 +391,7 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage) const
             stat.colors = QList<QRgb>({stat.centroid});
         } // END omp parallel for
 
-        for (auto color : std::as_const(imageData.m_samples)) {
-            positionColor(color, imageData.m_clusters);
-        }
+        positionColorMP(imageData.m_samples, imageData.m_clusters, numCore);
     }
 
     std::sort(imageData.m_clusters.begin(), imageData.m_clusters.end(), [this](const ImageData::colorStat &a, const ImageData::colorStat &b) {
@@ -374,7 +430,9 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage) const
 
     bool first = true;
 
-    for (const auto &stat : std::as_const(imageData.m_clusters)) {
+#pragma omp parallel for ordered
+    for (int i = 0; i < imageData.m_clusters.size(); ++i) {
+        const auto &stat = imageData.m_clusters[i];
         QVariantMap entry;
         const QColor color(stat.centroid);
         entry[QStringLiteral("color")] = color;
@@ -412,24 +470,26 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage) const
         }
 
         entry[QStringLiteral("contrastColor")] = contrast;
+#pragma omp ordered
+        { // BEGIN omp ordered
+            if (first) {
+                imageData.m_dominantContrast = contrast;
+                imageData.m_dominant = color;
+            }
+            first = false;
 
-        if (first) {
-            imageData.m_dominantContrast = contrast;
-            imageData.m_dominant = color;
-        }
-        first = false;
+            if (!imageData.m_highlight.isValid() || ColorUtils::chroma(color) > ColorUtils::chroma(imageData.m_highlight)) {
+                imageData.m_highlight = color;
+            }
 
-        if (!imageData.m_highlight.isValid() || ColorUtils::chroma(color) > ColorUtils::chroma(imageData.m_highlight)) {
-            imageData.m_highlight = color;
-        }
-
-        if (qGray(color.rgb()) > qGray(imageData.m_closestToWhite.rgb())) {
-            imageData.m_closestToWhite = color;
-        }
-        if (qGray(color.rgb()) < qGray(imageData.m_closestToBlack.rgb())) {
-            imageData.m_closestToBlack = color;
-        }
-        imageData.m_palette << entry;
+            if (qGray(color.rgb()) > qGray(imageData.m_closestToWhite.rgb())) {
+                imageData.m_closestToWhite = color;
+            }
+            if (qGray(color.rgb()) < qGray(imageData.m_closestToBlack.rgb())) {
+                imageData.m_closestToBlack = color;
+            }
+            imageData.m_palette << entry;
+        } // END omp ordered
     }
 
     postProcess(imageData);
