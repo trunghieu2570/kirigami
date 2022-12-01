@@ -220,6 +220,7 @@ protected:
     void setStatus(Status status);
     void updatePolish() override;
     void updatePaintedGeometry();
+    void itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &value) override;
 
 private:
     Kirigami::PlatformTheme *m_theme = nullptr;
