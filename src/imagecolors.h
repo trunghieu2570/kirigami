@@ -264,6 +264,7 @@ private:
     QPointer<QQuickItem> m_sourceItem;
     QSharedPointer<QQuickItemGrabResult> m_grabResult;
     QImage m_sourceImage;
+    QFutureWatcher<QImage> *m_futureSourceImageData = nullptr;
 
     QTimer *m_imageSyncTimer;
 

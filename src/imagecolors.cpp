@@ -60,6 +60,12 @@ ImageColors::~ImageColors()
 
 void ImageColors::setSource(const QVariant &source)
 {
+    if (m_futureSourceImageData) {
+        m_futureSourceImageData->cancel();
+        m_futureSourceImageData->deleteLater();
+        m_futureSourceImageData = nullptr;
+    }
+
     if (source.canConvert<QQuickItem *>()) {
         setSourceItem(source.value<QQuickItem *>());
     } else if (source.canConvert<QImage>()) {
@@ -71,10 +77,24 @@ void ImageColors::setSource(const QVariant &source)
 
         if (QIcon::hasThemeIcon(sourceString)) {
             setSourceImage(QIcon::fromTheme(sourceString).pixmap(128, 128).toImage());
-        } else if (auto url = QUrl(sourceString); url.isLocalFile()) {
-            setSourceImage(QImage(url.toLocalFile()));
         } else {
-            setSourceImage(QImage(sourceString));
+            QFuture<QImage> future = QtConcurrent::run([sourceString]() {
+                if (auto url = QUrl(sourceString); url.isLocalFile()) {
+                    return QImage(url.toLocalFile());
+                }
+                return QImage(sourceString);
+            });
+            m_futureSourceImageData = new QFutureWatcher<QImage>(this);
+            connect(m_futureSourceImageData, &QFutureWatcher<QImage>::finished, this, [this, source]() {
+                const QImage image = m_futureSourceImageData->future().result();
+                m_futureSourceImageData->deleteLater();
+                m_futureSourceImageData = nullptr;
+                setSourceImage(image);
+                m_source = source;
+                Q_EMIT sourceChanged();
+            });
+            m_futureSourceImageData->setFuture(future);
+            return;
         }
     } else {
         return;
