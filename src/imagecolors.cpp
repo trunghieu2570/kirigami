@@ -177,6 +177,9 @@ void ImageColors::update()
     if (!m_sourceItem) {
         if (!m_sourceImage.isNull()) {
             runUpdate();
+        } else {
+            m_imageData = {};
+            Q_EMIT paletteChanged();
         }
         return;
     }
