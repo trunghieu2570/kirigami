@@ -272,8 +272,9 @@ void Icon::updatePolish()
 
     const QSize itemSize(width(), height());
     if (itemSize.width() != 0 && itemSize.height() != 0) {
-        const auto multiplier =
-            QCoreApplication::instance()->testAttribute(Qt::AA_UseHighDpiPixmaps) ? 1 : (window() ? window()->devicePixelRatio() : qGuiApp->devicePixelRatio());
+        const auto multiplier = QCoreApplication::instance()->testAttribute(Qt::AA_UseHighDpiPixmaps)
+            ? 1
+            : (window() ? window()->effectiveDevicePixelRatio() : qGuiApp->devicePixelRatio());
         const QSize size = itemSize * multiplier;
 
         switch (m_source.type()) {
@@ -334,8 +335,9 @@ QImage Icon::findIcon(const QSize &size)
     QString iconSource = m_source.toString();
 
     if (iconSource.startsWith(QLatin1String("image://"))) {
-        const auto multiplier =
-            QCoreApplication::instance()->testAttribute(Qt::AA_UseHighDpiPixmaps) ? (window() ? window()->devicePixelRatio() : qGuiApp->devicePixelRatio()) : 1;
+        const auto multiplier = QCoreApplication::instance()->testAttribute(Qt::AA_UseHighDpiPixmaps)
+            ? (window() ? window()->effectiveDevicePixelRatio() : qGuiApp->devicePixelRatio())
+            : 1;
         QUrl iconUrl(iconSource);
         QString iconProviderId = iconUrl.host();
         // QUrl path has the  "/" prefix while iconId does not
