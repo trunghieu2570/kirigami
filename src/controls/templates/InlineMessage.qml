@@ -123,11 +123,11 @@ T2.Control {
     /**
      * This property holds whether the current message item is animating.
      */
-    readonly property bool animating: root.hasOwnProperty("_animating") && _animating
-
-    implicitHeight: visible ? contentLayout.implicitHeight + (2 * (background.border.width + Kirigami.Units.smallSpacing)) : 0
+    readonly property bool animating: _animating
 
     property bool _animating: false
+
+    implicitHeight: visible ? contentLayout.implicitHeight + (2 * (background.border.width + Kirigami.Units.smallSpacing)) : 0
 
     leftPadding: background.border.width + Kirigami.Units.smallSpacing
     topPadding: background.border.width + Kirigami.Units.smallSpacing
