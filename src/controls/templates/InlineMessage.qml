@@ -204,7 +204,7 @@ T2.Control {
             id: icon
 
             width: Kirigami.Units.iconSizes.smallMedium
-            height: actionsLayout.atBottom ? width : width
+            height: Kirigami.Units.iconSizes.smallMedium
 
             anchors {
                 left: parent.left
