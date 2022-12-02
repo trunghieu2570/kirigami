@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2018 Eike Hein <hein@kde.org>
+ *  SPDX-FileCopyrightText: 2022 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -192,8 +193,11 @@ T2.Control {
             }
         }
 
-        readonly property int remainingWidth: width - (label.implicitWidth + icon.width + Kirigami.Units.smallSpacing * 2)
-                                                - (closeButton.visible ? closeButton.width + Kirigami.Units.smallSpacing : 0)
+        readonly property real remainingWidth: width - (
+            icon.width
+            + labelArea.anchors.leftMargin + label.implicitWidth + labelArea.anchors.rightMargin
+            + (closeButton.visible ? closeButton.width : 0)
+        )
         readonly property bool multiline: remainingWidth <= 0 || actionsLayout.atBottom
 
         Kirigami.Icon {
