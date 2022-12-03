@@ -196,7 +196,7 @@ T2.Control {
         readonly property real remainingWidth: width - (
             icon.width
             + labelArea.anchors.leftMargin + label.implicitWidth + labelArea.anchors.rightMargin
-            + (closeButton.visible ? closeButton.width : 0)
+            + (root.showCloseButton ? closeButton.width : 0)
         )
         readonly property bool multiline: remainingWidth <= 0 || actionsLayout.atBottom
 
@@ -239,8 +239,8 @@ T2.Control {
             anchors {
                 left: icon.right
                 leftMargin: Kirigami.Units.smallSpacing
-                right: closeButton.visible ? closeButton.left : parent.right
-                rightMargin: closeButton.visible ? Kirigami.Units.smallSpacing : 0
+                right: root.showCloseButton ? closeButton.left : parent.right
+                rightMargin: root.showCloseButton ? Kirigami.Units.smallSpacing : 0
                 top: parent.top
                 bottom: contentLayout.multiline ? undefined : parent.bottom
             }
@@ -285,8 +285,8 @@ T2.Control {
                 left: parent.left
                 top: atBottom ? labelArea.bottom : parent.top
                 topMargin: atBottom ? Kirigami.Units.gridUnit : 0
-                right: (!atBottom && closeButton.visible) ? closeButton.left : parent.right
-                rightMargin: !atBottom && closeButton.visible ? Kirigami.Units.smallSpacing : 0
+                right: (!atBottom && root.showCloseButton) ? closeButton.left : parent.right
+                rightMargin: !atBottom && root.showCloseButton ? Kirigami.Units.smallSpacing : 0
             }
         }
 
