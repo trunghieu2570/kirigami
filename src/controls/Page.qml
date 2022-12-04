@@ -142,6 +142,37 @@ QQC2.Page {
             return Kirigami.ApplicationHeaderStyle.None;
         }
     }
+    
+    /**
+     * Whether to perform an animation when the page is shown, useful during lateral navigation.
+     * This will set the transform property on the page's contents in order to perform a translation on `y`.
+     * 
+     * By default, this is set to false.
+     * 
+     * @since 2.20
+     */
+    property bool animateWhenShown: false
+    
+    /**
+     * Whether to perform an animation on the header when the page is shown, useful during lateral navigation.
+     * This will set the transform property on the page header in order to perform a translation on `y`.
+     * 
+     * By default, this is the value of `animateWhenShown`.
+     * 
+     * @since 2.20
+     */
+    property bool animateHeaderWhenShown: animateWhenShown
+    
+    /**
+     * Whether to perform an animation on the footer when the page is shown, useful during lateral navigation.
+     * This will set the transform property on the page footer in order to perform a translation on `y`.
+     * 
+     * By default, this is the value of `animateWhenShown`.
+     * 
+     * @since 2.20
+     */
+    property bool animateFooterWhenShown: animateWhenShown
+    
 //END properties
 
 //BEGIN signal and signal handlers
@@ -189,6 +220,9 @@ QQC2.Page {
         parentChanged(root.parent);
         globalToolBar.syncSource();
         bottomToolBar.pageComplete = true
+
+        // run page shown animation if needed
+        pageAnimController.runShownAnimation();
     }
 
     onParentChanged: {
@@ -208,6 +242,12 @@ QQC2.Page {
         if (globalToolBar.row) {
             root.globalToolBarStyleChanged.connect(globalToolBar.syncSource);
             globalToolBar.syncSource();
+        }
+    }
+
+    onVisibleChanged: {
+        if (!root.visible) { 
+            pageAnimController.runShownAnimation(); 
         }
     }
 //END signals and signal handlers
@@ -272,6 +312,63 @@ QQC2.Page {
                         }),
                     });
                 }
+            }
+        },
+
+        // page animations for animateWhenShown property
+        QtObject {
+            id: pageAnimController
+            
+            // setup custom translate object to be used for y animation
+            property real yTranslate: 0
+            property Translate translate: Translate {
+                y: pageAnimController.yTranslate
+            }
+            
+            function addTransform(item, transform) {
+                if (!item.transform.includes(transform)) {
+                    item.transform.push(transform);
+                }
+            }
+
+            // called when animation is run
+            function runShownAnimation() {
+                if (!root.animateWhenShown) {
+                    return;
+                }
+                
+                showPageOpacityAnim.properties = 'contentItem.opacity';
+                addTransform(contentItem, pageAnimController.translate);
+
+                if (root.header && root.animateHeaderWhenShown) {
+                    showPageOpacityAnim.properties += ',header.opacity';
+                    addTransform(root.header, pageAnimController.translate);
+                }
+                if (root.footer && animateFooterWhenShown) {
+                    showPageOpacityAnim.properties += ',footer.opacity';
+                    addTransform(root.footer, pageAnimController.translate);
+                }
+                if (root.flickable) {
+                    showPageOpacityAnim.properties += ',flickable.opacity';
+                }
+                
+                showPageOpacityAnim.restart();
+                showPageYAnim.restart();
+            }
+
+            property var showPageOpacityAnim: NumberAnimation {
+                target: root
+                from: 0; to: 1
+                duration: Kirigami.Units.veryLongDuration
+                easing.type: Easing.InOutQuad
+            }
+
+            property var showPageYAnim: NumberAnimation {
+                target: pageAnimController
+                properties: 'yTranslate'
+                from: Kirigami.Units.gridUnit * 2; to: 0
+                duration: Kirigami.Units.longDuration * 3
+                easing.type: Easing.OutExpo
             }
         }
     ]
