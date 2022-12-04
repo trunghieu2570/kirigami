@@ -621,11 +621,12 @@ void Icon::updatePaintedGeometry()
     }
 }
 
-void Icon::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &)
+void Icon::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &value)
 {
     if (change == QQuickItem::ItemDevicePixelRatioHasChanged) {
         polish();
     }
+    QQuickItem::itemChange(change, value);
 }
 
 #include "moc_icon.cpp"
