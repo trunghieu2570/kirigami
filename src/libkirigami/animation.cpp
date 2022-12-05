@@ -9,45 +9,41 @@
 namespace Kirigami
 {
 
-// in case we want to expand this in the future
-class AnimationPrivate
-{
-    Q_DISABLE_COPY(AnimationPrivate)
-
-public:
-    explicit AnimationPrivate()
-        : visibleToHidden(QEasingCurve::OutCubic)
-        , visibleToVisible(QEasingCurve::InOutCubic)
-        , hiddenToVisible(QEasingCurve::OutCubic)
-    {
-    }
-
-    QEasingCurve::Type visibleToHidden;
-    QEasingCurve::Type visibleToVisible;
-    QEasingCurve::Type hiddenToVisible;
-};
-
 Animation::Animation(QObject *parent)
     : QObject(parent)
-    , d(std::make_unique<AnimationPrivate>())
 {
 }
 
 Animation::~Animation() = default;
 
-QEasingCurve::Type Animation::visibleToHidden() const
+QEasingCurve::Type Animation::opacityHiddenToVisible() const
 {
-    return d->visibleToHidden;
+    return QEasingCurve::InOutCubic;
 }
 
-QEasingCurve::Type Animation::visibleToVisible() const
+QEasingCurve::Type Animation::movementHiddenToVisible() const
 {
-    return d->visibleToVisible;
+    return QEasingCurve::OutCubic;
 }
 
-QEasingCurve::Type Animation::hiddenToVisible() const
+QEasingCurve::Type Animation::opacityVisibleToHidden() const
 {
-    return d->hiddenToVisible;
+    return QEasingCurve::InOutCubic;
+}
+
+QEasingCurve::Type Animation::movementVisibleToHidden() const
+{
+    return QEasingCurve::OutCubic;
+}
+
+QEasingCurve::Type Animation::opacityVisibleToVisible() const
+{
+    return QEasingCurve::InOutCubic;
+}
+
+QEasingCurve::Type Animation::movementVisibleToVisible() const
+{
+    return QEasingCurve::InOutCubic;
 }
 
 };

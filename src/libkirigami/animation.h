@@ -17,35 +17,32 @@ class QQmlEngine;
 
 namespace Kirigami
 {
-class AnimationPrivate;
 
 /**
- * @class Units units.h <Kirigami/Animation>
+ * @class Animation animation.h <Kirigami/Animation>
  *
  * A set of useful animation utilities.
  */
 class KIRIGAMI2_EXPORT Animation : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(int visibleToHidden READ visibleToHidden NOTIFY visibleToHiddenChanged)
-    Q_PROPERTY(int visibleToVisible READ visibleToVisible NOTIFY visibleToVisibleChanged)
-    Q_PROPERTY(int hiddenToVisible READ hiddenToVisible NOTIFY hiddenToVisibleChanged)
+    Q_PROPERTY(int opacityHiddenToVisible READ opacityHiddenToVisible CONSTANT)
+    Q_PROPERTY(int movementHiddenToVisible READ movementHiddenToVisible CONSTANT)
+    Q_PROPERTY(int opacityVisibleToHidden READ opacityVisibleToHidden CONSTANT)
+    Q_PROPERTY(int movementVisibleToHidden READ movementVisibleToHidden CONSTANT)
+    Q_PROPERTY(int opacityVisibleToVisible READ opacityVisibleToVisible CONSTANT)
+    Q_PROPERTY(int movementVisibleToVisible READ movementVisibleToVisible CONSTANT)
 
 public:
     explicit Animation(QObject *parent = nullptr);
     ~Animation() override;
 
-    QEasingCurve::Type visibleToHidden() const;
-    QEasingCurve::Type visibleToVisible() const;
-    QEasingCurve::Type hiddenToVisible() const;
-
-Q_SIGNALS:
-    void visibleToHiddenChanged();
-    void visibleToVisibleChanged();
-    void hiddenToVisibleChanged();
-
-private:
-    std::unique_ptr<AnimationPrivate> d;
+    QEasingCurve::Type opacityHiddenToVisible() const;
+    QEasingCurve::Type movementHiddenToVisible() const;
+    QEasingCurve::Type opacityVisibleToHidden() const;
+    QEasingCurve::Type movementVisibleToHidden() const;
+    QEasingCurve::Type opacityVisibleToVisible() const;
+    QEasingCurve::Type movementVisibleToVisible() const;
 };
 
 }
