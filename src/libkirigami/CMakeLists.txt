@@ -4,6 +4,7 @@ add_library(KF5Kirigami2 ${libkirigami_SRCS})
 add_library(KF5::Kirigami2 ALIAS KF5Kirigami2)
 
 target_sources(KF5Kirigami2 PRIVATE
+    animation.cpp
     platformtheme.cpp
     basictheme.cpp
     kirigamipluginfactory.cpp
@@ -64,6 +65,7 @@ ecm_generate_headers(Kirigami2_CamelCase_HEADERS
     KirigamiPluginFactory
     TabletModeWatcher
     Units
+    Animation
     VirtualKeyboardWatcher
 
     PREFIX Kirigami

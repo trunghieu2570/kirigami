@@ -16,6 +16,7 @@
 #include <QQmlEngine>
 #include <QStyleHints>
 
+#include "animation.h"
 #include "units.h"
 
 class QmlComponentsPoolSingleton
@@ -102,6 +103,9 @@ QtObject {
 
     m_units = engine->singletonInstance<Kirigami::Units *>(qmlTypeId("org.kde.kirigami", 2, 0, "Units"));
     Q_ASSERT(m_units);
+
+    m_animation = engine->singletonInstance<Kirigami::Animation *>(qmlTypeId("org.kde.kirigami", 2, 20, "Animation"));
+    Q_ASSERT(m_animation);
 
     connect(m_units, &Kirigami::Units::gridUnitChanged, this, &QmlComponentsPool::gridUnitChanged);
     connect(m_units, &Kirigami::Units::longDurationChanged, this, &QmlComponentsPool::longDurationChanged);

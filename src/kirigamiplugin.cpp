@@ -35,12 +35,12 @@
 #include <QQuickItem>
 #include <QQuickStyle>
 
+#include "libkirigami/animation.h"
 #include "libkirigami/basictheme_p.h"
+#include "libkirigami/kirigamipluginfactory.h"
 #include "libkirigami/platformtheme.h"
 #include "libkirigami/styleselector_p.h"
 #include "loggingcategory.h"
-#include "libkirigami/basictheme_p.h"
-#include "libkirigami/kirigamipluginfactory.h"
 
 static QString s_selectedStyle;
 
@@ -327,6 +327,11 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     // 2.20
     qmlRegisterType(componentUrl(QStringLiteral("SelectableLabel.qml")), uri, 2, 20, "SelectableLabel");
+
+    // 2.21
+    qmlRegisterSingletonType<Kirigami::Animation>(uri, 2, 21, "Animation", [](QQmlEngine *engine, QJSEngine *) {
+        return new Kirigami::Animation(engine);
+    });
 
     qmlProtectModule(uri, 2);
 }
