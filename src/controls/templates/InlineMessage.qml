@@ -276,7 +276,7 @@ T2.Control {
 
             flat: false
             actions: root.actions
-            visible: root.actions.length
+            visible: root.actions.length > 0
             alignment: Qt.AlignRight
 
             readonly property bool atBottom: (root.actions.length > 0) && (label.lineCount > 1 || implicitWidth > contentLayout.remainingWidth)
