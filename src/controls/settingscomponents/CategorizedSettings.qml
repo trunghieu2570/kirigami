@@ -61,7 +61,7 @@ Kirigami.PageRow {
         const vScrollBarWidth = initialPage.contentItem.QQC2.ScrollBar.vertical.width;
 
         // we need to add spacing from ListView's item delegate and it's items
-        const calcWidth = maxWordMetrics.width + Kirigami.Units.smallSpacing * 6 + vScrollBarWidth;
+        const calcWidth = maxWordMetrics.width + Kirigami.Units.smallSpacing * 8 + vScrollBarWidth;
         const minWidth = Kirigami.Units.gridUnit * 6;
         const maxWidth = Kirigami.Units.gridUnit * 8.5;
 
