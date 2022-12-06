@@ -8,7 +8,7 @@ import QtQuick 2.12
 import QtQuick.Templates 2.3 as T2
 import QtQuick.Controls 2.2 as QQC2
 import QtQuick.Layouts 1.2
-import org.kde.kirigami 2.13 as Kirigami
+import org.kde.kirigami 2.21 as Kirigami
 import "private" as P
 
 /**
@@ -419,27 +419,27 @@ OverlayDrawer {
                     // as while the animation is running the drawer may close, and
                     // the animator would stop when not drawing see BUG 381576
                     popEnter: Transition {
-                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * -stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * -stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Kirigami.Animation.movementHiddenToVisible }
                     }
 
                     popExit: Transition {
-                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Kirigami.Animation.movementVisibleToHidden }
                     }
 
                     pushEnter: Transition {
-                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Kirigami.Animation.movementHiddenToVisible }
                     }
 
                     pushExit: Transition {
-                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Kirigami.Animation.movementVisibleToHidden }
                     }
 
                     replaceEnter: Transition {
-                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Kirigami.Animation.movementHiddenToVisible }
                     }
 
                     replaceExit: Transition {
-                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Kirigami.Animation.movementVisibleToHidden }
                     }
                 }
                 Item {

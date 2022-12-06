@@ -7,7 +7,7 @@
 import QtQuick 2.5
 import QtQuick.Controls 2.0 as QQC2
 import QtQuick.Layouts 1.2
-import org.kde.kirigami 2.4 as Kirigami
+import org.kde.kirigami 2.21 as Kirigami
 import "private"
 
 
@@ -139,7 +139,7 @@ AbstractApplicationHeader {
                 from: -height
                 to: 0
                 duration: Kirigami.Units.longDuration
-                easing.type: Easing.OutCubic
+                easing.type: Kirigami.Animation.movementHiddenToVisible
             }
         }
         popExit: Transition {
@@ -147,7 +147,7 @@ AbstractApplicationHeader {
                 from: 0
                 to: height
                 duration: Kirigami.Units.longDuration
-                easing.type: Easing.OutCubic
+                easing.type: Kirigami.Animation.movementVisibleToHidden
             }
         }
 
@@ -156,7 +156,7 @@ AbstractApplicationHeader {
                 from: height
                 to: 0
                 duration: Kirigami.Units.longDuration
-                easing.type: Easing.OutCubic
+                easing.type: Kirigami.Animation.movementHiddenToVisible
             }
         }
 
@@ -165,7 +165,7 @@ AbstractApplicationHeader {
                 from: 0
                 to: -height
                 duration: Kirigami.Units.longDuration
-                easing.type: Easing.OutCubic
+                easing.type: Kirigami.Animation.movementVisibleToHidden
             }
         }
 
@@ -174,7 +174,7 @@ AbstractApplicationHeader {
                 from: height
                 to: 0
                 duration: Kirigami.Units.longDuration
-                easing.type: Easing.OutCubic
+                easing.type: Kirigami.Animation.movementHiddenToVisible
             }
         }
 
@@ -183,7 +183,7 @@ AbstractApplicationHeader {
                 from: 0
                 to: -height
                 duration: Kirigami.Units.longDuration
-                easing.type: Easing.OutCubic
+                easing.type: Kirigami.Animation.movementVisibleToHidden
             }
         }
     }
@@ -212,7 +212,7 @@ AbstractApplicationHeader {
             // If the title delegate really needs to load async, it should be its responsibility to do it itself.
             asynchronous: false
             sourceComponent: header.pageDelegate
-            readonly property Kirigami.Page page: pageRow.layers.get(modelData+1)
+            readonly property Kirigami.Page page: paKirigami.Animation.movementHiddenToVisiblegeRow.layers.get(modelData+1)
             readonly property bool current: true;
             Component.onCompleted: stack.push(this)
             Component.onDestruction: stack.pop()

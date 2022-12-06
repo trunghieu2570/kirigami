@@ -314,7 +314,7 @@ ContentItem::ContentItem(ColumnView *parent)
     m_slideAnim->setPropertyName("x");
     // NOTE: the duration will be taken from kirigami units upon classBegin
     m_slideAnim->setDuration(0);
-    m_slideAnim->setEasingCurve(QEasingCurve(privateQmlComponentsPoolSelf->instance(qmlEngine(this))->m_animation->movementHiddenToVisible()));
+    // NOTE: easing curve will be taken from kirigami animation upon classBegin
     connect(m_slideAnim, &QPropertyAnimation::finished, this, [this]() {
         if (!m_view->currentItem()) {
             m_view->setCurrentIndex(m_items.indexOf(m_viewAnchorItem));
@@ -1600,6 +1600,8 @@ void ColumnView::classBegin()
 
     connect(QmlComponentsPoolSingleton::instance(qmlEngine(this)), &QmlComponentsPool::longDurationChanged, this, syncDuration);
     syncDuration();
+
+    m_contentItem->m_slideAnim->setEasingCurve(QEasingCurve(privateQmlComponentsPoolSelf->instance(qmlEngine(this))->m_animation->movementHiddenToVisible()));
 
     QQuickItem::classBegin();
 }

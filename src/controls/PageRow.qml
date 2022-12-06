@@ -9,7 +9,7 @@ import QtQuick.Layouts 1.2
 import QtQml.Models 2.2
 import QtQuick.Templates 2.0 as QT
 import QtQuick.Controls 2.0 as QQC2
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami 2.21 as Kirigami
 import "private/globaltoolbar" as GlobalToolBar
 import "templates" as KT
 
@@ -773,7 +773,7 @@ QT.Control {
                 from: 0
                 to: 1
                 duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutCubic
+                easing.type: Kirigami.Animation.opacityHiddenToVisible
             }
         }
         popExit: Transition {
@@ -782,13 +782,13 @@ QT.Control {
                     from: 1
                     to: 0
                     duration: Kirigami.Units.longDuration
-                    easing.type: Easing.InOutCubic
+                    easing.type: Kirigami.Animation.opacityVisibleToHidden
                 }
                 YAnimator {
                     from: 0
                     to: height/2
                     duration: Kirigami.Units.longDuration
-                    easing.type: Easing.InCubic
+                    easing.type: Kirigami.Animation.movementVisibleToHidden
                 }
             }
         }
@@ -801,13 +801,13 @@ QT.Control {
                     from: 0
                     to: 1
                     duration: Kirigami.Units.longDuration
-                    easing.type: Easing.InOutCubic
+                    easing.type: Kirigami.Animation.opacityHiddenToVisible
                 }
                 YAnimator {
                     from: height/2
                     to: 0
                     duration: Kirigami.Units.longDuration
-                    easing.type: Easing.OutCubic
+                    easing.type: Kirigami.Animation.movementHiddenToVisible
                 }
             }
         }
@@ -818,7 +818,7 @@ QT.Control {
                 from: 1
                 to: 0
                 duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutCubic
+                easing.type: Kirigami.Animation.opacityVisibleToHidden
             }
         }
 
@@ -828,13 +828,13 @@ QT.Control {
                     from: 0
                     to: 1
                     duration: Kirigami.Units.longDuration
-                    easing.type: Easing.InOutCubic
+                    easing.type: Kirigami.Animation.opacityHiddenToVisible
                 }
                 YAnimator {
                     from: height/2
                     to: 0
                     duration: Kirigami.Units.longDuration
-                    easing.type: Easing.OutCubic
+                    easing.type: Kirigami.Animation.movementHiddenToVisible
                 }
             }
         }
@@ -845,13 +845,13 @@ QT.Control {
                     from: 1
                     to: 0
                     duration: Kirigami.Units.longDuration
-                    easing.type: Easing.InCubic
+                    easing.type: Kirigami.Animation.opacityVisibleToHidden
                 }
                 YAnimator {
                     from: 0
                     to: -height/2
                     duration: Kirigami.Units.longDuration
-                    easing.type: Easing.InOutCubic
+                    easing.type: Kirigami.Animation.movementVisibleToHidden
                 }
             }
         }
