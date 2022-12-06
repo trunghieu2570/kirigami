@@ -41,7 +41,7 @@ QQC2.Label {
      * @brief This property holds the level of the heading, which determines its size.
      *
      * This property holds the level, which determines how large the header is.
-     * 
+     *
      * Acceptable values range from 1 (big) to 5 (small).
      *
      * default: ``1``
@@ -72,10 +72,10 @@ QQC2.Label {
      * @brief This property holds the heading type.
      *
      * The type of the heading. This can be:
-     * * ``Kirigami.Kirigami.Heading.Type.Normal``: Create a normal heading (default)
-     * * ``Kirigami.Kirigami.Heading.Type.Primary``: Makes the heading more prominent. Useful
+     * * ``Kirigami.Heading.Type.Normal``: Create a normal heading (default)
+     * * ``Kirigami.Heading.Type.Primary``: Makes the heading more prominent. Useful
      *   when making the heading bigger is not enough.
-     * * ``Kirigami.Kirigami.Heading.Type.Secondary``: Makes the heading less prominent.
+     * * ``Kirigami.Heading.Type.Secondary``: Makes the heading less prominent.
      *   Useful when an heading is for a less important section in an application.
      *
      * @property Heading::Type type

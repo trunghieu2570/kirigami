@@ -149,7 +149,7 @@ Kirigami.AbstractListItem {
      * @brief This property holds the color of the icon.
      *
      * If the icon's original colors should be left intact, set this to the default value, "transparent".
-     * Note that this colour will only be applied if the icon can be recoloured, (e.g. you can use Kirigami.Kirigami.Theme.foregroundColor to change the icon's colour.)
+     * Note that this colour will only be applied if the icon can be recoloured, (e.g. you can use Kirigami.Theme.foregroundColor to change the icon's colour.)
      *
      * @property color iconColor
      * @since 2.7

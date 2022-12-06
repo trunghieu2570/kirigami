@@ -113,7 +113,7 @@ QT.Control {
     /**
      * @brief This property holds the default width for a column.
      *
-     * default: ``20 * Kirigami.Kirigami.Units.gridUnit``
+     * default: ``20 * Kirigami.Units.gridUnit``
      *
      * @note Pages can override it using implicitWidth, Layout.fillWidth, Layout.minimumWidth etc.
      */
@@ -192,13 +192,13 @@ QT.Control {
      * @since 5.38
      */
     property alias layers: layersStack
-    
+
     /**
      * @brief This property holds whether to automatically pop pages at the top of the stack if they are not visible.
-     * 
+     *
      * If a user navigates to a previous page on the stack (ex. pressing back button) and pages above
      * it on the stack are not visible, they will be popped if this property is true.
-     * 
+     *
      * @since 5.101
      */
     property bool popNotVisiblePagesAutomatically: false
@@ -278,7 +278,7 @@ QT.Control {
                             contentItem: RowLayout {
                                 width: parent.width
                                 Kirigami.Heading {
-                                    Layout.leftMargin: Kirigami.Kirigami.Units.largeSpacing
+                                    Layout.leftMargin: Kirigami.Units.largeSpacing
                                     text: dialog.title
                                     elide: Text.ElideRight
                                 }
@@ -288,9 +288,9 @@ QT.Control {
                                 Kirigami.Icon {
                                     id: closeIcon
                                     Layout.alignment: Qt.AlignVCenter
-                                    Layout.rightMargin: Kirigami.Kirigami.Units.largeSpacing
-                                    Layout.preferredHeight: Kirigami.Kirigami.Units.iconSizes.smallMedium
-                                    Layout.preferredWidth: Kirigami.Kirigami.Units.iconSizes.smallMedium
+                                    Layout.rightMargin: Kirigami.Units.largeSpacing
+                                    Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
+                                    Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
                                     source: closeMouseArea.containsMouse ? "window-close" : "window-close-symbolic"
                                     active: closeMouseArea.containsMouse
                                     MouseArea {
@@ -961,7 +961,7 @@ QT.Control {
 
             onItemInserted: root.pageInserted(position, item);
             onItemRemoved: root.pageRemoved(item);
-            
+
             onVisibleItemsChanged: {
                 if (root.popNotVisiblePagesAutomatically) {
                     while (root.lastItem != root.lastVisibleItem) {

@@ -51,28 +51,28 @@ QtObject {
     /**
      * @brief This property holds the left padding.
      *
-     * default: ``Kirigami.Kirigami.Units.largeSpacing``
+     * default: ``Kirigami.Units.largeSpacing``
      */
     property int leftPadding: Kirigami.Units.largeSpacing
 
     /**
      * @brief This property holds the top padding.
      *
-     * default: ``Kirigami.Kirigami.Units.largeSpacing``
+     * default: ``Kirigami.Units.largeSpacing``
      */
     property int topPadding: Kirigami.Units.largeSpacing
 
     /**
      * @brief This property holds the right padding.
      *
-     * default: ``Kirigami.Kirigami.Units.largeSpacing``
+     * default: ``Kirigami.Units.largeSpacing``
      */
     property int rightPadding: Kirigami.Units.largeSpacing
 
     /**
      * @brief This property holds the bottom padding.
      *
-     * default: ``Kirigami.Kirigami.Units.largeSpacing``
+     * default: ``Kirigami.Units.largeSpacing``
      */
     property int bottomPadding: Kirigami.Units.largeSpacing
 
