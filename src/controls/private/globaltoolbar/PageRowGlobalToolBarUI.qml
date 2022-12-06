@@ -67,7 +67,9 @@ Kirigami.AbstractApplicationHeader {
 
             action: Kirigami.Action {
                 children: applicationWindow().globalDrawer && applicationWindow().globalDrawer.actions ? applicationWindow().globalDrawer.actions : []
+                tooltip: checked ? qsTr("Close menu") : qsTr("Open menu")
             }
+            Accessible.name: action.tooltip
         }
 
         RowLayout {
