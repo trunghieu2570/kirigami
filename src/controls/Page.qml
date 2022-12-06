@@ -6,8 +6,8 @@
 
 import QtQuick 2.5
 import QtQuick.Layouts 1.2
-import QtQuick.Templates 2.1 as T2
-import QtQuick.Controls 2.1 as QQC2
+import QtQuick.Templates 2.15 as T2
+import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.10 as Kirigami
 import "private" as P
 
@@ -331,8 +331,10 @@ QQC2.Page {
         color: Kirigami.Theme.backgroundColor
     }
 
-    implicitHeight: ((header && header.visible) ? header.implicitHeight : 0) + ((footer && footer.visible) ? footer.implicitHeight : 0) + contentItem.implicitHeight + topPadding + bottomPadding
-    implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding
+    implicitWidth: contentWidth + leftPadding + rightPadding
+    implicitHeight: contentHeight + topPadding + bottomPadding
+        + (implicitHeaderHeight > 0 ? implicitHeaderHeight + spacing : 0)
+        + (implicitFooterHeight > 0 ? implicitFooterHeight + spacing : 0)
 
     // FIXME: on material the shadow would bleed over
     clip: root.header !== null;
