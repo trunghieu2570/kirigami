@@ -9,7 +9,7 @@ import QtQml 2.15
 import QtQuick.Controls 2.0 as QQC2
 import QtQuick.Window 2.5
 import org.kde.kirigami 2.4 as Kirigami
-
+import "templates/private" as TP
 /**
  * A window that provides some basic features needed for all apps
  * Use this class only if you need a custom content for your application,
@@ -211,24 +211,16 @@ QQC2.ApplicationWindow {
      *            user clicks the button.
      */
     function showPassiveNotification(message, timeout, actionText, callBack) {
-        if (!internal.__passiveNotification) {
-            const component = Qt.createComponent("templates/private/PassiveNotification.qml");
-            internal.__passiveNotification = component.createObject(overlay.parent);
-            component.destroy();
-        }
-
-        internal.__passiveNotification.showNotification(message, timeout, actionText, callBack);
+        notificationsObject.showNotification(message, timeout, actionText, callBack);
     }
 
    /**
-    * @brief This function hides the passive notification, if any is shown.
+    * @brief This function hides the passive notification at specified index, if any is shown.
+    * @param index Index of the notification to hide. Default is 0 (oldest notification).
     */
-    function hidePassiveNotification() {
-        if(internal.__passiveNotification) {
-           internal.__passiveNotification.hideNotification();
-        }
+    function hidePassiveNotification(index = 0) {
+        notificationsObject.hideNotification(index);
     }
-
 
     /**
      * @brief This function returns application window's object anywhere in the application.
@@ -244,6 +236,13 @@ QQC2.ApplicationWindow {
     LayoutMirroring.childrenInherit: true
 
     color: Kirigami.Theme.backgroundColor
+
+    TP.PassiveNotificationsManager {
+        id: notificationsObject
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        z: 1
+    }
 
     MouseArea {
         parent: contentItem.parent
@@ -338,11 +337,6 @@ QQC2.ApplicationWindow {
         // see BUG 433849
         root.width = root.width;
         root.height = root.height;
-    }
-
-    QtObject {
-        id: internal
-        property QtObject __passiveNotification
     }
 
     Action {

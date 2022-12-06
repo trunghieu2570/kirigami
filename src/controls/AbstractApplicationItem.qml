@@ -291,22 +291,15 @@ Item {
      *            user clicks the button.
      */
     function showPassiveNotification(message, timeout, actionText, callBack) {
-        if (!internal.__passiveNotification) {
-            const component = Qt.createComponent("templates/private/PassiveNotification.qml");
-            internal.__passiveNotification = component.createObject(root);
-            component.destroy();
-        }
-
-        internal.__passiveNotification.showNotification(message, timeout, actionText, callBack);
+        notificationsObject.showNotification(message, timeout, actionText, callBack);
     }
 
-   /**
-    * @brief This function hides the passive notification, if any is shown.
+    /**
+     * @brief This function hides the passive notification at specified index, if any is shown.
+     * @param index Index of the notification to hide. Default is 0 (oldest notification).
     */
-    function hidePassiveNotification() {
-        if(internal.__passiveNotification) {
-           internal.__passiveNotification.hideNotification();
-        }
+    function hidePassiveNotification(index = 0) {
+        notificationsObject.hideNotification(index);
     }
 
     /**
@@ -389,6 +382,13 @@ Item {
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
+    TP.PassiveNotificationsManager {
+        id: notificationsObject
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        z: 1
+    }
+
     Item {
         anchors.fill: parent
         parent: root.parent || root
@@ -462,9 +462,4 @@ Item {
     implicitWidth: Kirigami.Units.gridUnit * 30
     implicitHeight: Kirigami.Units.gridUnit * 45
     visible: true
-
-    QtObject {
-        id: internal
-        property QtObject __passiveNotification
-    }
 }

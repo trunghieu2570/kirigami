@@ -267,7 +267,7 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates/private SOURCES
     controls/templates/private/GenericDrawerIcon.qml
     controls/templates/private/IconPropertiesGroup.qml
     controls/templates/private/MenuIcon.qml
-    controls/templates/private/PassiveNotification.qml
+    controls/templates/private/PassiveNotificationsManager.qml
 )
 
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH styles/Material SOURCES
