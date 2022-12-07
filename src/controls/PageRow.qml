@@ -201,7 +201,7 @@ QT.Control {
      *
      * @since 5.101
      */
-    property bool popNotVisiblePagesAutomatically: false
+    property bool popHiddenPages: false
 //END PROPERTIES
 
 //BEGIN FUNCTIONS
@@ -963,8 +963,8 @@ QT.Control {
             onItemRemoved: root.pageRemoved(item);
 
             onVisibleItemsChanged: {
-                if (root.popNotVisiblePagesAutomatically) {
-                    while (root.lastItem != root.lastVisibleItem) {
+                if (root.popHiddenPages) {
+                    while (root.lastItem && root.lastVisibleItem && root.lastItem != root.lastVisibleItem) {
                         root.pop();
                     }
                 }
