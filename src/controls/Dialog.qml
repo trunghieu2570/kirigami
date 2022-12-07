@@ -1,12 +1,13 @@
 /*
     SPDX-FileCopyrightText: 2021 Devin Lin <espidev@gmail.com>
     SPDX-FileCopyrightText: 2021 Noah Davis <noahadvs@gmail.com>
+    SPDX-FileCopyrightText: 2022 ivan tkachenko <me@ratijas.tk>
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
 import QtQuick 2.15
 import QtQml 2.15
-import QtQuick.Layouts 1.2
+import QtQuick.Layouts 1.15
 import QtQuick.Templates 2.15 as T
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.12 as Kirigami
@@ -43,7 +44,7 @@ import QtGraphicalEffects 1.12 as GE
  *
  * @code{.qml}
  * import QtQuick 2.15
- * import QtQuick.Layouts 1.2
+ * import QtQuick.Layouts 1.15
  * import QtQuick.Controls 2.15 as Controls
  * import org.kde.kirigami 2.19 as Kirigami
  *
@@ -363,15 +364,14 @@ T.Dialog {
             // give an implied width and height to the contentItem so that features like word wrapping/eliding work
             // cannot placed directly in contentControl as a child, so we must use a property
             property var widthHint: Binding {
-                target: contentControl.contentChildren[0]
-                when: contentControl.contentChildren.length === 1
+                target: contentControl.contentChildren[0] || null
                 property: "width"
 
                 // we want to avoid horizontal scrolling, so we apply maximumWidth as a hint if necessary
                 property real preferredWidthHint: contentControl.contentItem.width
                 property real maximumWidthHint: contentControl.calculatedMaximumWidth - contentControl.leftPadding - contentControl.rightPadding
 
-                value: Math.min(maximumWidthHint,preferredWidthHint)
+                value: Math.min(maximumWidthHint, preferredWidthHint)
 
                 restoreMode: Binding.RestoreBinding
             }
