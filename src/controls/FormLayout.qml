@@ -271,9 +271,8 @@ Item {
 
                 const itemContainer = itemComponent.createObject(temp, { item });
 
-                // if section, label goes after the separator
-                if (item.Kirigami.FormData.isSection) {
-                    // put an extra spacer
+                // if it's a labeled section header, add extra spacing before it
+                if (item.Kirigami.FormData.label.length > 0 && item.Kirigami.FormData.isSection) {
                     placeHolderComponent.createObject(lay, { item });
                 }
 
