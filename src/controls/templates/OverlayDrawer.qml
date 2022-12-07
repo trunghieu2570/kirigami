@@ -5,7 +5,7 @@
  */
 
 import QtQuick 2.15
-import QtQuick.Templates 2.2 as T2
+import QtQuick.Templates 2.15 as T2
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.11 as Kirigami
 import "private" as P
@@ -31,15 +31,6 @@ T2.Drawer {
      * default: ``false``
      */
     property bool drawerOpen: false
-
-    /**
-     * @brief This property sets whether the drawer receives mouse and keyboard events.
-     *
-     * default: ``true``
-     *
-     * @see QtQuick.Item::enabled
-     */
-    property bool enabled: true
 
     /**
      * @brief This property tells whether the drawer is in a state between open

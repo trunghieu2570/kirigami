@@ -54,7 +54,6 @@ OverlayDrawer {
     handleClosedIcon.source: null
     handleOpenIcon.source: null
     handleVisible: (modal || !drawerOpen) && (typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true) && (!isMenu || Kirigami.Settings.isMobile)
-    interactive: Kirigami.Settings.hasTransientTouchInput || Kirigami.Settings.isMobile
 
     enabled: !isMenu || Kirigami.Settings.isMobile
 

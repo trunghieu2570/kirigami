@@ -26,9 +26,12 @@ T.OverlayDrawer {
     focus: false
     modal: true
     drawerOpen: !modal
-    closePolicy: modal ? T2.Popup.CloseOnEscape | T2.Popup.CloseOnReleaseOutside : T2.Popup.NoAutoClose
+    closePolicy: modal ? T2.Popup.CloseOnEscape | T2.Popup.CloseOnReleaseOutside : T2.Popup.CloseOnEscape
     handleVisible: interactive && (modal || !drawerOpen) && (typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true)
-    interactive: Kirigami.Settings.hasTransientTouchInput || Kirigami.Settings.isMobile
+
+    // FIXME: set to false when it does not lead to blocking closePolicy.
+    // See Kirigami bug: 454119
+    interactive: true
 
     onPositionChanged: {
         if (!modal && !root.peeking && !root.animating) {

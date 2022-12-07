@@ -346,4 +346,9 @@ QQC2.ApplicationWindow {
         shortcut: StandardKey.Quit
         onTriggered: root.close()
     }
+    Shortcut {
+        sequence: _quitAction.shortcut
+        context: Qt.ApplicationShortcut
+        onActivated: root.close()
+    }
 }
