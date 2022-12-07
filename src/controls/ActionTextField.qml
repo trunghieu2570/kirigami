@@ -94,7 +94,6 @@ QQC2.TextField {
 
     Shortcut {
         id: focusShortcut
-        enabled: root.focusSequence
         onActivated: {
             root.forceActiveFocus()
             root.selectAll()
