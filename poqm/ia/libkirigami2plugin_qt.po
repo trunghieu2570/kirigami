@@ -96,7 +96,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "A proposito de %1"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Abandona"
@@ -146,6 +146,22 @@ msgstr "Cargante..."
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Contrasigno"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "Claude"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Open"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr "Aperi"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -258,14 +274,6 @@ msgstr "Qt %2 (construite sur %3)"
 #~ msgctxt "LoadingPlaceholder|"
 #~ msgid "Still loading, please wait."
 #~ msgstr "Ancora cargante, pro favor, tu attende."
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Close"
-#~ msgstr "Claude"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Open"
-#~ msgstr "Aperi"
 
 #~ msgctxt "AboutItem|"
 #~ msgid "(%1)"

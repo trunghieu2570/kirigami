@@ -93,7 +93,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "%1 பற்றி "
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "வெளியேறு"
@@ -143,6 +143,22 @@ msgstr "ஏற்றப்படுகிறது…"
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "கடவுச்சொல்"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "மூடு"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Open"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr "திற"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -255,14 +271,6 @@ msgstr "Qt %2 (%3 கொண்டு தொகுக்கப்பட்டத�
 #~ msgctxt "LoadingPlaceholder|"
 #~ msgid "Still loading, please wait."
 #~ msgstr "இன்னும் ஏற்றப்படுகிறது, காத்திருங்கள்."
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Close"
-#~ msgstr "மூடு"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Open"
-#~ msgstr "திற"
 
 #~ msgctxt "AboutItem|"
 #~ msgid "(%1)"

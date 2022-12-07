@@ -97,7 +97,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Névjegy: %1"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Kilépés"
@@ -150,6 +150,22 @@ msgstr ""
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Jelszó"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "Bezárás"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Open"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr "Megnyitás"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -261,14 +277,6 @@ msgstr "Qt %2 (fordítva ezzel: %3)"
 #~ msgctxt "UrlButton|"
 #~ msgid "Copy link address"
 #~ msgstr "Hivatkozás címének másolása"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Close"
-#~ msgstr "Bezárás"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Open"
-#~ msgstr "Megnyitás"
 
 #~ msgctxt "AboutItem|"
 #~ msgid "(%1)"

@@ -101,7 +101,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "關於 %1"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "離開"
@@ -151,6 +151,19 @@ msgstr "載入中……"
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "密碼"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close drawer"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "關閉抽屜"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr ""
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"

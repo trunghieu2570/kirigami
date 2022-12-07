@@ -96,7 +96,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "%1 정보"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "끝내기"
@@ -146,6 +146,22 @@ msgstr "불러오는 중…"
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "암호"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "닫기"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Open"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr "열기"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -258,14 +274,6 @@ msgstr "Qt %2(%3(으)로 빌드됨)"
 #~ msgctxt "LoadingPlaceholder|"
 #~ msgid "Still loading, please wait."
 #~ msgstr "불러오고 있습니다. 잠시 기다려 주십시오."
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Close"
-#~ msgstr "닫기"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Open"
-#~ msgstr "열기"
 
 #~ msgctxt "AboutItem|"
 #~ msgid "(%1)"

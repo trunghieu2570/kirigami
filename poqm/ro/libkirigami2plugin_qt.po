@@ -97,7 +97,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Despre %1"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Termină"
@@ -147,6 +147,22 @@ msgstr "Se încarcă…"
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Parolă"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "Închide"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Open"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr "Deschide"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -255,14 +271,6 @@ msgstr "Qt %2 (construit cu %3)"
 #~ msgctxt "UrlButton|"
 #~ msgid "Copy link address"
 #~ msgstr "Copiază adresa legăturii"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Close"
-#~ msgstr "Închide"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Open"
-#~ msgstr "Deschide"
 
 #, fuzzy
 #~| msgctxt "AboutPage|"

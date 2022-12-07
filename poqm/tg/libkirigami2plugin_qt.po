@@ -115,7 +115,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Дар бораи барнома"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr ""
@@ -168,6 +168,16 @@ msgstr ""
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Ниҳонвожа"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr ""
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr ""
 
 #: controls/SearchField.qml:94
 #, fuzzy

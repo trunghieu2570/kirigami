@@ -95,7 +95,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "حول %1"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "أنهِ"
@@ -145,6 +145,22 @@ msgstr "يحمّل..."
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "كلمة السّرّ"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "أغلق"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Open"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr "افتح"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -253,14 +269,6 @@ msgstr "كيوت %2 (بني على %3)"
 #~ msgctxt "UrlButton|"
 #~ msgid "Copy link address"
 #~ msgstr "انسخ عنوان الوصلة"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Close"
-#~ msgstr "أغلق"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Open"
-#~ msgstr "افتح"
 
 #, fuzzy
 #~| msgctxt "AboutPage|"

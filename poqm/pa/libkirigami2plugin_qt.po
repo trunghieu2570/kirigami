@@ -117,7 +117,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "ਇਸ ਬਾਰੇ"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "ਬਾਹਰ"
@@ -170,6 +170,22 @@ msgstr ""
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "ਪਾਸਵਰਡ"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "ਬੰਦ ਕਰੋ"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Open"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr "ਖੋਲ੍ਹੋ"
 
 #: controls/SearchField.qml:94
 #, fuzzy
@@ -295,14 +311,6 @@ msgstr "Qt %2 (%3 ਨਾਲ ਬਣਾਇਆ)"
 #~ msgctxt "UrlButton|"
 #~ msgid "Copy link address"
 #~ msgstr "ਲਿੰਕ ਐਡਰੈਸ ਕਾਪੀ ਕਰੋ"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Close"
-#~ msgstr "ਬੰਦ ਕਰੋ"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Open"
-#~ msgstr "ਖੋਲ੍ਹੋ"
 
 #~ msgctxt "SearchField|"
 #~ msgid "Search..."

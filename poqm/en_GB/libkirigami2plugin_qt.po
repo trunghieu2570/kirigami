@@ -96,7 +96,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "About %1"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Quit"
@@ -146,6 +146,22 @@ msgstr "Loading…"
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Password"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "Close"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Open"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr "Open"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -254,14 +270,6 @@ msgstr "Qt %2 (built against %3)"
 #~ msgctxt "UrlButton|"
 #~ msgid "Copy link address"
 #~ msgstr "Copy link address"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Close"
-#~ msgstr "Close"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Open"
-#~ msgstr "Open"
 
 #~ msgctxt "AboutItem|"
 #~ msgid "(%1)"

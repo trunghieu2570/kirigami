@@ -98,7 +98,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "À propos de %1"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Quitter"
@@ -148,6 +148,22 @@ msgstr "Chargement en cours..."
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Mot de passe"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "Fermer"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Open"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr "Ouvrir"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -260,14 +276,6 @@ msgstr "Qt %2 (compilé avec %3)"
 #~ msgctxt "LoadingPlaceholder|"
 #~ msgid "Still loading, please wait."
 #~ msgstr "Encore en cours de téléchargement, veuillez patienter."
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Close"
-#~ msgstr "Fermer"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Open"
-#~ msgstr "Ouvrir"
 
 #~ msgctxt "AboutItem|"
 #~ msgid "(%1)"

@@ -99,7 +99,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "O programu %1"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Zapusti"
@@ -149,6 +149,22 @@ msgstr "Nalaganje…"
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Geslo"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "Zapri"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Open"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr "Odpri"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -261,11 +277,3 @@ msgstr "Qt %2 (zgrajeno za %3)"
 #~ msgctxt "LoadingPlaceholder|"
 #~ msgid "Still loading, please wait."
 #~ msgstr "Še vedno nalagam, prosim počakajte."
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Close"
-#~ msgstr "Zapri"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Open"
-#~ msgstr "Odpri"

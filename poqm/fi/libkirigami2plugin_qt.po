@@ -97,7 +97,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Tietoa – %1"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Lopeta"
@@ -147,6 +147,22 @@ msgstr "Ladataan…"
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Salasana"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "Sulje"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Open"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr "Avaa"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -255,14 +271,6 @@ msgstr "Qt %2 (koostettu kirjastolla %3)"
 #~ msgctxt "UrlButton|"
 #~ msgid "Copy link address"
 #~ msgstr "Kopioi linkin osoite"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Close"
-#~ msgstr "Sulje"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Open"
-#~ msgstr "Avaa"
 
 #~ msgctxt "SearchField|"
 #~ msgid "Search..."

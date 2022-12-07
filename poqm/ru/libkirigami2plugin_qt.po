@@ -96,7 +96,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "О программе %1"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Выход"
@@ -146,6 +146,22 @@ msgstr "Загрузка…"
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Пароль"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "Закрыть"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Open"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr "Открыть"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -254,14 +270,6 @@ msgstr "Qt %2 (собрана с версией %3)"
 #~ msgctxt "UrlButton|"
 #~ msgid "Copy link address"
 #~ msgstr "Скопировать адрес ссылки"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Close"
-#~ msgstr "Закрыть"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Open"
-#~ msgstr "Открыть"
 
 #~ msgctxt "SearchField|"
 #~ msgid "Search..."

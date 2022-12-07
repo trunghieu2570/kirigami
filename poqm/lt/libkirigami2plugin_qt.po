@@ -116,7 +116,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Apie"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr ""
@@ -172,6 +172,19 @@ msgstr ""
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Slaptažodis"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "GlobalDrawer|"
+#| msgid "Close Sidebar"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "Užverti šoninę juostą"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr ""
 
 #: controls/SearchField.qml:94
 #, fuzzy

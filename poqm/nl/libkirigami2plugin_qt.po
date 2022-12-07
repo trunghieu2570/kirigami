@@ -93,7 +93,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Info over %1"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Afsluiten"
@@ -143,6 +143,22 @@ msgstr "Bezig met laden…"
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Wachtwoord"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "Sluiten"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Open"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr "Openen"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -255,14 +271,6 @@ msgstr "Qt %2 (gebouwd tegen %3)"
 #~ msgctxt "LoadingPlaceholder|"
 #~ msgid "Still loading, please wait."
 #~ msgstr "Nog steeds bezig met laden, even geduld."
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Close"
-#~ msgstr "Sluiten"
-
-#~ msgctxt "OverlayDrawer|"
-#~ msgid "Open"
-#~ msgstr "Openen"
 
 #~ msgctxt "AboutItem|"
 #~ msgid "(%1)"

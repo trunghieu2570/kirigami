@@ -95,7 +95,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "%1 Hakkında"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Çık"
@@ -145,6 +145,19 @@ msgstr "Yükleniyor…"
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Parola"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close drawer"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "Çekmeceyi kapat"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr ""
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"

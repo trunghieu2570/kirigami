@@ -97,7 +97,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "O aplikaci %1"
 
-#: controls/AbstractApplicationWindow.qml:350
+#: controls/AbstractApplicationWindow.qml:344
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Ukončit"
@@ -147,6 +147,19 @@ msgstr "Probíhá načítání…"
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Heslo"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close drawer"
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr "Zavřít šuplík"
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr ""
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
