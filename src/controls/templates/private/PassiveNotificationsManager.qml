@@ -86,6 +86,8 @@ QQC2.Control {
     // we have to set height to show more than one notification
     height: Math.min(applicationWindow().height, Kirigami.Units.gridUnit * 10)
 
+    hoverEnabled: false
+
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
@@ -168,6 +170,9 @@ QQC2.Control {
         }
         delegate: QQC2.Control {
             id: delegate
+
+            hoverEnabled: true
+
             anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
             width: Math.min(implicitWidth, maximumNotificationWidth)
             z: {
