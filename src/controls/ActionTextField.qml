@@ -146,7 +146,7 @@ QQC2.TextField {
 
                 source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
                 active: leftActionArea.containsPress || leftActionArea.activeFocus
-                visible: modelData.visible
+                visible: !(modelData instanceof Kirigami.Action) || modelData.visible
                 enabled: modelData.enabled
 
                 ActionIconMouseArea {
@@ -185,7 +185,7 @@ QQC2.TextField {
 
                 source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
                 active: rightActionArea.containsPress || rightActionArea.activeFocus
-                visible: modelData.visible
+                visible: !(modelData instanceof Kirigami.Action) || modelData.visible
                 enabled: modelData.enabled
 
                 ActionIconMouseArea {
