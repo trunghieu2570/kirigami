@@ -157,17 +157,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Akcie"
 
-#: controls/GlobalDrawer.qml:495
+#: controls/GlobalDrawer.qml:494
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Späť"
 
-#: controls/GlobalDrawer.qml:588
+#: controls/GlobalDrawer.qml:587
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Zatvoriť bočný panel"
 
-#: controls/GlobalDrawer.qml:591
+#: controls/GlobalDrawer.qml:590
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
@@ -259,7 +259,7 @@ msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "Navigovať do %1."
 
-#: controls/templates/OverlayDrawer.qml:140
+#: controls/templates/OverlayDrawer.qml:131
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
@@ -267,7 +267,7 @@ msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Zatvoriť bočný panel"
 
-#: controls/templates/OverlayDrawer.qml:146
+#: controls/templates/OverlayDrawer.qml:137
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr ""

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kirigami\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"PO-Revision-Date: 2022-11-15 09:56+0100\n"
+"PO-Revision-Date: 2022-12-07 13:14+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -128,17 +128,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Accions"
 
-#: controls/GlobalDrawer.qml:495
+#: controls/GlobalDrawer.qml:494
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Arrere"
 
-#: controls/GlobalDrawer.qml:588
+#: controls/GlobalDrawer.qml:587
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Tanca la barra lateral"
 
-#: controls/GlobalDrawer.qml:591
+#: controls/GlobalDrawer.qml:590
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Obri la barra lateral"
@@ -154,17 +154,14 @@ msgid "Password"
 msgstr "Contrasenya"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close drawer"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr "Tanca el calaix"
+msgstr "Tanca el menú"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr ""
+msgstr "Obri el menú"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -222,12 +219,12 @@ msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "Navega a %1."
 
-#: controls/templates/OverlayDrawer.qml:140
+#: controls/templates/OverlayDrawer.qml:131
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Tanca el calaix"
 
-#: controls/templates/OverlayDrawer.qml:146
+#: controls/templates/OverlayDrawer.qml:137
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Obri el calaix"

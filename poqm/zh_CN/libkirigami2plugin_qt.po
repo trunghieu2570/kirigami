@@ -121,17 +121,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "操作"
 
-#: controls/GlobalDrawer.qml:495
+#: controls/GlobalDrawer.qml:494
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "返回"
 
-#: controls/GlobalDrawer.qml:588
+#: controls/GlobalDrawer.qml:587
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "关闭侧栏"
 
-#: controls/GlobalDrawer.qml:591
+#: controls/GlobalDrawer.qml:590
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "打开侧边栏"
@@ -215,12 +215,12 @@ msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "前往 %1。"
 
-#: controls/templates/OverlayDrawer.qml:140
+#: controls/templates/OverlayDrawer.qml:131
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "关闭抽屉栏"
 
-#: controls/templates/OverlayDrawer.qml:146
+#: controls/templates/OverlayDrawer.qml:137
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "打开抽屉栏"

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-11-15 04:44+0300\n"
+"PO-Revision-Date: 2022-12-07 17:08+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -121,17 +121,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Eylemler"
 
-#: controls/GlobalDrawer.qml:495
+#: controls/GlobalDrawer.qml:494
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Geri"
 
-#: controls/GlobalDrawer.qml:588
+#: controls/GlobalDrawer.qml:587
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Kenar Çubuğunu Kapat"
 
-#: controls/GlobalDrawer.qml:591
+#: controls/GlobalDrawer.qml:590
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Kenar Çubuğunu Aç"
@@ -147,17 +147,14 @@ msgid "Password"
 msgstr "Parola"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close drawer"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr "Çekmeceyi kapat"
+msgstr "Menüyü kapat"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr ""
+msgstr "Menüyü aç"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -215,12 +212,12 @@ msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "%1 konumuna geç."
 
-#: controls/templates/OverlayDrawer.qml:140
+#: controls/templates/OverlayDrawer.qml:131
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Çekmeceyi kapat"
 
-#: controls/templates/OverlayDrawer.qml:146
+#: controls/templates/OverlayDrawer.qml:137
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Çekmeceyi aç"

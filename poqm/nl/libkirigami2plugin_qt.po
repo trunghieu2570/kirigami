@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-11-15 12:02+0100\n"
+"PO-Revision-Date: 2022-12-07 11:13+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -119,17 +119,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Acties"
 
-#: controls/GlobalDrawer.qml:495
+#: controls/GlobalDrawer.qml:494
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Terug"
 
-#: controls/GlobalDrawer.qml:588
+#: controls/GlobalDrawer.qml:587
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Zijbalk sluiten"
 
-#: controls/GlobalDrawer.qml:591
+#: controls/GlobalDrawer.qml:590
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Zijbalk openen"
@@ -145,20 +145,14 @@ msgid "Password"
 msgstr "Wachtwoord"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr "Sluiten"
+msgstr "Menu sluiten"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Open"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr "Openen"
+msgstr "Menu openen"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -216,12 +210,12 @@ msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "Naar %1 navigeren."
 
-#: controls/templates/OverlayDrawer.qml:140
+#: controls/templates/OverlayDrawer.qml:131
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Schuiflade sluiten"
 
-#: controls/templates/OverlayDrawer.qml:146
+#: controls/templates/OverlayDrawer.qml:137
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Schuiflade openen"

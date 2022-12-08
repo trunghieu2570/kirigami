@@ -125,17 +125,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Dejanja"
 
-#: controls/GlobalDrawer.qml:495
+#: controls/GlobalDrawer.qml:494
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Nazaj"
 
-#: controls/GlobalDrawer.qml:588
+#: controls/GlobalDrawer.qml:587
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Zapri stransko letvico"
 
-#: controls/GlobalDrawer.qml:591
+#: controls/GlobalDrawer.qml:590
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Odpri stransko letvico"
@@ -222,12 +222,12 @@ msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "Krmari proti %1."
 
-#: controls/templates/OverlayDrawer.qml:140
+#: controls/templates/OverlayDrawer.qml:131
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Zapri predal"
 
-#: controls/templates/OverlayDrawer.qml:146
+#: controls/templates/OverlayDrawer.qml:137
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Odpri predal"
