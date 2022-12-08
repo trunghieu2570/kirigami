@@ -16,7 +16,7 @@ import org.kde.kirigami 2.20 as Kirigami
  * the user is using the application and wouldn't be suited as a global
  * system-wide notification.
 */
-QQC2.Control {
+Item {
     id: root
 
     property int maximumNotificationWidth: {
@@ -57,7 +57,7 @@ QQC2.Control {
         })
         // remove the oldest notification if new notification count would exceed 3
         if (notificationsModel.count === maximumNotificationCount) {
-            if (contentItem.itemAtIndex(0).hovered === true) {
+            if (listView.itemAtIndex(0).hovered === true) {
                 hideNotification(1)
             } else {
                 hideNotification()
@@ -78,15 +78,11 @@ QQC2.Control {
         }
     }
 
-    leftPadding: 0
-    topPadding: 0
-    rightPadding: 0
-    bottomPadding: Kirigami.Units.largeSpacing
-
     // we have to set height to show more than one notification
     height: Math.min(applicationWindow().height, Kirigami.Units.gridUnit * 10)
-
-    hoverEnabled: false
+    
+    implicitHeight: listView.implicitHeight
+    implicitWidth: listView.implicitWidth
 
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
@@ -95,7 +91,12 @@ QQC2.Control {
         id: notificationsModel
     }
 
-    contentItem: ListView {
+    ListView {
+        id: listView
+        
+        anchors.fill: parent
+        anchors.bottomMargin: Kirigami.Units.largeSpacing
+        
         implicitWidth: root.maximumNotificationWidth
         spacing: Kirigami.Units.smallSpacing
         model: notificationsModel
