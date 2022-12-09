@@ -110,7 +110,7 @@ Kirigami.ApplicationWindow {
 
                 placeholderText: "Search..."
 
-                focusSequence: "Ctrl+F"
+                focusSequence: StandardKey.Find
                 leftActions: [
                     Kirigami.Action {
                         icon.name: "edit-clear"
