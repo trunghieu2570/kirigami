@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: controls/AboutItem.qml:129
 #, qt-format
@@ -145,17 +145,14 @@ msgid "Password"
 msgstr "პაროლი"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close drawer"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr "უჯრის დახურვა"
+msgstr "მენიუს დახურვა"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr ""
+msgstr "მენიუს გახსნა"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
