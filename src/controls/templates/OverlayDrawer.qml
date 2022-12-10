@@ -22,7 +22,7 @@ import "private" as P
 T2.Drawer {
     id: root
 
-    z: modal ? (Math.round((position * 10000000)) ): 100
+    z: modal ? 0 : applicationWindow().overlay.z - 1
 
 //BEGIN properties
     /**
@@ -151,6 +151,13 @@ T2.Drawer {
      **/
     readonly property Item handle: MouseArea {
         id: drawerHandle
+
+        /*
+         * This property is used to set when the tooltip is visible.
+         * It exists because the text is changed while the tooltip is still visible.
+         */
+        property bool displayToolTip: true
+
         z: root.modal ? applicationWindow().overlay.z + (root.position > 0 ? +1 : -1) : root.background.parent.z + 1
         preventStealing: true
         hoverEnabled: handleAnchor && handleAnchor.visible
@@ -160,12 +167,14 @@ T2.Drawer {
             anchors.centerIn: parent
             width: parent.height - Kirigami.Units.smallSpacing * 1.5
             height: parent.height - Kirigami.Units.smallSpacing * 1.5
-            onClicked: root.drawerOpen = !root.drawerOpen;
+            onClicked: {
+                drawerHandle.displayToolTip = false
+                Qt.callLater(() => root.drawerOpen = !root.drawerOpen)
+            }
             Accessible.name: root.drawerOpen ? root.handleOpenToolTip : root.handleClosedToolTip
             visible: !Kirigami.SettingstabletMode && !Kirigami.SettingshasTransientTouchInput
         }
-
-        T2.ToolTip.visible: containsMouse
+        T2.ToolTip.visible: drawerHandle.displayToolTip && containsMouse
         T2.ToolTip.text: root.drawerOpen ? handleOpenToolTip : handleClosedToolTip
         T2.ToolTip.delay: Kirigami.Units.toolTipDelay
 
@@ -442,6 +451,7 @@ T2.Drawer {
         } else {
             close();
         }
+        Qt.callLater(() => drawerHandle.displayToolTip = true)
     }
 
     Component.onCompleted: {
