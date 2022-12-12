@@ -16,6 +16,10 @@ import org.kde.kirigami 2.4 as Kirigami
  *
  * It is recommended to use DelagateRecycler as base delegate like the following code:
  * @code
+ * import QtQuick 2.15
+ * import QtQuick.Layouts 1.15
+ * import QtQuick.Controls 2.15 as QQC2
+ * import org.kde.kirigami 2.19 as Kirigami
  *   ...
  *   Component {
  *       id: delegateComponent
@@ -27,7 +31,7 @@ import org.kde.kirigami 2.4 as Kirigami
  *                   listView: mainList
  *                   onMoveRequested: listModel.move(oldIndex, newIndex, 1)
  *               }
- *               Controls.Label {
+ *               QQC2.Label {
  *                   text: model.label
  *               }
  *           }
@@ -38,14 +42,14 @@ import org.kde.kirigami 2.4 as Kirigami
  *
  *       model: ListModel {
  *           id: listModel
- *           ListItem {
- *               lablel: "Item 1"
+ *           ListElement {
+ *               label: "Item 1"
  *           }
- *           ListItem {
- *               lablel: "Item 2"
+ *           ListElement {
+ *               label: "Item 2"
  *           }
- *           ListItem {
- *               lablel: "Item 3"
+ *           ListElement {
+ *               label: "Item 3"
  *           }
  *       }
  *       //this is optional to make list items animated when reordered
