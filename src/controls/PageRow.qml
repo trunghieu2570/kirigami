@@ -336,10 +336,10 @@ QT.Control {
                 dialog.open();
             } else {
                 // open as a layer
-                item = layers.push(page, properties);
+                item = push(page, properties);
                 Object.defineProperty(item, 'closeDialog', {
                     value: function() {
-                        layers.pop();
+                        pop();
                     }
                 });
             }
