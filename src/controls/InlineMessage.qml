@@ -66,7 +66,16 @@ T.InlineMessage {
         radius: Kirigami.Units.smallSpacing
         border {
             width: 1
-            color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.2)
+            color: switch (root.type) {
+                case Kirigami.MessageType.Information:
+                    return Kirigami.Theme.activeTextColor;
+                case Kirigami.MessageType.Positive:
+                    return Kirigami.Theme.positiveTextColor;
+                case Kirigami.MessageType.Error:
+                    return Kirigami.Theme.negativeTextColor;
+                case Kirigami.MessageType.Warning:
+                    return Kirigami.Theme.neutralTextColor;
+            }
         }
 
         color: switch (root.type) {
