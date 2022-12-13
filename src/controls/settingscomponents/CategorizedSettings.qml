@@ -60,7 +60,7 @@ Kirigami.PageRow {
         // fix words getting wrapped weirdly when the vertical scrollbar is shown
         const vScrollBarWidth = initialPage.contentItem.QQC2.ScrollBar.vertical.width;
 
-        // we need to add spacing from ListView's item delegate and it's items
+        // sum maximum word width, ListView's delegate spacing, and vertical scrollbar width
         const calcWidth = Math.ceil(maxWordMetrics.advanceWidth) + Kirigami.Units.smallSpacing * 6 + vScrollBarWidth;
         const minWidth = Kirigami.Units.gridUnit * 6;
         const maxWidth = Kirigami.Units.gridUnit * 8.5;
