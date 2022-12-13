@@ -194,6 +194,25 @@ T.ToolBar {
      * @since 5.96
      */
     property bool recolorIcons: true
+
+    /**
+     * @brief This property holds the calculated width that buttons on the tab bar use.
+     *
+     * @since 5.102
+     */
+    property real buttonWidth: {
+        // Counting buttons because Repeaters can be counted among visibleChildren
+        let visibleButtonCount = 0;
+        const minWidth = contentItem.height * 0.75;
+        for (let i = 0; i < contentItem.visibleChildren.length; ++i) {
+            if (contentItem.width / visibleButtonCount >= minWidth && // make buttons go off the screen if there is physically no room for them
+                contentItem.visibleChildren[i] instanceof T.AbstractButton) { // Checking for AbstractButtons because any AbstractButton can act as a tab
+                ++visibleButtonCount;
+            }
+        }
+
+        return Math.round(contentItem.width / visibleButtonCount);
+    }
 //END properties
 
     onCurrentIndexChanged: {
@@ -269,6 +288,7 @@ T.ToolBar {
             parent: root.contentItem
             action: modelData
             visible: modelData.visible
+            width: root.buttonWidth
             recolorIcon: root.recolorIcons
             T.ButtonGroup.group: tabGroup
             // Workaround setting the action when checkable is not explicitly set making tabs uncheckable

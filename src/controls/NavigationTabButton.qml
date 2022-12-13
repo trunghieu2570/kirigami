@@ -106,20 +106,6 @@ T.TabButton {
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
                              implicitContentHeight + topPadding + bottomPadding)
 
-    width: {
-        // Counting buttons because Repeaters can be counted among visibleChildren
-        let visibleButtonCount = 0;
-        const minWidth = height * 0.75;
-        for (let i = 0; i < parent.visibleChildren.length; ++i) {
-            if (parent.width / visibleButtonCount >= minWidth && // make buttons go off the screen if there is physically no room for them
-                parent.visibleChildren[i] instanceof T.AbstractButton) { // Checking for AbstractButtons because any AbstractButton can act as a tab
-                ++visibleButtonCount
-            }
-        }
-        
-        return Math.round(parent.width / visibleButtonCount)
-    }
-
     Kirigami.Theme.colorSet: Kirigami.Theme.Window
     Kirigami.Theme.inherit: false
 

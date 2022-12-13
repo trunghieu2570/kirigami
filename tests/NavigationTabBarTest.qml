@@ -52,12 +52,14 @@ QQC2.ApplicationWindow {
 
         Kirigami.NavigationTabButton {
             visible: true
+            width: navTabBar.buttonWidth
             icon.name: "document-save"
             text: `test ${tabIndex + 1}`
             QQC2.ButtonGroup.group: navTabBar.tabGroup
         }
         Kirigami.NavigationTabButton {
             visible: false
+            width: navTabBar.buttonWidth
             icon.name: "document-send"
             text: `test ${tabIndex + 1}`
             QQC2.ButtonGroup.group: navTabBar.tabGroup
