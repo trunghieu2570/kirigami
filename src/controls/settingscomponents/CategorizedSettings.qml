@@ -114,6 +114,8 @@ Kirigami.PageRow {
             implicitWidth: contentItem.implicitWidth + Kirigami.Units.smallSpacing * 4
             implicitHeight: contentItem.implicitHeight + Kirigami.Units.smallSpacing * 2
 
+            padding: Kirigami.Units.smallSpacing
+
             action: modelData
             highlighted: listview.currentIndex === index
             onClicked: listview.currentIndex = index
