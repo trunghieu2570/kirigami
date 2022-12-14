@@ -1,12 +1,13 @@
 /*
  *  SPDX-FileCopyrightText: 2010 Marco Martin <notmart@gmail.com>
+ *  SPDX-FileCopyrightText: 2022 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.8
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0 as QQC2
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.12 as Kirigami
 
 //TODO KF6: this needs to become a layout inside a Delegate rather than its own listItem
@@ -344,6 +345,21 @@ Kirigami.AbstractListItem {
                     opacity: listItem.fadeContent ? 0.6 : (listItem.bold ? 0.9 : 0.7)
                     visible: text.length > 0
                 }
+                QQC2.ToolTip.text: {
+                    let txt = "";
+                    if (labelItem.truncated) {
+                        txt += labelItem.text;
+                    }
+                    if (subtitleItem.truncated) {
+                        if (txt.length > 0) {
+                            txt += "<br/><br/>";
+                        }
+                        txt += subtitleItem.text;
+                    }
+                    return txt;
+                }
+                QQC2.ToolTip.visible: QQC2.ToolTip.text.length > 0 && (Kirigami.Settings.tabletMode ? listItem.pressed : listItem.hovered)
+                QQC2.ToolTip.delay: Kirigami.Settings.tabletMode ? Qt.styleHints.mousePressAndHoldInterval : Kirigami.Units.toolTipDelay
             }
         }
     }
