@@ -97,7 +97,7 @@ Kirigami.ShadowedRectangle {
         anchors.top: parent.top
         anchors.topMargin: Math.round(Kirigami.Units.smallSpacing / 4)
         
-        radius: Kirigami.Units.smallSpacing
+        radius: root.radius
         height: root.height
         color: Qt.darker(Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.6), 1.1)
         visible: !root.clickFeedback || !root.parent.down
