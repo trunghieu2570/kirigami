@@ -234,12 +234,7 @@ QQC2.Control {
                              && (action.visible === undefined || action.visible)
                 }
 
-                loaderDelegate: Loader {
-                    property var action
-                    height: visible ? implicitHeight : 0
-                    visible: layout.hiddenActions.includes(action)
-                             && (action.visible === undefined || action.visible)
-                }
+                hiddenActions: layout.hiddenActions
 
                 separatorDelegate: QQC2.MenuSeparator {
                     property var action

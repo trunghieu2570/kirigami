@@ -17,7 +17,7 @@ QQC2.Menu
     // renamed to work on both Qt 5.9 and 5.10
     property Component itemDelegate: ActionMenuItem {}
     property Component separatorDelegate: QQC2.MenuSeparator { property var action }
-    property Component loaderDelegate: Loader { property var action }
+    property var hiddenActions: []
     property QQC2.Action parentAction
     property QQC2.MenuItem parentItem
 
@@ -38,12 +38,11 @@ QQC2.Menu
                 if (!action.hasOwnProperty("children") && !action.children || action.children.length === 0) {
                     if (action.hasOwnProperty("separator") && action.separator) {
                         item = theMenu.separatorDelegate.createObject(null, { action: action });
-                    }
-                    else if (action.displayComponent) {
-                        item = theMenu.loaderDelegate.createObject(null,
-                                { action: action, sourceComponent: action.displayComponent });
-                    }
-                    else {
+                    } else if (action.displayComponent) {
+                        item = action.displayComponent.createObject(null);
+                        item.visible = Qt.binding(() => !hiddenActions.includes(action)
+                            && (action.visible === undefined || action.visible));
+                    } else {
                         item = theMenu.itemDelegate.createObject(null, { action: action });
                     }
                     theMenu.addItem(item)
