@@ -12,6 +12,8 @@ import org.kde.kirigami 2.19 as Kirigami
 /**
  * @brief Navigation buttons to be used for the NavigationTabBar component.
  * 
+ * It supplies its own padding, and also supports using the QQC2 AbstractButton ``display`` property to be used in column lists.
+ *
  * Alternative way to the "actions" property on NavigationTabBar, as it can be used
  * with Repeater to generate buttons from models.
  * 
@@ -106,6 +108,8 @@ T.TabButton {
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
                              implicitContentHeight + topPadding + bottomPadding)
 
+    display: T.AbstractButton.TextUnderIcon
+
     Kirigami.Theme.colorSet: Kirigami.Theme.Window
     Kirigami.Theme.inherit: false
 
@@ -118,15 +122,15 @@ T.TabButton {
     padding: Kirigami.Units.smallSpacing
     spacing: Kirigami.Units.smallSpacing
 
-    icon.height: Kirigami.Units.iconSizes.smallMedium
-    icon.width: Kirigami.Units.iconSizes.smallMedium
+    icon.height: control.display === T.AbstractButton.TextBesideIcon ? Kirigami.Units.iconSizes.small : Kirigami.Units.iconSizes.smallMedium
+    icon.width: control.display === T.AbstractButton.TextBesideIcon ? Kirigami.Units.iconSizes.small : Kirigami.Units.iconSizes.smallMedium
     icon.color: control.checked ? control.highlightForegroundColor : control.foregroundColor
 
     background: Rectangle {
         Kirigami.Theme.colorSet: Kirigami.Theme.Button
         Kirigami.Theme.inherit: false
 
-        implicitHeight: Kirigami.Units.gridUnit * 3 + Kirigami.Units.smallSpacing * 2
+        implicitHeight: (control.display === T.AbstractButton.TextBesideIcon) ? 0 : (Kirigami.Units.gridUnit * 3 + Kirigami.Units.smallSpacing * 2)
 
         color: "transparent"
 
@@ -146,18 +150,40 @@ T.TabButton {
         }
     }
 
-    contentItem: ColumnLayout {
-        spacing: label.lineCount > 1 ? 0 : control.spacing
+    contentItem: GridLayout {
+        id: gridLayout
+        columnSpacing: 0
+        rowSpacing: (label.visible && label.lineCount > 1) ? 0 : control.spacing
+
+        // if this is a row or a column
+        columns: control.display !== T.AbstractButton.TextBesideIcon ? 1 : 2
+
+        property real verticalMargins: (control.display === T.AbstractButton.TextBesideIcon) ? Kirigami.Units.largeSpacing : 0
 
         Kirigami.Icon {
             id: icon
             source: control.icon.name || control.icon.source
             isMask: control.recolorIcon
-            Layout.alignment: Qt.AlignHCenter | (label.lineCount > 1 ? 0 : Qt.AlignBottom)
+            visible: control.icon.name !== '' && control.icon.source !== '' && control.display !== T.AbstractButton.TextOnly
+            color: control.icon.color
+
+            Layout.topMargin: gridLayout.verticalMargins
+            Layout.bottomMargin: gridLayout.verticalMargins
+            Layout.leftMargin: (control.display === T.AbstractButton.TextBesideIcon) ? Kirigami.Units.gridUnit : 0
+            Layout.rightMargin: (control.display === T.AbstractButton.TextBesideIcon) ? Kirigami.Units.gridUnit : 0
+
+            Layout.alignment: {
+                if (control.display === T.AbstractButton.TextBesideIcon) {
+                    // row layout
+                    return Qt.AlignVCenter | Qt.AlignRight;
+                } else {
+                    // column layout
+                    return Qt.AlignHCenter | ((!label.visible || label.lineCount > 1) ? Qt.AlignVCenter : Qt.AlignBottom);
+                }
+            }
             implicitHeight: source ? control.icon.height : 0
             implicitWidth: source ? control.icon.width : 0
-            visible: control.icon.name !== '' && control.icon.source !== ''
-            color: control.icon.color
+
             Behavior on color { ColorAnimation {} }
             Behavior on opacity { NumberAnimation {} }
         }
@@ -168,18 +194,40 @@ T.TabButton {
             Kirigami.MnemonicData.label: control.text
 
             text: Kirigami.MnemonicData.richTextLabel
-            Layout.alignment: icon.visible ? Qt.AlignHCenter | Qt.AlignTop : Qt.AlignCenter
-            horizontalAlignment: Text.AlignHCenter
+            horizontalAlignment: (control.display === T.AbstractButton.TextBesideIcon) ? Text.AlignLeft : Text.AlignHCenter
 
+            visible: control.display !== T.AbstractButton.IconOnly
             wrapMode: Text.Wrap
             elide: Text.ElideMiddle
             color: control.checked ? control.highlightForegroundColor : control.foregroundColor
+
             font.bold: control.checked
             font.family: Kirigami.Theme.smallFont.family
-            font.pointSize: icon.visible ? Kirigami.Theme.smallFont.pointSize : Kirigami.Theme.defaultFont.pointSize * 1.20 // 1.20 is equivalent to level 2 heading
+            font.pointSize: {
+                if (control.display === T.AbstractButton.TextBesideIcon) {
+                    // row layout
+                    return Kirigami.Theme.defaultFont.pointSize;
+                } else {
+                    // column layout
+                    return icon.visible ? Kirigami.Theme.smallFont.pointSize : Kirigami.Theme.defaultFont.pointSize * 1.20; // 1.20 is equivalent to level 2 heading
+                }
+            }
 
             Behavior on color { ColorAnimation {} }
             Behavior on opacity { NumberAnimation {} }
+
+            Layout.topMargin: gridLayout.verticalMargins
+            Layout.bottomMargin: gridLayout.verticalMargins
+
+            Layout.alignment: {
+                if (control.display === T.AbstractButton.TextBesideIcon) {
+                    // row layout
+                    return Qt.AlignVCenter | Qt.AlignLeft;
+                } else {
+                    // column layout
+                    return icon.visible ? Qt.AlignHCenter | Qt.AlignTop : Qt.AlignCenter;
+                }
+            }
 
             // Work around bold text changing implicit size
             Layout.preferredWidth: boldMetrics.implicitWidth
