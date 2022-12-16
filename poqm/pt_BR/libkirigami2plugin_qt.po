@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkirigami2plugin_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"PO-Revision-Date: 2022-07-12 16:26-0300\n"
+"PO-Revision-Date: 2022-12-15 11:37-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -46,15 +46,12 @@ msgstr "Participe"
 #: controls/AboutItem.qml:203
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Doar"
 
 #: controls/AboutItem.qml:220
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Report Bug…"
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "Relatar erro..."
+msgstr "Relatar erro"
 
 #: controls/AboutItem.qml:233
 msgctxt "AboutItem|"
@@ -155,20 +152,14 @@ msgid "Password"
 msgstr "Senha"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr "Fechar"
+msgstr "Fechar menu"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Open"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr "Abrir"
+msgstr "Abrir menu"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
