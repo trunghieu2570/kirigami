@@ -573,10 +573,10 @@ void ContentItem::updateVisibleItems()
     if (newItems != m_visibleItems) {
         m_visibleItems = newItems;
         Q_EMIT m_view->visibleItemsChanged();
-        if (!newItems.isEmpty() && m_visibleItems.first() != oldFirstVisibleItem) {
+        if (!m_visibleItems.isEmpty() && m_visibleItems.first() != oldFirstVisibleItem) {
             Q_EMIT m_view->firstVisibleItemChanged();
         }
-        if (!newItems.isEmpty() && m_visibleItems.last() != oldLastVisibleItem) {
+        if (!m_visibleItems.isEmpty() && m_visibleItems.last() != oldLastVisibleItem) {
             Q_EMIT m_view->lastVisibleItemChanged();
         }
     }
