@@ -9,7 +9,7 @@ import QtQuick 2.7
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0 as QQC2
 import QtQuick.Templates 2.0 as T2
-import org.kde.kirigami 2.5 as Kirigami
+import org.kde.kirigami 2.20 as Kirigami
 import "private"
 
 /**
@@ -252,7 +252,7 @@ T2.Control {
             implicitWidth: label.implicitWidth
             height: contentLayout.multiline ? label.implicitHeight : implicitHeight
 
-            QQC2.Label {
+            Kirigami.SelectableLabel {
                 id: label
 
                 width: parent.width
@@ -260,7 +260,6 @@ T2.Control {
 
                 color: Kirigami.Theme.textColor
                 wrapMode: Text.WordWrap
-                elide: Text.ElideRight
 
                 text: root.text
 
