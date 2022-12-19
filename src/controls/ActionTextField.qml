@@ -156,7 +156,7 @@ QQC2.TextField {
                 }
 
                 QQC2.ToolTip {
-                    visible: rightActionArea.containsMouse || rightActionArea.activeFocus
+                    visible: (rightActionArea.containsMouse || rightActionArea.activeFocus) && (modelData.text.length > 0)
                     text: modelData.text
                 }
             }
@@ -195,7 +195,7 @@ QQC2.TextField {
                 }
 
                 QQC2.ToolTip {
-                    visible: rightActionArea.containsMouse || rightActionArea.activeFocus
+                    visible: (rightActionArea.containsMouse || rightActionArea.activeFocus) && (modelData.text.length > 0)
                     text: modelData.text
                 }
             }
