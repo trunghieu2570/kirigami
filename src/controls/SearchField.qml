@@ -103,6 +103,7 @@ Kirigami.ActionTextField {
             //ltr confusingly refers to the direction of the arrow in the icon, not the text direction which it should be used in
             icon.name: root.effectiveHorizontalAlignment === TextInput.AlignRight ? "edit-clear-locationbar-ltr" : "edit-clear-locationbar-rtl"
             visible: root.text.length > 0
+            text: qsTr("Clear search")
             onTriggered: {
                 root.clear();
                 // Since we are always sending the accepted signal here (whether or not the user has requested
