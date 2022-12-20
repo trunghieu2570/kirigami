@@ -963,8 +963,15 @@ QT.Control {
             onItemRemoved: root.pageRemoved(item);
 
             onVisibleItemsChanged: {
+                // implementation of `popHiddenPages` option
                 if (root.popHiddenPages) {
-                    while (root.lastItem && root.lastVisibleItem && root.lastItem != root.lastVisibleItem) {
+                    // manually fetch lastItem here rather than use root.lastItem property, since that binding may not have updated yet
+                    let lastItem = columnView.contentChildren[columnView.contentChildren.length - 1];
+                    let lastVisibleItem = columnView.lastVisibleItem;
+                    
+                    // pop every page that isn't visible and at the top of the stack
+                    while (lastItem && columnView.lastVisibleItem && 
+                        lastItem !== columnView.lastVisibleItem && columnView.containsItem(lastItem)) {
                         root.pop();
                     }
                 }
