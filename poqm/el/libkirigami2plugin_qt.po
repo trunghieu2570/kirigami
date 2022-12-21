@@ -176,6 +176,11 @@ msgctxt "SearchField|"
 msgid "Search"
 msgstr "Αναζήτηση"
 
+#: controls/SearchField.qml:106
+msgctxt "SearchField|"
+msgid "Clear search"
+msgstr ""
+
 #: controls/settingscomponents/CategorizedSettings.qml:30
 #: controls/settingscomponents/CategorizedSettings.qml:87
 msgctxt "CategorizedSettings|"
