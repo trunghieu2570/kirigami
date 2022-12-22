@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libkirigami2plugin_qt\n"
-"PO-Revision-Date: 2022-12-07 07:12+0200\n"
+"PO-Revision-Date: 2022-12-21 08:03+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -174,7 +174,7 @@ msgstr "Пошук"
 #: controls/SearchField.qml:106
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr ""
+msgstr "Спорожнити поле пошуку"
 
 #: controls/settingscomponents/CategorizedSettings.qml:30
 #: controls/settingscomponents/CategorizedSettings.qml:87
