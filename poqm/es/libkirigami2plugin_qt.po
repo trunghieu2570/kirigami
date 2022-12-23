@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libkirigamiplugin_qt\n"
-"PO-Revision-Date: 2022-12-08 12:04+0100\n"
+"PO-Revision-Date: 2022-12-22 00:22+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.11.90\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: controls/AboutItem.qml:129
 #, qt-format
@@ -167,7 +167,7 @@ msgstr "Buscar"
 #: controls/SearchField.qml:106
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr ""
+msgstr "Borrar la búsqueda"
 
 #: controls/settingscomponents/CategorizedSettings.qml:30
 #: controls/settingscomponents/CategorizedSettings.qml:87
