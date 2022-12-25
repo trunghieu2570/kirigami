@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
-"PO-Revision-Date: 2022-12-13 12:21\n"
+"PO-Revision-Date: 2022-12-24 11:42\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -149,12 +149,12 @@ msgstr "密码"
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr ""
+msgstr "关闭菜单"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr ""
+msgstr "打开菜单"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
