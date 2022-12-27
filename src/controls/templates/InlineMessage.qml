@@ -127,12 +127,14 @@ T2.Control {
 
     property bool _animating: false
 
-    implicitHeight: visible ? contentLayout.implicitHeight + (2 * (background.border.width + Kirigami.Units.smallSpacing)) : 0
+    implicitHeight: visible ? (contentLayout.implicitHeight + topPadding + bottomPadding) : 0
 
-    leftPadding: background.border.width + Kirigami.Units.smallSpacing
-    topPadding: background.border.width + Kirigami.Units.smallSpacing
-    rightPadding: background.border.width + Kirigami.Units.smallSpacing
-    bottomPadding: background.border.width + Kirigami.Units.smallSpacing
+    padding: Kirigami.Units.smallSpacing
+    // base style (such as qqc2-desktop-style) may define unique paddings for Control, reset it to uniform
+    topPadding: undefined
+    leftPadding: undefined
+    rightPadding: undefined
+    bottomPadding: undefined
 
     Behavior on implicitHeight {
         enabled: !root.visible

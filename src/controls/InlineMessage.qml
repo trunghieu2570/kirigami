@@ -61,6 +61,9 @@ import "templates" as T
 T.InlineMessage {
     id: root
 
+    // a rectangle padded with anchors.margins is used to simulate a border
+    padding: bgFillRect.anchors.margins + Kirigami.Units.smallSpacing
+
     background: Rectangle {
         id: bgBorderRect
 
