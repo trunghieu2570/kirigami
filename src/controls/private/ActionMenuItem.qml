@@ -13,9 +13,12 @@ QQC2.MenuItem {
 
     visible: action.visible === undefined || action.visible
     height: visible ? implicitHeight : 0
-    autoExclusive: action.QQC2.ActionGroup && action.QQC2.ActionGroup.group && action.QQC2.ActionGroup.group.exclusive
+    autoExclusive: {
+        const g = action.QQC2.ActionGroup.group;
+        return g && g.exclusive;
+    }
 
     QQC2.ToolTip.text: action.tooltip || ""
-    QQC2.ToolTip.visible: menuItem.hovered && QQC2.ToolTip.text.length>0
+    QQC2.ToolTip.visible: menuItem.hovered && QQC2.ToolTip.text.length > 0
     QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
 }
