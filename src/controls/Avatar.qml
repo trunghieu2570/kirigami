@@ -213,6 +213,11 @@ QQC2.Control {
             enabled: !!avatarRoot.actions.main || !!avatarRoot.actions.secondary
             cursorShape: containsMouse && mouseInCircle && enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
 
+            QQC2.ToolTip {
+                text: avatarRoot.actions.main && avatarRoot.actions.main.tooltip ? avatarRoot.actions.main.tooltip : ''
+                visible: primaryMouse.containsMouse && text
+            }
+
             states: [
                 State {
                     name: "secondaryRevealed"
