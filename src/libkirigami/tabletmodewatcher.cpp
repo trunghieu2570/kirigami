@@ -56,8 +56,12 @@ public:
 
             if (m_interface->isValid()) {
                 // NOTE: the initial call is actually sync, because is better a tiny freeze than having the ui always recalculated and changed at the start
-
-                QDBusPendingReply<QVariantMap> propsReply = m_interface->call(QDBus::Block, QLatin1String("GetAll"), m_interface->interface());
+                QDBusMessage message = QDBusMessage::createMethodCall(QStringLiteral("org.kde.KWin"),
+                                                                      QStringLiteral("/org/kde/KWin"),
+                                                                      QStringLiteral("org.freedesktop.DBus.Properties"),
+                                                                      QStringLiteral("GetAll"));
+                message.setArguments({m_interface->interface()});
+                QDBusReply<QVariantMap> propsReply = QDBusConnection::sessionBus().call(message);
                 isTabletModeAvailable = propsReply.value()[QLatin1String("tabletModeAvailable")].toBool();
                 isTabletMode = propsReply.value()[QLatin1String("tabletMode")].toBool();
                 QObject::connect(m_interface, &OrgKdeKWinTabletModeManagerInterface::tabletModeChanged, q, [this](bool tabletMode) {
