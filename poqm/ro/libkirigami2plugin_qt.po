@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-06-01 15:32+0100\n"
+"PO-Revision-Date: 2022-12-28 20:59+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -253,7 +253,7 @@ msgstr "Acțiuni suplimentare"
 #: controls/UrlButton.qml:51
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
-msgstr ""
+msgstr "Copiază legătura în clipboard"
 
 #: settings.cpp:220
 #, qt-format
