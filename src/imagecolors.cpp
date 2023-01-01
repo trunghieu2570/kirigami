@@ -311,10 +311,9 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage) const
     imageData.m_average = QColor(r / c, g / c, b / c, 255);
 
     for (int iteration = 0; iteration < 5; ++iteration) {
-#ifndef _MSC_VER
 #pragma omp parallel for private(r, g, b, c)
-#endif
-        for (auto &stat : imageData.m_clusters) {
+        for (int i = 0; i < imageData.m_clusters.size(); ++i) {
+            auto &stat = imageData.m_clusters[i];
             r = 0;
             g = 0;
             b = 0;
