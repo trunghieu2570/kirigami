@@ -44,24 +44,24 @@ Kirigami.PageRow {
         if(!pageSettingStack.completed || actions.length === 0) {
             return Kirigami.Units.gridUnit * 6  // we return the min width if the component isn't completed
         }
-        let longestWord = "";
+        let maxWordWidth = 0;
         for (let i = 0; i < actions.length; i++) {
             const words = actions[i].text.split(" ");
 
             for (let j = 0; j < words.length; j++) {
-
-                if (words[j].length > longestWord.length)
-                    longestWord = words[j];
+                maxWordMetrics.text = words[j]
+                const currWordWidth = Math.ceil(maxWordMetrics.advanceWidth)
+                if (currWordWidth > maxWordWidth) {
+                    maxWordWidth = currWordWidth
+                }
             }
         }
-        // set the TextMetric's text to the longest word, to get the word's width.
-        maxWordMetrics.text = longestWord;
 
         // fix words getting wrapped weirdly when the vertical scrollbar is shown
         const vScrollBarWidth = initialPage.contentItem.QQC2.ScrollBar.vertical.width;
 
-        // we need to add spacing from ListView's item delegate and it's items
-        const calcWidth = maxWordMetrics.width + Kirigami.Units.smallSpacing * 6 + vScrollBarWidth;
+        // sum maximum word width, ListView's delegate spacing, and vertical scrollbar width
+        const calcWidth = maxWordWidth + Kirigami.Units.smallSpacing * 6 + vScrollBarWidth;
         const minWidth = Kirigami.Units.gridUnit * 6;
         const maxWidth = Kirigami.Units.gridUnit * 8.5;
 
@@ -113,6 +113,8 @@ Kirigami.PageRow {
             width: parent && parent.width > 0 ? parent.width : implicitWidth
             implicitWidth: contentItem.implicitWidth + Kirigami.Units.smallSpacing * 4
             implicitHeight: contentItem.implicitHeight + Kirigami.Units.smallSpacing * 2
+
+            padding: Kirigami.Units.smallSpacing
 
             action: modelData
             highlighted: listview.currentIndex === index
