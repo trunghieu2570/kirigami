@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-07-23 23:16+0200\n"
+"PO-Revision-Date: 2022-12-19 10:38+0100\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.07.70\n"
+"X-Generator: Lokalize 22.12.0\n"
 "X-Qt-Contexts: true\n"
 
 #: controls/AboutItem.qml:129
@@ -41,15 +41,12 @@ msgstr "Machen Sie mit"
 #: controls/AboutItem.qml:203
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Spenden"
 
 #: controls/AboutItem.qml:220
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Report Bug…"
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "Probleme oder Wünsche berichten ..."
+msgstr "Probleme oder Wünsche berichten"
 
 #: controls/AboutItem.qml:233
 msgctxt "AboutItem|"
@@ -150,20 +147,14 @@ msgid "Password"
 msgstr "Passwort"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr "Schließen"
+msgstr "Menü schließen"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Open"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr "Öffnen"
+msgstr "Menü öffnen"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
