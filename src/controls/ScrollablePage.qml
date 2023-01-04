@@ -65,7 +65,7 @@ import "private"
  * [...]
  * @endcode
  */
-Page {
+Kirigami.Page {
     id: root
 
 //BEGIN properties
@@ -271,7 +271,7 @@ Page {
                     opacity: 0.8
                     border.color: Kirigami.Theme.backgroundColor
                     border.width: Kirigami.Units.smallSpacing
-                    property real progress: supportsRefreshing && !refreshing ? (busyIndicatorLoader.y/busyIndicatorFrame.height) : 0
+                    property real progress: supportsRefreshing && !refreshing ? (busyIndicatorLoader.y / busyIndicatorFrame.height) : 0
                 }
                 GE.ConicalGradient {
                     source: spinnerProgress
@@ -292,7 +292,7 @@ Page {
                             return;
                         }
 
-                        if (!root.refreshing && busyIndicatorLoader.y > busyIndicatorFrame.height/2 + topPadding) {
+                        if (!root.refreshing && busyIndicatorLoader.y > busyIndicatorFrame.height / 2 + topPadding) {
                             refreshTriggerTimer.running = true;
                         } else {
                             refreshTriggerTimer.running = false;
@@ -303,7 +303,7 @@ Page {
                     id: refreshTriggerTimer
                     interval: 500
                     onTriggered: {
-                        if (!root.refreshing && busyIndicatorLoader.y > busyIndicatorFrame.height/2 + topPadding) {
+                        if (!root.refreshing && busyIndicatorLoader.y > busyIndicatorFrame.height / 2 + topPadding) {
                             root.refreshing = true;
                         }
                     }
@@ -341,7 +341,11 @@ Page {
             scrollView.contentItem = root.flickable;
             root.flickable.parent = scrollView;
             // The flickable needs focus only if the page didn't already explicitly set focus to some other control (eg a text field in the header)
-            Qt.callLater( () => {if (root.activeFocus) root.flickable.forceActiveFocus()});
+            Qt.callLater(() => {
+                if (root.activeFocus) {
+                    root.flickable.forceActiveFocus();
+                }
+            });
             // Some existing code incorrectly uses anchors
             root.flickable.anchors.fill = undefined;
             root.flickable.anchors.left = undefined;
@@ -351,8 +355,8 @@ Page {
         } else {
             scrollView.contentItem = root.flickable;
             scrollingArea.parent = root.flickable.contentItem;
-            root.flickable.contentHeight = Qt.binding(() => { return scrollingArea.implicitHeight - root.flickable.topMargin - root.flickable.bottomMargin });
-            root.flickable.contentWidth = Qt.binding(() => { return scrollingArea.implicitWidth });
+            root.flickable.contentHeight = Qt.binding(() => scrollingArea.implicitHeight - root.flickable.topMargin - root.flickable.bottomMargin);
+            root.flickable.contentWidth = Qt.binding(() => scrollingArea.implicitWidth);
         }
         root.flickable.flickableDirection = Flickable.VerticalFlick;
     }
