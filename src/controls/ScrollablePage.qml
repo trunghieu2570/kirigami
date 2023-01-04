@@ -263,14 +263,14 @@ Page {
                     id: spinnerProgress
                     anchors {
                         fill: busyIndicator
-                        margins: Math.ceil(Kirigami.Units.smallSpacing)
+                        margins: Kirigami.Units.smallSpacing
                     }
                     radius: width
                     visible: supportsRefreshing && !refreshing && progress > 0
                     color: "transparent"
                     opacity: 0.8
                     border.color: Kirigami.Theme.backgroundColor
-                    border.width: Math.ceil(Kirigami.Units.smallSpacing)
+                    border.width: Kirigami.Units.smallSpacing
                     property real progress: supportsRefreshing && !refreshing ? (busyIndicatorLoader.y/busyIndicatorFrame.height) : 0
                 }
                 GE.ConicalGradient {
