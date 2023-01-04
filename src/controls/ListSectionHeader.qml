@@ -57,7 +57,7 @@ Kirigami.AbstractListItem {
     // we do not need a background
     background: Item {}
 
-    topPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+    topPadding: y > ListView.view.originX ? Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing : Kirigami.Units.smallSpacing
 
     contentItem: RowLayout {
         id: rowLayout
