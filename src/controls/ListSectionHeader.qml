@@ -56,23 +56,23 @@ Kirigami.AbstractListItem {
 
     // we do not need a background
     background: Item {}
-    
+
     topPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
-    
+
     contentItem: RowLayout {
         id: rowLayout
         spacing: Kirigami.Units.largeSpacing
-        
+
         Kirigami.Heading {
             Layout.fillWidth: rowLayout.children.length === 1
             Layout.alignment: Qt.AlignVCenter
-            
+
             opacity: 0.7
             level: 5
             type: Kirigami.Heading.Primary
             text: listSection.text
             elide: Text.ElideRight
-            
+
             // we override the Primary type's font weight (DemiBold) for Bold for contrast with small text
             font.weight: Font.Bold
         }
