@@ -6,8 +6,9 @@
 
 #include "wheelhandler.h"
 #include "settings.h"
-#include <QWheelEvent>
+#include <QQuickItem>
 #include <QQuickWindow>
+#include <QWheelEvent>
 
 KirigamiWheelEvent::KirigamiWheelEvent(QObject *parent)
     : QObject(parent)
@@ -134,13 +135,11 @@ void WheelHandler::setTarget(QQuickItem *target)
     if (m_flickable) {
         m_flickable->removeEventFilter(this);
         disconnect(m_flickable, nullptr, m_filterItem, nullptr);
+        disconnect(m_flickable, &QQuickItem::parentChanged, this, &WheelHandler::_k_rebindScrollBars);
     }
 
     m_flickable = target;
     m_filterItem->setParentItem(target);
-
-    QQuickItem *vscrollbar = nullptr;
-    QQuickItem *hscrollbar = nullptr;
 
     if (target) {
         target->installEventFilter(this);
@@ -157,52 +156,103 @@ void WheelHandler::setTarget(QQuickItem *target)
             m_filterItem->setHeight(target->height());
         });
 
-        // Get ScrollBars so that we can filter them too, even if they're not in the bounds of the Flickable
-        auto targetChildren = target->children();
-        for (auto child : targetChildren) {
-            if (child->inherits("QQuickScrollBarAttached")) {
-                vscrollbar = child->property("vertical").value<QQuickItem*>();
-                hscrollbar = child->property("horizontal").value<QQuickItem*>();
-                break;
-            }
-        }
-        // Check ScrollView if there are no scrollbars attached to the Flickable.
-        // We need to check if the parent inherits QQuickScrollView in case the
-        // parent is another Flickable that already has a Kirigami WheelHandler.
-        auto targetParent = target->parentItem();
-        if (targetParent && targetParent->inherits("QQuickScrollView") && !vscrollbar && !hscrollbar) {
-            auto targetParentChildren = targetParent->children();
-            for (auto child : targetParentChildren) {
-                if (child->inherits("QQuickScrollBarAttached")) {
-                    vscrollbar = child->property("vertical").value<QQuickItem*>();
-                    hscrollbar = child->property("horizontal").value<QQuickItem*>();
-                    break;
-                }
-            }
-        }
-    }
+        // Flickable may get reparented to or out of a ScrollView, so we need
+        // to redo the discovery process. This is especially important for
+        // Kirigami.ScrollablePage component.
+        connect(target, &QQuickItem::parentChanged, this, &WheelHandler::_k_rebindScrollBars);
 
-    if (m_verticalScrollBar != vscrollbar) {
-        if (m_verticalScrollBar) {
-            m_verticalScrollBar->removeEventFilter(this);
-        }
-        m_verticalScrollBar = vscrollbar;
-        if (vscrollbar) {
-            vscrollbar->installEventFilter(this);
-        }
-    }
-
-    if (m_horizontalScrollBar != hscrollbar) {
-        if (m_horizontalScrollBar) {
-            m_horizontalScrollBar->removeEventFilter(this);
-        }
-        m_horizontalScrollBar = hscrollbar;
-        if (hscrollbar) {
-            hscrollbar->installEventFilter(this);
-        }
+        _k_rebindScrollBars();
     }
 
     Q_EMIT targetChanged();
+}
+
+void WheelHandler::_k_rebindScrollBars()
+{
+    struct ScrollBarAttached {
+        QObject *attached = nullptr;
+        QQuickItem *vertical = nullptr;
+        QQuickItem *horizontal = nullptr;
+    };
+
+    // Get ScrollBars so that we can filter them too, even if they're not in the bounds of the Flickable
+    ScrollBarAttached attachedToFlickable;
+    const auto flickableChildren = m_flickable->children();
+    for (const auto child : flickableChildren) {
+        if (child->inherits("QQuickScrollBarAttached")) {
+            attachedToFlickable.attached = child;
+            attachedToFlickable.vertical = child->property("vertical").value<QQuickItem *>();
+            attachedToFlickable.horizontal = child->property("horizontal").value<QQuickItem *>();
+            break;
+        }
+    }
+
+    // Check ScrollView if there are no scrollbars attached to the Flickable.
+    // We need to check if the parent inherits QQuickScrollView in case the
+    // parent is another Flickable that already has a Kirigami WheelHandler.
+    ScrollBarAttached attachedToScrollView;
+    auto flickableParent = m_flickable->parentItem();
+    if (flickableParent && flickableParent->inherits("QQuickScrollView")) {
+        const auto siblings = flickableParent->children();
+        for (const auto child : siblings) {
+            if (child->inherits("QQuickScrollBarAttached")) {
+                attachedToScrollView.attached = child;
+                attachedToScrollView.vertical = child->property("vertical").value<QQuickItem *>();
+                attachedToScrollView.horizontal = child->property("horizontal").value<QQuickItem *>();
+                break;
+            }
+        }
+    }
+
+    // Dilemma: ScrollBars can be attached to both ScrollView and Flickable,
+    // but only one of them should be shown anyway. Let's prefer Flickable.
+
+    struct ChosenScrollBar {
+        QObject *attached = nullptr;
+        QQuickItem *scrollBar = nullptr;
+    };
+
+    ChosenScrollBar vertical;
+    if (attachedToFlickable.vertical) {
+        vertical.attached = attachedToFlickable.attached;
+        vertical.scrollBar = attachedToFlickable.vertical;
+    } else if (attachedToScrollView.vertical) {
+        vertical.attached = attachedToScrollView.attached;
+        vertical.scrollBar = attachedToScrollView.vertical;
+    }
+
+    ChosenScrollBar horizontal;
+    if (attachedToFlickable.horizontal) {
+        horizontal.attached = attachedToFlickable.attached;
+        horizontal.scrollBar = attachedToFlickable.horizontal;
+    } else if (attachedToScrollView.horizontal) {
+        horizontal.attached = attachedToScrollView.attached;
+        horizontal.scrollBar = attachedToScrollView.horizontal;
+    }
+
+    if (m_verticalScrollBar != vertical.scrollBar) {
+        if (m_verticalScrollBar) {
+            m_verticalScrollBar->removeEventFilter(this);
+            disconnect(m_verticalChangedConnection);
+        }
+        m_verticalScrollBar = vertical.scrollBar;
+        if (vertical.scrollBar) {
+            vertical.scrollBar->installEventFilter(this);
+            m_verticalChangedConnection = connect(vertical.attached, SIGNAL(verticalChanged()), this, SLOT(_k_rebindScrollBars()));
+        }
+    }
+
+    if (m_horizontalScrollBar != horizontal.scrollBar) {
+        if (m_horizontalScrollBar) {
+            m_horizontalScrollBar->removeEventFilter(this);
+            disconnect(m_horizontalChangedConnection);
+        }
+        m_horizontalScrollBar = horizontal.scrollBar;
+        if (horizontal.scrollBar) {
+            horizontal.scrollBar->installEventFilter(this);
+            m_horizontalChangedConnection = connect(horizontal.attached, SIGNAL(horizontalChanged()), this, SLOT(_k_rebindScrollBars()));
+        }
+    }
 }
 
 qreal WheelHandler::verticalStepSize() const
