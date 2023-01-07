@@ -5,7 +5,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as Controls
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
-import org.kde.%{APPNAME} 1.0
+import org.kde.%{APPNAMELC} 1.0
 
 Kirigami.ApplicationWindow {
     id: root
@@ -44,14 +44,12 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 text: i18n("Plus One")
                 icon.name: "list-add"
-                onTriggered: {
-                    counter += 1
-                }
+                onTriggered: counter += 1
             },
             Kirigami.Action {
                 text: i18n("About %{APPNAME}")
                 icon.name: "help-about"
-                onTriggered: pageStack.layers.push('qrc:About.qml')
+                onTriggered: pageStack.layers.pushDialogLayer('qrc:About.qml')
             },
             Kirigami.Action {
                 text: i18n("Quit")
@@ -70,17 +68,13 @@ Kirigami.ApplicationWindow {
     Kirigami.Page {
         id: page
 
-        Layout.fillWidth: true
-
         title: i18n("Main Page")
 
         actions.main: Kirigami.Action {
             text: i18n("Plus One")
             icon.name: "list-add"
             tooltip: i18n("Add one to the counter")
-            onTriggered: {
-                counter += 1
-            }
+            onTriggered: counter += 1
         }
 
         ColumnLayout {
@@ -95,7 +89,7 @@ Kirigami.ApplicationWindow {
 
             Controls.Button {
                 Layout.alignment: Qt.AlignHCenter
-                text: "+ 1"
+                text: i18n("+ 1")
                 onClicked: counter += 1
             }
         }
