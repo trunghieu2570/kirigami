@@ -3,7 +3,6 @@
 
 add_executable(%{APPNAMELC}
     main.cpp
-    about.cpp
     app.cpp
     resources.qrc)
 
