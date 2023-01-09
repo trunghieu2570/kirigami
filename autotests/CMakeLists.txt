@@ -1,10 +1,11 @@
+include(ECMAddTests)
 if(NOT TARGET Qt${QT_MAJOR_VERSION}::QuickTest)
     message(STATUS "Qt${QT_MAJOR_VERSION}QuickTest not found, autotests will not be built.")
     return()
 endif()
 
 add_executable(qmltest qmltest.cpp)
-target_link_libraries(qmltest PRIVATE Qt::Qml Qt${QT_MAJOR_VERSION}::QuickTest)
+target_link_libraries(qmltest PRIVATE Qt::Qml Qt${QT_MAJOR_VERSION}::QuickTest KF5Kirigami2)
 
 if (NOT BUILD_SHARED_LIBS)
     target_compile_definitions(qmltest PRIVATE STATIC_MODULE)
@@ -50,3 +51,5 @@ kirigami_add_tests(
 set_tests_properties(tst_theme.qml PROPERTIES
     ENVIRONMENT "QT_QUICK_CONTROLS_STYLE=default;KIRIGAMI_FORCE_STYLE=1"
 )
+
+ecm_add_tests(sharedqmlenginetest.cpp LINK_LIBRARIES Qt::Test Qt::Qml KF5Kirigami2)

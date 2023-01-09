@@ -11,6 +11,7 @@ target_sources(KF5Kirigami2 PRIVATE
     styleselector.cpp
     units.cpp
     virtualkeyboardwatcher.cpp
+    sharedqmlengine.cpp
 )
 
 set(libkirigami_extra_sources "")
@@ -65,6 +66,7 @@ ecm_generate_headers(Kirigami2_CamelCase_HEADERS
     TabletModeWatcher
     Units
     VirtualKeyboardWatcher
+    SharedQmlEngine
 
     PREFIX Kirigami
     REQUIRED_HEADERS Kirigami2_HEADERS
