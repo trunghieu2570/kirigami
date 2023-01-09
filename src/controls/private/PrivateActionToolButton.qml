@@ -106,14 +106,6 @@ Controls.ToolButton {
         }
     }
 
-    // This is slightly ugly but saves us from needing to recreate the entire
-    // contents of the toolbutton. When using QQC2-desktop-style, the background
-    // will be an item that renders the entire control. We can simply set a
-    // property on it to get a menu arrow.
-    // TODO: Support other styles
-    Component.onCompleted: {
-        if (background.hasOwnProperty("showMenuArrow")) {
-            background.showMenuArrow = Qt.binding(() => control.showMenuArrow && control.menuActions.length > 0)
-        }
-    }
+    // This will set showMenuArrow when using qqc2-desktop-style.
+    Accessible.role: (control.showMenuArrow && control.menuActions.length > 0) ? Accessible.ButtonMenu : Accessible.Button
 }
