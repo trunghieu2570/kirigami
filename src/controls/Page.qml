@@ -248,14 +248,26 @@ QQC2.Page {
      */
     property Component titleDelegate: Component {
         id: defaultTitleDelegate
-        Kirigami.Heading {
+        Item {
             Layout.fillWidth: true
-            Layout.maximumWidth: implicitWidth + 1 // The +1 is to make sure we do not trigger eliding at max width
             Layout.minimumWidth: 0
-            maximumLineCount: 1
-            elide: Text.ElideRight
-            text: root.title
-            textFormat: Text.PlainText
+            Layout.maximumWidth: implicitWidth
+            implicitWidth: Math.ceil(metrics.advanceWidth)
+            implicitHeight: metrics.height
+
+            Kirigami.Heading {
+                id: heading
+                anchors.fill: parent
+                maximumLineCount: 1
+                elide: Text.ElideRight
+                text: root.title
+                textFormat: Text.PlainText
+            }
+            TextMetrics {
+                id: metrics
+                font: heading.font
+                text: heading.text
+            }
         }
     }
 
