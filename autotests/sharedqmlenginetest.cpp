@@ -36,20 +36,20 @@ class SharedQmlEngineTest : public QObject
 private Q_SLOTS:
     void testSettingTranslationDomain()
     {
-        std::unique_ptr<QmlObject> obj(QmlObject::create());
+        std::unique_ptr<SharedQmlEngine> obj(SharedQmlEngine::create());
 
         const QString testDomain = QStringLiteral("testme");
         QVERIFY(obj->translationDomain().isEmpty());
         obj->setTranslationDomain(testDomain);
         QCOMPARE(obj->translationDomain(), testDomain);
-        obj.reset(QmlObject::create());
+        obj.reset(SharedQmlEngine::create());
         QVERIFY(obj->translationDomain().isEmpty());
     }
 
     void testUsingSameEngine()
     {
-        std::unique_ptr<QmlObject> obj1(QmlObject::create());
-        std::unique_ptr<QmlObject> obj2(QmlObject::create());
+        std::unique_ptr<SharedQmlEngine> obj1(SharedQmlEngine::create());
+        std::unique_ptr<SharedQmlEngine> obj2(SharedQmlEngine::create());
 
         QVERIFY(obj1->engine() == obj2->engine());
         QVERIFY(obj1->rootContext() != obj2->rootContext());
@@ -57,7 +57,7 @@ private Q_SLOTS:
 
     void testDeletingEngine()
     {
-        std::unique_ptr<QmlObject> obj1(QmlObject::create());
+        std::unique_ptr<SharedQmlEngine> obj1(SharedQmlEngine::create());
         std::weak_ptr<QQmlEngine> weakPtr(obj1->engine());
         QVERIFY(weakPtr.lock());
 
@@ -65,7 +65,7 @@ private Q_SLOTS:
         QCOMPARE(weakPtr.use_count(), 2);
 
         {
-            std::unique_ptr<QmlObject> obj2(QmlObject::create());
+            std::unique_ptr<SharedQmlEngine> obj2(SharedQmlEngine::create());
             // The static shared_ptr, the one in obj1 and in obj2
             QCOMPARE(weakPtr.use_count(), 3);
         }

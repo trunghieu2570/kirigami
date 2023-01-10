@@ -35,10 +35,10 @@ protected:
     }
 };
 
-class QmlObjectPrivate
+class SharedQmlEnginePrivate
 {
 public:
-    QmlObjectPrivate(QmlObject *parent)
+    SharedQmlEnginePrivate(SharedQmlEngine *parent)
         : q(parent)
         , component(nullptr)
         , delay(false)
@@ -52,7 +52,7 @@ public:
         });
     }
 
-    ~QmlObjectPrivate()
+    ~SharedQmlEnginePrivate()
     {
         delete incubator.object();
 
@@ -81,7 +81,7 @@ public:
     void preferredHeightChanged();
     void checkInitializationCompleted();
 
-    QmlObject *q;
+    SharedQmlEngine *q;
 
     QUrl source;
 
@@ -105,9 +105,9 @@ private:
     static std::shared_ptr<QQmlEngine> s_engine;
 };
 
-std::shared_ptr<QQmlEngine> QmlObjectPrivate::s_engine = std::shared_ptr<QQmlEngine>{};
+std::shared_ptr<QQmlEngine> SharedQmlEnginePrivate::s_engine = std::shared_ptr<QQmlEngine>{};
 
-void QmlObjectPrivate::errorPrint(QQmlComponent *component)
+void SharedQmlEnginePrivate::errorPrint(QQmlComponent *component)
 {
     QString errorStr = QStringLiteral("Error loading QML file.\n");
     if (component->isError()) {
@@ -120,7 +120,7 @@ void QmlObjectPrivate::errorPrint(QQmlComponent *component)
     qWarning(KirigamiLog) << component->url().toString() << '\n' << errorStr;
 }
 
-void QmlObjectPrivate::execute(const QUrl &source)
+void SharedQmlEnginePrivate::execute(const QUrl &source)
 {
     if (source.isEmpty()) {
         qWarning(KirigamiLog) << "File name empty!";
@@ -129,7 +129,7 @@ void QmlObjectPrivate::execute(const QUrl &source)
 
     delete component;
     component = new QQmlComponent(engine().get(), q);
-    QObject::connect(component, &QQmlComponent::statusChanged, q, &QmlObject::statusChanged, Qt::QueuedConnection);
+    QObject::connect(component, &QQmlComponent::statusChanged, q, &SharedQmlEngine::statusChanged, Qt::QueuedConnection);
     delete incubator.object();
 
     component->loadUrl(source);
@@ -141,7 +141,7 @@ void QmlObjectPrivate::execute(const QUrl &source)
     }
 }
 
-void QmlObjectPrivate::scheduleExecutionEnd()
+void SharedQmlEnginePrivate::scheduleExecutionEnd()
 {
     if (component->isReady() || component->isError()) {
         q->completeInitialization();
@@ -152,62 +152,63 @@ void QmlObjectPrivate::scheduleExecutionEnd()
     }
 }
 
-/*static*/ std::shared_ptr<QQmlEngine> QmlObject::qmlEngineInternal()
+/*static*/ std::shared_ptr<QQmlEngine> SharedQmlEngine::qmlEngineInternal()
 {
-    return QmlObjectPrivate::engine();
+    return SharedQmlEnginePrivate::engine();
 }
 
-QmlObject::QmlObject(QObject *localizeContext, QQmlContext *rootContext, QObject *parent)
+SharedQmlEngine::SharedQmlEngine(QObject *localizeContext, QQmlContext *rootContext, QObject *parent)
     : QObject(parent)
-    , d(new QmlObjectPrivate(this))
+    , d(new SharedQmlEnginePrivate(this))
 {
     Q_ASSERT(rootContext);
     Q_ASSERT(localizeContext);
 
     d->context = localizeContext;
-    d->rootContext = rootContext; // TODO Set parent?
+    d->rootContext = rootContext;
+    d->rootContext->setParent(this); // Delete the context when deleting the shared engine
     d->rootContext->setContextObject(d->context);
 }
 
-QmlObject::~QmlObject() = default;
+SharedQmlEngine::~SharedQmlEngine() = default;
 
-void QmlObject::setTranslationDomain(const QString &translationDomain)
+void SharedQmlEngine::setTranslationDomain(const QString &translationDomain)
 {
     d->context->setProperty("translationDomain", translationDomain);
 }
 
-QString QmlObject::translationDomain() const
+QString SharedQmlEngine::translationDomain() const
 {
     return d->context->property("translationDomain").toString();
 }
 
-void QmlObject::setSource(const QUrl &source)
+void SharedQmlEngine::setSource(const QUrl &source)
 {
     d->source = source;
     d->execute(source);
 }
 
-QUrl QmlObject::source() const
+QUrl SharedQmlEngine::source() const
 {
     return d->source;
 }
 
-void QmlObject::setInitializationDelayed(const bool delay)
+void SharedQmlEngine::setInitializationDelayed(const bool delay)
 {
     d->delay = delay;
 }
 
-bool QmlObject::isInitializationDelayed() const
+bool SharedQmlEngine::isInitializationDelayed() const
 {
     return d->delay;
 }
 
-std::shared_ptr<QQmlEngine> QmlObject::engine()
+std::shared_ptr<QQmlEngine> SharedQmlEngine::engine()
 {
     return d->engine();
 }
 
-QObject *QmlObject::rootObject() const
+QObject *SharedQmlEngine::rootObject() const
 {
     if (d->incubator.status() == QQmlIncubator::Loading) {
         qWarning(KirigamiLog) << "Trying to use rootObject before initialization is completed, whilst using setInitializationDelayed. Forcing completion";
@@ -216,17 +217,17 @@ QObject *QmlObject::rootObject() const
     return d->incubator.object();
 }
 
-QQmlComponent *QmlObject::mainComponent() const
+QQmlComponent *SharedQmlEngine::mainComponent() const
 {
     return d->component;
 }
 
-QQmlContext *QmlObject::rootContext() const
+QQmlContext *SharedQmlEngine::rootContext() const
 {
     return d->rootContext;
 }
 
-QQmlComponent::Status QmlObject::status() const
+QQmlComponent::Status SharedQmlEngine::status() const
 {
     if (!d->engine()) {
         return QQmlComponent::Error;
@@ -239,10 +240,12 @@ QQmlComponent::Status QmlObject::status() const
     return QQmlComponent::Status(d->component->status());
 }
 
-void QmlObjectPrivate::checkInitializationCompleted()
+void SharedQmlEnginePrivate::checkInitializationCompleted()
 {
     if (!incubator.isReady() && incubator.status() != QQmlIncubator::Error) {
-        QTimer::singleShot(0, q, SLOT(checkInitializationCompleted()));
+        QTimer::singleShot(0, q, [this]() {
+            checkInitializationCompleted();
+        });
         return;
     }
 
@@ -253,7 +256,7 @@ void QmlObjectPrivate::checkInitializationCompleted()
     Q_EMIT q->finished();
 }
 
-void QmlObject::completeInitialization(const QVariantHash &initialProperties)
+void SharedQmlEngine::completeInitialization(const QVariantHash &initialProperties)
 {
     d->executionEndTimer->stop();
     if (d->incubator.object()) {
@@ -285,7 +288,7 @@ void QmlObject::completeInitialization(const QVariantHash &initialProperties)
     }
 }
 
-QObject *QmlObject::createObjectFromSource(const QUrl &source, QQmlContext *context, const QVariantHash &initialProperties)
+QObject *SharedQmlEngine::createObjectFromSource(const QUrl &source, QQmlContext *context, const QVariantHash &initialProperties)
 {
     QQmlComponent *component = new QQmlComponent(d->engine().get(), this);
     component->loadUrl(source);
@@ -293,7 +296,7 @@ QObject *QmlObject::createObjectFromSource(const QUrl &source, QQmlContext *cont
     return createObjectFromComponent(component, context, initialProperties);
 }
 
-QObject *QmlObject::createObjectFromComponent(QQmlComponent *component, QQmlContext *context, const QVariantHash &initialProperties)
+QObject *SharedQmlEngine::createObjectFromComponent(QQmlComponent *component, QQmlContext *context, const QVariantHash &initialProperties)
 {
     QmlObjectIncubator incubator;
     incubator.m_initialProperties = initialProperties;

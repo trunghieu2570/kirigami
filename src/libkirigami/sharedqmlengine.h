@@ -22,22 +22,23 @@ class KLocalizedContext;
 
 namespace Kirigami
 {
-class QmlObjectPrivate;
+class SharedQmlEnginePrivate;
 
 /**
- * @class KDeclarative::QmlObject qmlobject.h KDeclarative/QmlObject
+ * @class Kirigami::SharedQmlEngine Kirigami/sharedqmlengine.h Kirigami/SharedQmlEngine
  *
  * @author Marco Martin <mart@kde.org>
  *
  * @short An object that instantiates an entire QML context, with its own declarative engine
  *
- * KDeclarative::QmlObject provides a class to conveniently use QML based
- * declarative user interfaces inside Plasma widgets.
- * A QmlObject corresponds to one QML file (which can include others).
- * It will have its own QQmlEngine with a single root object,
- * described in the QML file.
+ * Kirigami::SharedQmlEngine provides a class to conveniently use QML based
+ * declarative user interfaces.
+ * A SharedQmlEngine corresponds to one QML file (which can include others).
+ * It will a shared QQmlEngine with a single root object, described in the QML file.
+ *
+ * @since 6.0
  */
-class KIRIGAMI2_EXPORT QmlObject : public QObject
+class KIRIGAMI2_EXPORT SharedQmlEngine : public QObject
 {
     Q_OBJECT
 
@@ -49,27 +50,23 @@ class KIRIGAMI2_EXPORT QmlObject : public QObject
 
 public:
     /**
-     * Construct a new QmlObject
+     * Construct a new Kirigami::SharedQmlEngine
      *
-     * @param engine The QQmlEngine to use. If this object is the first user of
-     * the engine (e.g. use_count() is 1), KDeclarative::setupEngine() will be
-     * called. If this is nullptr, a new engine will be created for this object
-     * to use.
      * @param rootContext The QML context to use for object creation. If this is
-     * nullptr, the engine's root context will be used.
+     * nullptr, a new context will be created
      * @param parent The QObject parent for this object.
      */
     template<class LOCALIZED_CONTEXT = KLocalizedContext>
-    static QmlObject *create(QQmlContext *rootContext = nullptr, QObject *parent = nullptr)
+    static SharedQmlEngine *create(QQmlContext *rootContext = nullptr, QObject *parent = nullptr)
     {
         if (!rootContext) {
             rootContext = new QQmlContext(qmlEngineInternal().get());
         }
 
-        return new QmlObject(new LOCALIZED_CONTEXT(rootContext), rootContext, parent);
+        return new SharedQmlEngine(new LOCALIZED_CONTEXT(rootContext), rootContext, parent);
     }
 
-    ~QmlObject() override;
+    ~SharedQmlEngine() override;
 
     /**
      * Call this method before calling setupBindings to install a translation domain for all
@@ -194,10 +191,9 @@ Q_SIGNALS:
     void statusChanged(QQmlComponent::Status);
 
 private:
-    QmlObject(QObject *localizeContext, QQmlContext *rootContext, QObject *parent);
+    SharedQmlEngine(QObject *localizeContext, QQmlContext *rootContext, QObject *parent);
     static std::shared_ptr<QQmlEngine> qmlEngineInternal();
-    friend class QmlObjectPrivate;
-    const std::unique_ptr<QmlObjectPrivate> d;
+    const std::unique_ptr<SharedQmlEnginePrivate> d;
 
     Q_PRIVATE_SLOT(d, void scheduleExecutionEnd())
     Q_PRIVATE_SLOT(d, void checkInitializationCompleted())
