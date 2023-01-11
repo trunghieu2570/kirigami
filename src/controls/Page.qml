@@ -248,26 +248,8 @@ QQC2.Page {
      */
     property Component titleDelegate: Component {
         id: defaultTitleDelegate
-        Item {
-            Layout.fillWidth: true
-            Layout.minimumWidth: 0
-            Layout.maximumWidth: implicitWidth
-            implicitWidth: Math.ceil(metrics.advanceWidth)
-            implicitHeight: metrics.height
-
-            Kirigami.Heading {
-                id: heading
-                anchors.fill: parent
-                maximumLineCount: 1
-                elide: Text.ElideRight
-                text: root.title
-                textFormat: Text.PlainText
-            }
-            TextMetrics {
-                id: metrics
-                font: heading.font
-                text: heading.text
-            }
+        P.DefaultPageTitleDelegate {
+            text: root.title
         }
     }
 
