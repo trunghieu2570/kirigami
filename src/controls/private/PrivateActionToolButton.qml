@@ -108,4 +108,5 @@ Controls.ToolButton {
 
     // This will set showMenuArrow when using qqc2-desktop-style.
     Accessible.role: (control.showMenuArrow && control.menuActions.length > 0) ? Accessible.ButtonMenu : Accessible.Button
+    Accessible.ignored: !visible
 }
