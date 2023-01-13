@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
-"PO-Revision-Date: 2023-01-02 07:11\n"
+"PO-Revision-Date: 2023-01-12 10:30\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -169,7 +169,7 @@ msgstr "搜索"
 #: controls/SearchField.qml:106
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr ""
+msgstr "清除搜索内容"
 
 #: controls/settingscomponents/CategorizedSettings.qml:30
 #: controls/settingscomponents/CategorizedSettings.qml:87
