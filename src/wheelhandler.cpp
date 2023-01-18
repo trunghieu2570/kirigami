@@ -149,20 +149,15 @@ void WheelHandler::setTarget(QQuickItem *target)
         // Make it fill the Flickable
         m_filterItem->setWidth(target->width());
         m_filterItem->setHeight(target->height());
-        connect(target, &QQuickItem::widthChanged, m_filterItem, [this, target](){
+        connect(target, &QQuickItem::widthChanged, m_filterItem, [this, target]() {
             m_filterItem->setWidth(target->width());
         });
-        connect(target, &QQuickItem::heightChanged, m_filterItem, [this, target](){
+        connect(target, &QQuickItem::heightChanged, m_filterItem, [this, target]() {
             m_filterItem->setHeight(target->height());
         });
-
-        // Flickable may get reparented to or out of a ScrollView, so we need
-        // to redo the discovery process. This is especially important for
-        // Kirigami.ScrollablePage component.
-        connect(target, &QQuickItem::parentChanged, this, &WheelHandler::_k_rebindScrollBars);
-
-        _k_rebindScrollBars();
     }
+
+    _k_rebindScrollBars();
 
     Q_EMIT targetChanged();
 }
@@ -175,31 +170,35 @@ void WheelHandler::_k_rebindScrollBars()
         QQuickItem *horizontal = nullptr;
     };
 
-    // Get ScrollBars so that we can filter them too, even if they're not in the bounds of the Flickable
     ScrollBarAttached attachedToFlickable;
-    const auto flickableChildren = m_flickable->children();
-    for (const auto child : flickableChildren) {
-        if (child->inherits("QQuickScrollBarAttached")) {
-            attachedToFlickable.attached = child;
-            attachedToFlickable.vertical = child->property("vertical").value<QQuickItem *>();
-            attachedToFlickable.horizontal = child->property("horizontal").value<QQuickItem *>();
-            break;
-        }
-    }
-
-    // Check ScrollView if there are no scrollbars attached to the Flickable.
-    // We need to check if the parent inherits QQuickScrollView in case the
-    // parent is another Flickable that already has a Kirigami WheelHandler.
     ScrollBarAttached attachedToScrollView;
-    auto flickableParent = m_flickable->parentItem();
-    if (flickableParent && flickableParent->inherits("QQuickScrollView")) {
-        const auto siblings = flickableParent->children();
-        for (const auto child : siblings) {
+
+    if (m_flickable) {
+        // Get ScrollBars so that we can filter them too, even if they're not
+        // in the bounds of the Flickable
+        const auto flickableChildren = m_flickable->children();
+        for (const auto child : flickableChildren) {
             if (child->inherits("QQuickScrollBarAttached")) {
-                attachedToScrollView.attached = child;
-                attachedToScrollView.vertical = child->property("vertical").value<QQuickItem *>();
-                attachedToScrollView.horizontal = child->property("horizontal").value<QQuickItem *>();
+                attachedToFlickable.attached = child;
+                attachedToFlickable.vertical = child->property("vertical").value<QQuickItem *>();
+                attachedToFlickable.horizontal = child->property("horizontal").value<QQuickItem *>();
                 break;
+            }
+        }
+
+        // Check ScrollView if there are no scrollbars attached to the Flickable.
+        // We need to check if the parent inherits QQuickScrollView in case the
+        // parent is another Flickable that already has a Kirigami WheelHandler.
+        auto flickableParent = m_flickable->parentItem();
+        if (flickableParent && flickableParent->inherits("QQuickScrollView")) {
+            const auto siblings = flickableParent->children();
+            for (const auto child : siblings) {
+                if (child->inherits("QQuickScrollBarAttached")) {
+                    attachedToScrollView.attached = child;
+                    attachedToScrollView.vertical = child->property("vertical").value<QQuickItem *>();
+                    attachedToScrollView.horizontal = child->property("horizontal").value<QQuickItem *>();
+                    break;
+                }
             }
         }
     }
@@ -228,6 +227,19 @@ void WheelHandler::_k_rebindScrollBars()
     } else if (attachedToScrollView.horizontal) {
         horizontal.attached = attachedToScrollView.attached;
         horizontal.scrollBar = attachedToScrollView.horizontal;
+    }
+
+    // Flickable may get re-parented to or out of a ScrollView, so we need to
+    // redo the discovery process. This is especially important for
+    // Kirigami.ScrollablePage component.
+    if (m_flickable) {
+        if (attachedToFlickable.horizontal && attachedToFlickable.vertical) {
+            // But if both scrollbars are already those from the preferred
+            // Flickable, there's no need for rediscovery.
+            disconnect(m_flickable, &QQuickItem::parentChanged, this, &WheelHandler::_k_rebindScrollBars);
+        } else {
+            connect(m_flickable, &QQuickItem::parentChanged, this, &WheelHandler::_k_rebindScrollBars, Qt::UniqueConnection);
+        }
     }
 
     if (m_verticalScrollBar != vertical.scrollBar) {
