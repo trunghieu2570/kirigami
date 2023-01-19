@@ -486,8 +486,8 @@ QtObject {
                     }
                 }
 
-                property int oldContentY: NaN
-                property int oldContentHeight: 0
+                property real oldContentY: NaN
+                property real oldContentHeight: 0
                 property bool lastMovementWasDown: false
                 property real startDraggingPos
                 property bool layoutMovingGuard: false
