@@ -67,9 +67,6 @@ import QtQuick 2.7
 import org.kde.kirigami 2.7 as Kirigami
 
 QtObject {
-    id: root
-    readonly property Kirigami.Units units: Kirigami.Units
-
     readonly property Component leadingSeparator: Kirigami.Separator {
         property Item column
 
