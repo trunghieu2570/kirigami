@@ -63,7 +63,7 @@ class ColumnViewAttached : public QObject
 
     /**
      * If true the page will never go out of view, but will stay either
-     * at the right or left side of the Columnview
+     * at the right or left side of the ColumnView
      */
     Q_PROPERTY(bool pinned READ isPinned WRITE setPinned NOTIFY pinnedChanged)
 
@@ -139,7 +139,7 @@ private:
  * when not all items fit in the ColumnView, it will behave like a Flickable and will be a scrollable view which shows only a determined number of columns.
  * The columns can either all have the same fixed size (recommended),
  * size themselves with implicitWidth, or automatically expand to take all the available width: by default the last column will always be the expanding one.
- * Items inside the Columnview can access info of the view and set layouting hints via the Columnview attached property.
+ * Items inside the ColumnView can access info of the view and set layouting hints via the ColumnView attached property.
  *
  * This is the base for the implementation of PageRow
  * @since 2.7
