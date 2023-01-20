@@ -1,9 +1,9 @@
 set(KIRIGAMI_INSTALL_INCLUDEDIR "${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami2")
 
-add_library(KF5Kirigami2 ${libkirigami_SRCS})
-add_library(KF5::Kirigami2 ALIAS KF5Kirigami2)
+add_library(KF6Kirigami2 ${libkirigami_SRCS})
+add_library(KF6::Kirigami2 ALIAS KF6Kirigami2)
 
-target_sources(KF5Kirigami2 PRIVATE
+target_sources(KF6Kirigami2 PRIVATE
     platformtheme.cpp
     basictheme.cpp
     kirigamipluginfactory.cpp
@@ -29,20 +29,20 @@ ecm_qt_declare_logging_category(libkirigami_extra_sources
     DEFAULT_SEVERITY Warning
 )
 
-ecm_generate_export_header(KF5Kirigami2
+ecm_generate_export_header(KF6Kirigami2
     VERSION ${KF_VERSION}
     BASE_NAME Kirigami2
     DEPRECATION_VERSIONS 5.80 5.86
 )
 
-target_sources(KF5Kirigami2 PRIVATE ${libkirigami_extra_sources})
+target_sources(KF6Kirigami2 PRIVATE ${libkirigami_extra_sources})
 
-target_include_directories(KF5Kirigami2
+target_include_directories(KF6Kirigami2
     PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
     INTERFACE "$<INSTALL_INTERFACE:${KIRIGAMI_INSTALL_INCLUDEDIR}>"
 )
 
-target_link_libraries(KF5Kirigami2
+target_link_libraries(KF6Kirigami2
     PUBLIC
         Qt${QT_MAJOR_VERSION}::Core
     PRIVATE
@@ -52,7 +52,7 @@ target_link_libraries(KF5Kirigami2
         ${LIBKIRIGAMKI_EXTRA_LIBS}
 )
 
-set_target_properties(KF5Kirigami2 PROPERTIES
+set_target_properties(KF6Kirigami2 PROPERTIES
     VERSION     ${KIRIGAMI2_VERSION}
     SOVERSION   ${KIRIGAMI2_SOVERSION}
     EXPORT_NAME "Kirigami2"
@@ -78,8 +78,8 @@ if(NOT BUILD_SHARED_LIBS)
     )
 endif()
 
-install(TARGETS KF5Kirigami2
-        EXPORT KF5Kirigami2Targets
+install(TARGETS KF6Kirigami2
+        EXPORT KF6Kirigami2Targets
         ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 if(BUILD_SHARED_LIBS)
@@ -130,9 +130,9 @@ endif()
 
 if(BUILD_QCH)
     ecm_add_qch(
-        KF5Kirigami2_QCH
+        KF6Kirigami2_QCH
         NAME Kirigami2
-        BASE_NAME KF5Kirigami2
+        BASE_NAME KF6Kirigami2
         VERSION ${KF_VERSION}
         ORG_DOMAIN org.kde
         SOURCES # using only public headers, to cover only public API
@@ -151,7 +151,7 @@ endif()
 
 include(ECMGeneratePriFile)
 ecm_generate_pri_file(BASE_NAME Kirigami2
-    LIB_NAME KF5Kirigami2
+    LIB_NAME KF6Kirigami2
     DEPS "core"
     FILENAME_VAR PRI_FILENAME
     INCLUDE_INSTALL_DIR ${KIRIGAMI_INSTALL_INCLUDEDIR}

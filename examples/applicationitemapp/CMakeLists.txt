@@ -15,4 +15,4 @@ endif()
 
 install(TARGETS applicationitemapp ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
-include(${CMAKE_SOURCE_DIR}/KF5Kirigami2Macros.cmake)
+include(${CMAKE_SOURCE_DIR}/KF6Kirigami2Macros.cmake)

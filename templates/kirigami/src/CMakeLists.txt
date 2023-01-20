@@ -14,10 +14,10 @@ target_link_libraries(%{APPNAMELC}
     Qt5::Quick
     Qt5::QuickControls2
     Qt5::Svg
-    KF5::I18n
-    KF5::CoreAddons
-    KF5::ConfigCore
-    KF5::ConfigGui)
+    KF6::I18n
+    KF6::CoreAddons
+    KF6::ConfigCore
+    KF6::ConfigGui)
 
 if (ANDROID)
     kirigami_package_breeze_icons(ICONS

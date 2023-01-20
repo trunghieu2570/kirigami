@@ -16,8 +16,8 @@ deprecated: false
 release: true
 logo: logo.png
 libraries:
- - cmake: KF5::Kirigami2
-cmakename: KF5Kirigami2
+ - cmake: KF6::Kirigami2
+cmakename: KF6Kirigami2
 irc: kde-kirigami
 mailinglist: plasma-devel
 group: Frameworks

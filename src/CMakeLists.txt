@@ -297,7 +297,7 @@ target_link_libraries(KirigamiPlugin
     Qt${QT_MAJOR_VERSION}::Quick
     Qt${QT_MAJOR_VERSION}::QuickControls2
     Qt${QT_MAJOR_VERSION}::Concurrent
-    KF5Kirigami2
+    KF6Kirigami2
 )
 
 if (HAVE_OpenMP)
@@ -309,8 +309,8 @@ ecm_finalize_qml_module(KirigamiPlugin DESTINATION ${KDE_INSTALL_QMLDIR})
 ecm_generate_qmltypes(org.kde.kirigami 2.0 DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami.2)
 
 if (ANDROID)
-    install(FILES KF5Kirigami2-android-dependencies.xml
+    install(FILES KF6Kirigami2-android-dependencies.xml
         DESTINATION ${KDE_INSTALL_LIBDIR}
-        RENAME KF5Kirigami2_${CMAKE_ANDROID_ARCH_ABI}-android-dependencies.xml
+        RENAME KF6Kirigami2_${CMAKE_ANDROID_ARCH_ABI}-android-dependencies.xml
     )
 endif()

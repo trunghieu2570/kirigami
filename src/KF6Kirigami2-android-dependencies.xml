@@ -1,8 +1,8 @@
 <rules>
     <dependencies>
-        <lib name="KF5Kirigami2">
+        <lib name="KF6Kirigami2">
             <depends>
-                <bundled file="plugins/kf5/kirigami" />
+                <bundled file="plugins/kf6/kirigami" />
             </depends>
         </lib>
     </dependencies>

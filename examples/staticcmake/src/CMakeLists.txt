@@ -1,6 +1,6 @@
 
 include_directories(${CMAKE_SOURCE_DIR}/3rdparty/kirigami/src)
-include(${CMAKE_SOURCE_DIR}/3rdparty/kirigami/KF5Kirigami2Macros.cmake)
+include(${CMAKE_SOURCE_DIR}/3rdparty/kirigami/KF6Kirigami2Macros.cmake)
 
 set(minimal_SRCS
     main.cpp

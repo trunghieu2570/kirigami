@@ -79,38 +79,38 @@ include(ECMGenerateQmlTypes)
 include(ECMQmlModule)
 include(ECMDeprecationSettings)
 
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Kirigami2")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6Kirigami2")
 
 option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
 add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
 
 configure_package_config_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/KF5Kirigami2Config.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/KF5Kirigami2Config.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/KF6Kirigami2Config.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2Config.cmake"
     INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
     PATH_VARS  CMAKE_INSTALL_PREFIX
 )
 
 install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/KF5Kirigami2Config.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/KF5Kirigami2ConfigVersion.cmake"
-    "${CMAKE_CURRENT_SOURCE_DIR}/KF5Kirigami2Macros.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2Config.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2ConfigVersion.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/KF6Kirigami2Macros.cmake"
     DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
     COMPONENT Devel
 )
 
-install(EXPORT KF5Kirigami2Targets
+install(EXPORT KF6Kirigami2Targets
     DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-    FILE KF5Kirigami2Targets.cmake
-    NAMESPACE KF5::
+    FILE KF6Kirigami2Targets.cmake
+    NAMESPACE KF6::
 )
 
 
 ecm_setup_version(${KF_VERSION}
     VARIABLE_PREFIX KIRIGAMI2
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kirigami_version.h"
-    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5Kirigami2ConfigVersion.cmake"
-    SOVERSION 5
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2ConfigVersion.cmake"
+    SOVERSION 6
 )
 
 #use dbus on linux, bsd etc, but not android and apple stuff
