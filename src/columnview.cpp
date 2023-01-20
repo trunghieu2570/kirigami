@@ -70,7 +70,7 @@ QtObject {
     id: root
     readonly property Kirigami.Units units: Kirigami.Units
 
-    readonly property Component separator: Kirigami.Separator {
+    readonly property Component leadingSeparator: Kirigami.Separator {
         property Item column
 
         visible: column.Kirigami.ColumnView.view && column.Kirigami.ColumnView.view.contentX < column.x
@@ -78,7 +78,7 @@ QtObject {
         anchors.bottom: column.bottom
     }
 
-    readonly property Component rightSeparator: Kirigami.Separator {
+    readonly property Component trailingSeparator: Kirigami.Separator {
         property Item column
 
         anchors.top: column.top
@@ -94,11 +94,11 @@ QtObject {
     Q_ASSERT(m_instance);
     m_instance->setParent(this);
 
-    m_separatorComponent = m_instance->property("separator").value<QQmlComponent *>();
-    Q_ASSERT(m_separatorComponent);
+    m_leadingSeparatorComponent = m_instance->property("leadingSeparator").value<QQmlComponent *>();
+    Q_ASSERT(m_leadingSeparatorComponent);
 
-    m_rightSeparatorComponent = m_instance->property("rightSeparator").value<QQmlComponent *>();
-    Q_ASSERT(m_rightSeparatorComponent);
+    m_trailingSeparatorComponent = m_instance->property("trailingSeparator").value<QQmlComponent *>();
+    Q_ASSERT(m_trailingSeparatorComponent);
 
     m_units = engine->singletonInstance<Kirigami::Units *>(qmlTypeId("org.kde.kirigami", 2, 0, "Units"));
     Q_ASSERT(m_units);
@@ -449,7 +449,7 @@ void ContentItem::layoutItems()
                 QQuickItem *sep = nullptr;
                 int sepWidth = 0;
                 if (m_view->separatorVisible()) {
-                    sep = ensureRightSeparator(child);
+                    sep = ensureTrailingSeparator(child);
                     sepWidth = (sep ? sep->width() : 0);
                 }
                 const qreal width = childWidth(child);
@@ -469,10 +469,10 @@ void ContentItem::layoutItems()
             } else {
                 child->setSize(QSizeF(childWidth(child), height()));
 
-                auto it = m_rightSeparators.find(child);
-                if (it != m_rightSeparators.end()) {
+                auto it = m_trailingSeparators.find(child);
+                if (it != m_trailingSeparators.end()) {
                     it.value()->deleteLater();
-                    m_rightSeparators.erase(it);
+                    m_trailingSeparators.erase(it);
                 }
                 child->setPosition(QPointF(partialWidth, 0.0));
                 child->setZ(0);
@@ -528,7 +528,7 @@ void ContentItem::layoutPinnedItems()
                 QQuickItem *sep = nullptr;
                 int sepWidth = 0;
                 if (m_view->separatorVisible()) {
-                    sep = ensureRightSeparator(child);
+                    sep = ensureTrailingSeparator(child);
                     sepWidth = (sep ? sep->width() : 0);
                 }
 
@@ -596,11 +596,11 @@ void ContentItem::forgetItem(QQuickItem *item)
     disconnect(item, nullptr, this, nullptr);
     disconnect(item, nullptr, m_view, nullptr);
 
-    QQuickItem *separatorItem = m_separators.take(item);
+    QQuickItem *separatorItem = m_leadingSeparators.take(item);
     if (separatorItem) {
         separatorItem->deleteLater();
     }
-    separatorItem = m_rightSeparators.take(item);
+    separatorItem = m_trailingSeparators.take(item);
     if (separatorItem) {
         separatorItem->deleteLater();
     }
@@ -618,40 +618,40 @@ void ContentItem::forgetItem(QQuickItem *item)
     Q_EMIT m_view->countChanged();
 }
 
-QQuickItem *ContentItem::ensureSeparator(QQuickItem *item)
+QQuickItem *ContentItem::ensureLeadingSeparator(QQuickItem *item)
 {
-    QQuickItem *separatorItem = m_separators.value(item);
+    QQuickItem *separatorItem = m_leadingSeparators.value(item);
 
     if (!separatorItem) {
         separatorItem = qobject_cast<QQuickItem *>(
-            QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_separatorComponent->beginCreate(QQmlEngine::contextForObject(item)));
+            QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_leadingSeparatorComponent->beginCreate(QQmlEngine::contextForObject(item)));
         if (separatorItem) {
             separatorItem->setParent(this);
             separatorItem->setParentItem(item);
             separatorItem->setZ(9999);
             separatorItem->setProperty("column", QVariant::fromValue(item));
-            QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_separatorComponent->completeCreate();
-            m_separators[item] = separatorItem;
+            QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_leadingSeparatorComponent->completeCreate();
+            m_leadingSeparators[item] = separatorItem;
         }
     }
 
     return separatorItem;
 }
 
-QQuickItem *ContentItem::ensureRightSeparator(QQuickItem *item)
+QQuickItem *ContentItem::ensureTrailingSeparator(QQuickItem *item)
 {
-    QQuickItem *separatorItem = m_rightSeparators.value(item);
+    QQuickItem *separatorItem = m_trailingSeparators.value(item);
 
     if (!separatorItem) {
         separatorItem = qobject_cast<QQuickItem *>(
-            QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_rightSeparatorComponent->beginCreate(QQmlEngine::contextForObject(item)));
+            QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_trailingSeparatorComponent->beginCreate(QQmlEngine::contextForObject(item)));
         if (separatorItem) {
             separatorItem->setParent(this);
             separatorItem->setParentItem(item);
             separatorItem->setZ(9999);
             separatorItem->setProperty("column", QVariant::fromValue(item));
-            QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_rightSeparatorComponent->completeCreate();
-            m_rightSeparators[item] = separatorItem;
+            QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_trailingSeparatorComponent->completeCreate();
+            m_trailingSeparators[item] = separatorItem;
         }
     }
 
@@ -683,7 +683,7 @@ void ContentItem::itemChange(QQuickItem::ItemChange change, const QQuickItem::It
         }
 
         if (m_view->separatorVisible()) {
-            ensureSeparator(value.item);
+            ensureLeadingSeparator(value.item);
         }
 
         m_shouldAnimate = true;
@@ -984,14 +984,14 @@ void ColumnView::setSeparatorVisible(bool visible)
 
     if (visible) {
         for (QQuickItem *item : std::as_const(m_contentItem->m_items)) {
-            QQuickItem *sep = m_contentItem->ensureSeparator(item);
+            QQuickItem *sep = m_contentItem->ensureLeadingSeparator(item);
             if (sep) {
                 sep->setVisible(true);
             }
 
             ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
             if (attached->isPinned()) {
-                QQuickItem *sep = m_contentItem->ensureRightSeparator(item);
+                QQuickItem *sep = m_contentItem->ensureTrailingSeparator(item);
                 if (sep) {
                     sep->setVisible(true);
                 }
@@ -999,10 +999,10 @@ void ColumnView::setSeparatorVisible(bool visible)
         }
 
     } else {
-        for (QQuickItem *sep : std::as_const(m_contentItem->m_separators)) {
+        for (QQuickItem *sep : std::as_const(m_contentItem->m_leadingSeparators)) {
             sep->setVisible(false);
         }
-        for (QQuickItem *sep : std::as_const(m_contentItem->m_rightSeparators)) {
+        for (QQuickItem *sep : std::as_const(m_contentItem->m_trailingSeparators)) {
             sep->setVisible(false);
         }
     }
