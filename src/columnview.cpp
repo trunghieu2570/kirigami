@@ -70,8 +70,16 @@ QtObject {
     readonly property Component leadingSeparator: Kirigami.Separator {
         property Item column
 
-        visible: column.Kirigami.ColumnView.view && column.Kirigami.ColumnView.view.contentX < column.x
+        // positioning trick to hide the very first separator
+        visible: {
+            const view = column.Kirigami.ColumnView.view;
+            return view && (LayoutMirroring.enabled
+                ? view.contentX + view.width > column.x + column.width
+                : view.contentX < column.x);
+        }
+
         anchors.top: column.top
+        anchors.left: column.left
         anchors.bottom: column.bottom
         Kirigami.Theme.colorSet: Kirigami.Theme.Window
         Kirigami.Theme.inherit: false
