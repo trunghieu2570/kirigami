@@ -239,8 +239,8 @@ QT.Control {
      * @param page The page can be defined as a component, item or string. If an item is
      *             used then the page will get re-parented. If a string is used then it
      *             is interpreted as a url that is used to load a page component. Once
-     *             pushed the page gains the methods `closeDialog` allowing to close itself.
-     *             Kirigami only supports calling `closeDialog` once.
+     *             pushed the page gains the methods ``closeDialog`` allowing to close itself.
+     *             Kirigami only supports calling ``closeDialog`` once.
      * @param properties The properties given when initializing the page.
      * @param windowProperties The properties given to the initialized window on desktop.
      * @return Returns a newly created page.
