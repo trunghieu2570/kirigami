@@ -73,6 +73,8 @@ QtObject {
         visible: column.Kirigami.ColumnView.view && column.Kirigami.ColumnView.view.contentX < column.x
         anchors.top: column.top
         anchors.bottom: column.bottom
+        Kirigami.Theme.colorSet: Kirigami.Theme.Window
+        Kirigami.Theme.inherit: false
     }
 
     readonly property Component trailingSeparator: Kirigami.Separator {
@@ -81,6 +83,8 @@ QtObject {
         anchors.top: column.top
         anchors.right: column.right
         anchors.bottom: column.bottom
+        Kirigami.Theme.colorSet: Kirigami.Theme.Window
+        Kirigami.Theme.inherit: false
     }
 }
 )"), QUrl(QStringLiteral("columnview.cpp")));
