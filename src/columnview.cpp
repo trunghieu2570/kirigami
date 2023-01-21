@@ -624,7 +624,7 @@ QQuickItem *ContentItem::ensureSeparator(QQuickItem *item)
 
     if (!separatorItem) {
         separatorItem = qobject_cast<QQuickItem *>(
-            privateQmlComponentsPoolSelf->instance(qmlEngine(item))->m_separatorComponent->beginCreate(QQmlEngine::contextForObject(item)));
+            QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_separatorComponent->beginCreate(QQmlEngine::contextForObject(item)));
         if (separatorItem) {
             separatorItem->setParent(this);
             separatorItem->setParentItem(item);
