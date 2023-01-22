@@ -40,8 +40,6 @@ target_sources(KirigamiPlugin PRIVATE
     mnemonicattached.h
     pagepool.cpp
     pagepool.h
-    pagerouter.cpp
-    pagerouter.h
     scenepositionattached.cpp
     scenepositionattached.h
     settings.cpp
@@ -158,7 +156,6 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.11 SOURCES
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.12 SOURCES
     controls/ShadowedImage.qml
     controls/PlaceholderMessage.qml
-    controls/RouterWindow.qml
 )
 
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.13 SOURCES

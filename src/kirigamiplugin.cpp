@@ -18,7 +18,6 @@
 #include "inputmethod.h"
 #include "mnemonicattached.h"
 #include "pagepool.h"
-#include "pagerouter.h"
 #include "scenepositionattached.h"
 #include "settings.h"
 #include "shadowedrectangle.h"
@@ -260,10 +259,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterSingletonType<ColorUtils>(uri, 2, 12, "ColorUtils", singleton<ColorUtils>());
 
     qmlRegisterUncreatableType<CornersGroup>(uri, 2, 12, "CornersGroup", QStringLiteral("Used as grouped property"));
-    qmlRegisterType<PageRouter>(uri, 2, 12, "PageRouter");
-    qmlRegisterType<PageRoute>(uri, 2, 12, "PageRoute");
-    qmlRegisterUncreatableType<PageRouterAttached>(uri, 2, 12, "PageRouterAttached", QStringLiteral("PageRouterAttached cannot be created"));
-    qmlRegisterType(componentUrl(QStringLiteral("RouterWindow.qml")), uri, 2, 12, "RouterWindow");
 
     // 2.13
     qmlRegisterType<ImageColors>(uri, 2, 13, "ImageColors");
@@ -271,7 +266,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(QStringLiteral("swipenavigator/SwipeNavigator.qml")), uri, 2, 13, "SwipeNavigator");
 
     // 2.14
-    qmlRegisterUncreatableType<PreloadRouteGroup>(uri, 2, 14, "PreloadRouteGroup", QStringLiteral("PreloadRouteGroup cannot be created"));
     qmlRegisterType(componentUrl(QStringLiteral("FlexColumn.qml")), uri, 2, 14, "FlexColumn");
     qmlRegisterType<ToolBarLayout>(uri, 2, 14, "ToolBarLayout");
     qmlRegisterSingletonType<DisplayHint>(uri, 2, 14, "DisplayHint", singleton<DisplayHint>());

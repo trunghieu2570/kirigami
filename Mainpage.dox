@@ -26,8 +26,6 @@ A tutorial for Kirigami is available on <a href="https://develop.kde.org/docs/ki
 - \link org::kde::kirigami::Page Page  \endlink
 - \link org::kde::kirigami::ScrollablePage ScrollablePage  \endlink
 - \link org::kde::kirigami::templates::OverlaySheet  OverlaySheet \endlink
-- \link PageRouter  PageRouter \endlink
-- \link PageRoute  PageRoute \endlink
 - \link Kirigami::PlatformTheme Theme  \endlink
 - \link Kirigami::Units  Units \endlink
 - \link Icon Icon  \endlink

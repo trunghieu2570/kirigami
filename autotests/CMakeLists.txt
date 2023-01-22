@@ -36,9 +36,7 @@ kirigami_add_tests(
     tst_keynavigation.qml
     tst_listskeynavigation.qml
     tst_mnemonicdata.qml
-    tst_pagerouter.qml
     tst_pagerow.qml
-    tst_routerwindow.qml
     tst_theme.qml
 
     pagepool/tst_layers.qml
