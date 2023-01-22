@@ -32,7 +32,7 @@ ecm_qt_declare_logging_category(libkirigami_extra_sources
 ecm_generate_export_header(KF6Kirigami2
     VERSION ${KF_VERSION}
     BASE_NAME Kirigami2
-    DEPRECATION_VERSIONS 5.80 5.86
+    DEPRECATION_VERSIONS
 )
 
 target_sources(KF6Kirigami2 PRIVATE ${libkirigami_extra_sources})
@@ -92,41 +92,6 @@ install(FILES ${Kirigami2_HEADERS}
 install(FILES ${Kirigami2_CamelCase_HEADERS}
         DESTINATION ${KIRIGAMI_INSTALL_INCLUDEDIR}/Kirigami # prefix matching C++ namespace
         COMPONENT Devel)
-
-# provide compat headers for old broken C++ namespaceless include path
-if(NOT EXCLUDE_DEPRECATED_BEFORE_AND_AT STREQUAL "CURRENT" AND
-   EXCLUDE_DEPRECATED_BEFORE_AND_AT VERSION_LESS 5.91.0)
-
-    function(generate_compat_headers)
-        foreach(classname ${ARGV})
-            string(TOLOWER ${classname} classname_lc)
-            set(HEADER_NAME "${classname_lc}.h")
-            # normal header
-            set(compat_header "${CMAKE_CURRENT_BINARY_DIR}/compat/${HEADER_NAME}")
-            set(NEW_INCLUDE "kirigami/${HEADER_NAME}")
-            configure_file(compatheader.h.in ${compat_header} @ONLY)
-            install(FILES ${compat_header}
-                DESTINATION ${KIRIGAMI_INSTALL_INCLUDEDIR}
-                COMPONENT Devel
-            )
-            # CamelCase header
-            set(compat_header "${CMAKE_CURRENT_BINARY_DIR}/compat/${classname}")
-            set(NEW_INCLUDE "Kirigami/${classname}")
-            configure_file(compatheader.h.in ${compat_header} @ONLY)
-            install(FILES ${compat_header}
-                DESTINATION ${KIRIGAMI_INSTALL_INCLUDEDIR}
-                COMPONENT Devel
-            )
-        endforeach()
-    endfunction()
-
-    generate_compat_headers(
-        PlatformTheme
-        KirigamiPluginFactory
-        TabletModeWatcher
-        Units
-    )
-endif()
 
 if(BUILD_QCH)
     ecm_add_qch(

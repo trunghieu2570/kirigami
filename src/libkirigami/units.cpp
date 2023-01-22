@@ -19,42 +19,8 @@
 
 #include "loggingcategory.h"
 
-namespace Kirigami {
-using clock = std::chrono::steady_clock;
-
-const clock::duration rateLimit = std::chrono::seconds(1);
-
-/* Print a deprecation warning that is rate limited to only display once in
- * every time period as determined by rateLimit. We keep track of how often this
- * is called and display that if it is larger than 0.
- *
- * This is done to prevent flooding the logs with "X is deprecated" messages
- * that are all the same and don't provide any new information after the first.
- */
-void rateLimitWarning(const char *method, const char *since, const char *message)
+namespace Kirigami
 {
-    static QMap<QString, QPair<clock::time_point, int>> messages;
-
-    auto methodString = QString::fromUtf8(method);
-
-    if (!messages.contains(methodString)) {
-        messages.insert(methodString, qMakePair(clock::time_point{}, 0));
-    }
-
-    auto entry = messages.value(methodString);
-    if (clock::now() - entry.first < rateLimit) {
-        messages[methodString].second += 1;
-        return;
-    }
-
-    qCWarning(KirigamiLog).nospace() << method << " is deprecated (since " << since << "): " << message;
-
-    if (entry.second > 0) {
-        qCWarning(KirigamiLog) << "Previous message repeats" << entry.second << "times.";
-    }
-
-    messages[methodString] = qMakePair(clock::now(), 0);
-}
 
 class UnitsPrivate
 {
@@ -62,11 +28,8 @@ class UnitsPrivate
 
 public:
     explicit UnitsPrivate(Units *units)
-#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
-        : qmlFontMetrics(nullptr)
-#endif
         // Cache font so we don't have to go through QVariant and property every time
-        , fontMetrics(QFontMetricsF(QGuiApplication::font()))
+        : fontMetrics(QFontMetricsF(QGuiApplication::font()))
         , gridUnit(fontMetrics.height())
         , smallSpacing(std::floor(gridUnit / 4))
         , mediumSpacing(std::round(smallSpacing * 1.5))
@@ -77,18 +40,9 @@ public:
         , veryShortDuration(50)
         , humanMoment(2000)
         , toolTipDelay(700)
-#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
-        , wheelScrollLines(QGuiApplication::styleHints()->wheelScrollLines())
-#endif
         , iconSizes(new IconSizes(units))
     {
     }
-
-    // Only stored for QML API compatiblity
-    // TODO KF6 drop
-#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
-    std::unique_ptr<QObject> qmlFontMetrics = nullptr;
-#endif
 
     // Font metrics used for Units.
     // TextMetrics uses QFontMetricsF internally, so this should do the same
@@ -108,34 +62,10 @@ public:
     int humanMoment;
     int toolTipDelay;
 
-#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
-    int wheelScrollLines;
-#endif
-
     IconSizes *const iconSizes;
 
     // To prevent overriding custom set units if the font changes
     bool customUnitsSet = false;
-    bool customWheelScrollLinesSet = false;
-
-#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
-    std::unique_ptr<QObject> createQmlFontMetrics(QQmlEngine *engine)
-    {
-        QQmlComponent component(engine);
-        component.setData(QByteArrayLiteral(
-            "import QtQuick 2.14\n"
-            "import org.kde.kirigami 2.0\n"
-            "FontMetrics {\n"
-            "	function roundedIconSize(size) {\n"
-            R"(		console.warn("Units.fontMetrics.roundedIconSize is deprecated, use Units.iconSizes.roundedIconSize instead.");)"
-            "		return Units.iconSizes.roundedIconSize(size)\n"
-            "	}\n"
-            "}\n"
-        ), QUrl(QStringLiteral("units.cpp")));
-
-        return std::unique_ptr<QObject>(component.create());
-    }
-#endif
 };
 
 Units::~Units() = default;
@@ -144,13 +74,6 @@ Units::Units(QObject *parent)
     : QObject(parent)
     , d(std::make_unique<UnitsPrivate>(this))
 {
-    connect(QGuiApplication::styleHints(), &QStyleHints::wheelScrollLinesChanged, this, [this](int scrollLines) {
-        if (d->customWheelScrollLinesSet) {
-            return;
-        }
-
-        setWheelScrollLines(scrollLines);
-    });
     connect(qGuiApp, &QGuiApplication::fontChanged, this, [this](const QFont &font) {
         d->fontMetrics = QFontMetricsF(font);
 
@@ -168,15 +91,6 @@ Units::Units(QObject *parent)
         Q_EMIT largeSpacingChanged();
         Q_EMIT d->iconSizes->sizeForLabelsChanged();
     });
-}
-
-qreal Units::devicePixelRatio() const
-{
-    rateLimitWarning("Units.devicePixelRatio", "5.86", "This returns 1 when using Qt HiDPI scaling.");
-    const int pixelSize = QGuiApplication::font().pixelSize();
-    const qreal pointSize = QGuiApplication::font().pointSize();
-
-    return std::fmax(1, (pixelSize * 0.75 / pointSize));
 }
 
 int Units::gridUnit() const
@@ -338,40 +252,10 @@ int Units::maximumInteger() const
     return std::numeric_limits<int>::max();
 }
 
-#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
-int Units::wheelScrollLines() const
-{
-    rateLimitWarning("Units.wheelScrollLines", "5.86", "Use Qt.styleHints.wheelScrollLines instead");
-    return d->wheelScrollLines;
-}
-
-void Units::setWheelScrollLines(int lines)
-{
-    if (d->wheelScrollLines == lines) {
-        return;
-    }
-
-    d->wheelScrollLines = lines;
-    d->customWheelScrollLinesSet = true;
-    Q_EMIT wheelScrollLinesChanged();
-}
-#endif
-
 IconSizes *Units::iconSizes() const
 {
     return d->iconSizes;
 }
-
-#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 86)
-QObject *Units::fontMetrics() const
-{
-    rateLimitWarning("Units.fontMetrics", "5.86", "Create your own FontMetrics object instead.");
-    if (!d->qmlFontMetrics) {
-        d->qmlFontMetrics = d->createQmlFontMetrics(qmlEngine(this));
-    }
-    return d->qmlFontMetrics.get();
-}
-#endif
 
 IconSizes::IconSizes(Units *units)
     : QObject(units)

@@ -122,17 +122,6 @@ class KIRIGAMI2_EXPORT Units : public QObject
     Q_PROPERTY(int largeSpacing READ largeSpacing WRITE setLargeSpacing NOTIFY largeSpacingChanged)
 
     /**
-     * The ratio between physical and device-independent pixels. This value does not depend on the \
-     * size of the configured font. If you want to take font sizes into account when scaling elements,
-     * use theme.mSize(theme.defaultFont), units.smallSpacing and units.largeSpacing.
-     * The devicePixelRatio follows the definition of "device independent pixel" by Microsoft.
-     *
-     * @deprecated since 5.86. When using Qt's high DPI scaling, all sizes are
-     * considered to be device-independent pixels, so this will simply return 1.
-     */
-    Q_PROPERTY(qreal devicePixelRatio READ devicePixelRatio NOTIFY devicePixelRatioChanged)
-
-    /**
      * units.veryLongDuration should be used for specialty animations that benefit
      * from being even longer than longDuration.
      */
@@ -199,24 +188,6 @@ class KIRIGAMI2_EXPORT Units : public QObject
      */
     Q_PROPERTY(int toolTipDelay READ toolTipDelay WRITE setToolTipDelay NOTIFY toolTipDelayChanged)
 
-#if KIRIGAMI2_ENABLE_DEPRECATED_SINCE(5, 86)
-    /**
-     * How much the mouse scroll wheel scrolls, expressed in lines of text.
-     * Note: this is strictly for classical mouse wheels, touchpads 2 figer scrolling won't be affected
-     */
-    Q_PROPERTY(int wheelScrollLines READ wheelScrollLines NOTIFY wheelScrollLinesChanged)
-#endif
-
-#if KIRIGAMI2_ENABLE_DEPRECATED_SINCE(5, 86)
-    /**
-     * metrics used by the default font
-     *
-     * @deprecated since 5.86.0, Create your own TextMetrics object if needed.
-     * For the roundedIconSize function, use Units.iconSizes.roundedIconSize instead
-     */
-    Q_PROPERTY(QObject *fontMetrics READ fontMetrics CONSTANT)
-#endif
-
     Q_PROPERTY(int maximumInteger READ maximumInteger CONSTANT)
 
 public:
@@ -234,12 +205,6 @@ public:
 
     int largeSpacing() const;
     void setLargeSpacing(int size);
-
-#if KIRIGAMI2_ENABLE_DEPRECATED_SINCE(5, 86)
-    // TODO KF6 remove
-    KIRIGAMI2_DEPRECATED_VERSION(5, 86, "When using Qt scaling, this would return a value of 1")
-    qreal devicePixelRatio() const;
-#endif
 
     int veryLongDuration() const;
     void setVeryLongDuration(int duration);
@@ -259,13 +224,6 @@ public:
     int toolTipDelay() const;
     void setToolTipDelay(int delay);
 
-#if KIRIGAMI2_ENABLE_DEPRECATED_SINCE(5, 86)
-    // TODO KF6 remove
-    KIRIGAMI2_DEPRECATED_VERSION(5, 86, "Use Qt.styleHints.wheelScrollLines instead")
-    int wheelScrollLines() const;
-    void setWheelScrollLines(int lines);
-#endif
-
     IconSizes *iconSizes() const;
 
     int maximumInteger() const;
@@ -275,7 +233,6 @@ Q_SIGNALS:
     void smallSpacingChanged();
     void mediumSpacingChanged();
     void largeSpacingChanged();
-    void devicePixelRatioChanged();
     void veryLongDurationChanged();
     void longDurationChanged();
     void shortDurationChanged();
@@ -285,10 +242,6 @@ Q_SIGNALS:
     void wheelScrollLinesChanged();
 
 private:
-#if KIRIGAMI2_ENABLE_DEPRECATED_SINCE(5, 86)
-    QObject *fontMetrics() const;
-#endif
-
     std::unique_ptr<UnitsPrivate> d;
 };
 

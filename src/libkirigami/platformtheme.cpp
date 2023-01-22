@@ -812,13 +812,6 @@ QPalette PlatformTheme::palette() const
     return palette;
 }
 
-#if KIRIGAMI2_BUILD_DEPRECATED_SINCE(5, 80)
-void PlatformTheme::setPalette(const QPalette &palette)
-{
-    Q_UNUSED(palette);
-}
-#endif
-
 QIcon PlatformTheme::iconFromTheme(const QString &name, const QColor &customColor)
 {
     Q_UNUSED(customColor);
