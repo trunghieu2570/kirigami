@@ -103,7 +103,6 @@ ecm_target_qml_sources(KirigamiPlugin SOURCES
     controls/Heading.qml
     controls/Separator.qml
     controls/PageRow.qml
-    controls/Label.qml
     controls/OverlaySheet.qml
     controls/Page.qml
     controls/ScrollablePage.qml
@@ -273,7 +272,6 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates/private SOURCES
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH styles/Material SOURCES
     styles/Material/AbstractListItem.qml
     styles/Material/InlineMessage.qml
-    styles/Material/Label.qml
     styles/Material/SwipeListItem.qml
     styles/Material/Theme.qml
 )
