@@ -1599,22 +1599,6 @@ Module {
         }
     }
     Component {
-        prototype: "QQuickItem"
-        name: "org.kde.kirigami/Hero 2.15"
-        exports: ["org.kde.kirigami/Hero 2.15"]
-        exportMetaObjectRevisions: [15]
-        isComposite: true
-        defaultProperty: "data"
-        Property { name: "source"; type: "QQuickItem"; isPointer: true }
-        Property { name: "destination"; type: "QQuickItem"; isPointer: true }
-        Property { name: "restore"; type: "bool" }
-        Property { name: "mask"; type: "QObject"; isReadonly: true; isPointer: true }
-        Property { name: "easing"; type: "QObject"; isReadonly: true; isPointer: true }
-        Property { name: "duration"; type: "int" }
-        Method { name: "open"; type: "QVariant" }
-        Method { name: "close"; type: "QVariant" }
-    }
-    Component {
         prototype: "QQuickControl"
         name: "org.kde.kirigami/InlineMessage 2.4"
         exports: ["org.kde.kirigami/InlineMessage 2.4"]

@@ -175,7 +175,6 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.13 PATH swipenavigator SOURCES
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.14 SOURCES
     controls/FlexColumn.qml
     controls/CheckableListItem.qml
-    controls/Hero.qml
 )
 
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.17 PATH swipenavigator SOURCES

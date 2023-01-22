@@ -283,8 +283,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(QStringLiteral("CheckableListItem.qml")), uri, 2, 14, "CheckableListItem");
     qmlRegisterSingletonType<NameUtils>(uri, 2, 14, "NameUtils", singleton<NameUtils>());
 
-    qmlRegisterType(componentUrl(QStringLiteral("Hero.qml")), uri, 2, 15, "Hero");
-
     // 2.16
     qmlRegisterType<Kirigami::BasicThemeDefinition>(uri, 2, 16, "BasicThemeDefinition");
 
