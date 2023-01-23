@@ -143,19 +143,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
 #ifndef KIRIGAMI_BUILD_TYPE_STATIC
         auto plugin = Kirigami::KirigamiPluginFactory::findPlugin();
         if (plugin) {
-            // Check if the plugin implements units
-            auto pluginV2 = qobject_cast<Kirigami::KirigamiPluginFactoryV2 *>(plugin);
-            if (pluginV2) {
-                auto units = pluginV2->createUnits(engine);
-                if (units) {
-                    return units;
-                } else {
-                    qWarning(KirigamiLog) << "The style returned a nullptr Units*, falling back to defaults";
-                }
-            } else {
-                qWarning(KirigamiLog) << "The style does not provide a C++ Units implementation."
-                                      << "QML Units implementations are no longer supported.";
-            }
+            return plugin->createUnits(engine);
         } else {
             qWarning(KirigamiLog) << "Failed to find a Kirigami platform plugin";
         }

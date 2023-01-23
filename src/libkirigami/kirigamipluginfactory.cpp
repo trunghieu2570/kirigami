@@ -93,13 +93,6 @@ KirigamiPluginFactory *KirigamiPluginFactory::findPlugin()
 
     return pluginFactory;
 }
-
-KirigamiPluginFactoryV2::KirigamiPluginFactoryV2(QObject *parent)
-    : KirigamiPluginFactory(parent)
-{
-}
-
-KirigamiPluginFactoryV2::~KirigamiPluginFactoryV2() = default;
 }
 
 #include "moc_kirigamipluginfactory.cpp"
