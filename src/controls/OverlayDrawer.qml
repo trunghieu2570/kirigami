@@ -26,7 +26,7 @@ T.OverlayDrawer {
     focus: false
     modal: true
     drawerOpen: !modal
-    closePolicy: modal ? T2.Popup.CloseOnEscape | T2.Popup.CloseOnReleaseOutside : T2.Popup.CloseOnEscape
+    closePolicy: modal ? T2.Popup.CloseOnEscape | T2.Popup.CloseOnReleaseOutside : T2.Popup.NoAutoClose
     handleVisible: interactive && (modal || !drawerOpen) && (typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true)
 
     // FIXME: set to false when it does not lead to blocking closePolicy.
