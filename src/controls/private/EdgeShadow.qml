@@ -5,7 +5,7 @@
  */
 
 import QtQuick 2.1
-import QtGraphicalEffects 1.0 as GE
+import Qt5Compat.GraphicalEffects as GE
 import org.kde.kirigami 2.4 as Kirigami
 
 GE.LinearGradient {

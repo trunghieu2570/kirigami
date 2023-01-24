@@ -224,7 +224,7 @@ OverlayDrawer {
     /**
      * @brief This property sets whether activating a leaf action resets the
      * menu to show leaf's parent actions.
-     * 
+     *
      * A leaf action is an action without any child actions.
      *
      * default: ``true``
@@ -486,7 +486,7 @@ OverlayDrawer {
                         BasicListItem {
                             id: backItem
                             visible: level > 0
-                            icon: (LayoutMirroring.enabled ? "go-previous-symbolic-rtl" : "go-previous-symbolic")
+                            icon.name: (LayoutMirroring.enabled ? "go-previous-symbolic-rtl" : "go-previous-symbolic")
 
                             label: Kirigami.MnemonicData.richTextLabel
                             Kirigami.MnemonicData.enabled: backItem.enabled && backItem.visible

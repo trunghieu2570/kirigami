@@ -5,6 +5,7 @@
  */
 
 import QtQml 2.1
+import QtQuick
 
 QtObject {
     property string name

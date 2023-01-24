@@ -675,7 +675,7 @@ QT.Control {
         }
     }
 
-    Keys.onReleased: {
+    Keys.onReleased: event => {
         if (event.key === Qt.Key_Back) {
             this.goBack(event)
         }
@@ -959,8 +959,8 @@ QT.Control {
             columnResizeMode: root.wideMode ? Kirigami.ColumnView.FixedColumns : Kirigami.ColumnView.SingleColumn
             columnWidth: root.defaultColumnWidth
 
-            onItemInserted: root.pageInserted(position, item);
-            onItemRemoved: root.pageRemoved(item);
+            onItemInserted: (position, item) => root.pageInserted(position, item);
+            onItemRemoved: item => root.pageRemoved(item);
 
             onVisibleItemsChanged: {
                 // implementation of `popHiddenPages` option
@@ -968,9 +968,9 @@ QT.Control {
                     // manually fetch lastItem here rather than use root.lastItem property, since that binding may not have updated yet
                     let lastItem = columnView.contentChildren[columnView.contentChildren.length - 1];
                     let lastVisibleItem = columnView.lastVisibleItem;
-                    
+
                     // pop every page that isn't visible and at the top of the stack
-                    while (lastItem && columnView.lastVisibleItem && 
+                    while (lastItem && columnView.lastVisibleItem &&
                         lastItem !== columnView.lastVisibleItem && columnView.containsItem(lastItem)) {
                         root.pop();
                     }

@@ -108,34 +108,6 @@ Kirigami.AbstractListItem {
     property bool bold: false
 
     /**
-     * @code ts
-     * interface IconGroup {
-     *     name:   string,
-     *     source: string,
-     *     width:  int,
-     *     height: int,
-     *     color:  color,
-     * }
-     *
-     * type Icon = string | IconGroup | URL
-     * @endcode
-     *
-     * The icon that will render on this list item.
-     *
-     * This can either be an icon name, a URL, or an object with the following properties:
-     *
-     * If the type of the icon is a string containing an icon name, the icon will be looked up from the
-     * platform icon theme.
-     *
-     * Using an icon object allows you to specify more granular attributes of the icon,
-     * such as its color and dimensions.
-     *
-     * If the icon is a URL, the icon will be attempted to be loaded from the
-     * given URL.
-     */
-    property var icon
-
-    /**
      * @brief This property sets the size at which the icon will render.
      *
      * This will not affect icon lookup, unlike the icon group's width and height properties, which will.
@@ -271,8 +243,6 @@ Kirigami.AbstractListItem {
     Keys.onReturnPressed: action ? action.trigger() : clicked()
 //END signal handlers
 
-    icon: action ? action.icon.name || action.icon.source : undefined
-
     contentItem: Item {
         id: contItem
 
@@ -296,18 +266,7 @@ Kirigami.AbstractListItem {
 
             Kirigami.Icon {
                 id: iconItem
-                source: {
-                    if (!listItem.icon) {
-                        return undefined
-                    }
-                    if (listItem.icon.hasOwnProperty) {
-                        if (listItem.icon.hasOwnProperty("name") && listItem.icon.name !== "")
-                            return listItem.icon.name;
-                        if (listItem.icon.hasOwnProperty("source"))
-                            return listItem.icon.source;
-                    }
-                    return listItem.icon;
-                }
+                source: listItem.icon.name !== "" ? listItem.icon.name : listItem.icon.source
                 property int size: subtitleItem.visible || reserveSpaceForSubtitle ? Kirigami.Units.iconSizes.medium : Kirigami.Units.iconSizes.smallMedium
                 Layout.minimumHeight: size
                 Layout.maximumHeight: size
@@ -315,7 +274,7 @@ Kirigami.AbstractListItem {
                 Layout.maximumWidth: size
                 selected: (listItem.highlighted || listItem.checked || listItem.pressed)
                 opacity: listItem.fadeContent ? 0.6 : 1.0
-                visible: source !== undefined
+                visible: source.toString() !== ""
             }
             ColumnLayout {
                 id: labelColumn

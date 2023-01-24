@@ -7,7 +7,7 @@
 import QtQuick 2.15
 import QtQml 2.15
 import QtQuick.Controls 2.15 as QQC2
-import QtGraphicalEffects 1.0 as GE
+import Qt5Compat.GraphicalEffects as GE
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.kirigami.templates 2.2 as KT
 import "private"

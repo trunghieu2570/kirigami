@@ -1,15 +1,14 @@
 /*
  *  SPDX-FileCopyrightText: 2010 Marco Martin <notmart@gmail.com>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.1
-import QtQuick.Layouts 1.0
-import org.kde.kirigami 2.4 as Kirigami
-// NOTE: This must stay at 2.2 until KF6 due to retrocompatibility of the "icon" property
-import QtQuick.Templates 2.2 as T2
-import QtQuick.Templates 2.4 as QQC2
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import org.kde.kirigami 2.20 as Kirigami
+import QtQuick.Templates 2.15 as T2
 
 /**
  * @brief An item delegate for the primitive ListView component.
@@ -126,29 +125,14 @@ T2.ItemDelegate {
 
     default property alias _default: listItem.contentItem
 
-    // NOTE: Overrides action property of newer import versions which we can't use
-    /**
-     * @brief This property holds the item action.
-     * @property QtQuick.Controls.Action action
-     */
-    property QQC2.Action action
 //END properties
 
     activeFocusOnTab: ListView.view ? false : true
 
-    text: action ? action.text : undefined
-    checked: action ? action.checked : false
-    checkable: action ? action.checkable : false
     onClicked: {
         if (ListView.view && typeof index !== "undefined") {
             ListView.view.currentIndex = index;
         }
-        if (!action) {
-            return;
-        }
-
-        action.trigger();
-        checked = Qt.binding(function() { return action.checked });
     }
     //Theme.inherit: false
     //Theme.colorSet: Kirigami.Theme.View
@@ -174,7 +158,7 @@ T2.ItemDelegate {
 
     onVisibleChanged: {
         if (visible) {
-            height = Qt.binding(() => { return implicitHeight; })
+            height = Qt.binding(() => implicitHeight)
         } else {
             if (ListView.view && ListView.view.visible) {
                 height = 0;

@@ -66,7 +66,7 @@ QQC2.Menu
             }
         }
 
-        onObjectAdded: object.create()
-        onObjectRemoved: object.remove()
+        onObjectAdded: (index, object) => object.create()
+        onObjectRemoved: (index, object) => object.remove()
     }
 }

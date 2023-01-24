@@ -142,7 +142,7 @@ T2.Drawer {
      *
      * Currently supported only on left and right drawers.
      */
-    property bool handleVisible: typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true
+    property bool handleVisible: (typeof applicationWindow === "function") && applicationWindow() ? applicationWindow().controlsVisible : true
 
     /**
      * @brief Readonly property that points to the item that will act as a physical

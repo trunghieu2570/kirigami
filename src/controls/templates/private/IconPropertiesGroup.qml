@@ -4,11 +4,12 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQml 2.1
+import QtQuick 2.15
+import QtQml 2.15
 
 /**
  * @brief Group of icon properties.
- * 
+ *
  * This is a subset of those used in QQC2, Kirigami.Action still needs the full one as needs 100% api compatibility
  */
 QtObject {
@@ -20,7 +21,7 @@ QtObject {
      * If the icon is not found, icon.source will be used instead.
      */
     property string name
-    
+
     /**
      * @brief This property holds the icon source.
      *
