@@ -71,7 +71,7 @@ Kirigami.PageRow {
     globalToolBar.style: Kirigami.Settings.isMobile ? Kirigami.ApplicationHeaderStyle.Breadcrumb : Kirigami.ApplicationHeaderStyle.None
 
     signal backRequested(var event)
-    onBackRequested: {
+    onBackRequested: event => {
         if (pageSettingStack.depth > 1 && !pageSettingStack.wideMode && pageSettingStack.currentIndex !== 0) {
             event.accepted = true;
             pageSettingStack.pop();

@@ -17,7 +17,7 @@ AbstractPageHeader {
 
     MouseArea {
         anchors.fill: parent
-        onPressed: {
+        onPressed: mouse => {
             page.forceActiveFocus()
             mouse.accepted = false
         }

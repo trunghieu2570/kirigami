@@ -267,8 +267,8 @@ T2.Control {
 
                 verticalAlignment: Text.AlignVCenter
 
-                onLinkHovered: root.linkHovered(link)
-                onLinkActivated: root.linkActivated(link)
+                onLinkHovered: link => root.linkHovered(link)
+                onLinkActivated: link => root.linkActivated(link)
             }
         }
 

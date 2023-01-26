@@ -279,7 +279,7 @@ Item {
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     text: modelData.name
-                    onClicked: {
+                    onClicked: mouse => {
                         licenseSheet.text = modelData.text
                         licenseSheet.title = modelData.name
                         licenseSheet.open()

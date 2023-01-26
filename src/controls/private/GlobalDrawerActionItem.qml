@@ -150,8 +150,8 @@ Kirigami.AbstractListItem {
     }
 
     onClicked: trigger()
-    Keys.onEnterPressed: trigger()
-    Keys.onReturnPressed: trigger()
+    Keys.onEnterPressed: event => trigger()
+    Keys.onReturnPressed: event => trigger()
 
     function trigger() {
         modelData.trigger();
@@ -175,6 +175,6 @@ Kirigami.AbstractListItem {
         checked = Qt.binding(function() { return modelData.checked || (actionsMenu && actionsMenu.visible) });
     }
 
-    Keys.onDownPressed: nextItemInFocusChain().focus = true
-    Keys.onUpPressed: nextItemInFocusChain(false).focus = true
+    Keys.onDownPressed: event => nextItemInFocusChain().focus = true
+    Keys.onUpPressed: event => nextItemInFocusChain(false).focus = true
 }

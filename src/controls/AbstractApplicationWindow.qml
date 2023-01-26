@@ -248,7 +248,9 @@ QQC2.ApplicationWindow {
         parent: contentItem.parent
         z: 0
         anchors.fill: parent
-        onClicked: root.reachableMode = false;
+        onClicked: mouse => {
+            root.reachableMode = false;
+        }
         visible: root.reachableMode && root.reachableModeEnabled
         Rectangle {
             anchors.fill: parent
@@ -344,7 +346,7 @@ QQC2.ApplicationWindow {
         text: qsTr("Quit")
         icon.name: "application-exit";
         shortcut: StandardKey.Quit
-        onTriggered: root.close()
+        onTriggered: source => root.close()
     }
     Shortcut {
         sequence: _quitAction.shortcut

@@ -270,7 +270,7 @@ QtObject {
             acceptedDevices: PointerDevice.Mouse
         }
 
-        Keys.onEscapePressed: {
+        Keys.onEscapePressed: event => {
             if (root.sheetOpen) {
                 root.close();
             } else {
@@ -391,14 +391,14 @@ QtObject {
             drag.filterChildren: true
             hoverEnabled: true
 
-            onPressed: {
+            onPressed: mouse => {
                 const pos = mapToItem(contentLayout, mouse.x, mouse.y);
                 if (contentLayout.contains(pos) && mouseHover.hovered) { // only on mouse event, not touch
                     // disable dragging the sheet with a mouse
                     outerFlickable.interactive = false
                 }
             }
-            onReleased: {
+            onReleased: mouse => {
                 const pos = mapToItem(contentLayout, mouse.x, mouse.y);
                 if (!contentLayout.contains(pos)) {
                     root.close();
@@ -511,12 +511,14 @@ QtObject {
                 // disable dragging the sheet with a mouse on header bar
                 MouseArea {
                     anchors.fill: parent
-                    onPressed: {
+                    onPressed: mouse => {
                         if (mouseHover.hovered) { // only on mouse event, not touch
                             outerFlickable.interactive = false
                         }
                     }
-                    onReleased: outerFlickable.interactive = true
+                    onReleased: mouse => {
+                        outerFlickable.interactive = true
+                    }
                 }
 
                 onContentYChanged: {
@@ -691,7 +693,7 @@ QtObject {
                                 id: closeMouseArea
                                 hoverEnabled: true
                                 anchors.fill: parent
-                                onClicked: root.close();
+                                onClicked: mouse => root.close();
                             }
                         }
                         Kirigami.Separator {

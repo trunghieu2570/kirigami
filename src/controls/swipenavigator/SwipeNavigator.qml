@@ -104,7 +104,7 @@ Item {
             windowComponent.destroy();
             item = window.pageStack.push(page, properties);
         }
-        item.Keys.escapePressed.connect(function() { item.closeDialog() });
+        item.Keys.escapePressed.connect(event => item.closeDialog());
         return item;
     }
 

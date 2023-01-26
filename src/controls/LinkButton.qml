@@ -45,7 +45,11 @@ QQC2.Label {
 
     text: action ? action.text : ""
     enabled: !action || action.enabled
-    onClicked: if (action) action.trigger()
+    onClicked: mouse => {
+        if (action) {
+            action.trigger();
+        }
+    }
 
     font.bold: activeFocus
     font.underline: control.enabled
@@ -57,7 +61,7 @@ QQC2.Label {
     signal pressed(var mouse)
     signal clicked(var mouse)
 
-    Keys.onPressed: {
+    Keys.onPressed: event => {
         switch (event.key) {
         case Qt.Key_Space:
         case Qt.Key_Enter:
@@ -79,7 +83,7 @@ QQC2.Label {
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
 
-        onClicked: control.clicked(mouse)
-        onPressed: control.pressed(mouse)
+        onClicked: mouse => control.clicked(mouse)
+        onPressed: mouse => control.pressed(mouse)
     }
 }

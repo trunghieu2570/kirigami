@@ -190,12 +190,12 @@ T2.Drawer {
 
         enabled: root.handleVisible
 
-        onPressed: {
+        onPressed: mouse => {
             root.peeking = true;
             startX = mouse.x;
             mappedStartX = mapToItem(parent, startX, 0).x
         }
-        onPositionChanged: {
+        onPositionChanged: mouse => {
             if (!pressed) {
                 return;
             }
@@ -210,7 +210,7 @@ T2.Drawer {
             default:
             }
         }
-        onReleased: {
+        onReleased: mouse => {
             root.peeking = false;
             if (Math.abs(mapToItem(parent, mouse.x, 0).x - mappedStartX) < Qt.styleHints.startDragDistance) {
                 if (!root.drawerOpen) {

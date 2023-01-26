@@ -139,7 +139,7 @@ Item {
         preventStealing: true
 
 
-        onPressed: {
+        onPressed: mouse => {
             internal.originalParent = listItem.parent;
             listItem.parent = listView;
             listItem.y = internal.originalParent.mapToItem(listItem.parent, listItem.x, listItem.y).y;
@@ -152,7 +152,7 @@ Item {
             mouseArea.drag.maximumY = listView.height - listItem.height;
         }
 
-        onPositionChanged: {
+        onPositionChanged: mouse => {
             if (!pressed || listItem.y === internal.listItemLastY) {
                 return;
             }
@@ -167,7 +167,7 @@ Item {
                                && ( (listItem.y === 0 && !listView.atYBeginning) ||
                                     (listItem.y === mouseArea.drag.maximumY && !listView.atYEnd) );
         }
-        onReleased: {
+        onReleased: mouse => {
             listItem.y = internal.originalParent.mapFromItem(listItem, 0, 0).y;
             listItem.parent = internal.originalParent;
             dropAnimation.running = true;

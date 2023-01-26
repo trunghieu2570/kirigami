@@ -319,8 +319,10 @@ T.SwipeDelegate {
             property real lastPosition: 0
             property bool openIntention
 
-            onPressed: startX = mapToItem(listItem, 0, 0).x;
-            onClicked: {
+            onPressed: mouse => {
+                startX = mapToItem(listItem, 0, 0).x;
+            }
+            onClicked: mouse => {
                 if (Math.abs(mapToItem(listItem, 0, 0).x - startX) > Qt.styleHints.startDragDistance) {
                     return;
                 }
@@ -339,7 +341,7 @@ T.SwipeDelegate {
                 }
                 slideAnim.restart();
             }
-            onPositionChanged: {
+            onPositionChanged: mouse => {
                 const pos = mapToItem(listItem, mouse.x, mouse.y);
 
                 if (listItem.LayoutMirroring.enabled) {
@@ -351,7 +353,7 @@ T.SwipeDelegate {
                 }
                 lastPosition = listItem.swipe.position;
             }
-            onReleased: {
+            onReleased: mouse => {
                 if (listItem.LayoutMirroring.enabled) {
                     if (openIntention) {
                         slideAnim.to = openPosition
@@ -428,7 +430,7 @@ T.SwipeDelegate {
             anchors.fill: parent
 
             // QQC2.SwipeDelegate.onPressedChanged is broken with touch
-            onClicked: {
+            onClicked: mouse => {
                     slideAnim.to = 0;
                     slideAnim.restart();
             }

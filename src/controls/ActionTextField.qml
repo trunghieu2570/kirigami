@@ -111,7 +111,7 @@ QQC2.TextField {
         cursorShape: Qt.PointingHandCursor
         hoverEnabled: true
         Accessible.role: Accessible.Button
-        Keys.onPressed: {
+        Keys.onPressed: event => {
             switch (event.key) {
             case Qt.Key_Space:
             case Qt.Key_Enter:
@@ -152,7 +152,7 @@ QQC2.TextField {
                 ActionIconMouseArea {
                     id: leftActionArea
                     Accessible.name: modelData.text
-                    onClicked: modelData.trigger()
+                    onClicked: mouse => modelData.trigger()
                 }
 
                 QQC2.ToolTip {
@@ -191,7 +191,7 @@ QQC2.TextField {
                 ActionIconMouseArea {
                     id: rightActionArea
                     Accessible.name: modelData.text
-                    onClicked: modelData.trigger()
+                    onClicked: mouse => modelData.trigger()
                 }
 
                 QQC2.ToolTip {
