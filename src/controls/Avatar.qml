@@ -162,11 +162,16 @@ QQC2.Control {
     Accessible.role: !!actions.main ? Accessible.Button : Accessible.Graphic
     Accessible.name: !!actions.main ? qsTr("%1 — %2").arg(name).arg(actions.main.text) : name
     Accessible.focusable: !!actions.main
-    Accessible.onPressAction: {
-        avatarRoot.actions.main.trigger()
+    Accessible.onPressAction: __triggerMainAction()
+    Keys.onReturnPressed: event => __triggerMainAction()
+    Keys.onEnterPressed: event => __triggerMainAction()
+    Keys.onSpacePressed: event => __triggerMainAction()
+
+    function __triggerMainAction() {
+        if (actions.main) {
+            actions.main.trigger();
+        }
     }
-    Keys.onEnterPressed: if (!!avatarRoot.actions.main.trigger()) avatarRoot.actions.main.trigger()
-    Keys.onSpacePressed: if (!!avatarRoot.actions.main.trigger()) avatarRoot.actions.main.trigger()
 
     background: Rectangle {
         radius: parent.width / 2
@@ -205,9 +210,7 @@ QQC2.Control {
                     avatarRoot.actions.secondary.trigger()
                     return
                 }
-                if (!!avatarRoot.actions.main) {
-                    avatarRoot.actions.main.trigger()
-                }
+                avatarRoot.__triggerMainAction()
             }
 
             enabled: !!avatarRoot.actions.main || !!avatarRoot.actions.secondary
