@@ -420,7 +420,7 @@ T.Dialog {
                     id: closeMouseArea
                     hoverEnabled: Qt.styleHints.useHoverEffects
                     anchors.fill: parent
-                    onClicked: root.reject()
+                    onClicked: mouse => root.reject()
                 }
             }
         }

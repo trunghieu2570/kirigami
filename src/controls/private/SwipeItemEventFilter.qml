@@ -22,11 +22,11 @@ MouseArea {
 
     preventStealing: true
     width: Kirigami.Units.gridUnit
-    onPressed: {
+    onPressed: mouse => {
         const mapped = mapToItem(parent.flickableItem.contentItem, mouse.x, mouse.y);
         currentItem = parent.flickableItem.itemAt(mapped.x, mapped.y);
     }
-    onPositionChanged: {
+    onPositionChanged: mouse => {
         const mapped = mapToItem(parent.flickableItem.contentItem, mouse.x, mouse.y);
         currentItem = parent.flickableItem.itemAt(mapped.x, mapped.y);
         peek = 1 - mapped.x / parent.flickableItem.contentItem.width;

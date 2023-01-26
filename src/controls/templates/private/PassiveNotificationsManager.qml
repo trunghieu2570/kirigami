@@ -201,7 +201,7 @@ Item {
 
                 TapHandler {
                     acceptedButtons: Qt.LeftButton
-                    onTapped: hideNotification(index)
+                    onTapped: eventPoint => hideNotification(index)
                 }
                 Timer {
                     id: timer

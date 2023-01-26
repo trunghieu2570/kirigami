@@ -36,7 +36,7 @@ QQC2.ScrollView {
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.OutExpo
             }
-            onIndexChanged: {
+            onIndexChanged: (xPos, tabWidth) => {
                 if (xPos > (bar.width)/2) {
                     bar.targetDestination = (1-view.QQC2.ScrollBar.horizontal.size) * ((xPos+tabWidth) / bar.width)
                     scrollAni.restart()
@@ -65,7 +65,7 @@ QQC2.ScrollView {
                     vertical: Kirigami.Settings.isMobile
                         ? (swipeNavigatorRoot.width < swipeNavigatorRoot.height ? true : expandedLayouter.width > swipeNavigatorRoot.width)
                         : expandedLayouter.width > swipeNavigatorRoot.width
-                    onIndexChanged: bar.indexChanged(xPos, tabWidth)
+                    onIndexChanged: (xPos, tabWidth) => bar.indexChanged(xPos, tabWidth)
                 }
             }
         }

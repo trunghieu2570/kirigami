@@ -297,7 +297,7 @@ QQC2.Page {
 
     // Look for sheets and cose them
     // FIXME: port Sheets to Popup?
-    onBackRequested: {
+    onBackRequested: event => {
         let item;
         for (const i in root.resources) {
             item = root.resources[i];

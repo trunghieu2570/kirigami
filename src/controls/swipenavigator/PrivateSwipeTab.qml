@@ -23,7 +23,11 @@ Kirigami.PageTab {
             tabRoot.indexChanged(tabRoot.x, tabRoot.width)
         }
     }
-    TapHandler { onTapped: columnView.currentIndex = index }
+    TapHandler {
+        onTapped: eventPoint => {
+            columnView.currentIndex = index;
+        }
+    }
     Connections {
         target: columnView
         function onCurrentIndexChanged() {

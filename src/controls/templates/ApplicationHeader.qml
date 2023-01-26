@@ -340,7 +340,7 @@ AbstractApplicationHeader {
                     }
 
                     height: titleList.height
-                    onClicked: {
+                    onClicked: mouse => {
                         if (pageRow.currentIndex === modelData) {
                             // scroll up if current otherwise make current
                             if (!pageRow.currentItem.flickable) {

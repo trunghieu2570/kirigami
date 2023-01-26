@@ -269,8 +269,8 @@ Kirigami.AbstractListItem {
         }
     }
 
-    Keys.onEnterPressed: action ? action.trigger() : clicked()
-    Keys.onReturnPressed: action ? action.trigger() : clicked()
+    Keys.onEnterPressed: event => action ? action.trigger() : clicked()
+    Keys.onReturnPressed: event => action ? action.trigger() : clicked()
 //END signal handlers
 
     icon: action ? action.icon.name || action.icon.source : undefined

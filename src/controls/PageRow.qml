@@ -267,7 +267,7 @@ QT.Control {
                             maximumHeight: Kirigami.Units.gridUnit * 1.6
                             preferredHeight: Kirigami.Units.gridUnit * 1.6
 
-                            Keys.onEscapePressed: {
+                            Keys.onEscapePressed: event => {
                                 if (dialog.opened) {
                                     dialog.close();
                                 } else {
@@ -297,7 +297,7 @@ QT.Control {
                                         id: closeMouseArea
                                         hoverEnabled: true
                                         anchors.fill: parent
-                                        onClicked: dialog.close();
+                                        onClicked: mouse => dialog.close();
                                     }
                                 }
                             }
@@ -373,7 +373,7 @@ QT.Control {
                 }
             });
         }
-        item.Keys.escapePressed.connect(function() { item.closeDialog() });
+        item.Keys.escapePressed.connect(event => item.closeDialog());
         return item;
     }
 

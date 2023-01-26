@@ -428,7 +428,9 @@ Item {
         parent: root
         z: -1
         anchors.fill: parent
-        onClicked: root.reachableMode = false;
+        onClicked: mouse => {
+            root.reachableMode = false;
+        }
         visible: root.reachableMode && root.reachableModeEnabled
         Rectangle {
             anchors.fill: parent

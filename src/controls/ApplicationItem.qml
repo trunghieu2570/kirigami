@@ -131,7 +131,7 @@ Kirigami.AbstractApplicationItem {
         function goForward() {
             root.pageStack.currentIndex = Math.min(root.pageStack.depth - 1, root.pageStack.currentIndex + 1);
         }
-        Keys.onBackPressed: {
+        Keys.onBackPressed: event => {
             goBack();
             event.accepted = true;
         }

@@ -37,7 +37,7 @@ ListView {
 
     headerPositioning: ListView.OverlayHeader
 
-    Keys.onPressed: {
+    Keys.onPressed: event => {
         if (event.key === Qt.Key_Home) {
             positionViewAtBeginning();
             currentIndex = 0;

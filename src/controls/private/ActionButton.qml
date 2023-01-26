@@ -160,7 +160,7 @@ Item {
             QQC2.ToolTip.text: actionUnderMouse ? actionUnderMouse.text : ""
             QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
 
-            onPressed: {
+            onPressed: mouse => {
                 // search if we have a page to set to current
                 if (root.hasApplicationWindow && applicationWindow().pageStack.currentIndex !== undefined && root.page.Kirigami.ColumnView.level !== undefined) {
                     // search the button parent's parent, that is the page parent
@@ -172,7 +172,7 @@ Item {
                 startMouseY = mouse.y;
                 drawerShowAdjust = 0;
             }
-            onReleased: {
+            onReleased: mouse => {
                 tooltipHider.restart();
                 if (root.hasGlobalDrawer) globalDrawer.peeking = false;
                 if (root.hasContextDrawer) contextDrawer.peeking = false;
@@ -233,11 +233,11 @@ Item {
                 }
             }
 
-            onPositionChanged: {
+            onPositionChanged: mouse => {
                 drawerShowAdjust = Math.min(0.3, Math.max(0, (startMouseY - mouse.y)/(Kirigami.Units.gridUnit*15)));
                 button.xChanged();
             }
-            onPressAndHold: {
+            onPressAndHold: mouse => {
                 if (!actionUnderMouse) {
                     return;
                 }
@@ -490,10 +490,10 @@ Item {
             }
         }
 
-        onPressed: {
+        onPressed: mouse => {
             mouseArea.onPressed(mouse)
         }
-        onReleased: {
+        onReleased: mouse => {
             const pos = root.mapFromItem(fakeContextMenuButton, mouse.x, mouse.y);
 
             if ((typeof contextDrawer !== "undefined") && contextDrawer) {
@@ -548,8 +548,8 @@ Item {
         }
         height: Kirigami.Units.smallSpacing * 3
 
-        onPressed: mouseArea.onPressed(mouse)
-        onPositionChanged: mouseArea.positionChanged(mouse)
-        onReleased: mouseArea.released(mouse)
+        onPressed: mouse => mouseArea.onPressed(mouse)
+        onPositionChanged: mouse => mouseArea.positionChanged(mouse)
+        onReleased: mouse => mouseArea.released(mouse)
     }
 }

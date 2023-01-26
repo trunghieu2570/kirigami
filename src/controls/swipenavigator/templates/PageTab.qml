@@ -57,7 +57,7 @@ QQC2.Control {
     Accessible.focusable: true
     Accessible.onPressAction: control.clicked()
 
-    Keys.onPressed: {
+    Keys.onPressed: event => {
         if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
             control.clicked()
         }

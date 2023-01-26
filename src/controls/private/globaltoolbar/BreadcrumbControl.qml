@@ -36,7 +36,7 @@ Flickable {
             delegate: MouseArea {
                 Layout.preferredWidth: delegateLayout.implicitWidth
                 Layout.fillHeight: true
-                onClicked: {
+                onClicked: mouse => {
                     if (mainRepeater.useLayers) {
                         while (pageRow.layers.depth > modelData + 1) {
                             pageRow.layers.pop();

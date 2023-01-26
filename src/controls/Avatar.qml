@@ -205,7 +205,7 @@ QQC2.Control {
                 return distance < radiusSquared
             }
 
-            onClicked: {
+            onClicked: mouse =>{
                 if (mouseY > avatarRoot.height - secondaryRect.height && !!avatarRoot.actions.secondary) {
                     avatarRoot.actions.secondary.trigger()
                     return

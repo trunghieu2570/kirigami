@@ -342,7 +342,7 @@ OverlayDrawer {
                     // leftPadding: root.collapsible ? collapseButton.width + Kirigami.Units.smallSpacing*2 : topPadding
                     MouseArea {
                         anchors.fill: parent
-                        onClicked: root.bannerClicked()
+                        onClicked: mouse => root.bannerClicked()
                     }
                     P.EdgeShadow {
                         edge: Qt.BottomEdge
