@@ -100,10 +100,10 @@ Kirigami.Action {
     function layerContainsPage() {
         if (!useLayers || !pageStack.hasOwnProperty("layers")) return false
 
-        const found = pageStack.layers.find((item, index) => {
+        const item = pageStack.layers.find((item, index) => {
             return item === pagePool.pageForUrl(page)
         })
-        return found ? true: false
+        return !!item
     }
 
     /**

@@ -238,14 +238,15 @@ Kirigami.AbstractListItem {
 
 //BEGIN signal handlers
     onLeadingChanged: {
-        if (!!listItem.leading) {
-            listItem.leading.parent = contItem
-            listItem.leading.anchors.left = listItem.leading.parent.left
-            listItem.leading.anchors.top = listItem.leadingFillVertically ? listItem.leading.parent.top : undefined
-            listItem.leading.anchors.bottom = listItem.leadingFillVertically ? listItem.leading.parent.bottom : undefined
-            listItem.leading.anchors.verticalCenter = listItem.leadingFillVertically ? undefined : listItem.leading.parent.verticalCenter
-            layout.anchors.left = listItem.leading.right
-            layout.anchors.leftMargin = Qt.binding(function() { return listItem.leadingPadding })
+        const item = leading;
+        if (!!item) {
+            item.parent = contItem
+            item.anchors.left = item.parent.left
+            item.anchors.top = leadingFillVertically ? item.parent.top : undefined
+            item.anchors.bottom = leadingFillVertically ? item.parent.bottom : undefined
+            item.anchors.verticalCenter = leadingFillVertically ? undefined : item.parent.verticalCenter
+            layout.anchors.left = item.right
+            layout.anchors.leftMargin = Qt.binding(() => leadingPadding)
         } else {
             layout.anchors.left = contentItem.left
             layout.anchors.leftMargin = 0
@@ -253,14 +254,15 @@ Kirigami.AbstractListItem {
     }
 
     onTrailingChanged: {
-        if (!!listItem.trailing) {
-            listItem.trailing.parent = contItem
-            listItem.trailing.anchors.right = listItem.trailing.parent.right
-            listItem.trailing.anchors.top = listItem.trailingFillVertically ? listItem.trailing.parent.top : undefined
-            listItem.trailing.anchors.bottom = listItem.trailingFillVertically ? listItem.trailing.parent.bottom : undefined
-            listItem.trailing.anchors.verticalCenter = listItem.trailingFillVertically ? undefined : listItem.trailing.parent.verticalCenter
-            layout.anchors.right = listItem.trailing.left
-            layout.anchors.rightMargin = Qt.binding(function() { return listItem.trailingPadding })
+        const item = trailing;
+        if (!!item) {
+            item.parent = contItem
+            item.anchors.right = item.parent.right
+            item.anchors.top = trailingFillVertically ? item.parent.top : undefined
+            item.anchors.bottom = trailingFillVertically ? item.parent.bottom : undefined
+            item.anchors.verticalCenter = trailingFillVertically ? undefined : item.parent.verticalCenter
+            layout.anchors.right = item.left
+            layout.anchors.rightMargin = Qt.binding(() => trailingPadding)
         } else {
             layout.anchors.right = contentItem.right
             layout.anchors.rightMargin = 0

@@ -250,7 +250,7 @@ QT.Control {
         if (Kirigami.Settings.isMobile) {
             if (QQC2.ApplicationWindow.window.width > Kirigami.Units.gridUnit * 40) {
                 // open as a QQC2.Dialog
-                const dialog = Qt.createQmlObject('
+                const dialog = Qt.createQmlObject(`
                     import QtQuick 2.15;
                     import QtQuick.Controls 2.15;
                     import QtQuick.Layouts 1.15;
@@ -303,7 +303,7 @@ QT.Control {
                             }
                         }
                         contentItem: Control { topPadding: 0; leftPadding: 0; rightPadding: 0; bottomPadding: 0; }
-                    }', QQC2.ApplicationWindow.overlay);
+                    }`, QQC2.ApplicationWindow.overlay);
                 dialog.width = Qt.binding(() => QQC2.ApplicationWindow.window.width - Kirigami.Units.gridUnit * 5);
                 dialog.height = Qt.binding(() => QQC2.ApplicationWindow.window.height - Kirigami.Units.gridUnit * 5);
                 dialog.x = Kirigami.Units.gridUnit * 2.5;
@@ -760,7 +760,7 @@ QT.Control {
         // placeholder as initial item
         initialItem: columnViewLayout
 
-        function clear () {
+        function clear() {
             // don't let it kill the main page row
             const d = layersStack.depth;
             for (let i = 1; i < d; ++i) {

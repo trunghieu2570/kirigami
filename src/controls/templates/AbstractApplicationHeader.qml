@@ -148,7 +148,9 @@ Item {
         Connections {
             target: root.page ? root.page.globalToolBarItem : null
             enabled: target
-            function onImplicitHeightChanged() { root.implicitHeight = root.page.globalToolBarItem.implicitHeight }
+            function onImplicitHeightChanged() {
+                root.implicitHeight = root.page.globalToolBarItem.implicitHeight;
+            }
         }
 
         Timer {
@@ -185,7 +187,11 @@ Item {
         Item {
             id: mainItem
             clip: childrenRect.width > width
-            onChildrenChanged: Array.from(children).forEach(item => item.anchors.verticalCenter = this.verticalCenter)
+            onChildrenChanged: {
+                Array.from(children).forEach(item => {
+                    item.anchors.verticalCenter = this.verticalCenter;
+                })
+            }
             anchors {
                 fill: parent
                 leftMargin: root.leftPadding
@@ -196,4 +202,3 @@ Item {
         }
     }
 }
-

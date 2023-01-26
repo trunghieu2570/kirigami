@@ -11,12 +11,12 @@ import org.kde.kirigami 2.19 as Kirigami
 
 /**
  * @brief Navigation buttons to be used for the NavigationTabBar component.
- * 
+ *
  * It supplies its own padding, and also supports using the QQC2 AbstractButton ``display`` property to be used in column lists.
  *
  * Alternative way to the "actions" property on NavigationTabBar, as it can be used
  * with Repeater to generate buttons from models.
- * 
+ *
  * Example usage:
  * @code{.qml}
  * Kirigami.NavigationTabBar {
@@ -62,7 +62,7 @@ import org.kde.kirigami 2.19 as Kirigami
  *      ]
  *  }
  * @endcode
- * 
+ *
  * @since 5.87
  * @since org.kde.kirigami 2.19
  * @inherit QtQuick.Templates.TabButton
@@ -76,7 +76,9 @@ T.TabButton {
     readonly property int tabIndex: {
         let tabIdx = 0
         for (let i = 0; i < parent.children.length; ++i) {
-            if (parent.children[i] === this) return tabIdx
+            if (parent.children[i] === this) {
+                return tabIdx
+            }
             // Checking for AbstractButtons because any AbstractButton can act as a tab
             if (parent.children[i] instanceof T.AbstractButton) {
                 ++tabIdx
@@ -84,7 +86,7 @@ T.TabButton {
         }
         return -1
     }
-    
+
     /**
      * @brief This property sets whether the icon colors should be masked with a single color.
      *
@@ -113,7 +115,7 @@ T.TabButton {
     Kirigami.Theme.colorSet: Kirigami.Theme.Window
     Kirigami.Theme.inherit: false
 
-    // not using the hover handler built into control, since it seems to misbehave and 
+    // not using the hover handler built into control, since it seems to misbehave and
     // permanently report hovered after a touch event
     HoverHandler {
         id: hoverHandler

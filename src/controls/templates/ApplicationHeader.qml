@@ -364,7 +364,9 @@ AbstractApplicationHeader {
 
                         Connections {
                             target: delegateLoader.page.Component
-                            function onDestruction() { delegateLoader.sourceComponent = null }
+                            function onDestruction() {
+                                delegateLoader.sourceComponent = null;
+                            }
                         }
 
                         sourceComponent: header.pageDelegate

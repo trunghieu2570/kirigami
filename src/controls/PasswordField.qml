@@ -26,8 +26,7 @@ import org.kde.kirigami 2.20 as Kirigami
  * @since 5.57
  * @author Carl Schwan <carl@carlschwan.eu>
  */
-Kirigami.ActionTextField
-{
+Kirigami.ActionTextField {
     id: root
 
     /**

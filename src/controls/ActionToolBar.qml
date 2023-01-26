@@ -212,8 +212,8 @@ QQC2.Control {
                     return root.actions
                 } else {
                     const result = []
-                    result.concat(Array.prototype.map.call(root.actions, (i) => i))
-                    result.concat(Array.prototype.map.call(hiddenActions, (i) => i))
+                    result.concat(Array.prototype.map.call(root.actions, i => i))
+                    result.concat(Array.prototype.map.call(hiddenActions, i => i))
                     return result
                 }
             }

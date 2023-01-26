@@ -22,8 +22,7 @@ import org.kde.kirigami 2.19 as Kirigami
  * @since org.kde.kirigami 2.6
  * @inherit org::kde::kirigami::ScrollablePage
  */
-Kirigami.ScrollablePage
-{
+Kirigami.ScrollablePage {
     id: page
 
 //BEGIN properties

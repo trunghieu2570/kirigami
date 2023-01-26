@@ -65,7 +65,7 @@ Kirigami.AbstractApplicationWindow {
                     pageStack.push(settingsComponent);
                 }
             }
-            ]
+        ]
 
         Controls.CheckBox {
             checked: true

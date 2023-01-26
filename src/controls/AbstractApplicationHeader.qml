@@ -58,4 +58,3 @@ T.AbstractApplicationHeader {
         }
     }
 }
-

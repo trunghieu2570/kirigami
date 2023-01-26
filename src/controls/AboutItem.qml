@@ -21,8 +21,7 @@ import org.kde.kirigami 2.20 as Kirigami
  * @since 5.87
  * @since org.kde.kirigami 2.19
  */
-Item
-{
+Item {
     id: aboutItem
     /**
      * @brief This property holds an object with the same shape as KAboutData.

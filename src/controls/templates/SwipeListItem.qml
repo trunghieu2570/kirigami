@@ -465,12 +465,12 @@ T.SwipeDelegate {
     RowLayout {
         id: actionsLayout
         anchors {
-                right: parent.right
-                top: parent.top
-                bottom: parent.bottom
-                rightMargin: Kirigami.Units.smallSpacing
-            }
-        visible: parent != listItem
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+            rightMargin: Kirigami.Units.smallSpacing
+        }
+        visible: parent !== listItem
         parent: !listItem.alwaysVisibleActions && Kirigami.Settings.tabletMode
                 ? listItem.swipe.leftItem || listItem.swipe.rightItem || listItem
                 : overlayLoader
@@ -539,8 +539,8 @@ T.SwipeDelegate {
 
     swipe {
         enabled: false
-        right: listItem.alwaysVisibleActions ||listItem.LayoutMirroring.enabled || !Kirigami.Settings.tabletMode ? null : actionsBackgroundDelegate
-        left: listItem.alwaysVisibleActions ||listItem.LayoutMirroring.enabled && Kirigami.Settings.tabletMode ? actionsBackgroundDelegate : null
+        right: listItem.alwaysVisibleActions || listItem.LayoutMirroring.enabled || !Kirigami.Settings.tabletMode ? null : actionsBackgroundDelegate
+        left: listItem.alwaysVisibleActions || listItem.LayoutMirroring.enabled && Kirigami.Settings.tabletMode ? actionsBackgroundDelegate : null
     }
     NumberAnimation {
         id: slideAnim
@@ -552,4 +552,3 @@ T.SwipeDelegate {
     }
 //END items
 }
-
