@@ -1,7 +1,6 @@
 /* SPDX-FileCopyrightText: 2021 Noah Davis <noahadvs@gmail.com>
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
-
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.19 as Kirigami
@@ -16,12 +15,12 @@ TestCase {
     height: flickable.implicitHeight
 
     function test_MouseFlick() {
-        const x = flickable.contentX
-        const y = flickable.contentY
-        mousePress(flickable, flickable.leftMargin + 10, 10)
-        mouseMove(flickable)
-        mouseRelease(flickable)
-        verify(flickable.contentX === x && flickable.contentY === y, "not moved")
+        const x = flickable.contentX;
+        const y = flickable.contentY;
+        mousePress(flickable, flickable.leftMargin + 10, 10);
+        mouseMove(flickable);
+        mouseRelease(flickable);
+        verify(flickable.contentX === x && flickable.contentY === y, "not moved");
     }
 
     // NOTE: Unfortunately, this test can't work. Flickable does not handle touch events, only mouse events synthesized from touch events
@@ -40,27 +39,26 @@ TestCase {
         touch.commit()
         verify(flickable.contentX !== x || flickable.contentY !== y, "moved")
     }*/
-
     function test_MouseScrollBars() {
-        const x = flickable.contentX, y = flickable.contentY
-        mousePress(flickable, flickable.leftMargin + 10, 10)
-        mouseMove(flickable)
-        const interactive = flickable.QQC2.ScrollBar.vertical.interactive || flickable.QQC2.ScrollBar.horizontal.interactive
-        mouseRelease(flickable)
-        verify(interactive, "interactive scrollbars")
+        const x = flickable.contentX, y = flickable.contentY;
+        mousePress(flickable, flickable.leftMargin + 10, 10);
+        mouseMove(flickable);
+        const interactive = flickable.QQC2.ScrollBar.vertical.interactive || flickable.QQC2.ScrollBar.horizontal.interactive;
+        mouseRelease(flickable);
+        verify(interactive, "interactive scrollbars");
     }
 
     function test_TouchScrollBars() {
-        const x = flickable.contentX, y = flickable.contentY
-        let touch = touchEvent(flickable)
-        touch.press(0, flickable, flickable.leftMargin + 10, 10)
-        touch.commit()
-        touch.move(0, flickable)
-        touch.commit()
-        const interactive = flickable.QQC2.ScrollBar.vertical.interactive || flickable.QQC2.ScrollBar.horizontal.interactive
-        touch.release(0, flickable)
-        touch.commit()
-        verify(!interactive, "no interactive scrollbars")
+        const x = flickable.contentX, y = flickable.contentY;
+        let touch = touchEvent(flickable);
+        touch.press(0, flickable, flickable.leftMargin + 10, 10);
+        touch.commit();
+        touch.move(0, flickable);
+        touch.commit();
+        const interactive = flickable.QQC2.ScrollBar.vertical.interactive || flickable.QQC2.ScrollBar.horizontal.interactive;
+        touch.release(0, flickable);
+        touch.commit();
+        verify(!interactive, "no interactive scrollbars");
     }
 
     ScrollableFlickable {

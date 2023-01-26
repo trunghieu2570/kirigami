@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.12
 import QtQuick.Controls 2.12 as QQC2
 import org.kde.kirigami 2.12 as Kirigami
@@ -27,7 +26,7 @@ QQC2.StackView {
             }
             YAnimator {
                 from: 0
-                to: height/2
+                to: height / 2
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.InCubic
             }
@@ -45,14 +44,13 @@ QQC2.StackView {
                 easing.type: Easing.InOutCubic
             }
             YAnimator {
-                from: height/2
+                from: height / 2
                 to: 0
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.OutCubic
             }
         }
     }
-
 
     pushExit: Transition {
         OpacityAnimator {
@@ -72,7 +70,7 @@ QQC2.StackView {
                 easing.type: Easing.InOutCubic
             }
             YAnimator {
-                from: height/2
+                from: height / 2
                 to: 0
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.OutCubic
@@ -90,7 +88,7 @@ QQC2.StackView {
             }
             YAnimator {
                 from: 0
-                to: -height/2
+                to: -height / 2
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutCubic
             }

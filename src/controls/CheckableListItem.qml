@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick.Controls 2.0 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
 
@@ -53,7 +52,7 @@ Kirigami.BasicListItem {
     leading: QQC2.CheckBox {
         checked: checkableListItem.checked
         onToggled: {
-            checkableListItem.checked = !checkableListItem.checked
+            checkableListItem.checked = !checkableListItem.checked;
 
             // TODO(Qt6): rephrase as `checkableListItem.action?.trigger();`
             if (checkableListItem.action) {

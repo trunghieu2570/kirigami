@@ -3,10 +3,8 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-
 import org.kde.kirigami 2.20 as Kirigami
 
 Kirigami.ApplicationWindow {
@@ -28,9 +26,9 @@ Kirigami.ApplicationWindow {
 
             Keys.onPressed: event => {
                 if (event.text)
-                    see.text = event.text
+                    see.text = event.text;
                 else
-                    see.text = event.key
+                    see.text = event.key;
             }
 
             Keys.onEnterPressed: main.showPassiveNotification("page!")
@@ -43,7 +41,7 @@ Kirigami.ApplicationWindow {
     }
 
     Component.onCompleted: {
-        main.pageStack.push(keyPage)
-        main.pageStack.push(keyPage)
+        main.pageStack.push(keyPage);
+        main.pageStack.push(keyPage);
     }
 }

@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.2
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.kirigami.private 2.6 as KirigamiPrivate
@@ -33,10 +32,10 @@ Kirigami.LinkButton {
     Accessible.description: i18nc("@info:whatsthis", "Open link %1", button.text !== button.url ? button.url : "")
 
     onPressed: if (mouse.button === Qt.RightButton) {
-        menu.popup()
+        menu.popup();
     }
     onClicked: if (mouse.button !== Qt.RightButton) {
-        Qt.openUrlExternally(url)
+        Qt.openUrlExternally(url);
     }
 
     QQC2.ToolTip {

@@ -1,7 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-
 import org.kde.kirigami 2.20 as Kirigami
 
 Item {
@@ -27,7 +26,7 @@ Item {
             Kirigami.Action {
                 icon.name: "document-new"
                 text: "Action 1"
-            },
+            }, 
             Kirigami.Action {
                 icon.name: "document-new"
                 text: "Action 2"
@@ -42,17 +41,34 @@ Item {
         ComboBox {
             id: alignCombo
 
-            model: [
-                { text: "Top Left", align: Qt.AlignLeft | Qt.AlignTop },
-                { text: "Top Center", align: Qt.AlignHCenter | Qt.AlignTop },
-                { text: "Top Right", align: Qt.AlignRight | Qt.AlignTop },
-                { text: "Center Left", align: Qt.AlignLeft | Qt.AlignVCenter },
-                { text: "Center", align: Qt.AlignHCenter | Qt.AlignVCenter },
-                { text: "Center Right", align: Qt.AlignRight | Qt.AlignVCenter },
-                { text: "Bottom Left", align: Qt.AlignLeft | Qt.AlignBottom },
-                { text: "Bottom Center", align: Qt.AlignHCenter | Qt.AlignBottom },
-                { text: "Bottom Right", align: Qt.AlignRight | Qt.AlignBottom }
-            ]
+            model: [{
+                    "text": "Top Left",
+                    "align": Qt.AlignLeft | Qt.AlignTop
+                }, {
+                    "text": "Top Center",
+                    "align": Qt.AlignHCenter | Qt.AlignTop
+                }, {
+                    "text": "Top Right",
+                    "align": Qt.AlignRight | Qt.AlignTop
+                }, {
+                    "text": "Center Left",
+                    "align": Qt.AlignLeft | Qt.AlignVCenter
+                }, {
+                    "text": "Center",
+                    "align": Qt.AlignHCenter | Qt.AlignVCenter
+                }, {
+                    "text": "Center Right",
+                    "align": Qt.AlignRight | Qt.AlignVCenter
+                }, {
+                    "text": "Bottom Left",
+                    "align": Qt.AlignLeft | Qt.AlignBottom
+                }, {
+                    "text": "Bottom Center",
+                    "align": Qt.AlignHCenter | Qt.AlignBottom
+                }, {
+                    "text": "Bottom Right",
+                    "align": Qt.AlignRight | Qt.AlignBottom
+                }]
 
             textRole: "text"
             valueRole: "align"
@@ -61,10 +77,13 @@ Item {
         ComboBox {
             id: orientationCombo
 
-            model: [
-                { text: "Vertical", orientation: Qt.Vertical },
-                { text: "Horizontal", orientation: Qt.Horizontal }
-            ]
+            model: [{
+                    "text": "Vertical",
+                    "orientation": Qt.Vertical
+                }, {
+                    "text": "Horizontal",
+                    "orientation": Qt.Horizontal
+                }]
 
             textRole: "text"
             valueRole: "orientation"

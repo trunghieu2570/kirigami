@@ -5,11 +5,9 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.7
-import QtGraphicalEffects 1.0
+import Qt5Compat.GraphicalEffects 6.0
 import org.kde.kirigami 2.5 as Kirigami
-
 import "../../private"
 import "../../templates" as T
 
@@ -61,7 +59,6 @@ import "../../templates" as T
  *
  * @since 5.45
  */
-
 T.InlineMessage {
     id: root
 
@@ -76,7 +73,6 @@ T.InlineMessage {
             } else if (root.type == Kirigami.MessageType.Error) {
                 return Kirigami.Theme.negativeTextColor;
             }
-
             return Kirigami.Theme.activeTextColor;
         }
 

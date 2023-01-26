@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.7
 import QtQml 2.15
 import QtQuick.Layouts 1.2
@@ -30,7 +29,7 @@ import "private" as P
 QQC2.Control {
     id: root
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property holds a list of visible actions.
      *
@@ -103,9 +102,7 @@ QQC2.Control {
      *
      * @property int position
      */
-    property int position: parent && parent.hasOwnProperty("position")
-            ? parent.position
-            : QQC2.ToolBar.Header
+    property int position: parent && parent.hasOwnProperty("position") ? parent.position : QQC2.ToolBar.Header
 
     /**
      * @brief This property holds the maximum width of the content of this ToolBar.
@@ -153,8 +150,8 @@ QQC2.Control {
      * @property ToolBarLayout::HeightMode heightMode
      */
     property alias heightMode: layout.heightMode
-//END properties
 
+    //END properties
     implicitHeight: layout.implicitHeight
     implicitWidth: layout.implicitWidth
 
@@ -187,14 +184,12 @@ QQC2.Control {
 
             menuActions: {
                 if (action.displayComponent) {
-                    return [action]
+                    return [action];
                 }
-
                 if (action.hasOwnProperty("children") && action.children.length > 0) {
-                    return Array.prototype.map.call(action.children, i => i)
+                    return Array.prototype.map.call(action.children, i => i);
                 }
-
-                return []
+                return [];
             }
         }
 
@@ -209,12 +204,12 @@ QQC2.Control {
 
             menuActions: {
                 if (root.hiddenActions.length === 0) {
-                    return root.actions
+                    return root.actions;
                 } else {
-                    const result = []
-                    result.concat(Array.prototype.map.call(root.actions, (i) => i))
-                    result.concat(Array.prototype.map.call(hiddenActions, (i) => i))
-                    return result
+                    const result = [];
+                    result.concat(Array.prototype.map.call(root.actions, i => i));
+                    result.concat(Array.prototype.map.call(hiddenActions, i => i));
+                    return result;
                 }
             }
 
@@ -223,28 +218,24 @@ QQC2.Control {
                     Binding {
                         target: parentItem
                         property: "visible"
-                        value: layout.hiddenActions.includes(parentAction)
-                               && (parentAction.visible === undefined || parentAction.visible)
+                        value: layout.hiddenActions.includes(parentAction) && (parentAction.visible === undefined || parentAction.visible)
                         restoreMode: Binding.RestoreBinding
                     }
                 }
 
                 itemDelegate: P.ActionMenuItem {
-                    visible: layout.hiddenActions.includes(action)
-                             && (action.visible === undefined || action.visible)
+                    visible: layout.hiddenActions.includes(action) && (action.visible === undefined || action.visible)
                 }
 
                 loaderDelegate: Loader {
                     property var action
                     height: visible ? implicitHeight : 0
-                    visible: layout.hiddenActions.includes(action)
-                             && (action.visible === undefined || action.visible)
+                    visible: layout.hiddenActions.includes(action) && (action.visible === undefined || action.visible)
                 }
 
                 separatorDelegate: QQC2.MenuSeparator {
                     property var action
-                    visible: layout.hiddenActions.includes(action)
-                             && (action.visible === undefined || action.visible)
+                    visible: layout.hiddenActions.includes(action) && (action.visible === undefined || action.visible)
                 }
             }
         }

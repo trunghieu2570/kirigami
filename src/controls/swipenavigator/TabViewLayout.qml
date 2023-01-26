@@ -31,20 +31,20 @@ Item {
 
     required property Item bar
     onBarChanged: {
-        bar.parent = __grid
-        bar.Layout.row = Qt.binding(() => (__root.position === TabViewLayout.Position.Bottom) ? 1 : 0)
-        bar.Layout.fillWidth = true
+        bar.parent = __grid;
+        bar.Layout.row = Qt.binding(() => (__root.position === TabViewLayout.Position.Bottom) ? 1 : 0);
+        bar.Layout.fillWidth = true;
         if (bar instanceof QQC2.ToolBar) {
-            bar.position = Qt.binding(() => (__root.position === TabViewLayout.Position.Bottom) ? QQC2.ToolBar.Footer : QQC2.ToolBar.Header)
+            bar.position = Qt.binding(() => (__root.position === TabViewLayout.Position.Bottom) ? QQC2.ToolBar.Footer : QQC2.ToolBar.Header);
         }
     }
 
     required property Item contentItem
     onContentItemChanged: {
-        contentItem.parent = __grid
-        contentItem.Layout.row = Qt.binding(() => (__root.position === TabViewLayout.Position.Bottom) ? 0 : 1)
-        contentItem.Layout.fillWidth = true
-        contentItem.Layout.fillHeight = true
+        contentItem.parent = __grid;
+        contentItem.Layout.row = Qt.binding(() => (__root.position === TabViewLayout.Position.Bottom) ? 0 : 1);
+        contentItem.Layout.fillWidth = true;
+        contentItem.Layout.fillHeight = true;
     }
 
     implicitWidth: __grid.implicitWidth

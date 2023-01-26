@@ -2,7 +2,6 @@
  * SPDX-FileCopyrightText: 2021 Noah Davis <noahadvs@gmail.com>
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15 as QQC2
@@ -74,17 +73,18 @@ T.TabButton {
      * @brief This property tells the index of this tab within the tab bar.
      */
     readonly property int tabIndex: {
-        let tabIdx = 0
+        let tabIdx = 0;
         for (let i = 0; i < parent.children.length; ++i) {
-            if (parent.children[i] === this) return tabIdx
+            if (parent.children[i] === this)
+                return tabIdx;
             // Checking for AbstractButtons because any AbstractButton can act as a tab
             if (parent.children[i] instanceof T.AbstractButton) {
-                ++tabIdx
+                ++tabIdx;
             }
         }
-        return -1
+        return -1;
     }
-    
+
     /**
      * @brief This property sets whether the icon colors should be masked with a single color.
      *
@@ -103,10 +103,8 @@ T.TabButton {
     property color checkedBorderColor: Qt.rgba(highlightBarColor.r, highlightBarColor.g, highlightBarColor.b, 0.7)
     property color pressedBorderColor: Qt.rgba(highlightBarColor.r, highlightBarColor.g, highlightBarColor.b, 0.9)
 
-    implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
-                            implicitContentWidth + leftPadding + rightPadding)
-    implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
-                             implicitContentHeight + topPadding + bottomPadding)
+    implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
+    implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding)
 
     display: T.AbstractButton.TextUnderIcon
 
@@ -145,8 +143,16 @@ T.TabButton {
             border.color: control.checked ? checkedBorderColor : (control.pressed ? pressedBorderColor : color)
             border.width: 1
 
-            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
-            Behavior on border.color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
+            Behavior on color  {
+                ColorAnimation {
+                    duration: Kirigami.Units.shortDuration
+                }
+            }
+            Behavior on border.color  {
+                ColorAnimation {
+                    duration: Kirigami.Units.shortDuration
+                }
+            }
         }
     }
 
@@ -184,8 +190,14 @@ T.TabButton {
             implicitHeight: source ? control.icon.height : 0
             implicitWidth: source ? control.icon.width : 0
 
-            Behavior on color { ColorAnimation {} }
-            Behavior on opacity { NumberAnimation {} }
+            Behavior on color  {
+                ColorAnimation {
+                }
+            }
+            Behavior on opacity  {
+                NumberAnimation {
+                }
+            }
         }
         QQC2.Label {
             id: label
@@ -213,8 +225,14 @@ T.TabButton {
                 }
             }
 
-            Behavior on color { ColorAnimation {} }
-            Behavior on opacity { NumberAnimation {} }
+            Behavior on color  {
+                ColorAnimation {
+                }
+            }
+            Behavior on opacity  {
+                NumberAnimation {
+                }
+            }
 
             Layout.topMargin: gridLayout.verticalMargins
             Layout.bottomMargin: gridLayout.verticalMargins

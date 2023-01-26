@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.0
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12 as QQC2
@@ -149,7 +148,7 @@ ColumnLayout {
         Informational
     }
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property holds the PlaceholderMessage type.
      *
@@ -198,7 +197,8 @@ ColumnLayout {
      * @see org::kde::kirigami::private::ActionIconGroup
      * @since 5.70
      */
-    property P.ActionIconGroup icon: P.ActionIconGroup {}
+    property P.ActionIconGroup icon: P.ActionIconGroup {
+    }
 
     /**
      * @brief This property holds an action that helps the user proceed.
@@ -212,8 +212,8 @@ ColumnLayout {
      * @since 5.70
      */
     property alias helpfulAction: actionButton.action
-//END properties
 
+    //END properties
     spacing: Kirigami.Units.largeSpacing
 
     Kirigami.Icon {
@@ -226,11 +226,11 @@ ColumnLayout {
 
         source: {
             if (root.icon.source.length > 0) {
-                return root.icon.source
+                return root.icon.source;
             } else if (root.icon.name.length > 0) {
-                return root.icon.name
+                return root.icon.name;
             }
-            return undefined
+            return undefined;
         }
     }
 
@@ -241,7 +241,6 @@ ColumnLayout {
         type: Kirigami.Heading.Primary
         opacity: root.type === PlaceholderMessage.Type.Actionable ? 1 : 0.65
 
-
         Layout.fillWidth: true
         horizontalAlignment: Qt.AlignHCenter
         verticalAlignment: Qt.AlignVCenter
@@ -251,7 +250,7 @@ ColumnLayout {
 
     QQC2.Label {
         text: root.explanation
-        visible:  root.explanation !== ""
+        visible: root.explanation !== ""
         opacity: root.type === PlaceholderMessage.Type.Actionable ? 1 : 0.65
 
         horizontalAlignment: Qt.AlignHCenter

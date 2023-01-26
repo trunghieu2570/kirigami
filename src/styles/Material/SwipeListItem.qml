@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.5
 import org.kde.kirigami 2.4
 import QtQuick.Controls.Material 2.1 as Mat
@@ -50,7 +49,7 @@ T.SwipeListItem {
             pressed: listItem.pressed
             anchor: listItem
             active: listItem.down || listItem.visualFocus
-            color: Qt.rgba(0,0,0,0.2)
+            color: Qt.rgba(0, 0, 0, 0.2)
         }
     }
     implicitHeight: contentItem.implicitHeight + Units.smallSpacing * 6

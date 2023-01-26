@@ -3,9 +3,8 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
-import QtGraphicalEffects 1.0 as GE
+import Qt5Compat.GraphicalEffects 6.0 as GE
 import org.kde.kirigami 2.4 as Kirigami
 
 GE.LinearGradient {
@@ -43,8 +42,7 @@ GE.LinearGradient {
         }
         GradientStop {
             position: 1.0
-            color:  "transparent"
+            color: "transparent"
         }
     }
 }
-

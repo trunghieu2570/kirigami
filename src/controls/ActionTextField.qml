@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.20 as Kirigami
@@ -78,14 +77,14 @@ QQC2.TextField {
     leftPadding: Kirigami.Units.smallSpacing + (root.effectiveHorizontalAlignment === TextInput.AlignRight ? rightActionsRow : leftActionsRow).width
     rightPadding: Kirigami.Units.smallSpacing + (root.effectiveHorizontalAlignment === TextInput.AlignRight ? leftActionsRow : rightActionsRow).width
 
-    Behavior on leftPadding {
+    Behavior on leftPadding  {
         NumberAnimation {
             duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }
 
-    Behavior on rightPadding {
+    Behavior on rightPadding  {
         NumberAnimation {
             duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
@@ -95,8 +94,8 @@ QQC2.TextField {
     Shortcut {
         id: focusShortcut
         onActivated: {
-            root.forceActiveFocus(Qt.ShortcutFocusReason)
-            root.selectAll()
+            root.forceActiveFocus(Qt.ShortcutFocusReason);
+            root.selectAll();
         }
     }
 

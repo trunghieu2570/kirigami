@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12 as QQC2
@@ -23,19 +22,29 @@ T.PageTab {
         }
         color: {
             if (control.active) {
-                return Kirigami.ColorUtils.adjustColor(Kirigami.Theme.activeTextColor, {"alpha": 0.2*255})
+                return Kirigami.ColorUtils.adjustColor(Kirigami.Theme.activeTextColor, {
+                        "alpha": 0.2 * 255
+                    });
             } else if (control.needsAttention) {
-                return Kirigami.ColorUtils.adjustColor(Kirigami.Theme.negativeTextColor, {"alpha": 0.2*255})
+                return Kirigami.ColorUtils.adjustColor(Kirigami.Theme.negativeTextColor, {
+                        "alpha": 0.2 * 255
+                    });
             } else {
-                return "transparent"
+                return "transparent";
             }
         }
     }
 
     PrivateSwipeHighlight {
         states: [
-            State { name: "highlighted"; when: control.active },
-            State { name: "requestingAttention"; when: control.needsAttention }
+            State {
+                name: "highlighted"
+                when: control.active
+            }, 
+            State {
+                name: "requestingAttention"
+                when: control.needsAttention
+            }
         ]
     }
 
@@ -59,9 +68,7 @@ T.PageTab {
                 visible: !!control.icon.name
                 source: control.icon.name
 
-                Layout.preferredHeight: (control.presentation === T.PageTab.Presentation.Large)
-                    ? Kirigami.Units.iconSizes.medium
-                    : (Kirigami.Settings.isMobile ? Kirigami.Units.iconSizes.smallMedium : Kirigami.Units.iconSizes.small)
+                Layout.preferredHeight: (control.presentation === T.PageTab.Presentation.Large) ? Kirigami.Units.iconSizes.medium : (Kirigami.Settings.isMobile ? Kirigami.Units.iconSizes.smallMedium : Kirigami.Units.iconSizes.small)
                 Layout.preferredWidth: Layout.preferredHeight
 
                 Layout.alignment: (Qt.AlignHCenter | Qt.AlignBottom)
@@ -85,16 +92,14 @@ T.PageTab {
         visible: !vertical
 
         RowLayout {
-            Layout.margins: (control.presentation === T.PageTab.Presentation.Large) ? Kirigami.Units.largeSpacing*2 : Kirigami.Units.largeSpacing
+            Layout.margins: (control.presentation === T.PageTab.Presentation.Large) ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
             Layout.alignment: Qt.AlignVCenter
 
             Kirigami.Icon {
                 visible: !!control.icon.name
                 source: control.icon.name
 
-                Layout.preferredHeight: (control.presentation === T.PageTab.Presentation.Large)
-                    ? Kirigami.Units.iconSizes.medium
-                    : (Kirigami.Settings.isMobile ? Kirigami.Units.iconSizes.smallMedium : Kirigami.Units.iconSizes.small)
+                Layout.preferredHeight: (control.presentation === T.PageTab.Presentation.Large) ? Kirigami.Units.iconSizes.medium : (Kirigami.Settings.isMobile ? Kirigami.Units.iconSizes.smallMedium : Kirigami.Units.iconSizes.small)
                 Layout.preferredWidth: Layout.preferredHeight
 
                 Layout.alignment: (Qt.AlignLeft | Qt.AlignVCenter)

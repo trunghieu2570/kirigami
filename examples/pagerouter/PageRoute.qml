@@ -1,8 +1,8 @@
 Kirigami.PageRoute {
     name: "routeOne"
     Component {
+        // Page contents...
         Kirigami.Page {
-            // Page contents...
         }
     }
 }

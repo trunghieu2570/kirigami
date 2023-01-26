@@ -3,13 +3,11 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.5
 import QtQuick.Controls 2.0 as QQC2
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.4 as Kirigami
 import "private" as P
-
 
 // TODO KF6: Remove!
 /**
@@ -32,7 +30,7 @@ ApplicationHeader {
     pageDelegate: Item {
         id: delegateItem
         readonly property bool current: __appWindow.pageStack.currentIndex === index
-        implicitWidth: titleTextMetrics.width/2 + buttonTextMetrics.collapsedButtonsWidth
+        implicitWidth: titleTextMetrics.width / 2 + buttonTextMetrics.collapsedButtonsWidth
 
         RowLayout {
             id: titleLayout

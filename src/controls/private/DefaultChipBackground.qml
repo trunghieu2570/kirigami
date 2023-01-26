@@ -1,6 +1,5 @@
 // SPDX-FileCopyrightText: 2022 Felipe Kinoshita <kinofhek@gmail.com>
 // SPDX-License-Identifier: GPL-2.0-or-later
-
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
@@ -31,7 +30,7 @@ Rectangle {
      */
     property color pressedBorderColor: Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.9)
 
-    Kirigami.Theme.colorSet:Kirigami.Theme.Header
+    Kirigami.Theme.colorSet: Kirigami.Theme.Header
     Kirigami.Theme.inherit: false
 
     color: parent.pressed ? pressedColor : (parent.checked ? hoverSelectColor : Kirigami.Theme.backgroundColor)

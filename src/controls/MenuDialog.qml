@@ -2,7 +2,6 @@
     SPDX-FileCopyrightText: 2021 Devin Lin <espidev@gmail.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
-
 import QtQuick 2.15
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.15 as QQC2
@@ -100,9 +99,9 @@ Kirigami.Dialog {
 
                 iconSize: Kirigami.Units.gridUnit
                 leftPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
-                rightPadding: Kirigami.Units.largeSpacing + + Kirigami.Units.smallSpacing
+                rightPadding: Kirigami.Units.largeSpacing + +Kirigami.Units.smallSpacing
 
-                icon: modelData.icon.name
+                icon.name: modelData.icon.name
                 text: modelData.text
                 onClicked: modelData.trigger(this)
 
@@ -112,7 +111,9 @@ Kirigami.Dialog {
 
                 QQC2.ToolTip.visible: modelData.tooltip !== "" && hoverHandler.hovered
                 QQC2.ToolTip.text: modelData.tooltip
-                HoverHandler { id: hoverHandler }
+                HoverHandler {
+                    id: hoverHandler
+                }
             }
         }
     }

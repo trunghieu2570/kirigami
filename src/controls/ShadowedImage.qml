@@ -4,7 +4,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import org.kde.kirigami 2.12 as Kirigami
 
@@ -45,7 +44,7 @@ import org.kde.kirigami 2.12 as Kirigami
  */
 Item {
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property holds the color that will be underneath the image.
      *
@@ -116,8 +115,8 @@ Item {
      * @see QtQuick.Image::sourceSize
      */
     property alias sourceSize: image.sourceSize
-//END properties
 
+    //END properties
     Image {
         id: image
         anchors.fill: parent

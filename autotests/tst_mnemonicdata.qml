@@ -15,6 +15,6 @@ TestCase {
     height: 400
 
     function test_press() {
-        compare(Kirigami.MnemonicData.richTextLabel, "设置")
+        compare(Kirigami.MnemonicData.richTextLabel, "设置");
     }
 }

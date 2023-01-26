@@ -3,12 +3,9 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.5
 import org.kde.kirigami 2.4
-
 import "../../templates" as T
-
 
 /**
  * An item that can be used as a title for the application.
@@ -37,9 +34,8 @@ T.AbstractApplicationHeader {
                 left: parent.left
                 right: parent.right
                 bottom: root.y <= 0 ? parent.bottom : undefined
-                top: root.y <= 0 ? undefined :  parent.top
+                top: root.y <= 0 ? undefined : parent.top
             }
         }
     }
 }
-

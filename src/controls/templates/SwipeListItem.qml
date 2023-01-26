@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.6
 import QtQuick.Layouts 1.4
 import QtQuick.Controls 2.4 as QQC2
@@ -46,7 +45,7 @@ import "../private"
 T.SwipeDelegate {
     id: listItem
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property sets whether the item should emit signals related to mouse interaction.
      *
@@ -192,8 +191,8 @@ T.SwipeDelegate {
     /// @private
     /// @deprecated This property will be removed in KDE Framework 6. Use contentItem instead.
     default property alias _default: listItem.contentItem
-//END properties
 
+    //END properties
     LayoutMirroring.childrenInherit: true
 
     hoverEnabled: true
@@ -209,7 +208,8 @@ T.SwipeDelegate {
     topPadding: padding
     bottomPadding: padding
 
-    contentItem: Item {}
+    contentItem: Item {
+    }
     QtObject {
         id: internal
 
@@ -251,30 +251,22 @@ T.SwipeDelegate {
         }
     }
 
-//BEGIN items
+    //BEGIN items
     Loader {
         id: overlayLoader
         readonly property int paddingOffset: (visible ? width : 0) + Kirigami.Units.smallSpacing
         readonly property var theAlias: anchors
         function validate(want, defaultValue) {
-            const expectedLeftPadding = () => listItem.padding * 2 + (listItem.mirrored ? overlayLoader.paddingOffset : 0)
-            const expectedRightPadding = () => listItem.padding * 2 + (listItem.mirrored ? 0 : overlayLoader.paddingOffset)
-
-            const warningText =
-                `Don't override the leftPadding or rightPadding on a SwipeListItem!\n` +
-                `This makes it impossible for me to adjust my layout as I need to for various usecases.\n` +
-                `I'll try to fix the mistake for you, but you should remove your overrides from your app's code entirely.\n` +
-                `If I can't fix the paddings, I'll fall back to a default layout, but it'll be slightly incorrect and lacks\n` +
-                `adaptations needed for touch screens and right-to-left languages, among other things.`
-
+            const expectedLeftPadding = () => listItem.padding * 2 + (listItem.mirrored ? overlayLoader.paddingOffset : 0);
+            const expectedRightPadding = () => listItem.padding * 2 + (listItem.mirrored ? 0 : overlayLoader.paddingOffset);
+            const warningText = `Don't override the leftPadding or rightPadding on a SwipeListItem!\n` + `This makes it impossible for me to adjust my layout as I need to for various usecases.\n` + `I'll try to fix the mistake for you, but you should remove your overrides from your app's code entirely.\n` + `If I can't fix the paddings, I'll fall back to a default layout, but it'll be slightly incorrect and lacks\n` + `adaptations needed for touch screens and right-to-left languages, among other things.`;
             if (listItem.leftPadding != expectedLeftPadding() || listItem.rightPadding != expectedRightPadding()) {
-                listItem.leftPadding = Qt.binding(expectedLeftPadding)
-                listItem.rightPadding = Qt.binding(expectedRightPadding)
-                console.warn(warningText)
-                return defaultValue
+                listItem.leftPadding = Qt.binding(expectedLeftPadding);
+                listItem.rightPadding = Qt.binding(expectedRightPadding);
+                console.warn(warningText);
+                return defaultValue;
             }
-
-            return want
+            return want;
         }
         anchors {
             right: validate((Qt.application.layoutDirection === Qt.RightToLeft) ? undefined : (contentItem ? contentItem.right : undefined), contentItem ? contentItem.right : undefined)
@@ -294,7 +286,7 @@ T.SwipeDelegate {
         asynchronous: true
         sourceComponent: handleComponent
         opacity: listItem.alwaysVisibleActions || Kirigami.Settings.tabletMode || listItem.hovered ? 1 : 0
-        Behavior on opacity {
+        Behavior on opacity  {
             OpacityAnimator {
                 id: opacityAnim
                 duration: Kirigami.Units.veryShortDuration
@@ -314,39 +306,38 @@ T.SwipeDelegate {
             implicitWidth: Kirigami.Units.iconSizes.smallMedium
 
             preventStealing: true
-            readonly property real openPosition: (listItem.width - width - listItem.leftPadding * 2)/listItem.width
+            readonly property real openPosition: (listItem.width - width - listItem.leftPadding * 2) / listItem.width
             property real startX: 0
             property real lastPosition: 0
             property bool openIntention
 
-            onPressed: startX = mapToItem(listItem, 0, 0).x;
+            onPressed: startX = mapToItem(listItem, 0, 0).x
             onClicked: {
                 if (Math.abs(mapToItem(listItem, 0, 0).x - startX) > Qt.styleHints.startDragDistance) {
                     return;
                 }
                 if (listItem.LayoutMirroring.enabled) {
                     if (listItem.swipe.position < 0.5) {
-                        slideAnim.to = openPosition
+                        slideAnim.to = openPosition;
                     } else {
-                        slideAnim.to = 0
+                        slideAnim.to = 0;
                     }
                 } else {
                     if (listItem.swipe.position > -0.5) {
-                        slideAnim.to = -openPosition
+                        slideAnim.to = -openPosition;
                     } else {
-                        slideAnim.to = 0
+                        slideAnim.to = 0;
                     }
                 }
                 slideAnim.restart();
             }
             onPositionChanged: {
                 const pos = mapToItem(listItem, mouse.x, mouse.y);
-
                 if (listItem.LayoutMirroring.enabled) {
                     listItem.swipe.position = Math.max(0, Math.min(openPosition, (pos.x / listItem.width)));
                     openIntention = listItem.swipe.position > lastPosition;
                 } else {
-                    listItem.swipe.position = Math.min(0, Math.max(-openPosition, (pos.x / (listItem.width -listItem.rightPadding) - 1)));
+                    listItem.swipe.position = Math.min(0, Math.max(-openPosition, (pos.x / (listItem.width - listItem.rightPadding) - 1)));
                     openIntention = listItem.swipe.position < lastPosition;
                 }
                 lastPosition = listItem.swipe.position;
@@ -354,15 +345,15 @@ T.SwipeDelegate {
             onReleased: {
                 if (listItem.LayoutMirroring.enabled) {
                     if (openIntention) {
-                        slideAnim.to = openPosition
+                        slideAnim.to = openPosition;
                     } else {
-                        slideAnim.to = 0
+                        slideAnim.to = 0;
                     }
                 } else {
                     if (openIntention) {
-                        slideAnim.to = -openPosition
+                        slideAnim.to = -openPosition;
                     } else {
-                        slideAnim.to = 0
+                        slideAnim.to = 0;
                     }
                 }
                 slideAnim.restart();
@@ -372,7 +363,7 @@ T.SwipeDelegate {
                 id: handleIcon
                 anchors.fill: parent
                 selected: listItem.checked || (listItem.pressed && !listItem.checked && !listItem.sectionDelegate)
-                source: (LayoutMirroring.enabled ? (listItem.background.x < listItem.background.width/2 ? "overflow-menu-right" : "overflow-menu-left") : (listItem.background.x < -listItem.background.width/2 ? "overflow-menu-right" : "overflow-menu-left"))
+                source: (LayoutMirroring.enabled ? (listItem.background.x < listItem.background.width / 2 ? "overflow-menu-right" : "overflow-menu-left") : (listItem.background.x < -listItem.background.width / 2 ? "overflow-menu-right" : "overflow-menu-left"))
             }
 
             Connections {
@@ -383,16 +374,13 @@ T.SwipeDelegate {
                     if (!listItem.actionsVisible) {
                         return;
                     }
-
                     if (listItem.LayoutMirroring.enabled) {
                         listItem.swipe.position = Math.max(0, Math.min(dragButton.openPosition, internal.swipeFilterItem.peek));
                         dragButton.openIntention = listItem.swipe.position > dragButton.lastPosition;
-
                     } else {
                         listItem.swipe.position = Math.min(0, Math.max(-dragButton.openPosition, -internal.swipeFilterItem.peek));
                         dragButton.openIntention = listItem.swipe.position < dragButton.lastPosition;
                     }
-
                     dragButton.lastPosition = listItem.swipe.position;
                 }
                 function onPressed(mouse) {
@@ -429,8 +417,8 @@ T.SwipeDelegate {
 
             // QQC2.SwipeDelegate.onPressedChanged is broken with touch
             onClicked: {
-                    slideAnim.to = 0;
-                    slideAnim.restart();
+                slideAnim.to = 0;
+                slideAnim.restart();
             }
             Rectangle {
                 anchors.fill: parent
@@ -438,7 +426,6 @@ T.SwipeDelegate {
             }
 
             visible: listItem.swipe.position != 0
-
 
             EdgeShadow {
                 edge: Qt.TopEdge
@@ -461,26 +448,22 @@ T.SwipeDelegate {
         }
     }
 
-
     RowLayout {
         id: actionsLayout
         anchors {
-                right: parent.right
-                top: parent.top
-                bottom: parent.bottom
-                rightMargin: Kirigami.Units.smallSpacing
-            }
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+            rightMargin: Kirigami.Units.smallSpacing
+        }
         visible: parent != listItem
-        parent: !listItem.alwaysVisibleActions && Kirigami.Settings.tabletMode
-                ? listItem.swipe.leftItem || listItem.swipe.rightItem || listItem
-                : overlayLoader
+        parent: !listItem.alwaysVisibleActions && Kirigami.Settings.tabletMode ? listItem.swipe.leftItem || listItem.swipe.rightItem || listItem : overlayLoader
 
         property bool hasVisibleActions: false
         function updateVisibleActions(definitelyVisible) {
             if (definitelyVisible === undefined) {
-                definitelyVisible = false
+                definitelyVisible = false;
             }
-
             if (definitelyVisible) {
                 hasVisibleActions = true;
             } else {
@@ -501,20 +484,17 @@ T.SwipeDelegate {
                 if (listItem.actions.length === 0) {
                     return null;
                 } else {
-                    return listItem.actions[0].text !== undefined &&
-                        listItem.actions[0].trigger !== undefined ?
-                            listItem.actions :
-                            listItem.actions[0];
+                    return listItem.actions[0].text !== undefined && listItem.actions[0].trigger !== undefined ? listItem.actions : listItem.actions[0];
                 }
             }
             delegate: QQC2.ToolButton {
                 icon.name: modelData.iconName !== "" ? modelData.iconName : ""
                 icon.source: modelData.iconSource !== "" ? modelData.iconSource : ""
-                enabled: (modelData && modelData.enabled !== undefined) ? modelData.enabled : true;
-                visible: (modelData && modelData.visible !== undefined) ? modelData.visible : true;
-                onVisibleChanged: actionsLayout.updateVisibleActions(visible);
-                Component.onCompleted: actionsLayout.updateVisibleActions(visible);
-                Component.onDestruction: actionsLayout.updateVisibleActions(visible);
+                enabled: (modelData && modelData.enabled !== undefined) ? modelData.enabled : true
+                visible: (modelData && modelData.visible !== undefined) ? modelData.visible : true
+                onVisibleChanged: actionsLayout.updateVisibleActions(visible)
+                Component.onCompleted: actionsLayout.updateVisibleActions(visible)
+                Component.onDestruction: actionsLayout.updateVisibleActions(visible)
                 QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                 QQC2.ToolTip.timeout: 5000
                 QQC2.ToolTip.visible: listItem.visible && (Kirigami.Settings.tabletMode ? pressed : hovered) && QQC2.ToolTip.text.length > 0
@@ -534,13 +514,13 @@ T.SwipeDelegate {
         }
     }
 
-
-    background: DefaultListItemBackground {}
+    background: DefaultListItemBackground {
+    }
 
     swipe {
         enabled: false
-        right: listItem.alwaysVisibleActions ||listItem.LayoutMirroring.enabled || !Kirigami.Settings.tabletMode ? null : actionsBackgroundDelegate
-        left: listItem.alwaysVisibleActions ||listItem.LayoutMirroring.enabled && Kirigami.Settings.tabletMode ? actionsBackgroundDelegate : null
+        right: listItem.alwaysVisibleActions || listItem.LayoutMirroring.enabled || !Kirigami.Settings.tabletMode ? null : actionsBackgroundDelegate
+        left: listItem.alwaysVisibleActions || listItem.LayoutMirroring.enabled && Kirigami.Settings.tabletMode ? actionsBackgroundDelegate : null
     }
     NumberAnimation {
         id: slideAnim
@@ -550,6 +530,5 @@ T.SwipeDelegate {
         property: "position"
         from: listItem.swipe.position
     }
-//END items
+    //END items
 }
-

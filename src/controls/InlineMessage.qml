@@ -5,7 +5,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.7
 import org.kde.kirigami 2.5 as Kirigami
 import "templates" as T
@@ -75,7 +74,6 @@ T.InlineMessage {
             } else if (root.type === Kirigami.MessageType.Error) {
                 return Kirigami.Theme.negativeTextColor;
             }
-
             return Kirigami.Theme.activeTextColor;
         }
 

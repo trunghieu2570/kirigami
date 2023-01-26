@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.2
 import QtQuick.Controls 2.1 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
@@ -41,11 +40,14 @@ QQC2.Label {
     activeFocusOnTab: true
     Accessible.role: Accessible.Button
     Accessible.name: text
-    Accessible.onPressAction: control.clicked({"button": Qt.LeftButton})
+    Accessible.onPressAction: control.clicked({
+            "button": Qt.LeftButton
+        })
 
     text: action ? action.text : ""
     enabled: !action || action.enabled
-    onClicked: if (action) action.trigger()
+    onClicked: if (action)
+        action.trigger()
 
     font.bold: activeFocus
     font.underline: control.enabled
@@ -63,11 +65,15 @@ QQC2.Label {
         case Qt.Key_Enter:
         case Qt.Key_Return:
         case Qt.Key_Select:
-            control.clicked({"button": Qt.LeftButton});
+            control.clicked({
+                    "button": Qt.LeftButton
+                });
             event.accepted = true;
             break;
         case Qt.Key_Menu:
-            control.pressed({"button": Qt.RightButton});
+            control.pressed({
+                    "button": Qt.RightButton
+                });
             event.accepted = true;
             break;
         }

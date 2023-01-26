@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
@@ -21,9 +20,7 @@ Flickable {
     boundsBehavior: Flickable.StopAtBounds
     interactive: Kirigami.Settings.hasTransientTouchInput
 
-    contentX: Math.max(0,
-        Math.min(currentItem.x + currentItem.width/2 - root.width/2,
-                 root.contentWidth - root.width))
+    contentX: Math.max(0, Math.min(currentItem.x + currentItem.width / 2 - root.width / 2, root.contentWidth - root.width))
 
     RowLayout {
         id: mainLayout
@@ -82,7 +79,7 @@ Flickable {
         }
     }
 
-    Behavior on contentX {
+    Behavior on contentX  {
         NumberAnimation {
             duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad

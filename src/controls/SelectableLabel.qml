@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 
@@ -52,7 +51,8 @@ QQC2.TextArea {
     Accessible.selectableText: true
     Accessible.editable: false
 
-    background: Item {}
+    background: Item {
+    }
 
     HoverHandler {
         id: hoverHandler

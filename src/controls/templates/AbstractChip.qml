@@ -1,6 +1,5 @@
 // SPDX-FileCopyrightText: 2022 Felipe Kinoshita <kinofhek@gmail.com>
 // SPDX-License-Identifier: GPL-2.0-or-later
-
 import QtQuick 2.15
 import QtQuick.Templates 2.15 as T
 
@@ -26,5 +25,5 @@ T.AbstractButton {
     /**
      * @brief This signal is emitted when the close button has been clicked.
      */
-    signal removed()
+    signal removed
 }

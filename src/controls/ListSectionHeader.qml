@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.5
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.2
@@ -55,7 +54,8 @@ Kirigami.AbstractListItem {
     activeFocusOnTab: false
 
     // we do not need a background
-    background: Item {}
+    background: Item {
+    }
 
     topPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
 

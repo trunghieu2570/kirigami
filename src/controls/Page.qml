@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.5
 import QtQuick.Layouts 1.2
 import QtQuick.Templates 2.1 as T2
@@ -22,7 +21,7 @@ import "private" as P
 QQC2.Page {
     id: root
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief The default content padding is 1 gridUnit.
      * // TODO: check if  this is not displayed in the generated api doc.
@@ -200,11 +199,7 @@ QQC2.Page {
      * @since 2.1
      */
     //TODO KF6: remove this or at least all the assumptions about the internal tree structure of items
-    readonly property bool isCurrentPage: Kirigami.ColumnView.view
-            ? (Kirigami.ColumnView.index === Kirigami.ColumnView.view.currentIndex && Kirigami.ColumnView.view.parent.parent.currentItem === Kirigami.ColumnView.view.parent)
-            : (parent && parent instanceof QQC2.StackView
-                ? parent.currentItem === root
-                : true)
+    readonly property bool isCurrentPage: Kirigami.ColumnView.view ? (Kirigami.ColumnView.index === Kirigami.ColumnView.view.currentIndex && Kirigami.ColumnView.view.parent.parent.currentItem === Kirigami.ColumnView.view.parent) : (parent && parent instanceof QQC2.StackView ? parent.currentItem === root : true)
 
     /**
      * An item which stays on top of every other item in the page,
@@ -221,7 +216,8 @@ QQC2.Page {
      * @brief This holds the icon that represents this page.
      * @property var icon
      */
-    property P.ActionIconGroup icon: P.ActionIconGroup {}
+    property P.ActionIconGroup icon: P.ActionIconGroup {
+    }
 
     /**
      * @brief Whether this page needs user attention.
@@ -280,9 +276,9 @@ QQC2.Page {
             return Kirigami.ApplicationHeaderStyle.None;
         }
     }
-//END properties
+    //END properties
 
-//BEGIN signal and signal handlers
+    //BEGIN signal and signal handlers
     /**
      * @brief Emitted when the application requests a Back action.
      *
@@ -292,17 +288,16 @@ QQC2.Page {
      * and if it set event.accepted = true, it will stop the main
      * application to manage the back event.
      */
-    signal backRequested(var event);
-
+    signal backRequested(var event)
 
     // Look for sheets and cose them
     // FIXME: port Sheets to Popup?
     onBackRequested: {
         let item;
-        for(const i in root.resources) {
+        for (const i in root.resources) {
             item = root.resources[i];
             if (item.hasOwnProperty("close") && item.hasOwnProperty("sheetOpen") && item.sheetOpen) {
-                item.close()
+                item.close();
                 event.accepted = true;
                 return;
             }
@@ -312,9 +307,7 @@ QQC2.Page {
     // NOTE: contentItem will be created if not existing (and contentChildren of Page would become its children) This with anchors enforces the geometry we want, where globalToolBar is a super-header, on top of header
     contentItem: Item {
         anchors {
-            top: (root.header && root.header.visible)
-                    ? root.header.bottom
-                    : (globalToolBar.visible ? globalToolBar.bottom : parent.top)
+            top: (root.header && root.header.visible) ? root.header.bottom : (globalToolBar.visible ? globalToolBar.bottom : parent.top)
             topMargin: root.topPadding + root.spacing
             bottom: (root.footer && root.footer.visible) ? root.footer.top : parent.bottom
             bottomMargin: root.bottomPadding + root.spacing
@@ -329,7 +322,7 @@ QQC2.Page {
     implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding
 
     // FIXME: on material the shadow would bleed over
-    clip: root.header !== null;
+    clip: root.header !== null
 
     onHeaderChanged: {
         if (header) {
@@ -341,7 +334,7 @@ QQC2.Page {
         headerChanged();
         parentChanged(root.parent);
         globalToolBar.syncSource();
-        actionButtons.pageComplete = true
+        actionButtons.pageComplete = true;
     }
 
     onParentChanged: {
@@ -350,7 +343,6 @@ QQC2.Page {
         }
         globalToolBar.stack = null;
         globalToolBar.row = null;
-
         if (root.Kirigami.ColumnView.view) {
             globalToolBar.row = root.Kirigami.ColumnView.view.__pageRow;
         }
@@ -363,14 +355,13 @@ QQC2.Page {
             globalToolBar.syncSource();
         }
     }
-//END signals and signal handlers
+    //END signals and signal handlers
 
     // in data in order for them to not be considered for contentItem, contentChildren, contentData
     data: [
         P.PageActionPropertyGroup {
             id: actionsGroup
-        },
-
+        }, 
         Item {
             id: overlayItem
             parent: root
@@ -379,14 +370,14 @@ QQC2.Page {
                 fill: parent
                 topMargin: globalToolBar.height
             }
-        },
+        }, 
         // global top toolbar if we are in a PageRow (in the row or as a layer)
         Loader {
             id: globalToolBar
             z: 9999
             height: item ? item.implicitHeight : 0
             anchors {
-                left:  parent.left
+                left: parent.left
                 right: parent.right
                 top: parent.top
             }
@@ -406,31 +397,27 @@ QQC2.Page {
             }
 
             function syncSource() {
-                if (root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar &&
-                    root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.Titles &&
-                    root.titleDelegate !== defaultTitleDelegate) {
+                if (root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar && root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.Titles && root.titleDelegate !== defaultTitleDelegate) {
                     sourceComponent = root.titleDelegate;
                 } else if (active) {
-                    const url = root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar
-                        ? "private/globaltoolbar/ToolBarPageHeader.qml"
-                        : "private/globaltoolbar/TitlesPageHeader.qml";
+                    const url = root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar ? "private/globaltoolbar/ToolBarPageHeader.qml" : "private/globaltoolbar/TitlesPageHeader.qml";
                     // TODO: find container reliably, remove assumption
                     setSource(Qt.resolvedUrl(url), {
-                        pageRow: Qt.binding(() => row),
-                        page: root,
-                        current: Qt.binding(() => {
-                            if (!row && !stack) {
-                                return true;
-                            } else if (stack) {
-                                return stack;
-                            } else {
-                                return row.currentIndex === root.Kirigami.ColumnView.level;
-                            }
-                        }),
-                    });
+                            "pageRow": Qt.binding(() => row),
+                            "page": root,
+                            "current": Qt.binding(() => {
+                                    if (!row && !stack) {
+                                        return true;
+                                    } else if (stack) {
+                                        return stack;
+                                    } else {
+                                        return row.currentIndex === root.Kirigami.ColumnView.level;
+                                    }
+                                })
+                        });
                 }
             }
-        },
+        }, 
         // bottom action buttons
         Loader {
             id: actionButtons
@@ -460,13 +447,9 @@ QQC2.Page {
                 if (!pageComplete) {
                     return false;
                 }
-
-                if ((globalToolBar.row && globalToolBar.row.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.ToolBar)
-                    || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar
-                    || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.None) {
+                if ((globalToolBar.row && globalToolBar.row.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.ToolBar) || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.None) {
                     return false;
                 }
-
                 if (!root.actions.main && !root.actions.left && !root.actions.right && root.actions.contextualActions.length === 0) {
                     return false;
                 }
@@ -475,15 +458,12 @@ QQC2.Page {
                 if (typeof applicationWindow === "undefined") {
                     return true;
                 }
-
                 if (applicationWindow().header && applicationWindow().header.toString().indexOf("ToolBarApplicationHeader") !== -1) {
                     return false;
                 }
-
                 if (applicationWindow().footer && applicationWindow().footer.toString().indexOf("ToolBarApplicationHeader") !== -1) {
                     return false;
                 }
-
                 return true;
             }
 

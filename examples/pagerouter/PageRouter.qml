@@ -20,11 +20,17 @@ Kirigami.ApplicationWindow {
                         }
                         QQC2.Button {
                             text: "Red Login"
-                            onClicked: Kirigami.PageRouter.navigateToRoute(["home", {"route": "login", "data": "red"}])
+                            onClicked: Kirigami.PageRouter.navigateToRoute(["home", {
+                                        "route": "login",
+                                        "data": "red"
+                                    }])
                         }
                         QQC2.Button {
                             text: "Blue Login"
-                            onClicked: Kirigami.PageRouter.navigateToRoute(["home", {"route": "login", "data": "blue"}])
+                            onClicked: Kirigami.PageRouter.navigateToRoute(["home", {
+                                        "route": "login",
+                                        "data": "blue"
+                                    }])
                         }
                     }
                 }

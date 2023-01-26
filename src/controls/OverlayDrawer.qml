@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import QtQuick.Templates 2.0 as T2
 import org.kde.kirigami 2.15 as Kirigami
@@ -22,12 +21,12 @@ import "templates" as T
 T.OverlayDrawer {
     id: root
 
-//BEGIN Properties
+    //BEGIN Properties
     focus: false
     modal: true
     drawerOpen: !modal
     closePolicy: modal ? T2.Popup.CloseOnEscape | T2.Popup.CloseOnReleaseOutside : T2.Popup.NoAutoClose
-    handleVisible: interactive && (modal || !drawerOpen) && (typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true)
+    handleVisible: interactive && (modal || !drawerOpen) && (typeof (applicationWindow) === typeof (Function) && applicationWindow() ? applicationWindow().controlsVisible : true)
 
     // FIXME: set to false when it does not lead to blocking closePolicy.
     // See Kirigami bug: 454119
@@ -68,7 +67,7 @@ T.OverlayDrawer {
                 width: Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.smallSpacing * 2
                 height: width
                 radius: 2
-                Behavior on color {
+                Behavior on color  {
                     ColorAnimation {
                         duration: Kirigami.Units.longDuration
                         easing.type: Easing.InOutQuad
@@ -95,27 +94,28 @@ T.OverlayDrawer {
                             edge = Qt.LeftEdge;
                         }
                     }
-
-                    if ((root.handleClosedIcon.source || root.handleClosedIcon.name)
-                        && (root.handleOpenIcon.source || root.handleOpenIcon.name)) {
+                    if ((root.handleClosedIcon.source || root.handleClosedIcon.name) && (root.handleOpenIcon.source || root.handleOpenIcon.name)) {
                         return Qt.resolvedUrl("templates/private/GenericDrawerIcon.qml");
-                    } else if (edge === Qt.LeftEdge ) {
+                    } else if (edge === Qt.LeftEdge) {
                         return Qt.resolvedUrl("templates/private/MenuIcon.qml");
-                    } else if(edge === Qt.RightEdge && root.hasOwnProperty("actions")) {
+                    } else if (edge === Qt.RightEdge && root.hasOwnProperty("actions")) {
                         return Qt.resolvedUrl("templates/private/ContextIcon.qml");
-                    }else {
+                    } else {
                         return "";
                     }
                 }
                 onItemChanged: {
-                    if(item) {
-                        item.drawer = Qt.binding(function(){return root});
-                        item.color = Qt.binding(function(){return root.handle.pressed ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor});
+                    if (item) {
+                        item.drawer = Qt.binding(function () {
+                                return root;
+                            });
+                        item.color = Qt.binding(function () {
+                                return root.handle.pressed ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor;
+                            });
                     }
                 }
             }
         }
-
 
         Kirigami.Separator {
             LayoutMirroring.enabled: false
@@ -141,7 +141,7 @@ T.OverlayDrawer {
 
             opacity: root.position === 0 ? 0 : 1
 
-            Behavior on opacity {
+            Behavior on opacity  {
                 NumberAnimation {
                     duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutQuad

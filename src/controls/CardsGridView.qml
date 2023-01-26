@@ -3,12 +3,10 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.10
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.4 as Kirigami
 import "private" as P
-
 
 //TODO KF6: remove the whole class?
 /**
@@ -48,10 +46,10 @@ P.CardsGridViewPrivate {
      * @since 2.5
      */
     readonly property int columns: {
-        const minFromWidth = Math.floor(width / minimumColumnWidth)
-        const maxFromWidth = Math.ceil(width / maximumColumnWidth)
-        const extraCount = extraColumns ? Infinity : count
-        return Math.max(1,Math.min(maximumColumns,minFromWidth,maxFromWidth,extraCount))
+        const minFromWidth = Math.floor(width / minimumColumnWidth);
+        const maxFromWidth = Math.ceil(width / maximumColumnWidth);
+        const extraCount = extraColumns ? Infinity : count;
+        return Math.max(1, Math.min(maximumColumns, minFromWidth, maxFromWidth, extraCount));
     }
 
     /**
@@ -92,7 +90,7 @@ P.CardsGridViewPrivate {
      */
     property int minimumColumnWidth: Kirigami.Units.gridUnit * 12
 
-    cellWidth: Math.floor(width/columns)
+    cellWidth: Math.floor(width / columns)
     cellHeight: Math.max(Kirigami.Units.gridUnit * 15, Math.min(cellWidth, maximumColumnWidth) / 1.2)
 
     /**
@@ -108,8 +106,7 @@ P.CardsGridViewPrivate {
             positionViewAtBeginning();
             currentIndex = 0;
             event.accepted = true;
-        }
-        else if (event.key === Qt.Key_End) {
+        } else if (event.key === Qt.Key_End) {
             positionViewAtEnd();
             currentIndex = count - 1;
             event.accepted = true;

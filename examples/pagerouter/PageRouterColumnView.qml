@@ -9,8 +9,8 @@ Kirigami.ApplicationWindow {
         Kirigami.PageRoute {
             name: "home"
             Component {
+                // Page contents...
                 Kirigami.Page {
-                    // Page contents...
                 }
             }
         }

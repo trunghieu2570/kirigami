@@ -3,13 +3,11 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.5
 import QtQuick.Controls 2.0 as QQC2
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.4 as Kirigami
 import "private"
-
 
 /**
  * @brief An item that can be used as a title for the application.
@@ -26,7 +24,7 @@ import "private"
 AbstractApplicationHeader {
     id: header
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property sets the way the separator between pages should be drawn in the header.
      *
@@ -94,16 +92,18 @@ AbstractApplicationHeader {
             }
         }
     }
-//END properties
+    //END properties
 
-//BEGIN signal handlers
+    //BEGIN signal handlers
     onBackButtonEnabledChanged: {
         if (backButtonEnabled && !titleList.backButton) {
             let component = Qt.createComponent(Qt.resolvedUrl("private/BackButton.qml"));
             titleList.backButton = component.createObject(navButtons);
             component.destroy();
             component = Qt.createComponent(Qt.resolvedUrl("private/ForwardButton.qml"));
-            titleList.forwardButton = component.createObject(navButtons, {"headerFlickable": titleList});
+            titleList.forwardButton = component.createObject(navButtons, {
+                    "headerFlickable": titleList
+                });
             component.destroy();
         } else if (titleList.backButton) {
             titleList.backButton.destroy();
@@ -112,8 +112,8 @@ AbstractApplicationHeader {
     }
 
     Component.onCompleted: print("Warning: ApplicationHeader is deprecated, remove and use the automatic internal toolbar instead.")
-//END signal handlers
 
+    //END signal handlers
     Rectangle {
         anchors {
             verticalCenter: parent.verticalCenter
@@ -206,14 +206,14 @@ AbstractApplicationHeader {
         }
     }
     Repeater {
-        model: pageRow.layers.depth -1
+        model: pageRow.layers.depth - 1
         delegate: Loader {
             // Don't load async to prevent jumpy behaviour on slower devices as it loads in.
             // If the title delegate really needs to load async, it should be its responsibility to do it itself.
             asynchronous: false
             sourceComponent: header.pageDelegate
-            readonly property Kirigami.Page page: pageRow.layers.get(modelData+1)
-            readonly property bool current: true;
+            readonly property Kirigami.Page page: pageRow.layers.get(modelData + 1)
+            readonly property bool current: true
             Component.onCompleted: stack.push(this)
             Component.onDestruction: stack.pop()
         }
@@ -248,7 +248,6 @@ AbstractApplicationHeader {
         property Item forwardButton
         clip: true
 
-
         boundsBehavior: Flickable.StopAtBounds
         readonly property alias model: mainRepeater.model
         contentWidth: contentItem.width
@@ -262,10 +261,16 @@ AbstractApplicationHeader {
             if (titleList.wideMode || contentItem.children.length < 2) {
                 return;
             }
-            listScrollAnim.running = false
+            listScrollAnim.running = false;
             const pos = titleList.contentX;
             let destPos;
-            titleList.contentX = Math.max(((contentItem.children[idx] || {x: 0}).x + (contentItem.children[idx] || {width: 0}).width) - titleList.width, Math.min(titleList.contentX, (contentItem.children[idx] || {x: 0}).x));
+            titleList.contentX = Math.max(((contentItem.children[idx] || {
+                            "x": 0
+                        }).x + (contentItem.children[idx] || {
+                            "width": 0
+                        }).width) - titleList.width, Math.min(titleList.contentX, (contentItem.children[idx] || {
+                            "x": 0
+                        }).x));
             destPos = titleList.contentX;
             listScrollAnim.from = pos;
             listScrollAnim.to = destPos;
@@ -286,10 +291,10 @@ AbstractApplicationHeader {
                 titleList.contentX = pageRow.contentItem.contentX - pageRow.contentItem.originX + titleList.originX;
             }
         }
-        onCountChanged: contentXSyncTimer.restart();
-        onCurrentIndexChanged: gotoIndex(currentIndex);
-        onModelChanged: gotoIndex(currentIndex);
-        onContentWidthChanged: gotoIndex(currentIndex);
+        onCountChanged: contentXSyncTimer.restart()
+        onCurrentIndexChanged: gotoIndex(currentIndex)
+        onModelChanged: gotoIndex(currentIndex)
+        onContentWidthChanged: gotoIndex(currentIndex)
 
         onContentXChanged: {
             if (movingHorizontally && !titleList.scrollMutex && titleList.scrollingLocked && !pageRow.contentItem.moving) {
@@ -299,15 +304,15 @@ AbstractApplicationHeader {
             }
         }
         onHeightChanged: {
-            titleList.returnToBounds()
+            titleList.returnToBounds();
         }
         onMovementEnded: {
             if (titleList.scrollingLocked) {
                 //this will trigger snap as well
-                pageRow.contentItem.flick(0,0);
+                pageRow.contentItem.flick(0, 0);
             }
         }
-        onFlickEnded: movementEnded();
+        onFlickEnded: movementEnded()
 
         NumberAnimation {
             id: scrollTopAnimation
@@ -333,7 +338,7 @@ AbstractApplicationHeader {
                     width: {
                         // more columns shown?
                         if (titleList.scrollingLocked && delegateLoader.page) {
-                            return delegateLoader.page.width - (index === 0 ? navButtons.width : 0) - (index === pageRow.depth-1  ? stack.anchors.rightMargin : 0);
+                            return delegateLoader.page.width - (index === 0 ? navButtons.width : 0) - (index === pageRow.depth - 1 ? stack.anchors.rightMargin : 0);
                         } else {
                             return Math.min(titleList.width, delegateLoader.implicitWidth + Kirigami.Units.smallSpacing);
                         }
@@ -350,7 +355,6 @@ AbstractApplicationHeader {
                                 scrollTopAnimation.to = -pageRow.currentItem.flickable.topMargin;
                                 scrollTopAnimation.running = true;
                             }
-
                         } else {
                             pageRow.currentIndex = modelData;
                         }
@@ -364,7 +368,9 @@ AbstractApplicationHeader {
 
                         Connections {
                             target: delegateLoader.page.Component
-                            function onDestruction() { delegateLoader.sourceComponent = null }
+                            function onDestruction() {
+                                delegateLoader.sourceComponent = null;
+                            }
                         }
 
                         sourceComponent: header.pageDelegate

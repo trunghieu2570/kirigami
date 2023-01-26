@@ -3,10 +3,9 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Controls 2.0 as QQC2
-import QtGraphicalEffects 1.0 as GE
+import Qt5Compat.GraphicalEffects 6.0 as GE
 import org.kde.kirigami 2.16 as Kirigami
 
 Item {
@@ -23,9 +22,11 @@ Item {
     clip: true
 
     readonly property Kirigami.Page page: root.parent.page
-    //either Action or QAction should work here
 
-    function isActionAvailable(action) { return action && (action.hasOwnProperty("visible") ? action.visible === undefined || action.visible : !action.hasOwnProperty("visible")); }
+    //either Action or QAction should work here
+    function isActionAvailable(action) {
+        return action && (action.hasOwnProperty("visible") ? action.visible === undefined || action.visible : !action.hasOwnProperty("visible"));
+    }
 
     readonly property QtObject action: root.page && isActionAvailable(root.page.mainAction) ? root.page.mainAction : null
     readonly property QtObject leftAction: root.page && isActionAvailable(root.page.leftAction) ? root.page.leftAction : null
@@ -54,7 +55,7 @@ Item {
                 target: root
                 visible: true
             }
-        },
+        }, 
         State {
             when: !mouseArea.internalVisibility
             PropertyChanges {
@@ -89,16 +90,15 @@ Item {
     onWidthChanged: button.x = Qt.binding(() => (root.width / 2 - button.width / 2))
     Item {
         id: button
-        x: root.width/2 - button.width/2
+        x: root.width / 2 - button.width / 2
 
         property int mediumIconSizing: Kirigami.Units.iconSizes.medium
         property int largeIconSizing: Kirigami.Units.iconSizes.large
 
         anchors.bottom: edgeMouseArea.bottom
 
-        implicitWidth: implicitHeight + mediumIconSizing*2 + Kirigami.Units.gridUnit
-        implicitHeight: largeIconSizing + Kirigami.Units.largeSpacing*2
-
+        implicitWidth: implicitHeight + mediumIconSizing * 2 + Kirigami.Units.gridUnit
+        implicitHeight: largeIconSizing + Kirigami.Units.largeSpacing * 2
 
         onXChanged: {
             if (mouseArea.pressed || edgeMouseArea.pressed || fakeContextMenuButton.pressed) {
@@ -106,18 +106,18 @@ Item {
                     globalDrawer.peeking = true;
                     globalDrawer.visible = true;
                     if (Qt.application.layoutDirection === Qt.LeftToRight) {
-                        globalDrawer.position = Math.min(1, Math.max(0, (x - root.width/2 + button.width/2)/globalDrawer.contentItem.width + mouseArea.drawerShowAdjust));
+                        globalDrawer.position = Math.min(1, Math.max(0, (x - root.width / 2 + button.width / 2) / globalDrawer.contentItem.width + mouseArea.drawerShowAdjust));
                     } else {
-                        globalDrawer.position = Math.min(1, Math.max(0, (root.width/2 - button.width/2 - x)/globalDrawer.contentItem.width + mouseArea.drawerShowAdjust));
+                        globalDrawer.position = Math.min(1, Math.max(0, (root.width / 2 - button.width / 2 - x) / globalDrawer.contentItem.width + mouseArea.drawerShowAdjust));
                     }
                 }
                 if (root.hasContextDrawer && contextDrawer.enabled && contextDrawer.modal) {
                     contextDrawer.peeking = true;
                     contextDrawer.visible = true;
                     if (Qt.application.layoutDirection === Qt.LeftToRight) {
-                        contextDrawer.position = Math.min(1, Math.max(0, (root.width/2 - button.width/2 - x)/contextDrawer.contentItem.width + mouseArea.drawerShowAdjust));
+                        contextDrawer.position = Math.min(1, Math.max(0, (root.width / 2 - button.width / 2 - x) / contextDrawer.contentItem.width + mouseArea.drawerShowAdjust));
                     } else {
-                        contextDrawer.position = Math.min(1, Math.max(0, (x - root.width/2 + button.width/2)/contextDrawer.contentItem.width + mouseArea.drawerShowAdjust));
+                        contextDrawer.position = Math.min(1, Math.max(0, (x - root.width / 2 + button.width / 2) / contextDrawer.contentItem.width + mouseArea.drawerShowAdjust));
                     }
                 }
             }
@@ -128,29 +128,33 @@ Item {
             anchors.fill: parent
 
             visible: action !== null || leftAction !== null || rightAction !== null
-            property bool internalVisibility: (!root.hasApplicationWindow || (applicationWindow().controlsVisible && applicationWindow().height > root.height*2)) && (root.action === null || root.action.visible === undefined || root.action.visible)
+            property bool internalVisibility: (!root.hasApplicationWindow || (applicationWindow().controlsVisible && applicationWindow().height > root.height * 2)) && (root.action === null || root.action.visible === undefined || root.action.visible)
             preventStealing: true
 
             drag {
                 target: button
                 //filterChildren: true
                 axis: Drag.XAxis
-                minimumX: root.hasContextDrawer && contextDrawer.enabled && contextDrawer.modal ? 0 : root.width/2 - button.width/2
-                maximumX: root.hasGlobalDrawer && globalDrawer.enabled && globalDrawer.modal ? root.width : root.width/2 - button.width/2
+                minimumX: root.hasContextDrawer && contextDrawer.enabled && contextDrawer.modal ? 0 : root.width / 2 - button.width / 2
+                maximumX: root.hasGlobalDrawer && globalDrawer.enabled && globalDrawer.modal ? root.width : root.width / 2 - button.width / 2
             }
 
-            property var downTimestamp;
+            property var downTimestamp
             property int startX
             property int startMouseY
             property real drawerShowAdjust
 
-            readonly property int currentThird: (3*mouseX)/width
+            readonly property int currentThird: (3 * mouseX) / width
             readonly property QtObject actionUnderMouse: {
-                switch(currentThird) {
-                    case 0: return leftAction;
-                    case 1: return action;
-                    case 2: return rightAction;
-                    default: return null
+                switch (currentThird) {
+                case 0:
+                    return leftAction;
+                case 1:
+                    return action;
+                case 2:
+                    return rightAction;
+                default:
+                    return null;
                 }
             }
 
@@ -168,24 +172,26 @@ Item {
                     applicationWindow().pageStack.currentIndex = root.page.Kirigami.ColumnView.level;
                 }
                 downTimestamp = (new Date()).getTime();
-                startX = button.x + button.width/2;
+                startX = button.x + button.width / 2;
                 startMouseY = mouse.y;
                 drawerShowAdjust = 0;
             }
             onReleased: {
                 tooltipHider.restart();
-                if (root.hasGlobalDrawer) globalDrawer.peeking = false;
-                if (root.hasContextDrawer) contextDrawer.peeking = false;
+                if (root.hasGlobalDrawer)
+                    globalDrawer.peeking = false;
+                if (root.hasContextDrawer)
+                    contextDrawer.peeking = false;
                 // pixel/second
-                const x = button.x + button.width/2;
+                const x = button.x + button.width / 2;
                 const speed = ((x - startX) / ((new Date()).getTime() - downTimestamp) * 1000);
                 drawerShowAdjust = 0;
 
                 // project where it would be a full second in the future
-                if (root.hasContextDrawer && root.hasGlobalDrawer && globalDrawer.modal && x + speed > Math.min(root.width/4*3, root.width/2 + globalDrawer.contentItem.width/2)) {
+                if (root.hasContextDrawer && root.hasGlobalDrawer && globalDrawer.modal && x + speed > Math.min(root.width / 4 * 3, root.width / 2 + globalDrawer.contentItem.width / 2)) {
                     globalDrawer.open();
                     contextDrawer.close();
-                } else if (root.hasContextDrawer && x + speed < Math.max(root.width/4, root.width/2 - contextDrawer.contentItem.width/2)) {
+                } else if (root.hasContextDrawer && x + speed < Math.max(root.width / 4, root.width / 2 - contextDrawer.contentItem.width / 2)) {
                     if (root.hasContextDrawer && contextDrawer.modal) {
                         contextDrawer.open();
                     }
@@ -205,14 +211,12 @@ Item {
                 // of Android, so consider the button "clicked" when:
                 // *the button has been dragged less than a gridunit
                 // *the finger is still on the button
-                if (Math.abs((button.x + button.width/2) - startX) < Kirigami.Units.gridUnit &&
-                    mouse.y > 0) {
+                if (Math.abs((button.x + button.width / 2) - startX) < Kirigami.Units.gridUnit && mouse.y > 0) {
 
                     //if an action has been assigned, trigger it
                     if (actionUnderMouse && actionUnderMouse.trigger) {
                         actionUnderMouse.trigger();
                     }
-
                     if (actionUnderMouse && actionUnderMouse.hasOwnProperty("children") && actionUnderMouse.children.length > 0) {
                         let subMenuUnderMouse;
                         switch (actionUnderMouse) {
@@ -221,7 +225,7 @@ Item {
                             break;
                         case mainAction:
                             subMenuUnderMouse = mainActionSubMenu;
-                            break
+                            break;
                         case rightAction:
                             subMenuUnderMouse = rightActionSubMenu;
                             break;
@@ -234,7 +238,7 @@ Item {
             }
 
             onPositionChanged: {
-                drawerShowAdjust = Math.min(0.3, Math.max(0, (startMouseY - mouse.y)/(Kirigami.Units.gridUnit*15)));
+                drawerShowAdjust = Math.min(0.3, Math.max(0, (startMouseY - mouse.y) / (Kirigami.Units.gridUnit * 15)));
                 button.xChanged();
             }
             onPressAndHold: {
@@ -263,11 +267,11 @@ Item {
             Connections {
                 target: root.hasGlobalDrawer ? globalDrawer : null
                 function onPositionChanged() {
-                    if ( globalDrawer && globalDrawer.modal && !mouseArea.pressed && !edgeMouseArea.pressed && !fakeContextMenuButton.pressed) {
+                    if (globalDrawer && globalDrawer.modal && !mouseArea.pressed && !edgeMouseArea.pressed && !fakeContextMenuButton.pressed) {
                         if (Qt.application.layoutDirection === Qt.LeftToRight) {
-                            button.x = globalDrawer.contentItem.width * globalDrawer.position + root.width/2 - button.width/2;
+                            button.x = globalDrawer.contentItem.width * globalDrawer.position + root.width / 2 - button.width / 2;
                         } else {
-                            button.x = -globalDrawer.contentItem.width * globalDrawer.position + root.width/2 - button.width/2
+                            button.x = -globalDrawer.contentItem.width * globalDrawer.position + root.width / 2 - button.width / 2;
                         }
                     }
                 }
@@ -277,9 +281,9 @@ Item {
                 function onPositionChanged() {
                     if (contextDrawer && contextDrawer.modal && !mouseArea.pressed && !edgeMouseArea.pressed && !fakeContextMenuButton.pressed) {
                         if (Qt.application.layoutDirection === Qt.LeftToRight) {
-                            button.x = root.width/2 - button.width/2 - contextDrawer.contentItem.width * contextDrawer.position;
+                            button.x = root.width / 2 - button.width / 2 - contextDrawer.contentItem.width * contextDrawer.position;
                         } else {
-                            button.x = root.width/2 - button.width/2 + contextDrawer.contentItem.width * contextDrawer.position;
+                            button.x = root.width / 2 - button.width / 2 + contextDrawer.contentItem.width * contextDrawer.position;
                         }
                     }
                 }
@@ -293,9 +297,9 @@ Item {
 
                 Rectangle {
                     id: buttonGraphics
-                    radius: width/2
+                    radius: width / 2
                     anchors.centerIn: parent
-                    height: parent.height - Kirigami.Units.smallSpacing*2
+                    height: parent.height - Kirigami.Units.smallSpacing * 2
                     width: height
                     enabled: root.action && root.action.enabled
                     visible: root.action
@@ -306,10 +310,11 @@ Item {
                     ActionsMenu {
                         id: mainActionSubMenu
                         y: -height
-                        x: -width/2 + parent.width/2
+                        x: -width / 2 + parent.width / 2
                         actions: root.action && root.action.hasOwnProperty("children") ? root.action.children : ""
                         submenuComponent: Component {
-                            ActionsMenu {}
+                            ActionsMenu {
+                            }
                         }
                     }
                     Kirigami.Icon {
@@ -321,13 +326,13 @@ Item {
                         selected: true
                         color: root.action && root.action.icon && root.action.icon.color && root.action.icon.color.a > 0 ? root.action.icon.color : (selected ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor)
                     }
-                    Behavior on color {
+                    Behavior on color  {
                         ColorAnimation {
                             duration: Kirigami.Units.shortDuration
                             easing.type: Easing.InOutQuad
                         }
                     }
-                    Behavior on x {
+                    Behavior on x  {
                         NumberAnimation {
                             duration: Kirigami.Units.longDuration
                             easing.type: Easing.InOutQuad
@@ -346,13 +351,13 @@ Item {
                     enabled: root.leftAction && root.leftAction.enabled
                     radius: 2
                     height: button.mediumIconSizing + Kirigami.Units.smallSpacing * 2
-                    width: height + (root.action ? Kirigami.Units.gridUnit*2 : 0)
+                    width: height + (root.action ? Kirigami.Units.gridUnit * 2 : 0)
                     visible: root.leftAction
 
                     readonly property bool pressed: root.leftAction && root.leftAction.enabled && ((mouseArea.actionUnderMouse === root.leftAction && mouseArea.pressed) || root.leftAction.checked)
                     property color baseColor: root.leftAction && root.leftAction.icon && root.leftAction.icon.color && root.leftAction.icon.color !== undefined && root.leftAction.icon.color.a > 0 ? root.leftAction.icon.color : Kirigami.Theme.highlightColor
                     color: pressed ? baseColor : Kirigami.Theme.backgroundColor
-                    Behavior on color {
+                    Behavior on color  {
                         ColorAnimation {
                             duration: Kirigami.Units.shortDuration
                             easing.type: Easing.InOutQuad
@@ -361,10 +366,11 @@ Item {
                     ActionsMenu {
                         id: leftActionSubMenu
                         y: -height
-                        x: -width/2 + parent.width/2
+                        x: -width / 2 + parent.width / 2
                         actions: root.leftAction && root.leftAction.hasOwnProperty("children") ? root.leftAction.children : ""
                         submenuComponent: Component {
-                            ActionsMenu {}
+                            ActionsMenu {
+                            }
                         }
                     }
                     Kirigami.Icon {
@@ -393,12 +399,12 @@ Item {
                     enabled: root.rightAction && root.rightAction.enabled
                     radius: 2
                     height: button.mediumIconSizing + Kirigami.Units.smallSpacing * 2
-                    width: height + (root.action ? Kirigami.Units.gridUnit*2 : 0)
+                    width: height + (root.action ? Kirigami.Units.gridUnit * 2 : 0)
                     visible: root.rightAction
                     readonly property bool pressed: root.rightAction && root.rightAction.enabled && ((mouseArea.actionUnderMouse === root.rightAction && mouseArea.pressed) || root.rightAction.checked)
                     property color baseColor: root.rightAction && root.rightAction.icon && root.rightAction.icon.color && root.rightAction.icon.color !== undefined && root.rightAction.icon.color.a > 0 ? root.rightAction.icon.color : Kirigami.Theme.highlightColor
                     color: pressed ? baseColor : Kirigami.Theme.backgroundColor
-                    Behavior on color {
+                    Behavior on color  {
                         ColorAnimation {
                             duration: Kirigami.Units.shortDuration
                             easing.type: Easing.InOutQuad
@@ -407,10 +413,11 @@ Item {
                     ActionsMenu {
                         id: rightActionSubMenu
                         y: -height
-                        x: -width/2 + parent.width/2
+                        x: -width / 2 + parent.width / 2
                         actions: root.rightAction && root.rightAction.hasOwnProperty("children") ? root.rightAction.children : ""
                         submenuComponent: Component {
-                            ActionsMenu {}
+                            ActionsMenu {
+                            }
                         }
                     }
                     Kirigami.Icon {
@@ -432,8 +439,7 @@ Item {
                 anchors.fill: background
                 horizontalOffset: 0
                 verticalOffset: 1
-                radius: Kirigami.Units.gridUnit /2
-                samples: 16
+                radius: Kirigami.Units.gridUnit / 2
                 color: Qt.rgba(0, 0, 0, mouseArea.pressed ? 0.6 : 0.4)
                 source: background
             }
@@ -450,23 +456,21 @@ Item {
         drag {
             target: button
             axis: Drag.XAxis
-            minimumX: root.hasContextDrawer && contextDrawer.enabled && contextDrawer.modal ? 0 : root.width/2 - button.width/2
-            maximumX: root.hasGlobalDrawer && globalDrawer.enabled && globalDrawer.modal ? root.width : root.width/2 - button.width/2
+            minimumX: root.hasContextDrawer && contextDrawer.enabled && contextDrawer.modal ? 0 : root.width / 2 - button.width / 2
+            maximumX: root.hasGlobalDrawer && globalDrawer.enabled && globalDrawer.modal ? root.width : root.width / 2 - button.width / 2
         }
-        visible: root.page.actions && root.page.actions.contextualActions.length > 0 && ((typeof applicationWindow === "undefined") || applicationWindow().wideScreen)
-            // using internal pagerow api
-            && ((typeof applicationWindow !== "undefined") && root.page && root.page.parent ? root.page.Kirigami.ColumnView.level < applicationWindow().pageStack.depth-1 : (typeof applicationWindow === "undefined"))
+        visible: root.page.actions && root.page.actions.contextualActions.length > 0 && ((typeof applicationWindow === "undefined") || applicationWindow().wideScreen) && 
+        // using internal pagerow api
+        ((typeof applicationWindow !== "undefined") && root.page && root.page.parent ? root.page.Kirigami.ColumnView.level < applicationWindow().pageStack.depth - 1 : (typeof applicationWindow === "undefined"))
 
-        width: button.mediumIconSizing + Kirigami.Units.smallSpacing*2
+        width: button.mediumIconSizing + Kirigami.Units.smallSpacing * 2
         height: width
-
 
         GE.DropShadow {
             anchors.fill: handleGraphics
             horizontalOffset: 0
             verticalOffset: 1
-            radius: Kirigami.Units.gridUnit /2
-            samples: 16
+            radius: Kirigami.Units.gridUnit / 2
             color: Qt.rgba(0, 0, 0, fakeContextMenuButton.pressed ? 0.6 : 0.4)
             source: handleGraphics
         }
@@ -482,7 +486,7 @@ Item {
                 height: width
                 source: "overflow-menu"
             }
-            Behavior on color {
+            Behavior on color  {
                 ColorAnimation {
                     duration: Kirigami.Units.shortDuration
                     easing.type: Easing.InOutQuad
@@ -491,32 +495,27 @@ Item {
         }
 
         onPressed: {
-            mouseArea.onPressed(mouse)
+            mouseArea.onPressed(mouse);
         }
         onReleased: {
             const pos = root.mapFromItem(fakeContextMenuButton, mouse.x, mouse.y);
-
             if ((typeof contextDrawer !== "undefined") && contextDrawer) {
                 contextDrawer.peeking = false;
-
-                if (pos.x < root.width/2) {
+                if (pos.x < root.width / 2) {
                     contextDrawer.open();
                 } else if (contextDrawer.drawerOpen && mouse.x > 0 && mouse.x < width) {
                     contextDrawer.close();
                 }
             }
-
             if ((typeof globalDrawer !== "undefined") && globalDrawer) {
                 globalDrawer.peeking = false;
-
                 if (globalDrawer.position > 0.5) {
                     globalDrawer.open();
                 } else {
                     globalDrawer.close();
                 }
             }
-            if (containsMouse && ((typeof globalDrawer === "undefined") || !globalDrawer || !globalDrawer.drawerOpen || !globalDrawer.modal) &&
-                ((typeof contextDrawer === "undefined") || !contextDrawer || !contextDrawer.drawerOpen || !contextDrawer.modal)) {
+            if (containsMouse && ((typeof globalDrawer === "undefined") || !globalDrawer || !globalDrawer.drawerOpen || !globalDrawer.modal) && ((typeof contextDrawer === "undefined") || !contextDrawer || !contextDrawer.drawerOpen || !contextDrawer.modal)) {
                 contextMenu.visible = !contextMenu.visible;
             }
         }
@@ -526,14 +525,15 @@ Item {
             y: -height
             actions: root.page.actions.contextualActions
             submenuComponent: Component {
-                ActionsMenu {}
+                ActionsMenu {
+                }
             }
         }
     }
 
     MouseArea {
         id: edgeMouseArea
-        z:99
+        z: 99
         anchors {
             left: parent.left
             right: parent.right
@@ -543,8 +543,8 @@ Item {
             target: button
             //filterChildren: true
             axis: Drag.XAxis
-            minimumX: root.hasContextDrawer && contextDrawer.enabled && contextDrawer.modal ? 0 : root.width/2 - button.width/2
-            maximumX: root.hasGlobalDrawer && globalDrawer.enabled && globalDrawer.modal ? root.width : root.width/2 - button.width/2
+            minimumX: root.hasContextDrawer && contextDrawer.enabled && contextDrawer.modal ? 0 : root.width / 2 - button.width / 2
+            maximumX: root.hasGlobalDrawer && globalDrawer.enabled && globalDrawer.modal ? root.width : root.width / 2 - button.width / 2
         }
         height: Kirigami.Units.smallSpacing * 3
 

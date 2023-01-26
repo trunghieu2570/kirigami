@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0 as Controls
@@ -37,10 +36,10 @@ Kirigami.ApplicationWindow {
                 Kirigami.Action {
                     text: "action 3"
                 }
-            },
+            }, 
             Kirigami.Action {
                 text: "action 3"
-            },
+            }, 
             Kirigami.Action {
                 text: "action 4"
             }
@@ -61,6 +60,4 @@ Kirigami.ApplicationWindow {
             }
         }
     }
-
-
 }

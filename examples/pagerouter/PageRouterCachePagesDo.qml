@@ -14,8 +14,8 @@ Kirigami.ApplicationWindow {
             name: "home"
             cache: false
             Component {
+                // Page contents...
                 Kirigami.Page {
-                    // Page contents...
                 }
             }
         }

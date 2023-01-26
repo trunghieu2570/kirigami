@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.8
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0 as QQC2
@@ -19,7 +18,7 @@ import org.kde.kirigami 2.12 as Kirigami
 Kirigami.AbstractListItem {
     id: listItem
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property holds the text of this list item's label.
      *
@@ -234,54 +233,56 @@ Kirigami.AbstractListItem {
     property alias subtitleItem: subtitleItem
 
     default property alias _basicDefault: layout.data
-//END properties
+    //END properties
 
-//BEGIN signal handlers
+    //BEGIN signal handlers
     onLeadingChanged: {
         if (!!listItem.leading) {
-            listItem.leading.parent = contItem
-            listItem.leading.anchors.left = listItem.leading.parent.left
-            listItem.leading.anchors.top = listItem.leadingFillVertically ? listItem.leading.parent.top : undefined
-            listItem.leading.anchors.bottom = listItem.leadingFillVertically ? listItem.leading.parent.bottom : undefined
-            listItem.leading.anchors.verticalCenter = listItem.leadingFillVertically ? undefined : listItem.leading.parent.verticalCenter
-            layout.anchors.left = listItem.leading.right
-            layout.anchors.leftMargin = Qt.binding(function() { return listItem.leadingPadding })
+            listItem.leading.parent = contItem;
+            listItem.leading.anchors.left = listItem.leading.parent.left;
+            listItem.leading.anchors.top = listItem.leadingFillVertically ? listItem.leading.parent.top : undefined;
+            listItem.leading.anchors.bottom = listItem.leadingFillVertically ? listItem.leading.parent.bottom : undefined;
+            listItem.leading.anchors.verticalCenter = listItem.leadingFillVertically ? undefined : listItem.leading.parent.verticalCenter;
+            layout.anchors.left = listItem.leading.right;
+            layout.anchors.leftMargin = Qt.binding(function () {
+                    return listItem.leadingPadding;
+                });
         } else {
-            layout.anchors.left = contentItem.left
-            layout.anchors.leftMargin = 0
+            layout.anchors.left = contentItem.left;
+            layout.anchors.leftMargin = 0;
         }
     }
 
     onTrailingChanged: {
         if (!!listItem.trailing) {
-            listItem.trailing.parent = contItem
-            listItem.trailing.anchors.right = listItem.trailing.parent.right
-            listItem.trailing.anchors.top = listItem.trailingFillVertically ? listItem.trailing.parent.top : undefined
-            listItem.trailing.anchors.bottom = listItem.trailingFillVertically ? listItem.trailing.parent.bottom : undefined
-            listItem.trailing.anchors.verticalCenter = listItem.trailingFillVertically ? undefined : listItem.trailing.parent.verticalCenter
-            layout.anchors.right = listItem.trailing.left
-            layout.anchors.rightMargin = Qt.binding(function() { return listItem.trailingPadding })
+            listItem.trailing.parent = contItem;
+            listItem.trailing.anchors.right = listItem.trailing.parent.right;
+            listItem.trailing.anchors.top = listItem.trailingFillVertically ? listItem.trailing.parent.top : undefined;
+            listItem.trailing.anchors.bottom = listItem.trailingFillVertically ? listItem.trailing.parent.bottom : undefined;
+            listItem.trailing.anchors.verticalCenter = listItem.trailingFillVertically ? undefined : listItem.trailing.parent.verticalCenter;
+            layout.anchors.right = listItem.trailing.left;
+            layout.anchors.rightMargin = Qt.binding(function () {
+                    return listItem.trailingPadding;
+                });
         } else {
-            layout.anchors.right = contentItem.right
-            layout.anchors.rightMargin = 0
+            layout.anchors.right = contentItem.right;
+            layout.anchors.rightMargin = 0;
         }
     }
 
     Keys.onEnterPressed: action ? action.trigger() : clicked()
     Keys.onReturnPressed: action ? action.trigger() : clicked()
-//END signal handlers
 
+    //END signal handlers
     icon: action ? action.icon.name || action.icon.source : undefined
 
     contentItem: Item {
         id: contItem
 
-        implicitWidth: layout.implicitWidth
-            + (listItem.leading !== null ? listItem.leading.implicitWidth : 0)
-            + (listItem.trailing !== null ? listItem.trailing.implicitWidth : 0)
+        implicitWidth: layout.implicitWidth + (listItem.leading !== null ? listItem.leading.implicitWidth : 0) + (listItem.trailing !== null ? listItem.trailing.implicitWidth : 0)
 
-        Binding on implicitHeight {
-            value: Math.max(iconItem.size, (!subtitleItem.visible && listItem.reserveSpaceForSubtitle ? (labelItem.implicitHeight + labelColumn.spacing + subtitleItem.implicitHeight): labelColumn.implicitHeight) )
+        Binding on implicitHeight  {
+            value: Math.max(iconItem.size, (!subtitleItem.visible && listItem.reserveSpaceForSubtitle ? (labelItem.implicitHeight + labelColumn.spacing + subtitleItem.implicitHeight) : labelColumn.implicitHeight))
             delayed: true
         }
 
@@ -298,7 +299,7 @@ Kirigami.AbstractListItem {
                 id: iconItem
                 source: {
                     if (!listItem.icon) {
-                        return undefined
+                        return undefined;
                     }
                     if (listItem.icon.hasOwnProperty) {
                         if (listItem.icon.hasOwnProperty("name") && listItem.icon.name !== "")

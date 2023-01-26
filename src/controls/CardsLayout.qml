@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.6
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.4 as Kirigami
@@ -64,20 +63,15 @@ GridLayout {
      */
     property int minimumColumnWidth: Kirigami.Units.gridUnit * 12
 
-    columns: Math.max(1, Math.min(maximumColumns > 0 ? maximumColumns : Infinity,
-                                  Math.floor(width/minimumColumnWidth),
-                                  Math.ceil(width/maximumColumnWidth)));
+    columns: Math.max(1, Math.min(maximumColumns > 0 ? maximumColumns : Infinity, Math.floor(width / minimumColumnWidth), Math.ceil(width / maximumColumnWidth)))
 
     rowSpacing: Kirigami.Units.largeSpacing * columns
     columnSpacing: Kirigami.Units.largeSpacing * columns
 
-
     // NOTE: this default width which defaults to 2 columns is just to remove a binding loop on columns
-    width: maximumColumnWidth*2 + Kirigami.Units.largeSpacing
+    width: maximumColumnWidth * 2 + Kirigami.Units.largeSpacing
     // same computation of columns, but on the parent size
-    Layout.preferredWidth: maximumColumnWidth * Math.max(1, Math.min(maximumColumns > 0 ? maximumColumns : Infinity,
-                                  Math.floor(parent.width/minimumColumnWidth),
-                                  Math.ceil(parent.width/maximumColumnWidth))) + Kirigami.Units.largeSpacing * (columns - 1)
+    Layout.preferredWidth: maximumColumnWidth * Math.max(1, Math.min(maximumColumns > 0 ? maximumColumns : Infinity, Math.floor(parent.width / minimumColumnWidth), Math.ceil(parent.width / maximumColumnWidth))) + Kirigami.Units.largeSpacing * (columns - 1)
 
     Layout.maximumWidth: Layout.preferredWidth
     Layout.alignment: Qt.AlignHCenter

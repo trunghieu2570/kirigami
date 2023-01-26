@@ -1,7 +1,6 @@
 /* SPDX-FileCopyrightText: 2021 Noah Davis <noahadvs@gmail.com>
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
-
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.19 as Kirigami
@@ -25,42 +24,34 @@ TestCase {
     height: flickable.implicitHeight
 
     function test_Invokables() {
-        const originalX = flickable.contentX
-        const originalY = flickable.contentY
-        let x = originalX
-        let y = originalY
-
-        wheelHandler.scrollRight()
-        verify(flickable.contentX === x + hstep, "scrollRight()")
-        x = flickable.contentX
-
-        wheelHandler.scrollLeft()
-        verify(flickable.contentX === x - hstep, "scrollLeft()")
-        x = flickable.contentX
-
-        wheelHandler.scrollDown()
-        verify(flickable.contentY === y + vstep, "scrollDown()")
-        y = flickable.contentY
-
-        wheelHandler.scrollUp()
-        verify(flickable.contentY === y - vstep, "scrollUp()")
-        y = flickable.contentY
-
-        wheelHandler.scrollRight(101)
-        verify(flickable.contentX === x + 101, "scrollRight(101)")
-        x = flickable.contentX
-
-        wheelHandler.scrollLeft(101)
-        verify(flickable.contentX === x - 101, "scrollLeft(101)")
-        x = flickable.contentX
-
-        wheelHandler.scrollDown(101)
-        verify(flickable.contentY === y + 101, "scrollDown(101)")
-        y = flickable.contentY
-
-        wheelHandler.scrollUp(101)
-        verify(flickable.contentY === y - 101, "scrollUp(101)")
-        y = flickable.contentY
+        const originalX = flickable.contentX;
+        const originalY = flickable.contentY;
+        let x = originalX;
+        let y = originalY;
+        wheelHandler.scrollRight();
+        verify(flickable.contentX === x + hstep, "scrollRight()");
+        x = flickable.contentX;
+        wheelHandler.scrollLeft();
+        verify(flickable.contentX === x - hstep, "scrollLeft()");
+        x = flickable.contentX;
+        wheelHandler.scrollDown();
+        verify(flickable.contentY === y + vstep, "scrollDown()");
+        y = flickable.contentY;
+        wheelHandler.scrollUp();
+        verify(flickable.contentY === y - vstep, "scrollUp()");
+        y = flickable.contentY;
+        wheelHandler.scrollRight(101);
+        verify(flickable.contentX === x + 101, "scrollRight(101)");
+        x = flickable.contentX;
+        wheelHandler.scrollLeft(101);
+        verify(flickable.contentX === x - 101, "scrollLeft(101)");
+        x = flickable.contentX;
+        wheelHandler.scrollDown(101);
+        verify(flickable.contentY === y + 101, "scrollDown(101)");
+        y = flickable.contentY;
+        wheelHandler.scrollUp(101);
+        verify(flickable.contentY === y - 101, "scrollUp(101)");
+        y = flickable.contentY;
     }
 
     ScrollableFlickable {
@@ -72,4 +63,3 @@ TestCase {
         }
     }
 }
-

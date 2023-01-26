@@ -4,7 +4,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Window 2.1
@@ -36,22 +35,22 @@ TestCase {
     }
 
     function initTestCase() {
-        mainWindow.show()
+        mainWindow.show();
     }
 
     function cleanupTestCase() {
-        mainWindow.close()
+        mainWindow.close();
     }
 
     function test_press() {
-        compare(mainWindow.pageStack.depth, 1)
-        compare(mainWindow.pageStack.currentIndex, 0)
+        compare(mainWindow.pageStack.depth, 1);
+        compare(mainWindow.pageStack.currentIndex, 0);
         if (!mainWindow.active)
-            spyActive.wait(5000)
-        verify(mainWindow.active)
-        compare(mainWindow.pageStack.currentItem.flickable.currentIndex, 0)
-        keyClick(Qt.Key_Down)
-        spyCurrentIndex.wait()
-        compare(mainWindow.pageStack.currentItem.flickable.currentIndex, 1)
+            spyActive.wait(5000);
+        verify(mainWindow.active);
+        compare(mainWindow.pageStack.currentItem.flickable.currentIndex, 0);
+        keyClick(Qt.Key_Down);
+        spyCurrentIndex.wait();
+        compare(mainWindow.pageStack.currentItem.flickable.currentIndex, 1);
     }
 }

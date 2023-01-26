@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.0
 import QtQuick.Controls 2.0 as QQC2
 import org.kde.kirigami 2.4 as Kirigami
@@ -95,17 +94,12 @@ QQC2.Label {
         console.warn("org.kde.plasma.extras/Heading::headerPointSize() is deprecated. Use font.pointSize directly instead");
         return __headerPointSize(l);
     }
-
-    //
     //  W A R N I N G
     //  -------------
-    //
     // This method is not part of the Kirigami API.  It exists purely as an
     // implementation detail.  It may change from version to
     // version without notice, or even be removed.
-    //
     // We mean it.
-    //
     function __headerPointSize(level) {
         const n = Kirigami.Theme.defaultFont.pointSize;
         switch (level) {

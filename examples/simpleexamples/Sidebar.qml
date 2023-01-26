@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import QtQuick.Controls 2.3 as Controls
 import QtQuick.Layouts 1.2
@@ -13,7 +12,6 @@ Kirigami.ApplicationWindow {
     id: root
     width: Kirigami.Units.gridUnit * 60
     height: Kirigami.Units.gridUnit * 40
-
 
     pageStack.initialPage: mainPageComponent
     globalDrawer: Kirigami.OverlayDrawer {
@@ -79,22 +77,41 @@ Kirigami.ApplicationWindow {
     menuBar: Controls.MenuBar {
         Controls.Menu {
             title: qsTr("&File")
-            Controls.Action { text: qsTr("&New...") }
-            Controls.Action { text: qsTr("&Open...") }
-            Controls.Action { text: qsTr("&Save") }
-            Controls.Action { text: qsTr("Save &As...") }
-            Controls.MenuSeparator { }
-            Controls.Action { text: qsTr("&Quit") }
+            Controls.Action {
+                text: qsTr("&New...")
+            }
+            Controls.Action {
+                text: qsTr("&Open...")
+            }
+            Controls.Action {
+                text: qsTr("&Save")
+            }
+            Controls.Action {
+                text: qsTr("Save &As...")
+            }
+            Controls.MenuSeparator {
+            }
+            Controls.Action {
+                text: qsTr("&Quit")
+            }
         }
         Controls.Menu {
             title: qsTr("&Edit")
-            Controls.Action { text: qsTr("Cu&t") }
-            Controls.Action { text: qsTr("&Copy") }
-            Controls.Action { text: qsTr("&Paste") }
+            Controls.Action {
+                text: qsTr("Cu&t")
+            }
+            Controls.Action {
+                text: qsTr("&Copy")
+            }
+            Controls.Action {
+                text: qsTr("&Paste")
+            }
         }
         Controls.Menu {
             title: qsTr("&Help")
-            Controls.Action { text: qsTr("&About") }
+            Controls.Action {
+                text: qsTr("&About")
+            }
         }
     }
     header: Controls.ToolBar {
@@ -116,16 +133,16 @@ Kirigami.ApplicationWindow {
                         icon.name: "edit-clear"
                         visible: searchField.text != ""
                         onTriggered: {
-                            searchField.text = ""
-                            searchField.accepted()
+                            searchField.text = "";
+                            searchField.accepted();
                         }
-                    },
+                    }, 
                     Kirigami.Action {
                         icon.name: "edit-clear"
                         visible: searchField.text != ""
                         onTriggered: {
-                            searchField.text = ""
-                            searchField.accepted()
+                            searchField.text = "";
+                            searchField.accepted();
                         }
                     }
                 ]
@@ -134,16 +151,16 @@ Kirigami.ApplicationWindow {
                         icon.name: "edit-clear"
                         visible: searchField.text != ""
                         onTriggered: {
-                            searchField.text = ""
-                            searchField.accepted()
+                            searchField.text = "";
+                            searchField.accepted();
                         }
-                    },
+                    }, 
                     Kirigami.Action {
                         icon.name: "anchor"
                         visible: searchField.text != ""
                         onTriggered: {
-                            searchField.text = ""
-                            searchField.accepted()
+                            searchField.text = "";
+                            searchField.accepted();
                         }
                     }
                 ]
@@ -155,7 +172,8 @@ Kirigami.ApplicationWindow {
     //Main app content
     Component {
         id: mainPageComponent
-        MultipleColumnsGallery {}
+        MultipleColumnsGallery {
+        }
     }
     footer: Controls.ToolBar {
         position: Controls.ToolBar.Footer

@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12 as QQC2
@@ -22,7 +21,8 @@ QQC2.Control {
     property string title
     property bool active
 
-    property Private.ActionIconGroup icon: Private.ActionIconGroup {}
+    property Private.ActionIconGroup icon: Private.ActionIconGroup {
+    }
     property int presentation: PageTab.Presentation.Normal
     property bool vertical: false
     property var progress // type: real?
@@ -35,21 +35,21 @@ QQC2.Control {
         if (!!control.progress) {
             if (control.active) {
                 //: Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
-                return qsTr("Current page. Progress: %1 percent.").arg(Math.round(control.progress*100))
+                return qsTr("Current page. Progress: %1 percent.").arg(Math.round(control.progress * 100));
             } else {
                 //: Accessibility text for a page tab. Keep the text as concise as possible.
-                return qsTr("Navigate to %1. Progress: %2 percent.").arg(control.title).arg(Math.round(control.progress*100))
+                return qsTr("Navigate to %1. Progress: %2 percent.").arg(control.title).arg(Math.round(control.progress * 100));
             }
         } else {
             if (control.active) {
                 //: Accessibility text for a page tab. Keep the text as concise as possible.
-                return qsTr("Current page.")
+                return qsTr("Current page.");
             } else if (control.needsAttention) {
                 //: Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-                return qsTr("Navigate to %1. Demanding attention.", control.title)
+                return qsTr("Navigate to %1. Demanding attention.", control.title);
             } else {
                 //: Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-                return qsTr("Navigate to %1.", control.title)
+                return qsTr("Navigate to %1.", control.title);
             }
         }
     }
@@ -59,7 +59,7 @@ QQC2.Control {
 
     Keys.onPressed: {
         if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
-            control.clicked()
+            control.clicked();
         }
     }
 }

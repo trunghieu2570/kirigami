@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import org.kde.kirigami 2.20 as Kirigami
 
@@ -26,8 +25,7 @@ import org.kde.kirigami 2.20 as Kirigami
  * @since 5.57
  * @author Carl Schwan <carl@carlschwan.eu>
  */
-Kirigami.ActionTextField
-{
+Kirigami.ActionTextField {
     id: root
 
     /**
@@ -52,7 +50,7 @@ Kirigami.ActionTextField
         if (event.matches(StandardKey.Undo)) {
             // Disable undo action for security reasons
             // See QTBUG-103934
-            event.accepted = true
+            event.accepted = true;
         }
     }
 }

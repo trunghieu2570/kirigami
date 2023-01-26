@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.6
 import QtQuick.Controls 2.0 as QQC2
 import QtQuick.Layouts 1.2
@@ -17,7 +16,7 @@ Kirigami.BasicListItem {
     readonly property bool isExpandible: modelData && modelData.hasOwnProperty("expandible") && modelData.expandible
 
     checked: modelData.checked
-    icon: modelData.icon
+    icon.name: modelData.icon
     separatorVisible: false
     reserveSpaceForIcon: !isSeparator
     reserveSpaceForLabel: !isSeparator
@@ -44,7 +43,8 @@ Kirigami.BasicListItem {
         z: 99999999
         actions: modelData.children
         submenuComponent: Component {
-            ActionsMenu {}
+            ActionsMenu {
+            }
         }
     }
 
@@ -69,11 +69,11 @@ Kirigami.BasicListItem {
     Kirigami.Icon {
         isMask: true
         Layout.alignment: Qt.AlignVCenter
-        Layout.preferredHeight: Kirigami.Units.iconSizes.small/2
+        Layout.preferredHeight: Kirigami.Units.iconSizes.small / 2
         selected: listItem.checked || listItem.pressed
         Layout.preferredWidth: Layout.preferredHeight
         source: "go-up-symbolic"
-        visible: !isExpandible  && !listItem.isSeparator && modelData.children!== undefined && modelData.children.length > 0
+        visible: !isExpandible && !listItem.isSeparator && modelData.children !== undefined && modelData.children.length > 0
     }
 
     onPressed: {
@@ -85,14 +85,13 @@ Kirigami.BasicListItem {
         if (modelData.children.length === 0) {
             root.drawerOpen = false;
         }
-
         if (modelData && modelData.trigger !== undefined) {
             modelData.trigger();
-        // assume the model is a list of QAction or Action
+            // assume the model is a list of QAction or Action
         } else if (menu.model.length > index) {
             menu.model[index].trigger();
         } else {
-            console.warning("Don't know how to trigger the action")
+            console.warning("Don't know how to trigger the action");
         }
     }
 }

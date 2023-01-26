@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import QtQuick.Controls 2.4 as QQC2
 import QtQuick.Window 2.15
@@ -21,8 +20,7 @@ import org.kde.kirigami 2.20 as Kirigami
  * @since 5.87
  * @since org.kde.kirigami 2.19
  */
-Item
-{
+Item {
     id: aboutItem
     /**
      * @brief This property holds an object with the same shape as KAboutData.
@@ -99,7 +97,7 @@ Item
 
         RowLayout {
             Layout.fillWidth: true
-            property bool hasRemoteAvatar: (typeof(modelData.ocsUsername) !== "undefined" && modelData.ocsUsername.length > 0)
+            property bool hasRemoteAvatar: (typeof (modelData.ocsUsername) !== "undefined" && modelData.ocsUsername.length > 0)
 
             spacing: Kirigami.Units.smallSpacing * 2
 
@@ -125,13 +123,13 @@ Item
 
             QQC2.Label {
                 Layout.fillWidth: true
-                readonly property bool withTask: typeof(modelData.task) !== "undefined" && modelData.task.length > 0
+                readonly property bool withTask: typeof (modelData.task) !== "undefined" && modelData.task.length > 0
                 text: withTask ? qsTr("%1 (%2)").arg(modelData.name).arg(modelData.task) : modelData.name
                 wrapMode: Text.WordWrap
             }
 
             QQC2.ToolButton {
-                visible: typeof(modelData.ocsUsername) !== "undefined" && modelData.ocsUsername.length > 0
+                visible: typeof (modelData.ocsUsername) !== "undefined" && modelData.ocsUsername.length > 0
                 icon.name: "get-hot-new-stuff"
                 QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
@@ -140,7 +138,7 @@ Item
             }
 
             QQC2.ToolButton {
-                visible: typeof(modelData.emailAddress) !== "undefined" && modelData.emailAddress.length > 0
+                visible: typeof (modelData.emailAddress) !== "undefined" && modelData.emailAddress.length > 0
                 icon.name: "mail-sent"
                 QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
@@ -149,11 +147,11 @@ Item
             }
 
             QQC2.ToolButton {
-                visible: typeof(modelData.webAddress) !== "undefined" && modelData.webAddress.length > 0
+                visible: typeof (modelData.webAddress) !== "undefined" && modelData.webAddress.length > 0
                 icon.name: "globe"
                 QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
-                QQC2.ToolTip.text: (typeof(modelData.webAddress) === "undefined" && modelData.webAddress.length > 0) ? "" : modelData.webAddress
+                QQC2.ToolTip.text: (typeof (modelData.webAddress) === "undefined" && modelData.webAddress.length > 0) ? "" : modelData.webAddress
                 onClicked: Qt.openUrlExternally(modelData.webAddress)
             }
         }
@@ -172,7 +170,7 @@ Item
                 Layout.rowSpan: 3
                 Layout.preferredHeight: Kirigami.Units.iconSizes.huge
                 Layout.preferredWidth: height
-                Layout.maximumWidth: aboutItem.width / 3;
+                Layout.maximumWidth: aboutItem.width / 3
                 Layout.rightMargin: Kirigami.Units.largeSpacing
                 source: Kirigami.Settings.applicationWindowIcon || aboutItem.aboutData.programLogo || aboutItem.aboutData.programIconName || aboutItem.aboutData.componentName
             }
@@ -208,7 +206,7 @@ Item
                 UrlButton {
                     readonly property string theUrl: {
                         if (page.aboutData.bugAddress !== "submit@bugs.kde.org") {
-                            return page.aboutData.bugAddress
+                            return page.aboutData.bugAddress;
                         }
                         const elements = page.aboutData.productName.split('/');
                         let url = `https://bugs.kde.org/enter_bug.cgi?format=guided&product=${elements[0]}&version=${page.aboutData.version}`;
@@ -274,16 +272,18 @@ Item
             RowLayout {
                 Layout.leftMargin: Kirigami.Units.smallSpacing
 
-                QQC2.Label { text: qsTr("License:") }
+                QQC2.Label {
+                    text: qsTr("License:")
+                }
 
                 LinkButton {
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     text: modelData.name
                     onClicked: {
-                        licenseSheet.text = modelData.text
-                        licenseSheet.title = modelData.name
-                        licenseSheet.open()
+                        licenseSheet.text = modelData.text;
+                        licenseSheet.title = modelData.name;
+                        licenseSheet.open();
                     }
                 }
             }
@@ -316,10 +316,10 @@ Item
         Repeater {
             model: Kirigami.Settings.information
             delegate: QQC2.Label {
+                id: libraries
                 Layout.leftMargin: Kirigami.Units.gridUnit
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
-                id: libraries
                 text: modelData
             }
         }

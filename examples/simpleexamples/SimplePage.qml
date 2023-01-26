@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.0
 import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.2
@@ -18,12 +17,12 @@ ScrollablePage {
 
     actions.contextualActions: [
         Action {
-            text:"Action for buttons"
+            text: "Action for buttons"
             icon.name: "bookmarks"
             onTriggered: print("Action 1 clicked")
-        },
+        }, 
         Action {
-            text:"Action 2"
+            text: "Action 2"
             icon.name: "folder"
             enabled: false
         }

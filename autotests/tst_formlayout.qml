@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import QtQuick.Window 2.0
 import QtQuick.Layouts 1.3
@@ -36,10 +35,8 @@ TestCase {
         let window = fractionalSizeRoundingComponent.createObject();
         let item = window.item;
         window.show();
-
         verify(item.width >= item.implicitWidth, "implicit width should not be rounded down");
         fuzzyCompare(item.width, item.implicitWidth, 1);
-
         window.close();
     }
 
@@ -47,10 +44,8 @@ TestCase {
         let window = fractionalSizeRoundingComponent.createObject();
         let item = window.item;
         window.show();
-
         verify(item.height >= item.implicitHeight, "implicit height should not be rounded down");
         fuzzyCompare(item.height, item.implicitHeight, 1);
-
         window.close();
     }
 }

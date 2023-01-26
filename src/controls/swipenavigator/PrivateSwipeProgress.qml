@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import org.kde.kirigami 2.12 as Kirigami
@@ -21,7 +20,9 @@ Item {
             left: parent.left
         }
         width: parent.width * __progressRoot.progress
-        color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.positiveTextColor, {"alpha": 0.2*255})
+        color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.positiveTextColor, {
+                "alpha": 0.2 * 255
+            })
 
         Rectangle {
             anchors {
@@ -38,7 +39,6 @@ Item {
         }
     }
 
-
     Rectangle {
         Accessible.ignored: true
 
@@ -48,7 +48,9 @@ Item {
             right: parent.right
         }
         width: parent.width - (parent.width * __progressRoot.progress)
-        color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {"alpha": 0.1*255})
+        color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {
+                "alpha": 0.1 * 255
+            })
 
         Rectangle {
             anchors {
@@ -58,7 +60,9 @@ Item {
                 right: parent.right
             }
 
-            color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {"alpha": 0.1*255})
+            color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {
+                    "alpha": 0.1 * 255
+                })
 
             // Unlike most things, we don't want to scale with the em grid, so we don't use a Unit.
             height: 2

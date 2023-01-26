@@ -3,12 +3,10 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12 as QQC2
 import org.kde.kirigami 2.13 as Kirigami
-
 
 //TODO KF6: remove all of this?
 /**
@@ -19,7 +17,7 @@ import org.kde.kirigami 2.13 as Kirigami
 Item {
     id: swipeNavigatorRoot
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property holds the pages to swipe between.
      */
@@ -45,13 +43,17 @@ Item {
      * @brief This property holds the item that will be displayed before the tabs.
      * @property Item header
      */
-    property Component header: Item {visible: false}
+    property Component header: Item {
+        visible: false
+    }
 
     /**
      * @brief This property holds the item that will be displayed after the tabs.
      * @property Item footer
      */
-    property Component footer: Item {visible: false}
+    property Component footer: Item {
+        visible: false
+    }
 
     /**
      * @brief This property holds the initial tab index of the SwipeNavigator.
@@ -65,7 +67,7 @@ Item {
      * @property int currentIndex
      */
     property alias currentIndex: columnView.currentIndex
-//END properties
+    //END properties
 
     /**
      * @brief Pushes a page as a new dialog on desktop and as a layer on mobile.
@@ -104,7 +106,9 @@ Item {
             windowComponent.destroy();
             item = window.pageStack.push(page, properties);
         }
-        item.Keys.escapePressed.connect(function() { item.closeDialog() });
+        item.Keys.escapePressed.connect(function () {
+                item.closeDialog();
+            });
         return item;
     }
 
@@ -122,7 +126,7 @@ Item {
                 State {
                     name: "small"
                     when: !_gridManager.tall
-                },
+                }, 
                 State {
                     name: "tall"
                     when: _gridManager.tall
@@ -134,39 +138,38 @@ Item {
                     ScriptAction {
                         script: {
                             // Let's take these out of the layout first...
-                            _dummyOne.visible = false
-                            _dummyTwo.visible = false
+                            _dummyOne.visible = false;
+                            _dummyTwo.visible = false;
                             // Now we move the header and footer up
-                            _header.Layout.row += _gridManager.rowDirection
-                            _footer.Layout.row += _gridManager.rowDirection
+                            _header.Layout.row += _gridManager.rowDirection;
+                            _footer.Layout.row += _gridManager.rowDirection;
                             // Now that the header and footer are out of the way,
                             // let's expand the tabs
-                            __main.Layout.column--
-                            __main.Layout.columnSpan = 3
+                            __main.Layout.column--;
+                            __main.Layout.columnSpan = 3;
                         }
                     }
-                },
+                }, 
                 Transition {
                     to: "small"
                     ScriptAction {
                         script: {
                             // Let's move the tabs back to where they belong
-                            __main.Layout.columnSpan = 1
-                            __main.Layout.column++
+                            __main.Layout.columnSpan = 1;
+                            __main.Layout.column++;
                             // Move the header and footer down into the empty space
-                            _header.Layout.row -= _gridManager.rowDirection
-                            _footer.Layout.row -= _gridManager.rowDirection
+                            _header.Layout.row -= _gridManager.rowDirection;
+                            _footer.Layout.row -= _gridManager.rowDirection;
 
                             // Now we can bring these guys back in
-                            _dummyOne.visible = false
-                            _dummyTwo.visible = false
+                            _dummyOne.visible = false;
+                            _dummyTwo.visible = false;
                         }
                     }
                 }
             ]
         }
     }
-
 
     QQC2.StackView {
         id: stackView
@@ -198,12 +201,30 @@ Item {
                     columns: 3
 
                     // Row one
-                    Item { id: _spacer; Layout.row: 0; Layout.column: 1; Layout.fillWidth: true }
-                    Item { id: _dummyOne; Layout.row: 0; Layout.column: 0 }
-                    Item { id: _dummyTwo; Layout.row: 0; Layout.column: 2 }
+                    Item {
+                        id: _spacer
+                        Layout.row: 0
+                        Layout.column: 1
+                        Layout.fillWidth: true
+                    }
+                    Item {
+                        id: _dummyOne
+                        Layout.row: 0
+                        Layout.column: 0
+                    }
+                    Item {
+                        id: _dummyTwo
+                        Layout.row: 0
+                        Layout.column: 2
+                    }
 
                     // Row two
-                    Loader { id: _header; sourceComponent: swipeNavigatorRoot.header; Layout.row: 1; Layout.column: 0 }
+                    Loader {
+                        id: _header
+                        sourceComponent: swipeNavigatorRoot.header
+                        Layout.row: 1
+                        Layout.column: 0
+                    }
                     PrivateSwipeTabBar {
                         id: __main
                         readonly property int offset: _header.width - _footer.width
@@ -215,9 +236,13 @@ Item {
                         Layout.alignment: Qt.AlignHCenter
                         Layout.row: 1
                         Layout.column: 1
-
                     }
-                    Loader { id: _footer; sourceComponent: swipeNavigatorRoot.footer; Layout.row: 1; Layout.column: 2 }
+                    Loader {
+                        id: _footer
+                        sourceComponent: swipeNavigatorRoot.footer
+                        Layout.row: 1
+                        Layout.column: 2
+                    }
                 }
 
                 Accessible.role: Accessible.PageTabList
@@ -233,13 +258,13 @@ Item {
                 contentChildren: swipeNavigatorRoot.pages
 
                 Component.onCompleted: {
-                    columnView.currentIndex = swipeNavigatorRoot.initialIndex
+                    columnView.currentIndex = swipeNavigatorRoot.initialIndex;
                 }
                 // We only want the current page to be focusable, so we
                 // disable the inactive pages.
                 onCurrentIndexChanged: {
-                    Array.from(swipeNavigatorRoot.pages).forEach(item => item.enabled = false)
-                    swipeNavigatorRoot.pages[currentIndex].enabled = true
+                    Array.from(swipeNavigatorRoot.pages).forEach(item => item.enabled = false);
+                    swipeNavigatorRoot.pages[currentIndex].enabled = true;
                 }
             }
         }
@@ -261,7 +286,7 @@ Item {
                 }
                 YAnimator {
                     from: 0
-                    to: height/2
+                    to: height / 2
                     duration: Kirigami.Units.longDuration
                     easing.type: Easing.InCubic
                 }
@@ -279,14 +304,13 @@ Item {
                     easing.type: Easing.InOutCubic
                 }
                 YAnimator {
-                    from: height/2
+                    from: height / 2
                     to: 0
                     duration: Kirigami.Units.longDuration
                     easing.type: Easing.OutCubic
                 }
             }
         }
-
 
         pushExit: Transition {
             OpacityAnimator {
@@ -306,7 +330,7 @@ Item {
                     easing.type: Easing.InOutCubic
                 }
                 YAnimator {
-                    from: height/2
+                    from: height / 2
                     to: 0
                     duration: Kirigami.Units.longDuration
                     easing.type: Easing.OutCubic
@@ -324,7 +348,7 @@ Item {
                 }
                 YAnimator {
                     from: 0
-                    to: -height/2
+                    to: -height / 2
                     duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutCubic
                 }

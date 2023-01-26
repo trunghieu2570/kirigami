@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import QtQuick.Controls 2.4 as QQC2
 import QtQuick.Window 2.15
@@ -22,11 +21,10 @@ import org.kde.kirigami 2.19 as Kirigami
  * @since org.kde.kirigami 2.6
  * @inherit org::kde::kirigami::ScrollablePage
  */
-Kirigami.ScrollablePage
-{
+Kirigami.ScrollablePage {
     id: page
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property holds an object with the same shape as KAboutData.
      *
@@ -89,8 +87,8 @@ Kirigami.ScrollablePage
 
     /** @internal */
     default property alias _content: aboutItem._content
-//END properties
 
+    //END properties
     title: qsTr("About %1").arg(page.aboutData.displayName)
 
     Kirigami.AboutItem {

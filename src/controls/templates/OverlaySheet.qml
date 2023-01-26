@@ -3,8 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
-
 import QtQuick 2.12
 import QtQuick.Layouts 1.2
 import QtQuick.Window 2.2
@@ -178,7 +176,7 @@ QtObject {
     function open() {
         openAnimation.running = true;
         root.sheetOpen = true;
-        contentLayout.initialHeight = contentLayout.height
+        contentLayout.initialHeight = contentLayout.height;
         mainItem.visible = true;
         mainItem.forceActiveFocus();
     }
@@ -195,7 +193,7 @@ QtObject {
     onBackgroundChanged: {
         background.parent = contentLayout.parent;
         background.anchors.fill = contentLayout;
-        background.anchors.margins = -1
+        background.anchors.margins = -1;
         background.z = -1;
     }
     onContentItemChanged: {
@@ -221,7 +219,7 @@ QtObject {
         if (sheetOpen) {
             open();
         } else {
-            closeAnimation.restart()
+            closeAnimation.restart();
             Qt.inputMethod.hide();
             root.parent.forceActiveFocus();
         }
@@ -236,11 +234,11 @@ QtObject {
         // ScrollablePage must do things related to parenting of OverlaySheets in its conCompleted, so this must execute later
         // TODO KF6: port the root object to Popup template?
         Qt.callLater(() => {
-            if (!root.parent && typeof applicationWindow !== "undefined") {
-                root.parent = applicationWindow().overlay
-            }
-            headerItem.initHeader();
-        });
+                if (!root.parent && typeof applicationWindow !== "undefined") {
+                    root.parent = applicationWindow().overlay;
+                }
+                headerItem.initHeader();
+            });
     }
 
     readonly property Item rootItem: FocusScope {
@@ -285,7 +283,6 @@ QtObject {
 
         onHeightChanged: {
             const focusItem = Window.activeFocusItem;
-
             if (!focusItem) {
                 return;
             }
@@ -304,14 +301,11 @@ QtObject {
             if (!isDescendent) {
                 return;
             }
-
             let cursorY = 0;
             if (focusItem.cursorPosition !== undefined) {
                 cursorY = focusItem.positionToRectangle(focusItem.cursorPosition).y;
             }
-
-
-            const pos = focusItem.mapToItem(flickableContents, 0, cursorY - Units.gridUnit*3);
+            const pos = focusItem.mapToItem(flickableContents, 0, cursorY - Units.gridUnit * 3);
             // focused item already visible? add some margin for the space of the action buttons
             if (pos.y >= scrollView.flickableItem.contentY && pos.y <= scrollView.flickableItem.contentY + scrollView.flickableItem.height - Kirigami.Units.gridUnit * 8) {
                 return;
@@ -344,9 +338,7 @@ QtObject {
             target: outerFlickable
             properties: "contentY"
             from: outerFlickable.contentY
-            to: outerFlickable.visibleArea.yPosition < (1 - outerFlickable.visibleArea.heightRatio)/2 || scrollView.flickableItem.contentHeight < outerFlickable.height
-                ? outerFlickable.openPosition
-                : outerFlickable.contentHeight - outerFlickable.height + outerFlickable.topEmptyArea + headerItem.height + footerItem.height
+            to: outerFlickable.visibleArea.yPosition < (1 - outerFlickable.visibleArea.heightRatio) / 2 || scrollView.flickableItem.contentHeight < outerFlickable.height ? outerFlickable.openPosition : outerFlickable.contentHeight - outerFlickable.height + outerFlickable.topEmptyArea + headerItem.height + footerItem.height
             duration: Kirigami.Units.longDuration
             easing.type: Easing.OutQuad
         }
@@ -358,7 +350,7 @@ QtObject {
                     target: outerFlickable
                     properties: "contentY"
                     from: outerFlickable.contentY + (contentLayout.initialHeight - contentLayout.height)
-                    to: outerFlickable.visibleArea.yPosition < (1 - outerFlickable.visibleArea.heightRatio)/2 ? -mainItem.height : outerFlickable.contentHeight
+                    to: outerFlickable.visibleArea.yPosition < (1 - outerFlickable.visibleArea.heightRatio) / 2 ? -mainItem.height : outerFlickable.contentHeight
                     duration: Kirigami.Units.longDuration
                     easing.type: Easing.InQuad
                 }
@@ -372,7 +364,7 @@ QtObject {
             }
             ScriptAction {
                 script: {
-                    contentLayout.initialHeight = 0
+                    contentLayout.initialHeight = 0;
                     scrollView.flickableItem.contentY = -mainItem.height;
                     mainItem.visible = false;
                 }
@@ -381,9 +373,7 @@ QtObject {
         Rectangle {
             anchors.fill: parent
             color: "black"
-            opacity: 0.3 * Math.min(
-                (Math.min(outerFlickable.contentY + outerFlickable.height, outerFlickable.height) / outerFlickable.height),
-                (2 + (outerFlickable.contentHeight - outerFlickable.contentY - outerFlickable.topMargin - outerFlickable.bottomMargin)/outerFlickable.height))
+            opacity: 0.3 * Math.min((Math.min(outerFlickable.contentY + outerFlickable.height, outerFlickable.height) / outerFlickable.height), (2 + (outerFlickable.contentHeight - outerFlickable.contentY - outerFlickable.topMargin - outerFlickable.bottomMargin) / outerFlickable.height))
         }
 
         MouseArea {
@@ -393,9 +383,10 @@ QtObject {
 
             onPressed: {
                 const pos = mapToItem(contentLayout, mouse.x, mouse.y);
-                if (contentLayout.contains(pos) && mouseHover.hovered) { // only on mouse event, not touch
+                if (contentLayout.contains(pos) && mouseHover.hovered) {
+                    // only on mouse event, not touch
                     // disable dragging the sheet with a mouse
-                    outerFlickable.interactive = false
+                    outerFlickable.interactive = false;
                 }
             }
             onReleased: {
@@ -404,19 +395,17 @@ QtObject {
                     root.close();
                 }
                 // enable dragging of sheet once mouse is not clicked
-                outerFlickable.interactive = true
+                outerFlickable.interactive = true;
             }
-
 
             Item {
                 id: flickableContents
 
                 readonly property real listHeaderHeight: scrollView.flickableItem ? -scrollView.flickableItem.originY : 0
 
-                y: (scrollView.contentItem !== flickableContents ? -scrollView.flickableItem.contentY - listHeaderHeight  - (headerItem.visible ? headerItem.height : 0): 0)
+                y: (scrollView.contentItem !== flickableContents ? -scrollView.flickableItem.contentY - listHeaderHeight - (headerItem.visible ? headerItem.height : 0) : 0)
 
-                width: mainItem.contentItemPreferredWidth <= 0 ? mainItem.width : (mainItem.contentItemMaximumWidth > 0 ? Math.min( mainItem.contentItemMaximumWidth, Math.max( mainItem.width/2, mainItem.contentItemPreferredWidth ) ) : Math.max( mainItem.width / 2, mainItem.contentItemPreferredWidth ) ) + leftPadding + rightPadding
-
+                width: mainItem.contentItemPreferredWidth <= 0 ? mainItem.width : (mainItem.contentItemMaximumWidth > 0 ? Math.min(mainItem.contentItemMaximumWidth, Math.max(mainItem.width / 2, mainItem.contentItemPreferredWidth)) : Math.max(mainItem.width / 2, mainItem.contentItemPreferredWidth)) + leftPadding + rightPadding
 
                 implicitHeight: scrollView.viewContent === flickableContents ? root.contentItem.height + topPadding + bottomPadding : 0
 
@@ -425,7 +414,7 @@ QtObject {
                     enabled: flickableContents.focus && flickableContents.Window.activeFocusItem && flickableContents.Window.activeFocusItem.hasOwnProperty("text")
                     function onTextChanged() {
                         if (Qt.inputMethod.cursorRectangle.y + Qt.inputMethod.cursorRectangle.height > mainItem.Window.height) {
-                            scrollView.flickableItem.contentY += (Qt.inputMethod.cursorRectangle.y + Qt.inputMethod.cursorRectangle.height) - mainItem.Window.height
+                            scrollView.flickableItem.contentY += (Qt.inputMethod.cursorRectangle.y + Qt.inputMethod.cursorRectangle.height) - mainItem.Window.height;
                         }
                     }
                 }
@@ -453,12 +442,10 @@ QtObject {
                         // repositioning is relevant only when the content height is less than the viewport height.
                         // In that case the sheet looks like a dialog and should be centered. there is also a corner case when now is bigger then the viewport but prior to the
                         // resize event it was smaller, also in this case we need repositioning
-                        if (scrollView.animatedContentHeight < outerFlickable.height
-                            || scrollView.flickableItem.oldContentHeight < outerFlickable.height
-                        ) {
+                        if (scrollView.animatedContentHeight < outerFlickable.height || scrollView.flickableItem.oldContentHeight < outerFlickable.height) {
                             outerFlickable.adjustPosition();
                         }
-                        oldContentHeight = scrollView.animatedContentHeight
+                        oldContentHeight = scrollView.animatedContentHeight;
                     }
                 }
             }
@@ -470,12 +457,12 @@ QtObject {
                 topMargin: height
                 bottomMargin: height
                 // +1: we need the flickable to be always interactive
-                contentHeight: Math.max(height+1, scrollView.animatedContentHeight + topEmptyArea)
+                contentHeight: Math.max(height + 1, scrollView.animatedContentHeight + topEmptyArea)
 
                 // readonly property int topEmptyArea: Math.max(height-scrollView.animatedContentHeight, Kirigami.Units.gridUnit * 3)
-                readonly property int topEmptyArea: Math.max(height-scrollView.animatedContentHeight, Kirigami.Units.gridUnit * 3)
+                readonly property int topEmptyArea: Math.max(height - scrollView.animatedContentHeight, Kirigami.Units.gridUnit * 3)
 
-                readonly property real openPosition: Math.max(0, outerFlickable.height - outerFlickable.contentHeight + headerItem.height + footerItem.height) + height/2 - contentLayout.height/2;
+                readonly property real openPosition: Math.max(0, outerFlickable.height - outerFlickable.contentHeight + headerItem.height + footerItem.height) + height / 2 - contentLayout.height / 2
 
                 onOpenPositionChanged: {
                     if (openAnimation.running) {
@@ -497,11 +484,11 @@ QtObject {
                 }
 
                 function adjustPosition() {
-                    if(layoutMovingGuard) return;
-
+                    if (layoutMovingGuard)
+                        return;
                     if (openAnimation.running) {
                         openAnimation.running = false;
-                        open()
+                        open();
                     } else {
                         resetAnimation.running = false;
                         contentY = openPosition;
@@ -512,8 +499,9 @@ QtObject {
                 MouseArea {
                     anchors.fill: parent
                     onPressed: {
-                        if (mouseHover.hovered) { // only on mouse event, not touch
-                            outerFlickable.interactive = false
+                        if (mouseHover.hovered) {
+                            // only on mouse event, not touch
+                            outerFlickable.interactive = false;
                         }
                     }
                     onReleased: outerFlickable.interactive = true
@@ -523,11 +511,9 @@ QtObject {
                     if (scrollView.userInteracting) {
                         return;
                     }
-
                     const startPos = -scrollView.flickableItem.topMargin - flickableContents.listHeaderHeight;
                     const pos = contentY - topEmptyArea - flickableContents.listHeaderHeight;
                     const endPos = scrollView.animatedContentHeight - scrollView.flickableItem.height + scrollView.flickableItem.bottomMargin - flickableContents.listHeaderHeight;
-
                     layoutMovingGuard = true;
                     if (endPos - pos > 0) {
                         contentLayout.y = Math.round(Math.max(root.topInset, scrollView.flickableItem.topMargin - pos - flickableContents.listHeaderHeight));
@@ -535,10 +521,7 @@ QtObject {
                         contentLayout.y = Math.round(endPos - pos + root.topInset);
                     }
                     layoutMovingGuard = false;
-
-                    scrollView.flickableItem.contentY = Math.max(
-                        startPos, Math.min(pos, endPos));
-
+                    scrollView.flickableItem.contentY = Math.max(startPos, Math.min(pos, endPos));
                     lastMovementWasDown = contentY < oldContentY;
                     oldContentY = contentY;
                 }
@@ -547,7 +530,7 @@ QtObject {
                     if (openAnimation.running || closeAnimation.running) {
                         return;
                     }
-                    if (scrollView.flickableItem.atYBeginning ||scrollView.flickableItem.atYEnd) {
+                    if (scrollView.flickableItem.atYBeginning || scrollView.flickableItem.atYEnd) {
                         resetAnimation.restart();
                     }
                 }
@@ -557,28 +540,21 @@ QtObject {
                         startDraggingPos = contentY;
                         return;
                     }
-
                     let shouldClose = false;
 
                     // close
                     if (scrollView.flickableItem.atYBeginning) {
-                        if (startDraggingPos - contentY > Kirigami.Units.gridUnit * 4 &&
-                            contentY < -Kirigami.Units.gridUnit * 4 &&
-                            lastMovementWasDown) {
+                        if (startDraggingPos - contentY > Kirigami.Units.gridUnit * 4 && contentY < -Kirigami.Units.gridUnit * 4 && lastMovementWasDown) {
                             shouldClose = true;
                         }
                     }
-
                     if (scrollView.flickableItem.atYEnd) {
-                        if (contentY - startDraggingPos > Kirigami.Units.gridUnit * 4 &&
-                            contentY > contentHeight - height + Kirigami.Units.gridUnit * 4  &&
-                            !lastMovementWasDown) {
+                        if (contentY - startDraggingPos > Kirigami.Units.gridUnit * 4 && contentY > contentHeight - height + Kirigami.Units.gridUnit * 4 && !lastMovementWasDown) {
                             shouldClose = true;
                         }
                     }
-
                     if (shouldClose) {
-                        root.sheetOpen = false
+                        root.sheetOpen = false;
                     } else if (scrollView.flickableItem.atYBeginning || scrollView.flickableItem.atYEnd) {
                         resetAnimation.restart();
                     }
@@ -604,11 +580,11 @@ QtObject {
                     // Its events should be filtered but not scrolled
                     parent: outerFlickable
                     anchors.horizontalCenter: parent.horizontalCenter
-                    width: mainItem.contentItemPreferredWidth <= 0 ? mainItem.width : (mainItem.contentItemMaximumWidth > 0 ? Math.min( mainItem.contentItemMaximumWidth, Math.max( mainItem.width/2, mainItem.contentItemPreferredWidth ) ) : Math.max( mainItem.width / 2, mainItem.contentItemPreferredWidth ) ) - root.leftInset - root.rightInset + root.leftPadding + root.rightPadding
+                    width: mainItem.contentItemPreferredWidth <= 0 ? mainItem.width : (mainItem.contentItemMaximumWidth > 0 ? Math.min(mainItem.contentItemMaximumWidth, Math.max(mainItem.width / 2, mainItem.contentItemPreferredWidth)) : Math.max(mainItem.width / 2, mainItem.contentItemPreferredWidth)) - root.leftInset - root.rightInset + root.leftPadding + root.rightPadding
                     height: Math.min(implicitHeight, parent.height) - root.topInset - root.bottomInset
                     property real initialHeight
 
-                    Behavior on height {
+                    Behavior on height  {
                         NumberAnimation {
                             duration: Kirigami.Units.shortDuration
                             easing.type: Easing.InOutCubic
@@ -669,14 +645,14 @@ QtObject {
                             onTallHeaderChanged: {
                                 if (tallHeader) {
                                     // We want to position the close button in the top-right corner if the header is very tall
-                                    anchors.verticalCenter = undefined
-                                    anchors.topMargin = Kirigami.Units.largeSpacing
-                                    anchors.top = headerItem.top
+                                    anchors.verticalCenter = undefined;
+                                    anchors.topMargin = Kirigami.Units.largeSpacing;
+                                    anchors.top = headerItem.top;
                                 } else {
                                     // but we want to vertically center it in a short header
-                                    anchors.top = undefined
-                                    anchors.topMargin = undefined
-                                    anchors.verticalCenter = headerItem.verticalCenter
+                                    anchors.top = undefined;
+                                    anchors.topMargin = undefined;
+                                    anchors.verticalCenter = headerItem.verticalCenter;
                                 }
                             }
                             Component.onCompleted: tallHeaderChanged()
@@ -691,7 +667,7 @@ QtObject {
                                 id: closeMouseArea
                                 hoverEnabled: true
                                 anchors.fill: parent
-                                onClicked: root.close();
+                                onClicked: root.close()
                             }
                         }
                         Kirigami.Separator {
@@ -725,7 +701,7 @@ QtObject {
                         // HACK: Hide unnecessary horizontal scrollbar (https://bugreports.qt.io/browse/QTBUG-83890)
                         QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
-                        Behavior on animatedContentHeight {
+                        Behavior on animatedContentHeight  {
                             NumberAnimation {
                                 duration: Kirigami.Units.shortDuration
                                 easing.type: Easing.InOutCubic
@@ -733,7 +709,9 @@ QtObject {
                         }
                     }
 
-                    Item { Layout.fillHeight: true }
+                    Item {
+                        Layout.fillHeight: true
+                    }
 
                     Connections {
                         target: scrollView.flickableItem
@@ -744,15 +722,12 @@ QtObject {
                                 return;
                             }
                             scrollView.userInteracting = true;
-
-                            const diff = scrollView.flickableItem.contentY - oldContentY
-
+                            const diff = scrollView.flickableItem.contentY - oldContentY;
                             outerFlickable.contentY = outerFlickable.contentY + diff;
-
                             if (diff > 0) {
-                                contentLayout.y = Math.max(root.topInset,  contentLayout.y - diff);
+                                contentLayout.y = Math.max(root.topInset, contentLayout.y - diff);
                             } else if (scrollView.flickableItem.contentY < outerFlickable.topEmptyArea + headerItem.height) {
-                                contentLayout.y = Math.min(outerFlickable.topEmptyArea + root.topInset,  contentLayout.y - diff);
+                                contentLayout.y = Math.min(outerFlickable.topEmptyArea + root.topInset, contentLayout.y - diff);
                             }
                             oldContentY = scrollView.flickableItem.contentY;
                             scrollView.userInteracting = false;
@@ -789,14 +764,7 @@ QtObject {
                     // * it doesn't use toolbarapplicationheader
                     // * the bottom screen controls are visible
                     // * the sheet is displayed *under* the controls
-                    property int extraMargin: (!root.parent ||
-                        !Kirigami.Settings.isMobile ||
-                        typeof applicationWindow === "undefined" ||
-                        (root.parent === applicationWindow().overlay) ||
-                        !applicationWindow().controlsVisible ||
-                        (applicationWindow().pageStack && applicationWindow().pageStack.globalToolBar && applicationWindow().pageStack.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.ToolBar) ||
-                        (applicationWindow().header && applicationWindow().header.toString().indexOf("ToolBarApplicationHeader") === 0))
-                            ? 0 : Kirigami.Units.gridUnit * 3
+                    property int extraMargin: (!root.parent || !Kirigami.Settings.isMobile || typeof applicationWindow === "undefined" || (root.parent === applicationWindow().overlay) || !applicationWindow().controlsVisible || (applicationWindow().pageStack && applicationWindow().pageStack.globalToolBar && applicationWindow().pageStack.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.ToolBar) || (applicationWindow().header && applicationWindow().header.toString().indexOf("ToolBarApplicationHeader") === 0)) ? 0 : Kirigami.Units.gridUnit * 3
 
                     z: 2
                     Item {

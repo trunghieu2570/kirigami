@@ -4,14 +4,13 @@
     SPDX-FileCopyrightText: 2022 ivan tkachenko <me@ratijas.tk>
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
-
 import QtQuick 2.15
 import QtQml 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Templates 2.15 as T
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.12 as Kirigami
-import QtGraphicalEffects 1.12 as GE
+import Qt5Compat.GraphicalEffects 6.0 as GE
 
 /**
  * @brief Popup dialog that is used for short tasks and user interaction.
@@ -191,7 +190,6 @@ T.Dialog {
      */
     property real preferredWidth: -1
 
-
     /**
      * @brief This property holds the component to the left of the footer buttons.
      */
@@ -260,9 +258,7 @@ T.Dialog {
 
     // calculate dimensions
     implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding // maximum width enforced from our content (one source of truth) to avoid binding loops
-    implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
-                    + (implicitHeaderHeight > 0 ? implicitHeaderHeight + spacing : 0)
-                    + (implicitFooterHeight > 0 ? implicitFooterHeight + spacing : 0);
+    implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding + (implicitHeaderHeight > 0 ? implicitHeaderHeight + spacing : 0) + (implicitFooterHeight > 0 ? implicitFooterHeight + spacing : 0)
 
     // misc. dialog settings
     closePolicy: QQC2.Popup.CloseOnEscape | QQC2.Popup.CloseOnReleaseOutside
@@ -284,10 +280,22 @@ T.Dialog {
 
     // dialog enter and exit transitions
     enter: Transition {
-        NumberAnimation { property: "opacity"; from: 0; to: 1; easing.type: Easing.InOutQuad; duration: Kirigami.Units.longDuration }
+        NumberAnimation {
+            property: "opacity"
+            from: 0
+            to: 1
+            easing.type: Easing.InOutQuad
+            duration: Kirigami.Units.longDuration
+        }
     }
     exit: Transition {
-        NumberAnimation { property: "opacity"; from: 1; to: 0; easing.type: Easing.InOutQuad; duration: Kirigami.Units.longDuration }
+        NumberAnimation {
+            property: "opacity"
+            from: 1
+            to: 0
+            easing.type: Easing.InOutQuad
+            duration: Kirigami.Units.longDuration
+        }
     }
 
     // black background, fades in and out
@@ -295,7 +303,7 @@ T.Dialog {
         color: Qt.rgba(0, 0, 0, 0.3)
 
         // the opacity of the item is changed internally by QQuickPopup on open/close
-        Behavior on opacity {
+        Behavior on opacity  {
             OpacityAnimator {
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutQuad
@@ -336,16 +344,12 @@ T.Dialog {
             QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
             // height of everything else in the dialog other than the content
-            property real otherHeights: root.header.height + root.footer.height + root.topPadding + root.bottomPadding;
+            property real otherHeights: root.header.height + root.footer.height + root.topPadding + root.bottomPadding
 
             property real calculatedMaximumWidth: Math.min(root.absoluteMaximumWidth, root.maximumWidth) - root.leftPadding - root.rightPadding
             property real calculatedMaximumHeight: Math.min(root.absoluteMaximumHeight, root.maximumHeight) - root.topPadding - root.bottomPadding
-            property real calculatedImplicitWidth: (contentChildren.length === 1 && contentChildren[0].implicitWidth > 0
-                ? contentChildren[0].implicitWidth
-                : (contentItem.implicitWidth > 0 ? contentItem.implicitWidth : contentItem.width)) + leftPadding + rightPadding
-            property real calculatedImplicitHeight: (contentChildren.length === 1 && contentChildren[0].implicitHeight > 0
-                ? contentChildren[0].implicitHeight
-                : (contentItem.implicitHeight > 0 ? contentItem.implicitHeight : contentItem.height)) + topPadding + bottomPadding
+            property real calculatedImplicitWidth: (contentChildren.length === 1 && contentChildren[0].implicitWidth > 0 ? contentChildren[0].implicitWidth : (contentItem.implicitWidth > 0 ? contentItem.implicitWidth : contentItem.width)) + leftPadding + rightPadding
+            property real calculatedImplicitHeight: (contentChildren.length === 1 && contentChildren[0].implicitHeight > 0 ? contentChildren[0].implicitHeight : (contentItem.implicitHeight > 0 ? contentItem.implicitHeight : contentItem.height)) + topPadding + bottomPadding
 
             // how do we deal with the scrollbar width?
             // - case 1: the dialog itself has the preferredWidth set
@@ -379,10 +383,8 @@ T.Dialog {
     }
 
     header: T.Control {
-        implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
-                                implicitContentWidth + leftPadding + rightPadding)
-        implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
-                                implicitContentHeight + topPadding + bottomPadding)
+        implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
+        implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding)
 
         padding: Kirigami.Units.largeSpacing
         bottomPadding: verticalPadding + headerSeparator.implicitHeight // add space for bottom separator
@@ -399,7 +401,9 @@ T.Dialog {
                 // use tooltip for long text that is elided
                 QQC2.ToolTip.visible: truncated && titleHoverHandler.hovered
                 QQC2.ToolTip.text: root.title
-                HoverHandler { id: titleHoverHandler }
+                HoverHandler {
+                    id: titleHoverHandler
+                }
             }
             Kirigami.Icon {
                 id: closeIcon
@@ -448,7 +452,9 @@ T.Dialog {
         property bool bufferMode: contentItem.implicitHeight === 0
         implicitHeight: bufferMode ? Kirigami.Units.smallSpacing : contentItem.implicitHeight
 
-        leftPadding: 0; rightPadding: 0; bottomPadding: 0
+        leftPadding: 0
+        rightPadding: 0
+        bottomPadding: 0
         topPadding: bufferMode ? 0 : footerSeparator.implicitHeight // add space for the separator above the footer
 
         contentItem: RowLayout {

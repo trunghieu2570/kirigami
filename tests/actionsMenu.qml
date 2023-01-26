@@ -4,7 +4,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.20 as Kirigami
@@ -12,7 +11,8 @@ import org.kde.kirigami 2.20 as Kirigami
 Kirigami.ApplicationWindow {
     id: main
 
-    header: Kirigami.ToolBarApplicationHeader {}
+    header: Kirigami.ToolBarApplicationHeader {
+    }
 
     pageStack.initialPage: Kirigami.Page {
         QQC2.Button {
@@ -21,21 +21,38 @@ Kirigami.ApplicationWindow {
             QQC2.Menu {
                 id: menu
 
-                QQC2.MenuItem { text: "xxx" }
-                QQC2.MenuItem { text: "xxx" }
+                QQC2.MenuItem {
+                    text: "xxx"
+                }
+                QQC2.MenuItem {
+                    text: "xxx"
+                }
                 QQC2.Menu {
                     title: "yyy"
-                    QQC2.MenuItem { text: "yyy" }
-                    QQC2.MenuItem { text: "yyy" }
+                    QQC2.MenuItem {
+                        text: "yyy"
+                    }
+                    QQC2.MenuItem {
+                        text: "yyy"
+                    }
                 }
             }
         }
 
         title: "aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa"
         actions {
-            main:  Kirigami.Action { icon.name: "kate"; text: "BonDia" }
-            left : Kirigami.Action { icon.name: "kate"; text: "BonDia" }
-            right: Kirigami.Action { icon.name: "kate"; text: "BonDia" }
+            main: Kirigami.Action {
+                icon.name: "kate"
+                text: "BonDia"
+            }
+            left: Kirigami.Action {
+                icon.name: "kate"
+                text: "BonDia"
+            }
+            right: Kirigami.Action {
+                icon.name: "kate"
+                text: "BonDia"
+            }
         }
 
         QQC2.ActionGroup {
@@ -47,17 +64,34 @@ Kirigami.ApplicationWindow {
                 text: "submenus"
                 icon.name: "kalgebra"
 
-                Kirigami.Action { text: "xxx"; onTriggered: console.log("xxx") }
-                Kirigami.Action { text: "xxx"; onTriggered: console.log("xxx") }
-                Kirigami.Action { text: "xxx"; onTriggered: console.log("xxx") }
+                Kirigami.Action {
+                    text: "xxx"
+                    onTriggered: console.log("xxx")
+                }
+                Kirigami.Action {
+                    text: "xxx"
+                    onTriggered: console.log("xxx")
+                }
+                Kirigami.Action {
+                    text: "xxx"
+                    onTriggered: console.log("xxx")
+                }
                 Kirigami.Action {
                     text: "yyy"
-                    Kirigami.Action { text: "yyy" }
-                    Kirigami.Action { text: "yyy" }
-                    Kirigami.Action { text: "yyy" }
-                    Kirigami.Action { text: "yyy" }
+                    Kirigami.Action {
+                        text: "yyy"
+                    }
+                    Kirigami.Action {
+                        text: "yyy"
+                    }
+                    Kirigami.Action {
+                        text: "yyy"
+                    }
+                    Kirigami.Action {
+                        text: "yyy"
+                    }
                 }
-            },
+            }, 
             Kirigami.Action {
                 id: optionsAction
                 text: "Options"
@@ -79,12 +113,22 @@ Kirigami.ApplicationWindow {
                     text: "C"
                     checkable: true
                 }
-            },
-            Kirigami.Action { text: "stuffing..." },
-            Kirigami.Action { text: "stuffing..." },
-            Kirigami.Action { text: "stuffing..." },
-            Kirigami.Action { text: "stuffing..." },
-            Kirigami.Action { text: "stuffing..." }
+            }, 
+            Kirigami.Action {
+                text: "stuffing..."
+            }, 
+            Kirigami.Action {
+                text: "stuffing..."
+            }, 
+            Kirigami.Action {
+                text: "stuffing..."
+            }, 
+            Kirigami.Action {
+                text: "stuffing..."
+            }, 
+            Kirigami.Action {
+                text: "stuffing..."
+            }
         ]
     }
 }

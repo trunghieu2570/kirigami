@@ -3,10 +3,8 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-
 import org.kde.kirigami 2.20 as Kirigami
 
 Kirigami.ApplicationWindow {
@@ -14,7 +12,9 @@ Kirigami.ApplicationWindow {
     Component {
         id: delegateComponent
         Kirigami.Card {
-            contentItem: Label { text: ourlist.prefix + index }
+            contentItem: Label {
+                text: ourlist.prefix + index
+            }
         }
     }
 

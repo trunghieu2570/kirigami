@@ -1,7 +1,6 @@
 /* SPDX-FileCopyrightText: 2021 Noah Davis <noahadvs@gmail.com>
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
-
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.19 as Kirigami
@@ -48,7 +47,8 @@ QQC2.ApplicationWindow {
             stepSize: wheelHandler.horizontalStepSize / flickable.contentWidth
         }
 
-        Grid { // Example content
+        Grid {
+            // Example content
             columns: Math.sqrt(visibleChildren.length)
             Repeater {
                 model: 1000
@@ -57,8 +57,14 @@ QQC2.ApplicationWindow {
                     implicitHeight: wheelHandler.verticalStepSize
                     gradient: Gradient {
                         orientation: index % 2 ? Gradient.Vertical : Gradient.Horizontal
-                        GradientStop { position: 0; color: Qt.rgba(Math.random(), Math.random(), Math.random(), 1) }
-                        GradientStop { position: 1; color: Qt.rgba(Math.random(), Math.random(), Math.random(), 1) }
+                        GradientStop {
+                            position: 0
+                            color: Qt.rgba(Math.random(), Math.random(), Math.random(), 1)
+                        }
+                        GradientStop {
+                            position: 1
+                            color: Qt.rgba(Math.random(), Math.random(), Math.random(), 1)
+                        }
                     }
                 }
             }

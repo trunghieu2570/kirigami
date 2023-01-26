@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.6
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.2 as QQC2
@@ -30,11 +29,11 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 text: "Rooms"
                 icon.name: "view-list-icons"
-            },
+            }, 
             Kirigami.Action {
                 text: "Contacts"
                 icon.name: "tag-people"
-            },
+            }, 
             Kirigami.Action {
                 text: "Search"
                 icon.name: "search"
@@ -126,12 +125,12 @@ Kirigami.ApplicationWindow {
             }
             Kirigami.BasicListItem {
                 label: "Group call"
-                icon: "call-start"
+                icon.name: "call-start"
                 separatorVisible: false
             }
             Kirigami.BasicListItem {
                 label: "Send Attachment"
-                icon: "mail-attachment"
+                icon.name: "mail-attachment"
                 separatorVisible: false
             }
         }
@@ -169,7 +168,7 @@ Kirigami.ApplicationWindow {
                             height: width
                             source: "configure"
                         }
-                        onClicked: root.pageStack.layers.push(secondLayerComponent);
+                        onClicked: root.pageStack.layers.push(secondLayerComponent)
                     }
                     QQC2.ComboBox {
                         Layout.fillWidth: true
@@ -217,7 +216,7 @@ Kirigami.ApplicationWindow {
                     Kirigami.Action {
                         text: "Setting 2"
                     }
-                },
+                }, 
                 Kirigami.Action {
                     text: "Shared Media"
                     icon.name: "document-share"
@@ -256,9 +255,10 @@ Kirigami.ApplicationWindow {
                 }
                 contentItem: RowLayout {
                     QQC2.TextField {
-                        Layout.fillWidth: true
                         id: chatTextInput
-                        background: Item {}
+                        Layout.fillWidth: true
+                        background: Item {
+                        }
                     }
                     //NOTE: icon support in tool button in Qt 5.11
                     QQC2.ToolButton {
@@ -316,7 +316,7 @@ Kirigami.ApplicationWindow {
                         height: width
                         source: "configure"
                     }
-                    onClicked: root.pageStack.layers.pop();
+                    onClicked: root.pageStack.layers.pop()
                 }
             }
         }

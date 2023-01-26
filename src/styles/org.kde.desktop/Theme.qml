@@ -3,11 +3,9 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
+pragma Singleton
 import QtQuick 2.4
 import org.kde.kirigami 2.16 as Kirigami
-
-pragma Singleton
 
 Kirigami.BasicThemeDefinition {
     id: theme
@@ -75,21 +73,26 @@ Kirigami.BasicThemeDefinition {
     property list<QtObject> children: [
         TextMetrics {
             id: fontMetrics
-        },
+        }, 
         SystemPalette {
             id: palette
             colorGroup: SystemPalette.Active
-        },
+        }, 
         SystemPalette {
             id: disabledPalette
             colorGroup: SystemPalette.Disabled
         }
     ]
 
-    function __propagateColorSet(object, context) {}
+    function __propagateColorSet(object, context) {
+    }
 
-    function __propagateTextColor(object, color) {}
-    function __propagateBackgroundColor(object, color) {}
-    function __propagatePrimaryColor(object, color) {}
-    function __propagateAccentColor(object, color) {}
+    function __propagateTextColor(object, color) {
+    }
+    function __propagateBackgroundColor(object, color) {
+    }
+    function __propagatePrimaryColor(object, color) {
+    }
+    function __propagateAccentColor(object, color) {
+    }
 }

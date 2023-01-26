@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import QtQuick.Controls 2.0 as QQC2
 import org.kde.kirigami 2.4 as Kirigami
@@ -17,9 +16,9 @@ QQC2.ToolButton {
 
     property var showNavButtons: {
         try {
-            return globalToolBar.showNavigationButtons
+            return globalToolBar.showNavigationButtons;
         } catch (_) {
-            return false
+            return false;
         }
     }
     // The gridUnit wiggle room is used to not flicker the button visibility during an animated resize for instance due to a sidebar collapse

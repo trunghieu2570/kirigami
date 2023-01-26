@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import "private" as P
 import "templates" as T
 
@@ -18,5 +17,6 @@ import "templates" as T
 T.AbstractListItem {
     id: listItem
 
-    background: P.DefaultListItemBackground {}
+    background: P.DefaultListItemBackground {
+    }
 }

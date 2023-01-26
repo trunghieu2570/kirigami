@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.7
 import QtQuick.Controls 2.7
 import QtQuick.Window 2.1
@@ -18,11 +17,11 @@ TestCase {
     when: windowShown
 
     function initTestCase() {
-        mainWindow.show()
+        mainWindow.show();
     }
 
     function cleanupTestCase() {
-        mainWindow.close()
+        mainWindow.close();
     }
 
     Kirigami.ApplicationWindow {
@@ -47,20 +46,18 @@ TestCase {
         signalName: "onCurrentItemChanged"
     }
 
-
     function init() {
-        pool.clear()
-        mainWindow.pageStack.layers.clear()
-        compare(mainWindow.pageStack.layers.depth, 1)
-        mainWindow.pageStack.clear()
-
+        pool.clear();
+        mainWindow.pageStack.layers.clear();
+        compare(mainWindow.pageStack.layers.depth, 1);
+        mainWindow.pageStack.clear();
         for (var spy of [stackSpy, layerSpy, checkSpy_A, checkSpy_B, checkSpy_C, checkSpy_D, checkSpy_E]) {
-            spy.clear()
+            spy.clear();
         }
 
         // Give mainWindow a bit of room to breathe so it can process item
         // deletion and other delayed signals.
-        wait(50)
+        wait(50);
     }
 
     ActionGroup {
@@ -73,7 +70,12 @@ TestCase {
             pagePool: pool
             pageStack: mainWindow.pageStack
             page: "TestPage.qml?page=A"
-            initialProperties: { return {title: "A", objectName: "Page A" } }
+            initialProperties: {
+                return {
+                    "title": "A",
+                    "objectName": "Page A"
+                };
+            }
         }
 
         Kirigami.PagePoolAction {
@@ -82,7 +84,12 @@ TestCase {
             pagePool: pool
             pageStack: mainWindow.pageStack
             page: "TestPage.qml?page=B"
-            initialProperties: { return {title: "B", objectName: "Page B" } }
+            initialProperties: {
+                return {
+                    "title": "B",
+                    "objectName": "Page B"
+                };
+            }
         }
 
         Kirigami.PagePoolAction {
@@ -92,7 +99,12 @@ TestCase {
             pageStack: mainWindow.pageStack
             useLayers: true
             page: "TestPage.qml?page=C"
-            initialProperties: { return {title: "C", objectName: "Page C" } }
+            initialProperties: {
+                return {
+                    "title": "C",
+                    "objectName": "Page C"
+                };
+            }
         }
 
         Kirigami.PagePoolAction {
@@ -102,7 +114,12 @@ TestCase {
             pageStack: mainWindow.pageStack
             useLayers: true
             page: "TestPage.qml?page=D"
-            initialProperties: { return {title: "D", objectName: "Page D" } }
+            initialProperties: {
+                return {
+                    "title": "D",
+                    "objectName": "Page D"
+                };
+            }
         }
 
         Kirigami.PagePoolAction {
@@ -111,46 +128,47 @@ TestCase {
             pagePool: pool
             pageStack: mainWindow.pageStack
             page: "TestPage.qml?page=E"
-            initialProperties: { return {title: "E", objectName: "Page E" } }
+            initialProperties: {
+                return {
+                    "title": "E",
+                    "objectName": "Page E"
+                };
+            }
         }
     }
 
-    function tapBack () {
-        mouseClick(mainWindow, 10, 10)
+    function tapBack() {
+        mouseClick(mainWindow, 10, 10);
     }
 
     function test_pushLayerBackButtonPushAgain() {
-        var stack = mainWindow.pageStack
-        var layers = stack.layers
-
+        var stack = mainWindow.pageStack;
+        var layers = stack.layers;
         function pushA() {
-            stackPageA.trigger()
-            compare(stack.currentItem, pool.lastLoadedItem)
+            stackPageA.trigger();
+            compare(stack.currentItem, pool.lastLoadedItem);
         }
-
-        function pushC () {
-            layerPageC.trigger()
-            compare(layers.currentItem, pool.lastLoadedItem)
+        function pushC() {
+            layerPageC.trigger();
+            compare(layers.currentItem, pool.lastLoadedItem);
         }
-
-        function pushD () {
-            layerPageD.trigger()
-            compare(layers.currentItem, pool.lastLoadedItem)
+        function pushD() {
+            layerPageD.trigger();
+            compare(layers.currentItem, pool.lastLoadedItem);
         }
-
-        compare(stackSpy.count, 0)
-        pushA()
-        compare(stackSpy.count, 1)
-        compare(layerSpy.count, 0)
-        pushC()
-        compare(layerSpy.count, 1)
-        pushD()
-        compare(layerSpy.count, 2)
-        compare(stackSpy.count, 1)
-        tapBack()
-        compare(layerSpy.count, 3)
-        pushD()
-        compare(layerSpy.count, 4)
+        compare(stackSpy.count, 0);
+        pushA();
+        compare(stackSpy.count, 1);
+        compare(layerSpy.count, 0);
+        pushC();
+        compare(layerSpy.count, 1);
+        pushD();
+        compare(layerSpy.count, 2);
+        compare(stackSpy.count, 1);
+        tapBack();
+        compare(layerSpy.count, 3);
+        pushD();
+        compare(layerSpy.count, 4);
     }
 
     SignalSpy {
@@ -182,130 +200,135 @@ TestCase {
         target: stackPageE
         signalName: "onCheckedChanged"
     }
-    
+
     function dump_layers(msg = "") {
         for (var i = 0; i < mainWindow.pageStack.layers.depth; ++i) {
-            console.debug(`${msg} ${i}: ${mainWindow.pageStack.layers.get(i)}`)
+            console.debug(`${msg} ${i}: ${mainWindow.pageStack.layers.get(i)}`);
         }
     }
 
     function test_checked() {
-        var stack = mainWindow.pageStack
-        var layers = stack.layers
-
-        function testCheck(expected = {}) {
+        var stack = mainWindow.pageStack;
+        var layers = stack.layers;
+        function testCheck(expected) {
             let defaults = {
-                a: false, b: false, c: false, d: false, e: false
-            }
-            let actual = Object.assign({}, defaults, expected)
-            let pages = {a: stackPageA, b: stackPageB, c: layerPageC, d: layerPageD, e: stackPageE}
-            
+                "a": false,
+                "b": false,
+                "c": false,
+                "d": false,
+                "e": false
+            };
+            let actual = Object.assign({}, defaults, expected);
+            let pages = {
+                "a": stackPageA,
+                "b": stackPageB,
+                "c": layerPageC,
+                "d": layerPageD,
+                "e": stackPageE
+            };
             for (const prop in actual) {
-                compare(pages[prop].checked, actual[prop],
-                    `${pages[prop]} should ${actual[prop] ? 'be checked' : 'not be checked'}`)
+                compare(pages[prop].checked, actual[prop], `${pages[prop]} should ${actual[prop] ? 'be checked' : 'not be checked'}`);
             }
         }
-
-        testCheck()
-        
-        compare(stackSpy.count, 0)
-        compare(layerSpy.count, 0)
-        compare(checkSpy_A.count, 0)
-        compare(checkSpy_B.count, 0)
-        compare(checkSpy_C.count, 0)
-        compare(checkSpy_D.count, 0)
-        compare(checkSpy_E.count, 0)
-
-        stackPageA.trigger()
-        compare(checkSpy_A.count, 1)
-        testCheck({a:true})
-        compare(stack.currentItem, stackPageA.pageItem())
-
-        stackPageB.trigger()
-        compare(checkSpy_A.count, 2)
-        compare(checkSpy_B.count, 3)
-        testCheck({b:true})
-        compare(stack.currentItem, stackPageB.pageItem())
-
-        layerPageC.trigger()
-        testCheck({b:true, c:true})
-        compare(checkSpy_C.count, 1)
-        compare(stack.currentItem, stackPageB.pageItem())
-        compare(layers.currentItem, layerPageC.pageItem())
-        compare(layerPageC.layerContainsPage(), true)
-
-        layerPageD.trigger()
-        compare(stack.currentItem, stackPageB.pageItem())
-        compare(layers.currentItem, layerPageD.pageItem())
-        testCheck({b:true, c:true, d:true})
-
-        stackPageE.basePage = stack.currentItem
-        stackPageE.trigger()
-        testCheck({b:true, e:true})
-        compare(stack.currentItem, stackPageE.pageItem())
-        verify(!(layers.currentItem instanceof Page),
-                    `Current item ${layers.currentItem} is a page but all pages should be popped`)
-
-        stackPageA.trigger()
-        testCheck({a:true})
-        compare(stack.currentItem, stackPageA.pageItem())
-        verify(!(layers.currentItem instanceof Page),
-                    `Current item ${layers.currentItem} is a page but all pages should be popped`)
-
-        compare(checkSpy_A.count, 5)
-        compare(checkSpy_B.count, 4)
-        compare(checkSpy_C.count, 2)
-        compare(checkSpy_D.count, 2)
-        compare(checkSpy_E.count, 2)
+        testCheck();
+        compare(stackSpy.count, 0);
+        compare(layerSpy.count, 0);
+        compare(checkSpy_A.count, 0);
+        compare(checkSpy_B.count, 0);
+        compare(checkSpy_C.count, 0);
+        compare(checkSpy_D.count, 0);
+        compare(checkSpy_E.count, 0);
+        stackPageA.trigger();
+        compare(checkSpy_A.count, 1);
+        testCheck({
+                "a": true
+            });
+        compare(stack.currentItem, stackPageA.pageItem());
+        stackPageB.trigger();
+        compare(checkSpy_A.count, 2);
+        compare(checkSpy_B.count, 3);
+        testCheck({
+                "b": true
+            });
+        compare(stack.currentItem, stackPageB.pageItem());
+        layerPageC.trigger();
+        testCheck({
+                "b": true,
+                "c": true
+            });
+        compare(checkSpy_C.count, 1);
+        compare(stack.currentItem, stackPageB.pageItem());
+        compare(layers.currentItem, layerPageC.pageItem());
+        compare(layerPageC.layerContainsPage(), true);
+        layerPageD.trigger();
+        compare(stack.currentItem, stackPageB.pageItem());
+        compare(layers.currentItem, layerPageD.pageItem());
+        testCheck({
+                "b": true,
+                "c": true,
+                "d": true
+            });
+        stackPageE.basePage = stack.currentItem;
+        stackPageE.trigger();
+        testCheck({
+                "b": true,
+                "e": true
+            });
+        compare(stack.currentItem, stackPageE.pageItem());
+        verify(!(layers.currentItem instanceof Page), `Current item ${layers.currentItem} is a page but all pages should be popped`);
+        stackPageA.trigger();
+        testCheck({
+                "a": true
+            });
+        compare(stack.currentItem, stackPageA.pageItem());
+        verify(!(layers.currentItem instanceof Page), `Current item ${layers.currentItem} is a page but all pages should be popped`);
+        compare(checkSpy_A.count, 5);
+        compare(checkSpy_B.count, 4);
+        compare(checkSpy_C.count, 2);
+        compare(checkSpy_D.count, 2);
+        compare(checkSpy_E.count, 2);
     }
 
     function test_push_A_C_D_A_popsLayers() {
-        var stack = mainWindow.pageStack
-        var layers = stack.layers
-
-        stackPageA.trigger()
-        compare(stack.currentItem, stackPageA.pageItem())
-
-        layerPageC.trigger()
-        compare(layers.currentItem, layerPageC.pageItem())
-
-        layerPageD.trigger()
-        compare(layers.currentItem, layerPageD.pageItem())
-
-        stackPageA.trigger()
-        compare(stack.currentItem, stackPageA.pageItem())
-        verify(!(layers.currentItem instanceof Page),
-                    `Current item ${layers.currentItem} is a page but all pages should be popped`)
+        var stack = mainWindow.pageStack;
+        var layers = stack.layers;
+        stackPageA.trigger();
+        compare(stack.currentItem, stackPageA.pageItem());
+        layerPageC.trigger();
+        compare(layers.currentItem, layerPageC.pageItem());
+        layerPageD.trigger();
+        compare(layers.currentItem, layerPageD.pageItem());
+        stackPageA.trigger();
+        compare(stack.currentItem, stackPageA.pageItem());
+        verify(!(layers.currentItem instanceof Page), `Current item ${layers.currentItem} is a page but all pages should be popped`);
     }
 
     function test_push_A_C_D_back_back_C_back_C() {
-        var stack = mainWindow.pageStack
-        var layers = stack.layers
-
-        stackPageA.trigger()
-        layerPageC.trigger()
-        layerPageD.trigger()
-        tapBack()
-        tapBack()
-        layerPageC.trigger()
-        tapBack()
-        layerPageC.trigger()
-        compare(layers.currentItem, layerPageC.pageItem())
+        var stack = mainWindow.pageStack;
+        var layers = stack.layers;
+        stackPageA.trigger();
+        layerPageC.trigger();
+        layerPageD.trigger();
+        tapBack();
+        tapBack();
+        layerPageC.trigger();
+        tapBack();
+        layerPageC.trigger();
+        compare(layers.currentItem, layerPageC.pageItem());
     }
 
     function test_exclusive_group() {
-        var stack = mainWindow.pageStack
-        var layers = stack.layers
-
-        group.exclusive = true
-        stackPageA.trigger()
-        compare(stackPageA.checked, true)
-        compare(layerPageC.checked, false)
-        layerPageC.trigger()
-        compare(stackPageA.checked, false)
-        compare(layerPageC.checked, true)
-        tapBack()
-        compare(stackPageA.checked, true)
-        compare(layerPageC.checked, false)
+        var stack = mainWindow.pageStack;
+        var layers = stack.layers;
+        group.exclusive = true;
+        stackPageA.trigger();
+        compare(stackPageA.checked, true);
+        compare(layerPageC.checked, false);
+        layerPageC.trigger();
+        compare(stackPageA.checked, false);
+        compare(layerPageC.checked, true);
+        tapBack();
+        compare(stackPageA.checked, true);
+        compare(layerPageC.checked, false);
     }
 }

@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.5
 import QtQuick.Templates 2.0 as T2
 import org.kde.kirigami 2.4 as Kirigami
@@ -40,13 +39,9 @@ T2.Control {
 
     width: view.width
 
-    implicitHeight: topPadding + bottomPadding + (view.headerPositioning === ListView.InlineHeader
-                                                    ? maximumHeight
-                                                    : Math.min(maximumHeight, Math.max(minimumHeight, maximumHeight - Math.max(0, view.contentY))))
-
+    implicitHeight: topPadding + bottomPadding + (view.headerPositioning === ListView.InlineHeader ? maximumHeight : Math.min(maximumHeight, Math.max(minimumHeight, maximumHeight - Math.max(0, view.contentY))))
 
     z: 9
     topPadding: applicationWindow() && !applicationWindow().wideScreen && applicationWindow().header ? applicationWindow().header.paintedHeight : 0
     rightPadding: Kirigami.Units.gridUnit
-
 }

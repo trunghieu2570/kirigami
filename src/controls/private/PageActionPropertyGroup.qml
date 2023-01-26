@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQml 2.1
 
 QtObject {
@@ -12,4 +11,3 @@ QtObject {
     property QtObject right
     property list<QtObject> contextualActions
 }
-

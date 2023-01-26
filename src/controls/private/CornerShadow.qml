@@ -3,9 +3,8 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
-import QtGraphicalEffects 1.0 as GE
+import Qt5Compat.GraphicalEffects 6.0 as GE
 import org.kde.kirigami 2.4 as Kirigami
 
 GE.RadialGradient {
@@ -23,7 +22,7 @@ GE.RadialGradient {
      */
     property int corner: Qt.TopRightCorner
 
-    readonly property real margin: -Math.floor(radius/3)
+    readonly property real margin: -Math.floor(radius / 3)
 
     property int radius: Kirigami.Units.gridUnit
 
@@ -34,20 +33,20 @@ GE.RadialGradient {
     verticalRadius: height
     horizontalOffset: {
         switch (corner) {
-            case Qt.TopLeftCorner:
-            case Qt.BottomLeftCorner:
-                return -width/2;
-            default:
-                return width/2;
+        case Qt.TopLeftCorner:
+        case Qt.BottomLeftCorner:
+            return -width / 2;
+        default:
+            return width / 2;
         }
     }
     verticalOffset: {
         switch (corner) {
-            case Qt.TopLeftCorner:
-            case Qt.TopRightCorner:
-                return -width/2;
-            default:
-                return width/2;
+        case Qt.TopLeftCorner:
+        case Qt.TopRightCorner:
+            return -width / 2;
+        default:
+            return width / 2;
         }
     }
 
@@ -57,21 +56,20 @@ GE.RadialGradient {
             color: Qt.rgba(0, 0, 0, 0.25)
         }
         GradientStop {
-            position: 1 - radius/(radius - margin)
+            position: 1 - radius / (radius - margin)
             color: Qt.rgba(0, 0, 0, 0.25)
         }
         GradientStop {
-            position: 1 - radius/(radius - margin) + radius/(radius - margin) * 0.2
+            position: 1 - radius / (radius - margin) + radius / (radius - margin) * 0.2
             color: Qt.rgba(0, 0, 0, 0.1)
         }
         GradientStop {
-            position: 1 - radius/(radius - margin) + radius/(radius - margin) * 0.35
+            position: 1 - radius / (radius - margin) + radius / (radius - margin) * 0.35
             color: Qt.rgba(0, 0, 0, 0.02)
         }
         GradientStop {
             position: 1.0
-            color:  "transparent"
+            color: "transparent"
         }
     }
 }
-

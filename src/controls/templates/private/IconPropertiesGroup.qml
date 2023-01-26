@@ -3,8 +3,8 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQml 2.1
+import QtQuick 2.15
 
 /**
  * @brief Group of icon properties.
@@ -20,7 +20,7 @@ QtObject {
      * If the icon is not found, icon.source will be used instead.
      */
     property string name
-    
+
     /**
      * @brief This property holds the icon source.
      *
@@ -37,4 +37,3 @@ QtObject {
      */
     property color color: Qt.rgba(0, 0, 0, 0)
 }
-

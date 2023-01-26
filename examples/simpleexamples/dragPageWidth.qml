@@ -3,9 +3,7 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
-
 import org.kde.kirigami 2.4 as Kirigami
 
 Kirigami.ApplicationWindow {
@@ -37,11 +35,9 @@ Kirigami.ApplicationWindow {
 
         onPositionChanged: {
             if (mouse.x > _lastX) {
-                columnWidth = Math.min((defaultColumnWidth + dragRange),
-                    columnWidth + (mouse.x - _lastX));
+                columnWidth = Math.min((defaultColumnWidth + dragRange), columnWidth + (mouse.x - _lastX));
             } else if (mouse.x < _lastX) {
-                columnWidth = Math.max((defaultColumnWidth - dragRange),
-                    columnWidth - (_lastX - mouse.x));
+                columnWidth = Math.max((defaultColumnWidth - dragRange), columnWidth - (_lastX - mouse.x));
             }
         }
 
@@ -58,7 +54,9 @@ Kirigami.ApplicationWindow {
         Kirigami.Page {
             id: firstPage
 
-            background: Rectangle { color: "red" }
+            background: Rectangle {
+                color: "red"
+            }
         }
     }
 
@@ -68,7 +66,9 @@ Kirigami.ApplicationWindow {
         Kirigami.Page {
             id: secondPage
 
-            background: Rectangle { color: "green" }
+            background: Rectangle {
+                color: "green"
+            }
         }
     }
 }

@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.7
 import QtQuick.Controls 2.4 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
@@ -15,7 +14,7 @@ import org.kde.kirigami 2.14 as Kirigami
 QQC2.Action {
     id: root
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property holds whether the graphic representation of the action
      * is supposed to be visible.
@@ -98,7 +97,7 @@ QQC2.Action {
      * @since 2.12
      */
     function displayHintSet(hint) {
-        print("Action::displayHintSet is deprecated, use DisplayHint.displayHintSet(action, hint)")
+        print("Action::displayHintSet is deprecated, use DisplayHint.displayHintSet(action, hint)");
         return Kirigami.DisplayHint.displayHintSet(root, hint);
     }
 
@@ -130,14 +129,14 @@ QQC2.Action {
      * @property list<Action> children
      */
     default property list<QtObject> children
-//END properties
 
+    //END properties
     onChildrenChanged: {
         let child;
         for (const i in children) {
             child = children[i];
             if (child.hasOwnProperty("parent")) {
-                child.parent = root
+                child.parent = root;
             }
         }
     }
@@ -166,16 +165,16 @@ QQC2.Action {
         /**
          * Indicates there is no specific preference.
          */
-        NoPreference = 0,
+        NoPreference,
         /**
          * Only display an icon for this Action.
          */
-        IconOnly = 1,
+        IconOnly,
         /**
          * Try to keep the action visible even when space constrained.
          * Mutually exclusive with AlwaysHide, KeepVisible has priority.
          */
-        KeepVisible = 2,
+        KeepVisible,
         /**
          * If possible, hide the action in an overflow menu or similar location.
          * Mutually exclusive with KeepVisible, KeepVisible has priority.

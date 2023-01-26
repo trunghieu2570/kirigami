@@ -4,7 +4,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import org.kde.kirigami 2.20 as Kirigami
 
@@ -59,14 +58,14 @@ Kirigami.ActionTextField {
 
     // padding to accommodate search icon nicely
     leftPadding: if (effectiveHorizontalAlignment === TextInput.AlignRight) {
-        return _rightActionsRow.width + Kirigami.Units.smallSpacing
+        return _rightActionsRow.width + Kirigami.Units.smallSpacing;
     } else {
-        return (activeFocus || root.text.length > 0 ? 0 : (searchIcon.width + Kirigami.Units.smallSpacing)) + Kirigami.Units.smallSpacing * 2
+        return (activeFocus || root.text.length > 0 ? 0 : (searchIcon.width + Kirigami.Units.smallSpacing)) + Kirigami.Units.smallSpacing * 2;
     }
     rightPadding: if (effectiveHorizontalAlignment === TextInput.AlignRight) {
-        return (activeFocus || root.text.length > 0 ? 0 : (searchIcon.width + Kirigami.Units.smallSpacing)) + Kirigami.Units.smallSpacing * 2
+        return (activeFocus || root.text.length > 0 ? 0 : (searchIcon.width + Kirigami.Units.smallSpacing)) + Kirigami.Units.smallSpacing * 2;
     } else {
-        return _rightActionsRow.width + Kirigami.Units.smallSpacing
+        return _rightActionsRow.width + Kirigami.Units.smallSpacing;
     }
 
     Kirigami.Icon {
@@ -83,7 +82,7 @@ Kirigami.ActionTextField {
 
         source: "search"
 
-        Behavior on opacity {
+        Behavior on opacity  {
             NumberAnimation {
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutQuad
@@ -118,7 +117,8 @@ Kirigami.ActionTextField {
     Timer {
         id: fireSearchDelay
         interval: root.delaySearch ? Kirigami.Units.humanMoment : Kirigami.Units.shortDuration
-        running: false; repeat: false;
+        running: false
+        repeat: false
         onTriggered: {
             if (root.acceptableInput) {
                 root.accepted();
@@ -126,7 +126,7 @@ Kirigami.ActionTextField {
         }
     }
     onAccepted: {
-        fireSearchDelay.running = false
+        fireSearchDelay.running = false;
     }
     onTextChanged: {
         if (root.autoAccept) {

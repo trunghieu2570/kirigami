@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.6
 import QtQuick.Layouts 1.2
 import QtQuick.Templates 2.0 as T
@@ -25,7 +24,7 @@ import org.kde.kirigami 2.4 as Kirigami
 T.ItemDelegate {
     id: root
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property holds an item that serves as a header.
      *
@@ -62,8 +61,8 @@ T.ItemDelegate {
      * default: ``false``
      */
     property bool showClickFeedback: false
-//END properties
 
+    //END properties
     Layout.fillWidth: true
 
     implicitWidth: Math.max(background.implicitWidth, mainLayout.implicitWidth) + leftPadding + rightPadding
@@ -105,7 +104,7 @@ T.ItemDelegate {
             if (item.Layout.preferredHeight > 0) {
                 return item.Layout.preferredHeight;
             }
-            return item.implicitHeight
+            return item.implicitHeight;
         }
         Item {
             id: headerParent
@@ -135,12 +134,11 @@ T.ItemDelegate {
         }
     }
 
-//BEGIN signal handlers
+    //BEGIN signal handlers
     onContentItemChanged: {
         if (!contentItem) {
             return;
         }
-
         contentItem.parent = contentItemParent;
         contentItem.anchors.fill = contentItemParent;
     }
@@ -148,7 +146,6 @@ T.ItemDelegate {
         if (!header) {
             return;
         }
-
         header.parent = headerParent;
         header.anchors.fill = headerParent;
     }
@@ -162,10 +159,12 @@ T.ItemDelegate {
         footer.anchors.left = footerParent.left;
         footer.anchors.top = footerParent.top;
         footer.anchors.right = footerParent.right;
-        footer.anchors.topMargin = Qt.binding(function() {return (root.height - root.bottomPadding - root.topPadding)  - (footerParent.y + footerParent.height)});
+        footer.anchors.topMargin = Qt.binding(function () {
+                return (root.height - root.bottomPadding - root.topPadding) - (footerParent.y + footerParent.height);
+            });
     }
     Component.onCompleted: {
         contentItemChanged();
     }
-//END signal handlers
+    //END signal handlers
 }

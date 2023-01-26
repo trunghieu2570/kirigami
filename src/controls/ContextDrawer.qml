@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import QtQuick.Controls 2.2 as QQC2
 import org.kde.kirigami 2.4 as Kirigami
@@ -96,20 +95,15 @@ Kirigami.OverlayDrawer {
     property Page page: {
         if (applicationWindow().pageStack.layers && applicationWindow().pageStack.layers.depth > 1 && applicationWindow().pageStack.layers.currentItem.hasOwnProperty("contextualActions")) {
             return applicationWindow().pageStack.layers.currentItem;
-        }
-        else if ((applicationWindow().pageStack.currentItem || {}).hasOwnProperty("contextualActions")) {
+        } else if ((applicationWindow().pageStack.currentItem || {}).hasOwnProperty("contextualActions")) {
             return applicationWindow().pageStack.currentItem;
-        }
-        else {
+        } else {
             return applicationWindow().pageStack.lastVisibleItem;
         }
     }
 
     // Disable for empty menus or when we have a global toolbar
-    enabled: menu.count > 0 &&
-            (typeof applicationWindow() === "undefined" || !applicationWindow().pageStack.globalToolBar ||
-            (applicationWindow().pageStack.lastVisibleItem && applicationWindow().pageStack.lastVisibleItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar) ||
-            (applicationWindow().pageStack.layers && applicationWindow().pageStack.layers.depth > 1 && applicationWindow().pageStack.layers.currentItem && applicationWindow().pageStack.layers.currentItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar))
+    enabled: menu.count > 0 && (typeof applicationWindow() === "undefined" || !applicationWindow().pageStack.globalToolBar || (applicationWindow().pageStack.lastVisibleItem && applicationWindow().pageStack.lastVisibleItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar) || (applicationWindow().pageStack.layers && applicationWindow().pageStack.layers.depth > 1 && applicationWindow().pageStack.layers.currentItem && applicationWindow().pageStack.layers.currentItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar))
     edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
     drawerOpen: false
 
@@ -142,21 +136,16 @@ Kirigami.OverlayDrawer {
 
                     // Check if at least one action is visible
                     let somethingVisible = false;
-                    for (let i=0; i<root.actions.length; i++) {
+                    for (let i = 0; i < root.actions.length; i++) {
                         if (root.actions[i].visible) {
                             somethingVisible = true;
                             break;
                         }
                     }
-
                     if (!somethingVisible) {
                         return null;
                     }
-
-                    return root.actions[0].text !== undefined &&
-                        root.actions[0].trigger !== undefined ?
-                            root.actions :
-                            root.actions[0];
+                    return root.actions[0].text !== undefined && root.actions[0].trigger !== undefined ? root.actions : root.actions[0];
                 }
             }
             topMargin: root.handle.y > 0 ? menu.height - menu.contentHeight : 0

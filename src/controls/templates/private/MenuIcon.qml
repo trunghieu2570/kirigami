@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import org.kde.kirigami 2.4 as Kirigami
 
@@ -31,11 +30,11 @@ Item {
             anchors {
                 right: parent.right
                 top: parent.top
-                topMargin: -iconRoot.thickness/2 * iconRoot.drawerPosition
+                topMargin: -iconRoot.thickness / 2 * iconRoot.drawerPosition
             }
             antialiasing: iconRoot.drawerPosition !== 0
             transformOrigin: Item.Right
-            width: (1 - iconRoot.drawerPosition) * parent.width + iconRoot.drawerPosition * (Math.sqrt(2*(parent.width*parent.width)))
+            width: (1 - iconRoot.drawerPosition) * parent.width + iconRoot.drawerPosition * (Math.sqrt(2 * (parent.width * parent.width)))
             height: iconRoot.thickness
             color: canvas.color
             rotation: -45 * iconRoot.drawerPosition
@@ -52,15 +51,14 @@ Item {
             anchors {
                 right: parent.right
                 bottom: parent.bottom
-                bottomMargin: -iconRoot.thickness/2 * iconRoot.drawerPosition
+                bottomMargin: -iconRoot.thickness / 2 * iconRoot.drawerPosition
             }
             antialiasing: iconRoot.drawerPosition !== 0
             transformOrigin: Item.Right
-            width: (1 - iconRoot.drawerPosition) * parent.width + iconRoot.drawerPosition * (Math.sqrt(2*(parent.width*parent.width)))
+            width: (1 - iconRoot.drawerPosition) * parent.width + iconRoot.drawerPosition * (Math.sqrt(2 * (parent.width * parent.width)))
             height: iconRoot.thickness
             color: canvas.color
             rotation: 45 * iconRoot.drawerPosition
         }
     }
 }
-

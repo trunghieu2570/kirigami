@@ -4,7 +4,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15 as QQC2
@@ -74,7 +73,7 @@ Item {
     onTwinFormLayoutsChanged: {
         for (const i in twinFormLayouts) {
             if (!(root in twinFormLayouts[i].children[0].reverseTwins)) {
-                twinFormLayouts[i].children[0].reverseTwins.push(root)
+                twinFormLayouts[i].children[0].reverseTwins.push(root);
                 Qt.callLater(() => twinFormLayouts[i].children[0].reverseTwinsChanged());
             }
         }
@@ -123,21 +122,16 @@ Item {
                     // meaningless "TypeError: Type error". Normally they
                     // should be cleaned up from the array, but it would
                     // trigger a binding loop if done here.
-                    //
                     // This is, so far, the only way to detect them.
                     continue;
                 }
-                const actualWidth = item.Layout.preferredWidth > 0
-                    ? item.Layout.preferredWidth
-                    : item.implicitWidth;
-
+                const actualWidth = item.Layout.preferredWidth > 0 ? item.Layout.preferredWidth : item.implicitWidth;
                 hint = Math.max(hint, item.Layout.minimumWidth, Math.min(actualWidth, item.Layout.maximumWidth));
             }
             return hint;
         }
         property int buddiesImplicitWidth: {
             let hint = 0;
-
             for (const i in buddies) {
                 if (buddies[i].visible && buddies[i].item !== null && !buddies[i].item.Kirigami.FormData.isSection) {
                     hint = Math.max(hint, buddies[i].implicitWidth);
@@ -173,9 +167,9 @@ Item {
                 }
             }
         }
-        onImplicitWidthChanged: hintCompression.restart();
-        //This invisible row is used to sync alignment between multiple layouts
+        onImplicitWidthChanged: hintCompression.restart()
 
+        //This invisible row is used to sync alignment between multiple layouts
         Item {
             Layout.preferredWidth: {
                 let hint = lay.buddiesImplicitWidth;
@@ -225,11 +219,7 @@ Item {
             if (!item) {
                 return 0;
             }
-            const verticalAlignment =
-                item.Kirigami.FormData.labelAlignment !== 0
-                ? item.Kirigami.FormData.labelAlignment
-                : Qt.AlignTop;
-
+            const verticalAlignment = item.Kirigami.FormData.labelAlignment !== 0 ? item.Kirigami.FormData.labelAlignment : Qt.AlignTop;
             if (item.Kirigami.FormData.isSection) {
                 return Qt.AlignHCenter;
             }
@@ -268,18 +258,22 @@ Item {
                     continue;
                 }
                 lay.knownItems.push(item);
-
-                const itemContainer = itemComponent.createObject(temp, { item });
+                const itemContainer = itemComponent.createObject(temp, {
+                        "item": item
+                    });
 
                 // if it's a labeled section header, add extra spacing before it
                 if (item.Kirigami.FormData.label.length > 0 && item.Kirigami.FormData.isSection) {
-                    placeHolderComponent.createObject(lay, { item });
+                    placeHolderComponent.createObject(lay, {
+                            "item": item
+                        });
                 }
-
-                const buddy = item.Kirigami.FormData.checkable
-                    ? checkableBuddyComponent.createObject(lay, { item })
-                    : buddyComponent.createObject(lay, { item, index: i - 2 });
-
+                const buddy = item.Kirigami.FormData.checkable ? checkableBuddyComponent.createObject(lay, {
+                        "item": item
+                    }) : buddyComponent.createObject(lay, {
+                        "item": item,
+                        "index": i - 2
+                    });
                 itemContainer.parent = lay;
                 lay.buddies.push(buddy);
             }
@@ -289,7 +283,7 @@ Item {
         }
     }
 
-    onChildrenChanged: relayoutTimer.restart();
+    onChildrenChanged: relayoutTimer.restart()
 
     Component {
         id: itemComponent
@@ -321,11 +315,17 @@ Item {
                     container.destroy();
                 }
             }
-            onXChanged: if (item !== null) { item.x = x + lay.x; }
+            onXChanged: if (item !== null) {
+                item.x = x + lay.x;
+            }
             // Assume lay.y is always 0
-            onYChanged: if (item !== null) { item.y = y + lay.y; }
-            onWidthChanged: if (item !== null) { item.width = width; }
-            Component.onCompleted: item.x = x + lay.x;
+            onYChanged: if (item !== null) {
+                item.y = y + lay.y;
+            }
+            onWidthChanged: if (item !== null) {
+                item.width = width;
+            }
+            Component.onCompleted: item.x = x + lay.x
             Connections {
                 target: lay
                 function onXChanged() {
@@ -379,7 +379,7 @@ Item {
                 }
                 if (item.Kirigami.FormData.label.length > 0) {
                     if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof QQC2.TextArea)) {
-                        return Math.max(implicitHeight, item.Kirigami.FormData.buddyFor.height)
+                        return Math.max(implicitHeight, item.Kirigami.FormData.buddyFor.height);
                     }
                     return implicitHeight;
                 }
@@ -442,7 +442,7 @@ Item {
             }
 
             Layout.alignment: temp.effectiveLayout(this)
-            Layout.topMargin: item !== null && item.Kirigami.FormData.buddyFor.height > implicitHeight * 2 ? Kirigami.Units.smallSpacing/2 : 0
+            Layout.topMargin: item !== null && item.Kirigami.FormData.buddyFor.height > implicitHeight * 2 ? Kirigami.Units.smallSpacing / 2 : 0
 
             activeFocusOnTab: indicator.visible && indicator.enabled
             // HACK: desktop style checkboxes have also the text in the background item

@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.12
 import QtQml 2.14
 import QtQuick.Templates 2.12 as T
@@ -61,7 +60,7 @@ import "templates/private" as TP
 Item {
     id: root
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property holds the stack used to allocate the pages and to manage the
      * transitions between them.
@@ -252,13 +251,13 @@ Item {
         }
 
         transform: Translate {
-            Behavior on y {
+            Behavior on y  {
                 NumberAnimation {
                     duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }
-            y: root.reachableMode && root.reachableModeEnabled && !root.wideScreen ? root.height/2 : 0
+            y: root.reachableMode && root.reachableModeEnabled && !root.wideScreen ? root.height / 2 : 0
             x: root.globalDrawer && root.globalDrawer.modal === true && root.globalDrawer.toString().indexOf("SplitDrawer") === 0 ? root.globalDrawer.contentItem.width * root.globalDrawer.position : 0
         }
     }
@@ -276,9 +275,9 @@ Item {
     property Item background
 
     property alias overlay: overlayRoot
-//END properties
+    //END properties
 
-//BEGIN functions
+    //BEGIN functions
     /**
      * @brief This function shows a little passive notification at the bottom of the app window
      * lasting for few seconds, with an optional action button.
@@ -309,64 +308,64 @@ Item {
     function applicationWindow() {
         return root;
     }
-//END functions
+    //END functions
 
-//BEGIN signals handlers
+    //BEGIN signals handlers
     onMenuBarChanged: {
-        menuBar.parent = root.contentItem
+        menuBar.parent = root.contentItem;
         if (menuBar.z === undefined) {
             menuBar.z = 1;
         }
         if (menuBar instanceof T.ToolBar) {
-            menuBar.position = T.ToolBar.Footer
+            menuBar.position = T.ToolBar.Footer;
         } else if (menuBar instanceof T.TabBar) {
-            menuBar.position = T.TabBar.Footer
+            menuBar.position = T.TabBar.Footer;
         } else if (menuBar instanceof T.DialogButtonBox) {
-            menuBar.position = T.DialogButtonBox.Footer
+            menuBar.position = T.DialogButtonBox.Footer;
         }
-        menuBar.width = Qt.binding(() => root.contentItem.width)
+        menuBar.width = Qt.binding(() => root.contentItem.width);
         // FIXME: (root.header.height ?? 0) when we can depend from 5.15
-        menuBar.y = Qt.binding(() => -menuBar.height - (root.header.height ? root.header.height : 0))
+        menuBar.y = Qt.binding(() => -menuBar.height - (root.header.height ? root.header.height : 0));
     }
 
     onHeaderChanged: {
-        header.parent = root.contentItem
+        header.parent = root.contentItem;
         if (header.z === undefined) {
             header.z = 1;
         }
         if (header instanceof T.ToolBar) {
-            header.position = T.ToolBar.Header
+            header.position = T.ToolBar.Header;
         } else if (header instanceof T.TabBar) {
-            header.position = T.TabBar.Header
+            header.position = T.TabBar.Header;
         } else if (header instanceof T.DialogButtonBox) {
-            header.position = T.DialogButtonBox.Header
+            header.position = T.DialogButtonBox.Header;
         }
-        header.width = Qt.binding(() => root.contentItem.width)
-        header.y = Qt.binding(() => -header.height)
+        header.width = Qt.binding(() => root.contentItem.width);
+        header.y = Qt.binding(() => -header.height);
     }
 
     onFooterChanged: {
-        footer.parent = root.contentItem
+        footer.parent = root.contentItem;
         if (footer.z === undefined) {
             footer.z = 1;
         }
         if (footer instanceof T.ToolBar) {
-            footer.position = T.ToolBar.Footer
+            footer.position = T.ToolBar.Footer;
         } else if (footer instanceof T.TabBar) {
-            footer.position = T.TabBar.Footer
+            footer.position = T.TabBar.Footer;
         } else if (footer instanceof T.DialogButtonBox) {
-            footer.position = T.DialogButtonBox.Footer
+            footer.position = T.DialogButtonBox.Footer;
         }
-        footer.width = Qt.binding(() => root.contentItem.width)
-        footer.y = Qt.binding(() => root.contentItem.height)
+        footer.width = Qt.binding(() => root.contentItem.width);
+        footer.y = Qt.binding(() => root.contentItem.height);
     }
 
     onBackgroundChanged: {
-        background.parent = root.contentItem
+        background.parent = root.contentItem;
         if (background.z === undefined) {
             background.z = -1;
         }
-        background.anchors.fill = background.parent
+        background.anchors.fill = background.parent;
     }
 
     // NOTE: Don't want overscroll in landscape mode
@@ -376,9 +375,9 @@ Item {
         }
     }
 
-    onPageStackChanged: pageStack.parent = root.contentItem;
-//END signals handlers
+    onPageStackChanged: pageStack.parent = root.contentItem
 
+    //END signals handlers
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
@@ -428,7 +427,7 @@ Item {
         parent: root
         z: -1
         anchors.fill: parent
-        onClicked: root.reachableMode = false;
+        onClicked: root.reachableMode = false
         visible: root.reachableMode && root.reachableModeEnabled
         Rectangle {
             anchors.fill: parent

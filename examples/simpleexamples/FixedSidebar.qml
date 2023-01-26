@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.4 as Kirigami
@@ -13,7 +12,6 @@ Kirigami.ApplicationWindow {
     id: root
     width: Kirigami.Units.gridUnit * 60
     height: Kirigami.Units.gridUnit * 40
-
 
     pageStack.initialPage: mainPageComponent
     globalDrawer: Kirigami.OverlayDrawer {
@@ -28,13 +26,13 @@ Kirigami.ApplicationWindow {
                 wrapMode: Text.WordWrap
                 anchors.horizontalCenter: parent.horizontalCenter
             }
-
         }
     }
 
     //Main app content
     Component {
         id: mainPageComponent
-        MultipleColumnsGallery {}
+        MultipleColumnsGallery {
+        }
     }
 }

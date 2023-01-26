@@ -3,18 +3,16 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQml 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15 as Controls
-
 import org.kde.kirigami 2.20 as Kirigami
 
 Controls.ToolButton {
     id: control
 
-    signal menuAboutToShow()
+    signal menuAboutToShow
 
     Kirigami.Icon {
         id: kirigamiIcon
@@ -30,13 +28,14 @@ Controls.ToolButton {
 
     property var menuActions: {
         if (action && action.hasOwnProperty("children")) {
-            return Array.prototype.slice.call(action.children)
+            return Array.prototype.slice.call(action.children);
         }
-        return []
+        return [];
     }
 
     property Component menuComponent: ActionsMenu {
-        submenuComponent: ActionsMenu { }
+        submenuComponent: ActionsMenu {
+        }
     }
 
     property QtObject menu: null
@@ -48,24 +47,26 @@ Controls.ToolButton {
         if (menuComponent && menuActions.length > 0) {
             if (!menu) {
                 const setupIncubatedMenu = incubatedMenu => {
-                    menu = incubatedMenu
+                    menu = incubatedMenu;
                     // Important: We handle the press on parent in the parent, so ignore it here.
-                    menu.closePolicy = Controls.Popup.CloseOnEscape | Controls.Popup.CloseOnPressOutsideParent
-                    menu.closed.connect(() => control.checked = false)
-                    menu.actions = control.menuActions
-                }
-                const incubator = menuComponent.incubateObject(control, {"actions": menuActions})
+                    menu.closePolicy = Controls.Popup.CloseOnEscape | Controls.Popup.CloseOnPressOutsideParent;
+                    menu.closed.connect(() => control.checked = false);
+                    menu.actions = control.menuActions;
+                };
+                const incubator = menuComponent.incubateObject(control, {
+                        "actions": menuActions
+                    });
                 if (incubator.status !== Component.Ready) {
                     incubator.onStatusChanged = status => {
                         if (status === Component.Ready) {
-                            setupIncubatedMenu(incubator.object)
+                            setupIncubatedMenu(incubator.object);
                         }
-                    }
+                    };
                 } else {
                     setupIncubatedMenu(incubator.object);
                 }
             } else {
-                menu.actions = menuActions
+                menu.actions = menuActions;
             }
         }
     }
@@ -84,9 +85,9 @@ Controls.ToolButton {
         if (menuActions.length > 0 && menu) {
             if (checked) {
                 control.menuAboutToShow();
-                menu.popup(control, 0, control.height)
+                menu.popup(control, 0, control.height);
             } else {
-                menu.dismiss()
+                menu.dismiss();
             }
         }
     }

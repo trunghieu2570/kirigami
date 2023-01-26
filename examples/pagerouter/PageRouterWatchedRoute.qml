@@ -24,8 +24,8 @@ Kirigami.ApplicationWindow {
         }
         Kirigami.PageRoute {
             name: "two"
+            // Page contents...
             Kirigami.Page {
-                // Page contents...
             }
         }
     }

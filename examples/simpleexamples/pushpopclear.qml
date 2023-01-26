@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.4 as Kirigami
@@ -19,15 +18,15 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 text: "push"
                 onTriggered: pageStack.push(secondPageComponent)
-            },
+            }, 
             Kirigami.Action {
                 text: "pop"
                 onTriggered: pageStack.pop()
-            },
+            }, 
             Kirigami.Action {
                 text: "clear"
                 onTriggered: pageStack.clear()
-            },
+            }, 
             Kirigami.Action {
                 text: "replace"
                 onTriggered: pageStack.replace(secondPageComponent)
@@ -63,5 +62,4 @@ Kirigami.ApplicationWindow {
             }
         }
     }
-
 }

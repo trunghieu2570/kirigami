@@ -1,6 +1,5 @@
 // SPDX-FileCopyrightText: 2022 Felipe Kinoshita <kinofhek@gmail.com>
 // SPDX-License-Identifier: GPL-2.0-or-later
-
 import "templates" as T
 import "private" as P
 
@@ -16,5 +15,6 @@ import "private" as P
 T.AbstractChip {
     id: root
 
-    background: P.DefaultChipBackground {}
+    background: P.DefaultChipBackground {
+    }
 }

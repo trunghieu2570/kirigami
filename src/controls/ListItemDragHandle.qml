@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.6
 import org.kde.kirigami 2.4 as Kirigami
 
@@ -101,7 +100,7 @@ Item {
      * @brief This signal is emitted when the drag operation is complete and the item has been
      * dropped in the new final position.
      */
-    signal dropped()
+    signal dropped
 
     implicitWidth: Kirigami.Units.iconSizes.smallMedium
     implicitHeight: implicitWidth
@@ -128,7 +127,6 @@ Item {
 
             function arrangeItem() {
                 const newIndex = listView.indexAt(1, listView.contentItem.mapFromItem(mouseArea, 0, internal.mouseDownY).y);
-
                 if (newIndex > -1 && ((internal.draggingUp && newIndex < index) || (!internal.draggingUp && newIndex > index))) {
                     root.moveRequested(index, newIndex);
                 }
@@ -137,7 +135,6 @@ Item {
             anchors.fill: parent
         }
         preventStealing: true
-
 
         onPressed: {
             internal.originalParent = listItem.parent;
@@ -156,16 +153,12 @@ Item {
             if (!pressed || listItem.y === internal.listItemLastY) {
                 return;
             }
-
-            internal.draggingUp = listItem.y < internal.listItemLastY
+            internal.draggingUp = listItem.y < internal.listItemLastY;
             internal.listItemLastY = listItem.y;
-
             internal.arrangeItem();
 
-             // autoscroll when the dragging item reaches the listView's top/bottom boundary
-            scrollTimer.running = (listView.contentHeight > listView.height)
-                               && ( (listItem.y === 0 && !listView.atYBeginning) ||
-                                    (listItem.y === mouseArea.drag.maximumY && !listView.atYEnd) );
+            // autoscroll when the dragging item reaches the listView's top/bottom boundary
+            scrollTimer.running = (listView.contentHeight > listView.height) && ((listItem.y === 0 && !listView.atYBeginning) || (listItem.y === mouseArea.drag.maximumY && !listView.atYEnd));
         }
         onReleased: {
             listItem.y = internal.originalParent.mapFromItem(listItem, 0, 0).y;
@@ -213,4 +206,3 @@ Item {
         }
     }
 }
-

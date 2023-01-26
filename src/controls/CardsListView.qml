@@ -3,10 +3,10 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.4 as Kirigami
+
 /**
  * CardsListView is a ListView which can have AbstractCard as its delegate: it will
  * automatically assign the proper spacings and margins around the cards adhering
@@ -42,8 +42,7 @@ ListView {
             positionViewAtBeginning();
             currentIndex = 0;
             event.accepted = true;
-        }
-        else if (event.key === Qt.Key_End) {
+        } else if (event.key === Qt.Key_End) {
             positionViewAtEnd();
             currentIndex = count - 1;
             event.accepted = true;

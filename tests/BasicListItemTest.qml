@@ -3,11 +3,9 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15 as QQC2
-
 import org.kde.kirigami 2.20 as Kirigami
 
 Kirigami.ApplicationWindow {
@@ -41,7 +39,7 @@ Kirigami.ApplicationWindow {
                 ListView {
                     model: 3
                     delegate: Kirigami.BasicListItem {
-                        icon: "edit-bomb"
+                        icon.name: "edit-bomb"
                         text: "Boom!"
                     }
                 }
@@ -106,7 +104,7 @@ Kirigami.ApplicationWindow {
                         }
                         leadingFillVertically: false
 
-                        icon: "edit-bomb"
+                        icon.name: "edit-bomb"
                         text: "Boom!"
 
                         trailing: QQC2.Button {
@@ -139,7 +137,7 @@ Kirigami.ApplicationWindow {
                 ListView {
                     model: 3
                     delegate: Kirigami.BasicListItem {
-                        icon: "edit-bomb"
+                        icon.name: "edit-bomb"
                         text: "Boom!"
                         subtitle: "smaller boom"
                     }
@@ -168,7 +166,7 @@ Kirigami.ApplicationWindow {
                 ListView {
                     model: 3
                     delegate: Kirigami.BasicListItem {
-                        icon: "edit-bomb"
+                        icon.name: "edit-bomb"
                         text: "Boom!"
                         reserveSpaceForSubtitle: true
                     }
@@ -206,7 +204,7 @@ Kirigami.ApplicationWindow {
                         }
                         leadingFillVertically: false
 
-                        icon: "edit-bomb"
+                        icon.name: "edit-bomb"
                         text: "Boom!"
                         subtitle: "smaller boom"
 

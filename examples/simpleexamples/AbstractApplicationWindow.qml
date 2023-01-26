@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0 as Controls
@@ -32,7 +31,7 @@ Kirigami.AbstractApplicationWindow {
                 Kirigami.Action {
                     text: "action 3"
                 }
-            },
+            }, 
             Kirigami.Action {
                 text: "Sync"
                 icon.name: "folder-sync"
@@ -42,16 +41,16 @@ Kirigami.AbstractApplicationWindow {
                 Kirigami.Action {
                     text: "action 5"
                 }
-            },
+            }, 
             Kirigami.Action {
                 text: "Checkable"
                 icon.name: "view-list-details"
                 checkable: true
                 checked: false
                 onTriggered: {
-                    print("Action checked:" + checked)
+                    print("Action checked:" + checked);
                 }
-            },
+            }, 
             Kirigami.Action {
                 text: "Settings"
                 icon.name: "configure"
@@ -65,7 +64,7 @@ Kirigami.AbstractApplicationWindow {
                     pageStack.push(settingsComponent);
                 }
             }
-            ]
+        ]
 
         Controls.CheckBox {
             checked: true
@@ -91,25 +90,26 @@ Kirigami.AbstractApplicationWindow {
         property int currentIndex: 0
         focus: true
         onCurrentIndexChanged: {
-            if (depth > currentIndex+1) {
+            if (depth > currentIndex + 1) {
                 pop(get(currentIndex));
             }
         }
         onDepthChanged: {
-            currentIndex = depth-1;
+            currentIndex = depth - 1;
         }
         initialItem: mainPageComponent
 
         Keys.onReleased: {
-            if (event.key == Qt.Key_Back ||
-            (event.key === Qt.Key_Left && (event.modifiers & Qt.AltModifier))) {
+            if (event.key == Qt.Key_Back || (event.key === Qt.Key_Left && (event.modifiers & Qt.AltModifier))) {
                 event.accepted = true;
                 if (root.contextDrawer && root.contextDrawer.drawerOpen) {
                     root.contextDrawer.close();
                 } else if (root.globalDrawer && root.globalDrawer.drawerOpen) {
                     root.globalDrawer.close();
                 } else {
-                    var backEvent = {accepted: false}
+                    var backEvent = {
+                        "accepted": false
+                    };
                     if (root.pageStack.currentIndex >= 1) {
                         root.pageStack.currentItem.backRequested(backEvent);
                         if (!backEvent.accepted) {
@@ -121,7 +121,6 @@ Kirigami.AbstractApplicationWindow {
                             }
                         }
                     }
-
                     if (!backEvent.accepted) {
                         Qt.quit();
                     }
@@ -129,7 +128,6 @@ Kirigami.AbstractApplicationWindow {
             }
         }
     }
-
 
     Component {
         id: settingsComponent
@@ -145,7 +143,7 @@ Kirigami.AbstractApplicationWindow {
     //Main app content
     Component {
         id: mainPageComponent
-        MultipleColumnsGallery {}
+        MultipleColumnsGallery {
+        }
     }
-
 }

@@ -1,4 +1,3 @@
-
 import QtQuick 2.12
 import QtQuick.Layouts 1.4
 import QtQuick.Controls 2.12 as Controls
@@ -9,7 +8,7 @@ RowLayout {
     width: 500
     height: 500
 
-    property var icons: ["desktop", "firefox", "vlc", "blender", "applications-games", "blinken", "adjustlevels", "adjustrgb", "cuttlefish", "folder-games", "applications-network", "multimedia-player", "applications-utilities", "accessories-dictionary", "calligraflow", "calligrakrita", "view-left-close","calligraauthor"]
+    property var icons: ["desktop", "firefox", "vlc", "blender", "applications-games", "blinken", "adjustlevels", "adjustrgb", "cuttlefish", "folder-games", "applications-network", "multimedia-player", "applications-utilities", "accessories-dictionary", "calligraflow", "calligrakrita", "view-left-close", "calligraauthor"]
     property int i
 
     Kirigami.ImageColors {
@@ -43,9 +42,9 @@ RowLayout {
         Controls.Button {
             text: "Next"
             onClicked: {
-                i = (i+1)%icons.length
-                icon.source = icons[i]
-               // palette.update()
+                i = (i + 1) % icons.length;
+                icon.source = icons[i];
+                // palette.update()
             }
         }
 
@@ -71,7 +70,7 @@ RowLayout {
     }
     Item {
         Layout.preferredWidth: 500
-        Layout.preferredHeight: 500/(image.sourceSize.width/image.sourceSize.height)
+        Layout.preferredHeight: 500 / (image.sourceSize.width / image.sourceSize.height)
         Image {
             id: image
             source: "https://source.unsplash.com/random"
@@ -82,7 +81,7 @@ RowLayout {
             Controls.Button {
                 text: "Update"
                 onClicked: {
-                    image.source = "https://source.unsplash.com/random#" + (new Date()).getMilliseconds()
+                    image.source = "https://source.unsplash.com/random#" + (new Date()).getMilliseconds();
                 }
             }
             Repeater {

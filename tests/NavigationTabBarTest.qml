@@ -1,10 +1,8 @@
 /* SPDX-FileCopyrightText: 2021 Noah Davis <noahadvs@gmail.com>
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
-
 import org.kde.kirigami 2.20 as Kirigami
 
 QQC2.ApplicationWindow {
@@ -72,18 +70,18 @@ QQC2.ApplicationWindow {
                 icon.width: 32
                 text: "test 3"
                 checked: true
-            },
+            }, 
             Kirigami.Action {
                 visible: true
                 icon.name: "edit-cut"
                 text: "test 4"
                 checkable: true
-            },
+            }, 
             Kirigami.Action {
                 visible: false
                 icon.name: "edit-paste"
                 text: "test 5"
-            },
+            }, 
             Kirigami.Action {
                 visible: true
                 icon.source: "../logo.png"

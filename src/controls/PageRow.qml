@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Layouts 1.2
 import QtQml.Models 2.2
@@ -26,7 +25,7 @@ import "templates" as KT
 QT.Control {
     id: root
 
-//BEGIN PROPERTIES
+    //BEGIN PROPERTIES
     /**
      * @brief This property holds the number of items currently pushed onto the view.
      * @property int depth
@@ -37,7 +36,7 @@ QT.Control {
      * @brief This property holds the last page in the row.
      * @property Page lastItem
      */
-    readonly property Item lastItem: columnView.contentChildren.length > 0 ?  columnView.contentChildren[columnView.contentChildren.length - 1] : null
+    readonly property Item lastItem: columnView.contentChildren.length > 0 ? columnView.contentChildren[columnView.contentChildren.length - 1] : null
 
     /**
      * @brief This property holds the currently visible/active page.
@@ -82,7 +81,7 @@ QT.Control {
      * @property list<Page> items
      * @since 2.6
      */
-    property alias items: columnView.contentChildren;
+    property alias items: columnView.contentChildren
 
     /**
      * @brief This property holds all visible pages in the PageRow,
@@ -133,7 +132,7 @@ QT.Control {
      * @brief This property tells whether the PageRow is wide enough to show multiple pages.
      * @since 5.37
      */
-    readonly property bool wideMode: root.width >= root.defaultColumnWidth*2 && depth >= 2
+    readonly property bool wideMode: root.width >= root.defaultColumnWidth * 2 && depth >= 2
 
     /**
      * @brief This property sets whether the separators between pages should be displayed.
@@ -202,9 +201,9 @@ QT.Control {
      * @since 5.101
      */
     property bool popHiddenPages: false
-//END PROPERTIES
+    //END PROPERTIES
 
-//BEGIN FUNCTIONS
+    //BEGIN FUNCTIONS
     /**
      * @brief Pushes a page on the stack.
      *
@@ -308,16 +307,15 @@ QT.Control {
                 dialog.height = Qt.binding(() => QQC2.ApplicationWindow.window.height - Kirigami.Units.gridUnit * 5);
                 dialog.x = Kirigami.Units.gridUnit * 2.5;
                 dialog.y = Kirigami.Units.gridUnit * 2.5;
-
                 if (typeof page === "string") {
                     // url => load component and then load item from component
                     const component = Qt.createComponent(Qt.resolvedUrl(page));
                     item = component.createObject(dialog.contentItem, properties);
                     component.destroy();
-                    dialog.contentItem.contentItem = item
+                    dialog.contentItem.contentItem = item;
                 } else if (page instanceof Component) {
                     item = page.createObject(dialog.contentItem, properties);
-                    dialog.contentItem.contentItem = item
+                    dialog.contentItem.contentItem = item;
                 } else if (page instanceof Item) {
                     item = page;
                     page.parent = dialog.contentItem;
@@ -326,22 +324,22 @@ QT.Control {
 
                 // Pushing a PageRow is supported but without PageRow toolbar
                 if (item.globalToolBar && item.globalToolBar.style) {
-                    item.globalToolBar.style = Kirigami.ApplicationHeaderStyle.None
+                    item.globalToolBar.style = Kirigami.ApplicationHeaderStyle.None;
                 }
                 Object.defineProperty(item, 'closeDialog', {
-                    value: function() {
-                        dialog.close();
-                    }
-                });
+                        "value": function () {
+                            dialog.close();
+                        }
+                    });
                 dialog.open();
             } else {
                 // open as a layer
                 item = layers.push(page, properties);
                 Object.defineProperty(item, 'closeDialog', {
-                    value: function() {
-                        layers.pop();
-                    }
-                });
+                        "value": function () {
+                            layers.pop();
+                        }
+                    });
             }
         } else {
             // open as a new window
@@ -368,12 +366,14 @@ QT.Control {
             windowComponent.destroy();
             item = window.pageStack.push(page, properties);
             Object.defineProperty(item, 'closeDialog', {
-                value: function() {
-                    window.close();
-                }
-            });
+                    "value": function () {
+                        window.close();
+                    }
+                });
         }
-        item.Keys.escapePressed.connect(function() { item.closeDialog() });
+        item.Keys.escapePressed.connect(function () {
+                item.closeDialog();
+            });
         return item;
     }
 
@@ -404,16 +404,14 @@ QT.Control {
      */
     function insertPage(position, page, properties) {
         if (!page) {
-            return null
+            return null;
         }
         //don't push again things already there
         if (page.createObject === undefined && typeof page !== "string" && columnView.containsItem(page)) {
             print("The item " + page + " is already in the PageRow");
             return null;
         }
-
         position = Math.max(0, Math.min(depth, position));
-
         columnView.pop(columnView.currentItem);
 
         // figure out if more than one page is being pushed
@@ -449,7 +447,6 @@ QT.Control {
                     tProps = tPage.properties;
                     tPage = tPage.page;
                 }
-
                 pagesLogic.initAndInsertPage(position, tPage, tProps);
                 ++position;
             }
@@ -457,9 +454,7 @@ QT.Control {
 
         // initialize the page
         const pageItem = pagesLogic.initAndInsertPage(position, page, properties);
-
         pagePushed(pageItem);
-
         return pageItem;
     }
 
@@ -483,7 +478,6 @@ QT.Control {
         if (depth === 0) {
             return null;
         }
-
         return columnView.removeItem(page);
     }
 
@@ -497,7 +491,6 @@ QT.Control {
         if (depth === 0) {
             return null;
         }
-
         return columnView.pop(page);
     }
 
@@ -548,8 +541,8 @@ QT.Control {
         if (depth > 0)
             columnView.replaceItem(depth - 1, pageItem);
         else {
-            console.log("Calling replace on empty PageRow", pageItem)
-            columnView.addItem(pageItem)
+            console.log("Calling replace on empty PageRow", pageItem);
+            columnView.addItem(pageItem);
         }
         pagePushed(pageItem);
 
@@ -558,13 +551,11 @@ QT.Control {
             for (let i = 0; i < pages.length; i++) {
                 const tPage = pages[i];
                 const tProps = propsArray[i];
-
                 pageItem = pagesLogic.initPage(tPage, tProps);
                 columnView.addItem(pageItem);
                 pagePushed(pageItem);
             }
         }
-
         currentIndex = depth - 1;
         return pageItem;
     }
@@ -604,31 +595,35 @@ QT.Control {
      * "backed" on
      */
     function goBack(event = null) {
-        const backEvent = {accepted: false}
-
+        const backEvent = {
+            "accepted": false
+        };
         if (layersStack.depth >= 1) {
-            try { // app code might be screwy, but we still want to continue functioning if it throws an exception
-                layersStack.currentItem.backRequested(backEvent)
-            } catch (error) {}
-
+            try {
+                // app code might be screwy, but we still want to continue functioning if it throws an exception
+                layersStack.currentItem.backRequested(backEvent);
+            } catch (error) {
+            }
             if (!backEvent.accepted) {
                 if (layersStack.depth > 1) {
-                    layersStack.pop()
-                    if (event) event.accepted = true
-                    return
+                    layersStack.pop();
+                    if (event)
+                        event.accepted = true;
+                    return;
                 }
             }
         }
-
         if (root.currentIndex >= 1) {
-            try { // app code might be screwy, but we still want to continue functioning if it throws an exception
-                root.currentItem.backRequested(backEvent)
-            } catch (error) {}
-
+            try {
+                // app code might be screwy, but we still want to continue functioning if it throws an exception
+                root.currentItem.backRequested(backEvent);
+            } catch (error) {
+            }
             if (!backEvent.accepted) {
                 if (root.depth > 1) {
-                    root.currentIndex = Math.max(0, root.currentIndex - 1)
-                    if (event) event.accepted = true
+                    root.currentIndex = Math.max(0, root.currentIndex - 1);
+                    if (event)
+                        event.accepted = true;
                 }
             }
         }
@@ -641,11 +636,11 @@ QT.Control {
      * i.e. currentIndex + 1.
      */
     function goForward() {
-        root.currentIndex = Math.min(root.depth-1, root.currentIndex + 1)
+        root.currentIndex = Math.min(root.depth - 1, root.currentIndex + 1);
     }
-//END FUNCTIONS
+    //END FUNCTIONS
 
-//BEGIN signals & signal handlers
+    //BEGIN signals & signal handlers
     /**
      * @brief Emitted when a page has been inserted anywhere.
      * @param position where the page has been inserted
@@ -677,17 +672,18 @@ QT.Control {
 
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {
-            this.goBack(event)
+            this.goBack(event);
         }
     }
 
     onInitialPageChanged: {
         if (initialPage) {
             clear();
-            push(initialPage, null)
+            push(initialPage, null);
         }
     }
-/*
+
+    /*
     onActiveFocusChanged:  {
         if (activeFocus) {
             layersStack.currentItem.forceActiveFocus()
@@ -698,8 +694,7 @@ QT.Control {
         }
     }
 */
-//END signals & signal handlers
-
+    //END signals & signal handlers
     Connections {
         id: modalConnection
         target: root.leftSidebar
@@ -711,17 +706,15 @@ QT.Control {
                 leftSidebar.contentItem = sidebar;
                 sidebarControl.background = null;
                 leftSidebar.background = background;
-
                 sidebar.visible = true;
                 background.visible = true;
             } else {
-                const sidebar = leftSidebar.contentItem
-                const background = leftSidebar.background
-                leftSidebar.contentItem=null
-                sidebarControl.contentItem = sidebar
-                leftSidebar.background=null
-                sidebarControl.background = background
-
+                const sidebar = leftSidebar.contentItem;
+                const background = leftSidebar.background;
+                leftSidebar.contentItem = null;
+                sidebarControl.contentItem = sidebar;
+                leftSidebar.background = null;
+                sidebarControl.background = background;
                 sidebar.visible = true;
                 background.visible = true;
             }
@@ -732,11 +725,11 @@ QT.Control {
     implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
 
     Shortcut {
-        sequences: [ StandardKey.Back ]
+        sequences: [StandardKey.Back]
         onActivated: root.goBack()
     }
     Shortcut {
-        sequences: [ StandardKey.Forward ]
+        sequences: [StandardKey.Forward]
         onActivated: root.goForward()
     }
 
@@ -760,7 +753,7 @@ QT.Control {
         // placeholder as initial item
         initialItem: columnViewLayout
 
-        function clear () {
+        function clear() {
             // don't let it kill the main page row
             const d = layersStack.depth;
             for (let i = 1; i < d; ++i) {
@@ -786,7 +779,7 @@ QT.Control {
                 }
                 YAnimator {
                     from: 0
-                    to: height/2
+                    to: height / 2
                     duration: Kirigami.Units.longDuration
                     easing.type: Easing.InCubic
                 }
@@ -804,14 +797,13 @@ QT.Control {
                     easing.type: Easing.InOutCubic
                 }
                 YAnimator {
-                    from: height/2
+                    from: height / 2
                     to: 0
                     duration: Kirigami.Units.longDuration
                     easing.type: Easing.OutCubic
                 }
             }
         }
-
 
         pushExit: Transition {
             OpacityAnimator {
@@ -831,7 +823,7 @@ QT.Control {
                     easing.type: Easing.InOutCubic
                 }
                 YAnimator {
-                    from: height/2
+                    from: height / 2
                     to: 0
                     duration: Kirigami.Units.longDuration
                     easing.type: Easing.OutCubic
@@ -849,7 +841,7 @@ QT.Control {
                 }
                 YAnimator {
                     from: 0
-                    to: -height/2
+                    to: -height / 2
                     duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutCubic
                 }
@@ -866,14 +858,13 @@ QT.Control {
         }
         z: 100
         property QT.Control pageRow: root
-        active: (!firstVisibleItem || firstVisibleItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.None) &&
-                (globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None || (firstVisibleItem && firstVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar))
+        active: (!firstVisibleItem || firstVisibleItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.None) && (globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None || (firstVisibleItem && firstVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar))
         visible: active
         height: active ? implicitHeight : 0
         // If load is asynchronous, it will fail to compute the initial implicitHeight
         // https://bugs.kde.org/show_bug.cgi?id=442660
         asynchronous: false
-        source: Qt.resolvedUrl("private/globaltoolbar/PageRowGlobalToolBarUI.qml");
+        source: Qt.resolvedUrl("private/globaltoolbar/PageRowGlobalToolBarUI.qml")
     }
 
     QtObject {
@@ -882,7 +873,6 @@ QT.Control {
 
         function getPageComponent(page) {
             let pageComp;
-
             if (page.createObject) {
                 // page defined as component
                 pageComp = page;
@@ -899,18 +889,15 @@ QT.Control {
                     pageComp = pagesLogic.componentCache[page.toString()] = Qt.createComponent(page.toString());
                 }
             }
-
-            return pageComp
+            return pageComp;
         }
 
         function initPage(page, properties) {
             const pageComp = getPageComponent(page, properties);
-
             if (pageComp) {
                 // instantiate page from component
                 // FIXME: parent directly to columnView or root?
                 page = pageComp.createObject(null, properties || {});
-
                 if (pageComp.status === Component.Error) {
                     throw new Error("Error while loading page: " + pageComp.errorString());
                 }
@@ -950,8 +937,7 @@ QT.Control {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            topPadding: globalToolBarUI.item && globalToolBarUI.item.breadcrumbVisible
-                        ? globalToolBarUI.height : 0
+            topPadding: globalToolBarUI.item && globalToolBarUI.item.breadcrumbVisible ? globalToolBarUI.height : 0
 
             // Internal hidden api for Page
             readonly property Item __pageRow: root
@@ -959,8 +945,8 @@ QT.Control {
             columnResizeMode: root.wideMode ? Kirigami.ColumnView.FixedColumns : Kirigami.ColumnView.SingleColumn
             columnWidth: root.defaultColumnWidth
 
-            onItemInserted: root.pageInserted(position, item);
-            onItemRemoved: root.pageRemoved(item);
+            onItemInserted: root.pageInserted(position, item)
+            onItemRemoved: root.pageRemoved(item)
 
             onVisibleItemsChanged: {
                 // implementation of `popHiddenPages` option
@@ -968,10 +954,9 @@ QT.Control {
                     // manually fetch lastItem here rather than use root.lastItem property, since that binding may not have updated yet
                     let lastItem = columnView.contentChildren[columnView.contentChildren.length - 1];
                     let lastVisibleItem = columnView.lastVisibleItem;
-                    
+
                     // pop every page that isn't visible and at the top of the stack
-                    while (lastItem && columnView.lastVisibleItem && 
-                        lastItem !== columnView.lastVisibleItem && columnView.containsItem(lastItem)) {
+                    while (lastItem && columnView.lastVisibleItem && lastItem !== columnView.lastVisibleItem && columnView.containsItem(lastItem)) {
                         root.pop();
                     }
                 }
@@ -983,14 +968,14 @@ QT.Control {
         anchors.bottom: parent.bottom
         height: Kirigami.Units.smallSpacing
         x: (columnView.width - width) * (columnView.contentX / (columnView.contentWidth - columnView.width))
-        width: columnView.width * (columnView.width/columnView.contentWidth)
+        width: columnView.width * (columnView.width / columnView.contentWidth)
         color: Kirigami.Theme.textColor
         opacity: 0
         onXChanged: {
-            opacity = 0.3
+            opacity = 0.3;
             scrollIndicatorTimer.restart();
         }
-        Behavior on opacity {
+        Behavior on opacity  {
             OpacityAnimator {
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutQuad
@@ -999,7 +984,7 @@ QT.Control {
         Timer {
             id: scrollIndicatorTimer
             interval: Kirigami.Units.longDuration * 4
-            onTriggered: parent.opacity = 0;
+            onTriggered: parent.opacity = 0
         }
     }
 }

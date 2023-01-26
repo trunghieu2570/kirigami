@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.12
 import QtQuick.Templates 2.3 as T2
 import QtQuick.Controls 2.2 as QQC2
@@ -53,11 +52,11 @@ OverlayDrawer {
     edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
     handleClosedIcon.source: null
     handleOpenIcon.source: null
-    handleVisible: (modal || !drawerOpen) && (typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true) && (!isMenu || Kirigami.Settings.isMobile)
+    handleVisible: (modal || !drawerOpen) && (typeof (applicationWindow) === typeof (Function) && applicationWindow() ? applicationWindow().controlsVisible : true) && (!isMenu || Kirigami.Settings.isMobile)
 
     enabled: !isMenu || Kirigami.Settings.isMobile
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property holds the title displayed at the top of the drawer.
      * @see org::kde::kirigami::private::BannerImage::title
@@ -234,7 +233,7 @@ OverlayDrawer {
     /**
      * @brief This property points to the action acting as a submenu
      */
-    readonly property Action currentSubMenu: stackView.currentItem ? stackView.currentItem.current: null
+    readonly property Action currentSubMenu: stackView.currentItem ? stackView.currentItem.current : null
 
     /**
      * @brief This property sets whether the drawer becomes a menu on the desktop.
@@ -254,12 +253,12 @@ OverlayDrawer {
      * @since 2.12
      */
     property bool collapseButtonVisible: true
-//END properties
+    //END properties
 
     /**
      * @brief This signal notifies that the banner has been clicked.
      */
-    signal bannerClicked()
+    signal bannerClicked
 
     /**
      * @brief This function reverts the menu back to its initial state
@@ -272,22 +271,21 @@ OverlayDrawer {
     }
 
     // rightPadding: !Kirigami.Settings.isMobile && mainFlickable.contentHeight > mainFlickable.height ? Kirigami.Units.gridUnit : Kirigami.Units.smallSpacing
-
     Kirigami.Theme.colorSet: modal ? Kirigami.Theme.Window : Kirigami.Theme.View
 
     onHeaderChanged: {
         if (header) {
-            header.parent = headerContainer
+            header.parent = headerContainer;
             header.Layout.fillWidth = true;
             if (header.z === undefined) {
                 header.z = 1;
             }
             if (header instanceof T2.ToolBar) {
-                header.position = T2.ToolBar.Header
+                header.position = T2.ToolBar.Header;
             } else if (header instanceof T2.TabBar) {
-                header.position = T2.TabBar.Header
+                header.position = T2.TabBar.Header;
             } else if (header instanceof T2.DialogButtonBox) {
-                header.position = T2.DialogButtonBox.Header
+                header.position = T2.DialogButtonBox.Header;
             }
         }
     }
@@ -297,7 +295,7 @@ OverlayDrawer {
         //ensure the attached property exists
         Kirigami.Theme.inherit: true
         anchors.fill: parent
-        implicitWidth: Math.min (Kirigami.Units.gridUnit * 20, root.parent.width * 0.8)
+        implicitWidth: Math.min(Kirigami.Units.gridUnit * 20, root.parent.width * 0.8)
         QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
         QQC2.ScrollBar.vertical.anchors {
             top: scrollView.top
@@ -323,17 +321,16 @@ OverlayDrawer {
                 y: bannerImage.visible ? Math.max(headerContainer.height, -mainFlickable.contentY) - height : 0
 
                 Layout.fillWidth: true
-                // visible: !bannerImage.empty || root.collapsible
 
+                // visible: !bannerImage.empty || root.collapsible
                 P.BannerImage {
                     id: bannerImage
-
 
                     visible: !bannerImage.empty && opacity > 0 && root.bannerVisible
                     opacity: !root.collapsed
                     fillMode: Image.PreserveAspectCrop
 
-                    Behavior on opacity {
+                    Behavior on opacity  {
                         OpacityAnimator {
                             duration: Kirigami.Units.longDuration
                             easing.type: Easing.InOutQuad
@@ -364,7 +361,7 @@ OverlayDrawer {
                     // Workaround for https://bugreports.qt.io/browse/QTBUG-90034
                     Layout.preferredHeight: implicitHeight <= 0 || opacity === 1 ? -1 : implicitHeight * opacity
                     opacity: !root.collapsed || showHeaderWhenCollapsed
-                    Behavior on opacity {
+                    Behavior on opacity  {
                         // not an animator as is binded
                         NumberAnimation {
                             duration: Kirigami.Units.longDuration
@@ -373,7 +370,6 @@ OverlayDrawer {
                     }
                 }
             }
-
 
             ColumnLayout {
                 id: mainColumn
@@ -397,7 +393,7 @@ OverlayDrawer {
                     Layout.minimumWidth: parent.width - root.leftPadding - root.rightPadding
                     visible: children.length > 0 && childrenRect.height > 0 && opacity > 0
                     opacity: !root.collapsed || showTopContentWhenCollapsed
-                    Behavior on opacity {
+                    Behavior on opacity  {
                         // not an animator as is binded
                         NumberAnimation {
                             duration: Kirigami.Units.longDuration
@@ -418,32 +414,68 @@ OverlayDrawer {
                     // as while the animation is running the drawer may close, and
                     // the animator would stop when not drawing see BUG 381576
                     popEnter: Transition {
-                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * -stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation {
+                            property: "x"
+                            from: (stackView.mirrored ? -1 : 1) * -stackView.width
+                            to: 0
+                            duration: Kirigami.Units.veryLongDuration
+                            easing.type: Easing.OutCubic
+                        }
                     }
 
                     popExit: Transition {
-                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation {
+                            property: "x"
+                            from: 0
+                            to: (stackView.mirrored ? -1 : 1) * stackView.width
+                            duration: Kirigami.Units.veryLongDuration
+                            easing.type: Easing.OutCubic
+                        }
                     }
 
                     pushEnter: Transition {
-                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation {
+                            property: "x"
+                            from: (stackView.mirrored ? -1 : 1) * stackView.width
+                            to: 0
+                            duration: Kirigami.Units.veryLongDuration
+                            easing.type: Easing.OutCubic
+                        }
                     }
 
                     pushExit: Transition {
-                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation {
+                            property: "x"
+                            from: 0
+                            to: (stackView.mirrored ? -1 : 1) * -stackView.width
+                            duration: Kirigami.Units.veryLongDuration
+                            easing.type: Easing.OutCubic
+                        }
                     }
 
                     replaceEnter: Transition {
-                        NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation {
+                            property: "x"
+                            from: (stackView.mirrored ? -1 : 1) * stackView.width
+                            to: 0
+                            duration: Kirigami.Units.veryLongDuration
+                            easing.type: Easing.OutCubic
+                        }
                     }
 
                     replaceExit: Transition {
-                        NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                        NumberAnimation {
+                            property: "x"
+                            from: 0
+                            to: (stackView.mirrored ? -1 : 1) * -stackView.width
+                            duration: Kirigami.Units.veryLongDuration
+                            easing.type: Easing.OutCubic
+                        }
                     }
                 }
                 Item {
                     Layout.fillWidth: true
-                    Layout.fillHeight: root.actions.length>0
+                    Layout.fillHeight: root.actions.length > 0
                     Layout.minimumHeight: Kirigami.Units.smallSpacing
                 }
 
@@ -459,7 +491,7 @@ OverlayDrawer {
                     Layout.minimumWidth: parent.width - root.leftPadding - root.rightPadding
                     visible: children.length > 0 && (opacity > 0 || mainContentAnimator.running)
                     opacity: !root.collapsed || showContentWhenCollapsed
-                    Behavior on opacity {
+                    Behavior on opacity  {
                         OpacityAnimator {
                             id: mainContentAnimator
                             duration: Kirigami.Units.longDuration
@@ -530,7 +562,7 @@ OverlayDrawer {
                                     onCheckedChanged: {
                                         // move every checked item into view
                                         if (checked && topContent.height + backItem.height + (model.index + 1) * height - mainFlickable.contentY > mainFlickable.height) {
-                                            mainFlickable.contentY += height
+                                            mainFlickable.contentY += height;
                                         }
                                     }
                                     Kirigami.Theme.colorSet: drawerItem.visible && !root.modal && !root.collapsed && actionsRepeater.withSections ? Kirigami.Theme.Window : parent.Kirigami.Theme.colorSet
@@ -594,4 +626,3 @@ OverlayDrawer {
         }
     }
 }
-

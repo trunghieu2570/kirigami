@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.7
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.4 as QQC2
@@ -33,7 +32,7 @@ Item {
 
     property int position: QQC2.ToolBar.Header
 
-    property Kirigami.PageRow pageRow: __appWindow ? __appWindow.pageStack: null
+    property Kirigami.PageRow pageRow: __appWindow ? __appWindow.pageStack : null
     property Kirigami.Page page: pageRow ? pageRow.currentItem : null
 
     default property alias contentItem: mainItem.data
@@ -55,7 +54,7 @@ Item {
     Kirigami.Theme.inherit: true
 
     // FIXME: remove
-    property QtObject __appWindow: typeof applicationWindow !== "undefined" ? applicationWindow() : null;
+    property QtObject __appWindow: typeof applicationWindow !== "undefined" ? applicationWindow() : null
     implicitHeight: preferredHeight
     height: Layout.preferredHeight
 
@@ -73,8 +72,8 @@ Item {
 
     Component.onCompleted: AppHeaderSizeGroup.items.push(this)
 
-    onMinimumHeightChanged: implicitHeight = preferredHeight;
-    onPreferredHeightChanged: implicitHeight = preferredHeight;
+    onMinimumHeightChanged: implicitHeight = preferredHeight
+    onPreferredHeightChanged: implicitHeight = preferredHeight
 
     opacity: height > 0 ? 1 : 0
 
@@ -104,7 +103,7 @@ Item {
     Connections {
         target: __appWindow
         function onControlsVisibleChanged() {
-            heightAnim.from = root.implicitHeight
+            heightAnim.from = root.implicitHeight;
             heightAnim.to = __appWindow.controlsVisible ? root.preferredHeight : 0;
             heightAnim.restart();
         }
@@ -123,19 +122,15 @@ Item {
 
         function scrollIntentHandler(event) {
             if (!root.hideWhenTouchScrolling) {
-                return
+                return;
             }
-
-            if (root.pageRow
-                && root.pageRow.globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.TabBar
-                && root.pageRow.globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.Breadcrumb) {
+            if (root.pageRow && root.pageRow.globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.TabBar && root.pageRow.globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.Breadcrumb) {
                 return;
             }
             if (!root.page.flickable || (root.page.flickable.atYBeginning && root.page.flickable.atYEnd)) {
                 return;
             }
-
-            root.implicitHeight = Math.max(0, Math.min(root.preferredHeight, root.implicitHeight + event.delta.y))
+            root.implicitHeight = Math.max(0, Math.min(root.preferredHeight, root.implicitHeight + event.delta.y));
             event.accepted = root.implicitHeight > 0 && root.implicitHeight < root.preferredHeight;
             slideResetTimer.restart();
             if ((root.page.flickable instanceof ListView) && root.page.flickable.verticalLayoutDirection === ListView.BottomToTop) {
@@ -148,22 +143,24 @@ Item {
         Connections {
             target: root.page ? root.page.globalToolBarItem : null
             enabled: target
-            function onImplicitHeightChanged() { root.implicitHeight = root.page.globalToolBarItem.implicitHeight }
+            function onImplicitHeightChanged() {
+                root.implicitHeight = root.page.globalToolBarItem.implicitHeight;
+            }
         }
 
         Timer {
-           id: slideResetTimer
-           interval: 500
-           onTriggered: {
+            id: slideResetTimer
+            interval: 500
+            onTriggered: {
                 if ((root.pageRow ? root.pageRow.wideMode : (__appWindow && __appWindow.wideScreen)) || !Kirigami.Settings.isMobile) {
                     return;
                 }
-                if (root.height > root.minimumHeight + (root.preferredHeight - root.minimumHeight)/2 ) {
+                if (root.height > root.minimumHeight + (root.preferredHeight - root.minimumHeight) / 2) {
                     heightAnim.to = root.preferredHeight;
                 } else {
                     heightAnim.to = root.minimumHeight;
                 }
-                heightAnim.from = root.implicitHeight
+                heightAnim.from = root.implicitHeight;
                 heightAnim.restart();
             }
         }
@@ -174,10 +171,8 @@ Item {
                 if (!root.page) {
                     return;
                 }
-
                 heightAnim.from = root.implicitHeight;
                 heightAnim.to = root.preferredHeight;
-
                 heightAnim.restart();
             }
         }
@@ -196,4 +191,3 @@ Item {
         }
     }
 }
-

@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.7
 import QtQuick.Controls.Material 2.0
 import org.kde.kirigami 2.16 as Kirigami
@@ -14,7 +13,7 @@ import org.kde.kirigami 2.16 as Kirigami
 Kirigami.BasicThemeDefinition {
     id: theme
     //NOTE: this is useless per se, but it forces the Material attached property to be created
-    Material.elevation:2
+    Material.elevation: 2
 
     textColor: theme.Material.foreground
     disabledTextColor: "#9931363b"
@@ -90,14 +89,13 @@ Kirigami.BasicThemeDefinition {
     onSync: {
         //TODO: actually check if it's a dark or light color
         if (object.Kirigami.Theme.colorSet === Kirigami.Theme.Complementary) {
-            object.Material.theme = Material.Dark
+            object.Material.theme = Material.Dark;
         } else {
-            object.Material.theme = Material.Light
+            object.Material.theme = Material.Light;
         }
-
-        object.Material.foreground = object.Kirigami.Theme.textColor
-        object.Material.background = object.Kirigami.Theme.backgroundColor
-        object.Material.primary = object.Kirigami.Theme.highlightColor
-        object.Material.accent = object.Kirigami.Theme.highlightColor
+        object.Material.foreground = object.Kirigami.Theme.textColor;
+        object.Material.background = object.Kirigami.Theme.backgroundColor;
+        object.Material.primary = object.Kirigami.Theme.highlightColor;
+        object.Material.accent = object.Kirigami.Theme.highlightColor;
     }
 }

@@ -10,16 +10,16 @@ Kirigami.ApplicationWindow {
         Kirigami.PageRoute {
             name: "home"
             Component {
+                // This page will show up when starting the application
                 Kirigami.Page {
-                    // This page will show up when starting the application
                 }
             }
         }
         Kirigami.PageRoute {
             name: "login"
             Component {
+                // Page contents...
                 Kirigami.Page {
-                    // Page contents...
                 }
             }
         }

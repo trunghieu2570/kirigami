@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12 as QQC2
@@ -37,12 +36,12 @@ QQC2.ScrollView {
                 easing.type: Easing.OutExpo
             }
             onIndexChanged: {
-                if (xPos > (bar.width)/2) {
-                    bar.targetDestination = (1-view.QQC2.ScrollBar.horizontal.size) * ((xPos+tabWidth) / bar.width)
-                    scrollAni.restart()
+                if (xPos > (bar.width) / 2) {
+                    bar.targetDestination = (1 - view.QQC2.ScrollBar.horizontal.size) * ((xPos + tabWidth) / bar.width);
+                    scrollAni.restart();
                 } else {
-                    bar.targetDestination = (1-view.QQC2.ScrollBar.horizontal.size) * ((xPos) / bar.width)
-                    scrollAni.restart()
+                    bar.targetDestination = (1 - view.QQC2.ScrollBar.horizontal.size) * ((xPos) / bar.width);
+                    scrollAni.restart();
                 }
             }
 
@@ -51,7 +50,9 @@ QQC2.ScrollView {
                     id: expandedLayouter
                     Repeater {
                         model: swipeNavigatorRoot.pages
-                        delegate: PrivateSwipeTab { vertical: false }
+                        delegate: PrivateSwipeTab {
+                            vertical: false
+                        }
                     }
                 }
             }
@@ -62,9 +63,7 @@ QQC2.ScrollView {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignHCenter
-                    vertical: Kirigami.Settings.isMobile
-                        ? (swipeNavigatorRoot.width < swipeNavigatorRoot.height ? true : expandedLayouter.width > swipeNavigatorRoot.width)
-                        : expandedLayouter.width > swipeNavigatorRoot.width
+                    vertical: Kirigami.Settings.isMobile ? (swipeNavigatorRoot.width < swipeNavigatorRoot.height ? true : expandedLayouter.width > swipeNavigatorRoot.width) : expandedLayouter.width > swipeNavigatorRoot.width
                     onIndexChanged: bar.indexChanged(xPos, tabWidth)
                 }
             }

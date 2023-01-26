@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.6
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0 as QQC2
@@ -76,7 +75,6 @@ Kirigami.AbstractCard {
      */
     readonly property alias banner: bannerImage
 
-
     header: P.BannerImage {
         id: bannerImage
         anchors.leftMargin: -root.leftPadding + root.background.border.width
@@ -101,9 +99,8 @@ Kirigami.AbstractCard {
         if (!header) {
             return;
         }
-
         header.anchors.leftMargin = Qt.binding(() => -root.leftPadding);
-        header.anchors.topMargin = Qt.binding(() =>  -root.topPadding);
+        header.anchors.topMargin = Qt.binding(() => -root.topPadding);
         header.anchors.rightMargin = Qt.binding(() => root.headerOrientation === Qt.Vertical ? -root.rightPadding : 0);
         header.anchors.bottomMargin = Qt.binding(() => root.headerOrientation === Qt.Horizontal ? -root.bottomPadding : 0);
     }

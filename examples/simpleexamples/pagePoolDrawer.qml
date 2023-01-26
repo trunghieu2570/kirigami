@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import org.kde.kirigami 2.11 as Kirigami
 
@@ -26,7 +25,7 @@ Kirigami.ApplicationWindow {
                 icon.name: "speedometer"
                 pagePool: mainPagePool
                 page: "SimplePage.qml"
-            },
+            }, 
             Kirigami.PagePoolAction {
                 text: i18n("Page2")
                 icon.name: "window-duplicate"
@@ -40,5 +39,4 @@ Kirigami.ApplicationWindow {
     }
 
     pageStack.initialPage: mainPagePool.loadPage("SimplePage.qml")
-
 }

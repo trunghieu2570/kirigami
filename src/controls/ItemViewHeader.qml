@@ -3,10 +3,9 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.5
 import QtQuick.Templates 2.0 as T2
-import QtGraphicalEffects 1.0 as GE
+import Qt5Compat.GraphicalEffects 6.0 as GE
 import org.kde.kirigami 2.4 as Kirigami
 import "private" as P
 
@@ -29,7 +28,7 @@ Kirigami.AbstractItemViewHeader {
 
     property alias backgroundImage: image
 
-    Component.onCompleted: console.warn( "ItemViewHeader is deprecated (since 5.97): No replacemant is available.", (new Error).stack)
+    Component.onCompleted: console.warn("ItemViewHeader is deprecated (since 5.97): No replacemant is available.", (new Error).stack)
 
     maximumHeight: (backgroundImage.hasImage ? 10 : 6) * Kirigami.Units.gridUnit - (applicationWindow().header ? applicationWindow().header.height : 0) - bottomPadding
     bottomPadding: Kirigami.Units.smallSpacing
@@ -57,8 +56,8 @@ Kirigami.AbstractItemViewHeader {
 
         readonly property Page page: {
             let obj = root.view;
-            while(obj && !obj.hasOwnProperty("title") && !obj.hasOwnProperty("isCurrentPage")) {
-                obj = obj.parent
+            while (obj && !obj.hasOwnProperty("title") && !obj.hasOwnProperty("isCurrentPage")) {
+                obj = obj.parent;
             }
             return obj;
         }
@@ -79,7 +78,7 @@ Kirigami.AbstractItemViewHeader {
             id: heading
             anchors {
                 fill: parent
-                margins:  Kirigami.Units.smallSpacing
+                margins: Kirigami.Units.smallSpacing
             }
 
             height: undefined
@@ -98,11 +97,9 @@ Kirigami.AbstractItemViewHeader {
             layer.effect: GE.DropShadow {
                 horizontalOffset: 0
                 verticalOffset: 2
-                radius: Kirigami.Units.smallSpacing*2
-                samples: 32
+                radius: Kirigami.Units.smallSpacing * 2
                 color: Qt.rgba(0, 0, 0, 0.7)
             }
         }
     }
 }
-

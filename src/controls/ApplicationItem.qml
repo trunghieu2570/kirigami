@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import org.kde.kirigami 2.4 as Kirigami
 
@@ -111,11 +110,13 @@ Kirigami.AbstractApplicationItem {
             }
         }
         // FIXME
-        onCurrentIndexChanged: root.reachableMode = false;
+        onCurrentIndexChanged: root.reachableMode = false
 
         function goBack() {
             // NOTE: drawers are handling the back button by themselves
-            const backEvent = {accepted: false}
+            const backEvent = {
+                "accepted": false
+            };
             if (root.pageStack.currentIndex >= 1) {
                 root.pageStack.currentItem.backRequested(backEvent);
                 if (!backEvent.accepted) {
@@ -123,7 +124,6 @@ Kirigami.AbstractApplicationItem {
                     backEvent.accepted = true;
                 }
             }
-
             if (Kirigami.Settings.isMobile && !backEvent.accepted && Qt.platform.os !== "ios") {
                 Qt.quit();
             }
@@ -137,11 +137,11 @@ Kirigami.AbstractApplicationItem {
         }
         Shortcut {
             sequences: [StandardKey.Forward]
-            onActivated: __pageStack.goForward();
+            onActivated: __pageStack.goForward()
         }
         Shortcut {
             sequences: [StandardKey.Back]
-            onActivated: __pageStack.goBack();
+            onActivated: __pageStack.goBack()
         }
 
         background: Rectangle {

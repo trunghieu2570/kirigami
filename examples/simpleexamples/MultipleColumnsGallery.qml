@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.0
 import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.2
@@ -18,12 +17,12 @@ ScrollablePage {
 
     actions.contextualActions: [
         Action {
-            text:"Action for buttons"
+            text: "Action for buttons"
             icon.name: "bookmarks"
             onTriggered: print("Action 1 clicked")
-        },
+        }, 
         Action {
-            text:"Action 2"
+            text: "Action 2"
             icon.name: "folder"
             enabled: false
         }
@@ -39,7 +38,7 @@ ScrollablePage {
             text: "This page is used to test multiple columns: you can push and pop an arbitrary number of pages, each new page will have a random implicit width between 8 and 35 grid units.\nIf you enlarge the window enough, you can test how the application behaves with multiple columns."
         }
         Item {
-            Layout.minimumWidth: Units.gridUnit *2
+            Layout.minimumWidth: Units.gridUnit * 2
             Layout.minimumHeight: Layout.minimumWidth
         }
         Controls.Label {
@@ -49,12 +48,12 @@ ScrollablePage {
         Controls.Button {
             text: "Push Another Page"
             Layout.alignment: Qt.AlignHCenter
-            onClicked: pageStack.push(Qt.resolvedUrl("MultipleColumnsGallery.qml"));
+            onClicked: pageStack.push(Qt.resolvedUrl("MultipleColumnsGallery.qml"))
         }
         Controls.Button {
             text: "Pop A Page"
             Layout.alignment: Qt.AlignHCenter
-            onClicked: pageStack.pop();
+            onClicked: pageStack.pop()
         }
         RowLayout {
             Layout.alignment: Qt.AlignHCenter
@@ -64,17 +63,17 @@ ScrollablePage {
             }
             Controls.Button {
                 text: "Rename Page"
-                onClicked: page.title = edit.text;
+                onClicked: page.title = edit.text
             }
         }
         SearchField {
-            Layout.alignment: Qt.AlignHCenter
             id: searchField
-            onAccepted: console.log("Search text is " + searchField.text);
+            Layout.alignment: Qt.AlignHCenter
+            onAccepted: console.log("Search text is " + searchField.text)
         }
         PasswordField {
-            Layout.alignment: Qt.AlignHCenter
             id: passwordField
+            Layout.alignment: Qt.AlignHCenter
             onAccepted: console.log("Password")
         }
     }

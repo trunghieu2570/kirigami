@@ -3,11 +3,10 @@
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQml 2.15
 import QtQuick.Layouts 1.15
-import QtGraphicalEffects 1.12 as GE
+import Qt5Compat.GraphicalEffects 6.0 as GE
 import QtQuick.Templates 2.15 as T
 import org.kde.kirigami 2.19 as Kirigami
 
@@ -116,11 +115,10 @@ import org.kde.kirigami 2.19 as Kirigami
  * @since org.kde.kirigami 2.19
  * @inherit QtQuick.Templates.Toolbar
  */
-
 T.ToolBar {
     id: root
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property holds the list of actions displayed in the toolbar.
      */
@@ -183,7 +181,7 @@ T.ToolBar {
      * @brief This property holds the ButtonGroup used to manage the tabs.
      */
     readonly property T.ButtonGroup tabGroup: tabGroup
-    
+
     /**
      * @brief This property sets whether the icon colors should be masked with a single color.
      * 
@@ -206,15 +204,15 @@ T.ToolBar {
         const minWidth = contentItem.height * 0.75;
         for (let i = 0; i < contentItem.visibleChildren.length; ++i) {
             if (contentItem.width / visibleButtonCount >= minWidth && // make buttons go off the screen if there is physically no room for them
-                contentItem.visibleChildren[i] instanceof T.AbstractButton) { // Checking for AbstractButtons because any AbstractButton can act as a tab
+            contentItem.visibleChildren[i] instanceof T.AbstractButton) {
+                // Checking for AbstractButtons because any AbstractButton can act as a tab
                 ++visibleButtonCount;
             }
         }
-
         return Math.round(contentItem.width / visibleButtonCount);
     }
-//END properties
 
+    //END properties
     onCurrentIndexChanged: {
         if (currentIndex === -1) {
             if (tabGroup.checkState !== Qt.Unchecked) {
@@ -223,7 +221,7 @@ T.ToolBar {
             return;
         }
         if (tabGroup.checkedButton.tabIndex !== currentIndex) {
-            const buttonForCurrentIndex = tabGroup.buttons[currentIndex]
+            const buttonForCurrentIndex = tabGroup.buttons[currentIndex];
             if (buttonForCurrentIndex.action) {
                 // trigger also toggles and causes clicked() to be emitted
                 buttonForCurrentIndex.action.trigger();
@@ -244,7 +242,8 @@ T.ToolBar {
 
     Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
-    background: Rectangle { // color & shadow
+    background: Rectangle {
+        // color & shadow
         implicitHeight: Kirigami.Units.gridUnit * 3 + Kirigami.Units.smallSpacing * 2
         color: root.backgroundColor
         GE.RectangularGlow {
@@ -268,10 +267,10 @@ T.ToolBar {
         id: tabGroup
         exclusive: true
         buttons: root.contentItem.children
-        
+
         onCheckedButtonChanged: {
             if (!checkedButton) {
-                return
+                return;
             }
             if (root.currentIndex !== checkedButton.tabIndex) {
                 root.currentIndex = checkedButton.tabIndex;
@@ -293,12 +292,10 @@ T.ToolBar {
             T.ButtonGroup.group: tabGroup
             // Workaround setting the action when checkable is not explicitly set making tabs uncheckable
             onActionChanged: action.checkable = true
-            
+
             foregroundColor: root.foregroundColor
             highlightForegroundColor: root.highlightForegroundColor
             highlightBarColor: root.highlightBarColor
         }
     }
 }
-
-

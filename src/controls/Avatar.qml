@@ -3,11 +3,10 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.13
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.13 as QQC2
-import QtGraphicalEffects 1.0 as GE
+import Qt5Compat.GraphicalEffects 6.0 as GE
 import org.kde.kirigami 2.14 as Kirigami
 import org.kde.kirigami.private 2.14 as KP
 import "templates/private" as TP
@@ -30,7 +29,7 @@ QQC2.Control {
         UseIcon
     }
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property holds the given name of a user.
      *
@@ -129,7 +128,8 @@ QQC2.Control {
      * @note The secondary action should only be used for shortcuts of actions
      * elsewhere in your application's UI, and cannot be accessed on mobile platforms.
      */
-    property KP.AvatarGroup actions: KP.AvatarGroup {}
+    property KP.AvatarGroup actions: KP.AvatarGroup {
+    }
 
     /**
      * @brief This property holds the border properties group.
@@ -142,10 +142,10 @@ QQC2.Control {
      */
     property TP.BorderPropertiesGroup border: TP.BorderPropertiesGroup {
         width: 0
-        color: Qt.rgba(0,0,0,0.2)
+        color: Qt.rgba(0, 0, 0, 0.2)
     }
-//END properties
 
+    //END properties
     padding: 0
     horizontalPadding: padding
     verticalPadding: padding
@@ -163,10 +163,12 @@ QQC2.Control {
     Accessible.name: !!actions.main ? qsTr("%1 — %2").arg(name).arg(actions.main.text) : name
     Accessible.focusable: !!actions.main
     Accessible.onPressAction: {
-        avatarRoot.actions.main.trigger()
+        avatarRoot.actions.main.trigger();
     }
-    Keys.onEnterPressed: if (!!avatarRoot.actions.main.trigger()) avatarRoot.actions.main.trigger()
-    Keys.onSpacePressed: if (!!avatarRoot.actions.main.trigger()) avatarRoot.actions.main.trigger()
+    Keys.onEnterPressed: if (!!avatarRoot.actions.main.trigger())
+        avatarRoot.actions.main.trigger()
+    Keys.onSpacePressed: if (!!avatarRoot.actions.main.trigger())
+        avatarRoot.actions.main.trigger()
 
     background: Rectangle {
         radius: parent.width / 2
@@ -191,22 +193,20 @@ QQC2.Control {
             anchors.fill: parent
             hoverEnabled: true
             property bool mouseInCircle: {
-                const x = avatarRoot.width / 2, y = avatarRoot.height / 2
-                const xPrime = mouseX, yPrime = mouseY
-
-                const distance = (x - xPrime) ** 2 + (y - yPrime) ** 2
-                const radiusSquared = (Math.min(avatarRoot.width, avatarRoot.height) / 2) ** 2
-
-                return distance < radiusSquared
+                const x = avatarRoot.width / 2, y = avatarRoot.height / 2;
+                const xPrime = mouseX, yPrime = mouseY;
+                const distance = (x - xPrime) ** 2 + (y - yPrime) ** 2;
+                const radiusSquared = (Math.min(avatarRoot.width, avatarRoot.height) / 2) ** 2;
+                return distance < radiusSquared;
             }
 
             onClicked: {
                 if (mouseY > avatarRoot.height - secondaryRect.height && !!avatarRoot.actions.secondary) {
-                    avatarRoot.actions.secondary.trigger()
-                    return
+                    avatarRoot.actions.secondary.trigger();
+                    return;
                 }
                 if (!!avatarRoot.actions.main) {
-                    avatarRoot.actions.main.trigger()
+                    avatarRoot.actions.main.trigger();
                 }
             }
 
@@ -233,12 +233,9 @@ QQC2.Control {
 
     QtObject {
         id: __private
-        property color textColor: Kirigami.ColorUtils.brightnessForColor(avatarRoot.color) === Kirigami.ColorUtils.Light
-                                ? "black"
-                                : "white"
+        property color textColor: Kirigami.ColorUtils.brightnessForColor(avatarRoot.color) === Kirigami.ColorUtils.Light ? "black" : "white"
         property bool showImage: {
-            return (avatarRoot.imageMode === Kirigami.Avatar.ImageMode.AlwaysShowImage) ||
-                   (avatarImage.status === Image.Ready && avatarRoot.imageMode === Kirigami.Avatar.ImageMode.AdaptiveImageOrInitals)
+            return (avatarRoot.imageMode === Kirigami.Avatar.ImageMode.AlwaysShowImage) || (avatarImage.status === Image.Ready && avatarRoot.imageMode === Kirigami.Avatar.ImageMode.AdaptiveImageOrInitals);
         }
     }
 
@@ -246,10 +243,7 @@ QQC2.Control {
         Text {
             id: avatarText
             fontSizeMode: Text.Fit
-            visible: avatarRoot.initialsMode === Kirigami.Avatar.InitialsMode.UseInitials &&
-                    !__private.showImage &&
-                    !Kirigami.NameUtils.isStringUnsuitableForInitials(avatarRoot.name) &&
-                    avatarRoot.width > Kirigami.Units.gridUnit
+            visible: avatarRoot.initialsMode === Kirigami.Avatar.InitialsMode.UseInitials && !__private.showImage && !Kirigami.NameUtils.isStringUnsuitableForInitials(avatarRoot.name) && avatarRoot.width > Kirigami.Units.gridUnit
 
             text: Kirigami.NameUtils.initialsFromString(name)
             color: __private.textColor
@@ -265,8 +259,7 @@ QQC2.Control {
         }
         Kirigami.Icon {
             id: avatarIcon
-            visible: (avatarRoot.initialsMode === Kirigami.Avatar.InitialsMode.UseIcon && !__private.showImage) ||
-                    (Kirigami.NameUtils.isStringUnsuitableForInitials(avatarRoot.name) && !__private.showImage)
+            visible: (avatarRoot.initialsMode === Kirigami.Avatar.InitialsMode.UseIcon && !__private.showImage) || (Kirigami.NameUtils.isStringUnsuitableForInitials(avatarRoot.name) && !__private.showImage)
 
             source: "user"
 
@@ -312,19 +305,21 @@ QQC2.Control {
                 right: parent.right
             }
 
-            height: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing*2
+            height: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing * 2
 
             color: Qt.rgba(0, 0, 0, 0.6)
 
             Kirigami.Icon {
                 Kirigami.Theme.textColor: "white"
-                source: (avatarRoot.actions.secondary || {iconName: ""}).iconName
+                source: (avatarRoot.actions.secondary || {
+                        "iconName": ""
+                    }).iconName
 
                 width: Kirigami.Units.iconSizes.small
                 height: Kirigami.Units.iconSizes.small
 
-                x: Math.round((parent.width/2)-(this.width/2))
-                y: Math.round((parent.height/2)-(this.height/2))
+                x: Math.round((parent.width / 2) - (this.width / 2))
+                y: Math.round((parent.height / 2) - (this.height / 2))
             }
         }
 

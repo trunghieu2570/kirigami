@@ -3,12 +3,10 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.5
 import org.kde.kirigami 2.5 as Kirigami
 import "private" as P
 import "templates" as T
-
 
 //TODO KF6: remove
 /**
@@ -43,14 +41,14 @@ T.AbstractApplicationHeader {
             }
             edge: Qt.TopEdge
             opacity: (!root.page.header || root.page.header.toString().indexOf("ToolBar") === -1)
-            Behavior on opacity {
+            Behavior on opacity  {
                 OpacityAnimator {
                     duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }
         }
-        Behavior on opacity {
+        Behavior on opacity  {
             OpacityAnimator {
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutQuad
@@ -58,4 +56,3 @@ T.AbstractApplicationHeader {
         }
     }
 }
-

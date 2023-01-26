@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import QtQuick.Window 2.2
 import org.kde.kirigami 2.4
@@ -28,6 +27,6 @@ Controls.Label {
     activeFocusOnTab: false
 
     Component.onCompleted: {
-        console.warn("Kirigami.Label is deprecated. Use QtQuickControls2.Label instead")
+        console.warn("Kirigami.Label is deprecated. Use QtQuickControls2.Label instead");
     }
 }

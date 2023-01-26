@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
@@ -21,9 +20,9 @@ Item {
 
     property int maximumNotificationWidth: {
         if (Kirigami.Settings.isMobile) {
-            return applicationWindow().width - Kirigami.Units.largeSpacing * 4
+            return applicationWindow().width - Kirigami.Units.largeSpacing * 4;
         } else {
-            return Math.min(Kirigami.Units.gridUnit * 25, applicationWindow().width / 1.5)
+            return Math.min(Kirigami.Units.gridUnit * 25, applicationWindow().width / 1.5);
         }
     }
 
@@ -33,9 +32,7 @@ Item {
         if (!message) {
             return;
         }
-
         let interval = 7000;
-
         if (timeout === "short") {
             interval = 4000;
         } else if (timeout === "long") {
@@ -45,22 +42,22 @@ Item {
         }
 
         // this wrapper is necessary because of Qt casting a function into an object
-        const callBackWrapperObj = callBackWrapper.createObject()
-        callBackWrapperObj.callBack = callBack
+        const callBackWrapperObj = callBackWrapper.createObject();
+        callBackWrapperObj.callBack = callBack;
 
         // set empty string & function for qml not to complain
         notificationsModel.append({
-            text: message,
-            actionButtonText: actionText || "",
-            closeInterval: interval,
-            callBackWrapper: callBackWrapperObj
-        })
+                "text": message,
+                "actionButtonText": actionText || "",
+                "closeInterval": interval,
+                "callBackWrapper": callBackWrapperObj
+            });
         // remove the oldest notification if new notification count would exceed 3
         if (notificationsModel.count === maximumNotificationCount) {
             if (listView.itemAtIndex(0).hovered === true) {
-                hideNotification(1)
+                hideNotification(1);
             } else {
-                hideNotification()
+                hideNotification();
             }
         }
     }
@@ -70,17 +67,17 @@ Item {
      */
     function hideNotification(index = 0) {
         if (index >= 0 && notificationsModel.count > index) {
-            const callBackWrapperObj = notificationsModel.get(index).callBackWrapper
+            const callBackWrapperObj = notificationsModel.get(index).callBackWrapper;
             if (callBackWrapperObj) {
-                callBackWrapperObj.destroy()
+                callBackWrapperObj.destroy();
             }
-            notificationsModel.remove(index)
+            notificationsModel.remove(index);
         }
     }
 
     // we have to set height to show more than one notification
     height: Math.min(applicationWindow().height, Kirigami.Units.gridUnit * 10)
-    
+
     implicitHeight: listView.implicitHeight
     implicitWidth: listView.implicitWidth
 
@@ -93,10 +90,10 @@ Item {
 
     ListView {
         id: listView
-        
+
         anchors.fill: parent
         anchors.bottomMargin: Kirigami.Units.largeSpacing
-        
+
         implicitWidth: root.maximumNotificationWidth
         spacing: Kirigami.Units.smallSpacing
         model: notificationsModel
@@ -178,10 +175,10 @@ Item {
             width: Math.min(implicitWidth, maximumNotificationWidth)
             z: {
                 if (delegate.hovered)
-                    return 2
+                    return 2;
                 else if (delegate.index === 0)
-                    return 1
-                return 0
+                    return 1;
+                return 0;
             }
 
             leftPadding: Kirigami.Units.largeSpacing
@@ -223,8 +220,8 @@ Item {
                     visible: text.length > 0
                     Layout.alignment: Qt.AlignVCenter
                     onClicked: {
-                        const callBack = model.callBackWrapper.callBack
-                        hideNotification(index)
+                        const callBack = model.callBackWrapper.callBack;
+                        hideNotification(index);
                         if (callBack && (typeof callBack === "function")) {
                             callBack();
                         }
@@ -235,7 +232,7 @@ Item {
                 Kirigami.Theme.inherit: false
                 Kirigami.Theme.colorSet: root.Kirigami.Theme.colorSet
                 shadow {
-                    size: Kirigami.Units.gridUnit/2
+                    size: Kirigami.Units.gridUnit / 2
                     color: Qt.rgba(0, 0, 0, 0.4)
                     yOffset: 2
                 }
@@ -252,4 +249,3 @@ Item {
         }
     }
 }
-

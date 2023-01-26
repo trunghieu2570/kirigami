@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
@@ -13,9 +12,7 @@ import "../" as P
 
 Kirigami.AbstractApplicationHeader {
     id: header
-    readonly property int leftReservedSpace: (buttonsLayout.visible && buttonsLayout.visibleChildren.length > 0 ? buttonsLayout.width : 0)
-        + (leftHandleAnchor.visible ? leftHandleAnchor.width : 0)
-        + (menuButton.visible ? menuButton.width : 0)
+    readonly property int leftReservedSpace: (buttonsLayout.visible && buttonsLayout.visibleChildren.length > 0 ? buttonsLayout.width : 0) + (leftHandleAnchor.visible ? leftHandleAnchor.width : 0) + (menuButton.visible ? menuButton.width : 0)
     readonly property int rightReservedSpace: rightHandleAnchor.visible ? backButton.background.implicitHeight : 0
 
     readonly property alias leftHandleAnchor: leftHandleAnchor
@@ -45,11 +42,7 @@ Kirigami.AbstractApplicationHeader {
 
         Item {
             id: leftHandleAnchor
-            visible: (typeof applicationWindow() !== "undefined" && applicationWindow().globalDrawer && applicationWindow().globalDrawer.enabled && applicationWindow().globalDrawer.handleVisible &&
-            applicationWindow().globalDrawer.handle.handleAnchor === leftHandleAnchor) &&
-            (globalToolBar.canContainHandles || (breadcrumbLoader.pageRow.firstVisibleItem &&
-            breadcrumbLoader.pageRow.firstVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar))
-
+            visible: (typeof applicationWindow() !== "undefined" && applicationWindow().globalDrawer && applicationWindow().globalDrawer.enabled && applicationWindow().globalDrawer.handleVisible && applicationWindow().globalDrawer.handle.handleAnchor === leftHandleAnchor) && (globalToolBar.canContainHandles || (breadcrumbLoader.pageRow.firstVisibleItem && breadcrumbLoader.pageRow.firstVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar))
 
             Layout.preferredHeight: Math.min(backButton.implicitHeight, parent.height)
             Layout.preferredWidth: height
@@ -80,8 +73,7 @@ Kirigami.AbstractApplicationHeader {
             Layout.leftMargin: leftHandleAnchor.visible ? Kirigami.Units.smallSpacing : 0
 
             // TODO KF6: make showNavigationButtons an int, and replace with strict === equality
-            visible: (globalToolBar.showNavigationButtons !== Kirigami.ApplicationHeaderStyle.NoNavigationButtons || applicationWindow().pageStack.layers.depth > 1 && !(applicationWindow().pageStack.layers.currentItem instanceof Kirigami.PageRow))
-                && globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None
+            visible: (globalToolBar.showNavigationButtons !== Kirigami.ApplicationHeaderStyle.NoNavigationButtons || applicationWindow().pageStack.layers.depth > 1 && !(applicationWindow().pageStack.layers.currentItem instanceof Kirigami.PageRow)) && globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None
 
             Layout.maximumWidth: visibleChildren.length > 0 ? Layout.preferredWidth : 0
 
@@ -122,13 +114,7 @@ Kirigami.AbstractApplicationHeader {
 
         Item {
             id: rightHandleAnchor
-            visible: (typeof applicationWindow() !== "undefined" &&
-                    applicationWindow().contextDrawer &&
-                    applicationWindow().contextDrawer.enabled &&
-                    applicationWindow().contextDrawer.handleVisible &&
-                    applicationWindow().contextDrawer.handle.handleAnchor === rightHandleAnchor &&
-                    (globalToolBar.canContainHandles || (breadcrumbLoader.pageRow && breadcrumbLoader.pageRow.lastVisibleItem &&
-                        breadcrumbLoader.pageRow.lastVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar)))
+            visible: (typeof applicationWindow() !== "undefined" && applicationWindow().contextDrawer && applicationWindow().contextDrawer.enabled && applicationWindow().contextDrawer.handleVisible && applicationWindow().contextDrawer.handle.handleAnchor === rightHandleAnchor && (globalToolBar.canContainHandles || (breadcrumbLoader.pageRow && breadcrumbLoader.pageRow.lastVisibleItem && breadcrumbLoader.pageRow.lastVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar)))
             Layout.fillHeight: true
             Layout.preferredWidth: height
         }

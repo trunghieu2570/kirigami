@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.7
 import QtQml 2.7
 import QtQuick.Controls 2.5 as QQC2
@@ -18,7 +17,7 @@ import org.kde.kirigami 2.11 as Kirigami
 Kirigami.Action {
     id: root
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property holds the url or filename of the page that this action will load.
      */
@@ -84,13 +83,13 @@ Kirigami.Action {
       * @since org.kde.kirigami 2.12
       */
     property bool useLayers: false
-//END properties
+    //END properties
 
     /**
       * @returns the page item held in the PagePool or null if it has not been loaded yet.
       */
     function pageItem() {
-        return pagePool.pageForUrl(page)
+        return pagePool.pageForUrl(page);
     }
 
     /**
@@ -98,12 +97,12 @@ Kirigami.Action {
       * and useLayers is true, otherwise returns null.
       */
     function layerContainsPage() {
-        if (!useLayers || !pageStack.hasOwnProperty("layers")) return false
-
+        if (!useLayers || !pageStack.hasOwnProperty("layers"))
+            return false;
         const found = pageStack.layers.find((item, index) => {
-            return item === pagePool.pageForUrl(page)
-        })
-        return found ? true: false
+                return item === pagePool.pageForUrl(page);
+            });
+        return found ? true : false;
     }
 
     /**
@@ -111,8 +110,9 @@ Kirigami.Action {
       * otherwise returns null.
       */
     function stackContainsPage() {
-        if (useLayers) return false
-        return pageStack.columnView.containsItem(pagePool.pageForUrl(page))
+        if (useLayers)
+            return false;
+        return pageStack.columnView.containsItem(pagePool.pageForUrl(page));
     }
 
     checkable: true
@@ -124,53 +124,42 @@ Kirigami.Action {
 
         // User intends to "go back" to this layer.
         if (layerContainsPage() && pageItem() !== pageStack.layers.currentItem) {
-            pageStack.layers.replace(pageItem(), pageItem()) // force pop above
-            return
+            pageStack.layers.replace(pageItem(), pageItem()); // force pop above
+            return;
         }
 
         // User intends to "go back" to this page.
         if (stackContainsPage()) {
             if (pageStack.hasOwnProperty("layers")) {
-                pageStack.layers.clear()
+                pageStack.layers.clear();
             }
         }
-
-        const pageStack_ = useLayers ? pageStack.layers : pageStack
-
-        if (initialProperties && typeof(initialProperties) !== "object") {
+        const pageStack_ = useLayers ? pageStack.layers : pageStack;
+        if (initialProperties && typeof (initialProperties) !== "object") {
             console.warn("initialProperties must be of type object");
             return;
         }
-
         if (!pageStack_.hasOwnProperty("pop") || typeof pageStack_.pop !== "function" || !pageStack_.hasOwnProperty("push") || typeof pageStack_.push !== "function") {
             return;
         }
-
         if (pagePool.isLocalUrl(page)) {
             if (basePage) {
                 pageStack_.pop(basePage);
-
             } else if (!useLayers) {
                 pageStack_.clear();
             }
-
-            pageStack_.push(initialProperties ?
-                               pagePool.loadPageWithProperties(page, initialProperties) :
-                               pagePool.loadPage(page));
+            pageStack_.push(initialProperties ? pagePool.loadPageWithProperties(page, initialProperties) : pagePool.loadPage(page));
         } else {
-            const callback = function(item) {
+            const callback = function (item) {
                 if (basePage) {
                     pageStack_.pop(basePage);
-
                 } else if (!useLayers) {
                     pageStack_.clear();
                 }
                 pageStack_.push(item);
             };
-
             if (initialProperties) {
                 pagePool.loadPage(page, initialProperties, callback);
-
             } else {
                 pagePool.loadPage(page, callback);
             }
@@ -182,11 +171,11 @@ Kirigami.Action {
         id: _private
 
         function setChecked(checked) {
-            root.checked = checked
+            root.checked = checked;
         }
 
         function clearLayers() {
-            pageStack.layers.clear()
+            pageStack.layers.clear();
         }
 
         property list<Connections> connections: [
@@ -196,17 +185,16 @@ Kirigami.Action {
                 function onCurrentItemChanged() {
                     if (root.useLayers) {
                         if (root.layerContainsPage()) {
-                            _private.clearLayers()
+                            _private.clearLayers();
                         }
                         if (root.checkable)
                             _private.setChecked(false);
-
                     } else {
                         if (root.checkable)
                             _private.setChecked(root.stackContainsPage());
                     }
                 }
-            },
+            }, 
             Connections {
                 enabled: pageStack.hasOwnProperty("layers")
                 target: pageStack.layers
@@ -214,10 +202,9 @@ Kirigami.Action {
                 function onCurrentItemChanged() {
                     if (root.useLayers && root.checkable) {
                         _private.setChecked(root.layerContainsPage());
-
                     } else {
                         if (pageStack.layers.depth === 1 && root.stackContainsPage()) {
-                            _private.setChecked(true)
+                            _private.setChecked(true);
                         }
                     }
                 }

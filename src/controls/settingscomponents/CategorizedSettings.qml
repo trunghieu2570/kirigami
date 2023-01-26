@@ -6,7 +6,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
@@ -25,7 +24,8 @@ Kirigami.PageRow {
 
     property list<Kirigami.PagePoolAction> actions
     property alias stack: pageSettingStack
-    property Kirigami.PagePool pool: Kirigami.PagePool {}
+    property Kirigami.PagePool pool: Kirigami.PagePool {
+    }
 
     readonly property string title: pageSettingStack.depth < 2 ? qsTr("Settings") : qsTr("Settings — %1").arg(pageSettingStack.get(1).title)
 
@@ -41,18 +41,17 @@ Kirigami.PageRow {
         id: maxWordMetrics
     }
     columnView.columnWidth: {
-        if(!pageSettingStack.completed || actions.length === 0) {
-            return Kirigami.Units.gridUnit * 6  // we return the min width if the component isn't completed
+        if (!pageSettingStack.completed || actions.length === 0) {
+            return Kirigami.Units.gridUnit * 6;  // we return the min width if the component isn't completed
         }
         let maxWordWidth = 0;
         for (let i = 0; i < actions.length; i++) {
             const words = actions[i].text.split(" ");
-
             for (let j = 0; j < words.length; j++) {
-                maxWordMetrics.text = words[j]
-                const currWordWidth = Math.ceil(maxWordMetrics.advanceWidth)
+                maxWordMetrics.text = words[j];
+                const currWordWidth = Math.ceil(maxWordMetrics.advanceWidth);
                 if (currWordWidth > maxWordWidth) {
-                    maxWordWidth = currWordWidth
+                    maxWordWidth = currWordWidth;
                 }
             }
         }
@@ -64,7 +63,6 @@ Kirigami.PageRow {
         const calcWidth = maxWordWidth + Kirigami.Units.smallSpacing * 6 + vScrollBarWidth;
         const minWidth = Kirigami.Units.gridUnit * 6;
         const maxWidth = Kirigami.Units.gridUnit * 8.5;
-
         return Math.max(minWidth, Math.min(calcWidth, maxWidth));
     }
     globalToolBar.showNavigationButtons: Kirigami.ApplicationHeaderStyle.NoNavigationButtons
@@ -139,7 +137,6 @@ Kirigami.PageRow {
                     horizontalAlignment: Text.AlignHCenter
                 }
             }
-
         }
     }
 
@@ -158,4 +155,3 @@ Kirigami.PageRow {
         pageSettingStack.completed = true;
     }
 }
-

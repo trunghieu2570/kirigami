@@ -1,7 +1,6 @@
 /* SPDX-FileCopyrightText: 2021 Noah Davis <noahadvs@gmail.com>
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
-
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.19 as Kirigami
@@ -16,28 +15,28 @@ TestCase {
     height: 600
 
     function test_onWheel() {
-        let contentX = flickable.contentX
-        let contentY = flickable.contentY
-        let contentWidth = flickable.contentWidth
-        let contentHeight = flickable.contentHeight
+        let contentX = flickable.contentX;
+        let contentY = flickable.contentY;
+        let contentWidth = flickable.contentWidth;
+        let contentHeight = flickable.contentHeight;
 
         // grow
-        mouseWheel(flickable, flickable.leftMargin, 0, -120, -120, Qt.NoButton, Qt.ControlModifier)
-        verify(flickable.contentWidth === contentWidth - 120, "-xDelta")
-        contentWidth = flickable.contentWidth
-        verify(flickable.contentHeight === contentHeight - 120, "-yDelta")
-        contentHeight = flickable.contentHeight
+        mouseWheel(flickable, flickable.leftMargin, 0, -120, -120, Qt.NoButton, Qt.ControlModifier);
+        verify(flickable.contentWidth === contentWidth - 120, "-xDelta");
+        contentWidth = flickable.contentWidth;
+        verify(flickable.contentHeight === contentHeight - 120, "-yDelta");
+        contentHeight = flickable.contentHeight;
 
         // check if accepting the event prevents scrolling
-        verify(flickable.contentX === contentX && flickable.contentY === contentY, "not moved")
+        verify(flickable.contentX === contentX && flickable.contentY === contentY, "not moved");
 
         // shrink
-        mouseWheel(flickable, flickable.leftMargin, 0, 120, 120, Qt.NoButton, Qt.ControlModifier)
-        verify(flickable.contentWidth === contentWidth + 120, "+xDelta")
-        verify(flickable.contentHeight === contentHeight + 120, "+yDelta")
+        mouseWheel(flickable, flickable.leftMargin, 0, 120, 120, Qt.NoButton, Qt.ControlModifier);
+        verify(flickable.contentWidth === contentWidth + 120, "+xDelta");
+        verify(flickable.contentHeight === contentHeight + 120, "+yDelta");
 
         // check if accepting the event prevents scrolling
-        verify(flickable.contentX === contentX && flickable.contentY === contentY, "not moved")
+        verify(flickable.contentX === contentX && flickable.contentY === contentY, "not moved");
     }
 
     Rectangle {
@@ -57,9 +56,9 @@ TestCase {
                     // NOTE: Not limiting minimum content size to a size greater than the Flickable size makes it so
                     // wheel events stop coming to onWheel when the content size is the size of the flickable or smaller.
                     // Maybe it's a Flickable issue? Koko had the same problem with Flickable.
-                    flickable.contentWidth = Math.max(720, flickable.contentWidth + wheel.angleDelta.x)
-                    flickable.contentHeight = Math.max(720, flickable.contentHeight + wheel.angleDelta.y)
-                    wheel.accepted = true
+                    flickable.contentWidth = Math.max(720, flickable.contentWidth + wheel.angleDelta.x);
+                    flickable.contentHeight = Math.max(720, flickable.contentHeight + wheel.angleDelta.y);
+                    wheel.accepted = true;
                 }
             }
         }
@@ -88,7 +87,7 @@ TestCase {
             id: contentRect
             anchors.fill: parent
             gradient: Gradient.WideMatrix
-            border.color: Qt.rgba(0,0,0,0.5)
+            border.color: Qt.rgba(0, 0, 0, 0.5)
             border.width: 2
         }
     }

@@ -3,13 +3,13 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.12
 import QtQml 2.15
 import QtQuick.Controls 2.0 as QQC2
 import QtQuick.Window 2.5
 import org.kde.kirigami 2.4 as Kirigami
 import "templates/private" as TP
+
 /**
  * A window that provides some basic features needed for all apps
  * Use this class only if you need a custom content for your application,
@@ -73,7 +73,7 @@ import "templates/private" as TP
 QQC2.ApplicationWindow {
     id: root
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property holds the stack used to allocate the pages and to manage the
      * transitions between them.
@@ -196,9 +196,9 @@ QQC2.ApplicationWindow {
      * @since 5.76
      */
     readonly property Action quitAction: _quitAction
-//END properties
+    //END properties
 
-//BEGIN functions
+    //BEGIN functions
     /**
      * @brief This function shows a little passive notification at the bottom of the app window
      * lasting for few seconds, with an optional action button.
@@ -214,7 +214,7 @@ QQC2.ApplicationWindow {
         notificationsObject.showNotification(message, timeout, actionText, callBack);
     }
 
-   /**
+    /**
     * @brief This function hides the passive notification at specified index, if any is shown.
     * @param index Index of the notification to hide. Default is 0 (oldest notification).
     */
@@ -230,8 +230,8 @@ QQC2.ApplicationWindow {
     function applicationWindow() {
         return root;
     }
-//END functions
 
+    //END functions
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
@@ -248,7 +248,7 @@ QQC2.ApplicationWindow {
         parent: contentItem.parent
         z: 0
         anchors.fill: parent
-        onClicked: root.reachableMode = false;
+        onClicked: root.reachableMode = false
         visible: root.reachableMode && root.reachableModeEnabled
         Rectangle {
             anchors.fill: parent
@@ -294,13 +294,13 @@ QQC2.ApplicationWindow {
     }
 
     contentItem.transform: Translate {
-        Behavior on y {
+        Behavior on y  {
             NumberAnimation {
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }
-        y: root.reachableMode && root.reachableModeEnabled && !root.wideScreen ? root.height/2 : 0
+        y: root.reachableMode && root.reachableModeEnabled && !root.wideScreen ? root.height / 2 : 0
         x: root.globalDrawer && root.globalDrawer.modal === true && root.globalDrawer.toString().indexOf("SplitDrawer") === 0 ? root.globalDrawer.contentItem.width * root.globalDrawer.position : 0
     }
     //Don't want overscroll in landscape mode
@@ -323,7 +323,7 @@ QQC2.ApplicationWindow {
         value: overlay
         restoreMode: Binding.RestoreBinding
     }
-    onPageStackChanged: pageStack.parent = contentItem;
+    onPageStackChanged: pageStack.parent = contentItem
 
     width: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 30 : Kirigami.Units.gridUnit * 55
     height: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 45 : Kirigami.Units.gridUnit * 40
@@ -342,7 +342,7 @@ QQC2.ApplicationWindow {
     Action {
         id: _quitAction
         text: qsTr("Quit")
-        icon.name: "application-exit";
+        icon.name: "application-exit"
         shortcut: StandardKey.Quit
         onTriggered: root.close()
     }

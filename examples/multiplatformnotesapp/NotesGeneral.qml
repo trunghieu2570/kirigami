@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0 as QQC2
@@ -12,7 +11,6 @@ import org.kde.kirigami 2.4 as Kirigami
 Kirigami.ApplicationWindow {
     id: root
     property string currentFile
-
 
     pageStack.initialPage: iconView
 
@@ -63,7 +61,7 @@ Kirigami.ApplicationWindow {
                     if (root.pageStack.depth < 2) {
                         root.pageStack.push(editorComponent);
                     }
-                    root.pageStack.currentIndex = 1
+                    root.pageStack.currentIndex = 1;
                 }
             }
         }
@@ -76,22 +74,22 @@ Kirigami.ApplicationWindow {
             title: root.currentFile
             actions {
                 main: Kirigami.Action {
-                        id: shareAction
-                        icon.name: "document-share"
-                        text: "Share..."
-                        tooltip: "Share this document with your device"
-                        checkable: true
-                        onCheckedChanged: sheet.sheetOpen = checked;
-                    }
+                    id: shareAction
+                    icon.name: "document-share"
+                    text: "Share..."
+                    tooltip: "Share this document with your device"
+                    checkable: true
+                    onCheckedChanged: sheet.sheetOpen = checked
+                }
                 contextualActions: [
                     Kirigami.Action {
                         icon.name: "format-text-bold-symbolic"
                         tooltip: "Bold"
-                    },
+                    }, 
                     Kirigami.Action {
                         icon.name: "format-text-underline-symbolic"
                         tooltip: "Underline"
-                    },
+                    }, 
                     Kirigami.Action {
                         icon.name: "format-text-italic-symbolic"
                         tooltip: "Italic"
@@ -180,7 +178,8 @@ Kirigami.ApplicationWindow {
                 }
             }
             QQC2.TextArea {
-                background: Item {}
+                background: Item {
+                }
                 wrapMode: TextEdit.WordWrap
                 selectByMouse: true
                 text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin, lorem at semper pretium, tortor nisl pellentesque risus, eget eleifend odio ipsum ac mi. Donec justo ex, elementum vitae gravida vel, pretium ac lacus. Duis non metus ac enim viverra auctor in non nunc. Sed sit amet luctus nisi. Proin justo nulla, vehicula eget porta sit amet, aliquet vitae dolor. Mauris sed odio auctor, tempus ipsum ac, placerat enim. Ut in dolor vel ante dictum auctor.

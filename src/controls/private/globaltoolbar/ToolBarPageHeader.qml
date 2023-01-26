@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQml 2.15
 import QtQuick.Layouts 1.15
@@ -18,8 +17,8 @@ AbstractPageHeader {
     MouseArea {
         anchors.fill: parent
         onPressed: {
-            page.forceActiveFocus()
-            mouse.accepted = false
+            page.forceActiveFocus();
+            mouse.accepted = false;
         }
     }
 
@@ -57,24 +56,24 @@ AbstractPageHeader {
 
             actions: {
                 if (!page) {
-                    return []
+                    return [];
                 }
-
-                const result = []
-
+                const result = [];
                 if (page.actions.main) {
-                    result.push(page.actions.main)
+                    result.push(page.actions.main);
                 }
                 if (page.actions.left) {
-                    result.push(page.actions.left)
+                    result.push(page.actions.left);
                 }
                 if (page.actions.right) {
-                    result.push(page.actions.right)
+                    result.push(page.actions.right);
                 }
                 if (page.actions.contextualActions.length > 0) {
-                    return result.concat(Array.prototype.map.call(page.actions.contextualActions, function(item) { return item }))
+                    return result.concat(Array.prototype.map.call(page.actions.contextualActions, function (item) {
+                                return item;
+                            }));
                 }
-                return result
+                return result;
             }
 
             Binding {

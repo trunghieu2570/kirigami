@@ -4,7 +4,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.7
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0 as QQC2
@@ -99,7 +98,8 @@ T2.Control {
      * If no custom icon is set, an icon appropriate to the message type
      * is shown.
      */
-    property IconPropertiesGroup icon: IconPropertiesGroup {}
+    property IconPropertiesGroup icon: IconPropertiesGroup {
+    }
 
     /**
      * This property holds the message text.
@@ -136,12 +136,18 @@ T2.Control {
     rightPadding: undefined
     bottomPadding: undefined
 
-    Behavior on implicitHeight {
+    Behavior on implicitHeight  {
         enabled: !root.visible
 
         SequentialAnimation {
-            PropertyAction { targets: root; property: "_animating"; value: true }
-            NumberAnimation { duration: Kirigami.Units.longDuration }
+            PropertyAction {
+                targets: root
+                property: "_animating"
+                value: true
+            }
+            NumberAnimation {
+                duration: Kirigami.Units.longDuration
+            }
         }
     }
 
@@ -153,10 +159,12 @@ T2.Control {
 
     opacity: visible ? 1 : 0
 
-    Behavior on opacity {
+    Behavior on opacity  {
         enabled: !root.visible
 
-        NumberAnimation { duration: Kirigami.Units.shortDuration }
+        NumberAnimation {
+            duration: Kirigami.Units.shortDuration
+        }
     }
 
     onOpacityChanged: {
@@ -178,28 +186,30 @@ T2.Control {
         // initialized visible.
         property bool complete: false
 
-        Behavior on opacity {
+        Behavior on opacity  {
             enabled: root.visible && contentLayout.complete
 
             SequentialAnimation {
-                NumberAnimation { duration: Kirigami.Units.shortDuration * 2 }
-                PropertyAction { targets: root; property: "_animating"; value: false }
+                NumberAnimation {
+                    duration: Kirigami.Units.shortDuration * 2
+                }
+                PropertyAction {
+                    targets: root
+                    property: "_animating"
+                    value: false
+                }
             }
         }
 
         implicitHeight: {
             if (actionsLayout.atBottom) {
-                return label.implicitHeight + actionsLayout.height + Kirigami.Units.gridUnit
+                return label.implicitHeight + actionsLayout.height + Kirigami.Units.gridUnit;
             } else {
-                return Math.max(icon.implicitHeight, label.implicitHeight, closeButton.implicitHeight, actionsLayout.height)
+                return Math.max(icon.implicitHeight, label.implicitHeight, closeButton.implicitHeight, actionsLayout.height);
             }
         }
 
-        readonly property real remainingWidth: width - (
-            icon.width
-            + labelArea.anchors.leftMargin + label.implicitWidth + labelArea.anchors.rightMargin
-            + (root.showCloseButton ? closeButton.width : 0)
-        )
+        readonly property real remainingWidth: width - (icon.width + labelArea.anchors.leftMargin + label.implicitWidth + labelArea.anchors.rightMargin + (root.showCloseButton ? closeButton.width : 0))
         readonly property bool multiline: remainingWidth <= 0 || actionsLayout.atBottom
 
         Kirigami.Icon {
@@ -220,7 +230,6 @@ T2.Control {
                 } else if (root.icon.source) {
                     return root.icon.source;
                 }
-
                 if (root.type === Kirigami.MessageType.Positive) {
                     return "dialog-positive";
                 } else if (root.type === Kirigami.MessageType.Warning) {
@@ -228,7 +237,6 @@ T2.Control {
                 } else if (root.type === Kirigami.MessageType.Error) {
                     return "dialog-error";
                 }
-
                 return "dialog-information";
             }
 

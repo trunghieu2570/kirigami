@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import org.kde.kirigami 2.12 as Kirigami
 import "private" as P
 import "templates" as T
@@ -26,5 +25,6 @@ T.OverlaySheet {
     rightInset: 0
     bottomInset: -Kirigami.Units.smallSpacing
 
-    background: P.DefaultCardBackground {}
+    background: P.DefaultCardBackground {
+    }
 }

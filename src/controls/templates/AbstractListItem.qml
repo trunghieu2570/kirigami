@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import QtQuick.Layouts 1.0
 import org.kde.kirigami 2.4 as Kirigami
@@ -21,7 +20,7 @@ import QtQuick.Templates 2.4 as QQC2
 T2.ItemDelegate {
     id: listItem
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property sets whether the item should emit signals related to mouse interaction.
      *
@@ -132,8 +131,8 @@ T2.ItemDelegate {
      * @property QtQuick.Controls.Action action
      */
     property QQC2.Action action
-//END properties
 
+    //END properties
     activeFocusOnTab: ListView.view ? false : true
 
     text: action ? action.text : undefined
@@ -146,19 +145,20 @@ T2.ItemDelegate {
         if (!action) {
             return;
         }
-
         action.trigger();
-        checked = Qt.binding(function() { return action.checked });
+        checked = Qt.binding(function () {
+                return action.checked;
+            });
     }
+
     //Theme.inherit: false
     //Theme.colorSet: Kirigami.Theme.View
-
     padding: Kirigami.Settings.tabletMode ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
 
-    leftPadding: padding*2
+    leftPadding: padding * 2
     topPadding: padding
 
-    rightPadding: padding*2
+    rightPadding: padding * 2
     bottomPadding: padding
 
     implicitWidth: contentItem ? contentItem.implicitWidth + leftPadding + rightPadding : Kirigami.Units.gridUnit * 12
@@ -174,7 +174,9 @@ T2.ItemDelegate {
 
     onVisibleChanged: {
         if (visible) {
-            height = Qt.binding(() => { return implicitHeight; })
+            height = Qt.binding(() => {
+                    return implicitHeight;
+                });
         } else {
             if (ListView.view && ListView.view.visible) {
                 height = 0;

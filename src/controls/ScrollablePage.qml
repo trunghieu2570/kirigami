@@ -3,15 +3,13 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQml 2.15
 import QtQuick.Controls 2.15 as QQC2
-import QtGraphicalEffects 1.0 as GE
+import Qt5Compat.GraphicalEffects 6.0 as GE
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.kirigami.templates 2.2 as KT
 import "private"
-
 
 // TODO KF6: undo many workarounds to make existing code work?
 
@@ -68,7 +66,7 @@ import "private"
 Kirigami.Page {
     id: root
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property tells whether the list is asking for a refresh.
      *
@@ -93,8 +91,9 @@ Kirigami.Page {
      * @brief This property holds the main Flickable item of this page.
      * @deprecated here for compatibility; will be removed in KF6.
      */
-    property Flickable flickable: Flickable {} // FIXME KF6: this empty flickable exists for compatibility reasons. some apps assume flickable exists right from the beginning but ScrollView internally assumes it does not
-    onFlickableChanged: scrollView.contentItem = flickable;
+    property Flickable flickable: Flickable {
+    } // FIXME KF6: this empty flickable exists for compatibility reasons. some apps assume flickable exists right from the beginning but ScrollView internally assumes it does not
+    onFlickableChanged: scrollView.contentItem = flickable
 
     /**
      * @brief This property sets the vertical scrollbar policy.
@@ -130,8 +129,8 @@ Kirigami.Page {
      * default: ``true``
      */
     property bool keyboardNavigationEnabled: true
-//END properties
 
+    //END properties
     contentHeight: flickable ? flickable.contentHeight : 0
     implicitHeight: {
         let height = contentHeight + topPadding + bottomPadding;
@@ -162,9 +161,9 @@ Kirigami.Page {
     Keys.forwardTo: {
         if (root.keyboardNavigationEnabled && root.flickable) {
             if (("currentItem" in root.flickable) && root.flickable.currentItem) {
-                return [ root.flickable.currentItem, root.flickable ];
+                return [root.flickable.currentItem, root.flickable];
             } else {
-                return [ root.flickable ];
+                return [root.flickable];
             }
         } else {
             return [];
@@ -174,17 +173,14 @@ Kirigami.Page {
     contentItem: QQC2.ScrollView {
         id: scrollView
         anchors {
-            top: (root.header && root.header.visible)
-                    ? root.header.bottom
-                    // FIXME: for now assuming globalToolBarItem is in a Loader, which needs to be get rid of
-                    : (globalToolBarItem && globalToolBarItem.parent && globalToolBarItem.visible
-                        ? globalToolBarItem.parent.bottom
-                        : parent.top)
+            top: (root.header && root.header.visible) ? root.header.bottom : 
+            // FIXME: for now assuming globalToolBarItem is in a Loader, which needs to be get rid of
+            (globalToolBarItem && globalToolBarItem.parent && globalToolBarItem.visible ? globalToolBarItem.parent.bottom : parent.top)
             bottom: (root.footer && root.footer.visible) ? root.footer.top : parent.bottom
             left: parent.left
             right: parent.right
             topMargin: root.refreshing ? busyIndicatorLoader.height : 0
-            Behavior on topMargin {
+            Behavior on topMargin  {
                 NumberAnimation {
                     easing.type: Easing.InOutQuad
                     duration: Kirigami.Units.longDuration
@@ -226,7 +222,7 @@ Kirigami.Page {
                 onChildrenChanged: {
                     const child = children[children.length - 1];
                     if (child instanceof QQC2.ScrollView) {
-                        print("Warning: it's not supported to have ScrollViews inside a ScrollablePage")
+                        print("Warning: it's not supported to have ScrollViews inside a ScrollablePage");
                     }
                 }
             }
@@ -236,14 +232,11 @@ Kirigami.Page {
                 value: root.bottomPadding
                 restoreMode: Binding.RestoreBinding
             }
-        },
-
+        }, 
         Loader {
             id: busyIndicatorLoader
             z: 99
-            y: root.flickable.verticalLayoutDirection === ListView.BottomToTop
-                ? -root.flickable.contentY + root.flickable.originY + height
-                : -root.flickable.contentY + root.flickable.originY - height
+            y: root.flickable.verticalLayoutDirection === ListView.BottomToTop ? -root.flickable.contentY + root.flickable.originY + height : -root.flickable.contentY + root.flickable.originY - height
             width: root.flickable.width
             height: Kirigami.Units.gridUnit * 4
             active: root.supportsRefreshing
@@ -278,10 +271,22 @@ Kirigami.Page {
                     visible: spinnerProgress.visible
                     anchors.fill: spinnerProgress
                     gradient: Gradient {
-                        GradientStop { position: 0.00; color: Kirigami.Theme.highlightColor }
-                        GradientStop { position: spinnerProgress.progress; color: Kirigami.Theme.highlightColor }
-                        GradientStop { position: spinnerProgress.progress + 0.01; color: "transparent" }
-                        GradientStop { position: 1.00; color: "transparent" }
+                        GradientStop {
+                            position: 0.00
+                            color: Kirigami.Theme.highlightColor
+                        }
+                        GradientStop {
+                            position: spinnerProgress.progress
+                            color: Kirigami.Theme.highlightColor
+                        }
+                        GradientStop {
+                            position: spinnerProgress.progress + 0.01
+                            color: "transparent"
+                        }
+                        GradientStop {
+                            position: 1.00
+                            color: "transparent"
+                        }
                     }
                 }
 
@@ -291,7 +296,6 @@ Kirigami.Page {
                         if (!supportsRefreshing) {
                             return;
                         }
-
                         if (!root.refreshing && busyIndicatorLoader.y > busyIndicatorFrame.height / 2 + topPadding) {
                             refreshTriggerTimer.running = true;
                         } else {
@@ -336,16 +340,15 @@ Kirigami.Page {
                 }
             }
         }
-
         if (flickableFound) {
             scrollView.contentItem = root.flickable;
             root.flickable.parent = scrollView;
             // The flickable needs focus only if the page didn't already explicitly set focus to some other control (eg a text field in the header)
             Qt.callLater(() => {
-                if (root.activeFocus) {
-                    root.flickable.forceActiveFocus();
-                }
-            });
+                    if (root.activeFocus) {
+                        root.flickable.forceActiveFocus();
+                    }
+                });
             // Some existing code incorrectly uses anchors
             root.flickable.anchors.fill = undefined;
             root.flickable.anchors.left = undefined;

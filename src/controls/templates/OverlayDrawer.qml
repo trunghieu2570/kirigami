@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.15
 import QtQuick.Templates 2.15 as T2
 import QtQuick.Controls 2.15 as QQC2
@@ -24,7 +23,7 @@ T2.Drawer {
 
     z: modal ? 0 : applicationWindow().overlay.z - 1
 
-//BEGIN properties
+    //BEGIN properties
     /**
      * @brief This property tells whether the drawer is open and visible.
      *
@@ -47,7 +46,7 @@ T2.Drawer {
     /**
      * @brief This property tells whether the drawer is currently opening or closing itself.
      */
-    readonly property bool animating : enterAnimation.animating || exitAnimation.animating || positionResetAnim.running
+    readonly property bool animating: enterAnimation.animating || exitAnimation.animating || positionResetAnim.running
 
     /**
      * @brief This property holds whether the drawer can be collapsed to a
@@ -142,7 +141,7 @@ T2.Drawer {
      *
      * Currently supported only on left and right drawers.
      */
-    property bool handleVisible: typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true
+    property bool handleVisible: typeof (applicationWindow) === typeof (Function) && applicationWindow() ? applicationWindow().controlsVisible : true
 
     /**
      * @brief Readonly property that points to the item that will act as a physical
@@ -168,8 +167,8 @@ T2.Drawer {
             width: parent.height - Kirigami.Units.smallSpacing * 1.5
             height: parent.height - Kirigami.Units.smallSpacing * 1.5
             onClicked: {
-                drawerHandle.displayToolTip = false
-                Qt.callLater(() => root.drawerOpen = !root.drawerOpen)
+                drawerHandle.displayToolTip = false;
+                Qt.callLater(() => root.drawerOpen = !root.drawerOpen);
             }
             Accessible.name: root.drawerOpen ? root.handleOpenToolTip : root.handleClosedToolTip
             visible: !Kirigami.SettingstabletMode && !Kirigami.SettingshasTransientTouchInput
@@ -178,12 +177,7 @@ T2.Drawer {
         T2.ToolTip.text: root.drawerOpen ? handleOpenToolTip : handleClosedToolTip
         T2.ToolTip.delay: Kirigami.Units.toolTipDelay
 
-        property Item handleAnchor: (applicationWindow().pageStack && applicationWindow().pageStack.globalToolBar)
-                ? ((root.edge === Qt.LeftEdge && Qt.application.layoutDirection === Qt.LeftToRight)
-                   || (root.edge === Qt.RightEdge && Qt.application.layoutDirection === Qt.RightToLeft)
-                   ? applicationWindow().pageStack.globalToolBar.leftHandleAnchor
-                   : applicationWindow().pageStack.globalToolBar.rightHandleAnchor)
-                : (applicationWindow().header && applicationWindow().header.toString().indexOf("ToolBarApplicationHeader") !== -1 ? applicationWindow().header : null)
+        property Item handleAnchor: (applicationWindow().pageStack && applicationWindow().pageStack.globalToolBar) ? ((root.edge === Qt.LeftEdge && Qt.application.layoutDirection === Qt.LeftToRight) || (root.edge === Qt.RightEdge && Qt.application.layoutDirection === Qt.RightToLeft) ? applicationWindow().pageStack.globalToolBar.leftHandleAnchor : applicationWindow().pageStack.globalToolBar.rightHandleAnchor) : (applicationWindow().header && applicationWindow().header.toString().indexOf("ToolBarApplicationHeader") !== -1 ? applicationWindow().header : null)
 
         property int startX
         property int mappedStartX
@@ -193,19 +187,19 @@ T2.Drawer {
         onPressed: {
             root.peeking = true;
             startX = mouse.x;
-            mappedStartX = mapToItem(parent, startX, 0).x
+            mappedStartX = mapToItem(parent, startX, 0).x;
         }
         onPositionChanged: {
             if (!pressed) {
                 return;
             }
             const pos = mapToItem(parent, mouse.x - startX, mouse.y);
-            switch(root.edge) {
+            switch (root.edge) {
             case Qt.LeftEdge:
-                root.position = pos.x/root.contentItem.width;
+                root.position = pos.x / root.contentItem.width;
                 break;
             case Qt.RightEdge:
-                root.position = (root.parent.width - pos.x - width)/root.contentItem.width;
+                root.position = (root.parent.width - pos.x - width) / root.contentItem.width;
                 break;
             default:
             }
@@ -220,10 +214,10 @@ T2.Drawer {
             }
         }
         onCanceled: {
-            root.peeking = false
+            root.peeking = false;
         }
         x: {
-            switch(root.edge) {
+            switch (root.edge) {
             case Qt.LeftEdge:
                 return root.background.width * root.position + Kirigami.Units.smallSpacing;
             case Qt.RightEdge:
@@ -240,22 +234,16 @@ T2.Drawer {
                 if (typeof applicationWindow === "undefined") {
                     return;
                 }
-
                 let margin = Kirigami.Units.smallSpacing;
                 if (applicationWindow().footer) {
                     margin = applicationWindow().footer.height + Kirigami.Units.smallSpacing;
                 }
-
-                if(root.parent && root.height < root.parent.height) {
+                if (root.parent && root.height < root.parent.height) {
                     margin = root.parent.height - root.height - root.y + Kirigami.Units.smallSpacing;
                 }
-
-                if (!applicationWindow() || !applicationWindow().pageStack ||
-                    !applicationWindow().pageStack.contentItem ||
-                    !applicationWindow().pageStack.contentItem.itemAt) {
+                if (!applicationWindow() || !applicationWindow().pageStack || !applicationWindow().pageStack.contentItem || !applicationWindow().pageStack.contentItem.itemAt) {
                     return margin;
                 }
-
                 let item;
                 if (applicationWindow().pageStack.layers.depth > 1) {
                     item = applicationWindow().pageStack.layers.currentItem;
@@ -267,15 +255,13 @@ T2.Drawer {
                 if (!item) {
                     item = applicationWindow().pageStack.lastItem;
                 }
-
                 let pageFooter = item && item.page ? item.page.footer : (item ? item.footer : undefined);
                 if (pageFooter && root.parent) {
-                    margin = root.height < root.parent.height ? margin : margin + pageFooter.height
+                    margin = root.height < root.parent.height ? margin : margin + pageFooter.height;
                 }
-
                 return margin;
             }
-            Behavior on bottomMargin {
+            Behavior on bottomMargin  {
                 NumberAnimation {
                     duration: Kirigami.Units.shortDuration
                     easing.type: Easing.InOutQuad
@@ -284,10 +270,10 @@ T2.Drawer {
         }
 
         visible: root.enabled && (root.edge === Qt.LeftEdge || root.edge === Qt.RightEdge) && opacity > 0
-        width: handleAnchor && handleAnchor.visible ? handleAnchor.width : Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.smallSpacing*2
+        width: handleAnchor && handleAnchor.visible ? handleAnchor.width : Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.smallSpacing * 2
         height: handleAnchor && handleAnchor.visible ? handleAnchor.height : width
         opacity: root.handleVisible ? 1 : 0
-        Behavior on opacity {
+        Behavior on opacity  {
             NumberAnimation {
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutQuad
@@ -296,7 +282,7 @@ T2.Drawer {
         transform: Translate {
             id: translateTransform
             x: root.handleVisible ? 0 : (root.edge === Qt.LeftEdge ? -drawerHandle.width : drawerHandle.width)
-            Behavior on x {
+            Behavior on x  {
                 NumberAnimation {
                     duration: Kirigami.Units.longDuration
                     easing.type: !root.handleVisible ? Easing.OutQuad : Easing.InQuad
@@ -304,18 +290,18 @@ T2.Drawer {
             }
         }
     }
-//END properties
 
+    //END properties
     interactive: modal
 
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: modal ? Kirigami.Theme.View : Kirigami.Theme.Window
     Kirigami.Theme.onColorSetChanged: {
-        contentItem.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet
-        background.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet
+        contentItem.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet;
+        background.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet;
     }
 
-//BEGIN reassign properties
+    //BEGIN reassign properties
     //default paddings
     leftPadding: Kirigami.Units.smallSpacing
     topPadding: Kirigami.Units.smallSpacing
@@ -349,10 +335,10 @@ T2.Drawer {
             property bool animating
             ScriptAction {
                 script: {
-                    enterAnimation.animating = true
+                    enterAnimation.animating = true;
                     // on non modal dialog we don't want drawers in the overlay
                     if (!root.modal) {
-                        root.background.parent.parent = applicationWindow().overlay.parent
+                        root.background.parent.parent = applicationWindow().overlay.parent;
                     }
                 }
             }
@@ -380,10 +366,9 @@ T2.Drawer {
             }
         }
     }
-//END reassign properties
+    //END reassign properties
 
-
-//BEGIN signal handlers
+    //BEGIN signal handlers
     onCollapsedChanged: {
         if (Kirigami.SettingsisMobile) {
             collapsed = false;
@@ -419,23 +404,23 @@ T2.Drawer {
 
     onPositionChanged: {
         if (peeking) {
-            visible = true
+            visible = true;
         }
     }
     onVisibleChanged: {
         if (peeking) {
-            visible = true
+            visible = true;
         } else {
             drawerOpen = visible;
         }
     }
-    onPeekingChanged:  {
+    onPeekingChanged: {
         if (peeking) {
             root.enter.enabled = false;
             root.exit.enabled = false;
         } else {
             drawerOpen = position > 0.5 ? 1 : 0;
-            positionResetAnim.running = true
+            positionResetAnim.running = true;
             root.enter.enabled = true;
             root.exit.enabled = true;
         }
@@ -451,7 +436,7 @@ T2.Drawer {
         } else {
             close();
         }
-        Qt.callLater(() => drawerHandle.displayToolTip = true)
+        Qt.callLater(() => drawerHandle.displayToolTip = true);
     }
 
     Component.onCompleted: {
@@ -466,7 +451,7 @@ T2.Drawer {
         contentItem.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet;
         background.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet;
     }
-//END signal handlers
+    //END signal handlers
 
     // this is as hidden as it can get here
     property QtObject __internal: QtObject {
@@ -480,7 +465,7 @@ T2.Drawer {
                 target: root
                 to: drawerOpen ? 1 : 0
                 property: "position"
-                duration: (root.position)*Kirigami.Units.longDuration
+                duration: (root.position) * Kirigami.Units.longDuration
             }
             ScriptAction {
                 script: {
@@ -494,18 +479,18 @@ T2.Drawer {
                     when: root.collapsed
                     PropertyChanges {
                         target: root
-                        implicitWidth: edge === Qt.TopEdge || edge === Qt.BottomEdge ? applicationWindow().width : Math.min(collapsedSize + leftPadding + rightPadding, Math.round(applicationWindow().width*0.8))
+                        implicitWidth: edge === Qt.TopEdge || edge === Qt.BottomEdge ? applicationWindow().width : Math.min(collapsedSize + leftPadding + rightPadding, Math.round(applicationWindow().width * 0.8))
 
-                        implicitHeight: edge === Qt.LeftEdge || edge === Qt.RightEdge ? applicationWindow().height : Math.min(collapsedSize + topPadding + bottomPadding, Math.round(applicationWindow().height*0.8))
+                        implicitHeight: edge === Qt.LeftEdge || edge === Qt.RightEdge ? applicationWindow().height : Math.min(collapsedSize + topPadding + bottomPadding, Math.round(applicationWindow().height * 0.8))
                     }
-                },
+                }, 
                 State {
                     when: !root.collapsed
                     PropertyChanges {
                         target: root
-                        implicitWidth: edge === Qt.TopEdge || edge === Qt.BottomEdge ? applicationWindow().width : Math.min(contentItem.implicitWidth, Math.round(applicationWindow().width*0.8))
+                        implicitWidth: edge === Qt.TopEdge || edge === Qt.BottomEdge ? applicationWindow().width : Math.min(contentItem.implicitWidth, Math.round(applicationWindow().width * 0.8))
 
-                        implicitHeight: edge === Qt.LeftEdge || edge === Qt.RightEdge ? applicationWindow().height : Math.min(contentHeight + topPadding + bottomPadding, Math.round(applicationWindow().height*0.4))
+                        implicitHeight: edge === Qt.LeftEdge || edge === Qt.RightEdge ? applicationWindow().height : Math.min(contentHeight + topPadding + bottomPadding, Math.round(applicationWindow().height * 0.4))
 
                         contentWidth: contentItem.implicitWidth || (contentChildren.length === 1 ? contentChildren[0].implicitWidth : 0)
                         contentHeight: contentItem.implicitHeight || (contentChildren.length === 1 ? contentChildren[0].implicitHeight : 0)

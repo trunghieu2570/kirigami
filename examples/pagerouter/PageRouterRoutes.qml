@@ -9,24 +9,24 @@ Kirigami.ApplicationWindow {
         Kirigami.PageRoute {
             name: "routeOne"
             Component {
+                // Page contents...
                 Kirigami.Page {
-                    // Page contents...
                 }
             }
         }
         Kirigami.PageRoute {
             name: "routeTwo"
             Component {
+                // Page contents...
                 Kirigami.Page {
-                    // Page contents...
                 }
             }
         }
         Kirigami.PageRoute {
             name: "routeThree"
             Component {
+                // Page contents...
                 Kirigami.Page {
-                    // Page contents...
                 }
             }
         }

@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.6
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.12 as Kirigami
@@ -17,7 +16,7 @@ import org.kde.kirigami 2.12 as Kirigami
 Kirigami.ShadowedImage {
     id: root
 
-//BEGIN properties
+    //BEGIN properties
     /*
      * FIXME: compatibility
      *
@@ -88,19 +87,19 @@ Kirigami.ShadowedImage {
     property int implicitWidth: Layout.preferredWidth
 
     readonly property bool empty: title.length === 0 &&             // string
-                                  source.toString().length === 0 && // QUrl
-                                  !titleIcon                        // QVariant hanled by Kirigami.Icon
-//END properties
+    source.toString().length === 0 && // QUrl
+    !titleIcon                        // QVariant hanled by Kirigami.Icon
 
+    //END properties
     Layout.fillWidth: true
 
     Layout.preferredWidth: titleLayout.implicitWidth || sourceSize.width
-    Layout.preferredHeight: titleLayout.completed && source.toString() !== "" ? width/(sourceSize.width / sourceSize.height) : Layout.minimumHeight
+    Layout.preferredHeight: titleLayout.completed && source.toString() !== "" ? width / (sourceSize.width / sourceSize.height) : Layout.minimumHeight
     Layout.minimumHeight: titleLayout.implicitHeight > 0 ? titleLayout.implicitHeight + Kirigami.Units.smallSpacing * 2 : 0
 
     onTitleAlignmentChanged: {
-        Qt.callLater(titleLayout.implicitWidthChanged)
-        Qt.callLater(titleLayout.implicitHeightChanged)
+        Qt.callLater(titleLayout.implicitWidthChanged);
+        Qt.callLater(titleLayout.implicitHeightChanged);
     }
     fillMode: Image.PreserveAspectCrop
     asynchronous: true
@@ -148,7 +147,7 @@ Kirigami.ShadowedImage {
             rightMargin: root.rightPadding
             bottomMargin: root.bottomPadding
         }
-        width: Math.min(implicitWidth, parent.width -root.leftPadding - root.rightPadding)
+        width: Math.min(implicitWidth, parent.width - root.leftPadding - root.rightPadding)
         height: Math.min(implicitHeight, parent.height - root.topPadding - root.bottomPadding)
         Kirigami.Icon {
             id: headingIcon
