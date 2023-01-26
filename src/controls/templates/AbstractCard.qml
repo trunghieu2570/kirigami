@@ -162,7 +162,8 @@ T.ItemDelegate {
         footer.anchors.left = footerParent.left;
         footer.anchors.top = footerParent.top;
         footer.anchors.right = footerParent.right;
-        footer.anchors.topMargin = Qt.binding(function() {return (root.height - root.bottomPadding - root.topPadding)  - (footerParent.y + footerParent.height)});
+        footer.anchors.topMargin = Qt.binding(() =>
+            (root.height - root.bottomPadding - root.topPadding) - (footerParent.y + footerParent.height));
     }
     Component.onCompleted: {
         contentItemChanged();

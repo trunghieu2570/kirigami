@@ -299,7 +299,7 @@ QQC2.Page {
     // FIXME: port Sheets to Popup?
     onBackRequested: {
         let item;
-        for(const i in root.resources) {
+        for (const i in root.resources) {
             item = root.resources[i];
             if (item.hasOwnProperty("close") && item.hasOwnProperty("sheetOpen") && item.sheetOpen) {
                 item.close()

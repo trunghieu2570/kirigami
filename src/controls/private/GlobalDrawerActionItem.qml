@@ -38,7 +38,7 @@ Kirigami.AbstractListItem {
             selected: (listItem.highlighted || listItem.checked || listItem.pressed)
             visible: source !== undefined
         }
-        
+
         QQC2Impl.MnemonicLabel {
             id: labelItem
             text:  width > height * 2 ? listItem.Kirigami.MnemonicData.mnemonicLabel : ""

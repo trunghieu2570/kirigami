@@ -80,7 +80,7 @@ Item {
 
     // we have to set height to show more than one notification
     height: Math.min(applicationWindow().height, Kirigami.Units.gridUnit * 10)
-    
+
     implicitHeight: listView.implicitHeight
     implicitWidth: listView.implicitWidth
 
@@ -93,10 +93,10 @@ Item {
 
     ListView {
         id: listView
-        
+
         anchors.fill: parent
         anchors.bottomMargin: Kirigami.Units.largeSpacing
-        
+
         implicitWidth: root.maximumNotificationWidth
         spacing: Kirigami.Units.smallSpacing
         model: notificationsModel
@@ -177,11 +177,13 @@ Item {
             anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
             width: Math.min(implicitWidth, maximumNotificationWidth)
             z: {
-                if (delegate.hovered)
-                    return 2
-                else if (delegate.index === 0)
-                    return 1
-                return 0
+                if (delegate.hovered) {
+                    return 2;
+                } else if (delegate.index === 0) {
+                    return 1;
+                } else {
+                    return 0;
+                }
             }
 
             leftPadding: Kirigami.Units.largeSpacing

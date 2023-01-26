@@ -103,19 +103,18 @@ T.OverlayDrawer {
                         return Qt.resolvedUrl("templates/private/MenuIcon.qml");
                     } else if(edge === Qt.RightEdge && root.hasOwnProperty("actions")) {
                         return Qt.resolvedUrl("templates/private/ContextIcon.qml");
-                    }else {
+                    } else {
                         return "";
                     }
                 }
                 onItemChanged: {
-                    if(item) {
+                    if (item) {
                         item.drawer = Qt.binding(function(){return root});
                         item.color = Qt.binding(function(){return root.handle.pressed ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor});
                     }
                 }
             }
         }
-
 
         Kirigami.Separator {
             LayoutMirroring.enabled: false

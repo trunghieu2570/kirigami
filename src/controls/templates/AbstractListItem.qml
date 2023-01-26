@@ -139,10 +139,10 @@ T2.ItemDelegate {
 
     padding: Kirigami.Settings.tabletMode ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
 
-    leftPadding: padding*2
+    leftPadding: padding * 2
     topPadding: padding
 
-    rightPadding: padding*2
+    rightPadding: padding * 2
     bottomPadding: padding
 
     implicitWidth: contentItem ? contentItem.implicitWidth + leftPadding + rightPadding : Kirigami.Units.gridUnit * 12
@@ -158,7 +158,7 @@ T2.ItemDelegate {
 
     onVisibleChanged: {
         if (visible) {
-            height = Qt.binding(() => implicitHeight)
+            height = Qt.binding(() => implicitHeight);
         } else {
             if (ListView.view && ListView.view.visible) {
                 height = 0;

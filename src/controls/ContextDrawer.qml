@@ -77,10 +77,10 @@ Kirigami.OverlayDrawer {
 
     /**
      * @brief Arbitrary content to show above the list view.
-     * 
+     *
      * default: `an Item containing a Kirigami.Heading that displays a title whose text is
-     * controlled by the title property.` 
-     * 
+     * controlled by the title property.`
+     *
      * @property Component header
      * @since 2.7
      */
@@ -142,7 +142,7 @@ Kirigami.OverlayDrawer {
 
                     // Check if at least one action is visible
                     let somethingVisible = false;
-                    for (let i=0; i<root.actions.length; i++) {
+                    for (let i = 0; i < root.actions.length; i++) {
                         if (root.actions[i].visible) {
                             somethingVisible = true;
                             break;

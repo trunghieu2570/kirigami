@@ -198,12 +198,30 @@ Item {
                     columns: 3
 
                     // Row one
-                    Item { id: _spacer; Layout.row: 0; Layout.column: 1; Layout.fillWidth: true }
-                    Item { id: _dummyOne; Layout.row: 0; Layout.column: 0 }
-                    Item { id: _dummyTwo; Layout.row: 0; Layout.column: 2 }
+                    Item {
+                        id: _spacer
+                        Layout.row: 0
+                        Layout.column: 1
+                        Layout.fillWidth: true
+                    }
+                    Item {
+                        id: _dummyOne
+                        Layout.row: 0
+                        Layout.column: 0
+                    }
+                    Item {
+                        id: _dummyTwo
+                        Layout.row: 0
+                        Layout.column: 2
+                    }
 
                     // Row two
-                    Loader { id: _header; sourceComponent: swipeNavigatorRoot.header; Layout.row: 1; Layout.column: 0 }
+                    Loader {
+                        id: _header
+                        sourceComponent: swipeNavigatorRoot.header
+                        Layout.row: 1
+                        Layout.column: 0
+                    }
                     PrivateSwipeTabBar {
                         id: __main
                         readonly property int offset: _header.width - _footer.width
@@ -217,7 +235,12 @@ Item {
                         Layout.column: 1
 
                     }
-                    Loader { id: _footer; sourceComponent: swipeNavigatorRoot.footer; Layout.row: 1; Layout.column: 2 }
+                    Loader {
+                        id: _footer
+                        sourceComponent: swipeNavigatorRoot.footer
+                        Layout.row: 1
+                        Layout.column: 2
+                    }
                 }
 
                 Accessible.role: Accessible.PageTabList
