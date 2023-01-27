@@ -14,7 +14,7 @@ import org.kde.kirigami 2.16 as Kirigami
 Kirigami.BasicThemeDefinition {
     id: theme
     //NOTE: this is useless per se, but it forces the Material attached property to be created
-    Material.elevation:2
+    Material.elevation: 2
 
     textColor: theme.Material.foreground
     disabledTextColor: "#9931363b"
