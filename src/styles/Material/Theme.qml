@@ -87,7 +87,7 @@ Kirigami.BasicThemeDefinition {
         }
     ]
 
-    onSync: {
+    onSync: object => {
         //TODO: actually check if it's a dark or light color
         if (object.Kirigami.Theme.colorSet === Kirigami.Theme.Complementary) {
             object.Material.theme = Material.Dark
