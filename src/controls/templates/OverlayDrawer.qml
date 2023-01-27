@@ -232,7 +232,14 @@ T2.Drawer {
                 return 0;
             }
         }
-        y: handleAnchor && anchors.bottom ? handleAnchor.Kirigami.ScenePosition.y : 0
+
+        Binding {
+            when: drawerHandle.handleAnchor && drawerHandle.anchors.bottom
+            target: drawerHandle
+            property: "y"
+            value: drawerHandle.handleAnchor.Kirigami.ScenePosition.y
+            restoreMode: Binding.RestoreBinding
+        }
 
         anchors {
             bottom: drawerHandle.handleAnchor && drawerHandle.handleAnchor.visible ? undefined : parent.bottom
@@ -330,6 +337,10 @@ T2.Drawer {
 
     edge: Qt.LeftEdge
     modal: true
+    dim: modal
+    QQC2.Overlay.modal: Rectangle {
+        color: Qt.rgba(0, 0, 0, 0.35)
+    }
 
     dragMargin: enabled && (edge === Qt.LeftEdge || edge === Qt.RightEdge) ? Math.min(Kirigami.Units.gridUnit, Qt.styleHints.startDragDistance) : 0
 

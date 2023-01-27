@@ -4,9 +4,9 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.12
+import QtQuick 2.15
 import QtQml 2.15
-import QtQuick.Controls 2.0 as QQC2
+import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Window 2.5
 import org.kde.kirigami 2.4 as Kirigami
 import "templates/private" as TP
@@ -183,6 +183,11 @@ QQC2.ApplicationWindow {
     property bool reachableModeEnabled: true
 
     /**
+     * Effectively the same as QQC2.Overlay.overlay
+     */
+    readonly property Item overlay: QQC2.Overlay.overlay
+
+    /**
      * This property holds a standard action that will quit the application when triggered.
      * Its properties have the following values:
      *
@@ -312,17 +317,17 @@ QQC2.ApplicationWindow {
         }
     }
     Binding {
-        when: globalDrawer !== undefined && root.visible
+        when: globalDrawer !== undefined && root.visible && QQC2.Overlay.overlay
         target: globalDrawer
         property: "parent"
-        value: overlay
+        value: QQC2.Overlay.overlay
         restoreMode: Binding.RestoreBinding
     }
     Binding {
-        when: contextDrawer !== undefined && root.visible
+        when: contextDrawer !== undefined && root.visible && QQC2.Overlay.overlay
         target: contextDrawer
         property: "parent"
-        value: overlay
+        value: QQC2.Overlay.overlay
         restoreMode: Binding.RestoreBinding
     }
     onPageStackChanged: pageStack.parent = contentItem;
