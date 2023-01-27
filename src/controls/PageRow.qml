@@ -423,11 +423,6 @@ QT.Control {
         if (page instanceof Array) {
             pages = page;
             page = pages.pop();
-            //compatibility with pre-qqc1 api, can probably be removed
-            if (page.createObject === undefined && page.parent === undefined && typeof page !== "string") {
-                properties = properties || page.properties;
-                page = page.page;
-            }
         }
         if (properties instanceof Array) {
             propsArray = properties;
@@ -441,15 +436,6 @@ QT.Control {
             for (let i = 0; i < pages.length; i++) {
                 let tPage = pages[i];
                 let tProps = propsArray[i];
-                //compatibility with pre-qqc1 api, can probably be removed
-                if (tPage.createObject === undefined && tPage.parent === undefined && typeof tPage !== "string") {
-                    if (columnView.containsItem(tPage)) {
-                        print("The item " + page + " is already in the PageRow");
-                        continue;
-                    }
-                    tProps = tPage.properties;
-                    tPage = tPage.page;
-                }
 
                 pagesLogic.initAndInsertPage(position, tPage, tProps);
                 ++position;
