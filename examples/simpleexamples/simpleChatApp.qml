@@ -126,12 +126,12 @@ Kirigami.ApplicationWindow {
             }
             Kirigami.BasicListItem {
                 label: "Group call"
-                icon: "call-start"
+                icon.name: "call-start"
                 separatorVisible: false
             }
             Kirigami.BasicListItem {
                 label: "Send Attachment"
-                icon: "mail-attachment"
+                icon.name: "mail-attachment"
                 separatorVisible: false
             }
         }

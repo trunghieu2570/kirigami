@@ -102,7 +102,7 @@ Kirigami.Dialog {
                 leftPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
                 rightPadding: Kirigami.Units.largeSpacing + + Kirigami.Units.smallSpacing
 
-                icon: modelData.icon.name
+                icon.name: modelData.icon.name
                 text: modelData.text
                 onClicked: modelData.trigger(this)
 

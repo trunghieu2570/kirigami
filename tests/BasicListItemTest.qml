@@ -41,7 +41,7 @@ Kirigami.ApplicationWindow {
                 ListView {
                     model: 3
                     delegate: Kirigami.BasicListItem {
-                        icon: "edit-bomb"
+                        icon.name: "edit-bomb"
                         text: "Boom!"
                     }
                 }
@@ -106,7 +106,7 @@ Kirigami.ApplicationWindow {
                         }
                         leadingFillVertically: false
 
-                        icon: "edit-bomb"
+                        icon.name: "edit-bomb"
                         text: "Boom!"
 
                         trailing: QQC2.Button {
@@ -139,7 +139,7 @@ Kirigami.ApplicationWindow {
                 ListView {
                     model: 3
                     delegate: Kirigami.BasicListItem {
-                        icon: "edit-bomb"
+                        icon.name: "edit-bomb"
                         text: "Boom!"
                         subtitle: "smaller boom"
                     }
@@ -168,7 +168,7 @@ Kirigami.ApplicationWindow {
                 ListView {
                     model: 3
                     delegate: Kirigami.BasicListItem {
-                        icon: "edit-bomb"
+                        icon.name: "edit-bomb"
                         text: "Boom!"
                         reserveSpaceForSubtitle: true
                     }
@@ -206,7 +206,7 @@ Kirigami.ApplicationWindow {
                         }
                         leadingFillVertically: false
 
-                        icon: "edit-bomb"
+                        icon.name: "edit-bomb"
                         text: "Boom!"
                         subtitle: "smaller boom"
 
