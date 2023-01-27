@@ -116,16 +116,13 @@ Item {
         }
 
         function test_null_action() {
+            failOnWarning(/TypeError: Cannot call method 'trigger' of null/);
             mouseClick(avatarWithNullAction);
             avatarWithNullAction.forceActiveFocus(Qt.TabFocusReason);
             compare(avatarWithNullAction.activeFocus, true);
             keyClick(Qt.Key_Space);
             keyClick(Qt.Key_Return);
             keyClick(Qt.Key_Enter);
-            // Should not print any TypeError warnings, but there's no way to
-            // test it, except that it should not abort execution of this
-            // test script.
-            // TODO KF6: Use failOnWarning available from Qt 6.3
         }
 
         function test_kirigami_action() {
