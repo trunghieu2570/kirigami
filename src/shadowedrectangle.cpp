@@ -302,6 +302,11 @@ QSGNode *ShadowedRectangle::updatePaintNode(QSGNode *node, QQuickItem::UpdatePai
     Q_UNUSED(data);
 
 #if QT_CONFIG(opengl) || QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    if (boundingRect().isEmpty()) {
+        delete node;
+        return nullptr;
+    }
+
     auto shadowNode = static_cast<ShadowedRectangleNode *>(node);
 
     if (!shadowNode) {
