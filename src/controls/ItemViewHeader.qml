@@ -6,7 +6,7 @@
 
 import QtQuick 2.5
 import QtQuick.Templates 2.0 as T2
-import Qt5Compat.GraphicalEffects as GE
+import QtGraphicalEffects 1.0 as GE
 import org.kde.kirigami 2.4 as Kirigami
 import "private" as P
 
