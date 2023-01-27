@@ -103,7 +103,7 @@ AbstractApplicationHeader {
             titleList.backButton = component.createObject(navButtons);
             component.destroy();
             component = Qt.createComponent(Qt.resolvedUrl("private/ForwardButton.qml"));
-            titleList.forwardButton = component.createObject(navButtons, {"headerFlickable": titleList});
+            titleList.forwardButton = component.createObject(navButtons);
             component.destroy();
         } else if (titleList.backButton) {
             titleList.backButton.destroy();
