@@ -104,7 +104,22 @@ Item {
         columns: root.wideMode ? 2 : 1
         rowSpacing: Kirigami.Units.smallSpacing
         columnSpacing: Kirigami.Units.smallSpacing
-        width: root.wideMode ? undefined : root.width
+
+        //TODO: use state machine
+        Binding {
+            when: !root.wideMode
+            target: lay
+            property: "width"
+            value: root.width
+            restoreMode: Binding.RestoreBinding
+        }
+        Binding {
+            when: root.wideMode
+            target: lay
+            property: "width"
+            value: root.implicitWidth
+            restoreMode: Binding.RestoreBinding
+        }
         anchors {
             horizontalCenter: root.wideMode ? root.horizontalCenter : undefined
             left: root.wideMode ? undefined : root.left
