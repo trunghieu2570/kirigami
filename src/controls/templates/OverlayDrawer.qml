@@ -120,7 +120,6 @@ T2.Drawer {
      * @since 2.5
      */
     property P.IconPropertiesGroup handleClosedIcon: P.IconPropertiesGroup {
-        id: handleClosedIconGroup
         source: root.edge === Qt.RightEdge ? "view-right-new" : "view-left-new"
     }
 
