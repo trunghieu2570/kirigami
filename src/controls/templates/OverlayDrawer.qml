@@ -236,7 +236,7 @@ T2.Drawer {
             when: drawerHandle.handleAnchor && drawerHandle.anchors.bottom
             target: drawerHandle
             property: "y"
-            value: drawerHandle.handleAnchor.Kirigami.ScenePosition.y
+            value: drawerHandle.handleAnchor ? drawerHandle.handleAnchor.Kirigami.ScenePosition.y : 0
             restoreMode: Binding.RestoreBinding
         }
 
