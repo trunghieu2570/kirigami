@@ -14,35 +14,35 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 22.03.70\n"
 
-#: controls/AboutItem.qml:129
+#: controls/AboutItem.qml:128
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controls/AboutItem.qml:138
+#: controls/AboutItem.qml:137
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr "Odwiedź stronę sklepu KDE %1"
 
-#: controls/AboutItem.qml:147
+#: controls/AboutItem.qml:146
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Wyślij wiadomość do %1"
 
-#: controls/AboutItem.qml:197
+#: controls/AboutItem.qml:196
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Współtwórz"
 
-#: controls/AboutItem.qml:203
+#: controls/AboutItem.qml:202
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr ""
 
-#: controls/AboutItem.qml:220
+#: controls/AboutItem.qml:219
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Report Bug…"
@@ -50,54 +50,54 @@ msgctxt "AboutItem|"
 msgid "Report a Bug"
 msgstr "Zgłoś błąd..."
 
-#: controls/AboutItem.qml:233
+#: controls/AboutItem.qml:232
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Prawa autorskie"
 
-#: controls/AboutItem.qml:277
+#: controls/AboutItem.qml:276
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Licencja:"
 
-#: controls/AboutItem.qml:299
+#: controls/AboutItem.qml:298
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Licencja: %1"
 
-#: controls/AboutItem.qml:310
+#: controls/AboutItem.qml:309
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Używane biblioteki"
 
-#: controls/AboutItem.qml:340
+#: controls/AboutItem.qml:339
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autorzy"
 
-#: controls/AboutItem.qml:349
+#: controls/AboutItem.qml:348
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Pokaż zdjęcia autorów"
 
-#: controls/AboutItem.qml:380
+#: controls/AboutItem.qml:379
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Zasługi"
 
-#: controls/AboutItem.qml:393
+#: controls/AboutItem.qml:392
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Tłumacze"
 
-#: controls/AboutPage.qml:94
+#: controls/AboutPage.qml:93
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "O %1"
 
-#: controls/AbstractApplicationWindow.qml:344
+#: controls/AbstractApplicationWindow.qml:346
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Zakończ"
@@ -143,7 +143,7 @@ msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
 msgstr "Wczytywanie..."
 
-#: controls/PasswordField.qml:43
+#: controls/PasswordField.qml:42
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Hasło"
