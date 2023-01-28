@@ -7,8 +7,8 @@ project(%{APPNAMELC} VERSION 0.1)
 
 include(FeatureSummary)
 
-set(QT5_MIN_VERSION 5.15)
-set(KF6_MIN_VERSION 5.83)
+set(QT5_MIN_VERSION 6.4.0)
+set(KF6_MIN_VERSION 5.240.0)
 
 find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
 
@@ -18,8 +18,6 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMSetupVersion)
-include(ECMGenerateHeaders)
-include(ECMPoQmTools)
 
 ecm_setup_version(${PROJECT_VERSION}
     VARIABLE_PREFIX %{APPNAMEUC}
@@ -35,7 +33,7 @@ endif()
 
 add_subdirectory(src)
 
-install(PROGRAMS org.kde.%{APPNAMELC}.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+install(FILES org.kde.%{APPNAMELC}.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.%{APPNAMELC}.metainfo.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

@@ -3,7 +3,13 @@
     SPDX-FileCopyrightText: %{CURRENT_YEAR} %{AUTHOR} <%{EMAIL}>
 */
 
+#include <QtGlobal>
+#ifdef Q_OS_ANDROID
+#include <QGuiApplication>
+#else
 #include <QApplication>
+#endif
+
 #include <QQmlApplicationEngine>
 #include <QUrl>
 #include <QtQml>
@@ -19,8 +25,11 @@
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
-    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#ifdef Q_OS_ANDROID
+    QGuiApplication app(argc, argv);
+#else
     QApplication app(argc, argv);
+#endif
     QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
     QCoreApplication::setApplicationName(QStringLiteral("%{APPNAME}"));
 

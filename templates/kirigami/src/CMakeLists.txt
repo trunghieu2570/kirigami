@@ -7,7 +7,7 @@ add_executable(%{APPNAMELC}
     app.cpp
     resources.qrc)
 
-target_link_libraries(%{APPNAMELC}
+target_link_libraries(%{APPNAMELC} PRIVATE
     Qt5::Core
     Qt5::Gui
     Qt5::Qml
@@ -26,6 +26,8 @@ if (ANDROID)
         application-exit
         applications-graphics
     )
+else()
+    target_link_libraries(%{APPNAMELC} PRIVATE Qt::Widgets)
 endif()
 
 kconfig_add_kcfg_files(%{APPNAMELC} GENERATE_MOC %{APPNAMELC}config.kcfgc)
