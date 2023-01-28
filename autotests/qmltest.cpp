@@ -26,6 +26,8 @@ public Q_SLOTS:
     {
 #ifdef STATIC_MODULE
         KirigamiPlugin::getInstance().registerTypes(engine);
+#else
+        Q_UNUSED(engine)
 #endif
     }
 };
