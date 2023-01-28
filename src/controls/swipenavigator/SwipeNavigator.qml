@@ -8,6 +8,7 @@ import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12 as QQC2
 import org.kde.kirigami 2.13 as Kirigami
+import "." as SN
 
 
 //TODO KF6: remove all of this?
@@ -181,7 +182,7 @@ Item {
             }
         }
 
-        initialItem: Kirigami.TabViewLayout {
+        initialItem: SN.TabViewLayout {
             bar: QQC2.ToolBar {
                 id: topToolBar
 
@@ -222,7 +223,7 @@ Item {
                         Layout.row: 1
                         Layout.column: 0
                     }
-                    PrivateSwipeTabBar {
+                    SN.PrivateSwipeTabBar {
                         id: __main
                         readonly property int offset: _header.width - _footer.width
                         readonly property int effectiveOffset: _gridManager.tall ? 0 : offset
