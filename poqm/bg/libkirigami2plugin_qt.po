@@ -216,12 +216,12 @@ msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "Навигиране до %1."
 
-#: controls/templates/OverlayDrawer.qml:131
+#: controls/templates/OverlayDrawer.qml:130
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Затваряне на чекмеджето"
 
-#: controls/templates/OverlayDrawer.qml:137
+#: controls/templates/OverlayDrawer.qml:136
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Отваряне на чекмеджето"

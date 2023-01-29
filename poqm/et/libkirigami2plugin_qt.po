@@ -251,7 +251,7 @@ msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "Liigu edasi"
 
-#: controls/templates/OverlayDrawer.qml:131
+#: controls/templates/OverlayDrawer.qml:130
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
@@ -259,7 +259,7 @@ msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Sulge külgriba"
 
-#: controls/templates/OverlayDrawer.qml:137
+#: controls/templates/OverlayDrawer.qml:136
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr ""
