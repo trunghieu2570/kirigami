@@ -272,10 +272,7 @@ void Icon::updatePolish()
 
     const QSize itemSize(width(), height());
     if (itemSize.width() != 0 && itemSize.height() != 0) {
-        const auto multiplier = QCoreApplication::instance()->testAttribute(Qt::AA_UseHighDpiPixmaps)
-            ? 1
-            : (window() ? window()->effectiveDevicePixelRatio() : qGuiApp->devicePixelRatio());
-        const QSize size = itemSize * multiplier;
+        const QSize size = itemSize;
 
         switch (m_source.userType()) {
         case QMetaType::QPixmap:
@@ -335,9 +332,6 @@ QImage Icon::findIcon(const QSize &size)
     QString iconSource = m_source.toString();
 
     if (iconSource.startsWith(QLatin1String("image://"))) {
-        const auto multiplier = QCoreApplication::instance()->testAttribute(Qt::AA_UseHighDpiPixmaps)
-            ? (window() ? window()->effectiveDevicePixelRatio() : qGuiApp->devicePixelRatio())
-            : 1;
         QUrl iconUrl(iconSource);
         QString iconProviderId = iconUrl.host();
         // QUrl path has the  "/" prefix while iconId does not
@@ -350,13 +344,13 @@ QImage Icon::findIcon(const QSize &size)
         }
         switch (imageProvider->imageType()) {
         case QQmlImageProviderBase::Image:
-            img = imageProvider->requestImage(iconId, &actualSize, size * multiplier);
+            img = imageProvider->requestImage(iconId, &actualSize, size);
             if (!img.isNull()) {
                 setStatus(Ready);
             }
             break;
         case QQmlImageProviderBase::Pixmap:
-            img = imageProvider->requestPixmap(iconId, &actualSize, size * multiplier).toImage();
+            img = imageProvider->requestPixmap(iconId, &actualSize, size).toImage();
             if (!img.isNull()) {
                 setStatus(Ready);
             }
@@ -367,7 +361,7 @@ QImage Icon::findIcon(const QSize &size)
                 return m_loadedImage.scaled(size, Qt::KeepAspectRatio, smooth() ? Qt::SmoothTransformation : Qt::FastTransformation);
             }
             QQuickAsyncImageProvider *provider = dynamic_cast<QQuickAsyncImageProvider *>(imageProvider);
-            auto response = provider->requestImageResponse(iconId, size * multiplier);
+            auto response = provider->requestImageResponse(iconId, size);
             connect(response, &QQuickImageResponse::finished, this, [iconId, response, this]() {
                 if (response->errorString().isEmpty()) {
                     QQuickTextureFactory *textureFactory = response->textureFactory();
@@ -393,7 +387,7 @@ QImage Icon::findIcon(const QSize &size)
             break;
         }
         case QQmlImageProviderBase::Texture: {
-            QQuickTextureFactory *textureFactory = imageProvider->requestTexture(iconId, &actualSize, size * multiplier);
+            QQuickTextureFactory *textureFactory = imageProvider->requestTexture(iconId, &actualSize, size);
             if (textureFactory) {
                 img = textureFactory->image();
             }
