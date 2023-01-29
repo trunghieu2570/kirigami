@@ -74,23 +74,7 @@ Units::Units(QObject *parent)
     : QObject(parent)
     , d(std::make_unique<UnitsPrivate>(this))
 {
-    connect(qGuiApp, &QGuiApplication::fontChanged, this, [this](const QFont &font) {
-        d->fontMetrics = QFontMetricsF(font);
-
-        if (d->customUnitsSet) {
-            return;
-        }
-
-        d->gridUnit = d->fontMetrics.height();
-        Q_EMIT gridUnitChanged();
-        d->smallSpacing = std::floor(d->gridUnit / 4);
-        Q_EMIT smallSpacingChanged();
-        d->mediumSpacing = std::round(d->smallSpacing * 1.5);
-        Q_EMIT mediumSpacingChanged();
-        d->largeSpacing = d->smallSpacing * 2;
-        Q_EMIT largeSpacingChanged();
-        Q_EMIT d->iconSizes->sizeForLabelsChanged();
-    });
+    qGuiApp->installEventFilter(this);
 }
 
 int Units::gridUnit() const
@@ -250,6 +234,28 @@ void Units::setToolTipDelay(int delay)
 int Units::maximumInteger() const
 {
     return std::numeric_limits<int>::max();
+}
+
+bool Units::eventFilter([[maybe_unused]] QObject *watched, QEvent *event)
+{
+    if (event->type() == QEvent::ApplicationFontChange) {
+        d->fontMetrics = QFontMetricsF(qGuiApp->font());
+
+        if (d->customUnitsSet) {
+            return false;
+        }
+
+        d->gridUnit = d->fontMetrics.height();
+        Q_EMIT gridUnitChanged();
+        d->smallSpacing = std::floor(d->gridUnit / 4);
+        Q_EMIT smallSpacingChanged();
+        d->mediumSpacing = std::round(d->smallSpacing * 1.5);
+        Q_EMIT mediumSpacingChanged();
+        d->largeSpacing = d->smallSpacing * 2;
+        Q_EMIT largeSpacingChanged();
+        Q_EMIT d->iconSizes->sizeForLabelsChanged();
+    }
+    return false;
 }
 
 IconSizes *Units::iconSizes() const

@@ -241,6 +241,9 @@ Q_SIGNALS:
     void toolTipDelayChanged();
     void wheelScrollLinesChanged();
 
+protected:
+    bool eventFilter(QObject *watched, QEvent *event) override;
+
 private:
     std::unique_ptr<UnitsPrivate> d;
 };
