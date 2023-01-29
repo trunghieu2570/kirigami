@@ -1,9 +1,10 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12 as QQC2
-import org.kde.kirigami 2.12 as Kirigami
+import QtQuick 2.15
+import QtQuick.Controls 2.15 as QQC2
+import org.kde.kirigami 2.20 as Kirigami
 
 Kirigami.ApplicationWindow {
     id: applicaionWindow
+
     Kirigami.PageRouter {
         initialRoute: "one"
         pageStack: applicaionWindow.pageStack.columnView
