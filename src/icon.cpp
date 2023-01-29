@@ -253,7 +253,7 @@ void Icon::handleFinished(QNetworkReply *reply)
 
         // broken image from data, inform the user of this with some useful broken-image thing...
         const QIcon icon = QIcon::fromTheme(m_fallback);
-        m_loadedImage = icon.pixmap(window(), icon.actualSize(size().toSize()), iconMode(), QIcon::On).toImage();
+        m_loadedImage = icon.pixmap(icon.actualSize(size().toSize()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
     }
 
     polish();
@@ -289,7 +289,7 @@ void Icon::updatePolish()
             break;
         case QVariant::Icon: {
             const QIcon icon = m_source.value<QIcon>();
-            m_icon = icon.pixmap(window(), icon.actualSize(itemSize), iconMode(), QIcon::On).toImage();
+            m_icon = icon.pixmap(icon.actualSize(itemSize), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
             break;
         }
         case QVariant::Url:
@@ -378,7 +378,7 @@ QImage Icon::findIcon(const QSize &size)
                     if (m_loadedImage.isNull()) {
                         // broken image from data, inform the user of this with some useful broken-image thing...
                         const QIcon icon = QIcon::fromTheme(m_fallback);
-                        m_loadedImage = icon.pixmap(window(), icon.actualSize(QSize(width(), height())), iconMode(), QIcon::On).toImage();
+                        m_loadedImage = icon.pixmap(icon.actualSize(QSize(width(), height())), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
                         setStatus(Error);
                     } else {
                         setStatus(Ready);
@@ -389,7 +389,7 @@ QImage Icon::findIcon(const QSize &size)
             });
             // Temporary icon while we wait for the real image to load...
             const QIcon icon = QIcon::fromTheme(m_placeholder);
-            img = icon.pixmap(window(), icon.actualSize(size), iconMode(), QIcon::On).toImage();
+            img = icon.pixmap(icon.actualSize(size), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
             break;
         }
         case QQmlImageProviderBase::Texture: {
@@ -400,7 +400,7 @@ QImage Icon::findIcon(const QSize &size)
             if (img.isNull()) {
                 // broken image from data, or the texture factory wasn't healthy, inform the user of this with some useful broken-image thing...
                 const QIcon icon = QIcon::fromTheme(m_fallback);
-                img = icon.pixmap(window(), icon.actualSize(QSize(width(), height())), iconMode(), QIcon::On).toImage();
+                img = icon.pixmap(icon.actualSize(QSize(width(), height())), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
                 setStatus(Error);
             } else {
                 setStatus(Ready);
@@ -430,7 +430,7 @@ QImage Icon::findIcon(const QSize &size)
         }
         // Temporary icon while we wait for the real image to load...
         const QIcon icon = QIcon::fromTheme(m_placeholder);
-        img = icon.pixmap(window(), icon.actualSize(size), iconMode(), QIcon::On).toImage();
+        img = icon.pixmap(icon.actualSize(size), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
     } else {
         if (iconSource.startsWith(QLatin1String("qrc:/"))) {
             iconSource = iconSource.mid(3);
@@ -448,7 +448,7 @@ QImage Icon::findIcon(const QSize &size)
             }
         }
         if (!icon.isNull()) {
-            img = icon.pixmap(window(), icon.actualSize(window(), size), iconMode(), QIcon::On).toImage();
+            img = icon.pixmap(icon.actualSize(size), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
 
             setStatus(Ready);
             /*const QColor tintColor = !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor())
@@ -467,7 +467,7 @@ QImage Icon::findIcon(const QSize &size)
     if (!iconSource.isEmpty() && img.isNull()) {
         setStatus(Error);
         const QIcon icon = QIcon::fromTheme(m_fallback);
-        img = icon.pixmap(window(), icon.actualSize(size), iconMode(), QIcon::On).toImage();
+        img = icon.pixmap(icon.actualSize(size), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
     }
     return img;
 }
