@@ -1,15 +1,15 @@
-import QtQuick 2.0
-import QtQuick.Controls 2.2
-import org.kde.kirigami 2.13 as Kirigami
+import QtQuick 2.15
+import QtQuick.Controls 2.15 as QQC2
+import org.kde.kirigami 2.20 as Kirigami
 
 Kirigami.ApplicationWindow {
     Kirigami.SwipeNavigator {
         anchors.fill: parent
         initialIndex: 2
-        header: Button {
+        header: QQC2.Button {
             text: "Header"
         }
-        footer: Button {
+        footer: QQC2.Button {
             text: "Footer"
         }
         Kirigami.Page {

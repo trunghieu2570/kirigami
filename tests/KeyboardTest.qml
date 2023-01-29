@@ -27,10 +27,11 @@ Kirigami.ApplicationWindow {
             }
 
             Keys.onPressed: event => {
-                if (event.text)
+                if (event.text) {
                     see.text = event.text
-                else
+                } else {
                     see.text = event.key
+                }
             }
 
             Keys.onEnterPressed: main.showPassiveNotification("page!")
