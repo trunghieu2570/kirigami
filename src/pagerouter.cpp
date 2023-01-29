@@ -434,7 +434,7 @@ PageRouterAttached *PageRouter::qmlAttachedProperties(QObject *object)
 QSet<QObject *> flatParentTree(QObject *object)
 {
     // See below comment in Climber::climbObjectParents for why this is here.
-    static const QMetaObject *metaObject = QMetaType::metaObjectForType(QMetaType::type("QQuickItem*"));
+    static const QMetaObject *metaObject = QMetaType::fromName("QQuickItem*").metaObject();
     QSet<QObject *> ret;
     // Use an inline struct type so that climbItemParents and climbObjectParents
     // can call each other
