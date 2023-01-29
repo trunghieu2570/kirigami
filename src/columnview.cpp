@@ -1358,8 +1358,8 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
             m_contentItem->snapToItem();
             return false;
         }
-        m_oldMouseX = m_startMouseX = mapFromItem(item, me->localPos()).x();
-        m_oldMouseY = m_startMouseY = mapFromItem(item, me->localPos()).y();
+        m_oldMouseX = m_startMouseX = mapFromItem(item, me->position()).x();
+        m_oldMouseY = m_startMouseY = mapFromItem(item, me->position()).y();
 
         m_mouseDown = true;
         me->setAccepted(false);
@@ -1378,7 +1378,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
             return false;
         }
 
-        const QPointF pos = mapFromItem(item, me->localPos());
+        const QPointF pos = mapFromItem(item, me->position());
 
         bool verticalScrollIntercepted = false;
 
@@ -1416,7 +1416,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
 
         const bool wasDragging = m_dragging;
         // If a drag happened, start to steal all events, use startDragDistance * 2 to give time to widgets to take the mouse grab by themselves
-        m_dragging = keepMouseGrab() || qAbs(mapFromItem(item, me->localPos()).x() - m_startMouseX) > qApp->styleHints()->startDragDistance() * 3;
+        m_dragging = keepMouseGrab() || qAbs(mapFromItem(item, me->position()).x() - m_startMouseX) > qApp->styleHints()->startDragDistance() * 3;
 
         if (m_dragging != wasDragging) {
             m_moving = true;
@@ -1503,8 +1503,8 @@ void ColumnView::mousePressEvent(QMouseEvent *event)
     }
 
     m_contentItem->snapToItem();
-    m_oldMouseX = event->localPos().x();
-    m_startMouseX = event->localPos().x();
+    m_oldMouseX = event->position().x();
+    m_startMouseX = event->position().x();
     m_mouseDown = true;
     setKeepMouseGrab(false);
     event->accept();
@@ -1523,7 +1523,7 @@ void ColumnView::mouseMoveEvent(QMouseEvent *event)
 
     const bool wasDragging = m_dragging;
     // Same startDragDistance * 2 as the event filter
-    m_dragging = keepMouseGrab() || qAbs(event->localPos().x() - m_startMouseX) > qApp->styleHints()->startDragDistance() * 2;
+    m_dragging = keepMouseGrab() || qAbs(event->position().x() - m_startMouseX) > qApp->styleHints()->startDragDistance() * 2;
     if (m_dragging != wasDragging) {
         m_moving = true;
         Q_EMIT movingChanged();
