@@ -219,7 +219,7 @@ void MnemonicAttached::calculateWeights()
     if (m_weights.isEmpty()) {
         m_weight = m_baseWeight;
     } else {
-        m_weight = m_baseWeight + (m_weights.cend() - 1).key();
+        m_weight = m_baseWeight + (std::prev(m_weights.cend())).key();
     }
 }
 
@@ -403,7 +403,7 @@ void MnemonicAttached::setControlType(MnemonicAttached::ControlType controlType)
     if (m_weights.isEmpty()) {
         m_weight = m_baseWeight;
     } else {
-        m_weight = m_baseWeight + (m_weights.constEnd() - 1).key();
+        m_weight = m_baseWeight + (std::prev(m_weights.constEnd())).key();
     }
     Q_EMIT controlTypeChanged();
 }
