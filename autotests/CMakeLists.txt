@@ -28,19 +28,21 @@ macro(kirigami_add_tests)
 endmacro()
 
 kirigami_add_tests(
+    tst_actiontoolbar.qml
+    tst_avatar.qml
+    tst_formlayout.qml
+    tst_icon.qml
     tst_keynavigation.qml
     tst_listskeynavigation.qml
-    tst_pagerow.qml
-    tst_icon.qml
-    tst_actiontoolbar.qml
-    tst_pagerouter.qml
-    tst_routerwindow.qml
-    tst_avatar.qml
-    tst_theme.qml
     tst_mnemonicdata.qml
-    tst_formlayout.qml
-    pagepool/tst_pagepool.qml
+    tst_pagerouter.qml
+    tst_pagerow.qml
+    tst_routerwindow.qml
+    tst_theme.qml
+
     pagepool/tst_layers.qml
+    pagepool/tst_pagepool.qml
+
     wheelhandler/tst_filterMouseEvents.qml
     wheelhandler/tst_invokables.qml
     wheelhandler/tst_onWheel.qml
