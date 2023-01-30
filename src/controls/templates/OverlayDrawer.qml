@@ -157,7 +157,7 @@ T2.Drawer {
          */
         property bool displayToolTip: true
 
-        z: root.modal ? applicationWindow().overlay.z + (root.position > 0 ? +1 : -1) : root.background.parent.z + 1
+        z: root.modal ? applicationWindow().overlay.z + (root.position > 0 ? +1 : -1) : root.background.parent.z
         preventStealing: true
         hoverEnabled: handleAnchor && handleAnchor.visible
         parent: applicationWindow().overlay.parent
