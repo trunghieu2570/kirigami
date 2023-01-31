@@ -28,31 +28,31 @@ TestCase {
     }
 
     function test_bothNotElided() {
-        mouseMove(ui.itemBothNotElided);
+        mouseMove(ui.itemBothNotElided, ui.itemBothNotElided.width / 2, ui.itemBothNotElided.height / 2);
         wait(QQC2.ToolTip.toolTip.delay * 1.1);
         compare(QQC2.ToolTip.toolTip.visible, false);
     }
 
     function test_labelElided() {
-        mouseMove(ui.itemLabelElided);
+        mouseMove(ui.itemLabelElided, ui.itemLabelElided.width / 2, ui.itemLabelElided.height / 2);
         tryCompare(QQC2.ToolTip.toolTip, "visible", true, QQC2.ToolTip.toolTip.delay * 1.1);
         compare(QQC2.ToolTip.toolTip.text, ui.itemLabelElided.label);
     }
 
     function test_subtitleElided() {
-        mouseMove(ui.itemSubtitleElided);
+        mouseMove(ui.itemSubtitleElided, ui.itemSubtitleElided.width / 2, ui.itemSubtitleElided.height / 2);
         tryCompare(QQC2.ToolTip.toolTip, "visible", true, QQC2.ToolTip.toolTip.delay * 1.1);
         compare(QQC2.ToolTip.toolTip.text, ui.itemSubtitleElided.subtitle);
     }
 
     function test_bothElided() {
-        mouseMove(ui.itemBothElided);
+        mouseMove(ui.itemBothElided, ui.itemBothElided.width / 2, ui.itemBothElided.height / 2);
         tryCompare(QQC2.ToolTip.toolTip, "visible", true, QQC2.ToolTip.toolTip.delay * 1.1);
         compare(QQC2.ToolTip.toolTip.text, `${ui.itemBothElided.label}<br/><br/>${ui.itemBothElided.subtitle}`);
     }
 
     function test_htmlElided() {
-        mouseMove(ui.itemHtmlElided);
+        mouseMove(ui.itemHtmlElided, ui.itemHtmlElided.width / 2, ui.itemHtmlElided.height / 2);
         tryCompare(QQC2.ToolTip.toolTip, "visible", true, QQC2.ToolTip.toolTip.delay * 1.1);
         compare(QQC2.ToolTip.toolTip.text, `${ui.itemHtmlElided.label}<br/><br/>${ui.itemHtmlElided.subtitle}`);
     }
