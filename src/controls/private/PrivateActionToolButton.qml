@@ -16,12 +16,6 @@ Controls.ToolButton {
 
     signal menuAboutToShow()
 
-    Kirigami.Icon {
-        id: kirigamiIcon
-        visible: false
-        source: control.icon.name
-    }
-
     hoverEnabled: true
 
     display: Controls.ToolButton.TextBesideIcon
