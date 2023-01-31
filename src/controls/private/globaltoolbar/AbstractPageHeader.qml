@@ -35,7 +35,8 @@ Kirigami.AbstractApplicationHeader {
                         + pageRow.Kirigami.ScenePosition.x
                         + page.Kirigami.ScenePosition.x
                         + page.width
-                        + pageRow.globalToolBar.leftReservedSpace)))
+                        + pageRow.globalToolBar.leftReservedSpace
+                        + Kirigami.Units.smallSpacing)))
         : Kirigami.Units.smallSpacing
 
     rightPadding: pageRow
