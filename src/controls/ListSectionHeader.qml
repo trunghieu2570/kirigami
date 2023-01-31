@@ -4,9 +4,9 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.5
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.2
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.10 as Kirigami
 
 /**
@@ -16,13 +16,11 @@ import org.kde.kirigami 2.10 as Kirigami
  *
  * Example usage:
  * @code
- * import QtQuick 2.5
- * import QtQuick.Controls 2.5 as QQC2
- *
- * import org.kde.kirigami 2.10 as Kirigami
+ * import QtQuick 2.15
+ * import QtQuick.Controls 2.15 as QQC2
+ * import org.kde.kirigami 2.20 as Kirigami
  *
  * ListView {
- *  [...]
  *     section.delegate: Kirigami.ListSectionHeader {
  *         label: section
  *
@@ -33,24 +31,22 @@ import org.kde.kirigami 2.10 as Kirigami
  *             text: "Button 2"
  *         }
  *     }
- *  [...]
  * }
  * @endcode
  */
 Kirigami.AbstractListItem {
-    id: listSection
+    id: controlRoot
 
     /**
      * @brief This property sets the text of the ListView's section header.
      * @property string label
      */
-    property alias label: listSection.text
+    property alias label: controlRoot.text
 
-    default property alias _contents: rowLayout.data
+    default property alias __trailingContent: trailingContent.data
 
     separatorVisible: false
     sectionDelegate: true
-    hoverEnabled: false
 
     activeFocusOnTab: false
 
@@ -59,27 +55,73 @@ Kirigami.AbstractListItem {
 
     topPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
 
+    implicitWidth: contentItem === layout
+        ? (Math.ceil(textMetrics.advanceWidth) + layout.reservedWidthForTrailingContent + leftPadding + rightPadding)
+        : (contentItem ? contentItem.implicitWidth + leftPadding + rightPadding : Kirigami.Units.gridUnit * 12)
+
+    // Ideally, we should show a ToolTip only for truncated labels, but due to
+    // QTBUG-106489 we can't use enabled HoverHandler in lists. Binding to
+    // the whole Control::hovered would break after showing custom tooltips
+    // inside trailing content, requiring mouse cursor to re-enter the
+    // delegate to activate this tooltip again, so it's a UX compromise.
+    QQC2.ToolTip.text: text
+    QQC2.ToolTip.visible: heading.truncated && (Kirigami.Settings.tabletMode ? controlRoot.pressed : controlRoot.hovered)
+    QQC2.ToolTip.delay: Kirigami.Settings.tabletMode ? Qt.styleHints.mousePressAndHoldInterval : Kirigami.Units.toolTipDelay
+
     contentItem: RowLayout {
-        id: rowLayout
-        spacing: Kirigami.Units.largeSpacing
+        id: layout
+        spacing: 0
 
-        Kirigami.Heading {
-            Layout.fillWidth: rowLayout.children.length === 1
-            Layout.alignment: Qt.AlignVCenter
+        readonly property bool hasTrailingContent: trailingContent.visibleChildren.length > 0
+        readonly property real reservedWidthForTrailingContent: hasTrailingContent ? (trailingContent.implicitWidth + Kirigami.Units.largeSpacing) : 0
+        readonly property real maximumHeaderWidth: Math.floor(controlRoot.availableWidth - reservedWidthForTrailingContent)
+        readonly property bool hasRoomForSeparator: controlRoot.availableWidth - (Math.ceil(textMetrics.advanceWidth) + Kirigami.Units.largeSpacing + reservedWidthForTrailingContent) >= separator.Layout.minimumWidth
 
-            opacity: 0.7
-            level: 5
-            type: Kirigami.Heading.Primary
-            text: listSection.text
+        TextMetrics {
+            id: textMetrics
+            font: heading.font
+            text: heading.text
+        }
+
+        // Similar to Kirigami.Heading, but it's both bold (for contrast with small text) and semi-transparent.
+        QQC2.Label {
+            id: heading
+
+            text: controlRoot.text
+
             elide: Text.ElideRight
-
-            // we override the Primary type's font weight (DemiBold) for Bold for contrast with small text
+            font.pointSize: Kirigami.Theme.defaultFont.pointSize
             font.weight: Font.Bold
+            opacity: 0.7
+            Accessible.role: Accessible.Heading
+
+            Layout.fillWidth: false
+            Layout.alignment: Qt.AlignVCenter
+            Layout.maximumWidth: layout.maximumHeaderWidth
         }
 
         Kirigami.Separator {
+            id: separator
+
+            visible: layout.hasRoomForSeparator
+
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
+            Layout.leftMargin: Kirigami.Units.largeSpacing
+            Layout.rightMargin: layout.hasTrailingContent ? Kirigami.Units.largeSpacing : 0
+            Layout.minimumWidth: Kirigami.Units.gridUnit
+        }
+
+        RowLayout {
+            id: trailingContent
+
+            spacing: Kirigami.Units.largeSpacing
+
+            Layout.fillWidth: false
+            Layout.fillHeight: true
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+            Layout.leftMargin: layout.hasRoomForSeparator ? 0 : Kirigami.Units.largeSpacing
+            Layout.maximumWidth: controlRoot.availableWidth
         }
     }
 }

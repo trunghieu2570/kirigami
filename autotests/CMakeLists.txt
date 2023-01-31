@@ -41,6 +41,8 @@ kirigami_add_tests(
     tst_routerwindow.qml
     tst_theme.qml
 
+    delegates/tst_SectionHeader.qml
+
     pagepool/tst_layers.qml
     pagepool/tst_pagepool.qml
 
