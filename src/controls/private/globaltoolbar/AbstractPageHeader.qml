@@ -24,16 +24,14 @@ Kirigami.AbstractApplicationHeader {
     leftPadding: pageRow
         ? Math.min(
             width / 2,
-            Qt.application.layoutDirection === Qt.LeftToRight
-                ? Math.max(
-                    (page.title.length > 0 ? pageRow.globalToolBar.titleLeftPadding : 0),
-                    (pageRow.Kirigami.ScenePosition.x
+            Math.max(
+                (page.title.length > 0 ? pageRow.globalToolBar.titleLeftPadding : 0),
+                Qt.application.layoutDirection === Qt.LeftToRight
+                    ? (pageRow.Kirigami.ScenePosition.x
                         - page.Kirigami.ScenePosition.x
                         + pageRow.globalToolBar.leftReservedSpace
-                        + Kirigami.Units.smallSpacing))
-                : Math.max(
-                    (page.title.length > 0 ? pageRow.globalToolBar.titleLeftPadding : 0),
-                    (-pageRow.width
+                        + Kirigami.Units.smallSpacing)
+                    : (-pageRow.width
                         + pageRow.Kirigami.ScenePosition.x
                         + page.Kirigami.ScenePosition.x
                         + page.width
@@ -41,16 +39,15 @@ Kirigami.AbstractApplicationHeader {
         : Kirigami.Units.smallSpacing
 
     rightPadding: pageRow
-        ? (Qt.application.layoutDirection === Qt.LeftToRight
-            ? Math.max(0,
-                (-pageRow.width
-                    - pageRow.Kirigami.ScenePosition.x
-                    + page.width
-                    + page.Kirigami.ScenePosition.x
-                    + pageRow.globalToolBar.rightReservedSpace))
-            : Math.max(0,
-                (pageRow.Kirigami.ScenePosition.x
-                    - page.Kirigami.ScenePosition.x
-                    + pageRow.globalToolBar.rightReservedSpace)))
+        ? Math.max(0,
+            Qt.application.layoutDirection === Qt.LeftToRight
+            ? (-pageRow.width
+                - pageRow.Kirigami.ScenePosition.x
+                + page.width
+                + page.Kirigami.ScenePosition.x
+                + pageRow.globalToolBar.rightReservedSpace)
+            : (pageRow.Kirigami.ScenePosition.x
+                - page.Kirigami.ScenePosition.x
+                + pageRow.globalToolBar.rightReservedSpace))
         : 0
 }
