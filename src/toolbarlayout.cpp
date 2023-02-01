@@ -347,7 +347,17 @@ void ToolBarLayout::updatePolish()
 void ToolBarLayout::Private::performLayout()
 {
     if (!fullDelegate || !iconDelegate || !moreButton) {
-        qCWarning(KirigamiLog) << "ToolBarLayout: Unable to layout, required properties are not set";
+        QStringList diagnostics;
+        if (!fullDelegate) {
+            diagnostics.append(QStringLiteral("fullDelegate"));
+        }
+        if (!iconDelegate) {
+            diagnostics.append(QStringLiteral("iconDelegate"));
+        }
+        if (!moreButton) {
+            diagnostics.append(QStringLiteral("moreButton"));
+        }
+        qCWarning(KirigamiLog).noquote() << "ToolBarLayout: Unable to layout, required properties are not set:" << diagnostics.join(QStringLiteral(", "));
         return;
     }
 
