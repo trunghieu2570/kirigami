@@ -19,7 +19,8 @@ GridView {
 
         // initialize array so length property can be read
         property var leftMargins: []
-        readonly property int delegateWidth: Math.min(cellWidth, maximumColumnWidth) - Kirigami.Units.largeSpacing * 2
+        readonly property int delegateWidth: Math.min(cellWidth, maximumColumnWidth) - Kirigami.Units.largeSpacing * 2 - ((Kirigami.Units.largeSpacing * 2) / root.columns)
+        // We need to subtract ((Kirigami.Units.largeSpacing * 2) / root.columns) to consider space on the left and on the right spreaded trough all columns
     }
 
     delegate: Kirigami.DelegateRecycler {
@@ -32,7 +33,7 @@ GridView {
             const columnIndex = index % root.columns
             if (index < root.columns) {
                 // calulate left margin per column
-                calculations.leftMargins[columnIndex] = (width + Kirigami.Units.largeSpacing * 2)
+                calculations.leftMargins[columnIndex] = Kirigami.Units.largeSpacing + (width + Kirigami.Units.largeSpacing * 2 )
                         * (columnIndex) + root.width / 2
                         - (root.columns * (width + Kirigami.Units.largeSpacing * 2)) / 2;
             }
