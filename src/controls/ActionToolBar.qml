@@ -16,7 +16,6 @@ import "private" as P
  *
  * The default representation for visible actions is a QtQuick.Controls.ToolButton, but
  * it can be changed by setting the `Action.displayComponent` for an action.
- * The ActionToolBar component will try to display has many actions as possible but
  * The default behavior of ActionToolBar is to display as many actions as possible,
  * placing those that will not fit into an overflow menu. This can be changed by
  * setting the `displayHint` property on an Action. For example, when setting the
@@ -144,7 +143,7 @@ QQC2.Control {
      * Permitted values are:
      * * ``HeightMode.AlwaysCenter``
      * * ``HeightMode.AlwaysFill``
-     * * ``AlwaysFill.ConstrainIfLarger``
+     * * ``HeightMode.ConstrainIfLarger``
      *
      * default: ``HeightMode::ConstrainIfLarger``
      *
