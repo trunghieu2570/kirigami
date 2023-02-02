@@ -71,6 +71,7 @@ public:
 
     void setPosition(qreal x, qreal y);
     void setHeight(qreal height);
+    void resetHeight();
 
     qreal width() const;
     qreal height() const;
@@ -93,6 +94,7 @@ private:
         }
     }
     void cleanupIncubators();
+    void triggerRelayout();
 
     ToolBarLayout *m_parent = nullptr;
     QObject *m_action = nullptr;

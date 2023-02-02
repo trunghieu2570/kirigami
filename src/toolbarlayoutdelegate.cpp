@@ -133,12 +133,8 @@ void ToolBarLayoutDelegate::createItems(QQmlComponent *fullComponent, QQmlCompon
 
         m_full = qobject_cast<QQuickItem *>(incubator->object());
         m_full->setVisible(false);
-        connect(m_full, &QQuickItem::widthChanged, this, [this]() {
-            m_parent->relayout();
-        });
-        connect(m_full, &QQuickItem::heightChanged, this, [this]() {
-            m_parent->relayout();
-        });
+        connect(m_full, &QQuickItem::implicitWidthChanged, this, &ToolBarLayoutDelegate::triggerRelayout);
+        connect(m_full, &QQuickItem::implicitHeightChanged, this, &ToolBarLayoutDelegate::triggerRelayout);
         connect(m_full, &QQuickItem::visibleChanged, this, &ToolBarLayoutDelegate::ensureItemVisibility);
 
         if (m_icon) {
@@ -163,12 +159,8 @@ void ToolBarLayoutDelegate::createItems(QQmlComponent *fullComponent, QQmlCompon
 
         m_icon = qobject_cast<QQuickItem *>(incubator->object());
         m_icon->setVisible(false);
-        connect(m_icon, &QQuickItem::widthChanged, this, [this]() {
-            m_parent->relayout();
-        });
-        connect(m_icon, &QQuickItem::heightChanged, this, [this]() {
-            m_parent->relayout();
-        });
+        connect(m_icon, &QQuickItem::implicitWidthChanged, this, &ToolBarLayoutDelegate::triggerRelayout);
+        connect(m_icon, &QQuickItem::implicitHeightChanged, this, &ToolBarLayoutDelegate::triggerRelayout);
         connect(m_icon, &QQuickItem::visibleChanged, this, &ToolBarLayoutDelegate::ensureItemVisibility);
 
         if (m_full) {
@@ -252,6 +244,12 @@ void ToolBarLayoutDelegate::setHeight(qreal height)
     m_icon->setHeight(height);
 }
 
+void ToolBarLayoutDelegate::resetHeight()
+{
+    m_full->resetHeight();
+    m_icon->resetHeight();
+}
+
 qreal ToolBarLayoutDelegate::width() const
 {
     if (m_iconVisible) {
@@ -286,7 +284,7 @@ qreal ToolBarLayoutDelegate::implicitHeight() const
 
 qreal ToolBarLayoutDelegate::maxHeight() const
 {
-    return std::max(m_full->height(), m_icon->height());
+    return std::max(m_full->implicitHeight(), m_icon->implicitHeight());
 }
 
 qreal ToolBarLayoutDelegate::iconWidth() const
@@ -322,4 +320,9 @@ void ToolBarLayoutDelegate::cleanupIncubators()
         delete m_iconIncubator;
         m_iconIncubator = nullptr;
     }
+}
+
+void ToolBarLayoutDelegate::triggerRelayout()
+{
+    m_parent->relayout();
 }
