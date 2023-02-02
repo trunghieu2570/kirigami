@@ -442,7 +442,7 @@ void ToolBarLayout::Private::performLayout()
         }
 
         if (heightMode == AlwaysFill) {
-            moreButtonInstance->setHeight(q->height());
+            moreButtonInstance->setHeight(maxHeight);
         } else if (heightMode == ConstrainIfLarger) {
             if (moreButtonInstance->implicitHeight() > maxHeight) {
                 moreButtonInstance->setHeight(maxHeight);
@@ -472,7 +472,7 @@ void ToolBarLayout::Private::performLayout()
         }
 
         if (heightMode == AlwaysFill) {
-            entry->setHeight(q->height());
+            entry->setHeight(maxHeight);
         } else if (heightMode == ConstrainIfLarger) {
             if (entry->implicitHeight() > maxHeight) {
                 entry->setHeight(maxHeight);
