@@ -139,6 +139,8 @@ public:
         AlwaysCenter, ///< Always center items, allowing them to go outside the bounds of the layout if they are larger.
         AlwaysFill, ///< Always match the height of the layout. Larger items will be reduced in height, smaller items will be increased.
         ConstrainIfLarger, ///< If the item is larger than the toolbar, reduce its height. Otherwise center it in the toolbar.
+        PropagateItemsSizeHints, ///< Propagate implicitHeight from the toolbar to the layout, making it possible to have bigger elements or dynamically
+                                 ///< resizing ones
     };
     Q_ENUM(HeightMode)
 

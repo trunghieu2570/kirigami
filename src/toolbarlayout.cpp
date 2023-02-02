@@ -370,6 +370,7 @@ void ToolBarLayout::Private::performLayout()
     }
 
     qreal maxHeight = 0.0;
+    qreal implicitHeight = 0.0;
     qreal maxWidth = 0.0;
 
     // First, calculate the total width and maximum height of all delegates.
@@ -395,6 +396,7 @@ void ToolBarLayout::Private::performLayout()
 
         maxWidth += entry->width() + spacing;
         maxHeight = std::max(maxHeight, entry->maxHeight());
+        implicitHeight = std::max(implicitHeight, entry->implicitHeight());
     }
 
     // The last entry also gets spacing but shouldn't, so remove that.
@@ -461,6 +463,7 @@ void ToolBarLayout::Private::performLayout()
 
     if (moreButtonInstance->isVisible() && !q->heightValid()) {
         maxHeight = std::max(maxHeight, moreButtonInstance->implicitHeight());
+        implicitHeight = std::max(implicitHeight, moreButtonInstance->implicitHeight());
     };
 
     qreal currentX = layoutStart(visibleActionsWidth);
@@ -492,7 +495,11 @@ void ToolBarLayout::Private::performLayout()
         entry->show();
     }
 
-    q->setImplicitSize(maxWidth, maxHeight);
+    if (heightMode == PropagateItemsSizeHints) {
+        q->setImplicitSize(maxWidth, implicitHeight);
+    } else {
+        q->setImplicitSize(maxWidth, maxHeight);
+    }
     Q_EMIT q->hiddenActionsChanged();
 
     qreal newVisibleWidth = visibleActionsWidth;
