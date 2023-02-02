@@ -369,7 +369,7 @@ void ToolBarLayout::Private::performLayout()
         return;
     }
 
-    qreal maxHeight = moreButtonInstance->isVisible() ? moreButtonInstance->height() : 0.0;
+    qreal maxHeight = 0.0;
     qreal maxWidth = 0.0;
 
     // First, calculate the total width and maximum height of all delegates.
@@ -458,6 +458,10 @@ void ToolBarLayout::Private::performLayout()
         shouldShowMoreButton = false;
         moreButtonInstance->setVisible(false);
     }
+
+    if (moreButtonInstance->isVisible() && !q->heightValid()) {
+        maxHeight = std::max(maxHeight, moreButtonInstance->implicitHeight());
+    };
 
     qreal currentX = layoutStart(visibleActionsWidth);
     for (auto entry : std::as_const(sortedDelegates)) {
