@@ -13,7 +13,7 @@ import "../" as P
 
 Kirigami.AbstractApplicationHeader {
     id: header
-    readonly property int leftReservedSpace: (buttonsLayout.visible && buttonsLayout.visibleChildren.length > 0 ? buttonsLayout.width : 0)
+    readonly property int leftReservedSpace: (buttonsLayout.visible && buttonsLayout.visibleChildren.length > 0 ? buttonsLayout.width + Kirigami.Units.smallSpacing : 0) // Take into account the layout margins the nav buttons have
         + (leftHandleAnchor.visible ? leftHandleAnchor.width : 0)
         + (menuButton.visible ? menuButton.width : 0)
     readonly property int rightReservedSpace: rightHandleAnchor.visible ? backButton.background.implicitHeight : 0
