@@ -169,4 +169,115 @@ TestCase {
 
         compare(toolbar.visibleWidth, data.expected)
     }
+
+    Component {
+        id: heightMode
+
+        Kirigami.ActionToolBar {
+            id: heightModeToolBar
+            font.pointSize: 10
+
+            property real customHeight: 50
+
+            actions: [
+                Kirigami.Action {
+                    displayComponent: Button {
+                        objectName: "tall"
+                        implicitHeight: heightModeToolBar.customHeight
+                        implicitWidth: 50
+                    }
+                },
+                Kirigami.Action {
+                    displayComponent: Button {
+                        objectName: "short"
+                        implicitHeight: 25
+                        implicitWidth: 50
+                    }
+                }
+            ]
+        }
+    }
+
+    function getChild(toolbar, objectName) {
+        let c = toolbar.children[0].children
+        for (let i in c) {
+            if (c[i].objectName === objectName) {
+                return c[i]
+            }
+        }
+        return -1
+    }
+
+    function test_height() {
+        var toolbar = createTemporaryObject(heightMode, testCase, {width: testCase.width})
+
+        verify(toolbar)
+        verify(waitForRendering(toolbar))
+
+        while (toolbar.visibleWidth == 0) {
+            // Same as above
+            wait(50)
+        }
+
+        compare(toolbar.implicitHeight, 50)
+        compare(toolbar.height, 50)
+
+        toolbar.customHeight = 100
+
+        verify(waitForItemPolished(toolbar))
+
+        // Implicit height changes should propagate to the layout's height as
+        // long as that doesn't have an explicit height set.
+        compare(toolbar.implicitHeight, 100)
+        compare(toolbar.height, 100)
+
+        // This should be the default, but make sure to set it regardless
+        toolbar.heightMode = Kirigami.ToolBarLayout.ConstrainIfLarger
+        toolbar.height = 50
+
+        // Find the actual child items so we can check their properties
+        let t = getChild(toolbar, "tall");
+        let s = getChild(toolbar, "short");
+
+        // waitForItemPolished doesn't wait long enough and waitForRendering
+        // waits too long, so just wait an arbitrary amount of time...
+        wait(50)
+
+        // ConstrainIfLarger should reduce the height of the first, but not touch the second
+        compare(t.height, 50)
+        compare(t.y, 0)
+        compare(s.height, 25)
+        compare(s.y, 13) // Should be centered and rounded
+
+        // AlwaysCenter should not touch any item's height, only make sure they are centered
+        toolbar.heightMode = Kirigami.ToolBarLayout.AlwaysCenter
+
+        wait(50)
+
+        compare(t.height, 100)
+        compare(t.y, -25)
+        compare(s.height, 25)
+        compare(s.y, 13)
+
+        // AlwaysFill should make sure each item has the same height as the toolbar
+        toolbar.heightMode = Kirigami.ToolBarLayout.AlwaysFill
+
+        wait(50)
+
+        compare(t.height, 50)
+        compare(t.y, 0)
+        compare(s.height, 50)
+        compare(s.y, 0)
+
+        // Unconstraining the toolbar should reset its height to the maximum
+        // implicit height and set any children to that same value as heightMode
+        // is still AlwaysFill.
+        toolbar.height = undefined
+
+        wait(50)
+
+        compare(toolbar.height, 100)
+        compare(t.height, 100)
+        compare(s.height, 100)
+    }
 }
