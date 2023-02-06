@@ -389,7 +389,7 @@ QtObject {
         MouseArea {
             anchors.fill: parent
             drag.filterChildren: true
-            hoverEnabled: true
+            acceptedButtons: Qt.LeftButton | Qt.RightButton
 
             onPressed: mouse => {
                 const pos = mapToItem(contentLayout, mouse.x, mouse.y);
