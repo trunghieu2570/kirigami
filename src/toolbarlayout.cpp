@@ -40,6 +40,7 @@ public:
     {
     }
 
+    void calculateImplicitSize();
     void performLayout();
     QVector<ToolBarLayoutDelegate *> createDelegates();
     ToolBarLayoutDelegate *createDelegate(QObject *action);
@@ -56,6 +57,7 @@ public:
     QQmlComponent *moreButton = nullptr;
     qreal spacing = 0.0;
     Qt::Alignment alignment = Qt::AlignLeft;
+    qreal visibleActionsWidth = 0.0;
     qreal visibleWidth = 0.0;
     Qt::LayoutDirection layoutDirection = Qt::LeftToRight;
     HeightMode heightMode = ConstrainIfLarger;
@@ -131,10 +133,10 @@ void ToolBarLayout::addAction(QObject *action)
         d->actions.removeOne(action);
         d->actionsChanged = true;
 
-        relayout();
+        d->calculateImplicitSize();
     });
 
-    relayout();
+    d->calculateImplicitSize();
 }
 
 void ToolBarLayout::removeAction(QObject *action)
@@ -149,7 +151,7 @@ void ToolBarLayout::removeAction(QObject *action)
     d->removalTimer->start();
     d->actionsChanged = true;
 
-    relayout();
+    d->calculateImplicitSize();
 }
 
 void ToolBarLayout::clearActions()
@@ -165,7 +167,7 @@ void ToolBarLayout::clearActions()
     d->actions.clear();
     d->actionsChanged = true;
 
-    relayout();
+    d->calculateImplicitSize();
 }
 
 QList<QObject *> ToolBarLayout::hiddenActions() const
@@ -203,7 +205,7 @@ void ToolBarLayout::setIconDelegate(QQmlComponent *newIconDelegate)
 
     d->iconDelegate = newIconDelegate;
     d->delegates.clear();
-    relayout();
+    d->calculateImplicitSize();
     Q_EMIT iconDelegateChanged();
 }
 
@@ -223,7 +225,7 @@ void ToolBarLayout::setMoreButton(QQmlComponent *newMoreButton)
         d->moreButtonInstance->deleteLater();
         d->moreButtonInstance = nullptr;
     }
-    relayout();
+    d->calculateImplicitSize();
     Q_EMIT moreButtonChanged();
 }
 
@@ -239,7 +241,7 @@ void ToolBarLayout::setSpacing(qreal newSpacing)
     }
 
     d->spacing = newSpacing;
-    relayout();
+    d->calculateImplicitSize();
     Q_EMIT spacingChanged();
 }
 
@@ -255,7 +257,7 @@ void ToolBarLayout::setAlignment(Qt::Alignment newAlignment)
     }
 
     d->alignment = newAlignment;
-    relayout();
+    d->calculateImplicitSize();
     Q_EMIT alignmentChanged();
 }
 
@@ -281,7 +283,7 @@ void ToolBarLayout::setLayoutDirection(Qt::LayoutDirection &newLayoutDirection)
     }
 
     d->layoutDirection = newLayoutDirection;
-    relayout();
+    d->calculateImplicitSize();
     Q_EMIT layoutDirectionChanged();
 }
 
@@ -297,22 +299,20 @@ void ToolBarLayout::setHeightMode(HeightMode newHeightMode)
     }
 
     d->heightMode = newHeightMode;
-    relayout();
+    d->calculateImplicitSize();
     Q_EMIT heightModeChanged();
 }
 
 void ToolBarLayout::relayout()
 {
-    if (d->completed) {
-        polish();
-    }
+    d->calculateImplicitSize();
 }
 
 void ToolBarLayout::componentComplete()
 {
     QQuickItem::componentComplete();
     d->completed = true;
-    relayout();
+    d->calculateImplicitSize();
 }
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -322,7 +322,11 @@ void ToolBarLayout::geometryChange(const QRectF &newGeometry, const QRectF &oldG
 #endif
 {
     if (newGeometry != oldGeometry) {
-        relayout();
+        if (newGeometry.size() != QSizeF{implicitWidth(), implicitHeight()}) {
+            d->calculateImplicitSize();
+        } else {
+            polish();
+        }
     }
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QQuickItem::geometryChanged(newGeometry, oldGeometry);
@@ -334,7 +338,7 @@ void ToolBarLayout::geometryChange(const QRectF &newGeometry, const QRectF &oldG
 void ToolBarLayout::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &data)
 {
     if (change == ItemVisibleHasChanged || change == ItemSceneChange) {
-        relayout();
+        d->calculateImplicitSize();
     }
     QQuickItem::itemChange(change, data);
 }
@@ -344,16 +348,33 @@ void ToolBarLayout::updatePolish()
     d->performLayout();
 }
 
-void ToolBarLayout::Private::performLayout()
+/**
+ * Calculate the implicit size for this layout.
+ *
+ * This is a separate step from performing the actual layout, because of a nasty
+ * little issue with Control, where it will unconditionally set the height of
+ * its contentItem, which means QQuickItem::heightValid() becomes useless. So
+ * instead, we first calculate our implicit size, ignoring any explicitly set
+ * item size. Then we follow that by performing the actual layouting, using the
+ * width and height retrieved from the item, as those will return the explicitly
+ * set width/height if set and the implicit size otherwise. Since control
+ * watches for implicit size changes, we end up with correct behaviour both when
+ * we get an explicit size set and when we're relying on implicit size
+ * calculation.
+ */
+void ToolBarLayout::Private::calculateImplicitSize()
 {
+    if (!completed) {
+        return;
+    }
+
     if (!fullDelegate || !iconDelegate || !moreButton) {
         qCWarning(KirigamiLog) << "ToolBarLayout: Unable to layout, required properties are not set";
         return;
     }
 
     if (actions.isEmpty()) {
-        q->setImplicitWidth(0);
-        q->setImplicitHeight(0);
+        q->setImplicitSize(0., 0.);
         return;
     }
 
@@ -400,11 +421,7 @@ void ToolBarLayout::Private::performLayout()
     // The last entry also gets spacing but shouldn't, so remove that.
     maxWidth -= spacing;
 
-    if (q->heightValid() && q->height() > 0.0) {
-        maxHeight = q->height();
-    }
-
-    qreal visibleActionsWidth = 0.0;
+    visibleActionsWidth = 0.0;
 
     if (maxWidth > q->width() - (hiddenActions.isEmpty() ? 0.0 : moreButtonInstance->width() + spacing)) {
         // We have more items than fit into the view, so start hiding some.
@@ -435,17 +452,47 @@ void ToolBarLayout::Private::performLayout()
     }
 
     if (!hiddenActions.isEmpty()) {
+        maxHeight = std::max(maxHeight, moreButtonInstance->implicitHeight());
+    };
+
+    q->setImplicitSize(maxWidth, maxHeight);
+    Q_EMIT q->hiddenActionsChanged();
+
+    q->polish();
+}
+
+void ToolBarLayout::Private::performLayout()
+{
+    if (!completed || actions.isEmpty()) {
+        return;
+    }
+
+    if (sortedDelegates.isEmpty()) {
+        sortedDelegates = createDelegates();
+    }
+
+    bool ready = std::all_of(delegates.cbegin(), delegates.cend(), [](const std::pair<QObject *const, std::unique_ptr<ToolBarLayoutDelegate>> &entry) {
+        return entry.second->isReady();
+    });
+    if (!ready || !moreButtonInstance) {
+        return;
+    }
+
+    qreal width = q->width();
+    qreal height = q->height();
+
+    if (!hiddenActions.isEmpty()) {
         if (layoutDirection == Qt::LeftToRight) {
-            moreButtonInstance->setX(q->width() - moreButtonInstance->width());
+            moreButtonInstance->setX(width - moreButtonInstance->width());
         } else {
             moreButtonInstance->setX(0.0);
         }
 
         if (heightMode == AlwaysFill) {
-            moreButtonInstance->setHeight(maxHeight);
+            moreButtonInstance->setHeight(height);
         } else if (heightMode == ConstrainIfLarger) {
-            if (moreButtonInstance->implicitHeight() > maxHeight) {
-                moreButtonInstance->setHeight(maxHeight);
+            if (moreButtonInstance->implicitHeight() > height) {
+                moreButtonInstance->setHeight(height);
             } else {
                 moreButtonInstance->resetHeight();
             }
@@ -453,17 +500,13 @@ void ToolBarLayout::Private::performLayout()
             moreButtonInstance->resetHeight();
         }
 
-        moreButtonInstance->setY(qRound((maxHeight - moreButtonInstance->implicitHeight()) / 2.0));
+        moreButtonInstance->setY(qRound((height - moreButtonInstance->height()) / 2.0));
         shouldShowMoreButton = true;
         moreButtonInstance->setVisible(true);
     } else {
         shouldShowMoreButton = false;
         moreButtonInstance->setVisible(false);
     }
-
-    if (moreButtonInstance->isVisible() && !q->heightValid()) {
-        maxHeight = std::max(maxHeight, moreButtonInstance->implicitHeight());
-    };
 
     qreal currentX = layoutStart(visibleActionsWidth);
     for (auto entry : std::as_const(sortedDelegates)) {
@@ -472,10 +515,10 @@ void ToolBarLayout::Private::performLayout()
         }
 
         if (heightMode == AlwaysFill) {
-            entry->setHeight(maxHeight);
+            entry->setHeight(height);
         } else if (heightMode == ConstrainIfLarger) {
-            if (entry->implicitHeight() > maxHeight) {
-                entry->setHeight(maxHeight);
+            if (entry->implicitHeight() > height) {
+                entry->setHeight(height);
             } else {
                 entry->resetHeight();
             }
@@ -483,7 +526,7 @@ void ToolBarLayout::Private::performLayout()
             entry->resetHeight();
         }
 
-        qreal y = qRound((maxHeight - entry->height()) / 2.0);
+        qreal y = qRound((height - entry->height()) / 2.0);
 
         if (layoutDirection == Qt::LeftToRight) {
             entry->setPosition(currentX, y);
@@ -495,9 +538,6 @@ void ToolBarLayout::Private::performLayout()
 
         entry->show();
     }
-
-    q->setImplicitSize(maxWidth, maxHeight);
-    Q_EMIT q->hiddenActionsChanged();
 
     qreal newVisibleWidth = visibleActionsWidth;
     if (moreButtonInstance->isVisible()) {
@@ -549,7 +589,7 @@ QVector<ToolBarLayoutDelegate *> ToolBarLayout::Private::createDelegates()
             connect(moreButtonInstance, &QQuickItem::widthChanged, q, [this]() {
                 Q_EMIT q->minimumWidthChanged();
             });
-            q->relayout();
+            calculateImplicitSize();
             Q_EMIT q->minimumWidthChanged();
 
             QTimer::singleShot(0, q, [this]() {
