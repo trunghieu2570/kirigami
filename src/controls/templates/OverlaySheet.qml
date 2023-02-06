@@ -400,9 +400,7 @@ QtObject {
             }
             onReleased: mouse => {
                 const pos = mapToItem(contentLayout, mouse.x, mouse.y);
-                if (!contentLayout.contains(pos)) {
-                    root.close();
-                }
+
                 // enable dragging of sheet once mouse is not clicked
                 outerFlickable.interactive = true
             }
