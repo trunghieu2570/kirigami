@@ -265,7 +265,7 @@ T.Dialog {
                     + (implicitFooterHeight > 0 ? implicitFooterHeight + spacing : 0);
 
     // misc. dialog settings
-    closePolicy: QQC2.Popup.CloseOnEscape | QQC2.Popup.CloseOnReleaseOutside
+    closePolicy: Kirigami.Settings.isMobile ? QQC2.Popup.CloseOnEscape | QQC2.Popup.CloseOnReleaseOutside : QQC2.Popup.CloseOnEscape | QQC2.Popup.CloseOnPressOutside
     modal: true
     clip: false
     padding: 0
