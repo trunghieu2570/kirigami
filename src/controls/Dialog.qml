@@ -338,6 +338,8 @@ T.Dialog {
             // height of everything else in the dialog other than the content
             property real otherHeights: root.header.height + root.footer.height + root.topPadding + root.bottomPadding;
 
+            property real otherWidths: contentItem.leftPadding + contentItem.rightPadding
+
             property real calculatedMaximumWidth: Math.min(root.absoluteMaximumWidth, root.maximumWidth) - root.leftPadding - root.rightPadding
             property real calculatedMaximumHeight: Math.min(root.absoluteMaximumHeight, root.maximumHeight) - root.topPadding - root.bottomPadding
             property real calculatedImplicitWidth: (contentChildren.length === 1 && contentChildren[0].implicitWidth > 0
@@ -354,11 +356,11 @@ T.Dialog {
             //   -> we expand the dialog's width to accommodate the scrollbar width (to respect the content's desired width)
 
             // don't enforce preferred width and height if not set
-            Layout.preferredWidth: (root.preferredWidth >= 0 ? root.preferredWidth : calculatedImplicitWidth)
+            Layout.preferredWidth: (root.preferredWidth >= 0 ? root.preferredWidth - otherWidths : calculatedImplicitWidth)
             Layout.preferredHeight: root.preferredHeight >= 0 ? root.preferredHeight - otherHeights : calculatedImplicitHeight
 
             Layout.fillWidth: true
-            Layout.maximumWidth: calculatedMaximumWidth
+            Layout.maximumWidth: calculatedMaximumWidth - otherWidths
             Layout.maximumHeight: calculatedMaximumHeight - otherHeights // we enforce maximum height solely from the content
 
             // give an implied width and height to the contentItem so that features like word wrapping/eliding work
