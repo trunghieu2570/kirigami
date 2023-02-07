@@ -142,9 +142,9 @@ T.TabButton {
             anchors.centerIn: parent
 
             radius: Kirigami.Units.smallSpacing
-            color: control.pressed ? pressedColor : (control.checked || hoverHandler.hovered ? hoverSelectColor : "transparent")
+            color: control.down ? pressedColor : (control.checked || hoverHandler.hovered ? hoverSelectColor : "transparent")
 
-            border.color: control.checked ? checkedBorderColor : (control.pressed ? pressedBorderColor : color)
+            border.color: control.checked ? checkedBorderColor : (control.down ? pressedBorderColor : color)
             border.width: 1
 
             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }

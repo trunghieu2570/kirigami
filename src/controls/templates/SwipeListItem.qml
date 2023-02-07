@@ -373,7 +373,7 @@ T.SwipeDelegate {
             Kirigami.Icon {
                 id: handleIcon
                 anchors.fill: parent
-                selected: listItem.checked || (listItem.pressed && !listItem.checked && !listItem.sectionDelegate)
+                selected: listItem.checked || (listItem.down && !listItem.checked && !listItem.sectionDelegate)
                 source: (LayoutMirroring.enabled ? (listItem.background.x < listItem.background.width/2 ? "overflow-menu-right" : "overflow-menu-left") : (listItem.background.x < -listItem.background.width/2 ? "overflow-menu-right" : "overflow-menu-left"))
             }
 

@@ -70,7 +70,7 @@ Kirigami.BasicListItem {
         isMask: true
         Layout.alignment: Qt.AlignVCenter
         Layout.preferredHeight: Kirigami.Units.iconSizes.small/2
-        selected: listItem.checked || listItem.pressed
+        selected: listItem.checked || listItem.down
         Layout.preferredWidth: Layout.preferredHeight
         source: "go-up-symbolic"
         visible: !isExpandible  && !listItem.isSeparator && modelData.children!== undefined && modelData.children.length > 0

@@ -35,7 +35,7 @@ Kirigami.AbstractListItem {
             Layout.maximumHeight: size
             Layout.minimumWidth: size
             Layout.maximumWidth: size
-            selected: (listItem.highlighted || listItem.checked || listItem.pressed)
+            selected: (listItem.highlighted || listItem.checked || listItem.down)
             visible: source !== undefined
         }
 
@@ -44,7 +44,7 @@ Kirigami.AbstractListItem {
             text:  width > height * 2 ? listItem.Kirigami.MnemonicData.mnemonicLabel : ""
             Layout.fillWidth: true
             mnemonicVisible: listItem.Kirigami.MnemonicData.active
-            color: (listItem.highlighted || listItem.checked || listItem.pressed) ? listItem.activeTextColor : listItem.textColor
+            color: (listItem.highlighted || listItem.checked || listItem.down) ? listItem.activeTextColor : listItem.textColor
             elide: Text.ElideRight
             font: listItem.font
             opacity: {
@@ -81,7 +81,7 @@ Kirigami.AbstractListItem {
             Layout.leftMargin: !root.collapsed ? 0 : -width
             Layout.preferredHeight: !root.collapsed ? Kirigami.Units.iconSizes.small : Kirigami.Units.iconSizes.small/2
             opacity: 0.7
-            selected: listItem.checked || listItem.pressed
+            selected: listItem.checked || listItem.down
             Layout.preferredWidth: Layout.preferredHeight
             source: (LayoutMirroring.enabled ? "go-next-symbolic-rtl" : "go-next-symbolic")
             visible: (!isExpandible || root.collapsed) && !listItem.isSeparator && modelData.hasOwnProperty("children") && modelData.children!==undefined && modelData.children.length > 0
