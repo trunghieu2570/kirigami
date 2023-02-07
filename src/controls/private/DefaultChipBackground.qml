@@ -9,7 +9,7 @@ import org.kde.kirigami 2.19 as Kirigami
 Rectangle {
     /**
      * @brief This property holds the color of the Chip's background when it is being pressed.
-     * @see QtQuick.AbstractButton::pressed
+     * @see QtQuick.AbstractButton::down
      */
     property color pressedColor: Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.3)
 
@@ -27,15 +27,15 @@ Rectangle {
 
     /**
      * @brief This property holds the color of the Chip's border when it is being pressed.
-     * @see QtQuick.AbstractButton::pressed
+     * @see QtQuick.AbstractButton::down
      */
     property color pressedBorderColor: Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.9)
 
     Kirigami.Theme.colorSet:Kirigami.Theme.Header
     Kirigami.Theme.inherit: false
 
-    color: parent.pressed ? pressedColor : (parent.checked ? hoverSelectColor : Kirigami.Theme.backgroundColor)
-    border.color: parent.pressed ? checkedBorderColor : (parent.checked ? pressedBorderColor : Qt.darker(Kirigami.Theme.backgroundColor, 1.1))
+    color: parent.down ? pressedColor : (parent.checked ? hoverSelectColor : Kirigami.Theme.backgroundColor)
+    border.color: parent.down ? checkedBorderColor : (parent.checked ? pressedBorderColor : Qt.darker(Kirigami.Theme.backgroundColor, 1.1))
     border.width: 1
     radius: 3
 }

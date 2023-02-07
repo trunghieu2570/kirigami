@@ -316,7 +316,7 @@ Kirigami.AbstractListItem {
                 Layout.maximumHeight: size
                 Layout.minimumWidth: size
                 Layout.maximumWidth: size
-                selected: (listItem.highlighted || listItem.checked || listItem.pressed)
+                selected: (listItem.highlighted || listItem.checked || listItem.down)
                 opacity: listItem.fadeContent ? 0.6 : 1.0
                 visible: source !== undefined
             }
@@ -330,7 +330,7 @@ Kirigami.AbstractListItem {
                     text: listItem.text
                     Layout.fillWidth: true
                     Layout.alignment: subtitleItem.visible ? Qt.AlignLeft | Qt.AlignBottom : Qt.AlignLeft | Qt.AlignVCenter
-                    color: (listItem.highlighted || listItem.checked || listItem.pressed) ? listItem.activeTextColor : listItem.textColor
+                    color: (listItem.highlighted || listItem.checked || listItem.down) ? listItem.activeTextColor : listItem.textColor
                     elide: Text.ElideRight
                     font.weight: listItem.bold ? Font.Bold : Font.Normal
                     opacity: listItem.fadeContent ? 0.6 : 1.0
@@ -339,7 +339,7 @@ Kirigami.AbstractListItem {
                     id: subtitleItem
                     Layout.fillWidth: true
                     Layout.alignment: subtitleItem.visible ? Qt.AlignLeft | Qt.AlignTop : Qt.AlignLeft | Qt.AlignVCenter
-                    color: (listItem.highlighted || listItem.checked || listItem.pressed) ? listItem.activeTextColor : listItem.textColor
+                    color: (listItem.highlighted || listItem.checked || listItem.down) ? listItem.activeTextColor : listItem.textColor
                     elide: Text.ElideRight
                     font: Kirigami.Theme.smallFont
                     opacity: listItem.fadeContent ? 0.6 : (listItem.bold ? 0.9 : 0.7)
@@ -358,7 +358,7 @@ Kirigami.AbstractListItem {
                     }
                     return txt;
                 }
-                QQC2.ToolTip.visible: QQC2.ToolTip.text.length > 0 && (Kirigami.Settings.tabletMode ? listItem.pressed : listItem.hovered)
+                QQC2.ToolTip.visible: QQC2.ToolTip.text.length > 0 && (Kirigami.Settings.tabletMode ? listItem.down : listItem.hovered)
                 QQC2.ToolTip.delay: Kirigami.Settings.tabletMode ? Qt.styleHints.mousePressAndHoldInterval : Kirigami.Units.toolTipDelay
             }
         }

@@ -12,7 +12,7 @@ Rectangle {
     color: {
         if (listItem.alternatingBackground && index % 2)
             return listItem.alternateBackgroundColor
-        else if (listItem.checked || listItem.highlighted || (listItem.pressed && !listItem.checked && !listItem.sectionDelegate))
+        else if (listItem.checked || listItem.highlighted || (listItem.down && !listItem.checked && !listItem.sectionDelegate))
             return listItem.activeBackgroundColor
         return listItem.backgroundColor
     }
@@ -24,9 +24,9 @@ Rectangle {
         visible: !Kirigami.Settings.tabletMode && listItem.hoverEnabled
         color: listItem.activeBackgroundColor
         opacity: {
-            if ((listItem.highlighted || listItem.ListView.isCurrentItem) && !listItem.pressed) {
+            if ((listItem.highlighted || listItem.ListView.isCurrentItem) && !listItem.down) {
                 return .6
-            } else if (listItem.hovered && !listItem.pressed) {
+            } else if (listItem.hovered && !listItem.down) {
                 return .3
             } else {
                 return 0
@@ -44,7 +44,7 @@ Rectangle {
         }
         visible: {
             // Whether there is visual feedback (do not show the separator)
-            const visualFeedback = listItem.highlighted || listItem.pressed || listItem.checked || listItem.ListView.isCurrentItem
+            const visualFeedback = listItem.highlighted || listItem.down || listItem.checked || listItem.ListView.isCurrentItem
 
             // Show the separator when activeBackgroundColor is set to "transparent",
             // when the item is hovered. Check commit 344aec26.
