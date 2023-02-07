@@ -19,7 +19,7 @@ set(libkirigami_extra_sources "")
 if (UNIX AND NOT ANDROID AND NOT(APPLE) AND NOT(DISABLE_DBUS))
     qt_add_dbus_interface(libkirigami_extra_sources org.kde.KWin.TabletModeManager.xml tabletmodemanager_interface)
     qt_add_dbus_interface(libkirigami_extra_sources org.kde.KWin.VirtualKeyboard.xml virtualkeyboard_interface)
-    set(LIBKIRIGAMKI_EXTRA_LIBS Qt${QT_MAJOR_VERSION}::DBus)
+    set(LIBKIRIGAMKI_EXTRA_LIBS Qt6::DBus)
 endif()
 
 ecm_qt_declare_logging_category(libkirigami_extra_sources
@@ -44,11 +44,11 @@ target_include_directories(KF6Kirigami2
 
 target_link_libraries(KF6Kirigami2
     PUBLIC
-        Qt${QT_MAJOR_VERSION}::Core
+        Qt6::Core
     PRIVATE
-        Qt${QT_MAJOR_VERSION}::Qml
-        Qt${QT_MAJOR_VERSION}::Quick
-        Qt${QT_MAJOR_VERSION}::QuickControls2
+        Qt6::Qml
+        Qt6::Quick
+        Qt6::QuickControls2
         ${LIBKIRIGAMKI_EXTRA_LIBS}
 )
 

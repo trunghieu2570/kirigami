@@ -1,10 +1,10 @@
-if(NOT TARGET Qt${QT_MAJOR_VERSION}::QuickTest)
-    message(STATUS "Qt${QT_MAJOR_VERSION}QuickTest not found, autotests will not be built.")
+if(NOT TARGET Qt6::QuickTest)
+    message(STATUS "Qt6QuickTest not found, autotests will not be built.")
     return()
 endif()
 
 add_executable(qmltest qmltest.cpp)
-target_link_libraries(qmltest PRIVATE Qt::Qml Qt${QT_MAJOR_VERSION}::QuickTest)
+target_link_libraries(qmltest PRIVATE Qt6::Qml Qt6::QuickTest)
 
 if (NOT BUILD_SHARED_LIBS)
     target_compile_definitions(qmltest PRIVATE STATIC_MODULE)

@@ -288,14 +288,14 @@ if (DESKTOP_ENABLED)
 endif()
 
 target_link_libraries(KirigamiPlugin
-    PUBLIC Qt${QT_MAJOR_VERSION}::Core
+    PUBLIC Qt6::Core
     PRIVATE
     ${Kirigami_EXTRA_LIBS}
-    Qt${QT_MAJOR_VERSION}::GuiPrivate
-    Qt${QT_MAJOR_VERSION}::Qml
-    Qt${QT_MAJOR_VERSION}::Quick
-    Qt${QT_MAJOR_VERSION}::QuickControls2
-    Qt${QT_MAJOR_VERSION}::Concurrent
+    Qt6::GuiPrivate
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickControls2
+    Qt6::Concurrent
     KF6Kirigami2
 )
 
