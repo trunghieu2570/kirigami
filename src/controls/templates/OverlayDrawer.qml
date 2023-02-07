@@ -384,7 +384,7 @@ T2.Drawer {
 
 //BEGIN signal handlers
     onCollapsedChanged: {
-        if (Kirigami.SettingsisMobile) {
+        if (Kirigami.Settings.isMobile) {
             collapsed = false;
         }
         if (!__internal.completed) {
@@ -395,7 +395,7 @@ T2.Drawer {
         }
     }
     onCollapsibleChanged: {
-        if (Kirigami.SettingsisMobile) {
+        if (Kirigami.Settings.isMobile) {
             collapsible = false;
         }
         if (!__internal.completed) {
