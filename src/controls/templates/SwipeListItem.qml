@@ -489,11 +489,10 @@ T.SwipeDelegate {
                 const actionCount = listItem.actions.length;
                 for (let i = 0; i < actionCount; i++) {
                     // Assuming that visible is only false if it is explicitly false, and not just falsy
-                    if (listItem.actions[i].visible === false) {
-                        continue;
+                    if (listItem.actions[i].visible) {
+                        hasVisibleActions = true;
+                        break;
                     }
-                    hasVisibleActions = true;
-                    break;
                 }
             }
         }
