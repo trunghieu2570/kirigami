@@ -292,6 +292,8 @@ OverlayDrawer {
         }
     }
 
+    onIsMenuChanged: drawerOpen = false
+
     contentItem: QQC2.ScrollView {
         id: scrollView
         //ensure the attached property exists

@@ -70,6 +70,15 @@ Kirigami.AbstractApplicationHeader {
                 tooltip: checked ? qsTr("Close menu") : qsTr("Open menu")
             }
             Accessible.name: action.tooltip
+
+            Connections {
+                target: applicationWindow().globalDrawer
+                function onIsMenuChanged() {
+                    if (!applicationWindow().globalDrawer.isMenu && menuButton.menu) {
+                        menuButton.menu.dismiss()
+                    }
+                }
+            }
         }
 
         RowLayout {
