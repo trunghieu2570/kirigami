@@ -7,7 +7,7 @@ project(%{APPNAMELC} VERSION 0.1)
 
 include(FeatureSummary)
 
-set(QT5_MIN_VERSION 6.4.0)
+set(QT6_MIN_VERSION 6.4.0)
 set(KF6_MIN_VERSION 5.240.0)
 
 find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
@@ -24,7 +24,7 @@ ecm_setup_version(${PROJECT_VERSION}
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/src/version-%{APPNAMELC}.h"
 )
 
-find_package(Qt5 ${QT5_MIN_VERSION} REQUIRED COMPONENTS Core Gui Qml QuickControls2 Svg)
+find_package(Qt6 ${QT6_MIN_VERSION} REQUIRED COMPONENTS Core Gui Qml QuickControls2 Svg)
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS Kirigami2 CoreAddons Config I18n)
 
 if (ANDROID)
