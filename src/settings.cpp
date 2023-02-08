@@ -10,14 +10,10 @@
 #include <QFile>
 #include <QGuiApplication>
 #include <QIcon>
+#include <QInputDevice>
 #include <QMouseEvent>
 #include <QSettings>
 #include <QStandardPaths>
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#include <QTouchDevice>
-#else
-#include <QInputDevice>
-#endif
 #include <QWindow>
 
 #include <QtGui/private/qguiapplication_p.h>
@@ -65,13 +61,8 @@ Settings::Settings(QObject *parent)
         m_mobile = false;
     }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    const auto touchDevices = QTouchDevice::devices();
-    const auto touchDeviceType = QTouchDevice::TouchScreen;
-#else
     const auto touchDevices = QInputDevice::devices();
     const auto touchDeviceType = QInputDevice::DeviceType::TouchScreen;
-#endif
     for (const auto &device : touchDevices) {
         if (device->type() == touchDeviceType) {
             m_hasTouchScreen = true;

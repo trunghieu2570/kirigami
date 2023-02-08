@@ -716,19 +716,11 @@ void ContentItem::itemChange(QQuickItem::ItemChange change, const QQuickItem::It
     QQuickItem::itemChange(change, value);
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-void ContentItem::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
-{
-    updateVisibleItems();
-    QQuickItem::geometryChanged(newGeometry, oldGeometry);
-}
-#else
 void ContentItem::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
 {
     updateVisibleItems();
     QQuickItem::geometryChange(newGeometry, oldGeometry);
 }
-#endif
 
 void ContentItem::syncItemsOrder()
 {
@@ -1305,11 +1297,7 @@ ColumnViewAttached *ColumnView::qmlAttachedProperties(QObject *object)
     return new ColumnViewAttached(object);
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-void ColumnView::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
-#else
 void ColumnView::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
-#endif
 {
     m_contentItem->setY(m_topPadding);
     m_contentItem->setHeight(newGeometry.height() - m_topPadding - m_bottomPadding);
@@ -1317,11 +1305,7 @@ void ColumnView::geometryChange(const QRectF &newGeometry, const QRectF &oldGeom
     polish();
 
     m_contentItem->updateVisibleItems();
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QQuickItem::geometryChanged(newGeometry, oldGeometry);
-#else
     QQuickItem::geometryChange(newGeometry, oldGeometry);
-#endif
 }
 
 bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
@@ -1654,11 +1638,7 @@ void ColumnView::contentChildren_append(QQmlListProperty<QQuickItem> *prop, QQui
     item->setParentItem(view->m_contentItem);
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-int ColumnView::contentChildren_count(QQmlListProperty<QQuickItem> *prop)
-#else
 qsizetype ColumnView::contentChildren_count(QQmlListProperty<QQuickItem> *prop)
-#endif
 {
     ColumnView *view = static_cast<ColumnView *>(prop->object);
     if (!view) {
@@ -1668,11 +1648,7 @@ qsizetype ColumnView::contentChildren_count(QQmlListProperty<QQuickItem> *prop)
     return view->m_contentItem->m_items.count();
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-QQuickItem *ColumnView::contentChildren_at(QQmlListProperty<QQuickItem> *prop, int index)
-#else
 QQuickItem *ColumnView::contentChildren_at(QQmlListProperty<QQuickItem> *prop, qsizetype index)
-#endif
 {
     ColumnView *view = static_cast<ColumnView *>(prop->object);
     if (!view) {
@@ -1737,11 +1713,7 @@ void ColumnView::contentData_append(QQmlListProperty<QObject> *prop, QObject *ob
     }
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-int ColumnView::contentData_count(QQmlListProperty<QObject> *prop)
-#else
 qsizetype ColumnView::contentData_count(QQmlListProperty<QObject> *prop)
-#endif
 {
     ColumnView *view = static_cast<ColumnView *>(prop->object);
     if (!view) {
@@ -1751,11 +1723,7 @@ qsizetype ColumnView::contentData_count(QQmlListProperty<QObject> *prop)
     return view->m_contentData.count();
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-QObject *ColumnView::contentData_at(QQmlListProperty<QObject> *prop, int index)
-#else
 QObject *ColumnView::contentData_at(QQmlListProperty<QObject> *prop, qsizetype index)
-#endif
 {
     ColumnView *view = static_cast<ColumnView *>(prop->object);
     if (!view) {

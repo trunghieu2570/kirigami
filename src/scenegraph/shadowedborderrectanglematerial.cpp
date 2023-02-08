@@ -15,11 +15,7 @@ ShadowedBorderRectangleMaterial::ShadowedBorderRectangleMaterial()
     setFlag(QSGMaterial::Blending, true);
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-QSGMaterialShader *ShadowedBorderRectangleMaterial::createShader() const
-#else
 QSGMaterialShader *ShadowedBorderRectangleMaterial::createShader(QSGRendererInterface::RenderMode) const
-#endif
 {
     return new ShadowedBorderRectangleShader{shaderType};
 }
@@ -50,27 +46,6 @@ ShadowedBorderRectangleShader::ShadowedBorderRectangleShader(ShadowedRectangleMa
     setShader(shaderType, QStringLiteral("shadowedborderrectangle"));
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-void ShadowedBorderRectangleShader::initialize()
-{
-    ShadowedRectangleShader::initialize();
-    m_borderWidthLocation = program()->uniformLocation("borderWidth");
-    m_borderColorLocation = program()->uniformLocation("borderColor");
-}
-
-void ShadowedBorderRectangleShader::updateState(const QSGMaterialShader::RenderState &state, QSGMaterial *newMaterial, QSGMaterial *oldMaterial)
-{
-    ShadowedRectangleShader::updateState(state, newMaterial, oldMaterial);
-
-    auto p = program();
-
-    if (!oldMaterial || newMaterial->compare(oldMaterial) != 0 || state.isCachedMaterialDataDirty()) {
-        auto material = static_cast<ShadowedBorderRectangleMaterial *>(newMaterial);
-        p->setUniformValue(m_borderWidthLocation, material->borderWidth);
-        p->setUniformValue(m_borderColorLocation, material->borderColor);
-    }
-}
-#else
 bool ShadowedBorderRectangleShader::updateUniformData(QSGMaterialShader::RenderState &state, QSGMaterial *newMaterial, QSGMaterial *oldMaterial)
 {
     bool changed = ShadowedRectangleShader::updateUniformData(state, newMaterial, oldMaterial);
@@ -88,4 +63,3 @@ bool ShadowedBorderRectangleShader::updateUniformData(QSGMaterialShader::RenderS
 
     return changed;
 }
-#endif

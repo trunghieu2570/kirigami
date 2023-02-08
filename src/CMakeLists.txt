@@ -67,8 +67,6 @@ target_sources(KirigamiPlugin PRIVATE
     scenegraph/paintedrectangleitem.cpp
     scenegraph/paintedrectangleitem.h
     ${CMAKE_CURRENT_BINARY_DIR}/libkirigami/loggingcategory.cpp
-
-    scenegraph/shaders/shaders.qrc
 )
 if (HAVE_QTGUI_OPENGL AND NOT KF6_PORTING_TODO)
     target_sources(KirigamiPlugin PRIVATE

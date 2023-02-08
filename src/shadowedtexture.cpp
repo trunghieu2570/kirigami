@@ -10,9 +10,7 @@
 #include <QSGRectangleNode>
 #include <QSGRendererInterface>
 
-#if QT_CONFIG(opengl) || QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include "scenegraph/shadowedtexturenode.h"
-#endif
 
 ShadowedTexture::ShadowedTexture(QQuickItem *parentItem)
     : ShadowedRectangle(parentItem)
@@ -49,7 +47,6 @@ void ShadowedTexture::setSource(QQuickItem *newSource)
 QSGNode *ShadowedTexture::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData *data)
 {
     Q_UNUSED(data)
-#if QT_CONFIG(opengl) || QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
     if (boundingRect().isEmpty()) {
         delete node;
@@ -88,8 +85,4 @@ QSGNode *ShadowedTexture::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaint
 
     shadowNode->updateGeometry();
     return shadowNode;
-#else
-    Q_UNUSED(node)
-    return nullptr;
-#endif
 }

@@ -78,13 +78,8 @@ public:
     QElapsedTimer performanceTimer;
 
     static void appendAction(ToolBarLayout::ActionsProperty *list, QObject *action);
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    static int actionCount(ToolBarLayout::ActionsProperty *list);
-    static QObject *action(ToolBarLayout::ActionsProperty *list, int index);
-#else
     static qsizetype actionCount(ToolBarLayout::ActionsProperty *list);
     static QObject *action(ToolBarLayout::ActionsProperty *list, qsizetype index);
-#endif
     static void clearActions(ToolBarLayout::ActionsProperty *list);
 };
 
@@ -315,11 +310,7 @@ void ToolBarLayout::componentComplete()
     d->calculateImplicitSize();
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-void ToolBarLayout::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
-#else
 void ToolBarLayout::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
-#endif
 {
     if (newGeometry != oldGeometry) {
         if (newGeometry.size() != QSizeF{implicitWidth(), implicitHeight()}) {
@@ -328,11 +319,7 @@ void ToolBarLayout::geometryChange(const QRectF &newGeometry, const QRectF &oldG
             polish();
         }
     }
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QQuickItem::geometryChanged(newGeometry, oldGeometry);
-#else
     QQuickItem::geometryChange(newGeometry, oldGeometry);
-#endif
 }
 
 void ToolBarLayout::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &data)
@@ -737,20 +724,12 @@ void ToolBarLayout::Private::appendAction(ToolBarLayout::ActionsProperty *list, 
     layout->addAction(action);
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-int ToolBarLayout::Private::actionCount(ToolBarLayout::ActionsProperty *list)
-#else
 qsizetype ToolBarLayout::Private::actionCount(ToolBarLayout::ActionsProperty *list)
-#endif
 {
     return reinterpret_cast<ToolBarLayout *>(list->data)->d->actions.count();
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-QObject *ToolBarLayout::Private::action(ToolBarLayout::ActionsProperty *list, int index)
-#else
 QObject *ToolBarLayout::Private::action(ToolBarLayout::ActionsProperty *list, qsizetype index)
-#endif
 {
     return reinterpret_cast<ToolBarLayout *>(list->data)->d->actions.at(index);
 }

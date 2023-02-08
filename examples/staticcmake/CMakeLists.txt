@@ -5,7 +5,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/ ${CMAKE_MODULE_PATH} ${
 
 set(BREEZEICONS_DIR ${CMAKE_SOURCE_DIR}/3rdparty/breeze-icons/)
 
-find_package(Qt5 REQUIRED Core Quick Multimedia Test Widgets QuickControls2)
+find_package(Qt6 REQUIRED Core Quick Multimedia Test Widgets QuickControls2)
 
 include(KDEInstallDirs)
 include(KDECompilerSettings)

@@ -343,20 +343,12 @@ DelegateRecyclerAttached *DelegateRecycler::qmlAttachedProperties(QObject *objec
     return new DelegateRecyclerAttached(object);
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-void DelegateRecycler::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
-#else
 void DelegateRecycler::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
-#endif
 {
     if (m_item && newGeometry.size() != oldGeometry.size()) {
         updateSize(true);
     }
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QQuickItem::geometryChanged(newGeometry, oldGeometry);
-#else
     QQuickItem::geometryChange(newGeometry, oldGeometry);
-#endif
 }
 
 void DelegateRecycler::focusInEvent(QFocusEvent *event)

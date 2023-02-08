@@ -329,7 +329,6 @@ KirigamiPlugin& KirigamiPlugin::getInstance()
 
 void KirigamiPlugin::registerTypes(QQmlEngine* engine)
 {
-    Q_INIT_RESOURCE(shaders);
     Q_INIT_RESOURCE(KirigamiPlugin);
 
     if (engine) {

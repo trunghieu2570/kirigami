@@ -15,11 +15,7 @@ ShadowedRectangleMaterial::ShadowedRectangleMaterial()
     setFlag(QSGMaterial::Blending, true);
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-QSGMaterialShader *ShadowedRectangleMaterial::createShader() const
-#else
 QSGMaterialShader *ShadowedRectangleMaterial::createShader(QSGRendererInterface::RenderMode) const
-#endif
 {
     return new ShadowedRectangleShader{shaderType};
 }
@@ -50,49 +46,6 @@ ShadowedRectangleShader::ShadowedRectangleShader(ShadowedRectangleMaterial::Shad
     setShader(shaderType, QStringLiteral("shadowedrectangle"));
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-const char *const *ShadowedRectangleShader::attributeNames() const
-{
-    static char const *const names[] = {"in_vertex", "in_uv", nullptr};
-    return names;
-}
-
-void ShadowedRectangleShader::initialize()
-{
-    QSGMaterialShader::initialize();
-    m_matrixLocation = program()->uniformLocation("matrix");
-    m_aspectLocation = program()->uniformLocation("aspect");
-    m_opacityLocation = program()->uniformLocation("opacity");
-    m_sizeLocation = program()->uniformLocation("size");
-    m_radiusLocation = program()->uniformLocation("radius");
-    m_colorLocation = program()->uniformLocation("color");
-    m_shadowColorLocation = program()->uniformLocation("shadowColor");
-    m_offsetLocation = program()->uniformLocation("offset");
-}
-
-void ShadowedRectangleShader::updateState(const QSGMaterialShader::RenderState &state, QSGMaterial *newMaterial, QSGMaterial *oldMaterial)
-{
-    auto p = program();
-
-    if (state.isMatrixDirty()) {
-        p->setUniformValue(m_matrixLocation, state.combinedMatrix());
-    }
-
-    if (state.isOpacityDirty()) {
-        p->setUniformValue(m_opacityLocation, state.opacity());
-    }
-
-    if (!oldMaterial || newMaterial->compare(oldMaterial) != 0 || state.isCachedMaterialDataDirty()) {
-        auto material = static_cast<ShadowedRectangleMaterial *>(newMaterial);
-        p->setUniformValue(m_aspectLocation, material->aspect);
-        p->setUniformValue(m_sizeLocation, material->size);
-        p->setUniformValue(m_radiusLocation, material->radius);
-        p->setUniformValue(m_colorLocation, material->color);
-        p->setUniformValue(m_shadowColorLocation, material->shadowColor);
-        p->setUniformValue(m_offsetLocation, material->offset);
-    }
-}
-#else
 bool ShadowedRectangleShader::updateUniformData(RenderState &state, QSGMaterial *newMaterial, QSGMaterial *oldMaterial)
 {
     bool changed = false;
@@ -127,26 +80,11 @@ bool ShadowedRectangleShader::updateUniformData(RenderState &state, QSGMaterial 
 
     return changed;
 }
-#endif
 
 void ShadowedRectangleShader::setShader(ShadowedRectangleMaterial::ShaderType shaderType, const QString &shader)
 {
     const auto shaderRoot = QStringLiteral(":/org/kde/kirigami/shaders/");
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    auto header = QOpenGLContext::currentContext()->isOpenGLES() ? QStringLiteral("header_es.glsl") : QStringLiteral("header_desktop.glsl");
-
-    setShaderSourceFiles(QOpenGLShader::Vertex, {shaderRoot + header, shaderRoot + QStringLiteral("shadowedrectangle.vert")});
-
-    QString shaderFile = shader + QStringLiteral(".frag");
-    auto sdfFile = QStringLiteral("sdf.glsl");
-    if (shaderType == ShadowedRectangleMaterial::ShaderType::LowPower) {
-        shaderFile = shader + QStringLiteral("_lowpower.frag");
-        sdfFile = QStringLiteral("sdf_lowpower.glsl");
-    }
-
-    setShaderSourceFiles(QOpenGLShader::Fragment, {shaderRoot + header, shaderRoot + sdfFile, shaderRoot + shaderFile});
-#else
     setShaderFileName(QSGMaterialShader::VertexStage, shaderRoot + QStringLiteral("shadowedrectangle.vert.qsb"));
 
     auto shaderFile = shader;
@@ -154,5 +92,4 @@ void ShadowedRectangleShader::setShader(ShadowedRectangleMaterial::ShaderType sh
         shaderFile += QStringLiteral("_lowpower");
     }
     setShaderFileName(QSGMaterialShader::FragmentStage, shaderRoot + shaderFile + QStringLiteral(".frag.qsb"));
-#endif
 }
