@@ -1,8 +1,8 @@
-# giovanni <g.sora@tiscali.it>, 2017, 2019, 2020, 2021, 2022.
+# giovanni <g.sora@tiscali.it>, 2017, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-07-15 11:53+0200\n"
+"PO-Revision-Date: 2023-02-08 22:40+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #: controls/AboutItem.qml:128
 #, qt-format
@@ -39,15 +39,12 @@ msgstr "Sea involvite"
 #: controls/AboutItem.qml:202
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Dona"
 
 #: controls/AboutItem.qml:219
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Report Bug…"
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "Reporta Bug…"
+msgstr "Reporta un bug"
 
 #: controls/AboutItem.qml:232
 msgctxt "AboutItem|"
@@ -148,20 +145,14 @@ msgid "Password"
 msgstr "Contrasigno"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr "Claude"
+msgstr "Claude menu"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Open"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr "Aperi"
+msgstr "Aperi menu"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -176,7 +167,7 @@ msgstr "Cerca"
 #: controls/SearchField.qml:106
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr ""
+msgstr "Netta cerca"
 
 #: controls/settingscomponents/CategorizedSettings.qml:30
 #: controls/settingscomponents/CategorizedSettings.qml:87

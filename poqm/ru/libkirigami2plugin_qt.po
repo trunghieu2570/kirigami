@@ -1,10 +1,10 @@
 # Alexander Potashev <aspotashev@gmail.com>, 2016, 2017, 2019.
 # Alexander Yavorsky <kekcuha@gmail.com>, 2019, 2020, 2021.
-# Мария Шикунова <translation-team@basealt.ru>, 2022.
+# Мария Шикунова <translation-team@basealt.ru>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-11-17 12:50+0300\n"
+"PO-Revision-Date: 2023-02-08 10:35+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: controls/AboutItem.qml:128
 #, qt-format
@@ -148,20 +148,14 @@ msgid "Password"
 msgstr "Пароль"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr "Закрыть"
+msgstr "Закрыть меню"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Open"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr "Открыть"
+msgstr "Открыть меню"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -176,7 +170,7 @@ msgstr "Поиск"
 #: controls/SearchField.qml:106
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr ""
+msgstr "Очистить поиск"
 
 #: controls/settingscomponents/CategorizedSettings.qml:30
 #: controls/settingscomponents/CategorizedSettings.qml:87
