@@ -50,17 +50,17 @@ KirigamiPluginFactory *KirigamiPluginFactory::findPlugin()
         #else
         const auto libraryPaths = QCoreApplication::libraryPaths();
         for (const QString &path : libraryPaths) {
-            #ifdef Q_OS_ANDROID
+#ifdef Q_OS_ANDROID
             QDir dir(path);
-            #else
-            QDir dir(path + QStringLiteral("/kf" QT_STRINGIFY(QT_VERSION_MAJOR) "/kirigami"));
-            #endif
+#else
+            QDir dir(path + QStringLiteral("/kf6/kirigami"));
+#endif
             const auto fileNames = dir.entryList(QDir::Files);
 
             for (const QString &fileName : fileNames) {
 
 #ifdef Q_OS_ANDROID
-                if (fileName.startsWith(QStringLiteral("libplugins_kf" QT_STRINGIFY(QT_VERSION_MAJOR) "_kirigami_")) && QLibrary::isLibrary(fileName)) {
+                if (fileName.startsWith(QStringLiteral("libplugins_kf6_kirigami_")) && QLibrary::isLibrary(fileName)) {
 #endif
                     // TODO: env variable?
                     if (!QQuickStyle::name().isEmpty() && fileName.contains(QQuickStyle::name())) {
