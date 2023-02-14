@@ -453,6 +453,8 @@ T.Dialog {
 
         contentItem: RowLayout {
             spacing: parent.spacing
+            // Don't let user interact with footer during transitions
+            enabled: root.opened
 
             Loader {
                 id: leadingLoader
