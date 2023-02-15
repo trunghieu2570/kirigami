@@ -21,10 +21,8 @@ import "templates" as T
 T.OverlaySheet {
     id: root
 
-    leftInset: 0
-    topInset: -Kirigami.Units.smallSpacing
-    rightInset: 0
-    bottomInset: -Kirigami.Units.smallSpacing
-
-    background: P.DefaultCardBackground {}
+    background: P.DefaultCardBackground {
+        Kirigami.Theme.colorSet: root.Kirigami.Theme.colorSet
+        Kirigami.Theme.inherit: false
+    }
 }
