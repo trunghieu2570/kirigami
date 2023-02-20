@@ -117,6 +117,8 @@ void KirigamiPlugin::registerTypes(const char *uri)
     if (QIcon::themeName().isEmpty() && !qEnvironmentVariableIsSet("XDG_CURRENT_DESKTOP")) {
         QIcon::setThemeSearchPaths({Kirigami::StyleSelector::resolveFilePath(QStringLiteral(".")), QStringLiteral(":/icons")});
         QIcon::setThemeName(QStringLiteral("breeze-internal"));
+    } else {
+        QIcon::setFallbackSearchPaths(QIcon::fallbackSearchPaths() << Kirigami::StyleSelector::resolveFilePath(QStringLiteral("icons")));
     }
 
     qmlRegisterSingletonType<Settings>(uri, 2, 0, "Settings", [](QQmlEngine *e, QJSEngine *) -> QObject * {
