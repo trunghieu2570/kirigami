@@ -402,8 +402,6 @@ bool WheelHandler::scrollFlickable(QPointF pixelDelta, QPointF angleDelta, Qt::K
     const qreal bottomMargin = m_flickable->property("bottomMargin").toReal();
     const qreal leftMargin = m_flickable->property("leftMargin").toReal();
     const qreal rightMargin = m_flickable->property("rightMargin").toReal();
-    const qreal originX = m_flickable->property("originX").toReal();
-    const qreal originY = m_flickable->property("originY").toReal();
     const qreal pageWidth = width - leftMargin - rightMargin;
     const qreal pageHeight = height - topMargin - bottomMargin;
     const auto window = m_flickable->window();
@@ -434,8 +432,8 @@ bool WheelHandler::scrollFlickable(QPointF pixelDelta, QPointF angleDelta, Qt::K
 
         // contentX and contentY use reversed signs from what x and y would normally use, so flip the signs
 
-        qreal minXExtent = leftMargin - originX;
-        qreal maxXExtent = width - (contentWidth + rightMargin + originX);
+        qreal minXExtent = leftMargin;
+        qreal maxXExtent = width - (contentWidth + rightMargin);
 
         qreal newContentX = qBound(-minXExtent, contentX - xChange, -maxXExtent);
         // Flickable::pixelAligned rounds the position, so round to mimic that behavior.
@@ -462,8 +460,8 @@ bool WheelHandler::scrollFlickable(QPointF pixelDelta, QPointF angleDelta, Qt::K
 
         // contentX and contentY use reversed signs from what x and y would normally use, so flip the signs
 
-        qreal minYExtent = topMargin - originY;
-        qreal maxYExtent = height - (contentHeight + bottomMargin + originY);
+        qreal minYExtent = topMargin;
+        qreal maxYExtent = height - (contentHeight + bottomMargin);
 
         qreal newContentY = qBound(-minYExtent, contentY - yChange, -maxYExtent);
         // Flickable::pixelAligned rounds the position, so round to mimic that behavior.
