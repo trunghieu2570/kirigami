@@ -98,7 +98,7 @@ Item {
 
         RowLayout {
             Layout.fillWidth: true
-            property bool hasRemoteAvatar: (typeof(modelData.ocsUsername) !== "undefined" && modelData.ocsUsername.length > 0)
+            property bool hasRemoteAvatar: !!modelData.avatarUrl
 
             spacing: Kirigami.Units.smallSpacing * 2
 
@@ -109,7 +109,18 @@ Item {
                 implicitHeight: implicitWidth
 
                 fallback: "user"
-                source: hasRemoteAvatar && remoteAvatars.checked ? "https://store.kde.org/avatar/%1?s=%2".arg(modelData.ocsUsername).arg(width) : "user"
+                source: {
+                    if (hasRemoteAvatar && remoteAvatars.checked) {
+                        // Appending to the params of the url does not work, thus the search is set
+                        const url = new URL(modelData.avatarUrl);
+                        const params = new URLSearchParams(url.search);
+                        params.append("s", width);
+                        url.search = params.toString();
+                        return url;
+                    } else {
+                        return "user"
+                    }
+                }
                 visible: status !== Kirigami.Icon.Loading
             }
 
