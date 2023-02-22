@@ -141,15 +141,6 @@ Item {
             }
 
             QQC2.ToolButton {
-                visible: typeof(modelData.ocsUsername) !== "undefined" && modelData.ocsUsername.length > 0
-                icon.name: "get-hot-new-stuff"
-                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
-                QQC2.ToolTip.visible: hovered
-                QQC2.ToolTip.text: qsTr("Visit %1's KDE Store page").arg(modelData.name)
-                onClicked: Qt.openUrlExternally("https://store.kde.org/u/%1".arg(modelData.ocsUsername))
-            }
-
-            QQC2.ToolButton {
                 visible: typeof(modelData.emailAddress) !== "undefined" && modelData.emailAddress.length > 0
                 icon.name: "mail-sent"
                 QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
