@@ -139,7 +139,7 @@ T2.Popup {
         } else {
             return h;
         }
-        h +=  + headerItem.implicitHeight + footerParent.implicitHeight + topPadding + bottomPadding;
+        h += headerItem.implicitHeight + footerParent.implicitHeight + topPadding + bottomPadding;
     }
     //height: Math.min(parent.height, scrollView.contentItem.contentHeight)
 //END Reimplemented Properties
