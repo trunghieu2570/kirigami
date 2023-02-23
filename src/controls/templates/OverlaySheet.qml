@@ -108,8 +108,7 @@ T2.Popup {
     rightInset: -1
     topInset: -1
     bottomInset: -1
-//TODO: remove
-property alias sheetOpen: root.visible
+
     closePolicy: QQC2.Popup.CloseOnEscape
     x: parent.width/2 - width/2
     y: {
