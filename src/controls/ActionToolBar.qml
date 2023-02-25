@@ -39,7 +39,7 @@ QQC2.Control {
      *
      * @property list<Action> actions
      */
-    property alias actions: layout.actions
+    readonly property alias actions: layout.actions
 
     /**
      * @brief This property holds a list of hidden actions.
@@ -133,7 +133,7 @@ QQC2.Control {
      * @brief This property holds the combined width of all visible delegates.
      * @property int visibleWidth
      */
-    property alias visibleWidth: layout.visibleWidth
+    readonly property alias visibleWidth: layout.visibleWidth
 
     /**
      * @brief This property sets the handling method for items that do not match the toolbar's height.

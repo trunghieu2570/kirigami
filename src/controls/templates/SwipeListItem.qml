@@ -66,7 +66,7 @@ T.SwipeDelegate {
      * @deprecated This will be removed in KF6; use the ``hovered`` property instead.
      * @property bool containsMouse
      */
-    property alias containsMouse: listItem.hovered
+    readonly property alias containsMouse: listItem.hovered
 
     /**
      * @brief This property sets whether instances of this list item will alternate

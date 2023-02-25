@@ -84,10 +84,9 @@ Kirigami.AbstractApplicationItem {
      * as can fit in the screen. An handheld device would usually have a single
      * fullscreen column, a tablet device would have many tiled columns.
      *
-     * @warning This property is readonly.
      * @property QtQuick.StackView ApplicationItem::pageStack
      */
-    property alias pageStack: __pageStack // TODO KF6 make readonly
+    readonly property alias pageStack: __pageStack
 
     // Redefines here as here we can know a pointer to PageRow
     wideScreen: width >= applicationWindow().pageStack.defaultColumnWidth * 2

@@ -46,7 +46,7 @@ QT.Control {
      *
      * @property Page currentItem
      */
-    property alias currentItem: columnView.currentItem
+    readonly property alias currentItem: columnView.currentItem
 
     /**
      * @brief This property holds the index of the currently active page.
@@ -82,7 +82,7 @@ QT.Control {
      * @property list<Page> items
      * @since 2.6
      */
-    property alias items: columnView.contentChildren;
+    readonly property alias items: columnView.contentChildren;
 
     /**
      * @brief This property holds all visible pages in the PageRow,
@@ -90,7 +90,7 @@ QT.Control {
      * @property list<Page> visibleItems
      * @since 2.6
      */
-    property alias visibleItems: columnView.visibleItems
+    readonly property alias visibleItems: columnView.visibleItems
 
     /**
      * @brief This property holds the first page in the PageRow that is at least partially visible.
@@ -99,7 +99,7 @@ QT.Control {
      * @property Item firstVisibleItem
      * @since 2.6
      */
-    property alias firstVisibleItem: columnView.firstVisibleItem
+    readonly property alias firstVisibleItem: columnView.firstVisibleItem
 
     /**
      * @brief This property holds the last page in the PageRow that is at least partially visible.
@@ -108,7 +108,7 @@ QT.Control {
      * @property Item lastVisibleItem
      * @since 2.6
      */
-    property alias lastVisibleItem: columnView.lastVisibleItem
+    readonly property alias lastVisibleItem: columnView.lastVisibleItem
 
     /**
      * @brief This property holds the default width for a column.

@@ -96,10 +96,9 @@ Kirigami.AbstractApplicationWindow {
      * as can fit in the screen. An handheld device would usually have a single
      * fullscreen column, a tablet device would have many tiled columns.
      *
-     * @warning This property is not currently readonly, but it should be treated like it is readonly.
      * @property org::kde::kirigami::PageRow pageStack
      */
-    property alias pageStack: __pageStack  // TODO KF6 make readonly
+    readonly property alias pageStack: __pageStack
 
     // Redefined here as here we can know a pointer to PageRow.
     // We negate the canBeEnabled check because we don't want to factor in the automatic drawer provided by Kirigami for page actions for our calculations
