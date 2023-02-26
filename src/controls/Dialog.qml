@@ -361,18 +361,27 @@ T.Dialog {
             Layout.maximumWidth: calculatedMaximumWidth
             Layout.maximumHeight: calculatedMaximumHeight - otherHeights // we enforce maximum height solely from the content
 
-            // give an implied width and height to the contentItem so that features like word wrapping/eliding work
-            // cannot placed directly in contentControl as a child, so we must use a property
-            property var widthHint: Binding {
+            // we want to avoid horizontal scrolling, so we apply maximum width as a hint if necessary
+            readonly property real flickableContentWidth: Math.min(
+                /*maximum*/ contentControl.calculatedMaximumWidth - contentControl.leftPadding - contentControl.rightPadding,
+                /*preferred*/ contentControl.contentItem.width)
+
+            // Give an implied width and height to the contentItem so that features like word wrapping/eliding work.
+            // Cannot placed directly in contentControl as a child, we must store it in a non-default property.
+            property Binding widthHint: Binding {
                 target: contentControl.contentChildren[0] || null
                 property: "width"
-
-                // we want to avoid horizontal scrolling, so we apply maximumWidth as a hint if necessary
-                property real preferredWidthHint: contentControl.contentItem.width
-                property real maximumWidthHint: contentControl.calculatedMaximumWidth - contentControl.leftPadding - contentControl.rightPadding
-
-                value: Math.min(maximumWidthHint, preferredWidthHint)
-
+                value: contentControl.flickableContentWidth
+                restoreMode: Binding.RestoreBinding
+            }
+            // Also fix Flickable, so it does not follow it's own
+            // contentItem's implicitWidth, otherwise components like
+            // FormLayout which are perfectly usable at sizes below their
+            // implicitWidth (non wideMode), won't make it scrollable with keyboard.
+            property Binding contentWidthHint: Binding {
+                target: contentControl.contentItem
+                property: "contentWidth"
+                value: contentControl.flickableContentWidth
                 restoreMode: Binding.RestoreBinding
             }
         }
