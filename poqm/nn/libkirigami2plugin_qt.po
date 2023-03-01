@@ -1,10 +1,10 @@
 # Translation of libkirigami2plugin_qt to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2016, 2018, 2019, 2020, 2021.
+# Karl Ove Hufthammer <karl@huftis.org>, 2016, 2018, 2019, 2020, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2021-03-21 17:44+0100\n"
+"PO-Revision-Date: 2023-02-11 15:35+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -12,93 +12,93 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.12.3\n"
+"X-Generator: Lokalize 22.12.2\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: qtrich\n"
 "X-Qt-Contexts: true\n"
 
-#: controls/AboutItem.qml:129
+#: controls/AboutItem.qml:128
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
-#: controls/AboutItem.qml:138
+#: controls/AboutItem.qml:137
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
-msgstr ""
+msgstr "Gå til %1-sida i KDE-butikken"
 
-#: controls/AboutItem.qml:147
+#: controls/AboutItem.qml:146
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
-msgstr ""
+msgstr "Send e-post til %1"
 
-#: controls/AboutItem.qml:197
+#: controls/AboutItem.qml:196
 msgctxt "AboutItem|"
 msgid "Get Involved"
-msgstr ""
+msgstr "Vert med"
 
-#: controls/AboutItem.qml:203
+#: controls/AboutItem.qml:202
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Gje pengegåve"
 
-#: controls/AboutItem.qml:220
+#: controls/AboutItem.qml:219
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr ""
+msgstr "Meld frå om feil"
 
-#: controls/AboutItem.qml:233
+#: controls/AboutItem.qml:232
 msgctxt "AboutItem|"
 msgid "Copyright"
-msgstr ""
+msgstr "Opphavsrett"
 
-#: controls/AboutItem.qml:277
+#: controls/AboutItem.qml:276
 msgctxt "AboutItem|"
 msgid "License:"
-msgstr ""
+msgstr "Lisens:"
 
-#: controls/AboutItem.qml:299
+#: controls/AboutItem.qml:298
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
-msgstr ""
+msgstr "Lisens: %1"
 
-#: controls/AboutItem.qml:310
+#: controls/AboutItem.qml:309
 msgctxt "AboutItem|"
 msgid "Libraries in use"
-msgstr ""
+msgstr "Brukte bibliotek"
 
-#: controls/AboutItem.qml:340
+#: controls/AboutItem.qml:339
 msgctxt "AboutItem|"
 msgid "Authors"
-msgstr ""
+msgstr "Forfattarar"
 
-#: controls/AboutItem.qml:349
+#: controls/AboutItem.qml:348
 msgctxt "AboutItem|"
 msgid "Show author photos"
-msgstr ""
+msgstr "Vis forfattarbilete"
 
-#: controls/AboutItem.qml:380
+#: controls/AboutItem.qml:379
 msgctxt "AboutItem|"
 msgid "Credits"
-msgstr ""
+msgstr "Kreditering"
 
-#: controls/AboutItem.qml:393
+#: controls/AboutItem.qml:392
 msgctxt "AboutItem|"
 msgid "Translators"
-msgstr ""
+msgstr "Omsetjarar"
 
-#: controls/AboutPage.qml:94
+#: controls/AboutPage.qml:93
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
-msgstr ""
+msgstr "Om %1"
 
-#: controls/AbstractApplicationWindow.qml:344
+#: controls/AbstractApplicationWindow.qml:351
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Avslutt"
@@ -117,34 +117,34 @@ msgstr "%1 – %2"
 #: controls/Chip.qml:82
 msgctxt "Chip|"
 msgid "Remove Tag"
-msgstr ""
+msgstr "Fjern merkelapp"
 
 #: controls/ContextDrawer.qml:66
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Handlingar"
 
-#: controls/GlobalDrawer.qml:494
+#: controls/GlobalDrawer.qml:496
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Tilbake"
 
-#: controls/GlobalDrawer.qml:587
+#: controls/GlobalDrawer.qml:589
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Lukk sidestolpen"
 
-#: controls/GlobalDrawer.qml:590
+#: controls/GlobalDrawer.qml:592
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
-msgstr ""
+msgstr "Opna sidestolpe"
 
 #: controls/LoadingPlaceholder.qml:54
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
-msgstr ""
+msgstr "Lastar …"
 
-#: controls/PasswordField.qml:43
+#: controls/PasswordField.qml:42
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Passord"
@@ -152,17 +152,17 @@ msgstr "Passord"
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr ""
+msgstr "Lukk meny"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr ""
+msgstr "Opna meny"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
 msgid "Search…"
-msgstr ""
+msgstr "Søk …"
 
 #: controls/SearchField.qml:96
 msgctxt "SearchField|"
@@ -172,63 +172,63 @@ msgstr "Søk"
 #: controls/SearchField.qml:106
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr ""
+msgstr "Tøm søkjefelt"
 
 #: controls/settingscomponents/CategorizedSettings.qml:30
 #: controls/settingscomponents/CategorizedSettings.qml:87
 msgctxt "CategorizedSettings|"
 msgid "Settings"
-msgstr ""
+msgstr "Innstillingar"
 
 #: controls/settingscomponents/CategorizedSettings.qml:30
 #, qt-format
 msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
-msgstr ""
+msgstr "Innstillingar – %1"
 
 #. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
 #: controls/swipenavigator/templates/PageTab.qml:38
 #, qt-format
 msgctxt "PageTab|"
 msgid "Current page. Progress: %1 percent."
-msgstr ""
+msgstr "Gjeldande side. Framgang: %1 prosent."
 
 #. Accessibility text for a page tab. Keep the text as concise as possible.
 #: controls/swipenavigator/templates/PageTab.qml:41
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1. Progress: %2 percent."
-msgstr ""
+msgstr "Gå til %1. Framgang: %2 prosent."
 
 #. Accessibility text for a page tab. Keep the text as concise as possible.
 #: controls/swipenavigator/templates/PageTab.qml:46
 msgctxt "PageTab|"
 msgid "Current page."
-msgstr ""
+msgstr "Gjeldande side."
 
 #. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
 #: controls/swipenavigator/templates/PageTab.qml:49
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1. Demanding attention."
-msgstr ""
+msgstr "Gå til %1. Ber om merksemd."
 
 #. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
 #: controls/swipenavigator/templates/PageTab.qml:52
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1."
-msgstr ""
+msgstr "Gå til %1."
 
-#: controls/templates/OverlayDrawer.qml:131
+#: controls/templates/OverlayDrawer.qml:130
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
-msgstr ""
+msgstr "Lukk skuff"
 
-#: controls/templates/OverlayDrawer.qml:137
+#: controls/templates/OverlayDrawer.qml:136
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
-msgstr ""
+msgstr "Opna skuff"
 
 #: controls/templates/private/BackButton.qml:34
 msgctxt "BackButton|"
@@ -248,21 +248,21 @@ msgstr "Fleire handlingar"
 #: controls/UrlButton.qml:51
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
-msgstr ""
+msgstr "Kopier lenkja til utklippstavla"
 
-#: settings.cpp:220
+#: settings.cpp:211
 #, qt-format
 msgctxt "Settings|"
 msgid "KDE Frameworks %1"
 msgstr "KDE Frameworks %1"
 
-#: settings.cpp:222
+#: settings.cpp:213
 #, qt-format
 msgctxt "Settings|"
 msgid "The %1 windowing system"
 msgstr "Vindaugssystemet %1"
 
-#: settings.cpp:223
+#: settings.cpp:214
 #, qt-format
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
