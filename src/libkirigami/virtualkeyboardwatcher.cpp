@@ -92,39 +92,9 @@ bool VirtualKeyboardWatcher::enabled() const
     return d->enabled;
 }
 
-void VirtualKeyboardWatcher::setEnabled(bool newEnabled)
-{
-    if (newEnabled == d->enabled) {
-        return;
-    }
-
-    d->enabled = newEnabled;
-
-#ifdef KIRIGAMI_ENABLE_DBUS
-    d->propertiesInterface->Set(Private::interfaceName, QStringLiteral("enabled"), QDBusVariant(newEnabled));
-#else
-    Q_EMIT enabledChanged();
-#endif
-}
-
 bool VirtualKeyboardWatcher::active() const
 {
     return d->active;
-}
-
-void VirtualKeyboardWatcher::setActive(bool newActive)
-{
-    if (newActive == d->active) {
-        return;
-    }
-
-    d->active = newActive;
-
-#ifdef KIRIGAMI_ENABLE_DBUS
-    d->propertiesInterface->Set(Private::interfaceName, QStringLiteral("active"), QDBusVariant(newActive));
-#else
-    Q_EMIT activeChanged();
-#endif
 }
 
 bool VirtualKeyboardWatcher::visible() const

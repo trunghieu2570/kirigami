@@ -65,29 +65,9 @@ bool InputMethod::enabled() const
     return d->enabled;
 }
 
-void InputMethod::setEnabled(bool newEnabled)
-{
-    if (newEnabled == d->enabled) {
-        return;
-    }
-
-    d->enabled = newEnabled;
-    Q_EMIT enabledChanged();
-}
-
 bool InputMethod::active() const
 {
     return d->active;
-}
-
-void InputMethod::setActive(bool newActive)
-{
-    if (newActive == d->active) {
-        return;
-    }
-
-    d->active = newActive;
-    Q_EMIT activeChanged();
 }
 
 bool InputMethod::visible() const

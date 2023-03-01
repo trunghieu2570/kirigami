@@ -38,9 +38,8 @@ public:
      *
      * If this is false, that means the input method is available but not in use.
      */
-    Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
+    Q_PROPERTY(bool enabled READ enabled NOTIFY enabledChanged)
     bool enabled() const;
-    void setEnabled(bool newEnabled);
     Q_SIGNAL void enabledChanged();
 
     /**
@@ -50,9 +49,8 @@ public:
      * virtual keyboard for example, it would mean the virtual keyboard is
      * visible.
      */
-    Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
+    Q_PROPERTY(bool active READ active NOTIFY activeChanged)
     bool active() const;
-    void setActive(bool newActive);
     Q_SIGNAL void activeChanged();
 
     /**

@@ -35,14 +35,12 @@ public:
     bool available() const;
     Q_SIGNAL void availableChanged();
 
-    Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
+    Q_PROPERTY(bool enabled READ enabled NOTIFY enabledChanged)
     bool enabled() const;
-    void setEnabled(bool newEnabled);
     Q_SIGNAL void enabledChanged();
 
-    Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
+    Q_PROPERTY(bool active READ active NOTIFY activeChanged)
     bool active() const;
-    void setActive(bool newActive);
     Q_SIGNAL void activeChanged();
 
     Q_PROPERTY(bool visible READ visible NOTIFY visibleChanged)
