@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2018 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2023 Harald Sitter <sitter@kde.org>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -8,9 +9,11 @@
 #include <QCoreApplication>
 
 #if defined(KIRIGAMI_ENABLE_DBUS)
-#include "tabletmodemanager_interface.h"
+#include "settings_interface.h"
 #include <QDBusConnection>
 #endif
+
+using namespace Qt::Literals::StringLiterals;
 
 // TODO: All the dbus stuff should be conditional, optional win32 support
 
@@ -28,6 +31,10 @@ Q_GLOBAL_STATIC(TabletModeWatcherSingleton, privateTabletModeWatcherSelf)
 
 class TabletModeWatcherPrivate
 {
+    static constexpr auto PORTAL_GROUP = "org.kde.TabletMode"_L1;
+    static constexpr auto KEY_AVAILABLE = "available"_L1;
+    static constexpr auto KEY_ENABLED = "enabled"_L1;
+
 public:
     TabletModeWatcherPrivate(TabletModeWatcher *watcher)
         : q(watcher)
@@ -46,30 +53,27 @@ public:
             isTabletMode =
                 (QString::fromLatin1(qgetenv("QT_QUICK_CONTROLS_MOBILE")) == QStringLiteral("1")
                     || QString::fromLatin1(qgetenv("QT_QUICK_CONTROLS_MOBILE")) == QStringLiteral("true"))
-                || (QString::fromLatin1(qgetenv("KDE_KIRIGAMI_TABLET_MODE")) == QStringLiteral("1")
+                    || (QString::fromLatin1(qgetenv("KDE_KIRIGAMI_TABLET_MODE")) == QStringLiteral("1")
                     || QString::fromLatin1(qgetenv("KDE_KIRIGAMI_TABLET_MODE")) == QStringLiteral("true"));
             /* clang-format on */
             isTabletModeAvailable = isTabletMode;
         } else {
-            m_interface =
-                new OrgKdeKWinTabletModeManagerInterface(QStringLiteral("org.kde.KWin"), QStringLiteral("/org/kde/KWin"), QDBusConnection::sessionBus(), q);
+            auto portal = new OrgFreedesktopPortalSettingsInterface(u"org.freedesktop.portal.Desktop"_s, u"/org/freedesktop/portal/desktop"_s, QDBusConnection::sessionBus(), q);
 
-            if (m_interface->isValid()) {
-                // NOTE: the initial call is actually sync, because is better a tiny freeze than having the ui always recalculated and changed at the start
-                QDBusMessage message = QDBusMessage::createMethodCall(QStringLiteral("org.kde.KWin"),
-                                                                      QStringLiteral("/org/kde/KWin"),
-                                                                      QStringLiteral("org.freedesktop.DBus.Properties"),
-                                                                      QStringLiteral("GetAll"));
-                message.setArguments({m_interface->interface()});
-                QDBusReply<QVariantMap> propsReply = QDBusConnection::sessionBus().call(message);
-                isTabletModeAvailable = propsReply.value()[QLatin1String("tabletModeAvailable")].toBool();
-                isTabletMode = propsReply.value()[QLatin1String("tabletMode")].toBool();
-                QObject::connect(m_interface, &OrgKdeKWinTabletModeManagerInterface::tabletModeChanged, q, [this](bool tabletMode) {
-                    setIsTablet(tabletMode);
-                });
-                QObject::connect(m_interface, &OrgKdeKWinTabletModeManagerInterface::tabletModeAvailableChanged, q, [this](bool avail) {
-                    isTabletModeAvailable = avail;
-                    Q_EMIT q->tabletModeAvailableChanged(avail);
+            if (const auto reply = portal->ReadAll({PORTAL_GROUP}); !reply.isError() && !reply.value().isEmpty()) {
+                const auto properties = reply.value().value(PORTAL_GROUP);
+                isTabletModeAvailable = properties[KEY_AVAILABLE].toBool();
+                isTabletMode = properties[KEY_ENABLED].toBool();
+                QObject::connect(portal, &OrgFreedesktopPortalSettingsInterface::SettingChanged, q, [this](const QString &group, const QString &key, const QDBusVariant &value) {
+                    if (group != PORTAL_GROUP) {
+                        return;
+                    }
+                    if (key == KEY_AVAILABLE) {
+                        isTabletModeAvailable = value.variant().toBool();
+                        Q_EMIT q->tabletModeAvailableChanged(isTabletModeAvailable);
+                    } else if (key == KEY_ENABLED) {
+                        setIsTablet(value.variant().toBool());
+                    }
                 });
             } else {
                 isTabletModeAvailable = false;
@@ -86,9 +90,6 @@ public:
     void setIsTablet(bool tablet);
 
     TabletModeWatcher *q;
-#if defined(KIRIGAMI_ENABLE_DBUS)
-    OrgKdeKWinTabletModeManagerInterface *m_interface = nullptr;
-#endif
     QVector<QObject *> watchers;
     bool isTabletModeAvailable = false;
     bool isTabletMode = false;
