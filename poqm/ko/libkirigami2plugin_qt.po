@@ -1,8 +1,8 @@
-# Shinjo Park <kde@peremen.name>, 2017, 2018, 2019, 2020, 2021, 2022.
+# Shinjo Park <kde@peremen.name>, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-07-13 12:50+0200\n"
+"PO-Revision-Date: 2023-03-01 02:06+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -17,7 +17,7 @@ msgstr ""
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
-msgstr "%1 (%2)"
+msgstr "%1(%2)"
 
 #: controls/AboutItem.qml:137
 #, qt-format
@@ -39,15 +39,12 @@ msgstr "참여하기"
 #: controls/AboutItem.qml:202
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "기부하기"
 
 #: controls/AboutItem.qml:219
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Report Bug…"
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "버그 보고…"
+msgstr "버그 보고"
 
 #: controls/AboutItem.qml:232
 msgctxt "AboutItem|"
@@ -148,20 +145,14 @@ msgid "Password"
 msgstr "암호"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr "닫기"
+msgstr "메뉴 닫기"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Open"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr "열기"
+msgstr "메뉴 열기"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -176,7 +167,7 @@ msgstr "검색"
 #: controls/SearchField.qml:106
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr ""
+msgstr "검색 지우기"
 
 #: controls/settingscomponents/CategorizedSettings.qml:30
 #: controls/settingscomponents/CategorizedSettings.qml:87
