@@ -105,9 +105,14 @@ install(EXPORT KF6Kirigami2Targets
 
 ecm_setup_version(${KF_VERSION}
     VARIABLE_PREFIX KIRIGAMI2
-    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kirigami_version.h"
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kirigami2_version.h"
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2ConfigVersion.cmake"
     SOVERSION 6
+)
+install(
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/kirigami2_version.h"
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami2
+    COMPONENT Devel
 )
 
 #use dbus on linux, bsd etc, but not android and apple stuff
