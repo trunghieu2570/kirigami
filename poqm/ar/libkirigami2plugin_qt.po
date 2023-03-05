@@ -25,7 +25,7 @@ msgstr "‏%1 (%2)"
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
-msgstr "زر صفحة %1 في متجر كدي"
+msgstr "زر صفحة %1 في متجر كِيدِي"
 
 #: controls/AboutItem.qml:146
 #, qt-format
@@ -251,7 +251,7 @@ msgstr "انسخ الوصلة إلى الحافظة"
 #, qt-format
 msgctxt "Settings|"
 msgid "KDE Frameworks %1"
-msgstr "إصدارة إطار كدي %1"
+msgstr "إصدارة إطار كِيدِي %1"
 
 #: settings.cpp:222
 #, qt-format
