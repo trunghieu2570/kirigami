@@ -453,7 +453,7 @@ Item {
             minimumX: root.hasContextDrawer && contextDrawer.enabled && contextDrawer.modal ? 0 : root.width/2 - button.width/2
             maximumX: root.hasGlobalDrawer && globalDrawer.enabled && globalDrawer.modal ? root.width : root.width/2 - button.width/2
         }
-        visible: root.page.actions && root.page.actions.contextualActions.length > 0 && ((typeof applicationWindow === "undefined") || applicationWindow().wideScreen)
+        visible: root.page.actions && root.page.actions.length > 0 && ((typeof applicationWindow === "undefined") || applicationWindow().wideScreen)
             // using internal pagerow api
             && ((typeof applicationWindow !== "undefined") && root.page && root.page.parent ? root.page.Kirigami.ColumnView.level < applicationWindow().pageStack.depth-1 : (typeof applicationWindow === "undefined"))
 
@@ -524,7 +524,7 @@ Item {
             id: contextMenu
             x: parent.width - width
             y: -height
-            actions: root.page.actions.contextualActions
+            actions: root.page.actions
             submenuComponent: Component {
                 ActionsMenu {}
             }

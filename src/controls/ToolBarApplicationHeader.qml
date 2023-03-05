@@ -68,56 +68,30 @@ ApplicationHeader {
         }
         TextMetrics {
             id: buttonTextMetrics
-            text: (page.actions.left ? page.actions.left.text : "") + (page.actions.main ? page.actions.main.text : "") + (page.actions.right ? page.actions.right.text : "")
-            readonly property int collapsedButtonsWidth: ctxActionsButton.width + (page.actions.left ? ctxActionsButton.width + Kirigami.Units.gridUnit : 0) + (page.actions.main ? ctxActionsButton.width + Kirigami.Units.gridUnit : 0) + (page.actions.right ? ctxActionsButton.width + Kirigami.Units.gridUnit : 0)
+            text: ""
+            readonly property int collapsedButtonsWidth: ctxActionsButton.width
             readonly property int requiredWidth: width + collapsedButtonsWidth
-        }
-
-        RowLayout {
-            id: actionsLayout
-            anchors {
-                verticalCenter: parent.verticalCenter
-                right: ctxActionsButton.visible ? ctxActionsButton.left : parent.right
-            }
-
-            readonly property bool toobig: delegateItem.width - titleTextMetrics.width - Kirigami.Units.gridUnit < buttonTextMetrics.requiredWidth
-
-            P.PrivateActionToolButton {
-                Layout.alignment: Qt.AlignVCenter
-                action: page && page.actions ? page.actions.left : null
-                display: parent.toobig ? QQC2.AbstractButton.IconOnly : QQC2.AbstractButton.TextBesideIcon
-            }
-            P.PrivateActionToolButton {
-                Layout.alignment: Qt.AlignVCenter
-                Layout.rightMargin: Kirigami.Units.smallSpacing
-                action: page && page.actions ? page.actions.main : null
-                display: parent.toobig ? QQC2.AbstractButton.IconOnly : QQC2.AbstractButton.TextBesideIcon
-                flat: false
-            }
-            P.PrivateActionToolButton {
-                Layout.alignment: Qt.AlignVCenter
-                action: page && page.actions ? page.actions.right : null
-                display: parent.toobig ? QQC2.AbstractButton.IconOnly : QQC2.AbstractButton.TextBesideIcon
-            }
         }
 
         P.PrivateActionToolButton {
             id: ctxActionsButton
-            showMenuArrow: page.actions.contextualActions.length === 1
+            showMenuArrow: page.actions.length === 1
+
             anchors {
                 right: parent.right
                 verticalCenter: parent.verticalCenter
                 rightMargin: Kirigami.Units.smallSpacing
             }
+
             Kirigami.Action {
                 id: overflowAction
                 icon.name: "overflow-menu"
                 tooltip: qsTr("More Actions")
                 visible: children.length > 0
-                children: page && page.actions.contextualActions ? page.actions.contextualActions : null
+                children: page ? page.actions : null
             }
 
-            action: page && page.actions.contextualActions.length === 1 ? page.actions.contextualActions[0] : overflowAction
+            action: page && page.actions.length === 1 ? page.actions[0] : overflowAction
         }
     }
 }

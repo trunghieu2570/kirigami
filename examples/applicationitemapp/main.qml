@@ -47,7 +47,7 @@ Kirigami.ApplicationItem {
         id: mainPageComponent
         Kirigami.Page {
             title: "Hello"
-            actions.contextualActions: [
+            actions: [
                 Kirigami.Action {
                     text: "action 1"
                 },

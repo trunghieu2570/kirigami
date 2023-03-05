@@ -144,7 +144,7 @@ Kirigami.ApplicationWindow {
         id: channelsComponent
         Kirigami.ScrollablePage {
             title: "Channels"
-            actions.main: Kirigami.Action {
+            actions: Kirigami.Action {
                 icon.name: "search"
                 text: "Search"
             }
@@ -197,17 +197,15 @@ Kirigami.ApplicationWindow {
         id: chatComponent
         Kirigami.ScrollablePage {
             title: "#KDE"
-            actions {
-                left: Kirigami.Action {
+            actions: {
+                Kirigami.Action {
                     icon.name: "documentinfo"
                     text: "Channel info"
-                }
-                main: Kirigami.Action {
+                },
+                Kirigami.Action {
                     icon.name: "search"
                     text: "Search"
-                }
-            }
-            actions.contextualActions: [
+                },
                 Kirigami.Action {
                     text: "Room Settings"
                     icon.name: "configure"

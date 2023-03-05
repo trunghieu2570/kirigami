@@ -19,13 +19,12 @@ Kirigami.ApplicationWindow {
     Kirigami.ScrollablePage {
         id: iconView
         title: "Notes"
-        actions.contextualActions: [
-            Kirigami.Action {
-                id: sortAction
-                icon.name: "view-sort-ascending-symbolic"
-                tooltip: "Sort Ascending"
-            }
-        ]
+        actions: Kirigami.Action {
+            id: sortAction
+            icon.name: "view-sort-ascending-symbolic"
+            tooltip: "Sort Ascending"
+        }
+
         background: Rectangle {
             color: Kirigami.Theme.backgroundColor
         }
@@ -74,30 +73,28 @@ Kirigami.ApplicationWindow {
         Kirigami.ScrollablePage {
             id: editor
             title: root.currentFile
-            actions {
-                main: Kirigami.Action {
+            actions: [
+                Kirigami.Action {
                     id: shareAction
                     icon.name: "document-share"
                     text: "Share..."
                     tooltip: "Share this document with your device"
                     checkable: true
                     onCheckedChanged: sheet.sheetOpen = checked;
+                },
+                Kirigami.Action {
+                    icon.name: "format-text-bold-symbolic"
+                    tooltip: "Bold"
+                },
+                Kirigami.Action {
+                    icon.name: "format-text-underline-symbolic"
+                    tooltip: "Underline"
+                },
+                Kirigami.Action {
+                    icon.name: "format-text-italic-symbolic"
+                    tooltip: "Italic"
                 }
-                contextualActions: [
-                    Kirigami.Action {
-                        icon.name: "format-text-bold-symbolic"
-                        tooltip: "Bold"
-                    },
-                    Kirigami.Action {
-                        icon.name: "format-text-underline-symbolic"
-                        tooltip: "Underline"
-                    },
-                    Kirigami.Action {
-                        icon.name: "format-text-italic-symbolic"
-                        tooltip: "Italic"
-                    }
-                ]
-            }
+            ]
             background: Rectangle {
                 color: Kirigami.Theme.backgroundColor
                 Rectangle {

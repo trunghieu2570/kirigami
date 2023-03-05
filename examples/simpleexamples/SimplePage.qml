@@ -17,7 +17,7 @@ Kirigami.ScrollablePage {
 
     title: i18n("Simple Scrollable Page")
 
-    actions.contextualActions: [
+    actions: [
         Kirigami.Action {
             text:"Action for buttons"
             icon.name: "bookmarks"

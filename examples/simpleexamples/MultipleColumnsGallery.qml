@@ -17,7 +17,7 @@ Kirigami.ScrollablePage {
 
     title: "Multiple Columns"
 
-    actions.contextualActions: [
+    actions: [
         Kirigami.Action {
             text:"Action for buttons"
             icon.name: "bookmarks"

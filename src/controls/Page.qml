@@ -51,136 +51,23 @@ QQC2.Page {
     property Flickable flickable
 
     /**
-     * @brief Defines the contextual actions for the page:
-     * an easy way to assign actions in the right sliding panel
+     * @brief This property holds the actions for the page.
      *
-     * Example usage:
-     * @code
-     * import org.kde.kirigami 2.4 as Kirigami
-     *
-     * Kirigami.ApplicationWindow {
-     *  [...]
-     *     contextDrawer: Kirigami.ContextDrawer {
-     *         id: contextDrawer
-     *     }
-     *  [...]
-     * }
-     * @endcode
+     * These actions will be displayed in the toolbar on the desktop and inside
+     * the ContextDrawer on mobile.
      *
      * @code
-     * import org.kde.kirigami 2.4 as Kirigami
+     * import org.kde.kirigami 2 as Kirigami
      *
      * Kirigami.Page {
-     *   [...]
-     *     actions.contextualActions: [
-     *         Kirigami.Action {
-     *             icon.name: "edit"
-     *             text: "Action text"
-     *             onTriggered: {
-     *                 // do stuff
-     *             }
-     *         },
-     *         Kirigami.Action {
-     *             icon.name: "edit"
-     *             text: "Action text"
-     *             onTriggered: {
-     *                 // do stuff
-     *             }
-     *         }
-     *     ]
-     *   [...]
-     * }
-     * @endcode
-     *
-     * @warning This will likely be removed someday.
-     * @property list<QtQml.QtObject> contextualActions
-     */
-    // TODO: remove
-    property alias contextualActions: actionsGroup.contextualActions
-
-    /**
-     * @brief An optional single action for the action button.
-     *
-     * Example usage:
-     * @code
-     * import org.kde.kirigami 2.4 as Kirigami
-     * Kirigami.Page {
-     *     actions.main: Kirigami.Action {
-     *         icon.name: "edit"
-     *         onTriggered: {
-     *             // do stuff
-     *         }
+     *     actions: [
+     *         Kirigami.Action {...},
+     *         Kirigami.Action {...}
      *     }
      * }
      * @endcode
-     * @warning This will likely be removed someday.
-     * @property Action mainAction
      */
-    //TODO: remove
-    property alias mainAction: actionsGroup.main
-
-    /**
-     * @brief An optional extra action at the left of the main action button.
-     *
-     * Example usage:
-     *
-     * @code
-     * import org.kde.kirigami 2.4 as Kirigami
-     * Kirigami.Page {
-     *     actions.left: Kirigami.Action {
-     *         icon.name: "edit"
-     *         onTriggered: {
-     *             // do stuff
-     *         }
-     *     }
-     * }
-     * @endcode
-     * @warning This will likely be removed someday.
-     * @property Action leftAction
-     */
-    // TODO: remove
-    property alias leftAction: actionsGroup.left
-
-    /**
-     * @brief An optional extra action at the right of the main action button.
-     *
-     * Example usage:
-     * @code
-     * import org.kde.kirigami 2.4 as Kirigami
-     * Kirigami.Page {
-     *     actions.right: Kirigami.Action {
-     *         icon.name: "edit"
-     *         onTriggered: {
-     *             // do stuff
-     *         }
-     *     }
-     * }
-     * @endcode
-     * @warning This will likely be removed someday.
-     * @property Action rightAction
-     */
-    // TODO: remove
-    property alias rightAction: actionsGroup.right
-
-    /**
-     * @brief This property holds the actions group.
-     * @code
-     * import org.kde.kirigami 2.4 as Kirigami
-     * Kirigami.Page {
-     *     actions {
-     *         main: Kirigami.Action {...}
-     *         left: Kirigami.Action {...}
-     *         right: Kirigami.Action {...}
-     *         contextualActions: [
-     *             Kirigami.Action {...},
-     *             Kirigami.Action {...}
-     *         ]
-     *     }
-     * }
-     * @endcode
-     * @property org::kde::kirigami::private::PageActionPropertyGroup actions
-     */
-    readonly property alias actions: actionsGroup
+    property list<Kirigami.Action> actions
 
     /**
      * Emitted when a visualization for the actions is about to be shown,
@@ -367,10 +254,6 @@ QQC2.Page {
 
     // in data in order for them to not be considered for contentItem, contentChildren, contentData
     data: [
-        P.PageActionPropertyGroup {
-            id: actionsGroup
-        },
-
         Item {
             id: overlayItem
             parent: root
@@ -467,7 +350,7 @@ QQC2.Page {
                     return false;
                 }
 
-                if (!root.actions.main && !root.actions.left && !root.actions.right && root.actions.contextualActions.length === 0) {
+                if (!root.actions.length === 0) {
                     return false;
                 }
 

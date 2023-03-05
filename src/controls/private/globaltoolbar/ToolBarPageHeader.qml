@@ -55,46 +55,7 @@ AbstractPageHeader {
             alignment: pageRow ? pageRow.globalToolBar.toolbarActionAlignment : Qt.AlignRight
             heightMode: pageRow ? pageRow.globalToolBar.toolbarActionHeightMode : Kirigami.ToolBarLayout.ConstrainIfLarger
 
-            actions: {
-                if (!page) {
-                    return []
-                }
-
-                const result = []
-
-                if (page.actions.main) {
-                    result.push(page.actions.main)
-                }
-                if (page.actions.left) {
-                    result.push(page.actions.left)
-                }
-                if (page.actions.right) {
-                    result.push(page.actions.right)
-                }
-                if (page.actions.contextualActions.length > 0) {
-                    return result.concat(Array.prototype.map.call(page.actions.contextualActions, function(item) { return item }))
-                }
-                return result
-            }
-
-            Binding {
-                target: page.actions.main
-                property: "displayHint"
-                value: page.actions.main ? (page.actions.main.displayHint | Kirigami.DisplayHint.KeepVisible) : null
-                restoreMode: Binding.RestoreBinding
-            }
-            Binding {
-                target: page.actions.left
-                property: "displayHint"
-                value: page.actions.left ? (page.actions.left.displayHint | Kirigami.DisplayHint.KeepVisible) : null
-                restoreMode: Binding.RestoreBinding
-            }
-            Binding {
-                target: page.actions.right
-                property: "displayHint"
-                value: page.actions.right ? (page.actions.right.displayHint | Kirigami.DisplayHint.KeepVisible) : null
-                restoreMode: Binding.RestoreBinding
-            }
+            actions: page ? page.actions : []
         }
     }
 }
