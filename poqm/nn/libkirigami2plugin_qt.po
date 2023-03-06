@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-02-11 15:35+0100\n"
+"PO-Revision-Date: 2023-03-04 17:18+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -75,12 +75,12 @@ msgstr "Brukte bibliotek"
 #: controls/AboutItem.qml:339
 msgctxt "AboutItem|"
 msgid "Authors"
-msgstr "Forfattarar"
+msgstr "Opphavspersonar"
 
 #: controls/AboutItem.qml:348
 msgctxt "AboutItem|"
 msgid "Show author photos"
-msgstr "Vis forfattarbilete"
+msgstr "Vis bilete av opphavspersonane"
 
 #: controls/AboutItem.qml:379
 msgctxt "AboutItem|"
