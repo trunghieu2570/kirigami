@@ -4,8 +4,8 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#ifndef PLATFORMTHEME_H
-#define PLATFORMTHEME_H
+#ifndef KIRIGAMI_PLATFORMTHEME_H
+#define KIRIGAMI_PLATFORMTHEME_H
 
 #include <QColor>
 #include <QIcon>

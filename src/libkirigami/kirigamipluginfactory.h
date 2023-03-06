@@ -4,8 +4,8 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#ifndef KIRIGAMIPLUGINFACTORY_H
-#define KIRIGAMIPLUGINFACTORY_H
+#ifndef KIRIGAMI_KIRIGAMIPLUGINFACTORY_H
+#define KIRIGAMI_KIRIGAMIPLUGINFACTORY_H
 
 #include "platformtheme.h"
 #include <QObject>
