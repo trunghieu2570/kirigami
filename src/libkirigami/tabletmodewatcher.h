@@ -4,8 +4,8 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#ifndef KIRIGAMI_TABLETMODEWATCHER
-#define KIRIGAMI_TABLETMODEWATCHER
+#ifndef KIRIGAMI_TABLETMODEWATCHER_H
+#define KIRIGAMI_TABLETMODEWATCHER_H
 
 #include <QEvent>
 #include <QObject>

@@ -5,7 +5,8 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#pragma once
+#ifndef KIRIGAMI_UNITS_H
+#define KIRIGAMI_UNITS_H
 
 #include <QObject>
 #include <memory>
@@ -293,3 +294,5 @@ private:
 };
 
 }
+
+#endif
