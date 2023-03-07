@@ -18,76 +18,70 @@ msgstr ""
 "X-Text-Markup: qtrich\n"
 "X-Qt-Contexts: true\n"
 
-#: controls/AboutItem.qml:128
+#: controls/AboutItem.qml:139
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controls/AboutItem.qml:137
-#, qt-format
-msgctxt "AboutItem|"
-msgid "Visit %1's KDE Store page"
-msgstr "Visiter la page de la boutique de KDE pour %1"
-
-#: controls/AboutItem.qml:146
+#: controls/AboutItem.qml:148
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Envoyer un courriel à %1"
 
-#: controls/AboutItem.qml:196
+#: controls/AboutItem.qml:198
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Soyez impliqué"
 
-#: controls/AboutItem.qml:202
+#: controls/AboutItem.qml:204
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr "Faire un don"
 
-#: controls/AboutItem.qml:219
+#: controls/AboutItem.qml:221
 msgctxt "AboutItem|"
 msgid "Report a Bug"
 msgstr "Signaler un bogue"
 
-#: controls/AboutItem.qml:232
+#: controls/AboutItem.qml:234
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Droit d'auteur"
 
-#: controls/AboutItem.qml:276
+#: controls/AboutItem.qml:278
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Licence :"
 
-#: controls/AboutItem.qml:298
+#: controls/AboutItem.qml:300
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Licence : %1"
 
-#: controls/AboutItem.qml:309
+#: controls/AboutItem.qml:311
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Bibliothèques en cours d'utilisation"
 
-#: controls/AboutItem.qml:339
+#: controls/AboutItem.qml:341
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Auteurs"
 
-#: controls/AboutItem.qml:348
+#: controls/AboutItem.qml:350
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Afficher les photos des auteurs"
 
-#: controls/AboutItem.qml:379
+#: controls/AboutItem.qml:381
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Crédits"
 
-#: controls/AboutItem.qml:392
+#: controls/AboutItem.qml:394
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Traducteurs"
@@ -267,6 +261,10 @@ msgstr "Le système de fenêtres %1"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (compilé avec %3)"
+
+#~ msgctxt "AboutItem|"
+#~ msgid "Visit %1's KDE Store page"
+#~ msgstr "Visiter la page de la boutique de KDE pour %1"
 
 #~ msgctxt "UrlButton|"
 #~ msgid "Copy link address"

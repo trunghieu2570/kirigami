@@ -15,76 +15,70 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "X-Generator: Lokalize 22.12.2\n"
 
-#: controls/AboutItem.qml:128
+#: controls/AboutItem.qml:139
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controls/AboutItem.qml:137
-#, qt-format
-msgctxt "AboutItem|"
-msgid "Visit %1's KDE Store page"
-msgstr "%1 の KDE Store ページを訪れる"
-
-#: controls/AboutItem.qml:146
+#: controls/AboutItem.qml:148
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "%1 にメールを送る"
 
-#: controls/AboutItem.qml:196
+#: controls/AboutItem.qml:198
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "参加する"
 
-#: controls/AboutItem.qml:202
+#: controls/AboutItem.qml:204
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr "寄付する"
 
-#: controls/AboutItem.qml:219
+#: controls/AboutItem.qml:221
 msgctxt "AboutItem|"
 msgid "Report a Bug"
 msgstr "バグを報告"
 
-#: controls/AboutItem.qml:232
+#: controls/AboutItem.qml:234
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "著作権について"
 
-#: controls/AboutItem.qml:276
+#: controls/AboutItem.qml:278
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "ライセンス:"
 
-#: controls/AboutItem.qml:298
+#: controls/AboutItem.qml:300
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "ライセンス: %1"
 
-#: controls/AboutItem.qml:309
+#: controls/AboutItem.qml:311
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "使用されているライブラリ"
 
-#: controls/AboutItem.qml:339
+#: controls/AboutItem.qml:341
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "作者"
 
-#: controls/AboutItem.qml:348
+#: controls/AboutItem.qml:350
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "作者の写真を表示"
 
-#: controls/AboutItem.qml:379
+#: controls/AboutItem.qml:381
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "クレジット"
 
-#: controls/AboutItem.qml:392
+#: controls/AboutItem.qml:394
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "翻訳者"
@@ -264,3 +258,7 @@ msgstr "%1 ウィンドウシステム"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (%3 を用いてビルドされました)"
+
+#~ msgctxt "AboutItem|"
+#~ msgid "Visit %1's KDE Store page"
+#~ msgstr "%1 の KDE Store ページを訪れる"

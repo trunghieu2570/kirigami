@@ -13,35 +13,29 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 20.04.2\n"
 
-#: controls/AboutItem.qml:128
+#: controls/AboutItem.qml:139
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr ""
 
-#: controls/AboutItem.qml:137
-#, qt-format
-msgctxt "AboutItem|"
-msgid "Visit %1's KDE Store page"
-msgstr "Επισκεφθείτε τη σελίδα της αποθήκης του KDE για το %1"
-
-#: controls/AboutItem.qml:146
+#: controls/AboutItem.qml:148
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Αποστολή μηνύματος στο %1"
 
-#: controls/AboutItem.qml:196
+#: controls/AboutItem.qml:198
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Ασχοληθείτε"
 
-#: controls/AboutItem.qml:202
+#: controls/AboutItem.qml:204
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr ""
 
-#: controls/AboutItem.qml:219
+#: controls/AboutItem.qml:221
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Report Bug…"
@@ -49,43 +43,43 @@ msgctxt "AboutItem|"
 msgid "Report a Bug"
 msgstr "Αναφορά σφάλματος…"
 
-#: controls/AboutItem.qml:232
+#: controls/AboutItem.qml:234
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Copyright"
 
-#: controls/AboutItem.qml:276
+#: controls/AboutItem.qml:278
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Άδεια χρήσης:"
 
-#: controls/AboutItem.qml:298
+#: controls/AboutItem.qml:300
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Άδεια χρήσης: %1"
 
-#: controls/AboutItem.qml:309
+#: controls/AboutItem.qml:311
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Βιβλιοθήκες σε χρήση"
 
-#: controls/AboutItem.qml:339
+#: controls/AboutItem.qml:341
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Συγγραφείς"
 
-#: controls/AboutItem.qml:348
+#: controls/AboutItem.qml:350
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Εμφάνιση φωτογραφιών συγγραφέων"
 
-#: controls/AboutItem.qml:379
+#: controls/AboutItem.qml:381
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Ευχαριστίες"
 
-#: controls/AboutItem.qml:392
+#: controls/AboutItem.qml:394
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Μεταφραστές"
@@ -277,6 +271,10 @@ msgstr "Το %1 παραθυρικό σύστημα"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (κατασκευάστηκε με βάση το %3)"
+
+#~ msgctxt "AboutItem|"
+#~ msgid "Visit %1's KDE Store page"
+#~ msgstr "Επισκεφθείτε τη σελίδα της αποθήκης του KDE για το %1"
 
 #~ msgctxt "UrlButton|"
 #~ msgid "Copy link address"

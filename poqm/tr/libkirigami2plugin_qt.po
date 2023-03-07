@@ -15,76 +15,70 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "X-POOTLE-MTIME: 1497529432.000000\n"
 
-#: controls/AboutItem.qml:128
+#: controls/AboutItem.qml:139
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controls/AboutItem.qml:137
-#, qt-format
-msgctxt "AboutItem|"
-msgid "Visit %1's KDE Store page"
-msgstr "%1 KDE Mağaza sayfasını ziyaret et"
-
-#: controls/AboutItem.qml:146
+#: controls/AboutItem.qml:148
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "%1 kişisine bir e-posta gönder"
 
-#: controls/AboutItem.qml:196
+#: controls/AboutItem.qml:198
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Katıl"
 
-#: controls/AboutItem.qml:202
+#: controls/AboutItem.qml:204
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr "Bağış Yap"
 
-#: controls/AboutItem.qml:219
+#: controls/AboutItem.qml:221
 msgctxt "AboutItem|"
 msgid "Report a Bug"
 msgstr "Hata Bildir"
 
-#: controls/AboutItem.qml:232
+#: controls/AboutItem.qml:234
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Telif hakkı"
 
-#: controls/AboutItem.qml:276
+#: controls/AboutItem.qml:278
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Lisans:"
 
-#: controls/AboutItem.qml:298
+#: controls/AboutItem.qml:300
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Lisans: %1"
 
-#: controls/AboutItem.qml:309
+#: controls/AboutItem.qml:311
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Kullanılan kitaplıklar"
 
-#: controls/AboutItem.qml:339
+#: controls/AboutItem.qml:341
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Yazarlar"
 
-#: controls/AboutItem.qml:348
+#: controls/AboutItem.qml:350
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Yazar fotoğraflarını göster"
 
-#: controls/AboutItem.qml:379
+#: controls/AboutItem.qml:381
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Emeği Geçenler"
 
-#: controls/AboutItem.qml:392
+#: controls/AboutItem.qml:394
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Çevirmenler"
@@ -264,6 +258,10 @@ msgstr "%1 pencereleme sistemi"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (%3 üzerine yapılı)"
+
+#~ msgctxt "AboutItem|"
+#~ msgid "Visit %1's KDE Store page"
+#~ msgstr "%1 KDE Mağaza sayfasını ziyaret et"
 
 #~ msgctxt "UrlButton|"
 #~ msgid "Copy link address"
