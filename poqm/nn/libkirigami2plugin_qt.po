@@ -261,7 +261,3 @@ msgstr "Vindaugssystemet %1"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (bygd mot %3)"
-
-#~ msgctxt "AboutItem|"
-#~ msgid "Visit %1's KDE Store page"
-#~ msgstr "Gå til %1-sida i KDE-butikken"
