@@ -235,7 +235,7 @@ msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "Krmari naprej"
 
-#: controls/ToolBarApplicationHeader.qml:115
+#: controls/ToolBarApplicationHeader.qml:89
 msgctxt "ToolBarApplicationHeader|"
 msgid "More Actions"
 msgstr "Več dejanj"

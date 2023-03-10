@@ -230,7 +230,7 @@ msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "Přejít vpřed"
 
-#: controls/ToolBarApplicationHeader.qml:115
+#: controls/ToolBarApplicationHeader.qml:89
 msgctxt "ToolBarApplicationHeader|"
 msgid "More Actions"
 msgstr "Další činnosti"
@@ -257,7 +257,3 @@ msgstr "Okenní systém %1"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (sestaveno oproti %3)"
-
-#~ msgctxt "AboutItem|"
-#~ msgid "Visit %1's KDE Store page"
-#~ msgstr "Navštívit stránku KDE Store od %1"

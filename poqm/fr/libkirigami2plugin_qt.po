@@ -234,7 +234,7 @@ msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "Navigation avant"
 
-#: controls/ToolBarApplicationHeader.qml:115
+#: controls/ToolBarApplicationHeader.qml:89
 msgctxt "ToolBarApplicationHeader|"
 msgid "More Actions"
 msgstr "Actions supplémentaires"
