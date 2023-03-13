@@ -31,9 +31,12 @@ QSGMaterialType *ShadowedRectangleMaterial::type() const
 
 int ShadowedRectangleMaterial::compare(const QSGMaterial *other) const
 {
+    auto result = QSGMaterial::compare(other);
+
     auto material = static_cast<const ShadowedRectangleMaterial *>(other);
     /* clang-format off */
-    if (material->color == color
+    if (result == 0
+        && material->color == color
         && material->shadowColor == shadowColor
         && material->offset == offset
         && material->aspect == aspect
@@ -42,7 +45,7 @@ int ShadowedRectangleMaterial::compare(const QSGMaterial *other) const
         return 0;
     }
 
-    return QSGMaterial::compare(other);
+    return result;
 }
 
 ShadowedRectangleShader::ShadowedRectangleShader(ShadowedRectangleMaterial::ShaderType shaderType)
