@@ -23,6 +23,16 @@ import org.kde.kirigami 2.11 as Kirigami
 Kirigami.PageRow {
     id: pageSettingStack
 
+    /**
+     * @brief The default page that will be shown when opened.
+     *
+     * This only applies when the categorized settings object is wide enough to
+     * show multiple pages.
+     *
+     * @see actions
+     */
+    property string defaultPage
+
     property list<Kirigami.PagePoolAction> actions
     property alias stack: pageSettingStack
     property Kirigami.PagePool pool: Kirigami.PagePool {}
@@ -79,7 +89,14 @@ Kirigami.PageRow {
     }
     onWidthChanged: {
         if (pageSettingStack.depth < 2 && pageSettingStack.width >= Kirigami.Units.gridUnit * 40) {
-            actions[0].trigger();
+            let defaultAction = getActionByName(defaultPage);
+            if (defaultAction) {
+                defaultAction.trigger();
+                listview.currentIndex = indexOfAction(defaultAction);
+            } else {
+                actions[0].trigger();
+                listview.currentIndex = 0;
+            }
         }
     }
 
@@ -93,7 +110,14 @@ Kirigami.PageRow {
         ListView {
             id: listview
             Component.onCompleted: if (pageSettingStack.width >= Kirigami.Units.gridUnit * 40) {
-                actions[0].trigger();
+                let defaultAction = getActionByName(defaultPage);
+                if (defaultAction) {
+                    defaultAction.trigger();
+                    listview.currentIndex = indexOfAction(defaultAction);
+                } else {
+                    actions[0].trigger();
+                    listview.currentIndex = 0;
+                }
             } else {
                 if (count > 0) {
                     listview.currentIndex = 0;
@@ -156,6 +180,22 @@ Kirigami.PageRow {
 
     Component.onCompleted: {
         pageSettingStack.completed = true;
+    }
+
+    function getActionByName(actionName) {
+        for (let i = 0; i < actions.length; i++) {
+            if (actions[i].actionName == actionName) {
+                return actions[i];
+            }
+        }
+    }
+
+    function indexOfAction(action) {
+        for (let i = 0; i < actions.length; i++) {
+            if (actions[i] == action) {
+                return i;
+            }
+        }
     }
 }
 

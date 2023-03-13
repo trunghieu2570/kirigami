@@ -13,6 +13,14 @@ import org.kde.kirigami 2.11 as Kirigami
  * @inherit org::kde::kirigami::PagePoolAction
  */
 Kirigami.PagePoolAction {
+
+    /**
+     * @brief The name of the action for when it needs to be referenced.
+     *
+     * Primary use case if for setting a default page in CategorizedSettings.
+     */
+    required property string actionName
+
     pageStack: stack
     pagePool: pool
     basePage: stack.initialPage
