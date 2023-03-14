@@ -176,13 +176,13 @@ msgctxt "SearchField|"
 msgid "Clear search"
 msgstr ""
 
-#: controls/settingscomponents/CategorizedSettings.qml:30
-#: controls/settingscomponents/CategorizedSettings.qml:87
+#: controls/settingscomponents/CategorizedSettings.qml:40
+#: controls/settingscomponents/CategorizedSettings.qml:104
 msgctxt "CategorizedSettings|"
 msgid "Settings"
 msgstr "Beállítások"
 
-#: controls/settingscomponents/CategorizedSettings.qml:30
+#: controls/settingscomponents/CategorizedSettings.qml:40
 #, qt-format
 msgctxt "CategorizedSettings|"
 msgid "Settings — %1"

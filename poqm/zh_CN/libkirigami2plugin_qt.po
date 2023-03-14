@@ -165,13 +165,13 @@ msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "清除搜索内容"
 
-#: controls/settingscomponents/CategorizedSettings.qml:30
-#: controls/settingscomponents/CategorizedSettings.qml:87
+#: controls/settingscomponents/CategorizedSettings.qml:40
+#: controls/settingscomponents/CategorizedSettings.qml:104
 msgctxt "CategorizedSettings|"
 msgid "Settings"
 msgstr "设置"
 
-#: controls/settingscomponents/CategorizedSettings.qml:30
+#: controls/settingscomponents/CategorizedSettings.qml:40
 #, qt-format
 msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
