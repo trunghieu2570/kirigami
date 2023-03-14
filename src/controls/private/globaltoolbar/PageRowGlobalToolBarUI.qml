@@ -89,7 +89,7 @@ Kirigami.AbstractApplicationHeader {
             Layout.leftMargin: leftHandleAnchor.visible ? Kirigami.Units.smallSpacing : 0
 
             // TODO KF6: make showNavigationButtons an int, and replace with strict === equality
-            visible: (globalToolBar.showNavigationButtons !== Kirigami.ApplicationHeaderStyle.NoNavigationButtons || applicationWindow().pageStack.layers.depth > 1 && !(applicationWindow().pageStack.layers.currentItem instanceof Kirigami.PageRow))
+            visible: (globalToolBar.showNavigationButtons !== Kirigami.ApplicationHeaderStyle.NoNavigationButtons || applicationWindow().pageStack.layers.depth > 1 && !(applicationWindow().pageStack.layers.currentItem instanceof Kirigami.PageRow || header.layerIsMainRow))
                 && globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None
 
             Layout.maximumWidth: visibleChildren.length > 0 ? Layout.preferredWidth : 0
