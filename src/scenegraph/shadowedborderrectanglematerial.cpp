@@ -41,7 +41,7 @@ int ShadowedBorderRectangleMaterial::compare(const QSGMaterial *other) const
         return 0;
     }
 
-    return result;
+    return QSGMaterial::compare(other);
 }
 
 ShadowedBorderRectangleShader::ShadowedBorderRectangleShader(ShadowedRectangleMaterial::ShaderType shaderType)
