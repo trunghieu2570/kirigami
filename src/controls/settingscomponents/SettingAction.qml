@@ -18,8 +18,11 @@ Kirigami.PagePoolAction {
      * @brief The name of the action for when it needs to be referenced.
      *
      * Primary use case if for setting a default page in CategorizedSettings.
+     *
+     * @warning This property will be required in KF6 but isn't for the KF5 backport
+     *          to avoid randomly breaking everyone's exisitng settings.
      */
-    required property string actionName
+    property string actionName
 
     pageStack: stack
     pagePool: pool
