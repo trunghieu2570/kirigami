@@ -40,6 +40,7 @@ public:
         : q(qq)
     {
 #ifdef KIRIGAMI_ENABLE_DBUS
+    qDBusRegisterMetaType<VariantMapMap>();
     settingsInterface = new OrgFreedesktopPortalSettingsInterface(serviceName, objectName, QDBusConnection::sessionBus(), q);
 
     QObject::connect(settingsInterface,

@@ -58,6 +58,7 @@ public:
             /* clang-format on */
             isTabletModeAvailable = isTabletMode;
         } else {
+            qDBusRegisterMetaType<VariantMapMap>();
             auto portal = new OrgFreedesktopPortalSettingsInterface(u"org.freedesktop.portal.Desktop"_s, u"/org/freedesktop/portal/desktop"_s, QDBusConnection::sessionBus(), q);
 
             if (const auto reply = portal->ReadAll({PORTAL_GROUP}); !reply.isError() && !reply.value().isEmpty()) {
