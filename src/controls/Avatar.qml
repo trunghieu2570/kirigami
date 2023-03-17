@@ -116,6 +116,25 @@ QQC2.Control {
     // as undefined, which will result in a generated colour being used.
 
     /**
+     * @brief This property holds the color of the avatar's initials.
+     *
+     * If not explicitly set, this defaults to defaultInitialsColor.
+     *
+     * @see defaultInitialsColor
+     * @property color initialsColor
+     */
+    property color initialsColor: defaultInitialsColor
+
+    /**
+     * @brief This property holds the default color of the avatar's initials.
+     *
+     * It depends on the avatar's color.
+     *
+     * @property color defaultInitialsColor
+     */
+    readonly property alias defaultInitialsColor: __private.textColor
+
+    /**
      * @brief This property holds the main and secondary actions associated with this avatar.
      * @code
      * Kirigami.Avatar {
@@ -255,7 +274,7 @@ QQC2.Control {
                     avatarRoot.width > Kirigami.Units.gridUnit
 
             text: Kirigami.NameUtils.initialsFromString(name)
-            color: __private.textColor
+            color: avatarRoot.initialsColor
 
             anchors.fill: parent
             font {
