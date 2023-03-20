@@ -8,7 +8,7 @@ ecm_add_qml_module_dependencies(KirigamiPlugin DEPENDS
     "QtGraphicalEffects 1.0"
 )
 
-ecm_create_qm_loader(kirigami_QM_LOADER libkirigami2plugin_qt)
+ecm_create_qm_loader(kirigami_QM_LOADER libkirigami6_qt)
 target_sources(KirigamiPlugin PRIVATE ${kirigami_QM_LOADER})
 
 target_include_directories(KirigamiPlugin PRIVATE
