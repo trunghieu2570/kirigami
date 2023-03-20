@@ -265,7 +265,3 @@ msgstr "El sistema de finestres %1"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (construïdes amb %3)"
-
-#~ msgctxt "AboutItem|"
-#~ msgid "Visit %1's KDE Store page"
-#~ msgstr "Visita la pàgina %1 de la KDE Store"
