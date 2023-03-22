@@ -197,7 +197,7 @@ Kirigami.ApplicationWindow {
         id: chatComponent
         Kirigami.ScrollablePage {
             title: "#KDE"
-            actions: {
+            actions: [
                 Kirigami.Action {
                     icon.name: "documentinfo"
                     text: "Channel info"
