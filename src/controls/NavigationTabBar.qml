@@ -276,8 +276,11 @@ T.ToolBar {
         }
     }
 
-    // Using an Instantiator instead of a Repeater allows us to use parent.visibleChildren.length without including a Repeater in that count.
-    Instantiator {
+    // Using a Repeater here because Instantiator was causing issues:
+    // NavigationTabButtons that were supposed to be destroyed were still
+    // registered as buttons in tabGroup.
+    // NOTE: This will make Repeater show up as child through visibleChildren
+    Repeater {
         id: instantiator
         model: root.actions
         delegate: NavigationTabButton {
