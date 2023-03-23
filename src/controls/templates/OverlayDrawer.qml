@@ -22,7 +22,7 @@ import "private" as P
 T2.Drawer {
     id: root
 
-    z: modal ? 0 : applicationWindow().overlay.z - 1
+    z: modal ? 0 : 1
 
 //BEGIN properties
     /**
