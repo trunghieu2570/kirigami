@@ -131,8 +131,8 @@ T.ToolBar {
      */
     property real maximumContentWidth: {
         const minDelegateWidth = Kirigami.Units.gridUnit * 5;
-        // always have at least the width of 5 items (so small amounts of actions look natural)
-        return Math.max(minDelegateWidth * actions.length, minDelegateWidth * 5);
+        // Always have at least the width of 5 items, so that small amounts of actions look natural.
+        return minDelegateWidth * Math.max(actions.length, 5);
     }
 
     /**
