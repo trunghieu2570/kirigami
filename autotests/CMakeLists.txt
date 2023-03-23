@@ -33,6 +33,7 @@ kirigami_add_tests(
     tst_basiclistitem_tooltip.qml
     tst_colorutils.qml
     tst_formlayout.qml
+    tst_globaldrawer.qml
     tst_icon.qml
     tst_keynavigation.qml
     tst_listskeynavigation.qml
