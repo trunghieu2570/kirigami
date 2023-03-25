@@ -98,6 +98,7 @@ Kirigami.ActionTextField {
 
     focusSequence: StandardKey.Find
     inputMethodHints: Qt.ImhNoPredictiveText
+    EnterKey.type: Qt.EnterKeySearch
     rightActions: [
         Kirigami.Action {
             //ltr confusingly refers to the direction of the arrow in the icon, not the text direction which it should be used in
