@@ -72,11 +72,19 @@ QColor ColorUtils::linearInterpolation(const QColor &one, const QColor &two, dou
     if (two == Qt::transparent) {
         return scaleAlpha(one, 1 - balance);
     }
+    // QColor returns -1 when hue is undefined, which happens whenever
+    // saturation is 0. When this happens, interpolation can go wrong so handle
+    // it by first trying to use the other color's hue and if that is also -1,
+    // just skip the hue interpolation by using 0 for both.
+    auto sourceHue = std::max(one.hueF() > 0.0 ? one.hueF() : two.hueF(), 0.0f);
+    auto targetHue = std::max(two.hueF() > 0.0 ? two.hueF() : one.hueF(), 0.0f);
 
-    return QColor::fromHsv(std::fmod(linearlyInterpolateDouble(one.hue(), two.hue(), balance), 360.0),
-                           qBound(0.0, linearlyInterpolateDouble(one.saturation(), two.saturation(), balance), 255.0),
-                           qBound(0.0, linearlyInterpolateDouble(one.value(), two.value(), balance), 255.0),
-                           qBound(0.0, linearlyInterpolateDouble(one.alpha(), two.alpha(), balance), 255.0));
+    auto hue = std::fmod(linearlyInterpolateDouble(sourceHue, targetHue, balance), 1.0);
+    auto saturation = std::clamp(linearlyInterpolateDouble(one.saturationF(), two.saturationF(), balance), 0.0, 1.0);
+    auto value = std::clamp(linearlyInterpolateDouble(one.valueF(), two.valueF(), balance), 0.0, 1.0);
+    auto alpha = std::clamp(linearlyInterpolateDouble(one.alphaF(), two.alphaF(), balance), 0.0, 1.0);
+
+    return QColor::fromHsvF(hue, saturation, value, alpha);
 }
 
 // Some private things for the adjust, change, and scale properties
