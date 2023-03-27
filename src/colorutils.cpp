@@ -59,19 +59,10 @@ QColor ColorUtils::alphaBlend(const QColor &foreground, const QColor &background
 
 QColor ColorUtils::linearInterpolation(const QColor &one, const QColor &two, double balance)
 {
-    auto scaleAlpha = [](const QColor &color, double factor) {
-        return QColor::fromRgb(color.red(), color.green(), color.blue(), color.alpha() * factor);
-    };
     auto linearlyInterpolateDouble = [](double one, double two, double factor) {
         return one + (two - one) * factor;
     };
 
-    if (one == Qt::transparent) {
-        return scaleAlpha(two, balance);
-    }
-    if (two == Qt::transparent) {
-        return scaleAlpha(one, 1 - balance);
-    }
     // QColor returns -1 when hue is undefined, which happens whenever
     // saturation is 0. When this happens, interpolation can go wrong so handle
     // it by first trying to use the other color's hue and if that is also -1,
