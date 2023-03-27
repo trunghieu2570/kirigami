@@ -1,3 +1,10 @@
+/*
+ *  SPDX-FileCopyrightText: 2020 Janet Blackquill <uhhadd@gmail.com>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
+ *
+ *  SPDX-License-Identifier: LGPL-2.0-or-later
+ */
+
 import QtQuick 2.12
 import QtQuick.Controls 2.12 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
