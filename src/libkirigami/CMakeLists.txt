@@ -45,9 +45,9 @@ target_include_directories(KF6Kirigami2
 target_link_libraries(KF6Kirigami2
     PUBLIC
         Qt6::Core
-    PRIVATE
         Qt6::Qml
         Qt6::Quick
+    PRIVATE
         Qt6::QuickControls2
         ${LIBKIRIGAMKI_EXTRA_LIBS}
 )
