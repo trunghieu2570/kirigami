@@ -104,6 +104,8 @@ public:
 
     std::array<QColor, ColorRoleCount> colors;
 
+    qint64 cacheKey = -1;
+
     QFont defaultFont;
     QFont smallFont;
 
@@ -253,6 +255,27 @@ public:
     }
 };
 
+uint qHash(std::array<QColor, PlatformThemeData::ColorRoleCount> colors, uint seed)
+{
+    std::array<size_t, PlatformThemeData::ColorRoleCount> parts;
+    std::transform(colors.cbegin(), colors.cend(), parts.begin(), [](const QColor &color) {
+        return ::qHash((color.red() << 24) + (color.green() << 16) + (color.blue() << 8) + color.alpha());
+    });
+    return qHashRange(parts.begin(), parts.end(), seed);
+}
+
+uint qHash(PlatformThemeData::ColorMap *colors, uint seed)
+{
+    std::vector<size_t> parts;
+    parts.reserve(colors->size());
+    int i = 0;
+    for (const auto &p : *colors) {
+        parts[i] = ::qHash((p.second.red() << 24) + (p.second.green() << 16) + (p.second.blue() << 8) + p.second.alpha());
+        ++i;
+    };
+    return qHashRange(parts.begin(), parts.end(), seed);
+}
+
 class PlatformThemePrivate
 {
 public:
@@ -349,6 +372,9 @@ public:
         }
 
         pendingColorChange = true;
+        if (data) {
+            data->cacheKey = -1;
+        }
         QMetaObject::invokeMethod(theme, &PlatformTheme::emitColorChanged, Qt::QueuedConnection);
     }
 
@@ -366,6 +392,23 @@ public:
                 theme->updateChildren(theme->parent());
             },
             Qt::QueuedConnection);
+    }
+
+    inline qint64 cacheKey(PlatformTheme *theme)
+    {
+        if (!data) {
+            return -1;
+        }
+
+        if (data->cacheKey < 0) {
+            data->cacheKey = qHash(data->colors, 0x9e3779b9);
+        }
+
+        if (localOverrides) {
+            return qHashMulti(0x9e3779b9, data->cacheKey, qHash(localOverrides.get(), 0x9e3779b9));
+        }
+
+        return data->cacheKey;
     }
 
     /*
@@ -810,6 +853,11 @@ QPalette PlatformTheme::palette() const
     }
 
     return palette;
+}
+
+qint64 PlatformTheme::cacheKey() const
+{
+    return d->cacheKey(const_cast<PlatformTheme *>(this));
 }
 
 QIcon PlatformTheme::iconFromTheme(const QString &name, const QColor &customColor)

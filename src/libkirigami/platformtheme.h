@@ -245,6 +245,9 @@ public:
     // this may is used by the desktop QQC2 to set the styleoption palettes
     QPalette palette() const;
 
+    // unique number based on the color, usable as a key for caching things based on the theme
+    qint64 cacheKey() const;
+
     // this will be used by desktopicon to fetch icons with KIconLoader
     virtual Q_INVOKABLE QIcon iconFromTheme(const QString &name, const QColor &customColor = Qt::transparent);
 
