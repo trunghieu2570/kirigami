@@ -122,17 +122,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Əməllər"
 
-#: controls/GlobalDrawer.qml:494
+#: controls/GlobalDrawer.qml:504
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Geriyə"
 
-#: controls/GlobalDrawer.qml:587
+#: controls/GlobalDrawer.qml:597
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Yandakı paneli bağla"
 
-#: controls/GlobalDrawer.qml:590
+#: controls/GlobalDrawer.qml:600
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Yan paneli açın"

@@ -120,17 +120,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Činnosti"
 
-#: controls/GlobalDrawer.qml:494
+#: controls/GlobalDrawer.qml:504
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Zpět"
 
-#: controls/GlobalDrawer.qml:587
+#: controls/GlobalDrawer.qml:597
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Zavřít postranní panel"
 
-#: controls/GlobalDrawer.qml:590
+#: controls/GlobalDrawer.qml:600
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Otevřít postranní panel"
