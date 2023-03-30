@@ -97,7 +97,7 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "მეტი ქმედება"
 
-#: controls/Avatar.qml:163
+#: controls/Avatar.qml:182
 #, qt-format
 msgctxt "Avatar|"
 msgid "%1 — %2"
@@ -113,17 +113,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "ქმედებები"
 
-#: controls/GlobalDrawer.qml:496
+#: controls/GlobalDrawer.qml:506
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "უკან"
 
-#: controls/GlobalDrawer.qml:589
+#: controls/GlobalDrawer.qml:599
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "გვერდითი ზოლის დახურვა"
 
-#: controls/GlobalDrawer.qml:592
+#: controls/GlobalDrawer.qml:602
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "გვერდითი ზოლის გახსნა"

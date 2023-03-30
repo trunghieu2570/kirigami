@@ -123,7 +123,7 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Daugiau veiksmų"
 
-#: controls/Avatar.qml:163
+#: controls/Avatar.qml:182
 #, qt-format
 msgctxt "Avatar|"
 msgid "%1 — %2"
@@ -139,17 +139,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Veiksmai"
 
-#: controls/GlobalDrawer.qml:496
+#: controls/GlobalDrawer.qml:506
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Atgal"
 
-#: controls/GlobalDrawer.qml:589
+#: controls/GlobalDrawer.qml:599
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Užverti šoninę juostą"
 
-#: controls/GlobalDrawer.qml:592
+#: controls/GlobalDrawer.qml:602
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"

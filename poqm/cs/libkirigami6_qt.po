@@ -98,7 +98,7 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Další činnosti"
 
-#: controls/Avatar.qml:163
+#: controls/Avatar.qml:182
 #, qt-format
 msgctxt "Avatar|"
 msgid "%1 — %2"
@@ -114,17 +114,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Činnosti"
 
-#: controls/GlobalDrawer.qml:496
+#: controls/GlobalDrawer.qml:506
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Zpět"
 
-#: controls/GlobalDrawer.qml:589
+#: controls/GlobalDrawer.qml:599
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Zavřít postranní panel"
 
-#: controls/GlobalDrawer.qml:592
+#: controls/GlobalDrawer.qml:602
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Otevřít postranní panel"
