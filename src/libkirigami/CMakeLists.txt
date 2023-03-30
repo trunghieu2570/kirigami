@@ -19,6 +19,8 @@ set(libkirigami_extra_sources "")
 if (UNIX AND NOT ANDROID AND NOT(APPLE) AND NOT(DISABLE_DBUS))
     set_source_files_properties(org.freedesktop.portal.Settings.xml PROPERTIES INCLUDE dbustypes.h)
     qt_add_dbus_interface(libkirigami_extra_sources org.freedesktop.portal.Settings.xml settings_interface)
+    set_source_files_properties(org.freedesktop.impl.portal.Settings.xml PROPERTIES INCLUDE dbustypes.h)
+    qt_add_dbus_interface(libkirigami_extra_sources org.freedesktop.impl.portal.Settings.xml settings_impl_interface)
     set(LIBKIRIGAMKI_EXTRA_LIBS Qt6::DBus)
 endif()
 

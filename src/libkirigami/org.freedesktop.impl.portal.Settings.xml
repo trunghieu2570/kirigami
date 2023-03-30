@@ -1,0 +1,26 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<!--
+  SPDX-License-Identifier: CC0-1.0
+  SPDX-FileCopyrightText: None
+-->
+<node>
+  <interface name="org.freedesktop.impl.portal.Settings">
+    <property name="version" type="u" access="read"/>
+    <signal name="SettingChanged">
+      <arg name="group" type="s" direction="out"/>
+      <arg name="key" type="s" direction="out"/>
+      <arg name="value" type="v" direction="out"/>
+    </signal>
+    <method name="ReadAll">
+      <arg name="groups" type="as" direction="in"/>
+      <arg type="a{sa{sv}}" name="value" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="VariantMapMap"/>
+    </method>
+    <method name="Read">
+      <arg name="group" type="s" direction="in"/>
+      <arg name="key" type="s" direction="in"/>
+    </method>
+  </interface>
+</node>
+

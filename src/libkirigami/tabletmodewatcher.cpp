@@ -9,6 +9,7 @@
 #include <QCoreApplication>
 
 #if defined(KIRIGAMI_ENABLE_DBUS)
+#include "settings_impl_interface.h"
 #include "settings_interface.h"
 #include <QDBusConnection>
 #endif
@@ -35,7 +36,39 @@ class TabletModeWatcherPrivate
     static constexpr auto KEY_AVAILABLE = "available"_L1;
     static constexpr auto KEY_ENABLED = "enabled"_L1;
 
+    static constexpr auto KDE_PORTAL_SERVICE_NAME = "org.freedesktop.impl.portal.desktop.kde"_L1;
+
 public:
+    template<typename DBusIface>
+    void setupDBus(const QString &serviceName)
+    {
+        qDBusRegisterMetaType<VariantMapMap>();
+
+        auto portal = new DBusIface(serviceName, u"/org/freedesktop/portal/desktop"_s, QDBusConnection::sessionBus(), q);
+        if (const auto reply = portal->ReadAll({PORTAL_GROUP}); !reply.isError() && !reply.value().isEmpty()) {
+            const auto properties = reply.value().value(PORTAL_GROUP);
+            isTabletModeAvailable = properties[KEY_AVAILABLE].toBool();
+            isTabletMode = properties[KEY_ENABLED].toBool();
+            QObject::connect(portal, &DBusIface::SettingChanged, q, [this](const QString &group, const QString &key, const QDBusVariant &value) {
+                if (group != PORTAL_GROUP) {
+                    return;
+                }
+                if (key == KEY_AVAILABLE) {
+                    isTabletModeAvailable = value.variant().toBool();
+                    Q_EMIT q->tabletModeAvailableChanged(isTabletModeAvailable);
+                } else if (key == KEY_ENABLED) {
+                    setIsTablet(value.variant().toBool());
+                }
+            });
+        } else {
+            if (reply.isError()) {
+                qWarning() << reply.error();
+            }
+            isTabletModeAvailable = false;
+            isTabletMode = false;
+        }
+    }
+
     TabletModeWatcherPrivate(TabletModeWatcher *watcher)
         : q(watcher)
     {
@@ -58,27 +91,14 @@ public:
             /* clang-format on */
             isTabletModeAvailable = isTabletMode;
         } else {
-            qDBusRegisterMetaType<VariantMapMap>();
-            auto portal = new OrgFreedesktopPortalSettingsInterface(u"org.freedesktop.portal.Desktop"_s, u"/org/freedesktop/portal/desktop"_s, QDBusConnection::sessionBus(), q);
-
-            if (const auto reply = portal->ReadAll({PORTAL_GROUP}); !reply.isError() && !reply.value().isEmpty()) {
-                const auto properties = reply.value().value(PORTAL_GROUP);
-                isTabletModeAvailable = properties[KEY_AVAILABLE].toBool();
-                isTabletMode = properties[KEY_ENABLED].toBool();
-                QObject::connect(portal, &OrgFreedesktopPortalSettingsInterface::SettingChanged, q, [this](const QString &group, const QString &key, const QDBusVariant &value) {
-                    if (group != PORTAL_GROUP) {
-                        return;
-                    }
-                    if (key == KEY_AVAILABLE) {
-                        isTabletModeAvailable = value.variant().toBool();
-                        Q_EMIT q->tabletModeAvailableChanged(isTabletModeAvailable);
-                    } else if (key == KEY_ENABLED) {
-                        setIsTablet(value.variant().toBool());
-                    }
-                });
+            // A bit of awkward redirection... when kirigami is used by the portal service itself (e.g. for the
+            // file open dialog) then we need to talk to the portal impl directly and let Qt handle the call
+            // internally. Without this we'd be talking to the xdg-desktop-portal and that would talk to us again,
+            // causing a deadlock until the dbus timeout is hit.
+            if (QDBusConnection::sessionBus().interface()->servicePid(KDE_PORTAL_SERVICE_NAME) == qApp->applicationPid()){
+                setupDBus<OrgFreedesktopImplPortalSettingsInterface>(KDE_PORTAL_SERVICE_NAME);
             } else {
-                isTabletModeAvailable = false;
-                isTabletMode = false;
+                setupDBus<OrgFreedesktopPortalSettingsInterface>(u"org.freedesktop.portal.Desktop"_s);
             }
         }
 // TODO: case for Windows
