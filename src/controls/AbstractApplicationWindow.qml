@@ -200,7 +200,12 @@ QQC2.ApplicationWindow {
      * @endcode
      * @since 5.76
      */
-    readonly property Action quitAction: _quitAction
+    readonly property Kirigami.Action quitAction: Kirigami.Action {
+        text: qsTr("Quit")
+        icon.name: "application-exit";
+        shortcut: StandardKey.Quit
+        onTriggered: source => root.close();
+    }
 //END properties
 
 //BEGIN functions
@@ -346,16 +351,11 @@ QQC2.ApplicationWindow {
         root.height = root.height;
     }
 
-    Action {
-        id: _quitAction
-        text: qsTr("Quit")
-        icon.name: "application-exit";
-        shortcut: StandardKey.Quit
-        onTriggered: source => root.close()
-    }
+    // This is needed because discover in mobile mode does not
+    // close with the global drawer open.
     Shortcut {
-        sequence: _quitAction.shortcut
+        sequence: root.quitAction.shortcut
         context: Qt.ApplicationShortcut
-        onActivated: root.close()
+        onActivated: root.close();
     }
 }
