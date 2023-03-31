@@ -13,10 +13,6 @@ QQC2.MenuItem {
 
     visible: action.visible === undefined || action.visible
     height: visible ? implicitHeight : 0
-    autoExclusive: {
-        const g = action.QQC2.ActionGroup.group;
-        return g && g.exclusive;
-    }
 
     QQC2.ToolTip.text: action.tooltip || ""
     QQC2.ToolTip.visible: menuItem.hovered && QQC2.ToolTip.text.length > 0
