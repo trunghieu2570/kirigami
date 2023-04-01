@@ -24,7 +24,7 @@ Controls.ToolButton {
 
     property var menuActions: {
         if (action && action.hasOwnProperty("children")) {
-            return Array.prototype.slice.call(action.children)
+            return Array.prototype.slice.call(action.children).filter(action => action.visible)
         }
         return []
     }
