@@ -95,7 +95,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "%1 について"
 
-#: controls/AbstractApplicationWindow.qml:346
+#: controls/AbstractApplicationWindow.qml:199
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "終了"

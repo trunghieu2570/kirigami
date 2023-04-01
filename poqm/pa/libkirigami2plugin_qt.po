@@ -117,7 +117,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "ਇਸ ਬਾਰੇ"
 
-#: controls/AbstractApplicationWindow.qml:346
+#: controls/AbstractApplicationWindow.qml:199
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "ਬਾਹਰ"
