@@ -87,7 +87,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "%1 정보"
 
-#: controls/AbstractApplicationWindow.qml:351
+#: controls/AbstractApplicationWindow.qml:204
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "끝내기"

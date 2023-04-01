@@ -110,7 +110,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Apie"
 
-#: controls/AbstractApplicationWindow.qml:351
+#: controls/AbstractApplicationWindow.qml:204
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr ""

@@ -90,7 +90,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "О программе %1"
 
-#: controls/AbstractApplicationWindow.qml:351
+#: controls/AbstractApplicationWindow.qml:204
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Выход"
