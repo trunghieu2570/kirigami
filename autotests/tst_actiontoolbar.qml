@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2020 Arjen Hiemstra <ahiemstra@heimr.nl>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -279,5 +280,105 @@ TestCase {
         compare(toolbar.height, 100)
         compare(t.height, 100)
         compare(s.height, 100)
+    }
+
+    Component {
+        id: singleChildActionIsInvisibileComponent
+
+        Kirigami.ActionToolBar {
+            property alias parentAction: parentAction
+            property alias invisibleAction: invisibleAction
+
+            // make sure all actions are visible
+            height: 100
+            width: 500
+
+            actions: [
+                Kirigami.Action {
+                    id: parentAction
+                    text: "Parent Action"
+
+                    Kirigami.Action {
+                        id: invisibleAction
+                        text: "Invisible Action"
+                        visible: false
+                    }
+                }
+            ]
+        }
+    }
+
+    Component {
+        id: multipleChildActionsVisibilityComponent
+
+        Kirigami.ActionToolBar {
+            property alias parentAction: parentAction
+            property alias visibleAction: visibleAction
+            property alias invisibleAction: invisibleAction
+
+            // make sure all actions are visible
+            height: 100
+            width: 500
+
+            actions: [
+                Kirigami.Action {
+                    id: parentAction
+                    text: "Parent Action"
+
+                    Kirigami.Action {
+                        id: visibleAction
+                        text: "Visible Action"
+                    }
+
+                    Kirigami.Action {
+                        id: invisibleAction
+                        text: "Invisible Action"
+                        visible: false
+                    }
+                }
+            ]
+        }
+    }
+
+    function findButtonWithText(toolbar, text) {
+        let c = toolbar.children[0].children
+        for (let i in c) {
+            if (c[i].text === text) {
+                return c[i]
+            }
+        }
+        return null
+    }
+
+    function testSingleChildrenActionVisibility() {
+        const toolbar = createTemporaryObject(singleChildActionIsInvisibileComponent, testCase, {width: testCase.width})
+
+        verify(toolbar)
+        verify(waitForRendering(toolbar))
+
+        const parentActionButton = findButtonWithText(toolbar, "Parent Action")
+        verify(parentActionButton)
+
+        compare(parentActionButton.menuActions.length, 0)
+        compare(parentActionButton.Accessible.role, Accessible.Button)
+        toolbar.invisibleAction.visible = true
+        compare(parentActionButton.menuActions.length, 1)
+        compare(parentActionButton.Accessible.role, Accessible.ButtonMenu)
+    }
+
+    function testMultipleChildrenActionVisibility() {
+        const toolbar = createTemporaryObject(multipleChildActionsVisibilityComponent, testCase, {width: testCase.width})
+
+        verify(toolbar)
+        verify(waitForRendering(toolbar))
+
+        const parentActionButton = findButtonWithText(toolbar, "Parent Action")
+        verify(parentActionButton)
+
+        compare(parentActionButton.menuActions.length, 1)
+        compare(parentActionButton.Accessible.role, Accessible.ButtonMenu)
+        toolbar.invisibleAction.visible = true
+        compare(parentActionButton.menuActions.length, 2)
+        compare(parentActionButton.Accessible.role, Accessible.ButtonMenu)
     }
 }
