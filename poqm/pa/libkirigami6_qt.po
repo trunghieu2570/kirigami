@@ -1,28 +1,26 @@
-# A S Alam <aalam.yellow@gmail.com>, 2021.
+# A S Alam <aalam.yellow@gmail.com>, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2021-04-25 13:00-0700\n"
+"PO-Revision-Date: 2023-04-01 20:53-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
-"Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
+"Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: controls/AboutItem.qml:139
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: controls/AboutItem.qml:148
-#, fuzzy, qt-format
-#| msgctxt "AboutPage|"
-#| msgid "Send an email to %1"
+#, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "%1 ਨੂੰ ਈਮੇਲ ਭੇਜੋ"
@@ -30,54 +28,40 @@ msgstr "%1 ਨੂੰ ਈਮੇਲ ਭੇਜੋ"
 #: controls/AboutItem.qml:198
 msgctxt "AboutItem|"
 msgid "Get Involved"
-msgstr ""
+msgstr "ਹਿੱਸਾ ਲਵੋ"
 
 #: controls/AboutItem.qml:204
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "ਦਾਨ ਕਰੋ"
 
 #: controls/AboutItem.qml:221
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr ""
+msgstr "ਬੱਗ ਦੀ ਜਾਣਕਾਰੀ ਦਿਓ"
 
 #: controls/AboutItem.qml:234
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Copyright"
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "ਕਾਪੀਰਾਈਟ"
 
 #: controls/AboutItem.qml:278
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "License:"
 msgctxt "AboutItem|"
 msgid "License:"
-msgstr "ਲਸੰਸ:"
+msgstr "ਲਸੰਸ"
 
 #: controls/AboutItem.qml:300
-#, fuzzy, qt-format
-#| msgctxt "AboutPage|"
-#| msgid "License: %1"
+#, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "ਲਸੰਸ: %1"
 
 #: controls/AboutItem.qml:311
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Libraries in use"
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "ਵਰਤਣ ਲਈ ਲਾਇਬਰੇਰੀਆਂ"
 
 #: controls/AboutItem.qml:341
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Authors"
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "ਲੇਖਕ"
@@ -85,31 +69,23 @@ msgstr "ਲੇਖਕ"
 #: controls/AboutItem.qml:350
 msgctxt "AboutItem|"
 msgid "Show author photos"
-msgstr ""
+msgstr "ਲੇਖਕ ਦੀ ਫ਼ੋਟੋ ਵੇਖਾਓ"
 
 #: controls/AboutItem.qml:381
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Credits"
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "ਮਾਣ"
 
 #: controls/AboutItem.qml:394
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Translators"
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "ਉਲੱਥਾਕਾਰ"
 
 #: controls/AboutPage.qml:93
-#, fuzzy, qt-format
-#| msgctxt "AboutPage|"
-#| msgid "About"
+#, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
-msgstr "ਇਸ ਬਾਰੇ"
+msgstr "%1 ਬਾਰੇ"
 
 #: controls/AbstractApplicationWindow.qml:204
 msgctxt "AbstractApplicationWindow|"
@@ -130,7 +106,7 @@ msgstr "%1 — %2"
 #: controls/Chip.qml:82
 msgctxt "Chip|"
 msgid "Remove Tag"
-msgstr ""
+msgstr "ਟੈਗ ਹਟਾਓ"
 
 #: controls/ContextDrawer.qml:66
 msgctxt "ContextDrawer|"
@@ -148,17 +124,14 @@ msgid "Close Sidebar"
 msgstr "ਬਾਹੀ ਬੰਦ ਕਰੋ"
 
 #: controls/GlobalDrawer.qml:602
-#, fuzzy
-#| msgctxt "GlobalDrawer|"
-#| msgid "Close Sidebar"
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
-msgstr "ਬਾਹੀ ਬੰਦ ਕਰੋ"
+msgstr "ਬਾਹੀ ਖੋਲ੍ਹੋ"
 
 #: controls/LoadingPlaceholder.qml:54
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
-msgstr ""
+msgstr "…ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #: controls/PasswordField.qml:42
 msgctxt "PasswordField|"
@@ -166,28 +139,19 @@ msgid "Password"
 msgstr "ਪਾਸਵਰਡ"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr "ਬੰਦ ਕਰੋ"
+msgstr "ਮੇਨੂ ਬੰਦ ਕਰੋ"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Open"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr "ਖੋਲ੍ਹੋ"
+msgstr "ਮੇਨੂ ਖੋਲ੍ਹੋ"
 
 #: controls/SearchField.qml:94
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search"
 msgctxt "SearchField|"
 msgid "Search…"
-msgstr "ਖੋਜੋ"
+msgstr "…ਖੋਜੋ"
 
 #: controls/SearchField.qml:96
 msgctxt "SearchField|"
@@ -197,77 +161,63 @@ msgstr "ਖੋਜੋ"
 #: controls/SearchField.qml:106
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr ""
+msgstr "ਖੋਜ ਮਿਟਾਓ"
 
 #: controls/settingscomponents/CategorizedSettings.qml:40
 #: controls/settingscomponents/CategorizedSettings.qml:104
 msgctxt "CategorizedSettings|"
 msgid "Settings"
-msgstr ""
+msgstr "ਸੈਟਿੰਗਾਂ"
 
 #: controls/settingscomponents/CategorizedSettings.qml:40
 #, qt-format
 msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
-msgstr ""
+msgstr "ਸੈਟਿੰਗਾਂ — %1"
 
 #. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
 #: controls/swipenavigator/templates/PageTab.qml:38
-#, fuzzy, qt-format
-#| msgctxt "PrivateSwipeTab|"
-#| msgid "Current page. Progress: %1 percent."
+#, qt-format
 msgctxt "PageTab|"
 msgid "Current page. Progress: %1 percent."
-msgstr "ਮੌਜੂਦਾ ਸਫ਼ਾ। ਤਰੱਕੀ: %1 ਫ਼ੀਸਦੀ"
+msgstr "ਮੌਜੂਦਾ ਸਫ਼ਾ। ਤਰੱਕੀ: %1 ਫ਼ੀਸਦੀ।"
 
 #. Accessibility text for a page tab. Keep the text as concise as possible.
 #: controls/swipenavigator/templates/PageTab.qml:41
-#, fuzzy, qt-format
-#| msgctxt "PrivateSwipeTab|"
-#| msgid "Navigate to %1. Progress: %2 percent."
+#, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1. Progress: %2 percent."
-msgstr "%1 ਉੱਤੇ ਜਾਓ। ਤਰੱਕੀ: %2 ਫ਼ੀਸਦੀ"
+msgstr "%1 ਉੱਤੇ ਜਾਓ। ਤਰੱਕੀ: %2 ਫ਼ੀਸਦੀ।"
 
 #. Accessibility text for a page tab. Keep the text as concise as possible.
 #: controls/swipenavigator/templates/PageTab.qml:46
-#, fuzzy
-#| msgctxt "PrivateSwipeTab|"
-#| msgid "Current page."
 msgctxt "PageTab|"
 msgid "Current page."
 msgstr "ਮੌਜੂਦਾ ਸਫ਼ਾ।"
 
 #. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
 #: controls/swipenavigator/templates/PageTab.qml:49
-#, fuzzy, qt-format
-#| msgctxt "PrivateSwipeTab|"
-#| msgid "Navigate to %1. Demanding attention."
+#, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1. Demanding attention."
 msgstr "%1 ਉੱਤੇ ਜਾਓ। ਧਿਆਨ ਦੇਣ ਦੀ ਲੋੜ ਹੈ।"
 
 #. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
 #: controls/swipenavigator/templates/PageTab.qml:52
-#, fuzzy, qt-format
-#| msgctxt "PrivateSwipeTab|"
-#| msgid "Navigate to %1."
+#, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "%1 ਉੱਤੇ ਜਾਓ।"
 
 #: controls/templates/OverlayDrawer.qml:130
-#, fuzzy
-#| msgctxt "GlobalDrawer|"
-#| msgid "Close Sidebar"
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
-msgstr "ਬਾਹੀ ਬੰਦ ਕਰੋ"
+msgstr "ਦਰਾਜ ਬੰਦ ਕਰੋ"
 
 #: controls/templates/OverlayDrawer.qml:136
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
-msgstr ""
+msgstr "ਦਰਾਜ ਖੋਲ੍ਹੋ"
 
 #: controls/templates/private/BackButton.qml:34
 msgctxt "BackButton|"
@@ -287,7 +237,7 @@ msgstr "ਹੋਰ ਕਾਰਵਾਈਆਂ"
 #: controls/UrlButton.qml:51
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
-msgstr ""
+msgstr "ਲਿੰਕ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ"
 
 #: settings.cpp:211
 #, qt-format
