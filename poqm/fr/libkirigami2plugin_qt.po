@@ -169,7 +169,7 @@ msgctxt "SearchField|"
 msgid "Search"
 msgstr "Rechercher"
 
-#: controls/SearchField.qml:106
+#: controls/SearchField.qml:107
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "Effacer une recherche"

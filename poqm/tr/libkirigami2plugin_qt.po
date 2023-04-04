@@ -166,7 +166,7 @@ msgctxt "SearchField|"
 msgid "Search"
 msgstr "Ara"
 
-#: controls/SearchField.qml:106
+#: controls/SearchField.qml:107
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "Aramayı temizle"
