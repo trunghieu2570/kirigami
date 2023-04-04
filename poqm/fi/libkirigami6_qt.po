@@ -1,9 +1,9 @@
 # Lasse Liehu <lasse.liehu@gmail.com>, 2017.
-# Tommi Nieminen <translator@legisign.org>, 2018, 2019, 2020, 2021, 2022.
+# Tommi Nieminen <translator@legisign.org>, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-09-14 19:00+0300\n"
+"PO-Revision-Date: 2023-03-12 10:42+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 "X-Qt-Contexts: true\n"
 
 #: controls/AboutItem.qml:139
@@ -34,15 +34,12 @@ msgstr "Ota osaa"
 #: controls/AboutItem.qml:204
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Lahjoita"
 
 #: controls/AboutItem.qml:221
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Report Bug…"
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "Ilmoita viasta…"
+msgstr "Ilmoita viasta"
 
 #: controls/AboutItem.qml:234
 msgctxt "AboutItem|"
@@ -143,20 +140,14 @@ msgid "Password"
 msgstr "Salasana"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr "Sulje"
+msgstr "Sulje valikko"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Open"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr "Avaa"
+msgstr "Avaa valikko"
 
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
@@ -168,10 +159,10 @@ msgctxt "SearchField|"
 msgid "Search"
 msgstr "Etsi"
 
-#: controls/SearchField.qml:106
+#: controls/SearchField.qml:107
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr ""
+msgstr "Tyhjennä haku"
 
 #: controls/settingscomponents/CategorizedSettings.qml:40
 #: controls/settingscomponents/CategorizedSettings.qml:104
