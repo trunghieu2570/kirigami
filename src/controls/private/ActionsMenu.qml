@@ -21,10 +21,6 @@ QQC2.Menu
     property QQC2.Action parentAction
     property QQC2.MenuItem parentItem
 
-    Item {
-        id: invisibleItems
-        visible: false
-    }
     Instantiator {
         id: actionsInstantiator
 
