@@ -215,7 +215,11 @@ T.SwipeDelegate {
 
         property Flickable view: listItem.ListView.view || (listItem.parent ? (listItem.parent.ListView.view || (listItem.parent instanceof Flickable ? listItem.parent : null)) : null)
 
-        readonly property QtObject swipeFilterItem: (view && view.parent && view.parent.parent && view.parent.parent._swipeFilter) ? view.parent.parent._swipeFilter : null
+        function viewHasPropertySwipeFilter(): bool {
+            return view && view.parent && view.parent.parent && "_swipeFilter" in view.parent.parent;
+        }
+
+        readonly property QtObject swipeFilterItem: (viewHasPropertySwipeFilter() && view.parent.parent._swipeFilter) ? view.parent.parent._swipeFilter : null
 
         readonly property bool edgeEnabled: swipeFilterItem ? swipeFilterItem.currentItem === listItem || swipeFilterItem.currentItem === listItem.parent : false
 
@@ -224,7 +228,7 @@ T.SwipeDelegate {
             if (listItem.alwaysVisibleActions || !Kirigami.Settings.tabletMode) {
                 return;
             }
-            if (internal.view && Kirigami.Settings.tabletMode && !internal.view.parent.parent._swipeFilter) {
+            if (viewHasPropertySwipeFilter() && Kirigami.Settings.tabletMode && !internal.view.parent.parent._swipeFilter) {
                 const component = Qt.createComponent(Qt.resolvedUrl("../private/SwipeItemEventFilter.qml"));
                 internal.view.parent.parent._swipeFilter = component.createObject(internal.view.parent.parent);
                 component.destroy();
@@ -235,6 +239,9 @@ T.SwipeDelegate {
     Connections {
         target: Kirigami.Settings
         function onTabletModeChanged() {
+            if (!internal.viewHasPropertySwipeFilter()) {
+                return;
+            }
             if (Kirigami.Settings.tabletMode) {
                 if (!internal.swipeFilterItem) {
                     const component = Qt.createComponent(Qt.resolvedUrl("../private/SwipeItemEventFilter.qml"));
