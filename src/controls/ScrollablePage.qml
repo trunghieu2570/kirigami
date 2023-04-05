@@ -352,9 +352,11 @@ Kirigami.Page {
             root.flickable.anchors.right = undefined;
             root.flickable.anchors.top = undefined;
             root.flickable.anchors.bottom = undefined;
+            scrollingArea.visible = false;
         } else {
             scrollView.contentItem = root.flickable;
             scrollingArea.parent = root.flickable.contentItem;
+            scrollingArea.visible = true;
             root.flickable.contentHeight = Qt.binding(() => scrollingArea.implicitHeight - root.flickable.topMargin - root.flickable.bottomMargin);
             root.flickable.contentWidth = Qt.binding(() => scrollingArea.implicitWidth);
         }
