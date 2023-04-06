@@ -38,6 +38,7 @@ ecm_qt_declare_logging_category(libkirigami_extra_sources
 ecm_generate_export_header(KF6Kirigami2
     VERSION ${KF_VERSION}
     BASE_NAME Kirigami2
+    USE_VERSION_HEADER
     DEPRECATION_VERSIONS
 )
 
