@@ -102,15 +102,15 @@ install(EXPORT KF6Kirigami2Targets
     NAMESPACE KF6::
 )
 
-
+set(kirigami2_version_header "${CMAKE_CURRENT_BINARY_DIR}/src/libkirigami/kirigami2_version.h")
 ecm_setup_version(${KF_VERSION}
     VARIABLE_PREFIX KIRIGAMI2
-    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kirigami2_version.h"
+    VERSION_HEADER "${kirigami2_version_header}"
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2ConfigVersion.cmake"
     SOVERSION 6
 )
 install(
-    FILES "${CMAKE_CURRENT_BINARY_DIR}/kirigami2_version.h"
+    FILES "${kirigami2_version_header}"
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami2
     COMPONENT Devel
 )

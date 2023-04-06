@@ -23,7 +23,7 @@
 #include "libkirigami/tabletmodewatcher.h"
 
 #ifndef KIRIGAMI_BUILD_TYPE_STATIC
-#include "../kirigami2_version.h"
+#include "libkirigami/kirigami2_version.h"
 #endif
 
 class SettingsSingleton
