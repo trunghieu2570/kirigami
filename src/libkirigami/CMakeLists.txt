@@ -3,6 +3,12 @@ set(KIRIGAMI_INSTALL_INCLUDEDIR "${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami2")
 add_library(KF6Kirigami2 ${libkirigami_SRCS})
 add_library(KF6::Kirigami2 ALIAS KF6Kirigami2)
 
+set_target_properties(KF6Kirigami2 PROPERTIES
+    VERSION     ${KIRIGAMI2_VERSION}
+    SOVERSION   ${KIRIGAMI2_SOVERSION}
+    EXPORT_NAME "Kirigami2"
+)
+
 target_sources(KF6Kirigami2 PRIVATE
     platformtheme.cpp
     basictheme.cpp
@@ -50,12 +56,6 @@ target_link_libraries(KF6Kirigami2
     PRIVATE
         Qt6::QuickControls2
         ${LIBKIRIGAMKI_EXTRA_LIBS}
-)
-
-set_target_properties(KF6Kirigami2 PROPERTIES
-    VERSION     ${KIRIGAMI2_VERSION}
-    SOVERSION   ${KIRIGAMI2_SOVERSION}
-    EXPORT_NAME "Kirigami2"
 )
 
 ecm_generate_headers(Kirigami2_CamelCase_HEADERS
