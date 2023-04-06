@@ -1,6 +1,6 @@
 set(KIRIGAMI_INSTALL_INCLUDEDIR "${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami2")
 
-add_library(KF6Kirigami2 ${libkirigami_SRCS})
+add_library(KF6Kirigami2)
 add_library(KF6::Kirigami2 ALIAS KF6Kirigami2)
 
 set_target_properties(KF6Kirigami2 PROPERTIES
