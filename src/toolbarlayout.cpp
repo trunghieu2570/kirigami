@@ -116,6 +116,9 @@ ToolBarLayout::ActionsProperty ToolBarLayout::actionsProperty() const
 
 void ToolBarLayout::addAction(QObject *action)
 {
+    if (action == nullptr) {
+        return;
+    }
     d->actions.append(action);
     d->actionsChanged = true;
 
