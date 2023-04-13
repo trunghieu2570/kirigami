@@ -90,7 +90,7 @@ Q_SIGNALS:
     void tabletModeChanged(bool tabletMode);
 
 private:
-    TabletModeWatcher(QObject *parent = nullptr);
+    KIRIGAMI2_NO_EXPORT explicit TabletModeWatcher(QObject *parent = nullptr);
     TabletModeWatcherPrivate *d;
     friend class TabletModeWatcherSingleton;
 };
