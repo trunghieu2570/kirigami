@@ -328,11 +328,11 @@ protected:
     bool event(QEvent *event) override;
 
 private:
-    void update();
-    void updateChildren(QObject *item);
-    void emitSignals();
-    void emitColorChanged();
-    QObject *determineParent(QObject *object);
+    KIRIGAMI2_NO_EXPORT void update();
+    KIRIGAMI2_NO_EXPORT void updateChildren(QObject *item);
+    KIRIGAMI2_NO_EXPORT void emitSignals();
+    KIRIGAMI2_NO_EXPORT void emitColorChanged();
+    KIRIGAMI2_NO_EXPORT QObject *determineParent(QObject *object);
 
     PlatformThemePrivate *d;
     friend class PlatformThemePrivate;

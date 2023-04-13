@@ -50,7 +50,7 @@ public:
     Q_INVOKABLE int roundedIconSize(int size) const;
 
 private:
-    float iconScaleFactor() const;
+    KIRIGAMI2_NO_EXPORT float iconScaleFactor() const;
 
     Units *m_units;
 
