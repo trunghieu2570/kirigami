@@ -25,8 +25,6 @@ T.AbstractCard {
     id: root
 
     background: P.DefaultCardBackground {
-        id: bg
-
         clickFeedback: root.showClickFeedback
         hoverFeedback: root.hoverEnabled
     }
