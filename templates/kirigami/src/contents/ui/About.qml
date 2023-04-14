@@ -2,8 +2,9 @@
 // SPDX-FileCopyrightText: %{CURRENT_YEAR} %{AUTHOR} <%{EMAIL}>
 
 import org.kde.kirigami 2.19 as Kirigami
+import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 import org.kde.%{APPNAMELC} 1.0
 
-Kirigami.AboutPage {
+MobileForm.AboutPage {
     aboutData: About
 }
