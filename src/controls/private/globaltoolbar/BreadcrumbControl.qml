@@ -13,7 +13,7 @@ Flickable {
 
     property Kirigami.PageRow pageRow: parent.pageRow
 
-    readonly property Item currentItem: mainLayout.children[pageRow.currentIndex]
+    readonly property Item currentItem: mainLayout.children[pageRow.currentIndex] || null
 
     contentHeight: height
     contentWidth: mainLayout.width
@@ -21,9 +21,11 @@ Flickable {
     boundsBehavior: Flickable.StopAtBounds
     interactive: Kirigami.Settings.hasTransientTouchInput
 
-    contentX: Math.max(0,
-        Math.min(currentItem.x + currentItem.width/2 - root.width/2,
-                 root.contentWidth - root.width))
+    contentX: currentItem
+        ? Math.max(0,
+            Math.min(currentItem.x + currentItem.width/2 - root.width/2,
+                     root.contentWidth - root.width))
+        : 0
 
     RowLayout {
         id: mainLayout
