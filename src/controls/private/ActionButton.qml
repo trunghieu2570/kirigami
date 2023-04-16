@@ -257,7 +257,7 @@ Item {
                 id: tooltipHider
                 interval: Kirigami.Units.humanMoment
                 onTriggered: {
-                    QQC2.ToolTip.hide();
+                    mouseArea.QQC2.ToolTip.hide();
                 }
             }
             Connections {
