@@ -5,7 +5,7 @@
  */
 
 import QtQuick 2.1
-import QtQuick.Controls 2.0 as QQC2
+import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.4 as Kirigami
 
 QQC2.ToolButton {
@@ -27,9 +27,12 @@ QQC2.ToolButton {
 
     onClicked: applicationWindow().pageStack.goForward();
 
+    text: qsTr("Navigate Forward")
+    display: QQC2.ToolButton.IconOnly
+
     QQC2.ToolTip {
         visible: button.hovered
-        text: qsTr("Navigate Forward")
+        text: button.text
         delay: Kirigami.Units.toolTipDelay
         timeout: 5000
         y: button.height
