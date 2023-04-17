@@ -19,7 +19,7 @@ import org.kde.kirigami 2.20 as Kirigami
 Item {
     id: root
 
-    property int maximumNotificationWidth: {
+    readonly property int maximumNotificationWidth: {
         if (Kirigami.Settings.isMobile) {
             return applicationWindow().width - Kirigami.Units.largeSpacing * 4
         } else {
