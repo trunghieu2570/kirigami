@@ -34,7 +34,6 @@ QQC2.ToolButton {
         visible: button.hovered
         text: button.text
         delay: Kirigami.Units.toolTipDelay
-        timeout: 5000
         y: button.height
     }
 }

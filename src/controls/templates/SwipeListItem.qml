@@ -524,7 +524,6 @@ T.SwipeDelegate {
                 Component.onCompleted: actionsLayout.updateVisibleActions(visible);
                 Component.onDestruction: actionsLayout.updateVisibleActions(visible);
                 QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
-                QQC2.ToolTip.timeout: 5000
                 QQC2.ToolTip.visible: listItem.visible && (Kirigami.Settings.tabletMode ? pressed : hovered) && QQC2.ToolTip.text.length > 0
                 QQC2.ToolTip.text: modelData.tooltip || modelData.text
 

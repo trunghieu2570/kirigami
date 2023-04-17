@@ -126,7 +126,6 @@ Kirigami.AbstractListItem {
             visible: !listItem.isSeparator && (modelData.hasOwnProperty("tooltip") && modelData.tooltip.length || root.collapsed) && (!actionsMenu || !actionsMenu.visible) &&  listItem.hovered && text.length > 0
             text: modelData.hasOwnProperty("tooltip") && modelData.tooltip.length ? modelData.tooltip : modelData.text
             delay: Kirigami.Units.toolTipDelay
-            timeout: 5000
             y: listItem.height/2 - height/2
             x: Qt.application.layoutDirection === Qt.RightToLeft ? -width : listItem.width
         }
