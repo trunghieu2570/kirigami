@@ -12,8 +12,6 @@ import org.kde.kirigami 2.20 as Kirigami
 Kirigami.ApplicationWindow {
     id: main
 
-    header: Kirigami.ToolBarApplicationHeader {}
-
     pageStack.initialPage: Kirigami.Page {
         QQC2.Button {
             text: "button"
