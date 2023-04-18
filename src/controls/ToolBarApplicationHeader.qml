@@ -39,7 +39,7 @@ ApplicationHeader {
             anchors {
                 verticalCenter: parent.verticalCenter
                 left: parent.left
-                right: actionsLayout.left
+                right: ctxActionsButton.visible ? ctxActionsButton.left : parent.right
             }
             Kirigami.Separator {
                 id: separator
