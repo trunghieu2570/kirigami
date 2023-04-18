@@ -231,12 +231,12 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Buka penggambar"
 
-#: controls/templates/private/BackButton.qml:34
+#: controls/templates/private/BackButton.qml:32
 msgctxt "BackButton|"
 msgid "Navigate Back"
 msgstr "Navigasi Mundur"
 
-#: controls/templates/private/ForwardButton.qml:32
+#: controls/templates/private/ForwardButton.qml:30
 msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "Navigasi Maju"

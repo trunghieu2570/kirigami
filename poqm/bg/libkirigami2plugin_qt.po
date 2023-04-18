@@ -226,12 +226,12 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Отваряне на чекмеджето"
 
-#: controls/templates/private/BackButton.qml:34
+#: controls/templates/private/BackButton.qml:32
 msgctxt "BackButton|"
 msgid "Navigate Back"
 msgstr "Навигиране обратно"
 
-#: controls/templates/private/ForwardButton.qml:32
+#: controls/templates/private/ForwardButton.qml:30
 msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "Навигиране напред"
