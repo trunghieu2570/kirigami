@@ -32,11 +32,6 @@ Kirigami.ApplicationWindow {
         }
 
         title: "aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa"
-        actions {
-            main:  Kirigami.Action { icon.name: "kate"; text: "BonDia" }
-            left : Kirigami.Action { icon.name: "kate"; text: "BonDia" }
-            right: Kirigami.Action { icon.name: "kate"; text: "BonDia" }
-        }
 
         QQC2.ActionGroup {
             id: group
