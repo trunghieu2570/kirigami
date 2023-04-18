@@ -219,12 +219,12 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "மேல்தோன்றும் பலகையைத் திற"
 
-#: controls/templates/private/BackButton.qml:34
+#: controls/templates/private/BackButton.qml:32
 msgctxt "BackButton|"
 msgid "Navigate Back"
 msgstr "பின்னே செல்"
 
-#: controls/templates/private/ForwardButton.qml:32
+#: controls/templates/private/ForwardButton.qml:30
 msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "முன்னே செல்"
