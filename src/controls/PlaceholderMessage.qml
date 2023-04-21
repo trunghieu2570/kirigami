@@ -243,8 +243,8 @@ ColumnLayout {
         type: Kirigami.Heading.Primary
         opacity: root.type === PlaceholderMessage.Type.Actionable ? 1 : 0.65
 
-
-        Layout.fillWidth: true
+        // Layout.fillWidth + Kirigami.Heading causes rearranges on Qt5, possibly QTBUG-81707
+        Layout.preferredWidth: parent.width
         horizontalAlignment: Qt.AlignHCenter
         verticalAlignment: Qt.AlignVCenter
 
@@ -259,7 +259,8 @@ ColumnLayout {
         horizontalAlignment: Qt.AlignHCenter
         wrapMode: Text.WordWrap
 
-        Layout.fillWidth: true
+        // same workaround as above
+        Layout.preferredWidth: parent.width
     }
 
     QQC2.Button {
