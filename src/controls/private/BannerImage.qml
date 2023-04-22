@@ -99,8 +99,40 @@ Kirigami.ShadowedImage {
     Layout.minimumHeight: titleLayout.implicitHeight > 0 ? titleLayout.implicitHeight + Kirigami.Units.smallSpacing * 2 : 0
 
     onTitleAlignmentChanged: {
-        Qt.callLater(titleLayout.implicitWidthChanged)
-        Qt.callLater(titleLayout.implicitHeightChanged)
+        // VERTICAL ALIGNMENT
+        titleLayout.anchors.top = undefined
+        titleLayout.anchors.verticalCenter = undefined
+        titleLayout.anchors.bottom = undefined
+        shadowedRectangle.anchors.top = undefined
+        shadowedRectangle.anchors.verticalCenter = undefined
+        shadowedRectangle.anchors.bottom = undefined
+
+        if (root.titleAlignment & Qt.AlignTop) {
+            titleLayout.anchors.top = root.top
+            shadowedRectangle.anchors.top = root.top
+        }
+        else if (root.titleAlignment & Qt.AlignVCenter) {
+            titleLayout.anchors.verticalCenter = root.verticalCenter
+            shadowedRectangle.anchors.verticalCenter = root.verticalCenter
+        }
+        else if (root.titleAlignment & Qt.AlignBottom) {
+            titleLayout.anchors.bottom = root.bottom
+            shadowedRectangle.anchors.bottom = root.bottom
+        }
+
+        // HORIZONTAL ALIGNMENT
+        titleLayout.anchors.left = undefined
+        titleLayout.anchors.horizontalCenter = undefined
+        titleLayout.anchors.right = undefined
+        if (root.titleAlignment & Qt.AlignRight) {
+            titleLayout.anchors.right = root.right
+        }
+        else if (root.titleAlignment & Qt.AlignHCenter) {
+            titleLayout.anchors.horizontalCenter = root.horizontalCenter
+        }
+        else if (root.titleAlignment & Qt.AlignLeft) {
+            titleLayout.anchors.left = root.left
+        }
     }
     fillMode: Image.PreserveAspectCrop
     asynchronous: true
@@ -112,44 +144,35 @@ Kirigami.ShadowedImage {
     }
 
     Kirigami.ShadowedRectangle {
+        id: shadowedRectangle
         anchors {
             left: parent.left
             right: parent.right
-            top: (root.titleAlignment & Qt.AlignTop) ? parent.top : undefined
-            bottom: (root.titleAlignment & Qt.AlignBottom) ? parent.bottom : undefined
-            verticalCenter: (root.titleAlignment & Qt.AlignVCenter) ? parent.verticalCenter : undefined
         }
         height: Math.min(parent.height, titleLayout.height * 1.5)
 
         opacity: 0.5
         color: "black"
 
-        visible: root.source.toString().length !== 0 && root.title.length !== 0 && ((root.titleAlignment & Qt.AlignTop) || (root.titleAlignment & Qt.AlignVCenter) || (root.titleAlignment & Qt.AlignBottom))
-
         corners.topLeftRadius: root.titleAlignment & Qt.AlignTop ? root.corners.topLeftRadius : 0
         corners.topRightRadius: root.titleAlignment & Qt.AlignTop ? root.corners.topRightRadius : 0
         corners.bottomLeftRadius: root.titleAlignment & Qt.AlignBottom ? root.corners.bottomLeftRadius : 0
         corners.bottomRightRadius: root.titleAlignment & Qt.AlignBottom ? root.corners.bottomRightRadius : 0
+
+        visible: root.source.toString().length !== 0 && root.title.length !== 0 && ((root.titleAlignment & Qt.AlignTop) || (root.titleAlignment & Qt.AlignVCenter) || (root.titleAlignment & Qt.AlignBottom))
     }
 
     RowLayout {
         id: titleLayout
         property bool completed: false
         anchors {
-            left: root.titleAlignment & Qt.AlignLeft ? parent.left : undefined
-            top: root.titleAlignment & Qt.AlignTop ? parent.top : undefined
-            right: root.titleAlignment & Qt.AlignRight ? parent.right : undefined
-            bottom: root.titleAlignment & Qt.AlignBottom ? parent.bottom : undefined
-            horizontalCenter: root.titleAlignment & Qt.AlignHCenter ? parent.horizontalCenter : undefined
-            verticalCenter: root.titleAlignment & Qt.AlignVCenter ? parent.verticalCenter : undefined
-
             leftMargin: root.leftPadding
             topMargin: root.topPadding
             rightMargin: root.rightPadding
             bottomMargin: root.bottomPadding
         }
-        width: Math.min(implicitWidth, parent.width -root.leftPadding - root.rightPadding)
-        height: Math.min(implicitHeight, parent.height - root.topPadding - root.bottomPadding)
+        width: Math.min(implicitWidth, parent.width -root.leftPadding -root.rightPadding)
+        height: Math.min(implicitHeight, parent.height -root.topPadding -root.bottomPadding)
         Kirigami.Icon {
             id: headingIcon
             Layout.minimumWidth: Kirigami.Units.iconSizes.large
