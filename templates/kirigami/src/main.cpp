@@ -14,7 +14,6 @@
 #include <QUrl>
 #include <QtQml>
 
-#include "about.h"
 #include "app.h"
 #include "version-%{APPNAMELC}.h"
 #include <KAboutData>
