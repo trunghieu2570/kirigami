@@ -19,7 +19,7 @@ Kirigami.ApplicationWindow {
                 supportsMouseEvents: false
                 actions: [
                     Kirigami.Action {
-                        iconName: "go-up"
+                        icon.name: "go-up"
                     }
                 ]
                 Label {

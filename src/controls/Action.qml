@@ -27,21 +27,6 @@ QQC2.Action {
     property bool visible: true
 
     /**
-     * @brief This property holds the icon name for the action. This will pick the icon with the given name from the current theme.
-     * @deprecated Use icon.name instead.
-     * @property string iconName
-     */
-    property alias iconName: root.icon.name
-
-    /**
-     * @brief This property holds an url to an icon file or resource url for the action.
-     * @note Use this if you want a specific file rather than an icon from the theme.
-     * @deprecated Use icon.name instead.
-     * @property url iconSource
-     */
-    property alias iconSource: root.icon.source
-
-    /**
      * @brief This property holds the tooltip text that is shown when the cursor is hovering over the control.
      *
      * Leaving this undefined or setting it to an empty string means that no tooltip will be shown when
@@ -85,22 +70,6 @@ QQC2.Action {
      * @since 2.12
      */
     property int displayHint: Kirigami.DisplayHint.NoPreference
-
-    /**
-     * @brief This is a helper function to check if a certain display hint has been set.
-     *
-     * This function is mostly convenience to enforce the mutual exclusivity of KeepVisible and AlwaysHide.
-     *
-     * @param hint The display hint to check if it is set.
-     * @see org::kde::kirigami::DisplayHint
-     * @deprecated since 2.14, Use DisplayHint.displayHintSet(action, hint) instead.
-     * @return true if the hint was set for this action, false if not.
-     * @since 2.12
-     */
-    function displayHintSet(hint) {
-        print("Action::displayHintSet is deprecated, use DisplayHint.displayHintSet(action, hint)")
-        return Kirigami.DisplayHint.displayHintSet(root, hint);
-    }
 
     /**
      * @brief This property holds the component that should be used for displaying this action.
@@ -155,36 +124,5 @@ QQC2.Action {
             }
         }
         return visible;
-    }
-
-    /**
-     * @brief Hints for implementations using Actions indicating preferences about how to display the action.
-     * @see org::kde::kirigami::DisplayHint
-     * @deprecated since 2.14, use Kirigami.DisplayHint instead.
-     */
-    enum DisplayHint {
-        /**
-         * Indicates there is no specific preference.
-         */
-        NoPreference = 0,
-        /**
-         * Only display an icon for this Action.
-         */
-        IconOnly = 1,
-        /**
-         * Try to keep the action visible even when space constrained.
-         * Mutually exclusive with AlwaysHide, KeepVisible has priority.
-         */
-        KeepVisible = 2,
-        /**
-         * If possible, hide the action in an overflow menu or similar location.
-         * Mutually exclusive with KeepVisible, KeepVisible has priority.
-         */
-        AlwaysHide = 4,
-        /**
-         * When this action has children, do not display any indicator (like a
-         * menu arrow) for this action.
-         */
-        HideChildIndicator = 8
     }
 }

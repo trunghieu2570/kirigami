@@ -52,7 +52,7 @@ import org.kde.kirigami 2.19 as Kirigami
  *     footer: Kirigami.NavigationTabBar {
  *         actions: [
  *             Kirigami.Action {
- *                 iconName: "globe"
+ *                 icon.name: "globe"
  *                 text: "World"
  *                 checked: worldPage.visible
  *                 onTriggered: {
@@ -65,7 +65,7 @@ import org.kde.kirigami 2.19 as Kirigami
  *                 }
  *             },
  *             Kirigami.Action {
- *                 iconName: "player-time"
+ *                 icon.name: "player-time"
  *                 text: "Timers"
  *                 checked: timersPage.visible
  *                 onTriggered: {
@@ -78,7 +78,7 @@ import org.kde.kirigami 2.19 as Kirigami
  *                 }
  *             },
  *             Kirigami.Action {
- *                 iconName: "chronometer"
+ *                 icon.name: "chronometer"
  *                 text: "Stopwatch"
  *                 checked: stopwatchPage.visible
  *                 onTriggered: {
@@ -91,7 +91,7 @@ import org.kde.kirigami 2.19 as Kirigami
  *                 }
  *             },
  *             Kirigami.Action {
- *                 iconName: "notifications"
+ *                 icon.name: "notifications"
  *                 text: "Alarms"
  *                 checked: alarmsPage.visible
  *                 onTriggered: {

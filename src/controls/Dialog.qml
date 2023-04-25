@@ -230,7 +230,7 @@ T.Dialog {
      *     customFooterActions: [
      *         Kirigami.Action {
      *             text: i18n("Play")
-     *             iconName: "media-playback-start"
+     *             icon.name: "media-playback-start"
      *             onTriggered: {
      *                 //...
      *                 dialog.close();

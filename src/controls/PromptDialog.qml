@@ -44,7 +44,7 @@ import org.kde.kirigami 2.20 as Kirigami
  *     customFooterActions: [
  *         Kirigami.Action {
  *             text: qsTr("Create Folder")
- *             iconName: "dialog-ok"
+ *             icon.name: "dialog-ok"
  *             onTriggered: {
  *                 showPassiveNotification("Created");
  *                 textPromptDialog.close();
@@ -52,7 +52,7 @@ import org.kde.kirigami 2.20 as Kirigami
  *         },
  *         Kirigami.Action {
  *             text: qsTr("Cancel")
- *             iconName: "dialog-cancel"
+ *             icon.name: "dialog-cancel"
  *             onTriggered: {
  *                 textPromptDialog.close();
  *             }
