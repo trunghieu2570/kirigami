@@ -291,9 +291,7 @@ Item {
                     placeHolderComponent.createObject(lay, { item });
                 }
 
-                const buddy = item.Kirigami.FormData.checkable
-                    ? checkableBuddyComponent.createObject(lay, { item })
-                    : buddyComponent.createObject(lay, { item, index: i - 2 });
+                const buddy = buddyComponent.createObject(lay, { item, index: i - 2 });
 
                 itemContainer.parent = lay;
                 lay.buddies.push(buddy);
@@ -377,7 +375,7 @@ Item {
             property Item item
             property int index
 
-            enabled: item !== null && item.enabled && item.Kirigami.FormData.enabled
+            enabled: item !== null && item.enabled
             visible: item !== null && item.visible && (root.wideMode || text.length > 0)
             Kirigami.MnemonicData.enabled: item !== null && item.Kirigami.FormData.buddyFor && item.Kirigami.FormData.buddyFor.activeFocusOnTab
             Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
@@ -427,77 +425,6 @@ Item {
             Shortcut {
                 sequence: labelItem.Kirigami.MnemonicData.sequence
                 onActivated: labelItem.item.Kirigami.FormData.buddyFor.forceActiveFocus()
-            }
-        }
-    }
-    Component {
-        id: checkableBuddyComponent
-        QQC2.CheckBox {
-            id: labelItem
-
-            property Item item
-
-            visible: item !== null && item.visible
-            Kirigami.MnemonicData.enabled: item !== null && item.Kirigami.FormData.buddyFor && item.Kirigami.FormData.buddyFor.activeFocusOnTab
-            Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
-            Kirigami.MnemonicData.label: item !== null ? item.Kirigami.FormData.label : ""
-
-            Layout.columnSpan: item !== null && item.Kirigami.FormData.isSection ? lay.columns : 1
-            Layout.preferredHeight: {
-                if (!item) {
-                    return 0;
-                }
-                if (item.Kirigami.FormData.label.length > 0) {
-                    if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof QQC2.TextArea)) {
-                        return Math.max(implicitHeight, item.Kirigami.FormData.buddyFor.height);
-                    }
-                    return implicitHeight;
-                }
-                return Kirigami.Units.smallSpacing;
-            }
-
-            Layout.alignment: temp.effectiveLayout(this)
-            Layout.topMargin: item !== null && item.Kirigami.FormData.buddyFor.height > implicitHeight * 2 ? Kirigami.Units.smallSpacing/2 : 0
-
-            activeFocusOnTab: indicator.visible && indicator.enabled
-            // HACK: desktop style checkboxes have also the text in the background item
-            // text: Kirigami.MnemonicData.richTextLabel
-            enabled: item !== null && item.Kirigami.FormData.enabled
-            checked: item !== null && item.Kirigami.FormData.checked
-
-            onItemChanged: {
-                if (!item) {
-                    labelItem.destroy();
-                }
-            }
-            Shortcut {
-                sequence: labelItem.Kirigami.MnemonicData.sequence
-                onActivated: {
-                    checked = !checked;
-                    item.Kirigami.FormData.buddyFor.forceActiveFocus();
-                }
-            }
-            onCheckedChanged: {
-                item.Kirigami.FormData.checked = checked;
-            }
-            contentItem: Kirigami.Heading {
-                id: labelItemHeading
-                level: labelItem.item !== null && labelItem.item.Kirigami.FormData.isSection ? 3 : 5
-                text: labelItem.Kirigami.MnemonicData.richTextLabel
-                type: labelItem.item !== null && labelItem.item.Kirigami.FormData.isSection ? Kirigami.Heading.Type.Primary : Kirigami.Heading.Type.Normal
-                verticalAlignment: temp.effectiveTextLayout(labelItem.item)
-                enabled: labelItem.item !== null && labelItem.item.Kirigami.FormData.enabled
-                leftPadding: height  // parent.indicator.width
-            }
-            Rectangle {
-                enabled: labelItem.indicator.enabled
-                anchors.left: labelItemHeading.left
-                anchors.right: labelItemHeading.right
-                anchors.top: labelItemHeading.bottom
-                anchors.leftMargin: labelItemHeading.leftPadding
-                height: 1
-                color: Kirigami.Theme.highlightColor
-                visible: labelItem.activeFocus && labelItem.indicator.visible
             }
         }
     }

@@ -63,51 +63,6 @@ bool FormLayoutAttached::isSection() const
     return m_isSection;
 }
 
-void FormLayoutAttached::setCheckable(bool checkable)
-{
-    if (checkable == m_checkable) {
-        return;
-    }
-
-    m_checkable = checkable;
-    Q_EMIT checkableChanged();
-}
-
-bool FormLayoutAttached::checkable() const
-{
-    return m_checkable;
-}
-
-void FormLayoutAttached::setChecked(bool checked)
-{
-    if (checked == m_checked) {
-        return;
-    }
-
-    m_checked = checked;
-    Q_EMIT checkedChanged();
-}
-
-bool FormLayoutAttached::checked() const
-{
-    return m_checked;
-}
-
-void FormLayoutAttached::setEnabled(bool enabled)
-{
-    if (enabled == m_enabled) {
-        return;
-    }
-
-    m_enabled = enabled;
-    Q_EMIT enabledChanged();
-}
-
-bool FormLayoutAttached::enabled() const
-{
-    return m_enabled;
-}
-
 QQuickItem *FormLayoutAttached::buddyFor() const
 {
     return m_buddyFor;
