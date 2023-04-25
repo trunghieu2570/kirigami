@@ -17,11 +17,15 @@ import "templates" as KT
  * PageRow implements a row-based navigation model, which can be used
  * with a set of interlinked information pages. Items are pushed in the
  * back of the row and the view scrolls until that row is visualized.
- * A PageRow can show a single page or a multiple set of columns, depending
- * on the window width: on a phone a single column should be fullscreen,
- * while on a tablet or a desktop more than one column should be visible.
+ * A PageRow can show a single Page or multple pages at the same time,
+ * depending on the window width: on a phone a single column should be fullscreen,
+ * while on a tablet or a desktop more than one column can be visible at the same time.
  *
- * @inherits QtQuick.Controls.Control
+ * Example usage:
+ * @include pagerow.qml
+ *
+ * @see kirigami::ColumnViewAttached
+ * @inherit QtQuick.Templates.Control
  */
 QT.Control {
     id: root
@@ -40,30 +44,29 @@ QT.Control {
     readonly property Item lastItem: columnView.contentChildren.length > 0 ?  columnView.contentChildren[columnView.contentChildren.length - 1] : null
 
     /**
-     * @brief This property holds the currently visible/active page.
-     *
-     * Because of the ability to display multiple pages, it will hold the currently active page.
-     *
-     * @property Page currentItem
+     * @brief This property points to the currently active page.
+     * @property Kirigami.Page currentItem
      */
     property alias currentItem: columnView.currentItem
 
     /**
      * @brief This property holds the index of the currently active page.
-     * @see currentItem
+     * @see ::currentItem
      * @property int currentIndex
      */
     property alias currentIndex: columnView.currentIndex
 
     /**
-     * @brief This property sets the initial page for this PageRow.
-     * @property Page initialPage
+     * @brief This property sets the initial page/s for this PageRow.
+     * @note This can optionally be set to an array of pages by using the JavaScript array notation [].
+     * @property Kirigami.Page initialPage
      */
     property variant initialPage
 
     /**
      * @brief This property holds the main ColumnView of this Row.
-     * @property ColumnView contentItem
+     * @see kirigami::ColumnView
+     * @property Kirigami.ColumnView contentItem
      */
     contentItem: columnView
 
@@ -72,41 +75,41 @@ QT.Control {
      *
      * Generally, you shouldn't need to change the value of this property.
      *
-     * @property ColumnView columnView
-     * @since 2.12
+     * @property Kirigami.ColumnView columnView
+     * @since org.kde.kirigami 2.12
      */
     property alias columnView: columnView
 
     /**
-     * @brief This property holds the present pages in the PageRow.
-     * @property list<Page> items
-     * @since 2.6
+     * @brief This property holds a list of all pages in the PageRow.
+     * @property list<Kirigami.Page> items
+     * @since org.kde.kirigami 2.6
      */
     property alias items: columnView.contentChildren;
 
     /**
      * @brief This property holds all visible pages in the PageRow,
      * excluding those which are scrolled away.
-     * @property list<Page> visibleItems
-     * @since 2.6
+     * @property list<Kirigami.Page> visibleItems
+     * @since org.kde.kirigami 2.6
      */
     property alias visibleItems: columnView.visibleItems
 
     /**
      * @brief This property holds the first page in the PageRow that is at least partially visible.
      * @note Pages before that one (the one contained in the property) will be out of the viewport.
-     * @see ColumnView::firstVisibleItem
+     * @see kirigami::ColumnView::firstVisibleItem
      * @property Item firstVisibleItem
-     * @since 2.6
+     * @since org.kde.kirigami 2.6
      */
     property alias firstVisibleItem: columnView.firstVisibleItem
 
     /**
      * @brief This property holds the last page in the PageRow that is at least partially visible.
      * @note Pages after that one (the one contained in the property) will be out of the viewport.
-     * @see ColumnView::lastVisibleItem
+     * @see kirigami::ColumnView::lastVisibleItem
      * @property Item lastVisibleItem
-     * @since 2.6
+     * @since org.kde.kirigami 2.6
      */
     property alias lastVisibleItem: columnView.lastVisibleItem
 
@@ -130,8 +133,8 @@ QT.Control {
     property alias interactive: columnView.interactive
 
     /**
-     * @brief This property tells whether the PageRow is wide enough to show multiple pages.
-     * @since 5.37
+     * @brief This property specifies whether the PageRow is wide enough to show multiple pages.
+     * @since KDE Frameworks 5.37
      */
     readonly property bool wideMode: root.width >= root.defaultColumnWidth*2 && depth >= 2
 
@@ -141,33 +144,28 @@ QT.Control {
      * default: ``true``
      *
      * @property bool separatorVisible
-     * @since 5.38
+     * @since KDE Frameworks 5.38
      */
     property alias separatorVisible: columnView.separatorVisible
 
     /**
      * @brief This property sets the appearance of an optional global toolbar for the whole PageRow.
      *
-     * It's a grouped property comprised of the following properties:
-     * * style (``Kirigami.ApplicationHeaderStyle``): can have the following values:
-     *  * ``Auto``: Depending on application formfactor, it can behave automatically like other values, such as a Breadcrumb on mobile and ToolBar on desktop.
-     *  * ``Breadcrumb``: It will show a breadcrumb of all the page titles in the stack, for easy navigation.
-     *  * ``Titles``: Each page will only have its own title on top.
-     *  * ``TabBar``: The global toolbar will look like a TabBar for choosing which page to display.
-     *  * ``ToolBar``: Each page will have the title on top together buttons and menus to represent all of the page actions. Not available on Mobile systems.
-     *  * ``None``: No global toolbar will be shown.
-     *
-     * * ``actualStyle``: This will represent the actual style of the toolbar; it can be different from style in the case style is Auto.
-     * * ``showNavigationButtons``: OR flags combination of Kirigami.ApplicationHeaderStyle.ShowBackButton and Kirigami.ApplicationHeaderStyle.ShowForwardButton.
-     * * ``toolbarActionAlignment: Qt::Alignment``: How to horizontally align the actions when using the ToolBar style. Note that anything but Qt.AlignRight will cause the title to be hidden (default: ``Qt.AlignRight``).
+     * This grouped property has the following sub-properties:
+     * * ``style: ApplicationHeaderStyle::Status``: how the top bar controls should be represented to the user.
+     * * ``actualStyle``: this property holds the currently used style. It can be different when ``style`` is set to ``ApplicationHeaderStyle.Auto``
+     * * ``showNavigationButtons: ApplicationHeaderStyle::NavigationButton``: a
+     * combination of flags that determines whether to show the back and forward
+     * button.
+     * * ``toolbarActionAlignment: Qt::Alignment``: how to horizontally align the actions when using the ``ApplicationHeaderStyle.ToolBar`` style. Note that anything but ``Qt.AlignRight`` will cause the title to be hidden (default: ``Qt.AlignRight``).
      * * ``minimumHeight: int`` Minimum height of the header, which will be resized when scrolling. Only in Mobile mode (default: ``preferredHeight``, sliding but no scaling).
      * * ``preferredHeight: int`` The height the toolbar will usually have.
      * * ``maximumHeight: int `` The height the toolbar will have in mobile mode when the app is in reachable mode (default: preferredHeight * 1.5).
      * * ``leftReservedSpace: int, readonly`` How many pixels of extra space are reserved at the left of the page toolbar (typically for navigation buttons or a drawer handle).
      * * ``rightReservedSpace: int, readonly`` How many pixels of extra space  are reserved at the right of the page toolbar (typically for a drawer handle).
      *
-     * @property org::kde::kirigami::private::globaltoolbar::PageRowGlobalToolBarStyleGroup globalToolBar
-     * @since 5.48
+     * @property kirigami::private::globaltoolbar::PageRowGlobalToolBarStyleGroup globalToolBar
+     * @since KDE Frameworks 5.48
      */
     readonly property alias globalToolBar: globalToolBar
 
@@ -177,7 +175,7 @@ QT.Control {
      * In this case, when open and not modal, the drawer contents will be in the same layer as the base pagerow.
      * Pushing any other layer on top will cover the sidebar.
      *
-     * @since 5.84
+     * @since KDE Frameworks 5.84
      */
     // TODO KF6: globaldrawer should use actions also used by this sidebar instead of reparenting globaldrawer contents?
     property OverlayDrawer leftSidebar
@@ -189,7 +187,7 @@ QT.Control {
      * For instance the full screen image of an image viewer or a settings page.
      *
      * @property QtQuick.Controls.StackView layers
-     * @since 5.38
+     * @since KDE Frameworks 5.38
      */
     property alias layers: layersStack
 
@@ -199,7 +197,7 @@ QT.Control {
      * If a user navigates to a previous page on the stack (ex. pressing back button) and pages above
      * it on the stack are not visible, they will be popped if this property is true.
      *
-     * @since 5.101
+     * @since KDE Frameworks 5.101
      */
     property bool popHiddenPages: false
 //END PROPERTIES
@@ -400,7 +398,7 @@ QT.Control {
      * @param properties The properties argument is optional and allows defining a
      * map of properties to set on the page. If page is actually an array of pages, properties should also be an array of key/value maps
      * @return The new created page (or the last one if it was an array)
-     * @since 2.7
+     * @since org.kde.kirigami 2.7
      */
     function insertPage(position, page, properties) {
         if (!page) {
@@ -467,7 +465,7 @@ QT.Control {
      * Move the page at position fromPos to the new position toPos
      * If needed, currentIndex will be adjusted
      * in order to keep the same current page.
-     * @since 2.7
+     * @since org.kde.kirigami 2.7
      */
     function movePage(fromPos, toPos) {
         columnView.moveItem(fromPos, toPos);
@@ -477,7 +475,7 @@ QT.Control {
      * @brief Remove the given page.
      * @param page The page can be given both as integer position or by reference
      * @return The page that has just been removed
-     * @since 2.7
+     * @since org.kde.kirigami 2.7
      */
     function removePage(page) {
         if (depth === 0) {
@@ -488,7 +486,7 @@ QT.Control {
     }
 
     /**
-     * @brief Pops a page off the stack.
+     * @brief Pops a page off the stack and all the pages after it.
      * @param page If page is specified then the stack is unwound to that page,
      * to unwind to the first page specify page as null.
      * @return The page instance that was popped off the stack.
@@ -515,7 +513,7 @@ QT.Control {
      *     When an array is used the transition animation will only be to the last page.
      * @param properties The properties argument is optional and allows defining a
      * map of properties to set on the page.
-     * @see push() for details.
+     * @see ::push() for details.
      */
     function replace(page, properties) {
         if (!page) {
@@ -650,14 +648,14 @@ QT.Control {
      * @brief Emitted when a page has been inserted anywhere.
      * @param position where the page has been inserted
      * @param page the new page
-     * @since 2.7
+     * @since org.kde.kirigami 2.7
      */
     signal pageInserted(int position, Item page)
 
     /**
      * @brief Emitted when a page has been pushed to the bottom.
      * @param page the new page
-     * @since 2.5
+     * @since org.kde.kirigami 2.5
      */
     signal pagePushed(Item page)
 
@@ -665,7 +663,7 @@ QT.Control {
      * @brief Emitted when a page has been removed from the row.
      * @param page the page that has been removed: at this point it's still valid,
      *           but may be auto deleted soon.
-     * @since 2.5
+     * @since org.kde.kirigami 2.5
      */
     signal pageRemoved(Item page)
 

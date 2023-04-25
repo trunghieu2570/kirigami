@@ -47,10 +47,11 @@ import org.kde.kirigami 2.19 as Kirigami
  *     ]
  * }
  * @endcode
- *
- * @see Dialog
- * @see PromptDialog
- * @inherit org::kde::kirigami::Dialog
+ * @see kirigami::Dialog
+ * @see kirigami::PromptDialog
+ * @see <a href="https://develop.kde.org/hig/components/navigation/dialog">Human Interface Guidelines on Dialogs</a>
+ * @see <a href="https://develop.kde.org/hig/components/assistance/message">Human Interface Guidelines on Modal Message Dialogs</a>
+ * @inherit kirigami::Dialog
  */
 Kirigami.Dialog {
 

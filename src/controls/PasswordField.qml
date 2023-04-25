@@ -21,20 +21,19 @@ import org.kde.kirigami 2.20 as Kirigami
  *     }
  * }
  * @endcode
- *
- * @inherit org::kde::kirgami::ActionTextField
- * @since 5.57
  * @author Carl Schwan <carl@carlschwan.eu>
+ * @since KDE Frameworks 5.57
+ * @inherit kirigami::ActionTextField
  */
 Kirigami.ActionTextField {
     id: root
 
     /**
-     * @brief This property tells whether the password will be displayed in cleartext rather than obfuscated.
+     * @brief This property specifies whether the password will be displayed in cleartext rather than obfuscated.
      *
      * default: ``false``
      *
-     * @since 5.57
+     * @since KDE Frameworks 5.57
      */
     property bool showPassword: false
 

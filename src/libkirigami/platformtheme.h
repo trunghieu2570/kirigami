@@ -26,6 +26,9 @@ class PlatformThemePrivate;
  * This class is the base for color management in Kirigami,
  * different platforms can reimplement this class to integrate with
  * system platform colors of a given platform
+ *
+ * @see <a href="https://develop.kde.org/docs/use/kirigami/style-colors">Colors and Themes in Kirigami</a>
+ * @see <a href="https://develop.kde.org/hig/style/color">Human Interface Guidelines on Colors</a>
  */
 class KIRIGAMI2_EXPORT PlatformTheme : public QObject
 {
@@ -43,7 +46,7 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
      * This enumeration describes the color group used to generate the colors.
      * The enum value is based upon QPalette::CpolorGroup and has the same values.
      * It's redefined here in order to make it work with QML
-     * @since 4.43
+     * @since KDE Frameworks 4.43
      */
     Q_PROPERTY(ColorGroup colorGroup READ colorGroup WRITE setColorGroup NOTIFY colorGroupChanged)
 

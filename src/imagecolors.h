@@ -60,26 +60,27 @@ struct ImageData {
 };
 
 /**
- * Extracts the dominant colors from an element or an image and exports it to a color palette.
+ * @brief Helps extract specific colors from an element or image
+ * (e.g., its dominant colors).
  */
 class ImageColors : public QObject
 {
     Q_OBJECT
     /**
-     * The source from which colors should be extracted from.
+     * @brief This property holds the source from which colors should be extracted.
      *
-     * `source` can be one of the following:
-     * * Item
-     * * QImage
-     * * QIcon
-     * * Icon name
+     * The following values are allowed:
+     * * <a href="https://doc.qt.io/qt-6/qml-qtquick-item.html">Item</a>
+     * * <a href="https://doc.qt.io/qt-6/qimage.html">QImage</a>
+     * * <a href="https://doc.qt.io/qt-6/qicon.html">QIcon</a>
+     * * @link Icon::source Icon name @endlink
      *
-     * Note that an Item's color palette will only be extracted once unless you * call `update()`, regardless of how the item hanges.
+     * @note An Item's color palette will only be extracted once unless you * call `update()`, regardless of how the item hanges.
      */
     Q_PROPERTY(QVariant source READ source WRITE setSource NOTIFY sourceChanged)
 
     /**
-     * A list of colors and related information about then.
+     * @brief This property holds a list of colors and related information about them.
      *
      * Each list item has the following properties:
      * * `color`: The color of the list item.
@@ -90,50 +91,49 @@ class ImageColors : public QObject
      * dominant color in the source image and the last element is the
      * least dominant color of the image.
      *
-     * \note K-means clustering is used to extract these colors; see https://en.wikipedia.org/wiki/K-means_clustering.
+     * @note K-means clustering is used to extract these colors; see https://en.wikipedia.org/wiki/K-means_clustering.
      */
     Q_PROPERTY(QVariantList palette READ palette NOTIFY paletteChanged)
 
     /**
-     * Information whether the palette is towards a light or dark color
-     * scheme, possible values are:
-     * * ColorUtils.Light
-     * * ColorUtils.Dark
+     * @brief This property specifies whether the palette is a light or dark color scheme.
      */
     Q_PROPERTY(ColorUtils::Brightness paletteBrightness READ paletteBrightness NOTIFY paletteChanged)
 
     /**
-     * The average color of the source image.
+     * @brief This property holds the average color of the source image.
      */
     Q_PROPERTY(QColor average READ average NOTIFY paletteChanged)
 
     /**
-     * The dominant color of the source image.
+     * @brief This property holds the dominant color of the source image.
      *
      * The dominant color of the image is the color of the largest
      * cluster in the image.
      *
-     * \sa https://en.wikipedia.org/wiki/K-means_clustering
+     * @see https://en.wikipedia.org/wiki/K-means_clustering
      */
     Q_PROPERTY(QColor dominant READ dominant NOTIFY paletteChanged)
 
     /**
-     * Suggested "contrasting" color to the dominant one. It's the color in the palette nearest to the negative of the dominant
+     * @brief Ths property holds the suggested "contrasting" color to the dominant one.
+     *
+     * It's the color in the palette nearest to the negative of the dominant.
      */
     Q_PROPERTY(QColor dominantContrast READ dominantContrast NOTIFY paletteChanged)
 
     /**
-     * An accent color extracted from the source image.
+     * @brief This property holds an accent color extracted from the source image.
      *
      * The accent color is the color cluster with the highest CIELAB
      * chroma in the source image.
      *
-     * \sa https://en.wikipedia.org/wiki/Colorfulness#Chroma
+     * @see https://en.wikipedia.org/wiki/Colorfulness#Chroma
      */
     Q_PROPERTY(QColor highlight READ highlight NOTIFY paletteChanged)
 
     /**
-     * A color suitable for rendering text and other foreground
+     * @brief This property holds the color suitable for rendering text and other foreground
      * over the source image.
      *
      * On dark items, this will be the color closest to white in
@@ -144,71 +144,96 @@ class ImageColors : public QObject
     Q_PROPERTY(QColor foreground READ foreground NOTIFY paletteChanged)
 
     /**
-     * A color suitable for rendering a background behind the
-     * source image.
+     * @brief This property holds a color that is suitable as a
+     * a background behind the source image.
      *
-     * On dark items, this will be the color closest to black in the
+     * There are two possible outcomes:
+     * * On dark items, this will be the color closest to black in the
      * image if it's dark enough, or a dark gray otherwise.
-     * On light items, this will be the color closest to white
+     * * On light items, this will be the color closest to white
      * in the image if it's light enough, or a bright gray otherwise.
      */
     Q_PROPERTY(QColor background READ background NOTIFY paletteChanged)
 
     /**
-     * The lightest color of the source image.
+     * @brief This property holds the lightest color of the source image.
      */
     Q_PROPERTY(QColor closestToWhite READ closestToWhite NOTIFY paletteChanged)
 
     /**
-     * The darkest color of the source image.
+     * @brief This property holds the darkest color of the source image.
      */
     Q_PROPERTY(QColor closestToBlack READ closestToBlack NOTIFY paletteChanged)
 
     /**
-     * The value to return when palette is not available, e.g. when
-     * ImageColors is still computing it or the source is invalid.
+     * @brief This property holds the value to return when the palette is not
+     * available.
+     *
+     * @note This may happen when ImageColors is still computing or the image
+     * source is invalid.
      */
     Q_PROPERTY(QVariantList fallbackPalette MEMBER m_fallbackPalette NOTIFY fallbackPaletteChanged)
 
     /**
-     * The value to return when paletteBrightness is not available, e.g. when
-     * ImageColors is still computing it or the source is invalid.
+     * @brief This property holds the value to return instead when
+     * paletteBrightness is not available.
+     *
+     * @note This may happen when ImageColors is still computing or the image
+     * source is invalid.
      */
     Q_PROPERTY(ColorUtils::Brightness fallbackPaletteBrightness MEMBER m_fallbackPaletteBrightness NOTIFY fallbackPaletteBrightnessChanged)
 
     /**
-     * The value to return when average is not available, e.g. when
-     * ImageColors is still computing it or the source is invalid.
+     * @brief This property holds the value to return instead when average is
+     * not available.
+     *
+     * @note This may happen when ImageColors is still computing or the image
+     * source is invalid.
      */
     Q_PROPERTY(QColor fallbackAverage MEMBER m_fallbackAverage NOTIFY fallbackAverageChanged)
 
     /**
-     * The value to return when dominant is not available, e.g. when
-     * ImageColors is still computing it or the source is invalid.
+     * @brief This property holds the value to return instead when dominant is
+     * not available.
+     *
+     * @note This may happen when ImageColors is still computing or the image
+     * source is invalid.
      */
     Q_PROPERTY(QColor fallbackDominant MEMBER m_fallbackDominant NOTIFY fallbackDominantChanged)
 
     /**
-     * The value to return when dominantContrasting is not available, e.g. when
-     * ImageColors is still computing it or the source is invalid.
+     * @brief This property holds the value of the palette to return instead
+     * when dominantContrasting is not available.
+     *
+     * @note This may happen when ImageColors is still computing or the image
+     * source is invalid.
      */
     Q_PROPERTY(QColor fallbackDominantContrasting MEMBER m_fallbackDominantContrasting NOTIFY fallbackDominantContrastingChanged)
 
     /**
-     * The value to return when highlight is not available, e.g. when
-     * ImageColors is still computing it or the source is invalid.
+     * @brief This property holds the value to return instead when highlight is
+     * not available.
+     *
+     * @note This may happen when ImageColors is still computing or the image
+     * source is invalid.
      */
     Q_PROPERTY(QColor fallbackHighlight MEMBER m_fallbackHighlight NOTIFY fallbackHighlightChanged)
 
     /**
-     * The value to return when foreground is not available, e.g. when
-     * ImageColors is still computing it or the source is invalid.
+     * @brief This property holds the value to return instead when foreground is
+     * not available.
+     *
+     * @note This may happen when ImageColors is still computing or the image
+     * source is invalid.
      */
     Q_PROPERTY(QColor fallbackForeground MEMBER m_fallbackForeground NOTIFY fallbackForegroundChanged)
 
     /**
-     * The value to return when background is not available, e.g. when
-     * ImageColors is still computing it or the source is invalid.
+     * @brief This property holds the value to return instead when background is
+     * not available.
+     *
+     * @note This may happen when ImageColors is still computing or the image
+     * source is invalid.
      */
     Q_PROPERTY(QColor fallbackBackground MEMBER m_fallbackBackground NOTIFY fallbackBackgroundChanged)
 

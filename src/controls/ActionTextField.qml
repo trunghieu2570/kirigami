@@ -13,8 +13,8 @@ import org.kde.kirigami 2.20 as Kirigami
  * is a need to create a create a textfield with action buttons (e.g a clear
  * action).
  *
- * Example usage for a search field:
- * @code
+ * Example usage:
+ * @code{.qml}
  * import org.kde.kirigami 2.20 as Kirigami
  *
  * Kirigami.ActionTextField {
@@ -36,8 +36,7 @@ import org.kde.kirigami 2.20 as Kirigami
  *     onAccepted: console.log("Search text is " + searchField.text);
  * }
  * @endcode
- *
- * @since 5.56
+ * @since KDE Frameworks 5.56
  * @inherit QtQuick.Controls.TextField
  */
 QQC2.TextField {
@@ -45,29 +44,32 @@ QQC2.TextField {
 
     /**
      * @brief This property holds a shortcut sequence that will focus the text field.
-     * @since 5.56
+     * @since KDE Frameworks 5.56
      */
     property alias focusSequence: focusShortcut.sequence
 
     /**
      * @brief This property holds a list of actions that will be displayed on the left side of the text field.
      *
-     * By default this list is empty.
+     * By default, this list is empty.
      *
-     * @since 5.56
+     * @since KDE Frameworks 5.56
      */
     property list<QtObject> leftActions
 
     /**
      * @brief This property holds a list of actions that will be displayed on the right side of the text field.
      *
-     * By default this list is empty.
+     * By default, this list is empty.
      *
-     * @since 5.56
+     * @since KDE Frameworks 5.56
      */
     property list<QtObject> rightActions
 
+    /** @internal */
     property alias _leftActionsRow: leftActionsRow
+
+    /** @internal */
     property alias _rightActionsRow: rightActionsRow
 
     hoverEnabled: true

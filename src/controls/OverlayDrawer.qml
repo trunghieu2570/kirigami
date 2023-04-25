@@ -11,13 +11,23 @@ import "private" as P
 import "templates" as T
 
 /**
- * Overlay Drawers are used to expose additional UI elements needed for
+ * @brief Overlay drawers are used to expose additional UI elements needed for
  * small secondary tasks for which the main UI elements are not needed.
- * For example in Okular Mobile, an Overlay Drawer is used to display
- * thumbnails of all pages within a document along with a search field.
- * This is used for the distinct task of navigating to another page.
  *
- * @inherit org::kde::kirigami::templates::OverlayDrawer
+ * Overlay drawers can be used to create two kinds of components, a modal drawer
+ * and an inline drawer. A modal drawer darkens the rest of the application and
+ * grabs focus until confirmed, whereas an inline drawer does not.
+ *
+ * Unlike an OverlaySheet that appears in the center of the application, an OverlayDrawer
+ * can be attached to an edge of the application, usually the top or the bottom edges.
+ *
+ * @see Visit https://develop.kde.org/docs/use/kirigami/components-drawers to read more
+ * about modal and non-modal drawers.
+ *
+ * Example usage:
+ * @include overlaydrawer.qml
+ *
+ * @inherit kirigami::templates::OverlayDrawer
  */
 T.OverlayDrawer {
     id: root

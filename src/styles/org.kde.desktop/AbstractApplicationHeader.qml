@@ -8,17 +8,6 @@ import QtQuick 2.5
 import org.kde.kirigami 2.4 as Kirigami
 import "../../templates" as T
 
-/**
- * An item that can be used as a title for the application.
- * Scrolling the main page will make it taller or shorter (through the point of going away)
- * It's a behavior similar to the typical mobile web browser addressbar
- * the minimum, preferred and maximum heights of the item can be controlled with
- * * minimumHeight: default is 0, i.e. hidden
- * * preferredHeight: default is Kirigami.Units.gridUnit * 1.6
- * * maximumHeight: default is Kirigami.Units.gridUnit * 3
- *
- * To achieve a titlebar that stays completely fixed just set the 3 sizes as the same
- */
 T.AbstractApplicationHeader {
     id: root
 

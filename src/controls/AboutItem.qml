@@ -12,55 +12,59 @@ import org.kde.kirigami 2.20 as Kirigami
 
 //TODO: Kf6: move somewhere else which can depend from KAboutData?
 /**
- * @brief An about item that displays the about data
+ * @brief This component is an "About" item that displays data about the application.
  *
- * Allows to show the copyright notice of the application
- * together with the contributors and some information of which platform it's
- * running on.
+ * It allows showing the defind copyright notice of the application together
+ * with the contributors and some information of which platform it's running on.
  *
- * @since 5.87
+ * @see <a href="https://develop.kde.org/docs/use/kirigami/advanced-add_about_page">About Page in Kirigami</a>
+ * @see <a href="https://develop.kde.org/hig/components/assistance/aboutview">KDE Human Interface Guidelines on Application Information</a>
+ * @see kirigami::AboutPage
+ * @since KDE Frameworks 5.87
  * @since org.kde.kirigami 2.19
  */
 Item {
     id: aboutItem
     /**
-     * @brief This property holds an object with the same shape as KAboutData.
+     * @brief This property holds information that this component displays.
+     *
+     * The stored JSON information object has the same structure as KAboutData.
      *
      * Example usage:
-     * @code{json}
+     * @code{.json}
      * aboutData: {
-          "displayName" : "KirigamiApp",
-          "productName" : "kirigami/app",
-          "componentName" : "kirigamiapp",
-          "shortDescription" : "A Kirigami example",
-          "homepage" : "",
-          "bugAddress" : "submit@bugs.kde.org",
-          "version" : "5.14.80",
-          "otherText" : "",
-          "authors" : [
-              {
-                  "name" : "...",
-                  "task" : "",
-                  "emailAddress" : "somebody@kde.org",
-                  "webAddress" : "",
-                  "ocsUsername" : ""
-              }
-          ],
-          "credits" : [],
-          "translators" : [],
-          "licenses" : [
-              {
-                  "name" : "GPL v2",
-                  "text" : "long, boring, license text",
-                  "spdx" : "GPL-2.0"
-              }
-          ],
-          "copyrightStatement" : "© 2010-2018 Plasma Development Team",
-          "desktopFileName" : "org.kde.kirigamiapp"
-       }
-       @endcode
+     *    "displayName" : "KirigamiApp",
+     *    "productName" : "kirigami/app",
+     *    "componentName" : "kirigamiapp",
+     *    "shortDescription" : "A Kirigami example",
+     *    "homepage" : "",
+     *    "bugAddress" : "submit@bugs.kde.org",
+     *    "version" : "5.14.80",
+     *    "otherText" : "",
+     *    "authors" : [
+     *        {
+     *            "name" : "...",
+     *            "task" : "",
+     *            "emailAddress" : "somebody@kde.org",
+     *            "webAddress" : "",
+     *            "ocsUsername" : ""
+     *        }
+     *    ],
+     *    "credits" : [],
+     *    "translators" : [],
+     *    "licenses" : [
+     *        {
+     *            "name" : "GPL v2",
+     *            "text" : "long, boring, license text",
+     *            "spdx" : "GPL-2.0"
+     *        }
+     *    ],
+     *    "copyrightStatement" : "© 2010-2018 Plasma Development Team",
+     *    "desktopFileName" : "org.kde.kirigamiapp"
+     * }
+     * @endcode
      *
-     * @see KAboutData
+     * @see kirigami::KAboutData
      */
     property var aboutData
 
@@ -82,7 +86,8 @@ Item {
     property bool _usePageStack: false
 
     /**
-     * @see org::kde::kirigami::FormLayout::wideMode
+     * @brief This property specifies whether about item is in wide mode.
+     * @see kirigami::FormLayout::wideMode
      * @property bool wideMode
      */
     property alias wideMode: form.wideMode

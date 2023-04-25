@@ -39,8 +39,10 @@ import org.kde.kirigami 2.14 as Kirigami
  *     }
  * }
  * @endcode
- * @since 2.14
- * @inherit org::kde::kirigami::BasicListItem
+ * @see <a href="https://develop.kde.org/hig/components/editing/list">KDE Human Interface Guidelines on List Views and List Items</a>
+ * @see <a href="https://develop.kde.org/hig/components/editing/checkbox">KDE Human Interface Guidelines on Checkboxes</a>
+ * @since org.kde.kirigami 2.14
+ * @inherit kirigami::BasicListItem
  */
 Kirigami.BasicListItem {
     id: checkableListItem

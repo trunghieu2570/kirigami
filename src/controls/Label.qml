@@ -20,7 +20,7 @@ import QtQuick.Controls 2.0 as QQC2
  * property to define the label text.
  *
  * @inherit QtQuick.Templates.Label
- * @deprecated use QtQuick.Templates.Label directly, it will be styled appropriately
+ * @deprecated This will be removed in KF6. Use QtQuick.Controls.Label directly, it will be styled appropriately.
  */
 QQC2.Label {
     height: Math.round(Math.max(paintedHeight, Kirigami.Units.gridUnit * 1.6))

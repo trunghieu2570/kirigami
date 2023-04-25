@@ -41,18 +41,24 @@ QQC2.Control {
 
     /**
      * @brief This property holds the source of the user's profile picture; an image.
-     * @see QtQuick.Image::source
+     * @see QtQuick.Image.source
      * @property url source
      */
     property alias source: avatarImage.source
 
     /**
-     * @brief This property holds avatar's icon source.
+     * @brief This property holds the avatar's icon source.
      *
-     * This icon  is displayed when using an icon with ``Avatar.InitialsMode.UseIcon`` and
-     * ``Avatar.ImageNode.AlwaysShowInitials`` enabled.
+     * The icon acts as a fallback in case the profile image set via `source`
+     * takes too long to load or is undefined, or in case no `name` or `source`
+     * has been set.
      *
-     * @see org::kde::kirigami::Icon::source
+     * To force display the icon when both ``name`` and ``source`` are set, you
+     * may set ``imageMode`` to ``Kirigami.Avatar.ImageMode.AlwaysShowInitials``
+     * to make it fallback to using initials, and then change ``initialsMode``
+     * to ``Kirigami.Avatar.InitialsMode.UseIcon`` to display the icon.
+     *
+     * @see kirigami::Icon::source
      * @property var iconSource
      */
     property alias iconSource: avatarIcon.source
@@ -60,11 +66,11 @@ QQC2.Control {
     /**
      * @brief This property holds how the button should represent the user when no user-set image is available.
      *
-     * Possible values are:
+     * The following values are allowed:
      * * ``Avatar.InitialsMode.UseInitials``: Show the user's initials.
      * * ``Avatar.InitialsMode.UseIcon``: Show a generic icon.
      *
-     * @see org::kde::kirigami::Avatar::InitialsMode
+     * @see ::InitialsMode
      */
     property int initialsMode: Kirigami.Avatar.InitialsMode.UseInitials
 
@@ -74,32 +80,32 @@ QQC2.Control {
      * This property holds whether the button should always show the image; show the image if one is
      * available and show initials when it is not; or always show initials.
      *
-     * Possible values are:
+     * The following values are allowed:
      * * ``Avatar.ImageMode.AlwaysShowImage``: Always try to show the image; even if it hasn't loaded yet or is undefined.
      * * ``Avatar.ImageMode.AdaptiveImageOrInitals``: Show the image if it is valid; or show initials if it is not
      * * ``Avatar.ImageMode.AlwaysShowInitials``: Always show initials
      *
-     * @see org::kde::kirigami::Avatar::ImageMode
+     * @see ::ImageMode
      */
     property int imageMode: Kirigami.Avatar.ImageMode.AdaptiveImageOrInitals
 
     /**
      * @brief This property sets whether the provided image should be cached.
-     * @see QtQuick.Image::cache
+     * @see QtQuick.Image.cache
      * @property bool cache
      */
     property alias cache: avatarImage.cache
 
     /**
      * @brief This property holds the source size of the user's profile picture.
-     * @see QtQuick.Image::sourceSize
+     * @see QtQuick.Image.sourceSize
      * @property int sourceSize
      */
     property alias sourceSize: avatarImage.sourceSize
 
     /**
      * @brief This property holds whether the provided image should be smoothed.
-     * @see QtQuick.Image::smooth
+     * @see QtQuick.Image.smooth
      * @property bool smooth
      */
     property alias smooth: avatarImage.smooth
@@ -117,7 +123,7 @@ QQC2.Control {
 
     /**
      * @brief This property holds the main and secondary actions associated with this avatar.
-     * @code
+     * @code{.qml}
      * Kirigami.Avatar {
      *     actions.main: Kirigami.Action {}
      *     actions.secondary: Kirigami.Action {}
@@ -133,10 +139,12 @@ QQC2.Control {
 
     /**
      * @brief This property holds the border properties group.
-     * @code
+     *
+     * Example usage:
+     * @code{.qml}
      * Kirigami.Avatar {
      *     border.width: 10
-     *     border.color: 'red'
+     *     border.color: "red"
      * }
      * @endcode
      */

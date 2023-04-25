@@ -7,7 +7,7 @@
 import QtQuick 2.1
 import QtQuick.Layouts 1.0
 import org.kde.kirigami 2.4 as Kirigami
-// NOTE: This must stay at 2.2 until KF6 due to retrocompatibility of the "icon" property
+// TODO KF6: This must stay at 2.2 until KF6 due to retrocompatibility of the "icon" property
 import QtQuick.Templates 2.2 as T2
 import QtQuick.Templates 2.4 as QQC2
 
@@ -32,11 +32,11 @@ T2.ItemDelegate {
     property bool supportsMouseEvents: hoverEnabled
 
     /**
-     * @brief This property tells whether the cursor is currently hovering over the item.
+     * @brief This property specifies whether the cursor is currently hovering over the item.
      *
-     * On mobile touch devices, this will be true only when pressed.
+     * On mobile touch devices, this will be @c true only when pressed.
      *
-     * @see QtQuick.Templates.ItemDelegate::hovered
+     * @see QtQuick.Templates.ItemDelegate.hovered
      * @deprecated This will be removed in KF6; use the ``hovered``  property instead.
      * @property bool containsMouse
      */
@@ -50,18 +50,18 @@ T2.ItemDelegate {
      *
      * default: ``false``
      *
-     * @since 2.7
+     * @since org.kde.kirigami 2.7
      */
     property bool alternatingBackground: false
 
     /**
      * @brief This property sets whether this item is a section delegate.
      *
-     * Setting this to true will make the list item look like a "title" for items under it.
+     * Setting this to @c true will make the list item look like a "title" for items under it.
      *
      * default: ``false``
      *
-     * @see ListSectionHeader
+     * @see kirigami::ListSectionHeader
      */
     property bool sectionDelegate: false
 
@@ -78,6 +78,7 @@ T2.ItemDelegate {
      * @brief This property holds list item's background color.
      *
      * It is advised to use the default value.
+     *
      * default: ``"transparent"``
      */
     property color backgroundColor: "transparent"
@@ -87,9 +88,10 @@ T2.ItemDelegate {
      * background alternating is enabled.
      *
      * It is advised to use the default value.
+     *
      * default: ``Kirigami.Theme.alternateBackgroundColor``
      *
-     * @since 2.7
+     * @since org.kde.kirigami 2.7
      */
     property color alternateBackgroundColor: Kirigami.Theme.alternateBackgroundColor
 
@@ -98,6 +100,7 @@ T2.ItemDelegate {
      * when the item is pressed or selected.
      *
      * It is advised to use the default value.
+     *
      * default: ``Kirigami.Theme.highlightColor``
      */
     property color activeBackgroundColor: Kirigami.Theme.highlightColor
@@ -106,6 +109,7 @@ T2.ItemDelegate {
      * @brief This property holds the color of the text in the item.
      *
      * It is advised to use the default value.
+     *
      * default: ``Kirigami.Theme.textColor``
      *
      * If custom text elements are inserted in an AbstractListItem,
@@ -117,6 +121,7 @@ T2.ItemDelegate {
      * @brief This property holds the color of the text when the item is pressed or selected.
      *
      * It is advised to use the default value.
+     *
      * default: ``Kirigami.Theme.highlightedTextColor``
      *
      * If custom text elements are inserted in an AbstractListItem,
@@ -124,6 +129,7 @@ T2.ItemDelegate {
      */
     property color activeTextColor: Kirigami.Theme.highlightedTextColor
 
+    /** @internal */
     default property alias _default: listItem.contentItem
 
     // NOTE: Overrides action property of newer import versions which we can't use

@@ -25,7 +25,7 @@ Item {
      *
      * default: `Position.Bottom on mobile, and Position.Top otherwise`
      *
-     * @see org::kde::kirigami::TabViewLayout::Position
+     * @see ::Position
      */
     property int position: Kirigami.Settings.isMobile ? TabViewLayout.Position.Bottom : TabViewLayout.Position.Top
 

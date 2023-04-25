@@ -11,7 +11,7 @@ import org.kde.kirigami 2.11 as Kirigami
 
 /**
  * An action used to load Pages coming from a common PagePool
- * in a PageRow or QtQuickControls2 StackView.
+ * in a PageRow or QtQuick.Controls.StackView.
  *
  * @see PagePool
  */
@@ -34,9 +34,9 @@ Kirigami.Action {
     property Kirigami.PagePool pagePool
 
     /**
-     * The pageStack property accepts either a Kirigami.PageRow or a QtQuickControls2 StackView.
+     * The pageStack property accepts either a Kirigami.PageRow or a QtQuick.Controls.StackView.
      * The component that will instantiate the pages, which has to work with a stack logic.
-     * Kirigami.PageRow is recommended, but will work with QtQuicControls2 StackView as well.
+     * Kirigami.PageRow is recommended, but will work with QtQuick.Controls.StackView as well.
      *
      * default: `bound to ApplicationWindow's global pageStack, which is a PageRow by default`
      */
@@ -80,7 +80,7 @@ Kirigami.Action {
       *
       * default: ``false``
       *
-      * @since 5.70
+      * @since KDE Frameworks 5.70
       * @since org.kde.kirigami 2.12
       */
     property bool useLayers: false
@@ -94,7 +94,7 @@ Kirigami.Action {
     }
 
     /**
-      * @returns true if the page has been loaded and placed on pageStack.layers
+      * @returns @c true if the page has been loaded and placed on pageStack.layers
       * and useLayers is true, otherwise returns null.
       */
     function layerContainsPage() {
@@ -107,7 +107,7 @@ Kirigami.Action {
     }
 
     /**
-      * @returns true if the page has been loaded and placed on the pageStack,
+      * @returns @c true if the page has been loaded and placed on the pageStack,
       * otherwise returns null.
       */
     function stackContainsPage() {
@@ -178,6 +178,7 @@ Kirigami.Action {
     }
 
     // Exposing this as a property is required as Action does not have a default property
+    /** @internal */
     property QtObject _private: QtObject {
         id: _private
 

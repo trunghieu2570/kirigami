@@ -11,26 +11,21 @@ import QtQuick.Window 2.5
 import org.kde.kirigami 2.4 as Kirigami
 import "templates/private" as TP
 /**
- * A window that provides some basic features needed for all apps
- * Use this class only if you need a custom content for your application,
- * different from the Page Row behavior recommended by the HIG and provided
- * by ApplicationWindow.
- * It is recommended to use ApplicationWindow instead
- * @see ApplicationWindow
+ * @brief A window that provides some basic features needed for all apps.
  *
- * It's usually used as a root QML component for the application.
- * It provides support for a central page stack, side drawers and
- * a top ApplicationHeader, as well as basic support for the
- * Android back button
+ * An abstract application window is a top-level component that provides
+ * several utilities for convenience such as:
+ * * ::applicationWindow()
+ * * ::globalDrawer
+ * * ::pageStack
+ * * ::wideScreen
  *
- * Setting a width and height property on the ApplicationWindow
- * will set its initial size, but it won't set it as an automatically binding.
- * to resize programmatically the ApplicationWindow they need to
- * be assigned again in an imperative fashion
- *
+ * Use this class only if you need custom content for your application that is
+ * different from the PageRow behavior recommended by the HIG and provided
+ * by kirigami::AbstractApplicationWindow.
  *
  * Example usage:
- * @code
+ * @code{.qml}
  * import org.kde.kirigami 2.4 as Kirigami
  *
  * Kirigami.ApplicationWindow {
@@ -61,13 +56,22 @@ import "templates/private" as TP
  *         id: contextDrawer
  *     }
  *
- *     pageStack: PageStack {
- *         ...
+ *     pageStack.initialPage: Kirigami.Page {
+ *         actions.contextualActions: [
+ *             Kirigami.Action {
+ *                 text: "context action 1"
+ *             },
+ *             Kirigami.Action {
+ *                 text: "context action 2"
+ *             },
+ *             Kirigami.Action {
+ *                 text: "context action 3"
+ *             }
+ *         ]
  *     }
  *  [...]
  * }
  * @endcode
- *
  * @inherit QtQuick.Controls.ApplicationWindow
  */
 QQC2.ApplicationWindow {
@@ -75,17 +79,20 @@ QQC2.ApplicationWindow {
 
 //BEGIN properties
     /**
-     * @brief This property holds the stack used to allocate the pages and to manage the
-     * transitions between them.
+     * @brief This property holds the stack used to allocate the pages and to
+     * manage the transitions between them.
      *
-     * Put a container here, such as QtQuick.Controls.StackView.
+     * Put a container here, such as <a href="https://doc.qt.io/qt-6/qml-qtquick-controls2-stackview.html">Controls.StackView</a>
+     * or PageRow.
      */
     property Item pageStack
 
     /**
-     * @brief This property sets whether the standard chrome of the app is visible.
+     * @brief This property sets whether the standard chrome of the app is
+     * visible.
      *
-     * These are the action button, the drawer handles, and the application header.
+     * These are the action button, the drawer handles, and the application
+     * header.
      *
      * default: ``true``
      */
@@ -95,15 +102,15 @@ QQC2.ApplicationWindow {
      * @brief This property holds the drawer for global actions.
      *
      * This drawer can be opened by sliding from the left screen edge
-     * or by dragging the ActionButton to the right.
+     * or by either pressing on the handle or sliding it to the right.
      *
      * @note It is recommended to use the GlobalDrawer here.
-     * @property org::kde::kirigami::OverlayDrawer globalDrawer
+     * @property kirigami::OverlayDrawer globalDrawer
      */
     property OverlayDrawer globalDrawer
 
     /**
-     * @brief This property tells whether the application is in "widescreen" mode.
+     * @brief This property specifies whether the application is in "widescreen" mode.
      *
      * This is enabled on desktops or horizontal tablets.
      *
@@ -119,11 +126,11 @@ QQC2.ApplicationWindow {
      *
      * @note It is recommended to use the ContextDrawer class here.
      *
-     * The contents of the context drawer should depend from what page is
-     * loaded in the main pageStack
+     * The context drawer will display the previously defined contextual
+     * actions of the page that is currently active in the pageStack.
      *
      * Example usage:
-     * @code
+     * @code{.qml}
      * import org.kde.kirigami 2.4 as Kirigami
      *
      * Kirigami.ApplicationWindow {
@@ -135,12 +142,13 @@ QQC2.ApplicationWindow {
      * }
      * @endcode
      *
-     * @code
+     * @code{.qml}
      * import org.kde.kirigami 2.4 as Kirigami
      *
      * Kirigami.Page {
      *   [...]
-     *     contextualActions: [
+     *     // setting the contextual actions
+     *     actions.contextualActions: [
      *         Kirigami.Action {
      *             icon.name: "edit"
      *             text: "Action text"
@@ -160,40 +168,35 @@ QQC2.ApplicationWindow {
      * }
      * @endcode
      *
-     * When this page will be the current one, the context drawer will visualize
-     * contextualActions defined as property in that page.
-     * @property org::kde::kirigami::ContextDrawer contextDrawer
+     * @property kirigami::ContextDrawer contextDrawer
      */
     property OverlayDrawer contextDrawer
 
     /**
-     * @brief This property tells whether the application is in reachable mode for single hand use.
+     * @brief This property specifies whether the application is in reachable
+     * mode for single hand use.
      *
      * The whole content of the application is moved down the screen to be
-     * reachable with the thumb. If wideScreen is true, or reachableModeEnabled is false,
-     * this property has no effect.
+     * reachable with the thumb. If wideScreen is true, or reachableModeEnabled
+     * is false, this property has no effect.
+     *
+     * @warning This property should be treated as readonly. Use
+     * ``reachableModeEnabled`` instead.
      *
      * default: ``false``
      */
     property bool reachableMode: false
 
     /**
-     * @brief This property sets whether the application will go into reachable mode on pull down.
+     * @brief This property sets whether reachable mode can be used.
      */
     property bool reachableModeEnabled: true
 
     /**
-     * This property holds a standard action that will quit the application when triggered.
-     * Its properties have the following values:
+     * @brief This property holds a Kirigami action that will quit the
+     * application when triggered.
      *
-     * @code
-     * Action {
-     *     text: "Quit"
-     *     icon.name: "application-exit-symbolic";
-     *     shortcut: StandardKey.Quit
-     *     [...]
-     * @endcode
-     * @since 5.76
+     * @since KDE Frameworks 5.76
      */
     readonly property Kirigami.Action quitAction: Kirigami.Action {
         text: qsTr("Quit")
@@ -205,32 +208,45 @@ QQC2.ApplicationWindow {
 
 //BEGIN functions
     /**
-     * @brief This function shows a little passive notification at the bottom of the app window
-     * lasting for few seconds, with an optional action button.
+     * @brief This function shows a passive notification at the bottom of the
+     * app window lasting for few seconds, with an optional action button.
      *
-     * @param message The text message to be shown to the user.
-     * @param timeout How long to show the message:
-     *            possible values: "short", "long" or the number of milliseconds
-     * @param actionText Text in the action button, if any.
-     * @param callBack A JavaScript function that will be executed when the
-     *            user clicks the button.
+     * @param message Notification's text message that is shown to the user.
+     * @param timeout Notification's visibility duration. Possible values are:
+     * "short", "long" or the number of milliseconds. Default is ``7000``.
+     * @param actionText Notification's action button's text.
+     * @param callBack A JavaScript function that will be executed when the user
+     * clicks the button.
      */
     function showPassiveNotification(message, timeout, actionText, callBack) {
         notificationsObject.showNotification(message, timeout, actionText, callBack);
     }
 
    /**
-    * @brief This function hides the passive notification at specified index, if any is shown.
-    * @param index Index of the notification to hide. Default is 0 (oldest notification).
+    * @brief This function hides the passive notification at specified index,
+    * if any is shown.
+    *
+    * @param index Index of the notification to hide. Default is 0
+    * (oldest notification).
     */
     function hidePassiveNotification(index = 0) {
         notificationsObject.hideNotification(index);
     }
 
     /**
-     * @brief This function returns application window's object anywhere in the application.
-     * @returns a pointer to this application window
-     * can be used anywhere in the application.
+     * @brief This property returns a pointer
+     * to the main instance of AbstractApplicationWindow.
+     * 
+     * This is available to any children of this window,
+     * including those instantiated from separate QML files,
+     * making interoperation with multiple files easier.
+     * 
+     * Use this whenever you need access to properties
+     * that are available to the main AbstractApplicationWindow,
+     * such as its pageStack, globalDrawer or header.
+     * 
+     * @see AbstractApplicationItem::applicationWindow()
+     * @returns a pointer to the instantiated AbstractApplicationWindow.
      */
     function applicationWindow() {
         return root;

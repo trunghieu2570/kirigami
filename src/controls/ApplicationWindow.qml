@@ -8,26 +8,27 @@ import QtQuick 2.5
 import org.kde.kirigami 2.4 as Kirigami
 
 /**
- * @brief A window that provides some basic features needed for all apps
+ * @brief A window that provides some basic features needed for all apps.
  *
- * It's usually used as a root QML component for the application.
- * It's based around the PageRow component, the application will be
- * about pages adding and removal.
- * For most of the usages, this class should be used instead
- * of AbstractApplicationWindow
- * @see AbstractApplicationWindow
- *
- * Setting a width and height property on the ApplicationWindow
- * will set its initial size, but it won't set it as an automatically binding.
- * to resize programmatically the ApplicationWindow they need to
- * be assigned again in an imperative fashion
+ * An application window is a top-level component that provides
+ * several utilities for convenience, such as:
+ * * kirigami::AbstractApplicationWindow::applicationWindow()
+ * * kirigami::AbstractApplicationWindow::globalDrawer
+ * * kirigami::AbstractApplicationWindow::pageStack
+ * * kirigami::AbstractApplicationWindow::wideScreen
+ * 
+ * @see kirigami::AbstractApplicationWindow
+ * 
+ * Use this class only if you need custom content for your application that is
+ * different from the PageRow behavior recommended by the HIG and provided
+ * by kirigami::AbstractApplicationWindow.
  *
  * Example usage:
- * @code
+ * @code{.qml}
  * import org.kde.kirigami 2.4 as Kirigami
  *
  * Kirigami.ApplicationWindow {
- *  [...]
+ *   [...]
  *     globalDrawer: Kirigami.GlobalDrawer {
  *         actions: [
  *            Kirigami.Action {
@@ -55,49 +56,50 @@ import org.kde.kirigami 2.4 as Kirigami
  *     }
  *
  *     pageStack.initialPage: Kirigami.Page {
- *         mainAction: Kirigami.Action {
- *             iconName: "edit"
- *             onTriggered: {
- *                 // do stuff
+ *         actions {
+ *             main: Kirigami.Action {
+ *                 iconName: "edit"
+ *                 onTriggered: {
+ *                     // do stuff
+ *                 }
  *             }
+ *             contextualActions: [
+ *                 Kirigami.Action {
+ *                     iconName: "edit"
+ *                     text: "Action text"
+ *                     onTriggered: {
+ *                         // do stuff
+ *                     }
+ *                 },
+ *                 Kirigami.Action {
+ *                     iconName: "edit"
+ *                     text: "Action text"
+ *                     onTriggered: {
+ *                         // do stuff
+ *                     }
+ *                 }
+ *             ]
  *         }
- *         contextualActions: [
- *             Kirigami.Action {
- *                 iconName: "edit"
- *                 text: "Action text"
- *                 onTriggered: {
- *                     // do stuff
- *                 }
- *             },
- *             Kirigami.Action {
- *                 iconName: "edit"
- *                 text: "Action text"
- *                 onTriggered: {
- *                     // do stuff
- *                 }
- *             }
- *         ]
- *       [...]
  *     }
- *  [...]
+ *   [...]
  * }
  * @endcode
- *
 */
 Kirigami.AbstractApplicationWindow {
     id: root
 
     /**
-     * @brief This property holds the stack used to allocate the pages and to
-     * manage the transitions between them.
+     * @brief This property holds the PageRow that is used to allocate the pages
+     * and manage the transitions between them.
      *
-     * It's using a PageRow, while having the same API as PageStack,
-     * it positions the pages as adjacent columns, with as many columns
-     * as can fit in the screen. An handheld device would usually have a single
-     * fullscreen column, a tablet device would have many tiled columns.
+     * It implements useful features to control then shown pages such as:
+     * * kirigami::PageRow::initialPage
+     * * kirigami::PageRow::push()
+     * * kirigami::PageRow::pop()
      *
+     * @see kirigami::PageRow
      * @warning This property is not currently readonly, but it should be treated like it is readonly.
-     * @property org::kde::kirigami::PageRow pageStack
+     * @property Kirgiami.PageRow pageStack
      */
     property alias pageStack: __pageStack  // TODO KF6 make readonly
 

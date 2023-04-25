@@ -17,7 +17,7 @@ import "private" as P
  * a desktop application's menubar.
  *
  * Example usage:
- * @code
+ * @code{.qml}
  * import org.kde.kirigami 2.4 as Kirigami
  *
  * Kirigami.ApplicationWindow {
@@ -46,7 +46,9 @@ import "private" as P
  *  [...]
  * }
  * @endcode
- *
+ * @see <a href="https://develop.kde.org/docs/use/kirigami/components-drawers/#global-drawer">Global Drawers in Kirigami</a>
+ * @see <a href="https://develop.kde.org/hig/components/navigation/globaldrawer">Human Interface Guidelines on Global Drawers</a>
+ * @see <a href="https://develop.kde.org/hig/patterns-command/drawer/#global-drawer">KDE Human Interface Guidelines' Short Introduction of Global Drawers</a>
  */
 OverlayDrawer {
     id: root
@@ -60,22 +62,22 @@ OverlayDrawer {
 //BEGIN properties
     /**
      * @brief This property holds the title displayed at the top of the drawer.
-     * @see org::kde::kirigami::private::BannerImage::title
+     * @see kirigami::private::BannerImage::title
      * @property string title
      */
     property alias title: bannerImage.title
 
     /**
      * @brief This property holds an icon to be displayed alongside the title.
-     * @see org::kde::kirigami::private::BannerImage::titleIcon
-     * @see org::kde::kirigami::Icon::source
+     * @see kirigami::private::BannerImage::titleIcon
+     * @see kirigami::Icon::source
      * @property var titleIcon
      */
     property alias titleIcon: bannerImage.titleIcon
 
     /**
      * @brief This property holds the banner image source.
-     * @see org::kde::kirigami::ShadowedImage::source
+     * @see kirigami::ShadowedImage::source
      * @property url bannerImageSource
      */
     property alias bannerImageSource: bannerImage.source
@@ -87,7 +89,7 @@ OverlayDrawer {
      * A tree depth bigger than 2 is discouraged.
      *
      * Example usage:
-     * @code
+     * @code{.qml}
      * import org.kde.kirigami 2.4 as Kirigami
      *
      * Kirigami.ApplicationWindow {
@@ -126,7 +128,7 @@ OverlayDrawer {
      * If the drawer contents can be scrolled, this item will stay still and won't scroll.
      *
      * @note This property is mainly intended for toolbars.
-     * @since 2.12
+     * @since org.kde.kirigami 2.12
      */
     property Item header
 
@@ -138,7 +140,7 @@ OverlayDrawer {
      *
      * default: `the banner will be visible only on mobile platforms`
      *
-     * @since 2.12
+     * @since org.kde.kirigami 2.12
      */
     property bool bannerVisible: Kirigami.Settings.isMobile
 
@@ -146,7 +148,7 @@ OverlayDrawer {
      * @brief This property holds items that are displayed above the actions.
      *
      * Example usage:
-     * @code
+     * @code{.qml}
      * import org.kde.kirigami 2.4 as Kirigami
      *
      * Kirigami.ApplicationWindow {
@@ -169,7 +171,7 @@ OverlayDrawer {
      * @brief This property holds items that are displayed under the actions.
      *
      * Example usage:
-     * @code
+     * @code{.qml}
      * import org.kde.kirigami 2.4 as Kirigami
      *
      * Kirigami.ApplicationWindow {
@@ -194,12 +196,12 @@ OverlayDrawer {
      * when the drawer is collapsed as a sidebar.
      *
      * If you want to keep some items visible and some invisible, set this to
-     * false and control the visibility/opacity of individual items,
+     * @c false and control the visibility/opacity of individual items,
      * binded to the collapsed property
      *
      * default: ``false``
      *
-     * @since 2.5
+     * @since org.kde.kirigami 2.5
      */
     property bool showTopContentWhenCollapsed: false
 
@@ -208,13 +210,13 @@ OverlayDrawer {
      * when the drawer is collapsed as a sidebar.
      *
      * If you want to keep some items visible and some invisible, set this to
-     * false and control the visibility/opacity of individual items,
+     * @c false and control the visibility/opacity of individual items,
      * binded to the collapsed property
      *
      * default: ``false``
      *
-     * @see content
-     * @since 2.5
+     * @see ::content
+     * @since org.kde.kirigami 2.5
      */
     property bool showContentWhenCollapsed: false
 
@@ -241,7 +243,7 @@ OverlayDrawer {
      *
      * default: ``false``
      *
-     * @since 2.11
+     * @since org.kde.kirigami 2.11
      */
     property bool isMenu: false
 
@@ -251,7 +253,7 @@ OverlayDrawer {
      *
      * default: ``true``
      *
-     * @since 2.12
+     * @since org.kde.kirigami 2.12
      */
     property bool collapseButtonVisible: true
 //END properties

@@ -12,63 +12,100 @@
 #include <QtQml>
 
 /**
- * This Attached property is used to calculate automated keyboard sequences
- * to trigger actions based upon their text: if an "&" mnemonic is
- * used (ie "&Ok"), the system will attempt to assign the desired letter giving
- * it priority, otherwise a letter among the ones in the label will be used if
- * possible and not conflicting.
+ * @brief This Attached property is used to calculate automated keyboard sequences
+ * to trigger actions based upon their text.
+ *
+ * If an "&" mnemonic is used (ie "&Ok"), the system will attempt to assign
+ * the desired letter giving it priority, otherwise a letter among the ones
+ * in the label will be used if possible and not conflicting.
  * Different kinds of controls will have different priorities in assigning the
  * shortcut: for instance the "Ok/Cancel" buttons in a dialog will have priority
  * over fields of a FormLayout.
- * @see ControlType
  *
- * Usually the developer shouldn't use this directly as base components
- * already use this, but only when implementing a custom graphical Control.
- * @since 2.3
+ * @see ::ControlType
+ *
+ * @brief This attached property allows to define keyboard sequences to trigger
+ * actions based upon their text.
+ *
+ * A mnemonic, otherwise known as an accelerator, is an accessibility feature to
+ * signal to the user that a certain action (typically in a menu) can be
+ * triggered by pressing Alt + a certain key that is indicated by an ampersand
+ * sign (&). For instance, a File menu could be marked in code as &File and
+ * would be displayed to the user with an underscore under the letter F. This
+ * allows to invoke actions without having to navigate the UI with a mouse.
+ *
+ * This class automates the management of mnemonics, so if a key is already
+ * taken, the next available key is used. Likewise, certain components get
+ * increased priority: an "OK/Cancel" buttons in a Dialog will have priority
+ * over fields of a FormLayout.
+ *
+ * Mnemonics are already managed by visual QtQuick and Kirigami controls, so
+ * only use this class to implement your own visual QML controls.
+ *
+ * @since org.kde.kirigami 2.3
  */
 class MnemonicAttached : public QObject
 {
     Q_OBJECT
     /**
-     * The label of the control we want to compute a mnemonic for, instance
-     * "Label:" or "&Ok"
+     * @brief This property holds the label of the control that we want to
+     * compute a mnemonic for.
+     *
+     * For example: ``"Label:"`` or ``"&Ok"``
      */
     Q_PROPERTY(QString label READ label WRITE setLabel NOTIFY labelChanged)
 
     /**
-     * The user-visible final label, which will have the shortcut letter underlined,
-     * such as "&lt;u&gt;O&lt;/u&gt;k"
+     * @brief This property holds the user-visible final label.
+     *
+     * The user-visible final label, which will have the shortcut letter
+     * underlined, such as "&lt;u&gt;O&lt;/u&gt;k".
      */
     Q_PROPERTY(QString richTextLabel READ richTextLabel NOTIFY richTextLabelChanged)
 
     /**
-     * The label with an "&" mnemonic in the place which will have the shortcut
-     * assigned, regardless of whether the & was assigned by the user or automatically generated.
+     * @brief This property holds the label with an "&" mnemonic in the place
+     * which defines the shortcut key.
+     *
+     * @note The "&" will be automatically added if it is not set by the
+     * user.
      */
     Q_PROPERTY(QString mnemonicLabel READ mnemonicLabel NOTIFY mnemonicLabelChanged)
 
     /**
-     * Only if true this mnemonic will be considered for the global assignment
-     * default: true
+     * @brief This property sets whether this mnemonic is enabled.
+     *
+     * Set this to @c false to disable the accelerator marker (&) and its
+     * respective shortcut.
+     *
+     * default: ``true``
      */
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
 
     /**
-     * The type of control this mnemonic is attached: different types of controls have different importance and priority for shortcut assignment.
-     * @see ControlType
+     * @brief This property holds the control type that this mnemonic is
+     * attached to.
+     *
+     * @note Different types of controls have different importance and priority
+     * for shortcut assignment.
+     *
+     * @see ::ControlType
      */
     Q_PROPERTY(MnemonicAttached::ControlType controlType READ controlType WRITE setControlType NOTIFY controlTypeChanged)
 
     /**
-     * The final key sequence assigned, if any: it will be Alt+alphanumeric char
+     * @brief This property holds the final key sequence.
+     *
+     * @note The final key sequence will be Alt+alphanumeric char.
      */
     Q_PROPERTY(QKeySequence sequence READ sequence NOTIFY sequenceChanged)
 
     /**
-     * True when the user is pressing alt and the accelerators should be shown
+     * @brief This property holds whether the user is pressing alt and
+     * accelerators should be shown.
      *
-     * @since 5.72
-     * @since 2.15
+     * @since KDE Frameworks 5.72
+     * @since org.kde.kirigami 2.15
      */
     Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
 

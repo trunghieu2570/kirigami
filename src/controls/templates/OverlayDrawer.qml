@@ -11,11 +11,21 @@ import org.kde.kirigami 2.11 as Kirigami
 import "private" as P
 
 /**
- * Overlay Drawers are used to expose additional UI elements needed for
+ * @brief Overlay drawers are used to expose additional UI elements needed for
  * small secondary tasks for which the main UI elements are not needed.
- * For example in Okular Mobile, an Overlay Drawer is used to display
- * thumbnails of all pages within a document along with a search field.
- * This is used for the distinct task of navigating to another page.
+ *
+ * Overlay drawers can be used to create two kinds of components, a modal drawer
+ * and an inline drawer. A modal drawer darkens the rest of the application and
+ * grabs focus until confirmed, whereas an inline drawer does not.
+ *
+ * Unlike an OverlaySheet that appears in the center of the application, an OverlayDrawer
+ * can be attached to an edge of the application, usually the top or the bottom edges.
+ *
+ * @see Visit https://develop.kde.org/docs/use/kirigami/components-drawers to read more
+ * about modal and non-modal drawers.
+ *
+ * Example usage:
+ * @include overlaydrawer.qml
  *
  * @inherit QtQuick.Controls.Drawer
  */
@@ -26,14 +36,14 @@ T2.Drawer {
 
 //BEGIN properties
     /**
-     * @brief This property tells whether the drawer is open and visible.
+     * @brief This property specifies whether the drawer is open and visible.
      *
      * default: ``false``
      */
     property bool drawerOpen: false
 
     /**
-     * @brief This property tells whether the drawer is in a state between open
+     * @brief This property specifies whether the drawer is in a state between open
      * and closed.
      *
      * The drawer is visible but not completely open. This is usually the case when
@@ -45,7 +55,7 @@ T2.Drawer {
     property bool peeking: false
 
     /**
-     * @brief This property tells whether the drawer is currently opening or closing itself.
+     * @brief This property specifies whether the drawer is currently opening or closing itself.
      */
     readonly property bool animating : enterAnimation.animating || exitAnimation.animating || positionResetAnim.running
 
@@ -56,12 +66,12 @@ T2.Drawer {
      * Only modal drawers are collapsible. Collapsible is not supported in
      * the mobile mode.
      *
-     * @since 2.5
+     * @since org.kde.kirigami 2.5
      */
     property bool collapsible: false
 
     /**
-     * @brief This property tells whether the drawer is collapsed to a
+     * @brief This property specifies whether the drawer is collapsed to a
      * very thin sidebar, usually icon only.
      *
      * When true, the drawer will be collapsed to a very thin sidebar,
@@ -86,9 +96,8 @@ T2.Drawer {
     /**
      * @brief This property holds the options for handle's open icon.
      *
-     * This is a grouped property with following components:
-     *
-     * * ``source: var``: The name of a freedesktop-compatible icon.
+     * This grouped property has the following sub-properties:
+     * * ``source: var``: A Freedesktop standard icon name. The icon is pulled from system's icon theme.
      * * ``color: color``: An optional tint color for the icon.
      *
      * If no custom icon is set, a menu icon is shown for the application globalDrawer
@@ -96,9 +105,9 @@ T2.Drawer {
      * That's the default for the GlobalDrawer and ContextDrawer components respectively.
      *
      * For OverlayDrawer the default is view-right-close or view-left-close depending on
-     * the drawer location
+     * the drawer location.
      *
-     * @since 2.5
+     * @since org.kde.kirigami 2.5
      */
     readonly property P.IconPropertiesGroup handleOpenIcon: P.IconPropertiesGroup {
         source: root.edge === Qt.RightEdge ? "view-right-close" : "view-left-close"
@@ -107,8 +116,8 @@ T2.Drawer {
     /**
      * @brief This property holds the options for the handle's close icon.
      *
-     * This is a grouped property with the following components:
-     * * ``source: var``: The name of a freedesktop-compatible icon.
+     * This grouped property has the following sub-properties:
+     * * ``source: var``: A Freedesktop standard icon name. The icon is pulled from system's icon theme.
      * * ``color: color``: An optional tint color for the icon.
      *
      * If no custom icon is set, an X icon is shown,
@@ -117,7 +126,7 @@ T2.Drawer {
      * For OverlayDrawer the default is view-right-new or view-left-new depending on
      * the drawer location.
      *
-     * @since 2.5
+     * @since org.kde.kirigami 2.5
      */
     property P.IconPropertiesGroup handleClosedIcon: P.IconPropertiesGroup {
         source: root.edge === Qt.RightEdge ? "view-right-new" : "view-left-new"
@@ -125,13 +134,13 @@ T2.Drawer {
 
     /**
      * @brief This property holds the tooltip displayed when the drawer is open.
-     * @since 2.15
+     * @since org.kde.kirigami 2.15
      */
     property string handleOpenToolTip: qsTr("Close drawer")
 
     /**
      * @brief This property holds the tooltip displayed when the drawer is closed.
-     * @since 2.15
+     * @since org.kde.kirigami 2.15
      */
     property string handleClosedToolTip: qsTr("Open drawer")
 
@@ -145,7 +154,7 @@ T2.Drawer {
 
     /**
      * @brief Readonly property that points to the item that will act as a physical
-     * handle for the Drawer.
+     * handle for the drawer.
      * @property MouseArea handle
      **/
     readonly property Item handle: MouseArea {
@@ -468,6 +477,7 @@ T2.Drawer {
 //END signal handlers
 
     // this is as hidden as it can get here
+    /** @internal */
     property QtObject __internal: QtObject {
         //here in order to not be accessible from outside
         property bool completed: false

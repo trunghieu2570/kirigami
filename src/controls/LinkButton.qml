@@ -16,7 +16,7 @@ import org.kde.kirigami 2.14 as Kirigami
  * Maps to the Command Link in the HIG:
  * https://develop.kde.org/hig/components/navigation/commandlink/
  *
- * @since 5.52
+ * @since KDE Frameworks 5.52
  * @since org.kde.kirigami 2.6
  * @inherit QtQuick.Controls.Label
  */
@@ -27,7 +27,7 @@ QQC2.Label {
 
     /**
      * @brief This property holds the mouse buttons that the mouse area reacts to.
-     * @see QtQuick.MouseArea::acceptedButtons
+     * @see QtQuick.MouseArea.acceptedButtons
      * @property Qt::MouseButtons acceptedButtons
      */
     property alias acceptedButtons: area.acceptedButtons

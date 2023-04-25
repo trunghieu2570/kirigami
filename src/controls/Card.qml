@@ -11,7 +11,7 @@ import org.kde.kirigami 2.12 as Kirigami
 import "private" as P
 
 /**
- * @brief This is the standard layout of a Card.
+ * @brief This component implements a standard layout of a card.
  *
  * It is recommended to use this class when the concept of Cards is needed
  * in the application.
@@ -25,20 +25,21 @@ import "private" as P
  * It is possible even tough is discouraged to override the footer:
  * in this case the actions property shouldn't be used.
  *
- * @inherit org::kde::kirigami::AbstractCard
- * @since 2.4
+ * @see <a href="https://develop.kde.org/hig/components/editing/card">KDE Human Interface Guidelines on Cards</a>
+ * @since org.kde.kirigami 2.4
+ * @inherit kirigami::AbstractCard
  */
 Kirigami.AbstractCard {
     id: root
 
     /**
-     * @brief This property holds the clickable actions that will be available in the footer
+     * @brief This property holds visible actions that will be available in the footer
      * of the card.
      *
      * The actions will be represented by a list of ToolButtons with an optional overflow
      * menu, when not all of them will fit in the available Card width.
      *
-     * @property list<org::kde::kirigami::Action> Card::actions
+     * @property list<kirigami::Action> Card::actions
      */
     property list<QtObject> actions
 
@@ -48,9 +49,9 @@ Kirigami.AbstractCard {
      * These actions will only be shown in the overflow menu, even when there is enough space.
      *
      * @deprecated Use actions with a ``Kirigami.DisplayHint.AlwaysHide`` as displayHint.
-     * @see org::kde::kirigami::DisplayHint
-     * @property list<org::kde::kirigami::Action> hiddenActions
-     * @since 2.6
+     * @see kirigami::DisplayHint
+     * @since org.kde.kirigami 2.6
+     * @property list<kirigami::Action> hiddenActions
      */
     property alias hiddenActions: actionsToolBar.hiddenActions
 
@@ -66,12 +67,12 @@ Kirigami.AbstractCard {
      * default: ``Qt.AlignTop | Qt.AlignLeft``
      * * ``titleLevel: int``: The Kirigami.Heading level for the title, which controls the font size.
      * default: ``1``, which is the largest size.
-     * * ``titleWrapMode: QtQuick.Text::wrapMode``: Whether the header text should be able to wrap.
+     * * ``titleWrapMode: QtQuick.Text.wrapMode``: Whether the header text should be able to wrap.
      * default: ``Text.NoWrap``
      *
      * It also has the full set of properties that QtQuick.Image has, such as sourceSize and fillMode.
      *
-     * @see org::kde::kirigami::private::BannerImage
+     * @see kirigami::private::BannerImage
      * @property Image banner
      */
     readonly property alias banner: bannerImage

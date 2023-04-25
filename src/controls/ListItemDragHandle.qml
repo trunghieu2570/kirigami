@@ -14,60 +14,15 @@ import org.kde.kirigami 2.4 as Kirigami
  * In order for ListItemDragHandle to work correctly, the listItem that is being dragged
  * should not directly be the delegate of the ListView, but a child of it.
  *
- * It is recommended to use DelagateRecycler as base delegate like the following code:
- * @code
- * import QtQuick 2.15
- * import QtQuick.Layouts 1.15
- * import QtQuick.Controls 2.15 as QQC2
- * import org.kde.kirigami 2.19 as Kirigami
- *   ...
- *   Component {
- *       id: delegateComponent
- *       Kirigami.AbstractListItem {
- *           id: listItem
- *           contentItem: RowLayout {
- *               Kirigami.ListItemDragHandle {
- *                   listItem: listItem
- *                   listView: mainList
- *                   onMoveRequested: listModel.move(oldIndex, newIndex, 1)
- *               }
- *               QQC2.Label {
- *                   text: model.label
- *               }
- *           }
- *       }
- *   }
- *   ListView {
- *       id: mainList
+ * Example usage:
+ * @include listitemdraghandle.qml
  *
- *       model: ListModel {
- *           id: listModel
- *           ListElement {
- *               label: "Item 1"
- *           }
- *           ListElement {
- *               label: "Item 2"
- *           }
- *           ListElement {
- *               label: "Item 3"
- *           }
- *       }
- *       //this is optional to make list items animated when reordered
- *       moveDisplaced: Transition {
- *           YAnimator {
- *               duration: Kirigami.Units.longDuration
- *               easing.type: Easing.InOutQuad
- *           }
- *       }
- *       delegate: Kirigami.DelegateRecycler {
- *           width: mainList.width
- *           sourceComponent: delegateComponent
- *       }
- *   }
- *   ...
- * @endcode
+ * As seen from the example, we wrapped the ``Kirigami.AbstractListItem`` with an
+ * Item component. This is because when dragging the list item around, only the item that
+ * the drag handle is assigned to is moved, and the wrapper Item stays there for
+ * it to take up space so that other list items don't take it.
  *
- * @since 2.5
+ * @since org.kde.kirigami 2.5
  * @inherit QtQuick.Item
  */
 Item {
@@ -89,7 +44,7 @@ Item {
      * @brief This signal is emitted when the drag handle wants to move the item in the model.
      *
      * The following example does the move in the case a ListModel is used:
-     * @code
+     * @code{.qml}
      *  onMoveRequested: listModel.move(oldIndex, newIndex, 1)
      * @endcode
      * @param oldIndex the index the item is currently at

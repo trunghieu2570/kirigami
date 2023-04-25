@@ -16,7 +16,7 @@ import "private" as P
  * ApplicationWindow's pageStack should be a Page.
  *
  * @see ScrollablePage
- * For content that should be scrollable, such as ListViews, use ScrollablePage instead.
+ * For content that should be scrollable, such as QtQuick.ListView, use ScrollablePage instead.
  * @inherit QtQuick.Controls.Page
  */
 QQC2.Page {
@@ -24,29 +24,16 @@ QQC2.Page {
 
 //BEGIN properties
     /**
-     * @brief The default content padding is 1 gridUnit.
-     * // TODO: check if  this is not displayed in the generated api doc.
-     */
-    padding: Kirigami.Units.gridUnit
-
-    /**
-     * @brief The bottom content padding.
-     *
-     * default: `this is bound to the height of the floating action buttons when present; if not, then verticalPadding.`
-     * // TODO: check if this is not displayed in the generated api doc.
-     */
-    bottomPadding: actionButtons.item ? actionButtons.height : verticalPadding
-
-    /**
      * @brief If the central element of the page is a Flickable
      * (ListView and Gridview as well) you can set it there.
      *
      * Normally, you wouldn't need to do that, but just use the
      * ScrollablePage element instead.
      *
-     * Use this if your flickable has some non standard properties, such as not covering the whole Page.
+     * Use this if your flickable has some non standard properties,
+     * such as not covering the whole Page.
      *
-     * @see ScrollablePage
+     * @see kirigami::ScrollablePage
      */
     property Flickable flickable
 
@@ -55,7 +42,7 @@ QQC2.Page {
      * an easy way to assign actions in the right sliding panel
      *
      * Example usage:
-     * @code
+     * @code{.qml}
      * import org.kde.kirigami 2.4 as Kirigami
      *
      * Kirigami.ApplicationWindow {
@@ -67,7 +54,7 @@ QQC2.Page {
      * }
      * @endcode
      *
-     * @code
+     * @code{.qml}
      * import org.kde.kirigami 2.4 as Kirigami
      *
      * Kirigami.Page {
@@ -91,8 +78,7 @@ QQC2.Page {
      *   [...]
      * }
      * @endcode
-     *
-     * @warning This will likely be removed someday.
+     * @warning This will be removed in KF6.
      * @property list<QtQml.QtObject> contextualActions
      */
     // TODO: remove
@@ -102,7 +88,7 @@ QQC2.Page {
      * @brief An optional single action for the action button.
      *
      * Example usage:
-     * @code
+     * @code{.qml}
      * import org.kde.kirigami 2.4 as Kirigami
      * Kirigami.Page {
      *     actions.main: Kirigami.Action {
@@ -113,7 +99,7 @@ QQC2.Page {
      *     }
      * }
      * @endcode
-     * @warning This will likely be removed someday.
+     * @warning This will be removed in KF6.
      * @property Action mainAction
      */
     //TODO: remove
@@ -123,8 +109,7 @@ QQC2.Page {
      * @brief An optional extra action at the left of the main action button.
      *
      * Example usage:
-     *
-     * @code
+     * @code{.qml}
      * import org.kde.kirigami 2.4 as Kirigami
      * Kirigami.Page {
      *     actions.left: Kirigami.Action {
@@ -135,7 +120,7 @@ QQC2.Page {
      *     }
      * }
      * @endcode
-     * @warning This will likely be removed someday.
+     * @warning This will be removed in KF6.
      * @property Action leftAction
      */
     // TODO: remove
@@ -145,7 +130,7 @@ QQC2.Page {
      * @brief An optional extra action at the right of the main action button.
      *
      * Example usage:
-     * @code
+     * @code{.qml}
      * import org.kde.kirigami 2.4 as Kirigami
      * Kirigami.Page {
      *     actions.right: Kirigami.Action {
@@ -156,7 +141,7 @@ QQC2.Page {
      *     }
      * }
      * @endcode
-     * @warning This will likely be removed someday.
+     * @warning This will be removed in KF6.
      * @property Action rightAction
      */
     // TODO: remove
@@ -178,26 +163,20 @@ QQC2.Page {
      *     }
      * }
      * @endcode
-     * @property org::kde::kirigami::private::PageActionPropertyGroup actions
+     * @see <a href="https://develop.kde.org/hig/components/navigation/actionbutton">KDE Human Interface Guidelines on Actions</a>
+     * @property kirigami::private::PageActionPropertyGroup actions
      */
     readonly property alias actions: actionsGroup
 
     /**
-     * Emitted when a visualization for the actions is about to be shown,
-     * such as the toolbar menu or the contextDrawer.
+     * @brief This property specifies us if it is the currently active page.
      *
-     * @since 2.7
-     */
-    signal contextualActionsAboutToShow
-
-    /**
-     * @brief This property tells us if it is the currently active page.
+     * Specifies if it's the currently selected page in the window's pages
+     * row, or if layers are used whether this is the topmost item on the
+     * layers stack. If the page is not attached to either a column view or
+     * a stack view, expect this to be true.
      *
-     * Specifies if it's the currently selected page in the window's pages row, or if layers
-     * are used whether this is the topmost item on the layers stack. If the page is
-     * not attached to either a column view or a stack view, expect this to be true.
-     *
-     * @since 2.1
+     * @since org.kde.kirigami 2.1
      */
     //TODO KF6: remove this or at least all the assumptions about the internal tree structure of items
     readonly property bool isCurrentPage: Kirigami.ColumnView.view
@@ -213,13 +192,12 @@ QQC2.Page {
      * It's a "local" version of ApplicationWindow's overlay
      *
      * @property Item overlay
-     * @since 2.5
+     * @since org.kde.kirigami 2.5
      */
     readonly property alias overlay: overlayItem
 
     /**
      * @brief This holds the icon that represents this page.
-     * @property var icon
      */
     property P.ActionIconGroup icon: P.ActionIconGroup {}
 
@@ -244,7 +222,7 @@ QQC2.Page {
      *
      * It can be customized to put any kind of Item in there.
      *
-     * @since 2.7
+     * @since org.kde.kirigami 2.7
      */
     property Component titleDelegate: Component {
         id: defaultTitleDelegate
@@ -258,18 +236,24 @@ QQC2.Page {
      * present only if we are in a PageRow as a page or as a layer,
      * and the style is either Titles or ToolBar.
      *
-     * @since 2.5
+     * @since org.kde.kirigami 2.5
      */
     readonly property Item globalToolBarItem: globalToolBar.item
 
     /**
-     * The style for the automatically generated global toolbar: by default the Page toolbar is the one set globally in the PageRow in its globalToolBar.style property.
-     * A single page can override the application toolbar style for itself.
-     * It is discouraged to use this, except very specific exceptions, like a chat
-     * application which can't have controls on the bottom except the text field.
-     * If the Page is not in a PageRow, by default the toolbar will be invisible,
-     * so has to be explicitly set to Kirigami.ApplicationHeaderStyle.ToolBar if
-     * desired to be used in that case.
+     * @brief This property holds the style for the automatically generated
+     * toolbar of the PageRow where the Page is inserted.
+     *
+     * By default, the Page's globalToolBarStyle determines the style used by
+     * the PageRow where it is inserted, updating the PageRow's globalToolBar
+     * style. This allows for a single page to override the application toolbar
+     * style for itself.
+     *
+     * It is discouraged to use this, except in very specific cases, like a
+     * chat application that can't have controls at the bottom except for a
+     * text field. If the Page is not in a PageRow, by default, the toolbar
+     * will be invisible, so Page::globalToolBarStyle has to be explicitly
+     * set to ApplicationHeaderStyle.ToolBar to be used in that case.
      */
     property int globalToolBarStyle: {
         if (globalToolBar.row && !globalToolBar.stack) {
@@ -282,7 +266,15 @@ QQC2.Page {
     }
 //END properties
 
-//BEGIN signal and signal handlers
+//BEGIN signals and signal handlers
+    /**
+     * Emitted when a visualization for the actions is about to
+     * be shown, such as the toolbar menu or the ContextDrawer.
+     *
+     * @since org.kde.kirigami 2.7
+     */
+    signal contextualActionsAboutToShow
+
     /**
      * @brief Emitted when the application requests a Back action.
      *
@@ -308,28 +300,6 @@ QQC2.Page {
             }
         }
     }
-
-    // NOTE: contentItem will be created if not existing (and contentChildren of Page would become its children) This with anchors enforces the geometry we want, where globalToolBar is a super-header, on top of header
-    contentItem: Item {
-        anchors {
-            top: (root.header && root.header.visible)
-                    ? root.header.bottom
-                    : (globalToolBar.visible ? globalToolBar.bottom : parent.top)
-            topMargin: root.topPadding + root.spacing
-            bottom: (root.footer && root.footer.visible) ? root.footer.top : parent.bottom
-            bottomMargin: root.bottomPadding + root.spacing
-        }
-    }
-
-    background: Rectangle {
-        color: Kirigami.Theme.backgroundColor
-    }
-
-    implicitHeight: ((header && header.visible) ? header.implicitHeight : 0) + ((footer && footer.visible) ? footer.implicitHeight : 0) + contentItem.implicitHeight + topPadding + bottomPadding
-    implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding
-
-    // FIXME: on material the shadow would bleed over
-    clip: root.header !== null;
 
     onHeaderChanged: {
         if (header) {
@@ -364,6 +334,31 @@ QQC2.Page {
         }
     }
 //END signals and signal handlers
+
+    // NOTE: contentItem will be created if not existing (and contentChildren of Page would become its children) This with anchors enforces the geometry we want, where globalToolBar is a super-header, on top of header
+    contentItem: Item {
+        anchors {
+            top: (root.header && root.header.visible)
+                    ? root.header.bottom
+                    : (globalToolBar.visible ? globalToolBar.bottom : parent.top)
+            topMargin: root.topPadding + root.spacing
+            bottom: (root.footer && root.footer.visible) ? root.footer.top : parent.bottom
+            bottomMargin: root.bottomPadding + root.spacing
+        }
+    }
+
+    background: Rectangle {
+        color: Kirigami.Theme.backgroundColor
+    }
+
+    implicitHeight: ((header && header.visible) ? header.implicitHeight : 0) + ((footer && footer.visible) ? footer.implicitHeight : 0) + contentItem.implicitHeight + topPadding + bottomPadding
+    implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding
+
+    // FIXME: on material the shadow would bleed over
+    clip: root.header !== null;
+
+    padding: Kirigami.Units.gridUnit
+    bottomPadding: actionButtons.item ? actionButtons.height : verticalPadding
 
     // in data in order for them to not be considered for contentItem, contentChildren, contentData
     data: [

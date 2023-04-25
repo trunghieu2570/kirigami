@@ -12,8 +12,8 @@ import org.kde.kirigami 2.20 as Kirigami
  * @brief This is a standard TextField following the KDE HIG, which, by default,
  * uses Ctrl+F as the focus keyboard shortcut and "Search…" as a placeholder text.
  *
- * Example usage for the search field component:
- * @code
+ * Example usage:
+ * @code{.qml}
  * import org.kde.kirigami 2.20 as Kirigami
  *
  * Kirigami.SearchField {
@@ -21,8 +21,7 @@ import org.kde.kirigami 2.20 as Kirigami
  *     onAccepted: console.log("Search text is " + searchField.text)
  * }
  * @endcode
- *
- * @inherit org::kde::kirigami::ActionTextField
+ * @inherit kirigami::ActionTextField
  */
 Kirigami.ActionTextField {
     id: root
@@ -30,12 +29,12 @@ Kirigami.ActionTextField {
      * @brief This property sets whether the accepted signal is fired automatically
      * when the text is changed.
      *
-     * Setting this to false will require that the user presses return or enter
+     * Setting this to @c false will require that the user presses return or enter
      * (the same way a QtQuick.Controls.TextInput works).
      *
      * default: ``true``
      *
-     * @since 5.81
+     * @since KDE Frameworks 5.81
      * @since org.kde.kirigami 2.16
      */
     property bool autoAccept: true
@@ -43,7 +42,7 @@ Kirigami.ActionTextField {
     /**
      * @brief This property sets whether to delay automatic acceptance of the search input.
      *
-     * Set this to true if your search is expensive (such as for online
+     * Set this to @c true if your search is expensive (such as for online
      * operations or in exceptionally slow data sets) and want to delay it
      * for 2.5 seconds.
      *
@@ -52,7 +51,7 @@ Kirigami.ActionTextField {
      *
      * default: ``false``
      *
-     * @since 5.81
+     * @since KDE Frameworks 5.81
      * @since org.kde.kirigami 2.16
      */
     property bool delaySearch: false

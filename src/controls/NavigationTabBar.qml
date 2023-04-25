@@ -107,9 +107,9 @@ import org.kde.kirigami 2.19 as Kirigami
  *     }
  * }
  * @endcode
- *
- * @see NavigationTabButton
- * @since 5.87
+ * @see kirigami::NavigationTabButton
+ * @see <a href="https://develop.kde.org/hig/components/navigation/navigationtabbar">Human Interface Guidelines on Navigation Tab Bars</a>
+ * @since KDE Frameworks 5.87
  * @since org.kde.kirigami 2.19
  * @inherit QtQuick.Templates.Toolbar
  */
@@ -188,14 +188,14 @@ T.ToolBar {
      *
      * default: ``true``
      *
-     * @since 5.96
+     * @since KDE Frameworks 5.96
      */
     property bool recolorIcons: true
 
     /**
      * @brief This property holds the calculated width that buttons on the tab bar use.
      *
-     * @since 5.102
+     * @since KDE Frameworks 5.102
      */
     property real buttonWidth: {
         // Counting buttons because Repeaters can be counted among visibleChildren

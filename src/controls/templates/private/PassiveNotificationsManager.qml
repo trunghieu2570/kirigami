@@ -10,10 +10,11 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.20 as Kirigami
 
 /**
- * @brief PassiveNotificationManager is meant to display small, passive and inline notifications in the app.
+ * @brief PassiveNotificationManager is meant to display small, passive and
+ * inline notifications in the app.
  *
- * It is used to show messages of limited importance that make sense only when
- * the user is using the application and wouldn't be suited as a global
+ * It is used to show notifications of limited importance that make sense only
+ * when the user is using the application and wouldn't be suited as a global
  * system-wide notification.
 */
 Item {
@@ -65,9 +66,6 @@ Item {
         }
     }
 
-    /**
-     * @brief Remove a notification at specific index. By default, index is set to 0.
-     */
     function hideNotification(index = 0) {
         if (index >= 0 && notificationsModel.count > index) {
             const callBackWrapperObj = notificationsModel.get(index).callBackWrapper

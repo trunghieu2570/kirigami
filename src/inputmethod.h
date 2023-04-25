@@ -23,10 +23,10 @@ public:
     ~InputMethod() override;
 
     /**
-     * Is an input method available?
+     * @brief This property specifies whether an input method is available.
      *
-     * This will be true if there is an input method available. When it is
-     * false it means there's no special input method configured and input
+     * This will be @c true if there is an input method available. When it is
+     * @c false it means there's no special input method configured and input
      * happens directly through keyboard events.
      */
     Q_PROPERTY(bool available READ available NOTIFY availableChanged)
@@ -34,7 +34,7 @@ public:
     Q_SIGNAL void availableChanged();
 
     /**
-     * Is the current input method enabled?
+     * @brief This property sets whether the current input method is enabled.
      *
      * If this is false, that means the input method is available but not in use.
      */
@@ -44,7 +44,7 @@ public:
     Q_SIGNAL void enabledChanged();
 
     /**
-     * Is the current input method active?
+     * @brief This property sets whether the current method is active.
      *
      * What active means depends on the type of input method. In case of a
      * virtual keyboard for example, it would mean the virtual keyboard is
@@ -56,17 +56,18 @@ public:
     Q_SIGNAL void activeChanged();
 
     /**
+     * @brief This property specifies whether the current input method is visible.
      * Is the current input method visible?
      *
-     * For some input methods this will match \ref active however for others this
-     * may differ.
+     * For some input methods this will match ::active, for others this may differ.
      */
     Q_PROPERTY(bool visible READ visible NOTIFY visibleChanged)
     bool visible() const;
     Q_SIGNAL void visibleChanged();
 
     /**
-     * Will the input method be shown when a text input field gains focus?
+     * @brief This property sets whether the input method will be shown
+     * when a text input field gains focus.
      *
      * This is intended to be used to decide whether to give an input field
      * default focus. For certain input methods, like virtual keyboards, it may

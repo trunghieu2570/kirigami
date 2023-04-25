@@ -15,6 +15,7 @@ import "." as SN
 /**
  * @brief SwipeNavigator is a control providing for lateral navigation.
  * @include swipenavigator/main.qml
+ * @warning This might be removed in KF6.
  * @inherit QtQuick.Item
  */
 Item {

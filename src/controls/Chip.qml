@@ -12,7 +12,7 @@ import org.kde.kirigami 2.19 as Kirigami
  * Should be used in a group of multiple elements. e.g when displaying tags in a image viewer.
  *
  * Example usage:
- *  * @code
+ * @code{.qml}
  * import org.kde.kirigami 2.19 as Kirigami
  *
  * Flow {
@@ -34,8 +34,8 @@ import org.kde.kirigami 2.19 as Kirigami
  * }
  * @endcode
  *
- * @inherit org::kde::kirigami::AbstractChip
- * @since 2.19
+ * @since org.kde.kirigami 2.19
+ * @inherit kirigami::AbstractChip
  */
 Kirigami.AbstractChip {
     id: chip

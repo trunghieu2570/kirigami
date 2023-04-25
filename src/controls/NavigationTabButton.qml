@@ -62,8 +62,7 @@ import org.kde.kirigami 2.19 as Kirigami
  *      ]
  *  }
  * @endcode
- *
- * @since 5.87
+ * @since KDE Frameworks 5.87
  * @since org.kde.kirigami 2.19
  * @inherit QtQuick.Templates.TabButton
  */
@@ -71,7 +70,7 @@ T.TabButton {
     id: control
 
     /**
-     * @brief This property tells the index of this tab within the tab bar.
+     * @brief This property specifies the index of this tab within the tab bar.
      */
     readonly property int tabIndex: {
         let tabIdx = 0
@@ -92,7 +91,7 @@ T.TabButton {
      *
      * default: ``true``
      *
-     * @since 5.96
+     * @since KDE Frameworks 5.96
      */
     property bool recolorIcon: true
 

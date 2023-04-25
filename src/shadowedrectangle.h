@@ -13,6 +13,9 @@ class PaintedRectangleItem;
 
 /**
  * @brief Grouped property for rectangle border.
+ *
+ * Example usage:
+ * @include shadowedrectangle.qml
  */
 class BorderGroup : public QObject
 {
@@ -187,8 +190,8 @@ private:
  * rendered outside of the item's bounds, so the item's width and height are the
  * rectangle's width and height.
  *
- * @since 5.69
- * @since 2.12
+ * @since KDE Frameworks 5.69
+ * @since org.kde.kirigami 2.12
  */
 class ShadowedRectangle : public QQuickItem
 {
@@ -201,7 +204,7 @@ class ShadowedRectangle : public QQuickItem
      *
      * default: ``0``
      *
-     * @see corners
+     * @see ::corners
      */
     Q_PROPERTY(qreal radius READ radius WRITE setRadius NOTIFY radiusChanged)
 
@@ -224,7 +227,7 @@ class ShadowedRectangle : public QQuickItem
      *     border.color: Kirigami.Theme.textColor
      * }
      * @endcode
-     * @see BorderGroup
+     * @see kirigami::BorderGroup
      */
     Q_PROPERTY(BorderGroup *border READ border CONSTANT)
 
@@ -240,7 +243,7 @@ class ShadowedRectangle : public QQuickItem
      * }
      * @endcode
      *
-     * @see ShadowGroup
+     * @see kirigami::ShadowGroup
      */
     Q_PROPERTY(ShadowGroup *shadow READ shadow CONSTANT)
 
@@ -259,21 +262,21 @@ class ShadowedRectangle : public QQuickItem
      *     corners.bottomRightRadius: 10
      * @endcode
      *
-     * @see CornersGroup
+     * @see kirigami::CornersGroup
      */
     Q_PROPERTY(CornersGroup *corners READ corners CONSTANT)
 
     /**
      * @brief This property holds the rectangle's render mode.
      *
-     * default: ``RenderType::Auto``
+     * default: ``RenderType.Auto``
      *
-     * @see RenderType
+     * @see ::RenderType
      */
     Q_PROPERTY(RenderType renderType READ renderType WRITE setRenderType CONSTANT)
 
     /**
-     * @brief This property tells whether software rendering is being used.
+     * @brief This property specifies whether software rendering is being used.
      *
      * default: ``false``
      */

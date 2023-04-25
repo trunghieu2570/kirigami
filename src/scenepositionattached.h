@@ -13,15 +13,23 @@
 class QQuickItem;
 
 /**
- * This attached property contains the information about the scene position of the item:
- * Its global x and y coordinates will update automatically and can be binded
- * @code
- * import org.kde.kirigami 2.5 as Kirigami
- * Text {
- *    text: ScenePosition.x
- * }
- * @endcode
- * @since 2.3
+ * @brief This attached property contains items window-local x & y coordinates.
+ *
+ * Note that an Item's X and Y coordinates are relative to its parent, meaning
+ * that when a list of Items has the same parent, the top-most Item will have
+ * coordinates 0x0.
+ *
+ * Use this attached property to get the X and Y coordinates of an Item that are
+ * relative to their QML scene instead of their parent. This is useful when
+ * implementing custom views and animations.
+ *
+ * Typically the 0x0 coordinate of the QML scene starts at the top left corner
+ * of the window, below the titlebar.
+ *
+ * Example usage:
+ * @include scenepositionattached.qml
+ *
+ * @since org.kde.kirigami 2.3
  */
 class ScenePositionAttached : public QObject
 {

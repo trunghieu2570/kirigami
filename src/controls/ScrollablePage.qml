@@ -16,12 +16,12 @@ import "private"
 // TODO KF6: undo many workarounds to make existing code work?
 
 /**
- * @brief ScrollablePage is a Page that holds scrollable content, such as a ListView.
+ * @brief ScrollablePage is a Page that holds scrollable content, such as a QtQuick.ListView.
  *
  * Scrolling and scrolling indicators will be automatically managed.
  *
  * Example usage:
- * @code
+ * @code{.qml}
  * ScrollablePage {
  *     id: root
  *     // The page will automatically be scrollable
@@ -31,7 +31,6 @@ import "private"
  *     }
  * }
  * @endcode
- *
  * @warning Do not put a ScrollView inside of a ScrollablePage; children of a ScrollablePage are already inside a ScrollView.
  *
  * Another behavior added by this class is a "scroll down to refresh" behavior
@@ -42,7 +41,7 @@ import "private"
  * Implementations should handle the refresh themselves as follows
  *
  * Example usage:
- * @code
+ * @code{.qml}
  * Kirigami.ScrollablePage {
  *     id: view
  *     supportsRefreshing: true
@@ -70,15 +69,15 @@ Kirigami.Page {
 
 //BEGIN properties
     /**
-     * @brief This property tells whether the list is asking for a refresh.
+     * @brief This property specifies whether the list is asking for a refresh.
      *
-     * This property will automatically be set to true when the user pulls the list down enough,
+     * This property will automatically be set to @c true when the user pulls the list down enough,
      * which in return, shows a loading spinner. When this is set to true, it signals
      * the application logic to start its refresh procedure.
      *
      * default: ``false``
      *
-     * @note The application itself will have to set back this property to false when done.
+     * @note The application itself will have to set back this property to @c false when done.
      */
     property bool refreshing: false
 

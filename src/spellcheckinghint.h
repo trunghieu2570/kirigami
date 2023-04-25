@@ -20,19 +20,19 @@
  * }
  * @endcode
  * @author Carl Schwan <carl@carlschwan.eu>
- * @since 2.18
+ * @since org.kde.kirigami 2.18
  */
 class SpellCheckingAttached : public QObject
 {
     Q_OBJECT
     /**
-     * This property holds whether the spell checking should be enabled on the
+     * @brief This property holds whether the spell checking should be enabled on the
      * TextField/TextArea.
      *
      * @note By default, false. This might change in KF6, so if you don't want
      * spellchecking on your application, explicitly set it to false.
      *
-     * @since 2.18
+     * @since org.kde.kirigami 2.18
      */
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
 public:

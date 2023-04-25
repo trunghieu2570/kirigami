@@ -9,8 +9,8 @@ import QtQuick.Templates 2.15 as T
  * that provides a friendly way to display predetermined elements
  * with the visual styling of "tags" or "tokens."
  *
- * @see Chip
- * @since 2.19
+ * @see kirigami::Chip
+ * @since org.kde.kirigami 2.19
  * @inherit QtQuick.Controls.AbstractButton
  */
 T.AbstractButton {

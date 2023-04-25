@@ -16,6 +16,8 @@ import org.kde.kirigami 2.12 as Kirigami
  * most common list item usecases.
  *
  * @image html BasicListItemTypes.svg "The styles of the BasicListItem. From left to right top to bottom: light icon + title + subtitle, dark icon + title + subtitle, light icon + label, dark icon + label, light label, dark label." width=50%
+ * @warning This will be reworked into a layout to be used inside a delegate.
+ * @see <a href="https://develop.kde.org/hig/components/editing/list">KDE Human Interface Guidelines on List Views and List Items</a>
  */
 Kirigami.AbstractListItem {
     id: listItem
@@ -33,7 +35,7 @@ Kirigami.AbstractListItem {
 
     /**
      * @brief This property holds an optional subtitle that can appear under the label.
-     * @since 5.70
+     * @since KDE Frameworks 5.70
      * @since org.kde.kirigami 2.12
      */
     property alias subtitle: subtitleItem.text
@@ -63,7 +65,7 @@ Kirigami.AbstractListItem {
      * default: ``true``
      *
      * @warning This property will likely be removed in KF6
-     * @since 5.83
+     * @since KDE Frameworks 5.83
      * @since org.kde.kirigami 2.15
      */
     property bool leadingFillVertically: true
@@ -93,7 +95,7 @@ Kirigami.AbstractListItem {
      * default: ``true``
      *
      * @warning This property will likely be removed in KF6
-     * @since 5.83
+     * @since KDE Frameworks 5.83
      * @since org.kde.kirigami 2.15
      */
     property bool trailingFillVertically: true
@@ -103,7 +105,7 @@ Kirigami.AbstractListItem {
      *
      * default: ``false``
      *
-     * @since 5.71
+     * @since KDE Frameworks 5.71
      * @since org.kde.kirigami 2.13
      */
     property bool bold: false
@@ -141,8 +143,8 @@ Kirigami.AbstractListItem {
      *
      * This will not affect icon lookup, unlike the icon group's width and height properties, which will.
      *
+     * @since org.kde.kirigami 2.5
      * @property int iconSize
-     * @since 2.5
      */
     property alias iconSize: iconItem.size
 
@@ -152,8 +154,8 @@ Kirigami.AbstractListItem {
      * If the icon's original colors should be left intact, set this to the default value, "transparent".
      * Note that this colour will only be applied if the icon can be recoloured, (e.g. you can use Kirigami.Theme.foregroundColor to change the icon's colour.)
      *
+     * @since org.kde.kirigami 2.7
      * @property color iconColor
-     * @since 2.7
      */
     property alias iconColor: iconItem.color
 
@@ -163,7 +165,7 @@ Kirigami.AbstractListItem {
      * Can be used to override the icon coloration if the list item's background and
      * text are also being overridden, to ensure that the icon never becomes invisible.
      *
-     * @since 5.91
+     * @since KDE Frameworks 5.91
      * @since org.kde.kirigami 2.19
      * @property bool iconSelected
      */
@@ -179,7 +181,7 @@ Kirigami.AbstractListItem {
     /**
      * @brief This property sets whether or not the label of the list item should fill width.
      *
-     * Setting this to false is useful if you have other items in the list item
+     * Setting this to @c false is useful if you have other items in the list item
      * that should fill width instead of the label.
      *
      * @property bool reserveSpaceForLabel
@@ -192,14 +194,14 @@ Kirigami.AbstractListItem {
      *
      * default: ``false``
      *
-     * @since 5.77
+     * @since KDE Frameworks 5.77
      * @since org.kde.kirigami 2.15
      */
     property bool reserveSpaceForSubtitle: false
 
     /**
      * @brief This property holds the spacing between the label row and subtitle row.
-     * @since 5.83
+     * @since KDE Frameworks 5.83
      * @since org.kde.kirigami 2.15
      * @property real textSpacing
      */
@@ -213,27 +215,28 @@ Kirigami.AbstractListItem {
      *
      * default: ``false``
      *
-     * @since 5.83
+     * @since KDE Frameworks 5.83
      * @since org.kde.kirigami 2.15
      */
     property bool fadeContent: false
 
     /**
      * @brief This property holds the label item, for accessing the usual Text properties.
-     * @property QtQuick.Controls.Label labelItem
-     * @since 5.84
+     * @since KDE Frameworks 5.84
      * @since org.kde.kirigami 2.16
+     * @property QtQuick.Controls.Label labelItem
      */
     property alias labelItem: labelItem
 
     /**
      * @brief This property holds the subtitle item, for accessing the usual Text properties.
-     * @property QtQuick.Controls.Label subtitleItem
-     * @since 5.84
+     * @since KDE Frameworks 5.84
      * @since org.kde.kirigami 2.16
+     * @property QtQuick.Controls.Label subtitleItem
      */
     property alias subtitleItem: subtitleItem
 
+    /** @internal */
     default property alias _basicDefault: layout.data
 //END properties
 

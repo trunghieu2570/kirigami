@@ -12,7 +12,7 @@ import org.kde.kirigami 2.15 as Kirigami
  *
  * It provides background feedback on hover and click events, border customizability, and the ability to change the radius of each individual corner.
  *
- * @inherit org::kde::kirigami::ShadowedRectangle
+ * @inherit kirigami::ShadowedRectangle
  */
 Kirigami.ShadowedRectangle {
     id: root
@@ -41,7 +41,7 @@ Kirigami.ShadowedRectangle {
 
     /**
      * @brief This property holds the color displayed when a click event is triggered.
-     * @see DefaultCardBackground::clickFeedback
+     * @see ::clickFeedback
      */
     property color pressedColor: Kirigami.ColorUtils.tintWithAlpha(
                                      defaultColor,
@@ -49,7 +49,7 @@ Kirigami.ShadowedRectangle {
 
     /**
      * @brief This property holds the color displayed when a hover event is triggered.
-     * @see DefaultCardBackground::hoverFeedback
+     * @see ::hoverFeedback
      */
     property color hoverColor: Kirigami.ColorUtils.tintWithAlpha(
                                    defaultColor,

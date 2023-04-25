@@ -18,7 +18,7 @@ import "templates/private" as TP
  * Unless you need extra flexibility it is recommended to use ApplicationItem instead.
  *
  * Example usage:
- * @code
+ * @code{.qml}
  * import org.kde.kirigami 2.4 as Kirigami
  *
  * Kirigami.AbstractApplicationItem {
@@ -66,7 +66,7 @@ Item {
      * @brief This property holds the stack used to allocate the pages and to manage the
      * transitions between them.
      *
-     * Put a container here, such as QtQuick.Controls.StackView.
+     * Put a container here, such as <a href="https://doc.qt.io/qt-6/qml-qtquick-controls2-stackview.html">Controls.StackView</a> or PageRow.
      */
     property Item pageStack
 
@@ -100,7 +100,7 @@ Item {
      * @brief This property holds an item that can be used as a menuBar for the application.
      * @warning This will be restricted to QQC2.MenuBar in KF6.
      */
-    property Item menuBar // TODO KF6 restrict type to QQC2.MenuBar
+    property Item menuBar // TODO KF6: restrict type to QQC2.MenuBar
 
     /**
     * @brief This property holds an item that can be used as a title for the application.
@@ -118,7 +118,7 @@ Item {
     * To achieve a titlebar that stays completely fixed, just set the 3 sizes as the same.
     *
     * @warning This will be restricted to Kirigami.ApplicationHeader in KF6.
-    * @property org::kde:kirigami::ApplicationHeader header
+    * @property kirigami::ApplicationHeader header
     */
     property Item header // TODO KF6 restrict the type to Kirigami.ApplicationHeader
 
@@ -139,16 +139,16 @@ Item {
     /**
      * @brief This property holds the drawer for global actions.
      *
-     * Thos drawer can be opened by sliding from the left screen edge
-     * or by dragging the ActionButton to the right.
+     * This drawer can be opened by sliding from the left screen edge
+     * or by either pressing on the handle or sliding it to the right.
      *
      * @note It is recommended to use the GlobalDrawer here.
-     * @property org::kde::kirigami::OverlayDrawer globalDrawer
+     * @property kirigami::OverlayDrawer globalDrawer
      */
     property OverlayDrawer globalDrawer
 
     /**
-     * @brief This property tells us whether the application is in "widescreen" mode.
+     * @brief This property specifies whether the application is in "widescreen" mode.
      *
      * This is enabled on desktops or horizontal tablets.
      *
@@ -159,16 +159,16 @@ Item {
     /**
      * @brief This property holds the drawer for context-dependent actions.
      *
-     * The drawer that will be opened by sliding from the right screen edge
-     * or by dragging the ActionButton to the left.
+     * This drawer can be opened by sliding from the right screen edge
+     * or by either pressing on the handle or sliding it to the left.
      *
      * @note It is recommended to use the ContextDrawer class here.
      *
-     * The contents of the context drawer should depend from what page is
-     * loaded in the main pageStack
+     * The context drawer will display the previously defined contextual
+     * actions of the page that is currently active in the pageStack.
      *
      * Example usage:
-     * @code
+     * @code{.qml}
      * import org.kde.kirigami 2.4 as Kirigami
      *
      * Kirigami.ApplicationItem {
@@ -180,12 +180,13 @@ Item {
      * }
      * @endcode
      *
-     * @code
+     * @code{.qml}
      * import org.kde.kirigami 2.4 as Kirigami
      *
      * Kirigami.Page {
      *   [...]
-     *     contextualActions: [
+     *     // setting the contextual actions
+     *     actions.contextualActions: [
      *         Kirigami.Action {
      *             icon.name: "edit"
      *             text: "Action text"
@@ -205,26 +206,29 @@ Item {
      * }
      * @endcode
      *
-     * When this page will be the current one, the context drawer will visualize
-     * contextualActions defined as property in that page.
      *
-     * @property org::kde::kirigami::ContextDrawer contextDrawer
+     * @property kirigami::ContextDrawer contextDrawer
      */
     property OverlayDrawer contextDrawer
 
     /**
-     * @brief This tells us whether the application is in reachable mode for single hand use.
+     * @brief This property specifies whether the application is in reachable mode,
+     * for single hand use.
      *
      * The whole content of the application is moved down the screen to be
      * reachable with the thumb. If wideScreen is true, or reachableModeEnabled is false,
      * this property has no effect.
      *
+     * @note This property should be treated as readonly. Use ``reachableModeEnabled`` instead.
+     *
      * default: ``false``
+     *
+     * @see ::reachableModeEnabled
      */
     property bool reachableMode: false
 
     /**
-     * @brief This property sets whether the application will go into reachable mode on pull down.
+     * @brief This property sets whether reachable mode can be used.
      *
      * default: ``true``
      */
@@ -264,7 +268,7 @@ Item {
     }
 
     /**
-     * @brief This property holds the color for the background.
+     * @brief This property holds background's color.
      *
      * default: ``Kirigami.Theme.backgroundColor``
      */
@@ -280,7 +284,7 @@ Item {
 
 //BEGIN functions
     /**
-     * @brief This function shows a little passive notification at the bottom of the app window
+     * @brief This function shows a passive notification at the bottom of the app window
      * lasting for few seconds, with an optional action button.
      *
      * @param message The text message to be shown to the user.
@@ -303,8 +307,20 @@ Item {
     }
 
     /**
-     * @brief This property gets application windows object anywhere in the application.
-     * @returns a pointer to this item.
+     * @brief This property returns a pointer to the main instance of
+     * AbstractApplicationItem.
+     *
+     * This is available to any children of this Item, including those
+     * instantiated from separate QML files, making interoperation with
+     * multiple files easier.
+     *
+     * Use this whenever you need access to properties that are available to
+     * the main AbstractApplicationItem, such as its pageStack, globalDrawer
+     * or header.
+     *
+     * @see AbstractApplicationWindow::applicationWindow()
+     *
+     * @returns a pointer to the instantiated AbstractApplicationItem.
      */
     function applicationWindow() {
         return root;

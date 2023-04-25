@@ -13,7 +13,8 @@ import "templates" as T
  *
  * It's intended to make all listviews look coherent.
  *
- * @inherit org::kde::kirigami::templates::AbstractListItem
+ * @see <a href="https://develop.kde.org/hig/components/editing/list">KDE Human Interface Guidelines on List Views and List Items</a>
+ * @inherit kirigami::templates::AbstractListItem
  */
 T.AbstractListItem {
     id: listItem

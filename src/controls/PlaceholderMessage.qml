@@ -21,8 +21,8 @@ import "private" as P
  * simply be added as child items and they will be positioned sanely.
  *
  * Example usage:
+ ** Used as a "this view is empty" message
  * @code{.qml}
- ** used as a "this view is empty" message
  * import org.kde.kirigami 2.12 as Kirigami
  *
  * ListView {
@@ -40,8 +40,9 @@ import "private" as P
  *     }
  * }
  * @endcode
+ *
+ ** Used as a "here's how to proceed" message:
  * @code{.qml}
- ** Used as a "here's how to proceed" message
  * import org.kde.kirigami 2.12 as Kirigami
  *
  * ListView {
@@ -68,8 +69,9 @@ import "private" as P
  *     [...]
  * }
  * @endcode
+ *
+ ** Used as a "there was a problem here" message:
  * @code{.qml}
- ** Used as a "there was a problem here" message
  * import org.kde.kirigami 2.12 as Kirigami
  *
  * Kirigami.Page {
@@ -88,10 +90,11 @@ import "private" as P
  *     }
  * }
  * @endcode
+ *
+ ** Used as a loading indicator:
  * @code{.qml}
  * import org.kde.kirigami 2.12 as Kirigami
  *
- ** Used as a loading indicator
  * Kirigami.Page {
  *     id: root
  *     readonly property bool loading: [...]
@@ -115,10 +118,11 @@ import "private" as P
  *     }
  * }
  * @endcode
+ *
+ ** Used as a "Here's what you do next" button:
  * @code{.qml}
  * import org.kde.kirigami 2.12 as Kirigami
  *
- ** Used as a "Here's what you do next" button
  * Kirigami.Page {
  *     id: root
  *
@@ -138,8 +142,9 @@ import "private" as P
  *     }
  * }
  * @endcode
+ * @see <a href="https://develop.kde.org/hig/patterns-content/placeholdermessage">KDE Human Interface Guidelines on Placeholder Messages</a>
+ * @since org.kde.kirigami 2.12
  * @inherit QtQuick.Layouts.ColumnLayout
- * @since 2.12
  */
 ColumnLayout {
     id: root
@@ -153,13 +158,13 @@ ColumnLayout {
     /**
      * @brief This property holds the PlaceholderMessage type.
      *
-     * The type of the message. This can be:
-     * * ``Kirigami.PlaceholderMessage.Type.Actionable``: Makes it more attention-getting. Useful when the user is expected to interact with the message.
-     * * ``Kirigami.PlaceholderMessage.Type.Informational``: Makes it less prominent. Useful when the message in only informational.
+     * The following values are allowed:
+     * * ``Kirigami.PlaceholderMessage.Type.Actionable``: makes it more attention grabbing. Useful when the user is expected to interact with the message.
+     * * ``Kirigami.PlaceholderMessage.Type.Informational``: makes it less prominent. Useful when the message is only informational.
      *
      * default: `if a helpfulAction is provided this will be of type Actionable otherwise of type Informational.`
      *
-     * @since 5.94
+     * @since KDE Frameworks 5.94
      */
     property int type: actionButton.action && actionButton.action.enabled ? PlaceholderMessage.Type.Actionable : PlaceholderMessage.Type.Informational
 
@@ -170,7 +175,7 @@ ColumnLayout {
      * text. If both text: and explanation: are omitted, the message will have
      * no text and only an icon, action button, and/or other custom content.
      *
-     * @since 5.70
+     * @since KDE Frameworks 5.70
      */
     property string text
 
@@ -182,21 +187,18 @@ ColumnLayout {
      * Optional; if not defined, the message will have no supplementary
      * explanatory text.
      *
-     * @since 5.80
+     * @since KDE Frameworks 5.80
      */
     property string explanation
 
     /**
      * @brief This property provides an icon to display above the top text label.
-     * @note It accepts ``icon.name`` and ``icon.source`` to set the icon source.
-     * It is suggested to use ``icon.name``.
      *
      * Optional; if undefined, the message will have no icon.
      * Falls back to `undefined` if the specified icon is not valid or cannot
      * be loaded.
      *
-     * @see org::kde::kirigami::private::ActionIconGroup
-     * @since 5.70
+     * @since KDE Frameworks 5.70
      */
     property P.ActionIconGroup icon: P.ActionIconGroup {}
 
@@ -209,7 +211,7 @@ ColumnLayout {
      * Optional; if undefined, no button will appear below the text label.
      *
      * @property QtQuick.Controls.Action helpfulAction
-     * @since 5.70
+     * @since KDE Frameworks 5.70
      */
     property alias helpfulAction: actionButton.action
 //END properties

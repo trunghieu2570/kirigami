@@ -17,11 +17,7 @@ import org.kde.kirigami 2.20 as Kirigami
  * <b>Note:</b> If a `mainItem` is specified, it will replace
  * the subtitle label, and so the respective property will have no effect.
  *
- * @see Dialog
- * @see MenuDialog
- *
  * Example usage:
- *
  * @code{.qml}
  * Kirigami.PromptDialog {
  *     title: "Reset settings?"
@@ -34,7 +30,6 @@ import org.kde.kirigami 2.20 as Kirigami
  * @endcode
  *
  * Text field prompt dialog:
- *
  * @code{.qml}
  * Kirigami.PromptDialog {
  *     id: textPromptDialog
@@ -64,8 +59,11 @@ import org.kde.kirigami 2.20 as Kirigami
  *     }
  * }
  * @endcode
- *
- * @inherit Dialog
+ * @see kirigami::Dialog
+ * @see kirigami::MenuDialog
+ * @see <a href="https://develop.kde.org/hig/components/navigation/dialog">Human Interface Guidelines on Dialogs</a>
+ * @see <a href="https://develop.kde.org/hig/components/assistance/message">Human Interface Guidelines on Modal Message Dialogs</a>
+ * @inherit kirigami::Dialog
  */
 Kirigami.Dialog {
     default property alias mainItem: control.contentItem

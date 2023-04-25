@@ -41,7 +41,7 @@ public:
      * Creates an instance of PlatformTheme which can come out from
      * an implementation provided by a plugin
      *
-     * If this returns nullptr the PlatformTheme will use a fallback
+     * If this returns @c nullptr the PlatformTheme will use a fallback
      * implementation that loads a theme definition from a QML file.
      *
      * @param parent the parent object of the created PlatformTheme

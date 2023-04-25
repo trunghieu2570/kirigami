@@ -41,7 +41,6 @@ import QtGraphicalEffects 1.12 as GE
  * behaviour will not be handled. Use ListView's `header` and `footer` instead.
  *
  * Example for a selection dialog:
- *
  * @code{.qml}
  * import QtQuick 2.15
  * import QtQuick.Layouts 1.15
@@ -74,7 +73,6 @@ import QtGraphicalEffects 1.12 as GE
  * @endcode
  *
  * Example with scrolling (ListView scrolling behaviour is handled by the Dialog):
- *
  * @code{.qml}
  * Kirigami.Dialog {
  *     id: scrollableDialog
@@ -100,9 +98,10 @@ import QtGraphicalEffects 1.12 as GE
  * There are also sub-components of the Dialog that target specific usecases,
  * and can reduce boilerplate code if used:
  *
- * @see PromptDialog
- * @see MenuDialog
- *
+ * @see kirigami::PromptDialog
+ * @see kirigami::MenuDialog
+ * @see <a href="https://develop.kde.org/hig/components/navigation/dialog">Human Interface Guidelines on Dialogs</a>
+ * @see <a href="https://develop.kde.org/hig/components/assistance/message">Human Interface Guidelines on Modal Message Dialogs</a>
  * @inherit QtQuick.QtObject
  */
 T.Dialog {
@@ -239,8 +238,7 @@ T.Dialog {
      *     ]
      * }
      * @endcode
-     *
-     * @see org::kde::kirigami::Action
+     * @see kirigami::Action
      */
     property list<Kirigami.Action> customFooterActions
 

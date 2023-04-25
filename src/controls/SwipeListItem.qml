@@ -8,12 +8,12 @@ import "private" as P
 import "templates" as T
 
 /**
- * An item delegate Intended to support extra actions obtainable
- * by uncovering them by dragging away the item with the handle
- * This acts as a container for normal list items.
+ * An item delegate that shows actions on the right side, which are, on mobile mode,
+ * obtainable by dragging away the item with the handle. If the app is not in mobile mode,
+ * the actions are always shown to the user.
  *
  * Example usage:
- * @code
+ * @code{.qml}
  * ListView {
  *     model: myModel
  *     delegate: SwipeListItem {
@@ -34,7 +34,8 @@ import "templates" as T
  *
  * }
  * @endcode
- * @inherit org::kde::kirigami::templates::SwipeListItem
+ * @see <a href="https://develop.kde.org/hig/components/editing/list">KDE Human Interface Guidelines on List Views and List Items</a>
+ * @inherit kirigami::templates::SwipeListItem
  */
 T.SwipeListItem {
     id: listItem

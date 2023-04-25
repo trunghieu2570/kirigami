@@ -17,6 +17,8 @@ import "private" as P
  * will display the actions of the current page.
  *
  * Both Contextual actions and the main, left and right actions
+ *
+ * @deprecated This will be removed in KF6.
  */
 ApplicationHeader {
     id: header
@@ -26,6 +28,7 @@ ApplicationHeader {
     headerStyle: ApplicationHeaderStyle.Titles
 
     // FIXME: needs a property definition to have its own type in qml
+    /** @internal */
     property string _internal: ""
 
     Component.onCompleted: print("Warning: ToolbarApplicationHeader is deprecated, remove and use the automatic internal toolbar instead.")

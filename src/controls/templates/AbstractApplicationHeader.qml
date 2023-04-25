@@ -55,6 +55,7 @@ Item {
     Kirigami.Theme.inherit: true
 
     // FIXME: remove
+    /** @internal */
     property QtObject __appWindow: typeof applicationWindow !== "undefined" ? applicationWindow() : null;
     implicitHeight: preferredHeight
     height: Layout.preferredHeight

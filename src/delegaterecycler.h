@@ -35,7 +35,8 @@ Q_SIGNALS:
  *
  * @note CardListView and CardGridView are already using this recycler, so do NOT use it
  * as a delegate for those 2 views. Also, do NOT use this with a Repeater.
- * @since 2.4
+ *
+ * @since org.kde.kirigami 2.4
  */
 class DelegateRecycler : public QQuickItem
 {

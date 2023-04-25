@@ -16,9 +16,9 @@ import "private" as P
  * automatically shrink when the list is scrolled, like the behavior
  * of list headers in many mobile applications.
  * It provides some default content: a title and an optional background image
- * @since 2.1
- * @inherit org::kde::kirigami::AbstractItemViewHeader
- * @deprecated since 5.97; Don't use ItemViewHeader in your views anymore.
+ * @since org.kde.kirigami 2.1
+ * @inherit kirigami::AbstractItemViewHeader
+ * @deprecated This will be removed in KF6.
  *
  * TODO KF6 remove
  */

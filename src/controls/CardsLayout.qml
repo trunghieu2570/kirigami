@@ -9,40 +9,34 @@ import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.4 as Kirigami
 
 /**
- * @brief A GridLayout optimized for showing one or two columns of cards,
+ * @brief A GridLayout optimized for showing a couple of columns of cards,
  * depending on the available space.
  *
- * It Should be used when the cards are not instantiated by a model or by a
- * model which has always very few items (In the case of a big model
- * CardsListView or CardsGridview should be used instead).
+ * This should be used when the cards to be displayed, are not instantiated by
+ * a model or are instantiated by a model that always has very few items
+ * (in the case of a big model, use CardsListView or CardsGridview instead).
  *
- * They are presented as a grid of two columns which will remain
- * centered if the application is really wide, or become a single
- * column if there is not enough space for two columns,
- * such as a mobile phone screen.
+ * The cards are presented in a grid of at least one column, which will remain
+ * centered. Note that the layout will automatically add and remove columns
+ * depending on the size available.
  *
- * A CardsLayout should always be contained within a ColumnLayout.
+ * @note A CardsLayout should always be contained within a ColumnLayout.
  *
- * @since 2.4
+ * @since org.kde.kirigami 2.4
  * @inherit QtQuick.Layouts.GridLayout
  */
 GridLayout {
     /**
      * @brief This property holds the maximum number of columns.
      *
-     * This layout will never lay out the items in more columns than maximumColumns
-     *
      * default: ``2``
      *
-     * @since 2.5
+     * @since org.kde.kirigami 2.5
      */
     property int maximumColumns: 2
 
     /**
      * @brief This property holds the maximum width the columns may have.
-     *
-     * The cards will never become wider than this size; when the GridLayout is wider than
-     * maximumColumnWidth, it will switch from one to two columns.
      *
      * If the default needs to be overridden for some reason,
      * it is advised to express this unit as a multiple
@@ -55,12 +49,9 @@ GridLayout {
     /**
      * @brief This property holds the minimum width the columns may have.
      *
-     * The layout will try to dispose of items
-     * in a number of columns that will respect this size constraint.
-     *
      * default: ``12 * Kirigami.Units.gridUnit``
      *
-     * @since 2.5
+     * @since org.kde.kirigami 2.5
      */
     property int minimumColumnWidth: Kirigami.Units.gridUnit * 12
 

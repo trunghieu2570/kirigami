@@ -12,7 +12,7 @@ GE.LinearGradient {
     id: shadow
     /**
      * @brief This property holds the edge of the shadow that will determine the direction of the gradient.
-     * The acceptable values are:
+     * The following values are allowed:
      * * ``Qt.TopEdge``: the top edge of the content item.
      * * ``Qt.LeftEdge``: the left edge of the content item
      * * ``Qt.RightEdge``: the right edge of the content item.

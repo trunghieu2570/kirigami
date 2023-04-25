@@ -41,6 +41,7 @@ Item {
      * The default mask of the Hero will transition from a circle to a rectangle on open(), and
      * from a rectangle to a circle on close().
      *
+     * This grouped property has the following sub-properties:
      * * ``sourceProgress: real`` the progress of the animation, where 0 is the start and 1 is the end.
      * * ``destinationProgress: real`` the progress of the animation, where 1 is the start and 0 is the end.
      * * ``mask.sourceHeight: real`` the height of the source item.

@@ -29,13 +29,13 @@ Rectangle {
     /**
      * @brief This property holds the visual weight of the separator.
      *
-     * Weight options:
+     * The following values are allowed:
      * * ``Kirigami.Separator.Weight.Light``
      * * ``Kirigami.Separator.Weight.Normal``
      *
      * default: ``Separator.Weight.Normal``
      *
-     * @since 5.72
+     * @since KDE Frameworks 5.72
      * @since org.kde.kirigami 2.12
      */
     property int weight: Separator.Weight.Normal

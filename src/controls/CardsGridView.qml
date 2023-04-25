@@ -24,10 +24,11 @@ import "private" as P
  * If possible use cards only when you don't need to instantiate a lot
  * and use CardsLayout instead.
  *
- * @see CardsLayout
- * @see CardsListView
+ * @see kirigami::CardsLayout
+ * @see kirigami::CardsListView
+ * @see <a href="https://develop.kde.org/hig/components/editing/grid">KDE Human Interface Guidelines on Grids</a>
+ * @since org.kde.kirigami 2.4
  * @inherit QtQuick.GridView
- * @since 2.4
  */
 P.CardsGridViewPrivate {
     id: root
@@ -36,7 +37,7 @@ P.CardsGridViewPrivate {
      * @brief This property sets whether the view should fill the first row with columns
      * even when there is not enough space.
      *
-     * Set this to true if you want to stop the view from filling the first row with columns,
+     * Set this to @c true if you want to stop the view from filling the first row with columns,
      * even when delegates can't even fill the first row.
      *
      * default: ``true``
@@ -45,7 +46,7 @@ P.CardsGridViewPrivate {
 
     /**
      * @brief This property holds the number of columns the gridview has.
-     * @since 2.5
+     * @since org.kde.kirigami 2.5
      */
     readonly property int columns: {
         const minFromWidth = Math.floor(width / minimumColumnWidth)
@@ -59,7 +60,7 @@ P.CardsGridViewPrivate {
      *
      * default: ``Kirigami.Units.maximumInteger()``
      *
-     * @since 2.5
+     * @since org.kde.kirigami 2.5
      */
     property int maximumColumns: Kirigami.Units.maximumInteger
 
@@ -88,7 +89,7 @@ P.CardsGridViewPrivate {
      *
      * default: ``12 * Kirigami.Units.gridUnit``
      *
-     * @since 2.5
+     * @since org.kde.kirigami 2.5
      */
     property int minimumColumnWidth: Kirigami.Units.gridUnit * 12
 
@@ -97,7 +98,7 @@ P.CardsGridViewPrivate {
 
     /**
      * @brief This property holds the delegate of the CardsGridView.
-     * @see QtQuick.GridView::delegate
+     * @see QtQuick.GridView.delegate
      */
     default property alias delegate: root._delegateComponent
 

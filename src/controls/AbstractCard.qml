@@ -17,9 +17,10 @@ import "private" as P
  * Use this only when you need particular custom contents, for a standard layout
  * for cards, use the Card component.
  *
- * @see org::kde::kirigami::Card
- * @inherit org::kde::kirigami::templates::AbstractCard
- * @since 2.4
+ * @see kirigami::Card
+ * @see <a href="https://develop.kde.org/hig/components/editing/card">KDE Human Interface Guidelines on Cards</a>
+ * @since org.kde.kirigami 2.4
+ * @inherit kirigami::templates::AbstractCard
  */
 T.AbstractCard {
     id: root

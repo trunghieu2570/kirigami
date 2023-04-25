@@ -22,6 +22,8 @@ import "private"
  * * ``maximumHeight``: Default is Kirigami.Units.gridUnit * 3
  *
  * To achieve a titlebar that stays completely fixed just set the 3 sizes to the same value.
+ *
+ * @deprecated This will be removed in KF6.
  */
 AbstractApplicationHeader {
     id: header
@@ -30,7 +32,7 @@ AbstractApplicationHeader {
     /**
      * @brief This property sets the way the separator between pages should be drawn in the header.
      *
-     * Allowed values are:
+     * The following values are allowed:
      * * ``Kirigami.ApplicationHeaderStyle.Breadcrumb``: The pages are hierarchical, separated by an arrow.
      * * ``Kirigami.ApplicationHeaderStyle.TabBar``: The pages are intended to behave like pages of a tabbed view.
      * and the separator will look limke a dot.

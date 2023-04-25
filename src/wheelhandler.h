@@ -23,23 +23,18 @@ class KirigamiWheelEvent : public QObject
     Q_OBJECT
 
     /**
-     * x: real
-     *
-     * X coordinate of the mouse pointer
+     * @brief This property holds the x coordinate of the mouse pointer.
      */
     Q_PROPERTY(qreal x READ x CONSTANT)
 
     /**
-     * y: real
-     *
-     * Y coordinate of the mouse pointer
+     * @brief This property holds the y coordinate of the mouse pointer.
      */
     Q_PROPERTY(qreal y READ y CONSTANT)
 
     /**
-     * angleDelta: point
+     * @brief This property holds the distance the wheel is rotated in degrees.
      *
-     * The distance the wheel is rotated in degrees.
      * The x and y coordinates indicate the horizontal and vertical wheels respectively.
      * A positive value indicates it was rotated up/right, negative, bottom/left
      * This value is more likely to be set in traditional mice.
@@ -47,44 +42,43 @@ class KirigamiWheelEvent : public QObject
     Q_PROPERTY(QPointF angleDelta READ angleDelta CONSTANT)
 
     /**
-     * pixelDelta: point
-     *
-     * provides the delta in screen pixels available on high resolution trackpads
+     * @brief This property provides the delta in screen pixels available on high resolution trackpads.
      */
     Q_PROPERTY(QPointF pixelDelta READ pixelDelta CONSTANT)
 
     /**
-     * buttons: int
+     * @brief This property contains an OR combination of the buttons that were pressed during the wheel.
      *
-     * it contains an OR combination of the buttons that were pressed during the wheel, they can be:
-     * Qt.LeftButton, Qt.MiddleButton, Qt.RightButton
+     * Possible values in a combination are:
+     * * ``Qt.LeftButton``
+     * * ``Qt.MiddleButton``
+     * * ``Qt.RightButton``
      */
     Q_PROPERTY(int buttons READ buttons CONSTANT)
 
     /**
-     * modifiers: int
+     * @brief This property holds the keyboard modifiers that were pressed during the wheel event.
      *
-     * Keyboard mobifiers that were pressed during the wheel event, such as:
-     * Qt.NoModifier (default, no modifiers)
-     * Qt.ControlModifier
-     * Qt.ShiftModifier
+     * Possible values in a combination are:
+     * * ``Qt.NoModifier`` (default, no modifiers)
+     * * ``Qt.ControlModifier``
+     * * ``Qt.ShiftModifier``
      * ...
      */
     Q_PROPERTY(int modifiers READ modifiers CONSTANT)
 
     /**
-     * inverted: bool
+     * @brief This property holds whether the delta values are inverted.
      *
-     * Whether the delta values are inverted
-     * On some platformsthe returned delta are inverted, so positive values would mean bottom/left
+     * The returned delta may be inverted on some platforms, so positive values would mean bottom/left.
      */
     Q_PROPERTY(bool inverted READ inverted CONSTANT)
 
     /**
-     * accepted: bool
+     * @brief This property sets whether the event should be accepted or dropped.
+     * If set, the event shouldn't be managed anymore, for instance it can be used
+     * to block the handler to manage the scroll of a view on some scenarios.
      *
-     * If set, the event shouldn't be managed anymore,
-     * for instance it can be used to block the handler to manage the scroll of a view on some scenarios
      * @code
      * // This handler handles automatically the scroll of
      * // flickableItem, unless Ctrl is pressed, in this case the
@@ -145,15 +139,19 @@ public:
  * WheelHandler filters events from a Flickable, a vertical ScrollBar and a horizontal ScrollBar.
  * Wheel and KeyPress events (when `keyNavigationEnabled` is true) are used to scroll the Flickable.
  * When `filterMouseEvents` is true, WheelHandler blocks mouse button input from reaching the Flickable
- * and sets the `interactive` property of the scrollbars to false when touch input is used.
+ * and sets the `interactive` property of the scrollbars to @c false when touch input is used.
  *
  * Wheel event handling behavior:
  *
- * - Pixel delta is ignored unless angle delta is not available because pixel delta scrolling is too slow. Qt Widgets doesn't use pixel delta either, so the default scroll speed should be consistent with Qt Widgets.
+ * - Pixel delta is ignored unless angle delta is not available because pixel delta scrolling is too slow. Qt Widgets doesn't use pixel delta either, so the
+ * default scroll speed should be consistent with Qt Widgets.
  * - When using angle delta, scroll using the step increments defined by `verticalStepSize` and `horizontalStepSize`.
  * - When one of the keyboard modifiers in `pageScrollModifiers` is used, scroll by pages.
- * - When using a device that doesn't use 120 angle delta unit increments such as a touchpad, the `verticalStepSize`, `horizontalStepSize` and page increments (if using page scrolling) will be multiplied by `angle delta / 120` to keep scrolling smooth.
- * - If scrolling has happened in the last 400ms, use an internal QQuickItem stacked over the Flickable's contentItem to catch wheel events and use those wheel events to scroll, if possible. This prevents controls inside the Flickable's contentItem that allow scrolling to change the value (e.g., Sliders, SpinBoxes) from conflicting with scrolling the page.
+ * - When using a device that doesn't use 120 angle delta unit increments such as a touchpad, the `verticalStepSize`, `horizontalStepSize` and page increments
+ * (if using page scrolling) will be multiplied by `angle delta / 120` to keep scrolling smooth.
+ * - If scrolling has happened in the last 400ms, use an internal QQuickItem stacked over the Flickable's contentItem to catch wheel events and use those wheel
+ * events to scroll, if possible. This prevents controls inside the Flickable's contentItem that allow scrolling to change the value (e.g., Sliders, SpinBoxes)
+ * from conflicting with scrolling the page.
  *
  * Common usage with a Flickable:
  *
@@ -178,8 +176,7 @@ class WheelHandler : public QObject
      *
      * The default value is equivalent to `20 * Qt.styleHints.wheelScrollLines`. This is consistent with the default increment for QScrollArea.
      *
-     * @sa horizontalStepSize
-     *
+     * @see ::horizontalStepSize
      * @since KDE Frameworks 5.89
      */
     Q_PROPERTY(qreal verticalStepSize READ verticalStepSize
@@ -191,8 +188,7 @@ class WheelHandler : public QObject
      *
      * The default value is equivalent to `20 * Qt.styleHints.wheelScrollLines`. This is consistent with the default increment for QScrollArea.
      *
-     * @sa verticalStepSize
-     *
+     * @see ::verticalStepSize
      * @since KDE Frameworks 5.89
      */
     Q_PROPERTY(qreal horizontalStepSize READ horizontalStepSize
@@ -219,7 +215,7 @@ class WheelHandler : public QObject
      *
      * Hover events on the scrollbars and wheel events on anything also make the scrollbars interactive when this property is set to true.
      *
-     * The default value is `false`.
+     * default: ``false``
      *
      * @since KDE Frameworks 5.89
      */
@@ -239,7 +235,7 @@ class WheelHandler : public QObject
      * - End scrolls to the end.
      * - When Alt is held, scroll horizontally when using PageUp, PageDown, Home or End.
      *
-     * The default value is `false`.
+     * default: ``false``
      *
      * @since KDE Frameworks 5.89
      */
@@ -249,18 +245,20 @@ class WheelHandler : public QObject
     /**
      * @brief This property holds whether the WheelHandler blocks all wheel events from reaching the Flickable.
      *
-     * When this property is false, scrolling the Flickable with WheelHandler will only block an event from reaching the Flickable if the Flickable is actually scrolled by WheelHandler.
+     * When this property is false, scrolling the Flickable with WheelHandler will only block an event from reaching the Flickable if the Flickable is actually
+     * scrolled by WheelHandler.
      *
-     * NOTE: Wheel events created by touchpad gestures with pixel deltas will always be accepted no matter what. This is because they will cause the Flickable to jump back to where scrolling started unless the events are always accepted before they reach the Flickable.
+     * NOTE: Wheel events created by touchpad gestures with pixel deltas will always be accepted no matter what. This is because they will cause the Flickable
+     * to jump back to where scrolling started unless the events are always accepted before they reach the Flickable.
      *
-     * The default value is true.
+     * default: ``true``
      */
     Q_PROPERTY(bool blockTargetWheel MEMBER m_blockTargetWheel NOTIFY blockTargetWheelChanged)
 
     /**
      * @brief This property holds whether the WheelHandler can use wheel events to scroll the Flickable.
      *
-     * The default value is true.
+     * default: ``true``
      */
     Q_PROPERTY(bool scrollFlickableTarget MEMBER m_scrollFlickableTarget NOTIFY scrollFlickableTargetChanged)
 
@@ -292,7 +290,7 @@ public:
     /**
      * Scroll up one step. If the stepSize parameter is less than 0, the verticalStepSize will be used.
      *
-     * returns true if the contentItem was moved.
+     * returns @c true if the contentItem was moved.
      *
      * @since KDE Frameworks 5.89
      */
@@ -301,7 +299,7 @@ public:
     /**
      * Scroll down one step. If the stepSize parameter is less than 0, the verticalStepSize will be used.
      *
-     * returns true if the contentItem was moved.
+     * returns @c true if the contentItem was moved.
      *
      * @since KDE Frameworks 5.89
      */
@@ -310,7 +308,7 @@ public:
     /**
      * Scroll left one step. If the stepSize parameter is less than 0, the horizontalStepSize will be used.
      *
-     * returns true if the contentItem was moved.
+     * returns @c true if the contentItem was moved.
      *
      * @since KDE Frameworks 5.89
      */
@@ -319,7 +317,7 @@ public:
     /**
      * Scroll right one step. If the stepSize parameter is less than 0, the horizontalStepSize will be used.
      *
-     * returns true if the contentItem was moved.
+     * returns @c true if the contentItem was moved.
      *
      * @since KDE Frameworks 5.89
      */

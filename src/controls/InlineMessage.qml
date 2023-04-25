@@ -31,7 +31,7 @@ import "templates" as T
  * can fit, an overflow menu is provided.
  *
  * Example usage:
- * @code
+ * @code{.qml}
  * InlineMessage {
  *     type: Kirigami.MessageType.Error
  *
@@ -55,8 +55,10 @@ import "templates" as T
  *     ]
  * }
  * @endcode
- * @inherit org::kde::kirigami::templates::InlineMessage
- * @since 5.45
+ * @see <a href="https://develop.kde.org/docs/use/kirigami/components-inlinemessages">Inline Messages in Kirigami</a>
+ * @see <a href="https://develop.kde.org/hig/components/assistance/inline">KDE Human Interface Guidelines on Inline Messages</a>
+ * @since KDE Frameworks 5.45
+ * @inherit kirigami::templates::InlineMessage
  */
 T.InlineMessage {
     id: root

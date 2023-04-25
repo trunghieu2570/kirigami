@@ -15,13 +15,14 @@ import QtQuick.Controls 2.15 as QQC2
  *
  * Example usage:
  * @code{.qml}
+ * ...
  *     Kirigami.SelectableLabel {
  *         text: "Label"
  *     }
+ * ...
  * @endcode
- *
  * @see https://bugreports.qt.io/browse/QTBUG-14077
- * @since 5.95
+ * @since KDE Frameworks 5.95
  * @since org.kde.kirigami 2.20
  * @inherit QtQuick.Controls.TextArea
  */

@@ -13,114 +13,122 @@
 class QQuickItem;
 
 /**
- * This attached property contains the information for decorating a org::kde::kirigami::FormLayout:
+ * @brief This attached property contains the information for decorating a FormLayout:
  *
  * It contains the text labels of fields and information about sections.
  *
  * Some of its properties can be used with other <a href="https://doc.qt.io/qt-6/qml-qtquick-layouts-layout.html">Layout</a> types.
- * @code
- * import org.kde.kirigami 2.3 as Kirigami
- * Kirigami.FormLayout {
- *    TextField {
- *       Kirigami.FormData.label: "Label:"
- *    }
- *    TextField {
- *       Kirigami.FormData.label: "Label:"
- *    }
- * }
- * @endcode
- * @see org::kde::kirigami::FormLayout
- * @since 2.3
+ *
+ * Example usage:
+ * @include formlayoutattached.qml
+ *
+ * @see kirigami::FormLayout
+ * @since org.kde.kirigami 2.3
  */
 class FormLayoutAttached : public QObject
 {
     Q_OBJECT
     /**
-     * The label for a org::kde::kirigami::FormLayout field
+     * @brief This property holds the text for the field's label.
      */
     Q_PROPERTY(QString label READ label WRITE setLabel NOTIFY labelChanged)
+
     /**
-     * The alignment for the label of a org::kde::kirigami::FormLayout field
+     * @brief This property holds the alignment for the field's label.
      */
     Q_PROPERTY(int labelAlignment READ labelAlignment WRITE setLabelAlignment NOTIFY labelAlignmentChanged)
+
     /**
-     * If true, the child item of a org::kde::kirigami::FormLayout becomes a section separator, and
-     * may have different looks:
-     * * To make it just a space between two fields, just put an empty item with FormData.isSection:
+     * @brief This property sets whether this field acts as a section separator.
+     *
+     * default: ``false``
+     *
+     * You can use it in the following ways:
+     * * As space between two fields:
      * @code
-     * TextField {
+     * QQC2.TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
      * Item {
      *     Kirigami.FormData.isSection: true
      * }
-     * TextField {
+     * QQC2.TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
      * @endcode
      *
-     * * To make it a space with a section title:
+     * * As space with a section title:
      * @code
-     * TextField {
+     * QQC2.TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
      * Item {
      *     Kirigami.FormData.label: "Section Title"
      *     Kirigami.FormData.isSection: true
      * }
-     * TextField {
-     *     Kirigami.FormData.label: "Label:"
+     * QQC2.TextField {
+     *     Kirigami.FormData.label: "Label text"
      * }
      * @endcode
      *
-     * * To make it a space with a section title and a separator line:
+     * * As space with a section title and a separator line:
      * @code
-     * TextField {
+     * QQC2.TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
      * Kirigami.Separator {
      *     Kirigami.FormData.label: "Section Title"
      *     Kirigami.FormData.isSection: true
      * }
-     * TextField {
+     * QQC2.TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
      * @endcode
-     * @see org::kde::kirigami::FormLayout
+     *
+     * @see kirigami::FormLayout
      */
     Q_PROPERTY(bool isSection READ isSection WRITE setIsSection NOTIFY isSectionChanged)
 
     /**
-     * If true, a checkbox is prepended to the org::kde::kirigami::FormLayout item.
+     * @brief This property sets whether a checkbox should be added before the field's item.
+     *
+     * default: ``false``
      */
     Q_PROPERTY(bool checkable READ checkable WRITE setCheckable NOTIFY checkableChanged)
 
     /**
-     * This property is true when the checkbox of the org::kde::kirigami::FormLayout item is checked.
-     * @see checkable.
+     * @brief This property sets whether the checkbox created by the ::checkable
+     * property should be checked.
+     *
+     * default: ``false``
+     *
+     * @see ::checkable
      */
     Q_PROPERTY(bool checked READ checked WRITE setChecked NOTIFY checkedChanged)
 
     /**
-     * This property holds whether the label and the checkbox of the org::kde::kirigami::FormLayout item receive mouse and keyboard events.
+     * @brief This property sets whether the label or checkbox created by the
+     * FormLayout attached property should be enabled.
+     *
+     * default: ``true``
      */
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
 
     /**
      * This property can only be used
      * in conjunction with a Kirigami.FormData.label,
-     * often in a layout that is a child of a org::kde::kirigami::FormLayout.
+     * often in a layout that is a child of a kirigami::FormLayout.
      *
      * It then turns the item specified into a "buddy"
      * of the label, making it work as if it were
-     * a child of the org::kde::kirigami::FormLayout.
+     * a child of the kirigami::FormLayout.
      *
      * A buddy item is useful for instance when the label has a keyboard accelerator,
      * which when triggered provides active keyboard focus to the buddy item.
      *
      * @code
      * Kirigami.FormLayout {
-     *     Layouts.ColumnLayout {
+     *     ColumnLayout {
      *         // If the accelerator is in the letter S,
      *         // pressing Alt+S gives focus to the slider.
      *         Kirigami.FormData.label: "Slider label:"

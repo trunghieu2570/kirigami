@@ -14,7 +14,7 @@ import "private" as P
  * relevant to the application's current page.
  *
  * Example usage:
- * @code
+ * @code{.qml}
  * import org.kde.kirigami 2.4 as Kirigami
  *
  * Kirigami.ApplicationWindow {
@@ -26,12 +26,12 @@ import "private" as P
  * }
  * @endcode
  *
- * @code
+ * @code{.qml}
  * import org.kde.kirigami 2.4 as Kirigami
  *
  * Kirigami.Page {
  *   [...]
- *     contextualActions: [
+ *     actions.contextualActions: [
  *         Kirigami.Action {
  *             icon.name: "edit"
  *             text: "Action text"
@@ -50,7 +50,8 @@ import "private" as P
  *   [...]
  * }
  * @endcode
- *
+ * @see <a href="https://develop.kde.org/hig/components/navigation/contextdrawer">Human Interface Guidelines on Context Drawers</a>
+ * @see <a href="https://develop.kde.org/hig/patterns-command/drawer/#context-drawer">KDE Human Interface Guidelines' Short Introduction of Context Drawers</a>
  * @inherit OverlayDrawer
  */
 Kirigami.OverlayDrawer {
@@ -67,10 +68,11 @@ Kirigami.OverlayDrawer {
 
     /**
      * This can be any type of object that a ListView can accept as model.
-     * It expects items compatible with either QtQuick.Action or Kirigami.Action
+     * It expects items compatible with either QtQuick.Controls.Action or
+     * Kirigami.Action.
      *
      * @see QtQuick.Action
-     * @see org::kde::kirigami::Action
+     * @see kirigami::Action
      * @property list<Action> actions
      */
     property var actions: page ? page.contextualActions : []
@@ -82,14 +84,14 @@ Kirigami.OverlayDrawer {
      * controlled by the title property.`
      *
      * @property Component header
-     * @since 2.7
+     * @since org.kde.kirigami 2.7
      */
     property alias header: menu.header
 
     /**
      * @brief Arbitrary content to show below the list view.
      * @property Component footer
-     * @since 2.7
+     * @since org.kde.kirigami 2.7
      */
     property alias footer: menu.footer
 

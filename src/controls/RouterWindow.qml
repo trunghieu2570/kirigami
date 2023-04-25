@@ -16,26 +16,27 @@ import org.kde.kirigami 2.12 as Kirigami
  *
  * In order to call functions on the PageRouter, use @link PageRouterAttached  the attached Kirigami.PageRouter object @endlink.
  *
- * @inherit org::kde::kirigami::ApplicationWindow
+ * @warning This might be removed in KF6 due to not being used a lot.
+ * @inherit kirigami::ApplicationWindow
  */
 Kirigami.ApplicationWindow {
     id: __kirigamiApplicationWindow
 
     /**
-     * @see org::kde::kirigami::PageRouter::routes
+     * @see kirigami::PageRouter::routes
      * @property list<Kirigami.PageRoute> route
      */
     default property alias routes: __kirigamiPageRouter.routes
 
     /**
-     * @see org::kde::kirigami::PageRouter::initialRoute
+     * @see kirigami::PageRouter::initialRoute
      * @property string initialRoute
      */
     property alias initialRoute: __kirigamiPageRouter.initialRoute
 
     /**
      * @brief This property holds this window's PageRouter.
-     * @property org::kde::kirigami::PageRouter
+     * @property kirigami::PageRouter
      */
     property alias router: __kirigamiPageRouter
 

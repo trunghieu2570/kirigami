@@ -13,12 +13,13 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.11 as Kirigami
 
 /**
- * A container for setting actions showing them in a list view and displaying
+ * @brief This is a container for to show a list of actions in a list view and displaying
  * the actual page next to it.
  *
- * @since 5.86
+ * @see kirigami::SettingAction
+ * @since KDE Frameworks 5.86
  * @since org.kde.kirigami 2.18
- * @inherit kde::org::kirigami::PageRow
+ * @inherit kirigami::PageRow
  */
 Kirigami.PageRow {
     id: pageSettingStack

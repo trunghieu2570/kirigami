@@ -19,7 +19,8 @@ import "templates" as T
  *
  * To achieve a titlebar that stays completely fixed just set the 3 sizes as the same
  *
- * @inherit org::kde::kirigami::templates::ApplicationHeader
+ * @deprecated This will be removed in KF6.
+ * @inherit kirigami::templates::ApplicationHeader
  */
 T.ApplicationHeader {
     id: header

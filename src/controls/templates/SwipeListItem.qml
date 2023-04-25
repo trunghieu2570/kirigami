@@ -12,14 +12,14 @@ import org.kde.kirigami 2.11 as Kirigami
 import "../private"
 
 /**
- * An item delegate intended to support extra actions obtainable
- * by uncovering them by dragging away the item with the handle.
- *
- * This acts as a container for normal list items.
- * Any subclass of AbstractListItem can be assigned as the contentItem property.
+ * @brief An ItemDelegate intended to support extra actions.
+ * 
+ * On mobile, these actions can be uncovered by dragging a handle,
+ * whereas with applications on tablet or desktop mode
+ * these actions are always present on the right side of the delegate.
  *
  * Example usage:
- * @code
+ * @code{.qml}
  * ListView {
  *     model: myModel
  *     delegate: SwipeListItem {
@@ -40,7 +40,6 @@ import "../private"
  *
  * }
  * @endcode
- *
  * @inherit QtQuick.Templates.SwipeDelegate
  */
 T.SwipeDelegate {
@@ -58,11 +57,11 @@ T.SwipeDelegate {
     property alias supportsMouseEvents: listItem.hoverEnabled
 
     /**
-     * @brief This property tells whether the cursor is currently hovering over the item.
+     * @brief This property specifies whether the cursor is currently hovering over the item.
      *
-     * On mobile touch devices, this will be true only when pressed.
+     * On mobile touch devices, this will be @c true only when pressed.
      *
-     * @see QtQuick.Templates.ItemDelegate::hovered
+     * @see QtQuick.Templates.ItemDelegate.hovered
      * @deprecated This will be removed in KF6; use the ``hovered`` property instead.
      * @property bool containsMouse
      */
@@ -76,25 +75,25 @@ T.SwipeDelegate {
      *
      * default: ``false``
      *
-     * @since 2.7
+     * @since org.kde.kirigami 2.7
      */
     property bool alternatingBackground: false
 
     /**
-     * @brief This property sets whether this item is a section delegate.
+     * @brief This property sets whether this Item is a section delegate.
      *
-     * Setting this to true will make the list item look like a "title" for items under it.
+     * Setting this to @c true will make the list item look like a "title" for items under it.
      *
      * default: ``false``
      *
-     * @see ListSectionHeader
+     * @see kirigami::ListSectionHeader
      */
     property bool sectionDelegate: false
 
     /**
      * @brief This property sets whether the separator is visible.
      *
-     * The separator is a line between this and the item under it.
+     * The separator is a line between this and the Item under it.
      *
      * default: ``false``
      */
@@ -115,7 +114,7 @@ T.SwipeDelegate {
      * It is advised to use the default value.
      * default: ``Kirigami.Theme.alternateBackgroundColor``
      *
-     * @since 2.7
+     * @since org.kde.kirigami 2.7
      */
     property color alternateBackgroundColor: Kirigami.Theme.alternateBackgroundColor
 
@@ -132,7 +131,7 @@ T.SwipeDelegate {
      * @brief This property holds the color of the text in the item.
      *
      * It is advised to use the default value.
-     * default: ``Theme.textColor``
+     * default: ``Kirigami.Theme.textColor``
      *
      * If custom text elements are inserted in an AbstractListItem,
      * their color will have to be manually set with this property.
@@ -151,22 +150,22 @@ T.SwipeDelegate {
     property color activeTextColor: Kirigami.Theme.highlightedTextColor
 
     /**
-     * @brief This property tells whether actions are visible and interactive.
+     * @brief This property specifies whether actions are visible and interactive.
      *
      * True if it's possible to see and interact with the item's actions.
      *
      * Actions become hidden while editing of an item, for example.
      *
-     * @since 2.5
+     * @since org.kde.kirigami 2.5
      */
     readonly property bool actionsVisible: actionsLayout.hasVisibleActions
 
     /**
      * @brief This property sets whether actions behind this SwipeListItem will always be visible.
      *
-     * default: `true in desktop and tablet mode`
+     * default: `true in desktop and tablet mode, @c false in mobile mode`
      *
-     * @since 2.15
+     * @since org.kde.kirigami 2.15
      */
     property bool alwaysVisibleActions: !Kirigami.Settings.isMobile
 
@@ -183,14 +182,16 @@ T.SwipeDelegate {
      *
      * The value can represent the width of the handle component or the action layout.
      *
-     * @since 2.19
+     * @since org.kde.kirigami 2.19
      * @property real overlayWidth
      */
     readonly property alias overlayWidth: overlayLoader.width
 
     // TODO KF6 remove this super wrong thing
-    /// @private
-    /// @deprecated This property will be removed in KDE Framework 6. Use contentItem instead.
+    /**
+     * @deprecated This property will be removed in KDE Framework 6. Use contentItem instead.
+     * @internal
+     */
     default property alias _default: listItem.contentItem
 //END properties
 

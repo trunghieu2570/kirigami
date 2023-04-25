@@ -88,7 +88,7 @@ class KIRIGAMI2_EXPORT Units : public QObject
      * The icon sizes provided are normalized for different DPI, so icons
      * will scale depending on the DPI.
      *
-     * * sizeForLabels (the largest icon size that fits within fontMetrics.height) @since 5.80 @since org.kde.kirigami 2.16
+     * * sizeForLabels (the largest icon size that fits within fontMetrics.height) @since KDE Frameworks 5.80 @since org.kde.kirigami 2.16
      * * small
      * * smallMedium
      * * medium
@@ -188,7 +188,7 @@ class KIRIGAMI2_EXPORT Units : public QObject
      * the user should expect some kind of feedback. See veryShortDuration, shortDuration, longDuration, and
      * veryLongDuration for animation duration choices.
      *
-     * @since 5.81
+     * @since KDE Frameworks 5.81
      * @since org.kde.kirigami 2.16
      */
     Q_PROPERTY(int humanMoment READ humanMoment WRITE setHumanMoment NOTIFY humanMomentChanged)

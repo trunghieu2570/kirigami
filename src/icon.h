@@ -28,9 +28,10 @@ class Icon : public QQuickItem
     Q_OBJECT
 
     /**
-     * The source of this icon. An `Icon` can pull from:
+     * @brief This property holds the source of this icon.
      *
-     * * The icon theme:
+     * The icon can be pulled from:
+     * * The Freedesktop standard icon name:
      * @include icon/IconThemeSource.qml
      * * The filesystem:
      * @include icon/FilesystemSource.qml
@@ -56,52 +57,53 @@ class Icon : public QQuickItem
     Q_PROPERTY(QVariant source READ source WRITE setSource NOTIFY sourceChanged)
 
     /**
-     * The name of a fallback icon to load from the icon theme when the `source`
-     * cannot be found. The default fallback icon is `"unknown"`.
+     * @brief This property holds the name of an icon from the icon theme
+     * as a fallback for when an icon set with the ``source`` property is not found.
      *
      * @include icon/Fallback.qml
-     *
      * @note This will only be loaded if source is unavailable (e.g. it doesn't exist, or network issues have prevented loading).
      */
     Q_PROPERTY(QString fallback READ fallback WRITE setFallback NOTIFY fallbackChanged)
 
     /**
-     * The name of an icon from the icon theme to show while the icon set in `source` is
-     * being loaded. This is primarily relevant for remote sources, or those using slow-
-     * loading image providers. The default temporary icon is `"image-x-icon"`
+     * @brief This property holds the name of an icon from the icon theme to show
+     * while the icon set in `source` is being loaded.
      *
-     * @note This will only be loaded if the source is a type which can be so long-loading
-     * that a temporary image makes sense (e.g. a remote image, or from an ImageProvider
-     * of the type QQmlImageProviderBase::ImageResponse)
+     * This will only be used if the source image is a type that can have such a
+     * long loading time that showing a temporary image in its place makes sense
+     * (e.g. a remote image, or an image from an ImageProvider of the type
+     * QQmlImageProviderBase::ImageResponse).
      *
-     * @since 5.15
+     * default: ``"image-png"``
+     *
+     * @since KDE Frameworks 5.15
      */
     Q_PROPERTY(QString placeholder READ placeholder WRITE setPlaceholder NOTIFY placeholderChanged)
 
     /**
-     * Whether this icon will use the QIcon::Active mode when drawing the icon,
-     * resulting in a graphical effect being applied to the icon to indicate that
-     * it is currently active.
+     * @brief This property sets whether the icon will use the QIcon::Active mode,
+     * resulting in a graphical effect being applied when the icon is currently active.
      *
-     * This is typically used to indicate when an item is being hovered or pressed.
+     * @note This is typically used to indicate when an item is being hovered or pressed.
      *
      * @image html icon/active.png
      *
      * The color differences under the default KDE color palette, Breeze. Note
      * that a dull highlight background is typically displayed behind active icons and
      * it is recommended to add one if you are creating a custom component.
+     *
+     * default: ``false``
      */
     Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
 
     /**
-     * Whether this icon's `source` is valid and it is being used.
+     * @brief This property specifies whether the icon's `source` is valid and is being used.
      */
     Q_PROPERTY(bool valid READ valid NOTIFY validChanged)
 
     /**
-     * Whether this icon will use the QIcon::Selected mode when drawing the icon,
-     * resulting in a graphical effect being applied to the icon to indicate that
-     * it is currently selected.
+     * @brief This property sets whether the icon will use QIcon::Selected mode,
+     * resulting in a graphical effect being applied when the icon s currently selected.
      *
      * This is typically used to indicate when a list item is currently selected.
      *
@@ -109,55 +111,95 @@ class Icon : public QQuickItem
      *
      * The color differences under the default KDE color palette, Breeze. Note
      * that a blue background is typically displayed behind selected elements.
+     *
+     * default: ``false``
      */
     Q_PROPERTY(bool selected READ selected WRITE setSelected NOTIFY selectedChanged)
 
     /**
-     * Whether this icon will be treated as a mask. When an icon is being used
-     * as a mask, all non-transparent colors are replaced with the color provided in the Icon's
-     * @link Icon::color color @endlink property.
+     * @brief This property sets whether this icon will be treated as a mask.
      *
-     * @see color
+     * When an icon is being used as a mask, all non-transparent colors are replaced
+     * with the color provided in the Icon's @link Icon::color color @endlink property.
+     *
+     * default: ``false``
+     *
+     * @see ::color
      */
     Q_PROPERTY(bool isMask READ isMask WRITE setIsMask NOTIFY isMaskChanged)
 
     /**
-     * The color to use when drawing this icon when `isMask` is enabled.
+     * @brief This property holds the color to use when drawing the icon.
+     *
+     * This property is used only when `isMask` is set to true.
      * If this property is not set or is `Qt::transparent`, the icon will use
      * the text or the selected text color, depending on if `selected` is set to
      * true.
+     *
+     * default: ``Qt::transparent``
      */
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
 
     /**
-     * Whether the icon is correctly loaded, is asynchronously loading or there was an error.
-     * Note that image loading will not be initiated until the item is shown, so if the Icon is not visible,
+     * @brief This property specifies the status of the icon.
+     *
+     * @note Image loading will not be initiated until the item is shown, so if the Icon is not visible,
      * it can only have Null or Loading states.
-     * @since 5.15
+     *
+     * default: ``Status::Null``
+     *
+     * @since KDE Frameworks 5.15
      */
     Q_PROPERTY(Icon::Status status READ status NOTIFY statusChanged)
 
     /**
-     * The width of the painted area measured in pixels. This will be smaller than or
-     * equal to the width of the area taken up by the Item itself. This can be 0.
+     * @brief This property holds the width of the painted area in pixels.
      *
-     * @since 5.15
+     * This will be smaller than or equal to the width of the area
+     * taken up by the Item itself. This can be 0.
+     *
+     * default: ``0.0``
+     *
+     * @since KDE Frameworks 5.15
      */
     Q_PROPERTY(qreal paintedWidth READ paintedWidth NOTIFY paintedAreaChanged)
 
     /**
-     * The height of the painted area measured in pixels. This will be smaller than or
-     * equal to the height of the area taken up by the Item itself. This can be 0.
+     * @brief This property holds the height of the painted area in pixels.
      *
-     * @since 5.15
+     * This will be smaller than or equal to the height of the area
+     * taken up by the Item itself. This can be 0.
+     *
+     * default: ``0.0``
+     *
+     * @since KDE Frameworks 5.15
      */
     Q_PROPERTY(qreal paintedHeight READ paintedHeight NOTIFY paintedAreaChanged)
 public:
+    /**
+     * @brief This enum indicates the current status of the icon.
+     */
     enum Status {
-        Null = 0, /// No icon has been set
-        Ready, /// The icon loaded correctly
-        Loading, // The icon is being loaded, but not ready yet
-        Error, /// There was an error while loading the icon, for instance a non existent themed name, or an invalid url
+        /**
+         * @brief No icon source has been set.
+         */
+        Null = 0,
+
+        /**
+         * @brief The icon has been loaded correctly.
+         */
+        Ready,
+
+        /**
+         * @brief The icon is currently being loaded.
+         */
+        Loading,
+
+        /**
+         * @brief There was an error while loading the icon, for instance
+         * a non existent themed name, or an invalid url.
+         */
+        Error,
     };
     Q_ENUM(Status)
 

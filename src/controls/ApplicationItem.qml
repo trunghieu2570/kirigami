@@ -14,7 +14,7 @@ import org.kde.kirigami 2.4 as Kirigami
  * It's based around the PageRow component that allows adding/removing of pages.
  *
  * Example usage:
- * @code
+ * @code{.qml}
  * import org.kde.kirigami 2.4 as Kirigami
  *
  * Kirigami.ApplicationItem {
@@ -45,29 +45,31 @@ import org.kde.kirigami 2.4 as Kirigami
  *     }
  *
  *     pageStack.initialPage: Kirigami.Page {
- *         mainAction: Kirigami.Action {
- *             icon.name: "edit"
- *             onTriggered: {
- *                 // do stuff
+ *         actions {
+ *             main: Kirigami.Action {
+ *                 icon.name: "edit"
+ *                 onTriggered: {
+ *                     // do stuff
+ *                 }
  *             }
+ *             contextualActions: [
+ *                 Kirigami.Action {
+ *                     icon.name: "edit"
+ *                     text: "Action text"
+ *                     onTriggered: {
+ *                         // do stuff
+ *                     }
+ *                 },
+ *                 Kirigami.Action {
+ *                     icon.name: "edit"
+ *                     text: "Action text"
+ *                     onTriggered: {
+ *                         // do stuff
+ *                     }
+ *                 }
+ *             ]
+ *           [...]
  *         }
- *         contextualActions: [
- *             Kirigami.Action {
- *                 icon.name: "edit"
- *                 text: "Action text"
- *                 onTriggered: {
- *                     // do stuff
- *                 }
- *             },
- *             Kirigami.Action {
- *                 icon.name: "edit"
- *                 text: "Action text"
- *                 onTriggered: {
- *                     // do stuff
- *                 }
- *             }
- *         ]
- *         // ...
  *     }
  * }
  * @endcode
@@ -76,16 +78,12 @@ Kirigami.AbstractApplicationItem {
     id: root
 
     /**
-     * @brief This property holds the PageRow used to allocate the pages and
-     * manage the transitions between them.
+     * @brief This property holds the PageRow that is used to allocate
+     * the pages and manage the transitions between them.
      *
-     * It's using a PageRow, while having the same API as PageStack,
-     * it positions the pages as adjacent columns, with as many columns
-     * as can fit in the screen. An handheld device would usually have a single
-     * fullscreen column, a tablet device would have many tiled columns.
-     *
-     * @warning This property is readonly.
-     * @property QtQuick.StackView ApplicationItem::pageStack
+     * @see kirigami::PageRow
+     * @warning This property is not currently readonly, but it should be treated like it is readonly.
+     * @property Kirigami.PageRow pageStack
      */
     property alias pageStack: __pageStack // TODO KF6 make readonly
 

@@ -16,7 +16,7 @@ import org.kde.kirigami 2.4 as Kirigami
  * for example page or section titles.
  *
  * Example usage:
- * @code
+ * @code{.qml}
  * import org.kde.kirigami 2.4 as Kirigami
  * [...]
  * Column {
@@ -28,19 +28,20 @@ import org.kde.kirigami 2.4 as Kirigami
  * }
  * @endcode
  *
- * The most important property is "text", which applies to the text property of
- * Label. See the Label component from QtQuick.Controls 2 and primitive QML Text
- * element API for additional properties, methods and signals.
+ * The most important property is "text", which applies to the text property of Controls.Label.
+ * See <a href="https://doc.qt.io/qt-5/qml-qtquick-controls-label.html">Controls.Label</a>
+ * and <a href="https://doc.qt.io/qt-5/qml-qtquick-text.html">QtQuick.Text</a>
+ * for additional properties, methods and signals.
  *
+ * @see <a href="https://develop.kde.org/docs/use/kirigami/style-typography">Typography in Kirigami</a>
+ * @see <a href="https://develop.kde.org/hig/style/typography">KDE Human Interface Guidelines on Typography</a>
  * @inherit QtQuick.Controls.Label
  */
 QQC2.Label {
     id: heading
 
     /**
-     * @brief This property holds the level of the heading, which determines its size.
-     *
-     * This property holds the level, which determines how large the header is.
+     * @brief This property holds the level of the heading, determining its font size.
      *
      * Acceptable values range from 1 (big) to 5 (small).
      *
@@ -71,15 +72,15 @@ QQC2.Label {
     /**
      * @brief This property holds the heading type.
      *
-     * The type of the heading. This can be:
-     * * ``Kirigami.Heading.Type.Normal``: Create a normal heading (default)
+     * The following values are allowed:
+     * * ``Kirigami.Heading.Type.Normal``: Creates a normal heading (default).
      * * ``Kirigami.Heading.Type.Primary``: Makes the heading more prominent. Useful
      *   when making the heading bigger is not enough.
      * * ``Kirigami.Heading.Type.Secondary``: Makes the heading less prominent.
      *   Useful when an heading is for a less important section in an application.
      *
-     * @property Heading::Type type
-     * @since 5.82
+     * @since KDE Frameworks 5.82
+     * @property Kirigami.Heading.Type type
      */
     property int type: Kirigami.Heading.Type.Normal
 

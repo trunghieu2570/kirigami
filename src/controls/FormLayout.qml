@@ -14,51 +14,38 @@ import org.kde.kirigami 2.18 as Kirigami
  * This is the base class for Form layouts conforming to the
  * Kirigami Human Interface Guidelines. The layout consists
  * of two columns: the left column contains only right-aligned
- * labels provided by a Kirigami.FormData attached property,
+ * labels provided by a kirigami::FormData attached property,
  * the right column contains left-aligned child types.
  *
  * Child types can be sectioned using an QtQuick.Item
- * or Kirigami.Separator with a Kirigami.FormData
+ * or kirigami::Separator with a kirigami::FormData
  * attached property, see FormLayoutAttached::isSection for details.
  *
  * Example usage:
- * @code
- * import org.kde.kirigami 2.3 as Kirigami
- * Kirigami.FormLayout {
- *    TextField {
- *       Kirigami.FormData.label: "Label:"
- *    }
- *    Kirigami.Separator {
- *        Kirigami.FormData.label: "Section Title"
- *        Kirigami.FormData.isSection: true
- *    }
- *    TextField {
- *       Kirigami.FormData.label: "Label:"
- *    }
- *    TextField {
- *    }
- * }
- * @endcode
- * @see FormLayoutAttached
- * @since 2.3
+ * @include formlayout.qml
+ *
+ * @see kirigami::FormLayoutAttached
+ * @see <a href="https://develop.kde.org/docs/use/kirigami/components-formlayouts">Form Layouts in Kirigami</a>
+ * @see <a href="https://develop.kde.org/hig/patterns-content/form">KDE Human Interface Guidelines on Forms</a>
+ * @since org.kde.kirigami 2.3
  * @inherit QtQuick.Item
  */
 Item {
     id: root
 
     /**
-     * @brief This property tells whether the form layout is in wide mode.
+     * @brief This property specifies whether the form layout is in wide mode.
      *
      * If true, the layout will be optimized for a wide screen, such as
      * a desktop machine (the labels will be on a left column,
-     * the fields on a right column beside it), if false (such as on a phone)
+     * the fields on a right column beside it), if @c false (such as on a phone)
      * everything is laid out in a single column.
      *
-     * By default this property automatically adjusts the layout
+     * By default, this property automatically adjusts the layout
      * if there is enough screen space.
      *
-     * Set this to true for a convergent design,
-     * set this to false for a mobile-only design.
+     * Set this to @c true for a convergent design,
+     * set this to @c false for a mobile-only design.
      */
     property bool wideMode: width >= lay.wideImplicitWidth
 
@@ -67,7 +54,7 @@ Item {
      * on the same page, they can have each other in twinFormLayouts,
      * so they will vertically align with each other perfectly
      *
-     * @since 5.53
+     * @since KDE Frameworks 5.53
      */
     property list<Item> twinFormLayouts  // should be list<FormLayout> but we can't have a recursive declaration
 

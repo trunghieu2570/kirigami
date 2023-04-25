@@ -12,59 +12,67 @@ import org.kde.kirigami 2.19 as Kirigami
 
 //TODO KF6: move somewhere else? kirigami addons?
 /**
- * @brief An "About" page that is ready to integrate in a Kirigami app.
+ * @brief This component is an "About" page that displays data about the application.
  *
- * Allows to have a page that will show the copyright notice of the application
- * together with the contributors and some information of which platform it's
- * running on.
+ * It allows showing the defined copyright notice of the application together
+ * with the contributors and some information of which platform it's running on.
  *
- * @since 5.52
+ * @see <a href="https://develop.kde.org/docs/use/kirigami/advanced-add_about_page">About Page in Kirigami</a>
+ * @see <a href="https://develop.kde.org/hig/components/assistance/aboutview">KDE Human Interface Guidelines on Application Information</a>
+ * @see kirigami::AboutItem
+ * @since KDE Frameworks 5.52
  * @since org.kde.kirigami 2.6
- * @inherit org::kde::kirigami::ScrollablePage
+ * @inherit kirigami::ScrollablePage
  */
 Kirigami.ScrollablePage {
     id: page
 
 //BEGIN properties
     /**
-     * @brief This property holds an object with the same shape as KAboutData.
+     * @brief This property holds a JSON object with the structure of KAboutData
+     * that will be displayed by the AboutPage.
      *
-     * For example:
-     * @code{json}
+     * @see kcoreaddons::KAboutData
+     *
+     * Note that ``displayName``, ``version``, ``description``, and ``authors``
+     * keys are mandatory, while the rest of the keys are optional. Make sure
+     * to fill out as many optional keys as you can to provide more accurate
+     * crediting information, especially ``copyrightStatement``, which
+     * facilitates the management of the licenses used in your program.
+     *
+     * Example usage:
+     * @code{.json}
      * aboutData: {
-          "displayName" : "KirigamiApp",
-          "productName" : "kirigami/app",
-          "componentName" : "kirigamiapp",
-          "shortDescription" : "A Kirigami example",
-          "homepage" : "",
-          "bugAddress" : "submit@bugs.kde.org",
-          "version" : "5.14.80",
-          "otherText" : "",
-          "authors" : [
-              {
-                  "name" : "...",
-                  "task" : "",
-                  "emailAddress" : "somebody@kde.org",
-                  "webAddress" : "",
-                  "ocsUsername" : ""
-              }
-          ],
-          "credits" : [],
-          "translators" : [],
-          "licenses" : [
-              {
-                  "name" : "GPL v2",
-                  "text" : "long, boring, license text",
-                  "spdx" : "GPL-2.0"
-              }
-          ],
-          "copyrightStatement" : "© 2010-2018 Plasma Development Team",
-          "desktopFileName" : "org.kde.kirigamiapp"
-       }
-       @endcode
-     *
-     * @see KAboutData
-     * @see org::kde::kirigami::AboutItem::aboutData
+     *    "displayName" : "KirigamiApp",
+     *    "productName" : "kirigami/app",
+     *    "componentName" : "kirigamiapp",
+     *    "shortDescription" : "A Kirigami example",
+     *    "homepage" : "",
+     *    "bugAddress" : "submit@bugs.kde.org",
+     *    "version" : "5.14.80",
+     *    "otherText" : "",
+     *    "authors" : [
+     *        {
+     *            "name" : "...",
+     *            "task" : "",
+     *            "emailAddress" : "somebody@kde.org",
+     *            "webAddress" : "",
+     *            "ocsUsername" : ""
+     *        }
+     *    ],
+     *    "credits" : [],
+     *    "translators" : [],
+     *    "licenses" : [
+     *        {
+     *            "name" : "GPL v2",
+     *            "text" : "long, boring, license text",
+     *            "spdx" : "GPL-2.0"
+     *        }
+     *    ],
+     *    "copyrightStatement" : "© 2010-2018 Plasma Development Team",
+     *    "desktopFileName" : "org.kde.kirigamiapp"
+     * }
+     * @endcode
      * @property KAboutData aboutData
      */
     property alias aboutData: aboutItem.aboutData
@@ -80,7 +88,7 @@ Kirigami.ScrollablePage {
 
     /**
      * @brief This property holds a link to a "Donate" page.
-     * @since 5.101
+     * @since KDE Frameworks 5.101
      *
      * default: `"https://kde.org/community/donations" when application id starts with "org.kde.", otherwise it is empty.`
      */

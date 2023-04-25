@@ -23,7 +23,7 @@ import "../private" as PP
  * logically done as a new separate Page, even if potentially
  * are taller than the screen space.
  *
- * @since 2.0
+ * @since org.kde.kirigami 2.0
  * @inherit QtQuick.QtObject
  */
 QtObject {
@@ -44,7 +44,7 @@ QtObject {
     default property Item contentItem
 
     /**
-     * @brief This property tells whether the sheet is open and displaying its contents.
+     * @brief This property specifies whether the sheet is open and displaying its contents.
      */
     property bool sheetOpen
 
@@ -83,7 +83,7 @@ QtObject {
      *
      * default: ``0``
      *
-     * @since 2.12
+     * @since org.kde.kirigami 2.12
      */
     property real leftInset: 0
 
@@ -94,7 +94,7 @@ QtObject {
      *
      * default: ``0``
      *
-     * @since 2.12
+     * @since org.kde.kirigami 2.12
      */
     property real topInset: 0
 
@@ -105,7 +105,7 @@ QtObject {
      *
      * default: ``0``
      *
-     * @since 2.12
+     * @since org.kde.kirigami 2.12
      */
     property real rightInset: 0
 
@@ -116,14 +116,14 @@ QtObject {
      *
      * default: ``0``
      *
-     * @since 2.12
+     * @since org.kde.kirigami 2.12
      */
     property real bottomInset: 0
 
     /**
      * @brief This property holds an optional item which will be used as the sheet's header,
      * and will always be displayed.
-     * @since 5.43
+     * @since KDE Frameworks 5.43
      */
     property Item header: Kirigami.Heading {
         level: 2
@@ -141,7 +141,7 @@ QtObject {
     /**
      * @brief An optional item which will be used as the sheet's footer,
      * always kept on screen.
-     * @since 5.43
+     * @since KDE Frameworks 5.43
      */
     property Item footer
 
@@ -159,14 +159,14 @@ QtObject {
      *
      * default: `Only shown in desktop mode`
      *
-     * @since 5.44
+     * @since KDE Frameworks 5.44
      */
     property bool showCloseButton: !Kirigami.Settings.isMobile
 
     /**
      * @brief This property holds the sheet's title.
      * @note If the header property is set, this will have no effect as the heading will be replaced by the header.
-     * @since 5.84
+     * @since KDE Frameworks 5.84
      */
     property string title
 

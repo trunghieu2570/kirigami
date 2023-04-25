@@ -11,22 +11,23 @@ import org.kde.kirigami 2.19 as Kirigami
  *
  * Example usage:
  * @code{.qml}
- *     Kirigami.Page {
- *         Kirigami.LoadingPlaceholder {
- *             anchors.centerIn: parent
- *         }
+ * Kirigami.Page {
+ *     Kirigami.LoadingPlaceholder {
+ *         anchors.centerIn: parent
  *     }
+ * }
  * @endcode
+ *
  * @code{.qml}
- *     Kirigami.Page {
- *         Kirigami.LoadingPlaceholder {
- *             anchors.centerIn: parent
- *             determinate: true
- *             progressBar.value: loadingValue
- *         }
+ * Kirigami.Page {
+ *     Kirigami.LoadingPlaceholder {
+ *         anchors.centerIn: parent
+ *         determinate: true
+ *         progressBar.value: loadingValue
  *     }
+ * }
  * @endcode
- * @inherit org::kde::kirigami::PlaceholderMessage
+ * @inherit kirigami::PlaceholderMessage
  */
 Kirigami.PlaceholderMessage {
     id: loadingPlaceholder
@@ -35,7 +36,7 @@ Kirigami.PlaceholderMessage {
      * @brief This property holds whether the loading message shows a
      * determinate progress bar or not.
      *
-     * This should be true if you want to display the actual
+     * This should be @c true if you want to display the actual
      * percentage when it's loading.
      *
      * default: ``false``

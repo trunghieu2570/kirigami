@@ -15,7 +15,7 @@ import org.kde.kirigami 2.10 as Kirigami
  * It's intended to make all listviews look coherent.
  *
  * Example usage:
- * @code
+ * @code{.qml}
  * import QtQuick 2.5
  * import QtQuick.Controls 2.5 as QQC2
  *
@@ -36,6 +36,7 @@ import org.kde.kirigami 2.10 as Kirigami
  *  [...]
  * }
  * @endcode
+ * @inherit kirigami::AbstractListItem
  */
 Kirigami.AbstractListItem {
     id: listSection
@@ -46,6 +47,7 @@ Kirigami.AbstractListItem {
      */
     property alias label: listSection.text
 
+    /** @internal */
     default property alias _contents: rowLayout.data
 
     separatorVisible: false

@@ -31,50 +31,66 @@ public:
 };
 
 /**
- * This is an attached property to every item that is inserted in the ColumnView,
- * used to access the view and page information such as the position and information for layouting, such as fillWidth
- * @since 2.7
+ * This attached property is available to every child Item of the ColumnView,
+ * giving access to view and page information such as position and information for layouting.
+ * @since org.kde.kirigami 2.7
  */
 class ColumnViewAttached : public QObject
 {
     Q_OBJECT
 
     /**
-     * The index position of the column in the view, starting from 0
+     * @brief The index position of the column in the view, starting from 0.
      */
     Q_PROPERTY(int index READ index WRITE setIndex NOTIFY indexChanged)
 
     /**
-     * If true, the column will expand to take the whole viewport space minus reservedSpace
+     * @brief This property sets whether the item will expand and take the whole viewport space minus the reservedSpace.
      */
     Q_PROPERTY(bool fillWidth READ fillWidth WRITE setFillWidth NOTIFY fillWidthChanged)
 
     /**
-     * When a column is fillWidth, it will keep reservedSpace amount of pixels from going to fill the full viewport width
+     * @brief This property holds the reserved space in pixels
+     * applied to every item with fillWidth set to @c true.
+     *
+     * Every item that has fillWidth set to @c true will subtract this amount from the viewports width.
      */
     Q_PROPERTY(qreal reservedSpace READ reservedSpace WRITE setReservedSpace NOTIFY reservedSpaceChanged)
 
     /**
-     * Like the same property of MouseArea, when this is true, the column view won't
-     * try to manage events by itself when filtering from a child, not
-     * disturbing user interaction
+     * @brief This property sets whether the column view will manage input
+     * events from its children.
+     * 
+     * The ColumnView uses an event filter to intercept information about its
+     * children like layouting information. This may conflict with its children
+     * input events in special cases.
+     *  
+     * If you want to guarantee that a child of the column view will not be
+     * intercepted by this event filter and that input events are managed by the
+     * child, set this to @c true.
+     * 
+     * This is desirable in special cases where a component has a single purpose
+     * and is managed solely via input events, such as a map or document viewer.
+     * 
+     * @see QtQuick.MouseArea.preventStealing
      */
     Q_PROPERTY(bool preventStealing READ preventStealing WRITE setPreventStealing NOTIFY preventStealingChanged)
 
     /**
-     * If true the page will never go out of view, but will stay either
-     * at the right or left side of the ColumnView
+     * @brief This property sets whether this page will always be visible.
+     *
+     * When set to @c true, the page will either stay at the left or right side.
      */
     Q_PROPERTY(bool pinned READ isPinned WRITE setPinned NOTIFY pinnedChanged)
 
     /**
-     * The view this column belongs to
+     * @brief This is an attached property for Items to directly access the ColumnView.
      */
     Q_PROPERTY(ColumnView *view READ view NOTIFY viewChanged)
 
     /**
-     * True if this column is at least partly visible in the ColumnView's viewport.
-     * @since 5.77
+     * @brief This property holds whether this column is at least partly visible in ColumnView's viewport.
+     * @since KDE Frameworks 5.77
      */
     Q_PROPERTY(bool inViewport READ inViewport NOTIFY inViewportChanged)
 
@@ -142,126 +158,144 @@ private:
  * Items inside the ColumnView can access info of the view and set layouting hints via the ColumnView attached property.
  *
  * This is the base for the implementation of PageRow
- * @since 2.7
+ *
+ * @see ColumnViewAttached
+ * @since org.kde.kirigami 2.7
  */
 class ColumnView : public QQuickItem
 {
     Q_OBJECT
 
     /**
-     * The strategy to follow while automatically resizing the columns,
-     * the enum can have the following values:
-     * * FixedColumns: every column is fixed at the same width of the columnWidth property
-     * * DynamicColumns: columns take their width from their implicitWidth
-     * * SingleColumn: only one column at a time is shown, as wide as the viewport, eventual reservedSpace on the column's attached property is ignored
+     * @brief This property holds the ColumnView's column resizing strategy.
      */
     Q_PROPERTY(ColumnResizeMode columnResizeMode READ columnResizeMode WRITE setColumnResizeMode NOTIFY columnResizeModeChanged)
 
     /**
-     * The width of all columns when columnResizeMode is FixedColumns
+     * @brief The width of all columns when columnResizeMode is set to ``ColumnResizeMode::FixedColumns``.
      */
     Q_PROPERTY(qreal columnWidth READ columnWidth WRITE setColumnWidth NOTIFY columnWidthChanged)
 
     /**
-     * How many columns this view containsItem*/
+     * @brief This property holds the column count.
+     */
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
     /**
-     * The position of the currently active column. The current column will also have keyboard focus
+     * @brief This property holds the index of currently focused item.
+    * @note The current item will have keyboard focus.
      */
     Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex NOTIFY currentIndexChanged)
 
     /**
-     * The currently active column. The current column will also have keyboard focus
+     * @brief This property points to the currently focused item.
+     * @note The focused item will have keyboard focus.
      */
     Q_PROPERTY(QQuickItem *currentItem READ currentItem NOTIFY currentItemChanged)
 
     /**
-     * The main content item of this view: it's the parent of the column items
+     * @brief This property points to the contentItem of the view,
+     * which is the parent of the column items.
      */
     Q_PROPERTY(QQuickItem *contentItem READ contentItem CONSTANT)
 
     /**
-     * The value of the horizontal scroll of the view, in pixels
+     * @brief This property holds the view's horizontal scroll value in pixels.
      */
     Q_PROPERTY(qreal contentX READ contentX WRITE setContentX NOTIFY contentXChanged)
 
     /**
-     * The compound width of all columns in the view
+     * @brief This property holds the compound width of all columns in the view.
      */
     Q_PROPERTY(qreal contentWidth READ contentWidth NOTIFY contentWidthChanged)
 
     /**
-     * The padding this will have at the top
+     * @brief This property holds the view's top padding.
      */
     Q_PROPERTY(qreal topPadding READ topPadding WRITE setTopPadding NOTIFY topPaddingChanged)
 
     /**
-     * The padding this will have at the bottom
+     * @brief This property holds the view's bottom padding.
      */
     Q_PROPERTY(qreal bottomPadding READ bottomPadding WRITE setBottomPadding NOTIFY bottomPaddingChanged)
 
     /**
-     * The duration for scrolling animations
+     * @brief This property holds the scrolling animation's duration.
      */
     Q_PROPERTY(int scrollDuration READ scrollDuration WRITE setScrollDuration NOTIFY scrollDurationChanged)
 
     /**
-     * True if columns should be visually separated by a separator line
+     * @brief This property sets whether columns should be visually separated by a line.
      */
     Q_PROPERTY(bool separatorVisible READ separatorVisible WRITE setSeparatorVisible NOTIFY separatorVisibleChanged)
 
     /**
-     * The list of all visible column items that are at least partially in the viewport at any given moment
+     * @brief This property holds the list of all visible items that are currently at least partially visible.
      */
     Q_PROPERTY(QList<QObject *> visibleItems READ visibleItems NOTIFY visibleItemsChanged)
 
     /**
-     * The first of visibleItems provided from convenience
+     * @brief This property points to the first currently visible item.
      */
     Q_PROPERTY(QQuickItem *firstVisibleItem READ firstVisibleItem NOTIFY firstVisibleItemChanged)
 
     /**
-     * The last of visibleItems provided from convenience
+     * @brief This property points to the last currently visible item.
      */
     Q_PROPERTY(QQuickItem *lastVisibleItem READ lastVisibleItem NOTIFY lastVisibleItemChanged)
 
     // Properties to make it similar to Flickable
     /**
-     * True when the user is dragging around with touch gestures the view contents
+     * @brief This property specifies whether the user is currently dragging the view's contents with a touch gesture.
      */
     Q_PROPERTY(bool dragging READ dragging NOTIFY draggingChanged)
 
     /**
-     * True both when the user is dragging around with touch gestures the view contents or the view is animating
+     * @brief This property specifies whether the user is currently dragging
+     * the view's contents with a touch gesture or if the view is animating.
+     *
      */
     Q_PROPERTY(bool moving READ moving NOTIFY movingChanged)
 
     /**
-     * True if it supports moving the contents by dragging
+     * @brief This property sets whether the view supports moving the contents by
+     * dragging them with a touch gesture.
      */
     Q_PROPERTY(bool interactive READ interactive WRITE setInteractive NOTIFY interactiveChanged)
 
     /**
-     * True if the contents can be dragged also with mouse besides touch
+     * @brief This property sets whether the view supports moving the contents
+     * by dragging them with a mouse.
      */
     Q_PROPERTY(bool acceptsMouse READ acceptsMouse WRITE setAcceptsMouse NOTIFY acceptsMouseChanged)
 
     // Default properties
     /**
-     * Every column item the view contains
+     * @brief This property holds a list of every column visual item that the view currently contains.
      */
     Q_PROPERTY(QQmlListProperty<QQuickItem> contentChildren READ contentChildren NOTIFY contentChildrenChanged FINAL)
+
     /**
-     * every item declared inside the view, both visual and non-visual items
+     * @brief This property holds a list of every column visual and non-visual item that the view currently contains.
      */
     Q_PROPERTY(QQmlListProperty<QObject> contentData READ contentData FINAL)
     Q_CLASSINFO("DefaultProperty", "contentData")
 
 public:
     enum ColumnResizeMode {
+        /**
+         * @brief Every column is fixed at the same width specified by columnWidth property.
+         */
         FixedColumns = 0,
+
+        /**
+         * @brief Columns take their width from the implicitWidth property.
+         */
         DynamicColumns,
+
+        /**
+         * @brief Only one column is shown, and as wide as the viewport allows it.
+         */
         SingleColumn,
     };
     Q_ENUM(ColumnResizeMode)
@@ -328,70 +362,96 @@ public:
 
 public Q_SLOTS:
     /**
-     * Pushes a new item at the end of the view
+     * @brief This method pushes a new item to the end of the view.
      * @param item the new item which will be reparented and managed
      */
     void addItem(QQuickItem *item);
 
     /**
-     * Inserts a new item in the view at a given position.
+     * @brief This method inserts a new item in the view at a given position.
+     *
      * The current Item will not be changed, currentIndex will be adjusted
      * accordingly if needed to keep the same current item.
+     *
      * @param pos the position we want the new item to be inserted in
      * @param item the new item which will be reparented and managed
      */
     void insertItem(int pos, QQuickItem *item);
 
     /**
-     * Replaces an item in the view at a given position with a new item.
+     * @brief This method replaces an item in the view at a given position with a new item.
+     *
      * The current Item and currentIndex will not be changed.
+     *
      * @param pos the position we want the new item to be placed in
      * @param item the new item which will be reparented and managed
      */
     void replaceItem(int pos, QQuickItem *item);
 
     /**
-     * Move an item inside the view.
+     * @brief This method swaps items at given positions.
+     *
      * The currentIndex property may be changed in order to keep currentItem the same.
+     *
      * @param from the old position
      * @param to the new position
      */
     void moveItem(int from, int to);
 
     /**
-     * Removes an item from the view.
+     * @brief This method removes an item from the view.
+     *
      * Items will be reparented to their old parent.
      * If they have JavaScript ownership and they didn't have an old parent, they will be destroyed.
-     * CurrentIndex may be changed in order to keep the same currentItem
+     *
+     * The currentIndex property may be changed in order to keep the same currentItem.
+     *
      * @param item it can either be a pointer of an item or an integer specifying the position to remove
      * @returns the item that has just been removed
      */
     QQuickItem *removeItem(const QVariant &item);
 
     /**
-     * Removes all the items after item. Starting from the last column, every column will be removed until item is found, which will be left in place.
-     * Items will be reparented to their old parent.
-     * If they have JavaScript ownership and they didn't have an old parent, they will be destroyed
-     * @param item the item which will be the new last one of the row.
-     * @returns the last item that has been removed
+     * @brief This method removes every item after the specified @p item from
+     * the column view.
+     *
+     * If no item is specified, only the last item will be removed.
+     *
+     * Items that are inserted in a column view are reparented to the column
+     * view while keeping information about the original parent, if available.
+     *
+     * After calling this method, the items removed from the column view will
+     * either be reparented back to their original parent if they had one, or be
+     * deleted if they did not (this is normally the case if the item was
+     * created from a JavaScript expression).
+     *
+     * @param item it can either be a pointer to an item or an integer
+     * specifying the position to remove.
+     *
+     * @returns the item that has just been removed.
      */
     QQuickItem *pop(QQuickItem *item);
 
     /**
-     * Removes every item in the view.
+     * @brief This method removes every item in the view.
+     *
      * Items will be reparented to their old parent.
      * If they have JavaScript ownership and they didn't have an old parent, they will be destroyed
      */
     void clear();
 
     /**
-     * @returns true if the view contains the given item
+     * @brief This method checks whether an item is present in the view.
      */
     bool containsItem(QQuickItem *item);
 
     /**
-     * Returns the visible item containing the point x, y in content coordinates.
+     * @brief This method returns the item in the view at a given position.
+     *
      * If there is no item at the point specified, or the item is not visible null is returned.
+     *
+     * @param x The horizontal position of the item
+     * @param y The vertical position of the item
      */
     QQuickItem *itemAt(qreal x, qreal y);
 
@@ -413,14 +473,14 @@ protected:
 
 Q_SIGNALS:
     /**
-     * A new item has been inserted
+     * @brief This signal is emitted when an item has been inserted into the view.
      * @param position where the page has been inserted
      * @param item a pointer to the new item
      */
     void itemInserted(int position, QQuickItem *item);
 
     /**
-     * An item has just been removed from the view
+     * @brief This signal is emitted when an item has been removed from the view.
      * @param item a pointer to the item that has just been removed
      */
     void itemRemoved(QQuickItem *item);

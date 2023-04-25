@@ -11,6 +11,7 @@ import org.kde.kirigami 2.13 as Kirigami
 //TODO KF6: how much is this used? can be removed?
 /**
  * @brief FlexColumn is a column that grows in width to a fixed cap.
+ * @warning This might be removed in KF6 due to not being used.
  * @inherit QtQuick.Layouts.ColumnLayout
  */
 ColumnLayout {

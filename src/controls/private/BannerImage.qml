@@ -65,7 +65,7 @@ Kirigami.ShadowedImage {
      *
      * default: ``1``
      *
-     * @see org::kde::kirigami::Heading::level
+     * @see kirigami::Heading::level
      * @property int titleLevel
      */
     property alias titleLevel: heading.level
@@ -75,7 +75,7 @@ Kirigami.ShadowedImage {
      *
      * default: ``Text.NoWrap``
      *
-     * @see QtQuick.Text::wrapMode
+     * @see QtQuick.Text.wrapMode
      * @property int titleWrapMode
      */
     property alias titleWrapMode: heading.wrapMode
