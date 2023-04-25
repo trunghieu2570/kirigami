@@ -43,18 +43,6 @@ Kirigami.AbstractCard {
     property list<QtObject> actions
 
     /**
-     * @brief This property holds hidden actions that will be available in the footer.
-     *
-     * These actions will only be shown in the overflow menu, even when there is enough space.
-     *
-     * @deprecated Use actions with a ``Kirigami.DisplayHint.AlwaysHide`` as displayHint.
-     * @see org::kde::kirigami::DisplayHint
-     * @property list<org::kde::kirigami::Action> hiddenActions
-     * @since 2.6
-     */
-    property alias hiddenActions: actionsToolBar.hiddenActions
-
-    /**
      * @brief This grouped property controls the banner image present in the header.
      *
      * This grouped property has the following sub-properties:
