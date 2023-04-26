@@ -72,12 +72,12 @@ Flickable {
                     }
                     Kirigami.Heading {
                         Layout.leftMargin: Kirigami.Units.largeSpacing
+                        Layout.rightMargin: Kirigami.Units.largeSpacing
                         color: Kirigami.Theme.textColor
                         verticalAlignment: Text.AlignVCenter
                         wrapMode: Text.NoWrap
                         text: delegateLayout.page ? delegateLayout.page.title : ""
                         opacity: modelData === pageRow.currentIndex ? 1 : 0.4
-                        rightPadding: Kirigami.Units.largeSpacing
                     }
                 }
             }
