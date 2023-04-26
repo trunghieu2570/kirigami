@@ -14,19 +14,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 20.08.1\n"
 
-#: controls/AboutItem.qml:128
+#: controls/AboutItem.qml:133
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr ""
 
-#: controls/AboutItem.qml:137
+#: controls/AboutItem.qml:142
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr ""
 
-#: controls/AboutItem.qml:146
+#: controls/AboutItem.qml:151
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "Send an email to %1"
@@ -34,22 +34,22 @@ msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Saada e-kiri aadressile %1"
 
-#: controls/AboutItem.qml:196
+#: controls/AboutItem.qml:201
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr ""
 
-#: controls/AboutItem.qml:202
+#: controls/AboutItem.qml:207
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr ""
 
-#: controls/AboutItem.qml:219
+#: controls/AboutItem.qml:224
 msgctxt "AboutItem|"
 msgid "Report a Bug"
 msgstr ""
 
-#: controls/AboutItem.qml:232
+#: controls/AboutItem.qml:237
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Copyright"
@@ -57,7 +57,7 @@ msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Autoriõigus"
 
-#: controls/AboutItem.qml:276
+#: controls/AboutItem.qml:281
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "License:"
@@ -65,7 +65,7 @@ msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Litsents:"
 
-#: controls/AboutItem.qml:298
+#: controls/AboutItem.qml:303
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "License: %1"
@@ -73,7 +73,7 @@ msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Litsents: %1"
 
-#: controls/AboutItem.qml:309
+#: controls/AboutItem.qml:314
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Libraries in use"
@@ -81,7 +81,7 @@ msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Kasutatavad teegid"
 
-#: controls/AboutItem.qml:339
+#: controls/AboutItem.qml:344
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Authors"
@@ -89,12 +89,12 @@ msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autorid"
 
-#: controls/AboutItem.qml:348
+#: controls/AboutItem.qml:353
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr ""
 
-#: controls/AboutItem.qml:379
+#: controls/AboutItem.qml:384
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Credits"
@@ -102,7 +102,7 @@ msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Tunnustus"
 
-#: controls/AboutItem.qml:392
+#: controls/AboutItem.qml:397
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Translators"
@@ -110,7 +110,7 @@ msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Tõlkijad"
 
-#: controls/AboutPage.qml:93
+#: controls/AboutPage.qml:101
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "About"
@@ -118,17 +118,17 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Teave"
 
-#: controls/AbstractApplicationWindow.qml:199
+#: controls/AbstractApplicationWindow.qml:202
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr ""
 
-#: controls/ActionToolBar.qml:205
+#: controls/ActionToolBar.qml:208
 msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Veel toiminguid"
 
-#: controls/Avatar.qml:163
+#: controls/Avatar.qml:171
 #, qt-format
 msgctxt "Avatar|"
 msgid "%1 — %2"
@@ -139,22 +139,22 @@ msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr ""
 
-#: controls/ContextDrawer.qml:66
+#: controls/ContextDrawer.qml:67
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Toimingud"
 
-#: controls/GlobalDrawer.qml:504
+#: controls/GlobalDrawer.qml:506
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Tagasi"
 
-#: controls/GlobalDrawer.qml:597
+#: controls/GlobalDrawer.qml:599
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Sulge külgriba"
 
-#: controls/GlobalDrawer.qml:600
+#: controls/GlobalDrawer.qml:602
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
@@ -162,12 +162,12 @@ msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Sulge külgriba"
 
-#: controls/LoadingPlaceholder.qml:54
+#: controls/LoadingPlaceholder.qml:55
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
 msgstr ""
 
-#: controls/PasswordField.qml:42
+#: controls/PasswordField.qml:41
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Parool"
@@ -185,7 +185,7 @@ msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr ""
 
-#: controls/SearchField.qml:94
+#: controls/SearchField.qml:93
 #, fuzzy
 #| msgctxt "SearchField|"
 #| msgid "Search"
@@ -193,23 +193,23 @@ msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Otsi"
 
-#: controls/SearchField.qml:96
+#: controls/SearchField.qml:95
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "Otsi"
 
-#: controls/SearchField.qml:107
+#: controls/SearchField.qml:106
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr ""
 
-#: controls/settingscomponents/CategorizedSettings.qml:40
-#: controls/settingscomponents/CategorizedSettings.qml:104
+#: controls/settingscomponents/CategorizedSettings.qml:41
+#: controls/settingscomponents/CategorizedSettings.qml:105
 msgctxt "CategorizedSettings|"
 msgid "Settings"
 msgstr ""
 
-#: controls/settingscomponents/CategorizedSettings.qml:40
+#: controls/settingscomponents/CategorizedSettings.qml:41
 #, qt-format
 msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
@@ -251,7 +251,7 @@ msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "Liigu edasi"
 
-#: controls/templates/OverlayDrawer.qml:130
+#: controls/templates/OverlayDrawer.qml:139
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
@@ -259,7 +259,7 @@ msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Sulge külgriba"
 
-#: controls/templates/OverlayDrawer.qml:136
+#: controls/templates/OverlayDrawer.qml:145
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr ""
@@ -274,12 +274,12 @@ msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "Liigu edasi"
 
-#: controls/ToolBarApplicationHeader.qml:115
+#: controls/ToolBarApplicationHeader.qml:118
 msgctxt "ToolBarApplicationHeader|"
 msgid "More Actions"
 msgstr "Veel toiminguid"
 
-#: controls/UrlButton.qml:51
+#: controls/UrlButton.qml:54
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr ""

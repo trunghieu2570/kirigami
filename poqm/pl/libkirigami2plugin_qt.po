@@ -14,97 +14,97 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 22.12.2\n"
 
-#: controls/AboutItem.qml:128
+#: controls/AboutItem.qml:133
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controls/AboutItem.qml:137
+#: controls/AboutItem.qml:142
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr "Odwiedź stronę sklepu KDE %1"
 
-#: controls/AboutItem.qml:146
+#: controls/AboutItem.qml:151
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Wyślij wiadomość do %1"
 
-#: controls/AboutItem.qml:196
+#: controls/AboutItem.qml:201
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Współtwórz"
 
-#: controls/AboutItem.qml:202
+#: controls/AboutItem.qml:207
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr "Darowizna"
 
-#: controls/AboutItem.qml:219
+#: controls/AboutItem.qml:224
 msgctxt "AboutItem|"
 msgid "Report a Bug"
 msgstr "Zgłoś błąd"
 
-#: controls/AboutItem.qml:232
+#: controls/AboutItem.qml:237
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Prawa autorskie"
 
-#: controls/AboutItem.qml:276
+#: controls/AboutItem.qml:281
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Licencja:"
 
-#: controls/AboutItem.qml:298
+#: controls/AboutItem.qml:303
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Licencja: %1"
 
-#: controls/AboutItem.qml:309
+#: controls/AboutItem.qml:314
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Używane biblioteki"
 
-#: controls/AboutItem.qml:339
+#: controls/AboutItem.qml:344
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autorzy"
 
-#: controls/AboutItem.qml:348
+#: controls/AboutItem.qml:353
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Pokaż zdjęcia autorów"
 
-#: controls/AboutItem.qml:379
+#: controls/AboutItem.qml:384
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Zasługi"
 
-#: controls/AboutItem.qml:392
+#: controls/AboutItem.qml:397
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Tłumacze"
 
-#: controls/AboutPage.qml:93
+#: controls/AboutPage.qml:101
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "O %1"
 
-#: controls/AbstractApplicationWindow.qml:199
+#: controls/AbstractApplicationWindow.qml:202
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Zakończ"
 
-#: controls/ActionToolBar.qml:205
+#: controls/ActionToolBar.qml:208
 msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Więcej działań"
 
-#: controls/Avatar.qml:163
+#: controls/Avatar.qml:171
 #, qt-format
 msgctxt "Avatar|"
 msgid "%1 — %2"
@@ -115,32 +115,32 @@ msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr "Usuń znacznik"
 
-#: controls/ContextDrawer.qml:66
+#: controls/ContextDrawer.qml:67
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Działania"
 
-#: controls/GlobalDrawer.qml:504
+#: controls/GlobalDrawer.qml:506
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Wstecz"
 
-#: controls/GlobalDrawer.qml:597
+#: controls/GlobalDrawer.qml:599
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Zamknij pasek boczny"
 
-#: controls/GlobalDrawer.qml:600
+#: controls/GlobalDrawer.qml:602
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Otwórz pasek boczny"
 
-#: controls/LoadingPlaceholder.qml:54
+#: controls/LoadingPlaceholder.qml:55
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
 msgstr "Wczytywanie..."
 
-#: controls/PasswordField.qml:42
+#: controls/PasswordField.qml:41
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Hasło"
@@ -155,28 +155,28 @@ msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr "Otwórz menu"
 
-#: controls/SearchField.qml:94
+#: controls/SearchField.qml:93
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Poszukaj..."
 
-#: controls/SearchField.qml:96
+#: controls/SearchField.qml:95
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "Szukaj"
 
-#: controls/SearchField.qml:107
+#: controls/SearchField.qml:106
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "Wyczyść wyszukiwanie"
 
-#: controls/settingscomponents/CategorizedSettings.qml:40
-#: controls/settingscomponents/CategorizedSettings.qml:104
+#: controls/settingscomponents/CategorizedSettings.qml:41
+#: controls/settingscomponents/CategorizedSettings.qml:105
 msgctxt "CategorizedSettings|"
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: controls/settingscomponents/CategorizedSettings.qml:40
+#: controls/settingscomponents/CategorizedSettings.qml:41
 #, qt-format
 msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
@@ -216,12 +216,12 @@ msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "Przejdź do %1."
 
-#: controls/templates/OverlayDrawer.qml:130
+#: controls/templates/OverlayDrawer.qml:139
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Zamknij szufladę"
 
-#: controls/templates/OverlayDrawer.qml:136
+#: controls/templates/OverlayDrawer.qml:145
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Otwórz szufladę"
@@ -236,12 +236,12 @@ msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "Przejdź naprzód"
 
-#: controls/ToolBarApplicationHeader.qml:115
+#: controls/ToolBarApplicationHeader.qml:118
 msgctxt "ToolBarApplicationHeader|"
 msgid "More Actions"
 msgstr "Więcej działań"
 
-#: controls/UrlButton.qml:51
+#: controls/UrlButton.qml:54
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Skopiuj odnośnik do schowka"

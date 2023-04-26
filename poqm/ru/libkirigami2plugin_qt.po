@@ -16,97 +16,97 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 22.08.3\n"
 
-#: controls/AboutItem.qml:128
+#: controls/AboutItem.qml:133
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controls/AboutItem.qml:137
+#: controls/AboutItem.qml:142
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr "Перейти на страницу %1 в магазине приложений KDE"
 
-#: controls/AboutItem.qml:146
+#: controls/AboutItem.qml:151
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Send an email to %1"
 
-#: controls/AboutItem.qml:196
+#: controls/AboutItem.qml:201
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Присоединиться к команде"
 
-#: controls/AboutItem.qml:202
+#: controls/AboutItem.qml:207
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr "Сделать пожертвование"
 
-#: controls/AboutItem.qml:219
+#: controls/AboutItem.qml:224
 msgctxt "AboutItem|"
 msgid "Report a Bug"
 msgstr "Сообщить об ошибке"
 
-#: controls/AboutItem.qml:232
+#: controls/AboutItem.qml:237
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Авторские права"
 
-#: controls/AboutItem.qml:276
+#: controls/AboutItem.qml:281
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Лицензия:"
 
-#: controls/AboutItem.qml:298
+#: controls/AboutItem.qml:303
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Лицензия: %1"
 
-#: controls/AboutItem.qml:309
+#: controls/AboutItem.qml:314
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Используемые библиотеки"
 
-#: controls/AboutItem.qml:339
+#: controls/AboutItem.qml:344
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Авторы"
 
-#: controls/AboutItem.qml:348
+#: controls/AboutItem.qml:353
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Показать фотографии авторов"
 
-#: controls/AboutItem.qml:379
+#: controls/AboutItem.qml:384
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Благодарности"
 
-#: controls/AboutItem.qml:392
+#: controls/AboutItem.qml:397
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Переводчики"
 
-#: controls/AboutPage.qml:93
+#: controls/AboutPage.qml:101
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "О программе %1"
 
-#: controls/AbstractApplicationWindow.qml:199
+#: controls/AbstractApplicationWindow.qml:202
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Выход"
 
-#: controls/ActionToolBar.qml:205
+#: controls/ActionToolBar.qml:208
 msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Больше действий"
 
-#: controls/Avatar.qml:163
+#: controls/Avatar.qml:171
 #, qt-format
 msgctxt "Avatar|"
 msgid "%1 — %2"
@@ -117,32 +117,32 @@ msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr "Удаление метки"
 
-#: controls/ContextDrawer.qml:66
+#: controls/ContextDrawer.qml:67
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Действия"
 
-#: controls/GlobalDrawer.qml:504
+#: controls/GlobalDrawer.qml:506
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Назад"
 
-#: controls/GlobalDrawer.qml:597
+#: controls/GlobalDrawer.qml:599
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Закрыть боковую панель"
 
-#: controls/GlobalDrawer.qml:600
+#: controls/GlobalDrawer.qml:602
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Открыть боковую панель"
 
-#: controls/LoadingPlaceholder.qml:54
+#: controls/LoadingPlaceholder.qml:55
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
 msgstr "Загрузка…"
 
-#: controls/PasswordField.qml:42
+#: controls/PasswordField.qml:41
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Пароль"
@@ -157,28 +157,28 @@ msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr "Открыть меню"
 
-#: controls/SearchField.qml:94
+#: controls/SearchField.qml:93
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Поиск…"
 
-#: controls/SearchField.qml:96
+#: controls/SearchField.qml:95
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "Поиск"
 
-#: controls/SearchField.qml:107
+#: controls/SearchField.qml:106
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "Очистить поиск"
 
-#: controls/settingscomponents/CategorizedSettings.qml:40
-#: controls/settingscomponents/CategorizedSettings.qml:104
+#: controls/settingscomponents/CategorizedSettings.qml:41
+#: controls/settingscomponents/CategorizedSettings.qml:105
 msgctxt "CategorizedSettings|"
 msgid "Settings"
 msgstr "Параметры"
 
-#: controls/settingscomponents/CategorizedSettings.qml:40
+#: controls/settingscomponents/CategorizedSettings.qml:41
 #, qt-format
 msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
@@ -218,12 +218,12 @@ msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "Перейти к %1."
 
-#: controls/templates/OverlayDrawer.qml:130
+#: controls/templates/OverlayDrawer.qml:139
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Закрыть панель"
 
-#: controls/templates/OverlayDrawer.qml:136
+#: controls/templates/OverlayDrawer.qml:145
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Открыть панель"
@@ -238,12 +238,12 @@ msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "Перейти вперёд"
 
-#: controls/ToolBarApplicationHeader.qml:115
+#: controls/ToolBarApplicationHeader.qml:118
 msgctxt "ToolBarApplicationHeader|"
 msgid "More Actions"
 msgstr "Больше действий"
 
-#: controls/UrlButton.qml:51
+#: controls/UrlButton.qml:54
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Копировать ссылку в буфер обмена"
