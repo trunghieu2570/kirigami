@@ -5,6 +5,8 @@
  */
 
 #include "formlayoutattached.h"
+#include "loggingcategory.h"
+
 #include <QDebug>
 #include <QQuickItem>
 
@@ -12,6 +14,9 @@ FormLayoutAttached::FormLayoutAttached(QObject *parent)
     : QObject(parent)
 {
     m_buddyFor = qobject_cast<QQuickItem *>(parent);
+    if (!m_buddyFor) {
+        qWarning(KirigamiLog) << "FormData must be attached to an Item";
+    }
 }
 
 FormLayoutAttached::~FormLayoutAttached()
@@ -68,14 +73,43 @@ QQuickItem *FormLayoutAttached::buddyFor() const
     return m_buddyFor;
 }
 
-void FormLayoutAttached::setBuddyFor(QQuickItem *buddyfor)
+void FormLayoutAttached::setBuddyFor(QQuickItem *aBuddyFor)
 {
-    if (m_buddyFor == buddyfor || !m_buddyFor->isAncestorOf(buddyfor)) {
+    if (m_buddyFor == aBuddyFor) {
         return;
     }
 
-    m_buddyFor = buddyfor;
+    const auto attachee = qobject_cast<QQuickItem *>(parent());
+
+    if (!attachee) {
+        return;
+    }
+
+    // TODO: Use ScenePosition or introduce new type for optimized relative
+    // position calculation to support more nested buddy.
+
+    if (aBuddyFor && aBuddyFor != attachee && aBuddyFor->parentItem() != attachee) {
+        qWarning(KirigamiLog).nospace() << "FormData.buddyFor must be a direct child of the attachee. Attachee: " << attachee << ", buddyFor: " << aBuddyFor;
+        return;
+    }
+
+    if (m_buddyFor) {
+        disconnect(m_buddyFor, &QObject::destroyed, this, &FormLayoutAttached::resetBuddyFor);
+    }
+
+    m_buddyFor = aBuddyFor;
+
+    if (m_buddyFor) {
+        connect(m_buddyFor, &QObject::destroyed, this, &FormLayoutAttached::resetBuddyFor);
+    }
+
     Q_EMIT buddyForChanged();
+}
+
+void FormLayoutAttached::resetBuddyFor()
+{
+    const auto attachee = qobject_cast<QQuickItem *>(parent());
+    setBuddyFor(attachee);
 }
 
 FormLayoutAttached *FormLayoutAttached::qmlAttachedProperties(QObject *object)

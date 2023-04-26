@@ -102,6 +102,10 @@ class FormLayoutAttached : public QObject
      * A buddy item is useful for instance when the label has a keyboard accelerator,
      * which when triggered provides active keyboard focus to the buddy item.
      *
+     * By default buddy is the item that Kirigami.FormData is attached to.
+     * Custom buddy can only be a direct child of that item; nested components
+     * are not supported at the moment.
+     *
      * @code
      * Kirigami.FormLayout {
      *     Layouts.ColumnLayout {
@@ -133,7 +137,7 @@ public:
     bool isSection() const;
 
     QQuickItem *buddyFor() const;
-    void setBuddyFor(QQuickItem *buddyfor);
+    void setBuddyFor(QQuickItem *aBuddyFor);
 
     int labelAlignment() const;
     void setLabelAlignment(int alignment);
@@ -148,6 +152,8 @@ Q_SIGNALS:
     void labelAlignmentChanged();
 
 private:
+    void resetBuddyFor();
+
     QString m_label;
     QString m_actualDecoratedLabel;
     QString m_decoratedLabel;
