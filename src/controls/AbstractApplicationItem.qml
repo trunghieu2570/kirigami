@@ -10,6 +10,7 @@ import QtQuick.Templates 2.12 as T
 import QtQuick.Window 2.12
 import org.kde.kirigami 2.14 as Kirigami
 import "templates/private" as TP
+import "templates" as KT
 
 /**
  * @brief An item that provides the features of AbstractApplicationWindow without the window itself.
@@ -98,9 +99,8 @@ Item {
 
     /**
      * @brief This property holds an item that can be used as a menuBar for the application.
-     * @warning This will be restricted to QQC2.MenuBar in KF6.
      */
-    property Item menuBar // TODO KF6 restrict type to QQC2.MenuBar
+    property T.MenuBar menuBar
 
     /**
     * @brief This property holds an item that can be used as a title for the application.
@@ -117,10 +117,9 @@ Item {
     *
     * To achieve a titlebar that stays completely fixed, just set the 3 sizes as the same.
     *
-    * @warning This will be restricted to Kirigami.ApplicationHeader in KF6.
-    * @property org::kde:kirigami::ApplicationHeader header
+    * @property kirigami::templates::AbstractApplicationHeader header
     */
-    property Item header // TODO KF6 restrict the type to Kirigami.ApplicationHeader
+    property KT.AbstractApplicationHeader header
 
     /**
      * @brief This property holds an item that can be used as a footer for the application.
