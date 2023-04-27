@@ -350,7 +350,7 @@ QQC2.Page {
                     return false;
                 }
 
-                if (!root.actions.length === 0) {
+                if (root.actions.length === 0) {
                     return false;
                 }
 
