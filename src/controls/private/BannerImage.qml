@@ -18,20 +18,6 @@ Kirigami.ShadowedImage {
     id: root
 
 //BEGIN properties
-    /*
-     * FIXME: compatibility
-     *
-     * @deprecated Please use `source` property instead!
-     */
-    property alias imageSource: root.source
-
-    /*
-     * FIXME: compatibility
-     *
-     * @deprecated Please use `titleIcon` property instead!
-     */
-    property alias iconSource: root.titleIcon
-
     /**
      * @brief This property holds an icon to be displayed alongside the title.
      *
