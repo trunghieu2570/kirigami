@@ -258,10 +258,8 @@ QQC2.Control {
         property color textColor: Kirigami.ColorUtils.brightnessForColor(avatarRoot.color) === Kirigami.ColorUtils.Light
                                 ? "black"
                                 : "white"
-        property bool showImage: {
-            return (avatarRoot.imageMode === Kirigami.Avatar.ImageMode.AlwaysShowImage) ||
-                   (avatarImage.status === Image.Ready && avatarRoot.imageMode === Kirigami.Avatar.ImageMode.AdaptiveImageOrInitals)
-        }
+        readonly property bool showImage: (avatarRoot.imageMode === Kirigami.Avatar.ImageMode.AlwaysShowImage)
+            || (avatarImage.status === Image.Ready && avatarRoot.imageMode === Kirigami.Avatar.ImageMode.AdaptiveImageOrInitals)
     }
 
     contentItem: Item {
