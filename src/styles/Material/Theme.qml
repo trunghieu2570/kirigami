@@ -17,7 +17,7 @@ Kirigami.BasicThemeDefinition {
     Material.elevation: 2
 
     textColor: theme.Material.foreground
-    disabledTextColor: "#9931363b"
+    disabledTextColor: Qt.rgba(theme.textColor.r, theme.textColor.g, theme.textColor.b, 0.6)
 
     highlightColor: theme.Material.accent
     //FIXME: something better?
