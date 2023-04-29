@@ -49,15 +49,6 @@ QQC2.Label {
     property int level: 1
 
     /**
-     * @brief This property holds the point size between heading levels.
-     *
-     * default: ``0``
-     *
-     * @deprecated
-     */
-    property int step: 0
-
-    /**
      * @brief This enumeration defines heading types.
      *
      * This enum helps with heading visibility (making it less or more important).
@@ -83,42 +74,29 @@ QQC2.Label {
      */
     property int type: Kirigami.Heading.Type.Normal
 
-    font.pointSize: __headerPointSize(level)
+    font.pointSize: {
+        let factor = 1;
+        switch (heading.level) {
+            case 1:
+                factor = 1.35;
+                break;
+            case 2:
+                factor = 1.20;
+                break;
+            case 3:
+                factor = 1.15;
+                break;
+            case 4:
+                factor = 1.10;
+                break;
+            default:
+                break;
+        }
+        return Kirigami.Theme.defaultFont.pointSize * factor;
+    }
     font.weight: type === Kirigami.Heading.Type.Primary ? Font.DemiBold : Font.Normal
 
     opacity: type === Kirigami.Heading.Type.Secondary ? 0.7 : 1
 
     Accessible.role: Accessible.Heading
-
-    // TODO KF6: Remove this public method
-    function headerPointSize(l) {
-        console.warn("org.kde.plasma.extras/Heading::headerPointSize() is deprecated. Use font.pointSize directly instead");
-        return __headerPointSize(l);
-    }
-
-    //
-    //  W A R N I N G
-    //  -------------
-    //
-    // This method is not part of the Kirigami API.  It exists purely as an
-    // implementation detail.  It may change from version to
-    // version without notice, or even be removed.
-    //
-    // We mean it.
-    //
-    function __headerPointSize(level) {
-        const n = Kirigami.Theme.defaultFont.pointSize;
-        switch (level) {
-        case 1:
-            return n * 1.35 + step;
-        case 2:
-            return n * 1.20 + step;
-        case 3:
-            return n * 1.15 + step;
-        case 4:
-            return n * 1.10 + step;
-        default:
-            return n + step;
-        }
-    }
 }
