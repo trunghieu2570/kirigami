@@ -105,9 +105,7 @@ Kirigami.AbstractApplicationWindow {
     wideScreen: width >= (root.pageStack.defaultColumnWidth) + ((contextDrawer && !(contextDrawer instanceof Kirigami.ContextDrawer)) ? contextDrawer.width : 0) + (globalDrawer ? globalDrawer.width : 0)
 
     Component.onCompleted: {
-        if (pageStack.currentItem) {
-            pageStack.currentItem.forceActiveFocus()
-        }
+        pageStack.currentItem?.forceActiveFocus()
     }
 
     PageRow {

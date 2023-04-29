@@ -92,9 +92,7 @@ Kirigami.AbstractApplicationItem {
     wideScreen: width >= applicationWindow().pageStack.defaultColumnWidth * 2
 
     Component.onCompleted: {
-        if (pageStack.currentItem) {
-            pageStack.currentItem.forceActiveFocus();
-        }
+        pageStack.currentItem?.forceActiveFocus();
     }
 
     Kirigami.PageRow {

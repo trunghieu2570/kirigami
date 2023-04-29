@@ -122,9 +122,7 @@ Kirigami.OverlayDrawer {
     handleVisible: applicationWindow === undefined ? false : applicationWindow().controlsVisible
 
     onPeekingChanged: {
-        if (page) {
-            page.contextualActionsAboutToShow();
-        }
+        page?.contextualActionsAboutToShow();
     }
     contentItem: QQC2.ScrollView {
         // this just to create the attached property

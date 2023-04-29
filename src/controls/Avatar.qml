@@ -187,9 +187,7 @@ QQC2.Control {
     Keys.onSpacePressed: event => __triggerMainAction()
 
     function __triggerMainAction() {
-        if (actions.main) {
-            actions.main.trigger();
-        }
+        actions.main?.trigger();
     }
 
     background: Rectangle {
