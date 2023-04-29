@@ -13,7 +13,28 @@ QQC2.ToolButton {
 
     icon.name: (LayoutMirroring.enabled ? "go-previous-symbolic-rtl" : "go-previous-symbolic")
 
-    enabled: applicationWindow().pageStack.layers.depth > 1 || (applicationWindow().pageStack.depth > 1 && (applicationWindow().pageStack.currentIndex > 0 || applicationWindow().pageStack.contentItem.contentX > 0))
+    enabled: {
+        const pageStack = applicationWindow().pageStack;
+
+        if (pageStack.layers.depth > 1) {
+            return true;
+        }
+
+        if (pageStack.depth > 1) {
+            if (pageStack.currentIndex > 0) {
+                return true;
+            }
+
+            const view = pageStack.columnView;
+            if (LayoutMirroring.enabled) {
+                return view.contentWidth - view.width < view.contentX
+            } else {
+                return view.contentX > 0;
+            }
+        }
+
+        return false;
+    }
 
     // The gridUnit wiggle room is used to not flicker the button visibility during an animated resize for instance due to a sidebar collapse
     visible: {
