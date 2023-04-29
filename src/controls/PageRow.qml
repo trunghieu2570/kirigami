@@ -59,7 +59,7 @@ QT.Control {
      * @brief This property sets the initial page for this PageRow.
      * @property Page initialPage
      */
-    property variant initialPage
+    property var initialPage
 
     /**
      * @brief This property holds the main ColumnView of this Row.
