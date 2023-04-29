@@ -29,9 +29,8 @@ QtObject {
         return style;
     }
 
-    // TODO KF6: remove bool support.
-    // Until then, `true` is considered as both `ShowBackButton | ShowForwardButton` together.
-    property var/*flags<NavigationButtons> | bool*/ showNavigationButtons: (style !== Kirigami.ApplicationHeaderStyle.TabBar && (!Kirigami.Settings.isMobile || Qt.platform.os === "ios"))
+    /** @property kirigami::ApplicationHeaderStyle::NavigationButtons */
+    property int showNavigationButtons: (style !== Kirigami.ApplicationHeaderStyle.TabBar && (!Kirigami.Settings.isMobile || Qt.platform.os === "ios"))
         ? (Kirigami.ApplicationHeaderStyle.ShowBackButton | Kirigami.ApplicationHeaderStyle.ShowForwardButton)
         : Kirigami.ApplicationHeaderStyle.NoNavigationButtons
     property bool separatorVisible: true

@@ -15,15 +15,12 @@ QQC2.ToolButton {
 
     enabled: applicationWindow().pageStack.layers.depth > 1 || (applicationWindow().pageStack.depth > 1 && (applicationWindow().pageStack.currentIndex > 0 || applicationWindow().pageStack.contentItem.contentX > 0))
 
-    property var showNavButtons: {
-        try {
-            return globalToolBar.showNavigationButtons
-        } catch (_) {
-            return false
-        }
-    }
     // The gridUnit wiggle room is used to not flicker the button visibility during an animated resize for instance due to a sidebar collapse
-    visible: applicationWindow().pageStack.layers.depth > 1 || (applicationWindow().pageStack.contentItem.contentWidth > applicationWindow().pageStack.width + Kirigami.Units.gridUnit && (button.showNavButtons === true || (button.showNavButtons & Kirigami.ApplicationHeaderStyle.ShowBackButton)))
+    visible: {
+        const pageStack = applicationWindow().pageStack;
+        const showNavButtons = globalToolBar?.showNavigationButtons ?? Kirigami.ApplicationHeaderStyle.NoNavigationButtons;
+        return pageStack.layers.depth > 1 || (pageStack.contentItem.contentWidth > pageStack.width + Kirigami.Units.gridUnit && (showNavButtons & Kirigami.ApplicationHeaderStyle.ShowBackButton));
+    }
 
     onClicked: {
         applicationWindow().pageStack.goBack();
