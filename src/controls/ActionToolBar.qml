@@ -42,18 +42,6 @@ QQC2.Control {
     readonly property alias actions: layout.actions
 
     /**
-     * @brief This property holds a list of hidden actions.
-     *
-     * These actions will always be displayed in the overflow menu, even if there is enough space.
-     *
-     * @deprecated since 2.14, use the AlwaysHide hint on actions instead.
-     * @property list<Action> hiddenActions
-     * @since 2.6
-     */
-    property list<QtObject> hiddenActions
-    onHiddenActionsChanged: print("ActionToolBar::hiddenActions is deprecated, use the AlwaysHide hint on your actions instead")
-
-    /**
      * @brief This property holds whether the buttons will have a flat appearance.
      *
      * default: ``true``
@@ -207,16 +195,7 @@ QQC2.Control {
                 displayHint: Kirigami.DisplayHint.IconOnly | Kirigami.DisplayHint.HideChildIndicator
             }
 
-            menuActions: {
-                if (root.hiddenActions.length === 0) {
-                    return root.actions
-                } else {
-                    const result = []
-                    result.concat(Array.prototype.map.call(root.actions, i => i))
-                    result.concat(Array.prototype.map.call(hiddenActions, i => i))
-                    return result
-                }
-            }
+            menuActions: root.actions
 
             menuComponent: P.ActionsMenu {
                 submenuComponent: P.ActionsMenu {
@@ -224,27 +203,27 @@ QQC2.Control {
                         target: parentItem
                         property: "visible"
                         value: layout.hiddenActions.includes(parentAction)
-                               && (parentAction.visible === undefined || parentAction.visible)
+                               && (!(parentAction instanceof Kirigami.Action) || parentAction.visible)
                         restoreMode: Binding.RestoreBinding
                     }
                 }
 
                 itemDelegate: P.ActionMenuItem {
                     visible: layout.hiddenActions.includes(action)
-                             && (action.visible === undefined || action.visible)
+                             && (!(action instanceof Kirigami.Action) || action.visible)
                 }
 
                 loaderDelegate: Loader {
                     property var action
                     height: visible ? implicitHeight : 0
                     visible: layout.hiddenActions.includes(action)
-                             && (action.visible === undefined || action.visible)
+                             && (!(action instanceof Kirigami.Action) || action.visible)
                 }
 
                 separatorDelegate: QQC2.MenuSeparator {
                     property var action
                     visible: layout.hiddenActions.includes(action)
-                             && (action.visible === undefined || action.visible)
+                             && (!(action instanceof Kirigami.Action) || action.visible)
                 }
             }
         }
