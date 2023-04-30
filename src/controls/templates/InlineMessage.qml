@@ -56,7 +56,7 @@ import "private"
  *     ]
  * }
  * @endcode
- * @see <a href="https://develop.kde.org/docs/use/kirigami/components-inlinemessages">Inline Messages in Kirigami</a>
+ * @see <a href="https://develop.kde.org/docs/getting-started/kirigami/components-inlinemessages">Inline Messages in Kirigami</a>
  * @see <a href="https://develop.kde.org/hig/components/assistance/inline">KDE Human Interface Guidelines on Inline Messages</a>
  * @since KDE Frameworks 5.45
  * @inherit QtQuick.Controls.Control

@@ -21,7 +21,7 @@ import "private" as P
  * Unlike an OverlaySheet that appears in the center of the application, an OverlayDrawer
  * can be attached to an edge of the application, usually the top or the bottom edges.
  *
- * @see Visit https://develop.kde.org/docs/use/kirigami/components-drawers to read more
+ * @see Visit https://develop.kde.org/docs/getting-started/kirigami/components-drawers to read more
  * about modal and non-modal drawers.
  *
  * Example usage:

@@ -25,7 +25,7 @@ import org.kde.kirigami 2.18 as Kirigami
  * @include formlayout.qml
  *
  * @see kirigami::FormLayoutAttached
- * @see <a href="https://develop.kde.org/docs/use/kirigami/components-formlayouts">Form Layouts in Kirigami</a>
+ * @see <a href="https://develop.kde.org/docs/getting-started/kirigami/components-formlayouts">Form Layouts in Kirigami</a>
  * @see <a href="https://develop.kde.org/hig/patterns-content/form">KDE Human Interface Guidelines on Forms</a>
  * @since org.kde.kirigami 2.3
  * @inherit QtQuick.Item

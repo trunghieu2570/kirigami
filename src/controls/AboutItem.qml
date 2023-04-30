@@ -17,7 +17,7 @@ import org.kde.kirigami 2.20 as Kirigami
  * It allows showing the defind copyright notice of the application together
  * with the contributors and some information of which platform it's running on.
  *
- * @see <a href="https://develop.kde.org/docs/use/kirigami/advanced-add_about_page">About Page in Kirigami</a>
+ * @see <a href="https://develop.kde.org/docs/getting-started/kirigami/advanced-add_about_page">About Page in Kirigami</a>
  * @see <a href="https://develop.kde.org/hig/components/assistance/aboutview">KDE Human Interface Guidelines on Application Information</a>
  * @see kirigami::AboutPage
  * @since KDE Frameworks 5.87

@@ -27,7 +27,7 @@ class PlatformThemePrivate;
  * different platforms can reimplement this class to integrate with
  * system platform colors of a given platform
  *
- * @see <a href="https://develop.kde.org/docs/use/kirigami/style-colors">Colors and Themes in Kirigami</a>
+ * @see <a href="https://develop.kde.org/docs/getting-started/kirigami/style-colors">Colors and Themes in Kirigami</a>
  * @see <a href="https://develop.kde.org/hig/style/color">Human Interface Guidelines on Colors</a>
  */
 class KIRIGAMI2_EXPORT PlatformTheme : public QObject

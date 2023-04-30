@@ -46,7 +46,7 @@ import "private" as P
  *  [...]
  * }
  * @endcode
- * @see <a href="https://develop.kde.org/docs/use/kirigami/components-drawers/#global-drawer">Global Drawers in Kirigami</a>
+ * @see <a href="https://develop.kde.org/docs/getting-started/kirigami/components-drawers/#global-drawer">Global Drawers in Kirigami</a>
  * @see <a href="https://develop.kde.org/hig/components/navigation/globaldrawer">Human Interface Guidelines on Global Drawers</a>
  * @see <a href="https://develop.kde.org/hig/patterns-command/drawer/#global-drawer">KDE Human Interface Guidelines' Short Introduction of Global Drawers</a>
  */
