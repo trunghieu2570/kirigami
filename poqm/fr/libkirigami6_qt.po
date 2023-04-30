@@ -224,12 +224,12 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Ouvrir un tiroir"
 
-#: controls/templates/private/BackButton.qml:32
+#: controls/templates/private/BackButton.qml:29
 msgctxt "BackButton|"
 msgid "Navigate Back"
 msgstr "Navigation arrière"
 
-#: controls/templates/private/ForwardButton.qml:30
+#: controls/templates/private/ForwardButton.qml:27
 msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "Navigation avant"
