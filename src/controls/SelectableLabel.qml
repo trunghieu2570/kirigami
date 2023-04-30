@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2022 Fushan Wen <qydwhotmail@gmail.com>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -45,6 +46,7 @@ QQC2.TextArea {
     topPadding: 0
     bottomPadding: 0
 
+    activeFocusOnTab: false
     readOnly: true
     wrapMode: Text.WordWrap
     textFormat: TextEdit.AutoText
