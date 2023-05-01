@@ -46,6 +46,7 @@ QQC2.TextArea {
     bottomPadding: 0
 
     activeFocusOnTab: false
+    activeFocusOnPress: false
     readOnly: true
     wrapMode: Text.WordWrap
     textFormat: TextEdit.AutoText
