@@ -1,133 +1,91 @@
 # Kirigami
 
-QtQuick plugins to build user interfaces based on the KDE UX guidelines
+QtQuick plugins to build user interfaces following the [KDE Human Interface Guidelines](https://develop.kde.org/hig/).
 
 ## Introduction
 
-Kirigami provides high-level components for building apps that are made of primitives from QtQuick. Kirigami makes it easy to create applications that look and feel great on Plasma Desktop, Plasma Mobile, and Android, while following the [KDE Human Interface Guidelines](https://develop.kde.org/hig/).
+Kirigami is a set of [QtQuick](https://doc.qt.io/qt-6/qtquick-index.html) components for building adaptable user interfaces based on [QtQuick Controls 2](https://doc.qt.io/qt-6/qtquickcontrols-index.html). Kirigami makes it easy to create applications that look and feel great on [Plasma Mobile](https://plasma-mobile.org/), Desktop Linux, Android, MacOS, and Windows.
 
-## Build examples to desktop
+The API can be found in the [KDE API Reference website](https://api.kde.org/frameworks/kirigami/html/index.html) and a Kirigami tutorial is available in the [KDE Developer Platform](https://develop.kde.org/docs/getting-started/kirigami/).
 
-Build all examples available
+We also provide [Kirigami Gallery](https://invent.kde.org/sdk/kirigami-gallery) to showcase most Kirigami components.
 
-```sh
-mkdir build
-cd build
-cmake .. -DBUILD_EXAMPLES=ON
-make
+## Building Kirigami
+
+After installing `extra-cmake-modules` (ECM) and the necessary Qt6 development libraries, run:
+
+```bash
+git clone https://invent.kde.org/frameworks/kirigami.git
+cd kirigami
+cmake -B build/ -DCMAKE_INSTALL_PREFIX=/path/where/kirigami/will/be/installed
+cmake --build build/
+cmake --install build/
 ```
 
-Then, you can run:
+If you compiled and installed ECM yourself, you will need to add it to your PATH to compile Kirigami with it, as ECM does not provide its own `prefix.sh` file:
 
-```sh
-./examples/applicationitemapp/applicationitemapp
-# or
-./examples/galleryapp/kirigami2gallery
+```bash
+PATH=/path/to/the/ecm/installation/usr/ cmake -B build/ -DCMAKE_INSTALL_PREFIX=/path/where/kirigami/will/be/installed
+cmake --build build/
+cmake --install build/
 ```
 
-## Build the gallery example app on Android
+Alternatively, we recommend you use [kdesrc-build](https://community.kde.org/Get_Involved/development#Setting_up_the_development_environment) to build extra-cmake-modules and Kirigami together.
 
-Make sure to install **android-sdk**, **android-ndk** and **android-qt5-arch**, where **arch** should be the same architecture that you aim to deploy.
+The provided Kirigami example can be built and run with:
 
-```sh
-mkdir build
-cd build
-cmake .. \
-    -DQTANDROID_EXPORTED_TARGET=kirigami2gallery \
-    -DBUILD_EXAMPLES=on \
-    -DANDROID_APK_DIR=../examples/galleryapp \
-    -DECM_DIR=/path/to/share/ECM/cmake \
+```bash
+cmake -B build/ -DBUILD_EXAMPLES=ON
+cmake --build build/
+./build/bin/applicationitemapp
+```
+
+And the remaining examples containing only single QML files in the `examples/` folder can be viewed using `qml <filename.qml>` or `qmlscene <filename.qml>`.
+
+# Using a self-compiled Kirigami in your application
+
+To compile your application and link a self-compiled build of Kirigami to it, run:
+
+```bash
+source path/to/kirigami/build/prefix.sh
+```
+
+And then compile your application as usual.
+
+# Build your Android application and ship it with Kirigami
+
+1) Build Kirigami
+
+You will need to compile Qt for Android or use the [Qt Installer](https://www.qt.io/download-open-source) to install it, in addition to the Android SDK and NDK. After that, run:
+
+```bash
+cmake -B build/ \
     -DCMAKE_TOOLCHAIN_FILE=/usr/share/ECM/toolchain/Android.cmake \
-    -DECM_ADDITIONAL_FIND_ROOT_PATH=/path/to/Qt5.7.0/5.7/{arch} \
-    -DCMAKE_PREFIX_PATH=/path/to/Qt5.7.0/5.7/{arch}/path/to/Qt5Core \
-    -DANDROID_NDK=/path/to/Android/Sdk/ndk-bundle \
-    -DANDROID_SDK_ROOT=/path/to/Android/Sdk/ \
-    -DANDROID_SDK_BUILD_TOOLS_REVISION=26.0.2 \
-    -DCMAKE_INSTALL_PREFIX=/path/to/dummy/install/prefix
+    -DCMAKE_PREFIX_PATH=/path/to/Qt5.15.9/5.15/android_armv7/ \
+    -DCMAKE_INSTALL_PREFIX=/path/where/kirigami/will/be/installed/ \
+    -DECM_DIR=/usr/share/ECM/cmake
+
+cmake --build build/
+cmake --install build/
 ```
-
-You need a `-DCMAKE_INSTALL_PREFIX` to somewhere in your home, but using an absolute path.
-
-If you have a local checkout of the breeze-icons repo, you can avoid the cloning of the build dir
-by passing also `-DBREEZEICONS_DIR=/path/to/existing/sources/of/breeze-icons`
-
-```sh
-make create-apk-kirigami2gallery
-```
-
-Apk will be generated at `./kirigami2gallery_build_apk/build/outputs/apk/kirigami2gallery_build_apk-debug.apk`.
-
-To directly install on a phone:
-
-```sh
-adb install -r ./kirigami2gallery_build_apk/build/outputs/apk/kirigami2gallery_build_apk-debug.apk
-```
-
-To perform this, your device need to be configureted with `USB debugging` and `install via USB` in `Developer options`.
-
-> Some ambient variables must be set before the process: `ANDROID_NDK`, `ANDROID_SDK_ROOT`, `Qt5_android` and `JAVA_HOME`
-
-```sh
-export ANDROID_NDK=/path/to/android-ndk
-export ANDROID_SDK_ROOT=/path/to/android-sdk
-export Qt5_android=/path/to/android-qt5/5.7.0/{arch}
-export PATH=$ANDROID_SDK_ROOT/platform-tools/:$PATH
-# adapt the following path to your ant installation
-export ANT=/usr/bin/ant
-export JAVA_HOME=/path/to/lib/jvm/java-8-openjdk/
-```
-
-# Build on your application Android, ship it together Kirigami
-
-1) Build kirigami
-
-   Use the same procedure mentioned above (but without `BUILD_EXAMPLES` switch):
-    - `cd` into kirigami sources directory;
-    - Execute build script:
-        ```sh
-        mkdir build
-        cd build
-        
-        cmake ..  \
-            -DCMAKE_TOOLCHAIN_FILE=/path/to/share/ECM/toolchain/Android.cmake\
-            -DCMAKE_PREFIX_PATH=/path/to/Qt5.7.0/5.7/android_armv7/\
-            -DCMAKE_INSTALL_PREFIX=/path/to/dummy/install/prefix\
-            -DECM_DIR=/path/to/share/ECM/cmake
-        
-        make
-        make install
-        ```
-    - Note: omit the `make create-apk-kirigami2gallery` step.
 
 2) Build your application
 
-   This guide assumes that you build your application with CMake and use [Extra CMake Modules (ECM)](https://api.kde.org/ecm/) from KDE frameworks.
-    - `cd` into your application sources directory;
-    - Replace `$yourapp` with the actual name of your application;
-    - Execute build script:
-        ```sh
-        mkdir build
-        cd build
-        
-        cmake .. \
-            -DCMAKE_TOOLCHAIN_FILE=/path/to/share/ECM/toolchain/Android.cmake \
-            -DQTANDROID_EXPORTED_TARGET=$yourapp \
-            -DANDROID_APK_DIR=../examples/galleryapp/ \
-            -DCMAKE_PREFIX_PATH=/path/to/Qt5.7.0/5.7/android_armv7/ \
-            -DCMAKE_INSTALL_PREFIX=/path/to/dummy/install/prefix
-            
-        make
-        make install
-        make create-apk-$yourapp
-        ```
-    - Note: `-DCMAKE_INSTALL_PREFIX` directory will be the same as where Kirigami was installed,
-    since you need to create an apk package that contains both the kirigami build and the
-    build of your application.
+This guide assumes that you build your application with CMake and use [Extra CMake Modules (ECM)](https://api.kde.org/ecm/) from KDE frameworks.
 
-# Build an application with qmake
+Replace `$yourapp` with the actual name of your application:
 
-* Use `examples/minimalqmake` example as a template.
-* It links statically for Android, but on desktop systems it links to the shared library provided by your distribution. However, static linking mode may be useful for other systems such as iOS or Windows.
-* Static linking only: clone `kirigami` and `breeze-icons` git repositories under the 3rdparty folder.
-* Android only: in your `main()` call `KirigamiPlugin::getInstance().registerTypes();` to register QML types.
-* QtCreator should be able to deploy on Android out of the box via auto-detected Android Kit, provided that SDK, NDK and other relevant tools are installed.
+```bash
+cmake -B build/ \
+    -DCMAKE_TOOLCHAIN_FILE=/usr/share/ECM/toolchain/Android.cmake \
+    -DQTANDROID_EXPORTED_TARGET=$yourapp \
+    -DANDROID_APK_DIR=../path/to/yourapp/ \
+    -DCMAKE_PREFIX_PATH=/path/to/Qt5.15.9/5.15/android_armv7/ \
+    -DCMAKE_INSTALL_PREFIX=/path/where/yourapp/will/be/installed/
+
+cmake --build build/
+cmake --install build/
+cmake --build build/ --target create-apk-$yourapp
+```
+
+Note: `-DCMAKE_INSTALL_PREFIX` directory should be the same as where Kirigami was installed, since you need to create an apk package that contains both the Kirigami build and the build of your application.
