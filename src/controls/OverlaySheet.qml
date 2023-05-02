@@ -22,9 +22,9 @@ T.OverlaySheet {
     id: root
 
     leftInset: 0
-    topInset: -Kirigami.Units.smallSpacing
+    topInset: 0
     rightInset: 0
-    bottomInset: -Kirigami.Units.smallSpacing
+    bottomInset: 0
 
     background: P.DefaultCardBackground {}
 }
