@@ -50,8 +50,8 @@ P.CardsGridViewPrivate {
     readonly property int columns: {
         const minFromWidth = Math.floor(width / minimumColumnWidth)
         const maxFromWidth = Math.ceil(width / maximumColumnWidth)
-        const extraCount = extraColumns ? Infinity : count
-        return Math.max(1,Math.min(maximumColumns,minFromWidth,maxFromWidth,extraCount))
+        const maxColumns = extraColumns ? maximumColumns : count
+        return Math.max(1,Math.min(minFromWidth,maxFromWidth,maxColumns))
     }
 
     /**
