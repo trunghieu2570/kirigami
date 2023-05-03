@@ -106,8 +106,6 @@ ecm_target_qml_sources(KirigamiPlugin SOURCES
 )
 
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.1 SOURCES
-    controls/AbstractItemViewHeader.qml
-    controls/ItemViewHeader.qml
     controls/AbstractApplicationItem.qml
     controls/ApplicationItem.qml
 )
