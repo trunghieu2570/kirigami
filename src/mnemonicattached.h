@@ -12,18 +12,6 @@
 #include <QtQml>
 
 /**
- * @brief This Attached property is used to calculate automated keyboard sequences
- * to trigger actions based upon their text.
- *
- * If an "&" mnemonic is used (ie "&Ok"), the system will attempt to assign
- * the desired letter giving it priority, otherwise a letter among the ones
- * in the label will be used if possible and not conflicting.
- * Different kinds of controls will have different priorities in assigning the
- * shortcut: for instance the "Ok/Cancel" buttons in a dialog will have priority
- * over fields of a FormLayout.
- *
- * @see ::ControlType
- *
  * @brief This attached property allows to define keyboard sequences to trigger
  * actions based upon their text.
  *
@@ -37,11 +25,13 @@
  * This class automates the management of mnemonics, so if a key is already
  * taken, the next available key is used. Likewise, certain components get
  * increased priority: an "OK/Cancel" buttons in a Dialog will have priority
- * over fields of a FormLayout.
+ * over fields of a org::kde::kirigami::FormLayout.
  *
  * Mnemonics are already managed by visual QtQuick and Kirigami controls, so
  * only use this class to implement your own visual QML controls.
  *
+ * @see ::ControlType
+ * 
  * @since org.kde.kirigami 2.3
  */
 class MnemonicAttached : public QObject
