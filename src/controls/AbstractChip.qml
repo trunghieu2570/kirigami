@@ -5,7 +5,8 @@ import "templates" as T
 import "private" as P
 
 /**
- * AbstractChip is a visual object based on AbstractButton
+ * AbstractChip is a visual object based on
+ * <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-abstractbutton.html">AbstractButton</a>
  * that provides a way to display predetermined elements
  * with the visual styling of "tags" or "tokens". It provides
  * the look, the base properties, and signals for an AbstractButton.
