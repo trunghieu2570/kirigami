@@ -18,7 +18,7 @@
  * url, you should instantiate them in the traditional way
  * or use a different PagePool instance.
  *
- * @see kirigami::PagePoolAction
+ * @see PagePoolAction
  */
 class PagePool : public QObject
 {
@@ -33,7 +33,7 @@ class PagePool : public QObject
     Q_PROPERTY(QUrl lastLoadedUrl READ lastLoadedUrl NOTIFY lastLoadedUrlChanged)
 
     /**
-     * @brief This property holds the last item that was loaded with loadPage.
+     * @brief This property holds the last item that was loaded with ::loadPage().
      */
     Q_PROPERTY(QQuickItem *lastLoadedItem READ lastLoadedItem NOTIFY lastLoadedItemChanged)
 
@@ -82,7 +82,7 @@ public:
      * @brief This method loads the specified page and returns the page's instance
      * defined in the QML file.
      *
-     * @note If cachePages is set to true, only one instance will be made per url.
+     * @note If ::cachePages is set to true, only one instance will be made per url.
      * @note If the url is remote (i.e. http), do not rely on the return value but
      * use the async callback instead.
      *
@@ -103,7 +103,7 @@ public:
      * @brief This method loads the specified page and returns the page's instance
      * defined in the QML file with specified properties.
      *
-     * @note If cachePages is set to true, only one instance will be made per url.
+     * @note If ::cachePages is set to true, only one instance will be made per url.
      * @note If the url is remote (i.e. https), do not rely on the return value but
      * use the async callback instead.
      *
@@ -114,7 +114,7 @@ public:
      * item immediately but it will be passed as a parameter to the provided
      * callback. Normally, don't set a callback, use it only in case of
      * remote urls.
-     * @param properties This is a <a href="https://doc.qt.io/qt-6/qvariant.html#QVariantMap-typedef">QVariantMap</a> object that sets the properties of the
+     * @param properties This is a <a href="https://doc.qt.io/qt-5/qvariant.html#QVariantMap-typedef">QVariantMap</a> object that sets the properties of the
      * page.
      * @param callback A method that is called after the page instance is created.
      * @returns The page instance that will be created if necessary.
@@ -160,7 +160,7 @@ public:
      * The given URL is a local resource when it links to a local file, does
      * not have a set URL scheme, or when the scheme is set to  "qrc".
      * 
-     * @see QUrl.scheme
+     * @see <a href="https://doc.qt.io/qt-5/qurl.html#scheme">QUrl.scheme</a>
      *
      * @param url The url you want to check.
      */
