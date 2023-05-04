@@ -24,7 +24,7 @@ import "templates" as KT
  * Example usage:
  * @include pagerow.qml
  *
- * @see kirigami::ColumnViewAttached
+ * @see ColumnViewAttached
  * @inherit QtQuick.Templates.Control
  */
 QT.Control {
@@ -65,7 +65,7 @@ QT.Control {
 
     /**
      * @brief This property holds the main ColumnView of this Row.
-     * @see kirigami::ColumnView
+     * @see ColumnView
      * @property Kirigami.ColumnView contentItem
      */
     contentItem: columnView
@@ -98,7 +98,7 @@ QT.Control {
     /**
      * @brief This property holds the first page in the PageRow that is at least partially visible.
      * @note Pages before that one (the one contained in the property) will be out of the viewport.
-     * @see kirigami::ColumnView::firstVisibleItem
+     * @see ColumnView::firstVisibleItem
      * @property Item firstVisibleItem
      * @since org.kde.kirigami 2.6
      */
@@ -107,7 +107,7 @@ QT.Control {
     /**
      * @brief This property holds the last page in the PageRow that is at least partially visible.
      * @note Pages after that one (the one contained in the property) will be out of the viewport.
-     * @see kirigami::ColumnView::lastVisibleItem
+     * @see ColumnView::lastVisibleItem
      * @property Item lastVisibleItem
      * @since org.kde.kirigami 2.6
      */
