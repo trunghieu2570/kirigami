@@ -228,7 +228,7 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Obre el calaix"
 
-#: controls/templates/private/BackButton.qml:29
+#: controls/templates/private/BackButton.qml:50
 msgctxt "BackButton|"
 msgid "Navigate Back"
 msgstr "Navega enrere"
