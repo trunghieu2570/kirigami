@@ -82,7 +82,7 @@ QQC2.ApplicationWindow {
      * @brief This property holds the stack used to allocate the pages and to
      * manage the transitions between them.
      *
-     * Put a container here, such as <a href="https://doc.qt.io/qt-6/qml-qtquick-controls2-stackview.html">Controls.StackView</a>
+     * Put a container here, such as <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-stackview.html">Controls.StackView</a>
      * or PageRow.
      */
     property Item pageStack
@@ -243,7 +243,7 @@ QQC2.ApplicationWindow {
      * 
      * Use this whenever you need access to properties
      * that are available to the main AbstractApplicationWindow,
-     * such as its pageStack, globalDrawer or header.
+     * such as its ::pageStack or ::globalDrawer.
      * 
      * @see AbstractApplicationItem::applicationWindow()
      * @returns a pointer to the instantiated AbstractApplicationWindow.
