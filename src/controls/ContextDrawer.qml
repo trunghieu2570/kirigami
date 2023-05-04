@@ -71,7 +71,7 @@ Kirigami.OverlayDrawer {
      * It expects items compatible with either QtQuick.Controls.Action or
      * Kirigami.Action.
      *
-     * @see QtQuick.Action
+     * @see <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-action.html">Controls.Action</a>
      * @see kirigami::Action
      * @property list<Action> actions
      */
