@@ -33,7 +33,10 @@ private:
 /**
  * @brief This is a layout that creates delegates for actions and lays them out in a row.
  *
- * This effectively combines RowLayout and Repeater in a single item, with the
+ * This effectively combines
+ * <a href="https://doc.qt.io/qt-5/qml-qtquick-layouts-rowlayout.html">RowLayout</a>
+ * and <a href="https://doc.qt.io/qt-5/qml-qtquick-repeater.html">Repeater</a>
+ * in a single item, with the
  * addition of some extra performance enhancing tweaks. It will create instances
  * of ::fullDelegate and ::iconDelegate for each action in ::actions. These are
  * then positioned horizontally. Any action that ends up being placed outside
@@ -67,7 +70,7 @@ class ToolBarLayout : public QQuickItem
      * space, it will either use iconDelegate or the delegate will be shown in the
      * overflow menu.
      *
-     * @see kirigami::Action::displayComponent
+     * @see org::kde::kirigami::Action::displayComponent
      */
     Q_PROPERTY(QQmlComponent *fullDelegate READ fullDelegate WRITE setFullDelegate NOTIFY fullDelegateChanged)
     /**
@@ -99,8 +102,8 @@ class ToolBarLayout : public QQuickItem
      * we need to determine how to place the delegates. This property determines
      * how to do that.
      *
-     * @note The moreButton, if visible, will always be placed at the end of the layout.
-     * @see <a href="https://doc.qt.io/qt-6/qt.html#Alignment">Qt.Alignment</a>
+     * @note The ::moreButton, if visible, will always be placed at the end of the layout.
+     * @see <a href="https://doc.qt.io/qt-5/qt.html#Alignment">Qt.Alignment</a>
      */
     Q_PROPERTY(Qt::Alignment alignment READ alignment WRITE setAlignment NOTIFY alignmentChanged)
     /**
@@ -110,7 +113,7 @@ class ToolBarLayout : public QQuickItem
     /**
      * @brief This property holds the minimum width this layout can have.
      *
-     * This is equal to the width of the moreButton.
+     * This is equal to the width of the ::moreButton.
      */
     Q_PROPERTY(qreal minimumWidth READ minimumWidth NOTIFY minimumWidthChanged)
     /**
