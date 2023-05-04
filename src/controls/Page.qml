@@ -13,9 +13,8 @@ import "private" as P
 
 /**
  * Page is a container for all the app pages: everything pushed to the
- * ApplicationWindow's pageStack should be a Page.
+ * @link ApplicationWindow::pageStack pageStack @endlink should be a Page.
  *
- * @see ScrollablePage
  * For content that should be scrollable, such as QtQuick.ListView, use ScrollablePage instead.
  * @inherit QtQuick.Controls.Page
  */
