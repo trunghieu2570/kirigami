@@ -64,7 +64,7 @@ Item {
      * }
      * @endcode
      *
-     * @see kirigami::KAboutData
+     * @see KAboutData
      */
     property var aboutData
 
