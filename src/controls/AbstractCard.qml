@@ -12,8 +12,9 @@ import "private" as P
  *
  * A Card is a visual object that serves as an entry point for more detailed information.
  * An abstractCard is empty, providing just the look and the base properties and signals
- * for an ItemDelegate. It can be filled with any custom layout of items,
- * its content is organized in 3 properties: header, contentItem and footer.
+ * for an <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-itemdelegate.html">ItemDelegate</a>.
+ * It can be filled with any custom layout of items, its content is organized in
+ * 3 properties: ::header, contentItem and ::footer.
  * Use this only when you need particular custom contents, for a standard layout
  * for cards, use the Card component.
  *
