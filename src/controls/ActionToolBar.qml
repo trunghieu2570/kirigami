@@ -14,8 +14,9 @@ import "private" as P
 /**
  * @brief A toolbar built out of a list of actions.
  *
- * The default representation for visible actions is a QtQuick.Controls.ToolButton,
- * but it can be changed by setting ::displayComponent to a different component.
+ * The default representation for visible actions is a
+ * <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-toolbutton.html">ToolButton</a>,
+ * but it can be changed by setting Action::displayComponent to a different component.
  * 
  * The ActionToolBar component will try to display as many
  * action delegates as possible but it will place those that do not fit into an
@@ -27,7 +28,7 @@ import "private" as P
  * button if the full-sized delegate does not fit.
  *
  * @see <a href="https://develop.kde.org/hig/components/navigation/toolbar">KDE Human Interface Guidelines on Toolbars</a>
- * @see kirigami::ToolBarLayout
+ * @see ToolBarLayout
  * @since org.kde.kirigami 2.5
  * @inherit QtQuick.Controls.Control
  */
@@ -75,7 +76,7 @@ QQC2.Control {
      *
      * default: ``Controls.Button.TextBesideIcon``
      *
-     * @see <a href="https://doc.qt.io/qt-6/qml-qtquick-controls2-abstractbutton.html#display-prop">Controls.AbstractButton.display</a>
+     * @see <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-abstractbutton.html#display-prop">AbstractButton.display</a>
      */
     property int display: QQC2.Button.TextBesideIcon
 
@@ -90,7 +91,7 @@ QQC2.Control {
      *
      * default: ``Qt.AlignRight``
      *
-     * @see <a href="https://doc.qt.io/qt-6/qt.html#Alignment">Qt::AlignmentFlag</a>
+     * @see <a href="https://doc.qt.io/qt-5/qt.html#AlignmentFlag-enum">Qt::Alignment</a>
      * @property Qt::Alignment alignment
      */
     property alias alignment: layout.alignment
@@ -151,8 +152,8 @@ QQC2.Control {
      *
      * default: ``HeightMode::ConstrainIfLarger``
      *
-     * @see kirigami::ToolBarLayout::heightMode
-     * @see kirigami::ToolBarLayout::HeightMode
+     * @see ToolBarLayout::heightMode
+     * @see ToolBarLayout::HeightMode
      * @property ToolBarLayout::HeightMode heightMode
      */
     property alias heightMode: layout.heightMode
