@@ -78,7 +78,7 @@ class KIRIGAMI2_EXPORT Units : public QObject
     /**
      * The fundamental unit of space that should be used for sizes, expressed in pixels.
      * Given the screen has an accurate DPI settings, it corresponds to the height of
-     * the font's boundingRect.
+     * the font's <a href="https://doc.qt.io/qt-5/qfontmetrics.html#boundingRect">boundingRect</a>.
      */
     Q_PROPERTY(int gridUnit READ gridUnit WRITE setGridUnit NOTIFY gridUnitChanged)
 
@@ -88,13 +88,17 @@ class KIRIGAMI2_EXPORT Units : public QObject
      * The icon sizes provided are normalized for different DPI, so icons
      * will scale depending on the DPI.
      *
-     * * sizeForLabels (the largest icon size that fits within fontMetrics.height) @since KDE Frameworks 5.80 @since org.kde.kirigami 2.16
+     * * sizeForLabels (the largest icon size that fits within
+     * <a href="https://doc.qt.io/qt-5/qml-qtquick-fontmetrics.html#height-prop">fontMetrics.height</a>)
      * * small
      * * smallMedium
      * * medium
      * * large
      * * huge
      * * enormous
+     * 
+     * @since KDE Frameworks 5.80
+     * @since org.kde.kirigami 2.16
      */
     Q_PROPERTY(IconSizes *iconSizes READ iconSizes CONSTANT)
 
@@ -185,8 +189,8 @@ class KIRIGAMI2_EXPORT Units : public QObject
      *
      * \note This should __not__ be used as an animation duration, as it is deliberately not scaled according
      * to the animation settings. This is specifically for determining when something has taken too long and
-     * the user should expect some kind of feedback. See veryShortDuration, shortDuration, longDuration, and
-     * veryLongDuration for animation duration choices.
+     * the user should expect some kind of feedback. See ::veryShortDuration, ::shortDuration, ::longDuration, and
+     * ::veryLongDuration for animation duration choices.
      *
      * @since KDE Frameworks 5.81
      * @since org.kde.kirigami 2.16
