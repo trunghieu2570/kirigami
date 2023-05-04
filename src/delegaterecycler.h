@@ -25,16 +25,20 @@ Q_SIGNALS:
 };
 
 /**
- * This class may be used as a delegate of a ListView or a GridView in the case
- * the intended delegate is a bit heavy, with many objects inside.
+ * This class may be used as a delegate of a
+ * <a href="https://doc.qt.io/qt-5/qml-qtquick-listview.html">ListView</a>
+ * or a
+ * <a href="https://doc.qt.io/qt-5/qml-qtquick-gridview.html">GridView</a>
+ * in the case the intended delegate is a bit heavy, with many objects inside.
  * This will ensure the delegate instances will be put back in a common pool after
  * destruction, so when scrolling a big list, the delegates from old delete items will
  * be taken from the pool and reused, minimizing the need of instantiating new objects
  * and deleting old ones. It ensures scrolling of lists with heavy delegates is
  * smoother and helps with memory fragmentations as well.
  *
- * @note CardListView and CardGridView are already using this recycler, so do NOT use it
- * as a delegate for those 2 views. Also, do NOT use this with a Repeater.
+ * @note org::kde::kirigami::CardsListView and org::kde::kirigami::CardsGridView
+ * are already using this recycler, so do NOT use it as a delegate for those 2 views.
+ * Also, do NOT use this with a <a href="https://doc.qt.io/qt-5/qml-qtquick-repeater.html">Repeater</a>.
  *
  * @since org.kde.kirigami 2.4
  */
