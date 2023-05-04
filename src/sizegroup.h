@@ -30,7 +30,7 @@
  * will override the width or height calculated by the instantiated SizeGroup.
  *
  * @note All objects managed by a SizeGroup must belong to a Layout. This
- * includes Kirigami-specific Layouts such as kirigami::FormLayout.
+ * includes Kirigami-specific Layouts such as org::kde::kirigami::FormLayout.
  *
  * @include sizegroup.qml
  */
