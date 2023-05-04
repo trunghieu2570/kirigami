@@ -79,7 +79,7 @@ T2.Drawer {
      *
      * default: ``false``
      *
-     * @see collapsible Only collapsible drawers can be collapsed.
+     * @see collapsible
      */
     property bool collapsed: false
 
@@ -100,8 +100,9 @@ T2.Drawer {
      * * ``source: var``: A Freedesktop standard icon name. The icon is pulled from system's icon theme.
      * * ``color: color``: An optional tint color for the icon.
      *
-     * If no custom icon is set, a menu icon is shown for the application globalDrawer
-     * and an overflow menu icon is shown for the contextDrawer.
+     * If no custom icon is set, a menu icon is shown for the
+     * @link ApplicationWindow::globalDrawer globalDrawer @endlink
+     * and an overflow menu icon is shown for the @link ApplicationWindow::contextDrawer contextDrawer @endlink.
      * That's the default for the GlobalDrawer and ContextDrawer components respectively.
      *
      * For OverlayDrawer the default is view-right-close or view-left-close depending on
