@@ -8,16 +8,21 @@ import QtQuick 2.6
 import org.kde.kirigami 2.4 as Kirigami
 
 /**
- * Implements a drag handle supposed to be in items in ListViews to reorder items
- * The ListView must visualize a model which supports item reordering,
- * such as ListModel.move() or QAbstractItemModel  instances with moveRows() correctly implemented.
- * In order for ListItemDragHandle to work correctly, the listItem that is being dragged
+ * Implements a drag handle supposed to be in items in ListViews to reorder items.
+ * 
+ * The <a href="https://doc.qt.io/qt-5/qml-qtquick-listview.html">ListView</a>
+ * must use a model that supports item reordering, such as
+ * <a href="https://doc.qt.io/qt-5/qml-qtqml-models-listmodel.html#move-method">ListModel.move()</a>
+ * or <a href="https://doc.qt.io/qt-5/qabstractitemmodel.html">QAbstractItemModel</a> instances
+ * with <a href="https://doc.qt.io/qt-5/qabstractitemmodel.html#moveRows">moveRows()</a>
+ * correctly implemented.
+ * In order for ListItemDragHandle to work correctly, the list item that is being dragged
  * should not directly be the delegate of the ListView, but a child of it.
  *
  * Example usage:
  * @include listitemdraghandle.qml
  *
- * As seen from the example, we wrapped the ``Kirigami.AbstractListItem`` with an
+ * As seen from the example, we wrapped the AbstractListItem with an
  * Item component. This is because when dragging the list item around, only the item that
  * the drag handle is assigned to is moved, and the wrapper Item stays there for
  * it to take up space so that other list items don't take it.
