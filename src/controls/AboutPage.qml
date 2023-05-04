@@ -32,7 +32,7 @@ Kirigami.ScrollablePage {
      * @brief This property holds a JSON object with the structure of KAboutData
      * that will be displayed by the AboutPage.
      *
-     * @see kcoreaddons::KAboutData
+     * @see KAboutData
      *
      * Note that ``displayName``, ``version``, ``description``, and ``authors``
      * keys are mandatory, while the rest of the keys are optional. Make sure
