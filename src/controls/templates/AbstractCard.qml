@@ -12,9 +12,10 @@ import org.kde.kirigami 2.4 as Kirigami
 /**
  * AbstractCard is the base type for cards. A Card is a visual object that serves
  * as an entry point for more detailed information. An AbstractCard is empty,
- * providing just the look and the base properties and signals for an ItemDelegate.
+ * providing just the look and the base properties and signals for an
+ * <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-itemdelegate.html">ItemDelegate</a>.
  * It can be filled with any custom layout of items, its content is organized
- * into 3 properties: header, contentItem and footer.
+ * into 3 properties: ::header, contentItem and ::footer.
  * Use this only when you need custom contents.
  * For cards with a standard layout, use the Card component.
  *
