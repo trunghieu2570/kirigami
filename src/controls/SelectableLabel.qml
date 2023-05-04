@@ -11,8 +11,9 @@ import QtQuick.Controls 2.15 as QQC2
 /**
  * @brief This is a label which supports text selection.
  *
- * You can use all elements of the QML TextArea component, in particular
- * the "text" property to define the label text.
+ * You can use all elements of
+ * <a href="https://doc.qt.io/qt-5/qml-qtquick-controls-textarea.html">TextArea</a>,
+ * in particular the "text" property to define the label text.
  *
  * Example usage:
  * @code{.qml}
