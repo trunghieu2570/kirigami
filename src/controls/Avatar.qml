@@ -41,7 +41,7 @@ QQC2.Control {
 
     /**
      * @brief This property holds the source of the user's profile picture; an image.
-     * @see QtQuick.Image.source
+     * @see <a href="https://doc.qt.io/qt-5/qml-qtquick-image.html#source-prop">Image.source</a>
      * @property url source
      */
     property alias source: avatarImage.source
@@ -58,7 +58,7 @@ QQC2.Control {
      * to make it fallback to using initials, and then change ``initialsMode``
      * to ``Kirigami.Avatar.InitialsMode.UseIcon`` to display the icon.
      *
-     * @see kirigami::Icon::source
+     * @see Icon::source
      * @property var iconSource
      */
     property alias iconSource: avatarIcon.source
@@ -91,21 +91,21 @@ QQC2.Control {
 
     /**
      * @brief This property sets whether the provided image should be cached.
-     * @see QtQuick.Image.cache
+     * @see <a href="https://doc.qt.io/qt-5/qml-qtquick-image.html#cache-prop">Image.cache</a>
      * @property bool cache
      */
     property alias cache: avatarImage.cache
 
     /**
      * @brief This property holds the source size of the user's profile picture.
-     * @see QtQuick.Image.sourceSize
+     * @see <a href="https://doc.qt.io/qt-5/qml-qtquick-image.html#sourceSize-prop">Image.sourceSize</a>
      * @property int sourceSize
      */
     property alias sourceSize: avatarImage.sourceSize
 
     /**
      * @brief This property holds whether the provided image should be smoothed.
-     * @see QtQuick.Image.smooth
+     * @see <a href="https://doc.qt.io/qt-5/qml-qtquick-image.html#smooth-prop">Image.smooth</a>
      * @property bool smooth
      */
     property alias smooth: avatarImage.smooth
