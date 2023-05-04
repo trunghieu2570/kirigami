@@ -44,15 +44,20 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
 
     /**
      * This enumeration describes the color group used to generate the colors.
-     * The enum value is based upon QPalette::CpolorGroup and has the same values.
+     * 
+     * The enum value is based upon
+     * <a href="https://doc.qt.io/qt-5/qpalette.html#ColorGroup-enum">QPalette::ColorGroup</a>
+     * and has the same values.
+     * 
      * It's redefined here in order to make it work with QML
      * @since KDE Frameworks 4.43
      */
     Q_PROPERTY(ColorGroup colorGroup READ colorGroup WRITE setColorGroup NOTIFY colorGroupChanged)
 
     /**
-     * If true, the colorSet will be inherited from the colorset of a theme of one
+     * If true, the ::colorSet will be inherited from the colorset of a theme of one
      * of the ancestor items
+     * 
      * default: true
      */
     Q_PROPERTY(bool inherit READ inherit WRITE setInherit NOTIFY inheritChanged)
