@@ -45,15 +45,15 @@ class ColumnViewAttached : public QObject
     Q_PROPERTY(int index READ index WRITE setIndex NOTIFY indexChanged)
 
     /**
-     * @brief This property sets whether the item will expand and take the whole viewport space minus the reservedSpace.
+     * @brief This property sets whether the item will expand and take the whole viewport space minus the ::reservedSpace.
      */
     Q_PROPERTY(bool fillWidth READ fillWidth WRITE setFillWidth NOTIFY fillWidthChanged)
 
     /**
      * @brief This property holds the reserved space in pixels
-     * applied to every item with fillWidth set to @c true.
+     * applied to every item with ::fillWidth set to @c true.
      *
-     * Every item that has fillWidth set to @c true will subtract this amount from the viewports width.
+     * Every item that has ::fillWidth set to @c true will subtract this amount from the viewports width.
      */
     Q_PROPERTY(qreal reservedSpace READ reservedSpace WRITE setReservedSpace NOTIFY reservedSpaceChanged)
 
@@ -61,9 +61,10 @@ class ColumnViewAttached : public QObject
      * @brief This property sets whether the column view will manage input
      * events from its children.
      * 
-     * The ColumnView uses an event filter to intercept information about its
-     * children like layouting information. This may conflict with its children
-     * input events in special cases.
+     * The ColumnView uses an
+     * <a href="https://doc.qt.io/qt-5/eventsandfilters.html#event-filters">event filter</a>
+     * to intercept information about its children like layouting information.
+     * This may conflict with its children input events in special cases.
      *  
      * If you want to guarantee that a child of the column view will not be
      * intercepted by this event filter and that input events are managed by the
@@ -72,7 +73,7 @@ class ColumnViewAttached : public QObject
      * This is desirable in special cases where a component has a single purpose
      * and is managed solely via input events, such as a map or document viewer.
      * 
-     * @see QtQuick.MouseArea.preventStealing
+     * @see <a href="https://doc.qt.io/qt-5/qml-qtquick-mousearea.html#preventStealing-prop">MouseArea.preventStealing</a>
      */
     Q_PROPERTY(bool preventStealing READ preventStealing WRITE setPreventStealing NOTIFY preventStealingChanged)
 
@@ -152,12 +153,16 @@ private:
 
 /**
  * ColumnView is a container that lays out items horizontally in a row,
- * when not all items fit in the ColumnView, it will behave like a Flickable and will be a scrollable view which shows only a determined number of columns.
+ * when not all items fit in the ColumnView, it will behave like a
+ * <a href="https://doc.qt.io/qt-5/qml-qtquick-flickable.html">Flickable</a>
+ * and will be a scrollable view which shows only a determined number of columns.
  * The columns can either all have the same fixed size (recommended),
- * size themselves with implicitWidth, or automatically expand to take all the available width: by default the last column will always be the expanding one.
- * Items inside the ColumnView can access info of the view and set layouting hints via the ColumnView attached property.
+ * size themselves with
+ * <a href="https://doc.qt.io/qt-5/qquickitem.html#implicitWidth-prop">implicitWidth</a>,
+ * or automatically expand to take all the available width: by default the last column will always be the expanding one.
+ * Items inside the ColumnView can access info of the view and set layouting hints via ColumnViewAttached.
  *
- * This is the base for the implementation of PageRow
+ * This is the base for the implementation of org::kde::kirigami::PageRow.
  *
  * @see ColumnViewAttached
  * @since org.kde.kirigami 2.7
@@ -172,7 +177,7 @@ class ColumnView : public QQuickItem
     Q_PROPERTY(ColumnResizeMode columnResizeMode READ columnResizeMode WRITE setColumnResizeMode NOTIFY columnResizeModeChanged)
 
     /**
-     * @brief The width of all columns when columnResizeMode is set to ``ColumnResizeMode::FixedColumns``.
+     * @brief The width of all columns when ::columnResizeMode is set to ``ColumnResizeMode::FixedColumns``.
      */
     Q_PROPERTY(qreal columnWidth READ columnWidth WRITE setColumnWidth NOTIFY columnWidthChanged)
 
@@ -370,7 +375,7 @@ public Q_SLOTS:
     /**
      * @brief This method inserts a new item in the view at a given position.
      *
-     * The current Item will not be changed, currentIndex will be adjusted
+     * The ::currentItem will not be changed, ::currentIndex will be adjusted
      * accordingly if needed to keep the same current item.
      *
      * @param pos the position we want the new item to be inserted in
@@ -381,7 +386,7 @@ public Q_SLOTS:
     /**
      * @brief This method replaces an item in the view at a given position with a new item.
      *
-     * The current Item and currentIndex will not be changed.
+     * The ::currentItem and ::currentIndex will not be changed.
      *
      * @param pos the position we want the new item to be placed in
      * @param item the new item which will be reparented and managed
@@ -391,7 +396,7 @@ public Q_SLOTS:
     /**
      * @brief This method swaps items at given positions.
      *
-     * The currentIndex property may be changed in order to keep currentItem the same.
+     * The ::currentIndex property may be changed in order to keep ::currentItem the same.
      *
      * @param from the old position
      * @param to the new position
@@ -404,7 +409,7 @@ public Q_SLOTS:
      * Items will be reparented to their old parent.
      * If they have JavaScript ownership and they didn't have an old parent, they will be destroyed.
      *
-     * The currentIndex property may be changed in order to keep the same currentItem.
+     * The ::currentIndex property may be changed in order to keep the same ::currentItem.
      *
      * @param item it can either be a pointer of an item or an integer specifying the position to remove
      * @returns the item that has just been removed
