@@ -231,7 +231,7 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Ireki tiradera"
 
-#: controls/templates/private/BackButton.qml:32
+#: controls/templates/private/BackButton.qml:53
 msgctxt "BackButton|"
 msgid "Navigate Back"
 msgstr "Nabigatu atzera"

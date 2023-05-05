@@ -232,7 +232,7 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Відкрити висувну панель"
 
-#: controls/templates/private/BackButton.qml:32
+#: controls/templates/private/BackButton.qml:53
 msgctxt "BackButton|"
 msgid "Navigate Back"
 msgstr "Перейти назад"

@@ -231,7 +231,7 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Buka penggambar"
 
-#: controls/templates/private/BackButton.qml:32
+#: controls/templates/private/BackButton.qml:53
 msgctxt "BackButton|"
 msgid "Navigate Back"
 msgstr "Navigasi Mundur"

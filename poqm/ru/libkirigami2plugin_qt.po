@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-02-08 10:35+0300\n"
+"PO-Revision-Date: 2023-05-04 11:41+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: controls/AboutItem.qml:133
 #, qt-format
@@ -32,7 +32,7 @@ msgstr "Перейти на страницу %1 в магазине прилож
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
-msgstr "Send an email to %1"
+msgstr "Отправить письмо %1"
 
 #: controls/AboutItem.qml:201
 msgctxt "AboutItem|"
@@ -228,7 +228,7 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Открыть панель"
 
-#: controls/templates/private/BackButton.qml:32
+#: controls/templates/private/BackButton.qml:53
 msgctxt "BackButton|"
 msgid "Navigate Back"
 msgstr "Перейти назад"
