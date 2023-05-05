@@ -10,6 +10,7 @@
 #include "avatar.h"
 #include "colorutils.h"
 #include "columnview.h"
+#include "contextmenuattached.h"
 #include "delegaterecycler.h"
 #include "enums.h"
 #include "formlayoutattached.h"
@@ -141,7 +142,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
         return new Kirigami::BasicThemeDefinition{};
     });
 
-    qmlRegisterSingletonType<Kirigami::Units>(uri, 2, 0, "Units", [] (QQmlEngine *engine, QJSEngine *) {
+    qmlRegisterSingletonType<Kirigami::Units>(uri, 2, 0, "Units", [](QQmlEngine *engine, QJSEngine *) {
 #ifndef KIRIGAMI_BUILD_TYPE_STATIC
         auto plugin = Kirigami::KirigamiPluginFactory::findPlugin();
         if (plugin) {
@@ -218,6 +219,11 @@ void KirigamiPlugin::registerTypes(const char *uri)
                                                  3,
                                                  "MnemonicData",
                                                  QStringLiteral("Cannot create objects of type MnemonicData, use it as an attached property"));
+    qmlRegisterUncreatableType<ContextMenuAttached>(uri,
+                                                    2,
+                                                    3,
+                                                    "ContextMenu",
+                                                    QStringLiteral("Cannot create objects of type MnemonicData, use it as an attached property"));
 
     // 2.4
     qmlRegisterType(componentUrl(QStringLiteral("AbstractCard.qml")), uri, 2, 4, "AbstractCard");
