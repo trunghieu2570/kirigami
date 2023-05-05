@@ -6,6 +6,7 @@
  */
 
 import QtQuick 2.15
+import QtQuick.Window 2.15
 import org.kde.kirigami 2.20 as Kirigami
 
 /**
@@ -84,6 +85,7 @@ Kirigami.ActionTextField {
         source: "search"
 
         Behavior on opacity {
+            enabled: Window.visibility !== Window.Hidden
             NumberAnimation {
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutQuad

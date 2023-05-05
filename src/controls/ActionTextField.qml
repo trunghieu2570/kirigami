@@ -5,6 +5,7 @@
  */
 
 import QtQuick 2.15
+import QtQuick.Window 2.15
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.20 as Kirigami
 
@@ -79,6 +80,7 @@ QQC2.TextField {
     rightPadding: Kirigami.Units.smallSpacing + (root.effectiveHorizontalAlignment === TextInput.AlignRight ? leftActionsRow : rightActionsRow).width
 
     Behavior on leftPadding {
+        enabled: Window.visibility !== Window.Hidden
         NumberAnimation {
             duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
@@ -86,6 +88,7 @@ QQC2.TextField {
     }
 
     Behavior on rightPadding {
+        enabled: Window.visibility !== Window.Hidden
         NumberAnimation {
             duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
