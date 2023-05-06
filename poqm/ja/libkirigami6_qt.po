@@ -150,17 +150,17 @@ msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr "メニューを開く"
 
-#: controls/SearchField.qml:94
+#: controls/SearchField.qml:96
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "検索..."
 
-#: controls/SearchField.qml:96
+#: controls/SearchField.qml:98
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "検索"
 
-#: controls/SearchField.qml:107
+#: controls/SearchField.qml:109
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "検索をクリア"
