@@ -35,7 +35,7 @@ Kirigami.ShadowedRectangle {
     /**
      * @brief This property holds the card's normal background color.
      *
-     * default: ``Kirigami.Theme.backgroundColor``
+     * default: @link Kirigami.PlatformTheme.backgroundColor Kirigami.Theme.backgroundColor @endlink
      */
     property color defaultColor: Kirigami.Theme.backgroundColor
 
