@@ -230,7 +230,7 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Opna skuff"
 
-#: controls/templates/private/BackButton.qml:32
+#: controls/templates/private/BackButton.qml:53
 msgctxt "BackButton|"
 msgid "Navigate Back"
 msgstr "Naviger tilbake"
