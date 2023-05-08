@@ -135,7 +135,7 @@ T.ToolBar {
     /**
      * @brief This property holds the background color of the toolbar.
      *
-     * default: ``Kirigami.Theme.highlightColor``
+     * default: @link Kirigami.PlatformTheme.highlightColor Kirigami.Theme.highlightColor @endlink
      */
     property color backgroundColor: Kirigami.Theme.backgroundColor
 
@@ -152,7 +152,7 @@ T.ToolBar {
     /**
      * @brief This property holds the color of the highlight bar when an action is checked.
      *
-     * default: ``Kirigami.Theme.highlightColor``
+     * default: @link Kirigami.PlatformTheme.highlightColor Kirigami.Theme.highlightColor @endlink
      */
     property color highlightBarColor: Kirigami.Theme.highlightColor
 
