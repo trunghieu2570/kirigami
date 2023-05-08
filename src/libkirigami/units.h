@@ -83,7 +83,7 @@ class KIRIGAMI2_EXPORT Units : public QObject
     Q_PROPERTY(int gridUnit READ gridUnit WRITE setGridUnit NOTIFY gridUnitChanged)
 
     /**
-     * units.iconSizes provides access to platform-dependent icon sizing
+     * Provides access to platform-dependent icon sizing
      *
      * The icon sizes provided are normalized for different DPI, so icons
      * will scale depending on the DPI.
@@ -138,25 +138,25 @@ class KIRIGAMI2_EXPORT Units : public QObject
     Q_PROPERTY(qreal devicePixelRatio READ devicePixelRatio NOTIFY devicePixelRatioChanged)
 
     /**
-     * units.veryLongDuration should be used for specialty animations that benefit
+     * This property should be used for specialty animations that benefit
      * from being even longer than longDuration.
      */
     Q_PROPERTY(int veryLongDuration READ veryLongDuration WRITE setVeryLongDuration NOTIFY veryLongDurationChanged)
 
     /**
-     * units.longDuration should be used for longer, screen-covering animations, for opening and
+     * This property should be used for longer, screen-covering animations, for opening and
      * closing of dialogs and other "not too small" animations
      */
     Q_PROPERTY(int longDuration READ longDuration WRITE setLongDuration NOTIFY longDurationChanged)
 
     /**
-     * units.shortDuration should be used for short animations, such as accentuating a UI event,
+     * This property should be used for short animations, such as accentuating a UI event,
      * hover events, etc..
      */
     Q_PROPERTY(int shortDuration READ shortDuration WRITE setShortDuration NOTIFY shortDurationChanged)
 
     /**
-     * units.veryShortDuration should be used for elements that should have a hint of smoothness,
+     * This property should be used for elements that should have a hint of smoothness,
      * but otherwise animate near instantly.
      */
     Q_PROPERTY(int veryShortDuration READ veryShortDuration WRITE setVeryShortDuration NOTIFY veryShortDurationChanged)
@@ -200,7 +200,7 @@ class KIRIGAMI2_EXPORT Units : public QObject
     /**
      * time in ms by which the display of tooltips will be delayed.
      *
-     * @sa ToolTip.delay property
+     * @see <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-tooltip.html#delay-prop">ToolTip.delay</a>
      */
     Q_PROPERTY(int toolTipDelay READ toolTipDelay WRITE setToolTipDelay NOTIFY toolTipDelayChanged)
 
