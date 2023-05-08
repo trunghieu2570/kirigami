@@ -89,7 +89,8 @@ T2.Drawer {
      * For vertical drawers this will be the width of the drawer and for horizontal
      * drawers this will be the height of the drawer.
      *
-     * default: ``Units.iconSizes.medium``, just enough to accommodate medium sized icons
+     * default: @link Kirigami.Units.iconSizes Kirigami.Units.iconSizes.medium @endlink,
+     * just enough to accommodate medium sized icons
      */
     property int collapsedSize: Kirigami.Units.iconSizes.medium
 
