@@ -33,11 +33,8 @@ private:
 /**
  * @brief This is a layout that creates delegates for actions and lays them out in a row.
  *
- * This effectively combines
- * <a href="https://doc.qt.io/qt-5/qml-qtquick-layouts-rowlayout.html">RowLayout</a>
- * and <a href="https://doc.qt.io/qt-5/qml-qtquick-repeater.html">Repeater</a>
- * in a single item, with the
- * addition of some extra performance enhancing tweaks. It will create instances
+ * This effectively combines QtQuick.Layouts.RowLayout and QtQuick.Repeater in a single item,
+ * with the addition of some extra performance enhancing tweaks. It will create instances
  * of ::fullDelegate and ::iconDelegate for each action in ::actions. These are
  * then positioned horizontally. Any action that ends up being placed outside
  * the width of the item is hidden and will be part of ::hiddenActions which are
@@ -103,7 +100,7 @@ class ToolBarLayout : public QQuickItem
      * how to do that.
      *
      * @note The ::moreButton, if visible, will always be placed at the end of the layout.
-     * @see <a href="https://doc.qt.io/qt-5/qt.html#Alignment">Qt.Alignment</a>
+     * @see Qt::Alignment
      */
     Q_PROPERTY(Qt::Alignment alignment READ alignment WRITE setAlignment NOTIFY alignmentChanged)
     /**

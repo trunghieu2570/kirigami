@@ -72,7 +72,7 @@ class Icon : public QQuickItem
      * This will only be used if the source image is a type that can have such a
      * long loading time that showing a temporary image in its place makes sense
      * (e.g. a remote image, or an image from an ImageProvider of the type
-     * <a href="https://doc.qt.io/qt-5/qqmlimageproviderbase.html#ImageType-enum">QQmlImageProviderBase::ImageResponse</a>).
+     * QtQml.QQmlImageProviderBase.ImageResponse).
      *
      * default: ``"image-png"``
      *
@@ -82,7 +82,7 @@ class Icon : public QQuickItem
 
     /**
      * @brief This property sets whether the icon will use the
-     * <a href="https://doc.qt.io/qt-5/qicon.html#Mode-enum">QIcon::Active</a> mode,
+     * @link QtGui.QIcon.Mode QIcon.Active @endlink mode,
      * resulting in a graphical effect being applied when the icon is currently active.
      *
      * @note This is typically used to indicate when an item is being hovered or pressed.
@@ -104,7 +104,7 @@ class Icon : public QQuickItem
 
     /**
      * @brief This property sets whether the icon will use the
-     * <a href="https://doc.qt.io/qt-5/qicon.html#Mode-enum">QIcon::Selected</a> mode,
+     * @link QtGui.QIcon.Mode QIcon.Selected @endlink mode,
      * resulting in a graphical effect being applied when the icon is currently selected.
      *
      * This is typically used to indicate when a list item is currently selected.
@@ -139,7 +139,7 @@ class Icon : public QQuickItem
      * true.
      *
      * default: ``Qt::transparent``
-     * @see <a href="https://doc.qt.io/qt-5/qt.html#GlobalColor-enum">Qt::GlobalColor</a>
+     * @see Qt::GlobalColor
      */
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
 

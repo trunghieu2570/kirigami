@@ -17,7 +17,7 @@ class QQuickItem;
  *
  * It contains the text labels of fields and information about sections.
  *
- * Some of its properties can be used with other <a href="https://doc.qt.io/qt-5/qml-qtquick-layouts-layout.html">Layout</a> types.
+ * Some of its properties can be used with other QtQuick.Layouts.Layout types.
  *
  * Example usage:
  * @include formlayout.qml

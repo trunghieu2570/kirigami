@@ -12,7 +12,7 @@ import org.kde.kirigami 2.13 as Kirigami
 import "private" as P
 
 /**
- * A specialized form of the <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-drawer.html">Drawer</a> intended for showing an application's
+ * A specialized form of the QtQuick.Controls.Drawer intended for showing an application's
  * always-available global actions. Think of it like a mobile version of
  * a desktop application's menubar.
  *

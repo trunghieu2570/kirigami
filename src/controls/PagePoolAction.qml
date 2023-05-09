@@ -11,7 +11,7 @@ import org.kde.kirigami 2.11 as Kirigami
 
 /**
  * An action used to load Pages coming from a common PagePool
- * in a PageRow or <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-stackview.html">StackView</a>.
+ * in a PageRow or QtQuick.Controls.StackView.
  *
  * @see PagePool
  */

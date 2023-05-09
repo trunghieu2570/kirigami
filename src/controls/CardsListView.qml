@@ -21,8 +21,7 @@ import org.kde.kirigami 2.4 as Kirigami
  * Therefore, it is discouraged to use it with the Card type, unless it has
  * AbstractCard::headerOrientation set to ``Qt.Horizontal``.
  *
- * The choice between using this view with AbstractCard or a normal
- * <a href="https://doc.qt.io/qt-5/qml-qtquick-listview.html">ListView</a>
+ * The choice between using this view with AbstractCard or a normal QtQuick.ListView
  * with AbstractListItem / BasicListItem is purely a choice based on aesthetics alone.
  *
  * It is recommended to use default values.

@@ -9,8 +9,8 @@ import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.4 as Kirigami
 
 /**
- * @brief A <a href="https://doc.qt.io/qt-5/qml-qtquick-layouts-gridlayout.html">GridLayout</a>
- * optimized for showing a couple of columns of cards, depending on the available space.
+ * @brief A QtQuick.Layouts.GridLayout optimized for showing a couple of columns
+ * of cards, depending on the available space.
  *
  * This should be used when the cards to be displayed, are not instantiated by
  * a model or are instantiated by a model that always has very few items
@@ -21,7 +21,7 @@ import org.kde.kirigami 2.4 as Kirigami
  * depending on the size available.
  *
  * @note A CardsLayout should always be contained within a
- * <a href="https://doc.qt.io/qt-5/qml-qtquick-layouts-columnlayout.html">ColumnLayout</a>.
+ * QtQuick.Layouts.ColumnLayout.
  *
  * @since org.kde.kirigami 2.4
  * @inherit QtQuick.Layouts.GridLayout

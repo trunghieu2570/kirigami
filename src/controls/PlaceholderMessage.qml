@@ -17,10 +17,8 @@ import "private" as P
  * an optional icon above all the text, and an optional button below all the text which
  * can be used to easily show the user what to do next to add content to the view.
  *
- * The top-level component is a
- * <a href="https://doc.qt.io/qt-5/qml-qtquick-layouts-columnlayout.html">ColumnLayout</a>,
- * so additional components items can simply be added as child items and they will be
- * positioned sanely.
+ * The top-level component is a QtQuick.Layouts.ColumnLayout, so additional components items
+ * can simply be added as child items and they will be positioned sanely.
  *
  * Example usage:
  ** Used as a "this view is empty" message

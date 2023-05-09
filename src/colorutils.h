@@ -190,7 +190,7 @@ public:
      *
      * @returns The tinted color.
      *
-     * @see <a href="https://doc.qt.io/qt-5/qml-qtqml-qt.html#tint-method">Qt.tint()</a>
+     * @see QtQml.Qt.tint
      */
     Q_INVOKABLE QColor tintWithAlpha(const QColor &targetColor, const QColor &tintColor, double alpha);
 

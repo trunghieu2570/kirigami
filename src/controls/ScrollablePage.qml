@@ -16,8 +16,7 @@ import "private"
 // TODO KF6: undo many workarounds to make existing code work?
 
 /**
- * @brief ScrollablePage is a Page that holds scrollable content, such as a
- * <a href="https://doc.qt.io/qt-5/qml-qtquick-listview.html">ListView</a>.
+ * @brief ScrollablePage is a Page that holds scrollable content, such as a QtQuick.ListView.
  *
  * Scrolling and scrolling indicators will be automatically managed.
  *
@@ -32,8 +31,8 @@ import "private"
  *     }
  * }
  * @endcode
- * @warning Do not put a <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-scrollview.html">ScrollView</a>
- * inside of a ScrollablePage; children of a ScrollablePage are already inside a ScrollView.
+ * @warning Do not put a QtQuick.Controls.ScrollView inside of a ScrollablePage;
+ * children of a ScrollablePage are already inside a QtQuick.Controls.ScrollView.
  *
  * Another behavior added by this class is a "scroll down to refresh" behavior
  * It also can give the contents of the flickable to have more top margins in order
@@ -124,10 +123,7 @@ Kirigami.Page {
     /**
      * @brief This property sets whether it is possible to navigate the items in a view that support it.
      *
-     * If true, and if the <a href="https://doc.qt.io/qt-5/qml-qtquick-flickable.html">Flickable</a>
-     * is in an item view (e.g.
-     * <a href="https://doc.qt.io/qt-5/qml-qtquick-listview.html">ListView</a>,
-     * <a href="https://doc.qt.io/qt-5/qml-qtquick-gridview.html">GridView</a>),
+     * If true, and if the QtQuick.Flickable is in an item view (e.g. QtQuick.ListView, QtQuick.GridView),
      * it will be possible to navigate the view current items with keyboard up/down arrow buttons.
      * Also, any key event will be forwarded to the current list item.
      *

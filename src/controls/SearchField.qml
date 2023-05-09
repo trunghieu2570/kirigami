@@ -9,9 +9,8 @@ import QtQuick 2.15
 import org.kde.kirigami 2.20 as Kirigami
 
 /**
- * @brief This is a standard
- * <a href="https://doc.qt.io/qt-5/qml-qtquick-controls-textfield.html">TextField</a>
- * following the KDE HIG, which, by default, uses Ctrl+F as the focus keyboard shortcut
+ * @brief This is a standard QtQuick.Controls.TextField following the KDE HIG,
+ * which, by default, uses Ctrl+F as the focus keyboard shortcut
  * and "Search…" as a placeholder text.
  *
  * Example usage:
@@ -32,7 +31,7 @@ Kirigami.ActionTextField {
      * when the text is changed.
      *
      * Setting this to @c false will require that the user presses return or enter
-     * (similarly to <a href="https://doc.qt.io/qt-5/qml-qtquick-controls-textfield.html">TextInput</a>).
+     * (similarly to QtQuick.TextInput).
      *
      * default: ``true``
      *

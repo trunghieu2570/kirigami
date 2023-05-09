@@ -136,10 +136,9 @@ public:
 /**
  * @brief Handles scrolling for a Flickable and 2 attached ScrollBars.
  *
- * WheelHandler filters events from a
- * <a href="https://doc.qt.io/qt-5/qml-qtquick-flickable.html">Flickable</a>,
- * a vertical <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-scrollbar.html">ScrollBar</a>
- * and a horizontal ScrollBar. Wheel and KeyPress events (when ::keyNavigationEnabled is true) are
+ * WheelHandler filters events from a QtQuick.Flickable,
+ * a vertical QtQuick.Controls.ScrollBar and a horizontal QtQuick.Controls.ScrollBar.
+ * Wheel and KeyPress events (when ::keyNavigationEnabled is true) are
  * used to scroll the Flickable. When ::filterMouseEvents is true, WheelHandler blocks mouse button
  * input from reaching the Flickable and sets the
  * <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-scrollbar.html#interactive-prop">interactive</a>
@@ -178,8 +177,8 @@ class WheelHandler : public QObject
     /**
      * @brief This property holds the vertical step size.
      *
-     * The default value is equivalent to `20 * Qt.styleHints.wheelScrollLines`. This is consistent with the default increment for
-     * <a href="https://doc.qt.io/qt-5/qscrollarea.html">QScrollArea</a>.
+     * The default value is equivalent to `20 * Qt.styleHints.wheelScrollLines`.
+     * This is consistent with the default increment for QScrollArea.
      *
      * @see ::horizontalStepSize
      * @since KDE Frameworks 5.89
@@ -191,8 +190,8 @@ class WheelHandler : public QObject
     /**
      * @brief This property holds the horizontal step size.
      *
-     * The default value is equivalent to `20 * Qt.styleHints.wheelScrollLines`. This is consistent with the default increment for
-     * <a href="https://doc.qt.io/qt-5/qscrollarea.html">QScrollArea</a>.
+     * The default value is equivalent to `20 * Qt.styleHints.wheelScrollLines`.
+     * This is consistent with the default increment for QScrollArea.
      *
      * @see ::verticalStepSize
      * @since KDE Frameworks 5.89
@@ -204,9 +203,8 @@ class WheelHandler : public QObject
     /**
      * @brief This property holds the keyboard modifiers that will be used to start page scrolling.
      *
-     * The default value is equivalent to `Qt.ControlModifier | Qt.ShiftModifier`. This matches
-     * <a href="https://doc.qt.io/qt-5/qscrollbar.html">QScrollBar</a>,
-     * which uses <a href="https://doc.qt.io/qt-5/qabstractslider.html">QAbstractSlider</a> behavior.
+     * The default value is equivalent to `Qt.ControlModifier | Qt.ShiftModifier`. This matches QScrollBar,
+     * which uses QAbstractSlider behavior.
      *
      * @since KDE Frameworks 5.89
      */
@@ -215,8 +213,7 @@ class WheelHandler : public QObject
                NOTIFY pageScrollModifiersChanged FINAL)
 
     /**
-     * @brief This property holds whether the WheelHandler filters mouse events like a
-     * <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-scrollview.html">ScrollView</a> would.
+     * @brief This property holds whether the WheelHandler filters mouse events like a QtQuick.Controls.ScrollView would.
      *
      * Touch events are allowed to flick the view and they make the scrollbars not interactive.
      *

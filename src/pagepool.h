@@ -114,8 +114,7 @@ public:
      * item immediately but it will be passed as a parameter to the provided
      * callback. Normally, don't set a callback, use it only in case of
      * remote urls.
-     * @param properties This is a <a href="https://doc.qt.io/qt-5/qvariant.html#QVariantMap-typedef">QVariantMap</a> object that sets the properties of the
-     * page.
+     * @param properties This is a QVariant::QVariantMap object that sets the properties of the page.
      * @param callback A method that is called after the page instance is created.
      * @returns The page instance that will be created if necessary.
      * If the url is remote or if the callback was provided, it will return null.
@@ -160,7 +159,7 @@ public:
      * The given URL is a local resource when it links to a local file, does
      * not have a set URL scheme, or when the scheme is set to  "qrc".
      * 
-     * @see <a href="https://doc.qt.io/qt-5/qurl.html#scheme">QUrl.scheme</a>
+     * @see QUrl::scheme
      *
      * @param url The url you want to check.
      */

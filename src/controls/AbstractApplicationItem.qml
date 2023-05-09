@@ -66,7 +66,7 @@ Item {
      * @brief This property holds the stack used to allocate the pages and to manage the
      * transitions between them.
      *
-     * Put a container here, such as <a href="https://doc.qt.io/qt-6/qml-qtquick-controls2-stackview.html">Controls.StackView</a> or PageRow.
+     * Put a container here, such as QtQuick.Controls.StackView or PageRow.
      */
     property Item pageStack
 

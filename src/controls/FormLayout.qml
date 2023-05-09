@@ -17,8 +17,7 @@ import org.kde.kirigami 2.18 as Kirigami
  * labels provided by a kirigami::FormData attached property,
  * the right column contains left-aligned child types.
  *
- * Child types can be sectioned using an
- * <a href="https://doc.qt.io/qt-5/qml-qtquick-item.html">Item</a>
+ * Child types can be sectioned using an QtQuick.Item
  * or kirigami::Separator with a kirigami::FormData
  * attached property, see FormLayoutAttached::isSection for details.
  *

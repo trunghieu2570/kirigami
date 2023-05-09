@@ -38,8 +38,7 @@ import QtGraphicalEffects 1.12 as GE
  * If the content height exceeds the maximum height of the dialog, the
  * dialog's contents will become scrollable.
  *
- * If the contentItem is a
- * <a href="https://doc.qt.io/qt-5/qml-qtquick-listview.html">ListView</a>,
+ * If the contentItem is a QtQuick.ListView,
  * the dialog will take care of the necessary scrollbars and scrolling behaviour.
  * Do @b not attempt
  * to nest ListViews (it must be the top level item), as the scrolling

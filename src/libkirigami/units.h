@@ -78,7 +78,7 @@ class KIRIGAMI2_EXPORT Units : public QObject
     /**
      * The fundamental unit of space that should be used for sizes, expressed in pixels.
      * Given the screen has an accurate DPI settings, it corresponds to the height of
-     * the font's <a href="https://doc.qt.io/qt-5/qfontmetrics.html#boundingRect">boundingRect</a>.
+     * the font's QtGui.FontMetrics.boundingRect</a>.
      */
     Q_PROPERTY(int gridUnit READ gridUnit WRITE setGridUnit NOTIFY gridUnitChanged)
 

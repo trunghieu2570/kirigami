@@ -13,15 +13,12 @@ import org.kde.kirigami 2.14 as Kirigami
  * <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-abstractbutton.html#checked-prop">checked</a>
  * property controls the check state of the checkbox.
  *
- * When the list item or its checkbox is clicked, the
- * <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-action.html">Controls.Action</a>
- * specified in
- * the list item's ``actions:`` property will be triggered.
+ * When the list item or its checkbox is clicked, the QtQuick.Controls.Action
+ * specified in the list item's ``actions:`` property will be triggered.
  *
- * @note Due to the way BasicListItem works, the Controls.Action MUST contain the
+ * @note Due to the way BasicListItem works, the QtQuick.Controls.Action MUST contain the
  * line "checked = !checked" as the first line within its
- * <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-action.html#triggered-signal">onTriggered</a>
- * handler.
+ * @link QtQuick.Controls.Action.triggered QtQuick.Controls.Action.onTriggered @endlink handler.
  *
  * Example usage:
  * @code{.qml}

@@ -28,8 +28,8 @@ import org.kde.kirigami 2.4 as Kirigami
  * }
  * @endcode
  *
- * @see <a href="https://doc.qt.io/qt-5/qml-qtquick-controls-label.html">Controls.Label</a>
- * @see <a href="https://doc.qt.io/qt-5/qml-qtquick-text.html">QtQuick.Text</a>
+ * @see QtQuick.Controls.Label
+ * @see QtQuick.Text
  * @see <a href="https://develop.kde.org/docs/getting-started/kirigami/style-typography">Typography in Kirigami</a>
  * @see <a href="https://develop.kde.org/hig/style/typography">KDE Human Interface Guidelines on Typography</a>
  * @inherit QtQuick.Controls.Label

@@ -5,8 +5,7 @@ import QtQuick 2.15
 import QtQuick.Templates 2.15 as T
 
 /**
- * @brief AbstractChip is a visual object based on
- * <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-abstractbutton.html">AbstractButton</a>
+ * @brief AbstractChip is a visual object based on QtQuick.Controls.AbstractButton
  * that provides a friendly way to display predetermined elements
  * with the visual styling of "tags" or "tokens."
  *

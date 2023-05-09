@@ -14,8 +14,7 @@ import "private" as P
 /**
  * @brief A toolbar built out of a list of actions.
  *
- * The default representation for visible actions is a
- * <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-toolbutton.html">ToolButton</a>,
+ * The default representation for visible actions is a QtQuick.Controls.ToolButton,
  * but it can be changed by setting Action::displayComponent to a different component.
  * 
  * The ActionToolBar component will try to display as many

@@ -153,12 +153,10 @@ private:
 
 /**
  * ColumnView is a container that lays out items horizontally in a row,
- * when not all items fit in the ColumnView, it will behave like a
- * <a href="https://doc.qt.io/qt-5/qml-qtquick-flickable.html">Flickable</a>
+ * when not all items fit in the ColumnView, it will behave like a QtQuick.Flickable
  * and will be a scrollable view which shows only a determined number of columns.
  * The columns can either all have the same fixed size (recommended),
- * size themselves with
- * <a href="https://doc.qt.io/qt-5/qquickitem.html#implicitWidth-prop">implicitWidth</a>,
+ * size themselves with QtQuick.QQuickItem.implicitWidth,
  * or automatically expand to take all the available width: by default the last column will always be the expanding one.
  * Items inside the ColumnView can access info of the view and set layouting hints via ColumnViewAttached.
  *
