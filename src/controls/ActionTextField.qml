@@ -101,7 +101,7 @@ QQC2.TextField {
     }
 
     QQC2.ToolTip {
-        visible: focusShortcut.nativeText.length > 0 && root.text.length === 0 && !rightActionsRow.hovered && !leftActionsRow.hovered && hovered
+        visible: focusShortcut.nativeText.length > 0 && root.text.length === 0 && !rightActionsRow.hovered && !leftActionsRow.hovered && root.hovered
         text: focusShortcut.nativeText
     }
 
