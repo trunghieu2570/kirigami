@@ -1,9 +1,9 @@
 # Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, 2017.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2018, 2019.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2018, 2019, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2019-11-26 23:14+0100\n"
+"PO-Revision-Date: 2023-05-12 00:14+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -11,114 +11,89 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.08.3\n"
+"X-Generator: Lokalize 23.04.0\n"
 "X-Qt-Contexts: true\n"
 
 #: controls/AboutItem.qml:139
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: controls/AboutItem.qml:148
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
-msgstr ""
+msgstr "Enviar unha mensaxe de correo electrónico a %1"
 
 #: controls/AboutItem.qml:198
 msgctxt "AboutItem|"
 msgid "Get Involved"
-msgstr ""
+msgstr "Involucrarse"
 
 #: controls/AboutItem.qml:204
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Doar"
 
 #: controls/AboutItem.qml:221
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr ""
+msgstr "Informar dun fallo"
 
 #: controls/AboutItem.qml:234
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Copyright"
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Dereitos de copia"
 
 #: controls/AboutItem.qml:278
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "License:"
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Licenza:"
 
 #: controls/AboutItem.qml:300
-#, fuzzy, qt-format
-#| msgctxt "AboutPage|"
-#| msgid "License: %1"
+#, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Licenza: %1"
 
 #: controls/AboutItem.qml:311
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Libraries in use"
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Bibliotecas usadas"
 
 #: controls/AboutItem.qml:341
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Authors"
 msgctxt "AboutItem|"
 msgid "Authors"
-msgstr "Autores"
+msgstr "Autoría"
 
 #: controls/AboutItem.qml:350
 msgctxt "AboutItem|"
 msgid "Show author photos"
-msgstr ""
+msgstr "Mostrar fotos das persoas autoras"
 
 #: controls/AboutItem.qml:381
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Credits"
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Recoñecementos"
 
 #: controls/AboutItem.qml:394
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Translators"
 msgctxt "AboutItem|"
 msgid "Translators"
-msgstr "Tradutores"
+msgstr "Tradución"
 
 #: controls/AboutPage.qml:93
-#, fuzzy, qt-format
-#| msgctxt "AboutPage|"
-#| msgid "About"
+#, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
-msgstr "Sobre"
+msgstr "Sobre %1"
 
 #: controls/AbstractApplicationWindow.qml:204
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
-msgstr ""
+msgstr "Saír"
 
 #: controls/ActionToolBar.qml:193
-#, fuzzy
-#| msgctxt "ToolBarApplicationHeader|"
-#| msgid "More Actions"
 msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Máis accións"
@@ -127,12 +102,12 @@ msgstr "Máis accións"
 #, qt-format
 msgctxt "Avatar|"
 msgid "%1 — %2"
-msgstr ""
+msgstr "%1 — %2"
 
 #: controls/Chip.qml:82
 msgctxt "Chip|"
 msgid "Remove Tag"
-msgstr ""
+msgstr "Retirar a etiqueta"
 
 #: controls/ContextDrawer.qml:66
 msgctxt "ContextDrawer|"
@@ -147,17 +122,17 @@ msgstr "Atrás"
 #: controls/GlobalDrawer.qml:599
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
-msgstr ""
+msgstr "Pechar a barra lateral"
 
 #: controls/GlobalDrawer.qml:602
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
-msgstr ""
+msgstr "Abrir a barra lateral"
 
 #: controls/LoadingPlaceholder.qml:54
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
-msgstr ""
+msgstr "Cargando…"
 
 #: controls/PasswordField.qml:42
 msgctxt "PasswordField|"
@@ -167,91 +142,83 @@ msgstr "Contrasinal"
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr ""
+msgstr "Pechar o menú"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr ""
+msgstr "Abre o menú"
 
 #: controls/SearchField.qml:96
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search..."
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Buscar…"
 
 #: controls/SearchField.qml:98
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search..."
 msgctxt "SearchField|"
 msgid "Search"
-msgstr "Buscar…"
+msgstr "Buscar"
 
 #: controls/SearchField.qml:109
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr ""
+msgstr "Borrar a busca"
 
 #: controls/settingscomponents/CategorizedSettings.qml:40
 #: controls/settingscomponents/CategorizedSettings.qml:104
 msgctxt "CategorizedSettings|"
 msgid "Settings"
-msgstr ""
+msgstr "Configuración"
 
 #: controls/settingscomponents/CategorizedSettings.qml:40
 #, qt-format
 msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
-msgstr ""
+msgstr "Configuración — %1"
 
 #. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
 #: controls/swipenavigator/templates/PageTab.qml:38
 #, qt-format
 msgctxt "PageTab|"
 msgid "Current page. Progress: %1 percent."
-msgstr ""
+msgstr "Páxina actual. Progreso: %1 por cento."
 
 #. Accessibility text for a page tab. Keep the text as concise as possible.
 #: controls/swipenavigator/templates/PageTab.qml:41
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1. Progress: %2 percent."
-msgstr ""
+msgstr "Navegar a %1. Progreso: %2 por cento."
 
 #. Accessibility text for a page tab. Keep the text as concise as possible.
 #: controls/swipenavigator/templates/PageTab.qml:46
 msgctxt "PageTab|"
 msgid "Current page."
-msgstr ""
+msgstr "Páxina actual."
 
 #. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
 #: controls/swipenavigator/templates/PageTab.qml:49
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1. Demanding attention."
-msgstr ""
+msgstr "Navegar a %1. Require atención."
 
 #. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
 #: controls/swipenavigator/templates/PageTab.qml:52
-#, fuzzy, qt-format
-#| msgctxt "ForwardButton|"
-#| msgid "Navigate Forward"
+#, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1."
-msgstr "Continuar"
+msgstr "Navegar a %1."
 
 #: controls/templates/OverlayDrawer.qml:130
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
-msgstr ""
+msgstr "Pechar o caixón"
 
 #: controls/templates/OverlayDrawer.qml:136
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
-msgstr ""
+msgstr "Abrir o caixón"
 
 #: controls/templates/private/BackButton.qml:50
 msgctxt "BackButton|"
@@ -271,7 +238,7 @@ msgstr "Máis accións"
 #: controls/UrlButton.qml:51
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
-msgstr ""
+msgstr "Copiar a ligazón no portapapeis"
 
 #: settings.cpp:211
 #, qt-format
