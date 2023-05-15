@@ -262,6 +262,7 @@ protected:
     void setStatus(Status status);
     void updatePolish() override;
     void updatePaintedGeometry();
+    void updateIsMaskHeuristic(const QString &iconSource);
     void itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &value) override;
 
 private:
