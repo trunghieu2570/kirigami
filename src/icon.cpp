@@ -61,9 +61,7 @@ void Icon::setSource(const QVariant &icon)
 
     if (icon.userType() == QMetaType::QString) {
         const QString iconSource = icon.toString();
-        m_isMaskHeuristic = (iconSource.endsWith(QLatin1String("-symbolic")) //
-                             || iconSource.endsWith(QLatin1String("-symbolic-rtl")) //
-                             || iconSource.endsWith(QLatin1String("-symbolic-ltr")));
+        updateIsMaskHeuristic(iconSource);
         Q_EMIT isMaskChanged();
     }
 
@@ -433,6 +431,12 @@ QImage Icon::findIcon(const QSize &size)
         } else {
             if (icon.isNull()) {
                 icon = m_theme->iconFromTheme(iconSource, m_color);
+                if (m_isMaskHeuristic && icon.name() != iconSource) {
+                    updateIsMaskHeuristic(icon.name());
+                    if (!m_isMaskHeuristic) {
+                        Q_EMIT isMaskChanged();
+                    }
+                }
             }
         }
         if (!icon.isNull()) {
@@ -607,6 +611,13 @@ void Icon::updatePaintedGeometry()
         m_paintedHeight = newHeight;
         Q_EMIT paintedAreaChanged();
     }
+}
+
+void Icon::updateIsMaskHeuristic(const QString &iconSource)
+{
+    m_isMaskHeuristic = (iconSource.endsWith(QLatin1String("-symbolic")) //
+                         || iconSource.endsWith(QLatin1String("-symbolic-rtl")) //
+                         || iconSource.endsWith(QLatin1String("-symbolic-ltr")));
 }
 
 void Icon::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &value)
