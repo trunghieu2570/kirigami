@@ -29,19 +29,19 @@ class ScenePositionAttached : public QObject
     /**
      * The global scene X position
      */
-    Q_PROPERTY(int x READ x NOTIFY xChanged)
+    Q_PROPERTY(qreal x READ x NOTIFY xChanged)
 
     /**
      * The global scene Y position
      */
-    Q_PROPERTY(int y READ y NOTIFY yChanged)
+    Q_PROPERTY(qreal y READ y NOTIFY yChanged)
 
 public:
     explicit ScenePositionAttached(QObject *parent = nullptr);
     ~ScenePositionAttached() override;
 
-    int x() const;
-    int y() const;
+    qreal x() const;
+    qreal y() const;
 
     // QML attached property
     static ScenePositionAttached *qmlAttachedProperties(QObject *object);

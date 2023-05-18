@@ -19,9 +19,9 @@ ScenePositionAttached::~ScenePositionAttached()
 {
 }
 
-int ScenePositionAttached::x() const
+qreal ScenePositionAttached::x() const
 {
-    qreal x = 0;
+    qreal x = 0.0;
     QQuickItem *item = m_item;
 
     while (item) {
@@ -32,9 +32,9 @@ int ScenePositionAttached::x() const
     return x;
 }
 
-int ScenePositionAttached::y() const
+qreal ScenePositionAttached::y() const
 {
-    qreal y = 0;
+    qreal y = 0.0;
     QQuickItem *item = m_item;
 
     while (item) {
