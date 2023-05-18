@@ -1,6 +1,6 @@
 # KDE Config File
 [General]
-Name=Kirigami Application
+Name=Kirigami Application (Qt6)
 Name[ar]=تطبيق كيريغامي
 Name[az]=Kirigami tətbiqi
 Name[bg]=Приложение на Kirigami
