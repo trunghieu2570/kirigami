@@ -39,6 +39,7 @@ kirigami_add_tests(
     tst_listskeynavigation.qml
     tst_mnemonicdata.qml
     tst_pagerow.qml
+    tst_sceneposition.qml
     tst_theme.qml
 
     pagepool/tst_layers.qml
