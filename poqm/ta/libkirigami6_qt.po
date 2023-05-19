@@ -148,17 +148,17 @@ msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr "பட்டியைத் திற"
 
-#: controls/SearchField.qml:96
+#: controls/SearchField.qml:94
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "தேடு..."
 
-#: controls/SearchField.qml:98
+#: controls/SearchField.qml:96
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "தேடல்"
 
-#: controls/SearchField.qml:109
+#: controls/SearchField.qml:107
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "தேடலை காலியாக்கு"
