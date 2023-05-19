@@ -51,10 +51,17 @@ Q_SIGNALS:
     void yChanged();
 
 private:
+    void slotXChanged();
+    void slotYChanged();
     void connectAncestors(QQuickItem *item);
 
     QQuickItem *m_item = nullptr;
     QList<QQuickItem *> m_ancestors;
+
+    mutable qreal m_cachedX;
+    mutable qreal m_cachedY;
+    mutable quint32 m_cachedXValid : 1;
+    mutable quint32 m_cachedYValid : 1;
 };
 
 QML_DECLARE_TYPEINFO(ScenePositionAttached, QML_HAS_ATTACHED_PROPERTIES)

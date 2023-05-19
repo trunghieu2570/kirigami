@@ -10,6 +10,10 @@
 
 ScenePositionAttached::ScenePositionAttached(QObject *parent)
     : QObject(parent)
+    , m_cachedX(0)
+    , m_cachedY(0)
+    , m_cachedXValid(false)
+    , m_cachedYValid(false)
 {
     m_item = qobject_cast<QQuickItem *>(parent);
     connectAncestors(m_item);
@@ -21,28 +25,48 @@ ScenePositionAttached::~ScenePositionAttached()
 
 qreal ScenePositionAttached::x() const
 {
-    qreal x = 0.0;
-    QQuickItem *item = m_item;
+    if (!m_cachedXValid) {
+        qreal x = 0.0;
+        QQuickItem *item = m_item;
 
-    while (item) {
-        x += item->x();
-        item = item->parentItem();
+        while (item) {
+            x += item->x();
+            item = item->parentItem();
+        }
+
+        m_cachedX = x;
+        m_cachedXValid = true;
     }
-
-    return x;
+    return m_cachedX;
 }
 
 qreal ScenePositionAttached::y() const
 {
-    qreal y = 0.0;
-    QQuickItem *item = m_item;
+    if (!m_cachedYValid) {
+        qreal y = 0.0;
+        QQuickItem *item = m_item;
 
-    while (item) {
-        y += item->y();
-        item = item->parentItem();
+        while (item) {
+            y += item->y();
+            item = item->parentItem();
+        }
+
+        m_cachedY = y;
+        m_cachedYValid = true;
     }
+    return m_cachedY;
+}
 
-    return y;
+void ScenePositionAttached::slotXChanged()
+{
+    m_cachedXValid = false;
+    Q_EMIT xChanged();
+}
+
+void ScenePositionAttached::slotYChanged()
+{
+    m_cachedYValid = false;
+    Q_EMIT yChanged();
 }
 
 void ScenePositionAttached::connectAncestors(QQuickItem *item)
@@ -55,9 +79,11 @@ void ScenePositionAttached::connectAncestors(QQuickItem *item)
     while (ancestor) {
         m_ancestors << ancestor;
 
-        connect(ancestor, &QQuickItem::xChanged, this, &ScenePositionAttached::xChanged);
-        connect(ancestor, &QQuickItem::yChanged, this, &ScenePositionAttached::yChanged);
+        connect(ancestor, &QQuickItem::xChanged, this, &ScenePositionAttached::slotXChanged);
+        connect(ancestor, &QQuickItem::yChanged, this, &ScenePositionAttached::slotYChanged);
         connect(ancestor, &QQuickItem::parentChanged, this, [this, ancestor]() {
+            m_cachedXValid = false;
+            m_cachedYValid = false;
             do {
                 disconnect(ancestor, nullptr, this, nullptr);
                 m_ancestors.pop_back();
