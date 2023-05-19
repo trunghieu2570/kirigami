@@ -136,18 +136,21 @@ public:
 /**
  * @brief Handles scrolling for a Flickable and 2 attached ScrollBars.
  *
- * WheelHandler filters events from a Flickable, a vertical ScrollBar and a horizontal ScrollBar.
- * Wheel and KeyPress events (when `keyNavigationEnabled` is true) are used to scroll the Flickable.
- * When `filterMouseEvents` is true, WheelHandler blocks mouse button input from reaching the Flickable
- * and sets the `interactive` property of the scrollbars to @c false when touch input is used.
+ * WheelHandler filters events from a QtQuick.Flickable,
+ * a vertical QtQuick.Controls.ScrollBar and a horizontal QtQuick.Controls.ScrollBar.
+ * Wheel and KeyPress events (when ::keyNavigationEnabled is true) are
+ * used to scroll the Flickable. When ::filterMouseEvents is true, WheelHandler blocks mouse button
+ * input from reaching the Flickable and sets the
+ * <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-scrollbar.html#interactive-prop">interactive</a>
+ * property of the scrollbars to @c false when touch input is used.
  *
  * Wheel event handling behavior:
  *
  * - Pixel delta is ignored unless angle delta is not available because pixel delta scrolling is too slow. Qt Widgets doesn't use pixel delta either, so the
  * default scroll speed should be consistent with Qt Widgets.
- * - When using angle delta, scroll using the step increments defined by `verticalStepSize` and `horizontalStepSize`.
- * - When one of the keyboard modifiers in `pageScrollModifiers` is used, scroll by pages.
- * - When using a device that doesn't use 120 angle delta unit increments such as a touchpad, the `verticalStepSize`, `horizontalStepSize` and page increments
+ * - When using angle delta, scroll using the step increments defined by ::verticalStepSize and ::horizontalStepSize.
+ * - When one of the keyboard modifiers in ::pageScrollModifiers is used, scroll by pages.
+ * - When using a device that doesn't use 120 angle delta unit increments such as a touchpad, the ::verticalStepSize, ::horizontalStepSize and page increments
  * (if using page scrolling) will be multiplied by `angle delta / 120` to keep scrolling smooth.
  * - If scrolling has happened in the last 400ms, use an internal QQuickItem stacked over the Flickable's contentItem to catch wheel events and use those wheel
  * events to scroll, if possible. This prevents controls inside the Flickable's contentItem that allow scrolling to change the value (e.g., Sliders, SpinBoxes)
@@ -167,14 +170,15 @@ class WheelHandler : public QObject
     Q_OBJECT
 
     /**
-     * @brief This property holds the Qt Quick Flickable that the WheelHandler will control.
+     * @brief This property holds the Flickable that the WheelHandler will control.
      */
     Q_PROPERTY(QQuickItem *target READ target WRITE setTarget NOTIFY targetChanged FINAL)
 
     /**
      * @brief This property holds the vertical step size.
      *
-     * The default value is equivalent to `20 * Qt.styleHints.wheelScrollLines`. This is consistent with the default increment for QScrollArea.
+     * The default value is equivalent to `20 * Qt.styleHints.wheelScrollLines`.
+     * This is consistent with the default increment for QScrollArea.
      *
      * @see ::horizontalStepSize
      * @since KDE Frameworks 5.89
@@ -186,7 +190,8 @@ class WheelHandler : public QObject
     /**
      * @brief This property holds the horizontal step size.
      *
-     * The default value is equivalent to `20 * Qt.styleHints.wheelScrollLines`. This is consistent with the default increment for QScrollArea.
+     * The default value is equivalent to `20 * Qt.styleHints.wheelScrollLines`.
+     * This is consistent with the default increment for QScrollArea.
      *
      * @see ::verticalStepSize
      * @since KDE Frameworks 5.89
@@ -198,7 +203,8 @@ class WheelHandler : public QObject
     /**
      * @brief This property holds the keyboard modifiers that will be used to start page scrolling.
      *
-     * The default value is equivalent to `Qt.ControlModifier | Qt.ShiftModifier`. This matches QScrollBar, which uses QAbstractSlider behavior.
+     * The default value is equivalent to `Qt.ControlModifier | Qt.ShiftModifier`. This matches QScrollBar,
+     * which uses QAbstractSlider behavior.
      *
      * @since KDE Frameworks 5.89
      */
@@ -207,7 +213,7 @@ class WheelHandler : public QObject
                NOTIFY pageScrollModifiersChanged FINAL)
 
     /**
-     * @brief This property holds whether the WheelHandler filters mouse events like a Qt Quick Controls ScrollView would.
+     * @brief This property holds whether the WheelHandler filters mouse events like a QtQuick.Controls.ScrollView would.
      *
      * Touch events are allowed to flick the view and they make the scrollbars not interactive.
      *
@@ -288,7 +294,7 @@ public:
     void setKeyNavigationEnabled(bool enabled);
 
     /**
-     * Scroll up one step. If the stepSize parameter is less than 0, the verticalStepSize will be used.
+     * Scroll up one step. If the ::stepSize parameter is less than 0, the ::verticalStepSize will be used.
      *
      * returns @c true if the contentItem was moved.
      *
@@ -297,7 +303,7 @@ public:
     Q_INVOKABLE bool scrollUp(qreal stepSize = -1);
 
     /**
-     * Scroll down one step. If the stepSize parameter is less than 0, the verticalStepSize will be used.
+     * Scroll down one step. If the ::stepSize parameter is less than 0, the ::verticalStepSize will be used.
      *
      * returns @c true if the contentItem was moved.
      *
@@ -306,7 +312,7 @@ public:
     Q_INVOKABLE bool scrollDown(qreal stepSize = -1);
 
     /**
-     * Scroll left one step. If the stepSize parameter is less than 0, the horizontalStepSize will be used.
+     * Scroll left one step. If the ::stepSize parameter is less than 0, the ::horizontalStepSize will be used.
      *
      * returns @c true if the contentItem was moved.
      *
@@ -315,7 +321,7 @@ public:
     Q_INVOKABLE bool scrollLeft(qreal stepSize = -1);
 
     /**
-     * Scroll right one step. If the stepSize parameter is less than 0, the horizontalStepSize will be used.
+     * Scroll right one step. If the ::stepSize parameter is less than 0, the ::horizontalStepSize will be used.
      *
      * returns @c true if the contentItem was moved.
      *

@@ -31,7 +31,8 @@ import "private"
  *     }
  * }
  * @endcode
- * @warning Do not put a ScrollView inside of a ScrollablePage; children of a ScrollablePage are already inside a ScrollView.
+ * @warning Do not put a QtQuick.Controls.ScrollView inside of a ScrollablePage;
+ * children of a ScrollablePage are already inside a QtQuick.Controls.ScrollView.
  *
  * Another behavior added by this class is a "scroll down to refresh" behavior
  * It also can give the contents of the flickable to have more top margins in order
@@ -122,8 +123,8 @@ Kirigami.Page {
     /**
      * @brief This property sets whether it is possible to navigate the items in a view that support it.
      *
-     * If true, and if flickable is an item view (e.g. ListView, GridView), it will be possible
-     * to navigate the view current items with keyboard up/down arrow buttons.
+     * If true, and if the QtQuick.Flickable is in an item view (e.g. QtQuick.ListView, QtQuick.GridView),
+     * it will be possible to navigate the view current items with keyboard up/down arrow buttons.
      * Also, any key event will be forwarded to the current list item.
      *
      * default: ``true``

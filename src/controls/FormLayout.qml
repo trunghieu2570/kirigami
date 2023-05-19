@@ -24,7 +24,7 @@ import org.kde.kirigami 2.18 as Kirigami
  * Example usage:
  * @include formlayout.qml
  *
- * @see kirigami::FormLayoutAttached
+ * @see FormLayoutAttached
  * @see <a href="https://develop.kde.org/docs/getting-started/kirigami/components-formlayouts">Form Layouts in Kirigami</a>
  * @see <a href="https://develop.kde.org/hig/patterns-content/form">KDE Human Interface Guidelines on Forms</a>
  * @since org.kde.kirigami 2.3

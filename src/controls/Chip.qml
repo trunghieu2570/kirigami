@@ -46,7 +46,7 @@ Kirigami.AbstractChip {
     checkable: !closable
 
     /**
-     * @brief This property holds the label item; used for accessing the usual Text properties.
+     * @brief This property holds the label item; used for accessing the usual QtQuick.Text properties.
      * @property QtQuick.Controls.Label labelItem
      */
     property alias labelItem: label

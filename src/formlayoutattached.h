@@ -17,12 +17,12 @@ class QQuickItem;
  *
  * It contains the text labels of fields and information about sections.
  *
- * Some of its properties can be used with other <a href="https://doc.qt.io/qt-6/qml-qtquick-layouts-layout.html">Layout</a> types.
+ * Some of its properties can be used with other QtQuick.Layouts.Layout types.
  *
  * Example usage:
- * @include formlayoutattached.qml
+ * @include formlayout.qml
  *
- * @see kirigami::FormLayout
+ * @see org::kde::kirigami::FormLayout
  * @since org.kde.kirigami 2.3
  */
 class FormLayoutAttached : public QObject
@@ -85,7 +85,7 @@ class FormLayoutAttached : public QObject
      * }
      * @endcode
      *
-     * @see kirigami::FormLayout
+     * @see org::kde::kirigami::FormLayout
      */
     Q_PROPERTY(bool isSection READ isSection WRITE setIsSection NOTIFY isSectionChanged)
 
@@ -117,11 +117,11 @@ class FormLayoutAttached : public QObject
     /**
      * This property can only be used
      * in conjunction with a Kirigami.FormData.label,
-     * often in a layout that is a child of a kirigami::FormLayout.
+     * often in a layout that is a child of a FormLayout.
      *
      * It then turns the item specified into a "buddy"
      * of the label, making it work as if it were
-     * a child of the kirigami::FormLayout.
+     * a child of the org::kde::kirigami::FormLayout.
      *
      * A buddy item is useful for instance when the label has a keyboard accelerator,
      * which when triggered provides active keyboard focus to the buddy item.

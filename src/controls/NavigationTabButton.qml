@@ -12,10 +12,12 @@ import org.kde.kirigami 2.19 as Kirigami
 /**
  * @brief Navigation buttons to be used for the NavigationTabBar component.
  *
- * It supplies its own padding, and also supports using the QQC2 AbstractButton ``display`` property to be used in column lists.
+ * It supplies its own padding, and also supports using
+ * <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-abstractbutton.html#display-prop">AbstractButton.display</a>
+ * to be used in column lists.
  *
  * Alternative way to the "actions" property on NavigationTabBar, as it can be used
- * with Repeater to generate buttons from models.
+ * with a QtQuick.Repeater to generate buttons from models.
  *
  * Example usage:
  * @code{.qml}

@@ -221,7 +221,7 @@ Kirigami.AbstractListItem {
     property bool fadeContent: false
 
     /**
-     * @brief This property holds the label item, for accessing the usual Text properties.
+     * @brief This property holds the label item, for accessing the usual QtQuick.Text properties.
      * @since KDE Frameworks 5.84
      * @since org.kde.kirigami 2.16
      * @property QtQuick.Controls.Label labelItem
@@ -229,7 +229,7 @@ Kirigami.AbstractListItem {
     property alias labelItem: labelItem
 
     /**
-     * @brief This property holds the subtitle item, for accessing the usual Text properties.
+     * @brief This property holds the subtitle item, for accessing the usual QtQuick.Text properties.
      * @since KDE Frameworks 5.84
      * @since org.kde.kirigami 2.16
      * @property QtQuick.Controls.Label subtitleItem

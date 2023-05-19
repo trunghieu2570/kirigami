@@ -17,8 +17,8 @@ import "private" as P
  * an optional icon above all the text, and an optional button below all the text which
  * can be used to easily show the user what to do next to add content to the view.
  *
- * The top-level component is a ColumnLayout, so additional components items can
- * simply be added as child items and they will be positioned sanely.
+ * The top-level component is a QtQuick.Layouts.ColumnLayout, so additional components items
+ * can simply be added as child items and they will be positioned sanely.
  *
  * Example usage:
  ** Used as a "this view is empty" message
@@ -162,7 +162,7 @@ ColumnLayout {
      * * ``Kirigami.PlaceholderMessage.Type.Actionable``: makes it more attention grabbing. Useful when the user is expected to interact with the message.
      * * ``Kirigami.PlaceholderMessage.Type.Informational``: makes it less prominent. Useful when the message is only informational.
      *
-     * default: `if a helpfulAction is provided this will be of type Actionable otherwise of type Informational.`
+     * default: `if a ::helpfulAction is provided this will be of type Actionable otherwise of type Informational.`
      *
      * @since KDE Frameworks 5.94
      */

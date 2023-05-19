@@ -82,7 +82,7 @@ QQC2.Action {
      * default: ``Kirigami.DisplayHint.NoPreference``
      *
      * @note This property contains only preferences, implementations may choose to disregard them.
-     * @see kirigami::DisplayHint
+     * @see DisplayHint
      * @since org.kde.kirigami 2.12
      * @property Kirigami.DisplayHint displayHint
      */

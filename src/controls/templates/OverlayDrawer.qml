@@ -79,7 +79,7 @@ T2.Drawer {
      *
      * default: ``false``
      *
-     * @see collapsible Only collapsible drawers can be collapsed.
+     * @see collapsible
      */
     property bool collapsed: false
 
@@ -89,7 +89,8 @@ T2.Drawer {
      * For vertical drawers this will be the width of the drawer and for horizontal
      * drawers this will be the height of the drawer.
      *
-     * default: ``Units.iconSizes.medium``, just enough to accommodate medium sized icons
+     * default: @link Kirigami.Units.iconSizes Kirigami.Units.iconSizes.medium @endlink,
+     * just enough to accommodate medium sized icons
      */
     property int collapsedSize: Kirigami.Units.iconSizes.medium
 
@@ -100,8 +101,9 @@ T2.Drawer {
      * * ``source: var``: A Freedesktop standard icon name. The icon is pulled from system's icon theme.
      * * ``color: color``: An optional tint color for the icon.
      *
-     * If no custom icon is set, a menu icon is shown for the application globalDrawer
-     * and an overflow menu icon is shown for the contextDrawer.
+     * If no custom icon is set, a menu icon is shown for the
+     * @link ApplicationWindow::globalDrawer globalDrawer @endlink
+     * and an overflow menu icon is shown for the @link ApplicationWindow::contextDrawer contextDrawer @endlink.
      * That's the default for the GlobalDrawer and ContextDrawer components respectively.
      *
      * For OverlayDrawer the default is view-right-close or view-left-close depending on

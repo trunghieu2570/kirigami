@@ -28,31 +28,31 @@ Kirigami.Action {
      * @brief This property holds the PagePool object used by this PagePoolAction.
      *
      * PagePool will make sure only one instance of the page identified by the page url will be created and reused.
-     * PagePool's lastLoaderUrl property will be used to control the mutual exclusivity of the checked
+     * PagePool::lastLoadedUrl will be used to control the mutual exclusivity of the checked
      * state of the PagePoolAction instances sharing the same PagePool.
      */
     property Kirigami.PagePool pagePool
 
     /**
-     * The pageStack property accepts either a Kirigami.PageRow or a QtQuick.Controls.StackView.
+     * This property accepts either a PageRow or a StackView.
      * The component that will instantiate the pages, which has to work with a stack logic.
-     * Kirigami.PageRow is recommended, but will work with QtQuick.Controls.StackView as well.
+     * PageRow is recommended, but will work with StackView as well.
      *
-     * default: `bound to ApplicationWindow's global pageStack, which is a PageRow by default`
+     * default: `bound to the global ApplicationWindow::pageStack, which is a PageRow by default`
      */
     property Item pageStack: typeof applicationWindow !== 'undefined' ? applicationWindow().pageStack : null
 
     /**
-     * @brief This property sets the page in the pageStack after which
+     * @brief This property sets the page in the ::pageStack after which
      * new pages will be pushed.
      *
-     * All pages present after the given basePage will be removed from the pageStack
+     * All pages present after the given basePage will be removed from the ::pageStack
      */
     property QQC2.Page basePage
 
     /**
      * This property holds a function that generate the property values for the created page
-     * when it is pushed onto the Kirigami.PagePool.
+     * when it is pushed onto the PagePool.
      *
      * Example usage:
      * @code{.qml}
@@ -73,7 +73,7 @@ Kirigami.Action {
 
     /**
       * @brief This property sets whether PagePoolAction will use the layers property
-      * implemented by the pageStack.
+      * implemented by the ::pageStack.
       *
       * This is intended for use with PageRow layers to allow PagePoolActions to
       * push context-specific pages onto the layers stack.
@@ -107,7 +107,7 @@ Kirigami.Action {
     }
 
     /**
-      * @returns @c true if the page has been loaded and placed on the pageStack,
+      * @returns @c true if the page has been loaded and placed on the ::pageStack,
       * otherwise returns null.
       */
     function stackContainsPage() {

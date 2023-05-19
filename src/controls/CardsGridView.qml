@@ -98,7 +98,7 @@ P.CardsGridViewPrivate {
 
     /**
      * @brief This property holds the delegate of the CardsGridView.
-     * @see QtQuick.GridView.delegate
+     * @see <a href="https://doc.qt.io/qt-5/qml-qtquick-gridview.html#delegate-prop">GridView.delegate</a>
      */
     default property alias delegate: root._delegateComponent
 

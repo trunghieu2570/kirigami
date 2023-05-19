@@ -12,10 +12,10 @@ import org.kde.kirigami 2.20 as Kirigami
  * and possibly perform an action.
  *
  * Provides content padding (instead of padding outside of the scroll
- * area). Also has a default preferredWidth, as well as the `subtitle` property.
+ * area). Also has a default Dialog::preferredWidth, as well as the ::subtitle property.
  *
- * <b>Note:</b> If a `mainItem` is specified, it will replace
- * the subtitle label, and so the respective property will have no effect.
+ * <b>Note:</b> If a ::mainItem is specified, it will replace
+ * the ::subtitle label, and so the respective property will have no effect.
  *
  * Example usage:
  * @code{.qml}

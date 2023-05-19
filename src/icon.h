@@ -72,7 +72,7 @@ class Icon : public QQuickItem
      * This will only be used if the source image is a type that can have such a
      * long loading time that showing a temporary image in its place makes sense
      * (e.g. a remote image, or an image from an ImageProvider of the type
-     * QQmlImageProviderBase::ImageResponse).
+     * QtQml.QQmlImageProviderBase.ImageResponse).
      *
      * default: ``"image-png"``
      *
@@ -81,7 +81,8 @@ class Icon : public QQuickItem
     Q_PROPERTY(QString placeholder READ placeholder WRITE setPlaceholder NOTIFY placeholderChanged)
 
     /**
-     * @brief This property sets whether the icon will use the QIcon::Active mode,
+     * @brief This property sets whether the icon will use the
+     * @link QtGui.QIcon.Mode QIcon.Active @endlink mode,
      * resulting in a graphical effect being applied when the icon is currently active.
      *
      * @note This is typically used to indicate when an item is being hovered or pressed.
@@ -102,8 +103,9 @@ class Icon : public QQuickItem
     Q_PROPERTY(bool valid READ valid NOTIFY validChanged)
 
     /**
-     * @brief This property sets whether the icon will use QIcon::Selected mode,
-     * resulting in a graphical effect being applied when the icon s currently selected.
+     * @brief This property sets whether the icon will use the
+     * @link QtGui.QIcon.Mode QIcon.Selected @endlink mode,
+     * resulting in a graphical effect being applied when the icon is currently selected.
      *
      * This is typically used to indicate when a list item is currently selected.
      *
@@ -120,7 +122,7 @@ class Icon : public QQuickItem
      * @brief This property sets whether this icon will be treated as a mask.
      *
      * When an icon is being used as a mask, all non-transparent colors are replaced
-     * with the color provided in the Icon's @link Icon::color color @endlink property.
+     * with the color provided in the Icon's ::color property.
      *
      * default: ``false``
      *
@@ -131,12 +133,13 @@ class Icon : public QQuickItem
     /**
      * @brief This property holds the color to use when drawing the icon.
      *
-     * This property is used only when `isMask` is set to true.
+     * This property is used only when ::isMask is set to true.
      * If this property is not set or is `Qt::transparent`, the icon will use
-     * the text or the selected text color, depending on if `selected` is set to
+     * the text or the selected text color, depending on if ::selected is set to
      * true.
      *
      * default: ``Qt::transparent``
+     * @see Qt::GlobalColor
      */
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
 

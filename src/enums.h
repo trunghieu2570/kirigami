@@ -10,7 +10,7 @@
 #include <QObject>
 
 /**
- * @brief Types used in kirigami::PageRow and kirigami::Page that indicate how
+ * @brief Types used in org::kde::kirigami::PageRow and org::kde::kirigami::Page that indicate how
  * top bar controls should be represented to the user.
  */
 class ApplicationHeaderStyle : public QObject
@@ -52,7 +52,7 @@ public:
          * @brief Each page will show its title at the top together with action buttons and menus
          * that represent global and current pages actions.
          *
-         * Kirigami.PageRow does not implement this mode for mobile formfactor devices.
+         * org::kde::kirigami::PageRow does not implement this mode for mobile formfactor devices.
          */
         ToolBar,
 
@@ -186,8 +186,8 @@ public:
      * @brief A helper function to check if a certain display hint has been set.
      *
      * This function is mostly convenience to enforce certain behaviour of the
-     * various display hints, primarily the mutual exclusivity of KeepVisible
-     * and AlwaysHide.
+     * various display hints, primarily the mutual exclusivity of ::KeepVisible
+     * and ::AlwaysHide.
      *
      * @param values The display hints to check.
      * @param hint The display hint to check if it is set.
@@ -202,7 +202,7 @@ public:
      * @brief Check if a certain display hint has been set on an object.
      *
      * This overloads displayHintSet(DisplayHints, Hint) to accept a QObject
-     * instance. This object is checked to see if it has a displayHint property
+     * instance. This object is checked to see if it has a ``displayHint`` property
      * and if so, if that property has a @p hint set.
      *
      * @param object The object to check.
@@ -215,7 +215,7 @@ public:
     Q_INVOKABLE bool displayHintSet(QObject *object, Hint hint);
 
     /**
-     * Static version of \f displayHintSet(DisplayHints, Hint) that can be
+     * Static version of displayHintSet(DisplayHints, Hint) that can be
      * called from C++ code.
      */
     static bool isDisplayHintSet(DisplayHints values, Hint hint);

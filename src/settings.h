@@ -81,7 +81,7 @@ class Settings : public QObject
 
     /**
      * @brief This property holds the name of the application window icon.
-     * @see QGuiApplication::windowIcon()
+     * @see QGuiApplication::windowIcon
      *
      * @since KDE Frameworks 5.62
      * @since org.kde.kirigami 2.10

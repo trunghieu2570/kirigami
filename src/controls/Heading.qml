@@ -12,7 +12,7 @@ import org.kde.kirigami 2.4 as Kirigami
  * @brief A heading label used for subsections of texts.
  *
  * The characteristics of the text will be automatically set according to the
- * Kirigami.Theme. Use this components for section titles or headings in your UI,
+ * Kirigami.PlatformTheme. Use this components for section titles or headings in your UI,
  * for example page or section titles.
  *
  * Example usage:
@@ -28,11 +28,8 @@ import org.kde.kirigami 2.4 as Kirigami
  * }
  * @endcode
  *
- * The most important property is "text", which applies to the text property of Controls.Label.
- * See <a href="https://doc.qt.io/qt-5/qml-qtquick-controls-label.html">Controls.Label</a>
- * and <a href="https://doc.qt.io/qt-5/qml-qtquick-text.html">QtQuick.Text</a>
- * for additional properties, methods and signals.
- *
+ * @see QtQuick.Controls.Label
+ * @see QtQuick.Text
  * @see <a href="https://develop.kde.org/docs/getting-started/kirigami/style-typography">Typography in Kirigami</a>
  * @see <a href="https://develop.kde.org/hig/style/typography">KDE Human Interface Guidelines on Typography</a>
  * @inherit QtQuick.Controls.Label

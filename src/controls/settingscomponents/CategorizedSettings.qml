@@ -30,7 +30,7 @@ Kirigami.PageRow {
      * This only applies when the categorized settings object is wide enough to
      * show multiple pages.
      *
-     * @see actions
+     * @see @link actions @endlink
      */
     property string defaultPage
 

@@ -16,9 +16,9 @@ import "private" as P
  * It is recommended to use this class when the concept of Cards is needed
  * in the application.
  *
- * This Card has default items as header and footer. The header is an
+ * This Card has default items as AbstractCard::header and AbstractCard::footer. The header is an
  * image that can contain an optional title and icon, accessible via the
- * banner grouped property.
+ * ::banner grouped property.
  *
  * The footer will show a series of toolbuttons (and eventual overflow menu)
  * representing the actions list accessible with the list property actions.

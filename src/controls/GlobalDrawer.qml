@@ -12,7 +12,7 @@ import org.kde.kirigami 2.13 as Kirigami
 import "private" as P
 
 /**
- * A specialized form of the Drawer intended for showing an application's
+ * A specialized form of the QtQuick.Controls.Drawer intended for showing an application's
  * always-available global actions. Think of it like a mobile version of
  * a desktop application's menubar.
  *
@@ -70,7 +70,7 @@ OverlayDrawer {
     /**
      * @brief This property holds an icon to be displayed alongside the title.
      * @see kirigami::private::BannerImage::titleIcon
-     * @see kirigami::Icon::source
+     * @see Icon::source
      * @property var titleIcon
      */
     property alias titleIcon: bannerImage.titleIcon
@@ -197,7 +197,7 @@ OverlayDrawer {
      *
      * If you want to keep some items visible and some invisible, set this to
      * @c false and control the visibility/opacity of individual items,
-     * binded to the collapsed property
+     * binded to the OverlayDrawer.collapsed property.
      *
      * default: ``false``
      *

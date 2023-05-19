@@ -70,10 +70,10 @@ class ImageColors : public QObject
      * @brief This property holds the source from which colors should be extracted.
      *
      * The following values are allowed:
-     * * <a href="https://doc.qt.io/qt-6/qml-qtquick-item.html">Item</a>
-     * * <a href="https://doc.qt.io/qt-6/qimage.html">QImage</a>
-     * * <a href="https://doc.qt.io/qt-6/qicon.html">QIcon</a>
-     * * @link Icon::source Icon name @endlink
+     * * QtQuick.Item
+     * * QtGui.QImage
+     * * QtGui.QIcon
+     * * @link Icon::source Icon.name @endlink
      *
      * @note An Item's color palette will only be extracted once unless you * call `update()`, regardless of how the item hanges.
      */

@@ -103,7 +103,7 @@ T.SwipeDelegate {
      * @brief This property holds the background color of the list item.
      *
      * It is advised to use the default value.
-     * default: ``Kirigami.Theme.backgroundColor``
+     * default: @link Kirigami.PlatformTheme.backgroundColor Kirigami.Theme.backgroundColor @endlink
      */
     property color backgroundColor: Kirigami.Theme.backgroundColor
 
@@ -112,7 +112,7 @@ T.SwipeDelegate {
      * background alternating is enabled.
      *
      * It is advised to use the default value.
-     * default: ``Kirigami.Theme.alternateBackgroundColor``
+     * default: @link Kirigami.PlatformTheme.alternateBackgroundColor Kirigami.Theme.alternateBackgroundColor @endlink
      *
      * @since org.kde.kirigami 2.7
      */
@@ -123,7 +123,7 @@ T.SwipeDelegate {
      * when the item is pressed or selected.
      *
      * It is advised to use the default value.
-     * default: ``Kirigami.Theme.highlightColor``
+     * default: @link Kirigami.PlatformTheme.highlightColor Kirigami.Theme.highlightColor @endlink
      */
     property color activeBackgroundColor: Kirigami.Theme.highlightColor
 
@@ -131,7 +131,7 @@ T.SwipeDelegate {
      * @brief This property holds the color of the text in the item.
      *
      * It is advised to use the default value.
-     * default: ``Kirigami.Theme.textColor``
+     * default: @link Kirigami.PlatformTheme.textColor Kirigami.Theme.textColor @endlink
      *
      * If custom text elements are inserted in an AbstractListItem,
      * their color will have to be manually set with this property.
@@ -142,7 +142,7 @@ T.SwipeDelegate {
      * @brief This property holds the color of the text when the item is pressed or selected.
      *
      * It is advised to use the default value.
-     * default: ``Kirigami.Theme.highlightedTextColor``
+     * default: @link Kirigami.PlatformTheme.highlightedTextColor Kirigami.Theme.highlightedTextColor @endlink
      *
      * If custom text elements are inserted in an AbstractListItem,
      * their color property will have to be manually bound with this property

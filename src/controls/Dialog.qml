@@ -16,14 +16,17 @@ import QtGraphicalEffects 1.12 as GE
 /**
  * @brief Popup dialog that is used for short tasks and user interaction.
  *
- * Dialog consists of three components: the header, the content,
- * and the footer.
+ * Dialog consists of three components:
+ * the <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-dialog.html#header-prop">header</a>,
+ * the <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-popup.html#contentItem-prop">contentItem</a>,
+ * and the <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-dialog.html#footer-prop">footer</a>.
  *
  * By default, the header is a heading with text specified by the
- * `title` property.
+ * <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-dialog.html#title-prop">title</a> property.
  *
  * By default, the footer consists of a row of buttons specified by
- * the `standardButtons` and `customFooterActions` properties.
+ * the <a href="https://doc.qt.io/qt-5/qml-qtquick-controls2-dialog.html#standardButtons-prop">standardButtons</a>
+ * and ::customFooterActions properties.
  *
  * The `implicitHeight` and `implicitWidth` of the dialog contentItem is
  * the primary hint used for the dialog size. The dialog will be the
@@ -35,8 +38,9 @@ import QtGraphicalEffects 1.12 as GE
  * If the content height exceeds the maximum height of the dialog, the
  * dialog's contents will become scrollable.
  *
- * If the contentItem is a <b>ListView</b>, the dialog will take care of the
- * necessary scrollbars and scrolling behaviour. Do <b>not</b> attempt
+ * If the contentItem is a QtQuick.ListView,
+ * the dialog will take care of the necessary scrollbars and scrolling behaviour.
+ * Do @b not attempt
  * to nest ListViews (it must be the top level item), as the scrolling
  * behaviour will not be handled. Use ListView's `header` and `footer` instead.
  *
@@ -136,16 +140,20 @@ T.Dialog {
      * maximum height given is not larger than the height of the header and
      * footer, it will be ignored.
      *
-     * This is the window height, subtracted by largeSpacing on both the top
+     * This is the window height, subtracted by Kirigami.Units.largeSpacing on both the top
      * and bottom.
+     * 
+     * @see maximumHeight
      */
     readonly property real absoluteMaximumHeight: parent.height - Kirigami.Units.largeSpacing * 2
 
     /**
      * @brief This property holds the absolute maximum width the dialog can have.
      *
-     * By default, it is the window width, subtracted by largeSpacing on both
+     * By default, it is the window width, subtracted by Kirigami.Units.largeSpacing on both
      * the top and bottom.
+     * 
+     * @see maximumWidth
      */
     readonly property real absoluteMaximumWidth: parent.width - Kirigami.Units.largeSpacing * 2
 
@@ -157,14 +165,14 @@ T.Dialog {
      * maximum height given is not larger than the height of the header and
      * footer, it will be ignored.
      *
-     * By default, this is `absoluteMaximumHeight`.
+     * By default, this is ::absoluteMaximumHeight.
      */
     property real maximumHeight: absoluteMaximumHeight
 
     /**
      * @brief This property holds the maximum width the dialog can have.
      *
-     * By default, this is `absoluteMaximumWidth`.
+     * By default, this is ::absoluteMaximumWidth.
      */
     property real maximumWidth: absoluteMaximumWidth
 

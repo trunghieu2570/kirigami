@@ -89,7 +89,7 @@ T2.ItemDelegate {
      *
      * It is advised to use the default value.
      *
-     * default: ``Kirigami.Theme.alternateBackgroundColor``
+     * default: @link Kirigami.PlatformTheme.alternateBackgroundColor Kirigami.Theme.alternateBackgroundColor @endlink
      *
      * @since org.kde.kirigami 2.7
      */
@@ -101,7 +101,7 @@ T2.ItemDelegate {
      *
      * It is advised to use the default value.
      *
-     * default: ``Kirigami.Theme.highlightColor``
+     * default: @link Kirigami.PlatformTheme.highlightColor Kirigami.Theme.highlightColor @endlink
      */
     property color activeBackgroundColor: Kirigami.Theme.highlightColor
 
@@ -110,7 +110,7 @@ T2.ItemDelegate {
      *
      * It is advised to use the default value.
      *
-     * default: ``Kirigami.Theme.textColor``
+     * default: @link Kirigami.PlatformTheme.textColor Kirigami.Theme.textColor @endlink
      *
      * If custom text elements are inserted in an AbstractListItem,
      * their color will have to be manually set with this property.
@@ -122,7 +122,7 @@ T2.ItemDelegate {
      *
      * It is advised to use the default value.
      *
-     * default: ``Kirigami.Theme.highlightedTextColor``
+     * default: @link Kirigami.PlatformTheme.highlightedTextColor Kirigami.Theme.highlightedTextColor @endlink
      *
      * If custom text elements are inserted in an AbstractListItem,
      * their color will have to be manually set with this property.
