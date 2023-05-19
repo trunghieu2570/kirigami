@@ -53,6 +53,7 @@ Q_SIGNALS:
 private:
     void slotXChanged();
     void slotYChanged();
+    void slotParentChanged();
     void connectAncestors(QQuickItem *item);
 
     QQuickItem *m_item = nullptr;

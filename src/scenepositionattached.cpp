@@ -69,6 +69,27 @@ void ScenePositionAttached::slotYChanged()
     Q_EMIT yChanged();
 }
 
+void ScenePositionAttached::slotParentChanged()
+{
+    m_cachedXValid = false;
+    m_cachedYValid = false;
+
+    // sender() is said to violate the object-oriented principle of
+    // modularity. But we don't care: it is an internal method, and we know
+    // that it is only connected by our code in one place. Having it instead
+    // of capturing and connecting to lambdas also saves lots of RAM.
+    auto ancestor = qobject_cast<QQuickItem *>(sender());
+    do {
+        disconnect(ancestor, nullptr, this, nullptr);
+        m_ancestors.pop_back();
+    } while (!m_ancestors.isEmpty() && m_ancestors.last() != ancestor);
+
+    connectAncestors(ancestor);
+
+    Q_EMIT xChanged();
+    Q_EMIT yChanged();
+}
+
 void ScenePositionAttached::connectAncestors(QQuickItem *item)
 {
     if (!item) {
@@ -81,18 +102,7 @@ void ScenePositionAttached::connectAncestors(QQuickItem *item)
 
         connect(ancestor, &QQuickItem::xChanged, this, &ScenePositionAttached::slotXChanged);
         connect(ancestor, &QQuickItem::yChanged, this, &ScenePositionAttached::slotYChanged);
-        connect(ancestor, &QQuickItem::parentChanged, this, [this, ancestor]() {
-            m_cachedXValid = false;
-            m_cachedYValid = false;
-            do {
-                disconnect(ancestor, nullptr, this, nullptr);
-                m_ancestors.pop_back();
-            } while (!m_ancestors.isEmpty() && m_ancestors.last() != ancestor);
-
-            connectAncestors(ancestor);
-            Q_EMIT xChanged();
-            Q_EMIT yChanged();
-        });
+        connect(ancestor, &QQuickItem::parentChanged, this, &ScenePositionAttached::slotParentChanged);
 
         ancestor = ancestor->parentItem();
     }
