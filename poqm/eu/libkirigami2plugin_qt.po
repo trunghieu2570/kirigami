@@ -99,7 +99,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "%1(e)ri buruz"
 
-#: controls/AbstractApplicationWindow.qml:202
+#: controls/AbstractApplicationWindow.qml:201
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Irten"
@@ -160,17 +160,17 @@ msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr "Ireki menua"
 
-#: controls/SearchField.qml:93
+#: controls/SearchField.qml:94
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Bilatu..."
 
-#: controls/SearchField.qml:95
+#: controls/SearchField.qml:96
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "Bilatu..."
 
-#: controls/SearchField.qml:106
+#: controls/SearchField.qml:107
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "Garbitu bilaketa"
@@ -221,12 +221,12 @@ msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "Nabigatu %1(e)ra."
 
-#: controls/templates/OverlayDrawer.qml:139
+#: controls/templates/OverlayDrawer.qml:141
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Itxi tiradera"
 
-#: controls/templates/OverlayDrawer.qml:145
+#: controls/templates/OverlayDrawer.qml:147
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Ireki tiradera"

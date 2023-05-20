@@ -94,7 +94,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Sobre %1"
 
-#: controls/AbstractApplicationWindow.qml:202
+#: controls/AbstractApplicationWindow.qml:201
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Saír"
@@ -155,17 +155,17 @@ msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr "Abre o menú"
 
-#: controls/SearchField.qml:93
+#: controls/SearchField.qml:94
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Buscar…"
 
-#: controls/SearchField.qml:95
+#: controls/SearchField.qml:96
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "Buscar"
 
-#: controls/SearchField.qml:106
+#: controls/SearchField.qml:107
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "Borrar a busca"
@@ -216,12 +216,12 @@ msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "Navegar a %1."
 
-#: controls/templates/OverlayDrawer.qml:139
+#: controls/templates/OverlayDrawer.qml:141
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Pechar o caixón"
 
-#: controls/templates/OverlayDrawer.qml:145
+#: controls/templates/OverlayDrawer.qml:147
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Abrir o caixón"

@@ -100,7 +100,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Про %1"
 
-#: controls/AbstractApplicationWindow.qml:202
+#: controls/AbstractApplicationWindow.qml:201
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Вийти"
@@ -161,17 +161,17 @@ msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr "Відкрити меню"
 
-#: controls/SearchField.qml:93
+#: controls/SearchField.qml:94
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Шукати…"
 
-#: controls/SearchField.qml:95
+#: controls/SearchField.qml:96
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "Пошук"
 
-#: controls/SearchField.qml:106
+#: controls/SearchField.qml:107
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "Спорожнити поле пошуку"
@@ -222,12 +222,12 @@ msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "Перейти до «%1»."
 
-#: controls/templates/OverlayDrawer.qml:139
+#: controls/templates/OverlayDrawer.qml:141
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Закрити висувну панель"
 
-#: controls/templates/OverlayDrawer.qml:145
+#: controls/templates/OverlayDrawer.qml:147
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Відкрити висувну панель"

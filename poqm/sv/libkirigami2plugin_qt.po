@@ -96,7 +96,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Om %1"
 
-#: controls/AbstractApplicationWindow.qml:202
+#: controls/AbstractApplicationWindow.qml:201
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Avsluta"
@@ -163,17 +163,17 @@ msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr "Öppna"
 
-#: controls/SearchField.qml:93
+#: controls/SearchField.qml:94
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Sök…"
 
-#: controls/SearchField.qml:95
+#: controls/SearchField.qml:96
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "Sök"
 
-#: controls/SearchField.qml:106
+#: controls/SearchField.qml:107
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr ""
@@ -224,12 +224,12 @@ msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "Navigera till %1."
 
-#: controls/templates/OverlayDrawer.qml:139
+#: controls/templates/OverlayDrawer.qml:141
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Stäng låda"
 
-#: controls/templates/OverlayDrawer.qml:145
+#: controls/templates/OverlayDrawer.qml:147
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Öppna låda"

@@ -116,7 +116,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Apie"
 
-#: controls/AbstractApplicationWindow.qml:202
+#: controls/AbstractApplicationWindow.qml:201
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr ""
@@ -186,7 +186,7 @@ msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr ""
 
-#: controls/SearchField.qml:93
+#: controls/SearchField.qml:94
 #, fuzzy
 #| msgctxt "SearchField|"
 #| msgid "Search..."
@@ -194,7 +194,7 @@ msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Ieškoti..."
 
-#: controls/SearchField.qml:95
+#: controls/SearchField.qml:96
 #, fuzzy
 #| msgctxt "SearchField|"
 #| msgid "Search..."
@@ -202,7 +202,7 @@ msgctxt "SearchField|"
 msgid "Search"
 msgstr "Ieškoti..."
 
-#: controls/SearchField.qml:106
+#: controls/SearchField.qml:107
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr ""
@@ -255,7 +255,7 @@ msgctxt "PageTab|"
 msgid "Navigate to %1."
 msgstr "Naršyti pirmyn"
 
-#: controls/templates/OverlayDrawer.qml:139
+#: controls/templates/OverlayDrawer.qml:141
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
@@ -263,7 +263,7 @@ msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Užverti šoninę juostą"
 
-#: controls/templates/OverlayDrawer.qml:145
+#: controls/templates/OverlayDrawer.qml:147
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr ""
