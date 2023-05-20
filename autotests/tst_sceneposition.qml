@@ -148,4 +148,87 @@ TestCase {
         compare(itemTransform.Kirigami.ScenePosition.x, itemTransform.x);
         compare(itemTransform.Kirigami.ScenePosition.y, itemTransform.y);
     }
+
+    Item {
+        id: oldParent
+        Item {
+            id: reparentedChildItem
+        }
+    }
+    Item {
+        id: newParent
+    }
+
+    SignalSpy {
+        id: reparentingXSpy
+        target: reparentedChildItem.Kirigami.ScenePosition
+        signalName: "xChanged"
+    }
+    SignalSpy {
+        id: reparentingYSpy
+        target: reparentedChildItem.Kirigami.ScenePosition
+        signalName: "yChanged"
+    }
+
+    function test_disconnectOldAncestors() {
+        verify(reparentingXSpy.valid);
+        verify(reparentingYSpy.valid);
+        reparentingXSpy.clear();
+        reparentingYSpy.clear();
+
+        // change position of the item itself
+        reparentedChildItem.x = 12;
+        compare(reparentingXSpy.count, 1);
+        compare(reparentingYSpy.count, 0);
+        reparentedChildItem.y = 34;
+        compare(reparentingXSpy.count, 1);
+        compare(reparentingYSpy.count, 1);
+
+        // change position of the current parent
+        oldParent.x = 56;
+        compare(reparentedChildItem.Kirigami.ScenePosition.x, 12 + 56);
+        compare(reparentingXSpy.count, 2);
+        compare(reparentingYSpy.count, 1);
+        oldParent.y = 78;
+        compare(reparentedChildItem.Kirigami.ScenePosition.y, 34 + 78);
+        compare(reparentingXSpy.count, 2);
+        compare(reparentingYSpy.count, 2);
+
+        // reparent
+        reparentedChildItem.parent = newParent;
+        compare(reparentingXSpy.count, 3);
+        compare(reparentingYSpy.count, 3);
+        compare(reparentedChildItem.Kirigami.ScenePosition.x, 12);
+        compare(reparentedChildItem.Kirigami.ScenePosition.y, 34);
+
+        // change position of the new parent
+        newParent.x = 11;
+        compare(reparentedChildItem.Kirigami.ScenePosition.x, 12 + 11);
+        compare(reparentingXSpy.count, 4);
+        compare(reparentingYSpy.count, 3);
+        newParent.y = 22;
+        compare(reparentedChildItem.Kirigami.ScenePosition.y, 34 + 22);
+        compare(reparentingXSpy.count, 4);
+        compare(reparentingYSpy.count, 4);
+
+        // change position of the item itself (again, but with new parent)
+        reparentedChildItem.x = 33;
+        compare(reparentedChildItem.Kirigami.ScenePosition.x, 33 + 11);
+        compare(reparentingXSpy.count, 5);
+        compare(reparentingYSpy.count, 4);
+        reparentedChildItem.y = 44;
+        compare(reparentedChildItem.Kirigami.ScenePosition.y, 44 + 22);
+        compare(reparentingXSpy.count, 5);
+        compare(reparentingYSpy.count, 5);
+
+        // change position of the old parent, should not trigger signals of the item anymore
+        oldParent.x = 55;
+        compare(reparentedChildItem.Kirigami.ScenePosition.x, 33 + 11);
+        compare(reparentingXSpy.count, 5);
+        compare(reparentingYSpy.count, 5);
+        oldParent.y = 66;
+        compare(reparentedChildItem.Kirigami.ScenePosition.y, 44 + 22);
+        compare(reparentingXSpy.count, 5);
+        compare(reparentingYSpy.count, 5);
+    }
 }

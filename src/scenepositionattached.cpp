@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2017 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -58,12 +59,18 @@ void ScenePositionAttached::connectAncestors(QQuickItem *item)
         connect(ancestor, &QQuickItem::xChanged, this, &ScenePositionAttached::xChanged);
         connect(ancestor, &QQuickItem::yChanged, this, &ScenePositionAttached::yChanged);
         connect(ancestor, &QQuickItem::parentChanged, this, [this, ancestor]() {
-            do {
-                disconnect(ancestor, nullptr, this, nullptr);
-                m_ancestors.pop_back();
-            } while (!m_ancestors.isEmpty() && m_ancestors.last() != ancestor);
+            while (!m_ancestors.isEmpty()) {
+                QQuickItem *last = m_ancestors.takeLast();
+                // Disconnect the item which had its parent changed too,
+                // because connectAncestors() would reconnect it next.
+                disconnect(last, nullptr, this, nullptr);
+                if (last == ancestor) {
+                    break;
+                }
+            }
 
             connectAncestors(ancestor);
+
             Q_EMIT xChanged();
             Q_EMIT yChanged();
         });
