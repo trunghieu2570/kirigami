@@ -50,30 +50,35 @@ Rectangle {
             Layout.fillWidth: true
             label: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod"
             subtitle: "tempor incididunt"
+            toolTipVisible: true
         }
         Kirigami.BasicListItem {
             id: itemSubtitleElided
             Layout.fillWidth: true
             label: "Lorem ipsum dolor"
             subtitle: "tempor incididunt ut labore et dolore magna aliqua."
+            toolTipVisible: true
         }
         Kirigami.BasicListItem {
             id: itemBothElided
             Layout.fillWidth: true
             label: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod"
             subtitle: "tempor incididunt ut labore et dolore magna aliqua."
+            toolTipVisible: true
         }
         Kirigami.BasicListItem {
             id: itemHtmlElided
             Layout.fillWidth: true
             label: "HTML is <i>supported</i> inside <b>tooltips</b> as well…"
             subtitle: "…as line breaks between <sup>label</sup> &amp; <sub>subtitle</sub>"
+            toolTipVisible: true
         }
         QQC2.Label {
             Layout.fillWidth: true
             padding: Kirigami.Units.smallSpacing
             text: `QQC2.ToolTip.toolTip.visible:\n${QQC2.ToolTip.toolTip.visible}`
             color: Kirigami.Theme.textColor
+            toolTipVisible: true
         }
         QQC2.Label {
             Layout.fillWidth: true
@@ -82,6 +87,7 @@ Rectangle {
             text: `QQC2.ToolTip.toolTip.text:\n"${QQC2.ToolTip.toolTip.text}"`
             wrapMode: Text.Wrap
             color: Kirigami.Theme.textColor
+            toolTipVisible: true
         }
     }
 }

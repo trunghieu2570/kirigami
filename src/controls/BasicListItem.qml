@@ -240,7 +240,7 @@ Kirigami.AbstractListItem {
      * @brief This property holds whether the tooltip of the subtitle should be visible
      * @since 5.107
      */
-    property bool toolTipVisible: fase
+    property bool toolTipVisible: false
 
     /** @internal */
     default property alias _basicDefault: layout.data
