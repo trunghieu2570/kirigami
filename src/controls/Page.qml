@@ -181,21 +181,6 @@ QQC2.Page {
      */
     signal backRequested(var event);
 
-
-    // Look for sheets and cose them
-    // FIXME: port Sheets to Popup?
-    onBackRequested: event => {
-        let item;
-        for (const i in root.resources) {
-            item = root.resources[i];
-            if (item.hasOwnProperty("close") && item.hasOwnProperty("sheetOpen") && item.sheetOpen) {
-                item.close()
-                event.accepted = true;
-                return;
-            }
-        }
-    }
-
     // NOTE: contentItem will be created if not existing (and contentChildren of Page would become its children) This with anchors enforces the geometry we want, where globalToolBar is a super-header, on top of header
     contentItem: Item {
         anchors {
