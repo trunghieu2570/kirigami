@@ -460,7 +460,7 @@ Item {
         restoreMode: Binding.RestoreBinding
     }
 
-    implicitWidth: Kirigami.Units.gridUnit * 30
-    implicitHeight: Kirigami.Units.gridUnit * 45
+    implicitWidth: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 30 : Kirigami.Units.gridUnit * 55
+    implicitHeight: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 45 : Kirigami.Units.gridUnit * 40
     visible: true
 }
