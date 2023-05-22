@@ -1,8 +1,10 @@
 # KDE Config File
 [General]
 Name=Kirigami Application (Qt6)
+Name[ar]=تطبيق كيريغامي( كيوت 6)
 Name[ca]=Aplicació de Kirigami (Qt6)
 Name[ca@valencia]=Aplicació de Kirigami (Qt6)
+Name[en_GB]=Kirigami Application (Qt6)
 Name[eo]=Kirigami-Aplikaĵo (Qt6)
 Name[es]=Aplicación de Kirigami (Qt6)
 Name[gl]=Aplicación de Kirigami (Qt6)
@@ -10,6 +12,7 @@ Name[ia]=Application de Kirigami (Qt6)
 Name[ka]=აპლიკაცია Kirigami (Qt6)
 Name[nl]=Kirigami-toepassing (Qt6)
 Name[pl]=Aplikacja Kirigami (Qt6)
+Name[sl]=Aplikacija Kirigami (Qt6)
 Name[tr]=Kirigami Uygulaması (Qt6)
 Name[uk]=Програма на Kirigami (Qt6)
 Name[x-test]=xxKirigami Application (Qt6)xx
