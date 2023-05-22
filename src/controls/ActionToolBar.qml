@@ -8,6 +8,7 @@ import QtQuick 2.7
 import QtQml 2.15
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.4 as QQC2
+import QtQuick.Templates 2.15 as T
 import org.kde.kirigami 2.14 as Kirigami
 import "private" as P
 
@@ -91,9 +92,7 @@ QQC2.Control {
      *
      * @property int position
      */
-    property int position: parent && parent.hasOwnProperty("position")
-            ? parent.position
-            : QQC2.ToolBar.Header
+    property int position: parent instanceof T.ToolBar ? parent.position : QQC2.ToolBar.Header
 
     /**
      * @brief This property holds the maximum width of the content of this ToolBar.
@@ -178,8 +177,8 @@ QQC2.Control {
                     return [action]
                 }
 
-                if (action.hasOwnProperty("children") && action.children.length > 0) {
-                    return Array.prototype.map.call(action.children, i => i)
+                if (action instanceof Kirigami.Action) {
+                    return action.children;
                 }
 
                 return []

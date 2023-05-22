@@ -8,6 +8,7 @@ import QtQuick 2.15
 import QtQml 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15 as Controls
+import QtQuick.Templates 2.15 as T
 
 import org.kde.kirigami 2.20 as Kirigami
 
@@ -22,9 +23,9 @@ Controls.ToolButton {
 
     property bool showMenuArrow: !Kirigami.DisplayHint.displayHintSet(action, Kirigami.DisplayHint.HideChildIndicator)
 
-    property var menuActions: {
-        if (action && action.hasOwnProperty("children")) {
-            return Array.prototype.slice.call(action.children)
+    property list<T.Action> menuActions: {
+        if (action instanceof Kirigami.Action) {
+            return action.children;
         }
         return []
     }
@@ -48,7 +49,7 @@ Controls.ToolButton {
                     menu.closed.connect(() => control.checked = false)
                     menu.actions = control.menuActions
                 }
-                const incubator = menuComponent.incubateObject(control, {"actions": menuActions})
+                const incubator = menuComponent.incubateObject(control, { actions: menuActions })
                 if (incubator.status !== Component.Ready) {
                     incubator.onStatusChanged = status => {
                         if (status === Component.Ready) {
@@ -64,13 +65,13 @@ Controls.ToolButton {
         }
     }
 
-    visible: (action && action.hasOwnProperty("visible")) ? action.visible : true
+    visible: action instanceof Kirigami.Action ? action.visible : true
 
     // Workaround for QTBUG-85941
     Binding {
         target: control
         property: "checkable"
-        value: (control.action && control.action.checkable) || (control.menuActions && control.menuActions.length > 0)
+        value: (control.action?.checkable ?? false) || (control.menuActions.length > 0)
         restoreMode: Binding.RestoreBinding
     }
 
