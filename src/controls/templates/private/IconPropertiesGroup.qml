@@ -37,5 +37,15 @@ QtObject {
      * The icon is tinted with the specified color, unless the color is set to "transparent".
      */
     property color color: Qt.rgba(0, 0, 0, 0)
+
+    /**
+     * This property holds the width of the icon.
+     */
+    property real width
+
+    /**
+     * This property holds the height of the icon.
+     */
+    property real height
 }
 
