@@ -36,7 +36,9 @@ Kirigami.ApplicationWindow {
                 Layout.fillHeight: true
 
                 Component.onCompleted: {
-                    background.visible = true;
+                    if (background) {
+                        background.visible = true;
+                    }
                 }
                 ListView {
                     model: 3
@@ -64,7 +66,9 @@ Kirigami.ApplicationWindow {
                 Layout.fillHeight: true
 
                 Component.onCompleted: {
-                    background.visible = true;
+                    if (background) {
+                        background.visible = true;
+                    }
                 }
                 ListView {
                     model: 3
@@ -92,7 +96,9 @@ Kirigami.ApplicationWindow {
                 Layout.fillHeight: true
 
                 Component.onCompleted: {
-                    background.visible = true;
+                    if (background) {
+                        background.visible = true;
+                    }
                 }
                 ListView {
                     model: 3
@@ -134,7 +140,9 @@ Kirigami.ApplicationWindow {
                 Layout.fillHeight: true
 
                 Component.onCompleted: {
-                    background.visible = true;
+                    if (background) {
+                        background.visible = true;
+                    }
                 }
                 ListView {
                     model: 3
@@ -163,7 +171,9 @@ Kirigami.ApplicationWindow {
                 Layout.fillHeight: true
 
                 Component.onCompleted: {
-                    background.visible = true;
+                    if (background) {
+                        background.visible = true;
+                    }
                 }
                 ListView {
                     model: 3
@@ -192,7 +202,9 @@ Kirigami.ApplicationWindow {
                 Layout.fillHeight: true
 
                 Component.onCompleted: {
-                    background.visible = true;
+                    if (background) {
+                        background.visible = true;
+                    }
                 }
                 ListView {
                     model: 3
