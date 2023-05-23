@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
-"PO-Revision-Date: 2023-02-24 12:43\n"
+"PO-Revision-Date: 2023-05-22 13:58\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -12,8 +12,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-trunk/messages/kirigami/libkirigami2plugin_qt.pot\n"
-"X-Crowdin-File-ID: 6217\n"
+"X-Crowdin-File: /kf6-trunk/messages/kirigami/libkirigami6_qt.pot\n"
+"X-Crowdin-File-ID: 42919\n"
 
 #: controls/AboutItem.qml:139
 #, qt-format
@@ -66,12 +66,12 @@ msgstr "使用的程序库"
 #: controls/AboutItem.qml:341
 msgctxt "AboutItem|"
 msgid "Authors"
-msgstr "开发人员"
+msgstr "作者"
 
 #: controls/AboutItem.qml:350
 msgctxt "AboutItem|"
 msgid "Show author photos"
-msgstr "显示开发人员照片"
+msgstr "显示作者照片"
 
 #: controls/AboutItem.qml:381
 msgctxt "AboutItem|"
@@ -123,7 +123,7 @@ msgstr "返回"
 #: controls/GlobalDrawer.qml:599
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
-msgstr "关闭侧栏"
+msgstr "关闭侧边栏"
 
 #: controls/GlobalDrawer.qml:602
 msgctxt "GlobalDrawer|"
@@ -189,7 +189,7 @@ msgstr "当前页面。进度：百分之 %1。"
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1. Progress: %2 percent."
-msgstr "前往 %1。进度：百分之 %2。"
+msgstr "前往 %1。进度：%2%。"
 
 #. Accessibility text for a page tab. Keep the text as concise as possible.
 #: controls/swipenavigator/templates/PageTab.qml:46
@@ -258,7 +258,3 @@ msgstr "%1 窗口系统"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (使用 %3 构建)"
-
-#~ msgctxt "AboutItem|"
-#~ msgid "Visit %1's KDE Store page"
-#~ msgstr "访问 %1 的 KDE 商店页面"
