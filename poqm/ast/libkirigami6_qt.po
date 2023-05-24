@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-05-03 23:39+0200\n"
+"PO-Revision-Date: 2023-05-23 22:38+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
 "Language: ast\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #: controls/AboutItem.qml:139
 #, qt-format
@@ -48,18 +48,18 @@ msgstr ""
 #: controls/AboutItem.qml:278
 msgctxt "AboutItem|"
 msgid "License:"
-msgstr ""
+msgstr "Llicencia:"
 
 #: controls/AboutItem.qml:300
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
-msgstr ""
+msgstr "Llicencia: %1"
 
 #: controls/AboutItem.qml:311
 msgctxt "AboutItem|"
 msgid "Libraries in use"
-msgstr ""
+msgstr "Biblioteques n'usu"
 
 #: controls/AboutItem.qml:341
 msgctxt "AboutItem|"
@@ -74,12 +74,12 @@ msgstr ""
 #: controls/AboutItem.qml:381
 msgctxt "AboutItem|"
 msgid "Credits"
-msgstr ""
+msgstr "Creitos"
 
 #: controls/AboutItem.qml:394
 msgctxt "AboutItem|"
 msgid "Translators"
-msgstr ""
+msgstr "Traductores"
 
 #: controls/AboutPage.qml:93
 #, qt-format
@@ -95,7 +95,7 @@ msgstr ""
 #: controls/ActionToolBar.qml:193
 msgctxt "ActionToolBar|"
 msgid "More Actions"
-msgstr ""
+msgstr "Más aiciones"
 
 #: controls/Avatar.qml:182
 #, qt-format
@@ -111,7 +111,7 @@ msgstr ""
 #: controls/ContextDrawer.qml:66
 msgctxt "ContextDrawer|"
 msgid "Actions"
-msgstr ""
+msgstr "Aiciones"
 
 #: controls/GlobalDrawer.qml:506
 msgctxt "GlobalDrawer|"
@@ -131,12 +131,12 @@ msgstr ""
 #: controls/LoadingPlaceholder.qml:54
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
-msgstr ""
+msgstr "Cargando…"
 
 #: controls/PasswordField.qml:42
 msgctxt "PasswordField|"
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
@@ -167,13 +167,13 @@ msgstr ""
 #: controls/settingscomponents/CategorizedSettings.qml:104
 msgctxt "CategorizedSettings|"
 msgid "Settings"
-msgstr ""
+msgstr "Configuración"
 
 #: controls/settingscomponents/CategorizedSettings.qml:40
 #, qt-format
 msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
-msgstr ""
+msgstr "Configuración — %1"
 
 #. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
 #: controls/swipenavigator/templates/PageTab.qml:38
@@ -232,7 +232,7 @@ msgstr ""
 #: controls/ToolBarApplicationHeader.qml:89
 msgctxt "ToolBarApplicationHeader|"
 msgid "More Actions"
-msgstr ""
+msgstr "Más aiciones"
 
 #: controls/UrlButton.qml:51
 msgctxt "UrlButton|"
@@ -249,7 +249,7 @@ msgstr ""
 #, qt-format
 msgctxt "Settings|"
 msgid "The %1 windowing system"
-msgstr ""
+msgstr "El sistema de ventanes %1"
 
 #: settings.cpp:214
 #, qt-format
