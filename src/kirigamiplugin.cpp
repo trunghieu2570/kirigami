@@ -173,12 +173,9 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(QStringLiteral("OverlaySheet.qml")), uri, 2, 0, "OverlaySheet");
     qmlRegisterType(componentUrl(QStringLiteral("Page.qml")), uri, 2, 0, "Page");
     qmlRegisterType(componentUrl(QStringLiteral("ScrollablePage.qml")), uri, 2, 0, "ScrollablePage");
-    qmlRegisterType(componentUrl(QStringLiteral("SplitDrawer.qml")), uri, 2, 0, "SplitDrawer");
     qmlRegisterType(componentUrl(QStringLiteral("SwipeListItem.qml")), uri, 2, 0, "SwipeListItem");
 
     // 2.1
-    qmlRegisterType(componentUrl(QStringLiteral("AbstractItemViewHeader.qml")), uri, 2, 1, "AbstractItemViewHeader");
-    qmlRegisterType(componentUrl(QStringLiteral("ItemViewHeader.qml")), uri, 2, 1, "ItemViewHeader");
     qmlRegisterType(componentUrl(QStringLiteral("AbstractApplicationItem.qml")), uri, 2, 1, "AbstractApplicationItem");
     qmlRegisterType(componentUrl(QStringLiteral("ApplicationItem.qml")), uri, 2, 1, "ApplicationItem");
 
@@ -247,9 +244,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType<PagePool>(uri, 2, 11, "PagePool");
     qmlRegisterType(componentUrl(QStringLiteral("PagePoolAction.qml")), uri, 2, 11, "PagePoolAction");
 
-    // TODO: remove
-    qmlRegisterType(componentUrl(QStringLiteral("SwipeListItem2.qml")), uri, 2, 11, "SwipeListItem2");
-
     // 2.12
     qmlRegisterType<ShadowedRectangle>(uri, 2, 12, "ShadowedRectangle");
     qmlRegisterType<ShadowedTexture>(uri, 2, 12, "ShadowedTexture");
@@ -286,7 +280,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
     // 2.18
     qmlRegisterType<SpellCheckingAttached>(uri, 2, 18, "SpellChecking");
     qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/CategorizedSettings.qml")), uri, 2, 18, "CategorizedSettings");
-    qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/GenericSettingsPage.qml")), uri, 2, 18, "GenericSettingsPage");
     qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/SettingAction.qml")), uri, 2, 18, "SettingAction");
     
     // 2.19
