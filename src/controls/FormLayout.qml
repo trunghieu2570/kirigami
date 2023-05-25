@@ -103,7 +103,7 @@ Item {
         property int wideImplicitWidth
         columns: root.wideMode ? 2 : 1
         rowSpacing: Kirigami.Units.smallSpacing
-        columnSpacing: Kirigami.Units.smallSpacing
+        columnSpacing: Kirigami.Units.largeSpacing
 
         //TODO: use state machine
         Binding {
