@@ -318,8 +318,6 @@ Item {
         }
         if (menuBar instanceof T.ToolBar) {
             menuBar.position = T.ToolBar.Footer
-        } else if (menuBar instanceof T.TabBar) {
-            menuBar.position = T.TabBar.Footer
         } else if (menuBar instanceof T.DialogButtonBox) {
             menuBar.position = T.DialogButtonBox.Footer
         }
@@ -335,8 +333,6 @@ Item {
         }
         if (header instanceof T.ToolBar) {
             header.position = T.ToolBar.Header
-        } else if (header instanceof T.TabBar) {
-            header.position = T.TabBar.Header
         } else if (header instanceof T.DialogButtonBox) {
             header.position = T.DialogButtonBox.Header
         }
@@ -351,8 +347,6 @@ Item {
         }
         if (footer instanceof T.ToolBar) {
             footer.position = T.ToolBar.Footer
-        } else if (footer instanceof T.TabBar) {
-            footer.position = T.TabBar.Footer
         } else if (footer instanceof T.DialogButtonBox) {
             footer.position = T.DialogButtonBox.Footer
         }

@@ -41,9 +41,8 @@ Module {
                 "Auto": 0,
                 "Breadcrumb": 1,
                 "Titles": 2,
-                "TabBar": 3,
-                "ToolBar": 4,
-                "None": 5
+                "ToolBar": 3,
+                "None": 4
             }
         }
         Enum {

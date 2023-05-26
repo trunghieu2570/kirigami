@@ -220,7 +220,6 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private/globaltoolbar SOURCES
     controls/private/globaltoolbar/BreadcrumbControl.qml
     controls/private/globaltoolbar/PageRowGlobalToolBarStyleGroup.qml
     controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml
-    controls/private/globaltoolbar/TabBarControl.qml
     controls/private/globaltoolbar/TitlesPageHeader.qml
     controls/private/globaltoolbar/ToolBarPageHeader.qml
 )

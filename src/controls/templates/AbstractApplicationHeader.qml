@@ -127,7 +127,6 @@ Item {
             }
 
             if (root.pageRow
-                && root.pageRow.globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.TabBar
                 && root.pageRow.globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.Breadcrumb) {
                 return;
             }

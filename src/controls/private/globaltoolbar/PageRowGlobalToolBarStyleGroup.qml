@@ -10,9 +10,7 @@ import org.kde.kirigami 2.19 as Kirigami
 QtObject {
     id: globalToolBar
     property int style: Kirigami.ApplicationHeaderStyle.None
-    onStyleChanged: if (style === Kirigami.ApplicationHeaderStyle.TabBar) {
-        console.warn("TabBar header style is deprecated.")
-    }
+
     readonly property int actualStyle: {
         if (style === Kirigami.ApplicationHeaderStyle.Auto) {
             // TODO KF6
@@ -30,7 +28,7 @@ QtObject {
     }
 
     /** @property kirigami::ApplicationHeaderStyle::NavigationButtons */
-    property int showNavigationButtons: (style !== Kirigami.ApplicationHeaderStyle.TabBar && (!Kirigami.Settings.isMobile || Qt.platform.os === "ios"))
+    property int showNavigationButtons: (!Kirigami.Settings.isMobile || Qt.platform.os === "ios")
         ? (Kirigami.ApplicationHeaderStyle.ShowBackButton | Kirigami.ApplicationHeaderStyle.ShowForwardButton)
         : Kirigami.ApplicationHeaderStyle.NoNavigationButtons
     property bool separatorVisible: true

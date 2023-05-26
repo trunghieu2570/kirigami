@@ -152,7 +152,6 @@ QT.Control {
      *  * ``Auto``: Depending on application formfactor, it can behave automatically like other values, such as a Breadcrumb on mobile and ToolBar on desktop.
      *  * ``Breadcrumb``: It will show a breadcrumb of all the page titles in the stack, for easy navigation.
      *  * ``Titles``: Each page will only have its own title on top.
-     *  * ``TabBar``: The global toolbar will look like a TabBar for choosing which page to display.
      *  * ``ToolBar``: Each page will have the title on top together buttons and menus to represent all of the page actions. Not available on Mobile systems.
      *  * ``None``: No global toolbar will be shown.
      *

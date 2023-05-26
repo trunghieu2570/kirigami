@@ -32,8 +32,6 @@ AbstractApplicationHeader {
      *
      * Allowed values are:
      * * ``Kirigami.ApplicationHeaderStyle.Breadcrumb``: The pages are hierarchical, separated by an arrow.
-     * * ``Kirigami.ApplicationHeaderStyle.TabBar``: The pages are intended to behave like pages of a tabbed view.
-     * and the separator will look limke a dot.
      *
      * When the header is in wide screen mode, no separator will be drawn.
      *
@@ -46,7 +44,7 @@ AbstractApplicationHeader {
      *
      * default: `when true, there will be a back button present that will make the pagerow scroll back when clicked`
      */
-    property bool backButtonEnabled: (!titleList.isTabBar && (!Kirigami.Settings.isMobile || Qt.platform.os === "ios"))
+    property bool backButtonEnabled: !Kirigami.Settings.isMobile || Qt.platform.os === "ios")
 
     property Component pageDelegate: Component {
         Row {
@@ -58,12 +56,12 @@ AbstractApplicationHeader {
 
             Kirigami.Icon {
                 // in tabbar mode this is just a spacer
-                visible: !titleList.wideMode && ((typeof modelData !== "undefined" && modelData > 0) || titleList.internalHeaderStyle === Kirigami.ApplicationHeaderStyle.TabBar)
+                visible: !titleList.wideMode && ((typeof modelData !== "undefined" && modelData > 0)
                 anchors.verticalCenter: parent.verticalCenter
                 height: Kirigami.Units.iconSizes.small
                 width: height
                 selected: header.background && header.background.color && header.background.color === Kirigami.Theme.highlightColor
-                source: titleList.isTabBar ? "" : (LayoutMirroring.enabled ? "go-next-symbolic-rtl" : "go-next-symbolic")
+                source: LayoutMirroring.enabled ? "go-next-symbolic-rtl" : "go-next-symbolic"
             }
 
             Kirigami.Heading {
@@ -89,7 +87,7 @@ AbstractApplicationHeader {
                     height: Kirigami.Units.smallSpacing
                     color: title.color
                     opacity: 0.6
-                    visible: titleList.isTabBar && current
+                    visible: current
                 }
             }
         }
@@ -242,7 +240,6 @@ AbstractApplicationHeader {
         property bool scrollingLocked: (header.headerStyle === Kirigami.ApplicationHeaderStyle.Titles || titleList.wideMode)
         //uses this to have less strings comparisons
         property bool scrollMutex
-        property bool isTabBar: header.headerStyle === Kirigami.ApplicationHeaderStyle.TabBar
 
         property Item backButton
         property Item forwardButton

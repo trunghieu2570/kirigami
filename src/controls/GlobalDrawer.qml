@@ -284,8 +284,6 @@ OverlayDrawer {
             }
             if (header instanceof T2.ToolBar) {
                 header.position = T2.ToolBar.Header
-            } else if (header instanceof T2.TabBar) {
-                header.position = T2.TabBar.Header
             } else if (header instanceof T2.DialogButtonBox) {
                 header.position = T2.DialogButtonBox.Header
             }
