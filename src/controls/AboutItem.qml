@@ -98,7 +98,9 @@ Item {
 
         RowLayout {
             Layout.fillWidth: true
-            property bool hasRemoteAvatar: modelData.avatarUrl.toString() !== ""
+            function hasRemoteAvatar(): bool {
+                return modelData.avatarUrl?.toString() !== "";
+            }
 
             spacing: Kirigami.Units.smallSpacing * 2
 
