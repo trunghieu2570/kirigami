@@ -23,9 +23,9 @@ T.PageTab {
         }
         color: {
             if (control.active) {
-                return Qt.alpha(0.2)
+                return Qt.alpha(Kirigami.Theme.activeTextColor, 0.2)
             } else if (control.needsAttention) {
-                return Qt.alpha(0.2)
+                return Qt.alpha(Kirigami.Theme.negativeTextColor, 0.2)
             } else {
                 return "transparent"
             }

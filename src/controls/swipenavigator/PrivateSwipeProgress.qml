@@ -21,7 +21,7 @@ Item {
             left: parent.left
         }
         width: parent.width * __progressRoot.progress
-        color: Qt.alpha(0.2)
+        color: Qt.alpha(Kirigami.Theme.positiveTextColor, 0.2)
 
         Rectangle {
             anchors {
@@ -48,7 +48,7 @@ Item {
             right: parent.right
         }
         width: parent.width - (parent.width * __progressRoot.progress)
-        color: Qt.alpha(0.1)
+        color: Qt.alpha(Kirigami.Theme.textColor, 0.1)
 
         Rectangle {
             anchors {
@@ -58,7 +58,7 @@ Item {
                 right: parent.right
             }
 
-            color: Qt.alpha(0.1)
+            color: Qt.alpha(Kirigami.Theme.textColor, 0.1)
 
             // Unlike most things, we don't want to scale with the em grid, so we don't use a Unit.
             height: 2
