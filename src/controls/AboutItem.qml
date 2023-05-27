@@ -98,7 +98,7 @@ Item {
 
         RowLayout {
             Layout.fillWidth: true
-            property bool hasRemoteAvatar: !!modelData.avatarUrl
+            property bool hasRemoteAvatar: modelData.avatarUrl.toString() !== ""
 
             spacing: Kirigami.Units.smallSpacing * 2
 
@@ -110,7 +110,7 @@ Item {
 
                 fallback: "user"
                 source: {
-                    if (hasRemoteAvatar && remoteAvatars.checked && typeof(modelData.avatarUrl.length) !== "undefined") {
+                    if (hasRemoteAvatar && remoteAvatars.checked) {
                         // Appending to the params of the url does not work, thus the search is set
                         const url = new URL(modelData.avatarUrl);
                         const params = new URLSearchParams(url.search);
