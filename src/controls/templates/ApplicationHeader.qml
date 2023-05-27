@@ -44,7 +44,7 @@ AbstractApplicationHeader {
      *
      * default: `when true, there will be a back button present that will make the pagerow scroll back when clicked`
      */
-    property bool backButtonEnabled: !Kirigami.Settings.isMobile || Qt.platform.os === "ios")
+    property bool backButtonEnabled: !Kirigami.Settings.isMobile || Qt.platform.os === "ios"
 
     property Component pageDelegate: Component {
         Row {
@@ -56,7 +56,7 @@ AbstractApplicationHeader {
 
             Kirigami.Icon {
                 // in tabbar mode this is just a spacer
-                visible: !titleList.wideMode && ((typeof modelData !== "undefined" && modelData > 0)
+                visible: !titleList.wideMode && (typeof modelData !== "undefined" && modelData > 0)
                 anchors.verticalCenter: parent.verticalCenter
                 height: Kirigami.Units.iconSizes.small
                 width: height
