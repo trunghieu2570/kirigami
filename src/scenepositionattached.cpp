@@ -9,12 +9,53 @@
 #include <QDebug>
 #include <QQuickItem>
 
+PositionCache::PositionCache()
+    : x(0)
+    , y(0)
+    , xIsValid(false)
+    , yIsValid(false)
+{
+}
+
+template<typename F>
+qreal PositionCache::getX(F updateX)
+{
+    if (!xIsValid) {
+        x = updateX();
+        xIsValid = true;
+    }
+    return x;
+}
+
+template<typename F>
+qreal PositionCache::getY(F updateY)
+{
+    if (!yIsValid) {
+        y = updateY();
+        yIsValid = true;
+    }
+    return y;
+}
+
+void PositionCache::invalidate()
+{
+    invalidateX();
+    invalidateY();
+}
+
+void PositionCache::invalidateX()
+{
+    xIsValid = false;
+}
+
+void PositionCache::invalidateY()
+{
+    yIsValid = false;
+}
+
 ScenePositionAttached::ScenePositionAttached(QObject *parent)
     : QObject(parent)
-    , m_cachedX(0)
-    , m_cachedY(0)
-    , m_cachedXValid(false)
-    , m_cachedYValid(false)
+    , m_cache()
 {
     m_item = qobject_cast<QQuickItem *>(parent);
     connectAncestors(m_item);
@@ -26,7 +67,7 @@ ScenePositionAttached::~ScenePositionAttached()
 
 qreal ScenePositionAttached::x() const
 {
-    if (!m_cachedXValid) {
+    return m_cache.getX([this]() {
         qreal x = 0.0;
         QQuickItem *item = m_item;
 
@@ -35,15 +76,13 @@ qreal ScenePositionAttached::x() const
             item = item->parentItem();
         }
 
-        m_cachedX = x;
-        m_cachedXValid = true;
-    }
-    return m_cachedX;
+        return x;
+    });
 }
 
 qreal ScenePositionAttached::y() const
 {
-    if (!m_cachedYValid) {
+    return m_cache.getY([this]() {
         qreal y = 0.0;
         QQuickItem *item = m_item;
 
@@ -52,21 +91,19 @@ qreal ScenePositionAttached::y() const
             item = item->parentItem();
         }
 
-        m_cachedY = y;
-        m_cachedYValid = true;
-    }
-    return m_cachedY;
+        return y;
+    });
 }
 
 void ScenePositionAttached::slotXChanged()
 {
-    m_cachedXValid = false;
+    m_cache.invalidateX();
     Q_EMIT xChanged();
 }
 
 void ScenePositionAttached::slotYChanged()
 {
-    m_cachedYValid = false;
+    m_cache.invalidateY();
     Q_EMIT yChanged();
 }
 
@@ -83,8 +120,7 @@ void ScenePositionAttached::connectAncestors(QQuickItem *item)
         connect(ancestor, &QQuickItem::xChanged, this, &ScenePositionAttached::slotXChanged);
         connect(ancestor, &QQuickItem::yChanged, this, &ScenePositionAttached::slotYChanged);
         connect(ancestor, &QQuickItem::parentChanged, this, [this, ancestor]() {
-            m_cachedXValid = false;
-            m_cachedYValid = false;
+            m_cache.invalidate();
 
             while (!m_ancestors.isEmpty()) {
                 QQuickItem *last = m_ancestors.takeLast();

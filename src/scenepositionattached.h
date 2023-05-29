@@ -12,6 +12,29 @@
 
 class QQuickItem;
 
+// Little helper type that caches, invalidates and updates as needed X and Y values separately.
+class PositionCache
+{
+public:
+    explicit PositionCache();
+
+    // Note: compilers should be able to inline those functors at the call site.
+    template<typename F>
+    qreal getX(F updateX);
+    template<typename F>
+    qreal getY(F updateY);
+
+    void invalidate();
+    void invalidateX();
+    void invalidateY();
+
+private:
+    qreal x;
+    qreal y;
+    quint32 xIsValid : 1;
+    quint32 yIsValid : 1;
+};
+
 /**
  * This attached property contains the information about the scene position of the item:
  * Its global x and y coordinates will update automatically and can be binded
@@ -58,10 +81,7 @@ private:
     QQuickItem *m_item = nullptr;
     QList<QQuickItem *> m_ancestors;
 
-    mutable qreal m_cachedX;
-    mutable qreal m_cachedY;
-    mutable quint32 m_cachedXValid : 1;
-    mutable quint32 m_cachedYValid : 1;
+    mutable PositionCache m_cache;
 };
 
 QML_DECLARE_TYPEINFO(ScenePositionAttached, QML_HAS_ATTACHED_PROPERTIES)
