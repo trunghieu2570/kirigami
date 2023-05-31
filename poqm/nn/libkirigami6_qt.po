@@ -97,7 +97,7 @@ msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Avslutt"
 
-#: controls/ActionToolBar.qml:193
+#: controls/ActionToolBar.qml:192
 msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Fleire handlingar"

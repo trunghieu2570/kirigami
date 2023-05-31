@@ -96,7 +96,7 @@ msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr ""
 
-#: controls/ActionToolBar.qml:193
+#: controls/ActionToolBar.qml:192
 #, fuzzy
 #| msgctxt "ContextDrawer|"
 #| msgid "Actions"

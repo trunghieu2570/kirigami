@@ -95,7 +95,7 @@ msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Выход"
 
-#: controls/ActionToolBar.qml:193
+#: controls/ActionToolBar.qml:192
 msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Больше действий"
