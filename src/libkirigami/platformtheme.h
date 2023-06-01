@@ -278,7 +278,6 @@ public:
     static PlatformTheme *qmlAttachedProperties(QObject *object);
 
 Q_SIGNALS:
-    // TODO: parameters to signals as this is also a c++ api
     void colorsChanged();
     void defaultFontChanged(const QFont &font);
     void smallFontChanged(const QFont &font);
