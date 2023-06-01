@@ -311,8 +311,8 @@ Item {
 
             property Item item
 
-            enabled: item !== null && item.enabled
-            visible: item !== null && item.visible
+            enabled: item?.enabled ?? false
+            visible: item?.visible ?? false
 
             // NOTE: work around a  GridLayout quirk which doesn't lay out items with null size hints causing things to be laid out incorrectly in some cases
             implicitWidth: item !== null ? Math.max(item.implicitWidth, 1) : 0
@@ -320,15 +320,15 @@ Item {
             Layout.preferredWidth: item !== null ? Math.max(1, item.Layout.preferredWidth > 0 ? item.Layout.preferredWidth : Math.ceil(item.implicitWidth)) : 0
             Layout.preferredHeight: item !== null ? Math.max(1, item.Layout.preferredHeight > 0 ? item.Layout.preferredHeight : Math.ceil(item.implicitHeight)) : 0
 
-            Layout.minimumWidth: item !== null ? item.Layout.minimumWidth : 0
-            Layout.minimumHeight: item !== null ? item.Layout.minimumHeight : 0
+            Layout.minimumWidth: item?.Layout.minimumWidth ?? 0
+            Layout.minimumHeight: item?.Layout.minimumHeight ?? 0
 
-            Layout.maximumWidth: item !== null ? item.Layout.maximumWidth : 0
-            Layout.maximumHeight: item !== null ? item.Layout.maximumHeight : 0
+            Layout.maximumWidth: item?.Layout.maximumWidth ?? 0
+            Layout.maximumHeight: item?.Layout.maximumHeight ?? 0
 
             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
             Layout.fillWidth: item !== null && (item instanceof TextInput || item.Layout.fillWidth || item.Kirigami.FormData.isSection)
-            Layout.columnSpan: item !== null && item.Kirigami.FormData.isSection ? lay.columns : 1
+            Layout.columnSpan: item?.Kirigami.FormData.isSection ? lay.columns : 1
             onItemChanged: {
                 if (!item) {
                     container.destroy();
@@ -354,12 +354,12 @@ Item {
         Item {
             property Item item
 
-            enabled: item !== null && item.enabled
-            visible: item !== null && item.visible
+            enabled: item?.enabled ?? false
+            visible: item?.visible ?? false
 
             width: Kirigami.Units.smallSpacing
             height: Kirigami.Units.smallSpacing
-            Layout.topMargin: item !== null && item.height > 0 ? Kirigami.Units.smallSpacing : 0
+            Layout.topMargin: item?.height > 0 ? Kirigami.Units.smallSpacing : 0
             onItemChanged: {
                 if (!item) {
                     labelItem.destroy();
@@ -375,17 +375,17 @@ Item {
             property Item item
             property int index
 
-            enabled: item !== null && item.enabled
-            visible: item !== null && item.visible && (root.wideMode || text.length > 0)
-            Kirigami.MnemonicData.enabled: item !== null && item.Kirigami.FormData.buddyFor && item.Kirigami.FormData.buddyFor.activeFocusOnTab
+            enabled: item?.enabled ?? false
+            visible: (item?.visible && (root.wideMode || text.length > 0)) ?? false
+            Kirigami.MnemonicData.enabled: item?.Kirigami.FormData.buddyFor?.activeFocusOnTab ?? false
             Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
-            Kirigami.MnemonicData.label: item !== null ? item.Kirigami.FormData.label : ""
+            Kirigami.MnemonicData.label: item?.Kirigami.FormData.label ?? ""
             text: Kirigami.MnemonicData.richTextLabel
-            type: item !== null && item.Kirigami.FormData.isSection ? Kirigami.Heading.Type.Primary : Kirigami.Heading.Type.Normal
+            type: item?.Kirigami.FormData.isSection ? Kirigami.Heading.Type.Primary : Kirigami.Heading.Type.Normal
 
-            level: item !== null && item.Kirigami.FormData.isSection ? 3 : 5
+            level: item?.Kirigami.FormData.isSection ? 3 : 5
 
-            Layout.columnSpan: item !== null && item.Kirigami.FormData.isSection ? lay.columns : 1
+            Layout.columnSpan: item?.Kirigami.FormData.isSection ? lay.columns : 1
             Layout.preferredHeight: {
                 if (!item) {
                     return 0;
