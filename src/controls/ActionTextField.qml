@@ -94,6 +94,7 @@ QQC2.TextField {
 
     Shortcut {
         id: focusShortcut
+        enabled: root.visible && root.enabled
         onActivated: {
             root.forceActiveFocus(Qt.ShortcutFocusReason)
             root.selectAll()
