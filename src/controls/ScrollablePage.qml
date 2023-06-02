@@ -132,32 +132,21 @@ Kirigami.Page {
     property bool keyboardNavigationEnabled: true
 //END properties
 
-    contentHeight: flickable ? flickable.contentHeight : 0
-    implicitHeight: {
-        let height = contentHeight + topPadding + bottomPadding;
-        if (header && header.visible) {
-            height += header.implicitHeight;
-        }
-        if (footer && footer.visible) {
-            height += footer.implicitHeight;
-        }
-        return height;
-    }
+    implicitWidth: flickable?.contentItem?.implicitWidth
+        ?? Math.max(implicitBackgroundWidth + leftInset + rightInset,
+                    contentWidth + leftPadding + rightPadding,
+                    implicitHeaderWidth,
+                    implicitFooterWidth)
 
-    implicitWidth: {
-        if (flickable) {
-            if (flickable.contentItem) {
-                return flickable.contentItem.implicitWidth;
-            } else {
-                return contentItem.implicitWidth + leftPadding + rightPadding;
-            }
-        } else {
-            return 0;
-        }
-    }
+    implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
+                             contentHeight + topPadding + bottomPadding
+                             + (implicitHeaderHeight > 0 ? implicitHeaderHeight + spacing : 0)
+                             + (implicitFooterHeight > 0 ? implicitFooterHeight + spacing : 0))
+
+    contentHeight: flickable?.contentHeight ?? 0
 
     Kirigami.Theme.inherit: false
-    Kirigami.Theme.colorSet: flickable && flickable.hasOwnProperty("model") ? Kirigami.Theme.View : Kirigami.Theme.Window
+    Kirigami.Theme.colorSet: flickable?.hasOwnProperty("model") ? Kirigami.Theme.View : Kirigami.Theme.Window
 
     Keys.forwardTo: {
         if (root.keyboardNavigationEnabled && root.flickable) {
@@ -174,13 +163,13 @@ Kirigami.Page {
     contentItem: QQC2.ScrollView {
         id: scrollView
         anchors {
-            top: (root.header && root.header.visible)
+            top: root.header?.visible
                     ? root.header.bottom
                     // FIXME: for now assuming globalToolBarItem is in a Loader, which needs to be get rid of
-                    : (globalToolBarItem && globalToolBarItem.parent && globalToolBarItem.visible
+                    : (globalToolBarItem?.parent && globalToolBarItem.visible
                         ? globalToolBarItem.parent.bottom
                         : parent.top)
-            bottom: (root.footer && root.footer.visible) ? root.footer.top : parent.bottom
+            bottom: root.footer?.visible ? root.footer.top : parent.bottom
             left: parent.left
             right: parent.right
             topMargin: root.refreshing ? busyIndicatorLoader.height : 0
@@ -218,8 +207,8 @@ Kirigami.Page {
                 property Flickable flickable
                 anchors {
                     fill: parent
-                    leftMargin: root.leftPadding
                     topMargin: root.topPadding
+                    leftMargin: root.leftPadding
                     rightMargin: root.rightPadding
                     bottomMargin: root.bottomPadding
                 }
@@ -348,9 +337,9 @@ Kirigami.Page {
             });
             // Some existing code incorrectly uses anchors
             root.flickable.anchors.fill = undefined;
+            root.flickable.anchors.top = undefined;
             root.flickable.anchors.left = undefined;
             root.flickable.anchors.right = undefined;
-            root.flickable.anchors.top = undefined;
             root.flickable.anchors.bottom = undefined;
             scrollingArea.visible = false;
         } else {
