@@ -194,9 +194,10 @@ QQC2.ApplicationWindow {
      * @code
      * Action {
      *     text: "Quit"
-     *     icon.name: "application-exit-symbolic";
+     *     icon.name: "application-exit-symbolic"
      *     shortcut: StandardKey.Quit
-     *     [...]
+     *     // ...
+     * }
      * @endcode
      * @since 5.76
      */
@@ -355,6 +356,7 @@ QQC2.ApplicationWindow {
     // close with the global drawer open.
     Shortcut {
         sequence: root.quitAction.shortcut
+        enabled: root.quitAction.enabled
         context: Qt.ApplicationShortcut
         onActivated: root.close();
     }
