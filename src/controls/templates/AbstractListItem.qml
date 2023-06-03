@@ -146,21 +146,20 @@ T2.ItemDelegate {
     bottomPadding: padding
 
     implicitWidth: contentItem ? contentItem.implicitWidth + leftPadding + rightPadding : Kirigami.Units.gridUnit * 12
+    implicitHeight: contentItem ? contentItem.implicitHeight + topPadding + bottomPadding : 0
 
-    implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
+    width: parent?.width > 0 ? parent.width : implicitWidth
+    height: implicitHeight
 
-    width: parent && parent.width > 0 ? parent.width : implicitWidth
     Layout.fillWidth: true
 
     opacity: enabled ? 1 : 0.6
-
-    height: implicitHeight
 
     onVisibleChanged: {
         if (visible) {
             height = Qt.binding(() => implicitHeight);
         } else {
-            if (ListView.view && ListView.view.visible) {
+            if (ListView.view?.visible) {
                 height = 0;
             }
         }
@@ -169,5 +168,5 @@ T2.ItemDelegate {
     hoverEnabled: true
 
     Accessible.role: Accessible.ListItem
-    highlighted: focus && ListView.isCurrentItem && ListView.view && ListView.view.keyNavigationEnabled
+    highlighted: focus && ListView.isCurrentItem && ListView.view?.keyNavigationEnabled
 }
