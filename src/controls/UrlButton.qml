@@ -31,8 +31,8 @@ Kirigami.LinkButton {
 
     Accessible.name: button.text
     Accessible.description: button.text !== button.url
-        ? i18nc("@info:whatsthis", "Open link %1", button.url)
-        : i18nc("@info:whatsthis", "Open link")
+        ? qsTr("Open link %1", "@info:whatsthis").arg(button.url)
+        : qsTr("Open link", "@info:whatsthis")
 
     onPressed: mouse => {
         if (mouse.button === Qt.RightButton) {
