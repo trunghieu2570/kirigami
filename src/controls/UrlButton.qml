@@ -25,29 +25,29 @@ Kirigami.LinkButton {
     property string url
 
     text: url
-    enabled: !!url
+    enabled: url.length > 0
     visible: text.length > 0
     acceptedButtons: Qt.LeftButton | Qt.RightButton
 
-    Accessible.name: button.text !== button.url ? button.text : button.url
+    Accessible.name: button.text
     Accessible.description: i18nc("@info:whatsthis", "Open link %1", button.text !== button.url ? button.url : "")
 
     onPressed: mouse => {
         if (mouse.button === Qt.RightButton) {
-            menu.popup()
+            menu.popup();
         }
     }
 
     onClicked: mouse => {
         if (mouse.button !== Qt.RightButton) {
-            Qt.openUrlExternally(url);;
+            Qt.openUrlExternally(url);
         }
     }
 
     QQC2.ToolTip {
         // If button's text has been overridden, show a tooltip to expose the raw URL
         visible: button.text !== button.url && button.mouseArea.containsMouse
-        text: url
+        text: button.url
     }
 
     QQC2.Menu {
