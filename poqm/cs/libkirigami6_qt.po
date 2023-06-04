@@ -88,7 +88,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "O aplikaci %1"
 
-#: controls/AbstractApplicationWindow.qml:204
+#: controls/AbstractApplicationWindow.qml:205
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Ukončit"
@@ -235,7 +235,21 @@ msgctxt "ToolBarApplicationHeader|"
 msgid "More Actions"
 msgstr "Další činnosti"
 
-#: controls/UrlButton.qml:51
+#: controls/UrlButton.qml:34
+#, qt-format
+msgctxt "UrlButton|@info:whatsthis"
+msgid "Open link %1"
+msgstr ""
+
+#: controls/UrlButton.qml:35
+#, fuzzy
+#| msgctxt "PageRowGlobalToolBarUI|"
+#| msgid "Open menu"
+msgctxt "UrlButton|@info:whatsthis"
+msgid "Open link"
+msgstr "Otevřít nabídku"
+
+#: controls/UrlButton.qml:58
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Kopírovat odkaz do schránky"

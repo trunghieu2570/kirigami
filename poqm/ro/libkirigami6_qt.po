@@ -91,7 +91,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Despre %1"
 
-#: controls/AbstractApplicationWindow.qml:204
+#: controls/AbstractApplicationWindow.qml:205
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Termină"
@@ -244,7 +244,21 @@ msgctxt "ToolBarApplicationHeader|"
 msgid "More Actions"
 msgstr "Acțiuni suplimentare"
 
-#: controls/UrlButton.qml:51
+#: controls/UrlButton.qml:34
+#, qt-format
+msgctxt "UrlButton|@info:whatsthis"
+msgid "Open link %1"
+msgstr ""
+
+#: controls/UrlButton.qml:35
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Open"
+msgctxt "UrlButton|@info:whatsthis"
+msgid "Open link"
+msgstr "Deschide"
+
+#: controls/UrlButton.qml:58
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Copiază legătura în clipboard"
