@@ -247,8 +247,6 @@ msgstr ""
 
 #: controls/UrlButton.qml:35
 #, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Open menu"
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
 msgstr "Opna meny"

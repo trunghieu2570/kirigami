@@ -3,11 +3,11 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: libkirigami2plugin_qt\n"
-"PO-Revision-Date: 2022-12-21 08:03+0200\n"
+"PO-Revision-Date: 2023-06-04 19:02+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -245,15 +245,12 @@ msgstr "Інші дії"
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link %1"
-msgstr ""
+msgstr "Відкрити посилання %1"
 
 #: controls/UrlButton.qml:35
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Open menu"
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
-msgstr "Відкрити меню"
+msgstr "Відкрити посилання"
 
 #: controls/UrlButton.qml:58
 msgctxt "UrlButton|"
