@@ -4,22 +4,22 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQml 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15 as Controls
-import QtQuick.Templates 2.15 as T
+import QtQuick
+import QtQml
+import QtQuick.Layouts
+import QtQuick.Controls as QQC2
+import QtQuick.Templates as T
 
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami 2 as Kirigami
 
-Controls.ToolButton {
+QQC2.ToolButton {
     id: control
 
     signal menuAboutToShow()
 
     hoverEnabled: true
 
-    display: Controls.ToolButton.TextBesideIcon
+    display: QQC2.ToolButton.TextBesideIcon
 
     property bool showMenuArrow: !Kirigami.DisplayHint.displayHintSet(action, Kirigami.DisplayHint.HideChildIndicator)
 
@@ -45,7 +45,7 @@ Controls.ToolButton {
                 const setupIncubatedMenu = incubatedMenu => {
                     menu = incubatedMenu
                     // Important: We handle the press on parent in the parent, so ignore it here.
-                    menu.closePolicy = Controls.Popup.CloseOnEscape | Controls.Popup.CloseOnPressOutsideParent
+                    menu.closePolicy = QQC2.Popup.CloseOnEscape | QQC2.Popup.CloseOnPressOutsideParent
                     menu.closed.connect(() => control.checked = false)
                     menu.actions = control.menuActions
                 }
@@ -86,14 +86,14 @@ Controls.ToolButton {
         }
     }
 
-    Controls.ToolTip {
+    QQC2.ToolTip {
         visible: control.hovered && text.length > 0 && !(control.menu && control.menu.visible) && !control.pressed
         text: {
             const a = control.action;
             if (a) {
                 if (a.tooltip) {
                     return a.tooltip;
-                } else if (control.display === Controls.Button.IconOnly) {
+                } else if (control.display === QQC2.Button.IconOnly) {
                     return a.text;
                 }
             }
