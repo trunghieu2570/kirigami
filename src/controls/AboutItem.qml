@@ -208,11 +208,11 @@ Item {
 
                 UrlButton {
                     readonly property string theUrl: {
-                        if (aboutData.bugAddress !== "submit@bugs.kde.org") {
-                            return page.aboutData.bugAddress
+                        if (aboutItem.aboutData.bugAddress !== "submit@bugs.kde.org") {
+                            return aboutItem.aboutData.bugAddress
                         }
-                        const elements = aboutData.productName.split('/');
-                        let url = `https://bugs.kde.org/enter_bug.cgi?format=guided&product=${elements[0]}&version=${aboutData.version}`;
+                        const elements = aboutItem.aboutData.productName.split('/');
+                        let url = `https://bugs.kde.org/enter_bug.cgi?format=guided&product=${elements[0]}&version=${aboutItem.aboutData.version}`;
                         if (elements.length === 2) {
                             url += "&component=" + elements[1];
                         }
@@ -236,7 +236,7 @@ Item {
 
         QQC2.Label {
             Layout.leftMargin: Kirigami.Units.gridUnit
-            text: aboutData.otherText
+            text: aboutItem.aboutData.otherText
             visible: text.length > 0
             wrapMode: Text.WordWrap
             Layout.fillWidth: true
@@ -244,7 +244,7 @@ Item {
 
         QQC2.Label {
             Layout.leftMargin: Kirigami.Units.gridUnit
-            text: aboutData.copyrightStatement
+            text: aboutItem.aboutData.copyrightStatement
             visible: text.length > 0
             wrapMode: Text.WordWrap
             Layout.fillWidth: true
@@ -252,7 +252,7 @@ Item {
 
         UrlButton {
             Layout.leftMargin: Kirigami.Units.gridUnit
-            url: aboutData.homepage
+            url: aboutItem.aboutData.homepage
             visible: url.length > 0
             wrapMode: Text.WordWrap
             Layout.fillWidth: true
@@ -302,7 +302,7 @@ Item {
         }
 
         Repeater {
-            model: aboutData.licenses
+            model: aboutItem.aboutData.licenses
             delegate: _usePageStack ? licenseLinkButton : licenseTextItem
         }
 
@@ -326,7 +326,7 @@ Item {
         }
 
         Repeater {
-            model: aboutData.components
+            model: aboutItem.aboutData.components
             delegate: QQC2.Label {
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
@@ -340,7 +340,7 @@ Item {
             Kirigami.FormData.isSection: visible
             text: qsTr("Authors")
             wrapMode: Text.WordWrap
-            visible: aboutData.authors.length > 0
+            visible: aboutItem.aboutData.authors.length > 0
         }
 
         QQC2.CheckBox {
@@ -369,7 +369,7 @@ Item {
 
         Repeater {
             id: authorsRepeater
-            model: aboutData.authors
+            model: aboutItem.aboutData.authors
             property bool hasAnyRemoteAvatars
             delegate: personDelegate
             onCountChanged: remotesThrottle.start()
@@ -384,7 +384,7 @@ Item {
 
         Repeater {
             id: repCredits
-            model: aboutData.credits
+            model: aboutItem.aboutData.credits
             delegate: personDelegate
         }
 
@@ -397,7 +397,7 @@ Item {
 
         Repeater {
             id: repTranslators
-            model: aboutData.translators
+            model: aboutItem.aboutData.translators
             delegate: personDelegate
         }
     }
