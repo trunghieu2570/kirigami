@@ -208,11 +208,11 @@ Item {
 
                 UrlButton {
                     readonly property string theUrl: {
-                        if (page.aboutData.bugAddress !== "submit@bugs.kde.org") {
+                        if (aboutData.bugAddress !== "submit@bugs.kde.org") {
                             return page.aboutData.bugAddress
                         }
-                        const elements = page.aboutData.productName.split('/');
-                        let url = `https://bugs.kde.org/enter_bug.cgi?format=guided&product=${elements[0]}&version=${page.aboutData.version}`;
+                        const elements = aboutData.productName.split('/');
+                        let url = `https://bugs.kde.org/enter_bug.cgi?format=guided&product=${elements[0]}&version=${aboutData.version}`;
                         if (elements.length === 2) {
                             url += "&component=" + elements[1];
                         }
