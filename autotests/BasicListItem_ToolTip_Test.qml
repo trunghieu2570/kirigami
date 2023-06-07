@@ -78,7 +78,6 @@ Rectangle {
             padding: Kirigami.Units.smallSpacing
             text: `QQC2.ToolTip.toolTip.visible:\n${QQC2.ToolTip.toolTip.visible}`
             color: Kirigami.Theme.textColor
-            toolTipVisible: true
         }
         QQC2.Label {
             Layout.fillWidth: true
@@ -87,7 +86,6 @@ Rectangle {
             text: `QQC2.ToolTip.toolTip.text:\n"${QQC2.ToolTip.toolTip.text}"`
             wrapMode: Text.Wrap
             color: Kirigami.Theme.textColor
-            toolTipVisible: true
         }
     }
 }
