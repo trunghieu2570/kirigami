@@ -516,8 +516,8 @@ T.SwipeDelegate {
                 }
             }
             delegate: QQC2.ToolButton {
-                icon.name: modelData.iconName !== "" ? modelData.iconName : ""
-                icon.source: modelData.iconSource !== "" ? modelData.iconSource : ""
+                icon.name: modelData.icon.name
+                icon.source: modelData.icon.source
                 enabled: (modelData && modelData.enabled !== undefined) ? modelData.enabled : true;
                 visible: (modelData && modelData.visible !== undefined) ? modelData.visible : true;
                 onVisibleChanged: actionsLayout.updateVisibleActions(visible);
