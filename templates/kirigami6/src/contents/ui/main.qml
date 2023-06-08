@@ -39,17 +39,17 @@ Kirigami.ApplicationWindow {
     globalDrawer: Kirigami.GlobalDrawer {
         title: i18n("%{APPNAME}")
         titleIcon: "applications-graphics"
-        isMenu: !root.isMobile
+        isMenu: !Kirigami.Settings.isMobile
         actions: [
             Kirigami.Action {
                 text: i18n("Plus One")
                 icon.name: "list-add"
-                onTriggered: counter += 1
+                onTriggered: root.counter += 1
             },
             Kirigami.Action {
                 text: i18n("About %{APPNAME}")
                 icon.name: "help-about"
-                onTriggered: pageStack.layers.pushDialogLayer('qrc:About.qml')
+                onTriggered: root.pageStack.pushDialogLayer("qrc:About.qml")
             },
             Kirigami.Action {
                 text: i18n("Quit")
@@ -70,12 +70,14 @@ Kirigami.ApplicationWindow {
 
         title: i18n("Main Page")
 
-        actions.main: Kirigami.Action {
-            text: i18n("Plus One")
-            icon.name: "list-add"
-            tooltip: i18n("Add one to the counter")
-            onTriggered: counter += 1
-        }
+        actions: [
+            Kirigami.Action {
+                text: i18n("Plus One")
+                icon.name: "list-add"
+                tooltip: i18n("Add one to the counter")
+                onTriggered: root.counter += 1
+            }
+        ]
 
         ColumnLayout {
             width: page.width
@@ -84,13 +86,13 @@ Kirigami.ApplicationWindow {
 
             Kirigami.Heading {
                 Layout.alignment: Qt.AlignCenter
-                text: counter == 0 ? i18n("Hello, World!") : counter
+                text: root.counter === 0 ? i18n("Hello, World!") : root.counter
             }
 
             Controls.Button {
                 Layout.alignment: Qt.AlignHCenter
                 text: i18n("+ 1")
-                onClicked: counter += 1
+                onClicked: root.counter += 1
             }
         }
     }
