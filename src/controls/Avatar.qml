@@ -26,6 +26,7 @@ QQC2.Control {
         AdaptiveImageOrInitals,
         AlwaysShowInitials
     }
+
     enum InitialsMode {
         UseInitials,
         UseIcon
@@ -160,20 +161,20 @@ QQC2.Control {
 //END properties
 
     padding: 0
-    horizontalPadding: padding
-    verticalPadding: padding
-    leftPadding: horizontalPadding
-    rightPadding: horizontalPadding
-    topPadding: verticalPadding
-    bottomPadding: verticalPadding
+    topPadding: undefined
+    leftPadding: undefined
+    rightPadding: undefined
+    bottomPadding: undefined
+    verticalPadding: undefined
+    horizontalPadding: undefined
 
     implicitWidth: Kirigami.Units.iconSizes.large
     implicitHeight: Kirigami.Units.iconSizes.large
 
     activeFocusOnTab: !!actions.main
 
-    Accessible.role: !!actions.main ? Accessible.Button : Accessible.Graphic
-    Accessible.name: !!actions.main ? qsTr("%1 — %2").arg(name).arg(actions.main.text) : name
+    Accessible.role: actions.main ? Accessible.Button : Accessible.Graphic
+    Accessible.name: actions.main ? qsTr("%1 — %2").arg(name).arg(actions.main.text) : name
     Accessible.focusable: !!actions.main
     Accessible.onPressAction: __triggerMainAction()
     Keys.onReturnPressed: event => __triggerMainAction()
@@ -216,7 +217,7 @@ QQC2.Control {
                 return distance < radiusSquared
             }
 
-            onClicked: mouse =>{
+            onClicked: mouse => {
                 if (mouseY > avatarRoot.height - secondaryRect.height && !!avatarRoot.actions.secondary) {
                     avatarRoot.actions.secondary.trigger()
                     return
@@ -228,14 +229,14 @@ QQC2.Control {
             cursorShape: containsMouse && mouseInCircle && enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
 
             QQC2.ToolTip {
-                text: avatarRoot.actions.main && avatarRoot.actions.main.tooltip ? avatarRoot.actions.main.tooltip : ''
-                visible: primaryMouse.containsMouse && text
+                text: avatarRoot.actions.main?.tooltip ?? ""
+                visible: primaryMouse.containsMouse && text.length > 0
             }
 
             states: [
                 State {
                     name: "secondaryRevealed"
-                    when: (!Kirigami.Settings.isMobile) && (!!avatarRoot.actions.secondary) && (primaryMouse.containsMouse && primaryMouse.mouseInCircle)
+                    when: !Kirigami.Settings.isMobile && !!avatarRoot.actions.secondary && primaryMouse.containsMouse && primaryMouse.mouseInCircle
                     PropertyChanges {
                         target: secondaryRect
                         visible: true
@@ -318,9 +319,9 @@ QQC2.Control {
             visible: false
 
             anchors {
-                bottom: parent.bottom
                 left: parent.left
                 right: parent.right
+                bottom: parent.bottom
             }
 
             height: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing*2
@@ -328,14 +329,13 @@ QQC2.Control {
             color: Qt.rgba(0, 0, 0, 0.6)
 
             Kirigami.Icon {
+                anchors.centerIn: parent
+
                 Kirigami.Theme.textColor: "white"
                 source: avatarRoot.actions.secondary?.icon.name
 
                 width: Kirigami.Units.iconSizes.small
                 height: Kirigami.Units.iconSizes.small
-
-                x: Math.round((parent.width/2)-(this.width/2))
-                y: Math.round((parent.height/2)-(this.height/2))
             }
         }
 

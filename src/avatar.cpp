@@ -116,7 +116,7 @@ QList<QColor> grabColors()
     return c_colors[QStringLiteral("default")];
 }
 
-auto NameUtils::colorsFromString(const QString &string) -> QColor
+QColor NameUtils::colorsFromString(const QString &string)
 {
     // We use a hash to get a "random" number that's always the same for
     // a given string.
@@ -124,11 +124,10 @@ auto NameUtils::colorsFromString(const QString &string) -> QColor
     // hash modulo the length of the colors list minus one will always get us a valid
     // index
     auto index = hash % (grabColors().length() - 1);
-    // return a colour
     return grabColors()[index];
 }
 
-auto NameUtils::isStringUnsuitableForInitials(const QString &string) -> bool
+bool NameUtils::isStringUnsuitableForInitials(const QString &string)
 {
     if (string.isEmpty()) {
         return true;
@@ -140,10 +139,17 @@ auto NameUtils::isStringUnsuitableForInitials(const QString &string) -> bool
         return true;
     }
 
-    const auto scripts = QList<QChar::Script>{QChar::Script_Common, QChar::Script_Inherited, QChar::Script_Latin, QChar::Script_Han, QChar::Script_Hangul};
+    const auto scripts = std::array{
+        QChar::Script_Common,
+        QChar::Script_Inherited,
+        QChar::Script_Latin,
+        QChar::Script_Han,
+        QChar::Script_Hangul,
+    };
 
     for (auto character : string) {
-        if (!scripts.contains(character.script())) {
+        const auto contains = std::find(scripts.begin(), scripts.end(), character.script()) != scripts.end();
+        if (!contains) {
             return true;
         }
     }
