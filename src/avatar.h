@@ -6,7 +6,7 @@
 
 #include <QColor>
 #include <QObject>
-#include <QVariant>
+#include <QPointer>
 
 class NameUtils : public QObject
 {
@@ -21,13 +21,23 @@ public:
 class AvatarGroup : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QObject *main READ mainAction WRITE setMainAction NOTIFY mainActionChanged)
+    Q_PROPERTY(QObject *secondary READ secondaryAction WRITE setSecondaryAction NOTIFY secondaryActionChanged)
 
 public:
-    Q_PROPERTY(QVariant main MEMBER mainAction NOTIFY mainActionChanged)
-    QVariant mainAction;
-    Q_SIGNAL void mainActionChanged();
+    QObject *mainAction() const;
+    void setMainAction(QObject *action = nullptr);
 
-    Q_PROPERTY(QVariant secondary MEMBER secondaryAction NOTIFY secondaryActionChanged)
-    QVariant secondaryAction;
-    Q_SIGNAL void secondaryActionChanged();
+    QObject *secondaryAction() const;
+    void setSecondaryAction(QObject *action = nullptr);
+
+Q_SIGNALS:
+    void mainActionChanged();
+    void secondaryActionChanged();
+
+private:
+    void setAction(QObject *action, QPointer<QObject> &member, void (AvatarGroup::*signal)());
+
+    QPointer<QObject> m_mainAction;
+    QPointer<QObject> m_secondaryAction;
 };

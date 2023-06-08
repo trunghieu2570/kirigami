@@ -171,11 +171,11 @@ QQC2.Control {
     implicitWidth: Kirigami.Units.iconSizes.large
     implicitHeight: Kirigami.Units.iconSizes.large
 
-    activeFocusOnTab: !!actions.main
+    activeFocusOnTab: actions.main !== null
 
     Accessible.role: actions.main ? Accessible.Button : Accessible.Graphic
-    Accessible.name: actions.main ? qsTr("%1 — %2").arg(name).arg(actions.main.text) : name
-    Accessible.focusable: !!actions.main
+    Accessible.name: (actions.main && actions.main.text !== name) ? qsTr("%1 — %2").arg(name).arg(actions.main.text) : name
+    Accessible.focusable: actions.main !== null
     Accessible.onPressAction: __triggerMainAction()
     Keys.onReturnPressed: event => __triggerMainAction()
     Keys.onEnterPressed: event => __triggerMainAction()
@@ -218,14 +218,14 @@ QQC2.Control {
             }
 
             onClicked: mouse => {
-                if (mouseY > avatarRoot.height - secondaryRect.height && !!avatarRoot.actions.secondary) {
+                if (mouseY > avatarRoot.height - secondaryRect.height && avatarRoot.actions.secondary !== null) {
                     avatarRoot.actions.secondary.trigger()
                     return
                 }
                 avatarRoot.__triggerMainAction()
             }
 
-            enabled: !!avatarRoot.actions.main || !!avatarRoot.actions.secondary
+            enabled: avatarRoot.actions.main !== null || avatarRoot.actions.secondary !== null
             cursorShape: containsMouse && mouseInCircle && enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
 
             QQC2.ToolTip {
@@ -236,7 +236,7 @@ QQC2.Control {
             states: [
                 State {
                     name: "secondaryRevealed"
-                    when: !Kirigami.Settings.isMobile && !!avatarRoot.actions.secondary && primaryMouse.containsMouse && primaryMouse.mouseInCircle
+                    when: !Kirigami.Settings.isMobile && avatarRoot.actions.secondary !== null && primaryMouse.containsMouse && primaryMouse.mouseInCircle
                     PropertyChanges {
                         target: secondaryRect
                         visible: true

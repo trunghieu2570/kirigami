@@ -155,3 +155,42 @@ bool NameUtils::isStringUnsuitableForInitials(const QString &string)
     }
     return false;
 }
+
+QObject *AvatarGroup::mainAction() const
+{
+    return m_mainAction;
+}
+
+void AvatarGroup::setMainAction(QObject *action)
+{
+    setAction(action, m_mainAction, &AvatarGroup::mainActionChanged);
+}
+
+QObject *AvatarGroup::secondaryAction() const
+{
+    return m_secondaryAction;
+}
+
+void AvatarGroup::setSecondaryAction(QObject *action)
+{
+    setAction(action, m_secondaryAction, &AvatarGroup::secondaryActionChanged);
+}
+
+void AvatarGroup::setAction(QObject *action, QPointer<QObject> &member, void (AvatarGroup::*signal)())
+{
+    if (member == action) {
+        return;
+    }
+
+    if (member) {
+        disconnect(member, &QObject::destroyed, this, signal);
+    }
+
+    member = action;
+
+    if (member) {
+        connect(member, &QObject::destroyed, this, signal);
+    }
+
+    Q_EMIT(this->*signal)();
+}
