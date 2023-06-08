@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2020 Carson Black <uhhadd@gmail.com>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -336,7 +337,7 @@ QQC2.Control {
 
             Kirigami.Icon {
                 Kirigami.Theme.textColor: "white"
-                source: (avatarRoot.actions.secondary || {iconName: ""}).iconName
+                source: avatarRoot.actions.secondary?.icon.name
 
                 width: Kirigami.Units.iconSizes.small
                 height: Kirigami.Units.iconSizes.small
