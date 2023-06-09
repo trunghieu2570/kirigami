@@ -1,9 +1,9 @@
-# Mincho Kondarev <mkondarev@yahoo.de>, 2022.
+# Mincho Kondarev <mkondarev@yahoo.de>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-12-23 18:28+0100\n"
+"PO-Revision-Date: 2023-06-08 19:17+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 23.04.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: controls/AboutItem.qml:139
@@ -98,7 +98,7 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Повече действия"
 
-#: controls/Avatar.qml:182
+#: controls/Avatar.qml:183
 #, qt-format
 msgctxt "Avatar|"
 msgid "%1 — %2"
@@ -239,15 +239,12 @@ msgstr "Повече действия"
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link %1"
-msgstr ""
+msgstr "Отваряне на връзка %1"
 
 #: controls/UrlButton.qml:35
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Open menu"
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
-msgstr "Отваряне на меню"
+msgstr "Отваряне на връзка"
 
 #: controls/UrlButton.qml:58
 msgctxt "UrlButton|"

@@ -1,9 +1,9 @@
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2017, 2018.
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2021, 2022.
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-12-22 12:33+0400\n"
+"PO-Revision-Date: 2023-06-08 12:08+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: controls/AboutItem.qml:139
 #, qt-format
@@ -99,7 +99,7 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "إجراءات أخرى"
 
-#: controls/Avatar.qml:182
+#: controls/Avatar.qml:183
 #, qt-format
 msgctxt "Avatar|"
 msgid "%1 — %2"
@@ -240,15 +240,12 @@ msgstr "إجراءات أخرى"
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link %1"
-msgstr ""
+msgstr "افتح الوصلة %1"
 
 #: controls/UrlButton.qml:35
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Open menu"
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
-msgstr "افتح القائمة"
+msgstr "افتح الوصلة"
 
 #: controls/UrlButton.qml:58
 msgctxt "UrlButton|"
