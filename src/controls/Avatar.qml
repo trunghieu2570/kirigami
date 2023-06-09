@@ -99,13 +99,6 @@ QQC2.Control {
     property alias sourceSize: avatarImage.sourceSize
 
     /**
-     * @brief This property holds whether the provided image should be smoothed.
-     * @see QtQuick.Image::smooth
-     * @property bool smooth
-     */
-    property alias smooth: avatarImage.smooth
-
-    /**
      * @brief This property holds the color to use for this avatar.
      *
      * If not explicitly set, this defaults to generating a color from the name.
@@ -299,7 +292,6 @@ QQC2.Control {
             visible: __private.showImage
 
             mipmap: true
-            smooth: true
             sourceSize {
                 width: avatarRoot.width * Screen.devicePixelRatio
                 height: avatarRoot.height * Screen.devicePixelRatio
