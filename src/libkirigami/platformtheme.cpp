@@ -831,7 +831,18 @@ void PlatformTheme::setSupportsIconColoring(bool support)
 
 PlatformTheme *PlatformTheme::qmlAttachedProperties(QObject *object)
 {
-    auto plugin = KirigamiPluginFactory::findPlugin();
+    QQmlEngine *engine = qmlEngine(object);
+    QString pluginName;
+
+    if (engine) {
+        pluginName = engine->property("_kirigamiTheme").toString();
+    }
+
+    auto plugin = KirigamiPluginFactory::findPlugin(pluginName);
+    if (!plugin && !pluginName.isEmpty()) {
+        plugin = KirigamiPluginFactory::findPlugin();
+    }
+
     if (plugin) {
         if (auto theme = plugin->createPlatformTheme(object)) {
             return theme;

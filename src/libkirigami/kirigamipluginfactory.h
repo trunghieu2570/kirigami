@@ -58,9 +58,11 @@ public:
     /**
      * finds the plugin providing units and platformtheme for the current style
      * The plugin pointer is cached, so only the first call is a potentially heavy operation
+     * @param pluginName The name we want to search for, if empty the name of
+     *           the current QtQuickControls style will be searched
      * @return pointer to the KirigamiPluginFactory of the current style
      */
-    static KirigamiPluginFactory *findPlugin();
+    static KirigamiPluginFactory *findPlugin(const QString &pluginName = {});
 };
 }
 

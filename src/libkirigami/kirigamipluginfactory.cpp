@@ -26,72 +26,70 @@ KirigamiPluginFactory::KirigamiPluginFactory(QObject *parent)
 
 KirigamiPluginFactory::~KirigamiPluginFactory() = default;
 
-KirigamiPluginFactory *KirigamiPluginFactory::findPlugin()
+KirigamiPluginFactory *KirigamiPluginFactory::findPlugin(const QString &preferredName)
 {
-    static KirigamiPluginFactory *pluginFactory = nullptr;
+    static QHash<QString, KirigamiPluginFactory *> factories = QHash<QString, KirigamiPluginFactory *>();
 
+    QString pluginName = preferredName.isEmpty() ? QQuickStyle::name() : preferredName;
     //check for the plugin only once: it's an heavy operation
-    if (pluginFactory) {
-        return pluginFactory;
+    if (auto it = factories.constFind(pluginName); it != factories.constEnd()) {
+        return it.value();
     }
 
-    static bool s_factoryChecked = false;
+    // Even plugins that aren't found are in the map, so we know we shouldn't check again withthis expensive operation
+    factories[pluginName] = nullptr;
 
-    if (!s_factoryChecked) {
-        s_factoryChecked = true;
-
-        #ifdef KIRIGAMI_BUILD_TYPE_STATIC
-        for (QObject *staticPlugin : QPluginLoader::staticInstances()) {
-            KirigamiPluginFactory *factory = qobject_cast<KirigamiPluginFactory *>(staticPlugin);
-            if (factory) {
-                pluginFactory = factory;
-            }
+#ifdef KIRIGAMI_BUILD_TYPE_STATIC
+    for (QObject *staticPlugin : QPluginLoader::staticInstances()) {
+        KirigamiPluginFactory *factory = qobject_cast<KirigamiPluginFactory *>(staticPlugin);
+        if (factory) {
+            pluginFactory = factory;
         }
-        #else
-        const auto libraryPaths = QCoreApplication::libraryPaths();
-        for (const QString &path : libraryPaths) {
-#ifdef Q_OS_ANDROID
-            QDir dir(path);
+    }
 #else
-            QDir dir(path + QStringLiteral("/kf6/kirigami"));
+    const auto libraryPaths = QCoreApplication::libraryPaths();
+    for (const QString &path : libraryPaths) {
+#ifdef Q_OS_ANDROID
+        QDir dir(path);
+#else
+        QDir dir(path + QStringLiteral("/kf6/kirigami"));
 #endif
-            const auto fileNames = dir.entryList(QDir::Files);
+        const auto fileNames = dir.entryList(QDir::Files);
 
-            for (const QString &fileName : fileNames) {
+        for (const QString &fileName : fileNames) {
 
 #ifdef Q_OS_ANDROID
-                if (fileName.startsWith(QStringLiteral("libplugins_kf6_kirigami_")) && QLibrary::isLibrary(fileName)) {
+            if (fileName.startsWith(QStringLiteral("libplugins_kf6_kirigami_")) && QLibrary::isLibrary(fileName)) {
 #endif
-                    // TODO: env variable?
-                    if (!QQuickStyle::name().isEmpty() && fileName.contains(QQuickStyle::name())) {
-                        QPluginLoader loader(dir.absoluteFilePath(fileName));
-                        QObject *plugin = loader.instance();
-                        // TODO: load actually a factory as plugin
+                if (!pluginName.isEmpty() && fileName.contains(pluginName)) {
+                    // TODO: env variable too?
+                    QPluginLoader loader(dir.absoluteFilePath(fileName));
+                    QObject *plugin = loader.instance();
+                    // TODO: load actually a factory as plugin
 
-                        qCDebug(KirigamiLog) << "Loading style plugin from" << dir.absoluteFilePath(fileName);
+                    qCDebug(KirigamiLog) << "Loading style plugin from" << dir.absoluteFilePath(fileName);
 
-                        KirigamiPluginFactory *factory = qobject_cast<KirigamiPluginFactory *>(plugin);
-                        if (factory) {
-                            pluginFactory = factory;
-                            break;
-                        }
+                    KirigamiPluginFactory *factory = qobject_cast<KirigamiPluginFactory *>(plugin);
+                    if (factory) {
+                        factories[pluginName] = factory;
+                        break;
                     }
-#ifdef Q_OS_ANDROID
                 }
+#ifdef Q_OS_ANDROID
+            }
 #endif
-            }
-
-            // Ensure we only load the first plugin from the first plugin location.
-            // If we do not break here, we may end up loading a different plugin
-            // in place of the first one.
-            if (pluginFactory) {
-                break;
-            }
         }
-#endif
-    }
 
-    return pluginFactory;
+        // Ensure we only load the first plugin from the first plugin location.
+        // If we do not break here, we may end up loading a different plugin
+        // in place of the first one.
+        if (auto it = factories.constFind(pluginName); it != factories.constEnd()) {
+            break;
+        }
+    }
+#endif
+
+    return factories.value(pluginName);
 }
 }
 
