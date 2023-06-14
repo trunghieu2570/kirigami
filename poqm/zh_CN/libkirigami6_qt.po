@@ -99,7 +99,7 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "更多操作"
 
-#: controls/Avatar.qml:183
+#: controls/Avatar.qml:176
 #, qt-format
 msgctxt "Avatar|"
 msgid "%1 — %2"
