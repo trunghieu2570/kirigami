@@ -10,7 +10,10 @@
 #include <QApplication>
 #endif
 
+#include <QIcon>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QQuickStyle>
 #include <QUrl>
 
 #include "app.h"
@@ -59,7 +62,7 @@ int main(int argc, char *argv[])
         // A displayable program name string.
         i18nc("@title", "%{APPNAME}"),
         // The program version string.
-        QStringLiteral(% {APPNAMEUC} _VERSION_STRING),
+        QStringLiteral(%{APPNAMEUC}_VERSION_STRING),
         // Short description of what the app does.
         i18n("Application Description"),
         // The license this code is released under.
@@ -70,7 +73,7 @@ int main(int argc, char *argv[])
                         i18nc("@info:credit", "Maintainer"),
                         QStringLiteral("%{EMAIL}"),
                         QStringLiteral("https://yourwebsite.com"));
-    about.setTranslator(i18nc("NAME OF TRANSLATORS", "Your names"), i18nc("EMAIL OF TRANSLATORS", "Your emails"));
+    aboutData.setTranslator(i18nc("NAME OF TRANSLATORS", "Your names"), i18nc("EMAIL OF TRANSLATORS", "Your emails"));
     KAboutData::setApplicationData(aboutData);
     QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.%{APPNAMELC}")));
 
