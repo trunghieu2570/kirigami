@@ -4,7 +4,7 @@
 #pragma once
 
 #include <QObject>
-#include <QtQml>
+#include <QQmlEngine>
 
 /**
  * @brief This attached property contains hints for enabling spell checking.

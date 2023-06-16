@@ -12,7 +12,6 @@
 
 #include <QQmlApplicationEngine>
 #include <QUrl>
-#include <QtQml>
 
 #include "app.h"
 #include "version-%{APPNAMELC}.h"

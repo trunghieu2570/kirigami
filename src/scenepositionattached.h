@@ -8,7 +8,7 @@
 #define SCENEPOSITIONATTACHED_H
 
 #include <QObject>
-#include <QtQml>
+#include <QQmlEngine>
 
 class QQuickItem;
 

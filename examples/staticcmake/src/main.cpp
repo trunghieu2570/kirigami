@@ -13,7 +13,6 @@
 #include <QColor>
 #include <QQmlApplicationEngine>
 #include <QUrl>
-#include <QtQml>
 
 #ifdef Q_OS_ANDROID
 #include <QtAndroid>

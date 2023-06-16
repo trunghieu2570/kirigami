@@ -30,6 +30,9 @@
 
 #include <QClipboard>
 #include <QGuiApplication>
+#if defined(Q_OS_ANDROID)
+#include <QResource>
+#endif
 #include <QQmlContext>
 #include <QQuickItem>
 #include <QQuickStyle>

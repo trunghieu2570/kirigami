@@ -9,7 +9,6 @@
 
 #include <QObject>
 #include <QQuickWindow>
-#include <QtQml>
 
 /**
  * This Attached property is used to calculate automated keyboard sequences
