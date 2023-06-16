@@ -187,7 +187,6 @@ The main.cpp file should then have something like:
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;

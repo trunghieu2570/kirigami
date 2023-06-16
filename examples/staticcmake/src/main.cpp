@@ -29,7 +29,6 @@ Q_IMPORT_PLUGIN(KirigamiPlugin)
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
-    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 // The desktop QQC2 style needs it to be a QApplication
 #ifdef Q_OS_ANDROID
     QGuiApplication app(argc, argv);
