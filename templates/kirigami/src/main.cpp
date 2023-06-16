@@ -5,8 +5,8 @@
 
 #include <QApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include <QUrl>
-#include <QtQml>
 
 #include "about.h"
 #include "app.h"

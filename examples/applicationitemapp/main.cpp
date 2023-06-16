@@ -5,7 +5,6 @@
  */
 #include <QQuickView>
 #include <QUrl>
-#include <QtQml>
 #ifdef Q_OS_ANDROID
 #include <QGuiApplication>
 #else

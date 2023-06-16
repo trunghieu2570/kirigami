@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QQuickItem>
 #include <QQuickRenderControl>
+#include <QRegularExpression>
 
 QHash<QKeySequence, MnemonicAttached *> MnemonicAttached::s_sequenceToObject = QHash<QKeySequence, MnemonicAttached *>();
 

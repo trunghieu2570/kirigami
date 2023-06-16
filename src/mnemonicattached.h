@@ -9,7 +9,6 @@
 
 #include <QObject>
 #include <QQuickWindow>
-#include <QtQml>
 
 /**
  * @brief This attached property allows to define keyboard sequences to trigger

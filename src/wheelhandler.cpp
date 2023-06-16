@@ -6,9 +6,12 @@
 
 #include "wheelhandler.h"
 #include "settings.h"
+#include <QQmlInfo>
 #include <QQuickItem>
 #include <QQuickWindow>
 #include <QWheelEvent>
+
+#include <cmath>
 
 KirigamiWheelEvent::KirigamiWheelEvent(QObject *parent)
     : QObject(parent)

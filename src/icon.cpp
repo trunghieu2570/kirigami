@@ -14,13 +14,15 @@
 #include <QDebug>
 #include <QGuiApplication>
 #include <QIcon>
+#include <QNetworkReply>
 #include <QPainter>
 #include <QQuickImageProvider>
 #include <QQuickWindow>
 #include <QSGSimpleTextureNode>
 #include <QSGTexture>
 #include <QScreen>
-#include <QtQml>
+
+#include <cmath>
 
 Q_GLOBAL_STATIC(ImageTexturesCache, s_iconImageCache)
 
