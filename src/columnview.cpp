@@ -59,10 +59,10 @@ QmlComponentsPool *QmlComponentsPoolSingleton::instance(QQmlEngine *engine)
 QmlComponentsPool::QmlComponentsPool(QQmlEngine *engine)
     : QObject(engine)
 {
-    QQmlComponent *component = new QQmlComponent(engine, this);
+    QQmlComponent component(engine);
 
     /* clang-format off */
-    component->setData(QByteArrayLiteral(R"(
+    component.setData(QByteArrayLiteral(R"(
 import QtQuick 2.7
 import org.kde.kirigami 2.7 as Kirigami
 
@@ -98,7 +98,7 @@ QtObject {
 )"), QUrl(QStringLiteral("columnview.cpp")));
     /* clang-format on */
 
-    m_instance = component->create();
+    m_instance = component.create();
     // qCWarning(KirigamiLog)<<component->errors();
     Q_ASSERT(m_instance);
     m_instance->setParent(this);
