@@ -20,9 +20,10 @@
 #include "platformtheme.h"
 
 #include <QDebug>
+#include <QFutureWatcher>
 #include <QGuiApplication>
 #include <QTimer>
-#include <QtConcurrent>
+#include <QtConcurrentRun>
 
 #include "loggingcategory.h"
 #include <cmath>
