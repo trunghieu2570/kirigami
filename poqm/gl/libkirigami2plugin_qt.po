@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-05-12 00:14+0200\n"
+"PO-Revision-Date: 2023-06-05 08:29+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -76,7 +76,7 @@ msgstr "Autoría"
 #: controls/AboutItem.qml:353
 msgctxt "AboutItem|"
 msgid "Show author photos"
-msgstr "Mostrar fotos das persoas autoras"
+msgstr "Amosar fotos das persoas autoras"
 
 #: controls/AboutItem.qml:384
 msgctxt "AboutItem|"
