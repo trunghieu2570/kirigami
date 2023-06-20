@@ -10,10 +10,10 @@ import org.kde.kirigami 2.12 as Kirigami
 Rectangle {
     id: background
     color: {
-        if (listItem.alternatingBackground && index % 2)
-            return listItem.alternateBackgroundColor
-        else if (listItem.checked || listItem.highlighted || (listItem.down && !listItem.checked && !listItem.sectionDelegate))
+        if (listItem.checked || listItem.highlighted || (listItem.down && !listItem.checked && !listItem.sectionDelegate))
             return listItem.activeBackgroundColor
+        else if (listItem.alternatingBackground && index % 2)
+            return listItem.alternateBackgroundColor
         return listItem.backgroundColor
     }
 
