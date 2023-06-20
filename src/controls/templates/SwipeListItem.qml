@@ -541,9 +541,6 @@ T.SwipeDelegate {
         }
     }
 
-
-    background: DefaultListItemBackground {}
-
     swipe {
         enabled: false
         right: listItem.alwaysVisibleActions || listItem.LayoutMirroring.enabled || !Kirigami.Settings.tabletMode ? null : actionsBackgroundDelegate
