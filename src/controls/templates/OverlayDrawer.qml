@@ -182,7 +182,7 @@ T2.Drawer {
                    || (root.edge === Qt.RightEdge && Qt.application.layoutDirection === Qt.RightToLeft)
                    ? applicationWindow().pageStack.globalToolBar.leftHandleAnchor
                    : applicationWindow().pageStack.globalToolBar.rightHandleAnchor)
-                : (applicationWindow().header && applicationWindow().header.toString().indexOf("ToolBarApplicationHeader") !== -1 ? applicationWindow().header : null)
+                : null
 
         property int startX
         property int mappedStartX

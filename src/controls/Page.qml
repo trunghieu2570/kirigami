@@ -344,14 +344,6 @@ QQC2.Page {
                     return true;
                 }
 
-                if (applicationWindow().header && applicationWindow().header.toString().indexOf("ToolBarApplicationHeader") !== -1) {
-                    return false;
-                }
-
-                if (applicationWindow().footer && applicationWindow().footer.toString().indexOf("ToolBarApplicationHeader") !== -1) {
-                    return false;
-                }
-
                 return true;
             }
 

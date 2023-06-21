@@ -90,7 +90,6 @@ ecm_target_qml_sources(KirigamiPlugin SOURCES
     controls/AbstractApplicationWindow.qml
     controls/AbstractListItem.qml
     controls/ApplicationHeader.qml
-    controls/ToolBarApplicationHeader.qml
     controls/ApplicationWindow.qml
     controls/BasicListItem.qml
     controls/OverlayDrawer.qml
