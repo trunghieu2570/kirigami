@@ -104,7 +104,7 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Radnje"
 
-#: controls/Avatar.qml:176
+#: controls/Avatar.qml:177
 #, qt-format
 msgctxt "Avatar|"
 msgid "%1 — %2"
