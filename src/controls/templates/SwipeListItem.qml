@@ -284,9 +284,9 @@ T.SwipeDelegate {
             return want
         }
         anchors {
-            right: validate((Qt.application.layoutDirection === Qt.RightToLeft) ? undefined : (contentItem ? contentItem.right : undefined), contentItem ? contentItem.right : undefined)
+            right: validate(listItem.mirrored ? undefined : (contentItem ? contentItem.right : undefined), contentItem ? contentItem.right : undefined)
             rightMargin: validate(-paddingOffset, 0)
-            left: validate((Qt.application.layoutDirection === Qt.LeftToRight) ? undefined : (contentItem ? contentItem.left : undefined), undefined)
+            left: validate(!listItem.mirrored ? undefined : (contentItem ? contentItem.left : undefined), undefined)
             leftMargin: validate(-paddingOffset, 0)
             top: parent.top
             bottom: parent.bottom
@@ -333,7 +333,7 @@ T.SwipeDelegate {
                 if (Math.abs(mapToItem(listItem, 0, 0).x - startX) > Qt.styleHints.startDragDistance) {
                     return;
                 }
-                if (listItem.LayoutMirroring.enabled) {
+                if (listItem.mirrored) {
                     if (listItem.swipe.position < 0.5) {
                         slideAnim.to = openPosition
                     } else {
@@ -351,7 +351,7 @@ T.SwipeDelegate {
             onPositionChanged: mouse => {
                 const pos = mapToItem(listItem, mouse.x, mouse.y);
 
-                if (listItem.LayoutMirroring.enabled) {
+                if (listItem.mirrored) {
                     listItem.swipe.position = Math.max(0, Math.min(openPosition, (pos.x / listItem.width)));
                     openIntention = listItem.swipe.position > lastPosition;
                 } else {
@@ -361,7 +361,7 @@ T.SwipeDelegate {
                 lastPosition = listItem.swipe.position;
             }
             onReleased: mouse => {
-                if (listItem.LayoutMirroring.enabled) {
+                if (listItem.mirrored) {
                     if (openIntention) {
                         slideAnim.to = openPosition
                     } else {
@@ -381,7 +381,7 @@ T.SwipeDelegate {
                 id: handleIcon
                 anchors.fill: parent
                 selected: listItem.checked || (listItem.down && !listItem.checked && !listItem.sectionDelegate)
-                source: (LayoutMirroring.enabled ? (listItem.background.x < listItem.background.width/2 ? "overflow-menu-right" : "overflow-menu-left") : (listItem.background.x < -listItem.background.width/2 ? "overflow-menu-right" : "overflow-menu-left"))
+                source: (listItem.mirrored ? (listItem.background.x < listItem.background.width/2 ? "overflow-menu-right" : "overflow-menu-left") : (listItem.background.x < -listItem.background.width/2 ? "overflow-menu-right" : "overflow-menu-left"))
             }
 
             Connections {
@@ -393,7 +393,7 @@ T.SwipeDelegate {
                         return;
                     }
 
-                    if (listItem.LayoutMirroring.enabled) {
+                    if (listItem.mirrored) {
                         listItem.swipe.position = Math.max(0, Math.min(dragButton.openPosition, internal.swipeFilterItem.peek));
                         dragButton.openIntention = listItem.swipe.position > dragButton.lastPosition;
 
@@ -459,8 +459,8 @@ T.SwipeDelegate {
                 }
             }
             EdgeShadow {
-                edge: LayoutMirroring.enabled ? Qt.RightEdge : Qt.LeftEdge
-                x: LayoutMirroring.enabled ? listItem.background.x - width : (listItem.background.x + listItem.background.width)
+                edge: listItem.mirrored ? Qt.RightEdge : Qt.LeftEdge
+                x: listItem.mirrored ? listItem.background.x - width : (listItem.background.x + listItem.background.width)
                 visible: background.x != 0
                 anchors {
                     top: parent.top
@@ -473,6 +473,8 @@ T.SwipeDelegate {
 
     RowLayout {
         id: actionsLayout
+
+        LayoutMirroring.enabled: listItem.mirrored
         anchors {
             right: parent.right
             top: parent.top
@@ -543,8 +545,8 @@ T.SwipeDelegate {
 
     swipe {
         enabled: false
-        right: listItem.alwaysVisibleActions || listItem.LayoutMirroring.enabled || !Kirigami.Settings.tabletMode ? null : actionsBackgroundDelegate
-        left: listItem.alwaysVisibleActions || listItem.LayoutMirroring.enabled && Kirigami.Settings.tabletMode ? actionsBackgroundDelegate : null
+        right: listItem.alwaysVisibleActions || listItem.mirrored || !Kirigami.Settings.tabletMode ? null : actionsBackgroundDelegate
+        left: listItem.alwaysVisibleActions || listItem.mirrored && Kirigami.Settings.tabletMode ? actionsBackgroundDelegate : null
     }
     NumberAnimation {
         id: slideAnim
