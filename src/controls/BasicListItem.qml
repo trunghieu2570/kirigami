@@ -99,16 +99,6 @@ Kirigami.AbstractListItem {
     property bool trailingFillVertically: true
 
     /**
-     * @brief This property sets whether list item's text should render in bold.
-     *
-     * default: ``false``
-     *
-     * @since 5.71
-     * @since org.kde.kirigami 2.13
-     */
-    property bool bold: false
-
-    /**
      * @brief This property sets the size at which the icon will render.
      *
      * This will not affect icon lookup, unlike the icon group's width and height properties, which will.
@@ -293,7 +283,7 @@ Kirigami.AbstractListItem {
                     Layout.alignment: subtitleItem.visible ? Qt.AlignLeft | Qt.AlignBottom : Qt.AlignLeft | Qt.AlignVCenter
                     color: (listItem.highlighted || listItem.checked || listItem.down) ? listItem.activeTextColor : listItem.textColor
                     elide: Text.ElideRight
-                    font.weight: listItem.bold ? Font.Bold : Font.Normal
+                    // font: inherit from control
                     opacity: listItem.fadeContent ? 0.6 : 1.0
                 }
                 QQC2.Label {
@@ -303,7 +293,7 @@ Kirigami.AbstractListItem {
                     color: (listItem.highlighted || listItem.checked || listItem.down) ? listItem.activeTextColor : listItem.textColor
                     elide: Text.ElideRight
                     font: Kirigami.Theme.smallFont
-                    opacity: listItem.fadeContent ? 0.6 : (listItem.bold ? 0.9 : 0.7)
+                    opacity: listItem.fadeContent ? 0.6 : (font.bold ? 0.9 : 0.7)
                     visible: text.length > 0
                 }
                 QQC2.ToolTip.text: {
