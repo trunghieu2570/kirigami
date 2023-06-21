@@ -125,3 +125,5 @@ void SizeGroup::adjustItems(Mode whatChanged)
         }
     }
 }
+
+#include "moc_sizegroup.cpp"

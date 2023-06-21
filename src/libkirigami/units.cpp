@@ -331,3 +331,5 @@ int IconSizes::enormous() const
 }
 
 }
+
+#include "moc_units.cpp"

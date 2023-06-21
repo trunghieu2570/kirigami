@@ -22,3 +22,5 @@ void App::saveWindowGeometry(QQuickWindow *window, const QString &group) const
     KWindowConfig::saveWindowSize(window, windowGroup);
     dataResource.sync();
 }
+
+#include "moc_app.cpp"

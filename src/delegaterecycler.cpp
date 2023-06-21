@@ -404,3 +404,5 @@ void DelegateRecycler::updateSize(bool parentResized)
 
     m_updatingSize = false;
 }
+
+#include "moc_delegaterecycler.cpp"

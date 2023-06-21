@@ -194,3 +194,5 @@ void AvatarGroup::setAction(QObject *action, QPointer<QObject> &member, void (Av
 
     Q_EMIT(this->*signal)();
 }
+
+#include "moc_avatar.cpp"

@@ -326,3 +326,5 @@ void ToolBarLayoutDelegate::triggerRelayout()
 {
     m_parent->relayout();
 }
+
+#include "moc_toolbarlayoutdelegate.cpp"

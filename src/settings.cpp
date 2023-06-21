@@ -227,3 +227,5 @@ bool Settings::hasPlatformMenuBar() const
 {
     return m_hasPlatformMenuBar;
 }
+
+#include "moc_settings.cpp"

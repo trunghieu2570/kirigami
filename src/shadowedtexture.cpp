@@ -86,3 +86,5 @@ QSGNode *ShadowedTexture::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaint
     shadowNode->updateGeometry();
     return shadowNode;
 }
+
+#include "moc_shadowedtexture.cpp"

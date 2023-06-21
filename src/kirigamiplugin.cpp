@@ -326,3 +326,4 @@ void KirigamiPlugin::registerTypes(QQmlEngine *engine)
 #endif
 
 #include "kirigamiplugin.moc"
+#include "moc_kirigamiplugin.cpp"

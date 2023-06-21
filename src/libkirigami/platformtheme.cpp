@@ -1007,4 +1007,5 @@ QObject *PlatformTheme::determineParent(QObject *object)
 
 }
 
+#include "moc_platformtheme.cpp"
 #include "platformtheme.moc"

@@ -181,3 +181,5 @@ void VirtualKeyboardWatcher::Private::getAllProperties()
 
 #endif
 }
+
+#include "moc_virtualkeyboardwatcher.cpp"

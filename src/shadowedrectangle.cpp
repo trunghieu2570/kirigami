@@ -359,3 +359,5 @@ void ShadowedRectangle::checkSoftwareItem()
         setFlag(QQuickItem::ItemHasContents, false);
     }
 }
+
+#include "moc_shadowedrectangle.cpp"

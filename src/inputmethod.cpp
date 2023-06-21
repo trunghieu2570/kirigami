@@ -79,3 +79,5 @@ bool InputMethod::willShowOnActive() const
 {
     return Kirigami::VirtualKeyboardWatcher::self()->willShowOnActive();
 }
+
+#include "moc_inputmethod.cpp"

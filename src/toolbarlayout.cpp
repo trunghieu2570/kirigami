@@ -749,3 +749,5 @@ void ToolBarLayout::Private::clearActions(ToolBarLayout::ActionsProperty *list)
 {
     reinterpret_cast<ToolBarLayout *>(list->data)->clearActions();
 }
+
+#include "moc_toolbarlayout.cpp"
