@@ -367,7 +367,7 @@ Kirigami.AbstractListItem {
                     }
                     return txt;
                 }
-                QQC2.ToolTip.visible: toolTipVisible && QQC2.ToolTip.text.length > 0 && (Kirigami.Settings.tabletMode ? listItem.down : listItem.hovered)
+                QQC2.ToolTip.visible: toolTipVisible && QQC2.ToolTip.text.length > 0 && (Kirigami.Settings.tabletMode ? listItem.pressed : listItem.hovered)
                 QQC2.ToolTip.delay: Kirigami.Settings.tabletMode ? Qt.styleHints.mousePressAndHoldInterval : Kirigami.Units.toolTipDelay
             }
         }
