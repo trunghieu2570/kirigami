@@ -41,7 +41,7 @@ Kirigami.ActionTextField {
     placeholderText: qsTr("Password")
     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText | Qt.ImhSensitiveData
     rightActions: Kirigami.Action {
-        text: root.showPassword ? i18n("Hide Password") : i18n("Show Password")
+        text: root.showPassword ? qsTr("Hide Password") : qsTr("Show Password")
         icon.name: root.showPassword ? "password-show-off" : "password-show-on"
         onTriggered: root.showPassword = !root.showPassword
     }
