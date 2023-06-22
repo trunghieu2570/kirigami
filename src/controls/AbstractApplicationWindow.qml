@@ -7,6 +7,7 @@
 import QtQuick 2.15
 import QtQml 2.15
 import QtQuick.Controls 2.15 as QQC2
+import QtQuick.Templates as T
 import QtQuick.Window 2.5
 import org.kde.kirigami 2.4 as Kirigami
 import "templates/private" as TP
@@ -281,8 +282,16 @@ QQC2.ApplicationWindow {
     contentItem.anchors.left: contentItem.parent.left
     contentItem.anchors.right: contentItem.parent.right
     contentItem.anchors.topMargin: root.wideScreen && header && controlsVisible ? header.height : 0
-    contentItem.anchors.leftMargin: root.globalDrawer && root.globalDrawer.modal === false && (!root.pageStack || null !== root.globalDrawer) ? root.globalDrawer.width * root.globalDrawer.position : 0
-    contentItem.anchors.rightMargin: root.contextDrawer && root.contextDrawer.modal === false ? root.contextDrawer.width * root.contextDrawer.position : 0
+    contentItem.anchors.leftMargin: __marginForDrawer(globalDrawer)
+    contentItem.anchors.rightMargin: __marginForDrawer(contextDrawer)
+
+    function __marginForDrawer(drawer: T.Drawer): real {
+        if (drawer !== null && !drawer.modal) {
+            return drawer.width * drawer.position;
+        } else {
+            return 0;
+        }
+    }
 
     Binding {
         when: menuBar !== undefined

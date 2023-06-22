@@ -6,7 +6,7 @@
 
 import QtQuick 2.12
 import QtQml 2.14
-import QtQuick.Templates 2.12 as T
+import QtQuick.Templates as T
 import QtQuick.Window 2.12
 import org.kde.kirigami 2.14 as Kirigami
 import "templates/private" as TP
@@ -241,13 +241,23 @@ Item {
      */
     readonly property Item contentItem: Item {
         id: contentItemRoot
+
         parent: root
+
         anchors {
             fill: parent
             topMargin: controlsVisible ? (root.header ? root.header.height : 0) + (root.menuBar ? root.menuBar.height : 0) : 0
             bottomMargin: controlsVisible && root.footer ? root.footer.height : 0
-            leftMargin: root.globalDrawer && root.globalDrawer.modal === false ? root.globalDrawer.contentItem.width * root.globalDrawer.position : 0
-            rightMargin: root.contextDrawer && root.contextDrawer.modal === false ? root.contextDrawer.contentItem.width * root.contextDrawer.position : 0
+            leftMargin: __marginForDrawer(globalDrawer)
+            rightMargin: __marginForDrawer(contextDrawer)
+        }
+
+        function __marginForDrawer(drawer: T.Drawer): real {
+            if (drawer !== null && !drawer.modal) {
+                return drawer.width * drawer.position;
+            } else {
+                return 0;
+            }
         }
 
         transform: Translate {
