@@ -170,17 +170,6 @@ QT.Control {
     readonly property alias globalToolBar: globalToolBar
 
     /**
-     * @brief This property assigns a drawer as an internal left sidebar for this PageRow.
-     *
-     * In this case, when open and not modal, the drawer contents will be in the same layer as the base pagerow.
-     * Pushing any other layer on top will cover the sidebar.
-     *
-     * @since 5.84
-     */
-    // TODO KF6: globaldrawer should use actions also used by this sidebar instead of reparenting globaldrawer contents?
-    property OverlayDrawer leftSidebar
-
-    /**
      * @brief This property holds the modal layers.
      *
      * Sometimes an application needs a modal page that always covers all the rows.
@@ -654,12 +643,6 @@ QT.Control {
      */
     signal pageRemoved(Item page)
 
-    onLeftSidebarChanged: {
-        if (leftSidebar && !leftSidebar.modal) {
-            modalConnection.onModalChanged();
-        }
-    }
-
     Keys.onReleased: event => {
         if (event.key === Qt.Key_Back) {
             this.goBack(event)
@@ -684,34 +667,6 @@ QT.Control {
     }
 */
 //END signals & signal handlers
-
-    Connections {
-        id: modalConnection
-        target: root.leftSidebar
-        function onModalChanged() {
-            if (leftSidebar.modal) {
-                const sidebar = sidebarControl.contentItem;
-                const background = sidebarControl.background;
-                sidebarControl.contentItem = null;
-                leftSidebar.contentItem = sidebar;
-                sidebarControl.background = null;
-                leftSidebar.background = background;
-
-                sidebar.visible = true;
-                background.visible = true;
-            } else {
-                const sidebar = leftSidebar.contentItem
-                const background = leftSidebar.background
-                leftSidebar.contentItem=null
-                sidebarControl.contentItem = sidebar
-                leftSidebar.background=null
-                sidebarControl.background = background
-
-                sidebar.visible = true;
-                background.visible = true;
-            }
-        }
-    }
 
     implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding
     implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
@@ -919,17 +874,11 @@ QT.Control {
 
     RowLayout {
         id: columnViewLayout
+
         spacing: 1
+
         readonly property alias columnView: columnView
-        QQC2.Control {
-            id: sidebarControl
-            Layout.fillHeight: true
-            visible: contentItem !== null && root.leftDrawer && root.leftDrawer.visible
-            leftPadding: root.leftSidebar ? root.leftSidebar.leftPadding : 0
-            topPadding: root.leftSidebar ? root.leftSidebar.topPadding : 0
-            rightPadding: root.leftSidebar ? root.leftSidebar.rightPadding : 0
-            bottomPadding: root.leftSidebar ? root.leftSidebar.bottomPadding : 0
-        }
+
         Kirigami.ColumnView {
             id: columnView
             Layout.fillWidth: true
