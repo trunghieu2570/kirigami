@@ -1,12 +1,13 @@
 /*
     SPDX-FileCopyrightText: 2021 Devin Lin <espidev@gmail.com>
+    SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-import QtQuick 2.15
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.15 as QQC2
-import org.kde.kirigami 2.19 as Kirigami
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as QQC2
+import org.kde.kirigami 2 as Kirigami
 
 /**
  * A dialog that prompts users with a context menu, with
@@ -53,17 +54,18 @@ import org.kde.kirigami 2.19 as Kirigami
  * @inherit org::kde::kirigami::Dialog
  */
 Kirigami.Dialog {
+    id: root
 
     /**
      * @brief This property holds the actions displayed in the context menu.
      */
-    property list<QtObject> actions
+    property list<Kirigami.Action> actions
 
     /**
      * @brief This property holds the content header, which appears above the actions.
      * but below the header bar.
      */
-    property Item contentHeader
+    property alias contentHeader: columnHeader.contentItem
 
     /**
      * @brief This property holds the content header.
@@ -80,39 +82,39 @@ Kirigami.Dialog {
 
     ColumnLayout {
         id: column
+
         spacing: 0
 
         QQC2.Control {
             id: columnHeader
+
             topPadding: 0
-            bottomPadding: 0
             leftPadding: 0
             rightPadding: 0
-            contentItem: contentHeader
+            bottomPadding: 0
         }
 
         Repeater {
-            model: actions
+            model: root.actions
 
             delegate: Kirigami.BasicListItem {
+                required property Kirigami.Action modelData
+
                 Layout.fillWidth: true
                 Layout.preferredHeight: Kirigami.Units.gridUnit * 2
 
-                iconSize: Kirigami.Units.gridUnit
-                leftPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
-                rightPadding: Kirigami.Units.largeSpacing + + Kirigami.Units.smallSpacing
-
-                icon.name: modelData.icon.name
-                text: modelData.text
-                onClicked: modelData.trigger(this)
-
-                enabled: modelData.enabled
-
+                action: modelData
                 visible: modelData.visible
 
-                QQC2.ToolTip.visible: modelData.tooltip !== "" && hoverHandler.hovered
+                iconSize: Kirigami.Units.gridUnit
+                horizontalPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+                leftPadding: undefined
+                rightPadding: undefined
+
+                toolTipVisible: false // Prevent possibility of this and built-in tooltip fighting each other
                 QQC2.ToolTip.text: modelData.tooltip
-                HoverHandler { id: hoverHandler }
+                QQC2.ToolTip.visible: modelData.tooltip !== "" && (Kirigami.Settings.tabletMode ? pressed : hovered)
+                QQC2.ToolTip.delay: Kirigami.Settings.tabletMode ? Qt.styleHints.mousePressAndHoldInterval : Kirigami.Units.toolTipDelay
             }
         }
     }
