@@ -231,11 +231,6 @@ msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "İleri Git"
 
-#: controls/ToolBarApplicationHeader.qml:89
-msgctxt "ToolBarApplicationHeader|"
-msgid "More Actions"
-msgstr "Daha Fazla Eylem"
-
 #: controls/UrlButton.qml:34
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
@@ -269,6 +264,10 @@ msgstr "%1 pencereleme sistemi"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (%3 üzerine yapılı)"
+
+#~ msgctxt "ToolBarApplicationHeader|"
+#~ msgid "More Actions"
+#~ msgstr "Daha Fazla Eylem"
 
 #~ msgctxt "AboutItem|"
 #~ msgid "Visit %1's KDE Store page"

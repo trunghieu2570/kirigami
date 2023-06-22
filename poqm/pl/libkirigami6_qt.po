@@ -230,11 +230,6 @@ msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "Przejdź naprzód"
 
-#: controls/ToolBarApplicationHeader.qml:89
-msgctxt "ToolBarApplicationHeader|"
-msgid "More Actions"
-msgstr "Więcej działań"
-
 #: controls/UrlButton.qml:34
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
@@ -268,6 +263,10 @@ msgstr "System okien %1"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (zbudowany na %3)"
+
+#~ msgctxt "ToolBarApplicationHeader|"
+#~ msgid "More Actions"
+#~ msgstr "Więcej działań"
 
 #~ msgctxt "AboutItem|"
 #~ msgid "Visit %1's KDE Store page"

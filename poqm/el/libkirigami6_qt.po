@@ -244,11 +244,6 @@ msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "Πλοήγηση προς τα εμπρός"
 
-#: controls/ToolBarApplicationHeader.qml:89
-msgctxt "ToolBarApplicationHeader|"
-msgid "More Actions"
-msgstr "Περισσότερες ενέργειες"
-
 #: controls/UrlButton.qml:34
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
@@ -285,6 +280,10 @@ msgstr "Το %1 παραθυρικό σύστημα"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (κατασκευάστηκε με βάση το %3)"
+
+#~ msgctxt "ToolBarApplicationHeader|"
+#~ msgid "More Actions"
+#~ msgstr "Περισσότερες ενέργειες"
 
 #~ msgctxt "AboutItem|"
 #~ msgid "Visit %1's KDE Store page"

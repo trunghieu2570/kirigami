@@ -229,11 +229,6 @@ msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "முன்னே செல்"
 
-#: controls/ToolBarApplicationHeader.qml:89
-msgctxt "ToolBarApplicationHeader|"
-msgid "More Actions"
-msgstr "மேலும் செயல்கள்"
-
 #: controls/UrlButton.qml:34
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
@@ -270,6 +265,10 @@ msgstr "%1 சாளர நெறிமுறை"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (%3 கொண்டு தொகுக்கப்பட்டது)"
+
+#~ msgctxt "ToolBarApplicationHeader|"
+#~ msgid "More Actions"
+#~ msgstr "மேலும் செயல்கள்"
 
 #~ msgctxt "AboutItem|"
 #~ msgid "Visit %1's KDE Store page"

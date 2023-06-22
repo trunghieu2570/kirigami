@@ -272,11 +272,6 @@ msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "Naršyti pirmyn"
 
-#: controls/ToolBarApplicationHeader.qml:89
-msgctxt "ToolBarApplicationHeader|"
-msgid "More Actions"
-msgstr "Daugiau veiksmų"
-
 #: controls/UrlButton.qml:34
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
@@ -310,6 +305,10 @@ msgstr "%1 langų sistema"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (sudaryta remiantis %3)"
+
+#~ msgctxt "ToolBarApplicationHeader|"
+#~ msgid "More Actions"
+#~ msgstr "Daugiau veiksmų"
 
 #~ msgctxt "UrlButton|"
 #~ msgid "Copy link address"

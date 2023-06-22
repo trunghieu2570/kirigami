@@ -271,11 +271,6 @@ msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "आगे जाएँ"
 
-#: controls/ToolBarApplicationHeader.qml:89
-msgctxt "ToolBarApplicationHeader|"
-msgid "More Actions"
-msgstr "अधिक क्रियाएँ"
-
 #: controls/UrlButton.qml:34
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
@@ -312,6 +307,10 @@ msgstr "%1 विंडो प्रणाली"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "क्यूट %2 (%3 के प्रती निर्मित)"
+
+#~ msgctxt "ToolBarApplicationHeader|"
+#~ msgid "More Actions"
+#~ msgstr "अधिक क्रियाएँ"
 
 #, fuzzy
 #~| msgctxt "AboutPage|"

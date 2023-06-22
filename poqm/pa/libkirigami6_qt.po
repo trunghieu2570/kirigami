@@ -229,11 +229,6 @@ msgctxt "ForwardButton|"
 msgid "Navigate Forward"
 msgstr "ਅੱਗੇ ਜਾਓ"
 
-#: controls/ToolBarApplicationHeader.qml:89
-msgctxt "ToolBarApplicationHeader|"
-msgid "More Actions"
-msgstr "ਹੋਰ ਕਾਰਵਾਈਆਂ"
-
 #: controls/UrlButton.qml:34
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
@@ -270,6 +265,10 @@ msgstr "%1 ਵਿੰਡੋਇੰਗ ਸਿਸਟਮ"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (%3 ਨਾਲ ਬਣਾਇਆ)"
+
+#~ msgctxt "ToolBarApplicationHeader|"
+#~ msgid "More Actions"
+#~ msgstr "ਹੋਰ ਕਾਰਵਾਈਆਂ"
 
 #~ msgctxt "UrlButton|"
 #~ msgid "Copy link address"
