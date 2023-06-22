@@ -72,31 +72,31 @@ Kirigami.Action {
     property var initialProperties
 
     /**
-      * @brief This property sets whether PagePoolAction will use the layers property
-      * implemented by the pageStack.
-      *
-      * This is intended for use with PageRow layers to allow PagePoolActions to
-      * push context-specific pages onto the layers stack.
-      *
-      * default: ``false``
-      *
-      * @since 5.70
-      * @since org.kde.kirigami 2.12
-      */
+     * @brief This property sets whether PagePoolAction will use the layers property
+     * implemented by the pageStack.
+     *
+     * This is intended for use with PageRow layers to allow PagePoolActions to
+     * push context-specific pages onto the layers stack.
+     *
+     * default: ``false``
+     *
+     * @since 5.70
+     * @since org.kde.kirigami 2.12
+     */
     property bool useLayers: false
 //END properties
 
     /**
-      * @returns the page item held in the PagePool or null if it has not been loaded yet.
-      */
+     * @returns the page item held in the PagePool or null if it has not been loaded yet.
+     */
     function pageItem() {
         return pagePool.pageForUrl(page)
     }
 
     /**
-      * @returns true if the page has been loaded and placed on pageStack.layers
-      * and useLayers is true, otherwise returns null.
-      */
+     * @returns true if the page has been loaded and placed on pageStack.layers
+     * and useLayers is true, otherwise returns null.
+     */
     function layerContainsPage() {
         if (!useLayers || !pageStack.hasOwnProperty("layers")) return false
 
@@ -107,9 +107,9 @@ Kirigami.Action {
     }
 
     /**
-      * @returns true if the page has been loaded and placed on the pageStack,
-      * otherwise returns null.
-      */
+     * @returns true if the page has been loaded and placed on the pageStack,
+     * otherwise returns null.
+     */
     function stackContainsPage() {
         if (useLayers) return false
         return pageStack.columnView.containsItem(pagePool.pageForUrl(page))
