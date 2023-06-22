@@ -27,6 +27,7 @@ import org.kde.kirigami 2.19 as Kirigami
  *     title: "Clock"
  *
  *     pageStack.initialPage: worldPage
+ *
  *     Kirigami.Page {
  *         id: worldPage
  *         title: "World"
@@ -47,7 +48,6 @@ import org.kde.kirigami 2.19 as Kirigami
  *         title: "Alarms"
  *         visible: false
  *     }
- *
  *
  *     footer: Kirigami.NavigationTabBar {
  *         actions: [
