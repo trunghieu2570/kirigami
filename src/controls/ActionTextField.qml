@@ -20,7 +20,7 @@ import org.kde.kirigami 2.20 as Kirigami
  * Kirigami.ActionTextField {
  *     id: searchField
  *
- *     placeholderText: i18n("Search...")
+ *     placeholderText: i18n("Search…")
  *
  *     focusSequence: StandardKey.Find
  *
