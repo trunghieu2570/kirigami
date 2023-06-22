@@ -69,9 +69,8 @@ QQuickItem *PagePool::loadPage(const QString &url, QJSValue callback)
 
 QQuickItem *PagePool::loadPageWithProperties(const QString &url, const QVariantMap &properties, QJSValue callback)
 {
-    Q_ASSERT(qmlEngine(this));
-    QQmlContext *ctx = QQmlEngine::contextForObject(this);
-    Q_ASSERT(ctx);
+    const auto engine = qmlEngine(this);
+    Q_ASSERT(engine);
 
     const QUrl actualUrl = resolvedUrl(url);
 
@@ -81,7 +80,7 @@ QQuickItem *PagePool::loadPageWithProperties(const QString &url, const QVariantM
         m_lastLoadedItem = found.value();
 
         if (callback.isCallable()) {
-            QJSValueList args = {qmlEngine(this)->newQObject(found.value())};
+            QJSValueList args = {engine->newQObject(found.value())};
             callback.call(args);
             Q_EMIT lastLoadedUrlChanged();
             Q_EMIT lastLoadedItemChanged();
@@ -98,7 +97,7 @@ QQuickItem *PagePool::loadPageWithProperties(const QString &url, const QVariantM
     QQmlComponent *component = m_componentForUrl.value(actualUrl);
 
     if (!component) {
-        component = new QQmlComponent(qmlEngine(this), actualUrl, QQmlComponent::PreferSynchronous);
+        component = new QQmlComponent(engine, actualUrl, QQmlComponent::PreferSynchronous);
     }
 
     if (component->status() == QQmlComponent::Loading) {
@@ -108,7 +107,7 @@ QQuickItem *PagePool::loadPageWithProperties(const QString &url, const QVariantM
             return nullptr;
         }
 
-        connect(component, &QQmlComponent::statusChanged, this, [this, component, callback, properties](QQmlComponent::Status status) mutable {
+        connect(component, &QQmlComponent::statusChanged, this, [this, engine, component, callback, properties](QQmlComponent::Status status) mutable {
             if (status != QQmlComponent::Ready) {
                 qCWarning(KirigamiLog) << component->errors();
                 m_componentForUrl.remove(component->url());
@@ -117,7 +116,7 @@ QQuickItem *PagePool::loadPageWithProperties(const QString &url, const QVariantM
             }
             QQuickItem *item = createFromComponent(component, properties);
             if (item) {
-                QJSValueList args = {qmlEngine(this)->newQObject(item)};
+                QJSValueList args = {engine->newQObject(item)};
                 callback.call(args);
             }
 
@@ -159,7 +158,7 @@ QQuickItem *PagePool::loadPageWithProperties(const QString &url, const QVariantM
     Q_EMIT lastLoadedItemChanged();
 
     if (callback.isCallable()) {
-        QJSValueList args = {qmlEngine(this)->newQObject(item)};
+        QJSValueList args = {engine->newQObject(item)};
         callback.call(args);
         // We could return the item, but for api coherence return null
         return nullptr;
@@ -169,7 +168,7 @@ QQuickItem *PagePool::loadPageWithProperties(const QString &url, const QVariantM
 
 QQuickItem *PagePool::createFromComponent(QQmlComponent *component, const QVariantMap &properties)
 {
-    QQmlContext *ctx = QQmlEngine::contextForObject(this);
+    const auto ctx = qmlContext(this);
     Q_ASSERT(ctx);
 
     QObject *obj = component->createWithInitialProperties(properties, ctx);
@@ -194,8 +193,7 @@ QQuickItem *PagePool::createFromComponent(QQmlComponent *component, const QVaria
 
 QUrl PagePool::resolvedUrl(const QString &stringUrl) const
 {
-    Q_ASSERT(qmlEngine(this));
-    QQmlContext *ctx = QQmlEngine::contextForObject(this);
+    const auto ctx = qmlContext(this);
     Q_ASSERT(ctx);
 
     QUrl actualUrl(stringUrl);
@@ -275,17 +273,17 @@ void PagePool::deletePage(const QVariant &page)
 
 void PagePool::clear()
 {
-    for (auto *c : std::as_const(m_componentForUrl)) {
-        c->deleteLater();
+    for (const auto &component : std::as_const(m_componentForUrl)) {
+        component->deleteLater();
     }
     m_componentForUrl.clear();
 
-    for (auto *i : std::as_const(m_itemForUrl)) {
+    for (const auto &item : std::as_const(m_itemForUrl)) {
         // items that had been deparented are safe to delete
-        if (!i->parentItem()) {
-            i->deleteLater();
+        if (!item->parentItem()) {
+            item->deleteLater();
         }
-        QQmlEngine::setObjectOwnership(i, QQmlEngine::JavaScriptOwnership);
+        QQmlEngine::setObjectOwnership(item, QQmlEngine::JavaScriptOwnership);
     }
     m_itemForUrl.clear();
     m_urlForItem.clear();
