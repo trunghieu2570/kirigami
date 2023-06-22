@@ -7,7 +7,7 @@
 import "private" as P
 import "templates" as T
 
-//TODO KF6: not have list items at all (except perhaps swipelistitem which is an unuque ui) but rather have a set of layouts for lists items to be put inside standard QQC2 Delegate
+//TODO KF6: not have list items at all (except perhaps swipelistitem which is an unique ui) but rather have a set of layouts for lists items to be put inside standard QQC2 Delegate
 /**
  * @brief An item delegate for the primitive ListView component.
  *
@@ -16,7 +16,14 @@ import "templates" as T
  * @inherit org::kde::kirigami::templates::AbstractListItem
  */
 T.AbstractListItem {
-    id: listItem
+    id: root
 
-    background: P.DefaultListItemBackground {}
+    background: P.DefaultListItemBackground {
+        listItem: root
+    }
+
+    topInset: Kirigami.Units.smallSpacing / 2
+    bottomInset: Kirigami.Units.smallSpacing / 2
+    rightInset: Kirigami.Units.smallSpacing
+    leftInset: Kirigami.Units.smallSpacing
 }

@@ -37,7 +37,10 @@ import "templates" as T
  * @inherit org::kde::kirigami::templates::SwipeListItem
  */
 T.SwipeListItem {
-    id: listItem
+    id: root
 
-    background: P.DefaultListItemBackground {}
+    background: P.DefaultListItemBackground {
+        listItem: root
+        radius: 0
+    }
 }

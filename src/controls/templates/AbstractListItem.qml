@@ -97,7 +97,7 @@ T2.ItemDelegate {
      * when the item is pressed or selected.
      *
      * It is advised to use the default value.
-     * default: ``Kirigami.Theme.highlightColor``
+     * default: ``Kirigami.Theme.backgroundColor``
      */
     property color activeBackgroundColor: Kirigami.Theme.highlightColor
 
@@ -116,12 +116,12 @@ T2.ItemDelegate {
      * @brief This property holds the color of the text when the item is pressed or selected.
      *
      * It is advised to use the default value.
-     * default: ``Kirigami.Theme.highlightedTextColor``
+     * default: ``Kirigami.Theme.textColor``
      *
      * If custom text elements are inserted in an AbstractListItem,
      * their color will have to be manually set with this property.
      */
-    property color activeTextColor: Kirigami.Theme.highlightedTextColor
+    property color activeTextColor: Kirigami.Theme.textColor
 
     default property alias _default: listItem.contentItem
 
@@ -137,13 +137,7 @@ T2.ItemDelegate {
     //Theme.inherit: false
     //Theme.colorSet: Kirigami.Theme.View
 
-    padding: Kirigami.Settings.tabletMode ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
-
-    leftPadding: padding * 2
-    topPadding: padding
-
-    rightPadding: padding * 2
-    bottomPadding: padding
+    padding: Kirigami.Units.largeSpacing
 
     implicitWidth: contentItem ? contentItem.implicitWidth + leftPadding + rightPadding : Kirigami.Units.gridUnit * 12
     implicitHeight: contentItem ? contentItem.implicitHeight + topPadding + bottomPadding : 0

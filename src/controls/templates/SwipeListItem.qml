@@ -4,10 +4,10 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.6
-import QtQuick.Layouts 1.4
-import QtQuick.Controls 2.4 as QQC2
-import QtQuick.Templates 2.4 as T
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15 as QQC2
+import QtQuick.Templates 2.15 as T
 import org.kde.kirigami 2.11 as Kirigami
 import "../private"
 
@@ -124,9 +124,9 @@ T.SwipeDelegate {
      * when the item is pressed or selected.
      *
      * It is advised to use the default value.
-     * default: ``Kirigami.Theme.highlightColor``
+     * default: ``Kirigami.Theme.textColor``
      */
-    property color activeBackgroundColor: Kirigami.Theme.highlightColor
+    property color activeBackgroundColor: Kirigami.Theme.textColor
 
     /**
      * @brief This property holds the color of the text in the item.
@@ -148,7 +148,7 @@ T.SwipeDelegate {
      * If custom text elements are inserted in an AbstractListItem,
      * their color property will have to be manually bound with this property
      */
-    property color activeTextColor: Kirigami.Theme.highlightedTextColor
+    property color activeTextColor: Kirigami.Theme.textColor
 
     /**
      * @brief This property tells whether actions are visible and interactive.
@@ -197,19 +197,18 @@ T.SwipeDelegate {
     LayoutMirroring.childrenInherit: true
 
     hoverEnabled: true
-    implicitWidth: contentItem ? contentItem.implicitWidth : Kirigami.Units.gridUnit * 12
-    width: parent ? parent.width : implicitWidth
-    implicitHeight: Math.max(Kirigami.Units.gridUnit * 2, contentItem.implicitHeight) + topPadding + bottomPadding
 
-    padding: !listItem.alwaysVisibleActions && Kirigami.Settings.tabletMode ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
+    implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding
+    implicitHeight: Math.max(contentItem.implicitHeight,
+                             indicator ? indicator.implicitHeight : 0) + topPadding + bottomPadding
 
-    leftPadding: padding * 2 + (mirrored ? overlayLoader.paddingOffset : 0)
-    rightPadding: padding * 2 + (mirrored ? 0 : overlayLoader.paddingOffset)
+    padding: Kirigami.Units.largeSpacing
 
-    topPadding: padding
-    bottomPadding: padding
+    leftPadding: padding + (mirrored ? overlayLoader.paddingOffset : 0)
+    rightPadding: padding + (mirrored ? 0 : overlayLoader.paddingOffset)
 
     contentItem: Item {}
+
     QtObject {
         id: internal
 

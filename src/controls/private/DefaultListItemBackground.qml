@@ -1,38 +1,36 @@
 /*
  *  SPDX-FileCopyrightText: 2016 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2023 Carl Schwan <carl@carlschwan.eu>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.1
-import org.kde.kirigami 2.12 as Kirigami
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Templates as T
+import org.kde.kirigami 2 as Kirigami
 
 Rectangle {
     id: background
-    color: {
-        if (listItem.checked || listItem.highlighted || (listItem.down && !listItem.checked && !listItem.sectionDelegate))
-            return listItem.activeBackgroundColor
-        else if (listItem.alternatingBackground && index % 2)
-            return listItem.alternateBackgroundColor
-        return listItem.backgroundColor
+
+    required property T.Control listItem
+
+    radius: Kirigami.Units.mediumSpacing
+
+    color: if (listItem.highlighted || listItem.checked || (listItem.down && !listItem.checked && !listItem.sectionDelegate) || listItem.visualFocus) {
+        Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.highlightColor, 0.15)
+    } else if (listItem.hovered) {
+        Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.10)
+    } else {
+        Kirigami.Theme.backgroundColor
     }
 
-    visible: listItem.ListView.view === null || listItem.ListView.view.highlight === null
-    Rectangle {
-        id: internal
-        anchors.fill: parent
-        visible: !Kirigami.Settings.tabletMode && listItem.hoverEnabled
-        color: listItem.activeBackgroundColor
-        opacity: {
-            if ((listItem.highlighted || listItem.ListView.isCurrentItem) && !listItem.down) {
-                return .6
-            } else if (listItem.hovered && !listItem.down) {
-                return .3
-            } else {
-                return 0
-            }
-        }
+    border {
+        color: Kirigami.Theme.highlightColor
+        width: listItem.visualFocus || listItem.activeFocus ? 1 : 0
     }
+
+    Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
 
     Kirigami.Separator {
         anchors {

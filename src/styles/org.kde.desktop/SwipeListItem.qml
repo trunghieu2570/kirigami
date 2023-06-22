@@ -6,9 +6,13 @@
 
 import "../../private" as P
 import "../../templates" as T
+import org.kde.kirigami 2 as Kirigami
 
 T.SwipeListItem {
-    id: listItem
+    id: root
 
-    background: P.DefaultListItemBackground {}
+    background: P.DefaultListItemBackground {
+        listItem: root
+        radius: 0
+    }
 }
