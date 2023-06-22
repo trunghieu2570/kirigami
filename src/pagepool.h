@@ -38,7 +38,7 @@ class PagePool : public QObject
      * All items loaded/managed by the PagePool.
      * @since 5.84
      */
-    Q_PROPERTY(QList<QObject *> items READ items NOTIFY itemsChanged)
+    Q_PROPERTY(QList<QQuickItem *> items READ items NOTIFY itemsChanged)
 
     /**
      * All page URLs loaded/managed by the PagePool.
@@ -61,7 +61,7 @@ public:
 
     QUrl lastLoadedUrl() const;
     QQuickItem *lastLoadedItem() const;
-    QList<QObject *> items() const;
+    QList<QQuickItem *> items() const;
     QList<QUrl> urls() const;
 
     void setCachePages(bool cache);

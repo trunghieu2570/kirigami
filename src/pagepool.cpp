@@ -33,10 +33,9 @@ QQuickItem *PagePool::lastLoadedItem() const
     return m_lastLoadedItem;
 }
 
-QList<QObject *> PagePool::items() const
+QList<QQuickItem *> PagePool::items() const
 {
-    auto items = m_itemForUrl.values();
-    return QList<QObject *>(items.cbegin(), items.cend());
+    return m_itemForUrl.values();
 }
 
 QList<QUrl> PagePool::urls() const
