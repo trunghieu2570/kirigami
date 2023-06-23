@@ -115,11 +115,7 @@ T.TabButton {
     Kirigami.Theme.colorSet: Kirigami.Theme.Window
     Kirigami.Theme.inherit: false
 
-    // not using the hover handler built into control, since it seems to misbehave and
-    // permanently report hovered after a touch event
-    HoverHandler {
-        id: hoverHandler
-    }
+    hoverEnabled: true
 
     padding: Kirigami.Units.smallSpacing
     spacing: Kirigami.Units.smallSpacing
@@ -142,7 +138,7 @@ T.TabButton {
             anchors.centerIn: parent
 
             radius: Kirigami.Units.smallSpacing
-            color: control.down ? pressedColor : (control.checked || hoverHandler.hovered ? hoverSelectColor : "transparent")
+            color: control.down ? pressedColor : (control.checked || control.hovered ? hoverSelectColor : "transparent")
 
             border.color: control.checked ? checkedBorderColor : (control.down ? pressedBorderColor : color)
             border.width: 1
