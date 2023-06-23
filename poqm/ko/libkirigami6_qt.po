@@ -138,6 +138,22 @@ msgctxt "PasswordField|"
 msgid "Password"
 msgstr "암호"
 
+#: controls/PasswordField.qml:45
+#, fuzzy
+#| msgctxt "PasswordField|"
+#| msgid "Password"
+msgctxt "PasswordField|"
+msgid "Hide Password"
+msgstr "암호"
+
+#: controls/PasswordField.qml:45
+#, fuzzy
+#| msgctxt "PasswordField|"
+#| msgid "Password"
+msgctxt "PasswordField|"
+msgid "Show Password"
+msgstr "암호"
+
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"

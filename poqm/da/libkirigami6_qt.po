@@ -165,6 +165,22 @@ msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Adgangskode"
 
+#: controls/PasswordField.qml:45
+#, fuzzy
+#| msgctxt "PasswordField|"
+#| msgid "Password"
+msgctxt "PasswordField|"
+msgid "Hide Password"
+msgstr "Adgangskode"
+
+#: controls/PasswordField.qml:45
+#, fuzzy
+#| msgctxt "PasswordField|"
+#| msgid "Password"
+msgctxt "PasswordField|"
+msgid "Show Password"
+msgstr "Adgangskode"
+
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 #, fuzzy
 #| msgctxt "GlobalDrawer|"

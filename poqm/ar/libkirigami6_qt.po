@@ -140,6 +140,22 @@ msgctxt "PasswordField|"
 msgid "Password"
 msgstr "كلمة السّرّ"
 
+#: controls/PasswordField.qml:45
+#, fuzzy
+#| msgctxt "PasswordField|"
+#| msgid "Password"
+msgctxt "PasswordField|"
+msgid "Hide Password"
+msgstr "كلمة السّرّ"
+
+#: controls/PasswordField.qml:45
+#, fuzzy
+#| msgctxt "PasswordField|"
+#| msgid "Password"
+msgctxt "PasswordField|"
+msgid "Show Password"
+msgstr "كلمة السّرّ"
+
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
