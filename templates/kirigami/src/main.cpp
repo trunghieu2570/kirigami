@@ -1,19 +1,17 @@
-/*
-    SPDX-License-Identifier: GPL-2.0-or-later
-    SPDX-FileCopyrightText: %{CURRENT_YEAR} %{AUTHOR} <%{EMAIL}>
-*/
+// SPDX-License-Identifier: GPL-2.0-or-later
+// SPDX-FileCopyrightText: %{CURRENT_YEAR} %{AUTHOR} <%{EMAIL}>
 
+#include <QIcon>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QQuickStyle>
+#include <QUrl>
 #ifdef Q_OS_ANDROID
 #include <GuiQApplication>
 #else
 #include <QApplication>
 #endif
-#include <QQmlApplicationEngine>
-#include <QQmlContext>
-#include <QQuickStyle>
-#include <QUrl>
 
-#include "about.h"
 #include "app.h"
 #include "version-%{APPNAMELC}.h"
 #include <KAboutData>
@@ -62,7 +60,7 @@ int main(int argc, char *argv[])
         // A displayable program name string.
         i18nc("@title", "%{APPNAME}"),
         // The program version string.
-        QStringLiteral(% {APPNAMEUC} _VERSION_STRING),
+        QStringLiteral(%{APPNAMEUC}_VERSION_STRING),
         // Short description of what the app does.
         i18n("Application Description"),
         // The license this code is released under.
@@ -73,7 +71,7 @@ int main(int argc, char *argv[])
                         i18nc("@info:credit", "Maintainer"),
                         QStringLiteral("%{EMAIL}"),
                         QStringLiteral("https://yourwebsite.com"));
-    about.setTranslator(i18nc("NAME OF TRANSLATORS", "Your names"), i18nc("EMAIL OF TRANSLATORS", "Your emails"));
+    aboutData.setTranslator(i18nc("NAME OF TRANSLATORS", "Your names"), i18nc("EMAIL OF TRANSLATORS", "Your emails"));
     KAboutData::setApplicationData(aboutData);
     QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.%{APPNAMELC}")));
 
