@@ -177,6 +177,22 @@ msgctxt "PasswordField|"
 msgid "Password"
 msgstr "कूटशब्द"
 
+#: controls/PasswordField.qml:44
+#, fuzzy
+#| msgctxt "PasswordField|"
+#| msgid "Password"
+msgctxt "PasswordField|"
+msgid "Hide Password"
+msgstr "कूटशब्द"
+
+#: controls/PasswordField.qml:44
+#, fuzzy
+#| msgctxt "PasswordField|"
+#| msgid "Password"
+msgctxt "PasswordField|"
+msgid "Show Password"
+msgstr "कूटशब्द"
+
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 #, fuzzy
 #| msgctxt "OverlayDrawer|"
