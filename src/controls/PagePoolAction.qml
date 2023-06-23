@@ -48,7 +48,7 @@ Kirigami.Action {
      *
      * All pages present after the given basePage will be removed from the pageStack
      */
-    property QQC2.Page basePage
+    property T.Page basePage
 
     /**
      * This property holds a function that generate the property values for the created page
