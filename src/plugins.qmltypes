@@ -1173,7 +1173,7 @@ Module {
         Property { name: "keyboardNavigationEnabled"; type: "bool" }
         Property { name: "scrollablePageData"; type: "QObject"; isList: true; isReadonly: true }
         Property { name: "scrollablePageChildren"; type: "QQuickItem"; isList: true; isReadonly: true }
-        Property { name: "actions"; type: "Action_QMLTYPE_10"; isList: true; isReadonly: true }
+        Property { name: "actions"; type: "Action_QMLTYPE_34"; isList: true; isReadonly: true }
         Property { name: "isCurrentPage"; type: "bool"; isReadonly: true }
         Property { name: "icon"; type: "ActionIconGroup_QMLTYPE_59"; isPointer: true }
         Property { name: "needsAttention"; type: "bool" }
@@ -1199,8 +1199,8 @@ Module {
         Property { name: "preferredHeight"; type: "int" }
         Property { name: "maximumHeight"; type: "int" }
         Property { name: "position"; type: "int" }
-        Property { name: "pageRow"; type: "PageRow_QMLTYPE_80"; isPointer: true }
-        Property { name: "page"; type: "Page_QMLTYPE_90"; isPointer: true }
+        Property { name: "pageRow"; type: "PageRow_QMLTYPE_79"; isPointer: true }
+        Property { name: "page"; type: "Page_QMLTYPE_88"; isPointer: true }
         Property { name: "paintedHeight"; type: "int"; isReadonly: true }
         Property { name: "leftPadding"; type: "int" }
         Property { name: "topPadding"; type: "int" }
@@ -1228,9 +1228,9 @@ Module {
         Property { name: "header"; type: "AbstractApplicationHeader_QMLTYPE_101"; isPointer: true }
         Property { name: "footer"; type: "QQuickItem"; isPointer: true }
         Property { name: "controlsVisible"; type: "bool" }
-        Property { name: "globalDrawer"; type: "OverlayDrawer_QMLTYPE_77"; isPointer: true }
+        Property { name: "globalDrawer"; type: "OverlayDrawer_QMLTYPE_76"; isPointer: true }
         Property { name: "wideScreen"; type: "bool" }
-        Property { name: "contextDrawer"; type: "OverlayDrawer_QMLTYPE_77"; isPointer: true }
+        Property { name: "contextDrawer"; type: "OverlayDrawer_QMLTYPE_76"; isPointer: true }
         Property { name: "reachableMode"; type: "bool" }
         Property { name: "reachableModeEnabled"; type: "bool" }
         Property { name: "contentItem"; type: "QQuickItem"; isReadonly: true; isPointer: true }
@@ -1262,13 +1262,13 @@ Module {
         defaultProperty: "contentData"
         Property { name: "pageStack"; type: "QQuickItem"; isPointer: true }
         Property { name: "controlsVisible"; type: "bool" }
-        Property { name: "globalDrawer"; type: "OverlayDrawer_QMLTYPE_77"; isPointer: true }
+        Property { name: "globalDrawer"; type: "OverlayDrawer_QMLTYPE_76"; isPointer: true }
         Property { name: "wideScreen"; type: "bool" }
-        Property { name: "contextDrawer"; type: "OverlayDrawer_QMLTYPE_77"; isPointer: true }
+        Property { name: "contextDrawer"; type: "OverlayDrawer_QMLTYPE_76"; isPointer: true }
         Property { name: "reachableMode"; type: "bool" }
         Property { name: "reachableModeEnabled"; type: "bool" }
         Property { name: "overlay"; type: "QQuickItem"; isReadonly: true; isPointer: true }
-        Property { name: "quitAction"; type: "Action_QMLTYPE_10"; isReadonly: true; isPointer: true }
+        Property { name: "quitAction"; type: "Action_QMLTYPE_34"; isReadonly: true; isPointer: true }
         Method {
             name: "showPassiveNotification"
             type: "QVariant"
@@ -1336,7 +1336,7 @@ Module {
         Property { name: "tooltip"; type: "string" }
         Property { name: "separator"; type: "bool" }
         Property { name: "expandible"; type: "bool" }
-        Property { name: "parent"; type: "Action_QMLTYPE_9"; isPointer: true }
+        Property { name: "parent"; type: "Action_QMLTYPE_33"; isPointer: true }
         Property { name: "displayHint"; type: "int" }
         Property { name: "displayComponent"; type: "QQmlComponent"; isPointer: true }
         Property { name: "children"; type: "QObject"; isList: true; isReadonly: true }
@@ -1379,7 +1379,7 @@ Module {
         exportMetaObjectRevisions: [1]
         isComposite: true
         defaultProperty: "__data"
-        Property { name: "pageStack"; type: "PageRow_QMLTYPE_80"; isReadonly: true; isPointer: true }
+        Property { name: "pageStack"; type: "PageRow_QMLTYPE_79"; isReadonly: true; isPointer: true }
         Property { name: "activeFocusItem"; type: "QQuickItem"; isReadonly: true; isPointer: true }
         Property { name: "font"; type: "QFont" }
         Property { name: "palette"; type: "QVariant" }
@@ -1388,9 +1388,9 @@ Module {
         Property { name: "header"; type: "AbstractApplicationHeader_QMLTYPE_101"; isPointer: true }
         Property { name: "footer"; type: "QQuickItem"; isPointer: true }
         Property { name: "controlsVisible"; type: "bool" }
-        Property { name: "globalDrawer"; type: "OverlayDrawer_QMLTYPE_77"; isPointer: true }
+        Property { name: "globalDrawer"; type: "OverlayDrawer_QMLTYPE_76"; isPointer: true }
         Property { name: "wideScreen"; type: "bool" }
-        Property { name: "contextDrawer"; type: "OverlayDrawer_QMLTYPE_77"; isPointer: true }
+        Property { name: "contextDrawer"; type: "OverlayDrawer_QMLTYPE_76"; isPointer: true }
         Property { name: "reachableMode"; type: "bool" }
         Property { name: "reachableModeEnabled"; type: "bool" }
         Property { name: "contentItem"; type: "QQuickItem"; isReadonly: true; isPointer: true }
@@ -1420,15 +1420,15 @@ Module {
         exportMetaObjectRevisions: [0]
         isComposite: true
         defaultProperty: "contentData"
-        Property { name: "pageStack"; type: "PageRow_QMLTYPE_80"; isReadonly: true; isPointer: true }
+        Property { name: "pageStack"; type: "PageRow_QMLTYPE_79"; isReadonly: true; isPointer: true }
         Property { name: "controlsVisible"; type: "bool" }
-        Property { name: "globalDrawer"; type: "OverlayDrawer_QMLTYPE_77"; isPointer: true }
+        Property { name: "globalDrawer"; type: "OverlayDrawer_QMLTYPE_76"; isPointer: true }
         Property { name: "wideScreen"; type: "bool" }
-        Property { name: "contextDrawer"; type: "OverlayDrawer_QMLTYPE_77"; isPointer: true }
+        Property { name: "contextDrawer"; type: "OverlayDrawer_QMLTYPE_76"; isPointer: true }
         Property { name: "reachableMode"; type: "bool" }
         Property { name: "reachableModeEnabled"; type: "bool" }
         Property { name: "overlay"; type: "QQuickItem"; isReadonly: true; isPointer: true }
-        Property { name: "quitAction"; type: "Action_QMLTYPE_10"; isReadonly: true; isPointer: true }
+        Property { name: "quitAction"; type: "Action_QMLTYPE_34"; isReadonly: true; isPointer: true }
         Method {
             name: "showPassiveNotification"
             type: "QVariant"
@@ -1472,7 +1472,7 @@ Module {
         Property { name: "color"; type: "QVariant" }
         Property { name: "initialsColor"; type: "QColor" }
         Property { name: "actions"; type: "AvatarGroup"; isPointer: true }
-        Property { name: "border"; type: "BorderPropertiesGroup_QMLTYPE_168"; isPointer: true }
+        Property { name: "border"; type: "BorderPropertiesGroup_QMLTYPE_170"; isPointer: true }
         Property { name: "source"; type: "QUrl" }
         Property { name: "iconSource"; type: "QVariant" }
         Property { name: "cache"; type: "bool" }
@@ -1504,8 +1504,8 @@ Module {
         Property { name: "reserveSpaceForIcon"; type: "bool" }
         Property { name: "reserveSpaceForLabel"; type: "bool" }
         Property { name: "textSpacing"; type: "double" }
-        Property { name: "labelItem"; type: "Label_QMLTYPE_1"; isReadonly: true; isPointer: true }
-        Property { name: "subtitleItem"; type: "Label_QMLTYPE_1"; isReadonly: true; isPointer: true }
+        Property { name: "labelItem"; type: "Label_QMLTYPE_7"; isReadonly: true; isPointer: true }
+        Property { name: "subtitleItem"; type: "Label_QMLTYPE_7"; isReadonly: true; isPointer: true }
         Property { name: "_basicDefault"; type: "QObject"; isList: true; isReadonly: true }
         Property { name: "supportsMouseEvents"; type: "bool" }
         Property { name: "alternatingBackground"; type: "bool" }
@@ -1579,7 +1579,7 @@ Module {
         Property { name: "pool"; type: "PagePool"; isPointer: true }
         Property { name: "title"; type: "string"; isReadonly: true }
         Property { name: "completed"; type: "bool" }
-        Property { name: "stack"; type: "PageRow_QMLTYPE_80"; isReadonly: true; isPointer: true }
+        Property { name: "stack"; type: "PageRow_QMLTYPE_79"; isReadonly: true; isPointer: true }
         Signal {
             name: "backRequested"
             Parameter { name: "event"; type: "QVariant" }
@@ -1598,7 +1598,7 @@ Module {
         Property { name: "initialPage"; type: "QVariant" }
         Property { name: "defaultColumnWidth"; type: "int" }
         Property { name: "wideMode"; type: "bool"; isReadonly: true }
-        Property { name: "leftSidebar"; type: "OverlayDrawer_QMLTYPE_77"; isPointer: true }
+        Property { name: "leftSidebar"; type: "OverlayDrawer_QMLTYPE_76"; isPointer: true }
         Property { name: "popHiddenPages"; type: "bool" }
         Property { name: "depth"; type: "int"; isReadonly: true }
         Property { name: "currentItem"; type: "QQuickItem"; isReadonly: true; isPointer: true }
@@ -1612,11 +1612,11 @@ Module {
         Property { name: "separatorVisible"; type: "bool" }
         Property {
             name: "globalToolBar"
-            type: "PageRowGlobalToolBarStyleGroup_QMLTYPE_62"
+            type: "PageRowGlobalToolBarStyleGroup_QMLTYPE_61"
             isReadonly: true
             isPointer: true
         }
-        Property { name: "layers"; type: "StackView_QMLTYPE_61"; isReadonly: true; isPointer: true }
+        Property { name: "layers"; type: "StackView_QMLTYPE_60"; isReadonly: true; isPointer: true }
         Signal {
             name: "pageInserted"
             Parameter { name: "position"; type: "int" }
@@ -1710,8 +1710,8 @@ Module {
         Property { name: "reserveSpaceForIcon"; type: "bool" }
         Property { name: "reserveSpaceForLabel"; type: "bool" }
         Property { name: "textSpacing"; type: "double" }
-        Property { name: "labelItem"; type: "Label_QMLTYPE_1"; isReadonly: true; isPointer: true }
-        Property { name: "subtitleItem"; type: "Label_QMLTYPE_1"; isReadonly: true; isPointer: true }
+        Property { name: "labelItem"; type: "Label_QMLTYPE_7"; isReadonly: true; isPointer: true }
+        Property { name: "subtitleItem"; type: "Label_QMLTYPE_7"; isReadonly: true; isPointer: true }
         Property { name: "_basicDefault"; type: "QObject"; isList: true; isReadonly: true }
         Property { name: "supportsMouseEvents"; type: "bool" }
         Property { name: "alternatingBackground"; type: "bool" }
@@ -1732,7 +1732,7 @@ Module {
         exportMetaObjectRevisions: [19]
         isComposite: true
         defaultProperty: "data"
-        Property { name: "labelItem"; type: "Label_QMLTYPE_1"; isReadonly: true; isPointer: true }
+        Property { name: "labelItem"; type: "Label_QMLTYPE_7"; isReadonly: true; isPointer: true }
         Property { name: "closable"; type: "bool" }
         Signal { name: "removed" }
     }
@@ -1745,7 +1745,7 @@ Module {
         defaultProperty: "contentData"
         Property { name: "title"; type: "string" }
         Property { name: "actions"; type: "QVariant" }
-        Property { name: "page"; type: "Page_QMLTYPE_90"; isPointer: true }
+        Property { name: "page"; type: "Page_QMLTYPE_88"; isPointer: true }
         Property { name: "header"; type: "QQmlComponent"; isPointer: true }
         Property { name: "footer"; type: "QQmlComponent"; isPointer: true }
         Property { name: "drawerOpen"; type: "bool" }
@@ -1756,11 +1756,11 @@ Module {
         Property { name: "collapsedSize"; type: "int" }
         Property {
             name: "handleOpenIcon"
-            type: "IconPropertiesGroup_QMLTYPE_64"
+            type: "IconPropertiesGroup_QMLTYPE_66"
             isReadonly: true
             isPointer: true
         }
-        Property { name: "handleClosedIcon"; type: "IconPropertiesGroup_QMLTYPE_64"; isPointer: true }
+        Property { name: "handleClosedIcon"; type: "IconPropertiesGroup_QMLTYPE_66"; isPointer: true }
         Property { name: "handleOpenToolTip"; type: "string" }
         Property { name: "handleClosedToolTip"; type: "string" }
         Property { name: "handleVisible"; type: "bool" }
@@ -1787,7 +1787,7 @@ Module {
         Property { name: "flatFooterButtons"; type: "bool" }
         Property {
             name: "customFooterActions"
-            type: "Action_QMLTYPE_10"
+            type: "Action_QMLTYPE_34"
             isList: true
             isReadonly: true
         }
@@ -1843,7 +1843,7 @@ Module {
         Property { name: "showContentWhenCollapsed"; type: "bool" }
         Property { name: "showHeaderWhenCollapsed"; type: "bool" }
         Property { name: "resetMenuOnTriggered"; type: "bool" }
-        Property { name: "currentSubMenu"; type: "Action_QMLTYPE_10"; isReadonly: true; isPointer: true }
+        Property { name: "currentSubMenu"; type: "Action_QMLTYPE_34"; isReadonly: true; isPointer: true }
         Property { name: "isMenu"; type: "bool" }
         Property { name: "collapseButtonVisible"; type: "bool" }
         Property { name: "title"; type: "string" }
@@ -1861,11 +1861,11 @@ Module {
         Property { name: "collapsedSize"; type: "int" }
         Property {
             name: "handleOpenIcon"
-            type: "IconPropertiesGroup_QMLTYPE_64"
+            type: "IconPropertiesGroup_QMLTYPE_66"
             isReadonly: true
             isPointer: true
         }
-        Property { name: "handleClosedIcon"; type: "IconPropertiesGroup_QMLTYPE_64"; isPointer: true }
+        Property { name: "handleClosedIcon"; type: "IconPropertiesGroup_QMLTYPE_66"; isPointer: true }
         Property { name: "handleOpenToolTip"; type: "string" }
         Property { name: "handleClosedToolTip"; type: "string" }
         Property { name: "handleVisible"; type: "bool" }
@@ -1899,7 +1899,7 @@ Module {
         defaultProperty: "data"
         Property { name: "hoveredLink"; type: "string"; isReadonly: true }
         Property { name: "type"; type: "int" }
-        Property { name: "icon"; type: "IconPropertiesGroup_QMLTYPE_64"; isPointer: true }
+        Property { name: "icon"; type: "IconPropertiesGroup_QMLTYPE_66"; isPointer: true }
         Property { name: "text"; type: "string" }
         Property { name: "showCloseButton"; type: "bool" }
         Property { name: "actions"; type: "QObject"; isList: true; isReadonly: true }
@@ -1921,7 +1921,7 @@ Module {
         exportMetaObjectRevisions: [6]
         isComposite: true
         defaultProperty: "data"
-        Property { name: "action"; type: "Action_QMLTYPE_10"; isPointer: true }
+        Property { name: "action"; type: "Action_QMLTYPE_34"; isPointer: true }
         Property { name: "acceptedButtons"; type: "int" }
         Property { name: "mouseArea"; type: "QQuickMouseArea"; isReadonly: true; isPointer: true }
         Signal {
@@ -1980,7 +1980,7 @@ Module {
         Property { name: "determinate"; type: "bool" }
         Property {
             name: "progressBar"
-            type: "ProgressBar_QMLTYPE_247"
+            type: "ProgressBar_QMLTYPE_246"
             isReadonly: true
             isPointer: true
         }
@@ -2004,11 +2004,11 @@ Module {
         exportMetaObjectRevisions: [19]
         isComposite: true
         defaultProperty: "dialogData"
-        Property { name: "actions"; type: "Action_QMLTYPE_10"; isList: true; isReadonly: true }
+        Property { name: "actions"; type: "Action_QMLTYPE_34"; isList: true; isReadonly: true }
         Property { name: "contentHeader"; type: "QQuickItem"; isPointer: true }
         Property {
             name: "contentHeaderControl"
-            type: "Control_QMLTYPE_63"
+            type: "Control_QMLTYPE_62"
             isReadonly: true
             isPointer: true
         }
@@ -2025,7 +2025,7 @@ Module {
         Property { name: "flatFooterButtons"; type: "bool" }
         Property {
             name: "customFooterActions"
-            type: "Action_QMLTYPE_10"
+            type: "Action_QMLTYPE_34"
             isList: true
             isReadonly: true
         }
@@ -2044,7 +2044,7 @@ Module {
         exportMetaObjectRevisions: [19]
         isComposite: true
         defaultProperty: "contentData"
-        Property { name: "actions"; type: "Action_QMLTYPE_10"; isList: true; isReadonly: true }
+        Property { name: "actions"; type: "Action_QMLTYPE_34"; isList: true; isReadonly: true }
         Property { name: "maximumContentWidth"; type: "double" }
         Property { name: "backgroundColor"; type: "QColor" }
         Property { name: "foregroundColor"; type: "QColor" }
@@ -2089,11 +2089,11 @@ Module {
         Property { name: "collapsedSize"; type: "int" }
         Property {
             name: "handleOpenIcon"
-            type: "IconPropertiesGroup_QMLTYPE_64"
+            type: "IconPropertiesGroup_QMLTYPE_66"
             isReadonly: true
             isPointer: true
         }
-        Property { name: "handleClosedIcon"; type: "IconPropertiesGroup_QMLTYPE_64"; isPointer: true }
+        Property { name: "handleClosedIcon"; type: "IconPropertiesGroup_QMLTYPE_66"; isPointer: true }
         Property { name: "handleOpenToolTip"; type: "string" }
         Property { name: "handleClosedToolTip"; type: "string" }
         Property { name: "handleVisible"; type: "bool" }
@@ -2121,7 +2121,7 @@ Module {
         isComposite: true
         defaultProperty: "contentData"
         Property { name: "flickable"; type: "QQuickFlickable"; isPointer: true }
-        Property { name: "actions"; type: "Action_QMLTYPE_10"; isList: true; isReadonly: true }
+        Property { name: "actions"; type: "Action_QMLTYPE_34"; isList: true; isReadonly: true }
         Property { name: "isCurrentPage"; type: "bool"; isReadonly: true }
         Property { name: "icon"; type: "ActionIconGroup_QMLTYPE_59"; isPointer: true }
         Property { name: "needsAttention"; type: "bool" }
@@ -2157,7 +2157,7 @@ Module {
         Property { name: "tooltip"; type: "string" }
         Property { name: "separator"; type: "bool" }
         Property { name: "expandible"; type: "bool" }
-        Property { name: "parent"; type: "Action_QMLTYPE_9"; isPointer: true }
+        Property { name: "parent"; type: "Action_QMLTYPE_33"; isPointer: true }
         Property { name: "displayHint"; type: "int" }
         Property { name: "displayComponent"; type: "QQmlComponent"; isPointer: true }
         Property { name: "children"; type: "QObject"; isList: true; isReadonly: true }
@@ -2174,7 +2174,7 @@ Module {
         Property { name: "initialPage"; type: "QVariant" }
         Property { name: "defaultColumnWidth"; type: "int" }
         Property { name: "wideMode"; type: "bool"; isReadonly: true }
-        Property { name: "leftSidebar"; type: "OverlayDrawer_QMLTYPE_77"; isPointer: true }
+        Property { name: "leftSidebar"; type: "OverlayDrawer_QMLTYPE_76"; isPointer: true }
         Property { name: "popHiddenPages"; type: "bool" }
         Property { name: "depth"; type: "int"; isReadonly: true }
         Property { name: "currentItem"; type: "QQuickItem"; isReadonly: true; isPointer: true }
@@ -2188,11 +2188,11 @@ Module {
         Property { name: "separatorVisible"; type: "bool" }
         Property {
             name: "globalToolBar"
-            type: "PageRowGlobalToolBarStyleGroup_QMLTYPE_62"
+            type: "PageRowGlobalToolBarStyleGroup_QMLTYPE_61"
             isReadonly: true
             isPointer: true
         }
-        Property { name: "layers"; type: "StackView_QMLTYPE_61"; isReadonly: true; isPointer: true }
+        Property { name: "layers"; type: "StackView_QMLTYPE_60"; isReadonly: true; isPointer: true }
         Signal {
             name: "pageInserted"
             Parameter { name: "position"; type: "int" }
@@ -2263,28 +2263,6 @@ Module {
         Method { name: "goForward"; type: "QVariant" }
     }
     Component {
-        prototype: "QQuickControl"
-        name: "org.kde.kirigami/PageTab 2.17"
-        exports: ["org.kde.kirigami/PageTab 2.17"]
-        exportMetaObjectRevisions: [17]
-        isComposite: true
-        defaultProperty: "data"
-        Enum {
-            name: "Presentation"
-            values: {
-                "Normal": 0,
-                "Large": 1
-            }
-        }
-        Property { name: "title"; type: "string" }
-        Property { name: "active"; type: "bool" }
-        Property { name: "icon"; type: "ActionIconGroup_QMLTYPE_59"; isPointer: true }
-        Property { name: "presentation"; type: "int" }
-        Property { name: "vertical"; type: "bool" }
-        Property { name: "progress"; type: "QVariant" }
-        Property { name: "needsAttention"; type: "bool" }
-    }
-    Component {
         prototype: "QQuickTextField"
         name: "org.kde.kirigami/PasswordField 2.8"
         exports: ["org.kde.kirigami/PasswordField 2.8"]
@@ -2344,7 +2322,7 @@ Module {
         Property { name: "flatFooterButtons"; type: "bool" }
         Property {
             name: "customFooterActions"
-            type: "Action_QMLTYPE_10"
+            type: "Action_QMLTYPE_34"
             isList: true
             isReadonly: true
         }
@@ -2372,7 +2350,7 @@ Module {
         Property { name: "keyboardNavigationEnabled"; type: "bool" }
         Property { name: "scrollablePageData"; type: "QObject"; isList: true; isReadonly: true }
         Property { name: "scrollablePageChildren"; type: "QQuickItem"; isList: true; isReadonly: true }
-        Property { name: "actions"; type: "Action_QMLTYPE_10"; isList: true; isReadonly: true }
+        Property { name: "actions"; type: "Action_QMLTYPE_34"; isList: true; isReadonly: true }
         Property { name: "isCurrentPage"; type: "bool"; isReadonly: true }
         Property { name: "icon"; type: "ActionIconGroup_QMLTYPE_59"; isPointer: true }
         Property { name: "needsAttention"; type: "bool" }
@@ -2461,33 +2439,11 @@ Module {
         Property { name: "activeTextColor"; type: "QColor" }
         Property { name: "actionsVisible"; type: "bool"; isReadonly: true }
         Property { name: "alwaysVisibleActions"; type: "bool" }
-        Property { name: "actions"; type: "Action_QMLTYPE_9"; isList: true; isReadonly: true }
+        Property { name: "actions"; type: "Action_QMLTYPE_33"; isList: true; isReadonly: true }
         Property { name: "supportsMouseEvents"; type: "bool" }
         Property { name: "containsMouse"; type: "bool"; isReadonly: true }
         Property { name: "overlayWidth"; type: "double"; isReadonly: true }
         Property { name: "_default"; type: "QQuickItem"; isPointer: true }
-    }
-    Component {
-        prototype: "QQuickItem"
-        name: "org.kde.kirigami/SwipeNavigator 2.13"
-        exports: ["org.kde.kirigami/SwipeNavigator 2.13"]
-        exportMetaObjectRevisions: [13]
-        isComposite: true
-        defaultProperty: "pages"
-        Property { name: "pages"; type: "Page_QMLTYPE_90"; isList: true; isReadonly: true }
-        Property { name: "big"; type: "bool" }
-        Property { name: "header"; type: "QQmlComponent"; isPointer: true }
-        Property { name: "footer"; type: "QQmlComponent"; isPointer: true }
-        Property { name: "initialIndex"; type: "int" }
-        Property { name: "layers"; type: "StackView_QMLTYPE_61"; isReadonly: true; isPointer: true }
-        Property { name: "currentIndex"; type: "int" }
-        Method {
-            name: "pushDialogLayer"
-            type: "QVariant"
-            Parameter { name: "page"; type: "QVariant" }
-            Parameter { name: "properties"; type: "QVariant" }
-            Parameter { name: "windowProperties"; type: "QVariant" }
-        }
     }
     Component {
         prototype: "QQuickLabel"
@@ -2497,7 +2453,7 @@ Module {
         isComposite: true
         defaultProperty: "data"
         Property { name: "url"; type: "string" }
-        Property { name: "action"; type: "Action_QMLTYPE_10"; isPointer: true }
+        Property { name: "action"; type: "Action_QMLTYPE_34"; isPointer: true }
         Property { name: "acceptedButtons"; type: "int" }
         Property { name: "mouseArea"; type: "QQuickMouseArea"; isReadonly: true; isPointer: true }
         Signal {

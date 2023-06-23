@@ -259,7 +259,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
     // 2.13
     qmlRegisterType<ImageColors>(uri, 2, 13, "ImageColors");
     qmlRegisterType(componentUrl(QStringLiteral("Avatar.qml")), uri, 2, 13, "Avatar");
-    qmlRegisterType(componentUrl(QStringLiteral("swipenavigator/SwipeNavigator.qml")), uri, 2, 13, "SwipeNavigator");
 
     // 2.14
     qmlRegisterType(componentUrl(QStringLiteral("FlexColumn.qml")), uri, 2, 14, "FlexColumn");
@@ -272,10 +271,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     // 2.16
     qmlRegisterType<Kirigami::BasicThemeDefinition>(uri, 2, 16, "BasicThemeDefinition");
-
-    // 2.17
-    qmlRegisterType(componentUrl(QStringLiteral("swipenavigator/TabViewLayout.qml")), uri, 2, 17, "TabViewLayout");
-    qmlRegisterType(componentUrl(QStringLiteral("swipenavigator/PageTab.qml")), uri, 2, 17, "PageTab");
 
     // 2.18
     qmlRegisterType<SpellCheckingAttached>(uri, 2, 18, "SpellChecking");

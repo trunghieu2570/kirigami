@@ -158,18 +158,9 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.13 SOURCES
     controls/Avatar.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.13 PATH swipenavigator SOURCES
-    controls/swipenavigator/SwipeNavigator.qml
-)
-
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.14 SOURCES
     controls/FlexColumn.qml
     controls/CheckableListItem.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.17 PATH swipenavigator SOURCES
-    controls/swipenavigator/TabViewLayout.qml
-    controls/swipenavigator/PageTab.qml
 )
 
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.18 PATH settingscomponents SOURCES
@@ -220,18 +211,6 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private/globaltoolbar SOURCES
     controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml
     controls/private/globaltoolbar/TitlesPageHeader.qml
     controls/private/globaltoolbar/ToolBarPageHeader.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH swipenavigator SOURCES
-    controls/swipenavigator/PrivateSwipeHighlight.qml
-    controls/swipenavigator/PrivateSwipeProgress.qml
-    controls/swipenavigator/PrivateSwipeStack.qml
-    controls/swipenavigator/PrivateSwipeTab.qml
-    controls/swipenavigator/PrivateSwipeTabBar.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH swipenavigator/templates SOURCES
-    controls/swipenavigator/templates/PageTab.qml
 )
 
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates SOURCES
