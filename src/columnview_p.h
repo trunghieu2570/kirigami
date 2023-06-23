@@ -13,7 +13,8 @@
 
 class QPropertyAnimation;
 class QQmlComponent;
-namespace Kirigami {
+namespace Kirigami
+{
 class Units;
 }
 

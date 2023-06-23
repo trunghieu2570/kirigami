@@ -145,7 +145,7 @@ void WheelHandler::setTarget(QQuickItem *target)
         target->installEventFilter(this);
 
         // Stack WheelFilterItem over the Flickable's scrollable content
-        m_filterItem->stackAfter(target->property("contentItem").value<QQuickItem*>());
+        m_filterItem->stackAfter(target->property("contentItem").value<QQuickItem *>());
         // Make it fill the Flickable
         m_filterItem->setWidth(target->width());
         m_filterItem->setHeight(target->height());
@@ -527,7 +527,7 @@ bool WheelHandler::scrollRight(qreal stepSize)
 
 bool WheelHandler::eventFilter(QObject *watched, QEvent *event)
 {
-    auto item = qobject_cast<QQuickItem*>(watched);
+    auto item = qobject_cast<QQuickItem *>(watched);
     if (!item || !item->isEnabled()) {
         return false;
     }
@@ -561,17 +561,15 @@ bool WheelHandler::eventFilter(QObject *watched, QEvent *event)
         // If faulty pixelDelta, reset pixelDelta to (0,0).
         if (wheelEvent->pixelDelta() == wheelEvent->angleDelta()) {
             // In order to change any of the data, we have to create a whole new QWheelEvent from its constructor.
-            QWheelEvent newWheelEvent(
-                wheelEvent->position(),
-                wheelEvent->globalPosition(),
-                QPoint(0,0), // pixelDelta
-                wheelEvent->angleDelta(),
-                wheelEvent->buttons(),
-                wheelEvent->modifiers(),
-                wheelEvent->phase(),
-                wheelEvent->inverted(),
-                wheelEvent->source()
-            );
+            QWheelEvent newWheelEvent(wheelEvent->position(),
+                                      wheelEvent->globalPosition(),
+                                      QPoint(0, 0), // pixelDelta
+                                      wheelEvent->angleDelta(),
+                                      wheelEvent->buttons(),
+                                      wheelEvent->modifiers(),
+                                      wheelEvent->phase(),
+                                      wheelEvent->inverted(),
+                                      wheelEvent->source());
             m_kirigamiWheelEvent.initializeFromEvent(&newWheelEvent);
         } else {
             m_kirigamiWheelEvent.initializeFromEvent(wheelEvent);
@@ -588,9 +586,7 @@ bool WheelHandler::eventFilter(QObject *watched, QEvent *event)
             // Don't use pixelDelta from the event unless angleDelta is not available
             // because scrolling by pixelDelta is too slow on Wayland with libinput.
             QPointF pixelDelta = m_kirigamiWheelEvent.angleDelta().isNull() ? m_kirigamiWheelEvent.pixelDelta() : QPoint(0, 0);
-            scrolled = scrollFlickable(pixelDelta,
-                                       m_kirigamiWheelEvent.angleDelta(),
-                                       Qt::KeyboardModifiers(m_kirigamiWheelEvent.modifiers()));
+            scrolled = scrollFlickable(pixelDelta, m_kirigamiWheelEvent.angleDelta(), Qt::KeyboardModifiers(m_kirigamiWheelEvent.modifiers()));
         }
         setScrolling(scrolled);
 
@@ -672,20 +668,30 @@ bool WheelHandler::eventFilter(QObject *watched, QEvent *event)
         QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
         bool horizontalScroll = keyEvent->modifiers() & m_defaultHorizontalScrollModifiers;
         switch (keyEvent->key()) {
-        case Qt::Key_Up: return scrollUp();
-        case Qt::Key_Down: return scrollDown();
-        case Qt::Key_Left: return scrollLeft();
-        case Qt::Key_Right: return scrollRight();
-        case Qt::Key_PageUp: return horizontalScroll ? scrollLeft(pageWidth) : scrollUp(pageHeight);
-        case Qt::Key_PageDown: return horizontalScroll ? scrollRight(pageWidth) : scrollDown(pageHeight);
-        case Qt::Key_Home: return horizontalScroll ? scrollLeft(contentWidth) : scrollUp(contentHeight);
-        case Qt::Key_End: return horizontalScroll ? scrollRight(contentWidth) : scrollDown(contentHeight);
-        default: break;
+        case Qt::Key_Up:
+            return scrollUp();
+        case Qt::Key_Down:
+            return scrollDown();
+        case Qt::Key_Left:
+            return scrollLeft();
+        case Qt::Key_Right:
+            return scrollRight();
+        case Qt::Key_PageUp:
+            return horizontalScroll ? scrollLeft(pageWidth) : scrollUp(pageHeight);
+        case Qt::Key_PageDown:
+            return horizontalScroll ? scrollRight(pageWidth) : scrollDown(pageHeight);
+        case Qt::Key_Home:
+            return horizontalScroll ? scrollLeft(contentWidth) : scrollUp(contentHeight);
+        case Qt::Key_End:
+            return horizontalScroll ? scrollRight(contentWidth) : scrollDown(contentHeight);
+        default:
+            break;
         }
         break;
     }
 
-    default: break;
+    default:
+        break;
     }
 
     return false;

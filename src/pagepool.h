@@ -33,7 +33,7 @@ class PagePool : public QObject
      * The last item that was loaded with @loadPage.
      */
     Q_PROPERTY(QQuickItem *lastLoadedItem READ lastLoadedItem NOTIFY lastLoadedItemChanged)
-    
+
     /**
      * All items loaded/managed by the PagePool.
      * @since 5.84

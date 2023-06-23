@@ -59,23 +59,29 @@ public:
             isTabletModeAvailable = isTabletMode;
         } else {
             qDBusRegisterMetaType<VariantMapMap>();
-            auto portal = new OrgFreedesktopPortalSettingsInterface(u"org.freedesktop.portal.Desktop"_s, u"/org/freedesktop/portal/desktop"_s, QDBusConnection::sessionBus(), q);
+            auto portal = new OrgFreedesktopPortalSettingsInterface(u"org.freedesktop.portal.Desktop"_s,
+                                                                    u"/org/freedesktop/portal/desktop"_s,
+                                                                    QDBusConnection::sessionBus(),
+                                                                    q);
 
             if (const auto reply = portal->ReadAll({PORTAL_GROUP}); !reply.isError() && !reply.value().isEmpty()) {
                 const auto properties = reply.value().value(PORTAL_GROUP);
                 isTabletModeAvailable = properties[KEY_AVAILABLE].toBool();
                 isTabletMode = properties[KEY_ENABLED].toBool();
-                QObject::connect(portal, &OrgFreedesktopPortalSettingsInterface::SettingChanged, q, [this](const QString &group, const QString &key, const QDBusVariant &value) {
-                    if (group != PORTAL_GROUP) {
-                        return;
-                    }
-                    if (key == KEY_AVAILABLE) {
-                        isTabletModeAvailable = value.variant().toBool();
-                        Q_EMIT q->tabletModeAvailableChanged(isTabletModeAvailable);
-                    } else if (key == KEY_ENABLED) {
-                        setIsTablet(value.variant().toBool());
-                    }
-                });
+                QObject::connect(portal,
+                                 &OrgFreedesktopPortalSettingsInterface::SettingChanged,
+                                 q,
+                                 [this](const QString &group, const QString &key, const QDBusVariant &value) {
+                                     if (group != PORTAL_GROUP) {
+                                         return;
+                                     }
+                                     if (key == KEY_AVAILABLE) {
+                                         isTabletModeAvailable = value.variant().toBool();
+                                         Q_EMIT q->tabletModeAvailableChanged(isTabletModeAvailable);
+                                     } else if (key == KEY_ENABLED) {
+                                         setIsTablet(value.variant().toBool());
+                                     }
+                                 });
             } else {
                 isTabletModeAvailable = false;
                 isTabletMode = false;

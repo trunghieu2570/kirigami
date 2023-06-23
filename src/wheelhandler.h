@@ -149,11 +149,15 @@ public:
  *
  * Wheel event handling behavior:
  *
- * - Pixel delta is ignored unless angle delta is not available because pixel delta scrolling is too slow. Qt Widgets doesn't use pixel delta either, so the default scroll speed should be consistent with Qt Widgets.
+ * - Pixel delta is ignored unless angle delta is not available because pixel delta scrolling is too slow. Qt Widgets doesn't use pixel delta either, so the
+ * default scroll speed should be consistent with Qt Widgets.
  * - When using angle delta, scroll using the step increments defined by `verticalStepSize` and `horizontalStepSize`.
  * - When one of the keyboard modifiers in `pageScrollModifiers` is used, scroll by pages.
- * - When using a device that doesn't use 120 angle delta unit increments such as a touchpad, the `verticalStepSize`, `horizontalStepSize` and page increments (if using page scrolling) will be multiplied by `angle delta / 120` to keep scrolling smooth.
- * - If scrolling has happened in the last 400ms, use an internal QQuickItem stacked over the Flickable's contentItem to catch wheel events and use those wheel events to scroll, if possible. This prevents controls inside the Flickable's contentItem that allow scrolling to change the value (e.g., Sliders, SpinBoxes) from conflicting with scrolling the page.
+ * - When using a device that doesn't use 120 angle delta unit increments such as a touchpad, the `verticalStepSize`, `horizontalStepSize` and page increments
+ * (if using page scrolling) will be multiplied by `angle delta / 120` to keep scrolling smooth.
+ * - If scrolling has happened in the last 400ms, use an internal QQuickItem stacked over the Flickable's contentItem to catch wheel events and use those wheel
+ * events to scroll, if possible. This prevents controls inside the Flickable's contentItem that allow scrolling to change the value (e.g., Sliders, SpinBoxes)
+ * from conflicting with scrolling the page.
  *
  * Common usage with a Flickable:
  *
@@ -182,9 +186,7 @@ class WheelHandler : public QObject
      *
      * @since KDE Frameworks 5.89
      */
-    Q_PROPERTY(qreal verticalStepSize READ verticalStepSize
-               WRITE setVerticalStepSize RESET resetVerticalStepSize
-               NOTIFY verticalStepSizeChanged FINAL)
+    Q_PROPERTY(qreal verticalStepSize READ verticalStepSize WRITE setVerticalStepSize RESET resetVerticalStepSize NOTIFY verticalStepSizeChanged FINAL)
 
     /**
      * @brief This property holds the horizontal step size.
@@ -195,9 +197,8 @@ class WheelHandler : public QObject
      *
      * @since KDE Frameworks 5.89
      */
-    Q_PROPERTY(qreal horizontalStepSize READ horizontalStepSize
-               WRITE setHorizontalStepSize RESET resetHorizontalStepSize
-               NOTIFY horizontalStepSizeChanged FINAL)
+    Q_PROPERTY(
+        qreal horizontalStepSize READ horizontalStepSize WRITE setHorizontalStepSize RESET resetHorizontalStepSize NOTIFY horizontalStepSizeChanged FINAL)
 
     /**
      * @brief This property holds the keyboard modifiers that will be used to start page scrolling.
@@ -206,9 +207,8 @@ class WheelHandler : public QObject
      *
      * @since KDE Frameworks 5.89
      */
-    Q_PROPERTY(Qt::KeyboardModifiers pageScrollModifiers READ pageScrollModifiers
-               WRITE setPageScrollModifiers RESET resetPageScrollModifiers
-               NOTIFY pageScrollModifiersChanged FINAL)
+    Q_PROPERTY(Qt::KeyboardModifiers pageScrollModifiers READ pageScrollModifiers WRITE setPageScrollModifiers RESET resetPageScrollModifiers NOTIFY
+                   pageScrollModifiersChanged FINAL)
 
     /**
      * @brief This property holds whether the WheelHandler filters mouse events like a Qt Quick Controls ScrollView would.
@@ -223,8 +223,7 @@ class WheelHandler : public QObject
      *
      * @since KDE Frameworks 5.89
      */
-    Q_PROPERTY(bool filterMouseEvents READ filterMouseEvents
-               WRITE setFilterMouseEvents NOTIFY filterMouseEventsChanged FINAL)
+    Q_PROPERTY(bool filterMouseEvents READ filterMouseEvents WRITE setFilterMouseEvents NOTIFY filterMouseEventsChanged FINAL)
 
     /**
      * @brief This property holds whether the WheelHandler handles keyboard scrolling.
@@ -243,15 +242,16 @@ class WheelHandler : public QObject
      *
      * @since KDE Frameworks 5.89
      */
-    Q_PROPERTY(bool keyNavigationEnabled READ keyNavigationEnabled
-               WRITE setKeyNavigationEnabled NOTIFY keyNavigationEnabledChanged FINAL)
+    Q_PROPERTY(bool keyNavigationEnabled READ keyNavigationEnabled WRITE setKeyNavigationEnabled NOTIFY keyNavigationEnabledChanged FINAL)
 
     /**
      * @brief This property holds whether the WheelHandler blocks all wheel events from reaching the Flickable.
      *
-     * When this property is false, scrolling the Flickable with WheelHandler will only block an event from reaching the Flickable if the Flickable is actually scrolled by WheelHandler.
+     * When this property is false, scrolling the Flickable with WheelHandler will only block an event from reaching the Flickable if the Flickable is actually
+     * scrolled by WheelHandler.
      *
-     * NOTE: Wheel events created by touchpad gestures with pixel deltas will always be accepted no matter what. This is because they will cause the Flickable to jump back to where scrolling started unless the events are always accepted before they reach the Flickable.
+     * NOTE: Wheel events created by touchpad gestures with pixel deltas will always be accepted no matter what. This is because they will cause the Flickable
+     * to jump back to where scrolling started unless the events are always accepted before they reach the Flickable.
      *
      * The default value is true.
      */
@@ -350,9 +350,7 @@ private Q_SLOTS:
 
 private:
     void setScrolling(bool scrolling);
-    bool scrollFlickable(QPointF pixelDelta,
-                         QPointF angleDelta = {},
-                         Qt::KeyboardModifiers modifiers = Qt::NoModifier);
+    bool scrollFlickable(QPointF pixelDelta, QPointF angleDelta = {}, Qt::KeyboardModifiers modifiers = Qt::NoModifier);
 
     QPointer<QQuickItem> m_flickable;
     QPointer<QQuickItem> m_verticalScrollBar;

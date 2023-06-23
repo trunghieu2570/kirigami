@@ -9,15 +9,16 @@
 #include <QDebug>
 
 #include <QDir>
-#include <QQuickStyle>
 #include <QPluginLoader>
+#include <QQuickStyle>
 
 #include "styleselector_p.h"
 #include "units.h"
 
 #include "loggingcategory.h"
 
-namespace Kirigami {
+namespace Kirigami
+{
 
 KirigamiPluginFactory::KirigamiPluginFactory(QObject *parent)
     : QObject(parent)
@@ -31,7 +32,7 @@ KirigamiPluginFactory *KirigamiPluginFactory::findPlugin(const QString &preferre
     static QHash<QString, KirigamiPluginFactory *> factories = QHash<QString, KirigamiPluginFactory *>();
 
     QString pluginName = preferredName.isEmpty() ? QQuickStyle::name() : preferredName;
-    //check for the plugin only once: it's an heavy operation
+    // check for the plugin only once: it's an heavy operation
     if (auto it = factories.constFind(pluginName); it != factories.constEnd()) {
         return it.value();
     }

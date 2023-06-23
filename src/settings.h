@@ -35,7 +35,7 @@ class Settings : public QObject
     /**
      * This property holds whether the application is running on a device that is
      * behaving like a tablet.
-     * 
+     *
      * @note This doesn't mean exactly a tablet form factor, but
      * that the preferred input mode for the device is the touch screen
      * and that pointer and keyboard are either secondary or not available.

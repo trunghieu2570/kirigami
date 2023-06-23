@@ -40,35 +40,35 @@ public:
         : q(qq)
     {
 #ifdef KIRIGAMI_ENABLE_DBUS
-    qDBusRegisterMetaType<VariantMapMap>();
-    settingsInterface = new OrgFreedesktopPortalSettingsInterface(serviceName, objectName, QDBusConnection::sessionBus(), q);
+        qDBusRegisterMetaType<VariantMapMap>();
+        settingsInterface = new OrgFreedesktopPortalSettingsInterface(serviceName, objectName, QDBusConnection::sessionBus(), q);
 
-    QObject::connect(settingsInterface,
-                     &OrgFreedesktopPortalSettingsInterface::SettingChanged,
-                     q,
-                     [this](const QString &group, const QString &key, const QDBusVariant &value) {
-                         if (group != GROUP) {
-                             return;
-                         }
+        QObject::connect(settingsInterface,
+                         &OrgFreedesktopPortalSettingsInterface::SettingChanged,
+                         q,
+                         [this](const QString &group, const QString &key, const QDBusVariant &value) {
+                             if (group != GROUP) {
+                                 return;
+                             }
 
-                         if (key == KEY_AVAILABLE) {
-                             available = value.variant().toBool();
-                             Q_EMIT q->availableChanged();
-                         } else if (key == KEY_ENABLED) {
-                             enabled = value.variant().toBool();
-                             Q_EMIT q->enabledChanged();
-                         } else if (key == KEY_ACTIVE) {
-                             active = value.variant().toBool();
-                             Q_EMIT q->activeChanged();
-                         } else if (key == KEY_VISIBLE) {
-                             visible = value.variant().toBool();
-                             Q_EMIT q->visibleChanged();
-                         } else if (key == KEY_WILL_SHOW_ON_ACTIVE) {
-                             willShowOnActive = value.variant().toBool();
-                         }
-                     });
+                             if (key == KEY_AVAILABLE) {
+                                 available = value.variant().toBool();
+                                 Q_EMIT q->availableChanged();
+                             } else if (key == KEY_ENABLED) {
+                                 enabled = value.variant().toBool();
+                                 Q_EMIT q->enabledChanged();
+                             } else if (key == KEY_ACTIVE) {
+                                 active = value.variant().toBool();
+                                 Q_EMIT q->activeChanged();
+                             } else if (key == KEY_VISIBLE) {
+                                 visible = value.variant().toBool();
+                                 Q_EMIT q->visibleChanged();
+                             } else if (key == KEY_WILL_SHOW_ON_ACTIVE) {
+                                 willShowOnActive = value.variant().toBool();
+                             }
+                         });
 
-    getAllProperties();
+        getAllProperties();
 #endif
     }
 

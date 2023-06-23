@@ -9,9 +9,9 @@
 #ifndef KIRIGAMIPLUGIN_H
 #define KIRIGAMIPLUGIN_H
 
-#include <QUrl>
 #include <QQmlEngine>
 #include <QQmlExtensionPlugin>
+#include <QUrl>
 
 class KirigamiPlugin : public QQmlExtensionPlugin
 {
@@ -24,8 +24,8 @@ public:
     void initializeEngine(QQmlEngine *engine, const char *uri) override;
 
 #ifdef KIRIGAMI_BUILD_TYPE_STATIC
-    static KirigamiPlugin& getInstance();
-    static void registerTypes(QQmlEngine* engine = nullptr);
+    static KirigamiPlugin &getInstance();
+    static void registerTypes(QQmlEngine *engine = nullptr);
 #endif
 
 Q_SIGNALS:

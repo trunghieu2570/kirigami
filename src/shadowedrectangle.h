@@ -121,7 +121,7 @@ class CornersGroup : public QObject
      * @brief This property holds the top-left corner's radius in pixels.
      *
      * Setting this to ``-1`` indicates that the value should be ignored.
-     * 
+     *
      * default: ``-1``px
      */
     Q_PROPERTY(qreal topLeftRadius READ topLeft WRITE setTopLeft NOTIFY changed)
@@ -130,7 +130,7 @@ class CornersGroup : public QObject
      * @brief This property holds the top-right corner's radius in pixels.
      *
      * Setting this to ``-1`` indicates that the value should be ignored.
-     * 
+     *
      * default: ``-1``px
      */
     Q_PROPERTY(qreal topRightRadius READ topRight WRITE setTopRight NOTIFY changed)
@@ -139,7 +139,7 @@ class CornersGroup : public QObject
      * @brief This property holds the bottom-left corner's radius in pixels.
      *
      * Setting this to ``-1`` indicates that the value should be ignored.
-     * 
+     *
      * default: ``-1``px
      */
     Q_PROPERTY(qreal bottomLeftRadius READ bottomLeft WRITE setBottomLeft NOTIFY changed)
@@ -148,7 +148,7 @@ class CornersGroup : public QObject
      * @brief This property holds the bottom-right corner's radius in pixels.
      *
      * Setting this to ``-1`` indicates that the value should be ignored.
-     * 
+     *
      * default: ``-1``px
      */
     Q_PROPERTY(qreal bottomRightRadius READ bottomRight WRITE setBottomRight NOTIFY changed)

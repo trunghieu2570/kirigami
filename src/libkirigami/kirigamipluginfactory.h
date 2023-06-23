@@ -16,7 +16,8 @@
 
 class QQmlEngine;
 
-namespace Kirigami {
+namespace Kirigami
+{
 class Units;
 
 /**

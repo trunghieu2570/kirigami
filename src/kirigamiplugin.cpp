@@ -38,11 +38,10 @@
 #include <QQuickStyle>
 
 #include "libkirigami/basictheme_p.h"
+#include "libkirigami/kirigamipluginfactory.h"
 #include "libkirigami/platformtheme.h"
 #include "libkirigami/styleselector_p.h"
 #include "loggingcategory.h"
-#include "libkirigami/basictheme_p.h"
-#include "libkirigami/kirigamipluginfactory.h"
 
 static QString s_selectedStyle;
 
@@ -143,7 +142,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
         return new Kirigami::BasicThemeDefinition{};
     });
 
-    qmlRegisterSingletonType<Kirigami::Units>(uri, 2, 0, "Units", [] (QQmlEngine *engine, QJSEngine *) {
+    qmlRegisterSingletonType<Kirigami::Units>(uri, 2, 0, "Units", [](QQmlEngine *engine, QJSEngine *) {
 #ifndef KIRIGAMI_BUILD_TYPE_STATIC
         auto plugin = Kirigami::KirigamiPluginFactory::findPlugin();
         if (plugin) {
@@ -283,7 +282,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType<SpellCheckingAttached>(uri, 2, 18, "SpellChecking");
     qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/CategorizedSettings.qml")), uri, 2, 18, "CategorizedSettings");
     qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/SettingAction.qml")), uri, 2, 18, "SettingAction");
-    
+
     // 2.19
     qmlRegisterType(componentUrl(QStringLiteral("AboutItem.qml")), uri, 2, 19, "AboutItem");
     qmlRegisterType(componentUrl(QStringLiteral("NavigationTabBar.qml")), uri, 2, 19, "NavigationTabBar");
@@ -312,23 +311,22 @@ void KirigamiPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 }
 
 #ifdef KIRIGAMI_BUILD_TYPE_STATIC
-KirigamiPlugin& KirigamiPlugin::getInstance()
+KirigamiPlugin &KirigamiPlugin::getInstance()
 {
     static KirigamiPlugin instance;
     return instance;
 }
 
-void KirigamiPlugin::registerTypes(QQmlEngine* engine)
+void KirigamiPlugin::registerTypes(QQmlEngine *engine)
 {
     Q_INIT_RESOURCE(KirigamiPlugin);
 
     if (engine) {
         engine->addImportPath(QLatin1String(":/"));
-    }
-    else {
+    } else {
         qCWarning(KirigamiLog)
             << "Registering Kirigami on a null QQmlEngine instance - you likely want to pass a valid engine, or you will want to manually add the "
-            "qrc root path :/ to your import paths list so the engine is able to load the plugin";
+               "qrc root path :/ to your import paths list so the engine is able to load the plugin";
     }
 }
 #endif
