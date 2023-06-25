@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: controls/AboutItem.qml:133
 #, qt-format
@@ -145,20 +145,14 @@ msgid "Password"
 msgstr "პაროლი"
 
 #: controls/PasswordField.qml:44
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Hide Password"
-msgstr "პაროლი"
+msgstr "პაროლის დამალვა"
 
 #: controls/PasswordField.qml:44
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Show Password"
-msgstr "პაროლი"
+msgstr "პაროლის ჩვენება"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
