@@ -6,6 +6,7 @@
 
 import QtQuick 2.7
 import QtQml 2.7
+import QtQuick.Templates 2.1 as T
 import QtQuick.Controls 2.5 as QQC2
 import org.kde.kirigami 2.11 as Kirigami
 
