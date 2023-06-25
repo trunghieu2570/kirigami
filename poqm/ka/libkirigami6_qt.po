@@ -139,20 +139,14 @@ msgid "Password"
 msgstr "პაროლი"
 
 #: controls/PasswordField.qml:45
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Hide Password"
-msgstr "პაროლი"
+msgstr "პაროლის დამალვა"
 
 #: controls/PasswordField.qml:45
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Show Password"
-msgstr "პაროლი"
+msgstr "პაროლის ჩვენება"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
