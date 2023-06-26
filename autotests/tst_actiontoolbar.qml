@@ -224,7 +224,11 @@ TestCase {
 
         toolbar.customHeight = 100
 
-        verify(waitForItemPolished(toolbar))
+        // Changing the delegate height will trigger the internal layout to
+        // relayout, which is done in polish. This is not signaled to the
+        // parent toolbar, so we need to wait on the contentItem here.
+        verify(isPolishScheduled(toolbar.contentItem))
+        verify(waitForItemPolished(toolbar.contentItem))
 
         // Implicit height changes should propagate to the layout's height as
         // long as that doesn't have an explicit height set.
