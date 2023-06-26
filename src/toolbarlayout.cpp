@@ -63,8 +63,9 @@ public:
     HeightMode heightMode = ConstrainIfLarger;
 
     bool completed = false;
-    bool layoutQueued = false;
     bool actionsChanged = false;
+    bool implicitSizeValid = false;
+
     std::unordered_map<QObject *, std::unique_ptr<ToolBarLayoutDelegate>> delegates;
     QVector<ToolBarLayoutDelegate *> sortedDelegates;
     QQuickItem *moreButtonInstance = nullptr;
@@ -131,10 +132,10 @@ void ToolBarLayout::addAction(QObject *action)
         d->actions.removeOne(action);
         d->actionsChanged = true;
 
-        d->calculateImplicitSize();
+        relayout();
     });
 
-    d->calculateImplicitSize();
+    relayout();
 }
 
 void ToolBarLayout::removeAction(QObject *action)
@@ -149,7 +150,7 @@ void ToolBarLayout::removeAction(QObject *action)
     d->removalTimer->start();
     d->actionsChanged = true;
 
-    d->calculateImplicitSize();
+    relayout();
 }
 
 void ToolBarLayout::clearActions()
@@ -165,7 +166,7 @@ void ToolBarLayout::clearActions()
     d->actions.clear();
     d->actionsChanged = true;
 
-    d->calculateImplicitSize();
+    relayout();
 }
 
 QList<QObject *> ToolBarLayout::hiddenActions() const
@@ -203,7 +204,7 @@ void ToolBarLayout::setIconDelegate(QQmlComponent *newIconDelegate)
 
     d->iconDelegate = newIconDelegate;
     d->delegates.clear();
-    d->calculateImplicitSize();
+    relayout();
     Q_EMIT iconDelegateChanged();
 }
 
@@ -223,7 +224,7 @@ void ToolBarLayout::setMoreButton(QQmlComponent *newMoreButton)
         d->moreButtonInstance->deleteLater();
         d->moreButtonInstance = nullptr;
     }
-    d->calculateImplicitSize();
+    relayout();
     Q_EMIT moreButtonChanged();
 }
 
@@ -239,7 +240,7 @@ void ToolBarLayout::setSpacing(qreal newSpacing)
     }
 
     d->spacing = newSpacing;
-    d->calculateImplicitSize();
+    relayout();
     Q_EMIT spacingChanged();
 }
 
@@ -255,7 +256,7 @@ void ToolBarLayout::setAlignment(Qt::Alignment newAlignment)
     }
 
     d->alignment = newAlignment;
-    d->calculateImplicitSize();
+    relayout();
     Q_EMIT alignmentChanged();
 }
 
@@ -281,7 +282,7 @@ void ToolBarLayout::setLayoutDirection(Qt::LayoutDirection &newLayoutDirection)
     }
 
     d->layoutDirection = newLayoutDirection;
-    d->calculateImplicitSize();
+    relayout();
     Q_EMIT layoutDirectionChanged();
 }
 
@@ -297,27 +298,28 @@ void ToolBarLayout::setHeightMode(HeightMode newHeightMode)
     }
 
     d->heightMode = newHeightMode;
-    d->calculateImplicitSize();
+    relayout();
     Q_EMIT heightModeChanged();
 }
 
 void ToolBarLayout::relayout()
 {
-    d->calculateImplicitSize();
+    d->implicitSizeValid = false;
+    polish();
 }
 
 void ToolBarLayout::componentComplete()
 {
     QQuickItem::componentComplete();
     d->completed = true;
-    d->calculateImplicitSize();
+    relayout();
 }
 
 void ToolBarLayout::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
 {
     if (newGeometry != oldGeometry) {
         if (newGeometry.size() != QSizeF{implicitWidth(), implicitHeight()}) {
-            d->calculateImplicitSize();
+            relayout();
         } else {
             polish();
         }
@@ -328,7 +330,7 @@ void ToolBarLayout::geometryChange(const QRectF &newGeometry, const QRectF &oldG
 void ToolBarLayout::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &data)
 {
     if (change == ItemVisibleHasChanged || change == ItemSceneChange) {
-        d->calculateImplicitSize();
+        relayout();
     }
     QQuickItem::itemChange(change, data);
 }
@@ -448,6 +450,8 @@ void ToolBarLayout::Private::calculateImplicitSize()
     q->setImplicitSize(maxWidth, maxHeight);
     Q_EMIT q->hiddenActionsChanged();
 
+    implicitSizeValid = true;
+
     q->polish();
 }
 
@@ -455,6 +459,10 @@ void ToolBarLayout::Private::performLayout()
 {
     if (!completed || actions.isEmpty()) {
         return;
+    }
+
+    if (!implicitSizeValid) {
+        calculateImplicitSize();
     }
 
     if (sortedDelegates.isEmpty()) {
@@ -579,7 +587,7 @@ QVector<ToolBarLayoutDelegate *> ToolBarLayout::Private::createDelegates()
             connect(moreButtonInstance, &QQuickItem::widthChanged, q, [this]() {
                 Q_EMIT q->minimumWidthChanged();
             });
-            calculateImplicitSize();
+            q->relayout();
             Q_EMIT q->minimumWidthChanged();
 
             QTimer::singleShot(0, q, [this]() {
