@@ -46,8 +46,7 @@ Item {
         }
 
         // this wrapper is necessary because of Qt casting a function into an object
-        const callBackWrapperObj = callBackWrapper.createObject()
-        callBackWrapperObj.callBack = callBack
+        const callBackWrapperObj = callBackWrapper.createObject(listView, { callBack })
 
         // set empty string & function for qml not to complain
         notificationsModel.append({
