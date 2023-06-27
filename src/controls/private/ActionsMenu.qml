@@ -32,7 +32,7 @@ QQC2.Menu {
             property QtObject item: null
             property bool isSubMenu: false
 
-            function create() {
+            Component.onCompleted: {
                 if (!action.hasOwnProperty("children") && !action.children || action.children.length === 0) {
                     if (action.hasOwnProperty("separator") && action.separator) {
                         item = root.separatorDelegate.createObject(null, { action });
@@ -59,7 +59,7 @@ QQC2.Menu {
                 }
             }
 
-            function remove() {
+            Component.onDestruction: {
                 if (isSubMenu) {
                     root.removeMenu(item);
                 } else {
@@ -68,8 +68,5 @@ QQC2.Menu {
                 item.destroy();
             }
         }
-
-        onObjectAdded: (index, object) => object.create()
-        onObjectRemoved: (index, object) => object.remove()
     }
 }
