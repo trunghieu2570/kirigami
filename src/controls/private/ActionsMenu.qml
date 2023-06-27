@@ -33,8 +33,9 @@ QQC2.Menu {
             property bool isSubMenu: false
 
             Component.onCompleted: {
-                if (!action.hasOwnProperty("children") && !action.children || action.children.length === 0) {
-                    if (action.hasOwnProperty("separator") && action.separator) {
+                const isKirigamiAction = action instanceof Kirigami.Action;
+                if (!isKirigamiAction || action.children.length === 0) {
+                    if (isKirigamiAction && action.separator) {
                         item = root.separatorDelegate.createObject(null, { action });
                     } else if (action.displayComponent) {
                         item = root.loaderDelegate.createObject(null, {
