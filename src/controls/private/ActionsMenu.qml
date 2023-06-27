@@ -6,6 +6,7 @@
 
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
+import QtQuick.Templates 2.15 as T
 import org.kde.kirigami 2.20 as Kirigami
 
 QQC2.Menu {
@@ -15,10 +16,14 @@ QQC2.Menu {
 
     property Component submenuComponent
     property Component itemDelegate: ActionMenuItem {}
-    property Component separatorDelegate: QQC2.MenuSeparator { property var action }
-    property Component loaderDelegate: Loader { property var action }
-    property QQC2.Action parentAction
-    property QQC2.MenuItem parentItem
+    property Component separatorDelegate: QQC2.MenuSeparator {
+        property T.Action action
+    }
+    property Component loaderDelegate: Loader {
+        property T.Action action
+    }
+    property T.Action parentAction
+    property T.MenuItem parentItem
 
     z: 999999999
 
@@ -27,7 +32,7 @@ QQC2.Menu {
 
         active: root.visible
         delegate: QtObject {
-            readonly property QQC2.Action action: modelData
+            readonly property T.Action action: modelData
 
             property QtObject item: null
             property bool isSubMenu: false

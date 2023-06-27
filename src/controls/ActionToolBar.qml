@@ -213,14 +213,14 @@ QQC2.Control {
                 }
 
                 loaderDelegate: Loader {
-                    property var action
+                    property T.Action action
                     height: visible ? implicitHeight : 0
                     visible: layout.hiddenActions.includes(action)
                              && (!(action instanceof Kirigami.Action) || action.visible)
                 }
 
                 separatorDelegate: QQC2.MenuSeparator {
-                    property var action
+                    property T.Action action
                     visible: layout.hiddenActions.includes(action)
                              && (!(action instanceof Kirigami.Action) || action.visible)
                 }
