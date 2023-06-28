@@ -13,13 +13,6 @@ QtObject {
 
     readonly property int actualStyle: {
         if (style === Kirigami.ApplicationHeaderStyle.Auto) {
-            // TODO KF6
-            // Legacy: if ApplicationHeader is in the header or footer, disable the toolbar here
-            if (typeof applicationWindow !== "undefined" && applicationWindow().header && applicationWindow().header.toString().indexOf("ApplicationHeader") !== -1) {
-                return Kirigami.ApplicationHeaderStyle.None
-            }
-
-            //non legacy logic
             return (Kirigami.Settings.isMobile
                     ? (root.wideMode ? Kirigami.ApplicationHeaderStyle.Titles : Kirigami.ApplicationHeaderStyle.Breadcrumb)
                     : Kirigami.ApplicationHeaderStyle.ToolBar)

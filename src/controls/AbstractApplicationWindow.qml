@@ -19,9 +19,8 @@ import "templates/private" as TP
  * @see ApplicationWindow
  *
  * It's usually used as a root QML component for the application.
- * It provides support for a central page stack, side drawers and
- * a top ApplicationHeader, as well as basic support for the
- * Android back button
+ * It provides support for a central page stack, side drawers, and
+ * basic support for the Android back button.
  *
  * Setting a width and height property on the ApplicationWindow
  * will set its initial size, but it won't set it as an automatically binding.

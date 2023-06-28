@@ -89,7 +89,6 @@ ecm_target_qml_sources(KirigamiPlugin SOURCES
     controls/AbstractApplicationHeader.qml
     controls/AbstractApplicationWindow.qml
     controls/AbstractListItem.qml
-    controls/ApplicationHeader.qml
     controls/ApplicationWindow.qml
     controls/BasicListItem.qml
     controls/OverlayDrawer.qml
@@ -240,7 +239,6 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates SOURCES
     controls/templates/AbstractCard.qml
     controls/templates/AbstractChip.qml
     controls/templates/AbstractListItem.qml
-    controls/templates/ApplicationHeader.qml
     controls/templates/InlineMessage.qml
     controls/templates/OverlayDrawer.qml
     controls/templates/OverlaySheet.qml

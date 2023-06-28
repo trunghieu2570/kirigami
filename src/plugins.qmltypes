@@ -1126,32 +1126,6 @@ Module {
     }
     Component {
         prototype: "QQuickItem"
-        name: "org.kde.kirigami/ApplicationHeader 2.0"
-        exports: ["org.kde.kirigami/ApplicationHeader 2.0"]
-        exportMetaObjectRevisions: [0]
-        isComposite: true
-        defaultProperty: "contentItem"
-        Property { name: "headerStyle"; type: "int" }
-        Property { name: "backButtonEnabled"; type: "bool" }
-        Property { name: "pageDelegate"; type: "QQmlComponent"; isPointer: true }
-        Property { name: "minimumHeight"; type: "int" }
-        Property { name: "preferredHeight"; type: "int" }
-        Property { name: "maximumHeight"; type: "int" }
-        Property { name: "position"; type: "int" }
-        Property { name: "pageRow"; type: "PageRow_QMLTYPE_23"; isPointer: true }
-        Property { name: "page"; type: "Page_QMLTYPE_32"; isPointer: true }
-        Property { name: "paintedHeight"; type: "int"; isReadonly: true }
-        Property { name: "leftPadding"; type: "int" }
-        Property { name: "topPadding"; type: "int" }
-        Property { name: "rightPadding"; type: "int" }
-        Property { name: "bottomPadding"; type: "int" }
-        Property { name: "separatorVisible"; type: "bool" }
-        Property { name: "__appWindow"; type: "QObject"; isPointer: true }
-        Property { name: "background"; type: "QQuickItem"; isPointer: true }
-        Property { name: "contentItem"; type: "QObject"; isList: true; isReadonly: true }
-    }
-    Component {
-        prototype: "QQuickItem"
         name: "org.kde.kirigami/ApplicationItem 2.1"
         exports: ["org.kde.kirigami/ApplicationItem 2.1"]
         exportMetaObjectRevisions: [1]
