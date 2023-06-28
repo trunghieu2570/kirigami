@@ -172,7 +172,7 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
     Q_PROPERTY(QFont defaultFont READ defaultFont NOTIFY defaultFontChanged)
 
     // small font
-    Q_PROPERTY(QFont smallFont READ smallFont NOTIFY defaultFontChanged)
+    Q_PROPERTY(QFont smallFont READ smallFont NOTIFY smallFontChanged)
 
     // Active palette
     Q_PROPERTY(QPalette palette READ palette NOTIFY paletteChanged)
