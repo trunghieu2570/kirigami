@@ -167,14 +167,18 @@ Item {
                                && ( (listItem.y === 0 && !listView.atYBeginning) ||
                                     (listItem.y === mouseArea.drag.maximumY && !listView.atYEnd) );
         }
-        onReleased: mouse => {
+
+        onReleased: mouse => dropped()
+        onCanceled: dropped()
+
+        function dropped() {
             listItem.y = internal.originalParent.mapFromItem(listItem, 0, 0).y;
             listItem.parent = internal.originalParent;
             dropAnimation.running = true;
             scrollTimer.running = false;
             root.dropped();
         }
-        onCanceled: released()
+
         SequentialAnimation {
             id: dropAnimation
             YAnimator {
