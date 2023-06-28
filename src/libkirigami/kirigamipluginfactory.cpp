@@ -44,7 +44,8 @@ KirigamiPluginFactory *KirigamiPluginFactory::findPlugin(const QString &preferre
     for (QObject *staticPlugin : QPluginLoader::staticInstances()) {
         KirigamiPluginFactory *factory = qobject_cast<KirigamiPluginFactory *>(staticPlugin);
         if (factory) {
-            pluginFactory = factory;
+            factories[pluginName] = factory;
+            break;
         }
     }
 #else
