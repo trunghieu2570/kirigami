@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-06-05 11:11+0200\n"
+"PO-Revision-Date: 2023-06-23 14:39+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.04.2\n"
 "X-Qt-Contexts: true\n"
 
 #: controls/AboutItem.qml:139
@@ -88,7 +88,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "O aplikaci %1"
 
-#: controls/AbstractApplicationWindow.qml:205
+#: controls/AbstractApplicationWindow.qml:204
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Ukončit"
@@ -142,12 +142,12 @@ msgstr "Heslo"
 #: controls/PasswordField.qml:45
 msgctxt "PasswordField|"
 msgid "Hide Password"
-msgstr ""
+msgstr "Skrýt heslo"
 
 #: controls/PasswordField.qml:45
 msgctxt "PasswordField|"
 msgid "Show Password"
-msgstr ""
+msgstr "Zobrazit heslo"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
