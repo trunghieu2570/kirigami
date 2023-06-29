@@ -4,8 +4,8 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.6
-import org.kde.kirigami 2.4 as Kirigami
+import QtQuick
+import org.kde.kirigami 2 as Kirigami
 
 /**
  * Implements a drag handle supposed to be in items in ListViews to reorder items
@@ -29,7 +29,9 @@ import org.kde.kirigami 2.4 as Kirigami
  *               Kirigami.ListItemDragHandle {
  *                   listItem: listItem
  *                   listView: mainList
- *                   onMoveRequested: listModel.move(oldIndex, newIndex, 1)
+ *                   onMoveRequested: (oldIndex, newIndex) => {
+ *                       listModel.move(oldIndex, newIndex, 1);
+ *                   }
  *               }
  *               QQC2.Label {
  *                   text: model.label
@@ -90,7 +92,9 @@ Item {
      *
      * The following example does the move in the case a ListModel is used:
      * @code
-     *  onMoveRequested: listModel.move(oldIndex, newIndex, 1)
+     * onMoveRequested: (oldIndex, newIndex) => {
+     *     listModel.move(oldIndex, newIndex, 1);
+     * }
      * @endcode
      * @param oldIndex the index the item is currently at
      * @param newIndex the index we want to move the item to
@@ -104,25 +108,33 @@ Item {
     signal dropped()
 
     implicitWidth: Kirigami.Units.iconSizes.smallMedium
-    implicitHeight: implicitWidth
+    implicitHeight: Kirigami.Units.iconSizes.smallMedium
 
     MouseArea {
         id: mouseArea
+
         anchors.fill: parent
+
         drag {
             target: listItem
             axis: Drag.YAxis
             minimumY: 0
         }
+
         cursorShape: pressed ? Qt.ClosedHandCursor : Qt.OpenHandCursor
+        preventStealing: true
 
         Kirigami.Icon {
             id: internal
+
+            anchors.fill: parent
+
             source: "handle-sort"
+            opacity: mouseArea.pressed || (!Kirigami.Settings.tabletMode && listItem.hovered) ? 1 : 0.6
+
             property int startY
             property int mouseDownY
             property Item originalParent
-            opacity: mouseArea.pressed || (!Kirigami.Settings.tabletMode && listItem.hovered) ? 1 : 0.6
             property int listItemLastY
             property bool draggingUp
 
@@ -133,11 +145,7 @@ Item {
                     root.moveRequested(index, newIndex);
                 }
             }
-
-            anchors.fill: parent
         }
-        preventStealing: true
-
 
         onPressed: mouse => {
             internal.originalParent = listItem.parent;
@@ -164,8 +172,8 @@ Item {
 
              // autoscroll when the dragging item reaches the listView's top/bottom boundary
             scrollTimer.running = (listView.contentHeight > listView.height)
-                               && ( (listItem.y === 0 && !listView.atYBeginning) ||
-                                    (listItem.y === mouseArea.drag.maximumY && !listView.atYEnd) );
+                && ((listItem.y === 0 && !listView.atYBeginning)
+                    || (listItem.y === mouseArea.drag.maximumY && !listView.atYEnd));
         }
 
         onReleased: mouse => dropped()
@@ -194,10 +202,13 @@ Item {
                 value: 0
             }
         }
+
         Timer {
             id: scrollTimer
+
             interval: 50
             repeat: true
+
             onTriggered: {
                 if (internal.draggingUp) {
                     listView.contentY -= Kirigami.Units.gridUnit;
@@ -217,4 +228,3 @@ Item {
         }
     }
 }
-
