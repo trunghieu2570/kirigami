@@ -47,11 +47,13 @@ KirigamiPluginFactory *KirigamiPluginFactory::findPlugin(const QString &preferre
 #else
     const auto libraryPaths = QCoreApplication::libraryPaths();
     for (const QString &path : libraryPaths) {
+
 #ifdef Q_OS_ANDROID
-        QDir dir(path);
+        const QDir dir(path);
 #else
-        QDir dir(path + QStringLiteral("/kf6/kirigami"));
+        const QDir dir(path + QStringLiteral("/kf6/kirigami"));
 #endif
+
         const auto fileNames = dir.entryList(QDir::Files);
 
         for (const QString &fileName : fileNames) {
@@ -67,8 +69,7 @@ KirigamiPluginFactory *KirigamiPluginFactory::findPlugin(const QString &preferre
 
                     qCDebug(KirigamiLog) << "Loading style plugin from" << dir.absoluteFilePath(fileName);
 
-                    KirigamiPluginFactory *factory = qobject_cast<KirigamiPluginFactory *>(plugin);
-                    if (factory) {
+                    if (auto factory = qobject_cast<KirigamiPluginFactory *>(plugin)) {
                         factories[pluginName] = factory;
                         break;
                     }
