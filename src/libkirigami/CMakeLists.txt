@@ -32,7 +32,15 @@ ecm_qt_declare_logging_category(libkirigami_extra_sources
     HEADER loggingcategory.h
     IDENTIFIER KirigamiLog
     CATEGORY_NAME kf.kirigami
+    DESCRIPTION "Kirigami"
     DEFAULT_SEVERITY Warning
+    EXPORT KIRIGAMI
+)
+
+ecm_qt_install_logging_categories(
+    EXPORT KIRIGAMI
+    FILE kirigami.categories
+    DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
 )
 
 ecm_generate_export_header(KF6Kirigami2
