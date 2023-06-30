@@ -200,40 +200,6 @@ msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
 msgstr "Inställningar — %1"
 
-#. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
-#: controls/swipenavigator/templates/PageTab.qml:38
-#, qt-format
-msgctxt "PageTab|"
-msgid "Current page. Progress: %1 percent."
-msgstr "Aktuell sida. Förlopp: %1 procent."
-
-#. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:41
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1. Progress: %2 percent."
-msgstr "Navigera till %1. Förlopp: %2 procent."
-
-#. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:46
-msgctxt "PageTab|"
-msgid "Current page."
-msgstr "Aktuell sida."
-
-#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:49
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1. Demanding attention."
-msgstr "Navigera till %1. Kräver uppmärksamhet."
-
-#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:52
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1."
-msgstr "Navigera till %1."
-
 #: controls/templates/OverlayDrawer.qml:130
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
@@ -290,6 +256,26 @@ msgstr "Fönsterhanteringssystemet %1"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (byggt för %3)"
+
+#~ msgctxt "PageTab|"
+#~ msgid "Current page. Progress: %1 percent."
+#~ msgstr "Aktuell sida. Förlopp: %1 procent."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1. Progress: %2 percent."
+#~ msgstr "Navigera till %1. Förlopp: %2 procent."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Current page."
+#~ msgstr "Aktuell sida."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1. Demanding attention."
+#~ msgstr "Navigera till %1. Kräver uppmärksamhet."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1."
+#~ msgstr "Navigera till %1."
 
 #~ msgctxt "ToolBarApplicationHeader|"
 #~ msgid "More Actions"

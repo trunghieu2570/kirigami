@@ -203,40 +203,6 @@ msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
 msgstr "Ρυθμίσεις — %1"
 
-#. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
-#: controls/swipenavigator/templates/PageTab.qml:38
-#, qt-format
-msgctxt "PageTab|"
-msgid "Current page. Progress: %1 percent."
-msgstr "Τρέχουσα σελίδα. Πρόοδος: %1 τοις εκατό."
-
-#. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:41
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1. Progress: %2 percent."
-msgstr "Πλοήγηση προς το %1. Πρόοδος: %2 τοις εκατό."
-
-#. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:46
-msgctxt "PageTab|"
-msgid "Current page."
-msgstr "Τρέχουσα σελίδα."
-
-#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:49
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1. Demanding attention."
-msgstr "Πλοήγηση προς το %1. Δώστε προσοχή."
-
-#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:52
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1."
-msgstr "Πλοήγηση προς το %1."
-
 #: controls/templates/OverlayDrawer.qml:130
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
@@ -296,6 +262,26 @@ msgstr "Το %1 παραθυρικό σύστημα"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (κατασκευάστηκε με βάση το %3)"
+
+#~ msgctxt "PageTab|"
+#~ msgid "Current page. Progress: %1 percent."
+#~ msgstr "Τρέχουσα σελίδα. Πρόοδος: %1 τοις εκατό."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1. Progress: %2 percent."
+#~ msgstr "Πλοήγηση προς το %1. Πρόοδος: %2 τοις εκατό."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Current page."
+#~ msgstr "Τρέχουσα σελίδα."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1. Demanding attention."
+#~ msgstr "Πλοήγηση προς το %1. Δώστε προσοχή."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1."
+#~ msgstr "Πλοήγηση προς το %1."
 
 #~ msgctxt "ToolBarApplicationHeader|"
 #~ msgid "More Actions"

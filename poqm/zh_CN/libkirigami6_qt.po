@@ -193,40 +193,6 @@ msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
 msgstr "设置 — %1"
 
-#. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
-#: controls/swipenavigator/templates/PageTab.qml:38
-#, qt-format
-msgctxt "PageTab|"
-msgid "Current page. Progress: %1 percent."
-msgstr "当前页面。进度：百分之 %1。"
-
-#. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:41
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1. Progress: %2 percent."
-msgstr "前往 %1。进度：%2%。"
-
-#. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:46
-msgctxt "PageTab|"
-msgid "Current page."
-msgstr "当前页面。"
-
-#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:49
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1. Demanding attention."
-msgstr "前往 %1。要求关注。"
-
-#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:52
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1."
-msgstr "前往 %1。"
-
 #: controls/templates/OverlayDrawer.qml:130
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
@@ -280,6 +246,26 @@ msgstr "%1 窗口系统"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (使用 %3 构建)"
+
+#~ msgctxt "PageTab|"
+#~ msgid "Current page. Progress: %1 percent."
+#~ msgstr "当前页面。进度：百分之 %1。"
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1. Progress: %2 percent."
+#~ msgstr "前往 %1。进度：%2%。"
+
+#~ msgctxt "PageTab|"
+#~ msgid "Current page."
+#~ msgstr "当前页面。"
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1. Demanding attention."
+#~ msgstr "前往 %1。要求关注。"
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1."
+#~ msgstr "前往 %1。"
 
 #~ msgctxt "ToolBarApplicationHeader|"
 #~ msgid "More Actions"

@@ -191,40 +191,6 @@ msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
 msgstr "설정 — %1"
 
-#. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
-#: controls/swipenavigator/templates/PageTab.qml:38
-#, qt-format
-msgctxt "PageTab|"
-msgid "Current page. Progress: %1 percent."
-msgstr "현재 쪽입니다. 진행 상황: %1퍼센트."
-
-#. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:41
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1. Progress: %2 percent."
-msgstr "%1(으)로 탐색합니다. 진행 상황: %2퍼센트."
-
-#. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:46
-msgctxt "PageTab|"
-msgid "Current page."
-msgstr "현재 쪽입니다."
-
-#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:49
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1. Demanding attention."
-msgstr "%1(으)로 탐색합니다. 주목을 기다립니다."
-
-#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:52
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1."
-msgstr "%1(으)로 탐색합니다."
-
 #: controls/templates/OverlayDrawer.qml:130
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
@@ -281,6 +247,26 @@ msgstr "%1 창 시스템"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2(%3(으)로 빌드됨)"
+
+#~ msgctxt "PageTab|"
+#~ msgid "Current page. Progress: %1 percent."
+#~ msgstr "현재 쪽입니다. 진행 상황: %1퍼센트."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1. Progress: %2 percent."
+#~ msgstr "%1(으)로 탐색합니다. 진행 상황: %2퍼센트."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Current page."
+#~ msgstr "현재 쪽입니다."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1. Demanding attention."
+#~ msgstr "%1(으)로 탐색합니다. 주목을 기다립니다."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1."
+#~ msgstr "%1(으)로 탐색합니다."
 
 #~ msgctxt "ToolBarApplicationHeader|"
 #~ msgid "More Actions"

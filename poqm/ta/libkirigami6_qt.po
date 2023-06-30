@@ -191,40 +191,6 @@ msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
 msgstr "அமைப்புகள் — %1"
 
-#. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
-#: controls/swipenavigator/templates/PageTab.qml:38
-#, qt-format
-msgctxt "PageTab|"
-msgid "Current page. Progress: %1 percent."
-msgstr "தற்போதைய பக்கம். முன்னேற்றம்: %1 சதவீதம்."
-
-#. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:41
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1. Progress: %2 percent."
-msgstr "%1-க்கு செல். முன்னேற்றம்: %2 சதவீதம்."
-
-#. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:46
-msgctxt "PageTab|"
-msgid "Current page."
-msgstr "தற்போதைய பக்கம்"
-
-#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:49
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1. Demanding attention."
-msgstr "%1-க்கு செல். கவனத்தை கோருகிறது."
-
-#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:52
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1."
-msgstr "%1-க்கு செல்."
-
 #: controls/templates/OverlayDrawer.qml:130
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
@@ -281,6 +247,26 @@ msgstr "%1 சாளர நெறிமுறை"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (%3 கொண்டு தொகுக்கப்பட்டது)"
+
+#~ msgctxt "PageTab|"
+#~ msgid "Current page. Progress: %1 percent."
+#~ msgstr "தற்போதைய பக்கம். முன்னேற்றம்: %1 சதவீதம்."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1. Progress: %2 percent."
+#~ msgstr "%1-க்கு செல். முன்னேற்றம்: %2 சதவீதம்."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Current page."
+#~ msgstr "தற்போதைய பக்கம்"
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1. Demanding attention."
+#~ msgstr "%1-க்கு செல். கவனத்தை கோருகிறது."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1."
+#~ msgstr "%1-க்கு செல்."
 
 #~ msgctxt "ToolBarApplicationHeader|"
 #~ msgid "More Actions"

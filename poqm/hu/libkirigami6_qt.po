@@ -204,40 +204,6 @@ msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
 msgstr "Beállítások — %1"
 
-#. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
-#: controls/swipenavigator/templates/PageTab.qml:38
-#, qt-format
-msgctxt "PageTab|"
-msgid "Current page. Progress: %1 percent."
-msgstr "Jelenlegi oldal. Folyamat: %1 százalék."
-
-#. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:41
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1. Progress: %2 percent."
-msgstr "Ugrás ide: %1. Folyamat. %2 százalék."
-
-#. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:46
-msgctxt "PageTab|"
-msgid "Current page."
-msgstr "Jelenlegi oldal."
-
-#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:49
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1. Demanding attention."
-msgstr "Ugrás ide: %1. Beavatkozást igényel."
-
-#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:52
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1."
-msgstr "Ugrás ide: %1."
-
 #: controls/templates/OverlayDrawer.qml:130
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
@@ -297,6 +263,26 @@ msgstr "A(z) %1 ablakkezelő rendszer"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (fordítva ezzel: %3)"
+
+#~ msgctxt "PageTab|"
+#~ msgid "Current page. Progress: %1 percent."
+#~ msgstr "Jelenlegi oldal. Folyamat: %1 százalék."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1. Progress: %2 percent."
+#~ msgstr "Ugrás ide: %1. Folyamat. %2 százalék."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Current page."
+#~ msgstr "Jelenlegi oldal."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1. Demanding attention."
+#~ msgstr "Ugrás ide: %1. Beavatkozást igényel."
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1."
+#~ msgstr "Ugrás ide: %1."
 
 #~ msgctxt "ToolBarApplicationHeader|"
 #~ msgid "More Actions"

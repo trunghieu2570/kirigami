@@ -192,42 +192,6 @@ msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
 msgstr ""
 
-#. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
-#: controls/swipenavigator/templates/PageTab.qml:38
-#, qt-format
-msgctxt "PageTab|"
-msgid "Current page. Progress: %1 percent."
-msgstr ""
-
-#. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:41
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1. Progress: %2 percent."
-msgstr ""
-
-#. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:46
-msgctxt "PageTab|"
-msgid "Current page."
-msgstr ""
-
-#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:49
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1. Demanding attention."
-msgstr ""
-
-#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:52
-#, fuzzy, qt-format
-#| msgctxt "ForwardButton|"
-#| msgid "Navigate Forward"
-msgctxt "PageTab|"
-msgid "Navigate to %1."
-msgstr "Idi napred"
-
 #: controls/templates/OverlayDrawer.qml:130
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
@@ -281,6 +245,13 @@ msgstr ""
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr ""
+
+#, fuzzy
+#~| msgctxt "ForwardButton|"
+#~| msgid "Navigate Forward"
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1."
+#~ msgstr "Idi napred"
 
 #, fuzzy
 #~| msgctxt "ContextDrawer|"

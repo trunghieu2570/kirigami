@@ -230,40 +230,6 @@ msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
 msgstr "विन्यास"
 
-#. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
-#: controls/swipenavigator/templates/PageTab.qml:38
-#, qt-format
-msgctxt "PageTab|"
-msgid "Current page. Progress: %1 percent."
-msgstr "वर्तमान पृष्ठ। प्रगती : %1 प्रतिशत।"
-
-#. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:41
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1. Progress: %2 percent."
-msgstr "%1 पर जाएँ। प्रगती : %2 प्रतिशत।"
-
-#. Accessibility text for a page tab. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:46
-msgctxt "PageTab|"
-msgid "Current page."
-msgstr "वर्तमान पृष्ठ।"
-
-#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:49
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1. Demanding attention."
-msgstr "%1 पर जाएँ। ध्यान देने की मांग कर रहा है।"
-
-#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
-#: controls/swipenavigator/templates/PageTab.qml:52
-#, qt-format
-msgctxt "PageTab|"
-msgid "Navigate to %1."
-msgstr "%1 पर जाएँ।"
-
 #: controls/templates/OverlayDrawer.qml:130
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
@@ -323,6 +289,26 @@ msgstr "%1 विंडो प्रणाली"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "क्यूट %2 (%3 के प्रती निर्मित)"
+
+#~ msgctxt "PageTab|"
+#~ msgid "Current page. Progress: %1 percent."
+#~ msgstr "वर्तमान पृष्ठ। प्रगती : %1 प्रतिशत।"
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1. Progress: %2 percent."
+#~ msgstr "%1 पर जाएँ। प्रगती : %2 प्रतिशत।"
+
+#~ msgctxt "PageTab|"
+#~ msgid "Current page."
+#~ msgstr "वर्तमान पृष्ठ।"
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1. Demanding attention."
+#~ msgstr "%1 पर जाएँ। ध्यान देने की मांग कर रहा है।"
+
+#~ msgctxt "PageTab|"
+#~ msgid "Navigate to %1."
+#~ msgstr "%1 पर जाएँ।"
 
 #~ msgctxt "ToolBarApplicationHeader|"
 #~ msgid "More Actions"
