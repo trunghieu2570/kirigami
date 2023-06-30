@@ -7,11 +7,7 @@
 import QtQuick 2.4
 import org.kde.kirigami 2.16 as Kirigami
 
-pragma Singleton
-
 Kirigami.BasicThemeDefinition {
-    id: theme
-
     textColor: palette.windowText
     disabledTextColor: disabledPalette.windowText
 

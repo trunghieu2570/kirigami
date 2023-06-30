@@ -133,29 +133,12 @@ BasicThemeDefinition &BasicThemeInstance::themeDefinition(QQmlEngine *engine)
         return *m_themeDefinition;
     }
 
-    auto componentUrl = StyleSelector::componentUrl(QStringLiteral("Theme.qml"));
-    QString path{componentUrl.toLocalFile()};
-    if (path.isEmpty() && componentUrl.scheme() == QLatin1String("qrc")) {
-        path = QLatin1Char(':') + componentUrl.path();
-    }
-    QFile themeFile{path};
-    if (themeFile.open(QIODevice::ReadOnly)) {
-        auto data = themeFile.readAll();
+    auto themeUrl = StyleSelector::componentUrl(QStringLiteral("Theme.qml"));
+    QQmlComponent component(engine);
+    component.loadUrl(themeUrl);
 
-        // Before Kirigami 5.80, custom Theme files would be registered as a
-        // "Theme" singleton that would then be proxied by BasicTheme. This has
-        // changed with the Theme singleton being an instance of BasicTheme.
-        // However, this means that old theme files fail to load because
-        // QQmlComponent complains about "pragma Singleton". To workaround this,
-        // we remove the pragma here, as everything else should still work
-        // correctly.
-        // TODO KF6: Remove this and rely on all Theme files not being singletons.
-        data.replace("\npragma Singleton\n", "");
-
-        QQmlComponent component(engine);
-        component.setData(data, componentUrl);
+    if (!component.isError()) {
         auto result = component.create();
-
         if (!result) {
             const auto errors = component.errors();
             for (auto error : errors) {
@@ -164,8 +147,8 @@ BasicThemeDefinition &BasicThemeInstance::themeDefinition(QQmlEngine *engine)
 
             qCWarning(KirigamiLog) << "Invalid Theme file, using default Basic theme.";
             m_themeDefinition = std::make_unique<BasicThemeDefinition>();
-        } else if (qobject_cast<BasicThemeDefinition *>(result)) {
-            m_themeDefinition.reset(qobject_cast<BasicThemeDefinition *>(result));
+        } else if (auto themeDefinition = qobject_cast<BasicThemeDefinition *>(result)) {
+            m_themeDefinition.reset(themeDefinition);
         } else {
             qCWarning(KirigamiLog) << "Warning: Theme implementations should use Kirigami.BasicThemeDefinition for its root item";
             m_themeDefinition = std::make_unique<CompatibilityThemeDefinition>(result);
