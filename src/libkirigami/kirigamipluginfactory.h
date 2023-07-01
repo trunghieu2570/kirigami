@@ -7,7 +7,6 @@
 #ifndef KIRIGAMI_KIRIGAMIPLUGINFACTORY_H
 #define KIRIGAMI_KIRIGAMIPLUGINFACTORY_H
 
-#include "platformtheme.h"
 #include <QObject>
 
 #ifndef KIRIGAMI_BUILD_TYPE_STATIC
@@ -18,6 +17,7 @@ class QQmlEngine;
 
 namespace Kirigami
 {
+class PlatformTheme;
 class Units;
 
 /**

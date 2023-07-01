@@ -5,17 +5,13 @@
  */
 
 #include "kirigamipluginfactory.h"
+#include "loggingcategory.h"
 
+#include <QCoreApplication>
 #include <QDebug>
-
 #include <QDir>
 #include <QPluginLoader>
 #include <QQuickStyle>
-
-#include "styleselector_p.h"
-#include "units.h"
-
-#include "loggingcategory.h"
 
 namespace Kirigami
 {
