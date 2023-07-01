@@ -246,23 +246,3 @@ msgstr "Vindaugssystemet %1"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (bygd mot %3)"
-
-#~ msgctxt "PageTab|"
-#~ msgid "Current page. Progress: %1 percent."
-#~ msgstr "Gjeldande side. Framgang: %1 prosent."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1. Progress: %2 percent."
-#~ msgstr "Gå til %1. Framgang: %2 prosent."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Current page."
-#~ msgstr "Gjeldande side."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1. Demanding attention."
-#~ msgstr "Gå til %1. Ber om merksemd."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1."
-#~ msgstr "Gå til %1."
