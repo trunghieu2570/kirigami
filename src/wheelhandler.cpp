@@ -693,3 +693,5 @@ bool WheelHandler::eventFilter(QObject *watched, QEvent *event)
 
     return false;
 }
+
+#include "moc_wheelhandler.cpp"

@@ -221,3 +221,5 @@ void VirtualKeyboardWatcher::Private::getProperty(const QString &propertyName)
 
 #endif
 }
+
+#include "moc_virtualkeyboardwatcher.cpp"

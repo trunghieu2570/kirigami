@@ -32,3 +32,5 @@ SpellCheckingAttached *SpellCheckingAttached::qmlAttachedProperties(QObject *obj
 {
     return new SpellCheckingAttached(object);
 }
+
+#include "moc_spellcheckinghint.cpp"

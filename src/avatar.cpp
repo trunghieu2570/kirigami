@@ -153,3 +153,5 @@ auto NameUtils::isStringUnsuitableForInitials(const QString &string) -> bool
     }
     return false;
 }
+
+#include "moc_avatar.cpp"

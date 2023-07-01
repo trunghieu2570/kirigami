@@ -1789,3 +1789,4 @@ QQmlListProperty<QObject> ColumnView::contentData()
 }
 
 #include "moc_columnview.cpp"
+#include "moc_columnview_p.cpp"

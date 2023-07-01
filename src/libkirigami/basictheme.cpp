@@ -312,3 +312,4 @@ QColor BasicTheme::tint(const QColor &color)
 }
 
 #include "basictheme.moc"
+#include "moc_basictheme_p.cpp"

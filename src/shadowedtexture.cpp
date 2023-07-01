@@ -88,3 +88,5 @@ QSGNode *ShadowedTexture::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaint
     return nullptr;
 #endif
 }
+
+#include "moc_shadowedtexture.cpp"

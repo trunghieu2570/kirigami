@@ -323,3 +323,5 @@ void ToolBarLayoutDelegate::cleanupIncubators()
         m_iconIncubator = nullptr;
     }
 }
+
+#include "moc_toolbarlayoutdelegate.cpp"

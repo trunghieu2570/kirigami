@@ -320,3 +320,5 @@ qreal ColorUtils::luminance(const QColor &color)
     // Luminance is equal to Y
     return xyz.y;
 }
+
+#include "moc_colorutils.cpp"

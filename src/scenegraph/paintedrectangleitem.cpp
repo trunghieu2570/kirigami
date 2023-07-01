@@ -54,3 +54,5 @@ void PaintedRectangleItem::paint(QPainter *painter)
     painter->setBrush(m_color);
     painter->drawRoundedRect(borderWidth, borderWidth, width() - borderWidth * 2, height() - borderWidth * 2, radius, radius);
 }
+
+#include "moc_paintedrectangleitem.cpp"

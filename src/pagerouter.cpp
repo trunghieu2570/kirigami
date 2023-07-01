@@ -780,3 +780,5 @@ PageRouterAttached::PageRouterAttached(QObject *parent)
         });
     }
 }
+
+#include "moc_pagerouter.cpp"
