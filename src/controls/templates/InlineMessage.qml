@@ -221,15 +221,12 @@ T2.Control {
                     return root.icon.source;
                 }
 
-                if (root.type === Kirigami.MessageType.Positive) {
-                    return "dialog-positive";
-                } else if (root.type === Kirigami.MessageType.Warning) {
-                    return "dialog-warning";
-                } else if (root.type === Kirigami.MessageType.Error) {
-                    return "dialog-error";
+                switch (root.type) {
+                    case Kirigami.MessageType.Positive: return "dialog-positive";
+                    case Kirigami.MessageType.Warning: return "dialog-warning";
+                    case Kirigami.MessageType.Error: return "dialog-error";
+                    default: return "dialog-information";
                 }
-
-                return "dialog-information";
             }
 
             color: root.icon.color
