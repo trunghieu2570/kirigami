@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-06-10 09:22+0200\n"
+"PO-Revision-Date: 2023-07-01 07:38+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -12,7 +12,7 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #: controls/AboutItem.qml:139
 #, qt-format
@@ -140,20 +140,14 @@ msgid "Password"
 msgstr "Hasło"
 
 #: controls/PasswordField.qml:45
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Hide Password"
-msgstr "Hasło"
+msgstr "Ukryj hasło"
 
 #: controls/PasswordField.qml:45
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Show Password"
-msgstr "Hasło"
+msgstr "Pokaż hasło"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
