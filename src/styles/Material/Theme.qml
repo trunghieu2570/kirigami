@@ -12,22 +12,20 @@ import org.kde.kirigami 2.16 as Kirigami
  * \internal
  */
 Kirigami.BasicThemeDefinition {
-    id: theme
-
-    textColor: theme.Material.foreground
+    textColor: Material.foreground
     disabledTextColor: Qt.rgba(theme.textColor.r, theme.textColor.g, theme.textColor.b, 0.6)
 
-    highlightColor: theme.Material.accent
+    highlightColor: Material.accent
     //FIXME: something better?
-    highlightedTextColor: theme.Material.background
-    backgroundColor: theme.Material.background
-    alternateBackgroundColor: Qt.darker(theme.Material.background, 1.05)
+    highlightedTextColor: Material.background
+    backgroundColor: Material.background
+    alternateBackgroundColor: Qt.darker(Material.background, 1.05)
 
-    hoverColor: theme.Material.highlightedButtonColor
-    focusColor: theme.Material.highlightedButtonColor
+    hoverColor: Material.highlightedButtonColor
+    focusColor: Material.highlightedButtonColor
 
-    activeTextColor: theme.Material.primary
-    activeBackgroundColor: theme.Material.primary
+    activeTextColor: Material.primary
+    activeBackgroundColor: Material.primary
     linkColor: "#2980B9"
     linkBackgroundColor: "#2980B9"
     visitedLinkColor: "#7F8C8D"
@@ -39,41 +37,41 @@ Kirigami.BasicThemeDefinition {
     positiveTextColor: "#27AE60"
     positiveBackgroundColor: "#27AE60"
 
-    buttonTextColor: theme.Material.foreground
-    buttonBackgroundColor: theme.Material.buttonColor
-    buttonAlternateBackgroundColor: Qt.darker(theme.Material.buttonColor, 1.05)
-    buttonHoverColor: theme.Material.highlightedButtonColor
-    buttonFocusColor: theme.Material.highlightedButtonColor
+    buttonTextColor: Material.foreground
+    buttonBackgroundColor: Material.buttonColor
+    buttonAlternateBackgroundColor: Qt.darker(Material.buttonColor, 1.05)
+    buttonHoverColor: Material.highlightedButtonColor
+    buttonFocusColor: Material.highlightedButtonColor
 
-    viewTextColor: theme.Material.foreground
-    viewBackgroundColor: theme.Material.dialogColor
-    viewAlternateBackgroundColor: Qt.darker(theme.Material.dialogColor, 1.05)
-    viewHoverColor: theme.Material.listHighlightColor
-    viewFocusColor: theme.Material.listHighlightColor
+    viewTextColor: Material.foreground
+    viewBackgroundColor: Material.dialogColor
+    viewAlternateBackgroundColor: Qt.darker(Material.dialogColor, 1.05)
+    viewHoverColor: Material.listHighlightColor
+    viewFocusColor: Material.listHighlightColor
 
-    selectionTextColor: theme.Material.primaryHighlightedTextColor
-    selectionBackgroundColor: theme.Material.textSelectionColor
-    selectionAlternateBackgroundColor: Qt.darker(theme.Material.textSelectionColor, 1.05)
-    selectionHoverColor: theme.Material.highlightedButtonColor
-    selectionFocusColor: theme.Material.highlightedButtonColor
+    selectionTextColor: Material.primaryHighlightedTextColor
+    selectionBackgroundColor: Material.textSelectionColor
+    selectionAlternateBackgroundColor: Qt.darker(Material.textSelectionColor, 1.05)
+    selectionHoverColor: Material.highlightedButtonColor
+    selectionFocusColor: Material.highlightedButtonColor
 
     tooltipTextColor: fontMetrics.Material.foreground
     tooltipBackgroundColor: fontMetrics.Material.tooltipColor
-    tooltipAlternateBackgroundColor: Qt.darker(theme.Material.tooltipColor, 1.05)
+    tooltipAlternateBackgroundColor: Qt.darker(Material.tooltipColor, 1.05)
     tooltipHoverColor: fontMetrics.Material.highlightedButtonColor
     tooltipFocusColor: fontMetrics.Material.highlightedButtonColor
 
     complementaryTextColor: fontMetrics.Material.foreground
     complementaryBackgroundColor: fontMetrics.Material.background
     complementaryAlternateBackgroundColor: Qt.lighter(fontMetrics.Material.background, 1.05)
-    complementaryHoverColor: theme.Material.highlightedButtonColor
-    complementaryFocusColor: theme.Material.highlightedButtonColor
+    complementaryHoverColor: Material.highlightedButtonColor
+    complementaryFocusColor: Material.highlightedButtonColor
 
     headerTextColor: fontMetrics.Material.primaryTextColor
     headerBackgroundColor: fontMetrics.Material.primaryColor
     headerAlternateBackgroundColor: Qt.lighter(fontMetrics.Material.primaryColor, 1.05)
-    headerHoverColor: theme.Material.highlightedButtonColor
-    headerFocusColor: theme.Material.highlightedButtonColor
+    headerHoverColor: Material.highlightedButtonColor
+    headerFocusColor: Material.highlightedButtonColor
 
     defaultFont: fontMetrics.font
 
