@@ -73,4 +73,17 @@ TestCase {
         const activatedLink = message.linkActivatedSpy.signalArguments[0][0];
         compare(activatedLink, href);
     }
+
+    function test_hoveredLink_is_readonly() {
+        const message = createTemporaryObject(inlineMessageComponent, this);
+        verify(message);
+        compare(message.hoveredLink, "");
+        let failed = false;
+        try {
+            message.hoveredLink = "something";
+        } catch (e) {
+            failed = true;
+        }
+        verify(failed);
+    }
 }

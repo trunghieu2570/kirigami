@@ -81,7 +81,7 @@ T2.Control {
     /**
      * This property holds the link embedded in the message text that the user is hovering over.
      */
-    readonly property string hoveredLink: label.hoveredLink
+    readonly property alias hoveredLink: label.hoveredLink
 
     /**
      * This property holds the message type. One of Information, Positive, Warning or Error.
