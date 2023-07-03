@@ -252,7 +252,8 @@ Kirigami.AbstractListItem {
 
         RowLayout {
             id: layout
-            spacing: LayoutMirroring.enabled ? listItem.rightPadding : listItem.leftPadding
+            LayoutMirroring.enabled: listItem.mirrored
+            spacing: listItem.mirrored ? listItem.rightPadding : listItem.leftPadding
             anchors.left: contItem.left
             anchors.leftMargin: listItem.leading ? listItem.leadingPadding : 0
             anchors.right: contItem.right
