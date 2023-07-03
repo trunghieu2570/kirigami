@@ -232,7 +232,7 @@ T2.Control {
             color: root.icon.color
         }
 
-        MouseArea {
+        Item {
             id: labelArea
 
             anchors {
@@ -243,10 +243,6 @@ T2.Control {
                 top: parent.top
                 bottom: contentLayout.multiline ? undefined : parent.bottom
             }
-
-            acceptedButtons: Qt.NoButton
-            cursorShape: label.hoveredLink.length > 0 ? Qt.PointingHandCursor : undefined
-            propagateComposedEvents: true
 
             implicitWidth: label.implicitWidth
             height: contentLayout.multiline ? label.implicitHeight : implicitHeight
