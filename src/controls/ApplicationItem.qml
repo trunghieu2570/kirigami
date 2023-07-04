@@ -84,7 +84,7 @@ Kirigami.AbstractApplicationItem {
      * as can fit in the screen. An handheld device would usually have a single
      * fullscreen column, a tablet device would have many tiled columns.
      *
-     * @property QtQuick.StackView ApplicationItem::pageStack
+     * @property org::kde::kirigami::PageRow pageStack
      */
     readonly property alias pageStack: __pageStack
 

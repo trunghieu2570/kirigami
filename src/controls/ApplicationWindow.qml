@@ -108,7 +108,7 @@ Kirigami.AbstractApplicationWindow {
         pageStack.currentItem?.forceActiveFocus()
     }
 
-    PageRow {
+    Kirigami.PageRow {
         id: __pageStack
         globalToolBar.style: Kirigami.ApplicationHeaderStyle.Auto
         anchors {
