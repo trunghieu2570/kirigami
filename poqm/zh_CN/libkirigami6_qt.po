@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
-"PO-Revision-Date: 2023-06-17 04:09\n"
+"PO-Revision-Date: 2023-07-03 11:36\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -141,20 +141,14 @@ msgid "Password"
 msgstr "密码"
 
 #: controls/PasswordField.qml:45
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Hide Password"
-msgstr "密码"
+msgstr "隐藏密码"
 
 #: controls/PasswordField.qml:45
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Show Password"
-msgstr "密码"
+msgstr "显示密码"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
@@ -246,27 +240,3 @@ msgstr "%1 窗口系统"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (使用 %3 构建)"
-
-#~ msgctxt "PageTab|"
-#~ msgid "Current page. Progress: %1 percent."
-#~ msgstr "当前页面。进度：百分之 %1。"
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1. Progress: %2 percent."
-#~ msgstr "前往 %1。进度：%2%。"
-
-#~ msgctxt "PageTab|"
-#~ msgid "Current page."
-#~ msgstr "当前页面。"
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1. Demanding attention."
-#~ msgstr "前往 %1。要求关注。"
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1."
-#~ msgstr "前往 %1。"
-
-#~ msgctxt "ToolBarApplicationHeader|"
-#~ msgid "More Actions"
-#~ msgstr "更多操作"
