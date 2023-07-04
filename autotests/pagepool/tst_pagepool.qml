@@ -112,7 +112,7 @@ TestCase {
         loadPageActionPropDoesNotExist.trigger()
         verify(!pool.lastLoadedUrl.toString().endsWith(expectedUrl))
     }
-    
+
     function test_contains () {
         const page = "TestPage.qml?action=contains"
         let item = pool.loadPage(page)
@@ -120,7 +120,7 @@ TestCase {
         verify(pool.contains(page), "pool contains page")
         verify(pool.contains(item), "pool contains item")
     }
-    
+
     function test_deletePageByUrl () {
         const urlPage = "TestPage.qml?action=deletePageByUrl"
         pool.loadPage(urlPage)
@@ -128,7 +128,7 @@ TestCase {
         pool.deletePage(urlPage)
         verify(!pool.contains(urlPage), "pool does not contain page after deletion")
     }
-    
+
     function test_deletePageByItem () {
         const itemPage = "TestPage.qml?action=deletePageByItem"
         let item = pool.loadPage(itemPage)
@@ -136,7 +136,7 @@ TestCase {
         pool.deletePage(item)
         verify(!pool.contains(itemPage), "pool does not contain page after deletion")
     }
-    
+
     function test_iterateAndDeleteByItem () {
         const pages = []
         for (let i = 1; i <= 5; ++i) {
@@ -154,7 +154,7 @@ TestCase {
         }
         verify(pool.items.length == 0, "all items have been deleted")
     }
-    
+
     function test_iterateAndDeleteByUrl () {
         const pages = []
         for (let i = 1; i <= 5; ++i) {
