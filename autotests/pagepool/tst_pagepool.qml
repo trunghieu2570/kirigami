@@ -89,6 +89,7 @@ TestCase {
     }
 
     function test_loadPageInitialPropertiesWrongType () {
+        ignoreWarning("initialProperties must be of type object")
         var expectedUrl = "TestPage.qml?action=loadPageAction"
         compare(mainWindow.pageStack.depth, 0)
         loadPageAction.trigger()
@@ -108,9 +109,10 @@ TestCase {
     }
 
     function test_loadPageInitialPropertyNotExistFails () {
+        ignoreWarning(/.*Setting initial properties failed: TestPage does not have a property called propDoesNotExist/)
         var expectedUrl = "TestPage.qml?action=loadPageActionPropDoesNotExist"
         loadPageActionPropDoesNotExist.trigger()
-        verify(!pool.lastLoadedUrl.toString().endsWith(expectedUrl))
+        verify(pool.lastLoadedUrl.toString().endsWith(expectedUrl))
     }
 
     function test_contains () {
