@@ -4,11 +4,10 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.7
-import QtQml 2.7
-import QtQuick.Templates 2.1 as T
-import QtQuick.Controls 2.5 as QQC2
-import org.kde.kirigami 2.11 as Kirigami
+import QtQuick
+import QtQml
+import QtQuick.Templates as T
+import org.kde.kirigami 2 as Kirigami
 
 /**
  * An action used to load Pages coming from a common PagePool
@@ -90,7 +89,7 @@ Kirigami.Action {
     /**
      * @returns the page item held in the PagePool or null if it has not been loaded yet.
      */
-    function pageItem() {
+    function pageItem(): Item {
         return pagePool.pageForUrl(page)
     }
 
@@ -98,22 +97,25 @@ Kirigami.Action {
      * @returns true if the page has been loaded and placed on pageStack.layers
      * and useLayers is true, otherwise returns null.
      */
-    function layerContainsPage() {
-        if (!useLayers || !pageStack.hasOwnProperty("layers")) return false
+    function layerContainsPage(): bool {
+        if (!useLayers || !pageStack.hasOwnProperty("layers")) {
+            return false;
+        }
 
-        const item = pageStack.layers.find((item, index) => {
-            return item === pagePool.pageForUrl(page)
-        })
-        return !!item
+        const pageItem = this.pageItem();
+        const item = pageStack.layers.find(item => item === pageItem);
+        return item !== null;
     }
 
     /**
      * @returns true if the page has been loaded and placed on the pageStack,
      * otherwise returns null.
      */
-    function stackContainsPage() {
-        if (useLayers) return false
-        return pageStack.columnView.containsItem(pagePool.pageForUrl(page))
+    function stackContainsPage(): bool {
+        if (useLayers) {
+            return false;
+        }
+        return pageStack.columnView.containsItem(pagePool.pageForUrl(page));
     }
 
     checkable: true
@@ -124,49 +126,51 @@ Kirigami.Action {
         }
 
         // User intends to "go back" to this layer.
-        if (layerContainsPage() && pageItem() !== pageStack.layers.currentItem) {
-            pageStack.layers.replace(pageItem(), pageItem()) // force pop above
-            return
+        const pageItem = this.pageItem();
+        if (layerContainsPage() && pageItem !== pageStack.layers.currentItem) {
+            pageStack.layers.replace(pageItem, pageItem); // force pop above
+            return;
         }
 
         // User intends to "go back" to this page.
         if (stackContainsPage()) {
             if (pageStack.hasOwnProperty("layers")) {
-                pageStack.layers.clear()
+                pageStack.layers.clear();
             }
         }
 
-        const pageStack_ = useLayers ? pageStack.layers : pageStack
+        const stack = useLayers ? pageStack.layers : pageStack
 
         if (initialProperties && typeof(initialProperties) !== "object") {
             console.warn("initialProperties must be of type object");
             return;
         }
 
-        if (!pageStack_.hasOwnProperty("pop") || typeof pageStack_.pop !== "function" || !pageStack_.hasOwnProperty("push") || typeof pageStack_.push !== "function") {
+        if (!stack.hasOwnProperty("pop") || typeof stack.pop !== "function" || !stack.hasOwnProperty("push") || typeof stack.push !== "function") {
             return;
         }
 
         if (pagePool.isLocalUrl(page)) {
             if (basePage) {
-                pageStack_.pop(basePage);
+                stack.pop(basePage);
 
             } else if (!useLayers) {
-                pageStack_.clear();
+                stack.clear();
             }
 
-            pageStack_.push(initialProperties ?
-                               pagePool.loadPageWithProperties(page, initialProperties) :
-                               pagePool.loadPage(page));
+            stack.push(initialProperties
+                ? pagePool.loadPageWithProperties(page, initialProperties)
+                : pagePool.loadPage(page));
         } else {
-            const callback = function(item) {
+            const callback = item => {
                 if (basePage) {
-                    pageStack_.pop(basePage);
+                    stack.pop(basePage);
 
                 } else if (!useLayers) {
-                    pageStack_.clear();
+                    stack.clear();
                 }
-                pageStack_.push(item);
+
+                stack.push(item);
             };
 
             if (initialProperties) {
@@ -183,42 +187,44 @@ Kirigami.Action {
         id: _private
 
         function setChecked(checked) {
-            root.checked = checked
+            root.checked = checked;
         }
 
         function clearLayers() {
-            pageStack.layers.clear()
+            root.pageStack.layers.clear();
         }
 
         property list<Connections> connections: [
             Connections {
-                target: pageStack
+                target: root.pageStack
 
                 function onCurrentItemChanged() {
                     if (root.useLayers) {
                         if (root.layerContainsPage()) {
-                            _private.clearLayers()
+                            _private.clearLayers();
                         }
-                        if (root.checkable)
+                        if (root.checkable) {
                             _private.setChecked(false);
+                        }
 
                     } else {
-                        if (root.checkable)
+                        if (root.checkable) {
                             _private.setChecked(root.stackContainsPage());
+                        }
                     }
                 }
             },
             Connections {
-                enabled: pageStack.hasOwnProperty("layers")
-                target: pageStack.layers
+                enabled: root.pageStack.hasOwnProperty("layers")
+                target: root.pageStack.layers
 
                 function onCurrentItemChanged() {
                     if (root.useLayers && root.checkable) {
                         _private.setChecked(root.layerContainsPage());
 
                     } else {
-                        if (pageStack.layers.depth === 1 && root.stackContainsPage()) {
-                            _private.setChecked(true)
+                        if (root.pageStack.layers.depth === 1 && root.stackContainsPage()) {
+                            _private.setChecked(true);
                         }
                     }
                 }
