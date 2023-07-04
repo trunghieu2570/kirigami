@@ -15,19 +15,21 @@ Rectangle {
 
     required property T.Control listItem
 
+    readonly property bool selected: listItem.highlighted || listItem.checked || (listItem.down && !listItem.checked && !listItem.sectionDelegate) || listItem.visualFocus
+
     radius: Kirigami.Units.mediumSpacing
 
-    color: if (listItem.highlighted || listItem.checked || (listItem.down && !listItem.checked && !listItem.sectionDelegate) || listItem.visualFocus) {
+    color: if (listItem.activeFocus || listItem.hovered) {
         Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.highlightColor, 0.15)
-    } else if (listItem.hovered) {
+    } else if (background.selected) {
         Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.10)
     } else {
         Kirigami.Theme.backgroundColor
     }
 
     border {
-        color: Kirigami.Theme.highlightColor
-        width: listItem.visualFocus || listItem.activeFocus ? 1 : 0
+        color: listItem.activeFocus ? Kirigami.Theme.highlightColor : Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.5)
+        width: background.selected || listItem.activeFocus ? 1 : 0
     }
 
     Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
