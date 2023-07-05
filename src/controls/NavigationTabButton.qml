@@ -162,7 +162,7 @@ T.TabButton {
             id: icon
             source: control.icon.name || control.icon.source
             isMask: control.recolorIcon
-            visible: control.icon.name !== "" && control.icon.source.toString() !== "" && control.display !== T.AbstractButton.TextOnly
+            visible: (control.icon.name !== "" || control.icon.source.toString() !== "") && control.display !== T.AbstractButton.TextOnly
             color: control.icon.color
 
             Layout.topMargin: gridLayout.verticalMargins
