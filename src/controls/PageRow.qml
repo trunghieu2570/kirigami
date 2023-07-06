@@ -924,7 +924,7 @@ QT.Control {
         QQC2.Control {
             id: sidebarControl
             Layout.fillHeight: true
-            visible: contentItem !== null && root.leftDrawer && root.leftDrawer.visible
+            visible: contentItem !== null
             leftPadding: root.leftSidebar ? root.leftSidebar.leftPadding : 0
             topPadding: root.leftSidebar ? root.leftSidebar.topPadding : 0
             rightPadding: root.leftSidebar ? root.leftSidebar.rightPadding : 0
