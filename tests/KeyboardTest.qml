@@ -9,8 +9,12 @@ import QtQuick.Controls 2.15
 
 import org.kde.kirigami 2.20 as Kirigami
 
-Kirigami.ApplicationWindow {
-    id: main
+Kirigami.PageRow {
+    id: pageStack
+    width: 500
+    height: 500
+
+    defaultColumnWidth: 250
 
     Component {
         id: keyPage
@@ -38,13 +42,8 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    header: Label {
-        padding: Kirigami.Units.largeSpacing
-        text: `focus: ${main.activeFocusItem}, current: ${main.pageStack.currentIndex}`
-    }
-
     Component.onCompleted: {
-        main.pageStack.push(keyPage)
-        main.pageStack.push(keyPage)
+        pageStack.push(keyPage)
+        pageStack.push(keyPage)
     }
 }

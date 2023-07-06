@@ -18,44 +18,27 @@ TestCase {
     name: "KeyboardNavigation"
 
     KeyboardTest {
-        id: mainWindow
-        width: 480
-        height: 360
+        id: mainWindowPageStack
     }
 
     SignalSpy {
-        id: spyActive
-        target: mainWindow
-        signalName: "activeChanged"
-    }
-    SignalSpy {
         id: spyLastKey
-        target: mainWindow.pageStack.currentItem
+        target: mainWindowPageStack.currentItem
         signalName: "lastKeyChanged"
     }
 
-    function initTestCase() {
-        mainWindow.show()
-    }
-
-    function cleanupTestCase() {
-        mainWindow.close()
-    }
-
     function test_press() {
-        compare(mainWindow.pageStack.depth, 2)
-        compare(mainWindow.pageStack.currentIndex, 1)
-        if (!mainWindow.active)
-            spyActive.wait(5000)
-        verify(mainWindow.active)
+        waitForRendering(testCase)
+        compare(mainWindowPageStack.depth, 2)
+        compare(mainWindowPageStack.currentIndex, 1)
         keyClick("A")
         spyLastKey.wait()
-        compare(mainWindow.pageStack.currentItem.lastKey, "A")
+        compare(mainWindowPageStack.currentItem.lastKey, "A")
         keyClick(Qt.Key_Left, Qt.AltModifier)
-        compare(mainWindow.pageStack.currentIndex, 0)
-        compare(mainWindow.pageStack.currentItem.lastKey, "")
+        compare(mainWindowPageStack.currentIndex, 0)
+        compare(mainWindowPageStack.currentItem.lastKey, "")
         keyClick("B")
         spyLastKey.wait()
-        compare(mainWindow.pageStack.currentItem.lastKey, "B")
+        compare(mainWindowPageStack.currentItem.lastKey, "B")
     }
 }
