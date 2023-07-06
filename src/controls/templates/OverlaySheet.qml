@@ -114,7 +114,7 @@ T2.Popup {
     y: {
         const visualParentAdjust = sheetHandler.visualParent ? sheetHandler.visualParent.y : 0;
         const wantedPosition = Kirigami.Settings.isMobile ? parent.height - implicitHeight - Kirigami.Units.gridUnit : parent.height / 2 - implicitHeight / 2;
-        Math.max(visualParentAdjust, wantedPosition, Kirigami.Units.gridUnit * 3 - scrollView.contentItem.contentY);
+        Math.max(visualParentAdjust, wantedPosition, Kirigami.Units.gridUnit * 3);
     }
 
     implicitWidth: {
@@ -141,11 +141,10 @@ T2.Popup {
         }
         h += headerItem.implicitHeight + footerParent.implicitHeight + topPadding + bottomPadding;
     }
-    //height: Math.min(parent.height, scrollView.contentItem.contentHeight)
 //END Reimplemented Properties
 
 //BEGIN Signal handlers
-    onVisibleChanged: scrollView.contentItem.contentY = 0
+    onVisibleChanged: scrollView.contentItem.contentY = 0 + scrollView.contentItem.originY - scrollView.contentItem.topMargin
     onHeaderChanged: headerItem.initHeader()
     onFooterChanged: {
         footer.parent = footerParent;
@@ -163,11 +162,58 @@ T2.Popup {
 //END Signal handlers
 
 //BEGIN UI
-    contentItem: Item {
+    contentItem: MouseArea {
         implicitWidth: mainLayout.implicitWidth
         implicitHeight: mainLayout.implicitHeight
         Kirigami.Theme.colorSet: root.Kirigami.Theme.colorSet
         Kirigami.Theme.inherit: false
+
+        property real scenePressY
+        property real lastY
+        property bool dragStarted
+        drag.filterChildren: true
+        DragHandler {
+            id: mouseDragBlocker
+            target: null
+            dragThreshold: 0
+            acceptedDevices: PointerDevice.Mouse
+            onActiveChanged: {
+                if (active) {
+                    parent.dragStarted = false;
+                }
+            }
+        }
+
+        onPressed: mouse => {
+            scenePressY = mapToItem(null, mouse.x, mouse.y).y;
+            lastY = scenePressY;
+            dragStarted = false;
+        }
+        onPositionChanged: mouse => {
+            if (mouseDragBlocker.active) {
+                return;
+            }
+            const currentY = mapToItem(null, mouse.x, mouse.y).y;
+
+            if (dragStarted && currentY !== lastY) {
+                translation.y += currentY - lastY;
+            }
+            if (Math.abs(currentY - scenePressY) > Qt.styleHints.startDragDistance) {
+                dragStarted = true;
+            }
+            lastY = currentY;
+        }
+        onCanceled: restoreAnim.restart();
+        onReleased: mouse => {
+            if (mouseDragBlocker.active) {
+                return;
+            }
+            if (Math.abs(mapToItem(null, mouse.x, mouse.y).y - scenePressY) > Kirigami.Units.gridUnit * 5) {
+                root.close();
+            } else {
+                restoreAnim.restart();
+            }
+        }
 
         ColumnLayout {
             id: mainLayout
@@ -312,57 +358,25 @@ T2.Popup {
         Translate {
             id: translation
         }
-        Item {
+        MouseArea {
             id: sheetHandler
             readonly property Item visualParent: root.parent.hasOwnProperty("contentItem") && root.parent.contentItem ? root.parent.contentItem : root.parent
-            property var mappedPos: visualParent ? mapFromItem(visualParent, 0, 0) : Qt.point(0,0)
-            x: mappedPos.x
-            y: mappedPos.y
+            x: -root.x
+            y: -root.y
             z: -1
             width:  visualParent ? visualParent.width : 0
             height: visualParent ? visualParent.height * 2 : 0
 
-            TapHandler {
-                onTapped: root.close()
+            property var pressPos
+            onPressed: mouse => {
+                pressPos = mapToItem(null, mouse.x, mouse.y)
             }
-
-            DragHandler {
-                id: handler
-                target: null
-                acceptedDevices: PointerDevice.TouchScreen
-                property real lastY: 0
-                property bool dragStarted: false
-                grabPermissions: scrollView.initialized && (scrollView.contentItem.atYBeginning || scrollView.contentItem.atYEnd)
-                    ? PointerHandler.CanTakeOverFromItems | PointerHandler.CanTakeOverFromHandlersOfDifferentType | PointerHandler.ApprovesTakeOverByAnything
-                    : PointerHandler.CanTakeOverFromHandlersOfDifferentType | PointerHandler.ApprovesTakeOverByAnything
-                dragThreshold: 0
-                onActiveChanged: () => {
-                    if (active) {
-                        return;
-                    }
-                    if (Math.abs(handler.lastY - handler.centroid.scenePressPosition.y) < 4 || Math.abs(translation.y) > Kirigami.Units.gridUnit * 5) {
-                        root.close();
-                    } else {
-                        restoreAnim.restart();
-                    }
-                    handler.dragStarted = false;
-                }
-                onCentroidChanged: {
-                    const currentY = centroid.scenePosition.y - centroid.scenePressPosition.y;
-                    if (!active) {
-                        lastY = currentY;
-                        return;
-                    }
-
-                    if (!dragStarted && currentY > lastY && !scrollView.contentItem.atYBeginning) {
-                        scrollView.contentItem.contentY -= (currentY - lastY)
-                    } else if (!dragStarted && currentY < lastY && !scrollView.contentItem.atYEnd) {
-                        scrollView.contentItem.contentY += (lastY - currentY)
-                    } else if (currentY !== lastY) {
-                        translation.y += currentY - lastY;
-                        dragStarted = true;
-                    }
-                    lastY = currentY;
+            onReleased: mouse => {
+                // onClicked is emitted even if the mouse was dragged a lot, so we have to check the Manhattan length by hand
+                // https://en.wikipedia.org/wiki/Taxicab_geometry
+                let pos = mapToItem(null, mouse.x, mouse.y)
+                if (Math.abs(pos.x - pressPos.x) + Math.abs(pos.y - pressPos.y) < Qt.styleHints.startDragDistance) {
+                    root.close();
                 }
             }
 
