@@ -185,7 +185,7 @@ QQC2.Control {
         actions.main?.trigger();
     }
 
-    QQC2.ToolTip.text: avatarRoot.actions.main && avatarRoot.actions.main.tooltip ? avatarRoot.actions.main.tooltip : ''
+    QQC2.ToolTip.text: avatarRoot.actions.main?.tooltip ?? ''
     QQC2.ToolTip.visible: primaryMouse.containsMouse && QQC2.ToolTip.text.length > 0
     QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
 
