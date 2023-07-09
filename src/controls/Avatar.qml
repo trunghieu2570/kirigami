@@ -185,6 +185,10 @@ QQC2.Control {
         actions.main?.trigger();
     }
 
+    QQC2.ToolTip.text: avatarRoot.actions.main && avatarRoot.actions.main.tooltip ? avatarRoot.actions.main.tooltip : ''
+    QQC2.ToolTip.visible: primaryMouse.containsMouse && QQC2.ToolTip.text.length > 0
+    QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+
     background: Rectangle {
         radius: parent.width / 2
 
@@ -227,11 +231,6 @@ QQC2.Control {
 
             enabled: avatarRoot.actions.main !== null || avatarRoot.actions.secondary !== null
             cursorShape: containsMouse && mouseInCircle && enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
-
-            QQC2.ToolTip {
-                text: avatarRoot.actions.main?.tooltip ?? ""
-                visible: primaryMouse.containsMouse && text.length > 0
-            }
 
             states: [
                 State {
