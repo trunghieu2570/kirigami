@@ -1,11 +1,11 @@
 
 add_subdirectory(libkirigami)
 
-ecm_add_qml_module(KirigamiPlugin URI "org.kde.kirigami" VERSION 2.0 CLASSNAME KirigamiPlugin)
-
-ecm_add_qml_module_dependencies(KirigamiPlugin DEPENDS
-    "QtQuick.Controls 2.15"
-    "Qt5Compat.GraphicalEffects 6.0"
+ecm_add_qml_module(KirigamiPlugin URI "org.kde.kirigami" VERSION 2.0
+    CLASS_NAME KirigamiPlugin
+    DEPENDENCIES
+    "QtQuick.Controls"
+    "Qt5Compat.GraphicalEffects"
 )
 
 ecm_create_qm_loader(kirigami_QM_LOADER libkirigami6_qt)
@@ -212,8 +212,10 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates SOURCES
     controls/templates/OverlayDrawer.qml
     controls/templates/OverlaySheet.qml
     controls/templates/SingletonHeaderSizeGroup.qml
-    controls/templates/qmldir
 )
+
+set_source_files_properties(controls/templates/qmldir PROPERTIES QT_RESOURCE_ALIAS templates/qmldir)
+qt_target_qml_sources(KirigamiPlugin RESOURCES controls/templates/qmldir)
 
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates/private SOURCES
     controls/templates/private/BackButton.qml
@@ -226,13 +228,13 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates/private SOURCES
     controls/templates/private/PassiveNotificationsManager.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH styles/Material SOURCES
+qt_target_qml_sources(KirigamiPlugin RESOURCES
     styles/Material/InlineMessage.qml
     styles/Material/Theme.qml
 )
 
 if (DESKTOP_ENABLED)
-    ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH styles/org.kde.desktop SOURCES
+    qt_target_qml_sources(KirigamiPlugin RESOURCES
         styles/org.kde.desktop/AbstractApplicationHeader.qml
         styles/org.kde.desktop/Theme.qml
     )
@@ -255,8 +257,6 @@ target_link_libraries(KirigamiPlugin PRIVATE OpenMP::OpenMP_CXX)
 endif()
 
 ecm_finalize_qml_module(KirigamiPlugin DESTINATION ${KDE_INSTALL_QMLDIR})
-
-ecm_generate_qmltypes(org.kde.kirigami 2.0 DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami.2)
 
 if (ANDROID)
     install(FILES KF6Kirigami2-android-dependencies.xml
