@@ -195,7 +195,6 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private SOURCES
     controls/private/CornerShadow.qml
     controls/private/DefaultCardBackground.qml
     controls/private/DefaultChipBackground.qml
-    controls/private/DefaultListItemBackground.qml
     controls/private/DefaultPageTitleDelegate.qml
     controls/private/EdgeShadow.qml
     controls/private/GlobalDrawerActionItem.qml
@@ -236,17 +235,13 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates/private SOURCES
 )
 
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH styles/Material SOURCES
-    styles/Material/AbstractListItem.qml
     styles/Material/InlineMessage.qml
-    styles/Material/SwipeListItem.qml
     styles/Material/Theme.qml
 )
 
 if (DESKTOP_ENABLED)
     ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH styles/org.kde.desktop SOURCES
         styles/org.kde.desktop/AbstractApplicationHeader.qml
-        styles/org.kde.desktop/AbstractListItem.qml
-        styles/org.kde.desktop/SwipeListItem.qml
         styles/org.kde.desktop/Theme.qml
     )
 endif()

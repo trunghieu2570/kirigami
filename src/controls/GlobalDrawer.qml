@@ -544,7 +544,6 @@ OverlayDrawer {
                                         }
                                     }
                                     Kirigami.Theme.colorSet: drawerItem.visible && !root.modal && !root.collapsed && actionsRepeater.withSections ? Kirigami.Theme.Window : parent.Kirigami.Theme.colorSet
-                                    backgroundColor: Kirigami.Theme.backgroundColor
                                 }
                                 Item {
                                     id: headerItem
