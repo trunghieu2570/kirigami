@@ -217,12 +217,10 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates SOURCES
     controls/templates/AbstractApplicationHeader.qml
     controls/templates/AbstractCard.qml
     controls/templates/AbstractChip.qml
-    controls/templates/AbstractListItem.qml
     controls/templates/InlineMessage.qml
     controls/templates/OverlayDrawer.qml
     controls/templates/OverlaySheet.qml
     controls/templates/SingletonHeaderSizeGroup.qml
-    controls/templates/SwipeListItem.qml
     controls/templates/qmldir
 )
 
