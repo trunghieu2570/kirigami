@@ -123,12 +123,12 @@ msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Tilbake"
 
-#: controls/GlobalDrawer.qml:597
+#: controls/GlobalDrawer.qml:596
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Lukk sidestolpen"
 
-#: controls/GlobalDrawer.qml:600
+#: controls/GlobalDrawer.qml:599
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Opna sidestolpe"

@@ -125,12 +125,12 @@ msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Nazad"
 
-#: controls/GlobalDrawer.qml:597
+#: controls/GlobalDrawer.qml:596
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr ""
 
-#: controls/GlobalDrawer.qml:600
+#: controls/GlobalDrawer.qml:599
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr ""

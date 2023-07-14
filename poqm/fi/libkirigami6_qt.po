@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-03-12 10:42+0200\n"
+"PO-Revision-Date: 2023-07-04 21:31+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -119,12 +119,12 @@ msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Takaisin"
 
-#: controls/GlobalDrawer.qml:597
+#: controls/GlobalDrawer.qml:596
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Sulje sivupaneeli"
 
-#: controls/GlobalDrawer.qml:600
+#: controls/GlobalDrawer.qml:599
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Avaa sivupaneeli"
@@ -140,20 +140,14 @@ msgid "Password"
 msgstr "Salasana"
 
 #: controls/PasswordField.qml:45
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Hide Password"
-msgstr "Salasana"
+msgstr "Piilota salasana"
 
 #: controls/PasswordField.qml:45
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Show Password"
-msgstr "Salasana"
+msgstr "Näytä salasana"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
@@ -216,15 +210,12 @@ msgstr "Siirry eteenpäin"
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link %1"
-msgstr ""
+msgstr "Avaa linkki %1"
 
 #: controls/UrlButton.qml:35
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Open menu"
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
-msgstr "Avaa valikko"
+msgstr "Avaa linkki"
 
 #: controls/UrlButton.qml:58
 msgctxt "UrlButton|"
