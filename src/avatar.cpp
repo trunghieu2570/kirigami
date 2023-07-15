@@ -50,18 +50,18 @@ QString NameUtils::initialsFromString(const QString &string)
         auto last = split.last();
         if (first.isEmpty()) {
             // "" "LastName" -> "L"
-            return QString(last.front());
+            return QString(last.front()).toUpper();
         }
         if (last.isEmpty()) {
             // "FirstName" "" -> "F"
-            return QString(first.front());
+            return QString(first.front()).toUpper();
         }
         // "FirstName" "LastName" -> "FL"
-        return QString(first.front()) + last.front();
+        return (QString(first.front()) + last.front()).toUpper();
         // "OneName"
     } else {
         // "OneName" -> "O"
-        return QString(normalized.front());
+        return QString(normalized.front()).toUpper();
     }
 }
 
