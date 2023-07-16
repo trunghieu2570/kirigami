@@ -1,14 +1,14 @@
-# Translation for libkirigami2plugin_qt.po to Euskara/Basque (eu).
-# Copyright (C) 2017-2022 This file is copyright:
+# Translation for libkirigami6_qt.po to Euskara/Basque (eu).
+# Copyright (C) 2017-2023 This file is copyright:
 # This file is distributed under the same license as the original file.
 # KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2017, 2018, 2019, 2020, 2021, 2022.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kirigami\n"
-"PO-Revision-Date: 2022-12-28 22:20+0100\n"
+"PO-Revision-Date: 2023-07-15 19:37+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #: controls/AboutItem.qml:139
 #, qt-format
@@ -145,20 +145,14 @@ msgid "Password"
 msgstr "Pasahitza"
 
 #: controls/PasswordField.qml:45
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Hide Password"
-msgstr "Pasahitza"
+msgstr "Ezkutatu pasahitza"
 
 #: controls/PasswordField.qml:45
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Show Password"
-msgstr "Pasahitza"
+msgstr "Erakutsi pasahitza"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
@@ -221,15 +215,12 @@ msgstr "Nabigatu aurrera"
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link %1"
-msgstr ""
+msgstr "Iriki esteka, %1"
 
 #: controls/UrlButton.qml:35
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Open menu"
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
-msgstr "Ireki menua"
+msgstr "Ireki esteka"
 
 #: controls/UrlButton.qml:58
 msgctxt "UrlButton|"
