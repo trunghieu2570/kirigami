@@ -72,7 +72,7 @@ Kirigami.AbstractApplicationHeader {
             Accessible.name: action.tooltip
 
             Connections {
-                target: applicationWindow().globalDrawer
+                target: applicationWindow().globalDrawer as Kirigami.GlobalDrawer
                 function onIsMenuChanged() {
                     if (!applicationWindow().globalDrawer.isMenu && menuButton.menu) {
                         menuButton.menu.dismiss()
