@@ -14,7 +14,7 @@ Kirigami.BasicListItem {
 
     readonly property bool isSeparator: modelData.hasOwnProperty("separator") && modelData.separator
 
-    readonly property bool isExpandible: modelData && modelData.hasOwnProperty("expandible") && modelData.expandible
+    readonly property bool isExpandable: modelData && modelData.hasOwnProperty("expandible") && modelData.expandible
 
     checked: modelData.checked
     icon.name: modelData.icon.name
@@ -23,13 +23,13 @@ Kirigami.BasicListItem {
     reserveSpaceForLabel: !isSeparator
 
     label: model ? (model.text ? model.text : model.tooltip) : (modelData.text ? modelData.text : modelData.tooltip)
-    hoverEnabled: (!isExpandible || root.collapsed) && !Kirigami.Settings.tabletMode && !listItem.isSeparator
-    sectionDelegate: isExpandible
-    font.pointSize: isExpandible ? Kirigami.Theme.defaultFont.pointSize * 1.30 : Kirigami.Theme.defaultFont.pointSize
+    hoverEnabled: (!isExpandable || root.collapsed) && !Kirigami.Settings.tabletMode && !listItem.isSeparator
+    sectionDelegate: isExpandable
+    font.pointSize: isExpandable ? Kirigami.Theme.defaultFont.pointSize * 1.30 : Kirigami.Theme.defaultFont.pointSize
 
-    enabled: !isExpandible && (model ? model.enabled : modelData.enabled)
+    enabled: !isExpandable && (model ? model.enabled : modelData.enabled)
     visible: model ? model.visible : modelData.visible
-    opacity: enabled || isExpandible ? 1.0 : 0.6
+    opacity: enabled || isExpandable ? 1.0 : 0.6
 
     Kirigami.Separator {
         id: separatorAction
@@ -73,7 +73,7 @@ Kirigami.BasicListItem {
         selected: listItem.checked || listItem.down
         Layout.preferredWidth: Layout.preferredHeight
         source: "go-up-symbolic"
-        visible: !isExpandible  && !listItem.isSeparator && modelData.children!== undefined && modelData.children.length > 0
+        visible: !isExpandable  && !listItem.isSeparator && modelData.children!== undefined && modelData.children.length > 0
     }
 
     onPressed: {

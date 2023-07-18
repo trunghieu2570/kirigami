@@ -17,7 +17,7 @@ Kirigami.AbstractListItem {
     readonly property bool wideMode: width > height * 2
     readonly property bool isSeparator: modelData.hasOwnProperty("separator") && modelData.separator
 
-    readonly property bool isExpandible: modelData && modelData.hasOwnProperty("expandible") && modelData.expandible
+    readonly property bool isExpandable: modelData && modelData.hasOwnProperty("expandible") && modelData.expandible
 
     checked: modelData.checked || (actionsMenu && actionsMenu.visible)
     width: parent.width
@@ -85,7 +85,7 @@ Kirigami.AbstractListItem {
             selected: listItem.checked || listItem.down
             Layout.preferredWidth: Layout.preferredHeight
             source: (LayoutMirroring.enabled ? "go-next-symbolic-rtl" : "go-next-symbolic")
-            visible: (!isExpandible || root.collapsed) && !listItem.isSeparator && modelData.hasOwnProperty("children") && modelData.children!==undefined && modelData.children.length > 0
+            visible: (!isExpandable || root.collapsed) && !listItem.isSeparator && modelData.hasOwnProperty("children") && modelData.children!==undefined && modelData.children.length > 0
         }
     }
     Kirigami.MnemonicData.enabled: listItem.enabled && listItem.visible
@@ -117,9 +117,9 @@ Kirigami.AbstractListItem {
     }
     enabled: (model && model.enabled !== undefined) ? model.enabled : modelData.enabled
 
-    hoverEnabled: (!isExpandible || root.collapsed) && !Kirigami.Settings.tabletMode && !listItem.isSeparator
-    sectionDelegate: isExpandible
-    font.pointSize: isExpandible ? Kirigami.Theme.defaultFont.pointSize * 1.30 : Kirigami.Theme.defaultFont.pointSize
+    hoverEnabled: (!isExpandable || root.collapsed) && !Kirigami.Settings.tabletMode && !listItem.isSeparator
+    sectionDelegate: isExpandable
+    font.pointSize: isExpandable ? Kirigami.Theme.defaultFont.pointSize * 1.30 : Kirigami.Theme.defaultFont.pointSize
     height: implicitHeight * opacity
 
     data: [
