@@ -23,11 +23,11 @@ Kirigami.BasicListItem {
     reserveSpaceForLabel: !isSeparator
 
     label: model ? (model.text ? model.text : model.tooltip) : (modelData.text ? modelData.text : modelData.tooltip)
-    hoverEnabled: (!isExpandible || root.collapsed) && !Kirigami.Settings.tabletMode
+    hoverEnabled: (!isExpandible || root.collapsed) && !Kirigami.Settings.tabletMode && !listItem.isSeparator
     sectionDelegate: isExpandible
     font.pointSize: isExpandible ? Kirigami.Theme.defaultFont.pointSize * 1.30 : Kirigami.Theme.defaultFont.pointSize
 
-    enabled: !isExpandible && !isSeparator && (model ? model.enabled : modelData.enabled)
+    enabled: !isExpandible && (model ? model.enabled : modelData.enabled)
     visible: model ? model.visible : modelData.visible
     opacity: enabled || isExpandible ? 1.0 : 0.6
 

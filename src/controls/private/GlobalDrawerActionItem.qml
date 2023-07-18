@@ -115,9 +115,9 @@ Kirigami.AbstractListItem {
             easing.type: Easing.InOutQuad
         }
     }
-    enabled: !isSeparator && ( (model && model.enabled !== undefined) ? model.enabled : modelData.enabled)
+    enabled: (model && model.enabled !== undefined) ? model.enabled : modelData.enabled
 
-    hoverEnabled: (!isExpandible || root.collapsed) && !Kirigami.Settings.tabletMode
+    hoverEnabled: (!isExpandible || root.collapsed) && !Kirigami.Settings.tabletMode && !listItem.isSeparator
     sectionDelegate: isExpandible
     font.pointSize: isExpandible ? Kirigami.Theme.defaultFont.pointSize * 1.30 : Kirigami.Theme.defaultFont.pointSize
     height: implicitHeight * opacity
