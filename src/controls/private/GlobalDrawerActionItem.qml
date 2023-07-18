@@ -36,11 +36,12 @@ Kirigami.AbstractListItem {
             Layout.minimumWidth: size
             Layout.maximumWidth: size
             selected: (listItem.highlighted || listItem.checked || listItem.down)
-            visible: source !== undefined
+            visible: source !== undefined && !listItem.isSeparator
         }
 
         QQC2Impl.MnemonicLabel {
             id: labelItem
+            visible: !listItem.isSeparator
             text:  width > height * 2 ? listItem.Kirigami.MnemonicData.mnemonicLabel : ""
             Layout.fillWidth: true
             mnemonicVisible: listItem.Kirigami.MnemonicData.active
