@@ -8,6 +8,7 @@
 #include "icon.h"
 #include "libkirigami/platformtheme.h"
 #include "scenegraph/managedtexturenode.h"
+#include "units.h"
 
 #include "loggingcategory.h"
 #include <QBitmap>
@@ -16,6 +17,7 @@
 #include <QIcon>
 #include <QNetworkReply>
 #include <QPainter>
+#include <QPropertyAnimation>
 #include <QQuickImageProvider>
 #include <QQuickWindow>
 #include <QSGSimpleTextureNode>
@@ -26,7 +28,6 @@ Q_GLOBAL_STATIC(ImageTexturesCache, s_iconImageCache)
 
 Icon::Icon(QQuickItem *parent)
     : QQuickItem(parent)
-    , m_changed(false)
     , m_active(false)
     , m_selected(false)
     , m_isMask(false)
@@ -36,12 +37,38 @@ Icon::Icon(QQuickItem *parent)
     setImplicitSize(32, 32);
     // FIXME: not necessary anymore
     connect(qApp, &QGuiApplication::paletteChanged, this, &QQuickItem::polish);
-    connect(this, &QQuickItem::enabledChanged, this, &QQuickItem::polish);
     connect(this, &QQuickItem::smoothChanged, this, &QQuickItem::polish);
+    connect(this, &QQuickItem::enabledChanged, this, [this]() {
+        m_allowNextAnimation = true;
+        polish();
+    });
 }
 
 Icon::~Icon()
 {
+}
+
+void Icon::componentComplete()
+{
+    QQuickItem::componentComplete();
+
+    QQmlEngine *engine = qmlEngine(this);
+    Q_ASSERT(engine);
+    Kirigami::Units *units = engine->singletonInstance<Kirigami::Units *>(qmlTypeId("org.kde.kirigami", 2, 0, "Units"));
+    Q_ASSERT(units);
+    m_animation = new QPropertyAnimation(this);
+    connect(m_animation, &QPropertyAnimation::valueChanged, this, &Icon::valueChanged);
+    connect(m_animation, &QPropertyAnimation::finished, this, [this]() {
+        m_oldIcon = QImage();
+        m_textureChanged = true;
+        update();
+    });
+    m_animation->setTargetObject(this);
+    m_animation->setEasingCurve(QEasingCurve::InOutCubic);
+    m_animation->setDuration(units->longDuration());
+    connect(units, &Kirigami::Units::longDurationChanged, m_animation, [this, units]() {
+        m_animation->setDuration(units->longDuration());
+    });
 }
 
 void Icon::setSource(const QVariant &icon)
@@ -88,6 +115,9 @@ void Icon::setActive(const bool active)
         return;
     }
     m_active = active;
+    if (isComponentComplete()) {
+        m_allowNextAnimation = true;
+    }
     polish();
     Q_EMIT activeChanged();
 }
@@ -156,6 +186,30 @@ QColor Icon::color() const
     return m_color;
 }
 
+QSGNode *Icon::createSubtree(qreal initialOpacity)
+{
+    auto opacityNode = new QSGOpacityNode{};
+    opacityNode->setFlag(QSGNode::OwnedByParent, true);
+    opacityNode->setOpacity(initialOpacity);
+
+    auto *mNode = new ManagedTextureNode;
+
+    mNode->setTexture(s_iconImageCache->loadTexture(window(), m_icon, QQuickWindow::TextureCanUseAtlas));
+
+    opacityNode->appendChildNode(mNode);
+
+    return opacityNode;
+}
+
+void Icon::updateSubtree(QSGNode *node, qreal opacity)
+{
+    auto opacityNode = static_cast<QSGOpacityNode *>(node);
+    opacityNode->setOpacity(opacity);
+
+    auto textureNode = static_cast<ManagedTextureNode *>(opacityNode->firstChild());
+    textureNode->setFiltering(smooth() ? QSGTexture::Linear : QSGTexture::Nearest);
+}
+
 QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * /*data*/)
 {
     if (m_source.isNull() || qFuzzyIsNull(width()) || qFuzzyIsNull(height())) {
@@ -163,17 +217,49 @@ QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * 
         return Q_NULLPTR;
     }
 
-    if (m_changed || node == nullptr) {
+    if (!node) {
+        node = new QSGNode{};
+    }
+
+    if (m_animation && m_animation->state() == QAbstractAnimation::Running) {
+        if (node->childCount() < 2) {
+            node->appendChildNode(createSubtree(0.0));
+            m_textureChanged = true;
+        }
+
+        // Rather than doing a perfect crossfade, first fade in the new texture
+        // then fade out the old texture. This is done to avoid the underlying
+        // color bleeding through when both textures are at ~0.5 opacity, which
+        // causes flickering if the two textures are very similar.
+        updateSubtree(node->firstChild(), 2.0 - m_animValue * 2.0);
+        updateSubtree(node->lastChild(), m_animValue * 2.0);
+    } else {
+        if (node->childCount() == 0) {
+            node->appendChildNode(createSubtree(1.0));
+            m_textureChanged = true;
+        }
+
+        if (node->childCount() > 1) {
+            auto toRemove = node->firstChild();
+            node->removeChildNode(toRemove);
+            delete toRemove;
+        }
+
+        updateSubtree(node->firstChild(), 1.0);
+    }
+
+    if (m_textureChanged) {
+        auto mNode = static_cast<ManagedTextureNode *>(node->lastChild()->firstChild());
+        mNode->setTexture(s_iconImageCache->loadTexture(window(), m_icon, QQuickWindow::TextureCanUseAtlas));
+        m_textureChanged = false;
+        m_sizeChanged = true;
+    }
+
+    if (m_sizeChanged) {
         const QSize itemSize(width(), height());
         QRect nodeRect(QPoint(0, 0), itemSize);
 
-        ManagedTextureNode *mNode = dynamic_cast<ManagedTextureNode *>(node);
-        if (!mNode) {
-            delete node;
-            mNode = new ManagedTextureNode;
-        }
         if (itemSize.width() != 0 && itemSize.height() != 0) {
-            mNode->setTexture(s_iconImageCache->loadTexture(window(), m_icon, QQuickWindow::TextureCanUseAtlas));
             if (m_icon.size() != itemSize) {
                 // At this point, the image will already be scaled, but we need to output it in
                 // the correct aspect ratio, painted centered in the viewport. So:
@@ -182,12 +268,12 @@ QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * 
                 nodeRect = destination;
             }
         }
-        mNode->setRect(nodeRect);
-        node = mNode;
-        if (smooth()) {
-            mNode->setFiltering(QSGTexture::Linear);
+        for (int i = 0; i < node->childCount(); ++i) {
+            auto mNode = static_cast<ManagedTextureNode *>(node->childAtIndex(i)->firstChild());
+            mNode->setRect(nodeRect);
         }
-        m_changed = false;
+
+        m_sizeChanged = false;
     }
 
     return node;
@@ -197,6 +283,7 @@ void Icon::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
 {
     QQuickItem::geometryChange(newGeometry, oldGeometry);
     if (newGeometry.size() != oldGeometry.size()) {
+        m_sizeChanged = true;
         polish();
     }
 }
@@ -266,6 +353,11 @@ void Icon::updatePolish()
     if (itemSize.width() != 0 && itemSize.height() != 0) {
         const QSize size = itemSize;
 
+        if (m_animation) {
+            m_animation->stop();
+            m_oldIcon = m_icon;
+        }
+
         switch (m_source.userType()) {
         case QMetaType::QPixmap:
             m_icon = m_source.value<QPixmap>().toImage();
@@ -313,7 +405,24 @@ void Icon::updatePolish()
             p.end();
         }
     }
-    m_changed = true;
+
+    // don't animate initial setting
+    bool animated = (m_animated || m_allowNextAnimation) && !m_oldIcon.isNull() && !m_sizeChanged && !m_blockNextAnimation;
+
+    if (animated && m_animation) {
+        m_animValue = 0.0;
+        m_animation->setStartValue((qreal)0);
+        m_animation->setEndValue((qreal)1);
+        m_animation->start();
+        m_allowNextAnimation = false;
+    } else {
+        if (m_animation) {
+            m_animation->stop();
+        }
+        m_animValue = 1.0;
+        m_blockNextAnimation = false;
+    }
+    m_textureChanged = true;
     updatePaintedGeometry();
     update();
 }
@@ -620,12 +729,36 @@ void Icon::updateIsMaskHeuristic(const QString &iconSource)
                          || iconSource.endsWith(QLatin1String("-symbolic-ltr")));
 }
 
+bool Icon::isAnimated() const
+{
+    return m_animated;
+}
+
+void Icon::setAnimated(bool animated)
+{
+    if (m_animated == animated) {
+        return;
+    }
+
+    m_animated = animated;
+    Q_EMIT animatedChanged();
+}
+
 void Icon::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &value)
 {
     if (change == QQuickItem::ItemDevicePixelRatioHasChanged) {
+        m_blockNextAnimation = true;
         polish();
+    } else if (change == ItemVisibleHasChanged && value.boolValue) {
+        m_blockNextAnimation = true;
     }
     QQuickItem::itemChange(change, value);
+}
+
+void Icon::valueChanged(const QVariant &value)
+{
+    m_animValue = value.toReal();
+    update();
 }
 
 #include "moc_icon.cpp"

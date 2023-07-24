@@ -155,6 +155,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
         return new Kirigami::Units(engine);
     });
 
+    qmlRegisterRevision<QQuickItem, 6>(uri, 2, 0);
     qmlRegisterType(componentUrl(QStringLiteral("Action.qml")), uri, 2, 0, "Action");
     qmlRegisterType(componentUrl(QStringLiteral("AbstractApplicationHeader.qml")), uri, 2, 0, "AbstractApplicationHeader");
     qmlRegisterType(componentUrl(QStringLiteral("AbstractApplicationWindow.qml")), uri, 2, 0, "AbstractApplicationWindow");

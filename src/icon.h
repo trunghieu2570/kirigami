@@ -14,6 +14,7 @@
 #include <QVariant>
 
 class QNetworkReply;
+class QPropertyAnimation;
 
 namespace Kirigami
 {
@@ -152,6 +153,12 @@ class Icon : public QQuickItem
      * @since 5.15
      */
     Q_PROPERTY(qreal paintedHeight READ paintedHeight NOTIFY paintedAreaChanged)
+
+    /**
+     * If set, icon will blend when the source is changed
+     */
+    Q_PROPERTY(bool animated READ isAnimated WRITE setAnimated NOTIFY animatedChanged)
+
 public:
     enum Status {
         Null = 0, /// No icon has been set
@@ -163,6 +170,8 @@ public:
 
     Icon(QQuickItem *parent = nullptr);
     ~Icon() override;
+
+    void componentComplete() override;
 
     void setSource(const QVariant &source);
     QVariant source() const;
@@ -192,6 +201,9 @@ public:
     qreal paintedWidth() const;
     qreal paintedHeight() const;
 
+    bool isAnimated() const;
+    void setAnimated(bool animated);
+
     QSGNode *updatePaintNode(QSGNode *node, UpdatePaintNodeData *data) override;
 
 Q_SIGNALS:
@@ -205,6 +217,7 @@ Q_SIGNALS:
     void placeholderChanged(const QString &placeholder);
     void statusChanged();
     void paintedAreaChanged();
+    void animatedChanged();
 
 protected:
     void geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry) override;
@@ -220,12 +233,17 @@ protected:
     void itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &value) override;
 
 private:
+    void valueChanged(const QVariant &value);
+    QSGNode *createSubtree(qreal initialOpacity);
+    void updateSubtree(QSGNode *node, qreal opacity);
+
     Kirigami::PlatformTheme *m_theme = nullptr;
     QPointer<QNetworkReply> m_networkReply;
     QHash<int, bool> m_monochromeHeuristics;
     QVariant m_source;
     Status m_status = Null;
-    bool m_changed;
+    bool m_textureChanged = false;
+    bool m_sizeChanged = false;
     bool m_active;
     bool m_selected;
     bool m_isMask;
@@ -237,5 +255,13 @@ private:
     qreal m_paintedWidth = 0.0;
     qreal m_paintedHeight = 0.0;
 
+    QImage m_oldIcon;
     QImage m_icon;
+
+    // animation on image change
+    QPropertyAnimation *m_animation = nullptr;
+    qreal m_animValue = 1.0;
+    bool m_animated = true;
+    bool m_allowNextAnimation = false;
+    bool m_blockNextAnimation = false;
 };
