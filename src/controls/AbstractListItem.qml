@@ -74,6 +74,34 @@ QQC2.ItemDelegate {
     property bool separatorVisible: false
 
     /**
+     * @brief This property holds list item's background color.
+     *
+     * It is advised to use the default value.
+     * default: ``"transparent"``
+     */
+    property color backgroundColor: "transparent"
+
+    /**
+     * @brief This property holds the background color to be used when
+     * background alternating is enabled.
+     *
+     * It is advised to use the default value.
+     * default: ``Kirigami.Theme.alternateBackgroundColor``
+     *
+     * @since 2.7
+     */
+    property color alternateBackgroundColor: Kirigami.Theme.alternateBackgroundColor
+
+    /**
+     * @brief This property holds the color of the background
+     * when the item is pressed or selected.
+     *
+     * It is advised to use the default value.
+     * default: ``Kirigami.Theme.highlightColor``
+     */
+    property color activeBackgroundColor: Kirigami.Theme.highlightColor
+
+    /**
      * @brief This property holds the color of the text in the item.
      *
      * It is advised to use the default value.
