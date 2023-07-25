@@ -61,17 +61,16 @@ Kirigami.ActionTextField {
     leftPadding: if (effectiveHorizontalAlignment === TextInput.AlignRight) {
         return _rightActionsRow.width + Kirigami.Units.smallSpacing
     } else {
-        return (activeFocus || text.length > 0 ? 0 : (searchIcon.width + Kirigami.Units.smallSpacing)) + Kirigami.Units.smallSpacing * 2
+        return searchIcon.width + Kirigami.Units.smallSpacing * 3
     }
     rightPadding: if (effectiveHorizontalAlignment === TextInput.AlignRight) {
-        return (activeFocus || text.length > 0 ? 0 : (searchIcon.width + Kirigami.Units.smallSpacing)) + Kirigami.Units.smallSpacing * 2
+        return searchIcon.width + Kirigami.Units.smallSpacing * 3
     } else {
         return _rightActionsRow.width + Kirigami.Units.smallSpacing
     }
 
     Kirigami.Icon {
         id: searchIcon
-        opacity: root.activeFocus || root.text.length > 0 ? 0 : 1
         LayoutMirroring.enabled: root.effectiveHorizontalAlignment === TextInput.AlignRight
         anchors.left: root.left
         anchors.leftMargin: Kirigami.Units.smallSpacing * 2
@@ -82,13 +81,6 @@ Kirigami.ActionTextField {
         color: root.placeholderTextColor
 
         source: "search"
-
-        Behavior on opacity {
-            NumberAnimation {
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-        }
     }
 
     placeholderText: qsTr("Search…")
