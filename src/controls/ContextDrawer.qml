@@ -159,19 +159,22 @@ Kirigami.OverlayDrawer {
                 }
             }
             topMargin: root.handle.y > 0 ? menu.height - menu.contentHeight : 0
-            header: Item {
-                height: heading.height
-                width: menu.width
+            header: QQC2.ToolBar {
+                height: pageStack.globalToolBar.preferredHeight
+                width: parent.width
+
                 Kirigami.Heading {
                     id: heading
+                    elide: Text.ElideRight
+                    text: root.title
+
                     anchors {
+                        verticalCenter: parent.verticalCenter
                         left: parent.left
                         right: parent.right
-                        margins: Kirigami.Units.largeSpacing
+                        leftMargin: Kirigami.Units.largeSpacing
+                        rightMargin: Kirigami.Units.largeSpacing
                     }
-                    elide: Text.ElideRight
-                    level: 2
-                    text: root.title
                 }
             }
             delegate: Column {
