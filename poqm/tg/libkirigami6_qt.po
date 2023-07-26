@@ -189,7 +189,7 @@ msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr ""
 
-#: controls/SearchField.qml:94
+#: controls/SearchField.qml:86
 #, fuzzy
 #| msgctxt "SearchField|"
 #| msgid "Search..."
@@ -197,7 +197,7 @@ msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Ҷустуҷӯ..."
 
-#: controls/SearchField.qml:96
+#: controls/SearchField.qml:88
 #, fuzzy
 #| msgctxt "SearchField|"
 #| msgid "Search..."
@@ -205,7 +205,7 @@ msgctxt "SearchField|"
 msgid "Search"
 msgstr "Ҷустуҷӯ..."
 
-#: controls/SearchField.qml:107
+#: controls/SearchField.qml:99
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr ""
