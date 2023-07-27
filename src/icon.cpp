@@ -539,7 +539,9 @@ QImage Icon::findIcon(const QSize &size)
             icon = QIcon(iconSource);
         } else {
             if (icon.isNull()) {
-                icon = m_theme->iconFromTheme(iconSource, m_color);
+                const QColor tintColor =
+                    !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor()) : m_color;
+                icon = m_theme->iconFromTheme(iconSource, tintColor);
                 if (m_isMaskHeuristic && icon.name() != iconSource) {
                     updateIsMaskHeuristic(icon.name());
                     if (!m_isMaskHeuristic) {
