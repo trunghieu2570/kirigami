@@ -19,6 +19,7 @@ class QPropertyAnimation;
 namespace Kirigami
 {
 class PlatformTheme;
+class Units;
 }
 
 /**
@@ -159,6 +160,11 @@ class Icon : public QQuickItem
      */
     Q_PROPERTY(bool animated READ isAnimated WRITE setAnimated NOTIFY animatedChanged)
 
+    /**
+     * If set, icon will round the painted size to defined icon sizes. Default is true.
+     */
+    Q_PROPERTY(bool roundToIconSize READ roundToIconSize WRITE setRoundToIconSize NOTIFY roundToIconSizeChanged)
+
 public:
     enum Status {
         Null = 0, /// No icon has been set
@@ -204,6 +210,9 @@ public:
     bool isAnimated() const;
     void setAnimated(bool animated);
 
+    bool roundToIconSize() const;
+    void setRoundToIconSize(bool roundToIconSize);
+
     QSGNode *updatePaintNode(QSGNode *node, UpdatePaintNodeData *data) override;
 
 Q_SIGNALS:
@@ -218,6 +227,7 @@ Q_SIGNALS:
     void statusChanged();
     void paintedAreaChanged();
     void animatedChanged();
+    void roundToIconSizeChanged();
 
 protected:
     void geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry) override;
@@ -236,8 +246,10 @@ private:
     void valueChanged(const QVariant &value);
     QSGNode *createSubtree(qreal initialOpacity);
     void updateSubtree(QSGNode *node, qreal opacity);
+    QSize iconSizeHint() const;
 
     Kirigami::PlatformTheme *m_theme = nullptr;
+    Kirigami::Units *m_units = nullptr;
     QPointer<QNetworkReply> m_networkReply;
     QHash<int, bool> m_monochromeHeuristics;
     QVariant m_source;
@@ -252,8 +264,7 @@ private:
     QColor m_color = Qt::transparent;
     QString m_fallback = QStringLiteral("unknown");
     QString m_placeholder = QStringLiteral("image-png");
-    qreal m_paintedWidth = 0.0;
-    qreal m_paintedHeight = 0.0;
+    QSizeF m_paintedSize;
 
     QImage m_oldIcon;
     QImage m_icon;
@@ -262,6 +273,7 @@ private:
     QPropertyAnimation *m_animation = nullptr;
     qreal m_animValue = 1.0;
     bool m_animated = true;
+    bool m_roundToIconSize = true;
     bool m_allowNextAnimation = false;
     bool m_blockNextAnimation = false;
 };

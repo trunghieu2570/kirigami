@@ -54,8 +54,8 @@ void Icon::componentComplete()
 
     QQmlEngine *engine = qmlEngine(this);
     Q_ASSERT(engine);
-    Kirigami::Units *units = engine->singletonInstance<Kirigami::Units *>(qmlTypeId("org.kde.kirigami", 2, 0, "Units"));
-    Q_ASSERT(units);
+    m_units = engine->singletonInstance<Kirigami::Units *>(qmlTypeId("org.kde.kirigami", 2, 0, "Units"));
+    Q_ASSERT(m_units);
     m_animation = new QPropertyAnimation(this);
     connect(m_animation, &QPropertyAnimation::valueChanged, this, &Icon::valueChanged);
     connect(m_animation, &QPropertyAnimation::finished, this, [this]() {
@@ -65,10 +65,11 @@ void Icon::componentComplete()
     });
     m_animation->setTargetObject(this);
     m_animation->setEasingCurve(QEasingCurve::InOutCubic);
-    m_animation->setDuration(units->longDuration());
-    connect(units, &Kirigami::Units::longDurationChanged, m_animation, [this, units]() {
-        m_animation->setDuration(units->longDuration());
+    m_animation->setDuration(m_units->longDuration());
+    connect(m_units, &Kirigami::Units::longDurationChanged, m_animation, [this]() {
+        m_animation->setDuration(m_units->longDuration());
     });
+    updatePaintedGeometry();
 }
 
 void Icon::setSource(const QVariant &icon)
@@ -263,7 +264,7 @@ QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * 
             if (m_icon.size() != itemSize) {
                 // At this point, the image will already be scaled, but we need to output it in
                 // the correct aspect ratio, painted centered in the viewport. So:
-                QRect destination(QPoint(0, 0), m_icon.size().scaled(itemSize, Qt::KeepAspectRatio));
+                QRect destination(QPoint(0, 0), m_icon.size().scaled(m_paintedSize.toSize(), Qt::KeepAspectRatio));
                 destination.moveCenter(nodeRect.center());
                 nodeRect = destination;
             }
@@ -284,6 +285,7 @@ void Icon::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
     QQuickItem::geometryChange(newGeometry, oldGeometry);
     if (newGeometry.size() != oldGeometry.size()) {
         m_sizeChanged = true;
+        updatePaintedGeometry();
         polish();
     }
 }
@@ -332,7 +334,7 @@ void Icon::handleFinished(QNetworkReply *reply)
 
         // broken image from data, inform the user of this with some useful broken-image thing...
         const QIcon icon = QIcon::fromTheme(m_fallback);
-        m_loadedImage = icon.pixmap(icon.actualSize(size().toSize()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
+        m_loadedImage = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
     }
 
     polish();
@@ -370,7 +372,7 @@ void Icon::updatePolish()
             break;
         case QMetaType::QIcon: {
             const QIcon icon = m_source.value<QIcon>();
-            m_icon = icon.pixmap(icon.actualSize(itemSize), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
+            m_icon = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
             break;
         }
         case QMetaType::QUrl:
@@ -473,7 +475,7 @@ QImage Icon::findIcon(const QSize &size)
                     if (m_loadedImage.isNull()) {
                         // broken image from data, inform the user of this with some useful broken-image thing...
                         const QIcon icon = QIcon::fromTheme(m_fallback);
-                        m_loadedImage = icon.pixmap(icon.actualSize(QSize(width(), height())), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
+                        m_loadedImage = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
                         setStatus(Error);
                     } else {
                         setStatus(Ready);
@@ -484,7 +486,7 @@ QImage Icon::findIcon(const QSize &size)
             });
             // Temporary icon while we wait for the real image to load...
             const QIcon icon = QIcon::fromTheme(m_placeholder);
-            img = icon.pixmap(icon.actualSize(size), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
+            img = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
             break;
         }
         case QQmlImageProviderBase::Texture: {
@@ -495,7 +497,7 @@ QImage Icon::findIcon(const QSize &size)
             if (img.isNull()) {
                 // broken image from data, or the texture factory wasn't healthy, inform the user of this with some useful broken-image thing...
                 const QIcon icon = QIcon::fromTheme(m_fallback);
-                img = icon.pixmap(icon.actualSize(QSize(width(), height())), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
+                img = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
                 setStatus(Error);
             } else {
                 setStatus(Ready);
@@ -525,7 +527,7 @@ QImage Icon::findIcon(const QSize &size)
         }
         // Temporary icon while we wait for the real image to load...
         const QIcon icon = QIcon::fromTheme(m_placeholder);
-        img = icon.pixmap(icon.actualSize(size), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
+        img = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
     } else {
         if (iconSource.startsWith(QLatin1String("qrc:/"))) {
             iconSource = iconSource.mid(3);
@@ -551,7 +553,7 @@ QImage Icon::findIcon(const QSize &size)
             }
         }
         if (!icon.isNull()) {
-            img = icon.pixmap(icon.actualSize(size), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
+            img = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
 
             setStatus(Ready);
             /*const QColor tintColor = !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor())
@@ -570,7 +572,7 @@ QImage Icon::findIcon(const QSize &size)
     if (!iconSource.isEmpty() && img.isNull()) {
         setStatus(Error);
         const QIcon icon = QIcon::fromTheme(m_fallback);
-        img = icon.pixmap(icon.actualSize(size), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
+        img = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
     }
     return img;
 }
@@ -690,36 +692,61 @@ Icon::Status Icon::status() const
 
 qreal Icon::paintedWidth() const
 {
-    return m_paintedWidth;
+    return m_paintedSize.width();
 }
 
 qreal Icon::paintedHeight() const
 {
-    return m_paintedHeight;
+    return m_paintedSize.height();
+}
+
+QSize Icon::iconSizeHint() const
+{
+    // size hint is always square, non square case in updatePaintGeometry
+    if (m_roundToIconSize && m_units) {
+        return QSize(m_units->iconSizes()->roundedIconSize(std::min(width(), height())), m_units->iconSizes()->roundedIconSize(std::min(width(), height())));
+    } else {
+        return QSize(std::min(width(), height()), std::min(width(), height()));
+    }
 }
 
 void Icon::updatePaintedGeometry()
 {
-    qreal newWidth = 0.0;
-    qreal newHeight = 0.0;
+    QSizeF newSize;
     if (!m_icon.width() || !m_icon.height()) {
-        newWidth = newHeight = 0.0;
+        newSize = {0, 0};
     } else {
-        const qreal w = widthValid() ? width() : m_icon.size().width();
-        const qreal widthScale = w / m_icon.size().width();
-        const qreal h = heightValid() ? height() : m_icon.size().height();
-        const qreal heightScale = h / m_icon.size().height();
-        if (widthScale <= heightScale) {
-            newWidth = w;
-            newHeight = widthScale * m_icon.size().height();
-        } else if (heightScale < widthScale) {
-            newWidth = heightScale * m_icon.size().width();
-            newHeight = h;
+        int roundedWidth = m_units ? m_units->iconSizes()->roundedIconSize(std::min(width(), height())) : 32;
+        if (QSize roundedSize(roundedWidth, roundedWidth); QSize(width(), height()) == roundedSize) {
+            m_paintedSize = roundedSize;
+            m_textureChanged = true;
+            update();
+            Q_EMIT paintedAreaChanged();
+            return;
+        }
+        if (m_roundToIconSize && m_units) {
+            if (m_icon.width() > m_icon.height()) {
+                newSize = QSizeF(roundedWidth, qRound(m_icon.height() * (roundedWidth / static_cast<qreal>(m_icon.width()))));
+            } else {
+                newSize = QSizeF(m_units->iconSizes()->roundedIconSize(std::min(width(), height())),
+                                 m_units->iconSizes()->roundedIconSize(std::min(width(), height())));
+            }
+        } else {
+            const qreal w = widthValid() ? width() : m_icon.size().width();
+            const qreal widthScale = w / m_icon.size().width();
+            const qreal h = heightValid() ? height() : m_icon.size().height();
+            const qreal heightScale = h / m_icon.size().height();
+            if (widthScale <= heightScale) {
+                newSize = QSizeF(w, widthScale * m_icon.size().height());
+            } else if (heightScale < widthScale) {
+                newSize = QSizeF(heightScale * m_icon.size().width(), h);
+            }
         }
     }
-    if (newWidth != m_paintedWidth || newHeight != m_paintedHeight) {
-        m_paintedWidth = newWidth;
-        m_paintedHeight = newHeight;
+    if (newSize != m_paintedSize) {
+        m_paintedSize = newSize;
+        m_textureChanged = true;
+        update();
         Q_EMIT paintedAreaChanged();
     }
 }
@@ -744,6 +771,30 @@ void Icon::setAnimated(bool animated)
 
     m_animated = animated;
     Q_EMIT animatedChanged();
+}
+
+bool Icon::roundToIconSize() const
+{
+    return m_roundToIconSize;
+}
+
+void Icon::setRoundToIconSize(bool roundToIconSize)
+{
+    if (m_roundToIconSize == roundToIconSize) {
+        return;
+    }
+
+    const QSizeF oldPaintedSize = m_paintedSize;
+
+    m_roundToIconSize = roundToIconSize;
+    Q_EMIT roundToIconSizeChanged();
+
+    updatePaintedGeometry();
+    if (oldPaintedSize != m_paintedSize) {
+        Q_EMIT paintedAreaChanged();
+        m_textureChanged = true;
+        update();
+    }
 }
 
 void Icon::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &value)
