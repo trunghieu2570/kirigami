@@ -72,6 +72,9 @@ Kirigami.AbstractApplicationHeader {
             Accessible.name: action.tooltip
 
             Connections {
+                // Only target the GlobalDrawer when it *is* a GlobalDrawer, since
+                // it can be something else, and that something else probably
+                // doesn't have an isMenuChanged() signal.
                 target: applicationWindow().globalDrawer as Kirigami.GlobalDrawer
                 function onIsMenuChanged() {
                     if (!applicationWindow().globalDrawer.isMenu && menuButton.menu) {
