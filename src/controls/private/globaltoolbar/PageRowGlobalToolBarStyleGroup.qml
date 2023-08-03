@@ -13,9 +13,13 @@ QtObject {
 
     readonly property int actualStyle: {
         if (style === Kirigami.ApplicationHeaderStyle.Auto) {
-            return (Kirigami.Settings.isMobile
-                    ? (root.wideMode ? Kirigami.ApplicationHeaderStyle.Titles : Kirigami.ApplicationHeaderStyle.Breadcrumb)
-                    : Kirigami.ApplicationHeaderStyle.ToolBar)
+            if (!Kirigami.Settings.isMobile) {
+                return Kirigami.ApplicationHeaderStyle.ToolBar
+            } else if (root.wideMode) {
+                return Kirigami.ApplicationHeaderStyle.Titles
+            } else {
+                return Kirigami.ApplicationHeaderStyle.Breadcrumb
+            }
         }
         return style;
     }
