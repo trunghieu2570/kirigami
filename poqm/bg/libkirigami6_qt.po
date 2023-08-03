@@ -239,27 +239,3 @@ msgstr "Система за прозорци %1"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (изграден върху %3)"
-
-#~ msgctxt "PageTab|"
-#~ msgid "Current page. Progress: %1 percent."
-#~ msgstr "Текуща страница. Прогрес: %1 %."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1. Progress: %2 percent."
-#~ msgstr "Навигиране до %1. Прогрес: %2 %."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Current page."
-#~ msgstr "Текуща страница."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1. Demanding attention."
-#~ msgstr "Навигиране до %1. Изисква внимание."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1."
-#~ msgstr "Навигиране до %1."
-
-#~ msgctxt "ToolBarApplicationHeader|"
-#~ msgid "More Actions"
-#~ msgstr "Повече действия"
