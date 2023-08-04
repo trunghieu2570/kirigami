@@ -7,7 +7,6 @@
  */
 
 #include "kirigamiplugin.h"
-#include "avatar.h"
 #include "colorutils.h"
 #include "columnview.h"
 #include "delegaterecycler.h"
@@ -259,16 +258,13 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     // 2.13
     qmlRegisterType<ImageColors>(uri, 2, 13, "ImageColors");
-    qmlRegisterType(componentUrl(QStringLiteral("Avatar.qml")), uri, 2, 13, "Avatar");
 
     // 2.14
     qmlRegisterType(componentUrl(QStringLiteral("FlexColumn.qml")), uri, 2, 14, "FlexColumn");
     qmlRegisterType<ToolBarLayout>(uri, 2, 14, "ToolBarLayout");
     qmlRegisterSingletonType<DisplayHint>(uri, 2, 14, "DisplayHint", singleton<DisplayHint>());
     qmlRegisterType<SizeGroup>(uri, 2, 14, "SizeGroup");
-    qmlRegisterType<AvatarGroup>("org.kde.kirigami.private", 2, 14, "AvatarGroup");
     qmlRegisterType(componentUrl(QStringLiteral("CheckableListItem.qml")), uri, 2, 14, "CheckableListItem");
-    qmlRegisterSingletonType<NameUtils>(uri, 2, 14, "NameUtils", singleton<NameUtils>());
 
     // 2.16
     qmlRegisterType<Kirigami::BasicThemeDefinition>(uri, 2, 16, "BasicThemeDefinition");

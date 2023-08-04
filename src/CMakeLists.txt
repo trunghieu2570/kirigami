@@ -17,8 +17,6 @@ target_include_directories(KirigamiPlugin PRIVATE
 )
 
 target_sources(KirigamiPlugin PRIVATE
-    avatar.cpp
-    avatar.h
     colorutils.cpp
     colorutils.h
     columnview.cpp
@@ -152,10 +150,6 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.11 SOURCES
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.12 SOURCES
     controls/ShadowedImage.qml
     controls/PlaceholderMessage.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.13 SOURCES
-    controls/Avatar.qml
 )
 
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.14 SOURCES
