@@ -78,19 +78,12 @@ void Icon::setSource(const QVariant &icon)
         return;
     }
     m_source = icon;
-    m_monochromeHeuristics.clear();
 
     if (!m_theme) {
         m_theme = static_cast<Kirigami::PlatformTheme *>(qmlAttachedPropertiesObject<Kirigami::PlatformTheme>(this, true));
         Q_ASSERT(m_theme);
 
         connect(m_theme, &Kirigami::PlatformTheme::colorsChanged, this, &QQuickItem::polish);
-    }
-
-    if (icon.userType() == QMetaType::QString) {
-        const QString iconSource = icon.toString();
-        updateIsMaskHeuristic(iconSource);
-        Q_EMIT isMaskChanged();
     }
 
     if (m_networkReply) {
@@ -161,14 +154,13 @@ void Icon::setIsMask(bool mask)
     }
 
     m_isMask = mask;
-    m_isMaskHeuristic = mask;
     polish();
     Q_EMIT isMaskChanged();
 }
 
 bool Icon::isMask() const
 {
-    return m_isMask || m_isMaskHeuristic;
+    return m_isMask;
 }
 
 void Icon::setColor(const QColor &color)
@@ -400,7 +392,7 @@ void Icon::updatePolish()
             : m_color;
 
         // TODO: initialize m_isMask with icon.isMask()
-        if (tintColor.alpha() > 0 && (isMask() || guessMonochrome(m_icon))) {
+        if (tintColor.alpha() > 0 && isMask()) {
             QPainter p(&m_icon);
             p.setCompositionMode(QPainter::CompositionMode_SourceIn);
             p.fillRect(m_icon.rect(), tintColor);
@@ -544,28 +536,12 @@ QImage Icon::findIcon(const QSize &size)
                 const QColor tintColor =
                     !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor()) : m_color;
                 icon = m_theme->iconFromTheme(iconSource, tintColor);
-                if (m_isMaskHeuristic && icon.name() != iconSource) {
-                    updateIsMaskHeuristic(icon.name());
-                    if (!m_isMaskHeuristic) {
-                        Q_EMIT isMaskChanged();
-                    }
-                }
             }
         }
         if (!icon.isNull()) {
             img = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
 
             setStatus(Ready);
-            /*const QColor tintColor = !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor())
-            : m_color;
-
-            if (m_isMask || icon.isMask() || iconSource.endsWith(QLatin1String("-symbolic")) || iconSource.endsWith(QLatin1String("-symbolic-rtl")) ||
-            iconSource.endsWith(QLatin1String("-symbolic-ltr")) || guessMonochrome(img)) { //
-                QPainter p(&img);
-                p.setCompositionMode(QPainter::CompositionMode_SourceIn);
-                p.fillRect(img.rect(), tintColor);
-                p.end();
-            }*/
         }
     }
 
@@ -587,66 +563,6 @@ QIcon::Mode Icon::iconMode() const
         return QIcon::Active;
     }
     return QIcon::Normal;
-}
-
-bool Icon::guessMonochrome(const QImage &img)
-{
-    // don't try for too big images
-    if (img.width() >= 256 || m_theme->supportsIconColoring()) {
-        return false;
-    }
-    // round size to a standard size. hardcode as we can't use KIconLoader
-    int stdSize;
-    if (img.width() <= 16) {
-        stdSize = 16;
-    } else if (img.width() <= 22) {
-        stdSize = 22;
-    } else if (img.width() <= 24) {
-        stdSize = 24;
-    } else if (img.width() <= 32) {
-        stdSize = 32;
-    } else if (img.width() <= 48) {
-        stdSize = 48;
-    } else if (img.width() <= 64) {
-        stdSize = 64;
-    } else {
-        stdSize = 128;
-    }
-
-    auto findIt = m_monochromeHeuristics.constFind(stdSize);
-    if (findIt != m_monochromeHeuristics.constEnd()) {
-        return findIt.value();
-    }
-
-    QHash<int, int> dist;
-    int transparentPixels = 0;
-    int saturatedPixels = 0;
-    for (int x = 0; x < img.width(); x++) {
-        for (int y = 0; y < img.height(); y++) {
-            QColor color = QColor::fromRgba(qUnpremultiply(img.pixel(x, y)));
-            if (color.alpha() < 100) {
-                ++transparentPixels;
-                continue;
-            } else if (color.saturation() > 84) {
-                ++saturatedPixels;
-            }
-            dist[qGray(color.rgb())]++;
-        }
-    }
-
-    QMultiMap<int, int> reverseDist;
-    auto it = dist.constBegin();
-    qreal entropy = 0;
-    while (it != dist.constEnd()) {
-        reverseDist.insert(it.value(), it.key());
-        qreal probability = qreal(it.value()) / qreal(img.size().width() * img.size().height() - transparentPixels);
-        entropy -= probability * log(probability) / log(255);
-        ++it;
-    }
-
-    // Arbitrarily low values of entropy and colored pixels
-    m_monochromeHeuristics[stdSize] = saturatedPixels <= (img.size().width() * img.size().height() - transparentPixels) * 0.3 && entropy <= 0.3;
-    return m_monochromeHeuristics[stdSize];
 }
 
 QString Icon::fallback() const
@@ -749,13 +665,6 @@ void Icon::updatePaintedGeometry()
         update();
         Q_EMIT paintedAreaChanged();
     }
-}
-
-void Icon::updateIsMaskHeuristic(const QString &iconSource)
-{
-    m_isMaskHeuristic = (iconSource.endsWith(QLatin1String("-symbolic")) //
-                         || iconSource.endsWith(QLatin1String("-symbolic-rtl")) //
-                         || iconSource.endsWith(QLatin1String("-symbolic-ltr")));
 }
 
 bool Icon::isAnimated() const
