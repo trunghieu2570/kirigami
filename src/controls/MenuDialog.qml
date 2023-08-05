@@ -118,4 +118,7 @@ Kirigami.Dialog {
             }
         }
     }
+
+    standardButtons: QQC2.DialogButtonBox.NoButton
+    showCloseButton: true
 }
