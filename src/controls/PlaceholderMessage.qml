@@ -83,7 +83,7 @@ import "private" as P
  *         visible: root.networkConnected
  *
  *         icon.name: "network-disconnect"
- *         text: "Unable to load content
+ *         text: "Unable to load content"
  *         explanation: "Please try again later"
  *     }
  * }
