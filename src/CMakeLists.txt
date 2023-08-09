@@ -193,11 +193,6 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.14 SOURCES
     controls/CheckableListItem.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.18 PATH settingscomponents SOURCES
-    controls/settingscomponents/CategorizedSettings.qml
-    controls/settingscomponents/SettingAction.qml
-)
-
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.19 SOURCES
     controls/AboutItem.qml
     controls/NavigationTabBar.qml
