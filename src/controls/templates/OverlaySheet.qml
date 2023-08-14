@@ -110,11 +110,16 @@ T2.Popup {
     bottomInset: -1
 
     closePolicy: QQC2.Popup.CloseOnEscape
-    x: parent.width/2 - width/2
+    x: parent ? Math.round(parent.width / 2 - width / 2) : 0
     y: {
-        const visualParentAdjust = sheetHandler.visualParent ? sheetHandler.visualParent.y : 0;
-        const wantedPosition = Kirigami.Settings.isMobile ? parent.height - implicitHeight - Kirigami.Units.gridUnit : parent.height / 2 - implicitHeight / 2;
-        Math.max(visualParentAdjust, wantedPosition, Kirigami.Units.gridUnit * 3);
+        if (!parent) {
+            return 0;
+        }
+        const visualParentAdjust = sheetHandler.visualParent?.y ?? 0;
+        const wantedPosition = Kirigami.Settings.isMobile
+            ? parent.height - implicitHeight - Kirigami.Units.gridUnit
+            : parent.height / 2 - implicitHeight / 2;
+        return Math.round(Math.max(visualParentAdjust, wantedPosition, Kirigami.Units.gridUnit * 3));
     }
 
     implicitWidth: {
@@ -360,12 +365,12 @@ T2.Popup {
         }
         MouseArea {
             id: sheetHandler
-            readonly property Item visualParent: root.parent.hasOwnProperty("contentItem") && root.parent.contentItem ? root.parent.contentItem : root.parent
+            readonly property Item visualParent: root.parent?.contentItem ?? root.parent
             x: -root.x
             y: -root.y
             z: -1
-            width:  visualParent ? visualParent.width : 0
-            height: visualParent ? visualParent.height * 2 : 0
+            width:  visualParent?.width ?? 0
+            height: (visualParent?.height ?? 0) * 2
 
             property var pressPos
             onPressed: mouse => {
