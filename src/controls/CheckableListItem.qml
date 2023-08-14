@@ -50,6 +50,10 @@ Kirigami.BasicListItem {
     activeTextColor: Kirigami.Theme.textColor
     iconSelected: false
 
+    Component.onCompleted: {
+        console.warn("CheckableListItem is deprecated and will be removed before KF 6.0. Use the delegates from the `delegates` submodule instead.")
+    }
+
     leading: QQC2.CheckBox {
         checked: checkableListItem.checked
         onToggled: {

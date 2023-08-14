@@ -239,6 +239,10 @@ Kirigami.AbstractListItem {
     highlighted: checked
 //END signal handlers
 
+    Component.onCompleted: {
+        console.warn("BasicListItem is deprecated and will be removed before KF 6.0. Use the delegates from the `delegates` submodule instead.")
+    }
+
     contentItem: Item {
         id: contItem
 
