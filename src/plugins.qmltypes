@@ -1297,16 +1297,6 @@ Module {
         Property { name: "showClickFeedback"; type: "bool" }
     }
     Component {
-        prototype: "QQuickAbstractButton"
-        name: "org.kde.kirigami/AbstractChip 2.19"
-        exports: ["org.kde.kirigami/AbstractChip 2.19"]
-        exportMetaObjectRevisions: [19]
-        isComposite: true
-        defaultProperty: "data"
-        Property { name: "closable"; type: "bool" }
-        Signal { name: "removed" }
-    }
-    Component {
         prototype: "QQuickItemDelegate"
         name: "org.kde.kirigami/AbstractListItem 2.0"
         exports: ["org.kde.kirigami/AbstractListItem 2.0"]

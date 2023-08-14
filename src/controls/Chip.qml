@@ -6,6 +6,9 @@ import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
 
+import "templates" as KT
+import "private" as P
+
 /**
  * @brief A compact element that represents an attribute, action, or filter.
  *
@@ -34,10 +37,9 @@ import org.kde.kirigami 2.19 as Kirigami
  * }
  * @endcode
  *
- * @inherit org::kde::kirigami::AbstractChip
  * @since 2.19
  */
-Kirigami.AbstractChip {
+KT.Chip {
     id: chip
 
     implicitWidth: layout.implicitWidth
@@ -87,4 +89,6 @@ Kirigami.AbstractChip {
             onClicked: chip.removed()
         }
     }
+
+    background: P.DefaultChipBackground {}
 }

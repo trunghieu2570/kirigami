@@ -169,7 +169,6 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.19 SOURCES
     controls/Dialog.qml
     controls/MenuDialog.qml
     controls/PromptDialog.qml
-    controls/AbstractChip.qml
     controls/Chip.qml
     controls/LoadingPlaceholder.qml
 )
@@ -208,7 +207,7 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private/globaltoolbar SOURCES
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates SOURCES
     controls/templates/AbstractApplicationHeader.qml
     controls/templates/AbstractCard.qml
-    controls/templates/AbstractChip.qml
+    controls/templates/Chip.qml
     controls/templates/InlineMessage.qml
     controls/templates/OverlayDrawer.qml
     controls/templates/OverlaySheet.qml
