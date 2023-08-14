@@ -95,4 +95,6 @@ Kirigami.BasicListItem {
             console.warning("Don't know how to trigger the action")
         }
     }
+
+    Accessible.onPressAction: listItem.clicked()
 }

@@ -177,4 +177,7 @@ Kirigami.AbstractListItem {
 
     Keys.onDownPressed: event => nextItemInFocusChain().focus = true
     Keys.onUpPressed: event => nextItemInFocusChain(false).focus = true
+
+    Accessible.onPressAction: listItem.clicked()
+    Accessible.name: modelData.text
 }
