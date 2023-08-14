@@ -295,6 +295,8 @@ void ShadowedRectangle::itemChange(QQuickItem::ItemChange change, const QQuickIt
         // TODO: only conditionally emit?
         Q_EMIT softwareRenderingChanged();
     }
+
+    QQuickItem::itemChange(change, value);
 }
 
 QSGNode *ShadowedRectangle::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData *data)
