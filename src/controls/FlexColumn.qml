@@ -55,6 +55,7 @@ ColumnLayout {
 
     ColumnLayout {
         id: __inner
+        spacing: __outer.spacing
         Layout.maximumWidth: __outer.maximumWidth
         Layout.leftMargin: __outer.alignment & Qt.AlignLeft || __outer.alignment & Qt.AlignHCenter ? __outer.padding : 0
         Layout.rightMargin: __outer.alignment & Qt.AlignRight || __outer.alignment & Qt.AlignHCenter ? __outer.padding : 0
