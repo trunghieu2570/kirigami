@@ -125,12 +125,6 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "अधिक क्रियाएँ"
 
-#: controls/Avatar.qml:177
-#, qt-format
-msgctxt "Avatar|"
-msgid "%1 — %2"
-msgstr "%1 — %2"
-
 #: controls/Chip.qml:82
 msgctxt "Chip|"
 msgid "Remove Tag"
@@ -289,6 +283,10 @@ msgstr "%1 विंडो प्रणाली"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "क्यूट %2 (%3 के प्रती निर्मित)"
+
+#~ msgctxt "Avatar|"
+#~ msgid "%1 — %2"
+#~ msgstr "%1 — %2"
 
 #~ msgctxt "PageTab|"
 #~ msgid "Current page. Progress: %1 percent."

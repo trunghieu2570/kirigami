@@ -123,12 +123,6 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Daugiau veiksmų"
 
-#: controls/Avatar.qml:177
-#, qt-format
-msgctxt "Avatar|"
-msgid "%1 — %2"
-msgstr ""
-
 #: controls/Chip.qml:82
 msgctxt "Chip|"
 msgid "Remove Tag"

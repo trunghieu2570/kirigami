@@ -97,12 +97,6 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "더 많은 동작"
 
-#: controls/Avatar.qml:177
-#, qt-format
-msgctxt "Avatar|"
-msgid "%1 — %2"
-msgstr "%1 — %2"
-
 #: controls/Chip.qml:82
 msgctxt "Chip|"
 msgid "Remove Tag"
@@ -238,6 +232,10 @@ msgstr "%1 창 시스템"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2(%3(으)로 빌드됨)"
+
+#~ msgctxt "Avatar|"
+#~ msgid "%1 — %2"
+#~ msgstr "%1 — %2"
 
 #~ msgctxt "PageTab|"
 #~ msgid "Current page. Progress: %1 percent."

@@ -99,12 +99,6 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "更多操作"
 
-#: controls/Avatar.qml:177
-#, qt-format
-msgctxt "Avatar|"
-msgid "%1 — %2"
-msgstr "%1 — %2"
-
 #: controls/Chip.qml:82
 msgctxt "Chip|"
 msgid "Remove Tag"
@@ -240,3 +234,7 @@ msgstr "%1 窗口系统"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (使用 %3 构建)"
+
+#~ msgctxt "Avatar|"
+#~ msgid "%1 — %2"
+#~ msgstr "%1 — %2"

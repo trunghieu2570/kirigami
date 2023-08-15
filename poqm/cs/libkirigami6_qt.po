@@ -98,12 +98,6 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Další činnosti"
 
-#: controls/Avatar.qml:177
-#, qt-format
-msgctxt "Avatar|"
-msgid "%1 — %2"
-msgstr "%1 — %2"
-
 #: controls/Chip.qml:82
 msgctxt "Chip|"
 msgid "Remove Tag"
@@ -239,3 +233,7 @@ msgstr "Okenní systém %1"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (sestaveno oproti %3)"
+
+#~ msgctxt "Avatar|"
+#~ msgid "%1 — %2"
+#~ msgstr "%1 — %2"
