@@ -17,6 +17,7 @@ Kirigami.BasicListItem {
     readonly property bool isExpandable: modelData && modelData.hasOwnProperty("expandible") && modelData.expandible
 
     checked: modelData.checked
+    highlighted: checked
     icon.name: modelData.icon.name
     separatorVisible: false
     reserveSpaceForIcon: !isSeparator

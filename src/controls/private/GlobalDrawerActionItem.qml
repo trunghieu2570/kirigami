@@ -20,6 +20,7 @@ Kirigami.AbstractListItem {
     readonly property bool isExpandable: modelData && modelData.hasOwnProperty("expandible") && modelData.expandible
 
     checked: modelData.checked || (actionsMenu && actionsMenu.visible)
+    highlighted: checked
     width: parent.width
 
     contentItem: RowLayout {
