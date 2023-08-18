@@ -44,6 +44,7 @@ import org.kde.kirigami 2.12 as Kirigami
  * @inherit Item
  */
 Item {
+    id: root
 
 //BEGIN properties
     /**
@@ -121,13 +122,17 @@ Item {
     Image {
         id: image
         anchors.fill: parent
-        visible: shadowRectangle.softwareRendering
+    }
+
+    ShaderEffectSource {
+        id: textureSource
+        sourceItem: image
+        hideSource: !shadowRectangle.softwareRendering
     }
 
     Kirigami.ShadowedTexture {
         id: shadowRectangle
         anchors.fill: parent
-
-        source: image.status === Image.Ready ? image : null
+        source: (image.status === Image.Ready && !softwareRendering) ? textureSource : null
     }
 }
