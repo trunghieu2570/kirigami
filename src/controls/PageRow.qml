@@ -599,7 +599,9 @@ QT.Control {
             if (!backEvent.accepted) {
                 if (layersStack.depth > 1) {
                     layersStack.pop()
-                    if (event) event.accepted = true
+                    if (event) {
+                        event.accepted = true
+                    }
                     return
                 }
             }
@@ -613,7 +615,9 @@ QT.Control {
             if (!backEvent.accepted) {
                 if (root.depth > 1) {
                     root.currentIndex = Math.max(0, root.currentIndex - 1)
-                    if (event) event.accepted = true
+                    if (event) {
+                        event.accepted = true
+                    }
                 }
             }
         }
