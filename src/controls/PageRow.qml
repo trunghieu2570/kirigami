@@ -560,7 +560,7 @@ QT.Control {
      * Destroy (or reparent) all the pages contained.
      */
     function clear() {
-        return columnView.clear();
+        columnView.clear();
     }
 
     /**
