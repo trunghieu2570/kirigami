@@ -30,7 +30,7 @@ QT.Control {
      * @brief This property holds the number of items currently pushed onto the view.
      * @property int depth
      */
-    property alias depth: columnView.count
+    readonly property alias depth: columnView.count
 
     /**
      * @brief This property holds the last page in the row.
