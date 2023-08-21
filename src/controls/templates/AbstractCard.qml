@@ -76,10 +76,8 @@ T.ItemDelegate {
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.View
 
-    topPadding: contentItemParent.children.length > 0 ? Kirigami.Units.largeSpacing : 0
-    leftPadding: Kirigami.Units.largeSpacing
-    bottomPadding: contentItemParent.children.length > 0 ? Kirigami.Units.largeSpacing : 0
-    rightPadding: Kirigami.Units.largeSpacing
+    horizontalPadding: Kirigami.Units.largeSpacing
+    verticalPadding: contentItemParent.children.length > 0 ? Kirigami.Units.largeSpacing : 0
 
     width: ListView.view ? ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin : undefined
 
