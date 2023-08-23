@@ -362,7 +362,7 @@ Item {
             Layout.topMargin: item?.height > 0 ? Kirigami.Units.smallSpacing : 0
             onItemChanged: {
                 if (!item) {
-                    labelItem.destroy();
+                    destroy();
                 }
             }
         }
@@ -419,7 +419,7 @@ Item {
             }
             onItemChanged: {
                 if (!item) {
-                    labelItem.destroy();
+                    destroy();
                 }
             }
             Shortcut {
