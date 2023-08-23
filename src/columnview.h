@@ -318,10 +318,30 @@ public:
     bool acceptsMouse() const;
     void setAcceptsMouse(bool accepts);
 
-    // Api not intended for QML use
-    // can't do overloads in QML
-    QQuickItem *removeItem(QQuickItem *item);
-    QQuickItem *removeItem(int item);
+    /**
+     * @brief This method removes the specified item from the view.
+     *
+     * Items will be reparented to their old parent. If they have JavaScript
+     * ownership and they didn't have an old parent, they will be destroyed.
+     * CurrentIndex may be changed in order to keep the same currentItem
+     *
+     * @param item pointer to the item to remove
+     * @returns the removed item
+     */
+    Q_INVOKABLE QQuickItem *removeItem(QQuickItem *item);
+
+    /**
+     * @brief This method removes an item at a given index from the view.
+     *
+     * This method calls removeItem(QQuickItem *item) to remove the item at
+     * the specified index.
+     *
+     * @see ::removeItem(QQuickItem *item)
+     *
+     * @param index the index of the item which should be removed
+     * @return the removed item
+     */
+    Q_INVOKABLE QQuickItem *removeItem(const int &index);
 
     // QML attached property
     static ColumnViewAttached *qmlAttachedProperties(QObject *object);
@@ -357,16 +377,6 @@ public Q_SLOTS:
      * @param to the new position
      */
     void moveItem(int from, int to);
-
-    /**
-     * Removes an item from the view.
-     * Items will be reparented to their old parent.
-     * If they have JavaScript ownership and they didn't have an old parent, they will be destroyed.
-     * CurrentIndex may be changed in order to keep the same currentItem
-     * @param item it can either be a pointer of an item or an integer specifying the position to remove
-     * @returns the item that has just been removed
-     */
-    QQuickItem *removeItem(const QVariant &item);
 
     /**
      * Removes all the items after item. Starting from the last column, every column will be removed until item is found, which will be left in place.

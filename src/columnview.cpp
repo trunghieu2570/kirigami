@@ -1208,17 +1208,6 @@ void ColumnView::moveItem(int from, int to)
     polish();
 }
 
-QQuickItem *ColumnView::removeItem(const QVariant &item)
-{
-    if (item.canConvert<QQuickItem *>()) {
-        return removeItem(item.value<QQuickItem *>());
-    } else if (item.canConvert<int>()) {
-        return removeItem(item.toInt());
-    } else {
-        return nullptr;
-    }
-}
-
 QQuickItem *ColumnView::removeItem(QQuickItem *item)
 {
     if (m_contentItem->m_items.isEmpty() || !m_contentItem->m_items.contains(item)) {
@@ -1249,14 +1238,17 @@ QQuickItem *ColumnView::removeItem(QQuickItem *item)
     return item;
 }
 
-QQuickItem *ColumnView::removeItem(int pos)
+QQuickItem *ColumnView::removeItem(const int &index)
 {
     if (m_contentItem->m_items.isEmpty() //
-        || pos < 0 || pos >= m_contentItem->m_items.length()) {
+        || index < 0 || index >= m_contentItem->m_items.length()) {
         return nullptr;
     }
-
-    return removeItem(m_contentItem->m_items[pos]);
+    if (qApp->layoutDirection() == Qt::RightToLeft) {
+        return removeItem(m_contentItem->m_items[count() - 1 - index]);
+    } else {
+        return removeItem(m_contentItem->m_items[index]);
+    }
 }
 
 QQuickItem *ColumnView::pop(QQuickItem *item)
