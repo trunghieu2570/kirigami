@@ -91,10 +91,10 @@ T.ItemDelegate {
             top: parent.top
             left: parent.left
             right: parent.right
-            leftMargin: root.leftPadding
-            topMargin: root.topPadding
-            rightMargin: root.rightPadding
             bottom: parent.bottom
+            topMargin: root.topPadding
+            leftMargin: root.leftPadding
+            rightMargin: root.rightPadding
             bottomMargin: root.bottomPadding
         }
         columns: headerOrientation === Qt.Vertical ? 1 : 2
