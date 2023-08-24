@@ -97,7 +97,7 @@ T.ItemDelegate {
             rightMargin: root.rightPadding
             bottomMargin: root.bottomPadding
         }
-        columns: headerOrientation === Qt.Vertical ? 1 : 2
+        columns: root.headerOrientation === Qt.Vertical ? 1 : 2
         function preferredHeight(item) {
             if (!item) {
                 return 0;
@@ -105,15 +105,15 @@ T.ItemDelegate {
             if (item.Layout.preferredHeight > 0) {
                 return item.Layout.preferredHeight;
             }
-            return item.implicitHeight
+            return item.implicitHeight;
         }
         Item {
             id: headerParent
             Layout.fillWidth: true
             Layout.fillHeight: root.headerOrientation === Qt.Horizontal
             Layout.rowSpan: root.headerOrientation === Qt.Vertical ? 1 : 2
-            Layout.preferredWidth: header ? header.implicitWidth : 0
-            Layout.preferredHeight: root.headerOrientation === Qt.Vertical ? mainLayout.preferredHeight(header) : -1
+            Layout.preferredWidth: root.header?.implicitWidth ?? 0
+            Layout.preferredHeight: root.headerOrientation === Qt.Vertical ? mainLayout.preferredHeight(root.header) : -1
             visible: children.length > 0
         }
         Item {
@@ -122,15 +122,15 @@ T.ItemDelegate {
             Layout.fillHeight: true
             Layout.topMargin: root.topPadding
             Layout.bottomMargin: root.bottomPadding
-            Layout.preferredWidth: contentItem ? contentItem.implicitWidth : 0
-            Layout.preferredHeight: mainLayout.preferredHeight(contentItem)
+            Layout.preferredWidth: root.contentItem?.implicitWidth ?? 0
+            Layout.preferredHeight: mainLayout.preferredHeight(root.contentItem)
             visible: children.length > 0
         }
         Item {
             id: footerParent
             Layout.fillWidth: true
-            Layout.preferredWidth: footer ? footer.implicitWidth : 0
-            Layout.preferredHeight: mainLayout.preferredHeight(footer)
+            Layout.preferredWidth: root.footer?.implicitWidth ?? 0
+            Layout.preferredHeight: mainLayout.preferredHeight(root.footer)
             visible: children.length > 0
         }
     }
@@ -159,11 +159,12 @@ T.ItemDelegate {
 
         //make the footer always looking it's at the bottom of the card
         footer.parent = footerParent;
-        footer.anchors.left = footerParent.left;
         footer.anchors.top = footerParent.top;
+        footer.anchors.left = footerParent.left;
         footer.anchors.right = footerParent.right;
-        footer.anchors.topMargin = Qt.binding(() =>
-            (root.height - root.bottomPadding - root.topPadding) - (footerParent.y + footerParent.height));
+        footer.anchors.topMargin = Qt.binding(() => {
+            return height - topPadding - bottomPadding - footerParent.y - footerParent.height;
+        });
     }
     Component.onCompleted: {
         contentItemChanged();
