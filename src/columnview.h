@@ -341,7 +341,7 @@ public:
      * @param index the index of the item which should be removed
      * @return the removed item
      */
-    Q_INVOKABLE QQuickItem *removeItem(const int &index);
+    Q_INVOKABLE QQuickItem *removeItem(int index);
 
     // QML attached property
     static ColumnViewAttached *qmlAttachedProperties(QObject *object);

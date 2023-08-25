@@ -1238,7 +1238,7 @@ QQuickItem *ColumnView::removeItem(QQuickItem *item)
     return item;
 }
 
-QQuickItem *ColumnView::removeItem(const int &index)
+QQuickItem *ColumnView::removeItem(const int index)
 {
     if (m_contentItem->m_items.isEmpty() || index < 0 || index >= count()) {
         return nullptr;
