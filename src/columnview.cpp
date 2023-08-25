@@ -1240,12 +1240,8 @@ QQuickItem *ColumnView::removeItem(QQuickItem *item)
 
 QQuickItem *ColumnView::removeItem(const int &index)
 {
-    if (m_contentItem->m_items.isEmpty() //
-        || index < 0 || index >= m_contentItem->m_items.length()) {
+    if (m_contentItem->m_items.isEmpty() || index < 0 || index >= count()) {
         return nullptr;
-    }
-    if (qApp->layoutDirection() == Qt::RightToLeft) {
-        return removeItem(m_contentItem->m_items[count() - 1 - index]);
     } else {
         return removeItem(m_contentItem->m_items[index]);
     }
