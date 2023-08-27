@@ -147,6 +147,8 @@ private:
 class ColumnView : public QQuickItem
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_ATTACHED(ColumnViewAttached)
 
     /**
      * The strategy to follow while automatically resizing the columns,

@@ -35,6 +35,9 @@ class QQuickItem;
 class FormLayoutAttached : public QObject
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(FormData)
+    QML_ATTACHED(FormLayoutAttached)
+    QML_UNCREATABLE("")
     /**
      * The label for a org::kde::kirigami::FormLayout field
      */

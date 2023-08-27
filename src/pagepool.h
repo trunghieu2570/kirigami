@@ -22,6 +22,7 @@
 class PagePool : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
     /**
      * The last url that was loaded with @loadPage. Useful if you need
      * to have a "checked" state to buttons or list items that

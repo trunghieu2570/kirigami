@@ -24,6 +24,8 @@ class WheelHandler;
 class KirigamiWheelEvent : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
 
     /**
      * x: real
@@ -175,6 +177,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
     Q_INTERFACES(QQmlParserStatus)
+    QML_ELEMENT
 
     /**
      * @brief This property holds the Qt Quick Flickable that the WheelHandler will control.

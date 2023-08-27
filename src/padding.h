@@ -59,6 +59,7 @@ class PaddingPrivate;
 class Padding : public QQuickItem
 {
     Q_OBJECT
+    QML_ELEMENT
 
     /**
      * @brief This property holds the visual content Item.

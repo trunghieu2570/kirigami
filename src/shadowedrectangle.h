@@ -9,6 +9,8 @@
 #include <QQuickItem>
 #include <memory>
 
+#include <QQmlEngine>
+
 class PaintedRectangleItem;
 
 /**
@@ -17,6 +19,8 @@ class PaintedRectangleItem;
 class BorderGroup : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
     /**
      * @brief This property holds the border's width in pixels.
      *
@@ -59,6 +63,8 @@ private:
 class ShadowGroup : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
     /**
      * @brief This property holds the shadow's approximate size in pixels.
      * @note The actual shadow size can be less than this value due to falloff.
@@ -117,6 +123,8 @@ private:
 class CornersGroup : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
     /**
      * @brief This property holds the top-left corner's radius in pixels.
      *
@@ -193,6 +201,7 @@ private:
 class ShadowedRectangle : public QQuickItem
 {
     Q_OBJECT
+    QML_ELEMENT
     /**
      * @brief This property holds the radii of the rectangle's corners.
      *

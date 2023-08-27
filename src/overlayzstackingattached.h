@@ -10,6 +10,8 @@
 #include <QObject>
 #include <QQmlEngine>
 
+#include <qqmlregistration.h>
+
 class QQuickItem;
 
 /**
@@ -37,6 +39,10 @@ class QQuickItem;
 class OverlayZStackingAttached : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_NAMED_ELEMENT(OverlayZStacking)
+    QML_UNCREATABLE("Cannot create objects of type OverlayZStacking, use it as an attached property")
+    QML_ATTACHED(OverlayZStackingAttached)
     /**
      * An optimal z-index that attachee popup should bind to.
      */
