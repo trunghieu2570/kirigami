@@ -48,6 +48,8 @@ private:
 class ToolBarLayout : public QQuickItem
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_ATTACHED(ToolBarLayoutAttached)
     /**
      * The actions this layout should create delegates for.
      */

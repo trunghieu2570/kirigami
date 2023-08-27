@@ -72,7 +72,6 @@ include(ECMQtDeclareLoggingCategory)
 include(ECMAddQch)
 include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(KDEPackageAppTemplates)
-include(ECMGenerateQmlTypes)
 include(ECMQmlModule)
 include(ECMDeprecationSettings)
 

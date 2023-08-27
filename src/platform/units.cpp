@@ -346,7 +346,6 @@ int IconSizes::enormous() const
 {
     return 128;
 }
-
 }
 }
 

@@ -26,6 +26,10 @@ class QQuickItem;
 class ScenePositionAttached : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_ATTACHED(ScenePositionAttached)
+    QML_NAMED_ELEMENT(ScenePosition)
+    QML_UNCREATABLE("")
     /**
      * The global scene X position
      */

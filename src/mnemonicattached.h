@@ -10,6 +10,8 @@
 #include <QObject>
 #include <QQuickWindow>
 
+#include <QQmlEngine>
+
 /**
  * This Attached property is used to calculate automated keyboard sequences
  * to trigger actions based upon their text: if an "&" mnemonic is
@@ -28,6 +30,9 @@
 class MnemonicAttached : public QObject
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(MnemonicData)
+    QML_ATTACHED(MnemonicAttached)
+    QML_UNCREATABLE("Cannot create objects of type MnemonicData, use it as an attached property")
     /**
      * The label of the control we want to compute a mnemonic for, instance
      * "Label:" or "&Ok"

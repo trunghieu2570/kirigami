@@ -20,6 +20,7 @@
 class HeaderFooterLayout : public QQuickItem
 {
     Q_OBJECT
+    QML_ELEMENT
     /**
      * @brief This property holds the page header item.
      *

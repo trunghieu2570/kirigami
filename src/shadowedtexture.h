@@ -21,6 +21,7 @@
 class ShadowedTexture : public ShadowedRectangle
 {
     Q_OBJECT
+    QML_ELEMENT
 
     /**
      * This property holds the source item that will get rendered with the

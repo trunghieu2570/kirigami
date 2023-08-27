@@ -7,6 +7,8 @@
 #include <QObject>
 #include <QQmlEngine>
 
+#include <qqmlregistration.h>
+
 /**
  * @brief This attached property contains hints for spell checker.
  *
@@ -30,6 +32,11 @@
 class SpellCheckAttached : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_NAMED_ELEMENT(SpellCheck)
+    QML_UNCREATABLE("Attached property only")
+    QML_ATTACHED(SpellCheckAttached)
+
     /**
      * This property holds whether the spell checking should be enabled on the
      * TextField/TextArea.

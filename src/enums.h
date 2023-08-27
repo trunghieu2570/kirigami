@@ -8,10 +8,12 @@
 #define ENUMS_H
 
 #include <QObject>
+#include <QQmlEngine>
 
 namespace ApplicationHeaderStyle
 {
 Q_NAMESPACE
+QML_ELEMENT
 
 enum Status {
     Auto = 0,
@@ -34,6 +36,7 @@ Q_DECLARE_FLAGS(NavigationButtons, NavigationButton)
 namespace MessageType
 {
 Q_NAMESPACE
+QML_ELEMENT
 
 enum Type {
     Information = 0,
@@ -47,6 +50,8 @@ Q_ENUM_NS(Type)
 class DisplayHint : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
 public:
     /**

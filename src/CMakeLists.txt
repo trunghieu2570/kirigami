@@ -327,6 +327,15 @@ install(EXPORT KirigamiTargets
 
 ecm_finalize_qml_module(Kirigami DESTINATION ${KDE_INSTALL_QMLDIR})
 
+ecm_add_qml_module(KirigamiPrivatePlugin URI org.kde.kirigami.private VERSION 2.6 GENERATE_PLUGIN_SOURCE)
+
+target_sources(KirigamiPrivatePlugin PRIVATE copyhelper.cpp)
+
+target_link_libraries(KirigamiPrivatePlugin PRIVATE Qt6::Gui)
+
+ecm_finalize_qml_module(KirigamiPrivatePlugin DESTINATION ${KDE_INSTALL_QMLDIR})
+
+
 if (ANDROID)
     install(FILES KF6Kirigami2-android-dependencies.xml
         DESTINATION ${KDE_INSTALL_LIBDIR}
