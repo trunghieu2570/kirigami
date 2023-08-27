@@ -171,7 +171,7 @@ T2.Drawer {
                 Qt.callLater(() => root.drawerOpen = !root.drawerOpen)
             }
             Accessible.name: root.drawerOpen ? root.handleOpenToolTip : root.handleClosedToolTip
-            visible: !Kirigami.SettingstabletMode && !Kirigami.SettingshasTransientTouchInput
+            visible: !Kirigami.Settings.tabletMode && !Kirigami.Settings.hasTransientTouchInput
         }
         T2.ToolTip.visible: drawerHandle.displayToolTip && containsMouse
         T2.ToolTip.text: root.drawerOpen ? handleOpenToolTip : handleClosedToolTip
