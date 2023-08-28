@@ -5,8 +5,8 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.1
-import org.kde.kirigami 2.12 as Kirigami
+import QtQuick
+import org.kde.kirigami as Kirigami
 
 /**
  * @brief An image with a shadow.
@@ -111,6 +111,14 @@ Item {
      * @property int fillMode
      */
     property alias fillMode: image.fillMode
+
+    /**
+     * @brief This property holds whether the image uses mipmap filtering when scaled
+     * or transformed.
+     * @see QtQuick.Image::mipmap
+     * @property bool mipmap
+     */
+    property alias mipmap: image.mipmap
 
     /**
      * @brief This property holds the scaled width and height of the full-frame image.
