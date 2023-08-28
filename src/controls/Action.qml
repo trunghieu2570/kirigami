@@ -1,20 +1,20 @@
 /*
  *  SPDX-FileCopyrightText: 2016 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.7
-import QtQuick.Controls 2.4 as QQC2
-import org.kde.kirigami 2.14 as Kirigami
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Templates as T
+import org.kde.kirigami as Kirigami
 
 /**
  * @brief An item that represents an abstract Action
  * @inherit QtQuick.QQC2.Action
  */
 QQC2.Action {
-    id: root
-
 //BEGIN properties
     /**
      * @brief This property holds whether the graphic representation of the action
@@ -55,7 +55,7 @@ QQC2.Action {
     /**
      * @brief This property holds the parent action.
      */
-    property QQC2.Action parent
+    property T.Action parent
 
     /**
      * @brief This property sets this action's display type.
@@ -77,7 +77,7 @@ QQC2.Action {
      * @since 5.65
      * @since 2.12
      */
-    property Component displayComponent: null
+    property Component displayComponent
 
     /**
      * @brief This property holds a list of child actions.
@@ -86,43 +86,37 @@ QQC2.Action {
      *
      * Example usage:
      * @code
-     * Action {
+     * import QtQuick.Controls as QQC2
+     * import org.kde.kirigami as Kirigami
+     *
+     * Kirigami.Action {
      *    text: "Tools"
-     *    Action {
+     *
+     *    QQC2.Action {
      *        text: "Action1"
      *    }
-     *    Action {
+     *    Kirigami.Action {
      *        text: "Action2"
      *    }
      * }
      * @endcode
-     * @property list<Action> children
+     * @property list<T.Action> children
      */
-    default property list<QtObject> children
+    default property list<T.Action> children
 //END properties
 
     onChildrenChanged: {
-        let child;
-        for (const i in children) {
-            child = children[i];
-            if (child.hasOwnProperty("parent")) {
-                child.parent = root
-            }
-        }
+        children
+            .filter(action => action instanceof Kirigami.Action)
+            .forEach(action => {
+                action.parent = this;
+            });
     }
 
     /**
      * @brief This property holds the action's visible child actions.
-     * @property list<Action> visibleChildren
+     * @property list<T.Action> visibleChildren
      */
-    readonly property var visibleChildren: {
-        const visible = [];
-        for (const i in children) {
-            const child = children[i];
-            if (!child.hasOwnProperty("visible") || child.visible) {
-                visible.push(child);
-            }
-        }
-        return visible;
-    }
+    readonly property list<T.Action> visibleChildren: children
+        .filter(action => !(action instanceof Kirigami.Action) || action.visible)
 }
