@@ -156,7 +156,7 @@ Kirigami.AbstractListItem {
 
     function trigger() {
         modelData.trigger();
-        if (modelData.hasOwnProperty("children") && modelData.children!==undefined && modelData.children.length > 0) {
+        if (modelData instanceof Kirigami.Action && modelData.children.length > 0) {
             if (root.collapsed) {
                 // fallbacks needed for Qt 5.9
                 if ((!listItem.actionsMenu.hasOwnProperty("count") || listItem.actionsMenu.count>0) && !listItem.actionsMenu.visible) {

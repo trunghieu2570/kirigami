@@ -4,11 +4,11 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.12
-import QtQuick.Templates 2.3 as T2
-import QtQuick.Controls 2.2 as QQC2
-import QtQuick.Layouts 1.2
-import org.kde.kirigami 2.13 as Kirigami
+import QtQuick
+import QtQuick.Templates as T2
+import QtQuick.Controls as QQC2
+import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
 import "private" as P
 
 /**
@@ -18,10 +18,10 @@ import "private" as P
  *
  * Example usage:
  * @code
- * import org.kde.kirigami 2.4 as Kirigami
+ * import org.kde.kirigami as Kirigami
  *
  * Kirigami.ApplicationWindow {
- *  [...]
+ *
  *     globalDrawer: Kirigami.GlobalDrawer {
  *         actions: [
  *            Kirigami.Action {
@@ -43,7 +43,6 @@ import "private" as P
  *            }
  *         ]
  *     }
- *  [...]
  * }
  * @endcode
  *
@@ -88,22 +87,23 @@ OverlayDrawer {
      *
      * Example usage:
      * @code
-     * import org.kde.kirigami 2.4 as Kirigami
+     * import QtQuick.Controls as QQC2
+     * import org.kde.kirigami as Kirigami
      *
      * Kirigami.ApplicationWindow {
-     *  [...]
+     *
      *     globalDrawer: Kirigami.GlobalDrawer {
      *         actions: [
      *            Kirigami.Action {
      *                text: "View"
      *                icon.name: "view-list-icons"
-     *                Kirigami.Action {
+     *                QQC2.Action {
      *                    text: "action 1"
      *                }
      *                Kirigami.Action {
      *                    text: "action 2"
      *                }
-     *                Kirigami.Action {
+     *                QQC2.Action {
      *                    text: "action 3"
      *                }
      *            },
@@ -113,12 +113,11 @@ OverlayDrawer {
      *            }
      *         ]
      *     }
-     *  [...]
      * }
      * @endcode
-     * @property list<Action> actions
+     * @property list<T.Action> actions
      */
-    property list<QtObject> actions
+    property list<T2.Action> actions
 
     /**
      * @brief This property holds an item that will always be displayed at the top of the drawer.
@@ -234,7 +233,7 @@ OverlayDrawer {
     /**
      * @brief This property points to the action acting as a submenu
      */
-    readonly property Action currentSubMenu: stackView.currentItem ? stackView.currentItem.current: null
+    readonly property Kirigami.Action currentSubMenu: stackView.currentItem?.current ?? null
 
     /**
      * @brief This property sets whether the drawer becomes a menu on the desktop.
@@ -420,7 +419,7 @@ OverlayDrawer {
                     id: stackView
                     clip: true
                     Layout.fillWidth: true
-                    Layout.minimumHeight: currentItem ? currentItem.implicitHeight : 0
+                    Layout.minimumHeight: currentItem?.implicitHeight ?? 0
                     Layout.maximumHeight: Layout.minimumHeight
                     property P.ActionsMenu openSubMenu
                     initialItem: menuComponent
@@ -453,7 +452,7 @@ OverlayDrawer {
                 }
                 Item {
                     Layout.fillWidth: true
-                    Layout.fillHeight: root.actions.length>0
+                    Layout.fillHeight: root.actions.length > 0
                     Layout.minimumHeight: Kirigami.Units.smallSpacing
                 }
 
@@ -487,10 +486,15 @@ OverlayDrawer {
 
                     Column {
                         spacing: 0
+
                         property alias model: actionsRepeater.model
-                        property Action current
+
+                        // This is actually a "current parent action",
+                        // and column is filled with its children.
+                        property Kirigami.Action current
 
                         property int level: 0
+
                         Layout.maximumHeight: Layout.minimumHeight
 
                         BasicListItem {
@@ -520,15 +524,8 @@ OverlayDrawer {
                         Repeater {
                             id: actionsRepeater
 
-                            readonly property bool withSections: {
-                                for (let i = 0; i < root.actions.length; i++) {
-                                    const action = root.actions[i];
-                                    if (!(action.hasOwnProperty("expandible") && action.expandible)) {
-                                        return false;
-                                    }
-                                }
-                                return true;
-                            }
+                            readonly property bool withSections: !root.actions
+                                .every(a => a instanceof Kirigami.Action && a.expandible)
 
                             model: root.actions
                             delegate: Column {
