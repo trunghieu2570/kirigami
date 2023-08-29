@@ -15,6 +15,8 @@ import org.kde.kirigami as Kirigami
  * @inherit QtQuick.QQC2.Action
  */
 QQC2.Action {
+    id: root
+
 //BEGIN properties
     /**
      * @brief This property holds whether the graphic representation of the action
@@ -105,18 +107,12 @@ QQC2.Action {
     default property list<T.Action> children
 //END properties
 
-    onChildrenChanged: {
-        children
-            .filter(action => action instanceof Kirigami.Action)
-            .forEach(action => {
-                action.parent = this;
-            });
-    }
+    readonly property alias visibleChildren: helper.visibleChildren
 
-    /**
-     * @brief This property holds the action's visible child actions.
-     * @property list<T.Action> visibleChildren
-     */
-    readonly property list<T.Action> visibleChildren: children
-        .filter(action => !(action instanceof Kirigami.Action) || action.visible)
+    // TODO: Experiment with Property Interceptor syntax, this time on `children` property.
+    // That would allow getting rid this ad-hoc "private" property, as object would be
+    // parented to root but not stored in any property.
+    readonly property Kirigami.ActionHelper __helper: Kirigami.ActionHelper {
+        id: helper
+    }
 }

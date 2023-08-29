@@ -17,6 +17,8 @@ target_include_directories(KirigamiPlugin PRIVATE
 )
 
 target_sources(KirigamiPlugin PRIVATE
+    actionhelper.cpp
+    actionhelper.h
     colorutils.cpp
     colorutils.h
     columnview.cpp

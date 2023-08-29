@@ -7,6 +7,7 @@
  */
 
 #include "kirigamiplugin.h"
+#include "actionhelper.h"
 #include "colorutils.h"
 #include "columnview.h"
 #include "delegaterecycler.h"
@@ -291,6 +292,9 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     // 2.20
     qmlRegisterType(componentUrl(QStringLiteral("SelectableLabel.qml")), uri, 2, 20, "SelectableLabel");
+
+    // qmlRegisterUncreatableType<ActionHelper>(uri, 2, 20, "ActionHelper", QStringLiteral("Internal type, only used as an attached property"));
+    qmlRegisterType<ActionHelper>(uri, 2, 20, "ActionHelper");
 
     qmlProtectModule(uri, 2);
 }
