@@ -528,12 +528,24 @@ OverlayDrawer {
                                 .every(a => a instanceof Kirigami.Action && a.expandible)
 
                             model: root.actions
+
                             delegate: Column {
+                                id: delegate
+
+                                required property T2.Action modelData
+                                readonly property Kirigami.Action action: modelData as Kirigami.Action
+                                readonly property bool isExpandable: action?.expandible ?? false
+
                                 width: parent.width
+
                                 P.GlobalDrawerActionItem {
                                     id: drawerItem
-                                    visible: (modelData.hasOwnProperty("visible") && modelData.visible) && (root.collapsed || !(modelData.hasOwnProperty("expandible") && modelData.expandible))
+
+                                    action: delegate.modelData
+
+                                    visible: (delegate.action?.visible ?? false) && (root.collapsed || !delegate.isExpandable)
                                     width: parent.width
+
                                     onCheckedChanged: {
                                         // move every checked item into view
                                         if (checked && topContent.height + backItem.height + (model.index + 1) * height - mainFlickable.contentY > mainFlickable.height) {
@@ -544,40 +556,55 @@ OverlayDrawer {
                                 }
                                 Item {
                                     id: headerItem
-                                    visible: !root.collapsed && (modelData.hasOwnProperty("expandible") && modelData.expandible && !!modelData.children && modelData.children.length > 0)
+
+                                    // Being "expandible" implies that delegate's model is a Kirigami.Action
+                                    visible: !root.collapsed && delegate.isExpandable && delegate.action.children.length > 0
                                     height: sectionHeader.implicitHeight
                                     width: parent.width
+
                                     Kirigami.ListSectionHeader {
                                         id: sectionHeader
+
                                         anchors.fill: parent
+
                                         Kirigami.Theme.colorSet: root.modal ? Kirigami.Theme.View : Kirigami.Theme.Window
+
                                         contentItem: RowLayout {
+                                            spacing: Kirigami.Units.smallSpacing
+
                                             Kirigami.Icon {
                                                 property int size: Kirigami.Units.iconSizes.smallMedium
                                                 Layout.minimumHeight: size
                                                 Layout.maximumHeight: size
                                                 Layout.minimumWidth: size
                                                 Layout.maximumWidth: size
-                                                source: modelData.icon.name || modelData.icon.source
+                                                source: delegate.modelData.icon.name !== ""
+                                                    ? delegate.modelData.icon.name
+                                                    : delegate.modelData.icon.source
                                             }
-                                            Heading {
-                                                id: header
+
+                                            Kirigami.Heading {
                                                 level: 4
-                                                text: modelData.text
-                                            }
-                                            Item {
+                                                text: delegate.modelData.text
                                                 Layout.fillWidth: true
                                             }
                                         }
                                     }
                                 }
+
                                 Repeater {
-                                    id: __repeater
-                                    model: headerItem.visible ? modelData.children : null
+                                    model: !root.collapsed && delegate.isExpandable ? (delegate.action?.children ?? null) : null
                                     delegate: P.GlobalDrawerActionItem {
+                                        required property T2.Action modelData
+
+                                        readonly property real leadingPadding: (actionsRepeater.withSections && !root.collapsed && !root.modal ? 2 : 4) * horizontalPadding
+
+                                        action: modelData
+
                                         width: parent.width
-                                        opacity: !root.collapsed
-                                        leftPadding: actionsRepeater.withSections && !root.collapsed && !root.modal ? padding * 2 : padding * 4
+
+                                        leftPadding: mirrored ? undefined : leadingPadding
+                                        rightPadding: mirrored ? leadingPadding : undefined
                                     }
                                 }
                             }
