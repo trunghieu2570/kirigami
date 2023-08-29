@@ -138,12 +138,12 @@ QQC2.ItemDelegate {
     //Theme.colorSet: Kirigami.Theme.View
 
     padding: Kirigami.Settings.tabletMode ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
-
-    leftPadding: padding * 2
-    topPadding: padding
-
-    rightPadding: padding * 2
-    bottomPadding: padding
+    topPadding: undefined
+    leftPadding: undefined
+    rightPadding: undefined
+    bottomPadding: undefined
+    verticalPadding: undefined
+    horizontalPadding: padding * 2
 
     implicitWidth: contentItem ? contentItem.implicitWidth + leftPadding + rightPadding : Kirigami.Units.gridUnit * 12
     implicitHeight: contentItem ? contentItem.implicitHeight + topPadding + bottomPadding : 0
