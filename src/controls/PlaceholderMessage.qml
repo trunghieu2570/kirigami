@@ -7,7 +7,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12 as QQC2
-import org.kde.kirigami 2.12 as Kirigami
+import org.kde.kirigami as Kirigami
 import "private" as P
 
 /**
@@ -16,6 +16,10 @@ import "private" as P
  * The message comprises a label with text, an optional explanation below the main text,
  * an optional icon above all the text, and an optional button below all the text which
  * can be used to easily show the user what to do next to add content to the view.
+ *
+ * The explanatory text is selectable and can contain clickable links. In this latter
+ * case, client code must implement an ``onLinkactivated:`` signal handler or the links
+ * will not work.
  *
  * The top-level component is a ColumnLayout, so additional components items can
  * simply be added as child items and they will be positioned sanely.
@@ -84,7 +88,9 @@ import "private" as P
  *
  *         icon.name: "network-disconnect"
  *         text: "Unable to load content"
- *         explanation: "Please try again later"
+ *         explanation: "Please try again later."
+ *                      " Visit <a href="https://foo.com/com>this link</a> for more details."
+ *         onLinkActivated: link => Qt.openUrlExternally(link)
  *     }
  * }
  * @endcode
@@ -212,6 +218,26 @@ ColumnLayout {
      * @since 5.70
      */
     property alias helpfulAction: actionButton.action
+
+    /**
+     * This property holds the link embedded in the explanatory message text that
+     * the user is hovering over.
+     */
+    readonly property alias hoveredLink: label.hoveredLink
+
+    /**
+     * This signal is emitted when a link is hovered in the explanatory message
+     * text.
+     * @param The hovered link.
+     */
+    signal linkHovered(string link)
+
+    /**
+     * This signal is emitted when a link is clicked or tapped in the explanatory
+     * message text.
+     * @param The clicked or tapped link.
+     */
+    signal linkActivated(string link)
 //END properties
 
     spacing: Kirigami.Units.largeSpacing
@@ -249,7 +275,9 @@ ColumnLayout {
         wrapMode: Text.WordWrap
     }
 
-    QQC2.Label {
+    Kirigami.SelectableLabel {
+        id: label
+
         text: root.explanation
         visible:  root.explanation !== ""
         opacity: root.type === PlaceholderMessage.Type.Actionable ? 1 : 0.65
@@ -258,6 +286,9 @@ ColumnLayout {
         wrapMode: Text.WordWrap
 
         Layout.fillWidth: true
+
+        onLinkHovered: link => root.linkHovered(link)
+        onLinkActivated: link => root.linkActivated(link)
     }
 
     QQC2.Button {
