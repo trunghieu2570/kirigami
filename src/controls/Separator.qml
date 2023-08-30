@@ -33,16 +33,19 @@ Rectangle {
      * * ``Kirigami.Separator.Weight.Light``
      * * ``Kirigami.Separator.Weight.Normal``
      *
-     * default: ``Separator.Weight.Normal``
+     * default: ``Kirigami.Separator.Weight.Normal``
      *
      * @since 5.72
      * @since org.kde.kirigami 2.12
      */
-    property int weight: Separator.Weight.Normal
+    property int weight: Kirigami.Separator.Weight.Normal
 
     /* TODO: If we get a separator color role, change this to
      * mix weights lower than Normal with the background color
      * and mix weights higher than Normal with the text color.
      */
-    color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, weight === Separator.Weight.Light ? 0.07 : 0.15)
+    color: Kirigami.ColorUtils.linearInterpolation(
+        Kirigami.Theme.backgroundColor,
+        Kirigami.Theme.textColor,
+        weight === Kirigami.Separator.Weight.Light ? 0.07 : 0.15)
 }
