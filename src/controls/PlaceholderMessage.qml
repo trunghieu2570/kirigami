@@ -167,7 +167,9 @@ ColumnLayout {
      *
      * @since 5.94
      */
-    property int type: actionButton.action && actionButton.action.enabled ? PlaceholderMessage.Type.Actionable : PlaceholderMessage.Type.Informational
+    property int type: actionButton.action?.enabled
+        ? PlaceholderMessage.Type.Actionable
+        : PlaceholderMessage.Type.Informational
 
     /**
      * @brief This property holds the text to show in the placeholder label.
@@ -297,6 +299,6 @@ ColumnLayout {
         Layout.alignment: Qt.AlignHCenter
         Layout.topMargin: Kirigami.Units.gridUnit
 
-        visible: action && action.enabled
+        visible: action?.enabled ?? false
     }
 }
