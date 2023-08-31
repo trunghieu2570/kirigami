@@ -35,8 +35,7 @@ Icon::Icon(QQuickItem *parent)
     setFlag(ItemHasContents, true);
     // Using 32 because Icon used to redefine implicitWidth and implicitHeight and hardcode them to 32
     setImplicitSize(32, 32);
-    // FIXME: not necessary anymore
-    connect(qApp, &QGuiApplication::paletteChanged, this, &QQuickItem::polish);
+
     connect(this, &QQuickItem::smoothChanged, this, &QQuickItem::polish);
     connect(this, &QQuickItem::enabledChanged, this, [this]() {
         m_allowNextAnimation = true;
