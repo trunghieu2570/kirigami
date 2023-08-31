@@ -576,17 +576,18 @@ void ContentItem::updateVisibleItems()
     for (auto *item : std::as_const(m_visibleItems)) {
         disconnect(item, &QObject::destroyed, this, nullptr);
     }
-    const QQuickItem *oldFirstVisibleItem = m_visibleItems.isEmpty() ? nullptr : qobject_cast<QQuickItem *>(m_visibleItems.first());
-    const QQuickItem *oldLastVisibleItem = m_visibleItems.isEmpty() ? nullptr : qobject_cast<QQuickItem *>(m_visibleItems.last());
+
+    const QQuickItem *oldLeadingVisibleItem = m_view->leadingVisibleItem();
+    const QQuickItem *oldTrailingVisibleItem = m_view->trailingVisibleItem();
 
     if (newItems != m_visibleItems) {
         m_visibleItems = newItems;
         Q_EMIT m_view->visibleItemsChanged();
-        if (!m_visibleItems.isEmpty() && m_visibleItems.first() != oldFirstVisibleItem) {
-            Q_EMIT m_view->firstVisibleItemChanged();
+        if (!m_visibleItems.isEmpty() && m_visibleItems.first() != oldLeadingVisibleItem) {
+            Q_EMIT m_view->leadingVisibleItemChanged();
         }
-        if (!m_visibleItems.isEmpty() && m_visibleItems.last() != oldLastVisibleItem) {
-            Q_EMIT m_view->lastVisibleItemChanged();
+        if (!m_visibleItems.isEmpty() && m_visibleItems.last() != oldTrailingVisibleItem) {
+            Q_EMIT m_view->trailingVisibleItemChanged();
         }
     }
 }
@@ -872,7 +873,11 @@ void ColumnView::setCurrentIndex(int index)
         if (!m_mouseDown) {
             if (!contentsRect.contains(mappedCurrent)) {
                 m_contentItem->m_viewAnchorItem = m_currentItem;
-                m_contentItem->animateX(-m_currentItem->x() + m_contentItem->m_leftPinnedSpace);
+                if (qApp->layoutDirection() == Qt::RightToLeft) {
+                    m_contentItem->animateX(-m_currentItem->x() - m_currentItem->width() + width());
+                } else {
+                    m_contentItem->animateX(-m_currentItem->x() + m_contentItem->m_leftPinnedSpace);
+                }
             } else {
                 m_contentItem->snapToItem();
             }
@@ -893,7 +898,7 @@ QList<QObject *> ColumnView::visibleItems() const
     return m_contentItem->m_visibleItems;
 }
 
-QQuickItem *ColumnView::firstVisibleItem() const
+QQuickItem *ColumnView::leadingVisibleItem() const
 {
     if (m_contentItem->m_visibleItems.isEmpty()) {
         return nullptr;
@@ -902,7 +907,7 @@ QQuickItem *ColumnView::firstVisibleItem() const
     return qobject_cast<QQuickItem *>(m_contentItem->m_visibleItems.first());
 }
 
-QQuickItem *ColumnView::lastVisibleItem() const
+QQuickItem *ColumnView::trailingVisibleItem() const
 {
     if (m_contentItem->m_visibleItems.isEmpty()) {
         return nullptr;

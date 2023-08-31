@@ -219,12 +219,12 @@ class ColumnView : public QQuickItem
     /**
      * The first of visibleItems provided from convenience
      */
-    Q_PROPERTY(QQuickItem *firstVisibleItem READ firstVisibleItem NOTIFY firstVisibleItemChanged)
+    Q_PROPERTY(QQuickItem *leadingVisibleItem READ leadingVisibleItem NOTIFY leadingVisibleItemChanged)
 
     /**
      * The last of visibleItems provided from convenience
      */
-    Q_PROPERTY(QQuickItem *lastVisibleItem READ lastVisibleItem NOTIFY lastVisibleItemChanged)
+    Q_PROPERTY(QQuickItem *trailingVisibleItem READ trailingVisibleItem NOTIFY trailingVisibleItemChanged)
 
     // Properties to make it similar to Flickable
     /**
@@ -297,8 +297,8 @@ public:
 
     // NOTE: It's a QList<QObject *> as QML can't correctly build an Array out of QList<QQuickItem*>
     QList<QObject *> visibleItems() const;
-    QQuickItem *firstVisibleItem() const;
-    QQuickItem *lastVisibleItem() const;
+    QQuickItem *leadingVisibleItem() const;
+    QQuickItem *trailingVisibleItem() const;
 
     QQuickItem *contentItem() const;
 
@@ -447,8 +447,8 @@ Q_SIGNALS:
     void acceptsMouseChanged();
     void scrollDurationChanged();
     void separatorVisibleChanged();
-    void firstVisibleItemChanged();
-    void lastVisibleItemChanged();
+    void leadingVisibleItemChanged();
+    void trailingVisibleItemChanged();
     void topPaddingChanged();
     void bottomPaddingChanged();
 

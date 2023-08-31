@@ -94,20 +94,20 @@ QT.Control {
     /**
      * @brief This property holds the first page in the PageRow that is at least partially visible.
      * @note Pages before that one (the one contained in the property) will be out of the viewport.
-     * @see ColumnView::firstVisibleItem
-     * @property Item firstVisibleItem
+     * @see ColumnView::leadingVisibleItem
+     * @property Item leadingVisibleItem
      * @since 2.6
      */
-    readonly property alias firstVisibleItem: columnView.firstVisibleItem
+    readonly property alias leadingVisibleItem: columnView.leadingVisibleItem
 
     /**
      * @brief This property holds the last page in the PageRow that is at least partially visible.
      * @note Pages after that one (the one contained in the property) will be out of the viewport.
-     * @see ColumnView::lastVisibleItem
-     * @property Item lastVisibleItem
+     * @see ColumnView::trailingVisibleItem
+     * @property Item trailingVisibleItem
      * @since 2.6
      */
-    readonly property alias lastVisibleItem: columnView.lastVisibleItem
+    readonly property alias trailingVisibleItem: columnView.trailingVisibleItem
 
     /**
      * @brief This property holds the default width for a column.
@@ -855,8 +855,8 @@ QT.Control {
         }
         z: 100
         property QT.Control pageRow: root
-        active: (!firstVisibleItem || firstVisibleItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.None) &&
-                (globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None || (firstVisibleItem && firstVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar))
+        active: (!leadingVisibleItem || leadingVisibleItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.None) &&
+                (globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None || (leadingVisibleItem && leadingVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar))
         visible: active
         height: active ? implicitHeight : 0
         // If load is asynchronous, it will fail to compute the initial implicitHeight
@@ -956,11 +956,11 @@ QT.Control {
                 if (root.popHiddenPages) {
                     // manually fetch lastItem here rather than use root.lastItem property, since that binding may not have updated yet
                     let lastItem = columnView.contentChildren[columnView.contentChildren.length - 1];
-                    let lastVisibleItem = columnView.lastVisibleItem;
+                    let trailingVisibleItem = columnView.trailingVisibleItem;
 
                     // pop every page that isn't visible and at the top of the stack
-                    while (lastItem && columnView.lastVisibleItem &&
-                        lastItem !== columnView.lastVisibleItem && columnView.containsItem(lastItem)) {
+                    while (lastItem && columnView.trailingVisibleItem &&
+                        lastItem !== columnView.trailingVisibleItem && columnView.containsItem(lastItem)) {
                         root.pop();
                     }
                 }

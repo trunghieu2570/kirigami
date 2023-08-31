@@ -101,14 +101,14 @@ Kirigami.OverlayDrawer {
             return applicationWindow().pageStack.currentItem;
         }
         else {
-            return applicationWindow().pageStack.lastVisibleItem;
+            return applicationWindow().pageStack.trailingVisibleItem;
         }
     }
 
     // Disable for empty menus or when we have a global toolbar
     enabled: menu.count > 0 &&
             (typeof applicationWindow() === "undefined" || !applicationWindow().pageStack.globalToolBar ||
-            (applicationWindow().pageStack.lastVisibleItem && applicationWindow().pageStack.lastVisibleItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar) ||
+            (applicationWindow().pageStack.trailingVisibleItem && applicationWindow().pageStack.trailingVisibleItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar) ||
             (applicationWindow().pageStack.layers && applicationWindow().pageStack.layers.depth > 1 && applicationWindow().pageStack.layers.currentItem && applicationWindow().pageStack.layers.currentItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar))
     edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
     drawerOpen: false
