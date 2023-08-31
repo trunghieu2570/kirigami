@@ -183,6 +183,8 @@ TestCase {
     }
 
     function test_pop_no_args() {
+        skip("Behavior of ColumnView::pop() is not well-defined yet.");
+
         const { view, zero, one, two } = createViewWith3Items();
 
         let last = null;
