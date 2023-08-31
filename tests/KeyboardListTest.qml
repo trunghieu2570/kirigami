@@ -19,7 +19,10 @@ Kirigami.ApplicationWindow {
             delegate: Rectangle {
                 width: 100
                 height: 30
-                color: ListView.isCurrentItem ? "red" : "white"
+                color: "white"
+                border.color: ListView.isCurrentItem ? "#1EA8F7" : "transparent"
+                border.width: 4
+                radius: 4
             }
         }
     }

@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2016 Aleix Pol Gonzalez <aleixpol@kde.org>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -17,45 +18,60 @@ TestCase {
     height: 400
     name: "KeyboardNavigation"
 
-    KeyboardTest {
-        id: mainWindow
-        width: 480
-        height: 360
+    Component {
+        id: mainComponent
+        KeyboardTest {
+            id: window
+
+            width: 480
+            height: 360
+
+            readonly property SignalSpy spyLastKey: SignalSpy {
+                target: window.pageStack.currentItem
+                signalName: "lastKeyChanged"
+            }
+        }
     }
 
-    SignalSpy {
-        id: spyActive
-        target: mainWindow
-        signalName: "activeChanged"
-    }
-    SignalSpy {
-        id: spyLastKey
-        target: mainWindow.pageStack.currentItem
-        signalName: "lastKeyChanged"
+    // The following methods are adaptation of QtTest internals
+
+    function waitForWindowActive(window: Window) {
+        tryVerify(() => window.active);
     }
 
-    function initTestCase() {
-        mainWindow.show()
-    }
-
-    function cleanupTestCase() {
-        mainWindow.close()
+    function ensureWindowShown(window: Window) {
+        window.requestActivate();
+        waitForWindowActive(window);
+        wait(0);
     }
 
     function test_press() {
-        compare(mainWindow.pageStack.depth, 2)
-        compare(mainWindow.pageStack.currentIndex, 1)
-        if (!mainWindow.active)
-            spyActive.wait(5000)
-        verify(mainWindow.active)
-        keyClick("A")
-        spyLastKey.wait()
-        compare(mainWindow.pageStack.currentItem.lastKey, "A")
-        keyClick(Qt.Key_Left, Qt.AltModifier)
-        compare(mainWindow.pageStack.currentIndex, 0)
-        compare(mainWindow.pageStack.currentItem.lastKey, "")
+        const window = createTemporaryObject(mainComponent, this);
+        verify(window);
+        const spy = window.spyLastKey;
+        verify(spy.valid);
+
+        ensureWindowShown(window);
+
+        compare(window.pageStack.depth, 2);
+        compare(window.pageStack.currentIndex, 1);
+
+        let keyCount = 0;
+
+        keyClick("A");
+        keyCount += 1;
+        compare(spy.count, keyCount);
+        compare(window.pageStack.currentItem.lastKey, "A");
+
+        keyClick(Qt.Key_Left, Qt.AltModifier);
+        keyCount += 1;
+        compare(spy.count, keyCount);
+        compare(window.pageStack.currentIndex, 0);
+        compare(window.pageStack.currentItem.lastKey, "");
+
         keyClick("B")
-        spyLastKey.wait()
-        compare(mainWindow.pageStack.currentItem.lastKey, "B")
+        keyCount += 1;
+        compare(spy.count, keyCount);
+        compare(window.pageStack.currentItem.lastKey, "B");
     }
 }
