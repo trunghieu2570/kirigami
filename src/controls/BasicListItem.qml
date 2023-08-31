@@ -236,6 +236,7 @@ Kirigami.AbstractListItem {
 
     Keys.onEnterPressed: event => action ? action.trigger() : clicked()
     Keys.onReturnPressed: event => action ? action.trigger() : clicked()
+    highlighted: checked
 //END signal handlers
 
     contentItem: Item {
