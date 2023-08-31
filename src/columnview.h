@@ -328,7 +328,7 @@ public:
      * @param item pointer to the item to remove
      * @returns the removed item
      */
-    Q_INVOKABLE QQuickItem *removeItem(QQuickItem *item);
+    QQuickItem *removeItem(QQuickItem *item);
 
     /**
      * @brief This method removes an item at a given index from the view.
@@ -341,7 +341,7 @@ public:
      * @param index the index of the item which should be removed
      * @return the removed item
      */
-    Q_INVOKABLE QQuickItem *removeItem(int index);
+    QQuickItem *removeItem(int index);
 
     // QML attached property
     static ColumnViewAttached *qmlAttachedProperties(QObject *object);
@@ -352,6 +352,20 @@ public Q_SLOTS:
      * @param item the new item which will be reparented and managed
      */
     void addItem(QQuickItem *item);
+
+    /**
+     * @brief This method removes an item from the view.
+     *
+     * If the argument is a number, this method dispatches to removeItem(int index)
+     * to remove an item by its index. Otherwise the argument should be the item
+     * itself to be removed itself, and this method will dispatch to removeItem(QQuickItem *item).
+     *
+     * @see ::removeItem(QQuickItem *item)
+     *
+     * @param index the index of the item which should be removed, or the item itself
+     * @return the removed item
+     */
+    Q_INVOKABLE QQuickItem *removeItem(const QVariant &item);
 
     /**
      * Inserts a new item in the view at a given position.

@@ -1252,6 +1252,17 @@ QQuickItem *ColumnView::removeItem(const int index)
     }
 }
 
+QQuickItem *ColumnView::removeItem(const QVariant &item)
+{
+    if (item.canConvert<QQuickItem *>()) {
+        return removeItem(item.value<QQuickItem *>());
+    } else if (item.canConvert<int>()) {
+        return removeItem(item.toInt());
+    } else {
+        return nullptr;
+    }
+}
+
 QQuickItem *ColumnView::pop(QQuickItem *item)
 {
     QQuickItem *removed = nullptr;
