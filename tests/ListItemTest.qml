@@ -9,7 +9,8 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 
-import org.kde.kirigami 2 as Kirigami
+import org.kde.kirigami as Kirigami
+import org.kde.kirigami.delegates as KD
 
 Kirigami.ApplicationWindow {
     GridLayout {
@@ -20,6 +21,9 @@ Kirigami.ApplicationWindow {
         rowSpacing: Kirigami.Units.gridUnit
         columns: 3
         columnSpacing: Kirigami.Units.gridUnit
+
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
 
         // Icon + Label
         ColumnLayout {
@@ -33,41 +37,29 @@ Kirigami.ApplicationWindow {
                 wrapMode: Text.Wrap
             }
 
-            QQC2.ItemDelegate {
+            KD.SubtitleDelegate {
                 Layout.fillWidth: true
 
                 icon.name: "edit-bomb"
                 text: "Boom!"
-                checkable: true
-
-                contentItem: Kirigami.IconTitleSubtitle { }
             }
-            QQC2.CheckDelegate {
+            KD.CheckSubtitleDelegate {
                 Layout.fillWidth: true
 
                 icon.name: "edit-bomb"
                 text: "Boom!"
-                checkable: true
-
-                contentItem: Kirigami.IconTitleSubtitle { }
             }
-            QQC2.RadioDelegate {
+            KD.RadioSubtitleDelegate {
                 Layout.fillWidth: true
 
                 icon.name: "edit-bomb"
                 text: "Boom!"
-                checkable: true
-
-                contentItem: Kirigami.IconTitleSubtitle { }
             }
-            QQC2.SwitchDelegate {
+            KD.SwitchSubtitleDelegate {
                 Layout.fillWidth: true
 
                 icon.name: "edit-bomb"
                 text: "Boom!"
-                checkable: true
-
-                contentItem: Kirigami.IconTitleSubtitle { }
             }
         }
 
@@ -83,33 +75,25 @@ Kirigami.ApplicationWindow {
                 wrapMode: Text.Wrap
             }
 
-            QQC2.ItemDelegate {
+            KD.SubtitleDelegate {
                 Layout.fillWidth: true
-
                 text: "Boom!"
-
-                contentItem: Kirigami.IconTitleSubtitle { }
+                icon.width: Kirigami.Units.iconSizes.smallMedium
             }
-            QQC2.CheckDelegate {
+            KD.CheckSubtitleDelegate {
                 Layout.fillWidth: true
-
                 text: "Boom!"
-
-                contentItem: Kirigami.IconTitleSubtitle { }
+                icon.width: Kirigami.Units.iconSizes.smallMedium
             }
-            QQC2.RadioDelegate {
+            KD.RadioSubtitleDelegate {
                 Layout.fillWidth: true
-
                 text: "Boom!"
-
-                contentItem: Kirigami.IconTitleSubtitle { }
+                icon.width: Kirigami.Units.iconSizes.smallMedium
             }
-            QQC2.SwitchDelegate {
+            KD.SwitchSubtitleDelegate {
                 Layout.fillWidth: true
-
                 text: "Boom!"
-
-                contentItem: Kirigami.IconTitleSubtitle { }
+                icon.width: Kirigami.Units.iconSizes.smallMedium
             }
         }
 
@@ -140,9 +124,10 @@ Kirigami.ApplicationWindow {
                         color: Kirigami.Theme.neutralTextColor
                     }
 
-                    Kirigami.IconTitleSubtitle {
+                    KD.IconTitleSubtitle {
                         Layout.fillWidth: true
-                        control: plainDelegate
+                        title: plainDelegate.text
+                        icon: icon.fromControlsIcon(plainDelegate.icon)
                     }
 
                     QQC2.Button {
@@ -166,9 +151,10 @@ Kirigami.ApplicationWindow {
                         color: Kirigami.Theme.neutralTextColor
                     }
 
-                    Kirigami.IconTitleSubtitle {
+                    KD.IconTitleSubtitle {
                         Layout.fillWidth: true
-                        control: checkDelegate
+                        title: checkDelegate.text
+                        icon: icon.fromControlsIcon(checkDelegate.icon)
                     }
 
                     QQC2.Button {
@@ -192,9 +178,10 @@ Kirigami.ApplicationWindow {
                         color: Kirigami.Theme.neutralTextColor
                     }
 
-                    Kirigami.IconTitleSubtitle {
+                    KD.IconTitleSubtitle {
                         Layout.fillWidth: true
-                        control: radioDelegate
+                        title: radioDelegate.text
+                        icon: icon.fromControlsIcon(radioDelegate.icon)
                     }
 
                     QQC2.Button {
@@ -218,9 +205,10 @@ Kirigami.ApplicationWindow {
                         color: Kirigami.Theme.neutralTextColor
                     }
 
-                    Kirigami.IconTitleSubtitle {
+                    KD.IconTitleSubtitle {
                         Layout.fillWidth: true
-                        control: switchDelegate
+                        title: switchDelegate.text
+                        icon: icon.fromControlsIcon(switchDelegate.icon)
                     }
 
                     QQC2.Button {
@@ -243,49 +231,33 @@ Kirigami.ApplicationWindow {
                 wrapMode: Text.Wrap
             }
 
-            QQC2.ItemDelegate {
+            KD.SubtitleDelegate {
                 Layout.fillWidth: true
 
                 icon.name: "edit-bomb"
                 text: "Boom!"
-                checkable: true
-
-                contentItem: Kirigami.IconTitleSubtitle {
-                    subtitle: "smaller boom"
-                }
+                subtitle: "smaller boom"
             }
-            QQC2.CheckDelegate {
+            KD.CheckSubtitleDelegate {
                 Layout.fillWidth: true
 
                 icon.name: "edit-bomb"
                 text: "Boom!"
-                checkable: true
-
-                contentItem: Kirigami.IconTitleSubtitle {
-                    subtitle: "smaller boom"
-                }
+                subtitle: "smaller boom"
             }
-            QQC2.RadioDelegate {
+            KD.RadioSubtitleDelegate {
                 Layout.fillWidth: true
 
                 icon.name: "edit-bomb"
                 text: "Boom!"
-                checkable: true
-
-                contentItem: Kirigami.IconTitleSubtitle {
-                    subtitle: "smaller boom"
-                }
+                subtitle: "smaller boom"
             }
-            QQC2.SwitchDelegate {
+            KD.SwitchSubtitleDelegate {
                 Layout.fillWidth: true
 
                 icon.name: "edit-bomb"
                 text: "Boom!"
-                checkable: true
-
-                contentItem: Kirigami.IconTitleSubtitle {
-                    subtitle: "smaller boom"
-                }
+                subtitle: "smaller boom"
             }
         }
 
@@ -301,43 +273,51 @@ Kirigami.ApplicationWindow {
                 wrapMode: Text.Wrap
             }
 
-            QQC2.ItemDelegate {
+            KD.SubtitleDelegate {
                 Layout.fillWidth: true
 
                 icon.name: "edit-bomb"
                 text: "Boom!"
 
-                contentItem: Kirigami.IconTitleSubtitle {
+                contentItem: KD.IconTitleSubtitle {
+                    title: parent.text
+                    icon: icon.fromControlsIcon(parent.icon)
                     reserveSpaceForSubtitle: true
                 }
             }
-            QQC2.CheckDelegate {
+            KD.CheckSubtitleDelegate {
                 Layout.fillWidth: true
 
                 icon.name: "edit-bomb"
                 text: "Boom!"
 
-                contentItem: Kirigami.IconTitleSubtitle {
+                contentItem: KD.IconTitleSubtitle {
+                    title: parent.text
+                    icon: icon.fromControlsIcon(parent.icon)
                     reserveSpaceForSubtitle: true
                 }
             }
-            QQC2.RadioDelegate {
+            KD.RadioSubtitleDelegate {
                 Layout.fillWidth: true
 
                 icon.name: "edit-bomb"
                 text: "Boom!"
 
-                contentItem: Kirigami.IconTitleSubtitle {
+                contentItem: KD.IconTitleSubtitle {
+                    title: parent.text
+                    icon: icon.fromControlsIcon(parent.icon)
                     reserveSpaceForSubtitle: true
                 }
             }
-            QQC2.SwitchDelegate {
+            KD.SwitchSubtitleDelegate {
                 Layout.fillWidth: true
 
                 icon.name: "edit-bomb"
                 text: "Boom!"
 
-                contentItem: Kirigami.IconTitleSubtitle {
+                contentItem: KD.IconTitleSubtitle {
+                    title: parent.text
+                    icon: icon.fromControlsIcon(parent.icon)
                     reserveSpaceForSubtitle: true
                 }
             }
@@ -355,12 +335,13 @@ Kirigami.ApplicationWindow {
                 wrapMode: Text.Wrap
             }
 
-            QQC2.ItemDelegate {
+            KD.SubtitleDelegate {
                 id: subtitleDelegate
                 Layout.fillWidth: true
 
                 icon.name: "edit-bomb"
                 text: "Boom!"
+                subtitle: "smaller boom"
 
                 contentItem: RowLayout {
                     Rectangle {
@@ -370,10 +351,11 @@ Kirigami.ApplicationWindow {
                         color: Kirigami.Theme.neutralTextColor
                     }
 
-                    Kirigami.IconTitleSubtitle {
+                    KD.IconTitleSubtitle {
                         Layout.fillWidth: true
-                        control: subtitleDelegate
-                        subtitle: "smaller boom"
+                        title: subtitleDelegate.text
+                        subtitle: subtitleDelegate.subtitle
+                        icon: icon.fromControlsIcon(subtitleDelegate.icon)
                     }
 
                     QQC2.Button {
@@ -383,12 +365,13 @@ Kirigami.ApplicationWindow {
                     }
                 }
             }
-            QQC2.CheckDelegate {
+            KD.CheckSubtitleDelegate {
                 id: subtitleCheckDelegate
                 Layout.fillWidth: true
 
                 icon.name: "edit-bomb"
                 text: "Boom!"
+                subtitle: "smaller boom"
 
                 contentItem: RowLayout {
                     Rectangle {
@@ -398,10 +381,11 @@ Kirigami.ApplicationWindow {
                         color: Kirigami.Theme.neutralTextColor
                     }
 
-                    Kirigami.IconTitleSubtitle {
+                    KD.IconTitleSubtitle {
                         Layout.fillWidth: true
-                        control: subtitleCheckDelegate
-                        subtitle: "smaller boom"
+                        title: subtitleCheckDelegate.text
+                        subtitle: subtitleCheckDelegate.subtitle
+                        icon: icon.fromControlsIcon(subtitleCheckDelegate.icon)
                     }
 
                     QQC2.Button {
@@ -410,12 +394,13 @@ Kirigami.ApplicationWindow {
                     }
                 }
             }
-            QQC2.RadioDelegate {
+            KD.RadioSubtitleDelegate {
                 id: subtitleRadioDelegate
                 Layout.fillWidth: true
 
                 icon.name: "edit-bomb"
                 text: "Boom!"
+                subtitle: "smaller boom"
 
                 contentItem: RowLayout {
                     Rectangle {
@@ -425,10 +410,11 @@ Kirigami.ApplicationWindow {
                         color: Kirigami.Theme.neutralTextColor
                     }
 
-                    Kirigami.IconTitleSubtitle {
+                    KD.IconTitleSubtitle {
                         Layout.fillWidth: true
-                        control: subtitleRadioDelegate
-                        subtitle: "smaller boom"
+                        title: subtitleRadioDelegate.text
+                        subtitle: subtitleRadioDelegate.subtitle
+                        icon: icon.fromControlsIcon(subtitleRadioDelegate.icon)
                     }
 
                     QQC2.Button {
@@ -437,12 +423,13 @@ Kirigami.ApplicationWindow {
                     }
                 }
             }
-            QQC2.SwitchDelegate {
+            KD.SwitchSubtitleDelegate {
                 id: subtitleSwitchDelegate
                 Layout.fillWidth: true
 
                 icon.name: "edit-bomb"
                 text: "Boom!"
+                subtitle: "smaller boom"
 
                 contentItem: RowLayout {
                     Rectangle {
@@ -452,10 +439,11 @@ Kirigami.ApplicationWindow {
                         color: Kirigami.Theme.neutralTextColor
                     }
 
-                    Kirigami.IconTitleSubtitle {
+                    KD.IconTitleSubtitle {
                         Layout.fillWidth: true
-                        control: subtitleSwitchDelegate
-                        subtitle: "smaller boom"
+                        title: subtitleSwitchDelegate.text
+                        subtitle: subtitleSwitchDelegate.subtitle
+                        icon: icon.fromControlsIcon(subtitleSwitchDelegate.icon)
                     }
 
                     QQC2.Button {
