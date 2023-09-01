@@ -47,5 +47,23 @@ QtObject {
      * This property holds the height of the icon.
      */
     property real height
-}
 
+    /**
+     * Bind this icon to all matching properties of a Controls icon group.
+     *
+     * This function automatically binds all properties to matching properties
+     * of a controls icon group, since we cannot just reuse the Controls icon
+     * group.
+     *
+     * To use it, you can assign the result to an IconPropertiesGroup, like so:
+     * `icon: icon.fromControlsIcon(control.icon)`.
+     */
+    function fromControlsIcon(icon) {
+        name = Qt.binding(() => icon.name)
+        source = Qt.binding(() => icon.source)
+        color = Qt.binding(() => icon.color)
+        width = Qt.binding(() => icon.width)
+        height = Qt.binding(() => icon.height)
+        return this
+    }
+}
