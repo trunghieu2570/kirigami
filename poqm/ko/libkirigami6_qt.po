@@ -97,7 +97,7 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "더 많은 동작"
 
-#: controls/Chip.qml:82
+#: controls/Chip.qml:84
 msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr "태그 삭제"

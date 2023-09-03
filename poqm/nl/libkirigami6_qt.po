@@ -97,7 +97,7 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Meer acties"
 
-#: controls/Chip.qml:82
+#: controls/Chip.qml:84
 msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr "Tag verwijderen"
