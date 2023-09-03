@@ -769,6 +769,8 @@ ColumnView::ColumnView(QQuickItem *parent)
 {
     // NOTE: this is to *not* trigger itemChange
     m_contentItem = new ContentItem(this);
+    // Prevent interactions outside of ColumnView bounds, and let it act as a viewport.
+    setClip(true);
     setAcceptedMouseButtons(Qt::LeftButton | Qt::BackButton | Qt::ForwardButton);
     setAcceptTouchEvents(false); // Relies on synthetized mouse events
     setFiltersChildMouseEvents(true);
