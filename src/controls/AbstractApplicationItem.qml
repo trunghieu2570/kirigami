@@ -4,11 +4,11 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.12
-import QtQml 2.14
-import QtQuick.Templates 2.12 as T
-import QtQuick.Window 2.12
-import org.kde.kirigami 2.14 as Kirigami
+import QtQuick
+import QtQml
+import QtQuick.Templates as T
+
+import org.kde.kirigami as Kirigami
 import "templates/private" as TP
 import "templates" as KT
 
@@ -84,13 +84,6 @@ Item {
      * default: ``Kirigami.Theme.defaultFont``
      */
     property font font: Kirigami.Theme.defaultFont
-
-    /**
-     * @brief This property holds the palette for this item.
-     *
-     * default: ``Kirigami.Theme.palette``
-     */
-    property var palette: Kirigami.Theme.palette
 
     /**
      * @brief This property holds the locale for this item.
