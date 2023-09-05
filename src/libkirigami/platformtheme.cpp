@@ -261,6 +261,7 @@ public:
         , supportsIconColoring(false)
         , pendingColorChange(false)
         , pendingChildUpdate(false)
+        , useAlternateBackgroundColor(false)
         , colorSet(PlatformTheme::Window)
         , colorGroup(PlatformTheme::Active)
     {
@@ -387,6 +388,7 @@ public:
     bool supportsIconColoring : 1; // TODO KF6: Remove in favour of virtual method
     bool pendingColorChange : 1;
     bool pendingChildUpdate : 1;
+    bool useAlternateBackgroundColor : 1;
 
     // Note: We use these to store local values of PlatformTheme::ColorSet and
     // PlatformTheme::ColorGroup. While these are standard enums and thus 32
@@ -795,6 +797,21 @@ void PlatformTheme::setCustomHoverColor(const QColor &color)
 void PlatformTheme::setCustomFocusColor(const QColor &color)
 {
     d->setColor(this, PlatformThemeData::FocusColor, color);
+}
+
+bool PlatformTheme::useAlternateBackgroundColor() const
+{
+    return d->useAlternateBackgroundColor;
+}
+
+void PlatformTheme::setUseAlternateBackgroundColor(bool alternate)
+{
+    if (alternate == d->useAlternateBackgroundColor) {
+        return;
+    }
+
+    d->useAlternateBackgroundColor = alternate;
+    Q_EMIT useAlternateBackgroundColorChanged(alternate);
 }
 
 QPalette PlatformTheme::palette() const

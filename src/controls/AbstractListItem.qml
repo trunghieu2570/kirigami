@@ -127,6 +127,7 @@ QQC2.ItemDelegate {
 
 //END properties
 
+    Kirigami.Theme.useAlternateBackgroundColor: alternatingBackground
     activeFocusOnTab: ListView.view ? false : true
 
     onClicked: {

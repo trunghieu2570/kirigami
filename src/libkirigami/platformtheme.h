@@ -168,6 +168,11 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
      */
     Q_PROPERTY(QColor hoverColor READ hoverColor WRITE setCustomHoverColor RESET setCustomHoverColor NOTIFY colorsChanged)
 
+    /**
+     * Hint for item views to actually make use of the alternate background color feature
+     */
+    Q_PROPERTY(bool useAlternateBackgroundColor READ useAlternateBackgroundColor WRITE setUseAlternateBackgroundColor NOTIFY useAlternateBackgroundColorChanged)
+
     // font and palette
     Q_PROPERTY(QFont defaultFont READ defaultFont NOTIFY defaultFontChanged)
 
@@ -274,6 +279,9 @@ public:
     void setCustomFocusColor(const QColor &color = QColor());
     void setCustomHoverColor(const QColor &color = QColor());
 
+    bool useAlternateBackgroundColor() const;
+    void setUseAlternateBackgroundColor(bool alternate);
+
     // QML attached property
     static PlatformTheme *qmlAttachedProperties(QObject *object);
 
@@ -285,6 +293,7 @@ Q_SIGNALS:
     void colorGroupChanged(Kirigami::PlatformTheme::ColorGroup colorGroup);
     void paletteChanged(const QPalette &pal);
     void inheritChanged(bool inherit);
+    void useAlternateBackgroundColorChanged(bool alternate);
 
 protected:
     // Setters, not accessible from QML but from implementations
