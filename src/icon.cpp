@@ -532,11 +532,9 @@ QImage Icon::findIcon(const QSize &size)
         if (isPath) {
             icon = QIcon(iconSource);
         } else {
-            if (icon.isNull()) {
-                const QColor tintColor =
-                    !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor()) : m_color;
-                icon = m_theme->iconFromTheme(iconSource, tintColor);
-            }
+            const QColor tintColor =
+                !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor()) : m_color;
+            icon = m_theme->iconFromTheme(iconSource, tintColor);
         }
         if (!icon.isNull()) {
             img = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
