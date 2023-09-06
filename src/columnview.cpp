@@ -73,6 +73,10 @@ QtObject {
         // positioning trick to hide the very first separator
         visible: {
             const view = column.Kirigami.ColumnView.view;
+            if (!view.separatorVisible) {
+                return false;
+            }
+
             return view && (LayoutMirroring.enabled
                 ? view.contentX + view.width > column.x + column.width
                 : view.contentX < column.x);
@@ -989,31 +993,6 @@ void ColumnView::setSeparatorVisible(bool visible)
     }
 
     m_separatorVisible = visible;
-
-    if (visible) {
-        for (QQuickItem *item : std::as_const(m_contentItem->m_items)) {
-            QQuickItem *sep = m_contentItem->ensureLeadingSeparator(item);
-            if (sep) {
-                sep->setVisible(true);
-            }
-
-            ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
-            if (attached->isPinned()) {
-                QQuickItem *sep = m_contentItem->ensureTrailingSeparator(item);
-                if (sep) {
-                    sep->setVisible(true);
-                }
-            }
-        }
-
-    } else {
-        for (QQuickItem *sep : std::as_const(m_contentItem->m_leadingSeparators)) {
-            sep->setVisible(false);
-        }
-        for (QQuickItem *sep : std::as_const(m_contentItem->m_trailingSeparators)) {
-            sep->setVisible(false);
-        }
-    }
 
     Q_EMIT separatorVisibleChanged();
 }
