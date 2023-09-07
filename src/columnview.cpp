@@ -73,7 +73,7 @@ QtObject {
         // positioning trick to hide the very first separator
         visible: {
             const view = column.Kirigami.ColumnView.view;
-            if (!view.separatorVisible) {
+            if (!view || !view.separatorVisible) {
                 return false;
             }
 
