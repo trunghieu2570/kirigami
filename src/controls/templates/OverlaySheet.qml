@@ -8,7 +8,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Templates 2.15 as T2
-import org.kde.kirigami 2.15 as Kirigami
+import org.kde.kirigami as Kirigami
 import "private" as P
 
 /**
@@ -37,6 +37,9 @@ import "private" as P
 
 T2.Popup {
     id: root
+
+    Kirigami.OverlayZStacking.layer: Kirigami.OverlayZStacking.FullScreen
+    z: Kirigami.OverlayZStacking.z
 
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false

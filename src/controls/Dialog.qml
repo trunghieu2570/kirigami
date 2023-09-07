@@ -10,7 +10,7 @@ import QtQml 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Templates 2.15 as T
 import QtQuick.Controls 2.15 as QQC2
-import org.kde.kirigami 2.12 as Kirigami
+import org.kde.kirigami as Kirigami
 import Qt5Compat.GraphicalEffects as GE
 
 /**
@@ -275,6 +275,8 @@ T.Dialog {
         }
         return customFooterButtons.itemAt(index) as T.AbstractButton;
     }
+
+    z: Kirigami.OverlayZStacking.z
 
     // calculate dimensions
     implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding // maximum width enforced from our content (one source of truth) to avoid binding loops

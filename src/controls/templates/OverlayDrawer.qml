@@ -7,7 +7,7 @@
 import QtQuick 2.15
 import QtQuick.Templates 2.15 as T2
 import QtQuick.Controls 2.15 as QQC2
-import org.kde.kirigami 2.11 as Kirigami
+import org.kde.kirigami as Kirigami
 import "private" as P
 
 /**
@@ -21,8 +21,6 @@ import "private" as P
  */
 T2.Drawer {
     id: root
-
-    z: modal ? 0 : 1
 
 //BEGIN properties
     /**
@@ -157,10 +155,10 @@ T2.Drawer {
          */
         property bool displayToolTip: true
 
-        z: root.modal ? applicationWindow().overlay.z + (root.position > 0 ? +1 : -1) : root.background.parent.z + 1
+        z: root.z + 1
         preventStealing: true
         hoverEnabled: handleAnchor && handleAnchor.visible
-        parent: applicationWindow().overlay.parent
+        parent: root.T2.Overlay.overlay.parent
 
         QQC2.ToolButton {
             anchors.centerIn: parent
@@ -313,6 +311,8 @@ T2.Drawer {
 //END properties
 
     interactive: modal
+
+    z: Kirigami.OverlayZStacking.z
 
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: modal ? Kirigami.Theme.View : Kirigami.Theme.Window

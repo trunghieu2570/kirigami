@@ -16,6 +16,7 @@
 #include "imagecolors.h"
 #include "inputmethod.h"
 #include "mnemonicattached.h"
+#include "overlayzstackingattached.h"
 #include "pagepool.h"
 #include "scenepositionattached.h"
 #include "settings.h"
@@ -284,6 +285,11 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     // 2.20
     qmlRegisterType(componentUrl(QStringLiteral("SelectableLabel.qml")), uri, 2, 20, "SelectableLabel");
+    qmlRegisterUncreatableType<OverlayZStackingAttached>(uri,
+                                                         2,
+                                                         20,
+                                                         "OverlayZStacking",
+                                                         QStringLiteral("Cannot create objects of type OverlayZStacking, use it as an attached property"));
 
     qmlProtectModule(uri, 2);
 }

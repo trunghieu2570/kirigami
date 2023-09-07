@@ -25,8 +25,6 @@ QQC2.Menu {
     property T.Action parentAction
     property T.MenuItem parentItem
 
-    z: 999999999
-
     Instantiator {
         id: actionsInstantiator
 
