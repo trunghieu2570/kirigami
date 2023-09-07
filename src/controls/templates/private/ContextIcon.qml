@@ -4,16 +4,20 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.1
-import org.kde.kirigami 2.4 as Kirigami
+import QtQuick
+import org.kde.kirigami as Kirigami
 
 Item {
     id: canvas
-    width: height
-    height: Kirigami.Units.iconSizes.smallMedium
+
     property Kirigami.OverlayDrawer drawer
-    readonly property real position: drawer?.position ?? 0
     property color color: Kirigami.Theme.textColor
+    property int thickness: 2
+
+    property real position: drawer?.position ?? 0
+
+    width: Kirigami.Units.iconSizes.smallMedium
+    height: Kirigami.Units.iconSizes.smallMedium
     opacity: 0.8
     layer.enabled: true
 
@@ -26,18 +30,16 @@ Item {
             fill: parent
             margins: Kirigami.Units.smallSpacing
         }
-        property int thickness: 2
         Rectangle {
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 top: parent.top
-                //horizontalCenterOffset: -parent.width/2
-                topMargin: (parent.height/2 - iconRoot.thickness/2) * canvas.position
+                topMargin: (parent.height / 2 - canvas.thickness / 2) * canvas.position
             }
             antialiasing: canvas.position !== 0
             transformOrigin: Item.Center
-            width: (1 - canvas.position) * height + canvas.position * (Math.sqrt(2*(parent.width*parent.width)))
-            height: iconRoot.thickness
+            width: (1 - canvas.position) * height + canvas.position * Math.sqrt(2 * parent.width * parent.width)
+            height: canvas.thickness
             color: canvas.color
             rotation: 45 * canvas.position
         }
@@ -45,25 +47,22 @@ Item {
         Rectangle {
             anchors.centerIn: parent
             width: height
-            height: iconRoot.thickness
+            height: canvas.thickness
             color: canvas.color
         }
-
 
         Rectangle {
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 bottom: parent.bottom
-             //   topMargin: -iconRoot.thickness/2 * canvas.position
-                bottomMargin: (parent.height/2 - iconRoot.thickness/2) * canvas.position
+                bottomMargin: (parent.height / 2 - canvas.thickness / 2) * canvas.position
             }
             antialiasing: canvas.position !== 0
             transformOrigin: Item.Center
-            width: (1 - canvas.position) * height + canvas.position * (Math.sqrt(2*(parent.width*parent.width)))
-            height: iconRoot.thickness
+            width: (1 - canvas.position) * height + canvas.position * Math.sqrt(2 * parent.width * parent.width)
+            height: canvas.thickness
             color: canvas.color
             rotation: -45 * canvas.position
         }
     }
 }
-
