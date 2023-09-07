@@ -116,51 +116,39 @@ QQC2.ApplicationWindow {
      * The drawer that will be opened by sliding from the right screen edge
      * or by dragging the ActionButton to the left.
      *
-     * @note It is recommended to use the ContextDrawer class here.
+     * @note It is recommended to use the ContextDrawer type here.
      *
      * The contents of the context drawer should depend from what page is
      * loaded in the main pageStack
      *
      * Example usage:
+     *
      * @code
-     * import org.kde.kirigami 2.4 as Kirigami
+     * import org.kde.kirigami as Kirigami
      *
      * Kirigami.ApplicationWindow {
-     *  [...]
      *     contextDrawer: Kirigami.ContextDrawer {
-     *         id: contextDrawer
+     *         enabled: true
+     *         actions: [
+     *             Kirigami.Action {
+     *                 icon.name: "edit"
+     *                 text: "Action text"
+     *                 onTriggered: {
+     *                     // do stuff
+     *                 }
+     *             },
+     *             Kirigami.Action {
+     *                 icon.name: "edit"
+     *                 text: "Action text"
+     *                 onTriggered: {
+     *                     // do stuff
+     *                 }
+     *             }
+     *         ]
      *     }
-     *  [...]
      * }
      * @endcode
      *
-     * @code
-     * import org.kde.kirigami 2.4 as Kirigami
-     *
-     * Kirigami.Page {
-     *   [...]
-     *     contextualActions: [
-     *         Kirigami.Action {
-     *             icon.name: "edit"
-     *             text: "Action text"
-     *             onTriggered: {
-     *                 // do stuff
-     *             }
-     *         },
-     *         Kirigami.Action {
-     *             icon.name: "edit"
-     *             text: "Action text"
-     *             onTriggered: {
-     *                 // do stuff
-     *             }
-     *         }
-     *     ]
-     *   [...]
-     * }
-     * @endcode
-     *
-     * When this page will be the current one, the context drawer will visualize
-     * contextualActions defined as property in that page.
      * @property org::kde::kirigami::ContextDrawer contextDrawer
      */
     property OverlayDrawer contextDrawer

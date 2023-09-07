@@ -1,31 +1,36 @@
 /*
  *  SPDX-FileCopyrightText: 2019 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
 import QtQuick
 import QtQuick.Controls as QQC2
+import QtQuick.Templates as T
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 QQC2.ItemDelegate {
     id: listItem
 
-    readonly property bool isSeparator: modelData.hasOwnProperty("separator") && modelData.separator
+    required property T.Action tAction
 
-    readonly property bool isExpandable: modelData && modelData.hasOwnProperty("expandible") && modelData.expandible
+    readonly property Kirigami.Action kAction: tAction instanceof Kirigami.Action ? tAction : null
 
-    checked: modelData.checked
+    readonly property bool isSeparator: kAction?.separator ?? false
+    readonly property bool isExpandable: kAction?.expandible ?? false
+
+    checked: tAction.checked || (actionsMenu && actionsMenu.visible)
     highlighted: checked
-    icon.name: modelData.icon.name
+    icon.name: tAction.icon.name
 
-    text: model ? (model.text ? model.text : model.tooltip) : (modelData.text ? modelData.text : modelData.tooltip)
-    hoverEnabled: (!isExpandable || root.collapsed) && !Kirigami.Settings.tabletMode && !listItem.isSeparator
-    font.pointSize: isExpandable ? Kirigami.Theme.defaultFont.pointSize * 1.30 : Kirigami.Theme.defaultFont.pointSize
+    text: tAction.text ? tAction.text : tAction.tooltip
+    hoverEnabled: (!isExpandable || root.collapsed) && !Kirigami.Settings.tabletMode && !isSeparator
+    font.pointSize: Kirigami.Theme.defaultFont.pointSize * (isExpandable ? 1.30 : 1)
 
-    enabled: !isExpandable && (model ? model.enabled : modelData.enabled)
-    visible: model ? model.visible : modelData.visible
+    enabled: !isExpandable && tAction.enabled
+    visible: kAction?.visible ?? true
     opacity: enabled || isExpandable ? 1.0 : 0.6
 
     Kirigami.Separator {
@@ -38,17 +43,14 @@ QQC2.ItemDelegate {
     ActionsMenu {
         id: actionsMenu
         y: Kirigami.Settings.isMobile ? -height : listItem.height
-        z: 99999999
-        actions: modelData.children
-        submenuComponent: Component {
-            ActionsMenu {}
-        }
+        actions: kAction?.children ?? []
+        submenuComponent: ActionsMenu {}
     }
 
     Loader {
         Layout.fillWidth: true
         Layout.fillHeight: true
-        sourceComponent: modelData.displayComponent
+        sourceComponent: kAction?.displayComponent ?? null
         onStatusChanged: {
             for (const child of parent.children) {
                 if (child === this) {
@@ -62,33 +64,16 @@ QQC2.ItemDelegate {
         Component.onCompleted: statusChanged()
     }
 
-    Kirigami.Icon {
-        isMask: true
-        Layout.alignment: Qt.AlignVCenter
-        Layout.preferredHeight: Kirigami.Units.iconSizes.small/2
-        selected: listItem.checked || listItem.down
-        Layout.preferredWidth: Layout.preferredHeight
-        source: "go-up-symbolic"
-        visible: !isExpandable  && !listItem.isSeparator && modelData.children!== undefined && modelData.children.length > 0
-    }
-
     onPressed: {
-        if (modelData.children.length > 0) {
+        if (kAction && kAction.children.length > 0) {
             actionsMenu.open();
         }
     }
     onClicked: {
-        if (modelData.children.length === 0) {
+        if (!kAction || kAction.children.length === 0) {
             root.drawerOpen = false;
         }
 
-        if (modelData && modelData.trigger !== undefined) {
-            modelData.trigger();
-        // assume the model is a list of QAction or Action
-        } else if (menu.model.length > index) {
-            menu.model[index].trigger();
-        } else {
-            console.warning("Don't know how to trigger the action")
-        }
+        tAction?.trigger();
     }
 }

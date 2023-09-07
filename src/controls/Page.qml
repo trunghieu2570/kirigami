@@ -58,14 +58,6 @@ QQC2.Page {
     property list<Kirigami.Action> actions
 
     /**
-     * Emitted when a visualization for the actions is about to be shown,
-     * such as the toolbar menu or the contextDrawer.
-     *
-     * @since 2.7
-     */
-    signal contextualActionsAboutToShow
-
-    /**
      * @brief This property tells us if it is the currently active page.
      *
      * Specifies if it's the currently selected page in the window's pages row, or if layers

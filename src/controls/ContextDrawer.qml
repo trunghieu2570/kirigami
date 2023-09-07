@@ -1,11 +1,13 @@
 /*
  *  SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
 import QtQuick
 import QtQuick.Controls as QQC2
+import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import "private" as P
 
@@ -14,40 +16,30 @@ import "private" as P
  * relevant to the application's current page.
  *
  * Example usage:
+ *
  * @code
- * import org.kde.kirigami 2.4 as Kirigami
+ * import org.kde.kirigami as Kirigami
  *
  * Kirigami.ApplicationWindow {
- *  [...]
  *     contextDrawer: Kirigami.ContextDrawer {
- *         id: contextDrawer
+ *         enabled: true
+ *         actions: [
+ *             Kirigami.Action {
+ *                 icon.name: "edit"
+ *                 text: "Action text"
+ *                 onTriggered: {
+ *                     // do stuff
+ *                 }
+ *             },
+ *             Kirigami.Action {
+ *                 icon.name: "edit"
+ *                 text: "Action text"
+ *                 onTriggered: {
+ *                     // do stuff
+ *                 }
+ *             }
+ *         ]
  *     }
- *  [...]
- * }
- * @endcode
- *
- * @code
- * import org.kde.kirigami 2.4 as Kirigami
- *
- * Kirigami.Page {
- *   [...]
- *     contextualActions: [
- *         Kirigami.Action {
- *             icon.name: "edit"
- *             text: "Action text"
- *             onTriggered: {
- *                 // do stuff
- *             }
- *         },
- *         Kirigami.Action {
- *             icon.name: "edit"
- *             text: "Action text"
- *             onTriggered: {
- *                 // do stuff
- *             }
- *         }
- *     ]
- *   [...]
  * }
  * @endcode
  *
@@ -55,6 +47,7 @@ import "private" as P
  */
 Kirigami.OverlayDrawer {
     id: root
+
     handleClosedIcon.source: null
     handleOpenIcon.source: null
 
@@ -66,14 +59,13 @@ Kirigami.OverlayDrawer {
     property string title: qsTr("Actions")
 
     /**
-     * This can be any type of object that a ListView can accept as model.
-     * It expects items compatible with either QtQuick.Action or Kirigami.Action
+     * List of contextual actions to be displayed in a ListView.
      *
      * @see QtQuick.Action
      * @see org::kde::kirigami::Action
-     * @property list<Action> actions
+     * @property list<T.Action> actions
      */
-    property var actions: page ? page.contextualActions : []
+    property list<T.Action> actions
 
     /**
      * @brief Arbitrary content to show above the list view.
@@ -93,23 +85,25 @@ Kirigami.OverlayDrawer {
      */
     property alias footer: menu.footer
 
-    property Page page: {
-        if (applicationWindow().pageStack.layers && applicationWindow().pageStack.layers.depth > 1 && applicationWindow().pageStack.layers.currentItem.hasOwnProperty("contextualActions")) {
-            return applicationWindow().pageStack.layers.currentItem;
-        }
-        else if ((applicationWindow().pageStack.currentItem || {}).hasOwnProperty("contextualActions")) {
-            return applicationWindow().pageStack.currentItem;
-        }
-        else {
-            return applicationWindow().pageStack.trailingVisibleItem;
-        }
+    // Not stored in a property, so we don't have to waste memory on an extra list.
+    function visibleActions() {
+        return actions.filter(
+            action => !(action instanceof Kirigami.Action) || action.visible
+        );
     }
 
     // Disable for empty menus or when we have a global toolbar
-    enabled: menu.count > 0 &&
-            (typeof applicationWindow() === "undefined" || !applicationWindow().pageStack.globalToolBar ||
-            (applicationWindow().pageStack.trailingVisibleItem && applicationWindow().pageStack.trailingVisibleItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar) ||
-            (applicationWindow().pageStack.layers && applicationWindow().pageStack.layers.depth > 1 && applicationWindow().pageStack.layers.currentItem && applicationWindow().pageStack.layers.currentItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar))
+    enabled: {
+        const pageStack = typeof applicationWindow !== "undefined" ? applicationWindow().pageStack : null;
+        const itemExistsButStyleIsNotToolBar = item => item && item.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar;
+        return menu.count > 0
+            && (!pageStack
+                || !pageStack.globalToolBar
+                || (pageStack.layers.depth > 1
+                    && itemExistsButStyleIsNotToolBar(pageStack.layers.currentItem))
+                || itemExistsButStyleIsNotToolBar(pageStack.trailingVisibleItem));
+    }
+
     edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
     drawerOpen: false
 
@@ -119,11 +113,8 @@ Kirigami.OverlayDrawer {
     rightPadding: 0
     bottomPadding: 0
 
-    handleVisible: applicationWindow === undefined ? false : applicationWindow().controlsVisible
+    handleVisible: typeof applicationWindow !== "undefined" ? applicationWindow().controlsVisible : false
 
-    onPeekingChanged: {
-        page?.contextualActionsAboutToShow();
-    }
     contentItem: QQC2.ScrollView {
         // this just to create the attached property
         Kirigami.Theme.inherit: true
@@ -131,33 +122,9 @@ Kirigami.OverlayDrawer {
         ListView {
             id: menu
             interactive: contentHeight > height
-            model: {
-                if (typeof root.actions === "undefined") {
-                    return null;
-                }
-                if (root.actions.length === 0) {
-                    return null;
-                } else {
 
-                    // Check if at least one action is visible
-                    let somethingVisible = false;
-                    for (const action of root.actions) {
-                        if (action.visible) {
-                            somethingVisible = true;
-                            break;
-                        }
-                    }
+            model: root.visibleActions()
 
-                    if (!somethingVisible) {
-                        return null;
-                    }
-
-                    return root.actions[0].text !== undefined &&
-                        root.actions[0].trigger !== undefined ?
-                            root.actions :
-                            root.actions[0];
-                }
-            }
             topMargin: root.handle.y > 0 ? menu.height - menu.contentHeight : 0
             header: QQC2.ToolBar {
                 height: pageStack.globalToolBar.preferredHeight
@@ -177,16 +144,26 @@ Kirigami.OverlayDrawer {
                     }
                 }
             }
+
             delegate: Column {
+                id: delegate
+
+                required property T.Action modelData
+
                 width: parent.width
+
                 P.ContextDrawerActionItem {
+                    tAction: delegate.modelData
                     width: parent.width
                 }
+
                 Repeater {
-                    model: modelData.hasOwnProperty("expandible") && modelData.expandible ? modelData.children : null
+                    model: delegate.modelData instanceof Kirigami.Action && delegate.modelData.expandible
+                        ? delegate.modelData.children : null
+
                     delegate: P.ContextDrawerActionItem {
                         width: parent.width
-                        leftPadding: Kirigami.Units.largeSpacing * 2
+                        leftPadding: Kirigami.Units.gridUnit
                         opacity: !root.collapsed
                     }
                 }
