@@ -39,6 +39,8 @@ Kirigami.ApplicationItem {
     }
     contextDrawer: Kirigami.ContextDrawer {
         id: contextDrawer
+
+        actions: (pageStack.currentItem as Kirigami.Page)?.actions ?? []
     }
 
     pageStack.initialPage: mainPageComponent
@@ -56,7 +58,7 @@ Kirigami.ApplicationItem {
                 }
             ]
             Rectangle {
-                color: "red"
+                color: "#aaff7f"
                 anchors.fill: parent
             }
         }

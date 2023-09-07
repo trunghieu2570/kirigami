@@ -99,9 +99,9 @@ T.OverlayDrawer {
                     if ((root.handleClosedIcon.source || root.handleClosedIcon.name)
                         && (root.handleOpenIcon.source || root.handleOpenIcon.name)) {
                         return Qt.resolvedUrl("templates/private/GenericDrawerIcon.qml");
-                    } else if (edge === Qt.LeftEdge ) {
+                    } else if (edge === Qt.LeftEdge) {
                         return Qt.resolvedUrl("templates/private/MenuIcon.qml");
-                    } else if(edge === Qt.RightEdge && root.hasOwnProperty("actions")) {
+                    } else if (edge === Qt.RightEdge && root instanceof Kirigami.ContextDrawer) {
                         return Qt.resolvedUrl("templates/private/ContextIcon.qml");
                     } else {
                         return "";
@@ -109,8 +109,9 @@ T.OverlayDrawer {
                 }
                 onItemChanged: {
                     if (item) {
-                        item.drawer = Qt.binding(function(){return root});
-                        item.color = Qt.binding(function(){return root.handle.pressed ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor});
+                        item.drawer = root;
+                        item.color = Qt.binding(() => root.handle.pressed
+                            ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor);
                     }
                 }
             }
