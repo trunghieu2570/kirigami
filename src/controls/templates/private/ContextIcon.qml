@@ -12,6 +12,7 @@ Item {
     width: height
     height: Kirigami.Units.iconSizes.smallMedium
     property Kirigami.OverlayDrawer drawer
+    readonly property real position: drawer?.position ?? 0
     property color color: Kirigami.Theme.textColor
     opacity: 0.8
     layer.enabled: true
@@ -31,14 +32,14 @@ Item {
                 horizontalCenter: parent.horizontalCenter
                 top: parent.top
                 //horizontalCenterOffset: -parent.width/2
-                topMargin: (parent.height/2 - iconRoot.thickness/2) * drawer.position
+                topMargin: (parent.height/2 - iconRoot.thickness/2) * canvas.position
             }
-            antialiasing: drawer.position !== 0
+            antialiasing: canvas.position !== 0
             transformOrigin: Item.Center
-            width: (1 - drawer.position) * height + drawer.position * (Math.sqrt(2*(parent.width*parent.width)))
+            width: (1 - canvas.position) * height + canvas.position * (Math.sqrt(2*(parent.width*parent.width)))
             height: iconRoot.thickness
             color: canvas.color
-            rotation: 45 * drawer.position
+            rotation: 45 * canvas.position
         }
 
         Rectangle {
@@ -53,15 +54,15 @@ Item {
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 bottom: parent.bottom
-             //   topMargin: -iconRoot.thickness/2 * drawer.position
-                bottomMargin: (parent.height/2 - iconRoot.thickness/2) * drawer.position
+             //   topMargin: -iconRoot.thickness/2 * canvas.position
+                bottomMargin: (parent.height/2 - iconRoot.thickness/2) * canvas.position
             }
-            antialiasing: drawer.position !== 0
+            antialiasing: canvas.position !== 0
             transformOrigin: Item.Center
-            width: (1 - drawer.position) * height + drawer.position * (Math.sqrt(2*(parent.width*parent.width)))
+            width: (1 - canvas.position) * height + canvas.position * (Math.sqrt(2*(parent.width*parent.width)))
             height: iconRoot.thickness
             color: canvas.color
-            rotation: -45 * drawer.position
+            rotation: -45 * canvas.position
         }
     }
 }
