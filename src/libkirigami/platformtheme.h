@@ -41,8 +41,8 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
 
     /**
      * This enumeration describes the color group used to generate the colors.
-     * The enum value is based upon QPalette::CpolorGroup and has the same values.
-     * It's redefined here in order to make it work with QML
+     * The enum value is based upon QPalette::ColorGroup and has the same values.
+     * It's redefined here in order to make it work with QML.
      * @since 4.43
      */
     Q_PROPERTY(ColorGroup colorGroup READ colorGroup WRITE setColorGroup NOTIFY colorGroupChanged)
