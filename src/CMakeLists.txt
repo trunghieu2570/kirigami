@@ -82,9 +82,6 @@ if (HAVE_QTGUI_OPENGL AND NOT KF6_PORTING_TODO)
 endif()
 
 qt6_add_shaders(KirigamiPlugin "shaders6"
-    BATCHABLE
-    PRECOMPILE
-    OPTIMIZED
     PREFIX "/org/kde/kirigami/shaders"
     FILES
         scenegraph/shaders6/shadowedrectangle.vert
