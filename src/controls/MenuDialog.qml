@@ -115,6 +115,8 @@ Kirigami.Dialog {
                 QQC2.ToolTip.text: modelData.tooltip
                 QQC2.ToolTip.visible: modelData.tooltip !== "" && (Kirigami.Settings.tabletMode ? pressed : hovered)
                 QQC2.ToolTip.delay: Kirigami.Settings.tabletMode ? Qt.styleHints.mousePressAndHoldInterval : Kirigami.Units.toolTipDelay
+
+                onClicked: root.close()
             }
         }
     }

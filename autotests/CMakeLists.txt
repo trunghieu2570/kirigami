@@ -42,6 +42,7 @@ kirigami_add_tests(
     tst_inlinemessage.qml
     tst_keynavigation.qml
     tst_listskeynavigation.qml
+    tst_menudialog.qml
     tst_mnemonicdata.qml
     tst_overlayzstacking.qml
     tst_pagerow.qml
