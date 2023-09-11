@@ -75,12 +75,12 @@ T.TabButton {
      */
     readonly property int tabIndex: {
         let tabIdx = 0
-        for (let i = 0; i < parent.children.length; ++i) {
-            if (parent.children[i] === this) {
+        for (const child of parent.children) {
+            if (child === this) {
                 return tabIdx
             }
             // Checking for AbstractButtons because any AbstractButton can act as a tab
-            if (parent.children[i] instanceof T.AbstractButton) {
+            if (child instanceof T.AbstractButton) {
                 ++tabIdx
             }
         }

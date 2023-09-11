@@ -333,8 +333,7 @@ T2.Popup {
                         return;
                     }
                     contentItem.contentItem.childrenChanged.connect(() => {
-                        for(let i in contentItem.contentItem.children) {
-                            let item = contentItem.contentItem.children[i];
+                        for(const item of contentItem.contentItem.children) {
                             item.anchors.margins = Kirigami.Units.largeSpacing;
                             item.anchors.top = contentItem.contentItem.top;
                             item.anchors.left = contentItem.contentItem.left;

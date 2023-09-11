@@ -72,10 +72,10 @@ Item {
     property list<Item> twinFormLayouts  // should be list<FormLayout> but we can't have a recursive declaration
 
     onTwinFormLayoutsChanged: {
-        for (const i in twinFormLayouts) {
-            if (!(root in twinFormLayouts[i].children[0].reverseTwins)) {
-                twinFormLayouts[i].children[0].reverseTwins.push(root)
-                Qt.callLater(() => twinFormLayouts[i].children[0].reverseTwinsChanged());
+        for (const twinFormLayout of twinFormLayouts) {
+            if (!(root in twinFormLayout.children[0].reverseTwins)) {
+                twinFormLayout.children[0].reverseTwins.push(root)
+                Qt.callLater(() => twinFormLayout.children[0].reverseTwinsChanged());
             }
         }
     }
@@ -85,9 +85,8 @@ Item {
     }
 
     Component.onDestruction: {
-        for (const i in twinFormLayouts) {
-            const twin = twinFormLayouts[i];
-            const child = twin.children[0];
+        for (const twinFormLayout of twinFormLayouts) {
+            const child = twinFormLayout.children[0];
             child.reverseTwins = child.reverseTwins.filter(value => value !== root);
         }
     }
@@ -130,8 +129,7 @@ Item {
         property var buddies: []
         property int knownItemsImplicitWidth: {
             let hint = 0;
-            for (const i in knownItems) {
-                const item = knownItems[i];
+            for (const item of knownItems) {
                 if (typeof item.Layout === "undefined") {
                     // Items may have been dynamically destroyed. Even
                     // printing such zombie wrappers results in a
@@ -153,9 +151,9 @@ Item {
         property int buddiesImplicitWidth: {
             let hint = 0;
 
-            for (const i in buddies) {
-                if (buddies[i].visible && buddies[i].item !== null && !buddies[i].item.Kirigami.FormData.isSection) {
-                    hint = Math.max(hint, buddies[i].implicitWidth);
+            for (const buddy of buddies) {
+                if (buddy.visible && buddy.item !== null && !buddy.item.Kirigami.FormData.isSection) {
+                    hint = Math.max(hint, buddy.implicitWidth);
                 }
             }
             return hint;
@@ -163,14 +161,12 @@ Item {
         readonly property var actualTwinFormLayouts: {
             // We need to copy that array by value
             const list = lay.reverseTwins.slice();
-            for (const i in twinFormLayouts) {
-                const parentLay = twinFormLayouts[i];
+            for (const parentLay of twinFormLayouts) {
                 if (!parentLay || !parentLay.hasOwnProperty("children")) {
                     continue;
                 }
                 list.push(parentLay);
-                for (const j in parentLay.children[0].reverseTwins) {
-                    const childLay = parentLay.children[0].reverseTwins[j];
+                for (const childLay of parentLay.children[0].reverseTwins) {
                     if (childLay && !(childLay in list)) {
                         list.push(childLay);
                     }
@@ -194,9 +190,9 @@ Item {
         Item {
             Layout.preferredWidth: {
                 let hint = lay.buddiesImplicitWidth;
-                for (const i in lay.actualTwinFormLayouts) {
-                    if (lay.actualTwinFormLayouts[i] && lay.actualTwinFormLayouts[i].hasOwnProperty("children")) {
-                        hint = Math.max(hint, lay.actualTwinFormLayouts[i].children[0].buddiesImplicitWidth);
+                for (const item of lay.actualTwinFormLayouts) {
+                    if (item && item.hasOwnProperty("children")) {
+                        hint = Math.max(hint, item.children[0].buddiesImplicitWidth);
                     }
                 }
                 return hint;
@@ -206,9 +202,9 @@ Item {
         Item {
             Layout.preferredWidth: {
                 let hint = Math.min(root.width, lay.knownItemsImplicitWidth);
-                for (const i in lay.actualTwinFormLayouts) {
-                    if (lay.actualTwinFormLayouts[i] && lay.actualTwinFormLayouts[i].hasOwnProperty("children")) {
-                        hint = Math.max(hint, lay.actualTwinFormLayouts[i].children[0].knownItemsImplicitWidth);
+                for (const item of lay.actualTwinFormLayouts) {
+                    if (item.hasOwnProperty("children")) {
+                        hint = Math.max(hint, item.children[0].knownItemsImplicitWidth);
                     }
                 }
                 return hint;

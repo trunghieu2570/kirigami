@@ -431,7 +431,7 @@ QT.Control {
 
         // push any extra defined pages onto the stack
         if (pages) {
-            for (let i = 0; i < pages.length; i++) {
+            for (const i in pages) {
                 let tPage = pages[i];
                 let tProps = propsArray[i];
 
@@ -540,7 +540,7 @@ QT.Control {
 
         // Push any extra defined pages onto the stack.
         if (pages) {
-            for (let i = 0; i < pages.length; i++) {
+            for (const i in pages) {
                 const tPage = pages[i];
                 const tProps = propsArray[i];
 

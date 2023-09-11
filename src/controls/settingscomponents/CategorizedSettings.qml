@@ -55,11 +55,11 @@ Kirigami.PageRow {
             return Kirigami.Units.gridUnit * 6  // we return the min width if the component isn't completed
         }
         let maxWordWidth = 0;
-        for (let i = 0; i < actions.length; i++) {
-            const words = actions[i].text.split(" ");
+        for (const action of actions) {
+            const words = action.text.split(" ");
 
-            for (let j = 0; j < words.length; j++) {
-                maxWordMetrics.text = words[j]
+            for (const word of words) {
+                maxWordMetrics.text = word
                 const currWordWidth = Math.ceil(maxWordMetrics.advanceWidth)
                 if (currWordWidth > maxWordWidth) {
                     maxWordWidth = currWordWidth
@@ -183,15 +183,15 @@ Kirigami.PageRow {
     }
 
     function getActionByName(actionName) {
-        for (let i = 0; i < actions.length; i++) {
-            if (actions[i].actionName == actionName) {
-                return actions[i];
+        for (const action of actions) {
+            if (action.actionName == actionName) {
+                return action;
             }
         }
     }
 
     function indexOfAction(action) {
-        for (let i = 0; i < actions.length; i++) {
+        for (const i in actions) {
             if (actions[i] == action) {
                 return i;
             }

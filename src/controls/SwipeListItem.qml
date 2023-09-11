@@ -495,10 +495,9 @@ QQC2.SwipeDelegate {
             if (definitelyVisible) {
                 hasVisibleActions = true;
             } else {
-                const actionCount = listItem.actions.length;
-                for (let i = 0; i < actionCount; i++) {
+                for (const action of listItem.actions) {
                     // Assuming that visible is only false if it is explicitly false, and not just falsy
-                    if (listItem.actions[i].visible) {
+                    if (action.visible) {
                         hasVisibleActions = true;
                         break;
                     }

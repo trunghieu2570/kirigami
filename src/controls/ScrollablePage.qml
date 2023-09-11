@@ -192,8 +192,7 @@ Kirigami.Page {
             height: Math.max(root.flickable.height, implicitHeight)
             implicitHeight: {
                 let impl = 0;
-                for (const i in itemsParent.visibleChildren) {
-                    const child = itemsParent.visibleChildren[i];
+                for (const child of itemsParent.visibleChildren) {
                     if (child.implicitHeight <= 0) {
                         impl = Math.max(impl, child.height);
                     } else {
@@ -303,8 +302,7 @@ Kirigami.Page {
 
     Component.onCompleted: {
         let flickableFound = false;
-        for (const i in itemsParent.data) {
-            const child = itemsParent.data[i];
+        for (const child of itemsParent.data) {
             if (child instanceof Flickable) {
                 // If there were more flickable children, take the last one, as behavior compatibility
                 // with old internal ScrollView

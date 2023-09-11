@@ -201,9 +201,9 @@ T.ToolBar {
         // Counting buttons because Repeaters can be counted among visibleChildren
         let visibleButtonCount = 0;
         const minWidth = contentItem.height * 0.75;
-        for (let i = 0; i < contentItem.visibleChildren.length; ++i) {
+        for (const visibleChild of contentItem.visibleChildren) {
             if (contentItem.width / visibleButtonCount >= minWidth && // make buttons go off the screen if there is physically no room for them
-                contentItem.visibleChildren[i] instanceof T.AbstractButton) { // Checking for AbstractButtons because any AbstractButton can act as a tab
+                visibleChild instanceof T.AbstractButton) { // Checking for AbstractButtons because any AbstractButton can act as a tab
                 ++visibleButtonCount;
             }
         }

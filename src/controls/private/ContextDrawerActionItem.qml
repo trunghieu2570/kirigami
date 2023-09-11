@@ -54,8 +54,7 @@ Kirigami.BasicListItem {
         Layout.fillHeight: true
         sourceComponent: modelData.displayComponent
         onStatusChanged: {
-            for (const i in parent.children) {
-                const child = parent.children[i];
+            for (const child of parent.children) {
                 if (child === this) {
                     child.visible = status === Loader.Ready;
                     break;

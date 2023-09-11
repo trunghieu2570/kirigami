@@ -355,9 +355,9 @@ Item {
                 interval: 1
                 onTriggered: {
                     let hasAnyRemotes = false;
-                    for (let i = 0; i < authorsRepeater.count; ++i) {
+                    for (const item of authorsRepeater.children) {
                         const itm = authorsRepeater.itemAt(i);
-                        if (itm.hasRemoteAvatar) {
+                        if (item.hasRemoteAvatar) {
                             hasAnyRemotes = true;
                             break;
                         }

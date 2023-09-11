@@ -141,8 +141,8 @@ Kirigami.OverlayDrawer {
 
                     // Check if at least one action is visible
                     let somethingVisible = false;
-                    for (let i = 0; i < root.actions.length; i++) {
-                        if (root.actions[i].visible) {
+                    for (const action of root.actions) {
+                        if (action.visible) {
                             somethingVisible = true;
                             break;
                         }
