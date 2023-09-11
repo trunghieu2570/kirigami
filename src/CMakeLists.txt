@@ -80,33 +80,7 @@ if (HAVE_QTGUI_OPENGL AND NOT KF6_PORTING_TODO)
         scenegraph/shadowedtexturenode.h
     )
 endif()
-
-qt6_add_shaders(KirigamiPlugin "shaders6"
-    BATCHABLE
-    PRECOMPILE
-    OPTIMIZED
-    PREFIX "/org/kde/kirigami/shaders"
-    FILES
-        scenegraph/shaders6/shadowedrectangle.vert
-        scenegraph/shaders6/shadowedrectangle.frag
-        scenegraph/shaders6/shadowedrectangle_lowpower.frag
-        scenegraph/shaders6/shadowedborderrectangle.frag
-        scenegraph/shaders6/shadowedborderrectangle_lowpower.frag
-        scenegraph/shaders6/shadowedtexture.frag
-        scenegraph/shaders6/shadowedtexture_lowpower.frag
-        scenegraph/shaders6/shadowedbordertexture.frag
-        scenegraph/shaders6/shadowedbordertexture_lowpower.frag
-    OUTPUTS
-        shadowedrectangle.vert.qsb
-        shadowedrectangle.frag.qsb
-        shadowedrectangle_lowpower.frag.qsb
-        shadowedborderrectangle.frag.qsb
-        shadowedborderrectangle_lowpower.frag.qsb
-        shadowedtexture.frag.qsb
-        shadowedtexture_lowpower.frag.qsb
-        shadowedbordertexture.frag.qsb
-        shadowedbordertexture_lowpower.frag.qsb
-)
+add_subdirectory(scenegraph/shaders6)
 
 ecm_target_qml_sources(KirigamiPlugin SOURCES
     controls/Action.qml
@@ -238,8 +212,10 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates SOURCES
     controls/templates/OverlayDrawer.qml
     controls/templates/OverlaySheet.qml
     controls/templates/SingletonHeaderSizeGroup.qml
-    controls/templates/qmldir
 )
+
+set_source_files_properties(controls/templates/qmldir PROPERTIES QT_RESOURCE_ALIAS templates/qmldir)
+qt_target_qml_sources(KirigamiPlugin RESOURCES controls/templates/qmldir)
 
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates/private SOURCES
     controls/templates/private/BackButton.qml
