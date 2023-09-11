@@ -84,7 +84,6 @@ endif()
 qt6_add_shaders(KirigamiPlugin "shaders6"
     BATCHABLE
     PRECOMPILE
-    OPTIMIZED
     PREFIX "/org/kde/kirigami/shaders"
     FILES
         scenegraph/shaders6/shadowedrectangle.vert
