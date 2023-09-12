@@ -1,11 +1,19 @@
 
 add_subdirectory(libkirigami)
 
+if (WIN32)
+    # Kirigami apparently adds too many sources so on Windows we end
+    # up running into command line length limits. So disable cache
+    # generation on Windows for now.
+    set(_extra_options NO_CACHEGEN)
+endif()
+
 ecm_add_qml_module(KirigamiPlugin URI "org.kde.kirigami" VERSION 2.0
     CLASS_NAME KirigamiPlugin
     DEPENDENCIES
     "QtQuick.Controls"
     "Qt5Compat.GraphicalEffects"
+    ${_extra_options}
 )
 
 ecm_create_qm_loader(kirigami_QM_LOADER libkirigami6_qt)
