@@ -251,18 +251,18 @@ ecm_target_qml_sources(KirigamiPlugin SOURCES
 #     controls/templates/private/MenuIcon.qml
 #     controls/templates/private/PassiveNotificationsManager.qml
 # )
-#
-# qt_target_qml_sources(KirigamiPlugin RESOURCES
-#     styles/Material/InlineMessage.qml
-#     styles/Material/Theme.qml
-# )
-#
-# if (DESKTOP_ENABLED)
-#     qt_target_qml_sources(KirigamiPlugin RESOURCES
-#         styles/org.kde.desktop/AbstractApplicationHeader.qml
-#         styles/org.kde.desktop/Theme.qml
-#     )
-# endif()
+
+qt_target_qml_sources(KirigamiPlugin RESOURCES
+    styles/Material/InlineMessage.qml
+    styles/Material/Theme.qml
+)
+
+if (DESKTOP_ENABLED)
+    qt_target_qml_sources(KirigamiPlugin RESOURCES
+        styles/org.kde.desktop/AbstractApplicationHeader.qml
+        styles/org.kde.desktop/Theme.qml
+    )
+endif()
 
 target_link_libraries(KirigamiPlugin
     PUBLIC Qt6::Core
