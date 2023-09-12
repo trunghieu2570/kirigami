@@ -174,17 +174,17 @@ ecm_target_qml_sources(KirigamiPlugin SOURCES
     controls/private/PrivateActionToolButton.qml
     controls/private/EdgeShadow.qml
     controls/private/SwipeItemEventFilter.qml
-    # controls/private/globaltoolbar/AbstractPageHeader.qml
-    # controls/private/globaltoolbar/BreadcrumbControl.qml
-    # controls/private/globaltoolbar/PageRowGlobalToolBarStyleGroup.qml
-    # controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml
-    # controls/private/globaltoolbar/TitlesPageHeader.qml
-    # controls/private/globaltoolbar/ToolBarPageHeader.qml
-    # controls/templates/AbstractApplicationHeader.qml
-    # controls/templates/AbstractCard.qml
-    # controls/templates/Chip.qml
-    # controls/templates/InlineMessage.qml
-    # controls/templates/OverlayDrawer.qml
+    controls/private/globaltoolbar/AbstractPageHeader.qml
+    controls/private/globaltoolbar/BreadcrumbControl.qml
+    controls/private/globaltoolbar/PageRowGlobalToolBarStyleGroup.qml
+    controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml
+    controls/private/globaltoolbar/TitlesPageHeader.qml
+    controls/private/globaltoolbar/ToolBarPageHeader.qml
+    controls/templates/AbstractApplicationHeader.qml
+    controls/templates/AbstractCard.qml
+    controls/templates/Chip.qml
+    controls/templates/InlineMessage.qml
+    controls/templates/OverlayDrawer.qml
     # controls/templates/OverlaySheet.qml
     # controls/templates/SingletonHeaderSizeGroup.qml
     # controls/templates/qmldir
