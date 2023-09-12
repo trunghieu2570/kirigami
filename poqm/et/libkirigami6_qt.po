@@ -137,12 +137,12 @@ msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Tagasi"
 
-#: controls/GlobalDrawer.qml:596
+#: controls/GlobalDrawer.qml:595
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Sulge külgriba"
 
-#: controls/GlobalDrawer.qml:599
+#: controls/GlobalDrawer.qml:598
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"

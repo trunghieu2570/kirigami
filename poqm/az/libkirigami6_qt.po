@@ -115,12 +115,12 @@ msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Geriyə"
 
-#: controls/GlobalDrawer.qml:596
+#: controls/GlobalDrawer.qml:595
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Yandakı paneli bağla"
 
-#: controls/GlobalDrawer.qml:599
+#: controls/GlobalDrawer.qml:598
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Yan paneli açın"

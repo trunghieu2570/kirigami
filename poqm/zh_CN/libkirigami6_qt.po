@@ -114,12 +114,12 @@ msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "返回"
 
-#: controls/GlobalDrawer.qml:596
+#: controls/GlobalDrawer.qml:595
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "关闭侧边栏"
 
-#: controls/GlobalDrawer.qml:599
+#: controls/GlobalDrawer.qml:598
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "打开侧边栏"
