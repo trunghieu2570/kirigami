@@ -152,28 +152,28 @@ ecm_target_qml_sources(KirigamiPlugin SOURCES
     controls/settingscomponents/SettingAction.qml
     controls/AboutItem.qml
     controls/NavigationTabBar.qml
-    # controls/NavigationTabButton.qml
-    # controls/Dialog.qml
-    # controls/MenuDialog.qml
-    # controls/Chip.qml
-    # controls/PromptDialog.qml
-    # controls/LoadingPlaceholder.qml
-    # controls/SelectableLabel.qml
-    # controls/private/ActionButton.qml
-    # controls/private/ActionIconGroup.qml
-    # controls/private/ActionMenuItem.qml
-    # controls/private/ActionsMenu.qml
-    # controls/private/BannerImage.qml
-    # controls/private/CardsGridViewPrivate.qml
-    # controls/private/CornerShadow.qml
-    # controls/private/DefaultCardBackground.qml
-    # controls/private/ContextDrawerActionItem.qml
-    # controls/private/DefaultChipBackground.qml
-    # controls/private/DefaultPageTitleDelegate.qml
-    # controls/private/GlobalDrawerActionItem.qml
-    # controls/private/PrivateActionToolButton.qml
-    # controls/private/EdgeShadow.qml
-    # controls/private/SwipeItemEventFilter.qml
+    controls/NavigationTabButton.qml
+    controls/Dialog.qml
+    controls/MenuDialog.qml
+    controls/Chip.qml
+    controls/PromptDialog.qml
+    controls/LoadingPlaceholder.qml
+    controls/SelectableLabel.qml
+    controls/private/ActionButton.qml
+    controls/private/ActionIconGroup.qml
+    controls/private/ActionMenuItem.qml
+    controls/private/ActionsMenu.qml
+    controls/private/BannerImage.qml
+    controls/private/CardsGridViewPrivate.qml
+    controls/private/CornerShadow.qml
+    controls/private/DefaultCardBackground.qml
+    controls/private/ContextDrawerActionItem.qml
+    controls/private/DefaultChipBackground.qml
+    controls/private/DefaultPageTitleDelegate.qml
+    controls/private/GlobalDrawerActionItem.qml
+    controls/private/PrivateActionToolButton.qml
+    controls/private/EdgeShadow.qml
+    controls/private/SwipeItemEventFilter.qml
     # controls/private/globaltoolbar/AbstractPageHeader.qml
     # controls/private/globaltoolbar/BreadcrumbControl.qml
     # controls/private/globaltoolbar/PageRowGlobalToolBarStyleGroup.qml
