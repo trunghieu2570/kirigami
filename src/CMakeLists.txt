@@ -127,142 +127,142 @@ ecm_target_qml_sources(KirigamiPlugin SOURCES
     controls/SwipeListItem.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.1 SOURCES
-    controls/AbstractApplicationItem.qml
-    controls/ApplicationItem.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.3 SOURCES
-    controls/FormLayout.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.4 SOURCES
-    controls/AbstractCard.qml
-    controls/Card.qml
-    controls/CardsListView.qml
-    controls/CardsGridView.qml
-    controls/CardsLayout.qml
-    controls/InlineMessage.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.5 SOURCES
-    controls/ListItemDragHandle.qml
-    controls/ActionToolBar.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.6 SOURCES
-    controls/AboutPage.qml
-    controls/LinkButton.qml
-    controls/UrlButton.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.7 SOURCES
-    controls/ActionTextField.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.8 SOURCES
-    controls/SearchField.qml
-    controls/PasswordField.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.10 SOURCES
-    controls/ListSectionHeader.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.11 SOURCES
-    controls/PagePoolAction.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.12 SOURCES
-    controls/ShadowedImage.qml
-    controls/PlaceholderMessage.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.14 SOURCES
-    controls/FlexColumn.qml
-    controls/CheckableListItem.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.18 PATH settingscomponents SOURCES
-    controls/settingscomponents/CategorizedSettings.qml
-    controls/settingscomponents/SettingAction.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.19 SOURCES
-    controls/AboutItem.qml
-    controls/NavigationTabBar.qml
-    controls/NavigationTabButton.qml
-    controls/Dialog.qml
-    controls/MenuDialog.qml
-    controls/PromptDialog.qml
-    controls/Chip.qml
-    controls/LoadingPlaceholder.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.20 SOURCES
-    controls/SelectableLabel.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private SOURCES
-    controls/private/ActionButton.qml
-    controls/private/ActionIconGroup.qml
-    controls/private/ActionMenuItem.qml
-    controls/private/ActionsMenu.qml
-    controls/private/BannerImage.qml
-    controls/private/CardsGridViewPrivate.qml
-    controls/private/ContextDrawerActionItem.qml
-    controls/private/CornerShadow.qml
-    controls/private/DefaultCardBackground.qml
-    controls/private/DefaultChipBackground.qml
-    controls/private/DefaultPageTitleDelegate.qml
-    controls/private/EdgeShadow.qml
-    controls/private/GlobalDrawerActionItem.qml
-    controls/private/PrivateActionToolButton.qml
-    controls/private/SwipeItemEventFilter.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private/globaltoolbar SOURCES
-    controls/private/globaltoolbar/AbstractPageHeader.qml
-    controls/private/globaltoolbar/BreadcrumbControl.qml
-    controls/private/globaltoolbar/PageRowGlobalToolBarStyleGroup.qml
-    controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml
-    controls/private/globaltoolbar/TitlesPageHeader.qml
-    controls/private/globaltoolbar/ToolBarPageHeader.qml
-)
-
-ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates SOURCES
-    controls/templates/AbstractApplicationHeader.qml
-    controls/templates/AbstractCard.qml
-    controls/templates/Chip.qml
-    controls/templates/InlineMessage.qml
-    controls/templates/OverlayDrawer.qml
-    controls/templates/OverlaySheet.qml
-    controls/templates/SingletonHeaderSizeGroup.qml
-    controls/templates/qmldir
-)
-
-ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates/private SOURCES
-    controls/templates/private/BackButton.qml
-    controls/templates/private/BorderPropertiesGroup.qml
-    controls/templates/private/ContextIcon.qml
-    controls/templates/private/ForwardButton.qml
-    controls/templates/private/GenericDrawerIcon.qml
-    controls/templates/private/IconPropertiesGroup.qml
-    controls/templates/private/MenuIcon.qml
-    controls/templates/private/PassiveNotificationsManager.qml
-)
-
-qt_target_qml_sources(KirigamiPlugin RESOURCES
-    styles/Material/InlineMessage.qml
-    styles/Material/Theme.qml
-)
-
-if (DESKTOP_ENABLED)
-    qt_target_qml_sources(KirigamiPlugin RESOURCES
-        styles/org.kde.desktop/AbstractApplicationHeader.qml
-        styles/org.kde.desktop/Theme.qml
-    )
-endif()
+# ecm_target_qml_sources(KirigamiPlugin VERSION 2.1 SOURCES
+#     controls/AbstractApplicationItem.qml
+#     controls/ApplicationItem.qml
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin VERSION 2.3 SOURCES
+#     controls/FormLayout.qml
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin VERSION 2.4 SOURCES
+#     controls/AbstractCard.qml
+#     controls/Card.qml
+#     controls/CardsListView.qml
+#     controls/CardsGridView.qml
+#     controls/CardsLayout.qml
+#     controls/InlineMessage.qml
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin VERSION 2.5 SOURCES
+#     controls/ListItemDragHandle.qml
+#     controls/ActionToolBar.qml
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin VERSION 2.6 SOURCES
+#     controls/AboutPage.qml
+#     controls/LinkButton.qml
+#     controls/UrlButton.qml
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin VERSION 2.7 SOURCES
+#     controls/ActionTextField.qml
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin VERSION 2.8 SOURCES
+#     controls/SearchField.qml
+#     controls/PasswordField.qml
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin VERSION 2.10 SOURCES
+#     controls/ListSectionHeader.qml
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin VERSION 2.11 SOURCES
+#     controls/PagePoolAction.qml
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin VERSION 2.12 SOURCES
+#     controls/ShadowedImage.qml
+#     controls/PlaceholderMessage.qml
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin VERSION 2.14 SOURCES
+#     controls/FlexColumn.qml
+#     controls/CheckableListItem.qml
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin VERSION 2.18 PATH settingscomponents SOURCES
+#     controls/settingscomponents/CategorizedSettings.qml
+#     controls/settingscomponents/SettingAction.qml
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin VERSION 2.19 SOURCES
+#     controls/AboutItem.qml
+#     controls/NavigationTabBar.qml
+#     controls/NavigationTabButton.qml
+#     controls/Dialog.qml
+#     controls/MenuDialog.qml
+#     controls/PromptDialog.qml
+#     controls/Chip.qml
+#     controls/LoadingPlaceholder.qml
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin VERSION 2.20 SOURCES
+#     controls/SelectableLabel.qml
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private SOURCES
+#     controls/private/ActionButton.qml
+#     controls/private/ActionIconGroup.qml
+#     controls/private/ActionMenuItem.qml
+#     controls/private/ActionsMenu.qml
+#     controls/private/BannerImage.qml
+#     controls/private/CardsGridViewPrivate.qml
+#     controls/private/ContextDrawerActionItem.qml
+#     controls/private/CornerShadow.qml
+#     controls/private/DefaultCardBackground.qml
+#     controls/private/DefaultChipBackground.qml
+#     controls/private/DefaultPageTitleDelegate.qml
+#     controls/private/EdgeShadow.qml
+#     controls/private/GlobalDrawerActionItem.qml
+#     controls/private/PrivateActionToolButton.qml
+#     controls/private/SwipeItemEventFilter.qml
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private/globaltoolbar SOURCES
+#     controls/private/globaltoolbar/AbstractPageHeader.qml
+#     controls/private/globaltoolbar/BreadcrumbControl.qml
+#     controls/private/globaltoolbar/PageRowGlobalToolBarStyleGroup.qml
+#     controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml
+#     controls/private/globaltoolbar/TitlesPageHeader.qml
+#     controls/private/globaltoolbar/ToolBarPageHeader.qml
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates SOURCES
+#     controls/templates/AbstractApplicationHeader.qml
+#     controls/templates/AbstractCard.qml
+#     controls/templates/Chip.qml
+#     controls/templates/InlineMessage.qml
+#     controls/templates/OverlayDrawer.qml
+#     controls/templates/OverlaySheet.qml
+#     controls/templates/SingletonHeaderSizeGroup.qml
+#     controls/templates/qmldir
+# )
+#
+# ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates/private SOURCES
+#     controls/templates/private/BackButton.qml
+#     controls/templates/private/BorderPropertiesGroup.qml
+#     controls/templates/private/ContextIcon.qml
+#     controls/templates/private/ForwardButton.qml
+#     controls/templates/private/GenericDrawerIcon.qml
+#     controls/templates/private/IconPropertiesGroup.qml
+#     controls/templates/private/MenuIcon.qml
+#     controls/templates/private/PassiveNotificationsManager.qml
+# )
+#
+# qt_target_qml_sources(KirigamiPlugin RESOURCES
+#     styles/Material/InlineMessage.qml
+#     styles/Material/Theme.qml
+# )
+#
+# if (DESKTOP_ENABLED)
+#     qt_target_qml_sources(KirigamiPlugin RESOURCES
+#         styles/org.kde.desktop/AbstractApplicationHeader.qml
+#         styles/org.kde.desktop/Theme.qml
+#     )
+# endif()
 
 target_link_libraries(KirigamiPlugin
     PUBLIC Qt6::Core
