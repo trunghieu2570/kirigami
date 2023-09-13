@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2020 Arjen Hiemstra <ahiemstra@heimr.nl>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -42,7 +43,7 @@ TestCase {
     property TextField textField: TextField { font.pointSize: 10 }
 
     Component {
-        id: single;
+        id: single
         Kirigami.ActionToolBar {
             font.pointSize: 10
             actions: [
@@ -283,5 +284,58 @@ TestCase {
         compare(toolbar.height, 100)
         compare(t.height, 100)
         compare(s.height, 100)
+    }
+
+    Component {
+        id: toolbarComponent
+        Kirigami.ToolBarLayout {
+            fullDelegate: Item {}
+            iconDelegate: Item {}
+            moreButton: Item {}
+        }
+    }
+
+    Component {
+        id: actionComponent
+        Kirigami.Action {}
+    }
+
+    function test_dynamicActions() {
+        const toolbar = createTemporaryObject(toolbarComponent, this);
+        verify(toolbar);
+
+        const actionA = createTemporaryObject(actionComponent, this, { text: "Action A" });
+        verify(actionA)
+        toolbar.actions.push(actionA);
+        waitForPolish(toolbar);
+        actionA.destroy();
+        wait(1500); // Let it destroy, and let toolBarLayout's throttle timer expire
+
+        const actionB = createTemporaryObject(actionComponent, this, { text: "Action B" });
+        verify(actionB)
+
+        // shoud not crash
+        toolbar.actions.push(actionB);
+        waitForPolish(toolbar);
+    }
+
+    function test_duplicateDynamicAction() {
+        const toolbar = createTemporaryObject(toolbarComponent, this);
+        verify(toolbar);
+
+        const actionA = createTemporaryObject(actionComponent, this, { text: "Action A" });
+        verify(actionA)
+        toolbar.actions.push(actionA);
+        toolbar.actions.push(actionA);
+        waitForPolish(toolbar);
+        actionA.destroy();
+        wait(1500); // Let it destroy, and let toolBarLayout's throttle timer expire
+
+        const actionB = createTemporaryObject(actionComponent, this, { text: "Action B" });
+        verify(actionB)
+
+        // shoud not crash
+        toolbar.actions.push(actionB);
+        waitForPolish(toolbar);
     }
 }
