@@ -125,6 +125,8 @@ T.ToolBar {
             level: 2
             text: root.text
             elide: Text.ElideRight
+            wrapMode: Text.NoWrap
+            maximumLineCount: 1
         }
 
         Loader {
