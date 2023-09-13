@@ -10,6 +10,8 @@
 #include <QQuickItem>
 #include <memory>
 
+class ToolBarLayoutPrivate;
+
 /**
  * Attached property for ToolBarLayout delegates.
  */
@@ -220,8 +222,8 @@ protected:
     void updatePolish() override;
 
 private:
-    class Private;
-    const std::unique_ptr<Private> d;
+    friend class ToolBarLayoutPrivate;
+    const std::unique_ptr<ToolBarLayoutPrivate> d;
 };
 
 QML_DECLARE_TYPEINFO(ToolBarLayout, QML_HAS_ATTACHED_PROPERTIES)

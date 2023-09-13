@@ -13,7 +13,6 @@
 #include <QQmlComponent>
 #include <QTimer>
 
-#include "enums.h"
 #include "loggingcategory.h"
 #include "toolbarlayoutdelegate.h"
 
@@ -32,10 +31,12 @@ void ToolBarLayoutAttached::setAction(QObject *action)
     m_action = action;
 }
 
-class ToolBarLayout::Private
+class ToolBarLayoutPrivate
 {
+    ToolBarLayout *const q;
+
 public:
-    Private(ToolBarLayout *qq)
+    ToolBarLayoutPrivate(ToolBarLayout *qq)
         : q(qq)
     {
     }
@@ -47,10 +48,8 @@ public:
     qreal layoutStart(qreal layoutWidth);
     void maybeHideDelegate(int index, qreal &currentWidth, qreal totalWidth);
 
-    ToolBarLayout *q;
-
     QVector<QObject *> actions;
-    ActionsProperty actionsProperty;
+    ToolBarLayout::ActionsProperty actionsProperty;
     QList<QObject *> hiddenActions;
     QQmlComponent *fullDelegate = nullptr;
     QQmlComponent *iconDelegate = nullptr;
@@ -60,7 +59,7 @@ public:
     qreal visibleActionsWidth = 0.0;
     qreal visibleWidth = 0.0;
     Qt::LayoutDirection layoutDirection = Qt::LeftToRight;
-    HeightMode heightMode = ConstrainIfLarger;
+    ToolBarLayout::HeightMode heightMode = ToolBarLayout::ConstrainIfLarger;
 
     bool completed = false;
     bool actionsChanged = false;
@@ -86,9 +85,14 @@ public:
 
 ToolBarLayout::ToolBarLayout(QQuickItem *parent)
     : QQuickItem(parent)
-    , d(std::make_unique<Private>(this))
+    , d(std::make_unique<ToolBarLayoutPrivate>(this))
 {
-    d->actionsProperty = ActionsProperty(this, this, Private::appendAction, Private::actionCount, Private::action, Private::clearActions);
+    d->actionsProperty = ActionsProperty(this,
+                                         this,
+                                         ToolBarLayoutPrivate::appendAction,
+                                         ToolBarLayoutPrivate::actionCount,
+                                         ToolBarLayoutPrivate::action,
+                                         ToolBarLayoutPrivate::clearActions);
 
     // To prevent multiple assignments to actions from constantly recreating
     // delegates, we cache the delegates and only remove them once they are no
@@ -354,7 +358,7 @@ void ToolBarLayout::updatePolish()
  * we get an explicit size set and when we're relying on implicit size
  * calculation.
  */
-void ToolBarLayout::Private::calculateImplicitSize()
+void ToolBarLayoutPrivate::calculateImplicitSize()
 {
     if (!completed) {
         return;
@@ -455,7 +459,7 @@ void ToolBarLayout::Private::calculateImplicitSize()
     q->polish();
 }
 
-void ToolBarLayout::Private::performLayout()
+void ToolBarLayoutPrivate::performLayout()
 {
     if (!completed || actions.isEmpty()) {
         return;
@@ -486,9 +490,9 @@ void ToolBarLayout::Private::performLayout()
             moreButtonInstance->setX(0.0);
         }
 
-        if (heightMode == AlwaysFill) {
+        if (heightMode == ToolBarLayout::AlwaysFill) {
             moreButtonInstance->setHeight(height);
-        } else if (heightMode == ConstrainIfLarger) {
+        } else if (heightMode == ToolBarLayout::ConstrainIfLarger) {
             if (moreButtonInstance->implicitHeight() > height) {
                 moreButtonInstance->setHeight(height);
             } else {
@@ -512,9 +516,9 @@ void ToolBarLayout::Private::performLayout()
             continue;
         }
 
-        if (heightMode == AlwaysFill) {
+        if (heightMode == ToolBarLayout::AlwaysFill) {
             entry->setHeight(height);
-        } else if (heightMode == ConstrainIfLarger) {
+        } else if (heightMode == ToolBarLayout::ConstrainIfLarger) {
             if (entry->implicitHeight() > height) {
                 entry->setHeight(height);
             } else {
@@ -557,7 +561,7 @@ void ToolBarLayout::Private::performLayout()
     sortedDelegates.clear();
 }
 
-QVector<ToolBarLayoutDelegate *> ToolBarLayout::Private::createDelegates()
+QVector<ToolBarLayoutDelegate *> ToolBarLayoutPrivate::createDelegates()
 {
     QVector<ToolBarLayoutDelegate *> result;
     for (auto action : std::as_const(actions)) {
@@ -581,10 +585,10 @@ QVector<ToolBarLayoutDelegate *> ToolBarLayout::Private::createDelegates()
             moreButtonInstance = qobject_cast<QQuickItem *>(incubator->object());
             moreButtonInstance->setVisible(false);
 
-            connect(moreButtonInstance, &QQuickItem::visibleChanged, q, [this]() {
+            QObject::connect(moreButtonInstance, &QQuickItem::visibleChanged, q, [this]() {
                 moreButtonInstance->setVisible(shouldShowMoreButton);
             });
-            connect(moreButtonInstance, &QQuickItem::widthChanged, q, [this]() {
+            QObject::connect(moreButtonInstance, &QQuickItem::widthChanged, q, [this]() {
                 Q_EMIT q->minimumWidthChanged();
             });
             q->relayout();
@@ -601,7 +605,7 @@ QVector<ToolBarLayoutDelegate *> ToolBarLayout::Private::createDelegates()
     return result;
 }
 
-ToolBarLayoutDelegate *ToolBarLayout::Private::createDelegate(QObject *action)
+ToolBarLayoutDelegate *ToolBarLayoutPrivate::createDelegate(QObject *action)
 {
     QQmlComponent *fullComponent = nullptr;
     auto displayComponent = action->property("displayComponent");
@@ -624,7 +628,7 @@ ToolBarLayoutDelegate *ToolBarLayout::Private::createDelegate(QObject *action)
     return result;
 }
 
-qreal ToolBarLayout::Private::layoutStart(qreal layoutWidth)
+qreal ToolBarLayoutPrivate::layoutStart(qreal layoutWidth)
 {
     qreal availableWidth = moreButtonInstance->isVisible() ? q->width() - (moreButtonInstance->width() + spacing) : q->width();
 
@@ -639,7 +643,7 @@ qreal ToolBarLayout::Private::layoutStart(qreal layoutWidth)
     return 0.0;
 }
 
-void ToolBarLayout::Private::maybeHideDelegate(int index, qreal &currentWidth, qreal totalWidth)
+void ToolBarLayoutPrivate::maybeHideDelegate(int index, qreal &currentWidth, qreal totalWidth)
 {
     auto delegate = sortedDelegates.at(index);
 
@@ -729,23 +733,23 @@ void ToolBarLayout::Private::maybeHideDelegate(int index, qreal &currentWidth, q
     }
 }
 
-void ToolBarLayout::Private::appendAction(ToolBarLayout::ActionsProperty *list, QObject *action)
+void ToolBarLayoutPrivate::appendAction(ToolBarLayout::ActionsProperty *list, QObject *action)
 {
     auto layout = reinterpret_cast<ToolBarLayout *>(list->data);
     layout->addAction(action);
 }
 
-qsizetype ToolBarLayout::Private::actionCount(ToolBarLayout::ActionsProperty *list)
+qsizetype ToolBarLayoutPrivate::actionCount(ToolBarLayout::ActionsProperty *list)
 {
     return reinterpret_cast<ToolBarLayout *>(list->data)->d->actions.count();
 }
 
-QObject *ToolBarLayout::Private::action(ToolBarLayout::ActionsProperty *list, qsizetype index)
+QObject *ToolBarLayoutPrivate::action(ToolBarLayout::ActionsProperty *list, qsizetype index)
 {
     return reinterpret_cast<ToolBarLayout *>(list->data)->d->actions.at(index);
 }
 
-void ToolBarLayout::Private::clearActions(ToolBarLayout::ActionsProperty *list)
+void ToolBarLayoutPrivate::clearActions(ToolBarLayout::ActionsProperty *list)
 {
     reinterpret_cast<ToolBarLayout *>(list->data)->clearActions();
 }
