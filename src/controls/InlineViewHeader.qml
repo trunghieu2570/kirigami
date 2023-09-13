@@ -67,6 +67,11 @@ T.ToolBar {
     property list<T.Action> actions
 //END properties
 
+    implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
+                            Math.ceil(label.implicitWidth)
+                            + rowLayout.spacing
+                            + Math.ceil(Math.max(buttonsLoader.implicitWidth, buttonsLoader.Layout.minimumWidth))
+                            + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
                              implicitContentHeight + topPadding + bottomPadding)
 
@@ -105,6 +110,8 @@ T.ToolBar {
         spacing: 0
 
         Kirigami.Heading {
+            id: label
+
             Layout.fillWidth: !buttonsLoader.active
             Layout.maximumWidth: {
                 if (!buttonsLoader.active) {
