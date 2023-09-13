@@ -588,9 +588,7 @@ QVector<ToolBarLayoutDelegate *> ToolBarLayoutPrivate::createDelegates()
             QObject::connect(moreButtonInstance, &QQuickItem::visibleChanged, q, [this]() {
                 moreButtonInstance->setVisible(shouldShowMoreButton);
             });
-            QObject::connect(moreButtonInstance, &QQuickItem::widthChanged, q, [this]() {
-                Q_EMIT q->minimumWidthChanged();
-            });
+            QObject::connect(moreButtonInstance, &QQuickItem::widthChanged, q, &ToolBarLayout::minimumWidthChanged);
             q->relayout();
             Q_EMIT q->minimumWidthChanged();
 
