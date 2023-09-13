@@ -186,12 +186,12 @@ msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
 msgstr "Параметри — %1"
 
-#: controls/templates/OverlayDrawer.qml:130
+#: controls/templates/OverlayDrawer.qml:128
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Закрити висувну панель"
 
-#: controls/templates/OverlayDrawer.qml:136
+#: controls/templates/OverlayDrawer.qml:134
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Відкрити висувну панель"

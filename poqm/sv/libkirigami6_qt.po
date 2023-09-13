@@ -194,12 +194,12 @@ msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
 msgstr "Inställningar — %1"
 
-#: controls/templates/OverlayDrawer.qml:130
+#: controls/templates/OverlayDrawer.qml:128
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Stäng låda"
 
-#: controls/templates/OverlayDrawer.qml:136
+#: controls/templates/OverlayDrawer.qml:134
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Öppna låda"

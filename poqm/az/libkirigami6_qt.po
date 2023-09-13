@@ -194,12 +194,12 @@ msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
 msgstr "Ayarlar — %1"
 
-#: controls/templates/OverlayDrawer.qml:130
+#: controls/templates/OverlayDrawer.qml:128
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Çəkməcəni bağlayın"
 
-#: controls/templates/OverlayDrawer.qml:136
+#: controls/templates/OverlayDrawer.qml:134
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Çəkməcəni açın"

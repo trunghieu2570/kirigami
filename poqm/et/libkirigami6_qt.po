@@ -219,7 +219,7 @@ msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
 msgstr ""
 
-#: controls/templates/OverlayDrawer.qml:130
+#: controls/templates/OverlayDrawer.qml:128
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
@@ -227,7 +227,7 @@ msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Sulge külgriba"
 
-#: controls/templates/OverlayDrawer.qml:136
+#: controls/templates/OverlayDrawer.qml:134
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr ""

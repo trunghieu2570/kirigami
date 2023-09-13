@@ -179,12 +179,12 @@ msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
 msgstr "Impostazioni — %1"
 
-#: controls/templates/OverlayDrawer.qml:130
+#: controls/templates/OverlayDrawer.qml:128
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Chiudi il cassetto"
 
-#: controls/templates/OverlayDrawer.qml:136
+#: controls/templates/OverlayDrawer.qml:134
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Apri il cassetto"

@@ -179,12 +179,12 @@ msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
 msgstr "அமைப்புகள் — %1"
 
-#: controls/templates/OverlayDrawer.qml:130
+#: controls/templates/OverlayDrawer.qml:128
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "மேல்தோன்றும் பலகையை மூடு"
 
-#: controls/templates/OverlayDrawer.qml:136
+#: controls/templates/OverlayDrawer.qml:134
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "மேல்தோன்றும் பலகையைத் திற"
