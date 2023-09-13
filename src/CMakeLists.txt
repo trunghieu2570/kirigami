@@ -211,6 +211,7 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.19 SOURCES
 
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.20 SOURCES
     controls/SelectableLabel.qml
+    controls/InlineViewHeader.qml
 )
 
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private SOURCES
