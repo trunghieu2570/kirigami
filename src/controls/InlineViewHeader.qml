@@ -77,13 +77,6 @@ T.ToolBar {
 
     z: 999 // don't let content overlap it
 
-    // Just for getting the size of an icons-only ToolButton, used later
-    QQC2.ToolButton {
-        id: overflowButtonSizeHint
-        icon.name: "overflow-menu-symbolic"
-        visible: false
-    }
-
     background: Rectangle {
         Kirigami.Theme.colorSet: Kirigami.Theme.View
         Kirigami.Theme.inherit: false
@@ -119,7 +112,7 @@ T.ToolBar {
                 }
                 return rowLayout.width
                     - rowLayout.spacing
-                    - overflowButtonSizeHint.width;
+                    - buttonsLoader.Layout.minimumWidth;
             }
             Layout.alignment: Qt.AlignVCenter
             level: 2
@@ -134,6 +127,7 @@ T.ToolBar {
 
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
+            Layout.minimumWidth: item?.Layout.minimumWidth ?? 0
             active: root.actions.length > 0
             sourceComponent: Kirigami.ActionToolBar {
                 actions: root.actions
