@@ -319,6 +319,54 @@ public:
     void setAcceptsMouse(bool accepts);
 
     /**
+     * @brief This method removes all the items after the specified item or
+     * index from the view and returns the last item that was removed.
+     *
+     * Note that if the passed value is neither of the values said below, it
+     * will return a nullptr.
+     *
+     * @param item the item to remove. It can be an item, index or not defined
+     * in which case it will pop the last item.
+     */
+    Q_INVOKABLE QQuickItem *pop(const QVariant &item);
+
+    /**
+     * @brief This method removes all the items after the specified item from
+     * the view and returns the last item that was removed.
+     *
+     * @see ::removeItem()
+     *
+     * @param the item where the iteration should stop at
+     * @returns the last item that has been removed
+     */
+    QQuickItem *pop(QQuickItem *item);
+
+    /**
+     * @brief This method removes all the items after the specified position
+     * from the view and returns the last item that was removed.
+     *
+     * It starts iterating from the last item to the first item calling
+     * removeItem() for each of them until it reaches the specified position.
+     *
+     * @see ::removeItem()
+     *
+     * @param the position where the iteration should stop at
+     * @returns the last item that has been removed
+     */
+    QQuickItem *pop(int index);
+
+    /**
+     * @brief This method removes the last item from the view and returns it.
+     *
+     * This method calls removeItem() on the last item.
+     *
+     * @see ::removeItem()
+     *
+     * @return the removed item
+     */
+    Q_INVOKABLE QQuickItem *pop();
+
+    /**
      * @brief This method removes the specified item from the view.
      *
      * Items will be reparented to their old parent. If they have JavaScript
@@ -391,15 +439,6 @@ public Q_SLOTS:
      * @param to the new position
      */
     void moveItem(int from, int to);
-
-    /**
-     * Removes all the items after item. Starting from the last column, every column will be removed until item is found, which will be left in place.
-     * Items will be reparented to their old parent.
-     * If they have JavaScript ownership and they didn't have an old parent, they will be destroyed
-     * @param item the item which will be the new last one of the row.
-     * @returns the last item that has been removed
-     */
-    QQuickItem *pop(QQuickItem *item);
 
     /**
      * Removes every item in the view.

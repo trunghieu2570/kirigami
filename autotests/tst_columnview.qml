@@ -182,24 +182,31 @@ TestCase {
         compare(item, null);
     }
 
-    function test_pop_no_args() {
-        skip("Behavior of ColumnView::pop() is not well-defined yet.");
-
+    function test_pop_item_arg() {
         const { view, zero, one, two } = createViewWith3Items();
 
-        let last = null;
+        compare(view.pop(one), two);
+        compare(view.count, 2);
+        compare(view.pop(zero), one);
+        compare(view.count, 1);
+    }
 
-        last = view.pop();
-        verify(last, two);
+    function test_pop_index_arg() {
+        const { view, zero, one, two } = createViewWith3Items();
 
-        last = view.pop();
-        verify(last, one);
+        compare(view.pop(1), two);
+        compare(view.count, 2);
+        compare(view.pop(-1), zero);
+        compare(view.count, 0);
+    }
 
-        last = view.pop();
-        verify(last, zero);
+    function test_pop_no_args() {
+        const { view, zero, one, two } = createViewWith3Items();
 
-        last = view.pop();
-        verify(last, null);
+        compare(view.pop(), two);
+        compare(view.pop(), one);
+        compare(view.pop(), zero);
+        compare(view.pop(), null);
     }
 
     function test_move() {

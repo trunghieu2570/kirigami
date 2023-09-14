@@ -1244,18 +1244,43 @@ QQuickItem *ColumnView::removeItem(const QVariant &item)
     }
 }
 
+QQuickItem *ColumnView::pop(const QVariant &item)
+{
+    if (item.canConvert<QQuickItem *>()) {
+        return pop(item.value<QQuickItem *>());
+    } else if (item.canConvert<int>()) {
+        return pop(item.toInt());
+    } else if (item.isNull()) {
+        return pop();
+    }
+    return nullptr;
+}
 QQuickItem *ColumnView::pop(QQuickItem *item)
 {
     QQuickItem *removed = nullptr;
 
     while (!m_contentItem->m_items.isEmpty() && m_contentItem->m_items.last() != item) {
         removed = removeItem(m_contentItem->m_items.last());
-        // if no item has been passed, just pop one
-        if (!item) {
-            break;
-        }
     }
     return removed;
+}
+
+QQuickItem *ColumnView::pop(const int index)
+{
+    if (index >= 0 && index < count()) {
+        return pop(m_contentItem->m_items.at(index));
+    } else if (index == -1) {
+        return pop(nullptr);
+    }
+    return nullptr;
+}
+
+QQuickItem *ColumnView::pop()
+{
+    if (count() > 0) {
+        return removeItem(count() - 1);
+    }
+    return nullptr;
 }
 
 void ColumnView::clear()
