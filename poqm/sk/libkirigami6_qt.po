@@ -128,7 +128,7 @@ msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Ukončiť"
 
-#: controls/ActionToolBar.qml:192
+#: controls/ActionToolBar.qml:191
 msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Viac akcií"

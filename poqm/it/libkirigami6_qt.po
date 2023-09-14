@@ -92,7 +92,7 @@ msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Esci"
 
-#: controls/ActionToolBar.qml:192
+#: controls/ActionToolBar.qml:191
 msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Altre azioni"
