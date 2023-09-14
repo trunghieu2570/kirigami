@@ -9,7 +9,7 @@ import QtQuick.Controls 2.0 as QQC2
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.5 as Kirigami
 
-Kirigami.BasicListItem {
+QQC2.ItemDelegate {
     id: listItem
 
     readonly property bool isSeparator: modelData.hasOwnProperty("separator") && modelData.separator
@@ -19,13 +19,9 @@ Kirigami.BasicListItem {
     checked: modelData.checked
     highlighted: checked
     icon.name: modelData.icon.name
-    separatorVisible: false
-    reserveSpaceForIcon: !isSeparator
-    reserveSpaceForLabel: !isSeparator
 
-    label: model ? (model.text ? model.text : model.tooltip) : (modelData.text ? modelData.text : modelData.tooltip)
+    text: model ? (model.text ? model.text : model.tooltip) : (modelData.text ? modelData.text : modelData.tooltip)
     hoverEnabled: (!isExpandable || root.collapsed) && !Kirigami.Settings.tabletMode && !listItem.isSeparator
-    sectionDelegate: isExpandable
     font.pointSize: isExpandable ? Kirigami.Theme.defaultFont.pointSize * 1.30 : Kirigami.Theme.defaultFont.pointSize
 
     enabled: !isExpandable && (model ? model.enabled : modelData.enabled)

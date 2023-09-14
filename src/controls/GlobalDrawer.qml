@@ -493,17 +493,16 @@ OverlayDrawer {
                         property int level: 0
                         Layout.maximumHeight: Layout.minimumHeight
 
-                        BasicListItem {
+                        QQC2.ItemDelegate {
                             id: backItem
                             visible: level > 0
                             icon.name: (LayoutMirroring.enabled ? "go-previous-symbolic-rtl" : "go-previous-symbolic")
 
-                            label: Kirigami.MnemonicData.richTextLabel
+                            text: Kirigami.MnemonicData.richTextLabel
                             Kirigami.MnemonicData.enabled: backItem.enabled && backItem.visible
                             Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem
                             Kirigami.MnemonicData.label: qsTr("Back")
 
-                            separatorVisible: false
                             onClicked: stackView.pop()
 
                             Keys.onEnterPressed: stackView.pop()

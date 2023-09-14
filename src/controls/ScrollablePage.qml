@@ -59,7 +59,7 @@ import "private"
  *         model: MyModel {
  *             onRefreshDone: view.refreshing = false;
  *         }
- *         delegate: BasicListItem {}
+ *         delegate: ItemDelegate {}
  *     }
  * }
  * [...]

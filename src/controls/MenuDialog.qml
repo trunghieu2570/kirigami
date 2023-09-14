@@ -97,7 +97,7 @@ Kirigami.Dialog {
         Repeater {
             model: root.actions
 
-            delegate: Kirigami.BasicListItem {
+            delegate: QQC2.ItemDelegate {
                 required property Kirigami.Action modelData
 
                 Layout.fillWidth: true
@@ -106,12 +106,13 @@ Kirigami.Dialog {
                 action: modelData
                 visible: modelData.visible
 
-                iconSize: Kirigami.Units.gridUnit
+                icon.width: Kirigami.Units.gridUnit
+                icon.height: Kirigami.Units.gridUnit
+
                 horizontalPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
                 leftPadding: undefined
                 rightPadding: undefined
 
-                toolTipVisible: false // Prevent possibility of this and built-in tooltip fighting each other
                 QQC2.ToolTip.text: modelData.tooltip
                 QQC2.ToolTip.visible: modelData.tooltip !== "" && (Kirigami.Settings.tabletMode ? pressed : hovered)
                 QQC2.ToolTip.delay: Kirigami.Settings.tabletMode ? Qt.styleHints.mousePressAndHoldInterval : Kirigami.Units.toolTipDelay

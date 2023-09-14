@@ -16,7 +16,6 @@ import "private"
  * by uncovering them by dragging away the item with the handle.
  *
  * This acts as a container for normal list items.
- * Any subclass of AbstractListItem can be assigned as the contentItem property.
  *
  * Example usage:
  * @code
@@ -134,7 +133,7 @@ QQC2.SwipeDelegate {
      * It is advised to use the default value.
      * default: ``Theme.textColor``
      *
-     * If custom text elements are inserted in an AbstractListItem,
+     * If custom text elements are inserted in a SwipeListItem,
      * their color will have to be manually set with this property.
      */
     property color textColor: Kirigami.Theme.textColor
@@ -145,7 +144,7 @@ QQC2.SwipeDelegate {
      * It is advised to use the default value.
      * default: ``Kirigami.Theme.highlightedTextColor``
      *
-     * If custom text elements are inserted in an AbstractListItem,
+     * If custom text elements are inserted in a SwipeListItem,
      * their color property will have to be manually bound with this property
      */
     property color activeTextColor: Kirigami.Theme.highlightedTextColor

@@ -23,7 +23,7 @@ import org.kde.kirigami 2 as Kirigami
  *   ...
  *   Component {
  *       id: delegateComponent
- *       Kirigami.AbstractListItem {
+ *       QQC2.ItemDelegate {
  *           id: listItem
  *           contentItem: RowLayout {
  *               Kirigami.ListItemDragHandle {

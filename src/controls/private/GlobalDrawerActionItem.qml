@@ -11,7 +11,7 @@ import QtQuick.Controls.impl 2.3 as QQC2Impl
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.5 as Kirigami
 
-Kirigami.AbstractListItem {
+QQC2.ItemDelegate {
     id: listItem
 
     readonly property bool wideMode: width > height * 2
@@ -46,7 +46,7 @@ Kirigami.AbstractListItem {
             text:  width > height * 2 ? listItem.Kirigami.MnemonicData.mnemonicLabel : ""
             Layout.fillWidth: true
             mnemonicVisible: listItem.Kirigami.MnemonicData.active
-            color: (listItem.highlighted || listItem.checked || listItem.down) ? listItem.activeTextColor : listItem.textColor
+            color: (listItem.highlighted || listItem.checked || listItem.down) ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
             elide: Text.ElideRight
             font: listItem.font
             opacity: {
@@ -119,7 +119,6 @@ Kirigami.AbstractListItem {
     enabled: (model && model.enabled !== undefined) ? model.enabled : modelData.enabled
 
     hoverEnabled: (!isExpandable || root.collapsed) && !Kirigami.Settings.tabletMode && !listItem.isSeparator
-    sectionDelegate: isExpandable
     font.pointSize: isExpandable ? Kirigami.Theme.defaultFont.pointSize * 1.30 : Kirigami.Theme.defaultFont.pointSize
     height: implicitHeight * opacity
 

@@ -37,7 +37,7 @@ import org.kde.kirigami 2.10 as Kirigami
  * }
  * @endcode
  */
-Kirigami.AbstractListItem {
+ItemDelegate {
     id: listSection
 
     /**
@@ -48,8 +48,6 @@ Kirigami.AbstractListItem {
 
     default property alias _contents: rowLayout.data
 
-    separatorVisible: false
-    sectionDelegate: true
     hoverEnabled: false
 
     activeFocusOnTab: false
