@@ -14,20 +14,20 @@ import "templates" as KT
 
 /**
  * PageRow implements a row-based navigation model, which can be used
- * with a set of interlinked information pages. Items are pushed in the
+ * with a set of interlinked information pages. Pages are pushed in the
  * back of the row and the view scrolls until that row is visualized.
  * A PageRow can show a single page or a multiple set of columns, depending
  * on the window width: on a phone a single column should be fullscreen,
  * while on a tablet or a desktop more than one column should be visible.
  *
- * @inherits QtQuick.Controls.Control
+ * @inherits QtQuick.Templates.Control
  */
 QT.Control {
     id: root
 
 //BEGIN PROPERTIES
     /**
-     * @brief This property holds the number of items currently pushed onto the view.
+     * @brief This property holds the number of pages currently pushed onto the view.
      * @property int depth
      */
     readonly property alias depth: columnView.count
@@ -132,7 +132,7 @@ QT.Control {
      * @brief This property tells whether the PageRow is wide enough to show multiple pages.
      * @since 5.37
      */
-    readonly property bool wideMode: root.width >= root.defaultColumnWidth*2 && depth >= 2
+    readonly property bool wideMode: width >= defaultColumnWidth * 2 && depth >= 2
 
     /**
      * @brief This property sets whether the separators between pages should be displayed.
@@ -204,46 +204,49 @@ QT.Control {
 
 //BEGIN FUNCTIONS
     /**
-     * @brief Pushes a page on the stack.
+     * @brief This method pushes a page on the stack.
      *
-     * The page can be defined as a component, item or string.
-     * If an item is used then the page will get re-parented.
-     * If a string is used then it is interpreted as a url that is used to load a page
-     * component.
-     * The last pushed page will become the current item.
+     * A single page can be defined as an url, a component, or an object. It can
+     * also be an array of the above said types, but in that case, the
+     * properties' array length must match pages' array length or it must be
+     * empty. Failing to comply with the following rules will make the method
+     * return null before doing anything.
      *
-     * @param page The page can also be given as an array of pages.
-     *     In this case all those pages will
-     *     be pushed onto the stack. The items in the stack can be components, items or
-     *     strings just like for single pages.
-     *     Additionally an object can be used, which specifies a page and an optional
-     *     properties property.
-     *     This can be used to push multiple pages while still giving each of
-     *     them properties.
-     *     When an array is used the transition animation will only be to the last page.
+     * @param page A single page or an array of pages.
+     * @param properties A single property object or an array of property
+     * objects.
      *
-     * @param properties The properties argument is optional and allows defining a
-     * map of properties to set on the page. If page is actually an array of pages, properties should also be an array of key/value maps
-     * @return The new created page (or the last one if it was an array)
+     * @return The new created page (or the last one if it was an array).
      */
-    function push(page, properties) {
-        const item = insertPage(depth, page, properties);
-        currentIndex = depth - 1;
-        return item;
+    function push(page, properties): QT.Page {
+        if (!pagesLogic.verifyPages(page, properties)) {
+            console.trace("Pushed pages do not confront the rules.  Please check the documentation.")
+            return null
+        }
+
+        const item = pagesLogic.insertPage_unchecked(depth, page, properties)
+        currentIndex = depth - 1
+        return item
     }
 
     /**
      * @brief Pushes a page as a new dialog on desktop and as a layer on mobile.
-     * @param page The page can be defined as a component, item or string. If an item is
-     *             used then the page will get re-parented. If a string is used then it
-     *             is interpreted as a url that is used to load a page component. Once
-     *             pushed the page gains the methods `closeDialog` allowing to close itself.
-     *             Kirigami only supports calling `closeDialog` once.
+     *
+     * @param page A single page defined as either a string url, a component or
+     * an object (which will be reparented). The following page gains
+     * `closeDialog()` method allowing to make it indistinguishable to
+     * close/hide it when in desktop or mobile mode. Note that Kiriami supports
+     * calling `closeDialog()` only once.
+     *
      * @param properties The properties given when initializing the page.
      * @param windowProperties The properties given to the initialized window on desktop.
      * @return Returns a newly created page.
      */
-    function pushDialogLayer(page, properties = {}, windowProperties = {}) {
+    function pushDialogLayer(page, properties = {}, windowProperties = {}): QT.Page {
+        if (!pagesLogic.verifyPages(page, properties)) {
+            console.trace("Page pushed as a dialog or layer does not confront the rules. Please check the documentation.")
+            return null
+        }
         let item;
         if (Kirigami.Settings.isMobile) {
             if (QQC2.ApplicationWindow.window.width > Kirigami.Units.gridUnit * 40) {
@@ -378,74 +381,30 @@ QT.Control {
     /**
      * @brief Inserts a new page or a list of new pages at an arbitrary position.
      *
-     * The page can be defined as a component, item or string.
-     * If an item is used then the page will get re-parented.
-     * If a string is used then it is interpreted as a url that is used to load a page
-     * component.
-     * The current Page will not be changed, currentIndex will be adjusted
-     * accordingly if needed to keep the same current page.
+     * A single page can be defined as an url, a component, or an object. It can
+     * also be an array of the above said types, but in that case, the
+     * properties' array length must match pages' array length or it must be
+     * empty. Failing to comply with the following rules will make the method
+     * return null before doing anything.
      *
-     * @param page The page can also be given as an array of pages.
-     *     In this case all those pages will
-     *     be pushed onto the stack. The items in the stack can be components, items or
-     *     strings just like for single pages.
-     *     Additionally an object can be used, which specifies a page and an optional
-     *     properties property.
-     *     This can be used to push multiple pages while still giving each of
-     *     them properties.
-     *     When an array is used the transition animation will only be to the last page.
+     * @param page A single page or an array of pages.
+     * @param properties A single property object or an array of property
+     * objects.
      *
-     * @param properties The properties argument is optional and allows defining a
-     * map of properties to set on the page. If page is actually an array of pages, properties should also be an array of key/value maps
-     * @return The new created page (or the last one if it was an array)
+     * @return The new created page (or the last one if it was an array).
      * @since 2.7
      */
-    function insertPage(position, page, properties) {
-        if (!page) {
+    function insertPage(position, page, properties): QT.Page {
+        if (!pagesLogic.verifyPages(page, properties)) {
+            console.trace("Inserted pages do not confront the rules. Please check the documentation.")
             return null
         }
 
-        //don't push again things already there
-        if ((page instanceof Item) && columnView.containsItem(page)) {
-            print("The item " + page + " is already in the PageRow");
-            return null;
+        if (position < 0 || position > depth) {
+            console.trace(`You are trying to insert a page to an out-of-bounds position. Position will be adjusted accordingly.`)
+            position = Math.max(0, Math.min(depth, position));
         }
-
-        position = Math.max(0, Math.min(depth, position));
-
-        columnView.pop(columnView.currentItem);
-
-        // figure out if more than one page is being pushed
-        let pages;
-        let propsArray = [];
-        if (page instanceof Array) {
-            pages = page;
-            page = pages.pop();
-        }
-        if (properties instanceof Array) {
-            propsArray = properties;
-            properties = propsArray.pop();
-        } else {
-            propsArray = [properties];
-        }
-
-        // push any extra defined pages onto the stack
-        if (pages) {
-            for (const i in pages) {
-                let tPage = pages[i];
-                let tProps = propsArray[i];
-
-                pagesLogic.initAndInsertPage(position, tPage, tProps);
-                ++position;
-            }
-        }
-
-        // initialize the page
-        const pageItem = pagesLogic.initAndInsertPage(position, page, properties);
-
-        pagePushed(pageItem);
-
-        return pageItem;
+        return pagesLogic.insertPage_unchecked(position, page, properties)
     }
 
     /**
@@ -454,7 +413,7 @@ QT.Control {
      * in order to keep the same current page.
      * @since 2.7
      */
-    function movePage(fromPos, toPos) {
+    function movePage(fromPos, toPos): void {
         columnView.moveItem(fromPos, toPos);
     }
 
@@ -464,12 +423,11 @@ QT.Control {
      * @return The page that has just been removed
      * @since 2.7
      */
-    function removePage(page) {
-        if (depth === 0) {
-            return null;
+    function removePage(page): QT.Page {
+        if (depth > 0) {
+            return columnView.removeItem(page);
         }
-
-        return columnView.removeItem(page);
+        return null
     }
 
     /**
@@ -478,33 +436,33 @@ QT.Control {
      * to unwind to the first page specify page as null.
      * @return The page instance that was popped off the stack.
      */
-    function pop(page) {
-        if (depth === 0) {
-            return null;
+    function pop(page): QT.Page {
+        if (depth > 0) {
+            return columnView.pop(page);
         }
-
-        return columnView.pop(page);
+        return null
     }
 
     /**
-     * @brief Replaces a page on the stack.
-     * @param page The page can also be given as an array of pages.
-     *     In this case all those pages will
-     *     be pushed onto the stack. The items in the stack can be components, items or
-     *     strings just like for single pages.
-     *     the current page and all pagest after it in the stack will be removed.
-     *     Additionally an object can be used, which specifies a page and an optional
-     *     properties property.
-     *     This can be used to push multiple pages while still giving each of
-     *     them properties.
-     *     When an array is used the transition animation will only be to the last page.
-     * @param properties The properties argument is optional and allows defining a
-     * map of properties to set on the page.
+     * @brief Replaces a page on the current index.
+     *
+     * A single page can be defined as an url, a component, or an object. It can
+     * also be an array of the above said types, but in that case, the
+     * properties' array length must match pages' array length or it must be
+     * empty. Failing to comply with the following rules will make the method
+     * return null before doing anything.
+     *
+     * @param page A single page or an array of pages.
+     * @param properties A single property object or an array of property
+     * objects.
+     *
+     * @return The new created page (or the last one if it was an array).
      * @see push() for details.
      */
-    function replace(page, properties) {
-        if (!page) {
-            return null;
+    function replace(page, properties): QT.Page {
+        if (!pagesLogic.verifyPages(page, properties)) {
+            console.trace("Specified pages do not confront the rules. Please check the documentation.")
+            return null
         }
 
         // Remove all pages on top of the one being replaced.
@@ -559,7 +517,7 @@ QT.Control {
      *
      * Destroy (or reparent) all the pages contained.
      */
-    function clear() {
+    function clear(): void {
         columnView.clear();
     }
 
@@ -567,14 +525,14 @@ QT.Control {
      * @return the page at idx
      * @param idx the depth of the page we want
      */
-    function get(idx) {
-        return columnView.contentChildren[idx];
+    function get(idx): QT.Page {
+        return items[idx];
     }
 
     /**
      * Go back to the previous index and scroll to the left to show one more column.
      */
-    function flickBack() {
+    function flickBack(): void {
         if (depth > 1) {
             currentIndex = Math.max(0, currentIndex - 1);
         }
@@ -588,7 +546,7 @@ QT.Control {
      * @param event Optional, an event that will be accepted if a page is successfully
      * "backed" on
      */
-    function goBack(event = null) {
+    function goBack(event = null): void {
         const backEvent = {accepted: false}
 
         if (layersStack.depth >= 1) {
@@ -607,14 +565,14 @@ QT.Control {
             }
         }
 
-        if (root.currentIndex >= 1) {
+        if (currentIndex >= 1) {
             try { // app code might be screwy, but we still want to continue functioning if it throws an exception
-                root.currentItem.backRequested(backEvent)
+                currentItem.backRequested(backEvent)
             } catch (error) {}
 
             if (!backEvent.accepted) {
-                if (root.depth > 1) {
-                    root.currentIndex = Math.max(0, root.currentIndex - 1)
+                if (depth > 1) {
+                    currentIndex = Math.max(0, currentIndex - 1)
                     if (event) {
                         event.accepted = true
                     }
@@ -629,8 +587,8 @@ QT.Control {
      * becoming the next page in the row from the current active page,
      * i.e. currentIndex + 1.
      */
-    function goForward() {
-        root.currentIndex = Math.min(root.depth-1, root.currentIndex + 1)
+    function goForward(): void {
+        currentIndex = Math.min(depth - 1, currentIndex + 1)
     }
 //END FUNCTIONS
 
@@ -691,8 +649,8 @@ QT.Control {
 
     Connections {
         id: modalConnection
-        target: root.leftSidebar
-        function onModalChanged() {
+        target: leftSidebar
+        function onModalChanged(): void {
             if (leftSidebar.modal) {
                 const sidebar = sidebarControl.contentItem;
                 const background = sidebarControl.background;
@@ -722,11 +680,11 @@ QT.Control {
 
     Shortcut {
         sequences: [ StandardKey.Back ]
-        onActivated: root.goBack()
+        onActivated: goBack()
     }
     Shortcut {
         sequences: [ StandardKey.Forward ]
-        onActivated: root.goForward()
+        onActivated: goForward()
     }
 
     Keys.forwardTo: [currentItem]
@@ -749,7 +707,7 @@ QT.Control {
         // placeholder as initial item
         initialItem: columnViewLayout
 
-        function clear() {
+        function clear(): void {
             // don't let it kill the main page row
             const d = layersStack.depth;
             for (let i = 1; i < d; ++i) {
@@ -869,7 +827,88 @@ QT.Control {
         id: pagesLogic
         readonly property var componentCache: new Array()
 
-        function getPageComponent(page) {
+        function verifyPages(pages, properties): bool {
+            function validPage(page) {
+                //don't try adding an already existing page
+                if (page instanceof QT.Page && columnView.containsItem(page)) {
+                    console.log(`Page ${page} is already in the PageRow`)
+                    return false
+                }
+                return page instanceof QT.Page || page instanceof Component || typeof page === 'string'
+                    || (typeof page === 'object' && typeof page.toString() === 'string')
+            }
+
+            // check page/pages that it is/they are valid
+            const pagesIsArr = Array.isArray(pages) && pages.length > 0
+            let isValidArrOfPages = pagesIsArr;
+
+            if (pagesIsArr) {
+                for (const page of pages) {
+                    if (!validPage(page)) {
+                        isValidArrOfPages = false;
+                        break;
+                    }
+                }
+            }
+
+            // check properties obejct/array object validity
+            const isProp = typeof properties === 'object';
+            const propsIsArr = Array.isArray(properties) && properties.length > 0
+            let isValidPropArr = propsIsArr;
+
+            if (propsIsArr) {
+                for (const prop of properties) {
+                    if (typeof prop !== 'object') {
+                        isValidPropArr = false;
+                        break;
+                    }
+                }
+                isValidPropArr = isValidPropArr && pages.length === properties.length
+            }
+
+            return (validPage(pages) || isValidArrOfPages)
+                && (!properties || (isProp || isValidPropArr))
+        }
+
+        function insertPage_unchecked(position, page, properties) {
+            if (position >= 0 && position < root.depth - 2) {
+                columnView.pop(root.items[position]);
+            }
+
+            // figure out if more than one page is being pushed
+            let pages;
+            let propsArray = [];
+            if (page instanceof Array) {
+                pages = page;
+                page = pages.pop();
+            }
+            if (properties instanceof Array) {
+                propsArray = properties;
+                properties = propsArray.pop();
+            } else {
+                propsArray = [properties];
+            }
+
+            // push any extra defined pages onto the stack
+            if (pages) {
+                for (const i in pages) {
+                    let tPage = pages[i];
+                    let tProps = propsArray[i];
+
+                    pagesLogic.initAndInsertPage(position, tPage, tProps);
+                    ++position;
+                }
+            }
+
+            // initialize the page
+            const pageItem = pagesLogic.initAndInsertPage(position, page, properties);
+
+            pagePushed(pageItem);
+
+            return pageItem;
+        }
+
+        function getPageComponent(page): Component {
             let pageComp;
 
             if (page.createObject) {
@@ -892,7 +931,7 @@ QT.Control {
             return pageComp
         }
 
-        function initPage(page, properties) {
+        function initPage(page, properties): QT.Page {
             const pageComp = getPageComponent(page, properties);
 
             if (pageComp) {
@@ -914,7 +953,7 @@ QT.Control {
             return page;
         }
 
-        function initAndInsertPage(position, page, properties) {
+        function initAndInsertPage(position, page, properties): QT.Page {
             page = initPage(page, properties);
             columnView.insertItem(position, page);
             return page;
