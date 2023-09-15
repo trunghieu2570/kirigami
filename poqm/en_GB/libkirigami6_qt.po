@@ -173,18 +173,6 @@ msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "Clear search"
 
-#: controls/settingscomponents/CategorizedSettings.qml:40
-#: controls/settingscomponents/CategorizedSettings.qml:104
-msgctxt "CategorizedSettings|"
-msgid "Settings"
-msgstr "Settings"
-
-#: controls/settingscomponents/CategorizedSettings.qml:40
-#, qt-format
-msgctxt "CategorizedSettings|"
-msgid "Settings — %1"
-msgstr "Settings — %1"
-
 #: controls/templates/OverlayDrawer.qml:128
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
@@ -238,6 +226,14 @@ msgstr "The %1 windowing system"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (built against %3)"
+
+#~ msgctxt "CategorizedSettings|"
+#~ msgid "Settings"
+#~ msgstr "Settings"
+
+#~ msgctxt "CategorizedSettings|"
+#~ msgid "Settings — %1"
+#~ msgstr "Settings — %1"
 
 #~ msgctxt "Avatar|"
 #~ msgid "%1 — %2"

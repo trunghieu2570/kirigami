@@ -168,18 +168,6 @@ msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "Vyprázdnit hledání"
 
-#: controls/settingscomponents/CategorizedSettings.qml:40
-#: controls/settingscomponents/CategorizedSettings.qml:104
-msgctxt "CategorizedSettings|"
-msgid "Settings"
-msgstr "Nastavení"
-
-#: controls/settingscomponents/CategorizedSettings.qml:40
-#, qt-format
-msgctxt "CategorizedSettings|"
-msgid "Settings — %1"
-msgstr "Nastavení — %1"
-
 #: controls/templates/OverlayDrawer.qml:128
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
@@ -233,3 +221,11 @@ msgstr "Okenní systém %1"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (sestaveno oproti %3)"
+
+#~ msgctxt "CategorizedSettings|"
+#~ msgid "Settings"
+#~ msgstr "Nastavení"
+
+#~ msgctxt "CategorizedSettings|"
+#~ msgid "Settings — %1"
+#~ msgstr "Nastavení — %1"

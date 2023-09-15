@@ -182,18 +182,6 @@ msgctxt "SearchField|"
 msgid "Clear search"
 msgstr ""
 
-#: controls/settingscomponents/CategorizedSettings.qml:40
-#: controls/settingscomponents/CategorizedSettings.qml:104
-msgctxt "CategorizedSettings|"
-msgid "Settings"
-msgstr "Ayarlar"
-
-#: controls/settingscomponents/CategorizedSettings.qml:40
-#, qt-format
-msgctxt "CategorizedSettings|"
-msgid "Settings — %1"
-msgstr "Ayarlar — %1"
-
 #: controls/templates/OverlayDrawer.qml:128
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
@@ -250,6 +238,14 @@ msgstr "%1 qrafik server platforması"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (%3 versiyadan yığılıb)"
+
+#~ msgctxt "CategorizedSettings|"
+#~ msgid "Settings"
+#~ msgstr "Ayarlar"
+
+#~ msgctxt "CategorizedSettings|"
+#~ msgid "Settings — %1"
+#~ msgstr "Ayarlar — %1"
 
 #~ msgctxt "Avatar|"
 #~ msgid "%1 — %2"

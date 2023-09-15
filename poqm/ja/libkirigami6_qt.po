@@ -175,18 +175,6 @@ msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "検索をクリア"
 
-#: controls/settingscomponents/CategorizedSettings.qml:40
-#: controls/settingscomponents/CategorizedSettings.qml:104
-msgctxt "CategorizedSettings|"
-msgid "Settings"
-msgstr "設定"
-
-#: controls/settingscomponents/CategorizedSettings.qml:40
-#, qt-format
-msgctxt "CategorizedSettings|"
-msgid "Settings — %1"
-msgstr "設定 — %1"
-
 #: controls/templates/OverlayDrawer.qml:128
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
@@ -243,6 +231,14 @@ msgstr "%1 ウィンドウシステム"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (%3 を用いてビルドされました)"
+
+#~ msgctxt "CategorizedSettings|"
+#~ msgid "Settings"
+#~ msgstr "設定"
+
+#~ msgctxt "CategorizedSettings|"
+#~ msgid "Settings — %1"
+#~ msgstr "設定 — %1"
 
 #~ msgctxt "Avatar|"
 #~ msgid "%1 — %2"

@@ -173,18 +173,6 @@ msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "ਖੋਜ ਮਿਟਾਓ"
 
-#: controls/settingscomponents/CategorizedSettings.qml:40
-#: controls/settingscomponents/CategorizedSettings.qml:104
-msgctxt "CategorizedSettings|"
-msgid "Settings"
-msgstr "ਸੈਟਿੰਗਾਂ"
-
-#: controls/settingscomponents/CategorizedSettings.qml:40
-#, qt-format
-msgctxt "CategorizedSettings|"
-msgid "Settings — %1"
-msgstr "ਸੈਟਿੰਗਾਂ — %1"
-
 #: controls/templates/OverlayDrawer.qml:128
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
@@ -241,6 +229,14 @@ msgstr "%1 ਵਿੰਡੋਇੰਗ ਸਿਸਟਮ"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (%3 ਨਾਲ ਬਣਾਇਆ)"
+
+#~ msgctxt "CategorizedSettings|"
+#~ msgid "Settings"
+#~ msgstr "ਸੈਟਿੰਗਾਂ"
+
+#~ msgctxt "CategorizedSettings|"
+#~ msgid "Settings — %1"
+#~ msgstr "ਸੈਟਿੰਗਾਂ — %1"
 
 #~ msgctxt "Avatar|"
 #~ msgid "%1 — %2"
