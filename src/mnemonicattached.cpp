@@ -276,6 +276,9 @@ void MnemonicAttached::updateSequence()
         return;
     }
 
+    m_actualRichTextLabel = removeAcceleratorMarker(text);
+    m_mnemonicLabel = m_actualRichTextLabel;
+
     if (!m_weights.isEmpty()) {
         QMap<int, QChar>::const_iterator i = m_weights.constEnd();
         do {
@@ -322,8 +325,6 @@ void MnemonicAttached::updateSequence()
     if (!m_sequence.isEmpty()) {
         Q_EMIT sequenceChanged();
     }
-    m_actualRichTextLabel = removeAcceleratorMarker(text);
-    m_mnemonicLabel = m_actualRichTextLabel;
 
     Q_EMIT richTextLabelChanged();
     Q_EMIT mnemonicLabelChanged();
