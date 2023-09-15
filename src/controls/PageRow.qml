@@ -4,11 +4,11 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQuick.Layouts 1.2
-import QtQuick.Templates 2.0 as QT
-import QtQuick.Controls 2.0 as QQC2
-import org.kde.kirigami 2.20 as Kirigami
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Templates as QT
+import QtQuick.Controls as QQC2
+import org.kde.kirigami as Kirigami
 import "private/globaltoolbar" as GlobalToolBar
 import "templates" as KT
 
@@ -252,64 +252,13 @@ QT.Control {
         if (Kirigami.Settings.isMobile) {
             if (QQC2.ApplicationWindow.window.width > Kirigami.Units.gridUnit * 40) {
                 // open as a QQC2.Dialog
-                const dialog = Qt.createQmlObject(`
-                    import QtQuick 2.15;
-                    import QtQuick.Controls 2.15;
-                    import QtQuick.Layouts 1.15;
-                    import org.kde.kirigami 2.20 as Kirigami;
-                    Kirigami.Dialog {
-                        id: dialog
-                        modal: true;
-                        leftPadding: 0; rightPadding: 0; topPadding: 0; bottomPadding: 0;
-                        clip: true
-                        header: Kirigami.AbstractApplicationHeader {
-                            pageRow: null
-                            page: null
-                            minimumHeight: Kirigami.Units.gridUnit * 1.6
-                            maximumHeight: Kirigami.Units.gridUnit * 1.6
-                            preferredHeight: Kirigami.Units.gridUnit * 1.6
-
-                            Keys.onEscapePressed: event => {
-                                if (dialog.opened) {
-                                    dialog.close();
-                                } else {
-                                    event.accepted = false;
-                                }
-                            }
-
-                            contentItem: RowLayout {
-                                width: parent.width
-                                Kirigami.Heading {
-                                    Layout.leftMargin: Kirigami.Units.largeSpacing
-                                    text: dialog.title
-                                    elide: Text.ElideRight
-                                }
-                                Item {
-                                    Layout.fillWidth: true;
-                                }
-                                Kirigami.Icon {
-                                    id: closeIcon
-                                    Layout.alignment: Qt.AlignVCenter
-                                    Layout.rightMargin: Kirigami.Units.largeSpacing
-                                    Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
-                                    Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
-                                    source: closeMouseArea.containsMouse ? "window-close" : "window-close-symbolic"
-                                    active: closeMouseArea.containsMouse
-                                    MouseArea {
-                                        id: closeMouseArea
-                                        hoverEnabled: true
-                                        anchors.fill: parent
-                                        onClicked: mouse => dialog.close();
-                                    }
-                                }
-                            }
-                        }
-                        contentItem: Control { topPadding: 0; leftPadding: 0; rightPadding: 0; bottomPadding: 0; }
-                    }`, QQC2.ApplicationWindow.overlay);
-                dialog.width = Qt.binding(() => QQC2.ApplicationWindow.window.width - Kirigami.Units.gridUnit * 5);
-                dialog.height = Qt.binding(() => QQC2.ApplicationWindow.window.height - Kirigami.Units.gridUnit * 5);
-                dialog.x = Kirigami.Units.gridUnit * 2.5;
-                dialog.y = Kirigami.Units.gridUnit * 2.5;
+                const component = pagesLogic.getMobileDialogLayerComponent();
+                const dialog = component.createObject(QQC2.Overlay.overlay, {
+                    width: Qt.binding(() => QQC2.ApplicationWindow.window.width - Kirigami.Units.gridUnit * 5),
+                    height: Qt.binding(() => QQC2.ApplicationWindow.window.height - Kirigami.Units.gridUnit * 5),
+                    x: Kirigami.Units.gridUnit * 2.5,
+                    y: Kirigami.Units.gridUnit * 2.5,
+                });
 
                 if (typeof page === "string") {
                     // url => load component and then load item from component
@@ -830,6 +779,15 @@ QT.Control {
     QtObject {
         id: pagesLogic
         readonly property var componentCache: new Array()
+
+        property Component __mobileDialogLayerComponent
+
+        function getMobileDialogLayerComponent() {
+            if (!__mobileDialogLayerComponent) {
+                __mobileDialogLayerComponent = Qt.createComponent(Qt.resolvedUrl("private/MobileDialogLayer.qml"));
+            }
+            return __mobileDialogLayerComponent;
+        }
 
         function verifyPages(pages, properties): bool {
             function validPage(page) {
