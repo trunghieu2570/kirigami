@@ -420,7 +420,17 @@ Item {
             }
             Shortcut {
                 sequence: labelItem.Kirigami.MnemonicData.sequence
-                onActivated: labelItem.item.Kirigami.FormData.buddyFor.forceActiveFocus()
+                onActivated: {
+                    const buddy = labelItem.item.Kirigami.FormData.buddyFor;
+                    if (!buddy.hasOwnProperty("focusPolicy") || buddy.focusPolicy !== Qt.NoFocus) {
+                        buddy.forceActiveFocus();
+                    }
+
+                    // FIXME use buddy instanceof QQC2.AbstractButton
+                    if (typeof buddy.toggle === "function") {
+                        buddy.toggle();
+                    }
+                }
             }
         }
     }
