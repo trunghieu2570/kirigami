@@ -13,7 +13,7 @@ import QtQuick.Templates as T2
 
 import org.kde.kirigami as Kirigami
 
-import "templates/private" as TP
+import org.kde.kirigami.templates.private as TP
 
 /**
  * A simple item containing an icon, title and subtitle.

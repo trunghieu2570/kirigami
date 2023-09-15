@@ -1,4 +1,6 @@
 
+add_subdirectory(delegates)
+
 add_subdirectory(libkirigami)
 
 if (WIN32)
@@ -13,6 +15,8 @@ ecm_add_qml_module(KirigamiPlugin URI "org.kde.kirigami" VERSION 2.0
     DEPENDENCIES
     "QtQuick.Controls"
     "Qt5Compat.GraphicalEffects"
+    IMPORTS
+    "org.kde.kirigami.delegates"
     ${_extra_options}
 )
 
@@ -207,8 +211,6 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.19 SOURCES
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.20 SOURCES
     controls/SelectableLabel.qml
     controls/InlineViewHeader.qml
-    controls/TitleSubtitle.qml
-    controls/IconTitleSubtitle.qml
 )
 
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private SOURCES
@@ -259,6 +261,7 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates/private SOURCES
     controls/templates/private/IconPropertiesGroup.qml
     controls/templates/private/MenuIcon.qml
     controls/templates/private/PassiveNotificationsManager.qml
+    controls/templates/private/qmldir
 )
 
 qt_target_qml_sources(KirigamiPlugin RESOURCES
