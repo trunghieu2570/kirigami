@@ -220,7 +220,8 @@ QT.Control {
      */
     function push(page, properties): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
-            console.trace("Pushed pages do not confront the rules.  Please check the documentation.")
+            console.warn("Pushed pages do not confront the rules.  Please check the documentation.");
+            console.trace();
             return null
         }
 
@@ -244,7 +245,8 @@ QT.Control {
      */
     function pushDialogLayer(page, properties = {}, windowProperties = {}): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
-            console.trace("Page pushed as a dialog or layer does not confront the rules. Please check the documentation.")
+            console.warn("Page pushed as a dialog or layer does not confront the rules. Please check the documentation.");
+            console.trace();
             return null
         }
         let item;
@@ -396,12 +398,14 @@ QT.Control {
      */
     function insertPage(position, page, properties): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
-            console.trace("Inserted pages do not confront the rules. Please check the documentation.")
+            console.warn("Inserted pages do not confront the rules. Please check the documentation.");
+            console.trace();
             return null
         }
 
         if (position < 0 || position > depth) {
-            console.trace(`You are trying to insert a page to an out-of-bounds position. Position will be adjusted accordingly.`)
+            console.warn("You are trying to insert a page to an out-of-bounds position. Position will be adjusted accordingly.");
+            console.trace();
             position = Math.max(0, Math.min(depth, position));
         }
         return pagesLogic.insertPage_unchecked(position, page, properties)
@@ -461,7 +465,8 @@ QT.Control {
      */
     function replace(page, properties): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
-            console.trace("Specified pages do not confront the rules. Please check the documentation.")
+            console.warn("Specified pages do not confront the rules. Please check the documentation.");
+            console.trace();
             return null
         }
 
