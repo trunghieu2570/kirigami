@@ -105,7 +105,6 @@ public:
     static MnemonicAttached *qmlAttachedProperties(QObject *object);
 
 protected:
-    bool eventFilter(QObject *watched, QEvent *e) override;
     void updateSequence();
 
 Q_SIGNALS:
@@ -118,9 +117,12 @@ Q_SIGNALS:
     void activeChanged();
 
 private:
+    QWindow *window() const;
+
+    void onAltPressed();
+    void onAltReleased();
+
     void calculateWeights();
-    bool installEventFilterForWindow(QQuickWindow *wnd);
-    bool removeEventFilterForWindow(QQuickWindow *wnd);
 
     // TODO: to have support for DIALOG_BUTTON_EXTRA_WEIGHT etc, a type enum should be exported
     enum {

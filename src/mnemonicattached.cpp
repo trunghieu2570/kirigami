@@ -6,9 +6,12 @@
 
 #include "mnemonicattached.h"
 #include <QDebug>
+#include <QGuiApplication>
 #include <QQuickItem>
 #include <QQuickRenderControl>
+#include <QQuickWindow>
 #include <QRegularExpression>
+#include <QWindow>
 
 QHash<QKeySequence, MnemonicAttached *> MnemonicAttached::s_sequenceToObject = QHash<QKeySequence, MnemonicAttached *>();
 
@@ -102,21 +105,62 @@ static QString removeAcceleratorMarker(const QString &label_)
     return label;
 }
 
+class MnemonicEventFilter : public QObject
+{
+    Q_OBJECT
+
+public:
+    static MnemonicEventFilter &instance()
+    {
+        static MnemonicEventFilter s_instance;
+        return s_instance;
+    }
+
+    bool eventFilter(QObject *watched, QEvent *event) override
+    {
+        Q_UNUSED(watched);
+
+        if (event->type() == QEvent::KeyPress) {
+            QKeyEvent *ke = static_cast<QKeyEvent *>(event);
+            if (ke->key() == Qt::Key_Alt) {
+                m_altPressed = true;
+                Q_EMIT altPressed();
+            }
+        } else if (event->type() == QEvent::KeyRelease) {
+            QKeyEvent *ke = static_cast<QKeyEvent *>(event);
+            if (ke->key() == Qt::Key_Alt) {
+                m_altPressed = false;
+                Q_EMIT altReleased();
+            }
+        } else if (event->type() == QEvent::ApplicationStateChange) {
+            if (m_altPressed) {
+                m_altPressed = false;
+                Q_EMIT altReleased();
+            }
+        }
+
+        return false;
+    }
+
+Q_SIGNALS:
+    void altPressed();
+    void altReleased();
+
+private:
+    MnemonicEventFilter()
+        : QObject(nullptr)
+    {
+        qGuiApp->installEventFilter(this);
+    }
+
+    bool m_altPressed = false;
+};
+
 MnemonicAttached::MnemonicAttached(QObject *parent)
     : QObject(parent)
 {
-    QQuickItem *parentItem = qobject_cast<QQuickItem *>(parent);
-    if (parentItem) {
-        if (parentItem->window()) {
-            m_window = parentItem->window();
-            m_window->installEventFilter(this);
-        }
-        connect(parentItem, &QQuickItem::windowChanged, this, [this](QQuickWindow *window) {
-            removeEventFilterForWindow(m_window);
-            m_window = window;
-            installEventFilterForWindow(m_window);
-        });
-    }
+    connect(&MnemonicEventFilter::instance(), &MnemonicEventFilter::altPressed, this, &MnemonicAttached::onAltPressed);
+    connect(&MnemonicEventFilter::instance(), &MnemonicEventFilter::altReleased, this, &MnemonicAttached::onAltReleased);
 }
 
 MnemonicAttached::~MnemonicAttached()
@@ -124,33 +168,51 @@ MnemonicAttached::~MnemonicAttached()
     s_sequenceToObject.remove(m_sequence);
 }
 
-bool MnemonicAttached::eventFilter(QObject *watched, QEvent *e)
+QWindow *MnemonicAttached::window() const
 {
-    Q_UNUSED(watched)
+    if (auto *parentItem = qobject_cast<QQuickItem *>(parent())) {
+        if (auto *window = parentItem->window()) {
+            if (auto *renderWindow = QQuickRenderControl::renderWindowFor(window)) {
+                return renderWindow;
+            }
 
-    if (m_richTextLabel.isEmpty()) {
-        return false;
-    }
-
-    if (e->type() == QEvent::KeyPress) {
-        QKeyEvent *ke = static_cast<QKeyEvent *>(e);
-        if (ke->key() == Qt::Key_Alt) {
-            m_actualRichTextLabel = m_richTextLabel;
-            Q_EMIT richTextLabelChanged();
-            m_active = true;
-            Q_EMIT activeChanged();
-        }
-
-    } else if (e->type() == QEvent::KeyRelease) {
-        QKeyEvent *ke = static_cast<QKeyEvent *>(e);
-        if (ke->key() == Qt::Key_Alt) {
-            m_actualRichTextLabel = removeAcceleratorMarker(m_label);
-            Q_EMIT richTextLabelChanged();
-            m_active = false;
-            Q_EMIT activeChanged();
+            return window;
         }
     }
-    return false;
+
+    return nullptr;
+}
+
+void MnemonicAttached::onAltPressed()
+{
+    if (!m_active || m_richTextLabel.isEmpty()) {
+        return;
+    }
+
+    auto *win = window();
+    if (!win || !win->isActive()) {
+        return;
+    }
+
+    m_actualRichTextLabel = m_richTextLabel;
+    Q_EMIT richTextLabelChanged();
+    m_active = true;
+    Q_EMIT activeChanged();
+}
+
+void MnemonicAttached::onAltReleased()
+{
+    if (!m_active || m_richTextLabel.isEmpty()) {
+        return;
+    }
+
+    // Disabling menmonics again is always fine, e.g. on window deactivation,
+    // don't check for window is active here.
+
+    m_actualRichTextLabel = removeAcceleratorMarker(m_label);
+    Q_EMIT richTextLabelChanged();
+    m_active = false;
+    Q_EMIT activeChanged();
 }
 
 // Algorithm adapted from KAccelString
@@ -222,35 +284,6 @@ void MnemonicAttached::calculateWeights()
     } else {
         m_weight = m_baseWeight + (std::prev(m_weights.cend())).key();
     }
-}
-
-bool MnemonicAttached::installEventFilterForWindow(QQuickWindow *wnd)
-{
-    if (!wnd) {
-        return false;
-    }
-    QWindow *renderWindow = QQuickRenderControl::renderWindowFor(wnd);
-    // renderWindow means the widget is rendering somewhere else, like a QQuickWidget
-    if (renderWindow && renderWindow != m_window) {
-        renderWindow->installEventFilter(this);
-    } else {
-        wnd->installEventFilter(this);
-    }
-    return true;
-}
-
-bool MnemonicAttached::removeEventFilterForWindow(QQuickWindow *wnd)
-{
-    if (!wnd) {
-        return false;
-    }
-    QWindow *renderWindow = QQuickRenderControl::renderWindowFor(wnd);
-    if (renderWindow) {
-        renderWindow->removeEventFilter(this);
-    } else {
-        wnd->removeEventFilter(this);
-    }
-    return true;
 }
 
 void MnemonicAttached::updateSequence()
@@ -441,14 +474,12 @@ void MnemonicAttached::setActive(bool active)
     m_active = active;
 
     if (m_active) {
-        removeEventFilterForWindow(m_window);
         if (m_actualRichTextLabel != m_richTextLabel) {
             m_actualRichTextLabel = m_richTextLabel;
             Q_EMIT richTextLabelChanged();
         }
 
     } else {
-        installEventFilterForWindow(m_window);
         m_actualRichTextLabel = removeAcceleratorMarker(m_label);
         Q_EMIT richTextLabelChanged();
     }
@@ -456,4 +487,4 @@ void MnemonicAttached::setActive(bool active)
     Q_EMIT activeChanged();
 }
 
-#include "moc_mnemonicattached.cpp"
+#include "mnemonicattached.moc"
