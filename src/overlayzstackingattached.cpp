@@ -210,3 +210,5 @@ qreal OverlayZStackingAttached::defaultZForLayer(Layer layer)
     }
     return 0;
 }
+
+#include "moc_overlayzstackingattached.cpp"
