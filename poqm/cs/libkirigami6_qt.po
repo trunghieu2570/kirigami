@@ -221,11 +221,3 @@ msgstr "Okenní systém %1"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (sestaveno oproti %3)"
-
-#~ msgctxt "CategorizedSettings|"
-#~ msgid "Settings"
-#~ msgstr "Nastavení"
-
-#~ msgctxt "CategorizedSettings|"
-#~ msgid "Settings — %1"
-#~ msgstr "Nastavení — %1"
