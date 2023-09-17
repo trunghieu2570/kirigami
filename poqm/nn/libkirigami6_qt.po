@@ -225,11 +225,3 @@ msgstr "Vindaugssystemet %1"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (bygd mot %3)"
-
-#~ msgctxt "CategorizedSettings|"
-#~ msgid "Settings"
-#~ msgstr "Innstillingar"
-
-#~ msgctxt "CategorizedSettings|"
-#~ msgid "Settings — %1"
-#~ msgstr "Innstillingar – %1"
