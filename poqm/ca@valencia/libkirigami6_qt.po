@@ -229,35 +229,3 @@ msgstr "El sistema de finestres %1"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (construïdes amb %3)"
-
-#~ msgctxt "CategorizedSettings|"
-#~ msgid "Settings"
-#~ msgstr "Configuració"
-
-#~ msgctxt "CategorizedSettings|"
-#~ msgid "Settings — %1"
-#~ msgstr "Configuració — %1"
-
-#~ msgctxt "Avatar|"
-#~ msgid "%1 — %2"
-#~ msgstr "%1 — %2"
-
-#~ msgctxt "PageTab|"
-#~ msgid "Current page. Progress: %1 percent."
-#~ msgstr "Pàgina actual. Progrés: %1 per cent."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1. Progress: %2 percent."
-#~ msgstr "Navega a %1. Progrés: %2 per cent."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Current page."
-#~ msgstr "Pàgina actual."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1. Demanding attention."
-#~ msgstr "Navega a %1. Exigix atenció."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1."
-#~ msgstr "Navega a %1."
