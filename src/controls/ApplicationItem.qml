@@ -101,14 +101,7 @@ Kirigami.AbstractApplicationItem {
             fill: parent
             // HACK: workaround a bug in android iOS keyboard management
             bottomMargin: ((Qt.platform.os === "android" || Qt.platform.os === "ios") || !Qt.inputMethod.visible) ? 0 : Qt.inputMethod.keyboardRectangle.height
-            onBottomMarginChanged: {
-                if (bottomMargin > 0) {
-                    root.reachableMode = false;
-                }
-            }
         }
-        // FIXME
-        onCurrentIndexChanged: root.reachableMode = false;
 
         function goBack() {
             // NOTE: drawers are handling the back button by themselves

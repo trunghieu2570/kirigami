@@ -160,7 +160,6 @@ QT.Control {
      * * ``toolbarActionAlignment: Qt::Alignment``: How to horizontally align the actions when using the ToolBar style. Note that anything but Qt.AlignRight will cause the title to be hidden (default: ``Qt.AlignRight``).
      * * ``minimumHeight: int`` Minimum height of the header, which will be resized when scrolling. Only in Mobile mode (default: ``preferredHeight``, sliding but no scaling).
      * * ``preferredHeight: int`` The height the toolbar will usually have.
-     * * ``maximumHeight: int `` The height the toolbar will have in mobile mode when the app is in reachable mode (default: preferredHeight * 1.5).
      * * ``leftReservedSpace: int, readonly`` How many pixels of extra space are reserved at the left of the page toolbar (typically for navigation buttons or a drawer handle).
      * * ``rightReservedSpace: int, readonly`` How many pixels of extra space  are reserved at the right of the page toolbar (typically for a drawer handle).
      *

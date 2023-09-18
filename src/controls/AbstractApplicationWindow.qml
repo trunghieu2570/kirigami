@@ -166,22 +166,6 @@ QQC2.ApplicationWindow {
     property OverlayDrawer contextDrawer
 
     /**
-     * @brief This property tells whether the application is in reachable mode for single hand use.
-     *
-     * The whole content of the application is moved down the screen to be
-     * reachable with the thumb. If wideScreen is true, or reachableModeEnabled is false,
-     * this property has no effect.
-     *
-     * default: ``false``
-     */
-    property bool reachableMode: false
-
-    /**
-     * @brief This property sets whether the application will go into reachable mode on pull down.
-     */
-    property bool reachableModeEnabled: true
-
-    /**
      * Effectively the same as QQC2.Overlay.overlay
      */
     readonly property Item overlay: QQC2.Overlay.overlay
@@ -254,28 +238,6 @@ QQC2.ApplicationWindow {
         z: 1
     }
 
-    MouseArea {
-        parent: contentItem.parent
-        z: 0
-        anchors.fill: parent
-        onClicked: mouse => {
-            root.reachableMode = false;
-        }
-        visible: root.reachableMode && root.reachableModeEnabled
-        Rectangle {
-            anchors.fill: parent
-            color: Qt.rgba(0, 0, 0, 0.3)
-            opacity: 0.15
-            Kirigami.Icon {
-                anchors.horizontalCenter: parent.horizontalCenter
-                y: x
-                width: Kirigami.Units.iconSizes.large
-                height: width
-                source: "go-up"
-            }
-        }
-    }
-
     contentItem.z: 1
     contentItem.anchors.left: contentItem.parent.left
     contentItem.anchors.right: contentItem.parent.right
@@ -305,22 +267,6 @@ QQC2.ApplicationWindow {
         restoreMode: Binding.RestoreBinding
     }
 
-    contentItem.transform: Translate {
-        Behavior on y {
-            NumberAnimation {
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-        }
-        y: root.reachableMode && root.reachableModeEnabled && !root.wideScreen ? root.height/2 : 0
-        x: root.globalDrawer && root.globalDrawer.modal === true && root.globalDrawer.toString().indexOf("SplitDrawer") === 0 ? root.globalDrawer.contentItem.width * root.globalDrawer.position : 0
-    }
-    //Don't want overscroll in landscape mode
-    onWidthChanged: {
-        if (width > height) {
-            root.reachableMode = false;
-        }
-    }
     Binding {
         when: globalDrawer !== undefined && root.visible && QQC2.Overlay.overlay
         target: globalDrawer

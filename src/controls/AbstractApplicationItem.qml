@@ -205,24 +205,6 @@ Item {
     property OverlayDrawer contextDrawer
 
     /**
-     * @brief This tells us whether the application is in reachable mode for single hand use.
-     *
-     * The whole content of the application is moved down the screen to be
-     * reachable with the thumb. If wideScreen is true, or reachableModeEnabled is false,
-     * this property has no effect.
-     *
-     * default: ``false``
-     */
-    property bool reachableMode: false
-
-    /**
-     * @brief This property sets whether the application will go into reachable mode on pull down.
-     *
-     * default: ``true``
-     */
-    property bool reachableModeEnabled: true
-
-    /**
      * @brief This property holds the list of all children of this item.
      * @internal
      * @property list<Object> __data
@@ -241,17 +223,6 @@ Item {
             bottomMargin: controlsVisible && root.footer ? root.footer.height : 0
             leftMargin: root.globalDrawer && root.globalDrawer.modal === false ? root.globalDrawer.contentItem.width * root.globalDrawer.position : 0
             rightMargin: root.contextDrawer && root.contextDrawer.modal === false ? root.contextDrawer.contentItem.width * root.contextDrawer.position : 0
-        }
-
-        transform: Translate {
-            Behavior on y {
-                NumberAnimation {
-                    duration: Kirigami.Units.longDuration
-                    easing.type: Easing.InOutQuad
-                }
-            }
-            y: root.reachableMode && root.reachableModeEnabled && !root.wideScreen ? root.height/2 : 0
-            x: root.globalDrawer && root.globalDrawer.modal === true && root.globalDrawer.toString().indexOf("SplitDrawer") === 0 ? root.globalDrawer.contentItem.width * root.globalDrawer.position : 0
         }
     }
 
@@ -355,13 +326,6 @@ Item {
         background.anchors.fill = background.parent
     }
 
-    // NOTE: Don't want overscroll in landscape mode
-    onWidthChanged: {
-        if (width > height) {
-            root.reachableMode = false;
-        }
-    }
-
     onPageStackChanged: pageStack.parent = root.contentItem;
 //END signals handlers
 
@@ -406,28 +370,6 @@ Item {
             }
             if (contextDrawer) {
                 contextDrawer.visible = contextDrawer.drawerOpen;
-            }
-        }
-    }
-
-    MouseArea {
-        parent: root
-        z: -1
-        anchors.fill: parent
-        onClicked: mouse => {
-            root.reachableMode = false;
-        }
-        visible: root.reachableMode && root.reachableModeEnabled
-        Rectangle {
-            anchors.fill: parent
-            color: Qt.rgba(0, 0, 0, 0.3)
-            opacity: 0.15
-            Kirigami.Icon {
-                anchors.horizontalCenter: parent.horizontalCenter
-                y: x
-                width: Kirigami.Units.iconSizes.large
-                height: width
-                source: "go-up"
             }
         }
     }
