@@ -160,14 +160,12 @@ TestCase {
         verify(toolbar)
         verify(waitForRendering(toolbar))
 
-        while (toolbar.visibleWidth === 0) {
-            // The toolbar creates its delegates asynchronously during "idle
-            // time", this means we need to wait for a bit so the toolbar has
-            // the time to do that. As long as it has not finished creation, the
-            // toolbar will have a visibleWidth of 0, so we can use that to
-            // determine when it is done.
-            wait(50)
-        }
+        // The toolbar creates its delegates asynchronously during "idle
+        // time", this means we need to wait for a bit so the toolbar has
+        // the time to do that. As long as it has not finished creation, the
+        // toolbar will have a visibleWidth of 0, so we can use that to
+        // determine when it is done.
+        tryVerify(() => toolbar.visibleWidth !== 0)
 
         compare(toolbar.visibleWidth, expected)
     }
@@ -215,10 +213,8 @@ TestCase {
         verify(toolbar)
         verify(waitForRendering(toolbar))
 
-        while (toolbar.visibleWidth === 0) {
-            // Same as above
-            wait(50)
-        }
+        // Same as above
+        tryVerify(() => toolbar.visibleWidth !== 0)
 
         compare(toolbar.implicitHeight, 50)
         compare(toolbar.height, 50)
