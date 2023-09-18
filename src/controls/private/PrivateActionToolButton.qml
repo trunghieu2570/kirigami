@@ -19,7 +19,7 @@ QQC2.ToolButton {
 
     hoverEnabled: true
 
-    display: QQC2.ToolButton.TextBesideIcon
+    display: T.AbstractButton.TextBesideIcon
 
     property bool showMenuArrow: !Kirigami.DisplayHint.displayHintSet(action, Kirigami.DisplayHint.HideChildIndicator)
 

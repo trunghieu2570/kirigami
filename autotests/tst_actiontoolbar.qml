@@ -1,13 +1,15 @@
 /*
  *  SPDX-FileCopyrightText: 2020 Arjen Hiemstra <ahiemstra@heimr.nl>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtTest 1.0
-import org.kde.kirigami 2.14 as Kirigami
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Templates as T
+import QtTest
+import org.kde.kirigami as Kirigami
 
 // TODO: Find a nicer way to handle this
 import "../src/controls/private" as KirigamiPrivate
@@ -25,24 +27,24 @@ TestCase {
     // These buttons are required for getting the right metrics.
     // Since ActionToolBar bases all sizing on button sizes, we need to be able
     // to verify that layouting does the right thing.
-    property ToolButton iconButton: KirigamiPrivate.PrivateActionToolButton {
-        display: Button.IconOnly
+    KirigamiPrivate.PrivateActionToolButton {
+        id: iconButton
+        display: T.AbstractButton.IconOnly
         action: Kirigami.Action { icon.name: "document-new"; text: "Test Action" }
         font.pointSize: 10
     }
-    property ToolButton textButton: KirigamiPrivate.PrivateActionToolButton {
-        display: Button.TextOnly
+    KirigamiPrivate.PrivateActionToolButton {
+        id: textIconButton
         action: Kirigami.Action { icon.name: "document-new"; text: "Test Action" }
         font.pointSize: 10
     }
-    property ToolButton textIconButton: KirigamiPrivate.PrivateActionToolButton {
-        action: Kirigami.Action { icon.name: "document-new"; text: "Test Action" }
+    TextField {
+        id: textField
         font.pointSize: 10
     }
-    property TextField textField: TextField { font.pointSize: 10 }
 
     Component {
-        id: single;
+        id: single
         Kirigami.ActionToolBar {
             font.pointSize: 10
             actions: [
@@ -106,44 +108,44 @@ TestCase {
         return [
             // One action
             // Full window width, should just display a toolbutton
-            { tag: "single_full", component: single, width: testCase.width, expected: testCase.textIconButton.width },
+            { tag: "single_full", component: single, width: width, expected: textIconButton.width },
             // Small width, should display the overflow button
-            { tag: "single_min", component: single, width: 50, expected: testCase.iconButton.width },
+            { tag: "single_min", component: single, width: 50, expected: iconButton.width },
             // Half window width, should display a single toolbutton
-            { tag: "single_half", component: single, width: testCase.width / 2, expected: testCase.textIconButton.width },
+            { tag: "single_half", component: single, width: width / 2, expected: textIconButton.width },
             // Multiple actions
             // Full window width, should display as many buttons as there are actions
-            { tag: "multi_full", component: multiple, width: testCase.width,
-                expected: testCase.textIconButton.width * 3 + Kirigami.Units.smallSpacing * 2 },
+            { tag: "multi_full", component: multiple, width: width,
+                expected: textIconButton.width * 3 + Kirigami.Units.smallSpacing * 2 },
             // Small width, should display just the overflow button
-            { tag: "multi_min", component: multiple, width: 50, expected: testCase.iconButton.width },
+            { tag: "multi_min", component: multiple, width: 50, expected: iconButton.width },
             // Half window width, should display one action and overflow button
             { tag: "multi_small", component: multiple,
-                width: testCase.textIconButton.width * 2 + testCase.iconButton.width + Kirigami.Units.smallSpacing * 3,
-                expected: testCase.textIconButton.width * 2 + testCase.iconButton.width + Kirigami.Units.smallSpacing * 2 },
+                width: textIconButton.width * 2 + iconButton.width + Kirigami.Units.smallSpacing * 3,
+                expected: textIconButton.width * 2 + iconButton.width + Kirigami.Units.smallSpacing * 2 },
             // Multiple actions, display set to icon only
             // Full window width, should display as many icon-only buttons as there are actions
-            { tag: "icon_full", component: iconOnly, width: testCase.width,
-                expected: testCase.iconButton.width * 3 + Kirigami.Units.smallSpacing * 2 },
+            { tag: "icon_full", component: iconOnly, width: width,
+                expected: iconButton.width * 3 + Kirigami.Units.smallSpacing * 2 },
             // Small width, should display just the overflow button
-            { tag: "icon_min", component: iconOnly, width: 50, expected: testCase.iconButton.width },
+            { tag: "icon_min", component: iconOnly, width: 50, expected: iconButton.width },
             // Quarter window width, should display one icon-only button and the overflow button
-            { tag: "icon_small", component: iconOnly, width: testCase.iconButton.width * 4,
-                expected: testCase.iconButton.width * 3 + Kirigami.Units.smallSpacing * 2 },
+            { tag: "icon_small", component: iconOnly, width: iconButton.width * 4,
+                expected: iconButton.width * 3 + Kirigami.Units.smallSpacing * 2 },
             // QtQuick Controls actions
             // Full window width, should display as many buttons as there are actions
-            { tag: "qt_full", component: qtActions, width: testCase.width,
-                expected: testCase.textIconButton.width * 3 + Kirigami.Units.smallSpacing * 2 },
+            { tag: "qt_full", component: qtActions, width: width,
+                expected: textIconButton.width * 3 + Kirigami.Units.smallSpacing * 2 },
             // Small width, should display just the overflow button
-            { tag: "qt_min", component: qtActions, width: 50, expected: testCase.iconButton.width },
+            { tag: "qt_min", component: qtActions, width: 50, expected: iconButton.width },
             // Half window width, should display one action and overflow button
             { tag: "qt_small", component: qtActions,
-                width: testCase.textIconButton.width * 2 + testCase.iconButton.width + Kirigami.Units.smallSpacing * 3,
-                expected: testCase.textIconButton.width * 2 + testCase.iconButton.width + Kirigami.Units.smallSpacing * 2 },
+                width: textIconButton.width * 2 + iconButton.width + Kirigami.Units.smallSpacing * 3,
+                expected: textIconButton.width * 2 + iconButton.width + Kirigami.Units.smallSpacing * 2 },
             // Mix of different display hints, displayComponent and normal actions.
             // Full window width, should display everything, but one action is collapsed to icon
-            { tag: "mixed", component: mixed, width: testCase.width,
-                expected: testCase.textIconButton.width * 2 + testCase.iconButton.width * 2 + testCase.textField.width + Kirigami.Units.smallSpacing * 4 }
+            { tag: "mixed", component: mixed, width: width,
+                expected: textIconButton.width * 2 + iconButton.width * 2 + textField.width + Kirigami.Units.smallSpacing * 4 }
         ]
     }
 
@@ -152,13 +154,13 @@ TestCase {
     // ActionToolBar has some pretty complex behaviour, which generally boils down to it trying
     // to fit as many visible actions as possible and placing the hidden ones in an overflow menu.
     // This test, along with the data above, verifies that that this behaviour is correct.
-    function test_layout(data) {
-        var toolbar = createTemporaryObject(data.component, testCase, {width: data.width})
+    function test_layout({ component, width, expected }) {
+        var toolbar = createTemporaryObject(component, testCase, { width })
 
         verify(toolbar)
         verify(waitForRendering(toolbar))
 
-        while (toolbar.visibleWidth == 0) {
+        while (toolbar.visibleWidth === 0) {
             // The toolbar creates its delegates asynchronously during "idle
             // time", this means we need to wait for a bit so the toolbar has
             // the time to do that. As long as it has not finished creation, the
@@ -167,7 +169,7 @@ TestCase {
             wait(50)
         }
 
-        compare(toolbar.visibleWidth, data.expected)
+        compare(toolbar.visibleWidth, expected)
     }
 
     Component {
@@ -198,23 +200,22 @@ TestCase {
         }
     }
 
-    function getChild(toolbar, objectName) {
-        let c = toolbar.children[0].children
-        for (let i in c) {
-            if (c[i].objectName === objectName) {
-                return c[i]
+    function getChild(toolbar: Kirigami.ActionToolBar, objectName: string): Item {
+        for (const child of toolbar.children[0].children) {
+            if (child.objectName === objectName) {
+                return child
             }
         }
-        return -1
+        return null
     }
 
     function test_height() {
-        var toolbar = createTemporaryObject(heightMode, testCase, {width: testCase.width})
+        var toolbar = createTemporaryObject(heightMode, testCase, { width })
 
         verify(toolbar)
         verify(waitForRendering(toolbar))
 
-        while (toolbar.visibleWidth == 0) {
+        while (toolbar.visibleWidth === 0) {
             // Same as above
             wait(50)
         }
