@@ -166,6 +166,7 @@ TestCase {
         // toolbar will have a visibleWidth of 0, so we can use that to
         // determine when it is done.
         tryVerify(() => toolbar.visibleWidth !== 0)
+        wait(500)
 
         compare(toolbar.visibleWidth, expected)
     }
@@ -215,6 +216,7 @@ TestCase {
 
         // Same as above
         tryVerify(() => toolbar.visibleWidth !== 0)
+        wait(500)
 
         compare(toolbar.implicitHeight, 50)
         compare(toolbar.height, 50)
