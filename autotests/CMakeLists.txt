@@ -51,6 +51,8 @@ kirigami_add_tests(
     tst_sceneposition.qml
     tst_theme.qml
 
+    mobile/tst_pagerow.qml
+
     pagepool/tst_layers.qml
     pagepool/tst_pagepool.qml
 
@@ -62,4 +64,11 @@ kirigami_add_tests(
 
 set_tests_properties(tst_theme.qml PROPERTIES
     ENVIRONMENT "QT_QUICK_CONTROLS_STYLE=default;KIRIGAMI_FORCE_STYLE=1"
+)
+
+set_tests_properties(
+    mobile/tst_pagerow.qml
+
+    PROPERTIES
+        ENVIRONMENT "QT_QUICK_CONTROLS_MOBILE=1"
 )
