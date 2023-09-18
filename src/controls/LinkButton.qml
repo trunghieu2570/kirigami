@@ -6,6 +6,7 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
+import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
 /**
@@ -23,7 +24,7 @@ import org.kde.kirigami as Kirigami
 QQC2.Label {
     id: control
 
-    property Kirigami.Action action
+    property T.Action action
 
     /**
      * @brief This property holds the mouse buttons that the mouse area reacts to.
