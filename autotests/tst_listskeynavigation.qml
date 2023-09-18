@@ -26,12 +26,12 @@ TestCase {
 
             width: 480
             height: 360
-
-            readonly property SignalSpy spyCurrentIndex: SignalSpy {
-                target: window.pageStack.currentItem?.flickable ?? null
-                signalName: "currentIndexChanged"
-            }
         }
+    }
+
+    Component {
+        id: spyComponent
+        SignalSpy {}
     }
 
     // The following methods are adaptation of QtTest internals
@@ -49,7 +49,10 @@ TestCase {
     function test_press() {
         const window = createTemporaryObject(mainComponent, this);
         verify(window);
-        const spy = window.spyCurrentIndex;
+        const spy = createTemporaryObject(spyComponent, this, {
+            target: window.pageStack.currentItem.flickable,
+            signalName: "currentIndexChanged",
+        })
         verify(spy.valid);
 
         ensureWindowShown(window);
