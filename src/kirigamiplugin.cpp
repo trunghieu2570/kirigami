@@ -23,7 +23,7 @@
 #include "shadowedrectangle.h"
 #include "shadowedtexture.h"
 #include "sizegroup.h"
-#include "spellcheckinghint.h"
+#include "spellcheckattached.h"
 #include "toolbarlayout.h"
 #include "units.h"
 #include "wheelhandler.h"
@@ -265,7 +265,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType<Kirigami::BasicThemeDefinition>(uri, 2, 16, "BasicThemeDefinition");
 
     // 2.18
-    qmlRegisterType<SpellCheckingAttached>(uri, 2, 18, "SpellChecking");
+    qmlRegisterType<SpellCheckAttached>(uri, 2, 18, "SpellCheck");
 
     // 2.19
     qmlRegisterType(componentUrl(QStringLiteral("AboutItem.qml")), uri, 2, 19, "AboutItem");

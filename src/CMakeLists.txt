@@ -58,8 +58,8 @@ target_sources(KirigamiPlugin PRIVATE
     shadowedtexture.h
     sizegroup.cpp
     sizegroup.h
-    spellcheckinghint.cpp
-    spellcheckinghint.h
+    spellcheckattached.cpp
+    spellcheckattached.h
     toolbarlayout.cpp
     toolbarlayoutdelegate.cpp
     toolbarlayoutdelegate.h
