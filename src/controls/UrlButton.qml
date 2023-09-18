@@ -4,10 +4,10 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.2
-import org.kde.kirigami 2.20 as Kirigami
-import org.kde.kirigami.private 2.6 as KirigamiPrivate
-import QtQuick.Controls 2.1 as QQC2
+import QtQuick
+import org.kde.kirigami as Kirigami
+import org.kde.kirigami.private as KirigamiPrivate
+import QtQuick.Controls as QQC2
 
 /**
  * @brief A link button that contains a URL.
@@ -29,9 +29,9 @@ Kirigami.LinkButton {
     visible: text.length > 0
     acceptedButtons: Qt.LeftButton | Qt.RightButton
 
-    Accessible.name: button.text
-    Accessible.description: button.text !== button.url
-        ? qsTr("Open link %1", "@info:whatsthis").arg(button.url)
+    Accessible.name: text
+    Accessible.description: text !== url
+        ? qsTr("Open link %1", "@info:whatsthis").arg(url)
         : qsTr("Open link", "@info:whatsthis")
 
     onPressed: mouse => {
