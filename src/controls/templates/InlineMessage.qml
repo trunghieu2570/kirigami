@@ -130,11 +130,6 @@ T.Control {
     implicitHeight: visible ? (contentLayout.implicitHeight + topPadding + bottomPadding) : 0
 
     padding: Kirigami.Units.smallSpacing
-    // base style (such as qqc2-desktop-style) may define unique paddings for Control, reset it to uniform
-    topPadding: undefined
-    leftPadding: undefined
-    rightPadding: undefined
-    bottomPadding: undefined
 
     Behavior on implicitHeight {
         enabled: !root.visible
