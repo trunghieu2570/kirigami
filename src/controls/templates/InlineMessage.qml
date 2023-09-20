@@ -118,7 +118,7 @@ T.Control {
      * right. If more actions are set than can fit, an overflow menu is
      * provided.
      */
-    property list<QtObject> actions
+    property list<T.Action> actions
 
     /**
      * This property holds whether the current message item is animating.
