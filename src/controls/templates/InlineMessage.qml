@@ -5,12 +5,12 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.7
-import QtQuick.Layouts 1.0
-import QtQuick.Controls 2.0 as QQC2
-import QtQuick.Templates 2.0 as T2
-import org.kde.kirigami 2.20 as Kirigami
-import "private"
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as QQC2
+import QtQuick.Templates as T
+import org.kde.kirigami as Kirigami
+import "private" as P
 
 /**
  * An inline message item with support for informational, positive,
@@ -59,9 +59,9 @@ import "private"
  * @endcode
  *
  * @since 5.45
- * @inherit QtQuick.QQC2.Control
+ * @inherit QtQuick.Templates.Control
  */
-T2.Control {
+T.Control {
     id: root
 
     visible: false
@@ -99,7 +99,7 @@ T2.Control {
      * If no custom icon is set, an icon appropriate to the message type
      * is shown.
      */
-    property IconPropertiesGroup icon: IconPropertiesGroup {}
+    property P.IconPropertiesGroup icon: P.IconPropertiesGroup {}
 
     /**
      * This property holds the message text.

@@ -6,9 +6,9 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.7
-import org.kde.kirigami 2.5 as Kirigami
-import "templates" as T
+import QtQuick
+import org.kde.kirigami as Kirigami
+import "templates" as KT
 
 /**
  * An inline message item with support for informational, positive,
@@ -32,6 +32,8 @@ import "templates" as T
  *
  * Example usage:
  * @code
+ * import org.kde.kirigami as Kirigami
+ *
  * InlineMessage {
  *     type: Kirigami.MessageType.Error
  *
@@ -58,7 +60,7 @@ import "templates" as T
  * @inherit org::kde::kirigami::templates::InlineMessage
  * @since 5.45
  */
-T.InlineMessage {
+KT.InlineMessage {
     id: root
 
     // a rectangle padded with anchors.margins is used to simulate a border
