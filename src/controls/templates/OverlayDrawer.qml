@@ -239,7 +239,7 @@ T2.Drawer {
         }
 
         anchors {
-            bottom: drawerHandle.handleAnchor && drawerHandle.handleAnchor.visible ? undefined : parent.bottom
+            bottom: drawerHandle.handleAnchor ? undefined : parent.bottom
             bottomMargin: {
                 if (typeof applicationWindow === "undefined") {
                     return;
