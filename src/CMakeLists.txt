@@ -153,8 +153,6 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.3 SOURCES
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.4 SOURCES
     controls/AbstractCard.qml
     controls/Card.qml
-    controls/CardsListView.qml
-    controls/CardsGridView.qml
     controls/CardsLayout.qml
     controls/InlineMessage.qml
 )
@@ -218,7 +216,6 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private SOURCES
     controls/private/ActionMenuItem.qml
     controls/private/ActionsMenu.qml
     controls/private/BannerImage.qml
-    controls/private/CardsGridViewPrivate.qml
     controls/private/ContextDrawerActionItem.qml
     controls/private/CornerShadow.qml
     controls/private/DefaultCardBackground.qml
