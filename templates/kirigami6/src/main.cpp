@@ -80,14 +80,9 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     auto config = %{APPNAME}Config::self();
+    App application;
 
     qmlRegisterSingletonInstance("org.kde.%{APPNAMELC}", 1, 0, "Config", config);
-
-    qmlRegisterSingletonType("org.kde.%{APPNAMELC}", 1, 0, "About", [](QQmlEngine *engine, QJSEngine *) -> QJSValue {
-        return engine->toScriptValue(KAboutData::applicationData());
-    });
-
-    App application;
     qmlRegisterSingletonInstance("org.kde.%{APPNAMELC}", 1, 0, "App", &application);
 
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
