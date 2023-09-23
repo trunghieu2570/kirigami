@@ -82,6 +82,16 @@ T.ToolBar {
 
     z: 999 // don't let content overlap it
 
+    // HACK Due to the lack of a GridView.headerPositioning property,
+    // we need to "stick" ourselves to the top manually by translating Y accordingly.
+    // see see https://bugreports.qt.io/browse/QTBUG-117035.
+    // Conveniently, GridView is only attached to the root of the delegate (or headerItem),
+    // so this will only be done if the InlineViewHeader itself is the header item.
+    // And of course it won't be there for ListView either, where we have headerPositioning.
+    transform: Translate {
+        y: root.GridView.view ? root.GridView.view.contentY + height : 0
+    }
+
     background: Rectangle {
         Kirigami.Theme.colorSet: Kirigami.Theme.View
         Kirigami.Theme.inherit: false
