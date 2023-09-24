@@ -8,9 +8,6 @@ import QtQuick 2.7
 import QtQuick.Controls.Material 2.0
 import org.kde.kirigami 2.16 as Kirigami
 
-/**
- * \internal
- */
 Kirigami.BasicThemeDefinition {
     textColor: Material.foreground
     disabledTextColor: Qt.rgba(theme.textColor.r, theme.textColor.g, theme.textColor.b, 0.6)

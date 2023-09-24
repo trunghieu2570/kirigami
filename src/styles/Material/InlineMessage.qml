@@ -11,55 +11,6 @@ import Qt5Compat.GraphicalEffects as GE
 import org.kde.kirigami 2.5 as Kirigami
 import "../../templates" as T
 
-/**
- * An inline message item with support for informational, positive,
- * warning and error types, and with support for associated actions.
- *
- * InlineMessage can be used to give information to the user or
- * interact with the user, without requiring the use of a dialog.
- *
- * The InlineMessage item is hidden by default. It also manages its
- * height (and implicitHeight) during an animated reveal when shown.
- * You should avoid setting height on an InlineMessage unless it is
- * already visible.
- *
- * Optionally an icon can be set, defaulting to an icon appropriate
- * to the message type otherwise.
- *
- * Optionally a close button can be shown.
- *
- * Actions are added from left to right. If more actions are set than
- * can fit, an overflow menu is provided.
- *
- * Example:
- * @code
- * InlineMessage {
- *     type: Kirigami.MessageType.Error
- *
- *     text: "My error message"
- *
- *     actions: [
- *         Kirigami.Action {
- *             icon.name: "edit"
- *             text: "Action text"
- *             onTriggered: {
- *                 // do stuff
- *             }
- *         },
- *         Kirigami.Action {
- *             icon.name: "edit"
- *             text: "Action text"
- *             onTriggered: {
- *                 // do stuff
- *             }
- *         }
- *     ]
- * }
- * @endcode
- *
- * @since 5.45
- */
-
 T.InlineMessage {
     id: root
 
