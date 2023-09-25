@@ -92,7 +92,7 @@ Kirigami.ScrollablePage {
      *
      * default: `"https://kde.org/community/donations" when application id starts with "org.kde.", otherwise it is empty.`
      */
-    property url donateUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://kde.org/community/donations" : ""
+    property alias donateUrl: aboutItem.donateUrl
 
     /** @internal */
     default property alias _content: aboutItem._content
