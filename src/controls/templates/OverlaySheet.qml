@@ -167,6 +167,15 @@ T2.Popup {
             headerItem.initHeader();
         });
     }
+
+    Connections {
+        target: parent
+        function onVisibleChanged() {
+            if (!parent.visible) {
+                root.close();
+            }
+        }
+    }
 //END Signal handlers
 
 //BEGIN UI
