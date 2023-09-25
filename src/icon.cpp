@@ -248,18 +248,21 @@ QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * 
     }
 
     if (m_sizeChanged) {
-        const QSize itemSize(width(), height());
-        QRect nodeRect(QPoint(0, 0), itemSize);
+        const QSizeF iconPixSize(m_icon.width() / m_devicePixelRatio, m_icon.height() / m_devicePixelRatio);
+        const QSizeF itemPixSize = QSizeF((size() * m_devicePixelRatio).toSize()) / m_devicePixelRatio;
+        QRectF nodeRect(QPoint(0, 0), itemPixSize);
 
-        if (itemSize.width() != 0 && itemSize.height() != 0) {
-            if (m_icon.size() != itemSize) {
+        if (itemPixSize.width() != 0 && itemPixSize.height() != 0) {
+            if (iconPixSize != itemPixSize) {
                 // At this point, the image will already be scaled, but we need to output it in
                 // the correct aspect ratio, painted centered in the viewport. So:
-                QRect destination(QPoint(0, 0), m_icon.size().scaled(m_paintedSize.toSize(), Qt::KeepAspectRatio));
+                QRectF destination(QPointF(0, 0), QSizeF(m_icon.size()).scaled(m_paintedSize, Qt::KeepAspectRatio));
                 destination.moveCenter(nodeRect.center());
+                destination.moveTopLeft(QPointF(destination.topLeft().toPoint() * m_devicePixelRatio) / m_devicePixelRatio);
                 nodeRect = destination;
             }
         }
+
         for (int i = 0; i < node->childCount(); ++i) {
             auto mNode = static_cast<ManagedTextureNode *>(node->childAtIndex(i)->firstChild());
             mNode->setRect(nodeRect);
@@ -324,8 +327,7 @@ void Icon::handleFinished(QNetworkReply *reply)
         qCWarning(KirigamiLog) << "received broken image" << reply->url();
 
         // broken image from data, inform the user of this with some useful broken-image thing...
-        const QIcon icon = QIcon::fromTheme(m_fallback);
-        m_loadedImage = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
+        m_loadedImage = iconPixmap(QIcon::fromTheme(m_fallback));
     }
 
     polish();
@@ -334,6 +336,10 @@ void Icon::handleFinished(QNetworkReply *reply)
 void Icon::updatePolish()
 {
     QQuickItem::updatePolish();
+
+    if (window()) {
+        m_devicePixelRatio = window()->effectiveDevicePixelRatio();
+    }
 
     if (m_source.isNull()) {
         setStatus(Ready);
@@ -362,8 +368,7 @@ void Icon::updatePolish()
             m_icon = m_source.value<QBitmap>().toImage();
             break;
         case QMetaType::QIcon: {
-            const QIcon icon = m_source.value<QIcon>();
-            m_icon = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
+            m_icon = iconPixmap(m_source.value<QIcon>());
             break;
         }
         case QMetaType::QUrl:
@@ -465,8 +470,7 @@ QImage Icon::findIcon(const QSize &size)
                     }
                     if (m_loadedImage.isNull()) {
                         // broken image from data, inform the user of this with some useful broken-image thing...
-                        const QIcon icon = QIcon::fromTheme(m_fallback);
-                        m_loadedImage = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
+                        m_loadedImage = iconPixmap(QIcon::fromTheme(m_fallback));
                         setStatus(Error);
                     } else {
                         setStatus(Ready);
@@ -476,8 +480,7 @@ QImage Icon::findIcon(const QSize &size)
                 response->deleteLater();
             });
             // Temporary icon while we wait for the real image to load...
-            const QIcon icon = QIcon::fromTheme(m_placeholder);
-            img = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
+            img = iconPixmap(QIcon::fromTheme(m_placeholder));
             break;
         }
         case QQmlImageProviderBase::Texture: {
@@ -487,8 +490,7 @@ QImage Icon::findIcon(const QSize &size)
             }
             if (img.isNull()) {
                 // broken image from data, or the texture factory wasn't healthy, inform the user of this with some useful broken-image thing...
-                const QIcon icon = QIcon::fromTheme(m_fallback);
-                img = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
+                img = iconPixmap(QIcon::fromTheme(m_fallback));
                 setStatus(Error);
             } else {
                 setStatus(Ready);
@@ -517,8 +519,7 @@ QImage Icon::findIcon(const QSize &size)
             });
         }
         // Temporary icon while we wait for the real image to load...
-        const QIcon icon = QIcon::fromTheme(m_placeholder);
-        img = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
+        img = iconPixmap(QIcon::fromTheme(m_placeholder));
     } else {
         if (iconSource.startsWith(QLatin1String("qrc:/"))) {
             iconSource = iconSource.mid(3);
@@ -536,16 +537,14 @@ QImage Icon::findIcon(const QSize &size)
             icon = m_theme->iconFromTheme(iconSource, tintColor);
         }
         if (!icon.isNull()) {
-            img = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
-
+            img = iconPixmap(icon);
             setStatus(Ready);
         }
     }
 
     if (!iconSource.isEmpty() && img.isNull()) {
         setStatus(Error);
-        const QIcon icon = QIcon::fromTheme(m_fallback);
-        img = icon.pixmap(icon.actualSize(iconSizeHint()), window()->devicePixelRatio(), iconMode(), QIcon::On).toImage();
+        img = iconPixmap(QIcon::fromTheme(m_fallback));
     }
     return img;
 }
@@ -605,12 +604,12 @@ Icon::Status Icon::status() const
 
 qreal Icon::paintedWidth() const
 {
-    return m_paintedSize.width();
+    return std::round(m_paintedSize.width());
 }
 
 qreal Icon::paintedHeight() const
 {
-    return m_paintedSize.height();
+    return std::round(m_paintedSize.height());
 }
 
 QSize Icon::iconSizeHint() const
@@ -623,14 +622,22 @@ QSize Icon::iconSizeHint() const
     }
 }
 
+QImage Icon::iconPixmap(const QIcon &icon) const
+{
+    const QSize actualSize = icon.actualSize(iconSizeHint());
+    return icon.pixmap(actualSize, m_devicePixelRatio, iconMode(), QIcon::On).toImage();
+}
+
 void Icon::updatePaintedGeometry()
 {
     QSizeF newSize;
     if (!m_icon.width() || !m_icon.height()) {
         newSize = {0, 0};
     } else {
-        int roundedWidth = m_units ? m_units->iconSizes()->roundedIconSize(std::min(width(), height())) : 32;
-        if (QSize roundedSize(roundedWidth, roundedWidth); QSize(width(), height()) == roundedSize) {
+        qreal roundedWidth = m_units ? m_units->iconSizes()->roundedIconSize(std::min(width(), height())) : 32;
+        roundedWidth = std::round(roundedWidth * m_devicePixelRatio) / m_devicePixelRatio;
+
+        if (QSizeF roundedSize(roundedWidth, roundedWidth); size() == roundedSize) {
             m_paintedSize = roundedSize;
             m_textureChanged = true;
             update();
@@ -639,20 +646,22 @@ void Icon::updatePaintedGeometry()
         }
         if (m_roundToIconSize && m_units) {
             if (m_icon.width() > m_icon.height()) {
-                newSize = QSizeF(roundedWidth, qRound(m_icon.height() * (roundedWidth / static_cast<qreal>(m_icon.width()))));
+                newSize = QSizeF(roundedWidth, m_icon.height() * (roundedWidth / static_cast<qreal>(m_icon.width())));
             } else {
-                newSize = QSizeF(m_units->iconSizes()->roundedIconSize(std::min(width(), height())),
-                                 m_units->iconSizes()->roundedIconSize(std::min(width(), height())));
+                newSize = QSizeF(roundedWidth, roundedWidth);
             }
         } else {
-            const qreal w = widthValid() ? width() : m_icon.size().width();
-            const qreal widthScale = w / m_icon.size().width();
-            const qreal h = heightValid() ? height() : m_icon.size().height();
-            const qreal heightScale = h / m_icon.size().height();
+            const QSizeF iconPixSize(m_icon.width() / m_devicePixelRatio, m_icon.width() / m_devicePixelRatio);
+
+            const qreal w = widthValid() ? width() : iconPixSize.width();
+            const qreal widthScale = w / iconPixSize.width();
+            const qreal h = heightValid() ? height() : iconPixSize.height();
+            const qreal heightScale = h / iconPixSize.height();
+
             if (widthScale <= heightScale) {
-                newSize = QSizeF(w, widthScale * m_icon.size().height());
+                newSize = QSizeF(w, widthScale * iconPixSize.height());
             } else if (heightScale < widthScale) {
-                newSize = QSizeF(heightScale * m_icon.size().width(), h);
+                newSize = QSizeF(heightScale * iconPixSize.width(), h);
             }
         }
     }
@@ -707,7 +716,14 @@ void Icon::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChang
 {
     if (change == QQuickItem::ItemDevicePixelRatioHasChanged) {
         m_blockNextAnimation = true;
+        if (window()) {
+            m_devicePixelRatio = window()->effectiveDevicePixelRatio();
+        }
         polish();
+    } else if (change == QQuickItem::ItemSceneChange) {
+        if (value.window) {
+            m_devicePixelRatio = window()->effectiveDevicePixelRatio();
+        }
     } else if (change == ItemVisibleHasChanged && value.boolValue) {
         m_blockNextAnimation = true;
     }
