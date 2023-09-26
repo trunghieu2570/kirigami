@@ -8,10 +8,10 @@
 
 import QtQuick 2.7
 import Qt5Compat.GraphicalEffects as GE
-import org.kde.kirigami 2.5 as Kirigami
-import "../../templates" as T
+import org.kde.kirigami as Kirigami
+import org.kde.kirigami.templates as KT
 
-T.InlineMessage {
+KT.InlineMessage {
     id: root
 
     background: Rectangle {

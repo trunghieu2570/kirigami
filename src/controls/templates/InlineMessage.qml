@@ -10,7 +10,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
-import "private" as P
+import org.kde.kirigami.templates.private as TP
 
 /**
  * An inline message item with support for informational, positive,
@@ -99,7 +99,7 @@ T.Control {
      * If no custom icon is set, an icon appropriate to the message type
      * is shown.
      */
-    property P.IconPropertiesGroup icon: P.IconPropertiesGroup {}
+    property TP.IconPropertiesGroup icon: TP.IconPropertiesGroup {}
 
     /**
      * This property holds the message text.

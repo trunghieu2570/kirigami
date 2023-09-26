@@ -8,7 +8,7 @@
 
 import QtQuick
 import org.kde.kirigami as Kirigami
-import "templates" as KT
+import org.kde.kirigami.templates as KT
 
 /**
  * An inline message item with support for informational, positive,
