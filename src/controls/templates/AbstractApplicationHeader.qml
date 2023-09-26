@@ -33,8 +33,8 @@ Item {
 
     property int position: QQC2.ToolBar.Header
 
-    property Kirigami.PageRow pageRow: __appWindow ? __appWindow.pageStack: null
-    property Kirigami.Page page: pageRow ? pageRow.currentItem : null
+    property Kirigami.PageRow pageRow: __appWindow?.pageStack ?? null
+    property Kirigami.Page page: pageRow?.currentItem ?? null
 
     default property alias contentItem: mainItem.data
     readonly property int paintedHeight: headerItem.y + headerItem.height - 1
@@ -44,10 +44,12 @@ Item {
     property int rightPadding: 0
     property int bottomPadding: 0
     property bool separatorVisible: true
-    // whether or not the header should be
-    // "pushed" back when scrolling using the
-    // touch screen
-    property bool hideWhenTouchScrolling: root.pageRow ? root.pageRow.globalToolBar.hideWhenTouchScrolling : false
+
+    /**
+     * This property specifies whether the header should be pushed back when
+     * scrolling using the touch screen.
+     */
+    property bool hideWhenTouchScrolling: root.pageRow?.globalToolBar.hideWhenTouchScrolling ?? false
 
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
@@ -80,18 +82,12 @@ Item {
 
     onPageChanged: {
         // NOTE: The Connections object doesn't work with attached properties signals, so we have to do this by hand
-        if (headerItem.oldPage) {
-            headerItem.oldPage.Kirigami.ColumnView.scrollIntention.disconnect(headerItem.scrollIntentHandler);
-        }
-        if (root.page) {
-            root.page.Kirigami.ColumnView.scrollIntention.connect(headerItem.scrollIntentHandler);
-        }
+        headerItem.oldPage?.Kirigami.ColumnView.scrollIntention.disconnect(headerItem.scrollIntentHandler);
+        root.page?.Kirigami.ColumnView.scrollIntention.connect(headerItem.scrollIntentHandler);
         headerItem.oldPage = root.page;
     }
     Component.onDestruction: {
-        if (root.page) {
-            root.page.Kirigami.ColumnView.scrollIntention.disconnect(headerItem.scrollIntentHandler);
-        }
+            root.page?.Kirigami.ColumnView.scrollIntention.disconnect(headerItem.scrollIntentHandler);
     }
 
     NumberAnimation {
@@ -145,7 +141,7 @@ Item {
         property Kirigami.Page oldPage
 
         Connections {
-            target: root.page ? root.page.globalToolBarItem : null
+            target: root.page?.globalToolBarItem ?? null
             enabled: target
             function onImplicitHeightChanged() {
                 root.implicitHeight = root.page.globalToolBarItem.implicitHeight;
@@ -156,10 +152,10 @@ Item {
            id: slideResetTimer
            interval: 500
            onTriggered: {
-                if ((root.pageRow ? root.pageRow.wideMode : (__appWindow && __appWindow.wideScreen)) || !Kirigami.Settings.isMobile) {
+                if ((root.pageRow?.wideMode ?? (__appWindow?.wideScreen ?? false)) || !Kirigami.Settings.isMobile) {
                     return;
                 }
-                if (root.height > root.minimumHeight + (root.preferredHeight - root.minimumHeight)/2 ) {
+                if (root.height > root.minimumHeight + (root.preferredHeight - root.minimumHeight) / 2) {
                     heightAnim.to = root.preferredHeight;
                 } else {
                     heightAnim.to = root.minimumHeight;
