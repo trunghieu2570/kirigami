@@ -4,10 +4,10 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQml 2.15
-import QtQuick.Layouts 1.15
-import org.kde.kirigami 2.19 as Kirigami
+import QtQuick
+import QtQml
+import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
 
 AbstractPageHeader {
     id: root
@@ -33,15 +33,15 @@ AbstractPageHeader {
             id: titleLoader
 
             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-            Layout.fillWidth: item ? item.Layout.fillWidth : false
-            Layout.minimumWidth: item ? item.Layout.minimumWidth : -1
-            Layout.preferredWidth: item ? item.Layout.preferredWidth : -1
-            Layout.maximumWidth: item ? item.Layout.maximumWidth : -1
+            Layout.fillWidth: item?.Layout.fillWidth ?? false
+            Layout.minimumWidth: item?.Layout.minimumWidth ?? -1
+            Layout.preferredWidth: item?.Layout.preferredWidth ?? -1
+            Layout.maximumWidth: item?.Layout.maximumWidth ?? -1
 
             // Don't load async to prevent jumpy behaviour on slower devices as it loads in.
             // If the title delegate really needs to load async, it should be its responsibility to do it itself.
             asynchronous: false
-            sourceComponent: page ? page.titleDelegate : null
+            sourceComponent: page?.titleDelegate ?? null
         }
 
         Kirigami.ActionToolBar {
@@ -52,10 +52,10 @@ AbstractPageHeader {
             Layout.fillHeight: true
 
             visible: actions.length > 0
-            alignment: pageRow ? pageRow.globalToolBar.toolbarActionAlignment : Qt.AlignRight
-            heightMode: pageRow ? pageRow.globalToolBar.toolbarActionHeightMode : Kirigami.ToolBarLayout.ConstrainIfLarger
+            alignment: pageRow?.globalToolBar.toolbarActionAlignment ?? Qt.AlignRight
+            heightMode: pageRow?.globalToolBar.toolbarActionHeightMode ?? Kirigami.ToolBarLayout.ConstrainIfLarger
 
-            actions: page ? page.actions : []
+            actions: page?.actions ?? []
         }
     }
 }
