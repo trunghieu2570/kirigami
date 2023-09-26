@@ -23,18 +23,7 @@ QQC2.Page {
     id: root
 
 //BEGIN properties
-    /**
-     * @brief The default content padding is 1 gridUnit.
-     * // TODO: check if  this is not displayed in the generated api doc.
-     */
     padding: Kirigami.Units.gridUnit
-
-    /**
-     * @brief The bottom content padding.
-     *
-     * default: `this is bound to the height of the floating action buttons when present; if not, then verticalPadding.`
-     * // TODO: check if this is not displayed in the generated api doc.
-     */
     bottomPadding: actionButtons.item ? actionButtons.height : verticalPadding
 
     /**
