@@ -265,7 +265,11 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType<Kirigami::BasicThemeDefinition>(uri, 2, 16, "BasicThemeDefinition");
 
     // 2.18
-    qmlRegisterType<SpellCheckAttached>(uri, 2, 18, "SpellCheck");
+    qmlRegisterUncreatableType<SpellCheckAttached>(uri,
+                                                   2,
+                                                   18,
+                                                   "SpellCheck",
+                                                   QStringLiteral("Cannot create objects of type SpellCheck, use it as an attached property"));
 
     // 2.19
     qmlRegisterType(componentUrl(QStringLiteral("AboutItem.qml")), uri, 2, 19, "AboutItem");
