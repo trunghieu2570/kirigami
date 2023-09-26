@@ -6,7 +6,7 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.7
+import QtQuick
 import Qt5Compat.GraphicalEffects as GE
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.templates as KT
@@ -14,19 +14,17 @@ import org.kde.kirigami.templates as KT
 KT.InlineMessage {
     id: root
 
+    // a rectangle padded with anchors.margins is used to simulate a border
+    padding: bgFillRect.anchors.margins + Kirigami.Units.smallSpacing
+
     background: Rectangle {
         id: bgBorderRect
 
-        color: {
-            if (root.type == Kirigami.MessageType.Positive) {
-                return Kirigami.Theme.positiveTextColor;
-            } else if (root.type == Kirigami.MessageType.Warning) {
-                return Kirigami.Theme.neutralTextColor;
-            } else if (root.type == Kirigami.MessageType.Error) {
-                return Kirigami.Theme.negativeTextColor;
-            }
-
-            return Kirigami.Theme.activeTextColor;
+        color: switch (root.type) {
+            case Kirigami.MessageType.Positive: return Kirigami.Theme.positiveTextColor;
+            case Kirigami.MessageType.Warning: return Kirigami.Theme.neutralTextColor;
+            case Kirigami.MessageType.Error: return Kirigami.Theme.negativeTextColor;
+            default: return Kirigami.Theme.activeTextColor;
         }
 
         radius: Kirigami.Units.smallSpacing / 2
