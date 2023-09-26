@@ -128,7 +128,7 @@ Item {
             bottom: parent.bottom
         }
 
-        source: root.icon.name !== "" ? root.icon.name : root.icon.source
+        source: root.icon.name.length > 0 ? root.icon.name : root.icon.source
         implicitWidth: root.icon.width
         implicitHeight: root.icon.height
         selected: root.selected

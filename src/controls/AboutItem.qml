@@ -197,13 +197,13 @@ Item {
                 UrlButton {
                     text: qsTr("Get Involved")
                     url: aboutItem.getInvolvedUrl
-                    visible: url !== ""
+                    visible: url.toString().length > 0
                 }
 
                 UrlButton {
                     text: qsTr("Donate")
                     url: aboutItem.donateUrl
-                    visible: url !== ""
+                    visible: url.toString().length > 0
                 }
 
                 UrlButton {
@@ -220,7 +220,7 @@ Item {
                     }
                     text: qsTr("Report a Bug")
                     url: theUrl
-                    visible: theUrl !== ""
+                    visible: theUrl.toString().length > 0
                 }
             }
         }
@@ -331,7 +331,7 @@ Item {
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
                 Layout.leftMargin: Kirigami.Units.gridUnit
-                text: modelData.name + (modelData.version === "" ? "" : " %1".arg(modelData.version))
+                text: modelData.name + (modelData.version.length === 0 ? "" : " %1".arg(modelData.version))
             }
         }
 

@@ -26,7 +26,7 @@ import org.kde.kirigami 2.20 as Kirigami
  *
  *     rightActions: Kirigami.Action {
  *         icon.name: "edit-clear"
- *         visible: searchField.text !== ""
+ *         visible: searchField.text.length > 0
  *         onTriggered: {
  *             searchField.clear();
  *             searchField.accepted();

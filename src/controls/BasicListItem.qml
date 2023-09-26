@@ -267,7 +267,7 @@ Kirigami.AbstractListItem {
 
             Kirigami.Icon {
                 id: iconItem
-                source: listItem.icon.name !== "" ? listItem.icon.name : listItem.icon.source
+                source: listItem.icon.name.length > 0 ? listItem.icon.name : listItem.icon.source
                 property int size: subtitleItem.visible || reserveSpaceForSubtitle ? Kirigami.Units.iconSizes.medium : Kirigami.Units.iconSizes.smallMedium
                 Layout.minimumHeight: size
                 Layout.maximumHeight: size
@@ -275,7 +275,7 @@ Kirigami.AbstractListItem {
                 Layout.maximumWidth: size
                 selected: (listItem.highlighted || listItem.checked || listItem.down)
                 opacity: listItem.fadeContent ? 0.6 : 1.0
-                visible: source.toString() !== ""
+                visible: source.toString().length > 0
             }
             ColumnLayout {
                 id: labelColumn

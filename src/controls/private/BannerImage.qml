@@ -81,7 +81,7 @@ Kirigami.ShadowedImage {
     Layout.fillWidth: true
 
     Layout.preferredWidth: titleLayout.implicitWidth || sourceSize.width
-    Layout.preferredHeight: titleLayout.completed && source.toString() !== "" ? width/(sourceSize.width / sourceSize.height) : Layout.minimumHeight
+    Layout.preferredHeight: titleLayout.completed && source.toString().length > 0 ? width/(sourceSize.width / sourceSize.height) : Layout.minimumHeight
     Layout.minimumHeight: titleLayout.implicitHeight > 0 ? titleLayout.implicitHeight + Kirigami.Units.smallSpacing * 2 : 0
 
     onTitleAlignmentChanged: {
@@ -173,7 +173,7 @@ Kirigami.ShadowedImage {
             verticalAlignment: Text.AlignVCenter
             visible: text.length > 0
             level: 1
-            color: root.source.toString() !== "" ? "white" : Kirigami.Theme.textColor
+            color: root.source.toString().length > 0 ? "white" : Kirigami.Theme.textColor
             wrapMode: Text.NoWrap
             elide: Text.ElideRight
         }

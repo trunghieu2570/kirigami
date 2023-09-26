@@ -281,7 +281,7 @@ ColumnLayout {
         id: label
 
         text: root.explanation
-        visible:  root.explanation !== ""
+        visible:  root.explanation.length > 0
         opacity: root.type === PlaceholderMessage.Type.Actionable ? 1 : 0.65
 
         horizontalAlignment: Qt.AlignHCenter
