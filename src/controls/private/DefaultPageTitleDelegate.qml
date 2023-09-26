@@ -22,8 +22,8 @@ Item {
     Layout.minimumWidth: 0
     Layout.maximumWidth: implicitWidth
 
-    implicitWidth: Math.ceil(metrics.advanceWidth)
-    implicitHeight: Math.ceil(metrics.height)
+    implicitWidth: Math.ceil(heading.implicitWidth)
+    implicitHeight: Math.ceil(heading.implicitHeight)
 
     Kirigami.Heading {
         id: heading
@@ -32,13 +32,5 @@ Item {
         maximumLineCount: 1
         elide: Text.ElideRight
         textFormat: Text.PlainText
-    }
-
-    TextMetrics {
-        id: metrics
-
-        font: heading.font
-        text: heading.text
-        renderType: heading.renderType
     }
 }
