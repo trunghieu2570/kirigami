@@ -23,7 +23,7 @@ Item {
     Layout.maximumWidth: implicitWidth
 
     implicitWidth: Math.ceil(metrics.advanceWidth)
-    implicitHeight: metrics.height
+    implicitHeight: Math.ceil(metrics.height)
 
     Kirigami.Heading {
         id: heading
@@ -39,5 +39,6 @@ Item {
 
         font: heading.font
         text: heading.text
+        renderType: heading.renderType
     }
 }
