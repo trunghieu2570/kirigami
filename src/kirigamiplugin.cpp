@@ -7,6 +7,8 @@
  */
 
 #include "kirigamiplugin.h"
+
+#include "actionextattached.h"
 #include "colorutils.h"
 #include "columnview.h"
 #include "delegaterecycler.h"
@@ -298,6 +300,11 @@ void KirigamiPlugin::registerTypes(const char *uri)
                                                          "OverlayZStacking",
                                                          QStringLiteral("Cannot create objects of type OverlayZStacking, use it as an attached property"));
     qmlRegisterType(componentUrl(QStringLiteral("InlineViewHeader.qml")), uri, 2, 20, "InlineViewHeader");
+    qmlRegisterUncreatableType<ActionExtAttached>(uri,
+                                                  2,
+                                                  20,
+                                                  "ActionExt",
+                                                  QStringLiteral("Cannot create objects of type ActionExt, use it as an attached property"));
 
     qmlRegisterType<HeaderFooterLayout>(uri, 2, 20, "HeaderFooterLayout");
 

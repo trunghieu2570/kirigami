@@ -29,6 +29,8 @@ target_include_directories(KirigamiPlugin PRIVATE
 )
 
 target_sources(KirigamiPlugin PRIVATE
+    actionextattached.cpp
+    actionextattached.h
     colorutils.cpp
     colorutils.h
     columnview.cpp

@@ -31,6 +31,7 @@ macro(kirigami_add_tests)
 endmacro()
 
 kirigami_add_tests(
+    tst_actionext.qml
     tst_actiontoolbar.qml
     tst_basiclistitem_tooltip.qml
     tst_colorutils.qml
