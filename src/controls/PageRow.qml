@@ -224,7 +224,7 @@ QT.Control {
             return null
         }
 
-        const item = pagesLogic.insertPage_unchecked(depth, page, properties)
+        const item = pagesLogic.insertPage_unchecked(Math.max(0, currentIndex + 1), page, properties)
         currentIndex = depth - 1
         return item
     }
@@ -833,8 +833,10 @@ QT.Control {
         }
 
         function insertPage_unchecked(position, page, properties) {
-            if (position >= 0 && position < root.depth - 2) {
-                columnView.pop(root.items[position]);
+            if (position >= 0 && position < root.depth) {
+                // position - 1 because in pop() the page in the parameter is the last surviving,
+                // but we want to replace the thing at position
+                columnView.pop(root.items[position - 1]);
             }
 
             // figure out if more than one page is being pushed

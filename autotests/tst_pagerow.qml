@@ -76,11 +76,22 @@ TestCase {
 
     function test_goBack() {
         compare(mainWindow.pageStack.depth, 0)
-        mainWindow.pageStack.push(randomPage)
-        mainWindow.pageStack.push(randomPage)
+        compare(mainWindow.pageStack.currentIndex, -1)
+
+        let page = mainWindow.pageStack.push(randomPage)
+        print(page)
+        tryCompare(spyCurrentIndex, "count", 1)
+        compare(mainWindow.pageStack.depth, 1)
+        compare(mainWindow.pageStack.currentIndex, 0)
+
+        page = mainWindow.pageStack.push(randomPage)
+        print(page)
+        tryCompare(spyCurrentIndex, "count", 2)
+        compare(mainWindow.pageStack.depth, 2)
+
         compare(mainWindow.pageStack.depth, 2)
         compare(mainWindow.pageStack.currentIndex, 1)
-        compare(spyCurrentIndex.count, 3)
+
         spyActive.clear()
         mainWindow.requestActivate()
         spyCurrentIndex.clear()
@@ -96,6 +107,28 @@ TestCase {
         compare(spyCurrentIndex.count, 1)
         mainWindow.pageStack.pop()
         compare(mainWindow.pageStack.depth, 1)
+    }
+
+    function test_pushForgettingHistory() {
+        let page = mainWindow.pageStack.push(randomPage)
+        page.title = "P1"
+        tryCompare(spyCurrentIndex, "count", 1)
+        page = mainWindow.pageStack.push(randomPage)
+        page.title = "P2"
+        tryCompare(spyCurrentIndex, "count", 2)
+        page = mainWindow.pageStack.push(randomPage)
+        page.title = "P3"
+        tryCompare(spyCurrentIndex, "count", 3)
+
+        compare(mainWindow.pageStack.depth, 3)
+        compare(mainWindow.pageStack.currentIndex, 2)
+        mainWindow.pageStack.currentIndex = 0
+        page = mainWindow.pageStack.push(randomPage)
+        compare(mainWindow.pageStack.depth, 2)
+        compare(mainWindow.pageStack.items[0].title, "P1")
+        // This is the newly pushed page, everything else went away
+        compare(mainWindow.pageStack.items[1].title, "")
+        compare(mainWindow.pageStack.items[1], page)
     }
 
     property int destructions: 0
@@ -126,6 +159,6 @@ TestCase {
 
         compare(mainWindow.pageStack.depth, 0)
         spyDestructions.wait()
-        compare(testCase.destructions, 2)
+        compare(testCase.destructions, 3)
     }
 }

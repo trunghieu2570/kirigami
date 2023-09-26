@@ -1285,9 +1285,12 @@ QQuickItem *ColumnView::pop()
 
 void ColumnView::clear()
 {
-    for (QQuickItem *item : std::as_const(m_contentItem->m_items)) {
+    // Don't do an iterator on a list that gets progressively destroyed, treat it as a stack
+    while (!m_contentItem->m_items.isEmpty()) {
+        QQuickItem *item = m_contentItem->m_items.first();
         removeItem(item);
     }
+
     m_contentItem->m_items.clear();
     Q_EMIT contentChildrenChanged();
 }
