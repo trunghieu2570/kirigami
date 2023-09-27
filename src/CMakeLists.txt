@@ -214,7 +214,6 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.20 SOURCES
 )
 
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private SOURCES
-    controls/private/ActionButton.qml
     controls/private/ActionIconGroup.qml
     controls/private/ActionMenuItem.qml
     controls/private/ActionsMenu.qml
@@ -239,6 +238,7 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private/globaltoolbar SOURCES
     controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml
     controls/private/globaltoolbar/TitlesPageHeader.qml
     controls/private/globaltoolbar/ToolBarPageHeader.qml
+    controls/private/globaltoolbar/ToolBarPageFooter.qml
 )
 
 ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates SOURCES

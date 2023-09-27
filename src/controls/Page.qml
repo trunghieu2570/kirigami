@@ -24,7 +24,6 @@ QQC2.Page {
 
 //BEGIN properties
     padding: Kirigami.Units.gridUnit
-    bottomPadding: actionButtons.item ? actionButtons.height : verticalPadding
 
     /**
      * @brief If the central element of the page is a Flickable
@@ -202,7 +201,7 @@ QQC2.Page {
         headerChanged();
         parentChanged(root.parent);
         globalToolBar.syncSource();
-        actionButtons.pageComplete = true
+        bottomToolBar.pageComplete = true
     }
 
     onParentChanged: {
@@ -287,58 +286,43 @@ QQC2.Page {
                     });
                 }
             }
-        },
-        // bottom action buttons
-        Loader {
-            id: actionButtons
-            z: 9999
-            parent: root
-            anchors {
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
+        }
+    ]
+    // bottom action buttons
+    footer: Loader {
+        id: bottomToolBar
+
+        property T2.Page page: root
+        property bool pageComplete: false
+
+        active: {
+            // Important! Do not do anything until the page has been
+            // completed, so we are sure what the globalToolBarStyle is,
+            // otherwise we risk creating the content and then discarding it.
+            if (!pageComplete) {
+                return false;
             }
-            // if the page doesn't inherit, assume it has custom colors we want to use them here too
-            Kirigami.Theme.inherit: !root.Kirigami.Theme.inherit
-            Kirigami.Theme.colorSet: Kirigami.Theme.Button
 
-            // It should be T2.Page, Qt 5.7 doesn't like it
-            property Item page: root
-            height: item ? item.implicitHeight : 0
+            if ((globalToolBar.row && globalToolBar.row.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.ToolBar)
+                || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar
+                || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.None) {
+                return false;
+            }
 
-            asynchronous: true
+            if (root.actions.length === 0) {
+                return false;
+            }
 
-            property bool pageComplete: false
-
-            active: {
-                // Important! Do not do anything until the page has been
-                // completed, so we are sure what the globalToolBarStyle is,
-                // otherwise we risk creating the content and then discarding it.
-                if (!pageComplete) {
-                    return false;
-                }
-
-                if ((globalToolBar.row && globalToolBar.row.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.ToolBar)
-                    || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar
-                    || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.None) {
-                    return false;
-                }
-
-                if (root.actions.length === 0) {
-                    return false;
-                }
-
-                // Legacy
-                if (typeof applicationWindow === "undefined") {
-                    return true;
-                }
-
+            // Legacy
+            if (typeof applicationWindow === "undefined") {
                 return true;
             }
 
-            source: Qt.resolvedUrl("./private/ActionButton.qml")
+            return true;
         }
-    ]
+
+        source: Qt.resolvedUrl("./private/globaltoolbar/ToolBarPageFooter.qml")
+    }
 
     Layout.fillWidth: true
 }
