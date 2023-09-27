@@ -270,7 +270,7 @@ class ShadowedRectangle : public QQuickItem
      *
      * @see RenderType
      */
-    Q_PROPERTY(RenderType renderType READ renderType WRITE setRenderType CONSTANT)
+    Q_PROPERTY(RenderType renderType READ renderType WRITE setRenderType NOTIFY renderTypeChanged)
 
     /**
      * @brief This property tells whether software rendering is being used.
