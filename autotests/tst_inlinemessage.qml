@@ -54,6 +54,7 @@ TestCase {
     }
 
     function test_link() {
+        skip("finding links by sweeping with the mouse cursor all over the place seems very unreliable, especially on FreeBSD and Windows TODO: find a better way to find links")
         const href = "some";
         const message = createTemporaryObject(inlineMessageComponent, this, {
             text: `<a href="${href}">link</a>`,

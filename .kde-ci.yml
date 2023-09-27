@@ -5,6 +5,6 @@ Dependencies:
 
 Options:
   test-before-installing: True
-  require-passing-tests-on: [ 'Linux/Qt5', 'FreeBSD/Qt5', 'Windows/Qt5' ]
+  require-passing-tests-on: [ 'Linux/Qt6', 'FreeBSD/Qt6', 'Windows/Qt6' ]
   cmake-options: -DBUILD_EXAMPLES=ON
   cppcheck-ignore-files: ['templates/']
