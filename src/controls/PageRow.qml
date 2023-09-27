@@ -224,7 +224,7 @@ QT.Control {
             return null
         }
 
-        const item = pagesLogic.insertPage_unchecked(Math.max(0, currentIndex + 1), page, properties)
+        const item = pagesLogic.insertPage_unchecked(currentIndex + 1, page, properties)
         currentIndex = depth - 1
         return item
     }
