@@ -297,9 +297,9 @@ void MnemonicAttached::updateSequence()
 
     // Preserve strings like "One & Two" where & is not an accelerator escape
     const QString text = label().replace(QStringLiteral("& "), QStringLiteral("&& "));
+    m_actualRichTextLabel = removeAcceleratorMarker(text);
 
     if (!m_enabled) {
-        m_actualRichTextLabel = removeAcceleratorMarker(text);
         // was the label already completely plain text? try to limit signal emission
         if (m_mnemonicLabel != m_actualRichTextLabel) {
             m_mnemonicLabel = m_actualRichTextLabel;
@@ -309,8 +309,8 @@ void MnemonicAttached::updateSequence()
         return;
     }
 
-    m_actualRichTextLabel = removeAcceleratorMarker(text);
-    m_mnemonicLabel = m_actualRichTextLabel;
+    m_mnemonicLabel = text;
+    m_mnemonicLabel.replace(QRegularExpression(QLatin1String("\\&([^\\&])")), QStringLiteral("\\1"));
 
     if (!m_weights.isEmpty()) {
         QMap<int, QChar>::const_iterator i = m_weights.constEnd();
@@ -332,7 +332,6 @@ void MnemonicAttached::updateSequence()
                 m_sequence = ks;
                 m_richTextLabel = text;
                 m_richTextLabel.replace(QRegularExpression(QLatin1String("\\&([^\\&])")), QStringLiteral("\\1"));
-                m_actualRichTextLabel = m_richTextLabel;
                 m_mnemonicLabel = text;
                 const int mnemonicPos = m_mnemonicLabel.indexOf(c);
 
