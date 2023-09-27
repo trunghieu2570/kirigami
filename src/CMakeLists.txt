@@ -293,6 +293,13 @@ if (HAVE_OpenMP)
 target_link_libraries(KirigamiPlugin PRIVATE OpenMP::OpenMP_CXX)
 endif()
 
+if (NOT BUILD_SHARED_LIBS)
+    # Ensure we include any imported plugins into the main plugin when building
+    # statically as otherwise the plugin will not be found when importing the 
+    # main plugin.
+    target_link_libraries(KirigamiPlugin PRIVATE KirigamiDelegates)
+endif()
+
 ecm_finalize_qml_module(KirigamiPlugin DESTINATION ${KDE_INSTALL_QMLDIR})
 
 if (ANDROID)
