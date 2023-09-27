@@ -63,8 +63,8 @@ kirigami_add_tests(
     wheelhandler/tst_scrolling.qml
 )
 
-set_tests_properties(tst_theme.qml PROPERTIES
-    ENVIRONMENT "QT_QUICK_CONTROLS_STYLE=default;KIRIGAMI_FORCE_STYLE=1"
+set_tests_properties(tst_theme.qml tst_actiontoolbar.qml PROPERTIES
+    ENVIRONMENT "QT_QUICK_CONTROLS_STYLE=Basic;KIRIGAMI_FORCE_STYLE=1"
 )
 
 set_tests_properties(
