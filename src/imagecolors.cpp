@@ -323,7 +323,6 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage) const
 #if HAVE_OpenMP
     static const int numCore = std::min(8, omp_get_num_procs());
     omp_set_num_threads(numCore);
-    std::vector<decltype(imageData.m_samples)> tempSamples(numCore, decltype(imageData.m_samples){});
 #else
     constexpr int numCore = 1;
 #endif
@@ -347,19 +346,10 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage) const
             r += qRed(rgb);
             g += qGreen(rgb);
             b += qBlue(rgb);
-#if HAVE_OpenMP
-            tempSamples[omp_get_thread_num()] << rgb;
-#else
+#pragma omp critical
             imageData.m_samples << rgb;
-#endif
         }
     } // END omp parallel for
-
-#if HAVE_OpenMP
-    for (auto &s : tempSamples) {
-        imageData.m_samples << std::move(s);
-    }
-#endif
 
     if (imageData.m_samples.isEmpty()) {
         return imageData;
