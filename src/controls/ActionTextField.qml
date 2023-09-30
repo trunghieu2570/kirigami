@@ -6,6 +6,7 @@
 
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
+import QtQuick.Templates as T
 import org.kde.kirigami 2.20 as Kirigami
 
 /**
@@ -56,7 +57,7 @@ QQC2.TextField {
      *
      * @since 5.56
      */
-    property list<QtObject> leftActions
+    property list<T.Action> leftActions
 
     /**
      * @brief This property holds a list of actions that will be displayed on the right side of the text field.
@@ -65,7 +66,7 @@ QQC2.TextField {
      *
      * @since 5.56
      */
-    property list<QtObject> rightActions
+    property list<T.Action> rightActions
 
     property alias _leftActionsRow: leftActionsRow
     property alias _rightActionsRow: rightActionsRow
