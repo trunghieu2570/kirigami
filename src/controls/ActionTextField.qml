@@ -151,18 +151,18 @@ QQC2.TextField {
                 anchors.verticalCenter: parent.verticalCenter
 
                 source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
-                active: leftActionArea.containsPress || leftActionArea.activeFocus
+                active: actionArea.containsPress || actionArea.activeFocus
                 visible: !(modelData instanceof Kirigami.Action) || modelData.visible
                 enabled: modelData.enabled
 
                 ActionIconMouseArea {
-                    id: leftActionArea
+                    id: actionArea
                     Accessible.name: delegate.modelData.text
                     onClicked: mouse => delegate.modelData.trigger()
                 }
 
                 QQC2.ToolTip {
-                    visible: (rightActionArea.containsMouse || rightActionArea.activeFocus) && (delegate.modelData.text.length > 0)
+                    visible: (actionArea.containsMouse || actionArea.activeFocus) && (delegate.modelData.text.length > 0)
                     text: delegate.modelData.text
                 }
             }
@@ -194,18 +194,18 @@ QQC2.TextField {
                 anchors.verticalCenter: parent.verticalCenter
 
                 source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
-                active: rightActionArea.containsPress || rightActionArea.activeFocus
+                active: actionArea.containsPress || actionArea.activeFocus
                 visible: !(modelData instanceof Kirigami.Action) || modelData.visible
                 enabled: modelData.enabled
 
                 ActionIconMouseArea {
-                    id: rightActionArea
+                    id: actionArea
                     Accessible.name: delegate.modelData.text
                     onClicked: mouse => delegate.modelData.trigger()
                 }
 
                 QQC2.ToolTip {
-                    visible: (rightActionArea.containsMouse || rightActionArea.activeFocus) && (delegate.modelData.text.length > 0)
+                    visible: (actionArea.containsMouse || actionArea.activeFocus) && (delegate.modelData.text.length > 0)
                     text: delegate.modelData.text
                 }
             }
