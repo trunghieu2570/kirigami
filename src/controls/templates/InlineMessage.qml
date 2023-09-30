@@ -183,19 +183,21 @@ T.Control {
         }
 
         implicitHeight: {
-            if (actionsLayout.atBottom) {
-                return label.implicitHeight + actionsLayout.height + Kirigami.Units.gridUnit
+            if (atBottom) {
+                return label.implicitHeight + actionsLayout.implicitHeight + actionsLayout.anchors.topMargin
             } else {
-                return Math.max(icon.implicitHeight, label.implicitHeight, closeButton.implicitHeight, actionsLayout.height)
+                return Math.max(icon.implicitHeight, label.implicitHeight, closeButton.implicitHeight, actionsLayout.implicitHeight)
             }
         }
 
         readonly property real remainingWidth: width - (
             icon.width
-            + labelArea.anchors.leftMargin + label.implicitWidth + labelArea.anchors.rightMargin
+            + label.anchors.leftMargin + label.implicitWidth + label.anchors.rightMargin
             + (root.showCloseButton ? closeButton.width : 0)
         )
-        readonly property bool multiline: remainingWidth <= 0 || actionsLayout.atBottom
+        readonly property bool multiline: remainingWidth <= 0 || atBottom
+
+        readonly property bool atBottom: (root.actions.length > 0) && (label.lineCount > 1 || actionsLayout.implicitWidth > remainingWidth)
 
         Kirigami.Icon {
             id: icon
@@ -203,11 +205,7 @@ T.Control {
             width: Kirigami.Units.iconSizes.smallMedium
             height: Kirigami.Units.iconSizes.smallMedium
 
-            anchors {
-                left: parent.left
-                top: actionsLayout.atBottom ? parent.top : undefined
-                verticalCenter: actionsLayout.atBottom ? undefined : parent.verticalCenter
-            }
+            anchors.left: parent.left
 
             source: {
                 if (root.icon.name) {
@@ -225,10 +223,29 @@ T.Control {
             }
 
             color: root.icon.color
+
+            states: [
+                State {
+                    when: contentLayout.atBottom
+                    AnchorChanges {
+                        target: icon
+                        anchors.top: contentLayout.top
+                    }
+                },
+                // States are evaluated in the order they are declared.
+                // This is a fallback state.
+                State {
+                    when: true
+                    AnchorChanges {
+                        target: icon
+                        anchors.verticalCenter: contentLayout.verticalCenter
+                    }
+                }
+            ]
         }
 
-        Item {
-            id: labelArea
+        Kirigami.SelectableLabel {
+            id: label
 
             anchors {
                 left: icon.right
@@ -236,28 +253,45 @@ T.Control {
                 right: root.showCloseButton ? closeButton.left : parent.right
                 rightMargin: root.showCloseButton ? Kirigami.Units.smallSpacing : 0
                 top: parent.top
-                bottom: contentLayout.multiline ? undefined : parent.bottom
             }
 
-            implicitWidth: label.implicitWidth
-            height: contentLayout.multiline ? label.implicitHeight : implicitHeight
+            color: Kirigami.Theme.textColor
+            wrapMode: Text.WordWrap
 
-            Kirigami.SelectableLabel {
-                id: label
+            text: root.text
 
-                width: parent.width
-                height: parent.height
+            verticalAlignment: Text.AlignVCenter
 
-                color: Kirigami.Theme.textColor
-                wrapMode: Text.WordWrap
+            // QTBUG-117667 TextEdit (super-type of SelectableLabel) needs
+            // very specific state-management trick so it doesn't get stuck.
+            // State names serve purely as a description.
+            states: [
+                State {
+                    name: "multi-line"
+                    when: contentLayout.multiline
+                    AnchorChanges {
+                        target: label
+                        anchors.bottom: undefined
+                    }
+                    PropertyChanges {
+                        target: label
+                        height: label.implicitHeight
+                    }
+                },
+                // States are evaluated in the order they are declared.
+                // This is a fallback state.
+                State {
+                    name: "single-line"
+                    when: true
+                    AnchorChanges {
+                        target: label
+                        anchors.bottom: label.parent.bottom
+                    }
+                }
+            ]
 
-                text: root.text
-
-                verticalAlignment: Text.AlignVCenter
-
-                onLinkHovered: link => root.linkHovered(link)
-                onLinkActivated: link => root.linkActivated(link)
-            }
+            onLinkHovered: link => root.linkHovered(link)
+            onLinkActivated: link => root.linkActivated(link)
         }
 
         Kirigami.ActionToolBar {
@@ -268,14 +302,12 @@ T.Control {
             visible: root.actions.length > 0
             alignment: Qt.AlignRight
 
-            readonly property bool atBottom: (root.actions.length > 0) && (label.lineCount > 1 || implicitWidth > contentLayout.remainingWidth)
-
             anchors {
                 left: parent.left
-                top: atBottom ? labelArea.bottom : parent.top
-                topMargin: atBottom ? Kirigami.Units.gridUnit : 0
-                right: (!atBottom && root.showCloseButton) ? closeButton.left : parent.right
-                rightMargin: !atBottom && root.showCloseButton ? Kirigami.Units.smallSpacing : 0
+                top: contentLayout.atBottom ? label.bottom : parent.top
+                topMargin: contentLayout.atBottom ? Kirigami.Units.largeSpacing : 0
+                right: (!contentLayout.atBottom && root.showCloseButton) ? closeButton.left : parent.right
+                rightMargin: !contentLayout.atBottom && root.showCloseButton ? Kirigami.Units.smallSpacing : 0
             }
         }
 
@@ -286,11 +318,11 @@ T.Control {
 
             anchors {
                 right: parent.right
-                top: actionsLayout.atBottom ? parent.top : undefined
-                verticalCenter: actionsLayout.atBottom ? undefined : parent.verticalCenter
+                top: contentLayout.atBottom ? parent.top : undefined
+                verticalCenter: contentLayout.atBottom ? undefined : parent.verticalCenter
             }
 
-            height: actionsLayout.atBottom ? implicitHeight : implicitHeight
+            height: contentLayout.atBottom ? implicitHeight : implicitHeight
 
             icon.name: "dialog-close"
 
