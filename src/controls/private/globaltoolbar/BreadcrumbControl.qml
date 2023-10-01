@@ -76,7 +76,7 @@ Flickable {
                         color: Kirigami.Theme.textColor
                         verticalAlignment: Text.AlignVCenter
                         wrapMode: Text.NoWrap
-                        text: delegateLayout.page ? delegateLayout.page.title : ""
+                        text: delegateLayout.page?.title ?? ""
                         opacity: modelData === pageRow.currentIndex ? 1 : 0.4
                     }
                 }
