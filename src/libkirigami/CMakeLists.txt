@@ -123,13 +123,3 @@ if(BUILD_QCH)
     )
 endif()
 
-include(ECMGeneratePriFile)
-ecm_generate_pri_file(BASE_NAME Kirigami2
-    LIB_NAME KF6Kirigami2
-    DEPS "core"
-    FILENAME_VAR PRI_FILENAME
-    INCLUDE_INSTALL_DIR ${KIRIGAMI_INSTALL_INCLUDEDIR}
-)
-install(FILES ${PRI_FILENAME}
-        DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
-
