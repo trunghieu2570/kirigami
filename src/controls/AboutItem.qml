@@ -376,7 +376,6 @@ Item {
         }
 
         Kirigami.Heading {
-            height: visible ? implicitHeight : 0
             Kirigami.FormData.isSection: visible
             text: qsTr("Credits")
             visible: repCredits.count > 0
@@ -389,7 +388,6 @@ Item {
         }
 
         Kirigami.Heading {
-            height: visible ? implicitHeight : 0
             Kirigami.FormData.isSection: visible
             text: qsTr("Translators")
             visible: repTranslators.count > 0
