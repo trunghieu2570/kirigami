@@ -1,12 +1,12 @@
 /*
  *  SPDX-FileCopyrightText: 2018 Aleix Pol Gonzalez <aleixpol@blue-systems.com>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
 import QtQuick
 import QtQuick.Controls as QQC2
-import QtQuick.Window
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
@@ -85,6 +85,15 @@ Kirigami.ScrollablePage {
      * default: `"https://kde.org/community/donations" when application id starts with "org.kde.", otherwise it is empty.`
      */
     property alias donateUrl: aboutItem.donateUrl
+
+    /**
+     * @brief This property controls whether to load avatars by URL.
+     *
+     * If set to false, a fallback "user" icon will be displayed.
+     *
+     * default: ``false``
+     */
+    property alias loadAvatars: aboutItem.loadAvatars
 
     /** @internal */
     default property alias _content: aboutItem._content

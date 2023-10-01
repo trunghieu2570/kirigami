@@ -1,12 +1,12 @@
 /*
  *  SPDX-FileCopyrightText: 2018 Aleix Pol Gonzalez <aleixpol@blue-systems.com>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
 import QtQuick
 import QtQuick.Controls as QQC2
-import QtQuick.Window
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
@@ -90,6 +90,24 @@ Item {
     /** @internal */
     default property alias _content: form.data
 
+    // if aboutData is a native KAboutData object, avatarUrl should be a proper url instance,
+    // otherwise if it was defined as a string in pure JavaScript it should work too.
+    readonly property bool __hasAvatars: aboutItem.aboutData.authors.some(__hasAvatar)
+
+    function __hasAvatar(person): bool {
+        return typeof person.avatarUrl !== "undefined"
+            && person.avatarUrl.toString().length > 0;
+    }
+
+    /**
+     * @brief This property controls whether to load avatars by URL.
+     *
+     * If set to false, a fallback "user" icon will be displayed.
+     *
+     * default: ``false``
+     */
+    property bool loadAvatars: false
+
     implicitHeight: form.implicitHeight
     implicitWidth: form.implicitWidth
 
@@ -97,8 +115,14 @@ Item {
         id: personDelegate
 
         RowLayout {
+            id: delegate
+
+            // type: KAboutPerson | { name?, task?, emailAddress?, webAddress?, avatarUrl? }
+            required property var modelData
+
+            property bool hasAvatar: aboutItem.__hasAvatar(modelData)
+
             Layout.fillWidth: true
-            property bool hasRemoteAvatar: !!modelData.avatarUrl
 
             spacing: Kirigami.Units.smallSpacing * 2
 
@@ -110,7 +134,7 @@ Item {
 
                 fallback: "user"
                 source: {
-                    if (hasRemoteAvatar && remoteAvatars.checked) {
+                    if (delegate.hasAvatar && aboutItem.loadAvatars) {
                         // Appending to the params of the url does not work, thus the search is set
                         const url = new URL(modelData.avatarUrl);
                         const params = new URLSearchParams(url.search);
@@ -345,33 +369,16 @@ Item {
 
         QQC2.CheckBox {
             id: remoteAvatars
-            visible: authorsRepeater.hasAnyRemoteAvatars
-            checked: false
+            visible: aboutItem.__hasAvatars
+            checked: aboutItem.loadAvatars
+            onToggled: aboutItem.loadAvatars = checked
             text: qsTr("Show author photos")
-
-            Timer {
-                id: remotesThrottle
-                repeat: false
-                interval: 1
-                onTriggered: {
-                    let hasAnyRemotes = false;
-                    for (const item of authorsRepeater.children) {
-                        if (item.hasRemoteAvatar) {
-                            hasAnyRemotes = true;
-                            break;
-                        }
-                    }
-                    authorsRepeater.hasAnyRemoteAvatars = hasAnyRemotes;
-                }
-            }
         }
 
         Repeater {
             id: authorsRepeater
             model: aboutItem.aboutData.authors
-            property bool hasAnyRemoteAvatars
             delegate: personDelegate
-            onCountChanged: remotesThrottle.start()
         }
 
         Kirigami.Heading {
