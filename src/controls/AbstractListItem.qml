@@ -169,5 +169,5 @@ QQC2.ItemDelegate {
     hoverEnabled: true
 
     Accessible.role: Accessible.ListItem
-    highlighted: focus && ListView.isCurrentItem && ListView.view?.keyNavigationEnabled
+    highlighted: focus && ListView.isCurrentItem && (ListView.view?.keyNavigationEnabled ?? false)
 }
