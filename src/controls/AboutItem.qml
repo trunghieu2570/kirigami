@@ -356,7 +356,6 @@ Item {
                 onTriggered: {
                     let hasAnyRemotes = false;
                     for (const item of authorsRepeater.children) {
-                        const itm = authorsRepeater.itemAt(i);
                         if (item.hasRemoteAvatar) {
                             hasAnyRemotes = true;
                             break;
