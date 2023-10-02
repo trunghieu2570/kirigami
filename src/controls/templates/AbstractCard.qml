@@ -29,28 +29,14 @@ T.ItemDelegate {
     /**
      * @brief This property holds an item that serves as a header.
      *
-     * This item will be positioned on top if headerOrientation is ``Qt.Vertical``
-     * or on the left if it is ``Qt.Horizontal``.
+     * This item will be positioned on top.
      */
     property Item header
 
     /**
-     * @brief This property sets the card's orientation.
-     *
-     * * ``Qt.Vertical``: the header will be positioned on top
-     * * ``Qt.Horizontal``: the header will be positioned on the left (or right if an RTL layout is used)
-     *
-     * default: ``Qt.Vertical``
-     *
-     * @property Qt::Orientation headerOrientation
-     */
-    property int headerOrientation: Qt.Vertical
-
-    /**
      * @brief This property holds an item that serves as a footer.
      *
-     * This item will be positioned at the bottom if headerOrientation is ``Qt.Vertical``
-     * or on the right if it is ``Qt.Horizontal``.
+     * This item will be positioned at the bottom
      */
     property Item footer
 
@@ -71,7 +57,7 @@ T.ItemDelegate {
 
     hoverEnabled: !Kirigami.Settings.tabletMode && showClickFeedback
     // if it's in a CardLayout, try to expand horizontal cards to both columns
-    Layout.columnSpan: headerOrientation === Qt.Horizontal && parent.hasOwnProperty("columns") ? parent.columns : 1
+    Layout.columnSpan: 1
 
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.View
@@ -95,7 +81,7 @@ T.ItemDelegate {
             rightMargin: root.rightPadding
             bottomMargin: root.bottomPadding
         }
-        columns: root.headerOrientation === Qt.Vertical ? 1 : 2
+        columns: 1
         function preferredHeight(item) {
             if (!item) {
                 return 0;
@@ -108,10 +94,9 @@ T.ItemDelegate {
         Item {
             id: headerParent
             Layout.fillWidth: true
-            Layout.fillHeight: root.headerOrientation === Qt.Horizontal
-            Layout.rowSpan: root.headerOrientation === Qt.Vertical ? 1 : 2
+            Layout.rowSpan: 1
             Layout.preferredWidth: root.header?.implicitWidth ?? 0
-            Layout.preferredHeight: root.headerOrientation === Qt.Vertical ? mainLayout.preferredHeight(root.header) : -1
+            Layout.preferredHeight: mainLayout.preferredHeight(root.header)
             visible: children.length > 0
         }
         Item {
