@@ -49,6 +49,7 @@ kirigami_add_tests(
     tst_pagerow.qml
     tst_placeholdermessage.qml
     tst_sceneposition.qml
+    tst_scrollablepage.qml
     tst_spellcheck.qml
     tst_theme.qml
 
