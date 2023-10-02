@@ -24,6 +24,13 @@ T.AbstractButton {
     property bool closable: true
 
     /**
+     * @brief This property holds whether the icon should be masked or not. This controls the Kirigami.Icon.isMask property.
+     *
+     * default: ``false``
+     */
+    property bool iconMask: false
+
+    /**
      * @brief This signal is emitted when the close button has been clicked.
      */
     signal removed()

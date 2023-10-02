@@ -64,6 +64,7 @@ KT.Chip {
             Layout.preferredHeight: Kirigami.Units.iconSizes.small
             Layout.leftMargin: Kirigami.Units.smallSpacing
             color: chip.icon.color
+            isMask: chip.iconMask
             source: chip.icon.name || chip.icon.source
         }
         QQC2.Label {
