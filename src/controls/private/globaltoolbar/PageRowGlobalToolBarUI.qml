@@ -8,6 +8,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
+import "../../templates" as KT
 import "../../templates/private" as TP
 import "../" as P
 
@@ -24,6 +25,23 @@ Kirigami.AbstractApplicationHeader {
     readonly property bool breadcrumbVisible: layerIsMainRow && breadcrumbLoader.active
     readonly property bool layerIsMainRow: (root.layers.currentItem.hasOwnProperty("columnView")) ? root.layers.currentItem.columnView === root.columnView : false
     readonly property Item currentItem: layerIsMainRow ? root.columnView : root.layers.currentItem
+
+    function __shouldHandleAnchorBeVisible(handleAnchor: Item, drawerProperty: string, itemProperty: string): bool {
+        if (typeof applicationWindow === "undefined") {
+            return false;
+        }
+        const w = applicationWindow();
+        if (!w) {
+            return false;
+        }
+        const drawer = w[drawerProperty] as KT.OverlayDrawer;
+        if (!drawer || !drawer.enabled || !drawer.handleVisible || drawer.handle.handleAnchor !== handleAnchor) {
+            return false;
+        }
+        const item = breadcrumbLoader.pageRow?.[itemProperty] as Item;
+        const style = item?.globalToolBarStyle ?? Kirigami.ApplicationHeaderStyle.None;
+        return globalToolBar.canContainHandles || style === Kirigami.ApplicationHeaderStyle.ToolBar;
+    }
 
     height: visible ? implicitHeight : 0
     minimumHeight: globalToolBar.minimumHeight
@@ -54,11 +72,7 @@ Kirigami.AbstractApplicationHeader {
 
         Item {
             id: leftHandleAnchor
-            visible: (typeof applicationWindow() !== "undefined" && applicationWindow().globalDrawer && applicationWindow().globalDrawer.enabled && applicationWindow().globalDrawer.handleVisible &&
-            applicationWindow().globalDrawer.handle.handleAnchor === leftHandleAnchor) &&
-            (globalToolBar.canContainHandles || (breadcrumbLoader.pageRow.leadingVisibleItem &&
-            breadcrumbLoader.pageRow.leadingVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar))
-
+            visible: header.__shouldHandleAnchorBeVisible(leftHandleAnchor, "globalDrawer", "leadingVisibleItem")
 
             Layout.preferredHeight: Math.min(backButton.implicitHeight, parent.height)
             Layout.preferredWidth: height
@@ -134,20 +148,17 @@ Kirigami.AbstractApplicationHeader {
 
             asynchronous: true
 
-            active: globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.Breadcrumb && currentItem && currentItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.None
+            active: globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.Breadcrumb
+                && header.currentItem
+                && header.currentItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.None
 
             source: Qt.resolvedUrl("BreadcrumbControl.qml")
         }
 
         Item {
             id: rightHandleAnchor
-            visible: (typeof applicationWindow() !== "undefined" &&
-                    applicationWindow().contextDrawer &&
-                    applicationWindow().contextDrawer.enabled &&
-                    applicationWindow().contextDrawer.handleVisible &&
-                    applicationWindow().contextDrawer.handle.handleAnchor === rightHandleAnchor &&
-                    (globalToolBar.canContainHandles || (breadcrumbLoader.pageRow && breadcrumbLoader.pageRow.trailingVisibleItem &&
-                        breadcrumbLoader.pageRow.trailingVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar)))
+            visible: header.__shouldHandleAnchorBeVisible(leftHandleAnchor, "contextDrawer", "trailingVisibleItem")
+
             Layout.fillHeight: true
             Layout.preferredWidth: height
         }
