@@ -346,6 +346,7 @@ Kirigami.Page {
             scrollingArea.visible = true;
             root.flickable.contentHeight = Qt.binding(() => scrollingArea.implicitHeight - root.flickable.topMargin - root.flickable.bottomMargin);
             root.flickable.contentWidth = Qt.binding(() => scrollingArea.implicitWidth);
+            scrollView.forceActiveFocus(Qt.TabFocusReason); // QTBUG-44043 : Focus on currentItem instead of pageStack itself
         }
         root.flickable.flickableDirection = Flickable.VerticalFlick;
     }
