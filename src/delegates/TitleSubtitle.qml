@@ -90,6 +90,10 @@ Item {
      * Is the subtitle visible?
      */
     readonly property bool subtitleVisible: subtitleItem.visible || reserveSpaceForSubtitle
+    /**
+     * Is the title or subtitle truncated?
+     */
+    readonly property bool truncated: labelItem.truncated || subtitleItem.truncated
 
     implicitWidth: Math.max(labelItem.implicitWidth, subtitleItem.implicitWidth)
     implicitHeight: labelItem.implicitHeight + (subtitleVisible ? subtitleItem.implicitHeight : 0)

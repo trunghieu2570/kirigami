@@ -100,6 +100,10 @@ Item {
      * @copydoc Kirigami::TitleSubtitle::elide
      */
     property alias elide: titleSubtitle.elide
+    /**
+     * @copydoc Kirigami::TitleSubtitle::truncated
+     */
+    property alias truncated: titleSubtitle.truncated
 
     /**
      * Grouped property for icon properties.
