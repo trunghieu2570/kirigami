@@ -87,10 +87,8 @@ void StyleSelector::setBaseUrl(const QUrl &baseUrl)
 
 QString StyleSelector::resolveFilePath(const QString &path)
 {
-#if defined(KIRIGAMI_BUILD_TYPE_STATIC)
+#if defined(KIRIGAMI_BUILD_TYPE_STATIC) || defined(Q_OS_ANDROID)
     return QStringLiteral(":/qt/qml/org/kde/kirigami/") + path;
-#elif defined(Q_OS_ANDROID)
-    return QStringLiteral(":/android_rcc_bundle/qml/org/kde/kirigami/") + path;
 #else
     if (s_baseUrl.isValid()) {
         return s_baseUrl.toLocalFile() + QLatin1Char('/') + path;
@@ -102,10 +100,8 @@ QString StyleSelector::resolveFilePath(const QString &path)
 
 QString StyleSelector::resolveFileUrl(const QString &path)
 {
-#if defined(KIRIGAMI_BUILD_TYPE_STATIC)
+#if defined(KIRIGAMI_BUILD_TYPE_STATIC) || defined(Q_OS_ANDROID)
     return QStringLiteral("qrc:/qt/qml/org/kde/kirigami/") + path;
-#elif defined(Q_OS_ANDROID)
-    return QStringLiteral("qrc:/android_rcc_bundle/qml/org/kde/kirigami/") + path;
 #else
     return s_baseUrl.toString() + QLatin1Char('/') + path;
 #endif
