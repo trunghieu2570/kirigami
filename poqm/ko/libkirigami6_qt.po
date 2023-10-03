@@ -97,7 +97,7 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "더 많은 동작"
 
-#: controls/Chip.qml:84
+#: controls/Chip.qml:85
 msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr "태그 삭제"
@@ -142,12 +142,12 @@ msgctxt "PasswordField|"
 msgid "Show Password"
 msgstr "암호 표시"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:79
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
 msgstr "메뉴 닫기"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:79
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr "메뉴 열기"

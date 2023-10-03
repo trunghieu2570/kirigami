@@ -98,7 +98,7 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Máis accións"
 
-#: controls/Chip.qml:84
+#: controls/Chip.qml:85
 msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr "Retirar a etiqueta"
@@ -143,12 +143,12 @@ msgctxt "PasswordField|"
 msgid "Show Password"
 msgstr "Amosar o contrasinal"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:79
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
 msgstr "Pechar o menú"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:79
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr "Abre o menú"

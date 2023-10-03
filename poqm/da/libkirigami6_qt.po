@@ -121,7 +121,7 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Flere handlinger"
 
-#: controls/Chip.qml:84
+#: controls/Chip.qml:85
 msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr ""
@@ -175,7 +175,7 @@ msgctxt "PasswordField|"
 msgid "Show Password"
 msgstr "Adgangskode"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:79
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
@@ -183,7 +183,7 @@ msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
 msgstr "Luk sidepanel"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:79
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr ""

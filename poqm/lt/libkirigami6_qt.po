@@ -123,7 +123,7 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Daugiau veiksmų"
 
-#: controls/Chip.qml:84
+#: controls/Chip.qml:85
 msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr ""
@@ -177,7 +177,7 @@ msgctxt "PasswordField|"
 msgid "Show Password"
 msgstr "Slaptažodis"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:79
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
@@ -185,7 +185,7 @@ msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
 msgstr "Užverti šoninę juostą"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:79
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr ""

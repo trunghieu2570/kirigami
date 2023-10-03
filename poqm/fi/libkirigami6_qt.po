@@ -98,7 +98,7 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Lisää toimintoja"
 
-#: controls/Chip.qml:84
+#: controls/Chip.qml:85
 msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr "Poista luokitus"
@@ -143,12 +143,12 @@ msgctxt "PasswordField|"
 msgid "Show Password"
 msgstr "Näytä salasana"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:79
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
 msgstr "Sulje valikko"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:79
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr "Avaa valikko"

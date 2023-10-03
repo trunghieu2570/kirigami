@@ -103,7 +103,7 @@ msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Več dejanj"
 
-#: controls/Chip.qml:84
+#: controls/Chip.qml:85
 msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr "Odstrani značko"
@@ -148,12 +148,12 @@ msgctxt "PasswordField|"
 msgid "Show Password"
 msgstr "Prikaži geslo"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:79
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
 msgstr "Zapri meni"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:79
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr "Odpri meni"
