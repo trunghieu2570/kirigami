@@ -38,6 +38,10 @@ QQC2.ItemDelegate {
      */
     property string subtitle
 
+    QQC2.ToolTip.text: text + (subtitle.length > 0 ? "\n\n" + subtitle : "")
+    QQC2.ToolTip.visible: (Kirigami.Settings.tabletMode ? down : hovered) && (contentItem.truncated ?? false)
+    QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+
     contentItem: IconTitleSubtitle {
         icon: icon.fromControlsIcon(delegate.icon)
         title: delegate.text
