@@ -10,7 +10,7 @@ import org.kde.kirigami 2.16 as Kirigami
 
 Kirigami.BasicThemeDefinition {
     textColor: Material.foreground
-    disabledTextColor: Qt.rgba(theme.textColor.r, theme.textColor.g, theme.textColor.b, 0.6)
+    disabledTextColor: Qt.rgba(textColor.r, textColor.g, textColor.b, 0.6)
 
     highlightColor: Material.accent
     //FIXME: something better?
@@ -18,8 +18,8 @@ Kirigami.BasicThemeDefinition {
     backgroundColor: Material.background
     alternateBackgroundColor: Qt.darker(Material.background, 1.05)
 
-    hoverColor: Material.highlightedButtonColor
-    focusColor: Material.highlightedButtonColor
+    hoverColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
+    focusColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
 
     activeTextColor: Material.primary
     activeBackgroundColor: Material.primary
@@ -35,10 +35,10 @@ Kirigami.BasicThemeDefinition {
     positiveBackgroundColor: "#27AE60"
 
     buttonTextColor: Material.foreground
-    buttonBackgroundColor: Material.buttonColor
+    buttonBackgroundColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, false, false)
     buttonAlternateBackgroundColor: Qt.darker(Material.buttonColor, 1.05)
-    buttonHoverColor: Material.highlightedButtonColor
-    buttonFocusColor: Material.highlightedButtonColor
+    buttonHoverColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
+    buttonFocusColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
 
     viewTextColor: Material.foreground
     viewBackgroundColor: Material.dialogColor
@@ -49,26 +49,26 @@ Kirigami.BasicThemeDefinition {
     selectionTextColor: Material.primaryHighlightedTextColor
     selectionBackgroundColor: Material.textSelectionColor
     selectionAlternateBackgroundColor: Qt.darker(Material.textSelectionColor, 1.05)
-    selectionHoverColor: Material.highlightedButtonColor
-    selectionFocusColor: Material.highlightedButtonColor
+    selectionHoverColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
+    selectionFocusColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
 
     tooltipTextColor: fontMetrics.Material.foreground
     tooltipBackgroundColor: fontMetrics.Material.tooltipColor
     tooltipAlternateBackgroundColor: Qt.darker(Material.tooltipColor, 1.05)
-    tooltipHoverColor: fontMetrics.Material.highlightedButtonColor
-    tooltipFocusColor: fontMetrics.Material.highlightedButtonColor
+    tooltipHoverColor: fontMetrics.Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
+    tooltipFocusColor: fontMetrics.Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
 
     complementaryTextColor: fontMetrics.Material.foreground
     complementaryBackgroundColor: fontMetrics.Material.background
     complementaryAlternateBackgroundColor: Qt.lighter(fontMetrics.Material.background, 1.05)
-    complementaryHoverColor: Material.highlightedButtonColor
-    complementaryFocusColor: Material.highlightedButtonColor
+    complementaryHoverColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
+    complementaryFocusColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
 
     headerTextColor: fontMetrics.Material.primaryTextColor
     headerBackgroundColor: fontMetrics.Material.primaryColor
     headerAlternateBackgroundColor: Qt.lighter(fontMetrics.Material.primaryColor, 1.05)
-    headerHoverColor: Material.highlightedButtonColor
-    headerFocusColor: Material.highlightedButtonColor
+    headerHoverColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
+    headerFocusColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
 
     defaultFont: fontMetrics.font
 
