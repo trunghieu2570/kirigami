@@ -97,10 +97,6 @@ Item {
      */
     property alias selected: titleSubtitle.selected
     /**
-     * @copydoc Kirigami::TitleSubtitle::showTooltip
-     */
-    property alias showTooltip: titleSubtitle.showTooltip
-    /**
      * @copydoc Kirigami::TitleSubtitle::elide
      */
     property alias elide: titleSubtitle.elide

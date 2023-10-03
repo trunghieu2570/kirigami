@@ -87,12 +87,6 @@ Item {
      */
     property bool selected: false
     /**
-     * Show a tooltip when either title or subtitle has been elided.
-     *
-     * Defaults to true.
-     */
-    property bool showTooltip: true
-    /**
      * Is the subtitle visible?
      */
     readonly property bool subtitleVisible: subtitleItem.visible || reserveSpaceForSubtitle
@@ -147,31 +141,4 @@ Item {
 
         renderType: Text.NativeRendering
     }
-
-    PointHandler {
-        id: tap
-        enabled: root.showTooltip && root.QQC2.ToolTip.text.length > 0 && Kirigami.Settings.tabletMode
-    }
-
-    HoverHandler {
-        id: hover
-        enabled: root.showTooltip && root.QQC2.ToolTip.text.length > 0
-    }
-
-    QQC2.ToolTip.text: {
-        let txt = "";
-        if (labelItem.truncated) {
-            txt += labelItem.text;
-        }
-        if (subtitleItem.truncated) {
-            if (txt.length > 0) {
-                txt += "<br/><br/>";
-            }
-            txt += subtitleItem.text;
-        }
-        return txt;
-    }
-
-    QQC2.ToolTip.visible: tap.active || hover.hovered
-    QQC2.ToolTip.delay: Kirigami.Settings.tabletMode ? Qt.styleHints.mousePressAndHoldInterval : Kirigami.Units.toolTipDelay
 }
