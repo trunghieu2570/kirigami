@@ -117,7 +117,11 @@ void KirigamiPlugin::registerTypes(const char *uri)
     Kirigami::StyleSelector::setBaseUrl(baseUrl());
 
     if (QIcon::themeName().isEmpty() && !qEnvironmentVariableIsSet("XDG_CURRENT_DESKTOP")) {
+#if defined(Q_OS_ANDROID)
+        QIcon::setThemeSearchPaths({QStringLiteral("assets:/qml/org/kde/kirigami"), QStringLiteral(":/icons")});
+#else
         QIcon::setThemeSearchPaths({Kirigami::StyleSelector::resolveFilePath(QStringLiteral(".")), QStringLiteral(":/icons")});
+#endif
         QIcon::setThemeName(QStringLiteral("breeze-internal"));
     } else {
         QIcon::setFallbackSearchPaths(QIcon::fallbackSearchPaths() << Kirigami::StyleSelector::resolveFilePath(QStringLiteral("icons")));
