@@ -10,7 +10,7 @@ import org.kde.kirigami 2.16 as Kirigami
 
 Kirigami.BasicThemeDefinition {
     textColor: Material.foreground
-    disabledTextColor: Qt.rgba(textColor.r, textColor.g, textColor.b, 0.6)
+    disabledTextColor: Qt.alpha(textColor, 0.6)
 
     highlightColor: Material.accent
     //FIXME: something better?
