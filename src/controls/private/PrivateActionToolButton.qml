@@ -10,7 +10,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 
-import org.kde.kirigami 2 as Kirigami
+import org.kde.kirigami as Kirigami
 
 QQC2.ToolButton {
     id: control

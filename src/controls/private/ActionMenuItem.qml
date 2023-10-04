@@ -7,7 +7,7 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
-import org.kde.kirigami 2 as Kirigami
+import org.kde.kirigami as Kirigami
 
 QQC2.MenuItem {
     visible: !(action instanceof Kirigami.Action) || action.visible

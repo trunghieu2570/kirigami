@@ -7,7 +7,7 @@
 import QtQuick
 import QtQml
 import QtQuick.Templates as T
-import org.kde.kirigami 2 as Kirigami
+import org.kde.kirigami as Kirigami
 
 /**
  * An action used to load Pages coming from a common PagePool

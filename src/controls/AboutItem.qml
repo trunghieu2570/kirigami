@@ -4,11 +4,11 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.1
-import QtQuick.Controls 2.4 as QQC2
-import QtQuick.Window 2.15
-import QtQuick.Layouts 1.3
-import org.kde.kirigami 2.20 as Kirigami
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Window
+import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
 
 //TODO: Kf6: move somewhere else which can depend from KAboutData?
 /**

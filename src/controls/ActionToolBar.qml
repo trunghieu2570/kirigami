@@ -4,12 +4,12 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.7
-import QtQml 2.15
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.4 as QQC2
-import QtQuick.Templates 2.15 as T
-import org.kde.kirigami 2.14 as Kirigami
+import QtQuick
+import QtQml
+import QtQuick.Layouts
+import QtQuick.Controls as QQC2
+import QtQuick.Templates as T
+import org.kde.kirigami as Kirigami
 import "private" as P
 
 /**

@@ -4,9 +4,9 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.7
-import QtQuick.Controls.Material 2.0
-import org.kde.kirigami 2.16 as Kirigami
+import QtQuick
+import QtQuick.Controls.Material
+import org.kde.kirigami as Kirigami
 
 Kirigami.BasicThemeDefinition {
     textColor: Material.foreground

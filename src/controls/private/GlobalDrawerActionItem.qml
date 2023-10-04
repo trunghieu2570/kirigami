@@ -4,12 +4,12 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.6
-import QtQuick.Window 2.6
-import QtQuick.Controls 2.0 as QQC2
-import QtQuick.Controls.impl 2.3 as QQC2Impl
-import QtQuick.Layouts 1.2
-import org.kde.kirigami 2.5 as Kirigami
+import QtQuick
+import QtQuick.Window
+import QtQuick.Controls as QQC2
+import QtQuick.Controls.impl as QQC2Impl
+import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
 
 QQC2.ItemDelegate {
     id: listItem

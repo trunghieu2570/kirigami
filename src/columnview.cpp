@@ -63,8 +63,8 @@ QmlComponentsPool::QmlComponentsPool(QQmlEngine *engine)
 
     /* clang-format off */
     component.setData(QByteArrayLiteral(R"(
-import QtQuick 2.7
-import org.kde.kirigami 2.7 as Kirigami
+import QtQuick
+import org.kde.kirigami as Kirigami
 
 QtObject {
     readonly property Component leadingSeparator: Kirigami.Separator {

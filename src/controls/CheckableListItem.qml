@@ -4,8 +4,8 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick.Controls 2.0 as QQC2
-import org.kde.kirigami 2.14 as Kirigami
+import QtQuick.Controls as QQC2
+import org.kde.kirigami as Kirigami
 
 /**
  * A simple subclass of BasicListItem that adds a checkbox on the left side of

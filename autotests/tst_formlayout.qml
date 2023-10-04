@@ -4,11 +4,11 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.1
-import QtQuick.Window 2.0
-import QtQuick.Layouts 1.3
-import org.kde.kirigami 2.19 as Kirigami
-import QtTest 1.0
+import QtQuick
+import QtQuick.Window
+import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
+import QtTest
 
 TestCase {
     id: testCase

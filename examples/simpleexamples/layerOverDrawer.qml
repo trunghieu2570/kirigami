@@ -4,9 +4,9 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.15
+import QtQuick
 import QtQuick.Controls as QQC2
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 
 /**
  * This example show how to do a sidebar of an application what gets covered by new layers that might get pushed

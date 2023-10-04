@@ -1,6 +1,6 @@
-import QtQuick 2.10
-import QtQuick.Layouts 1.12
-import org.kde.kirigami 2.14 as Kirigami
+import QtQuick
+import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
 
 Kirigami.FlexColumn {
     Rectangle {

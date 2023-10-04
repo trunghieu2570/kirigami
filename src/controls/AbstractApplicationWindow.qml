@@ -4,11 +4,11 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQml 2.15
-import QtQuick.Controls 2.15 as QQC2
-import QtQuick.Window 2.5
-import org.kde.kirigami 2.4 as Kirigami
+import QtQuick
+import QtQml
+import QtQuick.Controls as QQC2
+import QtQuick.Window
+import org.kde.kirigami as Kirigami
 import "templates/private" as TP
 /**
  * A window that provides some basic features needed for all apps

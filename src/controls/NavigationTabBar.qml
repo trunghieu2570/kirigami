@@ -4,12 +4,12 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQml 2.15
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQml
+import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects as GE
-import QtQuick.Templates 2.15 as T
-import org.kde.kirigami 2.19 as Kirigami
+import QtQuick.Templates as T
+import org.kde.kirigami as Kirigami
 
 /**
  * @brief Page navigation tab-bar, used as an alternative to sidebars for 3-5 elements.

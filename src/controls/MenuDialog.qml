@@ -7,7 +7,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
-import org.kde.kirigami 2 as Kirigami
+import org.kde.kirigami as Kirigami
 
 /**
  * A dialog that prompts users with a context menu, with
