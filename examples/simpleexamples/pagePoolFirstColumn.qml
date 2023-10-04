@@ -15,8 +15,6 @@ Kirigami.ApplicationWindow {
     }
 
     globalDrawer: Kirigami.GlobalDrawer {
-        title: "Hello App"
-        titleIcon: "applications-graphics"
     }
     contextDrawer: Kirigami.ContextDrawer {
         id: contextDrawer

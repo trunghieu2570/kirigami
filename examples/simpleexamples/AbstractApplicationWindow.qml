@@ -19,7 +19,6 @@ Kirigami.AbstractApplicationWindow {
     globalDrawer: Kirigami.GlobalDrawer {
         title: "Widget gallery"
         titleIcon: "applications-graphics"
-
         actions: [
             Kirigami.Action {
                 text: "View"

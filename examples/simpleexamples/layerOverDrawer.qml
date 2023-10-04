@@ -18,8 +18,6 @@ Kirigami.ApplicationWindow {
 
     Kirigami.GlobalDrawer {
         id: drawer
-        title: "Hello App"
-        titleIcon: "applications-graphics"
         modal: false
 
         actions: [

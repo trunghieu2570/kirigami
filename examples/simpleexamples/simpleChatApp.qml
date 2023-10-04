@@ -19,8 +19,6 @@ Kirigami.ApplicationWindow {
 
     globalDrawer: Kirigami.GlobalDrawer {
         contentItem.implicitWidth: columnWidth
-        title: "Chat App"
-        titleIcon: "konversation"
         modal: true
         drawerOpen: false
         isMenu: true

@@ -63,7 +63,7 @@ OverlayDrawer {
      * @see org::kde::kirigami::private::BannerImage::title
      * @property string title
      */
-    property alias title: bannerImage.title
+    property string title
 
     /**
      * @brief This property holds an icon to be displayed alongside the title.
@@ -71,14 +71,7 @@ OverlayDrawer {
      * @see org::kde::kirigami::Icon::source
      * @property var titleIcon
      */
-    property alias titleIcon: bannerImage.titleIcon
-
-    /**
-     * @brief This property holds the banner image source.
-     * @see org::kde::kirigami::ShadowedImage::source
-     * @property url bannerImageSource
-     */
-    property alias bannerImageSource: bannerImage.source
+    property var titleIcon
 
     /**
      * @brief This property holds the actions displayed in the drawer.
@@ -128,19 +121,15 @@ OverlayDrawer {
      * @note This property is mainly intended for toolbars.
      * @since 2.12
      */
-    property Item header
-
-    /**
-     * @brief This property sets drawers banner visibility.
-     *
-     * If true, the banner area (which can contain an image,
-     * an icon, and a title) will be visible.
-     *
-     * default: `the banner will be visible only on mobile platforms`
-     *
-     * @since 2.12
-     */
-    property bool bannerVisible: Kirigami.Settings.isMobile
+    property Item header: RowLayout {
+        visible: root.title.length > 0 || root.titleIcon
+        Kirigami.Icon {
+            source: root.titleIcon
+        }
+        Kirigami.Heading {
+            text: root.title
+        }
+    }
 
     /**
      * @brief This property holds items that are displayed above the actions.
@@ -257,11 +246,6 @@ OverlayDrawer {
 //END properties
 
     /**
-     * @brief This signal notifies that the banner has been clicked.
-     */
-    signal bannerClicked()
-
-    /**
      * @brief This function reverts the menu back to its initial state
      */
     function resetMenu() {
@@ -275,6 +259,9 @@ OverlayDrawer {
 
     Kirigami.Theme.colorSet: modal ? Kirigami.Theme.Window : Kirigami.Theme.View
 
+    Component.onCompleted: {
+        headerChanged()
+    }
     onHeaderChanged: {
         if (header) {
             header.parent = headerContainer
@@ -320,40 +307,9 @@ OverlayDrawer {
                     rightMargin: Math.min(0, -scrollView.width + mainFlickable.width)
                 }
                 spacing: 0
-                y: bannerImage.visible ? Math.max(headerContainer.height, -mainFlickable.contentY) - height : 0
 
                 Layout.fillWidth: true
-                // visible: !bannerImage.empty || root.collapsible
 
-                P.BannerImage {
-                    id: bannerImage
-
-
-                    visible: !bannerImage.empty && opacity > 0 && root.bannerVisible
-                    opacity: !root.collapsed
-                    fillMode: Image.PreserveAspectCrop
-
-                    Behavior on opacity {
-                        OpacityAnimator {
-                            duration: Kirigami.Units.longDuration
-                            easing.type: Easing.InOutQuad
-                        }
-                    }
-                    // leftPadding: root.collapsible ? collapseButton.width + Kirigami.Units.smallSpacing*2 : topPadding
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: mouse => root.bannerClicked()
-                    }
-                    P.EdgeShadow {
-                        edge: Qt.BottomEdge
-                        visible: bannerImageSource != ""
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                            bottom: parent.top
-                        }
-                    }
-                }
                 RowLayout {
                     id: headerContainer
                     Kirigami.Theme.inherit: false

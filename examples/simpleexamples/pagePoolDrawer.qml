@@ -15,8 +15,6 @@ Kirigami.ApplicationWindow {
     }
 
     globalDrawer: Kirigami.GlobalDrawer {
-        title: "Hello App"
-        titleIcon: "applications-graphics"
         modal: !root.wideScreen
         width: Kirigami.Units.gridUnit * 10
 

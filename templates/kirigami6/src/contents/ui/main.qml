@@ -37,8 +37,6 @@ Kirigami.ApplicationWindow {
     property int counter: 0
 
     globalDrawer: Kirigami.GlobalDrawer {
-        title: i18n("%{APPNAME}")
-        titleIcon: "applications-graphics"
         isMenu: !Kirigami.Settings.isMobile
         actions: [
             Kirigami.Action {

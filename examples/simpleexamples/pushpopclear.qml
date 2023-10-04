@@ -12,9 +12,6 @@ Kirigami.ApplicationWindow {
     id: root
 
     globalDrawer: Kirigami.GlobalDrawer {
-        title: "Hello App"
-        titleIcon: "applications-graphics"
-
         actions: [
             Kirigami.Action {
                 text: "push"
