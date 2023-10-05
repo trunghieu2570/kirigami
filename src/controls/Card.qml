@@ -69,10 +69,10 @@ Kirigami.AbstractCard {
         id: bannerImage
         anchors.leftMargin: -root.leftPadding + root.background.border.width
         anchors.topMargin: -root.topPadding + root.background.border.width
-        anchors.rightMargin: root.headerOrientation === Qt.Vertical ? -root.rightPadding + root.background.border.width : 0
-        anchors.bottomMargin: root.headerOrientation === Qt.Horizontal ? -root.bottomPadding + root.background.border.width : 0
+        anchors.rightMargin: -root.rightPadding + root.background.border.width
+        anchors.bottomMargin: 0
         //height: Layout.preferredHeight
-        implicitWidth: root.headerOrientation === Qt.Horizontal ? sourceSize.width : Layout.preferredWidth
+        implicitWidth: Layout.preferredWidth
         Layout.preferredHeight: (source.toString().length > 0  ? width / (sourceSize.width / sourceSize.height) : Layout.minimumHeight) + anchors.topMargin + anchors.bottomMargin
 
         readonly property real widthWithBorder: width + root.background.border.width * 2
@@ -80,8 +80,8 @@ Kirigami.AbstractCard {
         readonly property real radiusFromBackground: root.background.radius - root.background.border.width
 
         corners.topLeftRadius: radiusFromBackground
-        corners.topRightRadius: (root.headerOrientation === Qt.Horizontal && widthWithBorder < root.width) ? 0 : radiusFromBackground
-        corners.bottomLeftRadius: (root.headerOrientation !== Qt.Horizontal && heightWithBorder < root.height) ? 0 : radiusFromBackground
+        corners.topRightRadius: radiusFromBackground
+        corners.bottomLeftRadius: radiusFromBackground
         corners.bottomRightRadius: heightWithBorder < root.height ? 0 : radiusFromBackground
     }
 
@@ -92,8 +92,8 @@ Kirigami.AbstractCard {
 
         header.anchors.leftMargin = Qt.binding(() => -root.leftPadding);
         header.anchors.topMargin = Qt.binding(() =>  -root.topPadding);
-        header.anchors.rightMargin = Qt.binding(() => root.headerOrientation === Qt.Vertical ? -root.rightPadding : 0);
-        header.anchors.bottomMargin = Qt.binding(() => root.headerOrientation === Qt.Horizontal ? -root.bottomPadding : 0);
+        header.anchors.rightMargin = Qt.binding(() => -root.rightPadding);
+        header.anchors.bottomMargin = Qt.binding(() => 0);
     }
 
     footer: Kirigami.ActionToolBar {

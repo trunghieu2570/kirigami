@@ -17,8 +17,6 @@ Item {
         banner.titleAlignment: alignCombo.currentValue
         banner.source: "/usr/share/wallpapers/Next/contents/screenshot.png"
 
-        headerOrientation: orientationCombo.currentValue
-
         contentItem: Label {
             text: "Card Contents"
         }
@@ -56,18 +54,6 @@ Item {
 
             textRole: "text"
             valueRole: "align"
-        }
-
-        ComboBox {
-            id: orientationCombo
-
-            model: [
-                { text: "Vertical", orientation: Qt.Vertical },
-                { text: "Horizontal", orientation: Qt.Horizontal }
-            ]
-
-            textRole: "text"
-            valueRole: "orientation"
         }
     }
 }

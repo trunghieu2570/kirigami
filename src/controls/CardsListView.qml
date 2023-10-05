@@ -16,8 +16,7 @@ import org.kde.kirigami 2.4 as Kirigami
  * horizontal size, so it is recommended to directly use AbstractCard with an
  * appropriate layout inside, because they are stretching for the whole list width.
  *
- * Therefore, it is discouraged to use it with the Card type, unless it has
- * headerOrientation set to ``Qt.Horizontal``.
+ * Therefore, it is discouraged to use it with the Card type.
  *
  * The choice between using this view with AbstractCard or a normal ListView
  * with AbstractListItem/BasicListItem is purely a choice based on aesthetics alone.
