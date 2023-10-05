@@ -89,7 +89,6 @@ class Padding : public QQuickItem
 
     /**
      * The padding on the left side. Unless explicitly set, it falls back to horizontalPadding and then to padding.
-     * If you need a locale-aware padding that is dependent to the layout direction, use leadingPadding instead.
      */
     Q_PROPERTY(qreal leftPadding READ leftPadding WRITE setLeftPadding NOTIFY leftPaddingChanged RESET resetLeftPadding FINAL)
 
@@ -100,7 +99,6 @@ class Padding : public QQuickItem
 
     /**
      * The padding on the right side. Unless explicitly set, it falls back to horizontalPadding and then to padding.
-     * If you need a locale-aware padding that is dependent to the layout direction, use trailingPadding instead.
      */
     Q_PROPERTY(qreal rightPadding READ rightPadding WRITE setRightPadding NOTIFY rightPaddingChanged RESET resetRightPadding FINAL)
 
