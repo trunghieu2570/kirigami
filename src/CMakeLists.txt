@@ -49,6 +49,8 @@ target_sources(KirigamiPlugin PRIVATE
     mnemonicattached.h
     overlayzstackingattached.cpp
     overlayzstackingattached.h
+    padding.cpp
+    padding.h
     pagepool.cpp
     pagepool.h
     scenepositionattached.cpp

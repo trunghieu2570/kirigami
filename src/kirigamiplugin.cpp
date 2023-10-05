@@ -17,6 +17,7 @@
 #include "inputmethod.h"
 #include "mnemonicattached.h"
 #include "overlayzstackingattached.h"
+#include "padding.h"
 #include "pagepool.h"
 #include "scenepositionattached.h"
 #include "settings.h"
@@ -296,6 +297,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
                                                          "OverlayZStacking",
                                                          QStringLiteral("Cannot create objects of type OverlayZStacking, use it as an attached property"));
     qmlRegisterType(componentUrl(QStringLiteral("InlineViewHeader.qml")), uri, 2, 20, "InlineViewHeader");
+    qmlRegisterType<Padding>(uri, 2, 14, "Padding");
 
     qmlRegisterType<HeaderFooterLayout>(uri, 2, 20, "HeaderFooterLayout");
 
