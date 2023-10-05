@@ -50,6 +50,7 @@ kirigami_add_tests(
     tst_navigationtabbar.qml
     tst_overlaysheet.qml
     tst_overlayzstacking.qml
+    tst_padding.qml
     tst_pagerow.qml
     tst_placeholdermessage.qml
     tst_sceneposition.qml
