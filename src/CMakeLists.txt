@@ -40,6 +40,7 @@ target_sources(KirigamiPlugin PRIVATE
     enums.h
     formlayoutattached.cpp
     formlayoutattached.h
+    headerfooterlayout.cpp
     icon.cpp
     icon.h
     imagecolors.cpp

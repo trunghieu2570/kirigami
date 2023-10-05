@@ -12,6 +12,7 @@
 #include "delegaterecycler.h"
 #include "enums.h"
 #include "formlayoutattached.h"
+#include "headerfooterlayout.h"
 #include "icon.h"
 #include "imagecolors.h"
 #include "inputmethod.h"
@@ -293,6 +294,8 @@ void KirigamiPlugin::registerTypes(const char *uri)
                                                          "OverlayZStacking",
                                                          QStringLiteral("Cannot create objects of type OverlayZStacking, use it as an attached property"));
     qmlRegisterType(componentUrl(QStringLiteral("InlineViewHeader.qml")), uri, 2, 20, "InlineViewHeader");
+
+    qmlRegisterType<HeaderFooterLayout>(uri, 2, 20, "HeaderFooterLayout");
 
     qmlProtectModule(uri, 2);
 }
