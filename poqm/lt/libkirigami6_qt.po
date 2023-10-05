@@ -133,17 +133,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Veiksmai"
 
-#: controls/GlobalDrawer.qml:504
+#: controls/GlobalDrawer.qml:460
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Atgal"
 
-#: controls/GlobalDrawer.qml:594
+#: controls/GlobalDrawer.qml:550
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Užverti šoninę juostą"
 
-#: controls/GlobalDrawer.qml:597
+#: controls/GlobalDrawer.qml:553
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
