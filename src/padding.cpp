@@ -29,15 +29,13 @@ public:
 
     qreal m_padding = 0;
 
-    qreal m_horizontalPadding = 0;
-    qreal m_verticalPadding = 0;
+    std::optional<qreal> m_horizontalPadding;
+    std::optional<qreal> m_verticalPadding;
 
-    qreal m_leftPadding = 0;
-    qreal m_topPadding = 0;
-    qreal m_rightPadding = 0;
-    qreal m_bottomPadding = 0;
-
-    qint8 m_validPaddings = 0;
+    std::optional<qreal> m_leftPadding;
+    std::optional<qreal> m_topPadding;
+    std::optional<qreal> m_rightPadding;
+    std::optional<qreal> m_bottomPadding;
 };
 
 void PaddingPrivate::calculateImplicitSize()
@@ -182,13 +180,12 @@ qreal Padding::padding() const
 
 void Padding::setHorizontalPadding(qreal padding)
 {
-    if (qFuzzyCompare(padding, horizontalPadding()) && (d->m_validPaddings & PaddingPrivate::Horizontal)) {
+    if (qFuzzyCompare(padding, horizontalPadding()) && d->m_horizontalPadding.has_value()) {
         return;
     }
 
     const QMarginsF oldMargins = d->margins();
     d->m_horizontalPadding = padding;
-    d->m_validPaddings |= PaddingPrivate::Horizontal;
     const QMarginsF newMargins = d->margins();
 
     if (!qFuzzyCompare(newMargins.left(), oldMargins.left())) {
@@ -207,13 +204,12 @@ void Padding::setHorizontalPadding(qreal padding)
 
 void Padding::resetHorizontalPadding()
 {
-    if (qFuzzyCompare(horizontalPadding(), 0.0) && (d->m_validPaddings & PaddingPrivate::Horizontal)) {
+    if (qFuzzyCompare(horizontalPadding(), 0.0) && d->m_horizontalPadding.has_value()) {
         return;
     }
 
     const QMarginsF oldMargins = d->margins();
-    d->m_horizontalPadding = 0;
-    d->m_validPaddings &= ~PaddingPrivate::Horizontal;
+    d->m_horizontalPadding.reset();
     const QMarginsF newMargins = d->margins();
 
     if (!qFuzzyCompare(newMargins.left(), oldMargins.left())) {
@@ -230,22 +226,17 @@ void Padding::resetHorizontalPadding()
 
 qreal Padding::horizontalPadding() const
 {
-    if (d->m_validPaddings & PaddingPrivate::Horizontal) {
-        return d->m_horizontalPadding;
-    } else {
-        return d->m_padding;
-    }
+    return d->m_horizontalPadding.value_or(d->m_padding);
 }
 
 void Padding::setVerticalPadding(qreal padding)
 {
-    if (qFuzzyCompare(padding, verticalPadding()) && (d->m_validPaddings & PaddingPrivate::Vertical)) {
+    if (qFuzzyCompare(padding, verticalPadding()) && d->m_verticalPadding.has_value()) {
         return;
     }
 
     const QMarginsF oldMargins = d->margins();
     d->m_verticalPadding = padding;
-    d->m_validPaddings |= PaddingPrivate::Vertical;
     const QMarginsF newMargins = d->margins();
 
     if (!qFuzzyCompare(newMargins.top(), oldMargins.top())) {
@@ -264,13 +255,12 @@ void Padding::setVerticalPadding(qreal padding)
 
 void Padding::resetVerticalPadding()
 {
-    if (qFuzzyCompare(verticalPadding(), 0.0) && (d->m_validPaddings & PaddingPrivate::Vertical)) {
+    if (qFuzzyCompare(verticalPadding(), 0.0) && d->m_verticalPadding.has_value()) {
         return;
     }
 
     const QMarginsF oldMargins = d->margins();
-    d->m_verticalPadding = 0.0;
-    d->m_validPaddings &= ~PaddingPrivate::Vertical;
+    d->m_verticalPadding.reset();
     const QMarginsF newMargins = d->margins();
 
     if (!qFuzzyCompare(newMargins.top(), oldMargins.top())) {
@@ -287,22 +277,17 @@ void Padding::resetVerticalPadding()
 
 qreal Padding::verticalPadding() const
 {
-    if (d->m_validPaddings & PaddingPrivate::Vertical) {
-        return d->m_verticalPadding;
-    } else {
-        return d->m_padding;
-    }
+    return d->m_verticalPadding.value_or(d->m_padding);
 }
 
 void Padding::setLeftPadding(qreal padding)
 {
     const qreal oldLeftPadding = leftPadding();
-    if (qFuzzyCompare(padding, oldLeftPadding) && (d->m_validPaddings & PaddingPrivate::Left)) {
+    if (qFuzzyCompare(padding, oldLeftPadding) && d->m_leftPadding.has_value()) {
         return;
     }
 
     d->m_leftPadding = padding;
-    d->m_validPaddings |= PaddingPrivate::Left;
 
     if (!qFuzzyCompare(padding, oldLeftPadding)) {
         Q_EMIT leftPaddingChanged();
@@ -315,12 +300,11 @@ void Padding::setLeftPadding(qreal padding)
 void Padding::resetLeftPadding()
 {
     const qreal oldLeftPadding = leftPadding();
-    if (qFuzzyCompare(oldLeftPadding, 0.0) && (d->m_validPaddings & PaddingPrivate::Left)) {
+    if (qFuzzyCompare(oldLeftPadding, 0.0) && d->m_leftPadding.has_value()) {
         return;
     }
 
-    d->m_leftPadding = 0.0;
-    d->m_validPaddings &= ~PaddingPrivate::Left;
+    d->m_leftPadding.reset();
 
     if (!qFuzzyCompare(oldLeftPadding, 0.0)) {
         Q_EMIT leftPaddingChanged();
@@ -330,24 +314,17 @@ void Padding::resetLeftPadding()
 
 qreal Padding::leftPadding() const
 {
-    if (d->m_validPaddings & PaddingPrivate::Left) {
-        return d->m_leftPadding;
-    } else if (d->m_validPaddings & PaddingPrivate::Horizontal) {
-        return d->m_horizontalPadding;
-    } else {
-        return d->m_padding;
-    }
+    return d->m_leftPadding.value_or(horizontalPadding());
 }
 
 void Padding::setTopPadding(qreal padding)
 {
     const qreal oldTopPadding = topPadding();
-    if (qFuzzyCompare(padding, oldTopPadding) && (d->m_validPaddings & PaddingPrivate::Top)) {
+    if (qFuzzyCompare(padding, oldTopPadding) && d->m_topPadding.has_value()) {
         return;
     }
 
     d->m_topPadding = padding;
-    d->m_validPaddings |= PaddingPrivate::Top;
 
     if (!qFuzzyCompare(padding, oldTopPadding)) {
         Q_EMIT topPaddingChanged();
@@ -360,12 +337,11 @@ void Padding::setTopPadding(qreal padding)
 void Padding::resetTopPadding()
 {
     const qreal oldTopPadding = topPadding();
-    if (qFuzzyCompare(oldTopPadding, 0.0) && (d->m_validPaddings & PaddingPrivate::Top)) {
+    if (qFuzzyCompare(oldTopPadding, 0.0) && d->m_topPadding.has_value()) {
         return;
     }
 
-    d->m_topPadding = 0.0;
-    d->m_validPaddings &= ~PaddingPrivate::Top;
+    d->m_topPadding.reset();
 
     if (!qFuzzyCompare(oldTopPadding, 0.0)) {
         Q_EMIT topPaddingChanged();
@@ -375,24 +351,17 @@ void Padding::resetTopPadding()
 
 qreal Padding::topPadding() const
 {
-    if (d->m_validPaddings & PaddingPrivate::Top) {
-        return d->m_topPadding;
-    } else if (d->m_validPaddings & PaddingPrivate::Vertical) {
-        return d->m_verticalPadding;
-    } else {
-        return d->m_padding;
-    }
+    return d->m_topPadding.value_or(verticalPadding());
 }
 
 void Padding::setRightPadding(qreal padding)
 {
     const qreal oldRightPadding = rightPadding();
-    if (qFuzzyCompare(padding, oldRightPadding) && (d->m_validPaddings & PaddingPrivate::Right)) {
+    if (qFuzzyCompare(padding, oldRightPadding) && d->m_rightPadding.has_value()) {
         return;
     }
 
     d->m_rightPadding = padding;
-    d->m_validPaddings |= PaddingPrivate::Right;
 
     if (!qFuzzyCompare(padding, oldRightPadding)) {
         Q_EMIT rightPaddingChanged();
@@ -405,12 +374,11 @@ void Padding::setRightPadding(qreal padding)
 void Padding::resetRightPadding()
 {
     const qreal oldRightPadding = rightPadding();
-    if (qFuzzyCompare(oldRightPadding, 0.0) && (d->m_validPaddings & PaddingPrivate::Right)) {
+    if (qFuzzyCompare(oldRightPadding, 0.0) && d->m_rightPadding.has_value()) {
         return;
     }
 
-    d->m_rightPadding = 0.0;
-    d->m_validPaddings &= ~PaddingPrivate::Right;
+    d->m_rightPadding.reset();
 
     if (!qFuzzyCompare(oldRightPadding, 0.0)) {
         Q_EMIT rightPaddingChanged();
@@ -420,24 +388,17 @@ void Padding::resetRightPadding()
 
 qreal Padding::rightPadding() const
 {
-    if (d->m_validPaddings & PaddingPrivate::Right) {
-        return d->m_rightPadding;
-    } else if (d->m_validPaddings & PaddingPrivate::Horizontal) {
-        return d->m_horizontalPadding;
-    } else {
-        return d->m_padding;
-    }
+    return d->m_rightPadding.value_or(horizontalPadding());
 }
 
 void Padding::setBottomPadding(qreal padding)
 {
     const qreal oldBottomPadding = bottomPadding();
-    if (qFuzzyCompare(padding, oldBottomPadding) && (d->m_validPaddings & PaddingPrivate::Bottom)) {
+    if (qFuzzyCompare(padding, oldBottomPadding) && d->m_bottomPadding.has_value()) {
         return;
     }
 
     d->m_bottomPadding = padding;
-    d->m_validPaddings |= PaddingPrivate::Bottom;
 
     if (!qFuzzyCompare(padding, oldBottomPadding)) {
         Q_EMIT bottomPaddingChanged();
@@ -450,12 +411,11 @@ void Padding::setBottomPadding(qreal padding)
 void Padding::resetBottomPadding()
 {
     const qreal oldBottomPadding = bottomPadding();
-    if (qFuzzyCompare(oldBottomPadding, 0.0) && (d->m_validPaddings & PaddingPrivate::Bottom)) {
+    if (qFuzzyCompare(oldBottomPadding, 0.0) && d->m_bottomPadding.has_value()) {
         return;
     }
 
-    d->m_bottomPadding = 0.0;
-    d->m_validPaddings &= ~PaddingPrivate::Bottom;
+    d->m_bottomPadding.reset();
 
     if (!qFuzzyCompare(oldBottomPadding, 0.0)) {
         Q_EMIT bottomPaddingChanged();
@@ -465,13 +425,7 @@ void Padding::resetBottomPadding()
 
 qreal Padding::bottomPadding() const
 {
-    if (d->m_validPaddings & PaddingPrivate::Bottom) {
-        return d->m_bottomPadding;
-    } else if (d->m_validPaddings & PaddingPrivate::Vertical) {
-        return d->m_verticalPadding;
-    } else {
-        return d->m_padding;
-    }
+    return d->m_bottomPadding.value_or(verticalPadding());
 }
 
 qreal Padding::availableWidth() const
