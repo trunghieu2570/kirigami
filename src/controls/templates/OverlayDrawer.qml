@@ -302,7 +302,7 @@ T2.Drawer {
         } else {
             close();
         }
-        Qt.callLater(() => drawerHandle.displayToolTip = true)
+        Qt.callLater(() => root.handle.displayToolTip = true)
     }
 
     Component.onCompleted: {
