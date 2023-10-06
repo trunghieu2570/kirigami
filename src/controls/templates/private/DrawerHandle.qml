@@ -6,7 +6,7 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
-import QtQuick.Templates as T2
+import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
 MouseArea {
@@ -21,13 +21,13 @@ MouseArea {
     /**
      * The drawer this handle will control
      */
-    //TODO: this could eventually be a T2.Drawer, tough this code
-    property T2.Drawer drawer
+    //TODO: this could eventually be a T.Drawer, tough this code
+    property T.Drawer drawer
 
-    z: drawer.T2.Overlay.overlay.z + 1
+    z: drawer.T.Overlay.overlay.z + 1
     preventStealing: true
     hoverEnabled: handleAnchor && handleAnchor.visible
-    parent: drawer.T2.Overlay.overlay.parent
+    parent: drawer.T.Overlay.overlay.parent
 
     QQC2.ToolButton {
         anchors.centerIn: parent

@@ -9,7 +9,7 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
-import "private" as P
+import "private" as KP
 
 /**
  * A specialized type of drawer that will show a list of actions
@@ -152,7 +152,7 @@ Kirigami.OverlayDrawer {
 
                 width: parent.width
 
-                P.ContextDrawerActionItem {
+                KP.ContextDrawerActionItem {
                     tAction: delegate.modelData
                     width: parent.width
                 }
@@ -161,7 +161,7 @@ Kirigami.OverlayDrawer {
                     model: delegate.modelData instanceof Kirigami.Action && delegate.modelData.expandible
                         ? delegate.modelData.children : null
 
-                    delegate: P.ContextDrawerActionItem {
+                    delegate: KP.ContextDrawerActionItem {
                         width: parent.width
                         leftPadding: Kirigami.Units.gridUnit
                         opacity: !root.collapsed

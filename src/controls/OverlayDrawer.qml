@@ -5,10 +5,10 @@
  */
 
 import QtQuick
-import QtQuick.Templates as T2
+import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
-import "private" as P
-import "templates" as T
+import "private" as KP
+import "templates" as KT
 
 /**
  * Overlay Drawers are used to expose additional UI elements needed for
@@ -19,14 +19,14 @@ import "templates" as T
  *
  * @inherit org::kde::kirigami::templates::OverlayDrawer
  */
-T.OverlayDrawer {
+KT.OverlayDrawer {
     id: root
 
 //BEGIN Properties
     focus: false
     modal: true
     drawerOpen: !modal
-    closePolicy: modal ? T2.Popup.CloseOnEscape | T2.Popup.CloseOnReleaseOutside : T2.Popup.NoAutoClose
+    closePolicy: modal ? T.Popup.CloseOnEscape | T.Popup.CloseOnReleaseOutside : T.Popup.NoAutoClose
     handleVisible: interactive && (modal || !drawerOpen) && (typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true)
 
     // FIXME: set to false when it does not lead to blocking closePolicy.
@@ -128,7 +128,7 @@ T.OverlayDrawer {
             }
             visible: !root.modal
         }
-        P.EdgeShadow {
+        KP.EdgeShadow {
             z: -2
             visible: root.modal
             edge: root.edge

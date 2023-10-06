@@ -5,10 +5,10 @@
  */
 
 import QtQuick
-import QtQuick.Templates as T2
+import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
-import "private" as P
+import "private" as KTP
 
 /**
  * Overlay Drawers are used to expose additional UI elements needed for
@@ -19,7 +19,7 @@ import "private" as P
  *
  * @inherit QtQuick.Controls.Drawer
  */
-T2.Drawer {
+T.Drawer {
     id: root
 
 //BEGIN properties
@@ -98,7 +98,7 @@ T2.Drawer {
      *
      * @since 2.5
      */
-    readonly property P.IconPropertiesGroup handleOpenIcon: P.IconPropertiesGroup {
+    readonly property KTP.IconPropertiesGroup handleOpenIcon: KTP.IconPropertiesGroup {
         source: root.edge === Qt.RightEdge ? "view-right-close" : "view-left-close"
     }
 
@@ -117,7 +117,7 @@ T2.Drawer {
      *
      * @since 2.5
      */
-    property P.IconPropertiesGroup handleClosedIcon: P.IconPropertiesGroup {
+    property KTP.IconPropertiesGroup handleClosedIcon: KTP.IconPropertiesGroup {
         source: root.edge === Qt.RightEdge ? "view-right-new" : "view-left-new"
     }
 
@@ -146,7 +146,7 @@ T2.Drawer {
      * handle for the Drawer.
      * @property MouseArea handle
      **/
-    readonly property Item handle: P.DrawerHandle {
+    readonly property Item handle: KTP.DrawerHandle {
         drawer: root
     }
 //END properties
@@ -169,11 +169,11 @@ T2.Drawer {
     rightPadding: Kirigami.Units.smallSpacing
     bottomPadding: Kirigami.Units.smallSpacing
 
-    y: modal ? 0 : ((T2.ApplicationWindow.menuBar ? T2.ApplicationWindow.menuBar.height : 0) + (T2.ApplicationWindow.header ? T2.ApplicationWindow.header.height : 0))
+    y: modal ? 0 : ((T.ApplicationWindow.menuBar ? T.ApplicationWindow.menuBar.height : 0) + (T.ApplicationWindow.header ? T.ApplicationWindow.header.height : 0))
 
-    height: parent && (root.edge === Qt.LeftEdge || root.edge === Qt.RightEdge) ? (modal ? parent.height : (parent.height - y - (T2.ApplicationWindow.footer ? T2.ApplicationWindow.footer.height : 0))) : implicitHeight
+    height: parent && (root.edge === Qt.LeftEdge || root.edge === Qt.RightEdge) ? (modal ? parent.height : (parent.height - y - (T.ApplicationWindow.footer ? T.ApplicationWindow.footer.height : 0))) : implicitHeight
 
-    parent: modal || edge === Qt.LeftEdge || edge === Qt.RightEdge ? T2.ApplicationWindow.overlay : T2.ApplicationWindow.contentItem
+    parent: modal || edge === Qt.LeftEdge || edge === Qt.RightEdge ? T.ApplicationWindow.overlay : T.ApplicationWindow.contentItem
 
     edge: Qt.LeftEdge
     modal: true

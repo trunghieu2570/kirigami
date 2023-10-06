@@ -5,7 +5,6 @@
  */
 
 import QtQuick
-import QtQuick.Window
 import QtQuick.Controls as QQC2
 import QtQuick.Controls.impl as QQC2Impl
 import QtQuick.Layouts
