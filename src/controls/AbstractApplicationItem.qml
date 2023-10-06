@@ -72,13 +72,6 @@ Item {
     property Item pageStack
 
     /**
-     * @brief This property exists for compatibility with Applicationwindow.
-     *
-     * default: ``Window.activeFocusItem``
-     */
-    readonly property Item activeFocusItem: Window.activeFocusItem
-
-    /**
      * @brief This property holds the font for this item.
      *
      * default: ``Kirigami.Theme.defaultFont``
