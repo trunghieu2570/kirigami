@@ -13,8 +13,7 @@ import org.kde.kirigami as Kirigami
  * depending on the available space.
  *
  * It Should be used when the cards are not instantiated by a model or by a
- * model which has always very few items (In the case of a big model
- * CardsListView or CardsGridview should be used instead).
+ * model which has always very few items.
  *
  * They are presented as a grid of two columns which will remain
  * centered if the application is really wide, or become a single
