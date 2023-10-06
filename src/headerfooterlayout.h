@@ -21,19 +21,25 @@ class HeaderFooterLayout : public QQuickItem
 {
     Q_OBJECT
     /**
-     * This property holds the page header item. The header item is positioned to the top,
+     * @brief This property holds the page header item.
+     *
+     * The header item is positioned to the top,
      * and resized to the width of the page. The default value is null.
      */
     Q_PROPERTY(QQuickItem *header READ header WRITE setHeader NOTIFY headerChanged FINAL)
 
     /**
-     * This property holds the visual content Item. It will be resized both in width and height with the layout resizing.
+     * @brief This property holds the visual content Item.
+     *
+     * It will be resized both in width and height with the layout resizing.
      * Its height will be resized to still have room for the heder and footer
      */
     Q_PROPERTY(QQuickItem *contentItem READ contentItem WRITE setContentItem NOTIFY contentItemChanged FINAL)
 
     /**
-     * This property holds the page footer item. The footer item is positioned to the bottom,
+     * @brief This property holds the page footer item.
+     *
+     * The footer item is positioned to the bottom,
      * and resized to the width of the page. The default value is null.
      */
     Q_PROPERTY(QQuickItem *footer READ footer WRITE setFooter NOTIFY footerChanged FINAL)
