@@ -6,7 +6,6 @@
 
 #include "padding.h"
 
-#include <QDebug>
 #include <QMarginsF>
 #include <qnumeric.h>
 #include <qtypes.h>
