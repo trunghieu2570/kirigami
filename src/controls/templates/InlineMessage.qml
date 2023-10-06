@@ -215,10 +215,10 @@ T.Control {
                 }
 
                 switch (root.type) {
-                    case Kirigami.MessageType.Positive: return "dialog-positive";
-                    case Kirigami.MessageType.Warning: return "dialog-warning";
-                    case Kirigami.MessageType.Error: return "dialog-error";
-                    default: return "dialog-information";
+                    case Kirigami.MessageType.Positive: return "emblem-positive";
+                    case Kirigami.MessageType.Warning: return "emblem-warning";
+                    case Kirigami.MessageType.Error: return "emblem-error";
+                    default: return "emblem-information";
                 }
             }
 
