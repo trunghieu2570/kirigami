@@ -7,9 +7,8 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
-import QtQuick.Templates as T2
+import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
-import "private" as P
 
 /**
  * @brief An overlay sheet that covers the current Page content.
@@ -34,8 +33,7 @@ import "private" as P
  *
  * @inherit QtQuick.Templates.Popup
  */
-
-T2.Popup {
+T.Popup {
     id: root
 
     Kirigami.OverlayZStacking.layer: Kirigami.OverlayZStacking.FullScreen
@@ -69,8 +67,8 @@ T2.Popup {
         elide: Text.ElideRight
 
         // use tooltip for long text that is elided
-        QQC2.ToolTip.visible: truncated && titleHoverHandler.hovered
-        QQC2.ToolTip.text: root.title
+        T.ToolTip.visible: truncated && titleHoverHandler.hovered
+        T.ToolTip.text: root.title
         HoverHandler {
             id: titleHoverHandler
         }
@@ -86,7 +84,7 @@ T2.Popup {
 //END Own Properties
 
 //BEGIN Reimplemented Properties
-    QQC2.Overlay.modeless: Item {
+    T.Overlay.modeless: Item {
         id: overlay
         Rectangle {
             x: sheetHandler.visualParent.Kirigami.ScenePosition.x
@@ -112,7 +110,7 @@ T2.Popup {
     topInset: -1
     bottomInset: -1
 
-    closePolicy: QQC2.Popup.CloseOnEscape
+    closePolicy: T.Popup.CloseOnEscape
     x: parent ? Math.round(parent.width / 2 - width / 2) : 0
     y: {
         if (!parent) {
@@ -152,7 +150,10 @@ T2.Popup {
 //END Reimplemented Properties
 
 //BEGIN Signal handlers
-    onVisibleChanged: scrollView.contentItem.contentY = 0 + scrollView.contentItem.originY - scrollView.contentItem.topMargin
+    onVisibleChanged: {
+        const flickable = scrollView.contentItem;
+        flickable.contentY = flickable.originY - flickable.topMargin;
+    }
     onHeaderChanged: headerItem.initHeader()
     onFooterChanged: {
         footer.parent = footerParent;
@@ -256,19 +257,20 @@ T2.Popup {
                 color: Kirigami.Theme.backgroundColor
 
                 function initHeader() {
-                    if (header) {
-                        header.parent = headerParent;
-                        header.anchors.fill = headerParent;
+                    const h = root.header;
+                    if (h) {
+                        h.parent = headerParent;
+                        h.anchors.fill = headerParent;
                     }
                 }
 
                 Item {
                     id: headerParent
-                    implicitHeight: header ? header.implicitHeight : 0
+                    implicitHeight: root.header?.implicitHeight ?? 0
                     anchors {
                         fill: parent
-                        leftMargin: Kirigami.Units.largeSpacing
                         margins: Kirigami.Units.smallSpacing
+                        leftMargin: Kirigami.Units.largeSpacing
                         rightMargin: (root.showCloseButton ? closeIcon.width : 0) + Kirigami.Units.smallSpacing
                     }
                 }
@@ -328,30 +330,32 @@ T2.Popup {
                 id: scrollView
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+                T.ScrollBar.horizontal.policy: T.ScrollBar.AlwaysOff
 
                 property bool initialized: false
                 property Item itemForSizeHints
 
                 // Important to not even access contentItem before it has been spontaneously created
                 contentWidth: initialized ? contentItem.width : width
-                contentHeight: itemForSizeHints ? itemForSizeHints.implicitHeight : 0
+                contentHeight: itemForSizeHints?.implicitHeight ?? 0
 
                 onContentItemChanged: {
                     initialized = true;
-                    contentItem.boundsBehavior = Flickable.StopAtBounds;
-                    if ((contentItem instanceof ListView) || (contentItem instanceof GridView)) {
-                        itemForSizeHints = contentItem;
+                    const flickable = contentItem as Flickable;
+                    flickable.boundsBehavior = Flickable.StopAtBounds;
+                    if ((flickable instanceof ListView) || (flickable instanceof GridView)) {
+                        itemForSizeHints = flickable;
                         return;
                     }
-                    contentItem.contentItem.childrenChanged.connect(() => {
-                        for(const item of contentItem.contentItem.children) {
+                    const content = flickable.contentItem;
+                    content.childrenChanged.connect(() => {
+                        for (const item of content.children) {
                             item.anchors.margins = Kirigami.Units.largeSpacing;
-                            item.anchors.top = contentItem.contentItem.top;
-                            item.anchors.left = contentItem.contentItem.left;
-                            item.anchors.right = contentItem.contentItem.right;
+                            item.anchors.top = content.top;
+                            item.anchors.left = content.left;
+                            item.anchors.right = content.right;
                         }
-                        itemForSizeHints = contentItem.contentItem.children[0];
+                        itemForSizeHints = content.children?.[0] ?? null;
                     });
                 }
             }
