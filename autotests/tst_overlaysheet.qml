@@ -81,6 +81,11 @@ TestCase {
         }
     }
 
+    function setupWarningsFilter() {
+        // no nullable property access errors are allowed
+        failOnWarning(/\bnull\b/);
+    }
+
     // Note about implicit size comparison: we don't know how much space
     // header+footer+paddings would take, but the sum should be no less than
     // the implicit or preferred size given. And the difference between
@@ -88,6 +93,7 @@ TestCase {
     // to get an overlap.
 
     function test_init() {
+        setupWarningsFilter();
         {
             const sheet = createTemporaryObject(emptyComponent, null);
             verify(sheet);
@@ -114,6 +120,7 @@ TestCase {
 
     // Layout.preferred* takes precedence over implicit size
     function test_sizeHintPrecedence() {
+        setupWarningsFilter();
         {
             // first, make sure 100x200 sheet's total implicit size is smaller than 300x400
             const sheet = createTemporaryObject(itemContentComponent, this);

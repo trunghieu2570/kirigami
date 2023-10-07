@@ -87,10 +87,10 @@ T.Popup {
     T.Overlay.modeless: Item {
         id: overlay
         Rectangle {
-            x: sheetHandler.visualParent.Kirigami.ScenePosition.x
-            y: sheetHandler.visualParent.Kirigami.ScenePosition.y
-            width: sheetHandler.visualParent.width
-            height: sheetHandler.visualParent.height
+            x: sheetHandler.visualParent?.Kirigami.ScenePosition.x ?? 0
+            y: sheetHandler.visualParent?.Kirigami.ScenePosition.y ?? 0
+            width: sheetHandler.visualParent?.width ?? 0
+            height: sheetHandler.visualParent?.height ?? 0
             color: Qt.rgba(0, 0, 0, 0.2)
         }
         Behavior on opacity {
@@ -125,17 +125,17 @@ T.Popup {
 
     implicitWidth: {
         if (!scrollView.itemForSizeHints) {
-            return parent.width;
+            return parent?.width ?? 0;
         } else if (scrollView.itemForSizeHints.Layout.preferredWidth > 0) {
             return scrollView.itemForSizeHints.Layout.preferredWidth;
         } else if (scrollView.itemForSizeHints.implicitWidth > 0) {
             return scrollView.itemForSizeHints.implicitWidth;
         } else {
-            return parent.width;
+            return parent?.width ?? 0;
         }
     }
     implicitHeight: {
-        let h = parent.height;
+        let h = parent?.height ?? 0;
         if (!scrollView.itemForSizeHints) {
             return h;
         } else if (scrollView.itemForSizeHints.Layout.preferredHeight > 0) {
