@@ -24,58 +24,90 @@ TestCase {
     width: flickable.implicitWidth
     height: flickable.implicitHeight
 
-    function wheelScrolling(angleDelta = 120) {
+    function wheelScrolling(angleDelta = wheelHandler.verticalStepSize) {
         let x = flickable.contentX
         let y = flickable.contentY
         const angleDeltaFactor = angleDelta / 120
         mouseWheel(flickable, flickable.leftMargin, 0, -angleDelta, -angleDelta, Qt.NoButton)
-        verify(flickable.contentX === Math.round(x + hstep * angleDeltaFactor), "+xTick")
+        if (angleDelta === wheelHandler.verticalStepSize) {
+            tryCompare(flickable, "contentX", Math.round(x + hstep * angleDeltaFactor), Kirigami.Units.longDuration * 2, "+xTick")
+        } else {
+            compare(flickable.contentX, Math.round(x + hstep * angleDeltaFactor), "+xTick")
+        }
         x = flickable.contentX
-        verify(flickable.contentY === Math.round(y + vstep * angleDeltaFactor), "+yTick")
+        if (angleDelta === wheelHandler.verticalStepSize) {
+            tryCompare(flickable, "contentY", Math.round(y + vstep * angleDeltaFactor), Kirigami.Units.longDuration * 2, "+yTick")
+        } else {
+            compare(flickable.contentY, Math.round(y + vstep * angleDeltaFactor), "+yTick")
+        }
         y = flickable.contentY
 
         mouseWheel(flickable, flickable.leftMargin, 0, angleDelta, angleDelta, Qt.NoButton)
-        verify(flickable.contentX === Math.round(x - hstep * angleDeltaFactor), "-xTick")
+        if (angleDelta === wheelHandler.verticalStepSize) {
+            tryCompare(flickable, "contentX", Math.round(x - hstep * angleDeltaFactor), Kirigami.Units.longDuration * 2, "-xTick")
+        } else {
+            compare(flickable.contentX, Math.round(x - hstep * angleDeltaFactor), "-xTick")
+        }
         x = flickable.contentX
-        verify(flickable.contentY === Math.round(y - vstep * angleDeltaFactor), "-yTick")
+        if (angleDelta === wheelHandler.verticalStepSize) {
+            tryCompare(flickable, "contentY", Math.round(y - vstep * angleDeltaFactor), Kirigami.Units.longDuration * 2, "-yTick")
+        } else {
+            compare(flickable.contentY, Math.round(y - vstep * angleDeltaFactor), "-yTick")
+        }
         y = flickable.contentY
 
         if (Qt.platform.pluginName !== "xcb") {
             mouseWheel(flickable, flickable.leftMargin, 0, 0, -angleDelta, Qt.NoButton, Qt.AltModifier)
-            verify(flickable.contentX === Math.round(x + hstep * angleDeltaFactor), "+h_yTick")
+            tryCompare(flickable, "contentX", Math.round(x + hstep * angleDeltaFactor), Kirigami.Units.longDuration * 2, "+h_yTick")
             x = flickable.contentX
-            verify(flickable.contentY === y, "no +yTick")
+            tryCompare(flickable, "contentY", y, Kirigami.Units.longDuration * 2, "no +yTick")
 
             mouseWheel(flickable, flickable.leftMargin, 0, 0, angleDelta, Qt.NoButton, Qt.AltModifier)
-            verify(flickable.contentX === Math.round(x - hstep * angleDeltaFactor), "-h_yTick")
+            tryCompare(flickable, "contentX", Math.round(x - hstep * angleDeltaFactor), Kirigami.Units.longDuration * 2, "-h_yTick")
             x = flickable.contentX
-            verify(flickable.contentY === y, "no -yTick")
+            tryCompare(flickable, "contentY", y, Kirigami.Units.longDuration * 2, "no -yTick")
         }
 
         mouseWheel(flickable, flickable.leftMargin, 0, -angleDelta, -angleDelta, Qt.NoButton, wheelHandler.pageScrollModifiers)
-        verify(flickable.contentX === Math.round(x + pageWidth * angleDeltaFactor), "+xPage")
+        if (angleDelta === wheelHandler.verticalStepSize) {
+            tryCompare(flickable, "contentX", Math.round(x + pageWidth * angleDeltaFactor), Kirigami.Units.longDuration * 2, "+xPage")
+        } else {
+            compare(flickable.contentX, Math.round(x + pageWidth * angleDeltaFactor), "+xPage")
+        }
         x = flickable.contentX
-        verify(flickable.contentY === Math.round(y + pageHeight * angleDeltaFactor), "+yPage")
+        if (angleDelta === wheelHandler.verticalStepSize) {
+            tryCompare(flickable, "contentY", Math.round(y + pageHeight * angleDeltaFactor), Kirigami.Units.longDuration * 2, "+yPage")
+        } else {
+            compare(flickable.contentY, Math.round(y + pageHeight * angleDeltaFactor), "+yPage")
+        }
         y = flickable.contentY
 
         mouseWheel(flickable, flickable.leftMargin, 0, angleDelta, angleDelta, Qt.NoButton, wheelHandler.pageScrollModifiers)
-        verify(flickable.contentX === Math.round(x - pageWidth * angleDeltaFactor), "-xPage")
+        if (angleDelta === wheelHandler.verticalStepSize) {
+            tryCompare(flickable, "contentX", Math.round(x - pageWidth * angleDeltaFactor), Kirigami.Units.longDuration * 2, "-xPage")
+        } else {
+            compare(flickable.contentX, Math.round(x - pageWidth * angleDeltaFactor), "-xPage")
+        }
         x = flickable.contentX
-        verify(flickable.contentY === Math.round(y - pageHeight * angleDeltaFactor), "-yPage")
+        if (angleDelta === wheelHandler.verticalStepSize) {
+            tryCompare(flickable, "contentY", Math.round(y - pageHeight * angleDeltaFactor), Kirigami.Units.longDuration * 2, "-yPage")
+        } else {
+            compare(flickable.contentY, Math.round(y - pageHeight * angleDeltaFactor), "-yPage")
+        }
         y = flickable.contentY
 
         if (Qt.platform.pluginName !== "xcb") {
             mouseWheel(flickable, flickable.leftMargin, 0, 0, -angleDelta, Qt.NoButton,
                     Qt.AltModifier | wheelHandler.pageScrollModifiers)
-            verify(flickable.contentX === Math.round(x + pageWidth * angleDeltaFactor), "+h_yPage")
+            tryCompare(flickable, "contentX", Math.round(x + pageWidth * angleDeltaFactor), Kirigami.Units.longDuration * 2, "+h_yPage")
             x = flickable.contentX
-            verify(flickable.contentY === y, "no +yPage")
+            tryCompare(flickable, "contentY", y, Kirigami.Units.longDuration * 2, "no +yPage")
 
             mouseWheel(flickable, flickable.leftMargin, 0, 0, angleDelta, Qt.NoButton,
                     Qt.AltModifier | wheelHandler.pageScrollModifiers)
-            verify(flickable.contentX === Math.round(x - pageWidth * angleDeltaFactor), "-h_yPage")
+            tryCompare(flickable, "contentX", Math.round(x - pageWidth * angleDeltaFactor), Kirigami.Units.longDuration * 2, "-h_yPage")
             x = flickable.contentX
-            verify(flickable.contentY === y, "no -yPage")
+            tryCompare(flickable, "contentY", y, Kirigami.Units.longDuration * 2, "no -yPage")
         }
     }
 
@@ -103,51 +135,51 @@ TestCase {
         let x = originalX
         let y = originalY
         keyClick(Qt.Key_Right)
-        verify(flickable.contentX === x + hstep, "Key_Right")
+        tryCompare(flickable, "contentX", x + hstep, Kirigami.Units.longDuration * 2, "Key_Right")
         x = flickable.contentX
 
         keyClick(Qt.Key_Left)
-        verify(flickable.contentX === x - hstep, "Key_Left")
+        tryCompare(flickable, "contentX", x - hstep, Kirigami.Units.longDuration * 2, "Key_Left")
         x = flickable.contentX
 
         keyClick(Qt.Key_Down)
-        verify(flickable.contentY === y + vstep, "Key_Down")
+        tryCompare(flickable, "contentY", y + vstep, Kirigami.Units.longDuration * 2, "Key_Down")
         y = flickable.contentY
 
         keyClick(Qt.Key_Up)
-        verify(flickable.contentY === y - vstep, "Key_Up")
+        tryCompare(flickable, "contentY", y - vstep, Kirigami.Units.longDuration * 2, "Key_Up")
         y = flickable.contentY
 
         keyClick(Qt.Key_PageDown)
-        verify(flickable.contentY === y + pageHeight, "Key_PageDown")
+        tryCompare(flickable, "contentY", y + pageHeight, Kirigami.Units.longDuration * 2, "Key_PageDown")
         y = flickable.contentY
 
         keyClick(Qt.Key_PageUp)
-        verify(flickable.contentY === y - pageHeight, "Key_PageUp")
+        tryCompare(flickable, "contentY", y - pageHeight, Kirigami.Units.longDuration * 2, "Key_PageUp")
         y = flickable.contentY
 
         keyClick(Qt.Key_End)
-        verify(flickable.contentY === contentHeight - pageHeight, "Key_End")
+        tryCompare(flickable, "contentY", contentHeight - pageHeight, Kirigami.Units.longDuration * 2, "Key_End")
         y = flickable.contentY
 
         keyClick(Qt.Key_Home)
-        verify(flickable.contentY === originalY, "Key_Home")
+        tryCompare(flickable, "contentY", originalY, Kirigami.Units.longDuration * 2, "Key_Home")
         y = flickable.contentY
 
         keyClick(Qt.Key_PageDown, Qt.AltModifier)
-        verify(flickable.contentX === x + pageWidth, "h_Key_PageDown")
+        tryCompare(flickable, "contentX", x + pageWidth, Kirigami.Units.longDuration * 2, "h_Key_PageDown")
         x = flickable.contentX
 
         keyClick(Qt.Key_PageUp, Qt.AltModifier)
-        verify(flickable.contentX === x - pageWidth, "h_Key_PageUp")
+        tryCompare(flickable, "contentX", x - pageWidth, Kirigami.Units.longDuration * 2, "h_Key_PageUp")
         x = flickable.contentX
 
         keyClick(Qt.Key_End, Qt.AltModifier)
-        verify(flickable.contentX === contentWidth - pageWidth, "h_Key_End")
+        tryCompare(flickable, "contentX", contentWidth - pageWidth, Kirigami.Units.longDuration * 2, "h_Key_End")
         x = flickable.contentX
 
         keyClick(Qt.Key_Home, Qt.AltModifier)
-        verify(flickable.contentX === originalX, "h_Key_Home")
+        tryCompare(flickable, "contentX", originalX, Kirigami.Units.longDuration * 2, "h_Key_Home")
     }
 
     function test_KeyboardScrolling() {

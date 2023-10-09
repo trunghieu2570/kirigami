@@ -31,35 +31,35 @@ TestCase {
         let y = originalY
 
         wheelHandler.scrollRight()
-        verify(flickable.contentX === x + hstep, "scrollRight()")
+        tryCompare(flickable, "contentX", x + hstep, Kirigami.Units.longDuration * 2, "scrollRight()")
         x = flickable.contentX
 
         wheelHandler.scrollLeft()
-        verify(flickable.contentX === x - hstep, "scrollLeft()")
+        tryCompare(flickable, "contentX", x - hstep, Kirigami.Units.longDuration * 2, "scrollLeft()")
         x = flickable.contentX
 
         wheelHandler.scrollDown()
-        verify(flickable.contentY === y + vstep, "scrollDown()")
+        tryCompare(flickable, "contentY", y + vstep, Kirigami.Units.longDuration * 2, "scrollDown()")
         y = flickable.contentY
 
         wheelHandler.scrollUp()
-        verify(flickable.contentY === y - vstep, "scrollUp()")
+        tryCompare(flickable, "contentY", y - vstep, Kirigami.Units.longDuration * 2, "scrollUp()")
         y = flickable.contentY
 
         wheelHandler.scrollRight(101)
-        verify(flickable.contentX === x + 101, "scrollRight(101)")
+        tryCompare(flickable, "contentX", x + 101, Kirigami.Units.longDuration * 2, "scrollRight(101)")
         x = flickable.contentX
 
         wheelHandler.scrollLeft(101)
-        verify(flickable.contentX === x - 101, "scrollLeft(101)")
+        tryCompare(flickable, "contentX", x - 101, Kirigami.Units.longDuration * 2, "scrollLeft(101)")
         x = flickable.contentX
 
         wheelHandler.scrollDown(101)
-        verify(flickable.contentY === y + 101, "scrollDown(101)")
+        tryCompare(flickable, "contentY", y + 101, Kirigami.Units.longDuration * 2, "scrollDown(101)")
         y = flickable.contentY
 
         wheelHandler.scrollUp(101)
-        verify(flickable.contentY === y - 101, "scrollUp(101)")
+        tryCompare(flickable, "contentY", y - 101, Kirigami.Units.longDuration * 2, "scrollUp(101)")
         y = flickable.contentY
     }
 

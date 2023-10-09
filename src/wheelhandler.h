@@ -8,11 +8,14 @@
 #include <QGuiApplication>
 #include <QObject>
 #include <QPoint>
+#include <QPropertyAnimation>
+#include <QQmlParserStatus>
 #include <QQuickItem>
 #include <QStyleHints>
 #include <QTimer>
 
 class QWheelEvent;
+class QQmlEngine;
 class WheelHandler;
 
 /**
@@ -168,7 +171,7 @@ public:
  * @include wheelhandler/ScrollViewUsage.qml
  *
  */
-class WheelHandler : public QObject
+class WheelHandler : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
 
@@ -349,6 +352,9 @@ private Q_SLOTS:
     void _k_rebindScrollBars();
 
 private:
+    void classBegin() override;
+    void componentComplete() override;
+
     void setScrolling(bool scrolling);
     bool scrollFlickable(QPointF pixelDelta, QPointF angleDelta = {}, Qt::KeyboardModifiers modifiers = Qt::NoModifier);
 
@@ -368,7 +374,6 @@ private:
     constexpr static qreal m_wheelScrollingDuration = 400;
     bool m_filterMouseEvents = false;
     bool m_keyNavigationEnabled = false;
-    bool m_wasTouched = false;
     bool m_blockTargetWheel = true;
     bool m_scrollFlickableTarget = true;
     // Same as QXcbWindow.
@@ -378,4 +383,10 @@ private:
     Qt::KeyboardModifiers m_pageScrollModifiers = m_defaultPageScrollModifiers;
     QTimer m_wheelScrollingTimer;
     KirigamiWheelEvent m_kirigamiWheelEvent;
+
+    // Smooth scrolling
+    QQmlEngine *m_engine = nullptr;
+    QPropertyAnimation m_yScrollAnimation{nullptr, "contentY"};
+    qreal m_lastTargetYValue = 0;
+    bool m_wasTouched = false;
 };

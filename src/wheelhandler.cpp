@@ -6,9 +6,13 @@
 
 #include "wheelhandler.h"
 #include "settings.h"
+
+#include <QQmlEngine>
 #include <QQuickItem>
 #include <QQuickWindow>
 #include <QWheelEvent>
+
+#include <libkirigami/units.h>
 
 KirigamiWheelEvent::KirigamiWheelEvent(QObject *parent)
     : QObject(parent)
@@ -98,6 +102,8 @@ WheelHandler::WheelHandler(QObject *parent)
         setScrolling(false);
     });
 
+    m_yScrollAnimation.setEasingCurve(QEasingCurve::OutCubic);
+
     connect(QGuiApplication::styleHints(), &QStyleHints::wheelScrollLinesChanged, this, [this](int scrollLines) {
         m_defaultPixelStepSize = 20 * scrollLines;
         if (!m_explicitVStepSize && m_verticalStepSize != m_defaultPixelStepSize) {
@@ -140,6 +146,10 @@ void WheelHandler::setTarget(QQuickItem *target)
 
     m_flickable = target;
     m_filterItem->setParentItem(target);
+    if (m_yScrollAnimation.targetObject()) {
+        m_yScrollAnimation.stop();
+    }
+    m_yScrollAnimation.setTargetObject(target);
 
     if (target) {
         target->installEventFilter(this);
@@ -374,6 +384,21 @@ void WheelHandler::setKeyNavigationEnabled(bool enabled)
     Q_EMIT keyNavigationEnabledChanged();
 }
 
+void WheelHandler::classBegin()
+{
+    // Initializes smooth scrolling
+    m_engine = qmlEngine(this);
+    auto units = m_engine->singletonInstance<Kirigami::Units *>(qmlTypeId("org.kde.kirigami", 2, 0, "Units"));
+    m_yScrollAnimation.setDuration(units->longDuration());
+    connect(units, &Kirigami::Units::longDurationChanged, this, [this] {
+        m_yScrollAnimation.setDuration(static_cast<Kirigami::Units *>(sender())->longDuration());
+    });
+}
+
+void WheelHandler::componentComplete()
+{
+}
+
 void WheelHandler::setScrolling(bool scrolling)
 {
     if (m_wheelScrolling == scrolling) {
@@ -465,16 +490,30 @@ bool WheelHandler::scrollFlickable(QPointF pixelDelta, QPointF angleDelta, Qt::K
         qreal minYExtent = topMargin - originY;
         qreal maxYExtent = height - (contentHeight + bottomMargin + originY);
 
-        qreal newContentY = qBound(-minYExtent, contentY - yChange, -maxYExtent);
+        qreal newContentY;
+        if (m_yScrollAnimation.state() == QPropertyAnimation::Running) {
+            newContentY = std::clamp(m_lastTargetYValue - yChange, -minYExtent, -maxYExtent);
+        } else {
+            newContentY = std::clamp(contentY - yChange, -minYExtent, -maxYExtent);
+        }
+
         // Flickable::pixelAligned rounds the position, so round to mimic that behavior.
         // Rounding prevents fractional positioning from causing text to be
         // clipped off on the top and bottom.
         // Multiply by devicePixelRatio before rounding and divide by devicePixelRatio
         // after to make position match pixels on the screen more closely.
         newContentY = std::round(newContentY * devicePixelRatio) / devicePixelRatio;
+        m_lastTargetYValue = newContentY;
         if (contentY != newContentY) {
             scrolled = true;
-            m_flickable->setProperty("contentY", newContentY);
+            if (m_wasTouched || !m_engine) {
+                m_flickable->setProperty("contentY", newContentY);
+            } else {
+                m_yScrollAnimation.stop();
+                m_yScrollAnimation.setStartValue(contentY);
+                m_yScrollAnimation.setEndValue(newContentY);
+                m_yScrollAnimation.start(QAbstractAnimation::KeepWhenStopped);
+            }
         }
     }
 
@@ -556,6 +595,10 @@ bool WheelHandler::eventFilter(QObject *watched, QEvent *event)
             }
         }
         QWheelEvent *wheelEvent = static_cast<QWheelEvent *>(event);
+
+        // Can't use wheelEvent->deviceType() to determine device type since on Wayland mouse is always regarded as touchpad
+        // https://invent.kde.org/qt/qt/qtwayland/-/blob/e695a39519a7629c1549275a148cfb9ab99a07a9/src/client/qwaylandinputdevice.cpp#L445
+        m_wasTouched = std::abs(wheelEvent->angleDelta().y()) < m_verticalStepSize && std::abs(wheelEvent->angleDelta().x()) < m_horizontalStepSize;
 
         // NOTE: On X11 with libinput, pixelDelta is identical to angleDelta when using a mouse that shouldn't use pixelDelta.
         // If faulty pixelDelta, reset pixelDelta to (0,0).
