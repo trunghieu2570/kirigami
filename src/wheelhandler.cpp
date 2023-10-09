@@ -598,7 +598,8 @@ bool WheelHandler::eventFilter(QObject *watched, QEvent *event)
 
         // Can't use wheelEvent->deviceType() to determine device type since on Wayland mouse is always regarded as touchpad
         // https://invent.kde.org/qt/qt/qtwayland/-/blob/e695a39519a7629c1549275a148cfb9ab99a07a9/src/client/qwaylandinputdevice.cpp#L445
-        m_wasTouched = std::abs(wheelEvent->angleDelta().y()) < m_verticalStepSize && std::abs(wheelEvent->angleDelta().x()) < m_horizontalStepSize;
+        // and we can only expect a touchpad never generates the same angle delta as a mouse
+        m_wasTouched = std::abs(wheelEvent->angleDelta().y()) != 120 && std::abs(wheelEvent->angleDelta().x()) != 120;
 
         // NOTE: On X11 with libinput, pixelDelta is identical to angleDelta when using a mouse that shouldn't use pixelDelta.
         // If faulty pixelDelta, reset pixelDelta to (0,0).
