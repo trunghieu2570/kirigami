@@ -61,7 +61,7 @@ import org.kde.kirigami 2 as Kirigami
  *               easing.type: Easing.InOutQuad
  *           }
  *       }
- *       delegate: Kirigami.DelegateRecycler {
+ *       delegate: Loader {
  *           width: mainList.width
  *           sourceComponent: delegateComponent
  *       }

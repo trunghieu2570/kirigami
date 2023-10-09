@@ -34,8 +34,6 @@ target_sources(KirigamiPlugin PRIVATE
     columnview.cpp
     columnview.h
     columnview_p.h
-    delegaterecycler.cpp
-    delegaterecycler.h
     enums.cpp
     enums.h
     formlayoutattached.cpp
