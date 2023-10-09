@@ -231,31 +231,3 @@ msgstr "%1 ウィンドウシステム"
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (%3 を用いてビルドされました)"
-
-#~ msgctxt "CategorizedSettings|"
-#~ msgid "Settings"
-#~ msgstr "設定"
-
-#~ msgctxt "CategorizedSettings|"
-#~ msgid "Settings — %1"
-#~ msgstr "設定 — %1"
-
-#~ msgctxt "Avatar|"
-#~ msgid "%1 — %2"
-#~ msgstr "%1 — %2"
-
-#~ msgctxt "PageTab|"
-#~ msgid "Current page. Progress: %1 percent."
-#~ msgstr "現在のページです。進捗: %1 パーセント。"
-
-#~ msgctxt "PageTab|"
-#~ msgid "Current page."
-#~ msgstr "現在のページです。"
-
-#~ msgctxt "ToolBarApplicationHeader|"
-#~ msgid "More Actions"
-#~ msgstr "その他のアクション"
-
-#~ msgctxt "AboutItem|"
-#~ msgid "Visit %1's KDE Store page"
-#~ msgstr "%1 の KDE Store ページを訪れる"
