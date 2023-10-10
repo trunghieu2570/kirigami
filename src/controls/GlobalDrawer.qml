@@ -407,6 +407,7 @@ Kirigami.OverlayDrawer {
                             QQC2.ItemDelegate {
                                 id: backItem
                                 visible: level > 0
+                                width: parent.width
                                 icon.name: (LayoutMirroring.enabled ? "go-previous-symbolic-rtl" : "go-previous-symbolic")
 
                                 text: Kirigami.MnemonicData.richTextLabel
