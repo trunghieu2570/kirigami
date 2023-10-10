@@ -82,16 +82,18 @@ void PaddingPrivate::signalPaddings(const QMarginsF &oldPaddings, Paddings which
     if ((which & Bottom) && !qFuzzyCompare(q->bottomPadding(), oldPaddings.bottom())) {
         Q_EMIT q->bottomPaddingChanged();
     }
+    if ((which == Horizontal || which == All)
+        && (!qFuzzyCompare(q->leftPadding(), oldPaddings.left()) || !qFuzzyCompare(q->rightPadding(), oldPaddings.right()))) {
+        Q_EMIT q->horizontalPaddingChanged();
+    }
+    if ((which == Vertical || which == All)
+        && (!qFuzzyCompare(q->topPadding(), oldPaddings.top()) || !qFuzzyCompare(q->bottomPadding(), oldPaddings.bottom()))) {
+        Q_EMIT q->verticalPaddingChanged();
+    }
     if (!qFuzzyCompare(q->leftPadding() + q->rightPadding(), oldPaddings.left() + oldPaddings.right())) {
-        if (which == Horizontal || which == All) {
-            Q_EMIT q->horizontalPaddingChanged();
-        }
         Q_EMIT q->availableWidthChanged();
     }
     if (!qFuzzyCompare(q->topPadding() + q->bottomPadding(), oldPaddings.top() + oldPaddings.bottom())) {
-        if (which == Vertical || which == All) {
-            Q_EMIT q->verticalPaddingChanged();
-        }
         Q_EMIT q->availableHeightChanged();
     }
 }
