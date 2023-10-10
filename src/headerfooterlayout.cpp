@@ -28,6 +28,7 @@ void HeaderFooterLayout::setHeader(QQuickItem *item)
 
     if (m_header) {
         disconnect(m_header, nullptr, this, nullptr);
+        m_header->setParentItem(nullptr);
     }
 
     m_header = item;
@@ -65,6 +66,7 @@ void HeaderFooterLayout::setContentItem(QQuickItem *item)
 
     if (m_contentItem) {
         disconnect(m_contentItem, nullptr, this, nullptr);
+        m_contentItem->setParentItem(nullptr);
     }
 
     m_contentItem = item;
@@ -94,6 +96,7 @@ void HeaderFooterLayout::setFooter(QQuickItem *item)
 
     if (m_footer) {
         disconnect(m_footer, nullptr, this, nullptr);
+        m_footer->setParentItem(nullptr);
     }
 
     m_footer = item;
