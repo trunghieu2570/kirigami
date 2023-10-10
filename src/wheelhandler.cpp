@@ -492,7 +492,8 @@ bool WheelHandler::scrollFlickable(QPointF pixelDelta, QPointF angleDelta, Qt::K
 
         qreal newContentY;
         if (m_yScrollAnimation.state() == QPropertyAnimation::Running) {
-            newContentY = std::clamp(m_lastTargetYValue - yChange, -minYExtent, -maxYExtent);
+            m_yScrollAnimation.stop();
+            newContentY = std::clamp(m_yScrollAnimation.endValue().toReal() + -yChange, -minYExtent, -maxYExtent);
         } else {
             newContentY = std::clamp(contentY - yChange, -minYExtent, -maxYExtent);
         }
@@ -503,14 +504,11 @@ bool WheelHandler::scrollFlickable(QPointF pixelDelta, QPointF angleDelta, Qt::K
         // Multiply by devicePixelRatio before rounding and divide by devicePixelRatio
         // after to make position match pixels on the screen more closely.
         newContentY = std::round(newContentY * devicePixelRatio) / devicePixelRatio;
-        m_lastTargetYValue = newContentY;
         if (contentY != newContentY) {
             scrolled = true;
             if (m_wasTouched || !m_engine) {
                 m_flickable->setProperty("contentY", newContentY);
             } else {
-                m_yScrollAnimation.stop();
-                m_yScrollAnimation.setStartValue(contentY);
                 m_yScrollAnimation.setEndValue(newContentY);
                 m_yScrollAnimation.start(QAbstractAnimation::KeepWhenStopped);
             }
