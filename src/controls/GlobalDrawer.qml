@@ -301,6 +301,9 @@ Kirigami.OverlayDrawer {
             }
             Kirigami.Heading {
                 text: root.title
+                elide: Text.ElideRight
+                visible: !root.collapsed
+                Layout.fillWidth: true
             }
         }
         contentItem: QQC2.ScrollView {
@@ -483,7 +486,10 @@ Kirigami.OverlayDrawer {
                                             id: sectionHeader
                                             anchors.fill: parent
                                             Kirigami.Theme.colorSet: root.modal ? Kirigami.Theme.View : Kirigami.Theme.Window
+
                                             contentItem: RowLayout {
+                                                spacing: sectionHeader.spacing
+
                                                 Kirigami.Icon {
                                                     property int size: Kirigami.Units.iconSizes.smallMedium
                                                     Layout.minimumHeight: size
@@ -492,12 +498,11 @@ Kirigami.OverlayDrawer {
                                                     Layout.maximumWidth: size
                                                     source: modelData.icon.name || modelData.icon.source
                                                 }
-                                                Heading {
-                                                    id: header
+
+                                                Kirigami.Heading {
                                                     level: 4
                                                     text: modelData.text
-                                                }
-                                                Item {
+                                                    elide: Text.ElideRight
                                                     Layout.fillWidth: true
                                                 }
                                             }
