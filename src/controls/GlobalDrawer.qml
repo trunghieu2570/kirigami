@@ -276,7 +276,7 @@ Kirigami.OverlayDrawer {
             }
         }
         header: RowLayout {
-            visible: root.title.length > 0 || root.titleIcon
+            visible: root.title.length > 0 || Boolean(root.titleIcon)
             Kirigami.Icon {
                 source: root.titleIcon
             }
@@ -288,13 +288,8 @@ Kirigami.OverlayDrawer {
             id: scrollView
             //ensure the attached property exists
             Kirigami.Theme.inherit: true
-            implicitWidth: Math.min (Kirigami.Units.gridUnit * 20, root.parent.width * 0.8)
+            implicitWidth: Math.min(Kirigami.Units.gridUnit * 20, root.parent.width * 0.8)
             QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
-            QQC2.ScrollBar.vertical.anchors {
-                top: scrollView.top
-                bottom: scrollView.bottom
-                topMargin: headerParent.height + headerParent.y
-            }
 
             Flickable {
                 id: mainFlickable
