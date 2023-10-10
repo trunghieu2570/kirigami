@@ -408,7 +408,7 @@ Kirigami.OverlayDrawer {
                                 id: backItem
                                 visible: level > 0
                                 width: parent.width
-                                icon.name: (LayoutMirroring.enabled ? "go-previous-symbolic-rtl" : "go-previous-symbolic")
+                                icon.name: mirrored ? "go-previous-symbolic-rtl" : "go-previous-symbolic"
 
                                 text: Kirigami.MnemonicData.richTextLabel
                                 Kirigami.MnemonicData.enabled: backItem.enabled && backItem.visible
@@ -499,13 +499,29 @@ Kirigami.OverlayDrawer {
                     }
 
                     QQC2.ToolButton {
-                        icon.name: root.collapsed ? "view-right-new" : "view-right-close"
-                        Layout.fillWidth: root.collapsed
-                        onClicked: root.collapsed = !root.collapsed
+                        Layout.fillWidth: true
+
+                        icon.name: {
+                            if (root.collapsible && root.collapseButtonVisible) {
+                                // Check for edge regardless of RTL/locale/mirrored status,
+                                // because edge can be set externally.
+                                const mirrored = root.edge === Qt.RightEdge;
+
+                                if (root.collapsed) {
+                                    return mirrored ? "sidebar-expand-right" : "sidebar-expand-left";
+                                } else {
+                                    return mirrored ? "sidebar-collapse-right" : "sidebar-collapse-left";
+                                }
+                            }
+                            return "";
+                        }
+
                         visible: root.collapsible && root.collapseButtonVisible
                         text: root.collapsed ? "" : qsTr("Close Sidebar")
 
-                        QQC2.ToolTip.visible: root.collapsed && hovered
+                        onClicked: root.collapsed = !root.collapsed
+
+                        QQC2.ToolTip.visible: root.collapsed && (Kirigami.Settings.tabletMode ? pressed : hovered)
                         QQC2.ToolTip.text: qsTr("Open Sidebar")
                         QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                     }

@@ -84,7 +84,7 @@ QQC2.ItemDelegate {
             opacity: 0.7
             selected: listItem.checked || listItem.down
             Layout.preferredWidth: Layout.preferredHeight
-            source: (LayoutMirroring.enabled ? "go-next-symbolic-rtl" : "go-next-symbolic")
+            source: listItem.mirrored ? "go-next-symbolic-rtl" : "go-next-symbolic"
             visible: (!isExpandable || root.collapsed) && !listItem.isSeparator && modelData.hasOwnProperty("children") && modelData.children!==undefined && modelData.children.length > 0
         }
     }
