@@ -139,7 +139,16 @@ T.Drawer {
      *
      * Currently supported only on left and right drawers.
      */
-    property bool handleVisible: (typeof applicationWindow === "function") && applicationWindow() ? applicationWindow().controlsVisible : true
+    property bool handleVisible: {
+        if (typeof applicationWindow === "function") {
+            const w = applicationWindow();
+            if (w) {
+                return w.controlsVisible;
+            }
+        }
+        // For a generic-purpose OverlayDrawer its handle is visible by default
+        return true;
+    }
 
     /**
      * @brief Readonly property that points to the item that will act as a physical

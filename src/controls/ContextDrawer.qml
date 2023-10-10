@@ -113,7 +113,16 @@ Kirigami.OverlayDrawer {
     rightPadding: 0
     bottomPadding: 0
 
-    handleVisible: typeof applicationWindow !== "undefined" ? applicationWindow().controlsVisible : false
+    property bool handleVisible: {
+        if (typeof applicationWindow === "function") {
+            const w = applicationWindow();
+            if (w) {
+                return w.controlsVisible;
+            }
+        }
+        // For a ContextDrawer its handle is hidden by default
+        return false;
+    }
 
     contentItem: QQC2.ScrollView {
         // this just to create the attached property

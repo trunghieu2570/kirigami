@@ -50,10 +50,29 @@ import "private" as KP
  */
 Kirigami.OverlayDrawer {
     id: root
+
     edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
+
     handleClosedIcon.source: null
     handleOpenIcon.source: null
-    handleVisible: (modal || !drawerOpen) && (typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true) && (!isMenu || Kirigami.Settings.isMobile)
+
+    handleVisible: {
+        // When drawer is inline with content and opened, there is no point is showing handle.
+        if (!modal && drawerOpen) {
+            return false;
+        }
+
+        // GlobalDrawer can be hidden by controlsVisible...
+        if (typeof applicationWindow === "function") {
+            const w = applicationWindow();
+            if (w && !w.controlsVisible) {
+                return false;
+            }
+        }
+
+        // ...but it still performs additional checks.
+        return enabled;
+    }
 
     enabled: !isMenu || Kirigami.Settings.isMobile
 
