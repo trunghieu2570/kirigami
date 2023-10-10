@@ -43,6 +43,12 @@ QQC2.ItemDelegate {
             id: labelItem
             visible: !listItem.isSeparator
             text:  width > height * 2 ? listItem.Kirigami.MnemonicData.mnemonicLabel : ""
+
+            // Work around Qt bug where left aligned text is not right aligned
+            // in RTL mode unless horizontalAlignment is explicitly set.
+            // https://bugreports.qt.io/browse/QTBUG-95873
+            horizontalAlignment: Text.AlignLeft
+
             Layout.fillWidth: true
             mnemonicVisible: listItem.Kirigami.MnemonicData.active
             color: (listItem.highlighted || listItem.checked || listItem.down) ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
