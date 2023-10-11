@@ -22,81 +22,81 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: controls/AboutItem.qml:139
+#: controls/AboutItem.qml:163
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controls/AboutItem.qml:148
+#: controls/AboutItem.qml:172
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Envia un correu a %1"
 
-#: controls/AboutItem.qml:198
+#: controls/AboutItem.qml:222
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Col·laboreu-hi"
 
-#: controls/AboutItem.qml:204
+#: controls/AboutItem.qml:228
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr "Donatius"
 
-#: controls/AboutItem.qml:221
+#: controls/AboutItem.qml:245
 msgctxt "AboutItem|"
 msgid "Report a Bug"
 msgstr "Informeu d'un error"
 
-#: controls/AboutItem.qml:234
+#: controls/AboutItem.qml:258
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Drets d'autoria"
 
-#: controls/AboutItem.qml:278
+#: controls/AboutItem.qml:302
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Llicència:"
 
-#: controls/AboutItem.qml:300
+#: controls/AboutItem.qml:324
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Llicència: %1"
 
-#: controls/AboutItem.qml:311
+#: controls/AboutItem.qml:335
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Biblioteques en ús"
 
-#: controls/AboutItem.qml:341
+#: controls/AboutItem.qml:365
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autoria"
 
-#: controls/AboutItem.qml:350
+#: controls/AboutItem.qml:375
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Mostra les fotos dels autors"
 
-#: controls/AboutItem.qml:381
+#: controls/AboutItem.qml:386
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Atribucions"
 
-#: controls/AboutItem.qml:394
+#: controls/AboutItem.qml:398
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Equip de traducció"
 
-#: controls/AboutPage.qml:93
+#: controls/AboutPage.qml:102
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Quant a %1"
 
-#: controls/AbstractApplicationWindow.qml:188
+#: controls/AbstractApplicationWindow.qml:176
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Ix"
@@ -111,22 +111,22 @@ msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr "Elimina l'etiqueta"
 
-#: controls/ContextDrawer.qml:66
+#: controls/ContextDrawer.qml:59
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Accions"
 
-#: controls/GlobalDrawer.qml:460
+#: controls/GlobalDrawer.qml:420
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Arrere"
 
-#: controls/GlobalDrawer.qml:550
+#: controls/GlobalDrawer.qml:510
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Tanca la barra lateral"
 
-#: controls/GlobalDrawer.qml:553
+#: controls/GlobalDrawer.qml:513
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Obri la barra lateral"

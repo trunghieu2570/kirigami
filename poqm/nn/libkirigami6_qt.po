@@ -18,81 +18,81 @@ msgstr ""
 "X-Text-Markup: qtrich\n"
 "X-Qt-Contexts: true\n"
 
-#: controls/AboutItem.qml:139
+#: controls/AboutItem.qml:163
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controls/AboutItem.qml:148
+#: controls/AboutItem.qml:172
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Send e-post til %1"
 
-#: controls/AboutItem.qml:198
+#: controls/AboutItem.qml:222
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Vert med"
 
-#: controls/AboutItem.qml:204
+#: controls/AboutItem.qml:228
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr "Gje pengegåve"
 
-#: controls/AboutItem.qml:221
+#: controls/AboutItem.qml:245
 msgctxt "AboutItem|"
 msgid "Report a Bug"
 msgstr "Meld frå om feil"
 
-#: controls/AboutItem.qml:234
+#: controls/AboutItem.qml:258
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Opphavsrett"
 
-#: controls/AboutItem.qml:278
+#: controls/AboutItem.qml:302
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Lisens:"
 
-#: controls/AboutItem.qml:300
+#: controls/AboutItem.qml:324
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Lisens: %1"
 
-#: controls/AboutItem.qml:311
+#: controls/AboutItem.qml:335
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Brukte bibliotek"
 
-#: controls/AboutItem.qml:341
+#: controls/AboutItem.qml:365
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Opphavspersonar"
 
-#: controls/AboutItem.qml:350
+#: controls/AboutItem.qml:375
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Vis bilete av opphavspersonane"
 
-#: controls/AboutItem.qml:381
+#: controls/AboutItem.qml:386
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Kreditering"
 
-#: controls/AboutItem.qml:394
+#: controls/AboutItem.qml:398
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Omsetjarar"
 
-#: controls/AboutPage.qml:93
+#: controls/AboutPage.qml:102
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Om %1"
 
-#: controls/AbstractApplicationWindow.qml:188
+#: controls/AbstractApplicationWindow.qml:176
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Avslutt"
@@ -107,22 +107,22 @@ msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr "Fjern merkelapp"
 
-#: controls/ContextDrawer.qml:66
+#: controls/ContextDrawer.qml:59
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Handlingar"
 
-#: controls/GlobalDrawer.qml:460
+#: controls/GlobalDrawer.qml:420
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Tilbake"
 
-#: controls/GlobalDrawer.qml:550
+#: controls/GlobalDrawer.qml:510
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Lukk sidestolpen"
 
-#: controls/GlobalDrawer.qml:553
+#: controls/GlobalDrawer.qml:513
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Opna sidestolpe"

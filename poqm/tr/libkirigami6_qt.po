@@ -15,81 +15,81 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "X-POOTLE-MTIME: 1497529432.000000\n"
 
-#: controls/AboutItem.qml:139
+#: controls/AboutItem.qml:163
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controls/AboutItem.qml:148
+#: controls/AboutItem.qml:172
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "%1 kişisine bir e-posta gönder"
 
-#: controls/AboutItem.qml:198
+#: controls/AboutItem.qml:222
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Katıl"
 
-#: controls/AboutItem.qml:204
+#: controls/AboutItem.qml:228
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr "Bağış Yap"
 
-#: controls/AboutItem.qml:221
+#: controls/AboutItem.qml:245
 msgctxt "AboutItem|"
 msgid "Report a Bug"
 msgstr "Hata Bildir"
 
-#: controls/AboutItem.qml:234
+#: controls/AboutItem.qml:258
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Telif hakkı"
 
-#: controls/AboutItem.qml:278
+#: controls/AboutItem.qml:302
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Lisans:"
 
-#: controls/AboutItem.qml:300
+#: controls/AboutItem.qml:324
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Lisans: %1"
 
-#: controls/AboutItem.qml:311
+#: controls/AboutItem.qml:335
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Kullanılan kitaplıklar"
 
-#: controls/AboutItem.qml:341
+#: controls/AboutItem.qml:365
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Yazarlar"
 
-#: controls/AboutItem.qml:350
+#: controls/AboutItem.qml:375
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Yazar fotoğraflarını göster"
 
-#: controls/AboutItem.qml:381
+#: controls/AboutItem.qml:386
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Emeği Geçenler"
 
-#: controls/AboutItem.qml:394
+#: controls/AboutItem.qml:398
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Çevirmenler"
 
-#: controls/AboutPage.qml:93
+#: controls/AboutPage.qml:102
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "%1 Hakkında"
 
-#: controls/AbstractApplicationWindow.qml:188
+#: controls/AbstractApplicationWindow.qml:176
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Çık"
@@ -104,22 +104,22 @@ msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr "Etiketi Kaldır"
 
-#: controls/ContextDrawer.qml:66
+#: controls/ContextDrawer.qml:59
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Eylemler"
 
-#: controls/GlobalDrawer.qml:460
+#: controls/GlobalDrawer.qml:420
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Geri"
 
-#: controls/GlobalDrawer.qml:550
+#: controls/GlobalDrawer.qml:510
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Kenar Çubuğunu Kapat"
 
-#: controls/GlobalDrawer.qml:553
+#: controls/GlobalDrawer.qml:513
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Kenar Çubuğunu Aç"

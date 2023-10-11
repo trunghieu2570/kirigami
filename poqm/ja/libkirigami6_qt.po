@@ -15,81 +15,81 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "X-Generator: Lokalize 22.12.2\n"
 
-#: controls/AboutItem.qml:139
+#: controls/AboutItem.qml:163
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controls/AboutItem.qml:148
+#: controls/AboutItem.qml:172
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "%1 にメールを送る"
 
-#: controls/AboutItem.qml:198
+#: controls/AboutItem.qml:222
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "参加する"
 
-#: controls/AboutItem.qml:204
+#: controls/AboutItem.qml:228
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr "寄付する"
 
-#: controls/AboutItem.qml:221
+#: controls/AboutItem.qml:245
 msgctxt "AboutItem|"
 msgid "Report a Bug"
 msgstr "バグを報告"
 
-#: controls/AboutItem.qml:234
+#: controls/AboutItem.qml:258
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "著作権について"
 
-#: controls/AboutItem.qml:278
+#: controls/AboutItem.qml:302
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "ライセンス:"
 
-#: controls/AboutItem.qml:300
+#: controls/AboutItem.qml:324
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "ライセンス: %1"
 
-#: controls/AboutItem.qml:311
+#: controls/AboutItem.qml:335
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "使用されているライブラリ"
 
-#: controls/AboutItem.qml:341
+#: controls/AboutItem.qml:365
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "作者"
 
-#: controls/AboutItem.qml:350
+#: controls/AboutItem.qml:375
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "作者の写真を表示"
 
-#: controls/AboutItem.qml:381
+#: controls/AboutItem.qml:386
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "クレジット"
 
-#: controls/AboutItem.qml:394
+#: controls/AboutItem.qml:398
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "翻訳者"
 
-#: controls/AboutPage.qml:93
+#: controls/AboutPage.qml:102
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "%1 について"
 
-#: controls/AbstractApplicationWindow.qml:188
+#: controls/AbstractApplicationWindow.qml:176
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "終了"
@@ -104,22 +104,22 @@ msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr "タグを削除"
 
-#: controls/ContextDrawer.qml:66
+#: controls/ContextDrawer.qml:59
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "アクション"
 
-#: controls/GlobalDrawer.qml:460
+#: controls/GlobalDrawer.qml:420
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "戻る"
 
-#: controls/GlobalDrawer.qml:550
+#: controls/GlobalDrawer.qml:510
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "サイドバーを閉じる"
 
-#: controls/GlobalDrawer.qml:553
+#: controls/GlobalDrawer.qml:513
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "サイドバーを開く"

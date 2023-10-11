@@ -18,13 +18,13 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: controls/AboutItem.qml:139
+#: controls/AboutItem.qml:163
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr ""
 
-#: controls/AboutItem.qml:148
+#: controls/AboutItem.qml:172
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "Send an email to %1"
@@ -32,7 +32,7 @@ msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Odoslať email na adresu %1"
 
-#: controls/AboutItem.qml:198
+#: controls/AboutItem.qml:222
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Get Involved"
@@ -40,12 +40,12 @@ msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Zapojiť sa"
 
-#: controls/AboutItem.qml:204
+#: controls/AboutItem.qml:228
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr ""
 
-#: controls/AboutItem.qml:221
+#: controls/AboutItem.qml:245
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Report Bug…"
@@ -53,7 +53,7 @@ msgctxt "AboutItem|"
 msgid "Report a Bug"
 msgstr "Nahlásiť chybu..."
 
-#: controls/AboutItem.qml:234
+#: controls/AboutItem.qml:258
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Copyright"
@@ -61,7 +61,7 @@ msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Copyright"
 
-#: controls/AboutItem.qml:278
+#: controls/AboutItem.qml:302
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "License:"
@@ -69,7 +69,7 @@ msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Licencia:"
 
-#: controls/AboutItem.qml:300
+#: controls/AboutItem.qml:324
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "License: %1"
@@ -77,7 +77,7 @@ msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Licencia: %1"
 
-#: controls/AboutItem.qml:311
+#: controls/AboutItem.qml:335
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Libraries in use"
@@ -85,7 +85,7 @@ msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Použité knižnice"
 
-#: controls/AboutItem.qml:341
+#: controls/AboutItem.qml:365
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Authors"
@@ -93,7 +93,7 @@ msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autori"
 
-#: controls/AboutItem.qml:350
+#: controls/AboutItem.qml:375
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Show author photos"
@@ -101,7 +101,7 @@ msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Zobraziť fotografie autora"
 
-#: controls/AboutItem.qml:381
+#: controls/AboutItem.qml:386
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Credits"
@@ -109,7 +109,7 @@ msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Zásluhy"
 
-#: controls/AboutItem.qml:394
+#: controls/AboutItem.qml:398
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Translators"
@@ -117,13 +117,13 @@ msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Preklady"
 
-#: controls/AboutPage.qml:93
+#: controls/AboutPage.qml:102
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "O  %1"
 
-#: controls/AbstractApplicationWindow.qml:188
+#: controls/AbstractApplicationWindow.qml:176
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr "Ukončiť"
@@ -138,22 +138,22 @@ msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr ""
 
-#: controls/ContextDrawer.qml:66
+#: controls/ContextDrawer.qml:59
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Akcie"
 
-#: controls/GlobalDrawer.qml:460
+#: controls/GlobalDrawer.qml:420
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Späť"
 
-#: controls/GlobalDrawer.qml:550
+#: controls/GlobalDrawer.qml:510
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Zatvoriť bočný panel"
 
-#: controls/GlobalDrawer.qml:553
+#: controls/GlobalDrawer.qml:513
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"

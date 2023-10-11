@@ -14,34 +14,34 @@ msgstr ""
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
 "X-Generator: Poedit 2.2.4\n"
 
-#: controls/AboutItem.qml:139
+#: controls/AboutItem.qml:163
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
 msgstr ""
 
-#: controls/AboutItem.qml:148
+#: controls/AboutItem.qml:172
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr ""
 
-#: controls/AboutItem.qml:198
+#: controls/AboutItem.qml:222
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr ""
 
-#: controls/AboutItem.qml:204
+#: controls/AboutItem.qml:228
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr ""
 
-#: controls/AboutItem.qml:221
+#: controls/AboutItem.qml:245
 msgctxt "AboutItem|"
 msgid "Report a Bug"
 msgstr ""
 
-#: controls/AboutItem.qml:234
+#: controls/AboutItem.qml:258
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Copyright"
@@ -49,7 +49,7 @@ msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Autorių teisės"
 
-#: controls/AboutItem.qml:278
+#: controls/AboutItem.qml:302
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "License:"
@@ -57,7 +57,7 @@ msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Licencija:"
 
-#: controls/AboutItem.qml:300
+#: controls/AboutItem.qml:324
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "License: %1"
@@ -65,7 +65,7 @@ msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Licencija: %1"
 
-#: controls/AboutItem.qml:311
+#: controls/AboutItem.qml:335
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Libraries in use"
@@ -73,7 +73,7 @@ msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Naudojamos bibliotekos"
 
-#: controls/AboutItem.qml:341
+#: controls/AboutItem.qml:365
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Authors"
@@ -81,12 +81,12 @@ msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autoriai"
 
-#: controls/AboutItem.qml:350
+#: controls/AboutItem.qml:375
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr ""
 
-#: controls/AboutItem.qml:381
+#: controls/AboutItem.qml:386
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Credits"
@@ -94,7 +94,7 @@ msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Padėkos"
 
-#: controls/AboutItem.qml:394
+#: controls/AboutItem.qml:398
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Translators"
@@ -102,7 +102,7 @@ msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Vertėjai"
 
-#: controls/AboutPage.qml:93
+#: controls/AboutPage.qml:102
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "About"
@@ -110,7 +110,7 @@ msgctxt "AboutPage|"
 msgid "About %1"
 msgstr "Apie"
 
-#: controls/AbstractApplicationWindow.qml:188
+#: controls/AbstractApplicationWindow.qml:176
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr ""
@@ -128,22 +128,22 @@ msgctxt "Chip|"
 msgid "Remove Tag"
 msgstr ""
 
-#: controls/ContextDrawer.qml:66
+#: controls/ContextDrawer.qml:59
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Veiksmai"
 
-#: controls/GlobalDrawer.qml:460
+#: controls/GlobalDrawer.qml:420
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Atgal"
 
-#: controls/GlobalDrawer.qml:550
+#: controls/GlobalDrawer.qml:510
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Užverti šoninę juostą"
 
-#: controls/GlobalDrawer.qml:553
+#: controls/GlobalDrawer.qml:513
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
