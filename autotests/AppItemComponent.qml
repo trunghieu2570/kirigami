@@ -17,23 +17,23 @@ Kirigami.ApplicationItem {
     visible: true
 
     globalDrawer: Kirigami.GlobalDrawer {
-        drawerOpen: true
+        // drawerOpen: true
 
-        header: Rectangle {
-            id: headerItem
-            implicitHeight: 50
-            implicitWidth: 50
-            color: "red"
-            radius: 20 // to see its bounds
-        }
+        // header: Rectangle {
+        //     id: headerItem
+        //     implicitHeight: 50
+        //     implicitWidth: 50
+        //     color: "red"
+        //     radius: 20 // to see its bounds
+        // }
 
-        // Create some item which we can use to measure actual header height
-        Rectangle {
-            id: topItem
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            color: "green"
-            radius: 20 // to see its bounds
-        }
+        // // Create some item which we can use to measure actual header height
+        // Rectangle {
+        //     id: topItem
+        //     Layout.fillWidth: true
+        //     Layout.fillHeight: true
+        //     color: "green"
+        //     radius: 20 // to see its bounds
+        // }
     }
 }
