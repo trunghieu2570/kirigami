@@ -10,60 +10,80 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import QtTest
 
-Kirigami.ApplicationItem {
-    id: root
+// Inline components are needed because ApplicationItem and
+// ApplicationWindow types expect themselves to be top-level components.
+TestCase {
+    name: "GlobalDrawerHeader"
+    visible: true
+    when: windowShown
 
     width: 500
     height: 500
-    visible: true
 
-    globalDrawer: Kirigami.GlobalDrawer {
-        id: drawer
+    component AppItemComponent : Kirigami.ApplicationItem {
+        id: app
 
-        drawerOpen: true
+        property alias headerItem: headerItem
+        property alias topItem: topItem
 
-        header: Rectangle {
-            id: headerItem
-            implicitHeight: 50
-            implicitWidth: 50
-            color: "red"
-            radius: 20 // to see its bounds
-        }
+        width: 500
+        height: 500
+        visible: true
 
-        // Create some item which we can use to measure actual header height
-        Rectangle {
-            id: topItem
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            color: "green"
-            radius: 20 // to see its bounds
+        globalDrawer: Kirigami.GlobalDrawer {
+            drawerOpen: true
+
+            header: Rectangle {
+                id: headerItem
+                implicitHeight: 50
+                implicitWidth: 50
+                color: "red"
+                radius: 20 // to see its bounds
+            }
+
+            // Create some item which we can use to measure actual header height
+            Rectangle {
+                id: topItem
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                color: "green"
+                radius: 20 // to see its bounds
+            }
         }
     }
 
-    TestCase {
-        name: "GlobalDrawerHeader"
-        when: windowShown
+    Component {
+        id: appItemComponent
+        AppItemComponent {}
+    }
 
-        function test_headerItemVisibility() {
-            const overlay = QQC2.Overlay.overlay;
-            verify(headerItem.height !== 0);
+    function test_headerItemVisibility() {
+        const app = createTemporaryObject(appItemComponent, this);
+        verify(app);
+        const { headerItem, topItem } = app;
 
-            // Due to margins, position won't be exactly zero...
-            let position = topItem.mapToItem(overlay, 0, 0);
-            verify(position.y > 0);
-            const oldY = position.y;
+        waitForRendering(app.globalDrawer.contentItem);
 
-            // ...but with visible header it would be greater than with invisible.
-            headerItem.visible = false;
-            waitForRendering(overlay);
-            position = topItem.mapToItem(overlay, 0, 0);
-            verify(position.y < oldY);
+        const overlay = QQC2.Overlay.overlay;
+        verify(headerItem.height !== 0);
 
-            // And now return it back to where we started.
-            headerItem.visible = true;
-            waitForRendering(overlay);
-            position = topItem.mapToItem(overlay, 0, 0);
-            verify(position.y === oldY);
-        }
+        // Due to margins, position won't be exactly zero...
+        const position = topItem.mapToItem(overlay, 0, 0);
+        verify(position.y > 0);
+        const oldY = position.y;
+
+        // ...but with visible header it would be greater than with invisible.
+        headerItem.visible = false;
+        tryVerify(() => {
+            const position = topItem.mapToItem(overlay, 0, 0);
+            return position.y < oldY;
+        });
+
+        // And now return it back to where we started.
+        headerItem.visible = true;
+        tryVerify(() => {
+            const position = topItem.mapToItem(overlay, 0, 0);
+            return position.y === oldY;
+        });
     }
 }
