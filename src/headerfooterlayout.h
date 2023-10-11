@@ -68,6 +68,8 @@ protected:
 
 private:
     void calculateImplicitSize();
+    void disconnectItem(QQuickItem *item);
+
     QPointer<QQuickItem> m_header;
     QPointer<QQuickItem> m_contentItem;
     QPointer<QQuickItem> m_footer;

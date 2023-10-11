@@ -15,10 +15,10 @@ HeaderFooterLayout::HeaderFooterLayout(QQuickItem *parent)
 
 HeaderFooterLayout::~HeaderFooterLayout()
 {
-    disconnect(m_header, nullptr, this, nullptr);
-    disconnect(m_contentItem, nullptr, this, nullptr);
-    disconnect(m_footer, nullptr, this, nullptr);
-}
+    disconnectItem(m_header);
+    disconnectItem(m_contentItem);
+    disconnectItem(m_footer);
+};
 
 void HeaderFooterLayout::setHeader(QQuickItem *item)
 {
@@ -27,7 +27,7 @@ void HeaderFooterLayout::setHeader(QQuickItem *item)
     }
 
     if (m_header) {
-        disconnect(m_header, nullptr, this, nullptr);
+        disconnectItem(m_header);
         m_header->setParentItem(nullptr);
     }
 
@@ -65,7 +65,7 @@ void HeaderFooterLayout::setContentItem(QQuickItem *item)
     }
 
     if (m_contentItem) {
-        disconnect(m_contentItem, nullptr, this, nullptr);
+        disconnectItem(m_contentItem);
         m_contentItem->setParentItem(nullptr);
     }
 
@@ -95,7 +95,7 @@ void HeaderFooterLayout::setFooter(QQuickItem *item)
     }
 
     if (m_footer) {
-        disconnect(m_footer, nullptr, this, nullptr);
+        disconnectItem(m_footer);
         m_footer->setParentItem(nullptr);
     }
 
@@ -181,6 +181,15 @@ void HeaderFooterLayout::calculateImplicitSize()
     }
     setImplicitSize(impWidth, impHeight);
     polish();
+}
+
+void HeaderFooterLayout::disconnectItem(QQuickItem *item)
+{
+    if (item) {
+        disconnect(item, &QQuickItem::implicitWidthChanged, this, &HeaderFooterLayout::calculateImplicitSize);
+        disconnect(item, &QQuickItem::implicitHeightChanged, this, &HeaderFooterLayout::calculateImplicitSize);
+        disconnect(item, &QQuickItem::visibleChanged, this, &HeaderFooterLayout::calculateImplicitSize);
+    }
 }
 
 #include "moc_headerfooterlayout.cpp"
