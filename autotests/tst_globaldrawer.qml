@@ -7,6 +7,7 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
+import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import QtTest
 
@@ -62,9 +63,11 @@ TestCase {
         verify(app);
         const { headerItem, topItem } = app;
 
+        compare(app.globalDrawer.parent, app.T.Overlay.overlay);
+
         waitForRendering(app.globalDrawer.contentItem);
 
-        const overlay = QQC2.Overlay.overlay;
+        const overlay = T.Overlay.overlay;
         verify(headerItem.height !== 0);
 
         // Due to margins, position won't be exactly zero...
@@ -85,5 +88,62 @@ TestCase {
             const position = topItem.mapToItem(overlay, 0, 0);
             return position.y === oldY;
         });
+    }
+
+    component AppItemLoaderComponent : Kirigami.ApplicationItem {
+        globalDrawer: globalDrawerLoader.item
+        contextDrawer: contextDrawerLoader.item
+
+        Loader {
+            id: globalDrawerLoader
+            active: true
+            sourceComponent: Kirigami.GlobalDrawer {}
+        }
+        Loader {
+            id: contextDrawerLoader
+            active: true
+            sourceComponent: Kirigami.ContextDrawer {}
+        }
+    }
+
+    Component {
+        id: appItemLoaderComponent
+        AppItemLoaderComponent {}
+    }
+
+    component AppWindowLoaderComponent : Kirigami.ApplicationWindow {
+        globalDrawer: globalDrawerLoader.item
+        contextDrawer: contextDrawerLoader.item
+
+        Loader {
+            id: globalDrawerLoader
+            active: true
+            sourceComponent: Kirigami.GlobalDrawer {}
+        }
+        Loader {
+            id: contextDrawerLoader
+            active: true
+            sourceComponent: Kirigami.ContextDrawer {}
+        }
+    }
+
+    Component {
+        id: appWindowLoaderComponent
+        AppWindowLoaderComponent {}
+    }
+
+    function test_reparentingFromLoader_data() {
+        return [
+            { tag: "item", component: appItemLoaderComponent },
+            { tag: "window", component: appWindowLoaderComponent },
+        ];
+    }
+
+    function test_reparentingFromLoader({ component }) {
+        const app = createTemporaryObject(component, this);
+        verify(app);
+
+        compare(app.globalDrawer.parent, app.T.Overlay.overlay);
+        compare(app.contextDrawer.parent, app.T.Overlay.overlay);
     }
 }

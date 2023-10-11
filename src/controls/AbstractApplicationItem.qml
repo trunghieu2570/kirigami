@@ -5,7 +5,6 @@
  */
 
 import QtQuick
-import QtQml
 import QtQuick.Templates as T
 
 import org.kde.kirigami as Kirigami
@@ -323,50 +322,35 @@ Item {
         anchors.fill: parent
         parent: root.parent || root
         z: 999999
-        Rectangle {
-            z: -1
-            anchors.fill: parent
-            color: "black"
-            visible: contextDrawer && contextDrawer.modal
-            parent: contextDrawer ? contextDrawer.background.parent.parent : overlayRoot
-            opacity: contextDrawer ? contextDrawer.position * 0.6 : 0
-        }
-        Rectangle {
-            z: -1
-            anchors.fill: parent
-            color: "black"
-            visible: globalDrawer && globalDrawer.modal
-            parent: globalDrawer ? globalDrawer.background.parent.parent : overlayRoot
-            opacity: globalDrawer ? globalDrawer.position * 0.6 : 0
-        }
+
         Item {
             id: overlayRoot
             z: -1
             anchors.fill: parent
         }
-        Window.onWindowChanged: {
-            if (globalDrawer) {
-                globalDrawer.visible = globalDrawer.drawerOpen;
-            }
-            if (contextDrawer) {
-                contextDrawer.visible = contextDrawer.drawerOpen;
-            }
+    }
+
+    // Don't use root.overlay property here. For one, we know that in a window
+    // it will always be the same as T.Overlay.overlay; secondly Drawers
+    // don't care about being contained/parented to anything else anyway.
+    onGlobalDrawerChanged: {
+        if (globalDrawer) {
+            globalDrawer.parent = Qt.binding(() => visible ? T.Overlay.overlay : null);
+        }
+    }
+    onContextDrawerChanged: {
+        if (contextDrawer) {
+            contextDrawer.parent = Qt.binding(() => visible ? T.Overlay.overlay : null);
         }
     }
 
-    Binding {
-        when: globalDrawer !== undefined && root.visible
-        target: globalDrawer
-        property: "parent"
-        value: overlay
-        restoreMode: Binding.RestoreBinding
-    }
-    Binding {
-        when: contextDrawer !== undefined && root.visible
-        target: contextDrawer
-        property: "parent"
-        value: overlay
-        restoreMode: Binding.RestoreBinding
+    Window.onWindowChanged: {
+        if (globalDrawer) {
+            globalDrawer.visible = globalDrawer.drawerOpen;
+        }
+        if (contextDrawer) {
+            contextDrawer.visible = contextDrawer.drawerOpen;
+        }
     }
 
     implicitWidth: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 30 : Kirigami.Units.gridUnit * 55
