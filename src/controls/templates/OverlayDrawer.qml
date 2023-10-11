@@ -306,21 +306,21 @@ T.Drawer {
             return;
         }
         positionResetAnim.running = false;
-        if (drawerOpen) {
-            open();
-        } else {
-            close();
-        }
+        // if (drawerOpen) {
+        //     open();
+        // } else {
+        //     close();
+        // }
         Qt.callLater(() => root.handle.displayToolTip = true)
     }
 
     Component.onCompleted: {
         // if defined as drawerOpen by default in QML, don't animate
         if (root.drawerOpen) {
-            root.enter.enabled = false;
-            root.visible = true;
-            root.position = 1;
-            root.enter.enabled = true;
+            // root.enter.enabled = false;
+            // root.visible = true;
+            // root.position = 1;
+            // root.enter.enabled = true;
         }
         __internal.completed = true;
         contentItem.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet;
