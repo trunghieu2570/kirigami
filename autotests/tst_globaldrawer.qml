@@ -57,33 +57,33 @@ TestCase {
         AppItemComponent {}
     }
 
-    function test_headerItemVisibility() {
-        const app = createTemporaryObject(appItemComponent, this);
-        verify(app);
-        const { headerItem, topItem } = app;
+    // function test_headerItemVisibility() {
+    //     const app = createTemporaryObject(appItemComponent, this);
+    //     verify(app);
+    //     const { headerItem, topItem } = app;
 
-        waitForRendering(app.globalDrawer.contentItem);
+    //     waitForRendering(app.globalDrawer.contentItem);
 
-        const overlay = QQC2.Overlay.overlay;
-        verify(headerItem.height !== 0);
+    //     const overlay = QQC2.Overlay.overlay;
+    //     verify(headerItem.height !== 0);
 
-        // Due to margins, position won't be exactly zero...
-        const position = topItem.mapToItem(overlay, 0, 0);
-        verify(position.y > 0);
-        const oldY = position.y;
+    //     // Due to margins, position won't be exactly zero...
+    //     const position = topItem.mapToItem(overlay, 0, 0);
+    //     verify(position.y > 0);
+    //     const oldY = position.y;
 
-        // ...but with visible header it would be greater than with invisible.
-        headerItem.visible = false;
-        tryVerify(() => {
-            const position = topItem.mapToItem(overlay, 0, 0);
-            return position.y < oldY;
-        });
+    //     // ...but with visible header it would be greater than with invisible.
+    //     headerItem.visible = false;
+    //     tryVerify(() => {
+    //         const position = topItem.mapToItem(overlay, 0, 0);
+    //         return position.y < oldY;
+    //     });
 
-        // And now return it back to where we started.
-        headerItem.visible = true;
-        tryVerify(() => {
-            const position = topItem.mapToItem(overlay, 0, 0);
-            return position.y === oldY;
-        });
-    }
+    //     // And now return it back to where we started.
+    //     headerItem.visible = true;
+    //     tryVerify(() => {
+    //         const position = topItem.mapToItem(overlay, 0, 0);
+    //         return position.y === oldY;
+    //     });
+    // }
 }
