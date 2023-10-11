@@ -9,8 +9,8 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 Kirigami.ApplicationItem {
-    // property alias headerItem: headerItem
-    // property alias topItem: topItem
+    property alias headerItem: headerItem
+    property alias topItem: topItem
 
     width: 500
     height: 500
