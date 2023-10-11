@@ -5,11 +5,11 @@
  */
 
 import QtQuick
-import QtQml
 import QtQuick.Controls as QQC2
-import QtQuick.Window
+import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import "templates/private" as TP
+
 /**
  * A window that provides some basic features needed for all apps
  * Use this class only if you need a custom content for your application,
@@ -154,9 +154,9 @@ QQC2.ApplicationWindow {
     property OverlayDrawer contextDrawer
 
     /**
-     * Effectively the same as QQC2.Overlay.overlay
+     * Effectively the same as T.Overlay.overlay
      */
-    readonly property Item overlay: QQC2.Overlay.overlay
+    readonly property Item overlay: T.Overlay.overlay
 
     /**
      * This property holds a standard action that will quit the application when triggered.
@@ -234,42 +234,40 @@ QQC2.ApplicationWindow {
     contentItem.anchors.rightMargin: root.contextDrawer && root.contextDrawer.modal === false ? root.contextDrawer.width * root.contextDrawer.position : 0
 
     Binding {
-        when: menuBar !== undefined
-        target: menuBar
+        target: root.menuBar
         property: "x"
         value: -contentItem.x
-        restoreMode: Binding.RestoreBinding
     }
     Binding {
-        when: header !== undefined
-        target: header
+        target: root.header
         property: "x"
         value: -contentItem.x
-        restoreMode: Binding.RestoreBinding
     }
     Binding {
-        when: footer !== undefined
-        target: footer
+        target: root.footer
         property: "x"
         value: -contentItem.x
-        restoreMode: Binding.RestoreBinding
     }
 
-    Binding {
-        when: globalDrawer !== undefined && root.visible && QQC2.Overlay.overlay
-        target: globalDrawer
-        property: "parent"
-        value: QQC2.Overlay.overlay
-        restoreMode: Binding.RestoreBinding
+    // Don't use root.overlay property here. For one, we know that in a window
+    // it will always be the same as T.Overlay.overlay; secondly Drawers
+    // don't care about being contained/parented to anything else anyway.
+    onGlobalDrawerChanged: {
+        if (globalDrawer) {
+            globalDrawer.parent = Qt.binding(() => T.Overlay.overlay);
+        }
     }
-    Binding {
-        when: contextDrawer !== undefined && root.visible && QQC2.Overlay.overlay
-        target: contextDrawer
-        property: "parent"
-        value: QQC2.Overlay.overlay
-        restoreMode: Binding.RestoreBinding
+    onContextDrawerChanged: {
+        if (contextDrawer) {
+            contextDrawer.parent = Qt.binding(() => T.Overlay.overlay);
+        }
     }
-    onPageStackChanged: pageStack.parent = contentItem;
+    onPageStackChanged: {
+        if (pageStack) {
+            // contentItem is declared as CONSTANT, so binding isn't needed.
+            pageStack.parent = contentItem;
+        }
+    }
 
     width: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 30 : Kirigami.Units.gridUnit * 55
     height: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 45 : Kirigami.Units.gridUnit * 40
