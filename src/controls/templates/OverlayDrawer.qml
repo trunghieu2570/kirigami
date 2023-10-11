@@ -302,26 +302,26 @@ T.Drawer {
     }
     onDrawerOpenChanged: {
         // sync this property only when the component is properly loaded
-        if (!__internal.completed) {
-            return;
-        }
-        positionResetAnim.running = false;
+        // if (!__internal.completed) {
+        //     return;
+        // }
+        // positionResetAnim.running = false;
         // if (drawerOpen) {
         //     open();
         // } else {
         //     close();
         // }
-        Qt.callLater(() => root.handle.displayToolTip = true)
+        // Qt.callLater(() => root.handle.displayToolTip = true)
     }
 
     Component.onCompleted: {
         // if defined as drawerOpen by default in QML, don't animate
-        if (root.drawerOpen) {
+        // if (root.drawerOpen) {
             // root.enter.enabled = false;
             // root.visible = true;
             // root.position = 1;
             // root.enter.enabled = true;
-        }
+        // }
         __internal.completed = true;
         contentItem.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet;
         background.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet;
