@@ -58,7 +58,7 @@ Kirigami.OverlayDrawer {
 
     handleVisible: {
         // When drawer is inline with content and opened, there is no point is showing handle.
-        if (!modal && drawerOpen) {
+        if (!modal /*&& drawerOpen*/) {
             return false;
         }
 
@@ -272,7 +272,7 @@ Kirigami.OverlayDrawer {
     function resetMenu() {
         stackView.pop(stackView.get(0, T.StackView.DontLoad));
         if (root.modal) {
-            root.drawerOpen = false;
+            // root.drawerOpen = false;
         }
     }
 
@@ -280,7 +280,7 @@ Kirigami.OverlayDrawer {
 
     Kirigami.Theme.colorSet: modal ? Kirigami.Theme.Window : Kirigami.Theme.View
 
-    onIsMenuChanged: drawerOpen = false
+    // onIsMenuChanged: drawerOpen = false
 
     contentItem: Kirigami.HeaderFooterLayout {
         id: mainLayout
