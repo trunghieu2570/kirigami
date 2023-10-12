@@ -303,7 +303,7 @@ Kirigami.OverlayDrawer {
 
                 text: Kirigami.MnemonicData.richTextLabel
 
-                Kirigami.MnemonicData.enabled: backItem.enabled && backItem.visible
+                Kirigami.MnemonicData.enabled: enabled && visible
                 Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem
                 Kirigami.MnemonicData.label: qsTr("Back")
 
@@ -355,13 +355,22 @@ Kirigami.OverlayDrawer {
         // `as` case operator is still buggy
         readonly property Kirigami.Action kAction: tAction instanceof Kirigami.Action ? tAction : null
 
+        readonly property bool isExpanded: {
+            return !root.collapsed
+                && kAction
+                && kAction.expandible
+                && kAction.children.length > 0;
+        }
+
+        visible: kAction?.visible ?? true
+
         width: parent.width
 
         KP.GlobalDrawerActionItem {
             Kirigami.Theme.colorSet: !root.modal && !root.collapsed && delegate.withSections
                 ? Kirigami.Theme.Window : parent.Kirigami.Theme.colorSet
 
-            visible: (modelData.hasOwnProperty("visible") && modelData.visible) && (root.collapsed || !(modelData.hasOwnProperty("expandible") && modelData.expandible))
+            visible: !delegate.isExpanded
             width: parent.width
 
             tAction: delegate.tAction
@@ -377,7 +386,7 @@ Kirigami.OverlayDrawer {
         Item {
             id: headerItem
 
-            visible: !root.collapsed && (modelData.hasOwnProperty("expandible") && modelData.expandible && !!modelData.children && modelData.children.length > 0)
+            visible: delegate.isExpanded
             height: sectionHeader.implicitHeight
             width: parent.width
 
@@ -396,12 +405,12 @@ Kirigami.OverlayDrawer {
                         Layout.maximumHeight: size
                         Layout.minimumWidth: size
                         Layout.maximumWidth: size
-                        source: modelData.icon.name || modelData.icon.source
+                        source: delegate.tAction.icon.name || delegate.tAction.icon.source
                     }
 
                     Kirigami.Heading {
                         level: 4
-                        text: modelData.text
+                        text: delegate.tAction.text
                         elide: Text.ElideRight
                         Layout.fillWidth: true
                     }
@@ -410,7 +419,7 @@ Kirigami.OverlayDrawer {
         }
 
         Repeater {
-            model: headerItem.visible ? modelData.children : null
+            model: delegate.isExpanded ? (delegate.kAction?.children ?? null) : null
 
             NestedActionDelegate {
                 required property T.Action modelData
