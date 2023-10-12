@@ -358,9 +358,7 @@ Kirigami.OverlayDrawer {
         width: parent.width
 
         KP.GlobalDrawerActionItem {
-            id: drawerItem
-
-            Kirigami.Theme.colorSet: drawerItem.visible && !root.modal && !root.collapsed && delegate.withSections
+            Kirigami.Theme.colorSet: !root.modal && !root.collapsed && delegate.withSections
                 ? Kirigami.Theme.Window : parent.Kirigami.Theme.colorSet
 
             visible: (modelData.hasOwnProperty("visible") && modelData.visible) && (root.collapsed || !(modelData.hasOwnProperty("expandible") && modelData.expandible))
