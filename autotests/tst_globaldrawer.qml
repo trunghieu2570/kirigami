@@ -59,6 +59,9 @@ TestCase {
     }
 
     function test_headerItemVisibility() {
+        if (Qt.platform.os === "unix") {
+            skip("On FreeBSD Qt 6.5 fails deep inside generated MOC code for `drawerOpen: true` binding");
+        }
         const app = createTemporaryObject(appItemComponent, this);
         verify(app);
         const { headerItem, topItem } = app;
