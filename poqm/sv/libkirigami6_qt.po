@@ -110,17 +110,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Åtgärder"
 
-#: controls/GlobalDrawer.qml:420
+#: controls/GlobalDrawer.qml:438
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Tillbaka"
 
-#: controls/GlobalDrawer.qml:510
+#: controls/GlobalDrawer.qml:544
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Stäng sidorad"
 
-#: controls/GlobalDrawer.qml:513
+#: controls/GlobalDrawer.qml:549
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Öppna sidorad"
