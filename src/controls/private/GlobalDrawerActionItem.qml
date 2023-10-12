@@ -164,12 +164,8 @@ QQC2.ItemDelegate {
         if (stackView.openSubMenu) {
             stackView.openSubMenu.visible = false;
 
-            if (!actionsMenu.hasOwnProperty("count") || actionsMenu.count > 0) {
-                if (actionsMenu.hasOwnProperty("popup")) {
-                    actionsMenu.popup(this, width, 0)
-                } else {
-                    actionsMenu.visible = true;
-                }
+            if (actionsMenu.count > 0) {
+                actionsMenu.popup(this, width, 0);
             }
         }
     }
@@ -183,14 +179,9 @@ QQC2.ItemDelegate {
 
         if (hasChildren) {
             if (root.collapsed) {
-                // fallbacks needed for Qt 5.9
-                if ((!actionsMenu.hasOwnProperty("count") || actionsMenu.count > 0) && !actionsMenu.visible) {
+                if (actionsMenu.count > 0 && !actionsMenu.visible) {
                     stackView.openSubMenu = actionsMenu;
-                    if (actionsMenu.hasOwnProperty("popup")) {
-                        actionsMenu.popup(this, width, 0)
-                    } else {
-                        actionsMenu.visible = true;
-                    }
+                    actionsMenu.popup(this, width, 0);
                 }
             } else {
                 stackView.push(menuComponent, {
