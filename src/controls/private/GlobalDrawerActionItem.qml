@@ -20,8 +20,6 @@ QQC2.ItemDelegate {
     // `as` case operator is still buggy
     readonly property Kirigami.Action kAction: tAction instanceof Kirigami.Action ? tAction : null
 
-    readonly property bool wideMode: width > height * 2
-
     readonly property bool actionVisible: kAction?.visible ?? true
     readonly property bool isSeparator: kAction?.separator ?? false
     readonly property bool isExpandable: kAction?.expandible ?? false
