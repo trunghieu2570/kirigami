@@ -26,6 +26,7 @@ TestCase {
     }
 
     function test_headerItemVisibility() {
+        print("AAAAA", Qt.platform.os);
         const app = createTemporaryObject(appItemComponent, this);
         verify(app);
         // const { headerItem, topItem } = app;
