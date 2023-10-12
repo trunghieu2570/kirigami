@@ -337,10 +337,10 @@ T.Drawer {
             property alias to: internalAnim.to
             NumberAnimation {
                 id: internalAnim
-                target: root
-                to: drawerOpen ? 1 : 0
-                property: "position"
-                duration: (root.position)*Kirigami.Units.longDuration
+                // target: root
+                // to: drawerOpen ? 1 : 0
+                // property: "position"
+                // duration: (root.position)*Kirigami.Units.longDuration
             }
             ScriptAction {
                 script: {
