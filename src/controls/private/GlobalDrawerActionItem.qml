@@ -4,14 +4,21 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Controls.impl as QQC2Impl
 import QtQuick.Layouts
+import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
 QQC2.ItemDelegate {
     id: listItem
+
+    required property T.Action tAction
+    // `as` case operator is still buggy
+    readonly property Kirigami.Action kAction: tAction instanceof Kirigami.Action ? tAction : null
 
     readonly property bool wideMode: width > height * 2
     readonly property bool isSeparator: modelData.hasOwnProperty("separator") && modelData.separator

@@ -4,6 +4,8 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
@@ -99,11 +101,11 @@ Kirigami.OverlayDrawer {
      * A tree depth bigger than 2 is discouraged.
      *
      * Example usage:
+     *
      * @code
-     * import org.kde.kirigami 2.4 as Kirigami
+     * import org.kde.kirigami as Kirigami
      *
      * Kirigami.ApplicationWindow {
-     *  [...]
      *     globalDrawer: Kirigami.GlobalDrawer {
      *         actions: [
      *            Kirigami.Action {
@@ -125,12 +127,11 @@ Kirigami.OverlayDrawer {
      *            }
      *         ]
      *     }
-     *  [...]
      * }
      * @endcode
-     * @property list<Action> actions
+     * @property list<T.Action> actions
      */
-    property list<QtObject> actions
+    property list<T.Action> actions
 
     /**
      * @brief This property holds an item that will always be displayed at the top of the drawer.
@@ -244,7 +245,7 @@ Kirigami.OverlayDrawer {
     /**
      * @brief This property points to the action acting as a submenu
      */
-    readonly property Action currentSubMenu: stackView.currentItem ? stackView.currentItem.current: null
+    readonly property T.Action currentSubMenu: stackView.currentItem?.current ?? null
 
     /**
      * @brief This property sets whether the drawer becomes a menu on the desktop.
@@ -287,7 +288,7 @@ Kirigami.OverlayDrawer {
 
         Column {
             property alias model: actionsRepeater.model
-            property Action current
+            property T.Action current
             property int level: 0
 
             spacing: 0
@@ -325,16 +326,19 @@ Kirigami.OverlayDrawer {
 
                 readonly property bool withSections: {
                     for (const action of root.actions) {
-                        if (!(action.hasOwnProperty("expandible") && action.expandible)) {
-                            return false;
+                        if (action.hasOwnProperty("expandible") && action.expandible) {
+                            return true;
                         }
                     }
-                    return true;
+                    return false;
                 }
 
                 model: root.actions
 
                 delegate: ActionDelegate {
+                    required property T.Action modelData
+
+                    tAction: modelData
                     withSections: actionsRepeater.withSections
                 }
             }
@@ -344,7 +348,12 @@ Kirigami.OverlayDrawer {
     component ActionDelegate : Column {
         id: delegate
 
-        property bool withSections
+        required property int index
+        required property T.Action tAction
+        required property bool withSections
+
+        // `as` case operator is still buggy
+        readonly property Kirigami.Action kAction: tAction instanceof Kirigami.Action ? tAction : null
 
         width: parent.width
 
@@ -357,9 +366,11 @@ Kirigami.OverlayDrawer {
             visible: (modelData.hasOwnProperty("visible") && modelData.visible) && (root.collapsed || !(modelData.hasOwnProperty("expandible") && modelData.expandible))
             width: parent.width
 
+            tAction: delegate.tAction
+
             onCheckedChanged: {
                 // move every checked item into view
-                if (checked && topContent.height + backItem.height + (model.index + 1) * height - mainFlickable.contentY > mainFlickable.height) {
+                if (checked && topContent.height + backItem.height + (delegate.index + 1) * height - mainFlickable.contentY > mainFlickable.height) {
                     mainFlickable.contentY += height
                 }
             }
@@ -404,13 +415,16 @@ Kirigami.OverlayDrawer {
             model: headerItem.visible ? modelData.children : null
 
             NestedActionDelegate {
+                required property T.Action modelData
+
+                tAction: modelData
                 withSections: delegate.withSections
             }
         }
     }
 
     component NestedActionDelegate : KP.GlobalDrawerActionItem {
-        property bool withSections
+        required property bool withSections
 
         width: parent.width
         opacity: !root.collapsed
