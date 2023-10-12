@@ -17,7 +17,7 @@ Kirigami.ApplicationItem {
     visible: true
 
     globalDrawer: Kirigami.GlobalDrawer {
-        drawerOpen: true
+        // drawerOpen: true
 
         header: Rectangle {
             id: headerItem
