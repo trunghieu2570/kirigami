@@ -23,6 +23,8 @@ T.Drawer {
     id: root
 
 //BEGIN properties
+    property bool whateverFirstProperty
+
     /**
      * @brief This property tells whether the drawer is open and visible.
      *
