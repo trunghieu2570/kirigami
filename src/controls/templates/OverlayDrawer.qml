@@ -286,7 +286,7 @@ T.Drawer {
         if (peeking) {
             visible = true
         } else {
-            drawerOpen = visible;
+            // drawerOpen = visible;
         }
     }
     onPeekingChanged:  {
@@ -294,7 +294,7 @@ T.Drawer {
             root.enter.enabled = false;
             root.exit.enabled = false;
         } else {
-            drawerOpen = position > 0.5 ? 1 : 0;
+            // drawerOpen = position > 0.5 ? 1 : 0;
             positionResetAnim.running = true
             root.enter.enabled = true;
             root.exit.enabled = true;
@@ -344,7 +344,7 @@ T.Drawer {
             }
             ScriptAction {
                 script: {
-                    root.drawerOpen = internalAnim.to !== 0;
+                    // root.drawerOpen = internalAnim.to !== 0;
                 }
             }
         }
