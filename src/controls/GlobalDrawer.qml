@@ -282,23 +282,163 @@ Kirigami.OverlayDrawer {
 
     onIsMenuChanged: drawerOpen = false
 
-    contentItem: Kirigami.HeaderFooterLayout {
-        id: mainLayout
-        anchors {
-            fill: parent
-            topMargin: root.collapsed && !showHeaderWhenCollapsed ? -contentItem.y : 0
-            Behavior on topMargin {
-                NumberAnimation {
-                    duration: Kirigami.Units.longDuration
-                    easing.type: Easing.InOutQuad
+    Component {
+        id: menuComponent
+
+        Column {
+            property alias model: actionsRepeater.model
+            property Action current
+            property int level: 0
+
+            spacing: 0
+            Layout.maximumHeight: Layout.minimumHeight
+
+            QQC2.ItemDelegate {
+                id: backItem
+
+                visible: level > 0
+                width: parent.width
+                icon.name: mirrored ? "go-previous-symbolic-rtl" : "go-previous-symbolic"
+
+                text: Kirigami.MnemonicData.richTextLabel
+
+                Kirigami.MnemonicData.enabled: backItem.enabled && backItem.visible
+                Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem
+                Kirigami.MnemonicData.label: qsTr("Back")
+
+                onClicked: stackView.pop()
+
+                Keys.onEnterPressed: stackView.pop()
+                Keys.onReturnPressed: stackView.pop()
+
+                Keys.onDownPressed: nextItemInFocusChain().focus = true
+                Keys.onUpPressed: nextItemInFocusChain(false).focus = true
+            }
+
+            Shortcut {
+                sequence: backItem.Kirigami.MnemonicData.sequence
+                onActivated: backItem.clicked()
+            }
+
+            Repeater {
+                id: actionsRepeater
+
+                readonly property bool withSections: {
+                    for (const action of root.actions) {
+                        if (!(action.hasOwnProperty("expandible") && action.expandible)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+
+                model: root.actions
+
+                delegate: ActionDelegate {
+                    withSections: actionsRepeater.withSections
                 }
             }
         }
+    }
+
+    component ActionDelegate : Column {
+        id: delegate
+
+        property bool withSections
+
+        width: parent.width
+
+        KP.GlobalDrawerActionItem {
+            id: drawerItem
+
+            Kirigami.Theme.colorSet: drawerItem.visible && !root.modal && !root.collapsed && delegate.withSections
+                ? Kirigami.Theme.Window : parent.Kirigami.Theme.colorSet
+
+            visible: (modelData.hasOwnProperty("visible") && modelData.visible) && (root.collapsed || !(modelData.hasOwnProperty("expandible") && modelData.expandible))
+            width: parent.width
+
+            onCheckedChanged: {
+                // move every checked item into view
+                if (checked && topContent.height + backItem.height + (model.index + 1) * height - mainFlickable.contentY > mainFlickable.height) {
+                    mainFlickable.contentY += height
+                }
+            }
+        }
+
+        Item {
+            id: headerItem
+
+            visible: !root.collapsed && (modelData.hasOwnProperty("expandible") && modelData.expandible && !!modelData.children && modelData.children.length > 0)
+            height: sectionHeader.implicitHeight
+            width: parent.width
+
+            Kirigami.ListSectionHeader {
+                id: sectionHeader
+
+                anchors.fill: parent
+                Kirigami.Theme.colorSet: root.modal ? Kirigami.Theme.View : Kirigami.Theme.Window
+
+                contentItem: RowLayout {
+                    spacing: sectionHeader.spacing
+
+                    Kirigami.Icon {
+                        property int size: Kirigami.Units.iconSizes.smallMedium
+                        Layout.minimumHeight: size
+                        Layout.maximumHeight: size
+                        Layout.minimumWidth: size
+                        Layout.maximumWidth: size
+                        source: modelData.icon.name || modelData.icon.source
+                    }
+
+                    Kirigami.Heading {
+                        level: 4
+                        text: modelData.text
+                        elide: Text.ElideRight
+                        Layout.fillWidth: true
+                    }
+                }
+            }
+        }
+
+        Repeater {
+            model: headerItem.visible ? modelData.children : null
+
+            NestedActionDelegate {
+                withSections: delegate.withSections
+            }
+        }
+    }
+
+    component NestedActionDelegate : KP.GlobalDrawerActionItem {
+        property bool withSections
+
+        width: parent.width
+        opacity: !root.collapsed
+        leftPadding: withSections && !root.collapsed && !root.modal ? padding * 2 : padding * 4
+    }
+
+    contentItem: Kirigami.HeaderFooterLayout {
+        id: mainLayout
+
+        anchors {
+            fill: parent
+            topMargin: root.collapsed && !showHeaderWhenCollapsed ? -contentItem.y : 0
+        }
+
+        Behavior on anchors.topMargin {
+            NumberAnimation {
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
+
         header: RowLayout {
             visible: root.title.length > 0 || Boolean(root.titleIcon)
+
             Kirigami.Icon {
                 source: root.titleIcon
             }
+
             Kirigami.Heading {
                 text: root.title
                 elide: Text.ElideRight
@@ -306,15 +446,21 @@ Kirigami.OverlayDrawer {
                 Layout.fillWidth: true
             }
         }
+
         contentItem: QQC2.ScrollView {
             id: scrollView
+
             //ensure the attached property exists
             Kirigami.Theme.inherit: true
-            implicitWidth: Math.min(Kirigami.Units.gridUnit * 20, root.parent.width * 0.8)
+
+            // HACK: workaround for https://bugreports.qt.io/browse/QTBUG-83890
             QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+
+            implicitWidth: Math.min(Kirigami.Units.gridUnit * 20, root.parent.width * 0.8)
 
             Flickable {
                 id: mainFlickable
+
                 contentWidth: width
                 contentHeight: mainColumn.Layout.minimumHeight
 
@@ -326,7 +472,9 @@ Kirigami.OverlayDrawer {
 
                     ColumnLayout {
                         id: topContent
+
                         spacing: 0
+
                         Layout.alignment: Qt.AlignHCenter
                         Layout.leftMargin: root.leftPadding
                         Layout.rightMargin: root.rightPadding
@@ -338,8 +486,10 @@ Kirigami.OverlayDrawer {
                         // NOTE: why this? just Layout.fillWidth: true doesn't seem sufficient
                         // as items are added only after this column creation
                         Layout.minimumWidth: parent.width - root.leftPadding - root.rightPadding
+
                         visible: children.length > 0 && childrenRect.height > 0 && opacity > 0
                         opacity: !root.collapsed || showTopContentWhenCollapsed
+
                         Behavior on opacity {
                             // not an animator as is binded
                             NumberAnimation {
@@ -351,12 +501,16 @@ Kirigami.OverlayDrawer {
 
                     T.StackView {
                         id: stackView
+
+                        property KP.ActionsMenu openSubMenu
+
                         clip: true
                         Layout.fillWidth: true
                         Layout.minimumHeight: currentItem ? currentItem.implicitHeight : 0
                         Layout.maximumHeight: Layout.minimumHeight
-                        property KP.ActionsMenu openSubMenu
+
                         initialItem: menuComponent
+
                         // NOTE: it's important those are NumberAnimation and not XAnimators
                         // as while the animation is running the drawer may close, and
                         // the animator would stop when not drawing see BUG 381576
@@ -384,9 +538,10 @@ Kirigami.OverlayDrawer {
                             NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
                         }
                     }
+
                     Item {
                         Layout.fillWidth: true
-                        Layout.fillHeight: root.actions.length>0
+                        Layout.fillHeight: root.actions.length > 0
                         Layout.minimumHeight: Kirigami.Units.smallSpacing
                     }
 
@@ -410,116 +565,10 @@ Kirigami.OverlayDrawer {
                             }
                         }
                     }
+
                     Item {
                         Layout.minimumWidth: Kirigami.Units.smallSpacing
                         Layout.minimumHeight: root.bottomPadding
-                    }
-
-                    Component {
-                        id: menuComponent
-
-                        Column {
-                            spacing: 0
-                            property alias model: actionsRepeater.model
-                            property Action current
-
-                            property int level: 0
-                            Layout.maximumHeight: Layout.minimumHeight
-
-                            QQC2.ItemDelegate {
-                                id: backItem
-                                visible: level > 0
-                                width: parent.width
-                                icon.name: mirrored ? "go-previous-symbolic-rtl" : "go-previous-symbolic"
-
-                                text: Kirigami.MnemonicData.richTextLabel
-                                Kirigami.MnemonicData.enabled: backItem.enabled && backItem.visible
-                                Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem
-                                Kirigami.MnemonicData.label: qsTr("Back")
-
-                                onClicked: stackView.pop()
-
-                                Keys.onEnterPressed: stackView.pop()
-                                Keys.onReturnPressed: stackView.pop()
-
-                                Keys.onDownPressed: nextItemInFocusChain().focus = true
-                                Keys.onUpPressed: nextItemInFocusChain(false).focus = true
-                            }
-                            Shortcut {
-                                sequence: backItem.Kirigami.MnemonicData.sequence
-                                onActivated: backItem.clicked()
-                            }
-
-                            Repeater {
-                                id: actionsRepeater
-
-                                readonly property bool withSections: {
-                                    for (const action of root.actions) {
-                                        if (!(action.hasOwnProperty("expandible") && action.expandible)) {
-                                            return false;
-                                        }
-                                    }
-                                    return true;
-                                }
-
-                                model: root.actions
-                                delegate: Column {
-                                    width: parent.width
-                                    KP.GlobalDrawerActionItem {
-                                        id: drawerItem
-                                        visible: (modelData.hasOwnProperty("visible") && modelData.visible) && (root.collapsed || !(modelData.hasOwnProperty("expandible") && modelData.expandible))
-                                        width: parent.width
-                                        onCheckedChanged: {
-                                            // move every checked item into view
-                                            if (checked && topContent.height + backItem.height + (model.index + 1) * height - mainFlickable.contentY > mainFlickable.height) {
-                                                mainFlickable.contentY += height
-                                            }
-                                        }
-                                        Kirigami.Theme.colorSet: drawerItem.visible && !root.modal && !root.collapsed && actionsRepeater.withSections ? Kirigami.Theme.Window : parent.Kirigami.Theme.colorSet
-                                    }
-                                    Item {
-                                        id: headerItem
-                                        visible: !root.collapsed && (modelData.hasOwnProperty("expandible") && modelData.expandible && !!modelData.children && modelData.children.length > 0)
-                                        height: sectionHeader.implicitHeight
-                                        width: parent.width
-                                        Kirigami.ListSectionHeader {
-                                            id: sectionHeader
-                                            anchors.fill: parent
-                                            Kirigami.Theme.colorSet: root.modal ? Kirigami.Theme.View : Kirigami.Theme.Window
-
-                                            contentItem: RowLayout {
-                                                spacing: sectionHeader.spacing
-
-                                                Kirigami.Icon {
-                                                    property int size: Kirigami.Units.iconSizes.smallMedium
-                                                    Layout.minimumHeight: size
-                                                    Layout.maximumHeight: size
-                                                    Layout.minimumWidth: size
-                                                    Layout.maximumWidth: size
-                                                    source: modelData.icon.name || modelData.icon.source
-                                                }
-
-                                                Kirigami.Heading {
-                                                    level: 4
-                                                    text: modelData.text
-                                                    elide: Text.ElideRight
-                                                    Layout.fillWidth: true
-                                                }
-                                            }
-                                        }
-                                    }
-                                    Repeater {
-                                        id: __repeater
-                                        model: headerItem.visible ? modelData.children : null
-                                        delegate: KP.GlobalDrawerActionItem {
-                                            width: parent.width
-                                            opacity: !root.collapsed
-                                            leftPadding: actionsRepeater.withSections && !root.collapsed && !root.modal ? padding * 2 : padding * 4
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     }
 
                     QQC2.ToolButton {
@@ -554,4 +603,3 @@ Kirigami.OverlayDrawer {
         }
     }
 }
-
