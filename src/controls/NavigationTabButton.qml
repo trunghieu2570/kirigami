@@ -185,7 +185,7 @@ T.TabButton {
             implicitHeight: source ? control.icon.height : 0
             implicitWidth: source ? control.icon.width : 0
 
-            Behavior on color { ColorAnimation {} }
+            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
         }
         QQC2.Label {
             id: label
@@ -210,7 +210,7 @@ T.TabButton {
                 }
             }
 
-            Behavior on color { ColorAnimation {} }
+            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
 
             Layout.topMargin: control.__verticalMargins
             Layout.bottomMargin: control.__verticalMargins
