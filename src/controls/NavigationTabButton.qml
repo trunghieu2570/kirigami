@@ -186,7 +186,6 @@ T.TabButton {
             implicitWidth: source ? control.icon.width : 0
 
             Behavior on color { ColorAnimation {} }
-            Behavior on opacity { NumberAnimation {} }
         }
         QQC2.Label {
             id: label
@@ -212,7 +211,6 @@ T.TabButton {
             }
 
             Behavior on color { ColorAnimation {} }
-            Behavior on opacity { NumberAnimation {} }
 
             Layout.topMargin: control.__verticalMargins
             Layout.bottomMargin: control.__verticalMargins
