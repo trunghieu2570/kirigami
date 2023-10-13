@@ -142,12 +142,12 @@ T.ToolBar {
     /**
      * @brief This property holds the foreground color of the toolbar (text, icon).
      */
-    property color foregroundColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.85)
+    property color foregroundColor: Qt.alpha(Kirigami.Theme.textColor, 0.85)
 
     /**
      * @brief This property holds the highlight foreground color (text, icon when action is checked).
      */
-    property color highlightForegroundColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.85)
+    property color highlightForegroundColor: Qt.alpha(Kirigami.Theme.textColor, 0.85)
 
     /**
      * @brief This property holds the color of the highlight bar when an action is checked.

@@ -96,14 +96,14 @@ T.TabButton {
      */
     property bool recolorIcon: true
 
-    property color foregroundColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.85)
-    property color highlightForegroundColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.85)
+    property color foregroundColor: Qt.alpha(Kirigami.Theme.textColor, 0.85)
+    property color highlightForegroundColor: Qt.alpha(Kirigami.Theme.textColor, 0.85)
     property color highlightBarColor: Kirigami.Theme.highlightColor
 
-    property color pressedColor: Qt.rgba(highlightBarColor.r, highlightBarColor.g, highlightBarColor.b, 0.3)
-    property color hoverSelectColor: Qt.rgba(highlightBarColor.r, highlightBarColor.g, highlightBarColor.b, 0.2)
-    property color checkedBorderColor: Qt.rgba(highlightBarColor.r, highlightBarColor.g, highlightBarColor.b, 0.7)
-    property color pressedBorderColor: Qt.rgba(highlightBarColor.r, highlightBarColor.g, highlightBarColor.b, 0.9)
+    property color pressedColor: Qt.alpha(highlightBarColor, 0.3)
+    property color hoverSelectColor: Qt.alpha(highlightBarColor, 0.2)
+    property color checkedBorderColor: Qt.alpha(highlightBarColor, 0.7)
+    property color pressedBorderColor: Qt.alpha(highlightBarColor, 0.9)
 
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
                             implicitContentWidth + leftPadding + rightPadding)
