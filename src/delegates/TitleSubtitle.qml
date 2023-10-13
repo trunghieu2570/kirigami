@@ -87,7 +87,10 @@ Item {
     /**
      * Is the subtitle visible?
      */
-    readonly property bool subtitleVisible: subtitleItem.visible || reserveSpaceForSubtitle
+    // Note: Don't rely on subtitleItem.visible because visibility is an
+    // implicitly propagated property, and we don't wanna re-layout on
+    // hide/show events. Copy-paste its bound expression instead.
+    readonly property bool subtitleVisible: subtitle.length > 0 || reserveSpaceForSubtitle
     /**
      * Is the title or subtitle truncated?
      */
@@ -116,7 +119,8 @@ Item {
         // binding evaluation is not defined which leads to incorrect sizing or
         // the QML engine complaining about not being able to anchor to null items.
         states: State {
-            when: subtitleItem.visible
+            // Note: Same thing about visibility as in subtitleVisible above.
+            when: root.subtitle.length > 0
             AnchorChanges {
                 target: labelItem
                 anchors.verticalCenter: undefined
