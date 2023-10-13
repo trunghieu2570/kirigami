@@ -105,6 +105,8 @@ T.TabButton {
     property color checkedBorderColor: Qt.alpha(highlightBarColor, 0.7)
     property color pressedBorderColor: Qt.alpha(highlightBarColor, 0.9)
 
+    readonly property real __verticalMargins: (display === T.AbstractButton.TextBesideIcon) ? Kirigami.Units.largeSpacing : 0
+
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
                             implicitContentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
@@ -120,9 +122,13 @@ T.TabButton {
     padding: Kirigami.Units.smallSpacing
     spacing: Kirigami.Units.smallSpacing
 
-    icon.height: control.display === T.AbstractButton.TextBesideIcon ? Kirigami.Units.iconSizes.small : Kirigami.Units.iconSizes.smallMedium
-    icon.width: control.display === T.AbstractButton.TextBesideIcon ? Kirigami.Units.iconSizes.small : Kirigami.Units.iconSizes.smallMedium
-    icon.color: control.checked ? control.highlightForegroundColor : control.foregroundColor
+    icon.height: display === T.AbstractButton.TextBesideIcon ? Kirigami.Units.iconSizes.small : Kirigami.Units.iconSizes.smallMedium
+    icon.width: display === T.AbstractButton.TextBesideIcon ? Kirigami.Units.iconSizes.small : Kirigami.Units.iconSizes.smallMedium
+    icon.color: checked ? highlightForegroundColor : foregroundColor
+
+    Kirigami.MnemonicData.enabled: enabled && visible
+    Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem
+    Kirigami.MnemonicData.label: text
 
     background: Rectangle {
         Kirigami.Theme.colorSet: Kirigami.Theme.Button
@@ -138,9 +144,9 @@ T.TabButton {
             anchors.centerIn: parent
 
             radius: Kirigami.Units.smallSpacing
-            color: control.down ? pressedColor : (control.checked || control.hovered ? hoverSelectColor : "transparent")
+            color: control.down ? control.pressedColor : (control.checked || control.hovered ? control.hoverSelectColor : "transparent")
 
-            border.color: control.checked ? checkedBorderColor : (control.down ? pressedBorderColor : color)
+            border.color: control.checked ? control.checkedBorderColor : (control.down ? control.pressedBorderColor : color)
             border.width: 1
 
             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
@@ -149,24 +155,21 @@ T.TabButton {
     }
 
     contentItem: GridLayout {
-        id: gridLayout
         columnSpacing: 0
         rowSpacing: (label.visible && label.lineCount > 1) ? 0 : control.spacing
 
         // if this is a row or a column
         columns: control.display !== T.AbstractButton.TextBesideIcon ? 1 : 2
 
-        property real verticalMargins: (control.display === T.AbstractButton.TextBesideIcon) ? Kirigami.Units.largeSpacing : 0
-
         Kirigami.Icon {
             id: icon
             source: control.icon.name || control.icon.source
             isMask: control.recolorIcon
-            visible: (control.icon.name.length > 0  || control.icon.source.toString().length > 0 ) && control.display !== T.AbstractButton.TextOnly
+            visible: (control.icon.name.length > 0 || control.icon.source.toString().length > 0) && control.display !== T.AbstractButton.TextOnly
             color: control.icon.color
 
-            Layout.topMargin: gridLayout.verticalMargins
-            Layout.bottomMargin: gridLayout.verticalMargins
+            Layout.topMargin: control.__verticalMargins
+            Layout.bottomMargin: control.__verticalMargins
             Layout.leftMargin: (control.display === T.AbstractButton.TextBesideIcon) ? Kirigami.Units.gridUnit : 0
             Layout.rightMargin: (control.display === T.AbstractButton.TextBesideIcon) ? Kirigami.Units.gridUnit : 0
 
@@ -187,11 +190,8 @@ T.TabButton {
         }
         QQC2.Label {
             id: label
-            Kirigami.MnemonicData.enabled: control.enabled && control.visible
-            Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem
-            Kirigami.MnemonicData.label: control.text
 
-            text: Kirigami.MnemonicData.richTextLabel
+            text: control.Kirigami.MnemonicData.richTextLabel
             horizontalAlignment: (control.display === T.AbstractButton.TextBesideIcon) ? Text.AlignLeft : Text.AlignHCenter
 
             visible: control.display !== T.AbstractButton.IconOnly
@@ -214,8 +214,8 @@ T.TabButton {
             Behavior on color { ColorAnimation {} }
             Behavior on opacity { NumberAnimation {} }
 
-            Layout.topMargin: gridLayout.verticalMargins
-            Layout.bottomMargin: gridLayout.verticalMargins
+            Layout.topMargin: control.__verticalMargins
+            Layout.bottomMargin: control.__verticalMargins
 
             Layout.alignment: {
                 if (control.display === T.AbstractButton.TextBesideIcon) {
@@ -235,12 +235,12 @@ T.TabButton {
             QQC2.Label {
                 id: boldMetrics
                 visible: false
-                text: parent.text
+                text: label.text
                 font.bold: true
                 font.family: Kirigami.Theme.smallFont.family
                 font.pointSize: Kirigami.Theme.smallFont.pointSize
                 horizontalAlignment: Text.AlignHCenter
-                wrapMode: QQC2.Label.Wrap
+                wrapMode: Text.Wrap
                 elide: Text.ElideMiddle
             }
         }
