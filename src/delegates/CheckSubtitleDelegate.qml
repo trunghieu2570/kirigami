@@ -35,7 +35,7 @@ QQC2.CheckDelegate {
     property string subtitle
 
     QQC2.ToolTip.text: text + (subtitle.length > 0 ? "\n\n" + subtitle : "")
-    QQC2.ToolTip.visible: (Kirigami.Settings.tabletMode ? down : hovered) && (contentItem.truncated ?? false)
+    QQC2.ToolTip.visible: (Kirigami.Settings.tabletMode ? down : hovered) && (contentItem?.truncated ?? false)
     QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
 
     contentItem: KD.IconTitleSubtitle {
