@@ -113,6 +113,11 @@ Item {
         font: root.font
         elide: root.elide
 
+        // Work around Qt bug where left aligned text is not right aligned
+        // in RTL mode unless horizontalAlignment is explicitly set.
+        // https://bugreports.qt.io/browse/QTBUG-95873
+        horizontalAlignment: Text.AlignLeft
+
         renderType: Text.NativeRendering
 
         // Note: Can't do this through ordinary bindings as the order between
@@ -144,6 +149,11 @@ Item {
         elide: root.elide
 
         visible: text.length > 0
+
+        // Work around Qt bug where left aligned text is not right aligned
+        // in RTL mode unless horizontalAlignment is explicitly set.
+        // https://bugreports.qt.io/browse/QTBUG-95873
+        horizontalAlignment: Text.AlignLeft
 
         renderType: Text.NativeRendering
     }
