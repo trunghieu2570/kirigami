@@ -121,7 +121,7 @@ T.ToolBar {
     /**
      * @brief This property holds the list of actions displayed in the toolbar.
      */
-    property list<Kirigami.Action> actions
+    property list<T.Action> actions
 
     /**
      * @brief The property holds the maximum width of the toolbar actions, before margins are added.
@@ -287,7 +287,7 @@ T.ToolBar {
             id: delegate
             parent: root.contentItem
             action: modelData
-            visible: modelData.visible
+            visible: (modelData as Kirigami.Action)?.visible ?? true
             width: root.buttonWidth
             recolorIcon: root.recolorIcons
             T.ButtonGroup.group: tabGroup

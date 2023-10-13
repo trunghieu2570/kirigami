@@ -47,6 +47,7 @@ kirigami_add_tests(
     tst_listskeynavigation.qml
     tst_menudialog.qml
     tst_mnemonicdata.qml
+    tst_navigationtabbar.qml
     tst_overlaysheet.qml
     tst_overlayzstacking.qml
     tst_pagerow.qml
