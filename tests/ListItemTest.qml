@@ -117,6 +117,7 @@ Kirigami.ApplicationWindow {
                 text: "Boom!"
 
                 contentItem: RowLayout {
+                    spacing: Kirigami.Units.smallSpacing
                     Rectangle {
                         radius: height
                         Layout.preferredWidth: Kirigami.Units.largeSpacing
@@ -144,6 +145,7 @@ Kirigami.ApplicationWindow {
                 text: "Boom!"
 
                 contentItem: RowLayout {
+                    spacing: Kirigami.Units.smallSpacing
                     Rectangle {
                         radius: height
                         Layout.preferredWidth: Kirigami.Units.largeSpacing
@@ -171,6 +173,7 @@ Kirigami.ApplicationWindow {
                 text: "Boom!"
 
                 contentItem: RowLayout {
+                    spacing: Kirigami.Units.smallSpacing
                     Rectangle {
                         radius: height
                         Layout.preferredWidth: Kirigami.Units.largeSpacing
@@ -198,6 +201,7 @@ Kirigami.ApplicationWindow {
                 text: "Boom!"
 
                 contentItem: RowLayout {
+                    spacing: Kirigami.Units.smallSpacing
                     Rectangle {
                         radius: height
                         Layout.preferredWidth: Kirigami.Units.largeSpacing
@@ -344,6 +348,7 @@ Kirigami.ApplicationWindow {
                 subtitle: "smaller boom"
 
                 contentItem: RowLayout {
+                    spacing: Kirigami.Units.smallSpacing
                     Rectangle {
                         radius: height
                         Layout.preferredWidth: Kirigami.Units.largeSpacing
@@ -359,7 +364,6 @@ Kirigami.ApplicationWindow {
                     }
 
                     QQC2.Button {
-                        Layout.rightMargin: Kirigami.Units.gridUnit
                         icon.name: "edit-delete"
                         text: "Defuse the bomb!"
                     }
@@ -374,6 +378,7 @@ Kirigami.ApplicationWindow {
                 subtitle: "smaller boom"
 
                 contentItem: RowLayout {
+                    spacing: Kirigami.Units.smallSpacing
                     Rectangle {
                         radius: height
                         Layout.preferredWidth: Kirigami.Units.largeSpacing
@@ -403,6 +408,7 @@ Kirigami.ApplicationWindow {
                 subtitle: "smaller boom"
 
                 contentItem: RowLayout {
+                    spacing: Kirigami.Units.smallSpacing
                     Rectangle {
                         radius: height
                         Layout.preferredWidth: Kirigami.Units.largeSpacing
@@ -432,6 +438,7 @@ Kirigami.ApplicationWindow {
                 subtitle: "smaller boom"
 
                 contentItem: RowLayout {
+                    spacing: Kirigami.Units.smallSpacing
                     Rectangle {
                         radius: height
                         Layout.preferredWidth: Kirigami.Units.largeSpacing
