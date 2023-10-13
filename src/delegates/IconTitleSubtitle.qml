@@ -7,13 +7,9 @@
  */
 
 import QtQuick
-import QtQuick.Layouts
-import QtQuick.Controls as QQC2
-import QtQuick.Templates as T2
-
 import org.kde.kirigami as Kirigami
-
-import org.kde.kirigami.templates.private as TP
+import org.kde.kirigami.delegates as KD
+import org.kde.kirigami.templates.private as KTP
 
 /**
  * A simple item containing an icon, title and subtitle.
@@ -111,7 +107,7 @@ Item {
      * \note By default, IconTitleSubtitle will reserve the space for the icon,
      * even if it is not set. To remove that space, set `icon.width` to 0.
      */
-    property TP.IconPropertiesGroup icon: TP.IconPropertiesGroup {
+    property KTP.IconPropertiesGroup icon: KTP.IconPropertiesGroup {
         width: titleSubtitle.subtitleVisible ? Kirigami.Units.iconSizes.medium : Kirigami.Units.iconSizes.smallMedium
         height: width
     }
@@ -135,7 +131,7 @@ Item {
         color: root.icon.color
     }
 
-    TitleSubtitle {
+    KD.TitleSubtitle {
         id: titleSubtitle
 
         anchors {
