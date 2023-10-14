@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQml
 import QtQuick.Layouts
@@ -285,6 +287,9 @@ T.ToolBar {
         model: root.actions
         delegate: NavigationTabButton {
             id: delegate
+
+            required property T.Action modelData
+
             parent: root.contentItem
             action: modelData
             visible: (modelData as Kirigami.Action)?.visible ?? true
