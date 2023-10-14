@@ -212,7 +212,7 @@ msgstr "Pàgina actual. Progrés: %1 per cent."
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1. Progress: %2 percent."
-msgstr "Navega a %1. Progrés: %2 per cent."
+msgstr "Navega cap a %1. Progrés: %2 per cent."
 
 #. Accessibility text for a page tab. Keep the text as concise as possible.
 #: controls/swipenavigator/templates/PageTab.qml:46
@@ -225,14 +225,14 @@ msgstr "Pàgina actual."
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1. Demanding attention."
-msgstr "Navega a %1. Exigix atenció."
+msgstr "Navega cap a %1. Exigix atenció."
 
 #. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
 #: controls/swipenavigator/templates/PageTab.qml:52
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1."
-msgstr "Navega a %1."
+msgstr "Navega cap a %1."
 
 #: controls/templates/OverlayDrawer.qml:141
 msgctxt "OverlayDrawer|"
@@ -262,7 +262,7 @@ msgstr "Més accions"
 #: controls/UrlButton.qml:54
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
-msgstr "Copia l'enllaç al porta-retalls"
+msgstr "Copia l'enllaç a dins del porta-retalls"
 
 #: settings.cpp:220
 #, qt-format
