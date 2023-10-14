@@ -210,7 +210,7 @@ msgstr "Obri l'enllaç"
 #: controls/UrlButton.qml:58
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
-msgstr "Copia l'enllaç al porta-retalls"
+msgstr "Copia l'enllaç a dins del porta-retalls"
 
 #: settings.cpp:211
 #, qt-format
