@@ -48,6 +48,21 @@ TestCase {
                 actions: [tAction, kAction],
             });
             verify(tabbar);
+            compare(tabbar.visibleActions, [tAction, kAction]);
+
+            const kInvisibleAction = createTemporaryObject(kActionComponent, this, {
+                visible: false,
+            });
+            verify(kInvisibleAction);
+            tabbar.actions.push(kInvisibleAction);
+            compare(tabbar.visibleActions, [tAction, kAction]);
+
+            tabbar.actions.push(null);
+            compare(tabbar.visibleActions, [tAction, kAction]);
+
+            const tAction2 = createTemporaryObject(tActionComponent, this);
+            tabbar.actions.push(tAction2);
+            compare(tabbar.visibleActions, [tAction, kAction, tAction2]);
         }
     }
 }

@@ -121,9 +121,22 @@ T.ToolBar {
 
 //BEGIN properties
     /**
-     * @brief This property holds the list of actions displayed in the toolbar.
+     * @brief This property holds the list of actions to be displayed in the toolbar.
      */
     property list<T.Action> actions
+
+    /**
+     * @brief This property holds a subset of visible actions of the list of actions.
+     *
+     * An action is considered visible if it is either a Kirigami.Action with
+     * ``visible`` property set to true, or it is a plain QQC2.Action.
+     */
+    readonly property list<T.Action> visibleActions: actions
+        // Note: instanceof check implies `!== null`
+        .filter(action => action instanceof Kirigami.Action
+            ? action.visible
+            : action !== null
+        )
 
     /**
      * @brief The property holds the maximum width of the toolbar actions, before margins are added.
@@ -131,7 +144,7 @@ T.ToolBar {
     property real maximumContentWidth: {
         const minDelegateWidth = Kirigami.Units.gridUnit * 5;
         // Always have at least the width of 5 items, so that small amounts of actions look natural.
-        return minDelegateWidth * Math.max(actions.length, 5);
+        return minDelegateWidth * Math.max(visibleActions.length, 5);
     }
 
     /**
@@ -284,7 +297,7 @@ T.ToolBar {
     // NOTE: This will make Repeater show up as child through visibleChildren
     Repeater {
         id: instantiator
-        model: root.actions
+        model: root.visibleActions
         delegate: NavigationTabButton {
             id: delegate
 
@@ -292,7 +305,6 @@ T.ToolBar {
 
             parent: root.contentItem
             action: modelData
-            visible: (modelData as Kirigami.Action)?.visible ?? true
             width: root.buttonWidth
             recolorIcon: root.recolorIcons
             T.ButtonGroup.group: tabGroup
