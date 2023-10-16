@@ -44,10 +44,9 @@ TestCase {
         {
             const tAction = createTemporaryObject(tActionComponent, this);
             const kAction = createTemporaryObject(kActionComponent, this);
-            const tabbar = createTemporaryObject(emptyComponent, this, {
-                actions: [tAction, kAction],
-            });
+            const tabbar = createTemporaryObject(emptyComponent, this);
             verify(tabbar);
+            tabbar.actions = [tAction, kAction];
             compare(tabbar.visibleActions, [tAction, kAction]);
 
             const kInvisibleAction = createTemporaryObject(kActionComponent, this, {
