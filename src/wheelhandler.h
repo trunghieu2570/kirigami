@@ -174,6 +174,7 @@ public:
 class WheelHandler : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
+    Q_INTERFACES(QQmlParserStatus)
 
     /**
      * @brief This property holds the Qt Quick Flickable that the WheelHandler will control.
