@@ -52,15 +52,6 @@ Kirigami.AbstractApplicationHeader {
     Kirigami.Theme.colorSet: globalToolBar.colorSet
     Kirigami.Theme.textColor: currentItem ? currentItem.Kirigami.Theme.textColor : parent.Kirigami.Theme.textColor
 
-    Rectangle {
-        anchors {
-            fill:parent
-            rightMargin: breadcrumbLoader.width
-            bottomMargin: 1
-        }
-        visible: !breadcrumbLoader.active
-        color: Kirigami.Theme.backgroundColor
-    }
     RowLayout {
         anchors.fill: parent
         spacing: 0

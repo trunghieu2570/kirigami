@@ -27,17 +27,28 @@ Kirigami.AbstractApplicationHeader {
             Math.max(
                 (page.title.length > 0 ? pageRow.globalToolBar.titleLeftPadding : 0),
                 Qt.application.layoutDirection === Qt.LeftToRight
-                    ? Math.min(pageRow.globalToolBar.leftReservedSpace,
-                        pageRow.Kirigami.ScenePosition.x
+                    ? (pageRow.Kirigami.ScenePosition.x
                         - page.Kirigami.ScenePosition.x
-                        + pageRow.globalToolBar.leftReservedSpace)
-                        + Kirigami.Units.smallSpacing
-                    : Math.min(pageRow.globalToolBar.leftReservedSpace,
-                        -pageRow.width
+                        + pageRow.globalToolBar.leftReservedSpace
+                        + Kirigami.Units.smallSpacing)
+                    : (-pageRow.width
                         + pageRow.Kirigami.ScenePosition.x
                         + page.Kirigami.ScenePosition.x
                         + page.width
-                        + pageRow.globalToolBar.leftReservedSpace)
-                        + Kirigami.Units.smallSpacing))
+                        + pageRow.globalToolBar.leftReservedSpace
+                        + Kirigami.Units.smallSpacing)))
         : Kirigami.Units.smallSpacing
+
+    rightPadding: pageRow
+        ? Math.max(0,
+            Qt.application.layoutDirection === Qt.LeftToRight
+            ? (-pageRow.width
+                - pageRow.Kirigami.ScenePosition.x
+                + page.width
+                + page.Kirigami.ScenePosition.x
+                + pageRow.globalToolBar.rightReservedSpace)
+            : (pageRow.Kirigami.ScenePosition.x
+                - page.Kirigami.ScenePosition.x
+                + pageRow.globalToolBar.rightReservedSpace))
+        : 0
 }
