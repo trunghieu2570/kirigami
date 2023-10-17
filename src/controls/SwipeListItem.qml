@@ -187,10 +187,6 @@ QQC2.SwipeDelegate {
      */
     readonly property alias overlayWidth: overlayLoader.width
 
-    // TODO KF6 remove this super wrong thing
-    /// @private
-    /// @deprecated This property will be removed in KDE Framework 6. Use contentItem instead.
-    default property alias _default: listItem.contentItem
 //END properties
 
     LayoutMirroring.childrenInherit: true

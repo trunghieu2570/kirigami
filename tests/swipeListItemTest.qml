@@ -22,7 +22,7 @@ Kirigami.ApplicationWindow {
                         icon.name: "go-up"
                     }
                 ]
-                Label {
+                contentItem: Label {
                     elide: Text.ElideRight
                     text: "big banana big banana big banana big banana big banana big banana big banana big banana big banana big banana big banana big banana big banana big banana big banana big banana big banana big banana big banana big banana"
                 }
