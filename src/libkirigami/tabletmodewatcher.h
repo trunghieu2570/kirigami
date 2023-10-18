@@ -47,8 +47,8 @@ class KIRIGAMI2_EXPORT TabletModeWatcher : public QObject
 #endif
 {
     Q_OBJECT
-    Q_PROPERTY(bool tabletModeAvailable READ isTabletModeAvailable NOTIFY tabletModeAvailableChanged)
-    Q_PROPERTY(bool tabletMode READ isTabletMode NOTIFY tabletModeChanged)
+    Q_PROPERTY(bool tabletModeAvailable READ isTabletModeAvailable NOTIFY tabletModeAvailableChanged FINAL)
+    Q_PROPERTY(bool tabletMode READ isTabletMode NOTIFY tabletModeChanged FINAL)
 
 public:
     ~TabletModeWatcher() override;

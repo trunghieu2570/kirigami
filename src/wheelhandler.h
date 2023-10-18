@@ -30,14 +30,14 @@ class KirigamiWheelEvent : public QObject
      *
      * X coordinate of the mouse pointer
      */
-    Q_PROPERTY(qreal x READ x CONSTANT)
+    Q_PROPERTY(qreal x READ x CONSTANT FINAL)
 
     /**
      * y: real
      *
      * Y coordinate of the mouse pointer
      */
-    Q_PROPERTY(qreal y READ y CONSTANT)
+    Q_PROPERTY(qreal y READ y CONSTANT FINAL)
 
     /**
      * angleDelta: point
@@ -47,14 +47,14 @@ class KirigamiWheelEvent : public QObject
      * A positive value indicates it was rotated up/right, negative, bottom/left
      * This value is more likely to be set in traditional mice.
      */
-    Q_PROPERTY(QPointF angleDelta READ angleDelta CONSTANT)
+    Q_PROPERTY(QPointF angleDelta READ angleDelta CONSTANT FINAL)
 
     /**
      * pixelDelta: point
      *
      * provides the delta in screen pixels available on high resolution trackpads
      */
-    Q_PROPERTY(QPointF pixelDelta READ pixelDelta CONSTANT)
+    Q_PROPERTY(QPointF pixelDelta READ pixelDelta CONSTANT FINAL)
 
     /**
      * buttons: int
@@ -62,7 +62,7 @@ class KirigamiWheelEvent : public QObject
      * it contains an OR combination of the buttons that were pressed during the wheel, they can be:
      * Qt.LeftButton, Qt.MiddleButton, Qt.RightButton
      */
-    Q_PROPERTY(int buttons READ buttons CONSTANT)
+    Q_PROPERTY(int buttons READ buttons CONSTANT FINAL)
 
     /**
      * modifiers: int
@@ -73,7 +73,7 @@ class KirigamiWheelEvent : public QObject
      * Qt.ShiftModifier
      * ...
      */
-    Q_PROPERTY(int modifiers READ modifiers CONSTANT)
+    Q_PROPERTY(int modifiers READ modifiers CONSTANT FINAL)
 
     /**
      * inverted: bool
@@ -81,7 +81,7 @@ class KirigamiWheelEvent : public QObject
      * Whether the delta values are inverted
      * On some platformsthe returned delta are inverted, so positive values would mean bottom/left
      */
-    Q_PROPERTY(bool inverted READ inverted CONSTANT)
+    Q_PROPERTY(bool inverted READ inverted CONSTANT FINAL)
 
     /**
      * accepted: bool
@@ -106,7 +106,7 @@ class KirigamiWheelEvent : public QObject
      * @endcode
      *
      */
-    Q_PROPERTY(bool accepted READ isAccepted WRITE setAccepted)
+    Q_PROPERTY(bool accepted READ isAccepted WRITE setAccepted FINAL)
 
 public:
     KirigamiWheelEvent(QObject *parent = nullptr);
@@ -259,14 +259,14 @@ class WheelHandler : public QObject, public QQmlParserStatus
      *
      * The default value is true.
      */
-    Q_PROPERTY(bool blockTargetWheel MEMBER m_blockTargetWheel NOTIFY blockTargetWheelChanged)
+    Q_PROPERTY(bool blockTargetWheel MEMBER m_blockTargetWheel NOTIFY blockTargetWheelChanged FINAL)
 
     /**
      * @brief This property holds whether the WheelHandler can use wheel events to scroll the Flickable.
      *
      * The default value is true.
      */
-    Q_PROPERTY(bool scrollFlickableTarget MEMBER m_scrollFlickableTarget NOTIFY scrollFlickableTargetChanged)
+    Q_PROPERTY(bool scrollFlickableTarget MEMBER m_scrollFlickableTarget NOTIFY scrollFlickableTargetChanged FINAL)
 
 public:
     explicit WheelHandler(QObject *parent = nullptr);

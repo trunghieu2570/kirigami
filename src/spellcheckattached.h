@@ -39,7 +39,7 @@ class SpellCheckAttached : public QObject
      *
      * @since 2.18
      */
-    Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
+    Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged FINAL)
 public:
     explicit SpellCheckAttached(QObject *parent = nullptr);
     ~SpellCheckAttached() override;

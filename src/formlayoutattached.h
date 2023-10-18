@@ -38,11 +38,11 @@ class FormLayoutAttached : public QObject
     /**
      * The label for a org::kde::kirigami::FormLayout field
      */
-    Q_PROPERTY(QString label READ label WRITE setLabel NOTIFY labelChanged)
+    Q_PROPERTY(QString label READ label WRITE setLabel NOTIFY labelChanged FINAL)
     /**
      * The alignment for the label of a org::kde::kirigami::FormLayout field
      */
-    Q_PROPERTY(int labelAlignment READ labelAlignment WRITE setLabelAlignment NOTIFY labelAlignmentChanged)
+    Q_PROPERTY(int labelAlignment READ labelAlignment WRITE setLabelAlignment NOTIFY labelAlignmentChanged FINAL)
     /**
      * If true, the child item of a org::kde::kirigami::FormLayout becomes a section separator, and
      * may have different looks:
@@ -88,7 +88,7 @@ class FormLayoutAttached : public QObject
      * @endcode
      * @see org::kde::kirigami::FormLayout
      */
-    Q_PROPERTY(bool isSection READ isSection WRITE setIsSection NOTIFY isSectionChanged)
+    Q_PROPERTY(bool isSection READ isSection WRITE setIsSection NOTIFY isSectionChanged FINAL)
 
     /**
      * This property can only be used
@@ -124,7 +124,7 @@ class FormLayoutAttached : public QObject
      * }
      * @endcode
      */
-    Q_PROPERTY(QQuickItem *buddyFor READ buddyFor WRITE setBuddyFor NOTIFY buddyForChanged)
+    Q_PROPERTY(QQuickItem *buddyFor READ buddyFor WRITE setBuddyFor NOTIFY buddyForChanged FINAL)
 
 public:
     explicit FormLayoutAttached(QObject *parent = nullptr);

@@ -31,23 +31,23 @@ public:
     VirtualKeyboardWatcher(QObject *parent = nullptr);
     ~VirtualKeyboardWatcher();
 
-    Q_PROPERTY(bool available READ available NOTIFY availableChanged)
+    Q_PROPERTY(bool available READ available NOTIFY availableChanged FINAL)
     bool available() const;
     Q_SIGNAL void availableChanged();
 
-    Q_PROPERTY(bool enabled READ enabled NOTIFY enabledChanged)
+    Q_PROPERTY(bool enabled READ enabled NOTIFY enabledChanged FINAL)
     bool enabled() const;
     Q_SIGNAL void enabledChanged();
 
-    Q_PROPERTY(bool active READ active NOTIFY activeChanged)
+    Q_PROPERTY(bool active READ active NOTIFY activeChanged FINAL)
     bool active() const;
     Q_SIGNAL void activeChanged();
 
-    Q_PROPERTY(bool visible READ visible NOTIFY visibleChanged)
+    Q_PROPERTY(bool visible READ visible NOTIFY visibleChanged FINAL)
     bool visible() const;
     Q_SIGNAL void visibleChanged();
 
-    Q_PROPERTY(bool willShowOnActive READ willShowOnActive NOTIFY willShowOnActiveChanged)
+    Q_PROPERTY(bool willShowOnActive READ willShowOnActive NOTIFY willShowOnActiveChanged FINAL)
     bool willShowOnActive() const;
     Q_SIGNAL void willShowOnActiveChanged();
 

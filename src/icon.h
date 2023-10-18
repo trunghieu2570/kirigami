@@ -55,7 +55,7 @@ class Icon : public QQuickItem
      * at different sizes, and more. You might find it a useful tool when deciding
      * on which icons to use in your application.
      */
-    Q_PROPERTY(QVariant source READ source WRITE setSource NOTIFY sourceChanged)
+    Q_PROPERTY(QVariant source READ source WRITE setSource NOTIFY sourceChanged FINAL)
 
     /**
      * The name of a fallback icon to load from the icon theme when the `source`
@@ -65,7 +65,7 @@ class Icon : public QQuickItem
      *
      * @note This will only be loaded if source is unavailable (e.g. it doesn't exist, or network issues have prevented loading).
      */
-    Q_PROPERTY(QString fallback READ fallback WRITE setFallback NOTIFY fallbackChanged)
+    Q_PROPERTY(QString fallback READ fallback WRITE setFallback NOTIFY fallbackChanged FINAL)
 
     /**
      * The name of an icon from the icon theme to show while the icon set in `source` is
@@ -78,7 +78,7 @@ class Icon : public QQuickItem
      *
      * @since 5.15
      */
-    Q_PROPERTY(QString placeholder READ placeholder WRITE setPlaceholder NOTIFY placeholderChanged)
+    Q_PROPERTY(QString placeholder READ placeholder WRITE setPlaceholder NOTIFY placeholderChanged FINAL)
 
     /**
      * Whether this icon will use the QIcon::Active mode when drawing the icon,
@@ -93,12 +93,12 @@ class Icon : public QQuickItem
      * that a dull highlight background is typically displayed behind active icons and
      * it is recommended to add one if you are creating a custom component.
      */
-    Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
+    Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged FINAL)
 
     /**
      * Whether this icon's `source` is valid and it is being used.
      */
-    Q_PROPERTY(bool valid READ valid NOTIFY validChanged)
+    Q_PROPERTY(bool valid READ valid NOTIFY validChanged FINAL)
 
     /**
      * Whether this icon will use the QIcon::Selected mode when drawing the icon,
@@ -112,7 +112,7 @@ class Icon : public QQuickItem
      * The color differences under the default KDE color palette, Breeze. Note
      * that a blue background is typically displayed behind selected elements.
      */
-    Q_PROPERTY(bool selected READ selected WRITE setSelected NOTIFY selectedChanged)
+    Q_PROPERTY(bool selected READ selected WRITE setSelected NOTIFY selectedChanged FINAL)
 
     /**
      * Whether this icon will be treated as a mask. When an icon is being used
@@ -121,7 +121,7 @@ class Icon : public QQuickItem
      *
      * @see color
      */
-    Q_PROPERTY(bool isMask READ isMask WRITE setIsMask NOTIFY isMaskChanged)
+    Q_PROPERTY(bool isMask READ isMask WRITE setIsMask NOTIFY isMaskChanged FINAL)
 
     /**
      * The color to use when drawing this icon when `isMask` is enabled.
@@ -129,7 +129,7 @@ class Icon : public QQuickItem
      * the text or the selected text color, depending on if `selected` is set to
      * true.
      */
-    Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
+    Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged FINAL)
 
     /**
      * Whether the icon is correctly loaded, is asynchronously loading or there was an error.
@@ -137,7 +137,7 @@ class Icon : public QQuickItem
      * it can only have Null or Loading states.
      * @since 5.15
      */
-    Q_PROPERTY(Icon::Status status READ status NOTIFY statusChanged)
+    Q_PROPERTY(Icon::Status status READ status NOTIFY statusChanged FINAL)
 
     /**
      * The width of the painted area measured in pixels. This will be smaller than or
@@ -145,7 +145,7 @@ class Icon : public QQuickItem
      *
      * @since 5.15
      */
-    Q_PROPERTY(qreal paintedWidth READ paintedWidth NOTIFY paintedAreaChanged)
+    Q_PROPERTY(qreal paintedWidth READ paintedWidth NOTIFY paintedAreaChanged FINAL)
 
     /**
      * The height of the painted area measured in pixels. This will be smaller than or
@@ -153,17 +153,17 @@ class Icon : public QQuickItem
      *
      * @since 5.15
      */
-    Q_PROPERTY(qreal paintedHeight READ paintedHeight NOTIFY paintedAreaChanged)
+    Q_PROPERTY(qreal paintedHeight READ paintedHeight NOTIFY paintedAreaChanged FINAL)
 
     /**
      * If set, icon will blend when the source is changed
      */
-    Q_PROPERTY(bool animated READ isAnimated WRITE setAnimated NOTIFY animatedChanged)
+    Q_PROPERTY(bool animated READ isAnimated WRITE setAnimated NOTIFY animatedChanged FINAL)
 
     /**
      * If set, icon will round the painted size to defined icon sizes. Default is true.
      */
-    Q_PROPERTY(bool roundToIconSize READ roundToIconSize WRITE setRoundToIconSize NOTIFY roundToIconSizeChanged)
+    Q_PROPERTY(bool roundToIconSize READ roundToIconSize WRITE setRoundToIconSize NOTIFY roundToIconSizeChanged FINAL)
 
 public:
     enum Status {

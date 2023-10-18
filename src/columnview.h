@@ -16,8 +16,8 @@ class ColumnView;
 class ScrollIntentionEvent : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QPointF delta MEMBER delta CONSTANT)
-    Q_PROPERTY(bool accepted MEMBER accepted)
+    Q_PROPERTY(QPointF delta MEMBER delta CONSTANT FINAL)
+    Q_PROPERTY(bool accepted MEMBER accepted FINAL)
 public:
     ScrollIntentionEvent()
     {
@@ -42,41 +42,41 @@ class ColumnViewAttached : public QObject
     /**
      * The index position of the column in the view, starting from 0
      */
-    Q_PROPERTY(int index READ index WRITE setIndex NOTIFY indexChanged)
+    Q_PROPERTY(int index READ index WRITE setIndex NOTIFY indexChanged FINAL)
 
     /**
      * If true, the column will expand to take the whole viewport space minus reservedSpace
      */
-    Q_PROPERTY(bool fillWidth READ fillWidth WRITE setFillWidth NOTIFY fillWidthChanged)
+    Q_PROPERTY(bool fillWidth READ fillWidth WRITE setFillWidth NOTIFY fillWidthChanged FINAL)
 
     /**
      * When a column is fillWidth, it will keep reservedSpace amount of pixels from going to fill the full viewport width
      */
-    Q_PROPERTY(qreal reservedSpace READ reservedSpace WRITE setReservedSpace NOTIFY reservedSpaceChanged)
+    Q_PROPERTY(qreal reservedSpace READ reservedSpace WRITE setReservedSpace NOTIFY reservedSpaceChanged FINAL)
 
     /**
      * Like the same property of MouseArea, when this is true, the column view won't
      * try to manage events by itself when filtering from a child, not
      * disturbing user interaction
      */
-    Q_PROPERTY(bool preventStealing READ preventStealing WRITE setPreventStealing NOTIFY preventStealingChanged)
+    Q_PROPERTY(bool preventStealing READ preventStealing WRITE setPreventStealing NOTIFY preventStealingChanged FINAL)
 
     /**
      * If true the page will never go out of view, but will stay either
      * at the right or left side of the ColumnView
      */
-    Q_PROPERTY(bool pinned READ isPinned WRITE setPinned NOTIFY pinnedChanged)
+    Q_PROPERTY(bool pinned READ isPinned WRITE setPinned NOTIFY pinnedChanged FINAL)
 
     /**
      * The view this column belongs to
      */
-    Q_PROPERTY(ColumnView *view READ view NOTIFY viewChanged)
+    Q_PROPERTY(ColumnView *view READ view NOTIFY viewChanged FINAL)
 
     /**
      * True if this column is at least partly visible in the ColumnView's viewport.
      * @since 5.77
      */
-    Q_PROPERTY(bool inViewport READ inViewport NOTIFY inViewportChanged)
+    Q_PROPERTY(bool inViewport READ inViewport NOTIFY inViewportChanged FINAL)
 
 public:
     ColumnViewAttached(QObject *parent = nullptr);
@@ -155,97 +155,97 @@ class ColumnView : public QQuickItem
      * * DynamicColumns: columns take their width from their implicitWidth
      * * SingleColumn: only one column at a time is shown, as wide as the viewport, eventual reservedSpace on the column's attached property is ignored
      */
-    Q_PROPERTY(ColumnResizeMode columnResizeMode READ columnResizeMode WRITE setColumnResizeMode NOTIFY columnResizeModeChanged)
+    Q_PROPERTY(ColumnResizeMode columnResizeMode READ columnResizeMode WRITE setColumnResizeMode NOTIFY columnResizeModeChanged FINAL)
 
     /**
      * The width of all columns when columnResizeMode is FixedColumns
      */
-    Q_PROPERTY(qreal columnWidth READ columnWidth WRITE setColumnWidth NOTIFY columnWidthChanged)
+    Q_PROPERTY(qreal columnWidth READ columnWidth WRITE setColumnWidth NOTIFY columnWidthChanged FINAL)
 
     /**
      * How many columns this view containsItem*/
-    Q_PROPERTY(int count READ count NOTIFY countChanged)
+    Q_PROPERTY(int count READ count NOTIFY countChanged FINAL)
 
     /**
      * The position of the currently active column. The current column will also have keyboard focus
      */
-    Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex NOTIFY currentIndexChanged)
+    Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex NOTIFY currentIndexChanged FINAL)
 
     /**
      * The currently active column. The current column will also have keyboard focus
      */
-    Q_PROPERTY(QQuickItem *currentItem READ currentItem NOTIFY currentItemChanged)
+    Q_PROPERTY(QQuickItem *currentItem READ currentItem NOTIFY currentItemChanged FINAL)
 
     /**
      * The main content item of this view: it's the parent of the column items
      */
-    Q_PROPERTY(QQuickItem *contentItem READ contentItem CONSTANT)
+    Q_PROPERTY(QQuickItem *contentItem READ contentItem CONSTANT FINAL)
 
     /**
      * The value of the horizontal scroll of the view, in pixels
      */
-    Q_PROPERTY(qreal contentX READ contentX WRITE setContentX NOTIFY contentXChanged)
+    Q_PROPERTY(qreal contentX READ contentX WRITE setContentX NOTIFY contentXChanged FINAL)
 
     /**
      * The compound width of all columns in the view
      */
-    Q_PROPERTY(qreal contentWidth READ contentWidth NOTIFY contentWidthChanged)
+    Q_PROPERTY(qreal contentWidth READ contentWidth NOTIFY contentWidthChanged FINAL)
 
     /**
      * The padding this will have at the top
      */
-    Q_PROPERTY(qreal topPadding READ topPadding WRITE setTopPadding NOTIFY topPaddingChanged)
+    Q_PROPERTY(qreal topPadding READ topPadding WRITE setTopPadding NOTIFY topPaddingChanged FINAL)
 
     /**
      * The padding this will have at the bottom
      */
-    Q_PROPERTY(qreal bottomPadding READ bottomPadding WRITE setBottomPadding NOTIFY bottomPaddingChanged)
+    Q_PROPERTY(qreal bottomPadding READ bottomPadding WRITE setBottomPadding NOTIFY bottomPaddingChanged FINAL)
 
     /**
      * The duration for scrolling animations
      */
-    Q_PROPERTY(int scrollDuration READ scrollDuration WRITE setScrollDuration NOTIFY scrollDurationChanged)
+    Q_PROPERTY(int scrollDuration READ scrollDuration WRITE setScrollDuration NOTIFY scrollDurationChanged FINAL)
 
     /**
      * True if columns should be visually separated by a separator line
      */
-    Q_PROPERTY(bool separatorVisible READ separatorVisible WRITE setSeparatorVisible NOTIFY separatorVisibleChanged)
+    Q_PROPERTY(bool separatorVisible READ separatorVisible WRITE setSeparatorVisible NOTIFY separatorVisibleChanged FINAL)
 
     /**
      * The list of all visible column items that are at least partially in the viewport at any given moment
      */
-    Q_PROPERTY(QList<QObject *> visibleItems READ visibleItems NOTIFY visibleItemsChanged)
+    Q_PROPERTY(QList<QObject *> visibleItems READ visibleItems NOTIFY visibleItemsChanged FINAL)
 
     /**
      * The first of visibleItems provided from convenience
      */
-    Q_PROPERTY(QQuickItem *leadingVisibleItem READ leadingVisibleItem NOTIFY leadingVisibleItemChanged)
+    Q_PROPERTY(QQuickItem *leadingVisibleItem READ leadingVisibleItem NOTIFY leadingVisibleItemChanged FINAL)
 
     /**
      * The last of visibleItems provided from convenience
      */
-    Q_PROPERTY(QQuickItem *trailingVisibleItem READ trailingVisibleItem NOTIFY trailingVisibleItemChanged)
+    Q_PROPERTY(QQuickItem *trailingVisibleItem READ trailingVisibleItem NOTIFY trailingVisibleItemChanged FINAL)
 
     // Properties to make it similar to Flickable
     /**
      * True when the user is dragging around with touch gestures the view contents
      */
-    Q_PROPERTY(bool dragging READ dragging NOTIFY draggingChanged)
+    Q_PROPERTY(bool dragging READ dragging NOTIFY draggingChanged FINAL)
 
     /**
      * True both when the user is dragging around with touch gestures the view contents or the view is animating
      */
-    Q_PROPERTY(bool moving READ moving NOTIFY movingChanged)
+    Q_PROPERTY(bool moving READ moving NOTIFY movingChanged FINAL)
 
     /**
      * True if it supports moving the contents by dragging
      */
-    Q_PROPERTY(bool interactive READ interactive WRITE setInteractive NOTIFY interactiveChanged)
+    Q_PROPERTY(bool interactive READ interactive WRITE setInteractive NOTIFY interactiveChanged FINAL)
 
     /**
      * True if the contents can be dragged also with mouse besides touch
      */
-    Q_PROPERTY(bool acceptsMouse READ acceptsMouse WRITE setAcceptsMouse NOTIFY acceptsMouseChanged)
+    Q_PROPERTY(bool acceptsMouse READ acceptsMouse WRITE setAcceptsMouse NOTIFY acceptsMouseChanged FINAL)
 
     // Default properties
     /**

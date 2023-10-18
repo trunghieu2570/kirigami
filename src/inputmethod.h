@@ -29,7 +29,7 @@ public:
      * false it means there's no special input method configured and input
      * happens directly through keyboard events.
      */
-    Q_PROPERTY(bool available READ available NOTIFY availableChanged)
+    Q_PROPERTY(bool available READ available NOTIFY availableChanged FINAL)
     bool available() const;
     Q_SIGNAL void availableChanged();
 
@@ -38,7 +38,7 @@ public:
      *
      * If this is false, that means the input method is available but not in use.
      */
-    Q_PROPERTY(bool enabled READ enabled NOTIFY enabledChanged)
+    Q_PROPERTY(bool enabled READ enabled NOTIFY enabledChanged FINAL)
     bool enabled() const;
     Q_SIGNAL void enabledChanged();
 
@@ -49,7 +49,7 @@ public:
      * virtual keyboard for example, it would mean the virtual keyboard is
      * visible.
      */
-    Q_PROPERTY(bool active READ active NOTIFY activeChanged)
+    Q_PROPERTY(bool active READ active NOTIFY activeChanged FINAL)
     bool active() const;
     Q_SIGNAL void activeChanged();
 
@@ -59,7 +59,7 @@ public:
      * For some input methods this will match \ref active however for others this
      * may differ.
      */
-    Q_PROPERTY(bool visible READ visible NOTIFY visibleChanged)
+    Q_PROPERTY(bool visible READ visible NOTIFY visibleChanged FINAL)
     bool visible() const;
     Q_SIGNAL void visibleChanged();
 
@@ -72,7 +72,7 @@ public:
      * field focused on application startup may cause the virtual keyboard to
      * show, greatly reducing the available application space.
      */
-    Q_PROPERTY(bool willShowOnActive READ willShowOnActive NOTIFY willShowOnActiveChanged)
+    Q_PROPERTY(bool willShowOnActive READ willShowOnActive NOTIFY willShowOnActiveChanged FINAL)
     bool willShowOnActive() const;
     Q_SIGNAL void willShowOnActiveChanged();
 

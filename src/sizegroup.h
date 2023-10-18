@@ -41,13 +41,13 @@ public:
     /**
      * Which dimensions this SizeGroup should adjust
      */
-    Q_PROPERTY(Mode mode MEMBER m_mode NOTIFY modeChanged)
+    Q_PROPERTY(Mode mode MEMBER m_mode NOTIFY modeChanged FINAL)
     Q_SIGNAL void modeChanged();
 
     /**
      * Which items this SizeGroup should adjust
      */
-    Q_PROPERTY(QQmlListProperty<QQuickItem> items READ items CONSTANT)
+    Q_PROPERTY(QQmlListProperty<QQuickItem> items READ items CONSTANT FINAL)
     QQmlListProperty<QQuickItem> items();
 
     void adjustItems(Mode whatChanged);

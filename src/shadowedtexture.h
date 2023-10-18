@@ -26,7 +26,7 @@ class ShadowedTexture : public ShadowedRectangle
      * This property holds the source item that will get rendered with the
      * shadow.
      */
-    Q_PROPERTY(QQuickItem *source READ source WRITE setSource NOTIFY sourceChanged)
+    Q_PROPERTY(QQuickItem *source READ source WRITE setSource NOTIFY sourceChanged FINAL)
 
 public:
     ShadowedTexture(QQuickItem *parent = nullptr);

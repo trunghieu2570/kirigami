@@ -37,7 +37,7 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
      * Color sets define a color "environment", suitable for drawing all parts of a
      * given region. Colors from different sets should not be combined.
      */
-    Q_PROPERTY(ColorSet colorSet READ colorSet WRITE setColorSet NOTIFY colorSetChanged)
+    Q_PROPERTY(ColorSet colorSet READ colorSet WRITE setColorSet NOTIFY colorSetChanged FINAL)
 
     /**
      * This enumeration describes the color group used to generate the colors.
@@ -45,26 +45,26 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
      * It's redefined here in order to make it work with QML.
      * @since 4.43
      */
-    Q_PROPERTY(ColorGroup colorGroup READ colorGroup WRITE setColorGroup NOTIFY colorGroupChanged)
+    Q_PROPERTY(ColorGroup colorGroup READ colorGroup WRITE setColorGroup NOTIFY colorGroupChanged FINAL)
 
     /**
      * If true, the colorSet will be inherited from the colorset of a theme of one
      * of the ancestor items
      * default: true
      */
-    Q_PROPERTY(bool inherit READ inherit WRITE setInherit NOTIFY inheritChanged)
+    Q_PROPERTY(bool inherit READ inherit WRITE setInherit NOTIFY inheritChanged FINAL)
 
     // foreground colors
     /**
      * Color for normal foregrounds, usually text, but not limited to it,
      * anything that should be painted with a clear contrast should use this color
      */
-    Q_PROPERTY(QColor textColor READ textColor WRITE setCustomTextColor RESET setCustomTextColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor textColor READ textColor WRITE setCustomTextColor RESET setCustomTextColor NOTIFY colorsChanged FINAL)
 
     /**
      * Foreground color for disabled areas, usually a mid-gray
      */
-    Q_PROPERTY(QColor disabledTextColor READ disabledTextColor WRITE setCustomDisabledTextColor RESET setCustomDisabledTextColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor disabledTextColor READ disabledTextColor WRITE setCustomDisabledTextColor RESET setCustomDisabledTextColor NOTIFY colorsChanged FINAL)
 
     /**
      * Color for text that has been highlighted, often is a light color while normal text is dark
@@ -75,38 +75,38 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
     /**
      * Foreground for areas that are active or requesting attention
      */
-    Q_PROPERTY(QColor activeTextColor READ activeTextColor WRITE setCustomActiveTextColor RESET setCustomActiveTextColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor activeTextColor READ activeTextColor WRITE setCustomActiveTextColor RESET setCustomActiveTextColor NOTIFY colorsChanged FINAL)
 
     /**
      * Color for links
      */
-    Q_PROPERTY(QColor linkColor READ linkColor WRITE setCustomLinkColor RESET setCustomLinkColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor linkColor READ linkColor WRITE setCustomLinkColor RESET setCustomLinkColor NOTIFY colorsChanged FINAL)
 
     /**
      * Color for visited links, usually a bit darker than linkColor
      */
-    Q_PROPERTY(QColor visitedLinkColor READ visitedLinkColor WRITE setCustomVisitedLinkColor RESET setCustomVisitedLinkColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor visitedLinkColor READ visitedLinkColor WRITE setCustomVisitedLinkColor RESET setCustomVisitedLinkColor NOTIFY colorsChanged FINAL)
 
     /**
      * Foreground color for negative areas, such as critical error text
      */
-    Q_PROPERTY(QColor negativeTextColor READ negativeTextColor WRITE setCustomNegativeTextColor RESET setCustomNegativeTextColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor negativeTextColor READ negativeTextColor WRITE setCustomNegativeTextColor RESET setCustomNegativeTextColor NOTIFY colorsChanged FINAL)
 
     /**
      * Foreground color for neutral areas, such as warning texts (but not critical)
      */
-    Q_PROPERTY(QColor neutralTextColor READ neutralTextColor WRITE setCustomNeutralTextColor RESET setCustomNeutralTextColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor neutralTextColor READ neutralTextColor WRITE setCustomNeutralTextColor RESET setCustomNeutralTextColor NOTIFY colorsChanged FINAL)
 
     /**
      * Success messages, trusted content
      */
-    Q_PROPERTY(QColor positiveTextColor READ positiveTextColor WRITE setCustomPositiveTextColor RESET setCustomPositiveTextColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor positiveTextColor READ positiveTextColor WRITE setCustomPositiveTextColor RESET setCustomPositiveTextColor NOTIFY colorsChanged FINAL)
 
     // background colors
     /**
      * The generic background color
      */
-    Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setCustomBackgroundColor RESET setCustomBackgroundColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setCustomBackgroundColor RESET setCustomBackgroundColor NOTIFY colorsChanged FINAL)
 
     /**
      * The generic background color
@@ -120,7 +120,7 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
     /**
      * The background color for selected areas
      */
-    Q_PROPERTY(QColor highlightColor READ highlightColor WRITE setCustomHighlightColor RESET setCustomHighlightColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor highlightColor READ highlightColor WRITE setCustomHighlightColor RESET setCustomHighlightColor NOTIFY colorsChanged FINAL)
 
     /**
      * Background for areas that are active or requesting attention
@@ -131,7 +131,8 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
     /**
      * Background color for links
      */
-    Q_PROPERTY(QColor linkBackgroundColor READ linkBackgroundColor WRITE setCustomLinkBackgroundColor RESET setCustomLinkBackgroundColor NOTIFY colorsChanged)
+    Q_PROPERTY(
+        QColor linkBackgroundColor READ linkBackgroundColor WRITE setCustomLinkBackgroundColor RESET setCustomLinkBackgroundColor NOTIFY colorsChanged FINAL)
 
     /**
      * Background color for visited links, usually a bit darker than linkBackgroundColor
@@ -161,26 +162,27 @@ class KIRIGAMI2_EXPORT PlatformTheme : public QObject
     /**
      * A decoration color that indicates active focus
      */
-    Q_PROPERTY(QColor focusColor READ focusColor WRITE setCustomFocusColor RESET setCustomFocusColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor focusColor READ focusColor WRITE setCustomFocusColor RESET setCustomFocusColor NOTIFY colorsChanged FINAL)
 
     /**
      * A decoration color that indicates mouse hovering
      */
-    Q_PROPERTY(QColor hoverColor READ hoverColor WRITE setCustomHoverColor RESET setCustomHoverColor NOTIFY colorsChanged)
+    Q_PROPERTY(QColor hoverColor READ hoverColor WRITE setCustomHoverColor RESET setCustomHoverColor NOTIFY colorsChanged FINAL)
 
     /**
      * Hint for item views to actually make use of the alternate background color feature
      */
-    Q_PROPERTY(bool useAlternateBackgroundColor READ useAlternateBackgroundColor WRITE setUseAlternateBackgroundColor NOTIFY useAlternateBackgroundColorChanged)
+    Q_PROPERTY(
+        bool useAlternateBackgroundColor READ useAlternateBackgroundColor WRITE setUseAlternateBackgroundColor NOTIFY useAlternateBackgroundColorChanged FINAL)
 
     // font and palette
-    Q_PROPERTY(QFont defaultFont READ defaultFont NOTIFY defaultFontChanged)
+    Q_PROPERTY(QFont defaultFont READ defaultFont NOTIFY defaultFontChanged FINAL)
 
     // small font
-    Q_PROPERTY(QFont smallFont READ smallFont NOTIFY smallFontChanged)
+    Q_PROPERTY(QFont smallFont READ smallFont NOTIFY smallFontChanged FINAL)
 
     // Active palette
-    Q_PROPERTY(QPalette palette READ palette NOTIFY paletteChanged)
+    Q_PROPERTY(QPalette palette READ palette NOTIFY paletteChanged FINAL)
 
 public:
     enum ColorSet {

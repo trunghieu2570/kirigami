@@ -22,7 +22,7 @@ class BorderGroup : public QObject
      *
      * default: ``0``px
      */
-    Q_PROPERTY(qreal width READ width WRITE setWidth NOTIFY changed)
+    Q_PROPERTY(qreal width READ width WRITE setWidth NOTIFY changed FINAL)
     /**
      * @brief This property holds the border's color.
      *
@@ -30,7 +30,7 @@ class BorderGroup : public QObject
      *
      * default: ``Qt::black``
      */
-    Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY changed)
+    Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY changed FINAL)
 
 public:
     explicit BorderGroup(QObject *parent = nullptr);
@@ -65,19 +65,19 @@ class ShadowGroup : public QObject
      *
      * default: ``0``px
      */
-    Q_PROPERTY(qreal size READ size WRITE setSize NOTIFY changed)
+    Q_PROPERTY(qreal size READ size WRITE setSize NOTIFY changed FINAL)
     /**
      * @brief This property holds the shadow's offset in pixels on the X axis.
      *
      * default: ``0``px
      */
-    Q_PROPERTY(qreal xOffset READ xOffset WRITE setXOffset NOTIFY changed)
+    Q_PROPERTY(qreal xOffset READ xOffset WRITE setXOffset NOTIFY changed FINAL)
     /**
      * @brief This property holds the shadow's offset in pixels on the Y axis.
      *
      * default: ``0``px
      */
-    Q_PROPERTY(qreal yOffset READ yOffset WRITE setYOffset NOTIFY changed)
+    Q_PROPERTY(qreal yOffset READ yOffset WRITE setYOffset NOTIFY changed FINAL)
     /**
      * @brief This property holds the shadow's color.
      *
@@ -85,7 +85,7 @@ class ShadowGroup : public QObject
      *
      * default: ``Qt::black``
      */
-    Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY changed)
+    Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY changed FINAL)
 
 public:
     explicit ShadowGroup(QObject *parent = nullptr);
@@ -124,7 +124,7 @@ class CornersGroup : public QObject
      *
      * default: ``-1``px
      */
-    Q_PROPERTY(qreal topLeftRadius READ topLeft WRITE setTopLeft NOTIFY changed)
+    Q_PROPERTY(qreal topLeftRadius READ topLeft WRITE setTopLeft NOTIFY changed FINAL)
 
     /**
      * @brief This property holds the top-right corner's radius in pixels.
@@ -133,7 +133,7 @@ class CornersGroup : public QObject
      *
      * default: ``-1``px
      */
-    Q_PROPERTY(qreal topRightRadius READ topRight WRITE setTopRight NOTIFY changed)
+    Q_PROPERTY(qreal topRightRadius READ topRight WRITE setTopRight NOTIFY changed FINAL)
 
     /**
      * @brief This property holds the bottom-left corner's radius in pixels.
@@ -142,7 +142,7 @@ class CornersGroup : public QObject
      *
      * default: ``-1``px
      */
-    Q_PROPERTY(qreal bottomLeftRadius READ bottomLeft WRITE setBottomLeft NOTIFY changed)
+    Q_PROPERTY(qreal bottomLeftRadius READ bottomLeft WRITE setBottomLeft NOTIFY changed FINAL)
 
     /**
      * @brief This property holds the bottom-right corner's radius in pixels.
@@ -151,7 +151,7 @@ class CornersGroup : public QObject
      *
      * default: ``-1``px
      */
-    Q_PROPERTY(qreal bottomRightRadius READ bottomRight WRITE setBottomRight NOTIFY changed)
+    Q_PROPERTY(qreal bottomRightRadius READ bottomRight WRITE setBottomRight NOTIFY changed FINAL)
 
 public:
     explicit CornersGroup(QObject *parent = nullptr);
@@ -203,7 +203,7 @@ class ShadowedRectangle : public QQuickItem
      *
      * @see corners
      */
-    Q_PROPERTY(qreal radius READ radius WRITE setRadius NOTIFY radiusChanged)
+    Q_PROPERTY(qreal radius READ radius WRITE setRadius NOTIFY radiusChanged FINAL)
 
     /**
      * @brief This property holds the rectangle's color.
@@ -212,7 +212,7 @@ class ShadowedRectangle : public QQuickItem
      *
      * default: ``Qt::white``
      */
-    Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
+    Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged FINAL)
 
     /**
      * @brief This property holds the border's grouped property.
@@ -226,7 +226,7 @@ class ShadowedRectangle : public QQuickItem
      * @endcode
      * @see BorderGroup
      */
-    Q_PROPERTY(BorderGroup *border READ border CONSTANT)
+    Q_PROPERTY(BorderGroup *border READ border CONSTANT FINAL)
 
     /**
      * @brief This property holds the shadow's grouped property.
@@ -242,7 +242,7 @@ class ShadowedRectangle : public QQuickItem
      *
      * @see ShadowGroup
      */
-    Q_PROPERTY(ShadowGroup *shadow READ shadow CONSTANT)
+    Q_PROPERTY(ShadowGroup *shadow READ shadow CONSTANT FINAL)
 
     /**
      * @brief This property holds the corners grouped property
@@ -261,7 +261,7 @@ class ShadowedRectangle : public QQuickItem
      *
      * @see CornersGroup
      */
-    Q_PROPERTY(CornersGroup *corners READ corners CONSTANT)
+    Q_PROPERTY(CornersGroup *corners READ corners CONSTANT FINAL)
 
     /**
      * @brief This property holds the rectangle's render mode.
@@ -270,14 +270,14 @@ class ShadowedRectangle : public QQuickItem
      *
      * @see RenderType
      */
-    Q_PROPERTY(RenderType renderType READ renderType WRITE setRenderType NOTIFY renderTypeChanged)
+    Q_PROPERTY(RenderType renderType READ renderType WRITE setRenderType NOTIFY renderTypeChanged FINAL)
 
     /**
      * @brief This property tells whether software rendering is being used.
      *
      * default: ``false``
      */
-    Q_PROPERTY(bool softwareRendering READ isSoftwareRendering NOTIFY softwareRenderingChanged)
+    Q_PROPERTY(bool softwareRendering READ isSoftwareRendering NOTIFY softwareRenderingChanged FINAL)
 
 public:
     ShadowedRectangle(QQuickItem *parent = nullptr);

@@ -21,7 +21,7 @@ class ToolBarLayoutAttached : public QObject
     /**
      * The action this delegate was created for.
      */
-    Q_PROPERTY(QObject *action READ action CONSTANT)
+    Q_PROPERTY(QObject *action READ action CONSTANT FINAL)
 public:
     ToolBarLayoutAttached(QObject *parent = nullptr);
 
@@ -51,11 +51,11 @@ class ToolBarLayout : public QQuickItem
     /**
      * The actions this layout should create delegates for.
      */
-    Q_PROPERTY(QQmlListProperty<QObject> actions READ actionsProperty NOTIFY actionsChanged)
+    Q_PROPERTY(QQmlListProperty<QObject> actions READ actionsProperty NOTIFY actionsChanged FINAL)
     /**
      * A list of actions that do not fit in the current view and are thus hidden.
      */
-    Q_PROPERTY(QList<QObject *> hiddenActions READ hiddenActions NOTIFY hiddenActionsChanged)
+    Q_PROPERTY(QList<QObject *> hiddenActions READ hiddenActions NOTIFY hiddenActionsChanged FINAL)
     /**
      * A component that is used to create full-size delegates from.
      *
@@ -66,13 +66,13 @@ class ToolBarLayout : public QQuickItem
      * delegate when it fits. If not, it will use the iconDelegate, unless even
      * that does not fit, in which case it will still be hidden.
      */
-    Q_PROPERTY(QQmlComponent *fullDelegate READ fullDelegate WRITE setFullDelegate NOTIFY fullDelegateChanged)
+    Q_PROPERTY(QQmlComponent *fullDelegate READ fullDelegate WRITE setFullDelegate NOTIFY fullDelegateChanged FINAL)
     /**
      * A component that is used to create icon-only delegates from.
      *
      * \sa fullDelegate
      */
-    Q_PROPERTY(QQmlComponent *iconDelegate READ iconDelegate WRITE setIconDelegate NOTIFY iconDelegateChanged)
+    Q_PROPERTY(QQmlComponent *iconDelegate READ iconDelegate WRITE setIconDelegate NOTIFY iconDelegateChanged FINAL)
     /**
      * A component that is used to create the "more button" item from.
      *
@@ -80,11 +80,11 @@ class ToolBarLayout : public QQuickItem
      * current view. It is intended to have functionality to show these hidden
      * actions, like popup a menu with them showing.
      */
-    Q_PROPERTY(QQmlComponent *moreButton READ moreButton WRITE setMoreButton NOTIFY moreButtonChanged)
+    Q_PROPERTY(QQmlComponent *moreButton READ moreButton WRITE setMoreButton NOTIFY moreButtonChanged FINAL)
     /**
      * The amount of spacing between individual delegates.
      */
-    Q_PROPERTY(qreal spacing READ spacing WRITE setSpacing NOTIFY spacingChanged)
+    Q_PROPERTY(qreal spacing READ spacing WRITE setSpacing NOTIFY spacingChanged FINAL)
     /**
      * How to align the delegates within this layout.
      *
@@ -93,17 +93,17 @@ class ToolBarLayout : public QQuickItem
      * how to do that. Note that the moreButton, if visible, will always be
      * placed at the end of the layout.
      */
-    Q_PROPERTY(Qt::Alignment alignment READ alignment WRITE setAlignment NOTIFY alignmentChanged)
+    Q_PROPERTY(Qt::Alignment alignment READ alignment WRITE setAlignment NOTIFY alignmentChanged FINAL)
     /**
      * The combined width of visible delegates in this layout.
      */
-    Q_PROPERTY(qreal visibleWidth READ visibleWidth NOTIFY visibleWidthChanged)
+    Q_PROPERTY(qreal visibleWidth READ visibleWidth NOTIFY visibleWidthChanged FINAL)
     /**
      * The minimum width this layout can have.
      *
      * This is equal to the width of the moreButton.
      */
-    Q_PROPERTY(qreal minimumWidth READ minimumWidth NOTIFY minimumWidthChanged)
+    Q_PROPERTY(qreal minimumWidth READ minimumWidth NOTIFY minimumWidthChanged FINAL)
     /**
      * Which direction to layout in.
      *
@@ -117,7 +117,7 @@ class ToolBarLayout : public QQuickItem
      * be placed at the leftmost position. Alignment flags are inverted, so
      * AlignLeft will align items to the right, and vice-versa.
      */
-    Q_PROPERTY(Qt::LayoutDirection layoutDirection READ layoutDirection WRITE setLayoutDirection NOTIFY layoutDirectionChanged)
+    Q_PROPERTY(Qt::LayoutDirection layoutDirection READ layoutDirection WRITE setLayoutDirection NOTIFY layoutDirectionChanged FINAL)
     /**
      * How to handle items that do not match the toolbar's height.
      *
@@ -128,7 +128,7 @@ class ToolBarLayout : public QQuickItem
      *
      * \sa HeightMode
      */
-    Q_PROPERTY(HeightMode heightMode READ heightMode WRITE setHeightMode NOTIFY heightModeChanged)
+    Q_PROPERTY(HeightMode heightMode READ heightMode WRITE setHeightMode NOTIFY heightModeChanged FINAL)
 
 public:
     using ActionsProperty = QQmlListProperty<QObject>;

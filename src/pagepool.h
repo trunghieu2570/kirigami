@@ -27,24 +27,24 @@ class PagePool : public QObject
      * to have a "checked" state to buttons or list items that
      * load the page when clicked.
      */
-    Q_PROPERTY(QUrl lastLoadedUrl READ lastLoadedUrl NOTIFY lastLoadedUrlChanged)
+    Q_PROPERTY(QUrl lastLoadedUrl READ lastLoadedUrl NOTIFY lastLoadedUrlChanged FINAL)
 
     /**
      * The last item that was loaded with @loadPage.
      */
-    Q_PROPERTY(QQuickItem *lastLoadedItem READ lastLoadedItem NOTIFY lastLoadedItemChanged)
+    Q_PROPERTY(QQuickItem *lastLoadedItem READ lastLoadedItem NOTIFY lastLoadedItemChanged FINAL)
 
     /**
      * All items loaded/managed by the PagePool.
      * @since 5.84
      */
-    Q_PROPERTY(QList<QQuickItem *> items READ items NOTIFY itemsChanged)
+    Q_PROPERTY(QList<QQuickItem *> items READ items NOTIFY itemsChanged FINAL)
 
     /**
      * All page URLs loaded/managed by the PagePool.
      * @since 5.84
      */
-    Q_PROPERTY(QList<QUrl> urls READ urls NOTIFY urlsChanged)
+    Q_PROPERTY(QList<QUrl> urls READ urls NOTIFY urlsChanged FINAL)
 
     /**
      * If true (default) the pages will be kept around, will have C++ ownership and
@@ -53,7 +53,7 @@ class PagePool : public QObject
      * page stacks) and each call to loadPage will create a new page instance. When
      * cachePages is false, Components get cached nevertheless.
      */
-    Q_PROPERTY(bool cachePages READ cachePages WRITE setCachePages NOTIFY cachePagesChanged)
+    Q_PROPERTY(bool cachePages READ cachePages WRITE setCachePages NOTIFY cachePagesChanged FINAL)
 
 public:
     PagePool(QObject *parent = nullptr);

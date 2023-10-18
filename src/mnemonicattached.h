@@ -32,36 +32,36 @@ class MnemonicAttached : public QObject
      * The label of the control we want to compute a mnemonic for, instance
      * "Label:" or "&Ok"
      */
-    Q_PROPERTY(QString label READ label WRITE setLabel NOTIFY labelChanged)
+    Q_PROPERTY(QString label READ label WRITE setLabel NOTIFY labelChanged FINAL)
 
     /**
      * The user-visible final label, which will have the shortcut letter underlined,
      * such as "&lt;u&gt;O&lt;/u&gt;k"
      */
-    Q_PROPERTY(QString richTextLabel READ richTextLabel NOTIFY richTextLabelChanged)
+    Q_PROPERTY(QString richTextLabel READ richTextLabel NOTIFY richTextLabelChanged FINAL)
 
     /**
      * The label with an "&" mnemonic in the place which will have the shortcut
      * assigned, regardless of whether the & was assigned by the user or automatically generated.
      */
-    Q_PROPERTY(QString mnemonicLabel READ mnemonicLabel NOTIFY mnemonicLabelChanged)
+    Q_PROPERTY(QString mnemonicLabel READ mnemonicLabel NOTIFY mnemonicLabelChanged FINAL)
 
     /**
      * Only if true this mnemonic will be considered for the global assignment
      * default: true
      */
-    Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
+    Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged FINAL)
 
     /**
      * The type of control this mnemonic is attached: different types of controls have different importance and priority for shortcut assignment.
      * @see ControlType
      */
-    Q_PROPERTY(MnemonicAttached::ControlType controlType READ controlType WRITE setControlType NOTIFY controlTypeChanged)
+    Q_PROPERTY(MnemonicAttached::ControlType controlType READ controlType WRITE setControlType NOTIFY controlTypeChanged FINAL)
 
     /**
      * The final key sequence assigned, if any: it will be Alt+alphanumeric char
      */
-    Q_PROPERTY(QKeySequence sequence READ sequence NOTIFY sequenceChanged)
+    Q_PROPERTY(QKeySequence sequence READ sequence NOTIFY sequenceChanged FINAL)
 
     /**
      * True when the user is pressing alt and the accelerators should be shown
@@ -69,7 +69,7 @@ class MnemonicAttached : public QObject
      * @since 5.72
      * @since 2.15
      */
-    Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
+    Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged FINAL)
 
 public:
     enum ControlType {

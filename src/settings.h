@@ -23,14 +23,14 @@ class Settings : public QObject
      * This is the case for foldable convertibles and transformable laptops that support
      * keyboard detachment.
      */
-    Q_PROPERTY(bool tabletModeAvailable READ isTabletModeAvailable NOTIFY tabletModeAvailableChanged)
+    Q_PROPERTY(bool tabletModeAvailable READ isTabletModeAvailable NOTIFY tabletModeAvailableChanged FINAL)
 
     /**
      * This property holds whether the application is running on a small mobile device
      * such as a mobile phone. This is used when we want to do specific adaptations to
      * the UI for small screen form factors, such as having bigger touch areas.
      */
-    Q_PROPERTY(bool isMobile READ isMobile NOTIFY isMobileChanged)
+    Q_PROPERTY(bool isMobile READ isMobile NOTIFY isMobileChanged FINAL)
 
     /**
      * This property holds whether the application is running on a device that is
@@ -40,7 +40,7 @@ class Settings : public QObject
      * that the preferred input mode for the device is the touch screen
      * and that pointer and keyboard are either secondary or not available.
      */
-    Q_PROPERTY(bool tabletMode READ tabletMode NOTIFY tabletModeChanged)
+    Q_PROPERTY(bool tabletMode READ tabletMode NOTIFY tabletModeChanged FINAL)
 
     /**
      * This property holds whether the system has a platform menu bar; e.g. a user is
@@ -48,25 +48,25 @@ class Settings : public QObject
      *
      * @warning Android has a platform menu bar; which may not be what you expected.
      */
-    Q_PROPERTY(bool hasPlatformMenuBar READ hasPlatformMenuBar CONSTANT)
+    Q_PROPERTY(bool hasPlatformMenuBar READ hasPlatformMenuBar CONSTANT FINAL)
 
     /**
      * This property holds whether the user in this moment is interacting with the app
      * with the touch screen.
      */
-    Q_PROPERTY(bool hasTransientTouchInput READ hasTransientTouchInput NOTIFY hasTransientTouchInputChanged)
+    Q_PROPERTY(bool hasTransientTouchInput READ hasTransientTouchInput NOTIFY hasTransientTouchInputChanged FINAL)
 
     /**
      * This property holds the name of the QtQuickControls2 style the application is using,
      * for instance org.kde.desktop, Plasma, Material, Universal etc
      */
-    Q_PROPERTY(QString style READ style CONSTANT)
+    Q_PROPERTY(QString style READ style CONSTANT FINAL)
 
     // TODO: make this adapt without file watchers?
     /**
      * This property holds the number of lines of text the mouse wheel should scroll.
      */
-    Q_PROPERTY(int mouseWheelScrollLines READ mouseWheelScrollLines CONSTANT)
+    Q_PROPERTY(int mouseWheelScrollLines READ mouseWheelScrollLines CONSTANT FINAL)
 
     /**
      * This property holds the runtime information about the libraries in use.
@@ -74,7 +74,7 @@ class Settings : public QObject
      * @since 5.52
      * @since org.kde.kirigami 2.6
      */
-    Q_PROPERTY(QStringList information READ information CONSTANT)
+    Q_PROPERTY(QStringList information READ information CONSTANT FINAL)
 
     /**
      * This property holds the name of the application window icon.
@@ -83,7 +83,7 @@ class Settings : public QObject
      * @since 5.62
      * @since org.kde.kirigami 2.10
      */
-    Q_PROPERTY(QVariant applicationWindowIcon READ applicationWindowIcon CONSTANT)
+    Q_PROPERTY(QVariant applicationWindowIcon READ applicationWindowIcon CONSTANT FINAL)
 
 public:
     Settings(QObject *parent = nullptr);

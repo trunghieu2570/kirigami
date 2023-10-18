@@ -40,12 +40,12 @@ class OverlayZStackingAttached : public QObject
     /**
      * An optimal z-index that attachee popup should bind to.
      */
-    Q_PROPERTY(qreal z READ z NOTIFY zChanged)
+    Q_PROPERTY(qreal z READ z NOTIFY zChanged FINAL)
 
     /**
      * The logical stacking layer of attachee popup, akin to window manager's layers.
      */
-    Q_PROPERTY(Layer layer READ layer WRITE setLayer NOTIFY layerChanged)
+    Q_PROPERTY(Layer layer READ layer WRITE setLayer NOTIFY layerChanged FINAL)
 
 public:
     enum Layer {

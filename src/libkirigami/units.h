@@ -29,13 +29,13 @@ class KIRIGAMI2_EXPORT IconSizes : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(int sizeForLabels READ sizeForLabels NOTIFY sizeForLabelsChanged)
-    Q_PROPERTY(int small READ small NOTIFY smallChanged)
-    Q_PROPERTY(int smallMedium READ smallMedium NOTIFY smallMediumChanged)
-    Q_PROPERTY(int medium READ medium NOTIFY mediumChanged)
-    Q_PROPERTY(int large READ large NOTIFY largeChanged)
-    Q_PROPERTY(int huge READ huge NOTIFY hugeChanged)
-    Q_PROPERTY(int enormous READ enormous NOTIFY enormousChanged)
+    Q_PROPERTY(int sizeForLabels READ sizeForLabels NOTIFY sizeForLabelsChanged FINAL)
+    Q_PROPERTY(int small READ small NOTIFY smallChanged FINAL)
+    Q_PROPERTY(int smallMedium READ smallMedium NOTIFY smallMediumChanged FINAL)
+    Q_PROPERTY(int medium READ medium NOTIFY mediumChanged FINAL)
+    Q_PROPERTY(int large READ large NOTIFY largeChanged FINAL)
+    Q_PROPERTY(int huge READ huge NOTIFY hugeChanged FINAL)
+    Q_PROPERTY(int enormous READ enormous NOTIFY enormousChanged FINAL)
 
 public:
     IconSizes(Units *units);
@@ -81,7 +81,7 @@ class KIRIGAMI2_EXPORT Units : public QObject
      * Given the screen has an accurate DPI settings, it corresponds to the height of
      * the font's boundingRect.
      */
-    Q_PROPERTY(int gridUnit READ gridUnit NOTIFY gridUnitChanged)
+    Q_PROPERTY(int gridUnit READ gridUnit NOTIFY gridUnitChanged FINAL)
 
     /**
      * units.iconSizes provides access to platform-dependent icon sizing
@@ -97,7 +97,7 @@ class KIRIGAMI2_EXPORT Units : public QObject
      * * huge
      * * enormous
      */
-    Q_PROPERTY(IconSizes *iconSizes READ iconSizes CONSTANT)
+    Q_PROPERTY(IconSizes *iconSizes READ iconSizes CONSTANT FINAL)
 
     /**
      * This property holds the amount of spacing that should be used between smaller UI elements,
@@ -105,7 +105,7 @@ class KIRIGAMI2_EXPORT Units : public QObject
      * Internally, this size depends on the size of the default font as rendered on the screen,
      * so it takes user-configured font size and DPI into account.
      */
-    Q_PROPERTY(int smallSpacing READ smallSpacing NOTIFY smallSpacingChanged)
+    Q_PROPERTY(int smallSpacing READ smallSpacing NOTIFY smallSpacingChanged FINAL)
 
     /**
      * This property holds the amount of spacing that should be used between medium UI elements,
@@ -113,7 +113,7 @@ class KIRIGAMI2_EXPORT Units : public QObject
      * Internally, this size depends on the size of the default font as rendered on the screen,
      * so it takes user-configured font size and DPI into account.
      */
-    Q_PROPERTY(int mediumSpacing READ mediumSpacing NOTIFY mediumSpacingChanged)
+    Q_PROPERTY(int mediumSpacing READ mediumSpacing NOTIFY mediumSpacingChanged FINAL)
 
     /**
      * This property holds the amount of spacing that should be used between bigger UI elements,
@@ -121,31 +121,31 @@ class KIRIGAMI2_EXPORT Units : public QObject
      * Internally, this size depends on the size of the default font as rendered on the screen,
      * so it takes user-configured font size and DPI into account.
      */
-    Q_PROPERTY(int largeSpacing READ largeSpacing NOTIFY largeSpacingChanged)
+    Q_PROPERTY(int largeSpacing READ largeSpacing NOTIFY largeSpacingChanged FINAL)
 
     /**
      * units.veryLongDuration should be used for specialty animations that benefit
      * from being even longer than longDuration.
      */
-    Q_PROPERTY(int veryLongDuration READ veryLongDuration NOTIFY veryLongDurationChanged)
+    Q_PROPERTY(int veryLongDuration READ veryLongDuration NOTIFY veryLongDurationChanged FINAL)
 
     /**
      * units.longDuration should be used for longer, screen-covering animations, for opening and
      * closing of dialogs and other "not too small" animations
      */
-    Q_PROPERTY(int longDuration READ longDuration NOTIFY longDurationChanged)
+    Q_PROPERTY(int longDuration READ longDuration NOTIFY longDurationChanged FINAL)
 
     /**
      * units.shortDuration should be used for short animations, such as accentuating a UI event,
      * hover events, etc..
      */
-    Q_PROPERTY(int shortDuration READ shortDuration NOTIFY shortDurationChanged)
+    Q_PROPERTY(int shortDuration READ shortDuration NOTIFY shortDurationChanged FINAL)
 
     /**
      * units.veryShortDuration should be used for elements that should have a hint of smoothness,
      * but otherwise animate near instantly.
      */
-    Q_PROPERTY(int veryShortDuration READ veryShortDuration NOTIFY veryShortDurationChanged)
+    Q_PROPERTY(int veryShortDuration READ veryShortDuration NOTIFY veryShortDurationChanged FINAL)
 
     /**
      * Time in milliseconds equivalent to the theoretical human moment, which can be used
@@ -181,16 +181,16 @@ class KIRIGAMI2_EXPORT Units : public QObject
      * @since 5.81
      * @since org.kde.kirigami 2.16
      */
-    Q_PROPERTY(int humanMoment READ humanMoment NOTIFY humanMomentChanged)
+    Q_PROPERTY(int humanMoment READ humanMoment NOTIFY humanMomentChanged FINAL)
 
     /**
      * time in ms by which the display of tooltips will be delayed.
      *
      * @sa ToolTip.delay property
      */
-    Q_PROPERTY(int toolTipDelay READ toolTipDelay NOTIFY toolTipDelayChanged)
+    Q_PROPERTY(int toolTipDelay READ toolTipDelay NOTIFY toolTipDelayChanged FINAL)
 
-    Q_PROPERTY(int maximumInteger READ maximumInteger CONSTANT)
+    Q_PROPERTY(int maximumInteger READ maximumInteger CONSTANT FINAL)
 
 public:
     explicit Units(QObject *parent = nullptr);
