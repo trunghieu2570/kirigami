@@ -85,7 +85,7 @@ PlatformPluginFactory *PlatformPluginFactory::findPlugin(const QString &preferre
         // Ensure we only load the first plugin from the first plugin location.
         // If we do not break here, we may end up loading a different plugin
         // in place of the first one.
-        if (auto it = factories.constFind(pluginName); it != factories.constEnd()) {
+        if (factories.value(pluginName) != nullptr) {
             break;
         }
     }
