@@ -146,8 +146,8 @@ QQC2.ItemDelegate {
     verticalPadding: undefined
     horizontalPadding: padding * 2
 
-    implicitWidth: contentItem ? contentItem.implicitWidth + leftPadding + rightPadding : Kirigami.Units.gridUnit * 12
-    implicitHeight: contentItem ? contentItem.implicitHeight + topPadding + bottomPadding : 0
+    implicitWidth: contentItem ? implicitContentWidth + leftPadding + rightPadding : Kirigami.Units.gridUnit * 12
+    implicitHeight: contentItem ? implicitContentHeight + topPadding + bottomPadding : 0
 
     width: parent?.width > 0 ? parent.width : implicitWidth
     height: implicitHeight

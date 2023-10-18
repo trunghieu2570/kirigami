@@ -196,9 +196,9 @@ QQC2.SwipeDelegate {
     LayoutMirroring.childrenInherit: true
 
     hoverEnabled: true
-    implicitWidth: contentItem ? contentItem.implicitWidth : Kirigami.Units.gridUnit * 12
+    implicitWidth: contentItem ? implicitContentWidth : Kirigami.Units.gridUnit * 12
     width: parent ? parent.width : implicitWidth
-    implicitHeight: Math.max(Kirigami.Units.gridUnit * 2, contentItem.implicitHeight) + topPadding + bottomPadding
+    implicitHeight: Math.max(Kirigami.Units.gridUnit * 2, implicitContentHeight) + topPadding + bottomPadding
 
     padding: !listItem.alwaysVisibleActions && Kirigami.Settings.tabletMode ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
 
