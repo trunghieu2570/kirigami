@@ -107,17 +107,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "동작"
 
-#: controls/GlobalDrawer.qml:438
+#: controls/GlobalDrawer.qml:308
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "뒤로"
 
-#: controls/GlobalDrawer.qml:544
+#: controls/GlobalDrawer.qml:614
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "사이드바 닫기"
 
-#: controls/GlobalDrawer.qml:549
+#: controls/GlobalDrawer.qml:619
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "사이드바 열기"

@@ -1,8 +1,8 @@
-# Eloy Cuadra <ecuadra@eloihr.net>, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkirigamiplugin_qt\n"
-"PO-Revision-Date: 2023-06-24 01:44+0200\n"
+"PO-Revision-Date: 2023-10-17 22:53+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.2\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #: controls/AboutItem.qml:163
 #, qt-format
@@ -33,7 +33,7 @@ msgstr "Involucrarse"
 #: controls/AboutItem.qml:228
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr "Donar"
+msgstr "Hacer un donativo"
 
 #: controls/AboutItem.qml:245
 msgctxt "AboutItem|"
@@ -107,17 +107,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Acciones"
 
-#: controls/GlobalDrawer.qml:438
+#: controls/GlobalDrawer.qml:308
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Atrás"
 
-#: controls/GlobalDrawer.qml:544
+#: controls/GlobalDrawer.qml:614
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Cerrar la barra lateral"
 
-#: controls/GlobalDrawer.qml:549
+#: controls/GlobalDrawer.qml:619
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Abrir la barra lateral"
