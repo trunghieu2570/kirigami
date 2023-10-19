@@ -297,7 +297,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
                                                          "OverlayZStacking",
                                                          QStringLiteral("Cannot create objects of type OverlayZStacking, use it as an attached property"));
     qmlRegisterType(componentUrl(QStringLiteral("InlineViewHeader.qml")), uri, 2, 20, "InlineViewHeader");
-    qmlRegisterType<Padding>(uri, 2, 14, "Padding");
+    qmlRegisterType<Padding>(uri, 2, 20, "Padding");
 
     qmlRegisterType<HeaderFooterLayout>(uri, 2, 20, "HeaderFooterLayout");
 
