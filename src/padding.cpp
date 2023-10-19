@@ -33,6 +33,7 @@ public:
     void calculateImplicitSize();
     void signalPaddings(const QMarginsF &oldPaddings, Paddings paddings);
     QMarginsF paddings() const;
+    void disconnect();
 
     QPointer<QQuickItem> m_contentItem;
 
@@ -98,6 +99,17 @@ void PaddingPrivate::signalPaddings(const QMarginsF &oldPaddings, Paddings which
     }
 }
 
+void PaddingPrivate::disconnect()
+{
+    if (m_contentItem) {
+        QObject::disconnect(m_contentItem, &QQuickItem::implicitWidthChanged, q, &Padding::polish);
+        QObject::disconnect(m_contentItem, &QQuickItem::implicitHeightChanged, q, &Padding::polish);
+        QObject::disconnect(m_contentItem, &QQuickItem::visibleChanged, q, &Padding::polish);
+        QObject::disconnect(m_contentItem, &QQuickItem::implicitWidthChanged, q, &Padding::implicitContentWidthChanged);
+        QObject::disconnect(m_contentItem, &QQuickItem::implicitHeightChanged, q, &Padding::implicitContentHeightChanged);
+    }
+}
+
 Padding::Padding(QQuickItem *parent)
     : QQuickItem(parent)
     , d(std::make_unique<PaddingPrivate>(this))
@@ -106,7 +118,7 @@ Padding::Padding(QQuickItem *parent)
 
 Padding::~Padding()
 {
-    disconnect(d->m_contentItem, nullptr, this, nullptr);
+    d->disconnect();
 }
 
 void Padding::setContentItem(QQuickItem *item)
@@ -115,9 +127,8 @@ void Padding::setContentItem(QQuickItem *item)
         return;
     }
 
-    if (d->m_contentItem) {
-        disconnect(d->m_contentItem, nullptr, this, nullptr);
-    }
+    // Not unsetting old contentItem's parent unlike Control
+    d->disconnect();
 
     d->m_contentItem = item;
 
