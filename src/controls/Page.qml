@@ -91,11 +91,6 @@ QQC2.Page {
     property P.ActionIconGroup icon: P.ActionIconGroup {}
 
     /**
-     * @brief Whether this page needs user attention.
-     */
-    property bool needsAttention
-
-    /**
      * @brief Progress of a task this page is doing.
      *
      * Set to undefined to indicate that there are no ongoing tasks.
