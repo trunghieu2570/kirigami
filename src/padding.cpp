@@ -275,7 +275,11 @@ void Padding::resetLeftPadding()
 
 qreal Padding::leftPadding() const
 {
-    return d->m_leftPadding.value_or(horizontalPadding());
+    if (d->m_leftPadding.has_value()) {
+        return d->m_leftPadding.value();
+    } else {
+        return horizontalPadding();
+    }
 }
 
 void Padding::setTopPadding(qreal padding)
@@ -308,7 +312,11 @@ void Padding::resetTopPadding()
 
 qreal Padding::topPadding() const
 {
-    return d->m_topPadding.value_or(verticalPadding());
+    if (d->m_topPadding.has_value()) {
+        return d->m_topPadding.value();
+    } else {
+        return verticalPadding();
+    }
 }
 
 void Padding::setRightPadding(qreal padding)
@@ -341,7 +349,11 @@ void Padding::resetRightPadding()
 
 qreal Padding::rightPadding() const
 {
-    return d->m_rightPadding.value_or(horizontalPadding());
+    if (d->m_rightPadding.has_value()) {
+        return d->m_rightPadding.value();
+    } else {
+        return horizontalPadding();
+    }
 }
 
 void Padding::setBottomPadding(qreal padding)
@@ -374,7 +386,11 @@ void Padding::resetBottomPadding()
 
 qreal Padding::bottomPadding() const
 {
-    return d->m_bottomPadding.value_or(verticalPadding());
+    if (d->m_bottomPadding.has_value()) {
+        return d->m_bottomPadding.value();
+    } else {
+        return verticalPadding();
+    }
 }
 
 qreal Padding::availableWidth() const
