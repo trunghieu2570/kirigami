@@ -154,7 +154,7 @@ msgctxt "PasswordField|"
 msgid "Show Password"
 msgstr "Κωδικός πρόσβασης"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:93
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:71
 #, fuzzy
 #| msgctxt "OverlayDrawer|"
 #| msgid "Close"
@@ -162,7 +162,7 @@ msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
 msgstr "Κλείσιμο"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:93
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:71
 #, fuzzy
 #| msgctxt "OverlayDrawer|"
 #| msgid "Open"

@@ -151,7 +151,7 @@ msgctxt "PasswordField|"
 msgid "Show Password"
 msgstr "Password"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:93
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:71
 #, fuzzy
 #| msgctxt "OverlayDrawer|"
 #| msgid "Close drawer"
@@ -159,7 +159,7 @@ msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
 msgstr "Tutup penggambar"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:93
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:71
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr ""
