@@ -195,7 +195,7 @@ void Padding::setHorizontalPadding(qreal padding)
 
 void Padding::resetHorizontalPadding()
 {
-    if (qFuzzyCompare(horizontalPadding(), 0.0) && d->m_horizontalPadding.has_value()) {
+    if (!d->m_horizontalPadding.has_value()) {
         return;
     }
 
@@ -228,7 +228,7 @@ void Padding::setVerticalPadding(qreal padding)
 
 void Padding::resetVerticalPadding()
 {
-    if (qFuzzyCompare(verticalPadding(), 0.0) && d->m_verticalPadding.has_value()) {
+    if (!d->m_verticalPadding.has_value()) {
         return;
     }
 
@@ -261,11 +261,11 @@ void Padding::setLeftPadding(qreal padding)
 
 void Padding::resetLeftPadding()
 {
-    const QMarginsF oldPadding = d->paddings();
-    if (qFuzzyCompare(oldPadding.left(), 0.0) && d->m_leftPadding.has_value()) {
+    if (!d->m_leftPadding.has_value()) {
         return;
     }
 
+    const QMarginsF oldPadding = d->paddings();
     d->m_leftPadding.reset();
 
     d->signalPaddings(oldPadding, PaddingPrivate::Left);
@@ -294,11 +294,11 @@ void Padding::setTopPadding(qreal padding)
 
 void Padding::resetTopPadding()
 {
-    const QMarginsF oldPadding = d->paddings();
-    if (qFuzzyCompare(oldPadding.top(), 0.0) && d->m_topPadding.has_value()) {
+    if (!d->m_topPadding.has_value()) {
         return;
     }
 
+    const QMarginsF oldPadding = d->paddings();
     d->m_topPadding.reset();
 
     d->signalPaddings(oldPadding, PaddingPrivate::Top);
@@ -327,11 +327,11 @@ void Padding::setRightPadding(qreal padding)
 
 void Padding::resetRightPadding()
 {
-    const QMarginsF oldPadding = d->paddings();
-    if (qFuzzyCompare(oldPadding.right(), 0.0) && d->m_rightPadding.has_value()) {
+    if (!d->m_rightPadding.has_value()) {
         return;
     }
 
+    const QMarginsF oldPadding = d->paddings();
     d->m_rightPadding.reset();
 
     d->signalPaddings(oldPadding, PaddingPrivate::Right);
@@ -360,11 +360,11 @@ void Padding::setBottomPadding(qreal padding)
 
 void Padding::resetBottomPadding()
 {
-    const QMarginsF oldPadding = d->paddings();
-    if (qFuzzyCompare(oldPadding.bottom(), 0.0) && d->m_bottomPadding.has_value()) {
+    if (!d->m_bottomPadding.has_value()) {
         return;
     }
 
+    const QMarginsF oldPadding = d->paddings();
     d->m_bottomPadding.reset();
 
     d->signalPaddings(oldPadding, PaddingPrivate::Bottom);
