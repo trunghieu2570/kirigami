@@ -77,6 +77,10 @@ Item {
      */
     property int elide: Text.ElideRight
     /**
+     * The text wrap mode used for both the title and subtitle.
+     */
+    property int wrapMode: Text.NoWrap
+    /**
      * Make the implicit height use the subtitle's height even if no subtitle is set.
      */
     property bool reserveSpaceForSubtitle: false
@@ -112,6 +116,7 @@ Item {
         color: root.color
         font: root.font
         elide: root.elide
+        wrapMode: root.wrapMode
 
         // Work around Qt bug where left aligned text is not right aligned
         // in RTL mode unless horizontalAlignment is explicitly set.
@@ -147,6 +152,7 @@ Item {
         color: root.subtitleColor
         font: root.subtitleFont
         elide: root.elide
+        wrapMode: root.wrapMode
 
         visible: text.length > 0
 

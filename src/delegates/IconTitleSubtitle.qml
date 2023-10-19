@@ -97,6 +97,10 @@ Item {
      */
     property alias elide: titleSubtitle.elide
     /**
+     * @copydoc Kirigami::TitleSubtitle::wrapMode
+     */
+    property alias wrapMode: titleSubtitle.wrapMode
+    /**
      * @copydoc Kirigami::TitleSubtitle::truncated
      */
     property alias truncated: titleSubtitle.truncated
