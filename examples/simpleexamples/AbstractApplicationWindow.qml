@@ -57,7 +57,7 @@ Kirigami.AbstractApplicationWindow {
                 icon.name: "configure"
                 checkable: true
                 //Need to do this, otherwise it breaks the bindings
-                property bool current: pageStack.currentItem ? pageStack.currentItem.objectName == "settingsPage" : false
+                property bool current: pageStack.currentItem?.objectName === "settingsPage" ?? false
                 onCurrentChanged: {
                     checked = current;
                 }
@@ -91,7 +91,7 @@ Kirigami.AbstractApplicationWindow {
         property int currentIndex: 0
         focus: true
         onCurrentIndexChanged: {
-            if (depth > currentIndex+1) {
+            if (depth > currentIndex + 1) {
                 pop(get(currentIndex));
             }
         }

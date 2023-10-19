@@ -11,6 +11,7 @@ QQC2.ApplicationWindow {
 
     width: flickable.implicitWidth
     height: flickable.implicitHeight
+    visible: true
 
     Flickable {
         id: flickable

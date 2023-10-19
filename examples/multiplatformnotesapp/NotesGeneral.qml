@@ -4,10 +4,13 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.delegates as KD
 
 Kirigami.ApplicationWindow {
     id: root
@@ -40,6 +43,11 @@ Kirigami.ApplicationWindow {
                 color: Kirigami.Theme.highlightColor
             }
             delegate: MouseArea {
+                id: delegate
+
+                required property int index
+                required property int modelData
+
                 width: view.cellWidth
                 height: view.cellHeight
                 Kirigami.Icon {
@@ -53,12 +61,12 @@ Kirigami.ApplicationWindow {
                             top: parent.bottom
                             horizontalCenter: parent.horizontalCenter
                         }
-                        text: "File " + modelData
+                        text: "File " + delegate.modelData
                     }
                 }
                 onClicked: {
                     view.currentIndex = index;
-                    root.currentFile = "File " + modelData;
+                    root.currentFile = "File " + delegate.modelData;
                     if (root.pageStack.depth < 2) {
                         root.pageStack.push(editorComponent);
                     }
@@ -77,10 +85,13 @@ Kirigami.ApplicationWindow {
                 Kirigami.Action {
                     id: shareAction
                     icon.name: "document-share"
-                    text: "Share..."
+                    text: "Share…"
                     tooltip: "Share this document with your device"
+                    checked: sheet.visible
                     checkable: true
-                    onCheckedChanged: sheet.sheetOpen = checked;
+                    onCheckedChanged: checked => {
+                        sheet.visible = checked;
+                    }
                 },
                 Kirigami.Action {
                     icon.name: "format-text-bold-symbolic"
@@ -96,19 +107,20 @@ Kirigami.ApplicationWindow {
                 }
             ]
             background: Rectangle {
-                color: Kirigami.Theme.backgroundColor
-                Rectangle {
-                    anchors.fill: parent
-                    color: "yellow"
-                    opacity: 0.2
-                }
+                color: Kirigami.ColorUtils.brightnessForColor(Kirigami.Theme.backgroundColor) === Kirigami.ColorUtils.Light
+                    ? "#F8EBC3" : "#1F2226"
             }
 
             Kirigami.OverlaySheet {
                 id: sheet
-                onSheetOpenChanged: shareAction.checked = sheetOpen
+
+                parent: root.QQC2.Overlay.overlay
+
+                onOpened: forceActiveFocus(Qt.PopupFocusReason)
+
                 ListView {
                     implicitWidth: Kirigami.Units.gridUnit * 30
+                    reuseItems: true
                     model: ListModel {
                         ListElement {
                             title: "Share with phone \"Nokia 3310\""
@@ -131,53 +143,49 @@ Kirigami.ApplicationWindow {
                             buttonText: "Send As Email"
                         }
                     }
-                    header: Kirigami.AbstractListItem {
-                        height: Kirigami.Units.gridUnit * 6
+                    header: KD.SubtitleDelegate {
                         hoverEnabled: false
-                        RowLayout {
-                            Kirigami.Icon {
-                                source: "documentinfo"
-                                width: Kirigami.Units.iconSizes.large
-                                height: width
-                            }
-                            QQC2.Label {
-                                Layout.fillWidth: true
-                                Layout.minimumWidth: 0
-                                wrapMode: Text.WordWrap
-                                text: "This document has already automatically synced with your phone \"Dancepartymeister 12\". If you want to sync with another device or do further actions you can do that here"
-                            }
-                        }
+                        down: false
+
+                        width: ListView.view?.width
+
+                        text: "This document has already automatically synced with your phone \"Dancepartymeister 12\". If you want to sync with another device or do further actions you can do that here"
+
+                        icon.name: "documentinfo"
+                        icon.width: Kirigami.Units.iconSizes.large
+                        icon.height: Kirigami.Units.iconSizes.large
                     }
-                    delegate: Kirigami.AbstractListItem {
-                        height: Kirigami.Units.gridUnit * 6
+                    delegate: QQC2.ItemDelegate {
+                        id: delegate
+
+                        required property string title
+                        required property string description
+                        required property string buttonText
+
                         hoverEnabled: false
-                        //TODO: bug in overlaysheet
-                        rightPadding: Kirigami.Units.gridUnit * 1.5
-                        RowLayout {
-                            ColumnLayout {
+                        highlighted: false
+                        down: false
+
+                        width: ListView.view?.width
+
+                        contentItem: RowLayout {
+                            spacing: Kirigami.Units.smallSpacing
+                            KD.TitleSubtitle {
                                 Layout.fillWidth: true
-                                Layout.minimumWidth: 0
-                                QQC2.Label {
-                                    wrapMode: Text.WordWrap
-                                    text: model.title
-                                }
-                                QQC2.Label {
-                                    Layout.fillWidth: true
-                                    Layout.minimumWidth: 0
-                                    wrapMode: Text.WordWrap
-                                    text: model.description
-                                }
+                                title: delegate.title
+                                subtitle: delegate.description
                             }
                             QQC2.Button {
-                                text: model.buttonText
+                                text: delegate.buttonText
                                 onClicked: sheet.close()
                             }
                         }
                     }
                 }
             }
+
             QQC2.TextArea {
-                background: Item {}
+                background: null
                 wrapMode: TextEdit.WordWrap
                 selectByMouse: true
                 text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin, lorem at semper pretium, tortor nisl pellentesque risus, eget eleifend odio ipsum ac mi. Donec justo ex, elementum vitae gravida vel, pretium ac lacus. Duis non metus ac enim viverra auctor in non nunc. Sed sit amet luctus nisi. Proin justo nulla, vehicula eget porta sit amet, aliquet vitae dolor. Mauris sed odio auctor, tempus ipsum ac, placerat enim. Ut in dolor vel ante dictum auctor.

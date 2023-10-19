@@ -8,11 +8,13 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.kde.kirigamiaddons.settings as AddonsSettings
 
-Kirigami.CategorizedSettings {
+AddonsSettings.CategorizedSettings {
     actions: [
-        Kirigami.SettingAction {
+        AddonsSettings.SettingAction {
             text: qsTr("General")
+            actionName: qsTr("General")
             icon.name: "wayland"
             page: Qt.resolvedUrl("./GeneralSettingsPage.qml")
         }

@@ -47,6 +47,7 @@ Kirigami.ApplicationWindow {
                 model: pageActions
                 keyNavigationEnabled: true
                 activeFocusOnTab: true
+                reuseItems: true
                 delegate: Kirigami.BasicListItem {
                     id: delegate
                     action: modelData

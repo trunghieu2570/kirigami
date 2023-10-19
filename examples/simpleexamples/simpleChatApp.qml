@@ -44,7 +44,7 @@ Kirigami.ApplicationWindow {
         edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
         modal: !root.wideScreen
         onModalChanged: drawerOpen = !modal
-        handleVisible: typeof applicationWindow === "undefined" ? false : applicationWindow().controlsVisible
+        handleVisible: root.controlsVisible
 
         //here padding 0 as listitems look better without as opposed to any other control
         topPadding: 0
@@ -86,7 +86,7 @@ Kirigami.ApplicationWindow {
                             QQC2.Label {
                                 Layout.fillWidth: true
                                 color: Kirigami.Theme.highlightedTextColor
-                                font.pointSize: Kirigami.Units.fontMetrics.font.pointSize * 0.8
+                                font: Kirigami.Theme.smallFont
                                 text: "#kde: kde.org"
                             }
                         }
@@ -108,6 +108,7 @@ Kirigami.ApplicationWindow {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 ListView {
+                    reuseItems: true
                     model: 50
                     delegate: Kirigami.BasicListItem {
                         label: "Person " + modelData
@@ -155,17 +156,11 @@ Kirigami.ApplicationWindow {
                 RowLayout {
                     anchors.fill: parent
                     spacing: Kirigami.Units.smallSpacing
-                    //NOTE: icon support in tool button in Qt 5.11
                     QQC2.ToolButton {
                         Layout.fillHeight: true
                         //make it square
                         implicitWidth: height
-                        Kirigami.Icon {
-                            anchors.centerIn: parent
-                            width: Kirigami.Units.iconSizes.smallMedium
-                            height: width
-                            source: "configure"
-                        }
+                        icon.name: "configure"
                         onClicked: root.pageStack.layers.push(secondLayerComponent);
                     }
                     QQC2.ComboBox {
@@ -179,10 +174,11 @@ Kirigami.ApplicationWindow {
                 id: channelsList
                 currentIndex: 2
                 model: 30
+                reuseItems: true
                 delegate: Kirigami.BasicListItem {
                     label: "#Channel " + modelData
                     checkable: true
-                    checked: channelsList.currentIndex == index
+                    checked: channelsList.currentIndex === index
                     separatorVisible: false
                     reserveSpaceForIcon: false
                 }
@@ -255,17 +251,11 @@ Kirigami.ApplicationWindow {
                         id: chatTextInput
                         background: Item {}
                     }
-                    //NOTE: icon support in tool button in Qt 5.11
                     QQC2.ToolButton {
                         Layout.fillHeight: true
                         //make it square
                         implicitWidth: height
-                        Kirigami.Icon {
-                            anchors.centerIn: parent
-                            width: Kirigami.Units.iconSizes.smallMedium
-                            height: width
-                            source: "go-next"
-                        }
+                        icon.name: "go-next"
                     }
                 }
             }
@@ -275,6 +265,7 @@ Kirigami.ApplicationWindow {
                 verticalLayoutDirection: ListView.BottomToTop
                 currentIndex: 2
                 model: 30
+                reuseItems: true
                 delegate: Item {
                     height: Kirigami.Units.gridUnit * 4
                     ColumnLayout {
@@ -305,12 +296,7 @@ Kirigami.ApplicationWindow {
                     Layout.fillHeight: true
                     //make it square
                     implicitWidth: height
-                    Kirigami.Icon {
-                        anchors.centerIn: parent
-                        width: Kirigami.Units.iconSizes.smallMedium
-                        height: width
-                        source: "configure"
-                    }
+                    icon.name: "configure"
                     onClicked: root.pageStack.layers.pop();
                 }
             }

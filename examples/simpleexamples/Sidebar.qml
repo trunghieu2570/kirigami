@@ -114,7 +114,7 @@ Kirigami.ApplicationWindow {
                 leftActions: [
                     Kirigami.Action {
                         icon.name: "edit-clear"
-                        visible: searchField.text !== ""
+                        visible: searchField.text.length > 0
                         onTriggered: {
                             searchField.text = ""
                             searchField.accepted()
@@ -122,7 +122,7 @@ Kirigami.ApplicationWindow {
                     },
                     Kirigami.Action {
                         icon.name: "edit-clear"
-                        visible: searchField.text !== ""
+                        visible: searchField.text.length > 0
                         onTriggered: {
                             searchField.text = ""
                             searchField.accepted()
@@ -132,7 +132,7 @@ Kirigami.ApplicationWindow {
                 rightActions: [
                     Kirigami.Action {
                         icon.name: "edit-clear"
-                        visible: searchField.text !== ""
+                        visible: searchField.text.length > 0
                         onTriggered: {
                             searchField.text = ""
                             searchField.accepted()
@@ -140,7 +140,7 @@ Kirigami.ApplicationWindow {
                     },
                     Kirigami.Action {
                         icon.name: "anchor"
-                        visible: searchField.text !== ""
+                        visible: searchField.text.length > 0
                         onTriggered: {
                             searchField.text = ""
                             searchField.accepted()
