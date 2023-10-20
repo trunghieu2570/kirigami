@@ -163,7 +163,7 @@ public:
 
     BasicThemeDefinition &themeDefinition(QQmlEngine *engine);
 
-    QVector<BasicTheme *> watchers;
+    QList<BasicTheme *> watchers;
 
 private:
     void onDefinitionChanged();

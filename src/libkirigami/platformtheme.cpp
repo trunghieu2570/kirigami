@@ -114,7 +114,7 @@ public:
     // a little bit of data and that data is shared among instances, whereas
     // signal/slots turn out to have a pretty large memory overhead per instance.
     using Watcher = PlatformTheme *;
-    QVector<Watcher> watchers;
+    QList<Watcher> watchers;
 
     inline void setColorSet(PlatformTheme *sender, PlatformTheme::ColorSet set)
     {

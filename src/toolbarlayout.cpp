@@ -43,12 +43,12 @@ public:
 
     void calculateImplicitSize();
     void performLayout();
-    QVector<ToolBarLayoutDelegate *> createDelegates();
+    QList<ToolBarLayoutDelegate *> createDelegates();
     ToolBarLayoutDelegate *createDelegate(QObject *action);
     qreal layoutStart(qreal layoutWidth);
     void maybeHideDelegate(int index, qreal &currentWidth, qreal totalWidth);
 
-    QVector<QObject *> actions;
+    QList<QObject *> actions;
     ToolBarLayout::ActionsProperty actionsProperty;
     QList<QObject *> hiddenActions;
     QQmlComponent *fullDelegate = nullptr;
@@ -66,13 +66,13 @@ public:
     bool implicitSizeValid = false;
 
     std::unordered_map<QObject *, std::unique_ptr<ToolBarLayoutDelegate>> delegates;
-    QVector<ToolBarLayoutDelegate *> sortedDelegates;
+    QList<ToolBarLayoutDelegate *> sortedDelegates;
     QQuickItem *moreButtonInstance = nullptr;
     ToolBarDelegateIncubator *moreButtonIncubator = nullptr;
     bool shouldShowMoreButton = false;
     int firstHiddenIndex = -1;
 
-    QVector<QObject *> removedActions;
+    QList<QObject *> removedActions;
     QTimer *removalTimer = nullptr;
 
     QElapsedTimer performanceTimer;
@@ -561,9 +561,9 @@ void ToolBarLayoutPrivate::performLayout()
     sortedDelegates.clear();
 }
 
-QVector<ToolBarLayoutDelegate *> ToolBarLayoutPrivate::createDelegates()
+QList<ToolBarLayoutDelegate *> ToolBarLayoutPrivate::createDelegates()
 {
-    QVector<ToolBarLayoutDelegate *> result;
+    QList<ToolBarLayoutDelegate *> result;
     for (auto action : std::as_const(actions)) {
         if (delegates.find(action) != delegates.end()) {
             result.append(delegates.at(action).get());

@@ -95,7 +95,7 @@ public:
     void setIsTablet(bool tablet);
 
     TabletModeWatcher *q;
-    QVector<QObject *> watchers;
+    QList<QObject *> watchers;
     bool isTabletModeAvailable = false;
     bool isTabletMode = false;
 };
