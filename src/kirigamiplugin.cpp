@@ -135,11 +135,12 @@ void KirigamiPlugin::registerTypes(const char *uri)
         return settings;
     });
 
-    qmlRegisterUncreatableType<ApplicationHeaderStyle>(uri,
-                                                       2,
-                                                       0,
-                                                       "ApplicationHeaderStyle",
-                                                       QStringLiteral("Cannot create objects of type ApplicationHeaderStyle"));
+    qmlRegisterUncreatableMetaObject(ApplicationHeaderStyle::staticMetaObject,
+                                     uri,
+                                     2,
+                                     0,
+                                     "ApplicationHeaderStyle",
+                                     QStringLiteral("Cannot create objects of type ApplicationHeaderStyle"));
 
     qmlRegisterSingletonType<Kirigami::Units>(uri, 2, 0, "Units", [](QQmlEngine *engine, QJSEngine *) {
 #ifndef KIRIGAMI_BUILD_TYPE_STATIC
@@ -207,7 +208,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(QStringLiteral("CardsGridView.qml")), uri, 2, 4, "CardsGridView");
     qmlRegisterType(componentUrl(QStringLiteral("CardsLayout.qml")), uri, 2, 4, "CardsLayout");
     qmlRegisterType(componentUrl(QStringLiteral("InlineMessage.qml")), uri, 2, 4, "InlineMessage");
-    qmlRegisterUncreatableType<MessageType>(uri, 2, 4, "MessageType", QStringLiteral("Cannot create objects of type MessageType"));
+    qmlRegisterUncreatableMetaObject(MessageType::staticMetaObject, uri, 2, 4, "MessageType", QStringLiteral("Cannot create objects of type MessageType"));
 
     // 2.5
     qmlRegisterType(componentUrl(QStringLiteral("ListItemDragHandle.qml")), uri, 2, 5, "ListItemDragHandle");
