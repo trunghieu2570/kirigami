@@ -261,7 +261,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<HeaderFooterLayout>(uri, 2, 20, "HeaderFooterLayout");
 
-    qmlProtectModule(uri, 2);
 }
 
 void KirigamiPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
