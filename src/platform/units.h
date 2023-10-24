@@ -8,8 +8,10 @@
 #ifndef KIRIGAMI_UNITS_H
 #define KIRIGAMI_UNITS_H
 
-#include <QObject>
 #include <memory>
+
+#include <QObject>
+#include <QQmlEngine>
 
 #include "kirigamiplatform_export.h"
 
@@ -30,6 +32,8 @@ class UnitsPrivate;
 class KIRIGAMIPLATFORM_EXPORT IconSizes : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("Grouped Property")
 
     Q_PROPERTY(int sizeForLabels READ sizeForLabels NOTIFY sizeForLabelsChanged FINAL)
     Q_PROPERTY(int small READ small NOTIFY smallChanged FINAL)
@@ -75,6 +79,8 @@ Q_SIGNALS:
 class KIRIGAMIPLATFORM_EXPORT Units : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
     friend class IconSizes;
 
@@ -231,6 +237,8 @@ public:
     IconSizes *iconSizes() const;
 
     int maximumInteger() const;
+
+    static Units *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine);
 
 Q_SIGNALS:
     void gridUnitChanged();

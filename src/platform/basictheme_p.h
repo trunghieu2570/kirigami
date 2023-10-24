@@ -20,6 +20,7 @@ class BasicTheme;
 class KIRIGAMIPLATFORM_EXPORT BasicThemeDefinition : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(QColor textColor MEMBER textColor NOTIFY changed FINAL)
     Q_PROPERTY(QColor disabledTextColor MEMBER disabledTextColor NOTIFY changed FINAL)

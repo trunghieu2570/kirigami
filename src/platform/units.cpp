@@ -18,6 +18,7 @@
 #include <cmath>
 
 #include "kirigamiplatform_logging.h"
+#include "platformpluginfactory.h"
 
 namespace Kirigami
 {
@@ -236,6 +237,20 @@ void Units::setToolTipDelay(int delay)
 int Units::maximumInteger() const
 {
     return std::numeric_limits<int>::max();
+}
+
+Units *Units::create(QQmlEngine *qmlEngine, [[maybe_unused]] QJSEngine *jsEngine)
+{
+#ifndef KIRIGAMI_BUILD_TYPE_STATIC
+    auto plugin = PlatformPluginFactory::findPlugin();
+    if (plugin) {
+        return plugin->createUnits(qmlEngine);
+    } else {
+        qWarning(KirigamiPlatform) << "Failed to find a Kirigami platform plugin";
+    }
+#endif
+    // Fall back to the default units implementation
+    return new Units(qmlEngine);
 }
 
 bool Units::eventFilter([[maybe_unused]] QObject *watched, QEvent *event)

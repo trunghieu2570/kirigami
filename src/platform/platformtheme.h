@@ -12,6 +12,7 @@
 #include <QObject>
 #include <QPalette>
 #include <QQuickItem>
+#include <qqmlregistration.h>
 
 #include "kirigamiplatform_export.h"
 
@@ -32,6 +33,9 @@ class PlatformThemePrivate;
 class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(Theme)
+    QML_ATTACHED(Kirigami::Platform::PlatformTheme)
+    QML_UNCREATABLE("Attached Property")
 
     /**
      * This enumeration describes the color set for which a color is being selected.
@@ -293,8 +297,8 @@ Q_SIGNALS:
     void colorsChanged();
     void defaultFontChanged(const QFont &font);
     void smallFontChanged(const QFont &font);
-    void colorSetChanged(Kirigami::PlatformTheme::ColorSet colorSet);
-    void colorGroupChanged(Kirigami::PlatformTheme::ColorGroup colorGroup);
+    void colorSetChanged(Kirigami::Platform::PlatformTheme::ColorSet colorSet);
+    void colorGroupChanged(Kirigami::Platform::PlatformTheme::ColorGroup colorGroup);
     void paletteChanged(const QPalette &pal);
     void inheritChanged(bool inherit);
     void useAlternateBackgroundColorChanged(bool alternate);
