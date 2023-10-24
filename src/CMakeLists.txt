@@ -24,6 +24,15 @@ ecm_add_qml_module(KirigamiPlugin URI "org.kde.kirigami" VERSION 2.0
 ecm_create_qm_loader(kirigami_QM_LOADER libkirigami6_qt)
 target_sources(KirigamiPlugin PRIVATE ${kirigami_QM_LOADER})
 
+ecm_qt_declare_logging_category(KirigamiPlugin
+    HEADER loggingcategory.h
+    IDENTIFIER KirigamiLog
+    CATEGORY_NAME kf.kirigami
+    DESCRIPTION "Kirigami"
+    DEFAULT_SEVERITY Warning
+    EXPORT KIRIGAMI
+)
+
 target_include_directories(KirigamiPlugin PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/platform
     ${CMAKE_CURRENT_BINARY_DIR}/platform
@@ -75,7 +84,6 @@ target_sources(KirigamiPlugin PRIVATE
     scenegraph/managedtexturenode.h
     scenegraph/paintedrectangleitem.cpp
     scenegraph/paintedrectangleitem.h
-    ${CMAKE_CURRENT_BINARY_DIR}/libkirigami/loggingcategory.cpp
 )
 if (HAVE_QTGUI_OPENGL AND NOT KF6_PORTING_TODO)
     target_sources(KirigamiPlugin PRIVATE
