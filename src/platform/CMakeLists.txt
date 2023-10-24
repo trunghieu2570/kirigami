@@ -12,7 +12,7 @@ set_target_properties(KirigamiPlatform PROPERTIES
 target_sources(KirigamiPlatform PRIVATE
     platformtheme.cpp
     basictheme.cpp
-    kirigamipluginfactory.cpp
+    platformpluginfactory.cpp
     tabletmodewatcher.cpp
     styleselector.cpp
     units.cpp
@@ -65,6 +65,7 @@ target_link_libraries(KirigamiPlatform
     Qt6::Qml
     Qt6::Quick
     PRIVATE
+    Qt6::GuiPrivate
     Qt6::QuickControls2
     ${LIBKIRIGAMKI_EXTRA_LIBS}
 )
@@ -72,7 +73,7 @@ target_link_libraries(KirigamiPlatform
 ecm_generate_headers(KirigamiPlatform_CamelCase_HEADERS
     HEADER_NAMES
     PlatformTheme
-    KirigamiPluginFactory
+    PlatformPluginFactory
     StyleSelector
     TabletModeWatcher
     Units

@@ -7,7 +7,7 @@
 
 #include "platformtheme.h"
 #include "basictheme_p.h"
-#include "kirigamipluginfactory.h"
+#include "platformpluginfactory.h"
 #include <QDebug>
 #include <QDir>
 #include <QGuiApplication>
@@ -393,10 +393,8 @@ public:
     static_assert(PlatformTheme::ColorGroupCount <= 16, "PlatformTheme::ColorGroup contains more elements than can be stored in PlatformThemePrivate");
     static_assert(PlatformTheme::ColorSetCount <= 16, "PlatformTheme::ColorSet contains more elements than can be stored in PlatformThemePrivate");
 
-    static KirigamiPluginFactory *s_pluginFactory;
+    inline static PlatformPluginFactory *s_pluginFactory = nullptr;
 };
-
-KirigamiPluginFactory *PlatformThemePrivate::s_pluginFactory = nullptr;
 
 PlatformTheme::PlatformTheme(QObject *parent)
     : QObject(parent)
@@ -846,9 +844,9 @@ PlatformTheme *PlatformTheme::qmlAttachedProperties(QObject *object)
         pluginName = engine->property("_kirigamiTheme").toString();
     }
 
-    auto plugin = KirigamiPluginFactory::findPlugin(pluginName);
+    auto plugin = PlatformPluginFactory::findPlugin(pluginName);
     if (!plugin && !pluginName.isEmpty()) {
-        plugin = KirigamiPluginFactory::findPlugin();
+        plugin = PlatformPluginFactory::findPlugin();
     }
 
     if (plugin) {

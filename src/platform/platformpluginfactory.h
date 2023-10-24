@@ -4,8 +4,8 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#ifndef KIRIGAMI_KIRIGAMIPLUGINFACTORY_H
-#define KIRIGAMI_KIRIGAMIPLUGINFACTORY_H
+#ifndef KIRIGAMI_PLATFORMPLUGINFACTORY_H
+#define KIRIGAMI_PLATFORMPLUGINFACTORY_H
 
 #include <QObject>
 
@@ -21,7 +21,7 @@ class PlatformTheme;
 class Units;
 
 /**
- * @class KirigamiPluginFactory kirigamipluginfactory.h <Kirigami/KirigamiPluginFactory>
+ * @class PlatformPluginFactory platformpluginfactory.h <Kirigami/PlatformPluginFactory>
  *
  * This class is reimpleented by plugins to provide different implementations
  * of PlatformTheme
@@ -31,8 +31,8 @@ class KIRIGAMIPLATFORM_EXPORT PlatformPluginFactory : public QObject
     Q_OBJECT
 
 public:
-    explicit KirigamiPluginFactory(QObject *parent = nullptr);
-    ~KirigamiPluginFactory() override;
+    explicit PlatformPluginFactory(QObject *parent = nullptr);
+    ~PlatformPluginFactory() override;
 
     /**
      * Creates an instance of PlatformTheme which can come out from
@@ -57,17 +57,17 @@ public:
      * The plugin pointer is cached, so only the first call is a potentially heavy operation
      * @param pluginName The name we want to search for, if empty the name of
      *           the current QtQuickControls style will be searched
-     * @return pointer to the KirigamiPluginFactory of the current style
+     * @return pointer to the PlatformPluginFactory of the current style
      */
-    static KirigamiPluginFactory *findPlugin(const QString &pluginName = {});
+    static PlatformPluginFactory *findPlugin(const QString &pluginName = {});
 };
 
 }
 }
 
 QT_BEGIN_NAMESPACE
-#define KirigamiPluginFactory_iid "org.kde.kirigami.KirigamiPluginFactory"
-Q_DECLARE_INTERFACE(Kirigami::KirigamiPluginFactory, KirigamiPluginFactory_iid)
+#define PlatformPluginFactory_iid "org.kde.kirigami.PlatformPluginFactory"
+Q_DECLARE_INTERFACE(Kirigami::Platform::PlatformPluginFactory, PlatformPluginFactory_iid)
 QT_END_NAMESPACE
 
-#endif // KIRIGAMIPLUGINFACTORY_H
+#endif // PLATFORMPLUGINFACTORY_H

@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#include "kirigamipluginfactory.h"
+#include "platformpluginfactory.h"
 
 #include <QCoreApplication>
 #include <QDebug>
@@ -19,16 +19,16 @@ namespace Kirigami
 namespace Platform
 {
 
-KirigamiPluginFactory::KirigamiPluginFactory(QObject *parent)
+PlatformPluginFactory::PlatformPluginFactory(QObject *parent)
     : QObject(parent)
 {
 }
 
-KirigamiPluginFactory::~KirigamiPluginFactory() = default;
+PlatformPluginFactory::~PlatformPluginFactory() = default;
 
-KirigamiPluginFactory *KirigamiPluginFactory::findPlugin(const QString &preferredName)
+PlatformPluginFactory *PlatformPluginFactory::findPlugin(const QString &preferredName)
 {
-    static QHash<QString, KirigamiPluginFactory *> factories = QHash<QString, KirigamiPluginFactory *>();
+    static QHash<QString, PlatformPluginFactory *> factories = QHash<QString, PlatformPluginFactory *>();
 
     QString pluginName = preferredName.isEmpty() ? QQuickStyle::name() : preferredName;
     // check for the plugin only once: it's an heavy operation
@@ -41,7 +41,7 @@ KirigamiPluginFactory *KirigamiPluginFactory::findPlugin(const QString &preferre
 
 #ifdef KIRIGAMI_BUILD_TYPE_STATIC
     for (QObject *staticPlugin : QPluginLoader::staticInstances()) {
-        KirigamiPluginFactory *factory = qobject_cast<KirigamiPluginFactory *>(staticPlugin);
+        PlatformPluginFactory *factory = qobject_cast<PlatformPluginFactory *>(staticPlugin);
         if (factory) {
             factories[pluginName] = factory;
             break;
@@ -54,7 +54,7 @@ KirigamiPluginFactory *KirigamiPluginFactory::findPlugin(const QString &preferre
 #ifdef Q_OS_ANDROID
         const QDir dir(path);
 #else
-        const QDir dir(path + QStringLiteral("/kf6/kirigami"));
+        const QDir dir(path + QStringLiteral("/kf6/kirigami/platform"));
 #endif
 
         const auto fileNames = dir.entryList(QDir::Files);
@@ -62,7 +62,7 @@ KirigamiPluginFactory *KirigamiPluginFactory::findPlugin(const QString &preferre
         for (const QString &fileName : fileNames) {
 
 #ifdef Q_OS_ANDROID
-            if (fileName.startsWith(QStringLiteral("libplugins_kf6_kirigami_")) && QLibrary::isLibrary(fileName)) {
+            if (fileName.startsWith(QStringLiteral("libplugins_kf6_kirigami_platform_")) && QLibrary::isLibrary(fileName)) {
 #endif
                 if (!pluginName.isEmpty() && fileName.contains(pluginName)) {
                     // TODO: env variable too?
@@ -72,7 +72,7 @@ KirigamiPluginFactory *KirigamiPluginFactory::findPlugin(const QString &preferre
 
                     qCDebug(KirigamiPlatform) << "Loading style plugin from" << dir.absoluteFilePath(fileName);
 
-                    if (auto factory = qobject_cast<KirigamiPluginFactory *>(plugin)) {
+                    if (auto factory = qobject_cast<PlatformPluginFactory *>(plugin)) {
                         factories[pluginName] = factory;
                         break;
                     }
@@ -93,6 +93,8 @@ KirigamiPluginFactory *KirigamiPluginFactory::findPlugin(const QString &preferre
 
     return factories.value(pluginName);
 }
+
+}
 }
 
-#include "moc_kirigamipluginfactory.cpp"
+#include "moc_platformpluginfactory.cpp"
