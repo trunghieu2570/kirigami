@@ -1,7 +1,7 @@
 
-add_subdirectory(delegates)
+add_subdirectory(platform)
 
-add_subdirectory(libkirigami)
+add_subdirectory(delegates)
 
 if (WIN32)
     # Kirigami apparently adds too many sources so on Windows we end
@@ -24,8 +24,8 @@ ecm_create_qm_loader(kirigami_QM_LOADER libkirigami6_qt)
 target_sources(KirigamiPlugin PRIVATE ${kirigami_QM_LOADER})
 
 target_include_directories(KirigamiPlugin PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/libkirigami
-    ${CMAKE_CURRENT_BINARY_DIR}/libkirigami
+    ${CMAKE_CURRENT_SOURCE_DIR}/platform
+    ${CMAKE_CURRENT_BINARY_DIR}/platform
 )
 
 target_sources(KirigamiPlugin PRIVATE
