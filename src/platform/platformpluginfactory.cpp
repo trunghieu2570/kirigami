@@ -5,7 +5,6 @@
  */
 
 #include "kirigamipluginfactory.h"
-#include "loggingcategory.h"
 
 #include <QCoreApplication>
 #include <QDebug>
@@ -16,6 +15,8 @@
 #include "kirigamiplatform_logging.h"
 
 namespace Kirigami
+{
+namespace Platform
 {
 
 KirigamiPluginFactory::KirigamiPluginFactory(QObject *parent)
@@ -69,7 +70,7 @@ KirigamiPluginFactory *KirigamiPluginFactory::findPlugin(const QString &preferre
                     QObject *plugin = loader.instance();
                     // TODO: load actually a factory as plugin
 
-                    qCDebug(KirigamiLog) << "Loading style plugin from" << dir.absoluteFilePath(fileName);
+                    qCDebug(KirigamiPlatform) << "Loading style plugin from" << dir.absoluteFilePath(fileName);
 
                     if (auto factory = qobject_cast<KirigamiPluginFactory *>(plugin)) {
                         factories[pluginName] = factory;

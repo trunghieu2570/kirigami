@@ -20,6 +20,8 @@ using namespace Qt::Literals::StringLiterals;
 
 namespace Kirigami
 {
+namespace Platform
+{
 Q_GLOBAL_STATIC(VirtualKeyboardWatcher, virtualKeyboardWatcherSelf)
 
 class KIRIGAMIPLATFORM_NO_EXPORT VirtualKeyboardWatcher::Private
@@ -180,6 +182,8 @@ void VirtualKeyboardWatcher::Private::getAllProperties()
 }
 
 #endif
+
+}
 }
 
 #include "moc_virtualkeyboardwatcher.cpp"

@@ -17,6 +17,8 @@ class QQmlEngine;
 
 namespace Kirigami
 {
+namespace Platform
+{
 class Units;
 class UnitsPrivate;
 
@@ -250,6 +252,7 @@ private:
     std::unique_ptr<UnitsPrivate> d;
 };
 
+}
 }
 
 #endif

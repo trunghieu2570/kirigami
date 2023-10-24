@@ -18,8 +18,11 @@ class QPropertyAnimation;
 
 namespace Kirigami
 {
+namespace Platform
+{
 class PlatformTheme;
 class Units;
+}
 }
 
 /**
@@ -249,8 +252,8 @@ private:
     QSize iconSizeHint() const;
     inline QImage iconPixmap(const QIcon &icon) const;
 
-    Kirigami::PlatformTheme *m_theme = nullptr;
-    Kirigami::Units *m_units = nullptr;
+    Kirigami::Platform::PlatformTheme *m_theme = nullptr;
+    Kirigami::Platform::Units *m_units = nullptr;
     QPointer<QNetworkReply> m_networkReply;
     QHash<int, bool> m_monochromeHeuristics;
     QVariant m_source;

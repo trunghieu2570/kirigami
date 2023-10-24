@@ -15,6 +15,8 @@ class QQmlEngine;
 
 namespace Kirigami
 {
+namespace Platform
+{
 class PlatformTheme;
 class Units;
 
@@ -59,6 +61,8 @@ public:
      */
     static KirigamiPluginFactory *findPlugin(const QString &pluginName = {});
 };
+
+}
 }
 
 QT_BEGIN_NAMESPACE

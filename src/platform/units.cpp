@@ -17,9 +17,11 @@
 #include <chrono>
 #include <cmath>
 
-#include "loggingcategory.h"
+#include "kirigamiplatform_logging.h"
 
 namespace Kirigami
+{
+namespace Platform
 {
 
 class UnitsPrivate
@@ -82,7 +84,7 @@ int Units::gridUnit() const
     return d->gridUnit;
 }
 
-void Kirigami::Units::setGridUnit(int size)
+void Units::setGridUnit(int size)
 {
     if (d->gridUnit == size) {
         return;
@@ -98,7 +100,7 @@ int Units::smallSpacing() const
     return d->smallSpacing;
 }
 
-void Kirigami::Units::setSmallSpacing(int size)
+void Units::setSmallSpacing(int size)
 {
     if (d->smallSpacing == size) {
         return;
@@ -114,7 +116,7 @@ int Units::mediumSpacing() const
     return d->mediumSpacing;
 }
 
-void Kirigami::Units::setMediumSpacing(int size)
+void Units::setMediumSpacing(int size)
 {
     if (d->mediumSpacing == size) {
         return;
@@ -130,7 +132,7 @@ int Units::largeSpacing() const
     return d->largeSpacing;
 }
 
-void Kirigami::Units::setLargeSpacing(int size)
+void Units::setLargeSpacing(int size)
 {
     if (d->largeSpacing) {
         return;
@@ -330,6 +332,7 @@ int IconSizes::enormous() const
     return 128;
 }
 
+}
 }
 
 #include "moc_units.cpp"

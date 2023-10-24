@@ -14,6 +14,8 @@
 
 namespace Kirigami
 {
+namespace Platform
+{
 class TabletModeWatcherPrivate;
 
 class KIRIGAMIPLATFORM_EXPORT TabletModeChangedEvent : public QEvent
@@ -43,6 +45,7 @@ public:
 class KIRIGAMIPLATFORM_EXPORT TabletModeWatcher : public QObject
 {
     Q_OBJECT
+
     Q_PROPERTY(bool tabletModeAvailable READ isTabletModeAvailable NOTIFY tabletModeAvailableChanged FINAL)
     Q_PROPERTY(bool tabletMode READ isTabletMode NOTIFY tabletModeChanged FINAL)
 
@@ -90,6 +93,8 @@ private:
     TabletModeWatcherPrivate *d;
     friend class TabletModeWatcherSingleton;
 };
+
+}
 }
 
 #endif // KIRIGAMI_TABLETMODEWATCHER

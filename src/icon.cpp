@@ -6,9 +6,10 @@
  */
 
 #include "icon.h"
-#include "libkirigami/platformtheme.h"
 #include "scenegraph/managedtexturenode.h"
-#include "units.h"
+
+#include "platform/platformtheme.h"
+#include "platform/units.h"
 
 #include "loggingcategory.h"
 #include <QBitmap>
@@ -53,7 +54,7 @@ void Icon::componentComplete()
 
     QQmlEngine *engine = qmlEngine(this);
     Q_ASSERT(engine);
-    m_units = engine->singletonInstance<Kirigami::Units *>(qmlTypeId("org.kde.kirigami", 2, 0, "Units"));
+    m_units = engine->singletonInstance<Kirigami::Platform::Units *>("org.kde.kirigami.platform", "Units");
     Q_ASSERT(m_units);
     m_animation = new QPropertyAnimation(this);
     connect(m_animation, &QPropertyAnimation::valueChanged, this, &Icon::valueChanged);
@@ -65,7 +66,7 @@ void Icon::componentComplete()
     m_animation->setTargetObject(this);
     m_animation->setEasingCurve(QEasingCurve::InOutCubic);
     m_animation->setDuration(m_units->longDuration());
-    connect(m_units, &Kirigami::Units::longDurationChanged, m_animation, [this]() {
+    connect(m_units, &Kirigami::Platform::Units::longDurationChanged, m_animation, [this]() {
         m_animation->setDuration(m_units->longDuration());
     });
     updatePaintedGeometry();
@@ -79,10 +80,10 @@ void Icon::setSource(const QVariant &icon)
     m_source = icon;
 
     if (!m_theme) {
-        m_theme = static_cast<Kirigami::PlatformTheme *>(qmlAttachedPropertiesObject<Kirigami::PlatformTheme>(this, true));
+        m_theme = static_cast<Kirigami::Platform::PlatformTheme *>(qmlAttachedPropertiesObject<Kirigami::Platform::PlatformTheme>(this, true));
         Q_ASSERT(m_theme);
 
-        connect(m_theme, &Kirigami::PlatformTheme::colorsChanged, this, &QQuickItem::polish);
+        connect(m_theme, &Kirigami::Platform::PlatformTheme::colorsChanged, this, &QQuickItem::polish);
     }
 
     if (m_networkReply) {

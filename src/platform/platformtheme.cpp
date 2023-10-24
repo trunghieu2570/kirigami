@@ -26,6 +26,8 @@
 
 namespace Kirigami
 {
+namespace Platform
+{
 // Initialize event types.
 // We want to avoid collisions with application event types so we should use
 // registerEventType for generating the event types. Unfortunately, that method
@@ -1011,6 +1013,7 @@ QObject *PlatformTheme::determineParent(QObject *object)
     }
 }
 
+}
 }
 
 #include "moc_platformtheme.cpp"

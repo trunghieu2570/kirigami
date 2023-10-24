@@ -87,7 +87,7 @@ KirigamiPlugin::KirigamiPlugin(QObject *parent)
 
 QUrl KirigamiPlugin::componentUrl(const QString &fileName) const
 {
-    return Kirigami::StyleSelector::componentUrl(fileName);
+    return Kirigami::Platform::StyleSelector::componentUrl(fileName);
 }
 
 using SingletonCreationFunction = QObject *(*)(QQmlEngine *, QJSEngine *);
@@ -111,17 +111,17 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.kirigami"));
 
-    Kirigami::StyleSelector::setBaseUrl(baseUrl());
+    Kirigami::Platform::StyleSelector::setBaseUrl(baseUrl());
 
     if (QIcon::themeName().isEmpty() && !qEnvironmentVariableIsSet("XDG_CURRENT_DESKTOP")) {
 #if defined(Q_OS_ANDROID)
         QIcon::setThemeSearchPaths({QStringLiteral("assets:/qml/org/kde/kirigami"), QStringLiteral(":/icons")});
 #else
-        QIcon::setThemeSearchPaths({Kirigami::StyleSelector::resolveFilePath(QStringLiteral(".")), QStringLiteral(":/icons")});
+        QIcon::setThemeSearchPaths({Kirigami::Platform::StyleSelector::resolveFilePath(QStringLiteral(".")), QStringLiteral(":/icons")});
 #endif
         QIcon::setThemeName(QStringLiteral("breeze-internal"));
     } else {
-        QIcon::setFallbackSearchPaths(QIcon::fallbackSearchPaths() << Kirigami::StyleSelector::resolveFilePath(QStringLiteral("icons")));
+        QIcon::setFallbackSearchPaths(QIcon::fallbackSearchPaths() << Kirigami::Platform::StyleSelector::resolveFilePath(QStringLiteral("icons")));
     }
 
     qmlRegisterSingletonType<Settings>(uri, 2, 0, "Settings", [](QQmlEngine *e, QJSEngine *) -> QObject * {

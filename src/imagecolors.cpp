@@ -17,7 +17,6 @@
  */
 
 #include "imagecolors.h"
-#include "platformtheme.h"
 
 #include <QDebug>
 #include <QFutureWatcher>
@@ -34,6 +33,8 @@
 #include <omp.h>
 #endif
 
+#include "platform/platformtheme.h"
+
 #define return_fallback(value)                                                                                                                                 \
     if (m_imageData.m_samples.size() == 0) {                                                                                                                   \
         return value;                                                                                                                                          \
@@ -41,7 +42,9 @@
 
 #define return_fallback_finally(value, finally)                                                                                                                \
     if (m_imageData.m_samples.size() == 0) {                                                                                                                   \
-        return value.isValid() ? value : static_cast<Kirigami::PlatformTheme *>(qmlAttachedPropertiesObject<Kirigami::PlatformTheme>(this, true))->finally();  \
+        return value.isValid()                                                                                                                                 \
+            ? value                                                                                                                                            \
+            : static_cast<Kirigami::Platform::PlatformTheme *>(qmlAttachedPropertiesObject<Kirigami::Platform::PlatformTheme>(this, true))->finally();         \
     }
 
 ImageColors::ImageColors(QObject *parent)
@@ -497,7 +500,8 @@ void ImageColors::postProcess(ImageData &imageData) const
 {
     constexpr short unsigned WCAG_NON_TEXT_CONTRAST_RATIO = 3;
     constexpr qreal WCAG_TEXT_CONTRAST_RATIO = 4.5;
-    const QColor backgroundColor = static_cast<Kirigami::PlatformTheme *>(qmlAttachedPropertiesObject<Kirigami::PlatformTheme>(this, true))->backgroundColor();
+    const QColor backgroundColor =
+        static_cast<Kirigami::Platform::PlatformTheme *>(qmlAttachedPropertiesObject<Kirigami::Platform::PlatformTheme>(this, true))->backgroundColor();
     const qreal backgroundLum = ColorUtils::luminance(backgroundColor);
     qreal lowerLum, upperLum;
     // 192 is from kcm_colors
@@ -508,7 +512,8 @@ void ImageColors::postProcess(ImageData &imageData) const
     } else {
         // For light themes, still prefer lighter colors
         // (lowerLum + 0.05) / (textLum + 0.05) >= 4.5
-        const QColor textColor = static_cast<Kirigami::PlatformTheme *>(qmlAttachedPropertiesObject<Kirigami::PlatformTheme>(this, true))->textColor();
+        const QColor textColor =
+            static_cast<Kirigami::Platform::PlatformTheme *>(qmlAttachedPropertiesObject<Kirigami::Platform::PlatformTheme>(this, true))->textColor();
         const qreal textLum = ColorUtils::luminance(textColor);
         lowerLum = WCAG_TEXT_CONTRAST_RATIO * (textLum + 0.05) - 0.05;
         upperLum = backgroundLum;

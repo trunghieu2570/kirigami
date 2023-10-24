@@ -17,6 +17,8 @@
 
 namespace Kirigami
 {
+namespace Platform
+{
 class PlatformThemeData;
 class PlatformThemePrivate;
 
@@ -383,8 +385,7 @@ using FontChangedEvent = PropertyChangedEvent<QFont>;
 
 }
 
+}
 } // namespace Kirigami
-
-QML_DECLARE_TYPEINFO(Kirigami::PlatformTheme, QML_HAS_ATTACHED_PROPERTIES)
 
 #endif // PLATFORMTHEME_H

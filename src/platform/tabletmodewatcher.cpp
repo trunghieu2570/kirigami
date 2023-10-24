@@ -19,6 +19,8 @@ using namespace Qt::Literals::StringLiterals;
 
 namespace Kirigami
 {
+namespace Platform
+{
 
 class TabletModeWatcherSingleton
 {
@@ -147,6 +149,8 @@ void TabletModeWatcher::addWatcher(QObject *watcher)
 void TabletModeWatcher::removeWatcher(QObject *watcher)
 {
     d->watchers.removeAll(watcher);
+}
+
 }
 }
 

@@ -12,7 +12,7 @@
 #include <QQuickWindow>
 #include <QWheelEvent>
 
-#include <libkirigami/units.h>
+#include "platform/units.h"
 
 KirigamiWheelEvent::KirigamiWheelEvent(QObject *parent)
     : QObject(parent)
@@ -388,10 +388,10 @@ void WheelHandler::classBegin()
 {
     // Initializes smooth scrolling
     m_engine = qmlEngine(this);
-    auto units = m_engine->singletonInstance<Kirigami::Units *>(qmlTypeId("org.kde.kirigami", 2, 0, "Units"));
+    auto units = m_engine->singletonInstance<Kirigami::Platform::Units *>("org.kde.kirigami.platform", "Units");
     m_yScrollAnimation.setDuration(units->longDuration());
-    connect(units, &Kirigami::Units::longDurationChanged, this, [this] {
-        m_yScrollAnimation.setDuration(static_cast<Kirigami::Units *>(sender())->longDuration());
+    connect(units, &Kirigami::Platform::Units::longDurationChanged, this, [this] {
+        m_yScrollAnimation.setDuration(static_cast<Kirigami::Platform::Units *>(sender())->longDuration());
     });
 }
 

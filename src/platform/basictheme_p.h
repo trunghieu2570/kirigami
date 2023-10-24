@@ -13,6 +13,8 @@
 
 namespace Kirigami
 {
+namespace Platform
+{
 class BasicTheme;
 
 class KIRIGAMIPLATFORM_EXPORT BasicThemeDefinition : public QObject
@@ -188,6 +190,7 @@ private:
     QColor tint(const QColor &color);
 };
 
+}
 }
 
 #endif // BASICTHEME_H

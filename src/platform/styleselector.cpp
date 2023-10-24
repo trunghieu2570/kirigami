@@ -12,6 +12,8 @@
 
 namespace Kirigami
 {
+namespace Platform
+{
 
 QString StyleSelector::style()
 {
@@ -105,4 +107,5 @@ QString StyleSelector::resolveFileUrl(const QString &path)
 #endif
 }
 
+}
 }

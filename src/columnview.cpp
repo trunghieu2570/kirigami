@@ -16,7 +16,7 @@
 #include <QQmlEngine>
 #include <QStyleHints>
 
-#include "units.h"
+#include "platform/units.h"
 
 class QmlComponentsPoolSingleton
 {
@@ -113,11 +113,11 @@ QtObject {
     m_trailingSeparatorComponent = m_instance->property("trailingSeparator").value<QQmlComponent *>();
     Q_ASSERT(m_trailingSeparatorComponent);
 
-    m_units = engine->singletonInstance<Kirigami::Units *>(qmlTypeId("org.kde.kirigami", 2, 0, "Units"));
+    m_units = engine->singletonInstance<Kirigami::Platform::Units *>("org.kde.kirigami", "Units");
     Q_ASSERT(m_units);
 
-    connect(m_units, &Kirigami::Units::gridUnitChanged, this, &QmlComponentsPool::gridUnitChanged);
-    connect(m_units, &Kirigami::Units::longDurationChanged, this, &QmlComponentsPool::longDurationChanged);
+    connect(m_units, &Kirigami::Platform::Units::gridUnitChanged, this, &QmlComponentsPool::gridUnitChanged);
+    connect(m_units, &Kirigami::Platform::Units::longDurationChanged, this, &QmlComponentsPool::longDurationChanged);
 }
 
 QmlComponentsPool::~QmlComponentsPool()

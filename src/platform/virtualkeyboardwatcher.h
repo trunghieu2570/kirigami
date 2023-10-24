@@ -16,6 +16,8 @@
 
 namespace Kirigami
 {
+namespace Platform
+{
 /**
  * @class VirtualKeyboardWatcher virtualkeyboardwatcher.h <Kirigami/VirtualKeyboardWatcher>
  *
@@ -58,6 +60,7 @@ private:
     const std::unique_ptr<Private> d;
 };
 
+}
 }
 
 #endif // KIRIGAMI_VIRTUALKEYBOARDWATCHER

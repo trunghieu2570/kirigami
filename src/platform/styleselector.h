@@ -16,6 +16,9 @@ class QUrl;
 
 namespace Kirigami
 {
+namespace Platform
+{
+
 class KIRIGAMIPLATFORM_EXPORT StyleSelector
 {
 public:
@@ -34,6 +37,7 @@ private:
     inline static QStringList s_styleChain;
 };
 
+}
 }
 
 #endif // STYLESELECTOR_H
