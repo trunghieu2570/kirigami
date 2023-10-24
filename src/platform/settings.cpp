@@ -20,11 +20,13 @@
 #include <QtGui/qpa/qplatformmenu.h>
 #include <QtGui/qpa/qplatformtheme.h>
 
-#include "libkirigami/tabletmodewatcher.h"
+#include "kirigamiplatform_version.h"
+#include "tabletmodewatcher.h"
 
-#ifndef KIRIGAMI_BUILD_TYPE_STATIC
-#include "libkirigami/kirigami2_version.h"
-#endif
+namespace Kirigami
+{
+namespace Platform
+{
 
 class SettingsSingleton
 {
@@ -39,13 +41,13 @@ Settings::Settings(QObject *parent)
     , m_hasTouchScreen(false)
     , m_hasTransientTouchInput(false)
 {
-    m_tabletModeAvailable = Kirigami::TabletModeWatcher::self()->isTabletModeAvailable();
-    connect(Kirigami::TabletModeWatcher::self(), &Kirigami::TabletModeWatcher::tabletModeAvailableChanged, this, [this](bool tabletModeAvailable) {
+    m_tabletModeAvailable = TabletModeWatcher::self()->isTabletModeAvailable();
+    connect(TabletModeWatcher::self(), &TabletModeWatcher::tabletModeAvailableChanged, this, [this](bool tabletModeAvailable) {
         setTabletModeAvailable(tabletModeAvailable);
     });
 
-    m_tabletMode = Kirigami::TabletModeWatcher::self()->isTabletMode();
-    connect(Kirigami::TabletModeWatcher::self(), &Kirigami::TabletModeWatcher::tabletModeChanged, this, [this](bool tabletMode) {
+    m_tabletMode = TabletModeWatcher::self()->isTabletMode();
+    connect(TabletModeWatcher::self(), &TabletModeWatcher::tabletModeChanged, this, [this](bool tabletMode) {
         setTabletMode(tabletMode);
     });
 
@@ -96,11 +98,6 @@ Settings::Settings(QObject *parent)
 
 Settings::~Settings()
 {
-}
-
-Settings *Settings::self()
-{
-    return &privateSettingsSelf()->self;
 }
 
 bool Settings::eventFilter(QObject *watched, QEvent *event)
@@ -208,7 +205,7 @@ QStringList Settings::information() const
 {
     return {
 #ifndef KIRIGAMI_BUILD_TYPE_STATIC
-        tr("KDE Frameworks %1").arg(QStringLiteral(KIRIGAMI2_VERSION_STRING)),
+        tr("KDE Frameworks %1").arg(QStringLiteral(KIRIGAMIPLATFORM_VERSION_STRING)),
 #endif
         tr("The %1 windowing system").arg(QGuiApplication::platformName()),
         tr("Qt %2 (built against %3)").arg(QString::fromLocal8Bit(qVersion()), QStringLiteral(QT_VERSION_STR))};
@@ -226,6 +223,9 @@ QVariant Settings::applicationWindowIcon() const
 bool Settings::hasPlatformMenuBar() const
 {
     return m_hasPlatformMenuBar;
+}
+
+}
 }
 
 #include "moc_settings.cpp"

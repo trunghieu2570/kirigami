@@ -56,8 +56,6 @@ target_sources(KirigamiPlugin PRIVATE
     pagepool.h
     scenepositionattached.cpp
     scenepositionattached.h
-    settings.cpp
-    settings.h
     shadowedrectangle.cpp
     shadowedrectangle.h
     shadowedtexture.cpp
@@ -72,7 +70,6 @@ target_sources(KirigamiPlugin PRIVATE
     toolbarlayout.h
     wheelhandler.cpp
     wheelhandler.h
-    inputmethod.cpp
 
     scenegraph/managedtexturenode.cpp
     scenegraph/managedtexturenode.h

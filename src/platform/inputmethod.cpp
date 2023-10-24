@@ -6,9 +6,14 @@
 
 #include "inputmethod.h"
 
-#include "libkirigami/virtualkeyboardwatcher.h"
+#include "virtualkeyboardwatcher.h"
 
-class Q_DECL_HIDDEN InputMethod::Private
+namespace Kirigami
+{
+namespace Platform
+{
+
+class KIRIGAMIPLATFORM_NO_EXPORT InputMethod::Private
 {
 public:
     bool available = false;
@@ -21,29 +26,29 @@ InputMethod::InputMethod(QObject *parent)
     : QObject(parent)
     , d(std::make_unique<Private>())
 {
-    auto watcher = Kirigami::VirtualKeyboardWatcher::self();
+    auto watcher = VirtualKeyboardWatcher::self();
 
-    connect(watcher, &Kirigami::VirtualKeyboardWatcher::availableChanged, this, [this]() {
-        d->available = Kirigami::VirtualKeyboardWatcher::self()->available();
+    connect(watcher, &VirtualKeyboardWatcher::availableChanged, this, [this]() {
+        d->available = VirtualKeyboardWatcher::self()->available();
         Q_EMIT availableChanged();
     });
 
-    connect(watcher, &Kirigami::VirtualKeyboardWatcher::enabledChanged, this, [this]() {
-        d->enabled = Kirigami::VirtualKeyboardWatcher::self()->enabled();
+    connect(watcher, &VirtualKeyboardWatcher::enabledChanged, this, [this]() {
+        d->enabled = VirtualKeyboardWatcher::self()->enabled();
         Q_EMIT enabledChanged();
     });
 
-    connect(watcher, &Kirigami::VirtualKeyboardWatcher::activeChanged, this, [this]() {
-        d->active = Kirigami::VirtualKeyboardWatcher::self()->active();
+    connect(watcher, &VirtualKeyboardWatcher::activeChanged, this, [this]() {
+        d->active = VirtualKeyboardWatcher::self()->active();
         Q_EMIT activeChanged();
     });
 
-    connect(watcher, &Kirigami::VirtualKeyboardWatcher::visibleChanged, this, [this]() {
-        d->visible = Kirigami::VirtualKeyboardWatcher::self()->visible();
+    connect(watcher, &VirtualKeyboardWatcher::visibleChanged, this, [this]() {
+        d->visible = VirtualKeyboardWatcher::self()->visible();
         Q_EMIT visibleChanged();
     });
 
-    connect(watcher, &Kirigami::VirtualKeyboardWatcher::willShowOnActiveChanged, this, [this]() {
+    connect(watcher, &VirtualKeyboardWatcher::willShowOnActiveChanged, this, [this]() {
         Q_EMIT willShowOnActiveChanged();
     });
 
@@ -77,7 +82,10 @@ bool InputMethod::visible() const
 
 bool InputMethod::willShowOnActive() const
 {
-    return Kirigami::VirtualKeyboardWatcher::self()->willShowOnActive();
+    return VirtualKeyboardWatcher::self()->willShowOnActive();
+}
+
+}
 }
 
 #include "moc_inputmethod.cpp"

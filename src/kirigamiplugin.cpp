@@ -14,13 +14,11 @@
 #include "headerfooterlayout.h"
 #include "icon.h"
 #include "imagecolors.h"
-#include "inputmethod.h"
 #include "mnemonicattached.h"
 #include "overlayzstackingattached.h"
 #include "padding.h"
 #include "pagepool.h"
 #include "scenepositionattached.h"
-#include "settings.h"
 #include "shadowedrectangle.h"
 #include "shadowedtexture.h"
 #include "sizegroup.h"
@@ -123,14 +121,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
     } else {
         QIcon::setFallbackSearchPaths(QIcon::fallbackSearchPaths() << Kirigami::Platform::StyleSelector::resolveFilePath(QStringLiteral("icons")));
     }
-
-    qmlRegisterSingletonType<Settings>(uri, 2, 0, "Settings", [](QQmlEngine *e, QJSEngine *) -> QObject * {
-        Settings *settings = Settings::self();
-        // singleton managed internally, qml should never delete it
-        e->setObjectOwnership(settings, QQmlEngine::CppOwnership);
-        settings->setStyle(Kirigami::StyleSelector::style());
-        return settings;
-    });
 
     qmlRegisterUncreatableMetaObject(ApplicationHeaderStyle::staticMetaObject,
                                      uri,
@@ -258,10 +248,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(QStringLiteral("PromptDialog.qml")), uri, 2, 19, "PromptDialog");
     qmlRegisterType(componentUrl(QStringLiteral("Chip.qml")), uri, 2, 19, "Chip");
     qmlRegisterType(componentUrl(QStringLiteral("LoadingPlaceholder.qml")), uri, 2, 19, "LoadingPlaceholder");
-
-    qmlRegisterSingletonType<InputMethod>(uri, 2, 19, "InputMethod", [](QQmlEngine *, QJSEngine *) {
-        return new InputMethod{};
-    });
 
     // 2.20
     qmlRegisterType(componentUrl(QStringLiteral("SelectableLabel.qml")), uri, 2, 20, "SelectableLabel");

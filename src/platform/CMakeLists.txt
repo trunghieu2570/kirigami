@@ -12,8 +12,10 @@ set_target_properties(KirigamiPlatform PROPERTIES
 target_sources(KirigamiPlatform PRIVATE
     platformtheme.cpp
     basictheme.cpp
+    inputmethod.cpp
     platformpluginfactory.cpp
     tabletmodewatcher.cpp
+    settings.cpp
     styleselector.cpp
     units.cpp
     virtualkeyboardwatcher.cpp

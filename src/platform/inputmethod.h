@@ -10,13 +10,23 @@
 #include <memory>
 
 #include <QObject>
+#include <qqmlregistration.h>
+
+#include "kirigamiplatform_export.h"
+
+namespace Kirigami
+{
+namespace Platform
+{
 
 /**
  * This exposes information about the current used input method.
  */
-class InputMethod : public QObject
+class KIRIGAMIPLATFORM_EXPORT InputMethod : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
 public:
     InputMethod(QObject *parent = nullptr);
@@ -80,5 +90,8 @@ private:
     class Private;
     const std::unique_ptr<Private> d;
 };
+
+}
+}
 
 #endif // INPUTMETHOD_H

@@ -8,14 +8,23 @@
 
 #include <QObject>
 #include <QVariant>
+#include <qqmlregistration.h>
 
+#include "kirigamiplatform_export.h"
+
+namespace Kirigami
+{
+namespace Platform
+{
 /**
  * This class contains global kirigami settings about the current device setup
  * It is exposed to QML as the singleton "Settings"
  */
-class Settings : public QObject
+class KIRIGAMIPLATFORM_EXPORT Settings : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
     /**
      * This property holds whether the system can dynamically enter and exit tablet mode
@@ -112,7 +121,7 @@ public:
 
     QVariant applicationWindowIcon() const;
 
-    static Settings *self();
+    // static Settings *self();
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event) override;
@@ -133,5 +142,8 @@ private:
     bool m_hasTransientTouchInput : 1;
     bool m_hasPlatformMenuBar : 1;
 };
+
+}
+}
 
 #endif
