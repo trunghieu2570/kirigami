@@ -90,7 +90,6 @@ configure_package_config_file(
 
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2Config.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2ConfigVersion.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/KF6Kirigami2Macros.cmake"
     DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
     COMPONENT Devel
