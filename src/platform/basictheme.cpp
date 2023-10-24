@@ -15,95 +15,8 @@
 
 namespace Kirigami
 {
-class CompatibilityThemeDefinition : public BasicThemeDefinition
+namespace Platform
 {
-    Q_OBJECT
-public:
-    CompatibilityThemeDefinition(QObject *component, QObject *parent = nullptr)
-        : BasicThemeDefinition(parent)
-    {
-        m_object = component;
-
-        connect(m_object, SIGNAL(textColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(disabledTextColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(highlightColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(highlightedTextColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(backgroundColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(alternateBackgroundColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(linkColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(visitedLinkColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(buttonTextColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(buttonBackgroundColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(buttonAlternateBackgroundColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(buttonHoverColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(buttonFocusColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(viewTextColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(viewBackgroundColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(viewAlternateBackgroundColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(viewHoverColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(viewFocusColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(complementaryTextColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(complementaryBackgroundColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(complementaryAlternateBackgroundColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(complementaryHoverColorChanged()), this, SLOT(syncFromQml()));
-        connect(m_object, SIGNAL(complementaryFocusColorChanged()), this, SLOT(syncFromQml()));
-    }
-
-    void syncToQml(PlatformTheme *object) override
-    {
-        BasicThemeDefinition::syncToQml(object);
-
-        QMetaObject::invokeMethod(m_object, "__propagateColorSet", Q_ARG(QVariant, QVariant::fromValue(object->parent())), Q_ARG(QVariant, object->colorSet()));
-        QMetaObject::invokeMethod(m_object,
-                                  "__propagateTextColor",
-                                  Q_ARG(QVariant, QVariant::fromValue(object->parent())),
-                                  Q_ARG(QVariant, object->textColor()));
-        QMetaObject::invokeMethod(m_object,
-                                  "__propagateBackgroundColor",
-                                  Q_ARG(QVariant, QVariant::fromValue(object->parent())),
-                                  Q_ARG(QVariant, object->backgroundColor()));
-        QMetaObject::invokeMethod(m_object,
-                                  "__propagatePrimaryColor",
-                                  Q_ARG(QVariant, QVariant::fromValue(object->parent())),
-                                  Q_ARG(QVariant, object->highlightColor()));
-        QMetaObject::invokeMethod(m_object,
-                                  "__propagateAccentColor",
-                                  Q_ARG(QVariant, QVariant::fromValue(object->parent())),
-                                  Q_ARG(QVariant, object->highlightColor()));
-    }
-
-    Q_SLOT void syncFromQml()
-    {
-        textColor = m_object->property("textColor").value<QColor>();
-        disabledTextColor = m_object->property("disabledTextColor").value<QColor>();
-        highlightColor = m_object->property("highlightColor").value<QColor>();
-        highlightedTextColor = m_object->property("highlightedTextColor").value<QColor>();
-        backgroundColor = m_object->property("backgroundColor").value<QColor>();
-        alternateBackgroundColor = m_object->property("alternateBackgroundColor").value<QColor>();
-        linkColor = m_object->property("linkColor").value<QColor>();
-        visitedLinkColor = m_object->property("visitedLinkColor").value<QColor>();
-        buttonTextColor = m_object->property("buttonTextColor").value<QColor>();
-        buttonBackgroundColor = m_object->property("buttonBackgroundColor").value<QColor>();
-        buttonAlternateBackgroundColor = m_object->property("buttonAlternateBackgroundColor").value<QColor>();
-        buttonHoverColor = m_object->property("buttonHoverColor").value<QColor>();
-        buttonFocusColor = m_object->property("buttonFocusColor").value<QColor>();
-        viewTextColor = m_object->property("viewTextColor").value<QColor>();
-        viewBackgroundColor = m_object->property("viewBackgroundColor").value<QColor>();
-        viewAlternateBackgroundColor = m_object->property("viewAlternateBackgroundColor").value<QColor>();
-        viewHoverColor = m_object->property("viewHoverColor").value<QColor>();
-        viewFocusColor = m_object->property("viewFocusColor").value<QColor>();
-        complementaryTextColor = m_object->property("complementaryTextColor").value<QColor>();
-        complementaryBackgroundColor = m_object->property("complementaryBackgroundColor").value<QColor>();
-        complementaryAlternateBackgroundColor = m_object->property("complementaryAlternateBackgroundColor").value<QColor>();
-        complementaryHoverColor = m_object->property("complementaryHoverColor").value<QColor>();
-        complementaryFocusColor = m_object->property("complementaryFocusColor").value<QColor>();
-
-        Q_EMIT changed();
-    }
-
-private:
-    QObject *m_object;
-};
 
 BasicThemeDefinition::BasicThemeDefinition(QObject *parent)
     : QObject(parent)
@@ -139,19 +52,16 @@ BasicThemeDefinition &BasicThemeInstance::themeDefinition(QQmlEngine *engine)
 
     if (!component.isError()) {
         auto result = component.create();
-        if (!result) {
+        if (auto themeDefinition = qobject_cast<BasicThemeDefinition *>(result)) {
+            m_themeDefinition.reset(themeDefinition);
+        } else {
             const auto errors = component.errors();
             for (auto error : errors) {
-                qCWarning(KirigamiLog) << error.toString();
+                qCWarning(KirigamiPlatform) << error.toString();
             }
 
             qCWarning(KirigamiPlatform) << "Invalid Theme file, using default Basic theme.";
             m_themeDefinition = std::make_unique<BasicThemeDefinition>();
-        } else if (auto themeDefinition = qobject_cast<BasicThemeDefinition *>(result)) {
-            m_themeDefinition.reset(themeDefinition);
-        } else {
-            qCWarning(KirigamiLog) << "Warning: Theme implementations should use Kirigami.BasicThemeDefinition for its root item";
-            m_themeDefinition = std::make_unique<CompatibilityThemeDefinition>(result);
         }
     } else {
         qCDebug(KirigamiPlatform) << "No Theme file found, using default Basic theme";
@@ -293,6 +203,6 @@ QColor BasicTheme::tint(const QColor &color)
 }
 
 }
+}
 
-#include "basictheme.moc"
 #include "moc_basictheme_p.cpp"
