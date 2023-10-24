@@ -11,14 +11,23 @@ set_target_properties(KirigamiPlatform PROPERTIES
 
 target_sources(KirigamiPlatform PRIVATE
     platformtheme.cpp
+    platformtheme.h
     basictheme.cpp
+    basictheme_p.h
     inputmethod.cpp
+    inputmethod.h
     platformpluginfactory.cpp
+    platformpluginfactory.h
     tabletmodewatcher.cpp
+    tabletmodewatcher.h
     settings.cpp
+    settings.h
     styleselector.cpp
+    styleselector.h
     units.cpp
+    units.h
     virtualkeyboardwatcher.cpp
+    virtualkeyboardwatcher.h
 )
 
 set(libkirigami_extra_sources "")
