@@ -16,6 +16,7 @@ ecm_add_qml_module(KirigamiPlugin URI "org.kde.kirigami" VERSION 2.0
     "QtQuick.Controls"
     "Qt5Compat.GraphicalEffects"
     IMPORTS
+    "org.kde.kirigami.platform"
     "org.kde.kirigami.delegates"
     ${_extra_options}
 )
@@ -280,12 +281,11 @@ target_link_libraries(KirigamiPlugin
     PUBLIC Qt6::Core
     PRIVATE
     ${Kirigami_EXTRA_LIBS}
-    Qt6::GuiPrivate
     Qt6::Qml
     Qt6::Quick
     Qt6::QuickControls2
     Qt6::Concurrent
-    KF6Kirigami2
+    KirigamiPlatform
 )
 
 if (HAVE_OpenMP)
