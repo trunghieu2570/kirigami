@@ -11,7 +11,7 @@
 #include <QObject>
 #include <memory>
 
-#include "kirigami2_export.h"
+#include "kirigamiplatform_export.h"
 
 class QQmlEngine;
 
@@ -25,7 +25,7 @@ class UnitsPrivate;
  *
  * Provides access to platform-dependent icon sizing
  */
-class KIRIGAMI2_EXPORT IconSizes : public QObject
+class KIRIGAMIPLATFORM_EXPORT IconSizes : public QObject
 {
     Q_OBJECT
 
@@ -51,7 +51,7 @@ public:
     Q_INVOKABLE int roundedIconSize(int size) const;
 
 private:
-    KIRIGAMI2_NO_EXPORT float iconScaleFactor() const;
+    KIRIGAMIPLATFORM_NO_EXPORT float iconScaleFactor() const;
 
     Units *m_units;
 
@@ -70,7 +70,7 @@ Q_SIGNALS:
  *
  * A set of values to define semantically sizes and durations.
  */
-class KIRIGAMI2_EXPORT Units : public QObject
+class KIRIGAMIPLATFORM_EXPORT Units : public QObject
 {
     Q_OBJECT
 

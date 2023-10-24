@@ -26,7 +26,6 @@
 #include "sizegroup.h"
 #include "spellcheckattached.h"
 #include "toolbarlayout.h"
-#include "units.h"
 #include "wheelhandler.h"
 
 #include <QClipboard>
@@ -38,10 +37,8 @@
 #include <QQuickItem>
 #include <QQuickStyle>
 
-#include "libkirigami/basictheme_p.h"
-#include "libkirigami/kirigamipluginfactory.h"
-#include "libkirigami/platformtheme.h"
-#include "libkirigami/styleselector_p.h"
+#include "platform/styleselector.h"
+
 #include "loggingcategory.h"
 
 static QString s_selectedStyle;
@@ -142,19 +139,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
                                      "ApplicationHeaderStyle",
                                      QStringLiteral("Cannot create objects of type ApplicationHeaderStyle"));
 
-    qmlRegisterSingletonType<Kirigami::Units>(uri, 2, 0, "Units", [](QQmlEngine *engine, QJSEngine *) {
-#ifndef KIRIGAMI_BUILD_TYPE_STATIC
-        auto plugin = Kirigami::KirigamiPluginFactory::findPlugin();
-        if (plugin) {
-            return plugin->createUnits(engine);
-        } else {
-            qWarning(KirigamiLog) << "Failed to find a Kirigami platform plugin";
-        }
-#endif
-        // Fall back to the default units implementation
-        return new Kirigami::Units(engine);
-    });
-
     qmlRegisterRevision<QQuickItem, 6>(uri, 2, 0);
     qmlRegisterType(componentUrl(QStringLiteral("Action.qml")), uri, 2, 0, "Action");
     qmlRegisterType(componentUrl(QStringLiteral("AbstractApplicationHeader.qml")), uri, 2, 0, "AbstractApplicationHeader");
@@ -179,14 +163,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
     // 2.1
     qmlRegisterType(componentUrl(QStringLiteral("AbstractApplicationItem.qml")), uri, 2, 1, "AbstractApplicationItem");
     qmlRegisterType(componentUrl(QStringLiteral("ApplicationItem.qml")), uri, 2, 1, "ApplicationItem");
-
-    // 2.2
-    // Theme changed from a singleton to an attached property
-    qmlRegisterUncreatableType<Kirigami::PlatformTheme>(uri,
-                                                        2,
-                                                        2,
-                                                        "Theme",
-                                                        QStringLiteral("Cannot create objects of type Theme, use it as an attached property"));
 
     // 2.3
     qmlRegisterType(componentUrl(QStringLiteral("FormLayout.qml")), uri, 2, 3, "FormLayout");
@@ -265,9 +241,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterSingletonType<DisplayHint>(uri, 2, 14, "DisplayHint", singleton<DisplayHint>());
     qmlRegisterType<SizeGroup>(uri, 2, 14, "SizeGroup");
     qmlRegisterType(componentUrl(QStringLiteral("CheckableListItem.qml")), uri, 2, 14, "CheckableListItem");
-
-    // 2.16
-    qmlRegisterType<Kirigami::BasicThemeDefinition>(uri, 2, 16, "BasicThemeDefinition");
 
     // 2.18
     qmlRegisterUncreatableType<SpellCheckAttached>(uri,

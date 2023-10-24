@@ -6,12 +6,12 @@
  */
 
 #include "basictheme_p.h"
+#include "styleselector.h"
 
-#include "styleselector_p.h"
 #include <QFile>
 #include <QGuiApplication>
 
-#include "loggingcategory.h"
+#include "kirigamiplatform_logging.h"
 
 namespace Kirigami
 {
@@ -145,7 +145,7 @@ BasicThemeDefinition &BasicThemeInstance::themeDefinition(QQmlEngine *engine)
                 qCWarning(KirigamiLog) << error.toString();
             }
 
-            qCWarning(KirigamiLog) << "Invalid Theme file, using default Basic theme.";
+            qCWarning(KirigamiPlatform) << "Invalid Theme file, using default Basic theme.";
             m_themeDefinition = std::make_unique<BasicThemeDefinition>();
         } else if (auto themeDefinition = qobject_cast<BasicThemeDefinition *>(result)) {
             m_themeDefinition.reset(themeDefinition);
@@ -154,7 +154,7 @@ BasicThemeDefinition &BasicThemeInstance::themeDefinition(QQmlEngine *engine)
             m_themeDefinition = std::make_unique<CompatibilityThemeDefinition>(result);
         }
     } else {
-        qCDebug(KirigamiLog) << "No Theme file found, using default Basic theme";
+        qCDebug(KirigamiPlatform) << "No Theme file found, using default Basic theme";
         m_themeDefinition = std::make_unique<BasicThemeDefinition>();
     }
 

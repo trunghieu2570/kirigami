@@ -13,6 +13,8 @@
 #include <QPluginLoader>
 #include <QQuickStyle>
 
+#include "kirigamiplatform_logging.h"
+
 namespace Kirigami
 {
 

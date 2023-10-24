@@ -12,7 +12,7 @@
 
 #include <QObject>
 
-#include "kirigami2_export.h"
+#include "kirigamiplatform_export.h"
 
 namespace Kirigami
 {
@@ -23,7 +23,7 @@ namespace Kirigami
  *
  * @since 5.91
  */
-class KIRIGAMI2_EXPORT VirtualKeyboardWatcher : public QObject
+class KIRIGAMIPLATFORM_EXPORT VirtualKeyboardWatcher : public QObject
 {
     Q_OBJECT
 

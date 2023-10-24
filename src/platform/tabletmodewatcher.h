@@ -10,13 +10,13 @@
 #include <QEvent>
 #include <QObject>
 
-#include "kirigami2_export.h"
+#include "kirigamiplatform_export.h"
 
 namespace Kirigami
 {
 class TabletModeWatcherPrivate;
 
-class KIRIGAMI2_EXPORT TabletModeChangedEvent : public QEvent
+class KIRIGAMIPLATFORM_EXPORT TabletModeChangedEvent : public QEvent
 {
 public:
     TabletModeChangedEvent(bool tablet)
@@ -27,7 +27,7 @@ public:
 
     bool tabletMode = false;
 
-    static QEvent::Type type;
+    inline static QEvent::Type type = QEvent::None;
 };
 
 /**
@@ -40,11 +40,7 @@ public:
  * the device is currently in such mode or not, emitting a signal
  * when the user switches.
  */
-#ifdef KIRIGAMI_BUILD_TYPE_STATIC
-class TabletModeWatcher : public QObject
-#else
-class KIRIGAMI2_EXPORT TabletModeWatcher : public QObject
-#endif
+class KIRIGAMIPLATFORM_EXPORT TabletModeWatcher : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool tabletModeAvailable READ isTabletModeAvailable NOTIFY tabletModeAvailableChanged FINAL)
@@ -90,7 +86,7 @@ Q_SIGNALS:
     void tabletModeChanged(bool tabletMode);
 
 private:
-    KIRIGAMI2_NO_EXPORT explicit TabletModeWatcher(QObject *parent = nullptr);
+    KIRIGAMIPLATFORM_NO_EXPORT explicit TabletModeWatcher(QObject *parent = nullptr);
     TabletModeWatcherPrivate *d;
     friend class TabletModeWatcherSingleton;
 };

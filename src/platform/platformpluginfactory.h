@@ -9,9 +9,7 @@
 
 #include <QObject>
 
-#ifndef KIRIGAMI_BUILD_TYPE_STATIC
-#include "kirigami2_export.h"
-#endif
+#include "kirigamiplatform_export.h"
 
 class QQmlEngine;
 
@@ -26,11 +24,7 @@ class Units;
  * This class is reimpleented by plugins to provide different implementations
  * of PlatformTheme
  */
-#ifdef KIRIGAMI_BUILD_TYPE_STATIC
-class KirigamiPluginFactory : public QObject
-#else
-class KIRIGAMI2_EXPORT KirigamiPluginFactory : public QObject
-#endif
+class KIRIGAMIPLATFORM_EXPORT PlatformPluginFactory : public QObject
 {
     Q_OBJECT
 

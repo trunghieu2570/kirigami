@@ -13,7 +13,7 @@
 #include <QPalette>
 #include <QQuickItem>
 
-#include "kirigami2_export.h"
+#include "kirigamiplatform_export.h"
 
 namespace Kirigami
 {
@@ -27,7 +27,7 @@ class PlatformThemePrivate;
  * different platforms can reimplement this class to integrate with
  * system platform colors of a given platform
  */
-class KIRIGAMI2_EXPORT PlatformTheme : public QObject
+class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
 {
     Q_OBJECT
 
@@ -333,11 +333,11 @@ protected:
     bool event(QEvent *event) override;
 
 private:
-    KIRIGAMI2_NO_EXPORT void update();
-    KIRIGAMI2_NO_EXPORT void updateChildren(QObject *item);
-    KIRIGAMI2_NO_EXPORT void emitSignals();
-    KIRIGAMI2_NO_EXPORT void emitColorChanged();
-    KIRIGAMI2_NO_EXPORT QObject *determineParent(QObject *object);
+    KIRIGAMIPLATFORM_NO_EXPORT void update();
+    KIRIGAMIPLATFORM_NO_EXPORT void updateChildren(QObject *item);
+    KIRIGAMIPLATFORM_NO_EXPORT void emitSignals();
+    KIRIGAMIPLATFORM_NO_EXPORT void emitColorChanged();
+    KIRIGAMIPLATFORM_NO_EXPORT QObject *determineParent(QObject *object);
 
     PlatformThemePrivate *d;
     friend class PlatformThemePrivate;
@@ -357,7 +357,7 @@ namespace PlatformThemeEvents
 // of these events.
 
 template<typename T>
-class KIRIGAMI2_EXPORT PropertyChangedEvent : public QEvent
+class KIRIGAMIPLATFORM_EXPORT PropertyChangedEvent : public QEvent
 {
 public:
     PropertyChangedEvent(PlatformTheme *theme, const T &previous, const T &current)
@@ -372,7 +372,7 @@ public:
     T oldValue;
     T newValue;
 
-    static QEvent::Type type;
+    inline static QEvent::Type type = QEvent::None;
 };
 
 using DataChangedEvent = PropertyChangedEvent<std::shared_ptr<PlatformThemeData>>;

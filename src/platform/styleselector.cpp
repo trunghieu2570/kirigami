@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#include "styleselector_p.h"
+#include "styleselector.h"
 
 #include <QDir>
 #include <QFile>
@@ -12,8 +12,6 @@
 
 namespace Kirigami
 {
-QUrl StyleSelector::s_baseUrl;
-QStringList StyleSelector::s_styleChain;
 
 QString StyleSelector::style()
 {

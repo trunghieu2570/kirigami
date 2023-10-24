@@ -9,13 +9,13 @@
 
 #include "platformtheme.h"
 
-#include "kirigami2_export.h"
+#include "kirigamiplatform_export.h"
 
 namespace Kirigami
 {
 class BasicTheme;
 
-class KIRIGAMI2_EXPORT BasicThemeDefinition : public QObject
+class KIRIGAMIPLATFORM_EXPORT BasicThemeDefinition : public QObject
 {
     Q_OBJECT
 

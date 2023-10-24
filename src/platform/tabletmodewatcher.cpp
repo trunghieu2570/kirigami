@@ -19,7 +19,6 @@ using namespace Qt::Literals::StringLiterals;
 
 namespace Kirigami
 {
-KIRIGAMI2_EXPORT QEvent::Type TabletModeChangedEvent::type = QEvent::None;
 
 class TabletModeWatcherSingleton
 {

@@ -8,14 +8,15 @@
 #define STYLESELECTOR_H
 
 #include <QStringList>
+#include <QUrl>
 
-#include "kirigami2_export.h"
+#include "kirigamiplatform_export.h"
 
 class QUrl;
 
 namespace Kirigami
 {
-class KIRIGAMI2_EXPORT StyleSelector
+class KIRIGAMIPLATFORM_EXPORT StyleSelector
 {
 public:
     static QString style();
@@ -29,8 +30,8 @@ public:
     static QString resolveFileUrl(const QString &path);
 
 private:
-    static QUrl s_baseUrl;
-    static QStringList s_styleChain;
+    inline static QUrl s_baseUrl;
+    inline static QStringList s_styleChain;
 };
 
 }

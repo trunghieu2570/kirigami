@@ -14,7 +14,7 @@
 #include <QDBusPendingCallWatcher>
 #endif
 
-#include "loggingcategory.h"
+#include "kirigamiplatform_logging.h"
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -22,7 +22,7 @@ namespace Kirigami
 {
 Q_GLOBAL_STATIC(VirtualKeyboardWatcher, virtualKeyboardWatcherSelf)
 
-class Q_DECL_HIDDEN VirtualKeyboardWatcher::Private
+class KIRIGAMIPLATFORM_NO_EXPORT VirtualKeyboardWatcher::Private
 {
     static constexpr auto serviceName = "org.freedesktop.portal.Desktop"_L1;
     static constexpr auto objectName = "/org/freedesktop/portal/desktop"_L1;
@@ -143,7 +143,7 @@ void VirtualKeyboardWatcher::Private::updateWillShowOnActive()
     connect(willShowOnActiveCall, &QDBusPendingCallWatcher::finished, q, [this](auto call) {
         QDBusPendingReply<bool> reply = *call;
         if (reply.isError()) {
-            qCDebug(KirigamiLog) << reply.error().message();
+            qCDebug(KirigamiPlatform) << reply.error().message();
         } else {
             if (reply.value() != willShowOnActive) {
                 willShowOnActive = reply.value();
@@ -161,7 +161,7 @@ void VirtualKeyboardWatcher::Private::getAllProperties()
     connect(call, &QDBusPendingCallWatcher::finished, q, [this](auto call) {
         QDBusPendingReply<VariantMapMap> reply = *call;
         if (reply.isError()) {
-            qCDebug(KirigamiLog) << reply.error().message();
+            qCDebug(KirigamiPlatform) << reply.error().message();
         } else {
             const auto groupValues = reply.value().value(GROUP);
             available = groupValues.value(KEY_AVAILABLE).toBool();

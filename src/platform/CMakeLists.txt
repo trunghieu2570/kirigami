@@ -1,15 +1,15 @@
-set(KIRIGAMI_INSTALL_INCLUDEDIR "${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami2")
+add_library(KirigamiPlatform)
+add_library(KF6::KirigamiPlatform ALIAS KirigamiPlatform)
 
-add_library(KF6Kirigami2)
-add_library(KF6::Kirigami2 ALIAS KF6Kirigami2)
+ecm_add_qml_module(KirigamiPlatform URI "org.kde.kirigami.platform" VERSION 2.0 GENERATE_PLUGIN_SOURCE)
 
-set_target_properties(KF6Kirigami2 PROPERTIES
-    VERSION     ${KIRIGAMI2_VERSION}
-    SOVERSION   ${KIRIGAMI2_SOVERSION}
-    EXPORT_NAME "Kirigami2"
+set_target_properties(KirigamiPlatform PROPERTIES
+    VERSION     ${PROJECT_VERSION}
+    SOVERSION   6
+    EXPORT_NAME "KirigamiPlatform"
 )
 
-target_sources(KF6Kirigami2 PRIVATE
+target_sources(KirigamiPlatform PRIVATE
     platformtheme.cpp
     basictheme.cpp
     kirigamipluginfactory.cpp
@@ -28,13 +28,91 @@ if (UNIX AND NOT ANDROID AND NOT(APPLE) AND NOT(DISABLE_DBUS))
     set(LIBKIRIGAMKI_EXTRA_LIBS Qt6::DBus)
 endif()
 
-ecm_qt_declare_logging_category(libkirigami_extra_sources
-    HEADER loggingcategory.h
-    IDENTIFIER KirigamiLog
-    CATEGORY_NAME kf.kirigami
-    DESCRIPTION "Kirigami"
+target_sources(KirigamiPlatform PRIVATE ${libkirigami_extra_sources})
+
+ecm_qt_declare_logging_category(KirigamiPlatform
+    HEADER kirigamiplatform_logging.h
+    IDENTIFIER KirigamiPlatform
+    CATEGORY_NAME kf.kirigami.platform
+    DESCRIPTION "Kirigami Platform"
     DEFAULT_SEVERITY Warning
     EXPORT KIRIGAMI
+)
+
+ecm_setup_version(PROJECT
+    VARIABLE_PREFIX KIRIGAMIPLATFORM
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kirigamiplatform_version.h"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiPlatformConfigVersion.cmake"
+    SOVERSION 6
+)
+
+ecm_generate_export_header(KirigamiPlatform
+    VERSION ${PROJECT_VERSION}
+    BASE_NAME KirigamiPlatform
+    USE_VERSION_HEADER
+    DEPRECATION_VERSIONS
+)
+
+target_include_directories(KirigamiPlatform
+    INTERFACE
+    "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}>"
+    "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami/Platform>"
+)
+
+target_link_libraries(KirigamiPlatform
+    PUBLIC
+    Qt6::Core
+    Qt6::Qml
+    Qt6::Quick
+    PRIVATE
+    Qt6::QuickControls2
+    ${LIBKIRIGAMKI_EXTRA_LIBS}
+)
+
+ecm_generate_headers(KirigamiPlatform_CamelCase_HEADERS
+    HEADER_NAMES
+    PlatformTheme
+    KirigamiPluginFactory
+    StyleSelector
+    TabletModeWatcher
+    Units
+    VirtualKeyboardWatcher
+    REQUIRED_HEADERS KirigamiPlatform_HEADERS
+)
+
+configure_package_config_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/KF6KirigamiPlatformConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiPlatformConfig.cmake"
+    INSTALL_DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiPlatform
+    PATH_VARS CMAKE_INSTALL_PREFIX
+)
+
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiPlatformConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiPlatformConfigVersion.cmake"
+    DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiPlatform
+    COMPONENT Devel
+)
+
+install(TARGETS KirigamiPlatform EXPORT KF6KirigamiPlatformTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+
+install(EXPORT KF6KirigamiPlatformTargets
+    DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiPlatform
+    FILE KF6KirigamiPlatformTargets.cmake
+    NAMESPACE KF6::
+)
+
+install(FILES
+    ${KirigamiPlatform_HEADERS}
+    ${CMAKE_CURRENT_BINARY_DIR}/kirigamiplatform_export.h
+    ${CMAKE_CURRENT_BINARY_DIR}/kirigamiplatform_version.h
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami/Platform # prefix matching C++ namespace
+    COMPONENT Devel
+)
+install(FILES
+    ${KirigamiPlatform_CamelCase_HEADERS}
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami/Platform # prefix matching C++ namespace
+    COMPONENT Devel
 )
 
 ecm_qt_install_logging_categories(
@@ -43,80 +121,27 @@ ecm_qt_install_logging_categories(
     DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
 )
 
-ecm_generate_export_header(KF6Kirigami2
-    VERSION ${KF_VERSION}
-    BASE_NAME Kirigami2
-    USE_VERSION_HEADER
-    DEPRECATION_VERSIONS
-)
-
-target_sources(KF6Kirigami2 PRIVATE ${libkirigami_extra_sources})
-
-target_include_directories(KF6Kirigami2
-    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
-    INTERFACE "$<INSTALL_INTERFACE:${KIRIGAMI_INSTALL_INCLUDEDIR}>"
-)
-
-target_link_libraries(KF6Kirigami2
-    PUBLIC
-        Qt6::Core
-        Qt6::Qml
-        Qt6::Quick
-    PRIVATE
-        Qt6::QuickControls2
-        ${LIBKIRIGAMKI_EXTRA_LIBS}
-)
-
-ecm_generate_headers(Kirigami2_CamelCase_HEADERS
-    HEADER_NAMES
-    PlatformTheme
-    KirigamiPluginFactory
-    TabletModeWatcher
-    Units
-    VirtualKeyboardWatcher
-
-    PREFIX Kirigami
-    REQUIRED_HEADERS Kirigami2_HEADERS
-)
-
-if(NOT BUILD_SHARED_LIBS)
-    ecm_generate_headers(Kirigami2_HEADERS
-        HEADER_NAMES KirigamiPlugin
-        REQUIRED_HEADERS Kirigami2_HEADERS
-        RELATIVE ..
-    )
-endif()
-
-install(TARGETS KF6Kirigami2
-        EXPORT KF6Kirigami2Targets
-        ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
-
-if(BUILD_SHARED_LIBS)
-    list(APPEND Kirigami2_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kirigami2_export.h)
-endif()
-
-install(FILES ${Kirigami2_HEADERS}
-        DESTINATION ${KIRIGAMI_INSTALL_INCLUDEDIR}/kirigami # prefix matching C++ namespace
-        COMPONENT Devel)
-install(FILES ${Kirigami2_CamelCase_HEADERS}
-        DESTINATION ${KIRIGAMI_INSTALL_INCLUDEDIR}/Kirigami # prefix matching C++ namespace
-        COMPONENT Devel)
+ecm_finalize_qml_module(KirigamiPlatform)
 
 if(BUILD_QCH)
     ecm_add_qch(
-        KF6Kirigami2_QCH
-        NAME Kirigami2
-        BASE_NAME KF6Kirigami2
+        KF6Kirigami_QCH
+        NAME KirigamiPlatform
+        BASE_NAME KF6KirigamiPlatform
         VERSION ${KF_VERSION}
         ORG_DOMAIN org.kde
         SOURCES # using only public headers, to cover only public API
-            ${Kirigami2_HEADERS}
-        MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
+            platformpluginfactory.h
+            platformtheme.h
+            tabletmodewatcher.h
+            units.h
+            virtualkeyboardwatcher.h
+        MD_MAINPAGE "${CMAKE_CURRENT_SOURCE_DIR}/README.md"
         LINK_QCHS
             Qt6Core_QCH
         BLANK_MACROS
-            KIRIGAMI_EXPORT
-            KIRIGAMI_DEPRECATED
+            KIRIGAMIPLATFORM_EXPORT
+            KIRIGAMIPLATFORM_DEPRECATED
         TAGFILE_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
         QCH_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
         COMPONENT Devel
