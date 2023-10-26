@@ -108,6 +108,11 @@ install(FILES
 
 install(TARGETS KirigamiPlatform EXPORT KF6KirigamiPlatformTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
+if (NOT BUILD_SHARED_LIBS)
+    # Without this CMake complains about it missing from the export set
+    install(TARGETS KirigamiPlatform_resources_1 EXPORT KF6KirigamiPlatformTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+endif()
+
 install(EXPORT KF6KirigamiPlatformTargets
     DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiPlatform
     FILE KF6KirigamiPlatformTargets.cmake
