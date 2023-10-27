@@ -113,7 +113,7 @@ QtObject {
     m_trailingSeparatorComponent = m_instance->property("trailingSeparator").value<QQmlComponent *>();
     Q_ASSERT(m_trailingSeparatorComponent);
 
-    m_units = engine->singletonInstance<Kirigami::Platform::Units *>("org.kde.kirigami", "Units");
+    m_units = engine->singletonInstance<Kirigami::Platform::Units *>("org.kde.kirigami.platform", "Units");
     Q_ASSERT(m_units);
 
     connect(m_units, &Kirigami::Platform::Units::gridUnitChanged, this, &QmlComponentsPool::gridUnitChanged);
