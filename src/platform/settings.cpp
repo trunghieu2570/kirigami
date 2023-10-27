@@ -34,8 +34,6 @@ public:
     Settings self;
 };
 
-Q_GLOBAL_STATIC(SettingsSingleton, privateSettingsSelf)
-
 Settings::Settings(QObject *parent)
     : QObject(parent)
     , m_hasTouchScreen(false)

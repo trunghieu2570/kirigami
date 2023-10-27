@@ -121,8 +121,6 @@ public:
 
     QVariant applicationWindowIcon() const;
 
-    // static Settings *self();
-
 protected:
     bool eventFilter(QObject *watched, QEvent *event) override;
 
