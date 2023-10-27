@@ -88,14 +88,20 @@ configure_package_config_file(
     PATH_VARS  CMAKE_INSTALL_PREFIX
 )
 
+ecm_setup_version(PROJECT
+    VARIABLE_PREFIX KIRIGAMI
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kirigami_version.h"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2ConfigVersion.cmake"
+    SOVERSION 6
+)
+
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2Config.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2ConfigVersion.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/KF6Kirigami2Macros.cmake"
     DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
     COMPONENT Devel
 )
-
-
 
 #use dbus on linux, bsd etc, but not android and apple stuff
 if (UNIX AND NOT ANDROID AND NOT(APPLE) AND NOT(DISABLE_DBUS))

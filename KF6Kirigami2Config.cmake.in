@@ -7,11 +7,14 @@ find_dependency(Qt6Quick @REQUIRED_QT_VERSION@)
 
 # Any changes in this ".cmake" file will be overwritten by CMake, the source is the ".cmake.in" file.
 
-include("${CMAKE_CURRENT_LIST_DIR}/KF6Kirigami2Targets.cmake")
+find_dependency(KF6KirigamiPlatform @PROJECT_VERSION@)
+
+# TODO: Add a proper library target for the main Kirigami plugin
+add_library(KF6Kirigami2 ALIAS KF6::KirigamiPlatform)
+add_library(KF6::Kirigami2 ALIAS KF6::KirigamiPlatform)
+# include("${CMAKE_CURRENT_LIST_DIR}/KF6Kirigami2Targets.cmake")
 
 set(Kirigami2_INSTALL_PREFIX "@PACKAGE_CMAKE_INSTALL_PREFIX@")
-
-#set(Kirigami2_LIBRARIES KF6::Kirigami2)
 
 include("${CMAKE_CURRENT_LIST_DIR}/KF6Kirigami2Macros.cmake")
 @PACKAGE_INCLUDE_QCHTARGETS@
