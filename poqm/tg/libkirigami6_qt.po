@@ -240,21 +240,21 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr ""
 
-#: settings.cpp:211
+#: platform/settings.cpp:208
 #, qt-format
-msgctxt "Settings|"
+msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr ""
 
-#: settings.cpp:213
+#: platform/settings.cpp:210
 #, qt-format
-msgctxt "Settings|"
+msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr ""
 
-#: settings.cpp:214
+#: platform/settings.cpp:211
 #, qt-format
-msgctxt "Settings|"
+msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr ""
 
