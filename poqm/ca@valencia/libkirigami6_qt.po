@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kirigami\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"PO-Revision-Date: 2023-06-23 10:04+0200\n"
+"PO-Revision-Date: 2023-10-28 09:48+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -213,25 +213,19 @@ msgid "Copy Link to Clipboard"
 msgstr "Copia l'enllaç a dins del porta-retalls"
 
 #: platform/settings.cpp:208
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "KDE Frameworks %1"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "Frameworks %1 de KDE"
 
 #: platform/settings.cpp:210
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "The %1 windowing system"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "El sistema de finestres %1"
 
 #: platform/settings.cpp:211
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "Qt %2 (built against %3)"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (construïdes amb %3)"

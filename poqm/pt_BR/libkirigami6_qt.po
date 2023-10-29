@@ -5,12 +5,13 @@
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # André Marcelo Alvarenga <alvarenga@kde.org>, 2018, 2019.
 # Thiago Masato Costa Sueto <herzenschein@gmail.com>, 2021.
+# SPDX-FileCopyrightText: 2023 Geraldo Simiao <geraldosimiao@fedoraproject.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkirigami2plugin_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"PO-Revision-Date: 2023-06-26 17:10-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"PO-Revision-Date: 2023-10-28 00:30-0300\n"
+"Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: controls/AboutItem.qml:163
 #, qt-format
@@ -211,25 +212,19 @@ msgid "Copy Link to Clipboard"
 msgstr "Copiar link para a área de transferência"
 
 #: platform/settings.cpp:208
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "KDE Frameworks %1"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "KDE Frameworks %1"
 
 #: platform/settings.cpp:210
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "The %1 windowing system"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
-msgstr "O sistema de janelas %1"
+msgstr "O %1 sistema de janelas"
 
 #: platform/settings.cpp:211
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "Qt %2 (built against %3)"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (compilado com %3)"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kirigami\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"PO-Revision-Date: 2023-06-23 10:04+0200\n"
+"PO-Revision-Date: 2023-10-28 09:48+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -213,57 +213,19 @@ msgid "Copy Link to Clipboard"
 msgstr "Copia l'enllaç al porta-retalls"
 
 #: platform/settings.cpp:208
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "KDE Frameworks %1"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
-msgstr "Frameworks %1 del KDE"
+msgstr "Frameworks %1 de KDE"
 
 #: platform/settings.cpp:210
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "The %1 windowing system"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "El sistema de finestres %1"
 
 #: platform/settings.cpp:211
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "Qt %2 (built against %3)"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (construïdes amb %3)"
-
-#~ msgctxt "CategorizedSettings|"
-#~ msgid "Settings"
-#~ msgstr "Arranjament"
-
-#~ msgctxt "CategorizedSettings|"
-#~ msgid "Settings — %1"
-#~ msgstr "Configuració — %1"
-
-#~ msgctxt "Avatar|"
-#~ msgid "%1 — %2"
-#~ msgstr "%1 — %2"
-
-#~ msgctxt "PageTab|"
-#~ msgid "Current page. Progress: %1 percent."
-#~ msgstr "Pàgina actual. Progrés: %1 per cent."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1. Progress: %2 percent."
-#~ msgstr "Navega a %1. Progrés: %2 per cent."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Current page."
-#~ msgstr "Pàgina actual."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1. Demanding attention."
-#~ msgstr "Navega a %1. Exigeix atenció."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1."
-#~ msgstr "Navega a %1."

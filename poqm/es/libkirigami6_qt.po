@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libkirigamiplugin_qt\n"
-"PO-Revision-Date: 2023-10-17 22:53+0200\n"
+"PO-Revision-Date: 2023-10-28 12:25+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -204,25 +204,19 @@ msgid "Copy Link to Clipboard"
 msgstr "Copiar enlace en el portapapeles"
 
 #: platform/settings.cpp:208
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "KDE Frameworks %1"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "KDE Frameworks %1"
 
 #: platform/settings.cpp:210
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "The %1 windowing system"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "El sistema de ventanas %1"
 
 #: platform/settings.cpp:211
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "Qt %2 (built against %3)"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (compilado para %3)"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-06-23 07:16+0200\n"
+"PO-Revision-Date: 2023-10-28 09:26+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
 "%100<=4 ? 2 : 3);\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.4\n"
 
 #: controls/AboutItem.qml:163
 #, qt-format
@@ -210,28 +210,22 @@ msgid "Copy Link to Clipboard"
 msgstr "Kopiraj povezavo na odložišče"
 
 #: platform/settings.cpp:208
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "KDE Frameworks %1"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "KDE Frameworks %1"
 
 #: platform/settings.cpp:210
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "The %1 windowing system"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "Sistem oken %1"
 
 #: platform/settings.cpp:211
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "Qt %2 (built against %3)"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
-msgstr "Qt %2 (zgrajeno za %3)"
+msgstr "Qt %2 (izgradnja za %3)"
 
 #~ msgctxt "CategorizedSettings|"
 #~ msgid "Settings"
