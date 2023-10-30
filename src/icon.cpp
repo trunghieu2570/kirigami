@@ -722,8 +722,13 @@ void Icon::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChang
         }
         polish();
     } else if (change == QQuickItem::ItemSceneChange) {
-        if (value.window) {
-            m_devicePixelRatio = window()->effectiveDevicePixelRatio();
+        if (m_window) {
+            disconnect(m_window.data(), &QWindow::visibleChanged, this, &Icon::windowVisibleChanged);
+        }
+        m_window = value.window;
+        if (m_window) {
+            connect(m_window.data(), &QWindow::visibleChanged, this, &Icon::windowVisibleChanged);
+            m_devicePixelRatio = m_window->effectiveDevicePixelRatio();
         }
     } else if (change == ItemVisibleHasChanged && value.boolValue) {
         m_blockNextAnimation = true;
@@ -735,6 +740,13 @@ void Icon::valueChanged(const QVariant &value)
 {
     m_animValue = value.toReal();
     update();
+}
+
+void Icon::windowVisibleChanged(bool visible)
+{
+    if (visible) {
+        m_blockNextAnimation = true;
+    }
 }
 
 #include "moc_icon.cpp"

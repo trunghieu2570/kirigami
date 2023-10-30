@@ -14,6 +14,7 @@
 #include <QVariant>
 
 class QNetworkReply;
+class QQuickWindow;
 class QPropertyAnimation;
 
 namespace Kirigami
@@ -247,6 +248,7 @@ protected:
 
 private:
     void valueChanged(const QVariant &value);
+    void windowVisibleChanged(bool visible);
     QSGNode *createSubtree(qreal initialOpacity);
     void updateSubtree(QSGNode *node, qreal opacity);
     QSize iconSizeHint() const;
@@ -281,4 +283,5 @@ private:
     bool m_roundToIconSize = true;
     bool m_allowNextAnimation = false;
     bool m_blockNextAnimation = false;
+    QPointer<QQuickWindow> m_window;
 };
