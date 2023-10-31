@@ -7,10 +7,15 @@
 #include "headerfooterlayout.h"
 
 #include <QDebug>
+#include <QTimer>
 
 HeaderFooterLayout::HeaderFooterLayout(QQuickItem *parent)
     : QQuickItem(parent)
 {
+    m_sizeHintTimer = new QTimer(this);
+    m_sizeHintTimer->setInterval(0);
+    m_sizeHintTimer->setSingleShot(true);
+    connect(m_sizeHintTimer, &QTimer::timeout, this, &HeaderFooterLayout::calculateImplicitSize);
 }
 
 HeaderFooterLayout::~HeaderFooterLayout()
@@ -39,9 +44,9 @@ void HeaderFooterLayout::setHeader(QQuickItem *item)
             m_header->setZ(1);
         }
 
-        connect(m_header, &QQuickItem::implicitWidthChanged, this, &HeaderFooterLayout::calculateImplicitSize);
-        connect(m_header, &QQuickItem::implicitHeightChanged, this, &HeaderFooterLayout::calculateImplicitSize);
-        connect(m_header, &QQuickItem::visibleChanged, this, &HeaderFooterLayout::calculateImplicitSize);
+        connect(m_header, &QQuickItem::implicitWidthChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
+        connect(m_header, &QQuickItem::implicitHeightChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
+        connect(m_header, &QQuickItem::visibleChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
 
         if (m_header->inherits("QQuickTabBar") || m_header->inherits("QQuickToolBar") || m_header->inherits("QQuickDialogButtonBox")) {
             // Assume 0 is Header for all 3 types
@@ -73,9 +78,9 @@ void HeaderFooterLayout::setContentItem(QQuickItem *item)
 
     if (m_contentItem) {
         m_contentItem->setParentItem(this);
-        connect(m_contentItem, &QQuickItem::implicitWidthChanged, this, &HeaderFooterLayout::calculateImplicitSize);
-        connect(m_contentItem, &QQuickItem::implicitHeightChanged, this, &HeaderFooterLayout::calculateImplicitSize);
-        connect(m_contentItem, &QQuickItem::visibleChanged, this, &HeaderFooterLayout::calculateImplicitSize);
+        connect(m_contentItem, &QQuickItem::implicitWidthChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
+        connect(m_contentItem, &QQuickItem::implicitHeightChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
+        connect(m_contentItem, &QQuickItem::visibleChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
     }
 
     calculateImplicitSize();
@@ -107,9 +112,9 @@ void HeaderFooterLayout::setFooter(QQuickItem *item)
             m_footer->setZ(1);
         }
 
-        connect(m_footer, &QQuickItem::implicitWidthChanged, this, &HeaderFooterLayout::calculateImplicitSize);
-        connect(m_footer, &QQuickItem::implicitHeightChanged, this, &HeaderFooterLayout::calculateImplicitSize);
-        connect(m_footer, &QQuickItem::visibleChanged, this, &HeaderFooterLayout::calculateImplicitSize);
+        connect(m_footer, &QQuickItem::implicitWidthChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
+        connect(m_footer, &QQuickItem::implicitHeightChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
+        connect(m_footer, &QQuickItem::visibleChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
 
         if (m_footer->inherits("QQuickTabBar") || m_footer->inherits("QQuickToolBar") || m_footer->inherits("QQuickDialogButtonBox")) {
             // Assume 1 is Footer for all 3 types
@@ -186,9 +191,9 @@ void HeaderFooterLayout::calculateImplicitSize()
 void HeaderFooterLayout::disconnectItem(QQuickItem *item)
 {
     if (item) {
-        disconnect(item, &QQuickItem::implicitWidthChanged, this, &HeaderFooterLayout::calculateImplicitSize);
-        disconnect(item, &QQuickItem::implicitHeightChanged, this, &HeaderFooterLayout::calculateImplicitSize);
-        disconnect(item, &QQuickItem::visibleChanged, this, &HeaderFooterLayout::calculateImplicitSize);
+        disconnect(item, &QQuickItem::implicitWidthChanged, m_sizeHintTimer, nullptr);
+        disconnect(item, &QQuickItem::implicitHeightChanged, m_sizeHintTimer, nullptr);
+        disconnect(item, &QQuickItem::visibleChanged, m_sizeHintTimer, nullptr);
     }
 }
 
