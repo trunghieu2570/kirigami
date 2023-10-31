@@ -1283,25 +1283,6 @@ Module {
         Property { name: "showClickFeedback"; type: "bool" }
     }
     Component {
-        prototype: "QQuickItemDelegate"
-        name: "org.kde.kirigami/AbstractListItem 2.0"
-        exports: ["org.kde.kirigami/AbstractListItem 2.0"]
-        exportMetaObjectRevisions: [0]
-        isComposite: true
-        defaultProperty: "_default"
-        Property { name: "supportsMouseEvents"; type: "bool" }
-        Property { name: "alternatingBackground"; type: "bool" }
-        Property { name: "sectionDelegate"; type: "bool" }
-        Property { name: "separatorVisible"; type: "bool" }
-        Property { name: "backgroundColor"; type: "QColor" }
-        Property { name: "alternateBackgroundColor"; type: "QColor" }
-        Property { name: "activeBackgroundColor"; type: "QColor" }
-        Property { name: "textColor"; type: "QColor" }
-        Property { name: "activeTextColor"; type: "QColor" }
-        Property { name: "containsMouse"; type: "bool"; isReadonly: true }
-        Property { name: "_default"; type: "QQuickItem"; isPointer: true }
-    }
-    Component {
         prototype: "QQuickAction"
         name: "org.kde.kirigami/Action 2.0"
         exports: ["org.kde.kirigami/Action 2.0"]
@@ -1413,45 +1394,6 @@ Module {
             Parameter { name: "index"; type: "QVariant" }
         }
         Method { name: "applicationWindow"; type: "QVariant" }
-    }
-    Component {
-        prototype: "QQuickItemDelegate"
-        name: "org.kde.kirigami/BasicListItem 2.0"
-        exports: ["org.kde.kirigami/BasicListItem 2.0"]
-        exportMetaObjectRevisions: [0]
-        isComposite: true
-        defaultProperty: "_basicDefault"
-        Property { name: "leading"; type: "QQuickItem"; isPointer: true }
-        Property { name: "leadingPadding"; type: "double" }
-        Property { name: "leadingFillVertically"; type: "bool" }
-        Property { name: "trailing"; type: "QQuickItem"; isPointer: true }
-        Property { name: "trailingPadding"; type: "double" }
-        Property { name: "trailingFillVertically"; type: "bool" }
-        Property { name: "reserveSpaceForSubtitle"; type: "bool" }
-        Property { name: "fadeContent"; type: "bool" }
-        Property { name: "toolTipVisible"; type: "bool" }
-        Property { name: "label"; type: "string" }
-        Property { name: "subtitle"; type: "string" }
-        Property { name: "iconSize"; type: "int" }
-        Property { name: "iconColor"; type: "QColor" }
-        Property { name: "iconSelected"; type: "bool" }
-        Property { name: "reserveSpaceForIcon"; type: "bool" }
-        Property { name: "reserveSpaceForLabel"; type: "bool" }
-        Property { name: "textSpacing"; type: "double" }
-        Property { name: "labelItem"; type: "Label_QMLTYPE_1"; isReadonly: true; isPointer: true }
-        Property { name: "subtitleItem"; type: "Label_QMLTYPE_1"; isReadonly: true; isPointer: true }
-        Property { name: "_basicDefault"; type: "QObject"; isList: true; isReadonly: true }
-        Property { name: "supportsMouseEvents"; type: "bool" }
-        Property { name: "alternatingBackground"; type: "bool" }
-        Property { name: "sectionDelegate"; type: "bool" }
-        Property { name: "separatorVisible"; type: "bool" }
-        Property { name: "backgroundColor"; type: "QColor" }
-        Property { name: "alternateBackgroundColor"; type: "QColor" }
-        Property { name: "activeBackgroundColor"; type: "QColor" }
-        Property { name: "textColor"; type: "QColor" }
-        Property { name: "activeTextColor"; type: "QColor" }
-        Property { name: "containsMouse"; type: "bool"; isReadonly: true }
-        Property { name: "_default"; type: "QQuickItem"; isPointer: true }
     }
     Component {
         prototype: "QQuickItemDelegate"

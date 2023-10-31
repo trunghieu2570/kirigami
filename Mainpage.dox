@@ -47,7 +47,6 @@ If you have any questions about Kirigami, feel free to drop by the <a href="http
 
 - \link org::kde::kirigami::Card Card \endlink
 - \link org::kde::kirigami::templates::OverlaySheet  OverlaySheet \endlink
-- \link org::kde::kirigami::BasicListItem BasicListItem  \endlink
 - \link org::kde::kirigami::SwipeListItem  SwipeListItem \endlink
 - \link org::kde::kirigami::Heading Heading  \endlink
 - \link org::kde::kirigami::PlaceholderMessage PlaceholderMessage  \endlink

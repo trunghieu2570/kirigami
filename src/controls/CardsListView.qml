@@ -19,7 +19,7 @@ import org.kde.kirigami as Kirigami
  * Therefore, it is discouraged to use it with the Card type.
  *
  * The choice between using this view with AbstractCard or a normal ListView
- * with AbstractListItem/BasicListItem is purely a choice based on aesthetics alone.
+ * is purely a choice based on aesthetics alone.
  *
  * It is recommended to use default values.
  *

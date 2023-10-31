@@ -133,9 +133,7 @@ ecm_target_qml_sources(KirigamiPlugin SOURCES
     controls/Action.qml
     controls/AbstractApplicationHeader.qml
     controls/AbstractApplicationWindow.qml
-    controls/AbstractListItem.qml
     controls/ApplicationWindow.qml
-    controls/BasicListItem.qml
     controls/OverlayDrawer.qml
     controls/ContextDrawer.qml
     controls/GlobalDrawer.qml
@@ -200,7 +198,6 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.12 SOURCES
 
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.14 SOURCES
     controls/FlexColumn.qml
-    controls/CheckableListItem.qml
 )
 
 ecm_target_qml_sources(KirigamiPlugin VERSION 2.19 SOURCES
