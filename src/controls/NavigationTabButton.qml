@@ -87,15 +87,6 @@ T.TabButton {
         return -1
     }
 
-    /**
-     * @brief This property sets whether the icon colors should be masked with a single color.
-     *
-     * default: ``true``
-     *
-     * @since 5.96
-     */
-    property bool recolorIcon: true
-
     property color foregroundColor: Qt.alpha(Kirigami.Theme.textColor, 0.85)
     property color highlightForegroundColor: Qt.alpha(Kirigami.Theme.textColor, 0.85)
     property color highlightBarColor: Kirigami.Theme.highlightColor
@@ -164,7 +155,6 @@ T.TabButton {
         Kirigami.Icon {
             id: icon
             source: control.icon.name || control.icon.source
-            isMask: control.recolorIcon
             visible: (control.icon.name.length > 0 || control.icon.source.toString().length > 0) && control.display !== T.AbstractButton.TextOnly
             color: control.icon.color
 
