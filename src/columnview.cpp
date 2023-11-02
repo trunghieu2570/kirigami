@@ -1267,7 +1267,7 @@ QQuickItem *ColumnView::pop(QQuickItem *item)
 
 QQuickItem *ColumnView::pop(const int index)
 {
-    if (index >= 0 && index < count()) {
+    if (index >= 0 && index < count() - 1) {
         return pop(m_contentItem->m_items.at(index));
     } else if (index == -1) {
         return pop(nullptr);

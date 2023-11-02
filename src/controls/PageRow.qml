@@ -389,10 +389,7 @@ QT.Control {
      * @return The page instance that was popped off the stack.
      */
     function pop(page): QT.Page {
-        if (depth > 0) {
-            return columnView.pop(page);
-        }
-        return null
+        return columnView.pop(page);
     }
 
     /**
@@ -420,7 +417,7 @@ QT.Control {
 
         // Remove all pages on top of the one being replaced.
         if (currentIndex >= 0) {
-            columnView.pop(columnView.contentChildren[currentIndex]);
+            columnView.pop(currentIndex);
         } else {
             console.warn("There's no page to replace");
         }
@@ -833,11 +830,7 @@ QT.Control {
         }
 
         function insertPage_unchecked(position, page, properties) {
-            if (position >= 0 && position < root.depth) {
-                // position - 1 because in pop() the page in the parameter is the last surviving,
-                // but we want to replace the thing at position
-                columnView.pop(root.items[position - 1]);
-            }
+            columnView.pop(position - 1);
 
             // figure out if more than one page is being pushed
             let pages;
