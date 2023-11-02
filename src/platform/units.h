@@ -201,7 +201,6 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
     Q_PROPERTY(int maximumInteger READ maximumInteger CONSTANT FINAL)
 
 public:
-    explicit Units(QObject *parent = nullptr);
     ~Units() override;
 
     int gridUnit() const;
@@ -254,6 +253,7 @@ Q_SIGNALS:
     void wheelScrollLinesChanged();
 
 protected:
+    explicit Units(QObject *parent = nullptr);
     bool eventFilter(QObject *watched, QEvent *event) override;
 
 private:
