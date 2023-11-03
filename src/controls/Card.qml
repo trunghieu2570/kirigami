@@ -65,24 +65,25 @@ Kirigami.AbstractCard {
     readonly property alias banner: bannerImage
 
 
-    header: P.BannerImage {
-        id: bannerImage
-        anchors.leftMargin: -root.leftPadding + root.background.border.width
-        anchors.topMargin: -root.topPadding + root.background.border.width
-        anchors.rightMargin: -root.rightPadding + root.background.border.width
-        anchors.bottomMargin: 0
-        //height: Layout.preferredHeight
-        implicitWidth: Layout.preferredWidth
-        Layout.preferredHeight: (source.toString().length > 0  ? width / (sourceSize.width / sourceSize.height) : Layout.minimumHeight) + anchors.topMargin + anchors.bottomMargin
+    header: Kirigami.Padding {
+        leftPadding: -root.leftPadding + root.background.border.width
+        topPadding: -root.topPadding + root.background.border.width
+        rightPadding: -root.rightPadding + root.background.border.width
+        bottomPadding: root.contentItem ? 0: -root.bottomPadding + root.background.border.width
+        contentItem: P.BannerImage {
+            id: bannerImage
+            implicitWidth: Layout.preferredWidth
+            implicitHeight: (source.toString().length > 0 && sourceSize.width > 0 && sourceSize.height > 0 ? width / (sourceSize.width / sourceSize.height) : Layout.minimumHeight) + parent.topPadding + parent.bottomPadding
 
-        readonly property real widthWithBorder: width + root.background.border.width * 2
-        readonly property real heightWithBorder: height + root.background.border.width * 2
-        readonly property real radiusFromBackground: root.background.radius - root.background.border.width
+            readonly property real widthWithBorder: width + root.background.border.width * 2
+            readonly property real heightWithBorder: height + root.background.border.width * 2
+            readonly property real radiusFromBackground: root.background.radius - root.background.border.width
 
-        corners.topLeftRadius: radiusFromBackground
-        corners.topRightRadius: radiusFromBackground
-        corners.bottomLeftRadius: radiusFromBackground
-        corners.bottomRightRadius: heightWithBorder < root.height ? 0 : radiusFromBackground
+            corners.topLeftRadius: radiusFromBackground
+            corners.topRightRadius: radiusFromBackground
+            corners.bottomLeftRadius: radiusFromBackground
+            corners.bottomRightRadius: heightWithBorder < root.height ? 0 : radiusFromBackground
+        }
     }
 
     onHeaderChanged: {
