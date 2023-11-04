@@ -40,6 +40,13 @@ public:
         : q(qq)
     {
     }
+    ~ToolBarLayoutPrivate()
+    {
+        if (moreButtonIncubator) {
+            moreButtonIncubator->clear();
+            delete moreButtonIncubator;
+        }
+    }
 
     void calculateImplicitSize();
     void performLayout();
