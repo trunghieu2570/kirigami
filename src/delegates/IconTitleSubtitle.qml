@@ -112,7 +112,7 @@ Item {
         height: width
     }
 
-    implicitWidth: iconItem.implicitWidth + titleSubtitle.anchors.leftMargin + titleSubtitle.implicitWidth
+    implicitWidth: Math.ceil(iconItem.implicitWidth + titleSubtitle.anchors.leftMargin + titleSubtitle.implicitWidth)
     implicitHeight: Math.max(iconItem.implicitHeight, titleSubtitle.implicitHeight)
 
     Kirigami.Icon {

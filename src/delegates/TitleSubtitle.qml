@@ -96,7 +96,7 @@ Item {
      */
     readonly property bool truncated: labelItem.truncated || subtitleItem.truncated
 
-    implicitWidth: Math.max(labelItem.implicitWidth, subtitleItem.implicitWidth)
+    implicitWidth: Math.ceil(Math.max(labelItem.implicitWidth, subtitleItem.implicitWidth))
     implicitHeight: labelItem.implicitHeight + (subtitleVisible ? subtitleItem.implicitHeight : 0)
 
     Text {
