@@ -208,7 +208,7 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "複製連結至剪貼簿"
 
-#: platform/settings.cpp:208
+#: platform/settings.cpp:206
 #, fuzzy, qt-format
 #| msgctxt "Settings|"
 #| msgid "KDE Frameworks %1"
@@ -216,7 +216,7 @@ msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "KDE Frameworks %1"
 
-#: platform/settings.cpp:210
+#: platform/settings.cpp:208
 #, fuzzy, qt-format
 #| msgctxt "Settings|"
 #| msgid "The %1 windowing system"
@@ -224,7 +224,7 @@ msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "%1 視窗系統"
 
-#: platform/settings.cpp:211
+#: platform/settings.cpp:209
 #, fuzzy, qt-format
 #| msgctxt "Settings|"
 #| msgid "Qt %2 (built against %3)"
