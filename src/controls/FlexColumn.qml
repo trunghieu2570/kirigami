@@ -44,6 +44,11 @@ ColumnLayout {
      */
     property int alignment: Qt.AlignHCenter | Qt.AlignTop
 
+    /**
+     * @brief This property holds the inner column's width.
+     */
+    property real innerWidth: __inner.width
+
     Layout.fillWidth: true
     Layout.fillHeight: true
 
