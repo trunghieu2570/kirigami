@@ -84,16 +84,6 @@ Item {
 
     opacity: height > 0 ? 1 : 0
 
-    onPageChanged: {
-        // NOTE: The Connections object doesn't work with attached properties signals, so we have to do this by hand
-        headerItem.oldPage?.Kirigami.ColumnView.scrollIntention.disconnect(headerItem.scrollIntentHandler);
-        root.page?.Kirigami.ColumnView.scrollIntention.connect(headerItem.scrollIntentHandler);
-        headerItem.oldPage = root.page;
-    }
-    Component.onDestruction: {
-        root.page?.Kirigami.ColumnView.scrollIntention.disconnect(headerItem.scrollIntentHandler);
-    }
-
     NumberAnimation {
         id: heightAnim
         target: root
@@ -101,12 +91,22 @@ Item {
         duration: Kirigami.Units.longDuration
         easing.type: Easing.InOutQuad
     }
+
     Connections {
         target: root.__appWindow
+
         function onControlsVisibleChanged() {
             heightAnim.from = root.implicitHeight;
             heightAnim.to = root.__appWindow.controlsVisible ? root.preferredHeight : 0;
             heightAnim.restart();
+        }
+    }
+
+    Connections {
+        target: root.page?.Kirigami.ColumnView ?? null
+
+        function onScrollIntention(event) {
+            headerItem.scrollIntentHandler(event);
         }
     }
 
@@ -141,8 +141,6 @@ Item {
                 root.page.flickable.contentY -= event.delta.y;
             }
         }
-
-        property Kirigami.Page oldPage
 
         Connections {
             target: root.page?.globalToolBarItem ?? null
