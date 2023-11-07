@@ -28,8 +28,12 @@ Item {
     id: root
     z: 90
     property int minimumHeight: 0
-    property int preferredHeight: Math.max(...(Array.from(mainItem.children).map(elm => elm.implicitHeight))) + topPadding + bottomPadding
+    property int preferredHeight: mainItem.children.reduce(maximumImplicitHeightReducer, 0) + topPadding + bottomPadding
     property int maximumHeight: Kirigami.Units.gridUnit * 3
+
+    function maximumImplicitHeightReducer(accumulator: real, item: Item): real {
+        return Math.max(accumulator, item.implicitHeight);
+    }
 
     property int position: QQC2.ToolBar.Header
 
@@ -57,7 +61,7 @@ Item {
     Kirigami.Theme.inherit: true
 
     // FIXME: remove
-    property QtObject __appWindow: typeof applicationWindow !== "undefined" ? applicationWindow() : null;
+    property QtObject __appWindow: typeof applicationWindow !== "undefined" ? applicationWindow() : null
     implicitHeight: preferredHeight
     height: Layout.preferredHeight
 
@@ -87,7 +91,7 @@ Item {
         headerItem.oldPage = root.page;
     }
     Component.onDestruction: {
-            root.page?.Kirigami.ColumnView.scrollIntention.disconnect(headerItem.scrollIntentHandler);
+        root.page?.Kirigami.ColumnView.scrollIntention.disconnect(headerItem.scrollIntentHandler);
     }
 
     NumberAnimation {
@@ -98,10 +102,10 @@ Item {
         easing.type: Easing.InOutQuad
     }
     Connections {
-        target: __appWindow
+        target: root.__appWindow
         function onControlsVisibleChanged() {
-            heightAnim.from = root.implicitHeight
-            heightAnim.to = __appWindow.controlsVisible ? root.preferredHeight : 0;
+            heightAnim.from = root.implicitHeight;
+            heightAnim.to = root.__appWindow.controlsVisible ? root.preferredHeight : 0;
             heightAnim.restart();
         }
     }
@@ -115,7 +119,7 @@ Item {
             top: !Kirigami.Settings.isMobile || root.position === QQC2.ToolBar.Footer ? parent.top : undefined
         }
 
-        height: root.minimumHeight > 0 ? Math.max(root.height, root.minimumHeight) : Math.max(root.height, root.preferredHeight)
+        height: Math.max(root.height, root.minimumHeight > 0 ? root.minimumHeight : root.preferredHeight)
 
         function scrollIntentHandler(event) {
             if (!root.hideWhenTouchScrolling) {
@@ -152,7 +156,7 @@ Item {
            id: slideResetTimer
            interval: 500
            onTriggered: {
-                if ((root.pageRow?.wideMode ?? (__appWindow?.wideScreen ?? false)) || !Kirigami.Settings.isMobile) {
+                if ((root.pageRow?.wideMode ?? (root.__appWindow?.wideScreen ?? false)) || !Kirigami.Settings.isMobile) {
                     return;
                 }
                 if (root.height > root.minimumHeight + (root.preferredHeight - root.minimumHeight) / 2) {
@@ -182,15 +186,17 @@ Item {
         Item {
             id: mainItem
             clip: childrenRect.width > width
+
             onChildrenChanged: {
-                Array.from(children).forEach(item => {
-                    item.anchors.verticalCenter = this.verticalCenter;
-                })
+                for (const child of children) {
+                    child.anchors.verticalCenter = verticalCenter;
+                }
             }
+
             anchors {
                 fill: parent
-                leftMargin: root.leftPadding
                 topMargin: root.topPadding
+                leftMargin: root.leftPadding
                 rightMargin: root.rightPadding
                 bottomMargin: root.bottomPadding
             }
