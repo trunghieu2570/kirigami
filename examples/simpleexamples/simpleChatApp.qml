@@ -110,10 +110,9 @@ Kirigami.ApplicationWindow {
                 ListView {
                     reuseItems: true
                     model: 50
-                    delegate: Kirigami.BasicListItem {
-                        label: "Person " + modelData
-                        separatorVisible: false
-                        reserveSpaceForIcon: false
+                    delegate: QQC2.ItemDelegate {
+                        text: "Person " + modelData
+                        width: parent.width
                     }
                 }
             }
@@ -122,15 +121,15 @@ Kirigami.ApplicationWindow {
                 Layout.fillWidth: true
                 Layout.maximumHeight: 1//implicitHeight
             }
-            Kirigami.BasicListItem {
-                label: "Group call"
+            QQC2.ItemDelegate {
+                text: "Group call"
                 icon.name: "call-start"
-                separatorVisible: false
+                width: parent.width
             }
-            Kirigami.BasicListItem {
-                label: "Send Attachment"
+            QQC2.ItemDelegate {
+                text: "Send Attachment"
                 icon.name: "mail-attachment"
-                separatorVisible: false
+                width: parent.width
             }
         }
     }
@@ -175,12 +174,11 @@ Kirigami.ApplicationWindow {
                 currentIndex: 2
                 model: 30
                 reuseItems: true
-                delegate: Kirigami.BasicListItem {
-                    label: "#Channel " + modelData
+                delegate: QQC2.ItemDelegate {
+                    text: "#Channel " + modelData
                     checkable: true
                     checked: channelsList.currentIndex === index
-                    separatorVisible: false
-                    reserveSpaceForIcon: false
+                    width: parent.width
                 }
             }
         }

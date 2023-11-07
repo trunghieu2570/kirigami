@@ -5,6 +5,7 @@
  */
 
 import QtQuick
+import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
 Kirigami.ApplicationWindow {
@@ -48,9 +49,10 @@ Kirigami.ApplicationWindow {
                 keyNavigationEnabled: true
                 activeFocusOnTab: true
                 reuseItems: true
-                delegate: Kirigami.BasicListItem {
+                delegate: QQC2.ItemDelegate {
                     id: delegate
                     action: modelData
+                    width: parent.width
                 }
             }
         }

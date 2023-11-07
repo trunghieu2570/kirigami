@@ -45,8 +45,9 @@ Rectangle {
             id: content
             model: 10
 
-            delegate: Kirigami.BasicListItem {
-                label: "Item " + modelData
+            delegate: QQC2.ItemDelegate {
+                text: "Item " + modelData
+                width: parent.width
             }
         }
     }

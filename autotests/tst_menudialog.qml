@@ -68,7 +68,7 @@ TestCase {
         dialog.open();
         tryVerify(() => dialog.opened);
 
-        const delegate = findChildIf(dialog.contentItem, item => item.action === actionA) as Kirigami.BasicListItem;
+        const delegate = findChildIf(dialog.contentItem, item => item.action === actionA) as QQC2.ItemDelegate;
         verify(delegate);
 
         mouseClick(delegate);
