@@ -32,7 +32,7 @@ T.ItemDelegate {
      * This item will be positioned on top if headerOrientation is ``Qt.Vertical``
      * or on the left if it is ``Qt.Horizontal``.
      */
-    property alias header: layout.header
+    property alias header: headerFooterLayout.header
 
     /**
      * @brief This property sets the card's orientation.
@@ -52,7 +52,7 @@ T.ItemDelegate {
      * This item will be positioned at the bottom if headerOrientation is ``Qt.Vertical``
      * or on the right if it is ``Qt.Horizontal``.
      */
-    property alias footer: layout.footer
+    property alias footer: headerFooterLayout.footer
 
     /**
      * @brief This property sets whether clicking or tapping on the card area shows a visual click feedback.
@@ -63,14 +63,14 @@ T.ItemDelegate {
      */
     property bool showClickFeedback: false
 
-    //default property alias __contents: mainItem.data
-
 //END properties
 
     Layout.fillWidth: true
 
-    implicitWidth: Math.max(background.implicitWidth, layout.implicitWidth) + leftPadding + rightPadding
-    implicitHeight: layout.implicitHeight + topPadding + bottomPadding
+    implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
+                            outerPaddingLayout.implicitWidth)
+    implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
+                             outerPaddingLayout.implicitHeight)
 
     hoverEnabled: !Kirigami.Settings.tabletMode && showClickFeedback
 
@@ -80,23 +80,49 @@ T.ItemDelegate {
     width: ListView.view ? ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin : undefined
     padding: Kirigami.Units.largeSpacing
 
-    Kirigami.HeaderFooterLayout {
-        id: layout
-        parent: root
-        anchors {
-            fill: parent
-            margins: root.padding
-        }
-        contentItem: Kirigami.Padding {
-            visible: contentItem
-            contentItem: root.contentItem
-            topPadding: layout.header ? Kirigami.Units.largeSpacing : 0
-            bottomPadding: layout.footer ? Kirigami.Units.largeSpacing : 0
-            Connections {
-                target: layout.contentItem.contentItem
-                onXChanged: layout.contentItem.contentItem.x = 0
-                onYChanged: layout.contentItem.contentItem.y = layout.contentItem.topPadding
+    // Card component repurposes control's contentItem property, so it has to
+    // reimplement content layout and its padding manually.
+    Kirigami.Padding {
+        id: outerPaddingLayout
+
+        anchors.fill: parent
+
+        topPadding: root.topPadding
+        leftPadding: root.leftPadding
+        rightPadding: root.rightPadding
+        bottomPadding: root.bottomPadding
+
+        contentItem: Kirigami.HeaderFooterLayout {
+            id: headerFooterLayout
+
+            contentItem: Kirigami.Padding {
+                id: innerPaddingLayout
+
+                contentItem: root.contentItem
+
+                // Hide it altogether, so that vertical padding won't be
+                // included in control's total implicit height.
+                visible: contentItem !== null
+
+                topPadding: headerFooterLayout.header ? Kirigami.Units.largeSpacing : 0
+                bottomPadding: headerFooterLayout.footer ? Kirigami.Units.largeSpacing : 0
             }
+        }
+    }
+
+    // HACK: A Control like this ItemDelegate tries to manage its
+    // contentItem's positioning, so we need to override that. This is
+    // equivalent to declaring x/y/width/height bindings in QQC2 style
+    // implementations.
+    Connections {
+        target: root.contentItem
+
+        function onXChanged() {
+            root.contentItem.x = 0;
+        }
+
+        function onYChanged() {
+            root.contentItem.y = Qt.binding(() => innerPaddingLayout.topPadding);
         }
     }
 }
