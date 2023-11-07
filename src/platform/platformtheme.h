@@ -378,7 +378,7 @@ public:
     T oldValue;
     T newValue;
 
-    inline static QEvent::Type type = QEvent::None;
+    static QEvent::Type type;
 };
 
 using DataChangedEvent = PropertyChangedEvent<std::shared_ptr<PlatformThemeData>>;

@@ -28,6 +28,17 @@ namespace Kirigami
 {
 namespace Platform
 {
+template<>
+KIRIGAMIPLATFORM_EXPORT QEvent::Type PlatformThemeEvents::DataChangedEvent::type = QEvent::None;
+template<>
+KIRIGAMIPLATFORM_EXPORT QEvent::Type PlatformThemeEvents::ColorSetChangedEvent::type = QEvent::None;
+template<>
+KIRIGAMIPLATFORM_EXPORT QEvent::Type PlatformThemeEvents::ColorGroupChangedEvent::type = QEvent::None;
+template<>
+KIRIGAMIPLATFORM_EXPORT QEvent::Type PlatformThemeEvents::ColorChangedEvent::type = QEvent::None;
+template<>
+KIRIGAMIPLATFORM_EXPORT QEvent::Type PlatformThemeEvents::FontChangedEvent::type = QEvent::None;
+
 // Initialize event types.
 // We want to avoid collisions with application event types so we should use
 // registerEventType for generating the event types. Unfortunately, that method
