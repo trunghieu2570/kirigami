@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2023 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -11,11 +12,9 @@
 
 HeaderFooterLayout::HeaderFooterLayout(QQuickItem *parent)
     : QQuickItem(parent)
+    , m_isDirty(false)
+    , m_performingLayout(false)
 {
-    m_sizeHintTimer = new QTimer(this);
-    m_sizeHintTimer->setInterval(0);
-    m_sizeHintTimer->setSingleShot(true);
-    connect(m_sizeHintTimer, &QTimer::timeout, this, &HeaderFooterLayout::calculateImplicitSize);
 }
 
 HeaderFooterLayout::~HeaderFooterLayout()
@@ -44,16 +43,17 @@ void HeaderFooterLayout::setHeader(QQuickItem *item)
             m_header->setZ(1);
         }
 
-        connect(m_header, &QQuickItem::implicitWidthChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
-        connect(m_header, &QQuickItem::implicitHeightChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
-        connect(m_header, &QQuickItem::visibleChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
+        connect(m_header, &QQuickItem::implicitWidthChanged, this, &HeaderFooterLayout::markAsDirty);
+        connect(m_header, &QQuickItem::implicitHeightChanged, this, &HeaderFooterLayout::markAsDirty);
+        connect(m_header, &QQuickItem::visibleChanged, this, &HeaderFooterLayout::markAsDirty);
 
         if (m_header->inherits("QQuickTabBar") || m_header->inherits("QQuickToolBar") || m_header->inherits("QQuickDialogButtonBox")) {
             // Assume 0 is Header for all 3 types
             m_header->setProperty("position", 0);
         }
     }
-    calculateImplicitSize();
+
+    markAsDirty();
 
     Q_EMIT headerChanged();
 }
@@ -78,12 +78,12 @@ void HeaderFooterLayout::setContentItem(QQuickItem *item)
 
     if (m_contentItem) {
         m_contentItem->setParentItem(this);
-        connect(m_contentItem, &QQuickItem::implicitWidthChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
-        connect(m_contentItem, &QQuickItem::implicitHeightChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
-        connect(m_contentItem, &QQuickItem::visibleChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
+        connect(m_contentItem, &QQuickItem::implicitWidthChanged, this, &HeaderFooterLayout::markAsDirty);
+        connect(m_contentItem, &QQuickItem::implicitHeightChanged, this, &HeaderFooterLayout::markAsDirty);
+        connect(m_contentItem, &QQuickItem::visibleChanged, this, &HeaderFooterLayout::markAsDirty);
     }
 
-    calculateImplicitSize();
+    markAsDirty();
 
     Q_EMIT contentItemChanged();
 }
@@ -112,9 +112,9 @@ void HeaderFooterLayout::setFooter(QQuickItem *item)
             m_footer->setZ(1);
         }
 
-        connect(m_footer, &QQuickItem::implicitWidthChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
-        connect(m_footer, &QQuickItem::implicitHeightChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
-        connect(m_footer, &QQuickItem::visibleChanged, m_sizeHintTimer, qOverload<>(&QTimer::start));
+        connect(m_footer, &QQuickItem::implicitWidthChanged, this, &HeaderFooterLayout::markAsDirty);
+        connect(m_footer, &QQuickItem::implicitHeightChanged, this, &HeaderFooterLayout::markAsDirty);
+        connect(m_footer, &QQuickItem::visibleChanged, this, &HeaderFooterLayout::markAsDirty);
 
         if (m_footer->inherits("QQuickTabBar") || m_footer->inherits("QQuickToolBar") || m_footer->inherits("QQuickDialogButtonBox")) {
             // Assume 1 is Footer for all 3 types
@@ -122,7 +122,7 @@ void HeaderFooterLayout::setFooter(QQuickItem *item)
         }
     }
 
-    calculateImplicitSize();
+    markAsDirty();
 
     Q_EMIT footerChanged();
 }
@@ -132,17 +132,56 @@ QQuickItem *HeaderFooterLayout::footer()
     return m_footer;
 }
 
+void HeaderFooterLayout::forceLayout()
+{
+    updatePolish();
+}
+
 void HeaderFooterLayout::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
 {
     if (newGeometry != oldGeometry) {
-        polish();
+        markAsDirty();
     }
 
     QQuickItem::geometryChange(newGeometry, oldGeometry);
 }
 
+void HeaderFooterLayout::componentComplete()
+{
+    QQuickItem::componentComplete();
+    if (m_isDirty) {
+        performLayout();
+    }
+}
+
 void HeaderFooterLayout::updatePolish()
 {
+    if (m_isDirty) {
+        performLayout();
+    }
+}
+
+void HeaderFooterLayout::markAsDirty()
+{
+    if (!m_isDirty) {
+        m_isDirty = true;
+        polish();
+    }
+}
+
+void HeaderFooterLayout::performLayout()
+{
+    if (!isComponentComplete() || m_performingLayout) {
+        return;
+    }
+
+    m_isDirty = false;
+    m_performingLayout = true;
+
+    // Implicit size has to be updated first, as it may propagate to the
+    // actual size which will be used below during layouting.
+    updateImplicitSize();
+
     const QSizeF newSize = size();
     qreal headerHeight = 0;
     qreal footerHeight = 0;
@@ -150,14 +189,14 @@ void HeaderFooterLayout::updatePolish()
     if (m_header) {
         m_header->setWidth(newSize.width());
         if (m_header->isVisible()) {
-            headerHeight += m_header->height();
+            headerHeight = m_header->height();
         }
     }
     if (m_footer) {
         m_footer->setY(newSize.height() - m_footer->height());
         m_footer->setWidth(newSize.width());
         if (m_footer->isVisible()) {
-            footerHeight += m_footer->height();
+            footerHeight = m_footer->height();
         }
     }
     if (m_contentItem) {
@@ -165,9 +204,11 @@ void HeaderFooterLayout::updatePolish()
         m_contentItem->setWidth(newSize.width());
         m_contentItem->setHeight(newSize.height() - headerHeight - footerHeight);
     }
+
+    m_performingLayout = false;
 }
 
-void HeaderFooterLayout::calculateImplicitSize()
+void HeaderFooterLayout::updateImplicitSize()
 {
     qreal impWidth = 0;
     qreal impHeight = 0;
@@ -185,15 +226,14 @@ void HeaderFooterLayout::calculateImplicitSize()
         impHeight += m_contentItem->implicitHeight();
     }
     setImplicitSize(impWidth, impHeight);
-    polish();
 }
 
 void HeaderFooterLayout::disconnectItem(QQuickItem *item)
 {
     if (item) {
-        disconnect(item, &QQuickItem::implicitWidthChanged, m_sizeHintTimer, nullptr);
-        disconnect(item, &QQuickItem::implicitHeightChanged, m_sizeHintTimer, nullptr);
-        disconnect(item, &QQuickItem::visibleChanged, m_sizeHintTimer, nullptr);
+        disconnect(item, &QQuickItem::implicitWidthChanged, this, &HeaderFooterLayout::markAsDirty);
+        disconnect(item, &QQuickItem::implicitHeightChanged, this, &HeaderFooterLayout::markAsDirty);
+        disconnect(item, &QQuickItem::visibleChanged, this, &HeaderFooterLayout::markAsDirty);
     }
 }
 

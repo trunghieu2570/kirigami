@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2023 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -58,6 +59,13 @@ public:
     void setFooter(QQuickItem *item);
     QQuickItem *footer();
 
+    /**
+     * @brief HeaderFooterLayout normally positions its header, footer and
+     * contentItem once per frame (at polish event). This method forces the it
+     * to recalculate the layout immediately.
+     */
+    Q_INVOKABLE void forceLayout();
+
 Q_SIGNALS:
     void headerChanged();
     void contentItemChanged();
@@ -65,16 +73,21 @@ Q_SIGNALS:
 
 protected:
     void geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry) override;
+    void componentComplete() override;
     void updatePolish() override;
 
 private:
-    void calculateImplicitSize();
+    void markAsDirty();
+    void performLayout();
+    void updateImplicitSize();
     void disconnectItem(QQuickItem *item);
 
     QPointer<QQuickItem> m_header;
     QPointer<QQuickItem> m_contentItem;
     QPointer<QQuickItem> m_footer;
-    QTimer *m_sizeHintTimer;
+
+    bool m_isDirty : 1;
+    bool m_performingLayout : 1;
 };
 
 #endif

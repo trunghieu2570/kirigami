@@ -1,4 +1,5 @@
 /*
+ *  SPDX-FileCopyrightText: 2023 Marco Martin <mart@kde.org>
  *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
@@ -7,8 +8,8 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami
 import QtTest
+import org.kde.kirigami as Kirigami
 
 TestCase {
     id: testCase
@@ -47,7 +48,7 @@ TestCase {
             Rectangle {
                 color: "red"
                 Layout.fillWidth: true
-                Layout. minimumHeight: 50
+                Layout.minimumHeight: 50
             }
             Kirigami.HeaderFooterLayout {
                 Layout.fillWidth: true
@@ -74,7 +75,7 @@ TestCase {
     function test_implicit_sizes_standalone_layout() {
         const layout = createTemporaryObject(implicitSizeComponent, this);
         verify(layout);
-        verify(waitForRendering(layout))
+
         compare(layout.implicitHeight, 95);
         compare(layout.implicitWidth, 120);
         compare(layout.height, 95);
@@ -90,7 +91,7 @@ TestCase {
         compare(layout.contentItem.height, 40);
 
         layout.height = 130;
-        wait(50);
+        verify(waitForItemPolished(layout));
 
         // Header and footer don't change
         compare(layout.header.width, 120);
@@ -104,8 +105,7 @@ TestCase {
         compare(layout.contentItem.height, 75);
 
         layout.width = 200;
-        wait(50);
-
+        verify(waitForItemPolished(layout));
         // Everything stretched only horizontally
         compare(layout.header.width, 200);
         compare(layout.header.height, 30);
@@ -118,8 +118,7 @@ TestCase {
 
         // change header implicit size
         layout.header.implicitHeight = 40;
-        wait(50);
-
+        verify(waitForItemPolished(layout));
         compare(layout.implicitHeight, 105);
         compare(layout.implicitWidth, 120);
         compare(layout.height, 130);
@@ -136,8 +135,7 @@ TestCase {
 
         // hide header
         layout.header.visible = false;
-        wait(50);
-
+        verify(waitForItemPolished(layout));
         compare(layout.implicitHeight, 65);
         compare(layout.implicitWidth, 120);
         compare(layout.height, 130);
@@ -151,6 +149,16 @@ TestCase {
 
         compare(layout.contentItem.width, 200);
         compare(layout.contentItem.height, 105);
+
+        // force polish right now
+        verify(!isPolishScheduled(layout));
+        layout.header.visible = true;
+        verify(isPolishScheduled(layout));
+        compare(layout.implicitHeight, 65);
+        layout.forceLayout();
+        compare(layout.implicitHeight, 105);
+        verify(waitForItemPolished(layout));
+        compare(layout.implicitHeight, 105);
     }
 
     function test_implicit_sizes_nested_layout() {
@@ -178,9 +186,10 @@ TestCase {
         compare(headerFooterLayout.contentItem.height, 40);
 
         columnLayout.height = 200;
-        wait(50);
+        verify(waitForItemPolished(columnLayout));
+        verify(waitForItemPolished(headerFooterLayout));
 
-        // headerFooterLayoutshould have stretched
+        // headerFooterLayout should have stretched
         compare(headerFooterLayout.implicitHeight, 95);
         compare(headerFooterLayout.implicitWidth, 120);
         compare(headerFooterLayout.height, 145);
@@ -197,7 +206,8 @@ TestCase {
 
         // change header implicit size
         headerFooterLayout.header.implicitHeight = 40;
-        wait(50);
+        verify(waitForItemPolished(columnLayout));
+        verify(waitForItemPolished(headerFooterLayout));
 
         compare(headerFooterLayout.implicitHeight, 105);
         compare(headerFooterLayout.implicitWidth, 120);
@@ -215,7 +225,8 @@ TestCase {
 
         // hide header
         headerFooterLayout.header.visible = false;
-        wait(50);
+        verify(waitForItemPolished(columnLayout));
+        verify(waitForItemPolished(headerFooterLayout));
 
         compare(headerFooterLayout.implicitHeight, 65);
         compare(headerFooterLayout.implicitWidth, 120);
@@ -230,5 +241,32 @@ TestCase {
 
         compare(headerFooterLayout.contentItem.width, 120);
         compare(headerFooterLayout.contentItem.height, 120);
+    }
+
+    function test_disconnect_old_items() {
+        const layout = createTemporaryObject(implicitSizeComponent, this);
+        verify(layout);
+
+        verify(isPolishScheduled(layout));
+        verify(waitForItemPolished(layout));
+
+        for (const partName of ["header", "contentItem", "footer"]) {
+            const part = layout[partName];
+
+            part.implicitHeight = 10;
+
+            verify(isPolishScheduled(layout));
+            verify(waitForItemPolished(layout));
+
+            layout[partName] = null;
+
+            verify(isPolishScheduled(layout));
+            verify(waitForItemPolished(layout));
+
+            part.implicitHeight = 20;
+
+            verify(!isPolishScheduled(layout));
+        }
+
     }
 }

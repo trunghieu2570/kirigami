@@ -14,8 +14,8 @@ ColumnLayout {
     width: 600
     height: 600
 
-    Label {
-        text: "Implicit width: " + hfLayout.implicitWidth + "Implicit height:" + hfLayout.implicitHeight
+    Text {
+        text: `Implicit width: ${hfLayout.implicitWidth}\nImplicit height: ${hfLayout.implicitHeight}`
     }
     Kirigami.HeaderFooterLayout {
         id: hfLayout
