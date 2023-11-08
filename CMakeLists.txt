@@ -134,6 +134,13 @@ ecm_set_disabled_deprecation_versions(
     KF 5.95
 )
 
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    # link time optimization has been observed to break colors. Force-disable it.
+    # Before undoing this make double sure the lockscreen
+    # and logout screen are correctly colored in light/dark mode!
+    add_compile_options("-fno-lto")
+endif()
+
 add_subdirectory(src)
 if (NOT ANDROID)
     add_subdirectory(templates)
