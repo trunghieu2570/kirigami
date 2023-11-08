@@ -9,7 +9,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQml
 import QtQuick.Layouts
-import Qt5Compat.GraphicalEffects as GE
+import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
@@ -116,7 +116,7 @@ import org.kde.kirigami as Kirigami
  * @inherit QtQuick.Templates.Toolbar
  */
 
-T.ToolBar {
+QQC2.ToolBar {
     id: root
 
 //BEGIN properties
@@ -150,7 +150,7 @@ T.ToolBar {
     /**
      * @brief This property holds the background color of the toolbar.
      *
-     * default: ``Kirigami.Theme.highlightColor``
+     * default: ``Kirigami.Theme.backgroundColor``
      */
     property color backgroundColor: Kirigami.Theme.backgroundColor
 
@@ -170,13 +170,6 @@ T.ToolBar {
      * default: ``Kirigami.Theme.highlightColor``
      */
     property color highlightBarColor: Kirigami.Theme.highlightColor
-
-    /**
-     * @brief This property sets whether the toolbar should provide its own shadow.
-     *
-     * default: ``true``
-     */
-    property bool shadow: true
 
     /**
      * @brief This property holds the index of currently checked tab.
@@ -242,19 +235,15 @@ T.ToolBar {
     contentWidth: Math.ceil(Math.min(root.availableWidth, root.maximumContentWidth))
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, contentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, contentHeight + topPadding + bottomPadding)
-
-    Kirigami.Theme.colorSet: Kirigami.Theme.Window
-
-    background: Rectangle { // color & shadow
-        implicitHeight: Kirigami.Units.gridUnit * 3 + Kirigami.Units.smallSpacing * 2
-        color: root.backgroundColor
-        GE.RectangularGlow {
-            anchors.fill: parent
-            z: -1
-            visible: root.shadow
-            glowRadius: 5
-            spread: 0.3
-            color: Qt.rgba(0.0, 0.0, 0.0, 0.15)
+    position: {
+        if (QQC2.ApplicationWindow.window && QQC2.ApplicationWindow.window.footer === root) {
+            return QQC2.ToolBar.Footer
+        } else if (parent.hasOwnProperty("footer") && parent.footer === root) {
+            return QQC2.ToolBar.Footer
+        } else if (parent.parent.hasOwnProperty("footer") && parent.parent.footer === parent) {
+            return QQC2.ToolBar.Footer
+        } else {
+            return QQC2.ToolBar.Header
         }
     }
 
