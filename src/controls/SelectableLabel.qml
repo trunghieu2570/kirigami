@@ -40,10 +40,10 @@ QQC2.TextArea {
     property alias cursorShape: hoverHandler.cursorShape
 
     padding: 0
-    leftPadding: 0
-    rightPadding: 0
-    topPadding: 0
-    bottomPadding: 0
+    topPadding: undefined
+    leftPadding: undefined
+    rightPadding: undefined
+    bottomPadding: undefined
 
     activeFocusOnTab: false
     readOnly: true
