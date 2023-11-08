@@ -486,57 +486,40 @@ QQC2.SwipeDelegate {
                 : overlayLoader
 
         property bool hasVisibleActions: false
-        function updateVisibleActions(definitelyVisible) {
-            if (definitelyVisible === undefined) {
-                definitelyVisible = false
-            }
 
-            if (definitelyVisible) {
-                hasVisibleActions = true;
-            } else {
-                for (const action of listItem.actions) {
-                    // Assuming that visible is only false if it is explicitly false, and not just falsy
-                    if (action.visible) {
-                        hasVisibleActions = true;
-                        break;
-                    }
-                }
-            }
+        function updateVisibleActions(definitelyVisible: bool) {
+            hasVisibleActions = definitelyVisible || listItem.actions.some(isActionVisible);
+        }
+
+        function isActionVisible(action: T.Action): bool {
+            return (action instanceof Kirigami.Action) ? action.visible : true;
         }
 
         Repeater {
-            model: {
-                if (listItem.actions.length === 0) {
-                    return null;
-                } else {
-                    return listItem.actions[0].text !== undefined &&
-                        listItem.actions[0].trigger !== undefined ?
-                            listItem.actions :
-                            listItem.actions[0];
-                }
-            }
+            model: listItem.actions
+
             delegate: QQC2.ToolButton {
-                icon.name: modelData.icon.name
-                icon.source: modelData.icon.source
-                enabled: (modelData && modelData.enabled !== undefined) ? modelData.enabled : true;
-                visible: (modelData && modelData.visible !== undefined) ? modelData.visible : true;
+                required property T.Action modelData
+
+                action: modelData
+                display: T.AbstractButton.IconOnly
+                visible: actionsLayout.isActionVisible(action)
+
                 onVisibleChanged: actionsLayout.updateVisibleActions(visible);
                 Component.onCompleted: actionsLayout.updateVisibleActions(visible);
                 Component.onDestruction: actionsLayout.updateVisibleActions(visible);
+
                 QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
-                QQC2.ToolTip.visible: listItem.visible && (Kirigami.Settings.tabletMode ? pressed : hovered) && QQC2.ToolTip.text.length > 0
-                QQC2.ToolTip.text: modelData.tooltip || modelData.text
+                QQC2.ToolTip.visible: (Kirigami.Settings.tabletMode ? pressed : hovered) && QQC2.ToolTip.text.length > 0
+                QQC2.ToolTip.text: (action as Kirigami.Action)?.tooltip ?? action?.text ?? ""
 
                 onClicked: {
-                    if (modelData && modelData.trigger !== undefined) {
-                        modelData.trigger();
-                    }
                     slideAnim.to = 0;
                     slideAnim.restart();
                 }
 
-                Accessible.name: modelData.text
-                Accessible.description: modelData.tooltip
+                Accessible.name: text
+                Accessible.description: (action as Kirigami.Action)?.tooltip ?? ""
             }
         }
     }
