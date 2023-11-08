@@ -5,9 +5,9 @@
  */
 
 import QtQuick
+import QtQuick.Controls as QQC2
 import QtQuick.Layouts
-import QtQuick.Controls as QQC2
-import QtQuick.Controls as QQC2
+import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import "private"
 
@@ -175,7 +175,7 @@ QQC2.SwipeDelegate {
      * At most 4 actions can be revealed when sliding away the list item;
      * others will be shown in the overflow menu.
      */
-    property list<QQC2.Action> actions
+    property list<T.Action> actions
 
     /**
      * @brief This property holds the width of the overlay.
