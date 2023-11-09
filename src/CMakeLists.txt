@@ -1,3 +1,4 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/IncludeStaticDependencies.cmake)
 
 add_subdirectory(platform)
 
@@ -290,6 +291,8 @@ if (DESKTOP_ENABLED)
     )
 endif()
 
+include_static_dependencies(Kirigami EXPORT KirigamiTargets)
+
 target_link_libraries(Kirigami
     PUBLIC
     Qt6::Core
@@ -299,7 +302,6 @@ target_link_libraries(Kirigami
     Qt6::QuickControls2
     PRIVATE
     Qt6::Concurrent
-    KirigamiPlatform
     ${Kirigami_EXTRA_LIBS}
 )
 
@@ -308,10 +310,12 @@ if (HAVE_OpenMP)
 endif()
 
 if (NOT BUILD_SHARED_LIBS)
-    # Ensure we include any imported plugins into the main plugin when building
-    # statically as otherwise the plugin will not be found when importing the 
-    # main plugin.
-    target_link_libraries(KirigamiPlugin PRIVATE KirigamiDelegates)
+    # Ensure we install the plugin library file as that's required to link
+    # against for static builds to work properly
+    target_link_libraries(Kirigamiplugin PRIVATE KirigamiPlatformplugin KirigamiDelegatesplugin)
+    install(TARGETS Kirigamiplugin EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+else()
+    target_link_libraries(Kirigami PUBLIC KirigamiPlatform PRIVATE KirigamiDelegates)
 endif()
 
 install(TARGETS Kirigami EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})

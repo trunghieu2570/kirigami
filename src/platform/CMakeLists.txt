@@ -65,10 +65,13 @@ ecm_generate_export_header(KirigamiPlatform
 )
 
 target_include_directories(KirigamiPlatform
-    INTERFACE
+    PUBLIC
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>"
     "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}>"
     "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami/Platform>"
 )
+
+include_static_dependencies(KirigamiPlatform EXPORT KF6KirigamiPlatformTargets)
 
 target_link_libraries(KirigamiPlatform
     PUBLIC
@@ -106,12 +109,11 @@ install(FILES
     COMPONENT Devel
 )
 
-install(TARGETS KirigamiPlatform EXPORT KF6KirigamiPlatformTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
-
 if (NOT BUILD_SHARED_LIBS)
-    # Without this CMake complains about it missing from the export set
-    install(TARGETS KirigamiPlatform_resources_1 EXPORT KF6KirigamiPlatformTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+    install(TARGETS KirigamiPlatformplugin EXPORT KF6KirigamiPlatformTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 endif()
+
+install(TARGETS KirigamiPlatform EXPORT KF6KirigamiPlatformTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(EXPORT KF6KirigamiPlatformTargets
     DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiPlatform

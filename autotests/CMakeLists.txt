@@ -6,9 +6,10 @@ endif()
 add_executable(qmltest qmltest.cpp)
 target_link_libraries(qmltest PRIVATE Qt6::Qml Qt6::QuickTest)
 
-if (NOT BUILD_SHARED_LIBS)
-    target_compile_definitions(qmltest PRIVATE STATIC_MODULE)
-    target_link_libraries(qmltest PRIVATE KirigamiPlugin)
+if (BUILD_SHARED_LIBS)
+    target_link_libraries(qmltest PRIVATE Kirigami)
+else()
+    target_link_libraries(qmltest PRIVATE Kirigamiplugin)
 endif()
 
 macro(kirigami_add_tests)
