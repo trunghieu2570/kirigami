@@ -3,6 +3,9 @@ add_subdirectory(platform)
 
 add_subdirectory(delegates)
 
+add_library(Kirigami)
+add_library(KF6::Kirigami ALIAS Kirigami)
+
 if (WIN32)
     # Kirigami apparently adds too many sources so on Windows we end
     # up running into command line length limits. So disable cache
@@ -10,7 +13,7 @@ if (WIN32)
     set(_extra_options NO_CACHEGEN)
 endif()
 
-ecm_add_qml_module(KirigamiPlugin URI "org.kde.kirigami" VERSION 2.0
+ecm_add_qml_module(Kirigami URI "org.kde.kirigami" VERSION 2.0
     CLASS_NAME KirigamiPlugin
     DEPENDENCIES
     "QtQuick.Controls"
@@ -22,9 +25,9 @@ ecm_add_qml_module(KirigamiPlugin URI "org.kde.kirigami" VERSION 2.0
 )
 
 ecm_create_qm_loader(kirigami_QM_LOADER libkirigami6_qt)
-target_sources(KirigamiPlugin PRIVATE ${kirigami_QM_LOADER})
+target_sources(Kirigami PRIVATE ${kirigami_QM_LOADER})
 
-ecm_qt_declare_logging_category(KirigamiPlugin
+ecm_qt_declare_logging_category(Kirigami
     HEADER loggingcategory.h
     IDENTIFIER KirigamiLog
     CATEGORY_NAME kf.kirigami
@@ -33,12 +36,18 @@ ecm_qt_declare_logging_category(KirigamiPlugin
     EXPORT KIRIGAMI
 )
 
-target_include_directories(KirigamiPlugin PRIVATE
+set_target_properties(Kirigami PROPERTIES
+    VERSION     ${PROJECT_VERSION}
+    SOVERSION   6
+    EXPORT_NAME "Kirigami"
+)
+
+target_include_directories(Kirigami PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/platform
     ${CMAKE_CURRENT_BINARY_DIR}/platform
 )
 
-target_sources(KirigamiPlugin PRIVATE
+target_sources(Kirigami PRIVATE
     colorutils.cpp
     colorutils.h
     columnview.cpp
@@ -53,8 +62,6 @@ target_sources(KirigamiPlugin PRIVATE
     icon.h
     imagecolors.cpp
     imagecolors.h
-    kirigamiplugin.cpp
-    kirigamiplugin.h
     mnemonicattached.cpp
     mnemonicattached.h
     overlayzstackingattached.cpp
@@ -84,25 +91,26 @@ target_sources(KirigamiPlugin PRIVATE
     scenegraph/managedtexturenode.h
     scenegraph/paintedrectangleitem.cpp
     scenegraph/paintedrectangleitem.h
+    scenegraph/shadowedborderrectanglematerial.cpp
+    scenegraph/shadowedborderrectanglematerial.h
+    scenegraph/shadowedbordertexturematerial.cpp
+    scenegraph/shadowedbordertexturematerial.h
+    scenegraph/shadowedrectanglematerial.cpp
+    scenegraph/shadowedrectanglematerial.h
+    scenegraph/shadowedrectanglenode.cpp
+    scenegraph/shadowedrectanglenode.h
+    scenegraph/shadowedtexturematerial.cpp
+    scenegraph/shadowedtexturematerial.h
+    scenegraph/shadowedtexturenode.cpp
+    scenegraph/shadowedtexturenode.h
 )
-if (HAVE_QTGUI_OPENGL AND NOT KF6_PORTING_TODO)
-    target_sources(KirigamiPlugin PRIVATE
-        scenegraph/shadowedborderrectanglematerial.cpp
-        scenegraph/shadowedborderrectanglematerial.h
-        scenegraph/shadowedbordertexturematerial.cpp
-        scenegraph/shadowedbordertexturematerial.h
-        scenegraph/shadowedrectanglematerial.cpp
-        scenegraph/shadowedrectanglematerial.h
-        scenegraph/shadowedrectanglenode.cpp
-        scenegraph/shadowedrectanglenode.h
-        scenegraph/shadowedtexturematerial.cpp
-        scenegraph/shadowedtexturematerial.h
-        scenegraph/shadowedtexturenode.cpp
-        scenegraph/shadowedtexturenode.h
-    )
-endif()
 
-qt6_add_shaders(KirigamiPlugin "shaders6"
+target_sources(Kirigamiplugin PRIVATE
+    kirigamiplugin.cpp
+    kirigamiplugin.h
+)
+
+qt6_add_shaders(Kirigami "shaders"
     BATCHABLE
     PRECOMPILE
     OPTIMIZED
@@ -129,7 +137,7 @@ qt6_add_shaders(KirigamiPlugin "shaders6"
         shadowedbordertexture_lowpower.frag.qsb
 )
 
-ecm_target_qml_sources(KirigamiPlugin SOURCES
+ecm_target_qml_sources(Kirigami SOURCES
     controls/Action.qml
     controls/AbstractApplicationHeader.qml
     controls/AbstractApplicationWindow.qml
@@ -146,16 +154,16 @@ ecm_target_qml_sources(KirigamiPlugin SOURCES
     controls/SwipeListItem.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.1 SOURCES
+ecm_target_qml_sources(Kirigami VERSION 2.1 SOURCES
     controls/AbstractApplicationItem.qml
     controls/ApplicationItem.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.3 SOURCES
+ecm_target_qml_sources(Kirigami VERSION 2.3 SOURCES
     controls/FormLayout.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.4 SOURCES
+ecm_target_qml_sources(Kirigami VERSION 2.4 SOURCES
     controls/AbstractCard.qml
     controls/Card.qml
     controls/CardsListView.qml
@@ -163,44 +171,44 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.4 SOURCES
     controls/InlineMessage.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.5 SOURCES
+ecm_target_qml_sources(Kirigami VERSION 2.5 SOURCES
     controls/ListItemDragHandle.qml
     controls/ActionToolBar.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.6 SOURCES
+ecm_target_qml_sources(Kirigami VERSION 2.6 SOURCES
     controls/AboutPage.qml
     controls/LinkButton.qml
     controls/UrlButton.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.7 SOURCES
+ecm_target_qml_sources(Kirigami VERSION 2.7 SOURCES
     controls/ActionTextField.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.8 SOURCES
+ecm_target_qml_sources(Kirigami VERSION 2.8 SOURCES
     controls/SearchField.qml
     controls/PasswordField.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.10 SOURCES
+ecm_target_qml_sources(Kirigami VERSION 2.10 SOURCES
     controls/ListSectionHeader.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.11 SOURCES
+ecm_target_qml_sources(Kirigami VERSION 2.11 SOURCES
     controls/PagePoolAction.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.12 SOURCES
+ecm_target_qml_sources(Kirigami VERSION 2.12 SOURCES
     controls/ShadowedImage.qml
     controls/PlaceholderMessage.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.14 SOURCES
+ecm_target_qml_sources(Kirigami VERSION 2.14 SOURCES
     controls/FlexColumn.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.19 SOURCES
+ecm_target_qml_sources(Kirigami VERSION 2.19 SOURCES
     controls/AboutItem.qml
     controls/NavigationTabBar.qml
     controls/NavigationTabButton.qml
@@ -211,12 +219,12 @@ ecm_target_qml_sources(KirigamiPlugin VERSION 2.19 SOURCES
     controls/LoadingPlaceholder.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin VERSION 2.20 SOURCES
+ecm_target_qml_sources(Kirigami VERSION 2.20 SOURCES
     controls/SelectableLabel.qml
     controls/InlineViewHeader.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private SOURCES
+ecm_target_qml_sources(Kirigami PRIVATE PATH private SOURCES
     controls/private/ActionIconGroup.qml
     controls/private/ActionMenuItem.qml
     controls/private/ActionsMenu.qml
@@ -233,7 +241,7 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private SOURCES
     controls/private/SwipeItemEventFilter.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private/globaltoolbar SOURCES
+ecm_target_qml_sources(Kirigami PRIVATE PATH private/globaltoolbar SOURCES
     controls/private/globaltoolbar/AbstractPageHeader.qml
     controls/private/globaltoolbar/BreadcrumbControl.qml
     controls/private/globaltoolbar/PageRowGlobalToolBarStyleGroup.qml
@@ -243,7 +251,7 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH private/globaltoolbar SOURCES
     controls/private/globaltoolbar/ToolBarPageFooter.qml
 )
 
-ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates SOURCES
+ecm_target_qml_sources(Kirigami PRIVATE PATH templates SOURCES
     controls/templates/AbstractApplicationHeader.qml
     controls/templates/AbstractCard.qml
     controls/templates/Chip.qml
@@ -254,7 +262,7 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates SOURCES
     controls/templates/qmldir
 )
 
-ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates/private SOURCES
+ecm_target_qml_sources(Kirigami PRIVATE PATH templates/private SOURCES
     controls/templates/private/BackButton.qml
     controls/templates/private/BorderPropertiesGroup.qml
     controls/templates/private/ContextIcon.qml
@@ -267,31 +275,33 @@ ecm_target_qml_sources(KirigamiPlugin PRIVATE PATH templates/private SOURCES
     controls/templates/private/qmldir
 )
 
-qt_target_qml_sources(KirigamiPlugin RESOURCES
+qt_target_qml_sources(Kirigami RESOURCES
     styles/Material/InlineMessage.qml
     styles/Material/Theme.qml
 )
 
 if (DESKTOP_ENABLED)
-    qt_target_qml_sources(KirigamiPlugin RESOURCES
+    qt_target_qml_sources(Kirigami RESOURCES
         styles/org.kde.desktop/AbstractApplicationHeader.qml
         styles/org.kde.desktop/Theme.qml
     )
 endif()
 
-target_link_libraries(KirigamiPlugin
-    PUBLIC Qt6::Core
-    PRIVATE
-    ${Kirigami_EXTRA_LIBS}
+target_link_libraries(Kirigami
+    PUBLIC
+    Qt6::Core
+    Qt6::Gui
     Qt6::Qml
     Qt6::Quick
     Qt6::QuickControls2
+    PRIVATE
     Qt6::Concurrent
     KirigamiPlatform
+    ${Kirigami_EXTRA_LIBS}
 )
 
 if (HAVE_OpenMP)
-target_link_libraries(KirigamiPlugin PRIVATE OpenMP::OpenMP_CXX)
+    target_link_libraries(Kirigami PRIVATE OpenMP::OpenMP_CXX)
 endif()
 
 if (NOT BUILD_SHARED_LIBS)
@@ -301,7 +311,14 @@ if (NOT BUILD_SHARED_LIBS)
     target_link_libraries(KirigamiPlugin PRIVATE KirigamiDelegates)
 endif()
 
-ecm_finalize_qml_module(KirigamiPlugin DESTINATION ${KDE_INSTALL_QMLDIR})
+install(TARGETS Kirigami EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(EXPORT KirigamiTargets
+    DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6Kirigami
+    FILE KF6KirigamiTargets.cmake
+    NAMESPACE KF6
+)
+
+ecm_finalize_qml_module(Kirigami DESTINATION ${KDE_INSTALL_QMLDIR})
 
 if (ANDROID)
     install(FILES KF6Kirigami2-android-dependencies.xml
