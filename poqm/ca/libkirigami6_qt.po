@@ -151,12 +151,12 @@ msgctxt "PasswordField|"
 msgid "Show Password"
 msgstr "Mostra la contrasenya"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:96
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:94
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
 msgstr "Tanca el menú"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:96
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:94
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr "Obre el menú"
