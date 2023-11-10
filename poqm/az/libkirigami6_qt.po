@@ -151,7 +151,7 @@ msgctxt "PasswordField|"
 msgid "Show Password"
 msgstr "Şifrə"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:94
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:84
 #, fuzzy
 #| msgctxt "OverlayDrawer|"
 #| msgid "Close"
@@ -159,7 +159,7 @@ msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
 msgstr "Bağlamaq"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:94
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:84
 #, fuzzy
 #| msgctxt "OverlayDrawer|"
 #| msgid "Open"
