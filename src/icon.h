@@ -279,7 +279,7 @@ private:
     // animation on image change
     QPropertyAnimation *m_animation = nullptr;
     qreal m_animValue = 1.0;
-    bool m_animated = true;
+    bool m_animated = false;
     bool m_roundToIconSize = true;
     bool m_allowNextAnimation = false;
     bool m_blockNextAnimation = false;
