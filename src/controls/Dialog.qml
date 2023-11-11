@@ -339,56 +339,57 @@ T.Dialog {
     }
 
     // dialog content
-    contentItem: ColumnLayout {
-        QQC2.ScrollView {
-            id: contentControl
+    contentItem: QQC2.ScrollView {
+        id: contentControl
 
-            // ensure view colour scheme, and background color
-            Kirigami.Theme.inherit: false
-            Kirigami.Theme.colorSet: Kirigami.Theme.View
+        // ensure view colour scheme, and background color
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
 
-            QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+        QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
-            // height of everything else in the dialog other than the content
-            property real otherHeights: root.header.height + root.footer.height + root.topPadding + root.bottomPadding;
+        // height of everything else in the dialog other than the content
+        property real otherHeights: root.header.height + root.footer.height + root.topPadding + root.bottomPadding;
 
-            property real calculatedMaximumWidth: Math.min(root.absoluteMaximumWidth, root.maximumWidth) - root.leftPadding - root.rightPadding
-            property real calculatedMaximumHeight: Math.min(root.absoluteMaximumHeight, root.maximumHeight) - root.topPadding - root.bottomPadding
-            property real calculatedImplicitWidth: (contentChildren.length === 1 && contentChildren[0].implicitWidth > 0
-                ? contentChildren[0].implicitWidth
-                : (contentItem.implicitWidth > 0 ? contentItem.implicitWidth : contentItem.width)) + leftPadding + rightPadding
-            property real calculatedImplicitHeight: (contentChildren.length === 1 && contentChildren[0].implicitHeight > 0
+        property real calculatedMaximumWidth: Math.min(root.absoluteMaximumWidth, root.maximumWidth) - root.leftPadding - root.rightPadding
+        property real calculatedMaximumHeight: Math.min(root.absoluteMaximumHeight, root.maximumHeight) - root.topPadding - root.bottomPadding
+        property real calculatedImplicitWidth: (contentChildren.length === 1 && contentChildren[0].implicitWidth > 0
+            ? contentChildren[0].implicitWidth
+            : (contentItem.implicitWidth > 0 ? contentItem.implicitWidth : contentItem.width)) + leftPadding + rightPadding
+        property real calculatedImplicitHeight: (contentChildren.length === 1 && contentChildren[0].implicitHeight > 0
                 ? contentChildren[0].implicitHeight
                 : (contentItem.implicitHeight > 0 ? contentItem.implicitHeight : contentItem.height)) + topPadding + bottomPadding
 
-            // how do we deal with the scrollbar width?
-            // - case 1: the dialog itself has the preferredWidth set
-            //   -> we hint a width to the content so it shrinks to give space to the scrollbar
-            // - case 2: preferredWidth not set, so we are using the content's implicit width
-            //   -> we expand the dialog's width to accommodate the scrollbar width (to respect the content's desired width)
 
-            // don't enforce preferred width and height if not set
-            Layout.preferredWidth: (root.preferredWidth >= 0 ? root.preferredWidth : calculatedImplicitWidth)
-            Layout.preferredHeight: root.preferredHeight >= 0 ? root.preferredHeight - otherHeights : calculatedImplicitHeight
+        // how do we deal with the scrollbar width?
+        // - case 1: the dialog itself has the preferredWidth set
+        //   -> we hint a width to the content so it shrinks to give space to the scrollbar
+        // - case 2: preferredWidth not set, so we are using the content's implicit width
+        //   -> we expand the dialog's width to accommodate the scrollbar width (to respect the content's desired width)
 
-            Layout.fillWidth: true
-            Layout.maximumWidth: calculatedMaximumWidth
-            Layout.maximumHeight: calculatedMaximumHeight - otherHeights // we enforce maximum height solely from the content
+        // don't enforce preferred width and height if not set
+        property real preferredWidth: (root.preferredWidth >= 0 ? root.preferredWidth : calculatedImplicitWidth)
+        property real preferredHeight: root.preferredHeight >= 0 ? root.preferredHeight - otherHeights : calculatedImplicitHeight
 
-            // give an implied width and height to the contentItem so that features like word wrapping/eliding work
-            // cannot placed directly in contentControl as a child, so we must use a property
-            property var widthHint: Binding {
-                target: contentControl.contentChildren[0] || null
-                property: "width"
+        property real maximumWidth: calculatedMaximumWidth
+        property real maximumHeight: calculatedMaximumHeight - otherHeights // we enforce maximum height solely from the content
 
-                // we want to avoid horizontal scrolling, so we apply maximumWidth as a hint if necessary
-                property real preferredWidthHint: contentControl.contentItem.width
-                property real maximumWidthHint: contentControl.calculatedMaximumWidth - contentControl.leftPadding - contentControl.rightPadding
+        implicitWidth: Math.min(preferredWidth, maximumWidth)
+        implicitHeight: Math.min(preferredHeight, maximumHeight)
 
-                value: Math.min(maximumWidthHint, preferredWidthHint)
+        // give an implied width and height to the contentItem so that features like word wrapping/eliding work
+        // cannot placed directly in contentControl as a child, so we must use a property
+        property var widthHint: Binding {
+            target: contentControl.contentChildren[0] || null
+            property: "width"
 
-                restoreMode: Binding.RestoreBinding
-            }
+            // we want to avoid horizontal scrolling, so we apply maximumWidth as a hint if necessary
+            property real preferredWidthHint: contentControl.contentItem.width
+            property real maximumWidthHint: contentControl.calculatedMaximumWidth - contentControl.leftPadding - contentControl.rightPadding
+
+            value: Math.min(maximumWidthHint, preferredWidthHint)
+
+            restoreMode: Binding.RestoreBinding
         }
     }
 
