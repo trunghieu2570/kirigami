@@ -284,7 +284,6 @@ QQC2.ToolBar {
             parent: root.contentItem
             action: modelData
             width: root.buttonWidth
-            T.ButtonGroup.group: tabGroup
             // Workaround setting the action when checkable is not explicitly set making tabs uncheckable
             onActionChanged: action.checkable = true
 
