@@ -216,7 +216,7 @@ QQC2.ToolBar {
             }
             return;
         }
-        if (tabGroup.checkedButton.tabIndex !== currentIndex) {
+        if (!tabGroup.checkedButton || tabGroup.checkedButton.tabIndex !== currentIndex) {
             const buttonForCurrentIndex = tabGroup.buttons[currentIndex]
             if (buttonForCurrentIndex.action) {
                 // trigger also toggles and causes clicked() to be emitted
