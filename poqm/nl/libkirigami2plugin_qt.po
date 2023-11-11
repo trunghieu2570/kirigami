@@ -1,8 +1,8 @@
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-06-23 11:46+0200\n"
+"PO-Revision-Date: 2023-11-10 10:36+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.2\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #: controls/AboutItem.qml:133
 #, qt-format
@@ -177,7 +177,7 @@ msgstr "Zoeken"
 #: controls/SearchField.qml:107
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr "Gezochte wissen"
+msgstr "Zoeken wissen"
 
 #: controls/settingscomponents/CategorizedSettings.qml:41
 #: controls/settingscomponents/CategorizedSettings.qml:105
