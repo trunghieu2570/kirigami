@@ -1,9 +1,9 @@
-# Vít Pelčák <vit@pelcak.org>, 2016, 2017, 2018, 2019, 2020.
+# SPDX-FileCopyrightText: 2016, 2017, 2018, 2019, 2020, 2023 Vít Pelčák <vit@pelcak.org>
 # Vit Pelcak <vit@pelcak.org>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-06-23 14:39+0200\n"
+"PO-Revision-Date: 2023-11-02 13:42+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.04.2\n"
+"X-Generator: Lokalize 23.08.2\n"
 "X-Qt-Contexts: true\n"
 
 #: controls/AboutItem.qml:163
@@ -208,16 +208,16 @@ msgstr "Kopírovat odkaz do schránky"
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
-msgstr ""
+msgstr "KDE Frameworks %1"
 
 #: platform/settings.cpp:208
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
-msgstr ""
+msgstr "Okenní systém %1"
 
 #: platform/settings.cpp:209
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
-msgstr ""
+msgstr "Qt %2 (sestaveno oproti %3)"
