@@ -256,8 +256,22 @@ QQC2.ToolBar {
     // Used to manage which tab is checked and change the currentIndex
     T.ButtonGroup {
         id: tabGroup
-        exclusive: true
+        exclusive: false
         buttons: root.contentItem.children
+
+        // HACK: setting exclusive to false at the start seems to cause the initial checked item to get unchecked
+        // instead, we:
+        // - set exclusive to true only after the components load
+        // - set the checkedButton to the first checked item (same behavior as ButtonGroup)
+        Component.onCompleted: {
+            exclusive = true;
+            for (const child of contentItem.children) {
+                if (child.checked) {
+                    tabGroup.checkedButton = child;
+                    break;
+                }
+            }
+        }
 
         onCheckedButtonChanged: {
             if (!checkedButton) {
