@@ -238,9 +238,9 @@ QQC2.ToolBar {
     position: {
         if (QQC2.ApplicationWindow.window && QQC2.ApplicationWindow.window.footer === root) {
             return QQC2.ToolBar.Footer
-        } else if (parent.hasOwnProperty("footer") && parent.footer === root) {
+        } else if (parent?.footer === root) {
             return QQC2.ToolBar.Footer
-        } else if (parent.parent.hasOwnProperty("footer") && parent.parent.footer === parent) {
+        } else if (parent?.parent?.footer === parent) {
             return QQC2.ToolBar.Footer
         } else {
             return QQC2.ToolBar.Header
