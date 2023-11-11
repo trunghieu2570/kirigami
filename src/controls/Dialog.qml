@@ -108,12 +108,6 @@ import Qt5Compat.GraphicalEffects as GE
 T.Dialog {
     id: root
 
-    // TODO KF6: remove this property
-    /**
-     * @deprecated This property will be removed in the next major frameworks release (KF6)
-     */
-    property Item mainItem: contentControl.contentChildren.length > 0 ? contentControl.contentChildren[0] : null
-
     /**
      * @brief This property holds the dialog's contents; includes Items and QtObjects.
      * @property list<QtObject> dialogData
