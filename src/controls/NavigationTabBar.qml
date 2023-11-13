@@ -245,7 +245,7 @@ QQC2.ToolBar {
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, contentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, contentHeight + topPadding + bottomPadding)
     position: {
-        if (QQC2.ApplicationWindow.window && QQC2.ApplicationWindow.window.footer === root) {
+        if (QQC2.ApplicationWindow.window?.footer === root) {
             return QQC2.ToolBar.Footer
         } else if (parent?.footer === root) {
             return QQC2.ToolBar.Footer

@@ -64,4 +64,66 @@ TestCase {
             compare(tabbar.visibleActions, [tAction, kAction, tAction2]);
         }
     }
+
+    Component {
+        id: pageWithHeader
+        QQC2.Page {
+            header: Kirigami.NavigationTabBar {}
+        }
+    }
+
+    Component {
+        id: pageWithFooter
+        QQC2.Page {
+            footer: Kirigami.NavigationTabBar {}
+        }
+    }
+
+    function test_qqc2_page_position() {
+        {
+            const page = createTemporaryObject(pageWithHeader, this);
+            verify(page);
+            const bar = page.header;
+            verify(bar instanceof Kirigami.NavigationTabBar);
+            compare(bar.position, QQC2.ToolBar.Header);
+        }
+        {
+            const page = createTemporaryObject(pageWithFooter, this);
+            verify(page);
+            const bar = page.footer;
+            verify(bar instanceof Kirigami.NavigationTabBar);
+            compare(bar.position, QQC2.ToolBar.Footer);
+        }
+    }
+
+    Component {
+        id: windowWithHeader
+        QQC2.ApplicationWindow {
+            header: Kirigami.NavigationTabBar {}
+        }
+    }
+
+    Component {
+        id: windowWithFooter
+        QQC2.ApplicationWindow {
+            footer: Kirigami.NavigationTabBar {}
+        }
+    }
+
+    function test_qqc2_window_position() {
+        {
+            const window = createTemporaryObject(windowWithHeader, this);
+            verify(window);
+            const bar = window.header;
+            verify(bar instanceof Kirigami.NavigationTabBar);
+            compare(bar.position, QQC2.ToolBar.Header);
+        }
+        {
+            const window = createTemporaryObject(windowWithFooter, this);
+            verify(window);
+            const bar = window.footer;
+            verify(bar instanceof Kirigami.NavigationTabBar);
+            compare(bar.position, QQC2.ToolBar.Footer);
+        }
+    }
 }
