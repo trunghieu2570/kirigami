@@ -41,9 +41,6 @@ set_target_properties(Kirigami PROPERTIES
     VERSION     ${PROJECT_VERSION}
     SOVERSION   6
     EXPORT_NAME "Kirigami"
-    # Required so Kirigamiplugin can make use of the types in Kirigami.
-    # Can be removed when we switch to declarative registration.
-    CXX_VISIBILITY_PRESET default
 )
 
 target_include_directories(Kirigami PRIVATE

@@ -72,7 +72,7 @@ QQC2.Label {
      * @property Heading::Type type
      * @since 5.82
      */
-    property int type: Kirigami.Heading.Type.Normal
+    property int type: Heading.Type.Normal
 
     font.pointSize: {
         let factor = 1;
@@ -94,9 +94,9 @@ QQC2.Label {
         }
         return Kirigami.Theme.defaultFont.pointSize * factor;
     }
-    font.weight: type === Kirigami.Heading.Type.Primary ? Font.DemiBold : Font.Normal
+    font.weight: type === Heading.Type.Primary ? Font.DemiBold : Font.Normal
 
-    opacity: type === Kirigami.Heading.Type.Secondary ? 0.7 : 1
+    opacity: type === Heading.Type.Secondary ? 0.7 : 1
 
     Accessible.role: Accessible.Heading
 }
