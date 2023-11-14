@@ -943,6 +943,7 @@ QT.Control {
             acceptsMouse: Kirigami.Settings.isMobile
             columnResizeMode: root.wideMode ? Kirigami.ColumnView.FixedColumns : Kirigami.ColumnView.SingleColumn
             columnWidth: root.defaultColumnWidth
+            _headerHeight: root.globalToolBar.preferredHeight
 
             onItemInserted: (position, item) => root.pageInserted(position, item);
             onItemRemoved: item => root.pageRemoved(item);

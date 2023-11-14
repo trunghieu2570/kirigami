@@ -256,6 +256,14 @@ class ColumnView : public QQuickItem
      * every item declared inside the view, both visual and non-visual items
      */
     Q_PROPERTY(QQmlListProperty<QObject> contentData READ contentData FINAL)
+
+    /**
+     * The size of the header. If bigger than 0, this will ensure that the separator
+     * if floatin in the headerbar.
+     * @internal
+     */
+    Q_PROPERTY(qreal _headerHeight READ headerHeight WRITE setHeaderHeight NOTIFY headerHeightChanged)
+
     Q_CLASSINFO("DefaultProperty", "contentData")
 
 public:
@@ -292,6 +300,9 @@ public:
 
     qreal bottomPadding() const;
     void setBottomPadding(qreal padding);
+
+    qreal headerHeight() const;
+    void setHeaderHeight(qreal headerHeight);
 
     QQuickItem *currentItem();
 
@@ -504,6 +515,7 @@ Q_SIGNALS:
     void trailingVisibleItemChanged();
     void topPaddingChanged();
     void bottomPaddingChanged();
+    void headerHeightChanged();
 
 private:
     static void contentChildren_append(QQmlListProperty<QQuickItem> *prop, QQuickItem *object);
@@ -528,6 +540,7 @@ private:
     int m_currentIndex = -1;
     qreal m_topPadding = 0;
     qreal m_bottomPadding = 0;
+    qreal m_headerHeight = 0;
 
     bool m_mouseDown = false;
     bool m_interactive = true;

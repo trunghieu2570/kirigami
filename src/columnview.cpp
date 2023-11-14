@@ -87,6 +87,28 @@ QtObject {
         anchors.bottom: column.bottom
         Kirigami.Theme.colorSet: Kirigami.Theme.Window
         Kirigami.Theme.inherit: false
+
+        Rectangle {
+            color: Kirigami.Theme.backgroundColor
+            height: 6
+            width: 1
+            visible: leadingSeparator.column.Kirigami.ColumnView._headerHeight
+
+            Kirigami.Theme.colorSet: Kirigami.Theme.Header
+            Kirigami.Theme.inherit: false
+        }
+
+        Rectangle {
+            color: Kirigami.Theme.backgroundColor
+            height: 6
+            width: 1
+            y: leadingSeparator.column.Kirigami.ColumnView._headerHeight - height
+            visible: leadingSeparator.column.Kirigami.ColumnView._headerHeight > 0
+
+            Kirigami.Theme.colorSet: Kirigami.Theme.Header
+            Kirigami.Theme.inherit: false
+
+        }
     }
 
     readonly property Component trailingSeparator: Kirigami.Separator {
@@ -97,6 +119,28 @@ QtObject {
         anchors.bottom: column.bottom
         Kirigami.Theme.colorSet: Kirigami.Theme.Window
         Kirigami.Theme.inherit: false
+
+        Rectangle {
+            color: Kirigami.Theme.backgroundColor
+            height: 6
+            width: 1
+            visible: leadingSeparator.column.Kirigami.ColumnView._headerHeight
+
+            Kirigami.Theme.colorSet: Kirigami.Theme.Header
+            Kirigami.Theme.inherit: false
+        }
+
+        Rectangle {
+            color: Kirigami.Theme.backgroundColor
+            height: 6
+            width: 1
+            y: leadingSeparator.column.Kirigami.ColumnView._headerHeight - height
+            visible: trailingSeparator.column.Kirigami.ColumnView._headerHeight
+
+            Kirigami.Theme.colorSet: Kirigami.Theme.Header
+            Kirigami.Theme.inherit: false
+
+        }
     }
 }
 )"), QUrl(QStringLiteral("columnview.cpp")));
@@ -1767,6 +1811,20 @@ QQmlListProperty<QObject> ColumnView::contentData()
                                      contentData_count,
                                      contentData_at,
                                      contentData_clear);
+}
+
+qreal ColumnView::headerHeight() const
+{
+    return m_headerHeight;
+}
+
+void ColumnView::setHeaderHeight(qreal headerHeight)
+{
+    if (m_headerHeight == headerHeight) {
+        return;
+    }
+    m_headerHeight = headerHeight;
+    headerHeightChanged();
 }
 
 #include "moc_columnview.cpp"
