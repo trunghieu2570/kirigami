@@ -16,5 +16,3 @@ target_link_libraries(applicationitemapp
 )
 
 install(TARGETS applicationitemapp ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
-
-include(${CMAKE_SOURCE_DIR}/KF6Kirigami2Macros.cmake)
