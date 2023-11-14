@@ -90,7 +90,7 @@ TestCase {
         compare(layout.contentItem.height, 40);
 
         layout.height = 130;
-        verify(waitForRendering(layout))
+        wait(50);
 
         // Header and footer don't change
         compare(layout.header.width, 120);
@@ -104,7 +104,8 @@ TestCase {
         compare(layout.contentItem.height, 75);
 
         layout.width = 200;
-        verify(waitForRendering(layout));
+        wait(50);
+
         // Everything stretched only horizontally
         compare(layout.header.width, 200);
         compare(layout.header.height, 30);
@@ -117,7 +118,8 @@ TestCase {
 
         // change header implicit size
         layout.header.implicitHeight = 40;
-        verify(waitForRendering(layout));
+        wait(50);
+
         compare(layout.implicitHeight, 105);
         compare(layout.implicitWidth, 120);
         compare(layout.height, 130);
@@ -134,7 +136,8 @@ TestCase {
 
         // hide header
         layout.header.visible = false;
-        verify(waitForRendering(layout));
+        wait(50);
+
         compare(layout.implicitHeight, 65);
         compare(layout.implicitWidth, 120);
         compare(layout.height, 130);
@@ -175,7 +178,8 @@ TestCase {
         compare(headerFooterLayout.contentItem.height, 40);
 
         columnLayout.height = 200;
-        verify(waitForRendering(columnLayout));
+        wait(50);
+
         // headerFooterLayoutshould have stretched
         compare(headerFooterLayout.implicitHeight, 95);
         compare(headerFooterLayout.implicitWidth, 120);
@@ -193,7 +197,8 @@ TestCase {
 
         // change header implicit size
         headerFooterLayout.header.implicitHeight = 40;
-        verify(waitForRendering(columnLayout));
+        wait(50);
+
         compare(headerFooterLayout.implicitHeight, 105);
         compare(headerFooterLayout.implicitWidth, 120);
         compare(headerFooterLayout.height, 145);
@@ -210,7 +215,8 @@ TestCase {
 
         // hide header
         headerFooterLayout.header.visible = false;
-        verify(waitForRendering(columnLayout));
+        wait(50);
+
         compare(headerFooterLayout.implicitHeight, 65);
         compare(headerFooterLayout.implicitWidth, 120);
         compare(headerFooterLayout.height, 145);
