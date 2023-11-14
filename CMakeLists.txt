@@ -94,6 +94,12 @@ ecm_setup_version(PROJECT
     SOVERSION 6
 )
 
+ecm_setup_version(PROJECT
+    VARIABLE_PREFIX KIRIGAMI
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2ConfigVersion.cmake"
+    SOVERSION 6
+)
+
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiConfig.cmake"
     "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiConfigVersion.cmake"
@@ -111,6 +117,7 @@ configure_package_config_file(
 
 install(
     FILES ${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2Config.cmake
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2ConfigVersion.cmake"
     DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6Kirigami2
     COMPONENT Devel
 )
