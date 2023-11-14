@@ -14,7 +14,6 @@
 #endif
 #include <QQmlContext>
 #include <QQuickItem>
-#include <QQuickStyle>
 
 #include "platform/styleselector.h"
 

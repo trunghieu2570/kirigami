@@ -296,7 +296,6 @@ target_link_libraries(Kirigami
     Qt6::Gui
     Qt6::Qml
     Qt6::Quick
-    Qt6::QuickControls2
     PRIVATE
     Qt6::Concurrent
     ${Kirigami_EXTRA_LIBS}
