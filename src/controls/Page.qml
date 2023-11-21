@@ -67,6 +67,7 @@ QQC2.Page {
      * @since 2.1
      */
     //TODO KF6: remove this or at least all the assumptions about the internal tree structure of items
+    // Kirigami.ColumnView.view.parent.parent is the StackView in which the ColumnView is, the condition means "is the ColumnView the current layer of the pagerow"
     readonly property bool isCurrentPage: Kirigami.ColumnView.view
             ? (Kirigami.ColumnView.index === Kirigami.ColumnView.view.currentIndex && Kirigami.ColumnView.view.parent.parent.currentItem === Kirigami.ColumnView.view.parent)
             : (parent && parent instanceof QQC2.StackView
