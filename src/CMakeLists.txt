@@ -333,8 +333,8 @@ ecm_finalize_qml_module(KirigamiPrivatePlugin DESTINATION ${KDE_INSTALL_QMLDIR})
 
 
 if (ANDROID)
-    install(FILES KF6Kirigami2-android-dependencies.xml
+    install(FILES Kirigami-android-dependencies.xml
         DESTINATION ${KDE_INSTALL_LIBDIR}
-        RENAME KF6Kirigami2_${CMAKE_ANDROID_ARCH_ABI}-android-dependencies.xml
+        RENAME Kirigami_${CMAKE_ANDROID_ARCH_ABI}-android-dependencies.xml
     )
 endif()
