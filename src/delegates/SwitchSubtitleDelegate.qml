@@ -42,7 +42,7 @@ QQC2.SwitchDelegate {
         icon: icon.fromControlsIcon(delegate.icon)
         title: delegate.text
         subtitle: delegate.subtitle
-        selected: delegate.highlighted
+        selected: delegate.highlighted || delegate.down
         font: delegate.font
     }
 }

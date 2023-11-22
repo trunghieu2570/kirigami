@@ -32,7 +32,7 @@ import org.kde.kirigami as Kirigami
  *         title: delegate.text
  *         subtitle: "This is an example."
  *         font: delegate.font
- *         selected: delegate.highlighted
+ *         selected: delegate.highlighted || delegate.down
  *     }
  * }
  * ```
@@ -63,7 +63,9 @@ Item {
      *
      * By default this is `color` mixed with the background color.
      */
-    property color subtitleColor: Kirigami.ColorUtils.linearInterpolation(color, Kirigami.Theme.backgroundColor, 0.3)
+    property color subtitleColor: selected
+        ? Kirigami.Theme.highlightedTextColor
+        : Kirigami.ColorUtils.linearInterpolation(color, Kirigami.Theme.backgroundColor, 0.3)
     /**
      * The font used to display the title.
      */

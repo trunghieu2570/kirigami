@@ -360,6 +360,7 @@ Kirigami.ApplicationWindow {
                         Layout.fillWidth: true
                         title: subtitleDelegate.text
                         subtitle: subtitleDelegate.subtitle
+                        selected: subtitleDelegate.highlighted || subtitleDelegate.down
                         icon: icon.fromControlsIcon(subtitleDelegate.icon)
                     }
 
@@ -390,6 +391,7 @@ Kirigami.ApplicationWindow {
                         Layout.fillWidth: true
                         title: subtitleCheckDelegate.text
                         subtitle: subtitleCheckDelegate.subtitle
+                        selected: subtitleCheckDelegate.highlighted || subtitleCheckDelegate.down
                         icon: icon.fromControlsIcon(subtitleCheckDelegate.icon)
                     }
 
@@ -420,6 +422,7 @@ Kirigami.ApplicationWindow {
                         Layout.fillWidth: true
                         title: subtitleRadioDelegate.text
                         subtitle: subtitleRadioDelegate.subtitle
+                        selected: subtitleRadioDelegate.highlighted || subtitleRadioDelegate.down
                         icon: icon.fromControlsIcon(subtitleRadioDelegate.icon)
                     }
 
@@ -450,6 +453,7 @@ Kirigami.ApplicationWindow {
                         Layout.fillWidth: true
                         title: subtitleSwitchDelegate.text
                         subtitle: subtitleSwitchDelegate.subtitle
+                        selected: subtitleSwitchDelegate.highlighted || subtitleSwitchDelegate.down
                         icon: icon.fromControlsIcon(subtitleSwitchDelegate.icon)
                     }
 

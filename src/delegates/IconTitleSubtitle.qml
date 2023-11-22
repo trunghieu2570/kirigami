@@ -42,7 +42,7 @@ import org.kde.kirigami.templates.private as KTP
  *
  *             icon: icon.fromControlsIcon(delegate.icon)
  *             title: delegate.text
- *             selected: delegate.highlighted
+ *             selected: delegate.highlighted || delegate.down
  *             font: delegate.font
  *         }
  *
