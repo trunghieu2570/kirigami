@@ -219,7 +219,7 @@ QT.Control {
      */
     function push(page, properties): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
-            console.warn("Pushed pages do not confront the rules.  Please check the documentation.");
+            console.warn("Pushed pages do not conform to the rules. Please check the documentation.");
             console.trace();
             return null
         }
@@ -244,7 +244,7 @@ QT.Control {
      */
     function pushDialogLayer(page, properties = {}, windowProperties = {}): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
-            console.warn("Page pushed as a dialog or layer does not confront the rules. Please check the documentation.");
+            console.warn("Page pushed as a dialog or layer does not conform to the rules. Please check the documentation.");
             console.trace();
             return null
         }
@@ -346,7 +346,7 @@ QT.Control {
      */
     function insertPage(position, page, properties): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
-            console.warn("Inserted pages do not confront the rules. Please check the documentation.");
+            console.warn("Inserted pages do not conform to the rules. Please check the documentation.");
             console.trace();
             return null
         }
@@ -410,7 +410,7 @@ QT.Control {
      */
     function replace(page, properties): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
-            console.warn("Specified pages do not confront the rules. Please check the documentation.");
+            console.warn("Specified pages do not conform to the rules. Please check the documentation.");
             console.trace();
             return null
         }
