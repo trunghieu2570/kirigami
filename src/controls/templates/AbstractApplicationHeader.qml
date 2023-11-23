@@ -28,12 +28,11 @@ Item {
     id: root
     z: 90
     property int minimumHeight: 0
-    property int preferredHeight: mainItem.children.reduce(maximumImplicitHeightReducer, 0) + topPadding + bottomPadding
-    property int maximumHeight: Kirigami.Units.gridUnit * 3
-
-    function maximumImplicitHeightReducer(accumulator: real, item: Item): real {
+    // Use an inline arrow function, referring to an external normal function makes QV4 crash, see https://bugreports.qt.io/browse/QTBUG-119395
+    property int preferredHeight: mainItem.children.reduce((accumulator, item) => {
         return Math.max(accumulator, item.implicitHeight);
-    }
+    }, 0) + topPadding + bottomPadding
+    property int maximumHeight: Kirigami.Units.gridUnit * 3
 
     property int position: QQC2.ToolBar.Header
 
