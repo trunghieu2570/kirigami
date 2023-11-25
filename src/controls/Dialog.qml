@@ -236,12 +236,12 @@ T.Dialog {
      *
      * @see org::kde::kirigami::Action
      */
-    property list<Kirigami.Action> customFooterActions
+    property list<T.Action> customFooterActions
 
     // DialogButtonBox should NOT contain invisible buttons, because in Qt 6
     // ListView preserves space even for invisible items.
-    readonly property list<Kirigami.Action> __visibleCustomFooterActions: customFooterActions
-        .filter(action => action?.visible)
+    readonly property list<T.Action> __visibleCustomFooterActions: customFooterActions
+        .filter(action => !(action instanceof Kirigami.Action) || action?.visible)
 
     // default standard button
     standardButtons: QQC2.Dialog.Close
@@ -257,7 +257,7 @@ T.Dialog {
         }
     }
 
-    function customFooterButton(action: Kirigami.Action): T.AbstractButton {
+    function customFooterButton(action: T.Action): T.AbstractButton {
         if (!action) {
             // Even if there's a null object in the list of actions, we should
             // not return a button for it.
@@ -506,7 +506,7 @@ T.Dialog {
                     model: root.__visibleCustomFooterActions
                     // we have to use Button instead of ToolButton, because ToolButton has no visual distinction when disabled
                     delegate: QQC2.Button {
-                        required property Kirigami.Action modelData
+                        required property T.Action modelData
 
                         flat: flatFooterButtons
                         action: modelData

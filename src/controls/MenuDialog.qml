@@ -5,8 +5,9 @@
 */
 
 import QtQuick
-import QtQuick.Layouts
 import QtQuick.Controls as QQC2
+import QtQuick.Layouts
+import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
 /**
@@ -59,7 +60,7 @@ Kirigami.Dialog {
     /**
      * @brief This property holds the actions displayed in the context menu.
      */
-    property list<Kirigami.Action> actions
+    property list<T.Action> actions
 
     /**
      * @brief This property holds the content header, which appears above the actions.
@@ -98,13 +99,13 @@ Kirigami.Dialog {
             model: root.actions
 
             delegate: QQC2.ItemDelegate {
-                required property Kirigami.Action modelData
+                required property T.Action modelData
 
                 Layout.fillWidth: true
                 Layout.preferredHeight: Kirigami.Units.gridUnit * 2
 
                 action: modelData
-                visible: modelData.visible
+                visible: !(modelData instanceof Kirigami.Action) || modelData.visible
 
                 icon.width: Kirigami.Units.gridUnit
                 icon.height: Kirigami.Units.gridUnit
@@ -113,8 +114,8 @@ Kirigami.Dialog {
                 leftPadding: undefined
                 rightPadding: undefined
 
-                QQC2.ToolTip.text: modelData.tooltip
-                QQC2.ToolTip.visible: modelData.tooltip.length > 0 && (Kirigami.Settings.tabletMode ? pressed : hovered)
+                QQC2.ToolTip.text: modelData instanceof Kirigami.Action ? modelData.tooltip : ""
+                QQC2.ToolTip.visible: QQC2.ToolTip.text.length > 0 && (Kirigami.Settings.tabletMode ? pressed : hovered)
                 QQC2.ToolTip.delay: Kirigami.Settings.tabletMode ? Qt.styleHints.mousePressAndHoldInterval : Kirigami.Units.toolTipDelay
 
                 onClicked: root.close()
