@@ -55,7 +55,7 @@ QQC2.Page {
      * }
      * @endcode
      */
-    property list<Kirigami.Action> actions
+    property list<T.Action> actions
 
     /**
      * @brief This property tells us if it is the currently active page.
