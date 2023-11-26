@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
-"PO-Revision-Date: 2023-11-19 03:37\n"
+"PO-Revision-Date: 2023-11-25 02:26\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -209,16 +209,16 @@ msgstr "复制链接至剪贴板"
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
-msgstr ""
+msgstr "KDE 程序框架 %1"
 
 #: platform/settings.cpp:208
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
-msgstr ""
+msgstr "%1 窗口系统"
 
 #: platform/settings.cpp:209
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
-msgstr ""
+msgstr "Qt %2 (使用 %3 构建)"
