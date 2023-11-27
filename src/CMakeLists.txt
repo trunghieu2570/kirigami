@@ -13,6 +13,9 @@ if (WIN32)
     # generation on Windows for now.
     set(_extra_options NO_CACHEGEN)
 endif()
+if (BUILD_SHARED_LIBS)
+    set(_extra_options ${_extra_options} NO_PLUGIN_OPTIONAL)
+endif()
 
 ecm_add_qml_module(Kirigami URI "org.kde.kirigami" VERSION 2.0
     CLASS_NAME KirigamiPlugin
