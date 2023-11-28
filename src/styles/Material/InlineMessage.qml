@@ -7,7 +7,6 @@
  */
 
 import QtQuick
-import Qt5Compat.GraphicalEffects as GE
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.templates as KT
 
@@ -17,7 +16,7 @@ KT.InlineMessage {
     // a rectangle padded with anchors.margins is used to simulate a border
     padding: bgFillRect.anchors.margins + Kirigami.Units.smallSpacing
 
-    background: Rectangle {
+    background: Kirigami.ShadowedRectangle {
         id: bgBorderRect
 
         color: switch (root.type) {
@@ -28,6 +27,10 @@ KT.InlineMessage {
         }
 
         radius: Kirigami.Units.smallSpacing / 2
+        shadow.size: 12
+        shadow.xOffset: 0
+        shadow.yOffset: 1
+        shadow.color: Qt.rgba(0, 0, 0, 0.5)
 
         Rectangle {
             id: bgFillRect
@@ -48,15 +51,6 @@ KT.InlineMessage {
             opacity: 0.20
 
             radius: bgFillRect.radius
-        }
-
-        layer.enabled: true
-        layer.effect: GE.DropShadow {
-            horizontalOffset: 0
-            verticalOffset: 1
-            radius: 12
-            samples: 32
-            color: Qt.rgba(0, 0, 0, 0.5)
         }
     }
 }
