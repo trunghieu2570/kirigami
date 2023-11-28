@@ -237,7 +237,6 @@ ecm_target_qml_sources(Kirigami PRIVATE PATH private SOURCES
     controls/private/ActionsMenu.qml
     controls/private/BannerImage.qml
     controls/private/ContextDrawerActionItem.qml
-    controls/private/CornerShadow.qml
     controls/private/DefaultCardBackground.qml
     controls/private/DefaultChipBackground.qml
     controls/private/DefaultPageTitleDelegate.qml
