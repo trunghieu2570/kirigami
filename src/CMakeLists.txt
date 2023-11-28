@@ -16,6 +16,9 @@ endif()
 if (BUILD_SHARED_LIBS)
     set(_extra_options ${_extra_options} NO_PLUGIN_OPTIONAL)
 endif()
+if (ANDROID)
+    set(_extra_options ${_extra_options} OPTIONAL_IMPORTS org.kde.breeze)
+endif()
 
 ecm_add_qml_module(Kirigami URI "org.kde.kirigami" VERSION 2.0
     CLASS_NAME KirigamiPlugin
