@@ -11,7 +11,6 @@ import QtQuick.Layouts
 import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
-import Qt5Compat.GraphicalEffects as GE
 
 /**
  * @brief Popup dialog that is used for short tasks and user interaction.
@@ -318,23 +317,16 @@ T.Dialog {
     }
 
     // dialog view background
-    background: Item {
-        GE.RectangularGlow {
-            anchors.fill: rect
-            anchors.topMargin: 1
-            cornerRadius: rect.radius * 2
-            glowRadius: 2
-            spread: 0.2
+    background: Kirigami.ShadowedRectangle {
+        id: rect
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
+        Kirigami.Theme.inherit: false
+        color: Kirigami.Theme.backgroundColor
+        radius: Kirigami.Units.smallSpacing
+        shadow {
+            size: radius * 2
             color: Qt.rgba(0, 0, 0, 0.3)
-        }
-
-        Rectangle {
-            id: rect
-            anchors.fill: parent
-            Kirigami.Theme.colorSet: Kirigami.Theme.View
-            Kirigami.Theme.inherit: false
-            color: Kirigami.Theme.backgroundColor
-            radius: Kirigami.Units.smallSpacing
+            yOffset: 1
         }
     }
 
