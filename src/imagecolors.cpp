@@ -500,8 +500,13 @@ void ImageColors::postProcess(ImageData &imageData) const
 {
     constexpr short unsigned WCAG_NON_TEXT_CONTRAST_RATIO = 3;
     constexpr qreal WCAG_TEXT_CONTRAST_RATIO = 4.5;
-    const QColor backgroundColor =
-        static_cast<Kirigami::Platform::PlatformTheme *>(qmlAttachedPropertiesObject<Kirigami::Platform::PlatformTheme>(this, true))->backgroundColor();
+
+    auto platformTheme = qmlAttachedPropertiesObject<Kirigami::Platform::PlatformTheme>(this, false);
+    if (!platformTheme) {
+        return;
+    }
+
+    const QColor backgroundColor = static_cast<Kirigami::Platform::PlatformTheme *>(platformTheme)->backgroundColor();
     const qreal backgroundLum = ColorUtils::luminance(backgroundColor);
     qreal lowerLum, upperLum;
     // 192 is from kcm_colors

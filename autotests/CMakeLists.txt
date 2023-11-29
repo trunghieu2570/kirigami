@@ -41,6 +41,7 @@ kirigami_add_tests(
     tst_globaldrawer.qml
     tst_headerfooterlayout.qml
     tst_icon.qml
+    tst_ImageColors.qml
     tst_inlinemessage.qml
     tst_inlineviewheader.qml
     tst_keynavigation.qml
