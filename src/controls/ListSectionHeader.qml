@@ -62,7 +62,7 @@ ItemDelegate {
         spacing: Kirigami.Units.largeSpacing
 
         Kirigami.Heading {
-            Layout.fillWidth: rowLayout.children.length === 1
+            Layout.maximumWidth: rowLayout.width
             Layout.alignment: Qt.AlignVCenter
 
             opacity: 0.7
