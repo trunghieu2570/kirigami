@@ -1,7 +1,7 @@
 add_library(KirigamiPlatform)
 add_library(KF6::KirigamiPlatform ALIAS KirigamiPlatform)
 
-ecm_add_qml_module(KirigamiPlatform URI "org.kde.kirigami.platform" VERSION 2.0 GENERATE_PLUGIN_SOURCE)
+ecm_add_qml_module(KirigamiPlatform URI "org.kde.kirigami.platform" VERSION 2.0 GENERATE_PLUGIN_SOURCE DEPENDENCIES QtQuick)
 
 set_target_properties(KirigamiPlatform PROPERTIES
     VERSION     ${PROJECT_VERSION}
