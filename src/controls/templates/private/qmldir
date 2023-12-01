@@ -1,3 +1,4 @@
 module org.kde.kirigami.templates.private
 
 IconPropertiesGroup 1.0 IconPropertiesGroup.qml
+PassiveNotificationsManager 1.0 PassiveNotificationsManager.qml
