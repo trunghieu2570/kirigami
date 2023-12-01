@@ -105,7 +105,7 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      * * huge
      * * enormous
      */
-    Q_PROPERTY(IconSizes *iconSizes READ iconSizes CONSTANT FINAL)
+    Q_PROPERTY(Kirigami::Platform::IconSizes *iconSizes READ iconSizes CONSTANT FINAL)
 
     /**
      * This property holds the amount of spacing that should be used between smaller UI elements,
