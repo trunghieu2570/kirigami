@@ -10,12 +10,15 @@
 #define COPYHELPER_H
 
 #include <QObject>
+#include <qqmlregistration.h>
 
 class CopyHelperPrivate : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 public:
-    static void copyTextToClipboard(const QString &text);
+    Q_INVOKABLE void copyTextToClipboard(const QString &text);
 };
 
 #endif

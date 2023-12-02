@@ -11,7 +11,7 @@
 #include <QClipboard>
 #include <QGuiApplication>
 
-void copyTextToClipboard(const QString &text)
+void CopyHelperPrivate::copyTextToClipboard(const QString &text)
 {
     qGuiApp->clipboard()->setText(text);
 }
