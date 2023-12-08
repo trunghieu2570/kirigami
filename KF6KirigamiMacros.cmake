@@ -11,7 +11,44 @@ function(kirigami_package_breeze_icons)
     endif()
 
     #include icons used by Kirigami components themselves
-    set(ARG_ICONS ${ARG_ICONS} go-next go-previous go-up handle-sort overflow-menu-left overflow-menu-right go-next-symbolic go-next-symbolic-rtl go-previous-symbolic go-previous-symbolic-rtl overflow-menu user view-left-new view-right-new view-left-close view-right-close dialog-positive dialog-warning dialog-error dialog-information dialog-close globe mail-sent tools-report-bug)
+    set(ARG_ICONS ${ARG_ICONS}
+        application-exit
+        dialog-close
+        dialog-error
+        dialog-information
+        dialog-positive
+        dialog-warning
+        edit-clear-locationbar-ltr
+        edit-clear-locationbar-rtl
+        edit-copy
+        edit-delete-remove
+        emblem-error
+        emblem-information
+        emblem-positive
+        emblem-warning
+        globe
+        go-next
+        go-next-symbolic
+        go-next-symbolic-rtl
+        go-previous
+        go-previous-symbolic
+        go-previous-symbolic-rtl
+        go-up
+        handle-sort
+        mail-sent
+        open-menu-symbolic
+        overflow-menu-left
+        overflow-menu-right
+        overflow-menu
+        password-show-off
+        password-show-on
+        tools-report-bug
+        user
+        view-left-new
+        view-right-new
+        view-left-close
+        view-right-close
+    )
 
     function(_find_breeze_icon icon varName)
         #HACKY
