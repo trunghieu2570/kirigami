@@ -6,7 +6,6 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
-import Qt5Compat.GraphicalEffects as GE
 import org.kde.kirigami as Kirigami
 
 QQC2.ToolBar {

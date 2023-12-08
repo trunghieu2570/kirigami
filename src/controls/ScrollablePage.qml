@@ -7,7 +7,7 @@
 import QtQuick
 import QtQml
 import QtQuick.Controls as QQC2
-import Qt5Compat.GraphicalEffects as GE
+import QtQuick.Shapes as QQShapes
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.templates as KT
 import "private"
@@ -258,29 +258,26 @@ Kirigami.Page {
                     visible: root.refreshing
                     // Android busywidget QQC seems to be broken at custom sizes
                 }
-                Rectangle {
+                QQShapes.Shape {
                     id: spinnerProgress
                     anchors {
                         fill: busyIndicator
                         margins: Kirigami.Units.smallSpacing
                     }
-                    radius: width
                     visible: supportsRefreshing && !refreshing && progress > 0
-                    color: "transparent"
-                    opacity: 0.8
-                    border.color: Kirigami.Theme.backgroundColor
-                    border.width: Kirigami.Units.smallSpacing
                     property real progress: supportsRefreshing && !refreshing ? (busyIndicatorLoader.y / busyIndicatorFrame.height) : 0
-                }
-                GE.ConicalGradient {
-                    source: spinnerProgress
-                    visible: spinnerProgress.visible
-                    anchors.fill: spinnerProgress
-                    gradient: Gradient {
-                        GradientStop { position: 0.00; color: Kirigami.Theme.highlightColor }
-                        GradientStop { position: spinnerProgress.progress; color: Kirigami.Theme.highlightColor }
-                        GradientStop { position: spinnerProgress.progress + 0.01; color: "transparent" }
-                        GradientStop { position: 1.00; color: "transparent" }
+                    QQShapes.ShapePath {
+                        strokeWidth: Kirigami.Units.smallSpacing
+                        strokeColor: Kirigami.Theme.highlightColor
+                        fillColor: "transparent"
+                        PathAngleArc {
+                            centerX: spinnerProgress.width / 2
+                            centerY: spinnerProgress.height / 2
+                            radiusX: spinnerProgress.width / 2 - Kirigami.Units.smallSpacing / 2
+                            radiusY: spinnerProgress.height / 2 - Kirigami.Units.smallSpacing / 2
+                            startAngle: 0
+                            sweepAngle: 360 * spinnerProgress.progress
+                        }
                     }
                 }
 

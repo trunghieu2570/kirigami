@@ -146,8 +146,6 @@ if (UBUNTU_TOUCH)
     add_definitions(-DUBUNTU_TOUCH)
 endif()
 
-ecm_find_qmlmodule(Qt5Compat.GraphicalEffects 6.0)
-
 ecm_set_disabled_deprecation_versions(
     QT 5.15.2
     KF 5.95
