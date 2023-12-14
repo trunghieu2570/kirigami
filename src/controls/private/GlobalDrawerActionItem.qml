@@ -102,6 +102,7 @@ QQC2.ItemDelegate {
         }
     }
 
+    Accessible.name: listItem.tAction?.text ?? ""
     Kirigami.MnemonicData.enabled: enabled && visible
     Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem
     Kirigami.MnemonicData.label: tAction?.text ?? ""
