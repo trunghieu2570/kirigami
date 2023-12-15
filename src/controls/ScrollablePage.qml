@@ -188,18 +188,29 @@ Kirigami.Page {
         // Has to be a MouseArea that accepts events otherwise touch events on Wayland will get lost
         MouseArea {
             id: scrollingArea
-            width: root.flickable.width
+            width: root.horizontalScrollBarPolicy === QQC2.ScrollBar.AlwaysOff ? root.flickable.width : Math.max(root.flickable.width, implicitWidth)
             height: Math.max(root.flickable.height, implicitHeight)
-            implicitHeight: {
-                let impl = 0;
+            implicitWidth: {
+                let implicit = 0;
                 for (const child of itemsParent.visibleChildren) {
-                    if (child.implicitHeight <= 0) {
-                        impl = Math.max(impl, child.height);
+                    if (child.implicitWidth <= 0) {
+                        implicit = Math.max(implicit, child.width);
                     } else {
-                        impl = Math.max(impl, child.implicitHeight);
+                        implicit = Math.max(implicit, child.implicitWidth);
                     }
                 }
-                return impl + itemsParent.anchors.topMargin + itemsParent.anchors.bottomMargin;
+                return implicit + itemsParent.anchors.leftMargin + itemsParent.anchors.rightMargin;
+            }
+            implicitHeight: {
+                let implicit = 0;
+                for (const child of itemsParent.visibleChildren) {
+                    if (child.implicitHeight <= 0) {
+                        implicit = Math.max(implicit, child.height);
+                    } else {
+                        implicit = Math.max(implicit, child.implicitHeight);
+                    }
+                }
+                return implicit + itemsParent.anchors.topMargin + itemsParent.anchors.bottomMargin;
             }
             Item {
                 id: itemsParent
