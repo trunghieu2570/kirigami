@@ -7,7 +7,6 @@
 import QtQuick
 import QtQml
 import QtQuick.Controls as QQC2
-import QtQuick.Shapes as QQShapes
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.templates as KT
 import "private"
@@ -172,13 +171,6 @@ Kirigami.Page {
             bottom: root.footer?.visible ? root.footer.top : parent.bottom
             left: parent.left
             right: parent.right
-            topMargin: root.refreshing ? busyIndicatorLoader.height : 0
-            Behavior on topMargin {
-                NumberAnimation {
-                    easing.type: Easing.InOutQuad
-                    duration: Kirigami.Units.longDuration
-                }
-            }
         }
         QQC2.ScrollBar.horizontal.policy: root.horizontalScrollBarPolicy
         QQC2.ScrollBar.vertical.policy: root.verticalScrollBarPolicy
@@ -239,71 +231,11 @@ Kirigami.Page {
 
         Loader {
             id: busyIndicatorLoader
-            z: 99
-            y: root.flickable.verticalLayoutDirection === ListView.BottomToTop
-                ? -root.flickable.contentY + root.flickable.originY + height
-                : -root.flickable.contentY + root.flickable.originY - height
-            width: root.flickable.width
-            height: Kirigami.Units.gridUnit * 4
             active: root.supportsRefreshing
-
-            sourceComponent: Item {
-                id: busyIndicatorFrame
-
-                QQC2.BusyIndicator {
-                    id: busyIndicator
-                    z: 1
-                    anchors.centerIn: parent
-                    running: root.refreshing
-                    visible: root.refreshing
-                    // Android busywidget QQC seems to be broken at custom sizes
-                }
-                QQShapes.Shape {
-                    id: spinnerProgress
-                    anchors {
-                        fill: busyIndicator
-                        margins: Kirigami.Units.smallSpacing
-                    }
-                    visible: supportsRefreshing && !refreshing && progress > 0
-                    property real progress: supportsRefreshing && !refreshing ? (busyIndicatorLoader.y / busyIndicatorFrame.height) : 0
-                    QQShapes.ShapePath {
-                        strokeWidth: Kirigami.Units.smallSpacing
-                        strokeColor: Kirigami.Theme.highlightColor
-                        fillColor: "transparent"
-                        PathAngleArc {
-                            centerX: spinnerProgress.width / 2
-                            centerY: spinnerProgress.height / 2
-                            radiusX: spinnerProgress.width / 2 - Kirigami.Units.smallSpacing / 2
-                            radiusY: spinnerProgress.height / 2 - Kirigami.Units.smallSpacing / 2
-                            startAngle: 0
-                            sweepAngle: 360 * spinnerProgress.progress
-                        }
-                    }
-                }
-
-                Connections {
-                    target: busyIndicatorLoader
-                    function onYChanged() {
-                        if (!supportsRefreshing) {
-                            return;
-                        }
-
-                        if (!root.refreshing && busyIndicatorLoader.y > busyIndicatorFrame.height / 2 + topPadding) {
-                            refreshTriggerTimer.running = true;
-                        } else {
-                            refreshTriggerTimer.running = false;
-                        }
-                    }
-                }
-                Timer {
-                    id: refreshTriggerTimer
-                    interval: 500
-                    onTriggered: {
-                        if (!root.refreshing && busyIndicatorLoader.y > busyIndicatorFrame.height / 2 + topPadding) {
-                            root.refreshing = true;
-                        }
-                    }
-                }
+            sourceComponent: PullDownIndicator {
+                parent: root
+                active: root.refreshing
+                onTriggered: root.refreshing = true
             }
         }
     ]

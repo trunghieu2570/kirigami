@@ -243,6 +243,7 @@ ecm_target_qml_sources(Kirigami PRIVATE PATH private SOURCES
     controls/private/GlobalDrawerActionItem.qml
     controls/private/MobileDialogLayer.qml
     controls/private/PrivateActionToolButton.qml
+    controls/private/PullDownIndicator.qml
     controls/private/SwipeItemEventFilter.qml
 )
 
