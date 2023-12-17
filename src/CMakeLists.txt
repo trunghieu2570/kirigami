@@ -24,7 +24,6 @@ ecm_add_qml_module(Kirigami URI "org.kde.kirigami" VERSION 2.0
     CLASS_NAME KirigamiPlugin
     DEPENDENCIES
     "QtQuick.Controls"
-    "Qt5Compat.GraphicalEffects"
     IMPORTS
     "org.kde.kirigami.platform"
     "org.kde.kirigami.delegates"
