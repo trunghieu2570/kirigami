@@ -306,6 +306,11 @@ QQC2.Page {
                 return true;
             }
 
+            const drawer = applicationWindow() ? applicationWindow()['contextDrawer'] : undefined;
+            if (drawer !== undefined && drawer.enabled && drawer.handleVisible) {
+                return false;
+            }
+
             return true;
         }
 
