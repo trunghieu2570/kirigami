@@ -242,7 +242,13 @@ int Units::maximumInteger() const
 Units *Units::create(QQmlEngine *qmlEngine, [[maybe_unused]] QJSEngine *jsEngine)
 {
 #ifndef KIRIGAMI_BUILD_TYPE_STATIC
-    auto plugin = PlatformPluginFactory::findPlugin();
+    const QString pluginName = qmlEngine->property("_kirigamiTheme").toString();
+
+    auto plugin = PlatformPluginFactory::findPlugin(pluginName);
+    if (!plugin && !pluginName.isEmpty()) {
+        plugin = PlatformPluginFactory::findPlugin();
+    }
+
     if (plugin) {
         return plugin->createUnits(qmlEngine);
     } else {
