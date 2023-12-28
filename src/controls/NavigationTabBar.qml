@@ -262,6 +262,10 @@ QQC2.ToolBar {
         spacing: root.spacing
     }
 
+    background: Rectangle {
+        color: root.backgroundColor
+    }
+
     // Used to manage which tab is checked and change the currentIndex
     T.ButtonGroup {
         id: tabGroup
