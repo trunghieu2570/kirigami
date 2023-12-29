@@ -26,10 +26,10 @@ MouseArea {
 
     readonly property T.Overlay overlay: drawer.T.Overlay.overlay
 
-    // Even higher than the window's overlay. It can't be parented to overlay
-    // itself, as overlay interferes with event handling of its children.
+    // Above the Overlay when modal but below when non-modal and when the drawer is closed
+    // so that other overlays can be above it.
     parent: overlay?.parent ?? null
-    z: overlay ? overlay.z + 1 : 0
+    z: overlay ? overlay.z  + (drawer?.modal && drawer?.drawerOpen ? 1 : - 1) : 0
 
     preventStealing: true
     hoverEnabled: handleAnchor?.visible ?? false
