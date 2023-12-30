@@ -170,6 +170,7 @@ QQC2.ItemDelegate {
     }
 
     onClicked: trigger()
+    Accessible.onPressAction: trigger()
     Keys.onEnterPressed: event => trigger()
     Keys.onReturnPressed: event => trigger()
 

@@ -33,6 +33,8 @@ QQC2.ItemDelegate {
     visible: kAction?.visible ?? true
     opacity: enabled || isExpandable ? 1.0 : 0.6
 
+    Accessible.onPressAction: listItem.clicked()
+
     Kirigami.Separator {
         id: separatorAction
 
