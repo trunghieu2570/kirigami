@@ -172,6 +172,7 @@ Kirigami.Page {
             left: parent.left
             right: parent.right
         }
+        clip: true
         QQC2.ScrollBar.horizontal.policy: root.horizontalScrollBarPolicy
         QQC2.ScrollBar.vertical.policy: root.verticalScrollBarPolicy
     }
