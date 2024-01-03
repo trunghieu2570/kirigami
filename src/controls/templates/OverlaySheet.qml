@@ -330,6 +330,7 @@ T.Popup {
                 id: scrollView
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+                clip: true
                 T.ScrollBar.horizontal.policy: T.ScrollBar.AlwaysOff
 
                 property bool initialized: false
