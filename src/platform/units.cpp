@@ -252,8 +252,6 @@ Units *Units::create(QQmlEngine *qmlEngine, [[maybe_unused]] QJSEngine *jsEngine
 
     if (plugin) {
         return plugin->createUnits(qmlEngine);
-    } else {
-        qWarning(KirigamiPlatform) << "Failed to find a Kirigami platform plugin for style" << QQuickStyle::name();
     }
 #endif
     // Fall back to the default units implementation

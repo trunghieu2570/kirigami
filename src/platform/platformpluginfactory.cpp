@@ -91,7 +91,13 @@ PlatformPluginFactory *PlatformPluginFactory::findPlugin(const QString &preferre
     }
 #endif
 
-    return factories.value(pluginName);
+    PlatformPluginFactory *factory = factories.value(pluginName);
+
+    if (factory == nullptr) {
+        qWarning(KirigamiPlatform) << "Failed to find a Kirigami platform plugin for style" << QQuickStyle::name();
+    }
+
+    return factory;
 }
 
 }
