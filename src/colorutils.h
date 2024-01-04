@@ -119,8 +119,6 @@ public:
      *
      * @param adjustments The adjustments to apply to the color.
      *
-     * @note `value` and `lightness` are aliases for the same value.
-     *
      * @code{.js}
      * {
      *     red: null, // Range: -255 to 255
@@ -129,12 +127,11 @@ public:
      *     hue: null, // Range: -360 to 360
      *     saturation: null, // Range: -255 to 255
      *     value: null // Range: -255 to 255
-     *     lightness: null, // Range: -255 to 255
      *     alpha: null, // Range: -255 to 255
      * }
      * @endcode
      *
-     * @warning It is an error to adjust both RGB and HSL properties.
+     * @warning It is an error to adjust both RGB and HSV properties.
      *
      * @since 5.69
      * @since org.kde.kirigami 2.12
@@ -151,21 +148,18 @@ public:
      * be scaled from its original to the maximum if positive or to the minimum if
      * negative.
      *
-     * @note `value` and `lightness` are aliases for the same value.
-     *
      * @code{.js}
      * {
      *     red: null
      *     green: null
      *     blue: null
      *     saturation: null
-     *     lightness: null
      *     value: null
      *     alpha: null
      * }
      * @endcode
      *
-     * @warning It is an error to scale both RGB and HSL properties.
+     * @warning It is an error to scale both RGB and HSV properties.
      *
      * @since 5.69
      * @since org.kde.kirigami 2.12

@@ -112,7 +112,6 @@ ParsedAdjustments parseAdjustments(const QJSValue &value)
                                                     {QStringLiteral("hue"), parsed.hue},
                                                     {QStringLiteral("saturation"), parsed.saturation},
                                                     {QStringLiteral("value"), parsed.value},
-                                                    {QStringLiteral("lightness"), parsed.value},
                                                     //
                                                     {QStringLiteral("alpha"), parsed.alpha}};
 
@@ -124,7 +123,7 @@ ParsedAdjustments parseAdjustments(const QJSValue &value)
     }
 
     if ((parsed.red || parsed.green || parsed.blue) && (parsed.hue || parsed.saturation || parsed.value)) {
-        qCCritical(KirigamiLog) << "It is an error to have both RGB and HSL values in an adjustment.";
+        qCCritical(KirigamiLog) << "It is an error to have both RGB and HSV values in an adjustment.";
     }
 
     return parsed;
@@ -159,17 +158,17 @@ QColor ColorUtils::adjustColor(const QColor &color, const QJSValue &adjustments)
     auto copy = color;
 
     if (adjusts.alpha) {
-        copy.setAlpha(adjusts.alpha);
+        copy.setAlpha(qBound(0.0, copy.alpha() + adjusts.alpha, 255.0));
     }
 
     if (adjusts.red || adjusts.green || adjusts.blue) {
-        copy.setRed(copy.red() + adjusts.red);
-        copy.setGreen(copy.green() + adjusts.green);
-        copy.setBlue(copy.blue() + adjusts.blue);
+        copy.setRed(qBound(0.0, copy.red() + adjusts.red, 255.0));
+        copy.setGreen(qBound(0.0, copy.green() + adjusts.green, 255.0));
+        copy.setBlue(qBound(0.0, copy.blue() + adjusts.blue, 255.0));
     } else if (adjusts.hue || adjusts.saturation || adjusts.value) {
-        copy.setHsl(std::fmod(copy.hue() + adjusts.hue, 360.0), //
-                    copy.saturation() + adjusts.saturation, //
-                    copy.value() + adjusts.value,
+        copy.setHsv(std::fmod(copy.hue() + adjusts.hue, 360.0),
+                    qBound(0.0, copy.saturation() + adjusts.saturation, 255.0),
+                    qBound(0.0, copy.value() + adjusts.value, 255.0),
                     copy.alpha());
     }
 
@@ -209,15 +208,19 @@ QColor ColorUtils::scaleColor(const QColor &color, const QJSValue &adjustments)
         return current + (scale > 0 ? 255 - current : current) * scale;
     };
 
+    if (adjusts.alpha) {
+        copy.setAlpha(qBound(0.0, shiftToAverage(copy.alpha(), adjusts.alpha), 255.0));
+    }
+
     if (adjusts.red || adjusts.green || adjusts.blue) {
         copy.setRed(qBound(0.0, shiftToAverage(copy.red(), adjusts.red), 255.0));
         copy.setGreen(qBound(0.0, shiftToAverage(copy.green(), adjusts.green), 255.0));
         copy.setBlue(qBound(0.0, shiftToAverage(copy.blue(), adjusts.blue), 255.0));
     } else {
-        copy.setHsl(copy.hue(),
+        copy.setHsv(copy.hue(),
                     qBound(0.0, shiftToAverage(copy.saturation(), adjusts.saturation), 255.0),
                     qBound(0.0, shiftToAverage(copy.value(), adjusts.value), 255.0),
-                    qBound(0.0, shiftToAverage(copy.alpha(), adjusts.alpha), 255.0));
+                    copy.alpha());
     }
 
     return copy;
