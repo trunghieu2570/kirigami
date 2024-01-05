@@ -90,65 +90,65 @@ public:
 
     virtual void syncToQml(PlatformTheme *object);
 
-    QColor textColor = QColor{"#31363b"};
-    QColor disabledTextColor = QColor{"#9931363b"};
+    QColor textColor = QColor{0x31363b};
+    QColor disabledTextColor = QColor{0x31, 0x36, 0x3b, 0x99};
 
-    QColor highlightColor = QColor{"#2196F3"};
-    QColor highlightedTextColor = QColor{"#eff0fa"};
-    QColor backgroundColor = QColor{"#eff0f1"};
-    QColor alternateBackgroundColor = QColor{"#bdc3c7"};
+    QColor highlightColor = QColor{0x2196F3};
+    QColor highlightedTextColor = QColor{0xeff0fa};
+    QColor backgroundColor = QColor{0xeff0f1};
+    QColor alternateBackgroundColor = QColor{0xbdc3c7};
 
-    QColor focusColor = QColor{"#2196F3"};
-    QColor hoverColor = QColor{"#2196F3"};
+    QColor focusColor = QColor{0x2196F3};
+    QColor hoverColor = QColor{0x2196F3};
 
-    QColor activeTextColor = QColor{"#0176D3"};
-    QColor activeBackgroundColor = QColor{"#0176D3"};
-    QColor linkColor = QColor{"#2196F3"};
-    QColor linkBackgroundColor = QColor{"#2196F3"};
-    QColor visitedLinkColor = QColor{"#2196F3"};
-    QColor visitedLinkBackgroundColor = QColor{"#2196F3"};
-    QColor negativeTextColor = QColor{"#DA4453"};
-    QColor negativeBackgroundColor = QColor{"#DA4453"};
-    QColor neutralTextColor = QColor{"#F67400"};
-    QColor neutralBackgroundColor = QColor{"#F67400"};
-    QColor positiveTextColor = QColor{"#27AE60"};
-    QColor positiveBackgroundColor = QColor{"#27AE60"};
+    QColor activeTextColor = QColor{0x0176D3};
+    QColor activeBackgroundColor = QColor{0x0176D3};
+    QColor linkColor = QColor{0x2196F3};
+    QColor linkBackgroundColor = QColor{0x2196F3};
+    QColor visitedLinkColor = QColor{0x2196F3};
+    QColor visitedLinkBackgroundColor = QColor{0x2196F3};
+    QColor negativeTextColor = QColor{0xDA4453};
+    QColor negativeBackgroundColor = QColor{0xDA4453};
+    QColor neutralTextColor = QColor{0xF67400};
+    QColor neutralBackgroundColor = QColor{0xF67400};
+    QColor positiveTextColor = QColor{0x27AE60};
+    QColor positiveBackgroundColor = QColor{0x27AE60};
 
-    QColor buttonTextColor = QColor{"#31363b"};
-    QColor buttonBackgroundColor = QColor{"#eff0f1"};
-    QColor buttonAlternateBackgroundColor = QColor{"#bdc3c7"};
-    QColor buttonHoverColor = QColor{"#2196F3"};
-    QColor buttonFocusColor = QColor{"#2196F3"};
+    QColor buttonTextColor = QColor{0x31363b};
+    QColor buttonBackgroundColor = QColor{0xeff0f1};
+    QColor buttonAlternateBackgroundColor = QColor{0xbdc3c7};
+    QColor buttonHoverColor = QColor{0x2196F3};
+    QColor buttonFocusColor = QColor{0x2196F3};
 
-    QColor viewTextColor = QColor{"#31363b"};
-    QColor viewBackgroundColor = QColor{"#fcfcfc"};
-    QColor viewAlternateBackgroundColor = QColor{"#eff0f1"};
-    QColor viewHoverColor = QColor{"#2196F3"};
-    QColor viewFocusColor = QColor{"#2196F3"};
+    QColor viewTextColor = QColor{0x31363b};
+    QColor viewBackgroundColor = QColor{0xfcfcfc};
+    QColor viewAlternateBackgroundColor = QColor{0xeff0f1};
+    QColor viewHoverColor = QColor{0x2196F3};
+    QColor viewFocusColor = QColor{0x2196F3};
 
-    QColor selectionTextColor = QColor{"#eff0fa"};
-    QColor selectionBackgroundColor = QColor{"#2196F3"};
-    QColor selectionAlternateBackgroundColor = QColor{"#1d99f3"};
-    QColor selectionHoverColor = QColor{"#2196F3"};
-    QColor selectionFocusColor = QColor{"#2196F3"};
+    QColor selectionTextColor = QColor{0xeff0fa};
+    QColor selectionBackgroundColor = QColor{0x2196F3};
+    QColor selectionAlternateBackgroundColor = QColor{0x1d99f3};
+    QColor selectionHoverColor = QColor{0x2196F3};
+    QColor selectionFocusColor = QColor{0x2196F3};
 
-    QColor tooltipTextColor = QColor{"#eff0f1"};
-    QColor tooltipBackgroundColor = QColor{"#31363b"};
-    QColor tooltipAlternateBackgroundColor = QColor{"#4d4d4d"};
-    QColor tooltipHoverColor = QColor{"#2196F3"};
-    QColor tooltipFocusColor = QColor{"#2196F3"};
+    QColor tooltipTextColor = QColor{0xeff0f1};
+    QColor tooltipBackgroundColor = QColor{0x31363b};
+    QColor tooltipAlternateBackgroundColor = QColor{0x4d4d4d};
+    QColor tooltipHoverColor = QColor{0x2196F3};
+    QColor tooltipFocusColor = QColor{0x2196F3};
 
-    QColor complementaryTextColor = QColor{"#eff0f1"};
-    QColor complementaryBackgroundColor = QColor{"#31363b"};
-    QColor complementaryAlternateBackgroundColor = QColor{"#3b4045"};
-    QColor complementaryHoverColor = QColor{"#2196F3"};
-    QColor complementaryFocusColor = QColor{"#2196F3"};
+    QColor complementaryTextColor = QColor{0xeff0f1};
+    QColor complementaryBackgroundColor = QColor{0x31363b};
+    QColor complementaryAlternateBackgroundColor = QColor{0x3b4045};
+    QColor complementaryHoverColor = QColor{0x2196F3};
+    QColor complementaryFocusColor = QColor{0x2196F3};
 
-    QColor headerTextColor = QColor{"#232629"};
-    QColor headerBackgroundColor = QColor{"#e3e5e7"};
-    QColor headerAlternateBackgroundColor = QColor{"#eff0f1"};
-    QColor headerHoverColor = QColor{"#2196F3"};
-    QColor headerFocusColor = QColor{"#93cee9"};
+    QColor headerTextColor = QColor{0x232629};
+    QColor headerBackgroundColor = QColor{0xe3e5e7};
+    QColor headerAlternateBackgroundColor = QColor{0xeff0f1};
+    QColor headerHoverColor = QColor{0x2196F3};
+    QColor headerFocusColor = QColor{0x93cee9};
 
     QFont defaultFont;
     QFont smallFont;
