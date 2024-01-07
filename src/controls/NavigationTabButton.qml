@@ -121,6 +121,8 @@ T.TabButton {
     Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem
     Kirigami.MnemonicData.label: text
 
+    Accessible.onPressAction: control.action.trigger()
+
     background: Rectangle {
         Kirigami.Theme.colorSet: Kirigami.Theme.Button
         Kirigami.Theme.inherit: false
@@ -220,6 +222,8 @@ T.TabButton {
             Layout.preferredHeight: boldMetrics.implicitHeight * label.lineCount
             Layout.fillWidth: true
 
+            Accessible.ignored: true
+
             QQC2.Label {
                 id: boldMetrics
                 visible: false
@@ -230,6 +234,8 @@ T.TabButton {
                 horizontalAlignment: Text.AlignHCenter
                 wrapMode: Text.Wrap
                 elide: Text.ElideMiddle
+
+                Accessible.ignored: true
             }
         }
     }
