@@ -401,7 +401,7 @@ QQC2.SwipeDelegate {
                 }
                 function onPressed(mouse) {
                     if (internal.edgeEnabled) {
-                        dragButton.onPressed(mouse);
+                        dragButton.pressed(mouse);
                     }
                 }
                 function onClicked(mouse) {
