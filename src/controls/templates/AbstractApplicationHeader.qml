@@ -18,7 +18,7 @@ import "private"
  * the minimum, preferred and maximum heights of the item can be controlled with
  * * minimumHeight: default is 0, i.e. hidden
  * * preferredHeight: default is Units.gridUnit * 1.6
- * * preferredHeight: default is Units.gridUnit * 3
+ * * maximumHeight: default is Units.gridUnit * 3
  *
  * To achieve a titlebar that stays completely fixed just set the 3 sizes as the same
  *
