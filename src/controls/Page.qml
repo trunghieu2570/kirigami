@@ -204,7 +204,7 @@ QQC2.Page {
         }
         if (root.T.StackView.view) {
             globalToolBar.stack = root.T.StackView.view;
-            globalToolBar.row = root.T.StackView.view ? root.T.StackView.view.parent : null;
+            globalToolBar.row = root.T.StackView.view.parent instanceof Kirigami.PageRow ? root.T.StackView.view.parent : null;
         }
         if (globalToolBar.row) {
             root.globalToolBarStyleChanged.connect(globalToolBar.syncSource);
