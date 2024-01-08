@@ -73,11 +73,14 @@ ItemDelegate {
 
             // we override the Primary type's font weight (DemiBold) for Bold for contrast with small text
             font.weight: Font.Bold
+
+            Accessible.ignored: true
         }
 
         Kirigami.Separator {
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
+            Accessible.ignored: true
         }
     }
 }
