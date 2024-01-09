@@ -1,9 +1,9 @@
 # Kiszel Kristóf <kiszel.kristof@gmail.com>, 2017, 2018, 2020, 2021.
-# Kristof Kiszel <ulysses@fsf.hu>, 2021, 2022.
+# SPDX-FileCopyrightText: 2021, 2022, 2024 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-02-09 17:29+0100\n"
+"PO-Revision-Date: 2024-01-08 09:51+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.07.70\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: controls/AboutItem.qml:163
 #, qt-format
@@ -34,15 +34,12 @@ msgstr "Közreműködés"
 #: controls/AboutItem.qml:228
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Támogatás"
 
 #: controls/AboutItem.qml:245
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Report Bug…"
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "Hibabejelentés…"
+msgstr "Hibabejelentés"
 
 #: controls/AboutItem.qml:258
 msgctxt "AboutItem|"
@@ -122,17 +119,14 @@ msgid "Close Sidebar"
 msgstr "Oldalsáv bezárása"
 
 #: controls/GlobalDrawer.qml:619
-#, fuzzy
-#| msgctxt "GlobalDrawer|"
-#| msgid "Close Sidebar"
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
-msgstr "Oldalsáv bezárása"
+msgstr "Oldalsáv megnyitása"
 
 #: controls/LoadingPlaceholder.qml:54
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
-msgstr ""
+msgstr "Betöltés…"
 
 #: controls/PasswordField.qml:42
 msgctxt "PasswordField|"
@@ -140,36 +134,24 @@ msgid "Password"
 msgstr "Jelszó"
 
 #: controls/PasswordField.qml:45
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Hide Password"
-msgstr "Jelszó"
+msgstr "Jelszó elrejtése"
 
 #: controls/PasswordField.qml:45
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Show Password"
-msgstr "Jelszó"
+msgstr "Jelszó megjelenítése"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:84
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr "Bezárás"
+msgstr "Menü bezárása"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:84
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Open"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr "Megnyitás"
+msgstr "Menü megnyitása"
 
 #: controls/SearchField.qml:86
 msgctxt "SearchField|"
@@ -184,20 +166,17 @@ msgstr "Keresés"
 #: controls/SearchField.qml:99
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr ""
+msgstr "Keresés törlése"
 
 #: controls/templates/OverlayDrawer.qml:128
-#, fuzzy
-#| msgctxt "GlobalDrawer|"
-#| msgid "Close Sidebar"
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
-msgstr "Oldalsáv bezárása"
+msgstr "Csúszómenü bezárása"
 
 #: controls/templates/OverlayDrawer.qml:134
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
-msgstr ""
+msgstr "Csúszómenü megnyitása"
 
 #: controls/templates/private/BackButton.qml:50
 msgctxt "BackButton|"
@@ -213,41 +192,32 @@ msgstr "Előre"
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link %1"
-msgstr ""
+msgstr "Hivatkozás megnyitása: %1"
 
 #: controls/UrlButton.qml:35
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Open"
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
-msgstr "Megnyitás"
+msgstr "Hivatkozás megnyitása"
 
 #: controls/UrlButton.qml:58
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
-msgstr ""
+msgstr "Hivatkozás másolása a vágólapra"
 
 #: platform/settings.cpp:206
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "KDE Frameworks %1"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "KDE Frameworks %1"
 
 #: platform/settings.cpp:208
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "The %1 windowing system"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "A(z) %1 ablakkezelő rendszer"
 
 #: platform/settings.cpp:209
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "Qt %2 (built against %3)"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (fordítva ezzel: %3)"
