@@ -181,7 +181,15 @@ QQC2.Page {
 
     onHeaderChanged: {
         if (header) {
-            header.anchors.top = Qt.binding(() => globalToolBar.visible ? globalToolBar.bottom : root.top);
+            // This used to set the top anchor, but that no longer works so we need to adjust the item size instead.
+            // Effectively this works around QTBUG-120197 until that is fixed or we can clean up Kirigami to not have
+            // the global toolbar be part of the page.
+            if (header.hasOwnProperty("topPadding")) {
+                let originalTopPadding = header.topPadding
+                header.topPadding = Qt.binding(() => globalToolBar.visible ? globalToolBar.height + originalTopPadding : originalTopPadding)
+            } else {
+                console.warning("Page header set to something that does not have a topPadding property, this will cause overlapping problems")
+            }
         }
     }
 
