@@ -36,8 +36,8 @@ Item {
 
     property int position: QQC2.ToolBar.Header
 
-    property Kirigami.PageRow pageRow: __appWindow?.pageStack ?? null
-    property Kirigami.Page page: pageRow?.currentItem ?? null
+    property Kirigami.PageRow pageRow: __appWindow ? __appWindow.pageStack : null
+    property Kirigami.Page page: pageRow ? pageRow.currentItem : null
 
     default property alias contentItem: mainItem.data
     readonly property int paintedHeight: headerItem.y + headerItem.height - 1
@@ -102,7 +102,7 @@ Item {
     }
 
     Connections {
-        target: root.page?.Kirigami.ColumnView ?? null
+        target: root.page ? root.page.Kirigami.ColumnView : null
 
         function onScrollIntention(event) {
             headerItem.scrollIntentHandler(event);
@@ -142,7 +142,7 @@ Item {
         }
 
         Connections {
-            target: root.page?.globalToolBarItem ?? null
+            target: root.page ? root.page.globalToolBarItem : null
             enabled: target
             function onImplicitHeightChanged() {
                 root.implicitHeight = root.page.globalToolBarItem.implicitHeight;

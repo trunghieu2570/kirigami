@@ -245,7 +245,7 @@ Kirigami.OverlayDrawer {
     /**
      * @brief This property points to the action acting as a submenu
      */
-    readonly property T.Action currentSubMenu: stackView.currentItem?.current ?? null
+    readonly property T.Action currentSubMenu: stackView.currentItem ? stackView.currentItem.current : null
 
     /**
      * @brief This property sets whether the drawer becomes a menu on the desktop.
@@ -362,7 +362,7 @@ Kirigami.OverlayDrawer {
                 && kAction.children.length > 0;
         }
 
-        visible: kAction?.visible ?? true
+	visible: kAction ? kAction.visible : true
 
         width: parent.width
 
@@ -419,7 +419,7 @@ Kirigami.OverlayDrawer {
         }
 
         Repeater {
-            model: delegate.isExpanded ? (delegate.kAction?.children ?? null) : null
+            model: delegate.isExpanded ? (delegate.kAction ? delegate.kAction.children : null) : null
 
             NestedActionDelegate {
                 required property T.Action modelData

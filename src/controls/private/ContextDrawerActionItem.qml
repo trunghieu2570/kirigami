@@ -18,8 +18,8 @@ QQC2.ItemDelegate {
 
     readonly property Kirigami.Action kAction: tAction instanceof Kirigami.Action ? tAction : null
 
-    readonly property bool isSeparator: kAction?.separator ?? false
-    readonly property bool isExpandable: kAction?.expandible ?? false
+    readonly property bool isSeparator: kAction ? kAction.separator : false
+    readonly property bool isExpandable: kAction ? kAction.expandible : false
 
     checked: tAction.checked || (actionsMenu && actionsMenu.visible)
     highlighted: checked
