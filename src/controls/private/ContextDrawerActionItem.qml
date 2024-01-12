@@ -16,7 +16,7 @@ QQC2.ItemDelegate {
 
     required property T.Action tAction
 
-    readonly property Kirigami.Action kAction: tAction instanceof Kirigami.Action ? tAction : null
+    readonly property var /*Kirigami.Action*/ kAction: tAction instanceof Kirigami.Action ? tAction : null
 
     readonly property bool isSeparator: kAction?.separator ?? false
     readonly property bool isExpandable: kAction?.expandible ?? false

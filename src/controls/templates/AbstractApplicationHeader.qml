@@ -36,8 +36,8 @@ Item {
 
     property int position: QQC2.ToolBar.Header
 
-    property Kirigami.PageRow pageRow: __appWindow?.pageStack ?? null
-    property Kirigami.Page page: pageRow?.currentItem ?? null
+    property var /*Kirigami.PageRow*/ pageRow: __appWindow?.pageStack ?? null
+    property var /*Kirigami.Page*/ page: pageRow?.currentItem ?? null
 
     default property alias contentItem: mainItem.data
     readonly property int paintedHeight: headerItem.y + headerItem.height - 1

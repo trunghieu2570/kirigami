@@ -245,7 +245,7 @@ Kirigami.OverlayDrawer {
     /**
      * @brief This property points to the action acting as a submenu
      */
-    readonly property T.Action currentSubMenu: stackView.currentItem?.current ?? null
+    readonly property T.Action currentSubMenu: (stackView.currentItem as menuComponent)?.current ?? null
 
     /**
      * @brief This property sets whether the drawer becomes a menu on the desktop.
@@ -353,7 +353,7 @@ Kirigami.OverlayDrawer {
         required property bool withSections
 
         // `as` case operator is still buggy
-        readonly property Kirigami.Action kAction: tAction instanceof Kirigami.Action ? tAction : null
+        readonly property var /*Kirigami.Action*/ kAction: tAction instanceof Kirigami.Action ? tAction : null
 
         readonly property bool isExpanded: {
             return !root.collapsed
