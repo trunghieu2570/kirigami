@@ -352,6 +352,18 @@ T.Dialog {
                 ? contentChildren[0].implicitHeight
                 : (contentItem.implicitHeight > 0 ? contentItem.implicitHeight : contentItem.height)) + topPadding + bottomPadding
 
+        onContentItemChanged: {
+            if (!contentItem) {
+                return;
+            }
+            /* Why this is necessary? A Flickable mainItem syncs its size with the conents only on startup,
+             and if the contents can change their size dinamically afterwards (wrapping text does that),
+             the contentsize will be wrong see BUG 477257
+             We also don't do this declaratively but only we are sure a contentItem is declared/created as just
+             accessing the property would create an internal flickable, making it impossible to assign custom
+             flickables/ listviews to the Dialog*/
+            contentItem.contentHeight = Qt.binding(()=>{return contentControl.calculatedImplicitHeight})
+        }
 
         // how do we deal with the scrollbar width?
         // - case 1: the dialog itself has the preferredWidth set
