@@ -69,9 +69,13 @@ import org.kde.kirigami as Kirigami
 QtObject {
     readonly property Component leadingSeparator: Kirigami.Separator {
         property Item column
+        property bool inToolBar
 
         // positioning trick to hide the very first separator
         visible: {
+            if (inToolBar) {
+                return true;
+            }
             const view = column.Kirigami.ColumnView.view;
             if (!view || !view.separatorVisible) {
                 return false;
@@ -85,6 +89,8 @@ QtObject {
         anchors.top: column.top
         anchors.left: column.left
         anchors.bottom: column.bottom
+        anchors.topMargin: inToolBar ? Kirigami.Units.largeSpacing : 0
+        anchors.bottomMargin: inToolBar ? Kirigami.Units.largeSpacing : 0
         Kirigami.Theme.colorSet: Kirigami.Theme.Window
         Kirigami.Theme.inherit: false
     }
@@ -103,7 +109,7 @@ QtObject {
     /* clang-format on */
 
     m_instance = component.create();
-    // qCWarning(KirigamiLog)<<component->errors();
+    // qCWarning(KirigamiLog)<<component.errors();
     Q_ASSERT(m_instance);
     m_instance->setParent(this);
 
@@ -311,12 +317,65 @@ void ColumnViewAttached::setInViewport(bool inViewport)
     Q_EMIT inViewportChanged();
 }
 
+QQuickItem *ColumnViewAttached::globalHeader() const
+{
+    return m_globalHeader;
+}
+
+void ColumnViewAttached::setGlobalHeader(QQuickItem *header)
+{
+    if (header == m_globalHeader) {
+        return;
+    }
+
+    QQuickItem *oldHeader = m_globalHeader;
+    if (m_globalHeader) {
+        disconnect(m_globalHeader, nullptr, this, nullptr);
+    }
+
+    m_globalHeader = header;
+
+    connect(header, &QObject::destroyed, this, [this, header]() {
+        globalHeaderChanged(header, nullptr);
+    });
+
+    Q_EMIT globalHeaderChanged(oldHeader, header);
+}
+
+QQuickItem *ColumnViewAttached::globalFooter() const
+{
+    return m_globalFooter;
+}
+
+void ColumnViewAttached::setGlobalFooter(QQuickItem *footer)
+{
+    if (footer == m_globalFooter) {
+        return;
+    }
+
+    QQuickItem *oldFooter = m_globalFooter;
+    if (m_globalFooter) {
+        disconnect(m_globalFooter, nullptr, this, nullptr);
+    }
+
+    m_globalFooter = footer;
+
+    connect(footer, &QObject::destroyed, this, [this, footer]() {
+        globalFooterChanged(footer, nullptr);
+    });
+
+    Q_EMIT globalFooterChanged(oldFooter, footer);
+}
+
 /////////
 
 ContentItem::ContentItem(ColumnView *parent)
     : QQuickItem(parent)
     , m_view(parent)
 {
+    m_globalHeaderParent = new QQuickItem(this);
+    m_globalFooterParent = new QQuickItem(this);
+
     setFlags(flags() | ItemIsFocusScope);
     m_slideAnim = new QPropertyAnimation(this);
     m_slideAnim->setTargetObject(this);
@@ -336,6 +395,7 @@ ContentItem::ContentItem(ColumnView *parent)
     });
 
     connect(this, &QQuickItem::xChanged, this, &ContentItem::layoutPinnedItems);
+    m_creationInProgress = false;
 }
 
 ContentItem::~ContentItem()
@@ -456,6 +516,9 @@ void ContentItem::layoutItems()
         // for (QQuickItem *child : std::as_const(m_items)) {
         QQuickItem *child = reverse ? *(it - 1) : *it;
         ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(child, true));
+        if (child == m_globalHeaderParent || child == m_globalFooterParent) {
+            continue;
+        }
 
         if (child->isVisible()) {
             if (attached->isPinned() && m_view->columnResizeMode() != ColumnView::SingleColumn) {
@@ -466,9 +529,32 @@ void ContentItem::layoutItems()
                     sepWidth = (sep ? sep->width() : 0);
                 }
                 const qreal width = childWidth(child);
-                child->setSize(QSizeF(width + sepWidth, height()));
+                const qreal pageX = std::clamp(partialWidth, -x(), -x() + m_view->width() - child->width());
+                qreal headerHeight = .0;
+                qreal footerHeight = .0;
+                if (QQuickItem *header = attached->globalHeader()) {
+                    headerHeight = header->isVisible() ? header->height() : .0;
+                    header->setWidth(width + sepWidth);
+                    header->setPosition(QPointF(pageX, .0));
+                    header->setZ(2);
+                    if (m_view->separatorVisible()) {
+                        QQuickItem *sep = ensureTrailingSeparator(header);
+                        sep->setProperty("inToolBar", true);
+                    }
+                }
+                if (QQuickItem *footer = attached->globalFooter()) {
+                    footerHeight = footer->isVisible() ? footer->height() : .0;
+                    footer->setWidth(width + sepWidth);
+                    footer->setPosition(QPointF(pageX, height() - footerHeight));
+                    footer->setZ(2);
+                    if (m_view->separatorVisible()) {
+                        QQuickItem *sep = ensureTrailingSeparator(footer);
+                        sep->setProperty("inToolBar", true);
+                    }
+                }
 
-                child->setPosition(QPointF(qMin(qMax(-x(), partialWidth), -x() + m_view->width() - child->width() + sepWidth), 0.0));
+                child->setSize(QSizeF(width + sepWidth, height() - headerHeight - footerHeight));
+                child->setPosition(QPointF(pageX, headerHeight));
                 child->setZ(1);
 
                 if (partialWidth <= -x()) {
@@ -480,14 +566,48 @@ void ContentItem::layoutItems()
                 partialWidth += width;
 
             } else {
-                child->setSize(QSizeF(childWidth(child), height()));
+                const qreal width = childWidth(child);
+                qreal headerHeight = .0;
+                qreal footerHeight = .0;
+                if (QQuickItem *header = attached->globalHeader()) {
+                    if (m_view->separatorVisible()) {
+                        QQuickItem *sep = ensureLeadingSeparator(header);
+                        sep->setProperty("inToolBar", true);
+                    }
+                    headerHeight = header->isVisible() ? header->height() : .0;
+                    header->setWidth(width);
+                    header->setPosition(QPointF(partialWidth, .0));
+                    header->setZ(1);
+                    auto it = m_trailingSeparators.find(header);
+                    if (it != m_trailingSeparators.end()) {
+                        it.value()->deleteLater();
+                        m_trailingSeparators.erase(it);
+                    }
+                }
+                if (QQuickItem *footer = attached->globalFooter()) {
+                    if (m_view->separatorVisible()) {
+                        QQuickItem *sep = ensureLeadingSeparator(footer);
+                        sep->setProperty("inToolBar", true);
+                    }
+                    footerHeight = footer->isVisible() ? footer->height() : .0;
+                    footer->setWidth(width);
+                    footer->setPosition(QPointF(partialWidth, height() - footerHeight));
+                    footer->setZ(1);
+                    auto it = m_trailingSeparators.find(footer);
+                    if (it != m_trailingSeparators.end()) {
+                        it.value()->deleteLater();
+                        m_trailingSeparators.erase(it);
+                    }
+                }
+
+                child->setSize(QSizeF(width, height() - headerHeight - footerHeight));
 
                 auto it = m_trailingSeparators.find(child);
                 if (it != m_trailingSeparators.end()) {
                     it.value()->deleteLater();
                     m_trailingSeparators.erase(it);
                 }
-                child->setPosition(QPointF(partialWidth, 0.0));
+                child->setPosition(QPointF(partialWidth, headerHeight));
                 child->setZ(0);
 
                 partialWidth += child->width();
@@ -545,7 +665,26 @@ void ContentItem::layoutPinnedItems()
                     sepWidth = (sep ? sep->width() : 0);
                 }
 
-                child->setPosition(QPointF(qMin(qMax(-x(), partialWidth), -x() + m_view->width() - child->width() + sepWidth), 0.0));
+                const qreal pageX = qMin(qMax(-x(), partialWidth), -x() + m_view->width() - child->width() + sepWidth);
+                qreal headerHeight = .0;
+                qreal footerHeight = .0;
+                if (QQuickItem *header = attached->globalHeader()) {
+                    headerHeight = header->isVisible() ? header->height() : .0;
+                    header->setPosition(QPointF(pageX, .0));
+                    if (m_view->separatorVisible()) {
+                        QQuickItem *sep = ensureTrailingSeparator(header);
+                        sep->setProperty("inToolBar", true);
+                    }
+                }
+                if (QQuickItem *footer = attached->globalFooter()) {
+                    footerHeight = footer->isVisible() ? footer->height() : .0;
+                    footer->setPosition(QPointF(pageX, height() - footerHeight));
+                    if (m_view->separatorVisible()) {
+                        QQuickItem *sep = ensureTrailingSeparator(footer);
+                        sep->setProperty("inToolBar", true);
+                    }
+                }
+                child->setPosition(QPointF(pageX, headerHeight));
 
                 if (partialWidth <= -x()) {
                     m_leftPinnedSpace = qMax(m_leftPinnedSpace, child->width() - sepWidth);
@@ -619,9 +758,35 @@ void ContentItem::forgetItem(QQuickItem *item)
         separatorItem->deleteLater();
     }
 
+    if (QQuickItem *header = attached->globalHeader()) {
+        header->setVisible(false);
+        header->setParentItem(item);
+        separatorItem = m_leadingSeparators.take(header);
+        if (separatorItem) {
+            separatorItem->deleteLater();
+        }
+        separatorItem = m_trailingSeparators.take(header);
+        if (separatorItem) {
+            separatorItem->deleteLater();
+        }
+    }
+    if (QQuickItem *footer = attached->globalFooter()) {
+        footer->setVisible(false);
+        footer->setParentItem(item);
+        separatorItem = m_leadingSeparators.take(footer);
+        if (separatorItem) {
+            separatorItem->deleteLater();
+        }
+        separatorItem = m_trailingSeparators.take(footer);
+        if (separatorItem) {
+            separatorItem->deleteLater();
+        }
+    }
+
     const int index = m_items.indexOf(item);
     m_items.removeAll(item);
-    disconnect(item, &QObject::destroyed, this, nullptr);
+    // We are connected not only to destroyed but also to lambdas
+    disconnect(item, nullptr, this, nullptr);
     updateVisibleItems();
     m_shouldAnimate = true;
     m_view->polish();
@@ -674,6 +839,10 @@ QQuickItem *ContentItem::ensureTrailingSeparator(QQuickItem *item)
 
 void ContentItem::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &value)
 {
+    if (m_creationInProgress) {
+        QQuickItem::itemChange(change, value);
+        return;
+    }
     switch (change) {
     case QQuickItem::ItemChildAddedChange: {
         ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(value.item, true));
@@ -764,6 +933,32 @@ void ContentItem::updateRepeaterModel()
 
     } else {
         connect(modelObj, SIGNAL(childrenChanged()), this, SLOT(syncItemsOrder()));
+    }
+}
+
+void ContentItem::connectHeader(QQuickItem *oldHeader, QQuickItem *newHeader)
+{
+    if (oldHeader) {
+        disconnect(oldHeader, nullptr, this, nullptr);
+        oldHeader->setParentItem(nullptr);
+    }
+    if (newHeader) {
+        connect(newHeader, &QQuickItem::heightChanged, this, &ContentItem::layoutItems);
+        connect(newHeader, &QQuickItem::visibleChanged, this, &ContentItem::layoutItems);
+        newHeader->setParentItem(m_globalHeaderParent);
+    }
+}
+
+void ContentItem::connectFooter(QQuickItem *oldFooter, QQuickItem *newFooter)
+{
+    if (oldFooter) {
+        disconnect(oldFooter, nullptr, this, nullptr);
+        oldFooter->setParentItem(nullptr);
+    }
+    if (newFooter) {
+        connect(newFooter, &QQuickItem::heightChanged, this, &ContentItem::layoutItems);
+        connect(newFooter, &QQuickItem::visibleChanged, this, &ContentItem::layoutItems);
+        newFooter->setParentItem(m_globalFooterParent);
     }
 }
 
@@ -1097,6 +1292,15 @@ void ColumnView::insertItem(int pos, QQuickItem *item)
 
     item->forceActiveFocus();
 
+    if (attached->globalHeader()) {
+        m_contentItem->connectHeader(nullptr, attached->globalHeader());
+    }
+    if (attached->globalFooter()) {
+        m_contentItem->connectFooter(nullptr, attached->globalFooter());
+    }
+    connect(attached, &ColumnViewAttached::globalHeaderChanged, m_contentItem, &ContentItem::connectHeader);
+    connect(attached, &ColumnViewAttached::globalFooterChanged, m_contentItem, &ContentItem::connectFooter);
+
     // Animate shift to new item.
     m_contentItem->m_shouldAnimate = true;
     m_contentItem->layoutItems();
@@ -1154,6 +1358,15 @@ void ColumnView::replaceItem(int pos, QQuickItem *item)
         attached->setOriginalParent(item->parentItem());
         attached->setShouldDeleteOnRemove(item->parentItem() == nullptr && QQmlEngine::objectOwnership(item) == QQmlEngine::JavaScriptOwnership);
         item->setParentItem(m_contentItem);
+
+        if (attached->globalHeader()) {
+            m_contentItem->connectHeader(nullptr, attached->globalHeader());
+        }
+        if (attached->globalFooter()) {
+            m_contentItem->connectFooter(nullptr, attached->globalFooter());
+        }
+        connect(attached, &ColumnViewAttached::globalHeaderChanged, m_contentItem, &ContentItem::connectHeader);
+        connect(attached, &ColumnViewAttached::globalFooterChanged, m_contentItem, &ContentItem::connectFooter);
 
         if (m_currentIndex >= pos) {
             ++m_currentIndex;
@@ -1340,8 +1553,8 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
         while (candidateItem->parentItem() && candidateItem->parentItem() != m_contentItem) {
             candidateItem = candidateItem->parentItem();
         }
-        if (candidateItem->parentItem() == m_contentItem) {
-            setCurrentIndex(m_contentItem->m_items.indexOf(candidateItem));
+        if (int idx = m_contentItem->m_items.indexOf(candidateItem); idx >= 0 && candidateItem->parentItem() == m_contentItem) {
+            setCurrentIndex(idx);
         }
 
         // if !m_acceptsMouse we don't drag with mouse

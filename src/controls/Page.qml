@@ -157,33 +157,12 @@ QQC2.Page {
      */
     signal backRequested(var event);
 
-    // NOTE: contentItem will be created if not existing (and contentChildren of Page would become its children) This with anchors enforces the geometry we want, where globalToolBar is a super-header, on top of header
-    contentItem: Item {
-        anchors {
-            top: (root.header && root.header.visible)
-                    ? root.header.bottom
-                    : (globalToolBar.visible ? globalToolBar.bottom : parent.top)
-            topMargin: root.topPadding + root.spacing
-            bottom: (root.footer && root.footer.visible) ? root.footer.top : parent.bottom
-            bottomMargin: root.bottomPadding + root.spacing
-        }
-    }
-
     background: Rectangle {
         color: Kirigami.Theme.backgroundColor
     }
 
-    implicitHeight: ((header && header.visible) ? header.implicitHeight : 0) + ((footer && footer.visible) ? footer.implicitHeight : 0) + contentItem.implicitHeight + topPadding + bottomPadding
-    implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding
-
     // FIXME: on material the shadow would bleed over
     clip: root.header !== null;
-
-    onHeaderChanged: {
-        if (header) {
-            header.anchors.top = Qt.binding(() => globalToolBar.visible ? globalToolBar.bottom : root.top);
-        }
-    }
 
     Component.onCompleted: {
         headerChanged();
@@ -223,61 +202,58 @@ QQC2.Page {
                 fill: parent
                 topMargin: globalToolBar.height
             }
-        },
-        // global top toolbar if we are in a PageRow (in the row or as a layer)
-        Loader {
-            id: globalToolBar
-            z: 9999
-            height: item ? item.implicitHeight : 0
-            anchors {
-                left:  parent.left
-                right: parent.right
-                top: parent.top
-            }
-            property Kirigami.PageRow row
-            property T.StackView stack
-
-            // don't load async so that on slower devices we don't have the page content height changing while loading in
-            // otherwise, it looks unpolished and jumpy
-            asynchronous: false
-
-            visible: active
-            active: (root.titleDelegate !== defaultTitleDelegate || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.Titles)
-            onActiveChanged: {
-                if (active) {
-                    syncSource();
-                }
-            }
-
-            function syncSource() {
-                if (root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar &&
-                    root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.Titles &&
-                    root.titleDelegate !== defaultTitleDelegate) {
-                    sourceComponent = root.titleDelegate;
-                } else if (active) {
-                    const url = root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar
-                        ? "private/globaltoolbar/ToolBarPageHeader.qml"
-                        : "private/globaltoolbar/TitlesPageHeader.qml";
-                    // TODO: find container reliably, remove assumption
-                    setSource(Qt.resolvedUrl(url), {
-                        pageRow: Qt.binding(() => row),
-                        page: root,
-                        current: Qt.binding(() => {
-                            if (!row && !stack) {
-                                return true;
-                            } else if (stack) {
-                                return stack;
-                            } else {
-                                return row.currentIndex === root.Kirigami.ColumnView.level;
-                            }
-                        }),
-                    });
-                }
-            }
         }
     ]
+    // global top toolbar if we are in a PageRow (in the row or as a layer)
+    Kirigami.ColumnView.globalHeader: Loader {
+        id: globalToolBar
+        z: 9999
+        height: item ? item.implicitHeight : 0
+
+        width: root.width
+        property Kirigami.PageRow row
+        property T.StackView stack
+
+        // don't load async so that on slower devices we don't have the page content height changing while loading in
+        // otherwise, it looks unpolished and jumpy
+        asynchronous: false
+
+        visible: active
+        active: (root.titleDelegate !== defaultTitleDelegate || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.Titles)
+        onActiveChanged: {
+            if (active) {
+                syncSource();
+            }
+        }
+
+        function syncSource() {
+            if (root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar &&
+                root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.Titles &&
+                root.titleDelegate !== defaultTitleDelegate) {
+                sourceComponent = root.titleDelegate;
+            } else if (active) {
+                const url = root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar
+                    ? "private/globaltoolbar/ToolBarPageHeader.qml"
+                    : "private/globaltoolbar/TitlesPageHeader.qml";
+                // TODO: find container reliably, remove assumption
+                setSource(Qt.resolvedUrl(url), {
+                    pageRow: Qt.binding(() => row),
+                    page: root,
+                    current: Qt.binding(() => {
+                        if (!row && !stack) {
+                            return true;
+                        } else if (stack) {
+                            return stack;
+                        } else {
+                            return row.currentIndex === root.Kirigami.ColumnView.level;
+                        }
+                    }),
+                });
+            }
+        }
+    }
     // bottom action buttons
-    footer: Loader {
+    Kirigami.ColumnView.globalFooter: Loader {
         id: bottomToolBar
 
         property T.Page page: root

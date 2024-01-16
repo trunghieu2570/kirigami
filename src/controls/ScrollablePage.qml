@@ -164,10 +164,7 @@ Kirigami.Page {
         anchors {
             top: root.header?.visible
                     ? root.header.bottom
-                    // FIXME: for now assuming globalToolBarItem is in a Loader, which needs to be get rid of
-                    : (globalToolBarItem?.parent && globalToolBarItem.visible
-                        ? globalToolBarItem.parent.bottom
-                        : parent.top)
+                    : parent.top
             bottom: root.footer?.visible ? root.footer.top : parent.bottom
             left: parent.left
             right: parent.right

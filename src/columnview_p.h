@@ -61,6 +61,9 @@ public:
     void animateX(qreal x);
     void snapToItem();
 
+    void connectHeader(QQuickItem *oldHeader, QQuickItem *newHeader);
+    void connectFooter(QQuickItem *oldFooter, QQuickItem *newFooter);
+
     inline qreal viewportLeft() const;
     inline qreal viewportRight() const;
 
@@ -74,6 +77,8 @@ private Q_SLOTS:
 
 private:
     ColumnView *m_view;
+    QQuickItem *m_globalHeaderParent;
+    QQuickItem *m_globalFooterParent;
     QPropertyAnimation *m_slideAnim;
     QList<QQuickItem *> m_items;
     QList<QObject *> m_visibleItems;
@@ -89,5 +94,6 @@ private:
     qreal m_lastDragDelta = 0;
     ColumnView::ColumnResizeMode m_columnResizeMode = ColumnView::FixedColumns;
     bool m_shouldAnimate = false;
+    bool m_creationInProgress = true;
     friend class ColumnView;
 };

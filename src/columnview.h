@@ -78,6 +78,9 @@ class ColumnViewAttached : public QObject
      */
     Q_PROPERTY(bool inViewport READ inViewport NOTIFY inViewportChanged FINAL)
 
+    Q_PROPERTY(QQuickItem *globalHeader READ globalHeader WRITE setGlobalHeader NOTIFY globalHeaderChanged FINAL)
+    Q_PROPERTY(QQuickItem *globalFooter READ globalFooter WRITE setGlobalFooter NOTIFY globalFooterChanged FINAL)
+
 public:
     ColumnViewAttached(QObject *parent = nullptr);
     ~ColumnViewAttached() override;
@@ -110,6 +113,12 @@ public:
     bool inViewport() const;
     void setInViewport(bool inViewport);
 
+    QQuickItem *globalHeader() const;
+    void setGlobalHeader(QQuickItem *header);
+
+    QQuickItem *globalFooter() const;
+    void setGlobalFooter(QQuickItem *footer);
+
 Q_SIGNALS:
     void indexChanged();
     void fillWidthChanged();
@@ -119,6 +128,8 @@ Q_SIGNALS:
     void pinnedChanged();
     void scrollIntention(ScrollIntentionEvent *event);
     void inViewportChanged();
+    void globalHeaderChanged(QQuickItem *oldHeader, QQuickItem *newHeader);
+    void globalFooterChanged(QQuickItem *oldFooter, QQuickItem *newFooter);
 
 private:
     int m_index = -1;
@@ -132,6 +143,8 @@ private:
     bool m_preventStealing = false;
     bool m_pinned = false;
     bool m_inViewport = false;
+    QPointer<QQuickItem> m_globalHeader;
+    QPointer<QQuickItem> m_globalFooter;
 };
 
 /**
