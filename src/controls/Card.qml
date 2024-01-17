@@ -83,6 +83,12 @@ Kirigami.AbstractCard {
             corners.topRightRadius: radiusFromBackground
             corners.bottomLeftRadius: radiusFromBackground
             corners.bottomRightRadius: heightWithBorder < root.height ? 0 : radiusFromBackground
+
+            checkable: root.checkable
+            checked: root.checkable && root.checked
+            onToggled: (checked) => {
+                root.checked = checked
+            }
         }
     }
 

@@ -6,6 +6,7 @@
 
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
 /**
@@ -66,6 +67,32 @@ Kirigami.ShadowedImage {
      */
     property alias titleWrapMode: heading.wrapMode
 
+    /**
+     * @brief This property holds whether the title is part of an item considered
+     * checkable.
+     *
+     * If true, a checkbox will appear in the top-right corner of the title area.
+     *
+     * default: false
+     *
+     * @property bool checkable
+     */
+    property bool checkable: false
+
+    /**
+     * @brief This property holds whether the title's checkbox is currently checked.
+     *
+     * If using this outside of a GlobalDrawer or a Card, you must manually bind
+     * this to the checked condition of the parent item, or whatever else in your
+     * UI signals checkability. You must also handle the `toggled` signal when
+     * the user manually clicks the checkbox.
+     *
+     * default: false
+     *
+     * @property bool checked
+     */
+    property bool checked: false
+
     property int leftPadding: headingIcon.valid ? Kirigami.Units.smallSpacing * 2 : Kirigami.Units.largeSpacing
     property int topPadding: headingIcon.valid ? Kirigami.Units.smallSpacing * 2 : Kirigami.Units.largeSpacing
     property int rightPadding: headingIcon.valid ? Kirigami.Units.smallSpacing * 2 : Kirigami.Units.largeSpacing
@@ -77,6 +104,8 @@ Kirigami.ShadowedImage {
                                   source.toString().length === 0 && // QUrl
                                   !titleIcon                        // QVariant hanled by Kirigami.Icon
 //END properties
+
+    signal toggled(bool checked)
 
     Layout.fillWidth: true
 
@@ -157,7 +186,7 @@ Kirigami.ShadowedImage {
             rightMargin: root.rightPadding
             bottomMargin: root.bottomPadding
         }
-        width: Math.min(implicitWidth, parent.width -root.leftPadding -root.rightPadding)
+        width: Math.min(implicitWidth, parent.width -root.leftPadding -root.rightPadding - (checkboxLoader.active ? Kirigami.Units.largeSpacing : 0))
         height: Math.min(implicitHeight, parent.height -root.topPadding -root.bottomPadding)
         Kirigami.Icon {
             id: headingIcon
@@ -176,6 +205,20 @@ Kirigami.ShadowedImage {
             color: root.source.toString().length > 0 ? "white" : Kirigami.Theme.textColor
             wrapMode: Text.NoWrap
             elide: Text.ElideRight
+        }
+    }
+
+    Loader {
+        id: checkboxLoader
+        anchors {
+            top: parent.top
+            right: parent.right
+            topMargin: root.topPadding
+        }
+        active: root.checkable
+        sourceComponent: QQC2.CheckBox {
+            checked: root.checked
+            onToggled: root.toggled(checked);
         }
     }
 }
