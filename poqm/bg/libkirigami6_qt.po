@@ -221,15 +221,3 @@ msgstr "Система за прозорци %1"
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (изграден върху %3)"
-
-#~ msgctxt "CategorizedSettings|"
-#~ msgid "Settings"
-#~ msgstr "Настройки"
-
-#~ msgctxt "CategorizedSettings|"
-#~ msgid "Settings — %1"
-#~ msgstr "Настройки — %1"
-
-#~ msgctxt "Avatar|"
-#~ msgid "%1 — %2"
-#~ msgstr "%1 — %2"
