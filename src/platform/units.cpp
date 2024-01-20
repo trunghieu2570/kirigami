@@ -235,11 +235,6 @@ void Units::setToolTipDelay(int delay)
     Q_EMIT toolTipDelayChanged();
 }
 
-int Units::maximumInteger() const
-{
-    return std::numeric_limits<int>::max();
-}
-
 Units *Units::create(QQmlEngine *qmlEngine, [[maybe_unused]] QJSEngine *jsEngine)
 {
 #ifndef KIRIGAMI_BUILD_TYPE_STATIC

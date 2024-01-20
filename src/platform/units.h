@@ -198,8 +198,6 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      */
     Q_PROPERTY(int toolTipDelay READ toolTipDelay NOTIFY toolTipDelayChanged FINAL)
 
-    Q_PROPERTY(int maximumInteger READ maximumInteger CONSTANT FINAL)
-
 public:
     ~Units() override;
 
@@ -234,8 +232,6 @@ public:
     void setToolTipDelay(int delay);
 
     IconSizes *iconSizes() const;
-
-    int maximumInteger() const;
 
     static Units *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine);
 
