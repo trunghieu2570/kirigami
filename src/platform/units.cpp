@@ -44,6 +44,8 @@ public:
         , veryShortDuration(50)
         , humanMoment(2000)
         , toolTipDelay(700)
+        , settingsWindowWidth(gridUnit * 50)
+        , settingsWindowHeight(gridUnit * 40)
         , iconSizes(new IconSizes(units))
     {
     }
@@ -65,6 +67,10 @@ public:
     int veryShortDuration;
     int humanMoment;
     int toolTipDelay;
+
+    // sizes
+    int settingsWindowWidth;
+    int settingsWindowHeight;
 
     IconSizes *const iconSizes;
 
@@ -233,6 +239,36 @@ void Units::setToolTipDelay(int delay)
 
     d->toolTipDelay = delay;
     Q_EMIT toolTipDelayChanged();
+}
+
+int Units::settingsWindowWidth() const
+{
+    return d->settingsWindowWidth;
+}
+
+void Units::setSettingsWindowWidth(int width)
+{
+    if (d->settingsWindowWidth == width) {
+        return;
+    }
+
+    d->settingsWindowWidth = width;
+    Q_EMIT settingsWindowHeightChanged();
+}
+
+int Units::settingsWindowHeight() const
+{
+    return d->settingsWindowHeight;
+}
+
+void Units::setSettingsWindowHeight(int height)
+{
+    if (d->settingsWindowHeight == height) {
+        return;
+    }
+
+    d->settingsWindowHeight = height;
+    Q_EMIT settingsWindowHeightChanged();
 }
 
 int Units::maximumInteger() const

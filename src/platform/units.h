@@ -198,6 +198,16 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      */
     Q_PROPERTY(int toolTipDelay READ toolTipDelay NOTIFY toolTipDelayChanged FINAL)
 
+    /**
+     * units.settingsWindowWidth should be used for the width of settings dialogs.
+     */
+    Q_PROPERTY(int settingsWindowWidth READ settingsWindowWidth CONSTANT FINAL)
+
+    /**
+     * units.settingsWindowHeight should be used for the height of settings dialogs.
+     */
+    Q_PROPERTY(int settingsWindowHeight READ settingsWindowHeight CONSTANT FINAL)
+
     Q_PROPERTY(int maximumInteger READ maximumInteger CONSTANT FINAL)
 
 public:
@@ -233,6 +243,12 @@ public:
     int toolTipDelay() const;
     void setToolTipDelay(int delay);
 
+    int settingsWindowWidth() const;
+    void setSettingsWindowWidth(int width);
+
+    int settingsWindowHeight() const;
+    void setSettingsWindowHeight(int height);
+
     IconSizes *iconSizes() const;
 
     int maximumInteger() const;
@@ -251,6 +267,8 @@ Q_SIGNALS:
     void humanMomentChanged();
     void toolTipDelayChanged();
     void wheelScrollLinesChanged();
+    void settingsWindowWidthChanged();
+    void settingsWindowHeightChanged();
 
 protected:
     explicit Units(QObject *parent = nullptr);
