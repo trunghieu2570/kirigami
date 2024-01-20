@@ -566,7 +566,7 @@ void ContentItem::layoutItems()
                 const qreal width = childWidth(child);
                 qreal headerHeight = .0;
                 qreal footerHeight = .0;
-                if (QQuickItem *header = attached->globalHeader()) {
+                if (QQuickItem *header = attached->globalHeader(); header && qmlEngine(header)) {
                     if (m_view->separatorVisible()) {
                         QQuickItem *sep = ensureLeadingSeparator(header);
                         sep->setProperty("inToolBar", true);
@@ -581,7 +581,7 @@ void ContentItem::layoutItems()
                         m_trailingSeparators.erase(it);
                     }
                 }
-                if (QQuickItem *footer = attached->globalFooter()) {
+                if (QQuickItem *footer = attached->globalFooter(); footer && qmlEngine(footer)) {
                     if (m_view->separatorVisible()) {
                         QQuickItem *sep = ensureLeadingSeparator(footer);
                         sep->setProperty("inToolBar", true);
