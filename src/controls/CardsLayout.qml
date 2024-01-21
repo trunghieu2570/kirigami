@@ -67,8 +67,8 @@ GridLayout {
                                   Math.floor(width/minimumColumnWidth),
                                   Math.ceil(width/maximumColumnWidth)));
 
-    rowSpacing: Kirigami.Units.largeSpacing * columns
-    columnSpacing: Kirigami.Units.largeSpacing * columns
+    rowSpacing: Kirigami.Units.largeSpacing
+    columnSpacing: Kirigami.Units.largeSpacing
 
 
     // NOTE: this default width which defaults to 2 columns is just to remove a binding loop on columns
