@@ -658,7 +658,7 @@ void Icon::updatePaintedGeometry()
                 newSize = QSizeF(roundedWidth, roundedWidth);
             }
         } else {
-            const QSizeF iconPixSize(m_icon.width() / m_devicePixelRatio, m_icon.width() / m_devicePixelRatio);
+            const QSizeF iconPixSize(m_icon.width() / m_devicePixelRatio, m_icon.height() / m_devicePixelRatio);
 
             const qreal w = widthValid() ? width() : iconPixSize.width();
             const qreal widthScale = w / iconPixSize.width();
