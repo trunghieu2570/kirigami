@@ -29,6 +29,13 @@ Kirigami.ShadowedImage {
     property alias titleIcon: headingIcon.source
 
     /**
+     * @brief This property holds the size of the title icon
+     *
+     * @property int titleIconSize
+     */
+    property int titleIconSize: Kirigami.Units.iconSizes.large
+
+    /**
      * @brief This property holds the title's text which is to be displayed on top.
      * of the image.
      * @see QtQuick.Text::text
@@ -179,22 +186,31 @@ Kirigami.ShadowedImage {
 
     RowLayout {
         id: titleLayout
+
         property bool completed: false
+
         anchors {
             leftMargin: root.leftPadding
             topMargin: root.topPadding
             rightMargin: root.rightPadding
             bottomMargin: root.bottomPadding
         }
-        width: Math.min(implicitWidth, parent.width -root.leftPadding -root.rightPadding - (checkboxLoader.active ? Kirigami.Units.largeSpacing : 0))
-        height: Math.min(implicitHeight, parent.height -root.topPadding -root.bottomPadding)
+
+        width: Math.min(implicitWidth, parent.width - root.leftPadding - root.rightPadding)
+        height: Math.min(implicitHeight, parent.height - root.topPadding - root.bottomPadding)
+
+        spacing: Kirigami.Units.smallSpacing
+
         Kirigami.Icon {
             id: headingIcon
-            Layout.minimumWidth: Kirigami.Units.iconSizes.large
+            Layout.minimumWidth: root.titleIconSize
+            Layout.maximumWidth: root.titleIconSize
             Layout.minimumHeight: width
+            Layout.maximumHeight: width
             visible: valid
             isMask: false
         }
+
         Kirigami.Heading {
             id: heading
             Layout.fillWidth: true
@@ -206,19 +222,14 @@ Kirigami.ShadowedImage {
             wrapMode: Text.NoWrap
             elide: Text.ElideRight
         }
-    }
 
-    Loader {
-        id: checkboxLoader
-        anchors {
-            top: parent.top
-            right: parent.right
-            topMargin: root.topPadding
-        }
-        active: root.checkable
-        sourceComponent: QQC2.CheckBox {
-            checked: root.checked
-            onToggled: root.toggled(checked);
+        Loader {
+            id: checkboxLoader
+            active: root.checkable
+            sourceComponent: QQC2.CheckBox {
+                checked: root.checked
+                onToggled: root.toggled(checked);
+            }
         }
     }
 }
