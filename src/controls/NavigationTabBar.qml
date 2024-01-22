@@ -152,7 +152,16 @@ QQC2.ToolBar {
      *
      * default: ``Kirigami.Theme.backgroundColor``
      */
-    property color backgroundColor: Kirigami.Theme.backgroundColor
+    property color backgroundColor
+    onBackgroundColorChanged: Kirigami.Theme.backgroundColor = backgroundColor
+
+    Connections {
+        target: Kirigami.Theme
+
+        function onBackgroundColorChanged() {
+            root.backgroundColor = Kirigami.Theme.backgroundColor
+        }
+    }
 
     /**
      * @brief This property holds the foreground color of the toolbar (text, icon).
@@ -260,10 +269,6 @@ QQC2.ToolBar {
     contentItem: Row {
         id: rowLayout
         spacing: root.spacing
-    }
-
-    background: Rectangle {
-        color: root.backgroundColor
     }
 
     // Used to manage which tab is checked and change the currentIndex
