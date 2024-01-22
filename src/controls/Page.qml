@@ -259,6 +259,8 @@ QQC2.Page {
         property T.Page page: root
         property bool pageComplete: false
 
+        visible: active
+
         active: {
             // Important! Do not do anything until the page has been
             // completed, so we are sure what the globalToolBarStyle is,
