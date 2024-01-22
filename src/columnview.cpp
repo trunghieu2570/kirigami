@@ -70,13 +70,10 @@ QtObject {
     readonly property Component leadingSeparator: Kirigami.Separator {
         property Item column
         property bool inToolBar
+        property Kirigami.ColumnView view
 
         // positioning trick to hide the very first separator
         visible: {
-            if (inToolBar) {
-                return true;
-            }
-            const view = column.Kirigami.ColumnView.view;
             if (!view || !view.separatorVisible) {
                 return false;
             }
@@ -809,6 +806,7 @@ QQuickItem *ContentItem::ensureLeadingSeparator(QQuickItem *item)
             separatorItem->setParentItem(item);
             separatorItem->setZ(9999);
             separatorItem->setProperty("column", QVariant::fromValue(item));
+            separatorItem->setProperty("view", QVariant::fromValue(m_view));
             QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_leadingSeparatorComponent->completeCreate();
             m_leadingSeparators[item] = separatorItem;
         }
