@@ -255,54 +255,50 @@ Item {
 
 //BEGIN signals handlers
     onMenuBarChanged: {
-        menuBar.parent = root.contentItem
-        if (menuBar.z === undefined) {
-            menuBar.z = 1;
+        if (menuBar) {
+            menuBar.parent = root.contentItem
+            if (menuBar instanceof T.ToolBar) {
+                menuBar.position = T.ToolBar.Footer
+            } else if (menuBar instanceof T.DialogButtonBox) {
+                menuBar.position = T.DialogButtonBox.Footer
+            }
+            menuBar.width = Qt.binding(() => root.contentItem.width)
+            // FIXME: (root.header.height ?? 0) when we can depend from 5.15
+            menuBar.y = Qt.binding(() => -menuBar.height - (root.header.height ? root.header.height : 0))
         }
-        if (menuBar instanceof T.ToolBar) {
-            menuBar.position = T.ToolBar.Footer
-        } else if (menuBar instanceof T.DialogButtonBox) {
-            menuBar.position = T.DialogButtonBox.Footer
-        }
-        menuBar.width = Qt.binding(() => root.contentItem.width)
-        // FIXME: (root.header.height ?? 0) when we can depend from 5.15
-        menuBar.y = Qt.binding(() => -menuBar.height - (root.header.height ? root.header.height : 0))
     }
 
     onHeaderChanged: {
-        header.parent = root.contentItem
-        if (header.z === undefined) {
-            header.z = 1;
+        if (header) {
+            header.parent = root.contentItem
+            if (header instanceof T.ToolBar) {
+                header.position = T.ToolBar.Header
+            } else if (header instanceof T.DialogButtonBox) {
+                header.position = T.DialogButtonBox.Header
+            }
+            header.width = Qt.binding(() => root.contentItem.width)
+            header.y = Qt.binding(() => -header.height)
         }
-        if (header instanceof T.ToolBar) {
-            header.position = T.ToolBar.Header
-        } else if (header instanceof T.DialogButtonBox) {
-            header.position = T.DialogButtonBox.Header
-        }
-        header.width = Qt.binding(() => root.contentItem.width)
-        header.y = Qt.binding(() => -header.height)
     }
 
     onFooterChanged: {
-        footer.parent = root.contentItem
-        if (footer.z === undefined) {
-            footer.z = 1;
+        if (footer) {
+            footer.parent = root.contentItem
+            if (footer instanceof T.ToolBar) {
+                footer.position = T.ToolBar.Footer
+            } else if (footer instanceof T.DialogButtonBox) {
+                footer.position = T.DialogButtonBox.Footer
+            }
+            footer.width = Qt.binding(() => root.contentItem.width)
+            footer.y = Qt.binding(() => root.contentItem.height)
         }
-        if (footer instanceof T.ToolBar) {
-            footer.position = T.ToolBar.Footer
-        } else if (footer instanceof T.DialogButtonBox) {
-            footer.position = T.DialogButtonBox.Footer
-        }
-        footer.width = Qt.binding(() => root.contentItem.width)
-        footer.y = Qt.binding(() => root.contentItem.height)
     }
 
     onBackgroundChanged: {
-        background.parent = root.contentItem
-        if (background.z === undefined) {
-            background.z = -1;
+        if (background) {
+            background.parent = root.contentItem
+            background.anchors.fill = background.parent
         }
-        background.anchors.fill = background.parent
     }
 
     onPageStackChanged: pageStack.parent = root.contentItem;
