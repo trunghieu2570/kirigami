@@ -64,11 +64,6 @@ Kirigami.OverlayDrawer {
             return false;
         }
 
-        // If the drawer is displayed as a menu, the menu has its own handle
-        if (isMenu) {
-            return false;
-        }
-
         // GlobalDrawer can be hidden by controlsVisible...
         if (typeof applicationWindow === "function") {
             const w = applicationWindow();
@@ -78,7 +73,7 @@ Kirigami.OverlayDrawer {
         }
 
         // ...but it still performs additional checks.
-        return enabled;
+        return !isMenu || Kirigami.Settings.isMobile;
     }
 
     enabled: !isMenu || Kirigami.Settings.isMobile
