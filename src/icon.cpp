@@ -621,8 +621,9 @@ qreal Icon::paintedHeight() const
 
 QSize Icon::iconSizeHint() const
 {
-    // size hint is always square, non square case in updatePaintGeometry
-    if (m_roundToIconSize && m_units) {
+    if (!m_roundToIconSize) {
+        return QSize(width(), height());
+    } else if (m_units) {
         return QSize(m_units->iconSizes()->roundedIconSize(std::min(width(), height())), m_units->iconSizes()->roundedIconSize(std::min(width(), height())));
     } else {
         return QSize(std::min(width(), height()), std::min(width(), height()));
