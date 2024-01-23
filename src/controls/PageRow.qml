@@ -649,13 +649,106 @@ QT.Control {
     }
 
     QQC2.StackView {
+        id: layerToolbarStack
+        anchors {
+            left: parent.left
+            top: parent.top
+            right: parent.right
+        }
+        //visible: currentItem ? currentItem.implicitHeight > 0 : false
+        z: 100
+        height: currentItem?.implicitHeight ?? 0
+        initialItem: Item {implicitHeight: 0}
+
+        Component {
+            id: emptyToolbar
+            Item {
+                implicitHeight: 0
+            }
+        }
+        popEnter: Transition {
+            OpacityAnimator {
+                from: 0
+                to: 1
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutCubic
+            }
+        }
+        popExit: Transition {
+            OpacityAnimator {
+                from: 1
+                to: 0
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutCubic
+            }
+        }
+        pushEnter: Transition {
+            OpacityAnimator {
+                from: 0
+                to: 1
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutCubic
+            }
+        }
+        pushExit: Transition {
+            OpacityAnimator {
+                from: 1
+                to: 0
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutCubic
+            }
+        }
+        replaceEnter: Transition {
+            OpacityAnimator {
+                from: 0
+                to: 1
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutCubic
+            }
+        }
+        replaceExit: Transition {
+            OpacityAnimator {
+                from: 1
+                to: 0
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutCubic
+            }
+        }
+    }
+    QQC2.StackView {
         id: layersStack
         z: 99
         anchors {
-            fill: parent
+            left: parent.left
+            top: layerToolbarStack.bottom
+            right: parent.right
+            bottom: parent.bottom
         }
         // placeholder as initial item
         initialItem: columnViewLayout
+
+        onDepthChanged: {
+            let item = layersStack.get(depth - 1)
+
+            if (layerToolbarStack.depth > depth) {
+                while (layerToolbarStack.depth > depth) {
+                    layerToolbarStack.pop()
+                }
+            } else if (layerToolbarStack.depth < depth) {
+                for (let i = layerToolbarStack.depth; i < depth; ++i) {
+                    let toolBar = layersStack.get(i).Kirigami.ColumnView.globalHeader
+                    layerToolbarStack.push(toolBar || emptyToolbar)
+                }
+            }
+            let toolBarItem = layerToolbarStack.get(layerToolbarStack.depth - 1)
+            if (item.Kirigami.ColumnView.globalHeader != toolBarItem) {
+                let toolBar = item.Kirigami.ColumnView.globalHeader
+                layerToolbarStack.replace(toolBar || emptyToolbar)
+            }
+            // WORKAROUND: the second time the transition on opacity doesn't seem to be executed
+            toolBarItem = layerToolbarStack.get(layerToolbarStack.depth - 1)
+            toolBarItem.opacity = 1;
+        }
 
         function clear(): void {
             // don't let it kill the main page row
@@ -921,6 +1014,10 @@ QT.Control {
         id: columnViewLayout
         spacing: 1
         readonly property alias columnView: columnView
+        anchors {
+            fill: parent
+            topMargin: -layersStack.y
+        }
         QQC2.Control {
             id: sidebarControl
             Layout.fillHeight: true
