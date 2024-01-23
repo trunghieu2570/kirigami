@@ -143,17 +143,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Akcie"
 
-#: controls/GlobalDrawer.qml:308
+#: controls/GlobalDrawer.qml:313
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Späť"
 
-#: controls/GlobalDrawer.qml:614
+#: controls/GlobalDrawer.qml:621
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Zatvoriť bočný panel"
 
-#: controls/GlobalDrawer.qml:619
+#: controls/GlobalDrawer.qml:626
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"

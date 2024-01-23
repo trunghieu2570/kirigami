@@ -113,17 +113,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Ekintzak"
 
-#: controls/GlobalDrawer.qml:308
+#: controls/GlobalDrawer.qml:313
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Atzera"
 
-#: controls/GlobalDrawer.qml:614
+#: controls/GlobalDrawer.qml:621
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Itxi alboko-barra"
 
-#: controls/GlobalDrawer.qml:619
+#: controls/GlobalDrawer.qml:626
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Itxi alboko-barra"

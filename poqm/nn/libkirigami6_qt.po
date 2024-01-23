@@ -112,17 +112,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Handlingar"
 
-#: controls/GlobalDrawer.qml:308
+#: controls/GlobalDrawer.qml:313
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Tilbake"
 
-#: controls/GlobalDrawer.qml:614
+#: controls/GlobalDrawer.qml:621
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Lukk sidestolpen"
 
-#: controls/GlobalDrawer.qml:619
+#: controls/GlobalDrawer.qml:626
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Opna sidestolpe"
