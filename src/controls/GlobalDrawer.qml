@@ -479,13 +479,13 @@ Kirigami.OverlayDrawer {
 
             implicitWidth: Math.min(Kirigami.Units.gridUnit * 20, root.parent.width * 0.8)
 
-            clip: !!footer
-
             Flickable {
                 id: mainFlickable
 
                 contentWidth: width
                 contentHeight: mainColumn.Layout.minimumHeight
+
+                clip: root.footer !== null
 
                 ColumnLayout {
                     id: mainColumn
