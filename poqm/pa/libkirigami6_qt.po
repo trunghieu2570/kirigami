@@ -107,17 +107,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "ਕਾਰਵਾਈਆਂ"
 
-#: controls/GlobalDrawer.qml:313
+#: controls/GlobalDrawer.qml:308
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "ਪਿੱਛੇ"
 
-#: controls/GlobalDrawer.qml:621
+#: controls/GlobalDrawer.qml:616
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "ਬਾਹੀ ਬੰਦ ਕਰੋ"
 
-#: controls/GlobalDrawer.qml:626
+#: controls/GlobalDrawer.qml:621
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "ਬਾਹੀ ਖੋਲ੍ਹੋ"

@@ -109,17 +109,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Acções"
 
-#: controls/GlobalDrawer.qml:313
+#: controls/GlobalDrawer.qml:308
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Recuar"
 
-#: controls/GlobalDrawer.qml:621
+#: controls/GlobalDrawer.qml:616
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Fechar a Barra Lateral"
 
-#: controls/GlobalDrawer.qml:626
+#: controls/GlobalDrawer.qml:621
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Abrir a Barra Lateral"

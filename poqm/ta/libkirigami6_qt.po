@@ -107,17 +107,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "செயல்கள்"
 
-#: controls/GlobalDrawer.qml:313
+#: controls/GlobalDrawer.qml:308
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "பின்னே"
 
-#: controls/GlobalDrawer.qml:621
+#: controls/GlobalDrawer.qml:616
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "ஓரப்பட்டையை மூடு"
 
-#: controls/GlobalDrawer.qml:626
+#: controls/GlobalDrawer.qml:621
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "ஓரப்பட்டையை திற"

@@ -114,17 +114,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Дії"
 
-#: controls/GlobalDrawer.qml:313
+#: controls/GlobalDrawer.qml:308
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Назад"
 
-#: controls/GlobalDrawer.qml:621
+#: controls/GlobalDrawer.qml:616
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Закрити бічну панель"
 
-#: controls/GlobalDrawer.qml:626
+#: controls/GlobalDrawer.qml:621
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Відкрити бічну панель"

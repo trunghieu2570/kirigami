@@ -132,17 +132,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Toimingud"
 
-#: controls/GlobalDrawer.qml:313
+#: controls/GlobalDrawer.qml:308
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Tagasi"
 
-#: controls/GlobalDrawer.qml:621
+#: controls/GlobalDrawer.qml:616
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Sulge külgriba"
 
-#: controls/GlobalDrawer.qml:626
+#: controls/GlobalDrawer.qml:621
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
