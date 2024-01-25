@@ -258,7 +258,7 @@ Item {
             if (!item) {
                 return 0;
             }
-            if (root.wideMode) {
+            if (root.wideMode && !item.Kirigami.FormData.isSection) {
                 return item.Kirigami.FormData.labelAlignment !== 0 ? item.Kirigami.FormData.labelAlignment : Text.AlignVCenter;
             }
             return Text.AlignBottom;
@@ -387,7 +387,12 @@ Item {
                     return 0;
                 }
                 if (item.Kirigami.FormData.label.length > 0) {
-                    if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof QQC2.TextArea)) {
+                    // Add extra whitespace before textual section headers, which
+                    // looks better than separator lines
+                    if (item.Kirigami.FormData.isSection && labelItem.index !== 0) {
+                        return implicitHeight + Kirigami.Units.largeSpacing * 2;
+                    }
+                    else if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof QQC2.TextArea)) {
                         return Math.max(implicitHeight, item.Kirigami.FormData.buddyFor.height)
                     }
                     return implicitHeight;
