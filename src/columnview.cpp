@@ -102,7 +102,7 @@ QtObject {
         Kirigami.Theme.inherit: false
     }
 }
-)"), QUrl(QStringLiteral("columnview.cpp")));
+)"), QUrl(QStringLiteral(":/ColumnViewInternal.qml")));
     /* clang-format on */
 
     m_instance = component.create();
