@@ -193,6 +193,8 @@ QQC2.Control {
                 displayHint: Kirigami.DisplayHint.IconOnly | Kirigami.DisplayHint.HideChildIndicator
             }
 
+            Accessible.name: action.tooltip
+
             menuActions: root.actions
 
             menuComponent: P.ActionsMenu {
