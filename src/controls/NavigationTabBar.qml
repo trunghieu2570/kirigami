@@ -148,30 +148,6 @@ QQC2.ToolBar {
     }
 
     /**
-     * @brief This property holds the background color of the toolbar.
-     *
-     * default: ``Kirigami.Theme.backgroundColor``
-     */
-    property color backgroundColor: Kirigami.Theme.backgroundColor
-
-    /**
-     * @brief This property holds the foreground color of the toolbar (text, icon).
-     */
-    property color foregroundColor: Qt.alpha(Kirigami.Theme.textColor, 0.85)
-
-    /**
-     * @brief This property holds the highlight foreground color (text, icon when action is checked).
-     */
-    property color highlightForegroundColor: Qt.alpha(Kirigami.Theme.textColor, 0.85)
-
-    /**
-     * @brief This property holds the color of the highlight bar when an action is checked.
-     *
-     * default: ``Kirigami.Theme.highlightColor``
-     */
-    property color highlightBarColor: Kirigami.Theme.highlightColor
-
-    /**
      * @brief This property holds the index of currently checked tab.
      *
      * If the index set is out of bounds, or the triggered signal did not change any checked property of an action, the index
@@ -262,10 +238,6 @@ QQC2.ToolBar {
         spacing: root.spacing
     }
 
-    background: Rectangle {
-        color: root.backgroundColor
-    }
-
     // Used to manage which tab is checked and change the currentIndex
     T.ButtonGroup {
         id: tabGroup
@@ -300,9 +272,9 @@ QQC2.ToolBar {
             // Workaround setting the action when checkable is not explicitly set making tabs uncheckable
             onActionChanged: action.checkable = true
 
-            foregroundColor: root.foregroundColor
-            highlightForegroundColor: root.highlightForegroundColor
-            highlightBarColor: root.highlightBarColor
+            Kirigami.Theme.textColor: root.Kirigami.Theme.textColor
+            Kirigami.Theme.backgroundColor: root.Kirigami.Theme.backgroundColor
+            Kirigami.Theme.highlightColor: root.Kirigami.Theme.highlightColor
         }
     }
 }

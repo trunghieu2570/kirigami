@@ -87,14 +87,15 @@ T.TabButton {
         return -1
     }
 
-    property color foregroundColor: Qt.alpha(Kirigami.Theme.textColor, 0.85)
-    property color highlightForegroundColor: Qt.alpha(Kirigami.Theme.textColor, 0.85)
-    property color highlightBarColor: Kirigami.Theme.highlightColor
+    // FIXME: all those internal properties should go, and the button should style itself in a more standard way
+    // probably similar to view items
+    readonly property color __foregroundColor: Qt.alpha(Kirigami.Theme.textColor, 0.85)
+    readonly property color __highlightForegroundColor: Qt.alpha(Kirigami.Theme.textColor, 0.85)
 
-    property color pressedColor: Qt.alpha(highlightBarColor, 0.3)
-    property color hoverSelectColor: Qt.alpha(highlightBarColor, 0.2)
-    property color checkedBorderColor: Qt.alpha(highlightBarColor, 0.7)
-    property color pressedBorderColor: Qt.alpha(highlightBarColor, 0.9)
+    readonly property color __pressedColor: Qt.alpha(Kirigami.Theme.highlightColor, 0.3)
+    readonly property color __hoverSelectColor: Qt.alpha(Kirigami.Theme.highlightColor, 0.2)
+    readonly property color __checkedBorderColor: Qt.alpha(Kirigami.Theme.highlightColor, 0.7)
+    readonly property color __pressedBorderColor: Qt.alpha(Kirigami.Theme.highlightColor, 0.9)
 
     readonly property real __verticalMargins: (display === T.AbstractButton.TextBesideIcon) ? Kirigami.Units.largeSpacing : 0
 
@@ -115,7 +116,7 @@ T.TabButton {
 
     icon.height: display === T.AbstractButton.TextBesideIcon ? Kirigami.Units.iconSizes.small : Kirigami.Units.iconSizes.smallMedium
     icon.width: display === T.AbstractButton.TextBesideIcon ? Kirigami.Units.iconSizes.small : Kirigami.Units.iconSizes.smallMedium
-    icon.color: checked ? highlightForegroundColor : foregroundColor
+    icon.color: checked ? __highlightForegroundColor : __foregroundColor
 
     Kirigami.MnemonicData.enabled: enabled && visible
     Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem
@@ -137,9 +138,9 @@ T.TabButton {
             anchors.centerIn: parent
 
             radius: Kirigami.Units.smallSpacing
-            color: control.down ? control.pressedColor : (control.checked || control.hovered ? control.hoverSelectColor : "transparent")
+            color: control.down ? control.__pressedColor : (control.checked || control.hovered ? control.__hoverSelectColor : "transparent")
 
-            border.color: control.checked ? control.checkedBorderColor : (control.down ? control.pressedBorderColor : color)
+            border.color: control.checked ? control.__checkedBorderColor : (control.down ? control.__pressedBorderColor : color)
             border.width: 1
 
             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
@@ -188,7 +189,7 @@ T.TabButton {
             visible: control.display !== T.AbstractButton.IconOnly
             wrapMode: Text.Wrap
             elide: Text.ElideMiddle
-            color: control.checked ? control.highlightForegroundColor : control.foregroundColor
+            color: control.checked ? control.__highlightForegroundColor : control.__foregroundColor
 
             font.bold: control.checked
             font.family: Kirigami.Theme.smallFont.family
