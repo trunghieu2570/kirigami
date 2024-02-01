@@ -124,28 +124,30 @@ T.Popup {
     }
 
     implicitWidth: {
+        let width = parent?.width ?? 0;
         if (!scrollView.itemForSizeHints) {
-            return parent?.width ?? 0;
+            return width;
         } else if (scrollView.itemForSizeHints.Layout.preferredWidth > 0) {
-            return scrollView.itemForSizeHints.Layout.preferredWidth;
+            return Math.min(width, scrollView.itemForSizeHints.Layout.preferredWidth);
         } else if (scrollView.itemForSizeHints.implicitWidth > 0) {
-            return scrollView.itemForSizeHints.implicitWidth;
+            return Math.min(width, scrollView.itemForSizeHints.implicitWidth);
         } else {
-            return parent?.width ?? 0;
+            return width;
         }
     }
     implicitHeight: {
         let h = parent?.height ?? 0;
         if (!scrollView.itemForSizeHints) {
-            return h;
+            return h - y;
         } else if (scrollView.itemForSizeHints.Layout.preferredHeight > 0) {
             h = scrollView.itemForSizeHints.Layout.preferredHeight;
         } else if (scrollView.itemForSizeHints.implicitHeight > 0) {
             h = scrollView.itemForSizeHints.implicitHeight + Kirigami.Units.largeSpacing * 2;
-        } else {
-            return h;
+        } else if (scrollView.itemForSizeHints instanceof Flickable && scrollView.itemForSizeHints.contentHeight > 0) {
+            h = scrollView.itemForSizeHints.contentHeight + Kirigami.Units.largeSpacing * 2;
         }
         h += headerItem.implicitHeight + footerParent.implicitHeight + topPadding + bottomPadding;
+        return Math.min(h, parent.height - y)
     }
 //END Reimplemented Properties
 
