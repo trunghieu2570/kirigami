@@ -21,7 +21,7 @@ option(UBUNTU_TOUCH "Build for Ubuntu Touch" OFF)
 if(DEFINED STATIC_LIBRARY)
     message(FATAL_ERROR "Use the BUILD_SHARED_LIBS=OFF option to build a static library, STATIC_LIBRARY is no longer a supported option")
 endif()
-find_package(ECM 5.248.0 NO_MODULE)
+find_package(ECM 5.249.0 NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
 if (NOT ${BUILD_SHARED_LIBS})
