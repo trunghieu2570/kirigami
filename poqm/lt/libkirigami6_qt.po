@@ -9,74 +9,60 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Qt-Contexts: true\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: controls/AboutItem.qml:163
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: controls/AboutItem.qml:172
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
-msgstr ""
+msgstr "Siųsti el. laišką, adresu %1"
 
 #: controls/AboutItem.qml:222
 msgctxt "AboutItem|"
 msgid "Get Involved"
-msgstr ""
+msgstr "Įsitraukti"
 
 #: controls/AboutItem.qml:228
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Paremti"
 
 #: controls/AboutItem.qml:245
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr ""
+msgstr "Pranešti apie klaidą"
 
 #: controls/AboutItem.qml:258
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Copyright"
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Autorių teisės"
 
 #: controls/AboutItem.qml:302
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "License:"
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Licencija:"
 
 #: controls/AboutItem.qml:324
-#, fuzzy, qt-format
-#| msgctxt "AboutPage|"
-#| msgid "License: %1"
+#, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Licencija: %1"
 
 #: controls/AboutItem.qml:335
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Libraries in use"
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Naudojamos bibliotekos"
 
 #: controls/AboutItem.qml:365
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Authors"
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autoriai"
@@ -84,41 +70,30 @@ msgstr "Autoriai"
 #: controls/AboutItem.qml:375
 msgctxt "AboutItem|"
 msgid "Show author photos"
-msgstr ""
+msgstr "Rodyti autorių nuotraukas"
 
 #: controls/AboutItem.qml:386
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Credits"
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Padėkos"
 
 #: controls/AboutItem.qml:398
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Translators"
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Vertėjai"
 
 #: controls/AboutPage.qml:102
-#, fuzzy, qt-format
-#| msgctxt "AboutPage|"
-#| msgid "About"
+#, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
-msgstr "Apie"
+msgstr "Apie %1"
 
 #: controls/AbstractApplicationWindow.qml:176
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
-msgstr ""
+msgstr "Išeiti"
 
 #: controls/ActionToolBar.qml:191
-#, fuzzy
-#| msgctxt "ToolBarApplicationHeader|"
-#| msgid "More Actions"
 msgctxt "ActionToolBar|"
 msgid "More Actions"
 msgstr "Daugiau veiksmų"
@@ -126,7 +101,7 @@ msgstr "Daugiau veiksmų"
 #: controls/Chip.qml:85
 msgctxt "Chip|"
 msgid "Remove Tag"
-msgstr ""
+msgstr "Šalinti žymę"
 
 #: controls/ContextDrawer.qml:59
 msgctxt "ContextDrawer|"
@@ -144,17 +119,14 @@ msgid "Close Sidebar"
 msgstr "Užverti šoninę juostą"
 
 #: controls/GlobalDrawer.qml:621
-#, fuzzy
-#| msgctxt "GlobalDrawer|"
-#| msgid "Close Sidebar"
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
-msgstr "Užverti šoninę juostą"
+msgstr "Atverti šoninę juostą"
 
 #: controls/LoadingPlaceholder.qml:54
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
-msgstr ""
+msgstr "Įkeliama…"
 
 #: controls/PasswordField.qml:42
 msgctxt "PasswordField|"
@@ -162,67 +134,49 @@ msgid "Password"
 msgstr "Slaptažodis"
 
 #: controls/PasswordField.qml:45
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Hide Password"
-msgstr "Slaptažodis"
+msgstr "Slėpti slaptažodį"
 
 #: controls/PasswordField.qml:45
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Show Password"
-msgstr "Slaptažodis"
+msgstr "Rodyti slaptažodį"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:84
-#, fuzzy
-#| msgctxt "GlobalDrawer|"
-#| msgid "Close Sidebar"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr "Užverti šoninę juostą"
+msgstr "Užverti meniu"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:84
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr ""
+msgstr "Atverti meniu"
 
 #: controls/SearchField.qml:86
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search..."
 msgctxt "SearchField|"
 msgid "Search…"
-msgstr "Ieškoti..."
+msgstr "Ieškoti…"
 
 #: controls/SearchField.qml:88
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search..."
 msgctxt "SearchField|"
 msgid "Search"
-msgstr "Ieškoti..."
+msgstr "Paieška"
 
 #: controls/SearchField.qml:99
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr ""
+msgstr "Išvalyti paiešką"
 
 #: controls/templates/OverlayDrawer.qml:128
-#, fuzzy
-#| msgctxt "GlobalDrawer|"
-#| msgid "Close Sidebar"
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
-msgstr "Užverti šoninę juostą"
+msgstr "Uždaryti stalčių"
 
 #: controls/templates/OverlayDrawer.qml:134
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
-msgstr ""
+msgstr "Atidaryti stalčių"
 
 #: controls/templates/private/BackButton.qml:50
 msgctxt "BackButton|"
@@ -238,38 +192,32 @@ msgstr "Naršyti pirmyn"
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link %1"
-msgstr ""
+msgstr "Atverti nuorodą %1"
 
 #: controls/UrlButton.qml:35
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
-msgstr ""
+msgstr "Atverti nuorodą"
 
 #: controls/UrlButton.qml:58
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
-msgstr ""
+msgstr "Kopijuoti nuorodą į iškarpinę"
 
 #: platform/settings.cpp:206
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "KDE Frameworks %1"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "KDE Frameworks %1"
 
 #: platform/settings.cpp:208
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "The %1 windowing system"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "%1 langų sistema"
 
 #: platform/settings.cpp:209
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "Qt %2 (built against %3)"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (sudaryta remiantis %3)"
