@@ -65,8 +65,7 @@ Kirigami.ShadowedRectangle {
     /**
      * @brief This property holds the border color which is displayed at the edge of DefaultCardBackground.
      */
-    property color borderColor: Kirigami.ColorUtils.tintWithAlpha(
-                                    color, Kirigami.Theme.textColor, 0.2)
+    property color borderColor: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.25)
 
 //END properties
 

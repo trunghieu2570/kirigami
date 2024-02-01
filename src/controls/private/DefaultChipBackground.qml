@@ -28,7 +28,7 @@ Rectangle {
     /**
      * @brief This property holds the chip's default border color.
      */
-    property color defaultBorderColor: Qt.darker(defaultColor, 1.1)
+    property color defaultBorderColor: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.25)
 
     /**
      * @brief This property holds the color of the Chip's border when it is checked.
