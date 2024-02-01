@@ -145,6 +145,8 @@ T.Popup {
             h = scrollView.itemForSizeHints.implicitHeight + Kirigami.Units.largeSpacing * 2;
         } else if (scrollView.itemForSizeHints instanceof Flickable && scrollView.itemForSizeHints.contentHeight > 0) {
             h = scrollView.itemForSizeHints.contentHeight + Kirigami.Units.largeSpacing * 2;
+        } else {
+            h = scrollView.itemForSizeHints.height;
         }
         h += headerItem.implicitHeight + footerParent.implicitHeight + topPadding + bottomPadding;
         return Math.min(h, parent.height - y)
