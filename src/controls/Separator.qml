@@ -47,5 +47,5 @@ Rectangle {
     color: Kirigami.ColorUtils.linearInterpolation(
         Kirigami.Theme.backgroundColor,
         Kirigami.Theme.textColor,
-        0.25)
+        weight === Separator.Weight.Light ? Kirigami.Theme.frameContrast / 2 : Kirigami.Theme.frameContrast)
 }

@@ -190,6 +190,11 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     // Active palette
     Q_PROPERTY(QPalette palette READ palette NOTIFY paletteChanged FINAL)
 
+    /// This property holds the frame intensity.
+    ///
+    /// This is a number between 0 and 1.
+    Q_PROPERTY(qreal frameContrast READ frameContrast CONSTANT FINAL)
+
 public:
     enum ColorSet {
         View = 0, /** Color set for item views, usually the lightest of all */
@@ -257,6 +262,8 @@ public:
 
     // this may is used by the desktop QQC2 to set the styleoption palettes
     QPalette palette() const;
+
+    qreal frameContrast() const;
 
     // this will be used by desktopicon to fetch icons with KIconLoader
     virtual Q_INVOKABLE QIcon iconFromTheme(const QString &name, const QColor &customColor = Qt::transparent);

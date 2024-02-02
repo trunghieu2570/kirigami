@@ -698,6 +698,11 @@ void PlatformTheme::setSmallFont(const QFont &font)
     }
 }
 
+qreal PlatformTheme::frameContrast() const
+{
+    return 0.15;
+}
+
 // setters for QML clients
 void PlatformTheme::setCustomTextColor(const QColor &color)
 {
