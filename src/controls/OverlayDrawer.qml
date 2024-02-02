@@ -127,6 +127,8 @@ KT.OverlayDrawer {
                 bottom: root.edge === Qt.BottomEdge ? parent.top : (root.edge === Qt.TopEdge ? undefined : parent.bottom)
             }
             visible: !root.modal
+            Kirigami.Theme.inherit: false
+            Kirigami.Theme.colorSet: Kirigami.Theme.Header
         }
         KP.EdgeShadow {
             z: -2
