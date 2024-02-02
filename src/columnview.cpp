@@ -88,7 +88,7 @@ QtObject {
         anchors.bottom: column.bottom
         anchors.topMargin: inToolBar ? Kirigami.Units.largeSpacing : 0
         anchors.bottomMargin: inToolBar ? Kirigami.Units.largeSpacing : 0
-        Kirigami.Theme.colorSet: Kirigami.Theme.Window
+        Kirigami.Theme.colorSet: Kirigami.Theme.Header
         Kirigami.Theme.inherit: false
     }
 
@@ -98,7 +98,7 @@ QtObject {
         anchors.top: column.top
         anchors.right: column.right
         anchors.bottom: column.bottom
-        Kirigami.Theme.colorSet: Kirigami.Theme.Window
+        Kirigami.Theme.colorSet: Kirigami.Theme.Header
         Kirigami.Theme.inherit: false
     }
 }
