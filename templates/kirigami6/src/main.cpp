@@ -24,6 +24,8 @@
 
 #include "%{APPNAMELC}config.h"
 
+using namespace Qt::Literals::StringLiterals;
+
 #ifdef Q_OS_ANDROID
 Q_DECL_EXPORT
 #endif
@@ -37,7 +39,7 @@ int main(int argc, char *argv[])
 
     // Default to org.kde.desktop style unless the user forces another style
     if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
-        QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
+        QQuickStyle::setStyle(u"org.kde.desktop"_s);
     }
 #endif
 
@@ -54,11 +56,11 @@ int main(int argc, char *argv[])
 #endif
 
     KLocalizedString::setApplicationDomain("%{APPNAMELC}");
-    QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
+    QCoreApplication::setOrganizationName(u"KDE"_s);
 
     KAboutData aboutData(
         // The program name used internally.
-        QStringLiteral("%{APPNAMELC}"),
+        u"%{APPNAMELC}"_s,
         // A displayable program name string.
         i18nc("@title", "%{APPNAME}"),
         // The program version string.
@@ -71,22 +73,20 @@ int main(int argc, char *argv[])
         i18n("(c) %{CURRENT_YEAR}"));
     aboutData.addAuthor(i18nc("@info:credit", "%{AUTHOR}"),
                         i18nc("@info:credit", "Maintainer"),
-                        QStringLiteral("%{EMAIL}"),
-                        QStringLiteral("https://yourwebsite.com"));
+                        u"%{EMAIL}"_s,
+                        u"https://yourwebsite.com"_s);
     aboutData.setTranslator(i18nc("NAME OF TRANSLATORS", "Your names"), i18nc("EMAIL OF TRANSLATORS", "Your emails"));
     KAboutData::setApplicationData(aboutData);
-    QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.%{APPNAMELC}")));
+    QGuiApplication::setWindowIcon(QIcon::fromTheme(u"org.kde.%{APPNAMELC}"_s));
 
     QQmlApplicationEngine engine;
 
     auto config = %{APPNAME}Config::self();
-    App application;
 
-    qmlRegisterSingletonInstance("org.kde.%{APPNAMELC}", 1, 0, "Config", config);
-    qmlRegisterSingletonInstance("org.kde.%{APPNAMELC}", 1, 0, "App", &application);
+    qmlRegisterSingletonInstance("org.kde.%{APPNAMELC}.private", 1, 0, "Config", config);
 
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    engine.loadFromModule("org.kde.%{APPNAMELC}", u"Main.qml");
 
     if (engine.rootObjects().isEmpty()) {
         return -1;
