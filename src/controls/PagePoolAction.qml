@@ -141,6 +141,10 @@ Kirigami.Action {
 
         const stack = useLayers ? pageStack.layers : pageStack
 
+        if (pageItem != null && stack.currentItem == pageItem) {
+            return;
+        }
+
         if (initialProperties && typeof(initialProperties) !== "object") {
             console.warn("initialProperties must be of type object");
             return;
