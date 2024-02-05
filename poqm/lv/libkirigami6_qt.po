@@ -1,22 +1,18 @@
-# SPDX-FileCopyrightText: 2020, 2021, 2022, 2023 Xavier Besnard <xavier.besnard@kde.org>
-# Vincent Pinon <vpinon@kde.org>, 2016, 2017.
-# Simon Depiets <sdepiets@gmail.com>, 2018, 2019.
+# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-10-30 15:16+0100\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
-"Language: fr\n"
+"PO-Revision-Date: 2024-02-03 17:47+0200\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
+"Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.2\n"
-"X-Environment: kde\n"
-"X-Accelerator-Marker: &\n"
-"X-Text-Markup: qtrich\n"
 "X-Qt-Contexts: true\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: controls/AboutItem.qml:163
 #, qt-format
@@ -28,264 +24,200 @@ msgstr "%1 (%2)"
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
-msgstr "Envoyer un courriel à %1"
+msgstr "Sūtīt e-pasta vēstuli „%1“"
 
 #: controls/AboutItem.qml:222
 msgctxt "AboutItem|"
 msgid "Get Involved"
-msgstr "Soyez impliqué"
+msgstr "Iesaistīties"
 
 #: controls/AboutItem.qml:228
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr "Faire un don"
+msgstr "Ziedot"
 
 #: controls/AboutItem.qml:245
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "Signaler un bogue"
+msgstr "Ziņot par kļūdu"
 
 #: controls/AboutItem.qml:258
 msgctxt "AboutItem|"
 msgid "Copyright"
-msgstr "Droit d'auteur"
+msgstr "Autortiesības"
 
 #: controls/AboutItem.qml:302
 msgctxt "AboutItem|"
 msgid "License:"
-msgstr "Licence :"
+msgstr "Licence:"
 
 #: controls/AboutItem.qml:324
 #, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
-msgstr "Licence : %1"
+msgstr "Licence: %1"
 
 #: controls/AboutItem.qml:335
 msgctxt "AboutItem|"
 msgid "Libraries in use"
-msgstr "Bibliothèques en cours d'utilisation"
+msgstr "Izmantotās bibliotēkas"
 
 #: controls/AboutItem.qml:365
 msgctxt "AboutItem|"
 msgid "Authors"
-msgstr "Auteurs"
+msgstr "Autori"
 
 #: controls/AboutItem.qml:375
 msgctxt "AboutItem|"
 msgid "Show author photos"
-msgstr "Afficher les photos des auteurs"
+msgstr "Rādīt autoru fotogrāfijas"
 
 #: controls/AboutItem.qml:386
 msgctxt "AboutItem|"
 msgid "Credits"
-msgstr "Crédits"
+msgstr "Veidotāji"
 
 #: controls/AboutItem.qml:398
 msgctxt "AboutItem|"
 msgid "Translators"
-msgstr "Traducteurs"
+msgstr "Tulkotāji"
 
 #: controls/AboutPage.qml:102
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
-msgstr "À propos de %1"
+msgstr "Par „%1“"
 
 #: controls/AbstractApplicationWindow.qml:176
 msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
-msgstr "Quitter"
+msgstr "Iziet"
 
 #: controls/ActionToolBar.qml:191
 msgctxt "ActionToolBar|"
 msgid "More Actions"
-msgstr "Plus d'actions"
+msgstr "Vairāk darbību"
 
 #: controls/Chip.qml:85
 msgctxt "Chip|"
 msgid "Remove Tag"
-msgstr "Supprimer une étiquette"
+msgstr "Noņemt birku"
 
 #: controls/ContextDrawer.qml:59
 msgctxt "ContextDrawer|"
 msgid "Actions"
-msgstr "Actions"
+msgstr "Darbības"
 
 #: controls/GlobalDrawer.qml:308
 msgctxt "GlobalDrawer|"
 msgid "Back"
-msgstr "Retour"
+msgstr "Atpakaļ"
 
 #: controls/GlobalDrawer.qml:616
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
-msgstr "Fermer la barre latérale"
+msgstr "Aizvērt sānu joslu"
 
 #: controls/GlobalDrawer.qml:621
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
-msgstr "Ouvrir une barre latérale"
+msgstr "Atvērt sānu joslu"
 
 #: controls/LoadingPlaceholder.qml:54
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
-msgstr "Chargement en cours..."
+msgstr "Ielādē..."
 
 #: controls/PasswordField.qml:42
 msgctxt "PasswordField|"
 msgid "Password"
-msgstr "Mot de passe"
+msgstr "Parole"
 
 #: controls/PasswordField.qml:45
 msgctxt "PasswordField|"
 msgid "Hide Password"
-msgstr "Masquer un mot de passe"
+msgstr "Slēpt paroli"
 
 #: controls/PasswordField.qml:45
 msgctxt "PasswordField|"
 msgid "Show Password"
-msgstr "Afficher un mot de passe"
+msgstr "Rādīt paroli"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:84
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr "Fermer le menu"
+msgstr "Aizvērt izvēlni"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:84
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr "Ouvrir le menu"
+msgstr "Atvērt izvēlni"
 
 #: controls/SearchField.qml:86
 msgctxt "SearchField|"
 msgid "Search…"
-msgstr "Rechercher…"
+msgstr "Meklēt..."
 
 #: controls/SearchField.qml:88
 msgctxt "SearchField|"
 msgid "Search"
-msgstr "Rechercher"
+msgstr "Meklēt"
 
 #: controls/SearchField.qml:99
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr "Effacer une recherche"
+msgstr "Notīrīt meklēšanu"
 
 #: controls/templates/OverlayDrawer.qml:128
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
-msgstr "Fermer un tiroir"
+msgstr "Aizvērt atvilktni"
 
 #: controls/templates/OverlayDrawer.qml:134
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
-msgstr "Ouvrir un tiroir"
+msgstr "Atvērt atvilktni"
 
 #: controls/templates/private/BackButton.qml:50
 msgctxt "BackButton|"
 msgid "Navigate Back"
-msgstr "Navigation arrière"
+msgstr "Iet atpakaļ"
 
 #: controls/templates/private/ForwardButton.qml:27
 msgctxt "ForwardButton|"
 msgid "Navigate Forward"
-msgstr "Navigation avant"
+msgstr "Iet uz priekšu"
 
 #: controls/UrlButton.qml:34
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link %1"
-msgstr "Ouvrir le lien %1"
+msgstr "Atvērt saiti %1"
 
 #: controls/UrlButton.qml:35
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
-msgstr "Ouvrir un lien"
+msgstr "Atvērt saiti"
 
 #: controls/UrlButton.qml:58
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
-msgstr "Copier un lien dans le presse-papier"
+msgstr "Kopēt saiti starpliktuvē"
 
 #: platform/settings.cpp:206
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
-msgstr "Environnements de développement %1 de KDE"
+msgstr "KDE satvari %1"
 
 #: platform/settings.cpp:208
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
-msgstr "Le système de fenêtrage %1"
+msgstr "„%1“ logu sistēma"
 
 #: platform/settings.cpp:209
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
-msgstr "Qt %2 (Compilé avec %3)"
-
-#~ msgctxt "CategorizedSettings|"
-#~ msgid "Settings"
-#~ msgstr "Configuration"
-
-#~ msgctxt "CategorizedSettings|"
-#~ msgid "Settings — %1"
-#~ msgstr "Configuration — %1"
-
-#~ msgctxt "Avatar|"
-#~ msgid "%1 — %2"
-#~ msgstr "%1 — %2"
-
-#~ msgctxt "PageTab|"
-#~ msgid "Current page. Progress: %1 percent."
-#~ msgstr "Page actuelle. Avancement : %1 pourcent."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1. Progress: %2 percent."
-#~ msgstr "Naviguer vers %1. Avancement : %2 pourcent."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Current page."
-#~ msgstr "Page actuelle."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1. Demanding attention."
-#~ msgstr "Naviguer vers %1. Attention requise."
-
-#~ msgctxt "PageTab|"
-#~ msgid "Navigate to %1."
-#~ msgstr "Navigation vers %1"
-
-#~ msgctxt "ToolBarApplicationHeader|"
-#~ msgid "More Actions"
-#~ msgstr "Actions supplémentaires"
-
-#~ msgctxt "AboutItem|"
-#~ msgid "Visit %1's KDE Store page"
-#~ msgstr "Visiter la page de la boutique de KDE pour %1"
-
-#~ msgctxt "UrlButton|"
-#~ msgid "Copy link address"
-#~ msgstr "Copier l'adresse du lien"
-
-#~ msgctxt "LoadingPlaceholder|"
-#~ msgid "Still loading, please wait."
-#~ msgstr "Encore en cours de téléchargement, veuillez patienter."
-
-#~ msgctxt "AboutItem|"
-#~ msgid "(%1)"
-#~ msgstr "(%1)"
-
-#~ msgctxt "SearchField|"
-#~ msgid "Search..."
-#~ msgstr "Chercher…"
-
-#~ msgctxt "AboutPage|"
-#~ msgid "%1 <%2>"
-#~ msgstr "%1 <%2>"
-
-#~ msgctxt "ToolBarPageHeader|"
-#~ msgid "More Actions"
-#~ msgstr "Actions supplémentaires"
+msgstr "Qt %2 (būvēts pret %3)"
