@@ -48,6 +48,11 @@ MouseArea {
                 root.drawer.drawerOpen = !root.drawer.drawerOpen;
             })
         }
+        Keys.onEscapePressed: {
+            if (root.drawer.closePolicy & T.Popup.CloseOnEscape) {
+                root.drawer.drawerOpen = false;
+            }
+        }
     }
 
     QQC2.ToolTip.visible: displayToolTip && containsMouse
