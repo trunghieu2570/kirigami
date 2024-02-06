@@ -190,6 +190,14 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     // Active palette
     Q_PROPERTY(QPalette palette READ palette NOTIFY paletteChanged FINAL)
 
+    // Frame contrast value, usually used for separators and outlines
+    // Value is between 0.0 and 1.0
+    Q_PROPERTY(qreal frameContrast READ frameContrast CONSTANT FINAL)
+
+    // Returns half of the frameContrast value; used by Separator.Weight.Light
+    // Value is between 0.0 and 1.0
+    Q_PROPERTY(qreal lightFrameContrast READ lightFrameContrast CONSTANT FINAL)
+
 public:
     enum ColorSet {
         View = 0, /** Color set for item views, usually the lightest of all */
@@ -257,6 +265,9 @@ public:
 
     // this may is used by the desktop QQC2 to set the styleoption palettes
     QPalette palette() const;
+
+    qreal frameContrast() const;
+    qreal lightFrameContrast() const;
 
     // this will be used by desktopicon to fetch icons with KIconLoader
     virtual Q_INVOKABLE QIcon iconFromTheme(const QString &name, const QColor &customColor = Qt::transparent);
