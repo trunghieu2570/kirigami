@@ -703,7 +703,7 @@ qreal PlatformTheme::frameContrast() const
     // This value must be kept in sync with
     // the value from Breeze Qt Widget theme.
     // See: https://invent.kde.org/plasma/breeze/-/blob/master/kstyle/breezemetrics.h?ref_type=heads#L162
-    return 0.25;
+    return 0.20;
 }
 
 qreal PlatformTheme::lightFrameContrast() const
