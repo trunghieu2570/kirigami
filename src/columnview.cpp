@@ -424,11 +424,11 @@ void ContentItem::animateX(qreal newX)
 
 void ContentItem::snapToItem()
 {
-    QQuickItem *firstItem = childAt(viewportLeft(), 0);
+    QQuickItem *firstItem = childAt(viewportLeft(), height() / 2);
     if (!firstItem) {
         return;
     }
-    QQuickItem *nextItem = childAt(firstItem->x() + firstItem->width() + 1, 0);
+    QQuickItem *nextItem = childAt(firstItem->x() + firstItem->width() + 1, height() / 2);
 
     // need to make the last item visible?
     if (nextItem && //
