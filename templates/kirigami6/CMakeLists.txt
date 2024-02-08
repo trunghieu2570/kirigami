@@ -7,8 +7,8 @@ project(%{APPNAMELC} VERSION 0.1)
 
 include(FeatureSummary)
 
-set(QT6_MIN_VERSION 6.4.0)
-set(KF6_MIN_VERSION 5.240.0)
+set(QT6_MIN_VERSION 6.5.0)
+set(KF6_MIN_VERSION 6.0.0)
 
 find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
 
