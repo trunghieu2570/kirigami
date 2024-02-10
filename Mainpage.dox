@@ -28,31 +28,31 @@ A list of additional QML learning resources is available in the <a href="https:/
 If you have any questions about Kirigami, feel free to drop by the <a href="https://go.kde.org/matrix/#/#kirigami:kde.org">Kirigami group on Matrix</a>.
 
 \subsection components Main Window Components
-- \link org::kde::kirigami::ApplicationWindow  ApplicationWindow \endlink
-- \link org::kde::kirigami::Action Action  \endlink
-- \link org::kde::kirigami::GlobalDrawer GlobalDrawer  \endlink
-- \link org::kde::kirigami::ContextDrawer ContextDrawer  \endlink
-- \link org::kde::kirigami::OverlayDrawer OverlayDrawer  \endlink
-- \link org::kde::kirigami::Page Page  \endlink
-- \link org::kde::kirigami::ScrollablePage ScrollablePage  \endlink
-- \link org::kde::kirigami::AboutPage AboutPage \endlink
-- \link org::kde::kirigami::PageRow PageRow \endlink
-- \link org::kde::kirigami::FormLayout FormLayout \endlink
-- \link org::kde::kirigami::CardsLayout CardsLayout \endlink
+- \link ApplicationWindow  ApplicationWindow \endlink
+- \link Action Action  \endlink
+- \link GlobalDrawer GlobalDrawer  \endlink
+- \link ContextDrawer ContextDrawer  \endlink
+- \link OverlayDrawer OverlayDrawer  \endlink
+- \link Page Page  \endlink
+- \link ScrollablePage ScrollablePage  \endlink
+- \link AboutPage AboutPage \endlink
+- \link PageRow PageRow \endlink
+- \link FormLayout FormLayout \endlink
+- \link CardsLayout CardsLayout \endlink
 - \link SizeGroup SizeGroup \endlink
-- \link Kirigami::PlatformTheme Theme  \endlink
-- \link Kirigami::Units  Units \endlink
+- \link Kirigami::Platform::PlatformTheme Theme  \endlink
+- \link Kirigami::Platform::Units  Units \endlink
 
 \subsection controls Common Kirigami Controls
 
-- \link org::kde::kirigami::Card Card \endlink
+- \link Card Card \endlink
 - \link org::kde::kirigami::templates::OverlaySheet  OverlaySheet \endlink
-- \link org::kde::kirigami::SwipeListItem  SwipeListItem \endlink
-- \link org::kde::kirigami::Heading Heading  \endlink
-- \link org::kde::kirigami::PlaceholderMessage PlaceholderMessage  \endlink
-- \link org::kde::kirigami::SearchField SearchField \endlink
-- \link org::kde::kirigami::Dialog Dialog \endlink
-- \link org::kde::kirigami::NavigationTabBar NavigationTabBar \endlink
+- \link SwipeListItem  SwipeListItem \endlink
+- \link Heading Heading  \endlink
+- \link PlaceholderMessage PlaceholderMessage  \endlink
+- \link SearchField SearchField \endlink
+- \link Dialog Dialog \endlink
+- \link NavigationTabBar NavigationTabBar \endlink
 - \link Icon Icon  \endlink
 
 \subsection example Minimal Example
