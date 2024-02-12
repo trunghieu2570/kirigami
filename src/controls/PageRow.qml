@@ -296,22 +296,22 @@ QT.Control {
             }
         } else {
             // open as a new window
-            if (windowProperties.modality === undefined || windowProperties.modality === null) {
+            if (!("modality" in windowProperties)) {
                 windowProperties.modality = Qt.WindowModal;
             }
-            if (windowProperties.height === undefined || windowProperties.height === null) {
+            if (!("height" in windowProperties)) {
                 windowProperties.height = Kirigami.Units.gridUnit * 30;
             }
-            if (windowProperties.width === undefined || windowProperties.width === null) {
+            if (!("width" in windowProperties)) {
                 windowProperties.width = Kirigami.Units.gridUnit * 50;
             }
-            if (windowProperties.minimumWidth === undefined || windowProperties.minimumWidth === null) {
+            if (!("minimumWidth" in windowProperties)) {
                 windowProperties.minimumWidth = Kirigami.Units.gridUnit * 20;
             }
-            if (windowProperties.minimumHeight === undefined || windowProperties.minimumHeight === null) {
+            if (!("minimumHeight" in windowProperties)) {
                 windowProperties.minimumHeight = Kirigami.Units.gridUnit * 15;
             }
-            if (windowProperties.flags === undefined || windowProperties.flags === null) {
+            if (!("flags" in windowProperties)) {
                 windowProperties.flags = Qt.Dialog | Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowCloseButtonHint;
             }
             const windowComponent = Qt.createComponent(Qt.resolvedUrl("./ApplicationWindow.qml"));
