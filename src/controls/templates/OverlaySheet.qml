@@ -117,9 +117,7 @@ T.Popup {
             return 0;
         }
         const visualParentAdjust = sheetHandler.visualParent?.y ?? 0;
-        const wantedPosition = Kirigami.Settings.isMobile
-            ? parent.height - implicitHeight - Kirigami.Units.gridUnit
-            : parent.height / 2 - implicitHeight / 2;
+        const wantedPosition = parent.height / 2 - implicitHeight / 2;
         return Math.round(Math.max(visualParentAdjust, wantedPosition, Kirigami.Units.gridUnit * 3));
     }
 
