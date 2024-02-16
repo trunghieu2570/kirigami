@@ -35,9 +35,9 @@ public:
         // Cache font so we don't have to go through QVariant and property every time
         : fontMetrics(QFontMetricsF(QGuiApplication::font()))
         , gridUnit(std::ceil(fontMetrics.height()))
-        , smallSpacing(std::floor(gridUnit / 4))
-        , mediumSpacing(std::round(smallSpacing * 1.5))
-        , largeSpacing(smallSpacing * 2)
+        , smallSpacing(4)
+        , mediumSpacing(6)
+        , largeSpacing(8)
         , veryLongDuration(400)
         , longDuration(200)
         , shortDuration(100)
@@ -264,12 +264,6 @@ bool Units::eventFilter([[maybe_unused]] QObject *watched, QEvent *event)
 
         d->gridUnit = std::ceil(d->fontMetrics.height());
         Q_EMIT gridUnitChanged();
-        d->smallSpacing = std::floor(d->gridUnit / 4);
-        Q_EMIT smallSpacingChanged();
-        d->mediumSpacing = std::round(d->smallSpacing * 1.5);
-        Q_EMIT mediumSpacingChanged();
-        d->largeSpacing = d->smallSpacing * 2;
-        Q_EMIT largeSpacingChanged();
         Q_EMIT d->iconSizes->sizeForLabelsChanged();
     }
     return false;
