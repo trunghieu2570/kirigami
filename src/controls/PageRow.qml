@@ -986,8 +986,9 @@ QT.Control {
 
             if (pageComp) {
                 // instantiate page from component
-                // FIXME: parent directly to columnView or root?
-                page = pageComp.createObject(null, properties || {});
+                // Important: The parent needs to be set otherwise a reference needs to be kept around
+                // to avoid the page being garbage collected.
+                page = pageComp.createObject(pagesLogic, properties || {});
 
                 if (pageComp.status === Component.Error) {
                     throw new Error("Error while loading page: " + pageComp.errorString());
