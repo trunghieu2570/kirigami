@@ -5,6 +5,7 @@
  */
 
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import "private" as KP
@@ -125,10 +126,21 @@ KT.OverlayDrawer {
                 left: root.edge === Qt.LeftEdge ? parent.right : (root.edge === Qt.RightEdge ? undefined : parent.left)
                 top: root.edge === Qt.TopEdge ? parent.bottom : (root.edge === Qt.BottomEdge ? undefined : parent.top)
                 bottom: root.edge === Qt.BottomEdge ? parent.top : (root.edge === Qt.TopEdge ? undefined : parent.bottom)
+                topMargin: root.edge === Qt.TopEdge || root.edge === Qt.BottomEdge || !segmentedSeparator.visible ? undefined : Kirigami.Units.largeSpacing
             }
             visible: !root.modal
             Kirigami.Theme.inherit: false
             Kirigami.Theme.colorSet: Kirigami.Theme.Header
+
+            Rectangle {
+                id: segmentedSeparator
+                visible: (root.edge === Qt.LeftEdge || root.edge === Qt.RightEdge) && ((root.hasOwnProperty("header") && (root.header instanceof T.ToolBar || root.header instanceof KT.AbstractApplicationHeader))
+                    || root.contentItem instanceof ColumnLayout && root.contentItem.children[0] instanceof T.ToolBar)
+                y: applicationWindow()?.pageStack?.globalToolBar.preferredHeight - 2 * Kirigami.Units.largeSpacing
+                color: Kirigami.Theme.backgroundColor
+                height: Kirigami.Units.largeSpacing - 1
+                width: 1
+            }
         }
         KP.EdgeShadow {
             z: -2
