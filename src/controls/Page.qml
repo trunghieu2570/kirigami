@@ -285,7 +285,7 @@ QQC2.Page {
             }
 
             const drawer = applicationWindow() ? applicationWindow()['contextDrawer'] : undefined;
-            if (drawer !== undefined && drawer.enabled && drawer.handleVisible) {
+            if (Boolean(drawer) && drawer.enabled && drawer.handleVisible) {
                 return false;
             }
 
