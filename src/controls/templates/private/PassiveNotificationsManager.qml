@@ -175,6 +175,12 @@ Item {
 
             anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
             width: Math.min(implicitWidth, maximumNotificationWidth)
+            implicitHeight: {
+                // HACK: contentItem.implicitHeight needs to be updated manually for some reason
+                void contentItem.implicitHeight;
+                return Math.max(implicitBackgroundHeight + topInset + bottomInset,
+                                implicitContentHeight + topPadding + bottomPadding);
+            }
             z: {
                 if (delegate.hovered) {
                     return 2;
