@@ -320,11 +320,29 @@ T.Control {
 
             visible: root.showCloseButton
 
-            anchors {
-                right: parent.right
-                top: contentLayout.atBottom ? parent.top : undefined
-                verticalCenter: contentLayout.atBottom ? undefined : parent.verticalCenter
-            }
+            anchors.right: parent.right
+
+            // Incompatible anchors need to be evaluated in a given order,
+            // which simple declarative bindings cannot assure
+            states: [
+                State {
+                    name: "onTop"
+                    when: contentLayout.atBottom
+                    AnchorChanges {
+                        target: closeButton
+                        anchors.top: parent.top
+                        anchors.verticalCenter: undefined
+                    }
+                } ,
+                State {
+                    name: "centered"
+                    AnchorChanges {
+                        target: closeButton
+                        anchors.top: undefined
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
+            ]
 
             height: contentLayout.atBottom ? implicitHeight : implicitHeight
 
