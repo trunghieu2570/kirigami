@@ -655,8 +655,7 @@ QT.Control {
             top: parent.top
             right: parent.right
         }
-        //visible: currentItem ? currentItem.implicitHeight > 0 : false
-        z: 100
+        z: 100 // 100 is layersStack.z + 1
         height: currentItem?.implicitHeight ?? 0
         initialItem: Item {implicitHeight: 0}
 
@@ -715,6 +714,68 @@ QT.Control {
             }
         }
     }
+
+    QQC2.StackView {
+        id: layerFooterStack
+        anchors {
+            left: parent.left
+            bottom: parent.bottom
+            right: parent.right
+        }
+        z: 100 // 100 is layersStack.z + 1
+        height: currentItem?.implicitHeight ?? 0
+        initialItem: Item {implicitHeight: 0}
+
+        popEnter: Transition {
+            OpacityAnimator {
+                from: 0
+                to: 1
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutCubic
+            }
+        }
+        popExit: Transition {
+            OpacityAnimator {
+                from: 1
+                to: 0
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutCubic
+            }
+        }
+        pushEnter: Transition {
+            OpacityAnimator {
+                from: 0
+                to: 1
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutCubic
+            }
+        }
+        pushExit: Transition {
+            OpacityAnimator {
+                from: 1
+                to: 0
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutCubic
+            }
+        }
+        replaceEnter: Transition {
+            OpacityAnimator {
+                from: 0
+                to: 1
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutCubic
+            }
+        }
+        replaceExit: Transition {
+            OpacityAnimator {
+                from: 1
+                to: 0
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutCubic
+            }
+        }
+    }
+
     QQC2.StackView {
         id: layersStack
         z: 99
@@ -722,7 +783,7 @@ QT.Control {
             left: parent.left
             top: layerToolbarStack.bottom
             right: parent.right
-            bottom: parent.bottom
+            bottom: layerFooterStack.top
         }
         // placeholder as initial item
         initialItem: columnViewLayout
@@ -732,22 +793,40 @@ QT.Control {
 
             if (layerToolbarStack.depth > depth) {
                 while (layerToolbarStack.depth > depth) {
-                    layerToolbarStack.pop()
+                    layerToolbarStack.pop();
                 }
             } else if (layerToolbarStack.depth < depth) {
                 for (let i = layerToolbarStack.depth; i < depth; ++i) {
-                    let toolBar = layersStack.get(i).Kirigami.ColumnView.globalHeader
-                    layerToolbarStack.push(toolBar || emptyToolbar)
+                    const toolBar = layersStack.get(i).Kirigami.ColumnView.globalHeader;
+                    layerToolbarStack.push(toolBar || emptyToolbar);
                 }
             }
             let toolBarItem = layerToolbarStack.get(layerToolbarStack.depth - 1)
             if (item.Kirigami.ColumnView.globalHeader != toolBarItem) {
-                let toolBar = item.Kirigami.ColumnView.globalHeader
-                layerToolbarStack.replace(toolBar || emptyToolbar)
+                const toolBar = item.Kirigami.ColumnView.globalHeader;
+                layerToolbarStack.replace(toolBar ?? emptyToolbar);
             }
             // WORKAROUND: the second time the transition on opacity doesn't seem to be executed
             toolBarItem = layerToolbarStack.get(layerToolbarStack.depth - 1)
             toolBarItem.opacity = 1;
+
+            if (layerFooterStack.depth > depth) {
+                while (layerFooterStack.depth > depth) {
+                    layerFooterStack.pop();
+                }
+            } else if (layerFooterStack.depth < depth) {
+                for (let i = layerFooterStack.depth; i < depth; ++i) {
+                    const footer = layersStack.get(i).Kirigami.ColumnView.globalFooter;
+                    layerFooterStack.push(footer ?? emptyToolbar);
+                }
+            }
+            let footerItem = layerFooterStack.get(layerFooterStack.depth - 1)
+            if (item.Kirigami.ColumnView.globalHeader != footerItem) {
+                const footer = item.Kirigami.ColumnView.globalFooter;
+                layerFooterStack.replace(footer ?? emptyToolbar);
+            }
+            footerItem = layerFooterStack.get(layerFooterStack.depth - 1)
+            footerItem.opacity = 1;
         }
 
         function clear(): void {
