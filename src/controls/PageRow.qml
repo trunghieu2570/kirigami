@@ -272,6 +272,11 @@ QT.Control {
                 } else if (page instanceof Item) {
                     item = page;
                     page.parent = dialog.contentItem;
+                } else if (typeof page === 'object' && typeof page.toString() === 'string') { // url
+                    const component = Qt.createComponent(page);
+                    item = component.createObject(dialog.contentItem, properties);
+                    component.destroy();
+                    dialog.contentItem.contentItem = item
                 }
                 dialog.title = Qt.binding(() => item.title);
 
