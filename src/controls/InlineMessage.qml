@@ -64,7 +64,10 @@ KT.InlineMessage {
     id: root
 
     // a rectangle padded with anchors.margins is used to simulate a border
-    padding: bgFillRect.anchors.margins + Kirigami.Units.smallSpacing
+    leftPadding: bgFillRect.anchors.leftMargin + Kirigami.Units.smallSpacing
+    topPadding: bgFillRect.anchors.topMargin + Kirigami.Units.smallSpacing
+    rightPadding: bgFillRect.anchors.rightMargin + Kirigami.Units.smallSpacing
+    bottomPadding: bgFillRect.anchors.bottomMargin + Kirigami.Units.smallSpacing
 
     background: Rectangle {
         id: bgBorderRect
@@ -76,13 +79,18 @@ KT.InlineMessage {
             default: return Kirigami.Theme.activeTextColor;
         }
 
-        radius: Kirigami.Units.smallSpacing / 2
+        radius: root.position == KT.InlineMessage.Inline ? Kirigami.Units.smallSpacing / 2 : 0
 
         Rectangle {
             id: bgFillRect
 
             anchors.fill: parent
-            anchors.margins: 1
+            anchors {
+                leftMargin: root.position == KT.InlineMessage.Inline ? 1 : 0
+                topMargin: root.position == KT.InlineMessage.Header ? 0 : 1
+                rightMargin: root.position == KT.InlineMessage.Inline ? 1 : 0
+                bottomMargin: root.position == KT.InlineMessage.Footer ? 0 : 1
+            }
 
             color: Kirigami.Theme.backgroundColor
 

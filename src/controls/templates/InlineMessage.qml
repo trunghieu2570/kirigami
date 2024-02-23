@@ -67,6 +67,26 @@ T.Control {
     visible: false
 
     /**
+     * Defines a position for the message: whether it's to be used as an inline component inside the page,
+     * a page header, or a page footer.
+     */
+    enum Position {
+        Inline,
+        Header,
+        Footer
+    }
+
+    /**
+     * Adjust the look of the message based upon the position.
+     * If a message is positioned in the header area or in the footer area
+     * of a page, it might be desirable to not have borders but just a line
+     * separating it from the content area. In this case, use the Header or
+     * Footer position.
+     * Default is InlineMessage.Position.Inline
+     */
+    property int position: InlineMessage.Position.Inline
+
+    /**
      * This signal is emitted when a link is hovered in the message text.
      * @param The hovered link.
      */
