@@ -287,5 +287,9 @@ Kirigami.Page {
             scrollView.forceActiveFocus(Qt.TabFocusReason); // QTBUG-44043 : Focus on currentItem instead of pageStack itself
         }
         root.flickable.flickableDirection = Flickable.VerticalFlick;
+
+        // HACK: Qt's default flick deceleration is too high, and we can't change it from plasma-integration, see QTBUG-121500
+        root.flickable.flickDeceleration = 1500;
+        root.flickable.maximumFlickVelocity = 5000;
     }
 }
