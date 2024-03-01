@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
-"PO-Revision-Date: 2024-02-05 11:40\n"
+"PO-Revision-Date: 2024-02-29 12:56\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "报告程序缺陷"
 #: controls/AboutItem.qml:237
 msgctxt "AboutItem|"
 msgid "Copyright"
-msgstr "Copyright"
+msgstr "版权信息"
 
 #: controls/AboutItem.qml:281
 msgctxt "AboutItem|"
@@ -129,12 +129,12 @@ msgstr "返回"
 #: controls/GlobalDrawer.qml:599
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
-msgstr "关闭侧栏"
+msgstr "隐藏侧边栏"
 
 #: controls/GlobalDrawer.qml:602
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
-msgstr "打开侧边栏"
+msgstr "显示侧边栏"
 
 #: controls/LoadingPlaceholder.qml:55
 msgctxt "LoadingPlaceholder|"
