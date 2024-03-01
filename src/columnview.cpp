@@ -526,7 +526,8 @@ void ContentItem::layoutItems()
                     sepWidth = (sep ? sep->width() : 0);
                 }
                 const qreal width = childWidth(child);
-                const qreal pageX = std::clamp(partialWidth, -x(), -x() + m_view->width() - child->width());
+                const qreal widthDiff = std::max(0.0, m_view->width() - child->width()); // it's possible for the view width to be smaller than the child width
+                const qreal pageX = std::clamp(partialWidth, -x(), -x() + widthDiff);
                 qreal headerHeight = .0;
                 qreal footerHeight = .0;
                 if (QQuickItem *header = attached->globalHeader()) {
