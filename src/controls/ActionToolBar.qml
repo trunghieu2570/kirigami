@@ -155,7 +155,7 @@ QQC2.Control {
 
     contentItem: Kirigami.ToolBarLayout {
         id: layout
-        spacing: Kirigami.Units.smallSpacing
+        spacing: Kirigami.Units.mediumSpacing
         layoutDirection: root.mirrored ? Qt.RightToLeft : Qt.LeftToRight
 
         fullDelegate: P.PrivateActionToolButton {
