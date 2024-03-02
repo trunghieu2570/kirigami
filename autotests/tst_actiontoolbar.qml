@@ -25,17 +25,17 @@ TestCase {
     // These buttons are required for getting the right metrics.
     // Since ActionToolBar bases all sizing on button sizes, we need to be able
     // to verify that layouting does the right thing.
-    property ToolButton iconButton: KirigamiPrivate.PrivateActionToolButton {
+    property KirigamiPrivate.PrivateActionToolButton iconButton: KirigamiPrivate.PrivateActionToolButton {
         display: Button.IconOnly
         action: Kirigami.Action { icon.name: "document-new"; text: "Test Action" }
         font.pointSize: 10
     }
-    property ToolButton textButton: KirigamiPrivate.PrivateActionToolButton {
+    property KirigamiPrivate.PrivateActionToolButton textButton: KirigamiPrivate.PrivateActionToolButton {
         display: Button.TextOnly
         action: Kirigami.Action { icon.name: "document-new"; text: "Test Action" }
         font.pointSize: 10
     }
-    property ToolButton textIconButton: KirigamiPrivate.PrivateActionToolButton {
+    property KirigamiPrivate.PrivateActionToolButton textIconButton: KirigamiPrivate.PrivateActionToolButton {
         action: Kirigami.Action { icon.name: "document-new"; text: "Test Action" }
         font.pointSize: 10
     }
