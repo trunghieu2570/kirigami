@@ -76,7 +76,9 @@ T.ToolButton {
     property bool highlightBackground: down || checked
     property bool highlightBorder: control.enabled && control.down || control.checked || control.highlighted || control.visualFocus || control.hovered
 
-    background: Rectangle {
+    background: Kirigami.ShadowedRectangle {
+        Kirigami.Theme.colorSet: Kirigami.Theme.Window
+
         property color flatColor: Qt.rgba(
             Kirigami.Theme.backgroundColor.r,
             Kirigami.Theme.backgroundColor.g,
@@ -95,12 +97,18 @@ T.ToolButton {
         radius: 3
 
         border {
+            color: Kirigami.Theme.focusColor
+            width: highlightBorder ? 1 : 0
+        }
+
+        shadow {
             color: if (highlightBorder) {
                 return Kirigami.Theme.focusColor
             } else {
-                return Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, Kirigami.Theme.frameContrast)
+                return Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.20)
             }
-            width: 1
+            size: highlightBorder ? 3 : 4
+            yOffset: highlightBorder ? 0 : 1
         }
     }
 
@@ -116,7 +124,7 @@ T.ToolButton {
         }
     }
 
-    padding: Kirigami.Units.mediumSpacing
+    padding: Kirigami.Units.smallSpacing
 
     // Workaround for QTBUG-85941
     Binding {
