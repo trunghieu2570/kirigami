@@ -12,12 +12,18 @@ import QtQuick.Templates as T
 
 import org.kde.kirigami as Kirigami
 
-QQC2.ToolButton {
+T.ToolButton {
     id: control
 
     signal menuAboutToShow()
 
-    hoverEnabled: true
+    implicitWidth: Math.max((text && display !== T.AbstractButton.IconOnly ?
+        implicitBackgroundWidth : implicitHeight) + leftInset + rightInset,
+        implicitContentWidth + leftPadding + rightPadding)
+    implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
+                             implicitContentHeight + topPadding + bottomPadding)
+
+    hoverEnabled: Qt.styleHints.useHoverEffects
 
     display: QQC2.ToolButton.TextBesideIcon
 
@@ -66,6 +72,51 @@ QQC2.ToolButton {
     }
 
     visible: action instanceof Kirigami.Action ? action.visible : true
+
+    property bool highlightBackground: down || checked
+    property bool highlightBorder: control.enabled && control.down || control.checked || control.highlighted || control.visualFocus || control.hovered
+
+    background: Rectangle {
+        property color flatColor: Qt.rgba(
+            Kirigami.Theme.backgroundColor.r,
+            Kirigami.Theme.backgroundColor.g,
+            Kirigami.Theme.backgroundColor.b,
+            0
+        )
+
+        color: if (buttonDelegate.highlightBackground) {
+            return Kirigami.Theme.alternateBackgroundColor
+        } else if (buttonDelegate.flat) {
+            return flatColor
+        } else {
+            return Kirigami.Theme.backgroundColor
+        }
+
+        radius: 3
+
+        border {
+            color: if (highlightBorder) {
+                return Kirigami.Theme.focusColor
+            } else {
+                return Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, Kirigami.Theme.frameContrast)
+            }
+            width: 1
+        }
+    }
+
+    contentItem: RowLayout {
+        Kirigami.Icon {
+            source: control.icon.name ? control.icon.name : control.icon.source
+            Layout.preferredHeight: Kirigami.Units.iconSizes.sizeForLabels
+            Layout.preferredWidth: Kirigami.Units.iconSizes.sizeForLabels
+        }
+
+        QQC2.Label {
+            text: control.text
+        }
+    }
+
+    padding: Kirigami.Units.mediumSpacing
 
     // Workaround for QTBUG-85941
     Binding {
