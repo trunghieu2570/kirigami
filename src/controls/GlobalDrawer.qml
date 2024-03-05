@@ -302,6 +302,7 @@ Kirigami.OverlayDrawer {
                 icon.name: mirrored ? "go-previous-symbolic-rtl" : "go-previous-symbolic"
 
                 text: Kirigami.MnemonicData.richTextLabel
+                activeFocusOnTab: true
 
                 Kirigami.MnemonicData.enabled: enabled && visible
                 Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem

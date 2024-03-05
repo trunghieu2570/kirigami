@@ -29,6 +29,7 @@ QQC2.ItemDelegate {
 
     checked: checkedBinding()
     highlighted: checked
+    activeFocusOnTab: true
 
     width: parent.width
 
