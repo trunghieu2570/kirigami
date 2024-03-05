@@ -709,8 +709,10 @@ void ContentItem::updateVisibleItems()
                 m_visibleItems.removeAll(item);
             });
             attached->setInViewport(true);
+            item->setEnabled(true);
         } else {
             attached->setInViewport(false);
+            item->setEnabled(false);
         }
     }
 
