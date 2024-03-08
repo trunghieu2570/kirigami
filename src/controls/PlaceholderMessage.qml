@@ -242,6 +242,9 @@ ColumnLayout {
     signal linkActivated(string link)
 //END properties
 
+    Accessible.name: text
+    Accessible.description: explanation
+
     spacing: Kirigami.Units.largeSpacing
 
     Kirigami.Icon {
