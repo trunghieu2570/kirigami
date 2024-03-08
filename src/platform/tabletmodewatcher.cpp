@@ -58,6 +58,8 @@ public:
                     || QString::fromLatin1(qgetenv("KDE_KIRIGAMI_TABLET_MODE")) == QStringLiteral("true"));
             /* clang-format on */
             isTabletModeAvailable = isTabletMode;
+        } else if (qEnvironmentVariableIsSet("QT_NO_XDG_DESKTOP_PORTAL")) {
+            isTabletMode = false;
         } else {
             qDBusRegisterMetaType<VariantMapMap>();
             auto portal = new OrgFreedesktopPortalSettingsInterface(u"org.freedesktop.portal.Desktop"_s,
