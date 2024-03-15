@@ -131,17 +131,17 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Handlinger"
 
-#: controls/GlobalDrawer.qml:308
+#: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Tilbage"
 
-#: controls/GlobalDrawer.qml:616
+#: controls/GlobalDrawer.qml:617
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Luk sidepanel"
 
-#: controls/GlobalDrawer.qml:621
+#: controls/GlobalDrawer.qml:622
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
