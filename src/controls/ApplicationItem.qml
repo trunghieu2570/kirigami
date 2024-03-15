@@ -99,8 +99,6 @@ Kirigami.AbstractApplicationItem {
         id: __pageStack
         anchors {
             fill: parent
-            // HACK: workaround a bug in android iOS keyboard management
-            bottomMargin: ((Qt.platform.os === "android" || Qt.platform.os === "ios") || !Qt.inputMethod.visible) ? 0 : Qt.inputMethod.keyboardRectangle.height
         }
 
         function goBack() {
