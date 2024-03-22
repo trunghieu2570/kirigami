@@ -97,33 +97,6 @@ import "private" as P
  * @code{.qml}
  * import org.kde.kirigami 2.12 as Kirigami
  *
- ** Used as a loading indicator
- * Kirigami.Page {
- *     id: root
- *     readonly property bool loading: [...]
- *     readonly property int completionStatus: [...]
- *
- *     Kirigami.PlaceholderMessage {
- *         anchors.centerIn: parent
- *         width: parent.width - (Kirigami.Units.largeSpacing * 4)
- *
- *         visible: root.loading
- *
- *         icon.name: "my-awesome-app-icon"
- *         text: "Loading this awesome app"
- *
- *         ProgressBar {
- *             Layout.preferredWidth: Kirigami.Units.gridUnit * 20
- *             value: root.completionStatus
- *             from: 0
- *             to: 100
- *         }
- *     }
- * }
- * @endcode
- * @code{.qml}
- * import org.kde.kirigami 2.12 as Kirigami
- *
  ** Used as a "Here's what you do next" button
  * Kirigami.Page {
  *     id: root
