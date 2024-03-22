@@ -32,9 +32,7 @@ import org.kde.kirigami as Kirigami
  *     }
  *
  *     Kirigami.ContextualHelpButton {
- *         toolTipText: "With most displays, screen tearing reduces latency at "
- *                      "the cost of some visual fidelity at high framerates."
- *                      "Note that not all graphics drivers support this setting."
+ *         toolTipText: i18n("With most displays, screen tearing reduces latency at the cost of some visual fidelity at high framerates. Note that not all graphics drivers support this setting.")
  *     }
  * }
  *
@@ -47,7 +45,7 @@ QQC2.ToolButton {
     property alias toolTipText: toolTip.text
     property var toolTipVisible: false
 
-    text: i18nc("@action:button", "Show Contextual Help")
+    text: qsTr("Show Contextual Help")
     icon.name: "help-contextual-symbolic"
     display: QQC2.ToolButton.IconOnly
 
