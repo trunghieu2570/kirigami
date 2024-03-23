@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2023 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2024 Harald Sitter <sitter@kde.org>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -202,6 +203,7 @@ Q_SIGNALS:
 protected:
     void geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry) override;
     void updatePolish() override;
+    void componentComplete() override;
 
 private:
     friend class PaddingPrivate;

@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2023 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2024 Harald Sitter <sitter@kde.org>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -452,6 +453,13 @@ void Padding::updatePolish()
 
     d->m_contentItem->setPosition(QPointF(leftPadding(), topPadding()));
     d->m_contentItem->setSize(QSizeF(availableWidth(), availableHeight()));
+}
+
+void Padding::componentComplete()
+{
+    QQuickItem::componentComplete();
+    // This is important! We must have a geometry so our parents can lay out.
+    updatePolish();
 }
 
 #include "moc_padding.cpp"
