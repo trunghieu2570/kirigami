@@ -6,9 +6,8 @@
 */
 
 import QtQuick
-import QtQuick.Window
-import QtQuick.Layouts
 import QtQuick.Controls as QQC2
+import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 /**
@@ -22,13 +21,15 @@ import org.kde.kirigami as Kirigami
  *
  * Example usage:
  * @code{.qml}
+ * import QtQuick.Controls as QQC2
+ * import QtQuick.Layouts
  * import org.kde.kirigami as Kirigami
  *
  * RowLayout {
  *     spacing: Kirigami.Units.smallSpacing
  *
  *     QQC2.CheckBox {
- *         text: "Allow screen tearing in fullscreen windows"
+ *         text: i18n("Allow screen tearing in fullscreen windows")
  *     }
  *
  *     Kirigami.ContextualHelpButton {
