@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
-"PO-Revision-Date: 2024-03-17 20:42\n"
+"PO-Revision-Date: 2024-03-24 18:59\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -108,6 +108,11 @@ msgstr "移除标签"
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "操作"
+
+#: controls/ContextualHelpButton.qml:48
+msgctxt "ContextualHelpButton|"
+msgid "Show Contextual Help"
+msgstr ""
 
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"

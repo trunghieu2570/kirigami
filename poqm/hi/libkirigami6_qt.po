@@ -135,6 +135,11 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "क्रियाएं"
 
+#: controls/ContextualHelpButton.qml:48
+msgctxt "ContextualHelpButton|"
+msgid "Show Contextual Help"
+msgstr ""
+
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"
 msgid "Back"
