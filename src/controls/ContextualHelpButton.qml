@@ -1,6 +1,7 @@
 /*
    SPDX-FileCopyrightText: 2020 Felix Ernst <fe.a.ernst@gmail.com>
    SPDX-FileCopyrightText: 2024 Nate Graham <nate@kde.org>
+   SPDX-FileCopyrightText: 2024 ivan tkachenko <me@ratijas.tk>
 
    SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -51,24 +52,24 @@ QQC2.ToolButton {
     display: QQC2.ToolButton.IconOnly
 
     onReleased: {
-        toolTipVisible ? toolTip.delay = Kirigami.Units.toolTipDelay : toolTip.delay = 0;
+        toolTip.delay = toolTipVisible ? Kirigami.Units.toolTipDelay : 0;
         toolTipVisible = !toolTipVisible;
     }
     onActiveFocusChanged: {
         toolTip.delay = Kirigami.Units.toolTipDelay;
         toolTipVisible = false;
     }
-    Layout.maximumHeight: parent.height
+    Layout.maximumHeight: parent?.height ?? -1
 
     QQC2.ToolTip {
         id: toolTip
         // Wikipedia says anything between 45 and 75 characters per line is
         // acceptable. 21 * Kirigami.Units.gridUnit feels right.
         implicitWidth: Math.min(21 * Kirigami.Units.gridUnit, root.Window.width)
-        visible: parent.hovered || parent.toolTipVisible
+        visible: root.hovered || root.toolTipVisible
         onVisibleChanged: {
-            if (!visible && parent.toolTipVisible) {
-                parent.toolTipVisible = false;
+            if (!visible && root.toolTipVisible) {
+                root.toolTipVisible = false;
                 delay = Kirigami.Units.toolTipDelay;
             }
         }
