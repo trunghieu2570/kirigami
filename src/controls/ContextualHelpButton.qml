@@ -44,7 +44,7 @@ QQC2.ToolButton {
     id: root
 
     property alias toolTipText: toolTip.text
-    property var toolTipVisible: false
+    property bool toolTipVisible: false
 
     text: qsTr("Show Contextual Help")
     icon.name: "help-contextual-symbolic"
