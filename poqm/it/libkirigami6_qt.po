@@ -1,8 +1,8 @@
-# SPDX-FileCopyrightText: 2017, 2018, 2019, 2020, 2021, 2022, 2023 Vincenzo Reale <smart2128vr@gmail.com>
+# SPDX-FileCopyrightText: 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Vincenzo Reale <smart2128vr@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-11-08 09:29+0100\n"
+"PO-Revision-Date: 2024-03-25 16:34+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 24.02.1\n"
 "X-Qt-Contexts: true\n"
 
 #: controls/AboutItem.qml:163
@@ -110,7 +110,7 @@ msgstr "Azioni"
 #: controls/ContextualHelpButton.qml:48
 msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
-msgstr ""
+msgstr "Mostra la guida contestuale"
 
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"

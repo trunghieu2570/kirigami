@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: controls/AboutItem.qml:163
 #, qt-format
@@ -110,7 +110,7 @@ msgstr "ქმედებები"
 #: controls/ContextualHelpButton.qml:48
 msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
-msgstr ""
+msgstr "კონტექსტური დახმარების ჩვენება"
 
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"

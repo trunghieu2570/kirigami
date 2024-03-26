@@ -1,8 +1,8 @@
-# giovanni <g.sora@tiscali.it>, 2017, 2019, 2020, 2021, 2022, 2023.
+# giovanni <g.sora@tiscali.it>, 2017, 2019, 2020, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-10-31 10:01+0100\n"
+"PO-Revision-Date: 2024-03-25 12:01+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -110,7 +110,7 @@ msgstr "Actiones"
 #: controls/ContextualHelpButton.qml:48
 msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
-msgstr ""
+msgstr "Monstra adjuta de contexto"
 
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"

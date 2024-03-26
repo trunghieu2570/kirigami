@@ -1,14 +1,14 @@
 # Translation for libkirigami6_qt.po to Euskara/Basque (eu).
-# Copyright (C) 2017-2023 This file is copyright:
+# Copyright (C) 2017-2024 This file is copyright:
 # This file is distributed under the same license as the original file.
-# SPDX-FileCopyrightText: 2023 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2023, 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: kirigami\n"
-"PO-Revision-Date: 2023-10-28 07:35+0200\n"
+"PO-Revision-Date: 2024-03-25 11:02+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: controls/AboutItem.qml:163
 #, qt-format
@@ -116,7 +116,7 @@ msgstr "Ekintzak"
 #: controls/ContextualHelpButton.qml:48
 msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
-msgstr ""
+msgstr "Erakutsi testuinguru laguntza"
 
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"
