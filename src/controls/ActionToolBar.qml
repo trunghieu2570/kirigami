@@ -73,7 +73,7 @@ QQC2.Control {
      * When there is more space available than required by the visible action delegates,
      * we need to determine where to position them.
      *
-     * default: ``Qt.AlignRight``
+     * default: ``Qt.AlignLeft``
      *
      * @see Qt::AlignmentFlag
      * @property int alignment
