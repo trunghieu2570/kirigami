@@ -105,7 +105,7 @@ Kirigami.AbstractApplicationHeader {
 
             Layout.leftMargin: leftHandleAnchor.visible ? Kirigami.Units.smallSpacing : 0
 
-            visible: (globalToolBar.showNavigationButtons !== Kirigami.ApplicationHeaderStyle.NoNavigationButtons || applicationWindow().pageStack.layers.depth > 1 && !(applicationWindow().pageStack.layers.currentItem instanceof Kirigami.PageRow || header.layerIsMainRow))
+            visible: globalToolBar.showNavigationButtons !== Kirigami.ApplicationHeaderStyle.NoNavigationButtons && (applicationWindow().pageStack.layers.depth > 1 && !(applicationWindow().pageStack.layers.currentItem instanceof Kirigami.PageRow || header.layerIsMainRow))
                 && globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None
 
             Layout.maximumWidth: visibleChildren.length > 0 ? Layout.preferredWidth : 0
