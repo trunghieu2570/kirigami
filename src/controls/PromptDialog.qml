@@ -38,7 +38,7 @@ import org.kde.kirigami as Kirigami
  * @code{.qml}
  * Kirigami.PromptDialog {
  *     id: textPromptDialog
- *     title: "New Folder"
+ *     title: qsTr("New Folder")
  *
  *     standardButtons: Kirigami.Dialog.NoButton
  *     customFooterActions: [
@@ -60,7 +60,7 @@ import org.kde.kirigami as Kirigami
  *     ]
  *
  *     QQC2.TextField {
- *         placeholderText: qsTr("Folder name...")
+ *         placeholderText: qsTr("Folder name…")
  *     }
  * }
  * @endcode
@@ -68,6 +68,8 @@ import org.kde.kirigami as Kirigami
  * @inherit Dialog
  */
 Kirigami.Dialog {
+    id: root
+
     default property alias mainItem: control.contentItem
 
     /**
@@ -107,14 +109,15 @@ Kirigami.Dialog {
 
     QQC2.Control {
         id: control
-        topPadding: contentTopPadding
-        bottomPadding: contentBottomPadding
-        leftPadding: contentLeftPadding
-        rightPadding: contentRightPadding
+
+        topPadding: root.contentTopPadding
+        leftPadding: root.contentLeftPadding
+        rightPadding: root.contentRightPadding
+        bottomPadding: root.contentBottomPadding
 
         contentItem: Kirigami.SelectableLabel {
-            text: subtitle
-            wrapMode: QQC2.Label.Wrap
+            text: root.subtitle
+            wrapMode: TextEdit.Wrap
         }
     }
 }

@@ -27,7 +27,7 @@ import QtQuick.Controls as QQC2
  * @inherit QtQuick.Controls.TextArea
  */
 QQC2.TextArea {
-    id: selectableLabel
+    id: root
 
     /**
      * @brief This property holds the cursor shape that will appear whenever
@@ -65,6 +65,6 @@ QQC2.TextArea {
         // there is no proper workaround other than an upstream fix
         // See qqc2-desktop-style Label.qml
         enabled: false
-        cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.IBeamCursor
+        cursorShape: root.hoveredLink ? Qt.PointingHandCursor : Qt.IBeamCursor
     }
 }
