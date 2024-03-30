@@ -190,6 +190,7 @@ void ImageColors::update()
                 return;
             }
             m_imageData = m_futureImageData->future().result();
+            postProcess(m_imageData);
             m_futureImageData->deleteLater();
             m_futureImageData = nullptr;
 
@@ -485,8 +486,6 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage) const
             imageData.m_palette << entry;
         } // END omp ordered
     }
-
-    postProcess(imageData);
 
     return imageData;
 }
