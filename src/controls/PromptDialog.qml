@@ -70,7 +70,7 @@ import org.kde.kirigami as Kirigami
 Kirigami.Dialog {
     id: root
 
-    default property alias mainItem: control.contentItem
+    default property alias mainItem: wrapper.contentItem
 
     /**
      * The text to use in the dialog's contents.
@@ -107,8 +107,8 @@ Kirigami.Dialog {
     padding: 0 // we want content padding, not padding of the scrollview
     preferredWidth: Kirigami.Units.gridUnit * 18
 
-    QQC2.Control {
-        id: control
+    Kirigami.Padding {
+        id: wrapper
 
         topPadding: root.contentTopPadding
         leftPadding: root.contentLeftPadding
