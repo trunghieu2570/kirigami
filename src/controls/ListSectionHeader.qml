@@ -5,7 +5,7 @@
  */
 
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
@@ -14,15 +14,16 @@ import org.kde.kirigami as Kirigami
  *
  * It's intended to make all listviews look coherent.
  *
+ * Any additional content items will be positioned in a row at the trailing side
+ * of this component.
+ *
  * Example usage:
  * @code
- * import QtQuick 2.5
- * import QtQuick.Controls 2.5 as QQC2
- *
- * import org.kde.kirigami 2.10 as Kirigami
+ * import QtQuick
+ * import QtQuick.Controls as QQC2
+ * import org.kde.kirigami as Kirigami
  *
  * ListView {
- *  [...]
  *     section.delegate: Kirigami.ListSectionHeader {
  *         label: section
  *
@@ -33,11 +34,10 @@ import org.kde.kirigami as Kirigami
  *             text: "Button 2"
  *         }
  *     }
- *  [...]
  * }
  * @endcode
  */
-ItemDelegate {
+QQC2.ItemDelegate {
     id: listSection
 
     /**
