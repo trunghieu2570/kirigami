@@ -21,7 +21,7 @@ Item {
      */
     property int edge: Qt.LeftEdge
 
-    property int radius: Kirigami.Units.gridUnit
+    property int radius: Kirigami.Units.cornerRadius
     implicitWidth: radius
     implicitHeight: radius
 

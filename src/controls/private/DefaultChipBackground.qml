@@ -64,5 +64,5 @@ Rectangle {
         }
     }
     border.width: 1
-    radius: 3
+    radius: Kirigami.Units.cornerRadius
 }

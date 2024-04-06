@@ -26,7 +26,7 @@ KT.InlineMessage {
             default: return Kirigami.Theme.activeTextColor;
         }
 
-        radius: Kirigami.Units.smallSpacing / 2
+        radius: Kirigami.Units.cornerRadius
         shadow.size: 12
         shadow.xOffset: 0
         shadow.yOffset: 1
@@ -40,7 +40,7 @@ KT.InlineMessage {
 
             color: Kirigami.Theme.backgroundColor
 
-            radius: bgBorderRect.radius * 0.60
+            radius: bgBorderRect.radius
         }
 
         Rectangle {

@@ -322,7 +322,7 @@ T.Dialog {
         Kirigami.Theme.colorSet: Kirigami.Theme.View
         Kirigami.Theme.inherit: false
         color: Kirigami.Theme.backgroundColor
-        radius: Kirigami.Units.smallSpacing
+        radius: Kirigami.Units.cornerRadius
         shadow {
             size: radius * 2
             color: Qt.rgba(0, 0, 0, 0.3)

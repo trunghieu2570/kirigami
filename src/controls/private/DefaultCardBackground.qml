@@ -77,7 +77,7 @@ Kirigami.ShadowedRectangle {
         return root.defaultColor
     }
 
-    radius: Kirigami.Units.smallSpacing
+    radius: Kirigami.Units.cornerRadius
 
     border {
         width: root.borderWidth

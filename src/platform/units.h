@@ -192,6 +192,13 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      */
     Q_PROPERTY(int toolTipDelay READ toolTipDelay NOTIFY toolTipDelayChanged FINAL)
 
+    /**
+     * Corner radius value shared by buttons and other rectangle elements
+     *
+     * @since 6.2
+     */
+    Q_PROPERTY(qreal cornerRadius READ cornerRadius NOTIFY cornerRadiusChanged FINAL)
+
 public:
     ~Units() override;
 
@@ -225,6 +232,9 @@ public:
     int toolTipDelay() const;
     void setToolTipDelay(int delay);
 
+    qreal cornerRadius() const;
+    void setcornerRadius(qreal cornerRadius);
+
     IconSizes *iconSizes() const;
 
     static Units *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine);
@@ -241,6 +251,7 @@ Q_SIGNALS:
     void humanMomentChanged();
     void toolTipDelayChanged();
     void wheelScrollLinesChanged();
+    void cornerRadiusChanged();
 
 protected:
     explicit Units(QObject *parent = nullptr);

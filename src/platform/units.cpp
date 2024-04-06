@@ -44,6 +44,7 @@ public:
         , veryShortDuration(50)
         , humanMoment(2000)
         , toolTipDelay(700)
+        , cornerRadius(5)
         , iconSizes(new IconSizes(units))
     {
     }
@@ -65,6 +66,7 @@ public:
     int veryShortDuration;
     int humanMoment;
     int toolTipDelay;
+    qreal cornerRadius;
 
     IconSizes *const iconSizes;
 
@@ -233,6 +235,21 @@ void Units::setToolTipDelay(int delay)
 
     d->toolTipDelay = delay;
     Q_EMIT toolTipDelayChanged();
+}
+
+qreal Units::cornerRadius() const
+{
+    return d->cornerRadius;
+}
+
+void Units::setcornerRadius(qreal cornerRadius)
+{
+    if (d->cornerRadius == cornerRadius) {
+        return;
+    }
+
+    d->cornerRadius = cornerRadius;
+    Q_EMIT cornerRadiusChanged();
 }
 
 Units *Units::create(QQmlEngine *qmlEngine, [[maybe_unused]] QJSEngine *jsEngine)

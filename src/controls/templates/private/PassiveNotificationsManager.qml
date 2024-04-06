@@ -246,7 +246,7 @@ Item {
                     color: Qt.rgba(0, 0, 0, 0.4)
                     yOffset: 2
                 }
-                radius: Kirigami.Units.smallSpacing * 2
+                radius: Kirigami.Units.cornerRadius
                 color: Kirigami.Theme.backgroundColor
                 opacity: 0.9
             }

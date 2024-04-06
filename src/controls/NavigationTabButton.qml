@@ -137,7 +137,7 @@ T.TabButton {
             height: parent.height - Kirigami.Units.largeSpacing
             anchors.centerIn: parent
 
-            radius: Kirigami.Units.smallSpacing
+            radius: Kirigami.Units.cornerRadius
             color: control.down ? control.__pressedColor : (control.checked || control.hovered ? control.__hoverSelectColor : "transparent")
 
             border.color: control.checked ? control.__checkedBorderColor : (control.down ? control.__pressedBorderColor : color)

@@ -68,7 +68,7 @@ KT.OverlayDrawer {
 
                 width: Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.smallSpacing * 2
                 height: width
-                radius: 2
+                radius: Kirigami.Units.cornerRadius
                 Behavior on color {
                     ColorAnimation {
                         duration: Kirigami.Units.longDuration

@@ -79,7 +79,7 @@ KT.InlineMessage {
             default: return Kirigami.Theme.activeTextColor;
         }
 
-        radius: root.position == KT.InlineMessage.Inline ? Kirigami.Units.smallSpacing / 2 : 0
+        radius: root.position == KT.InlineMessage.Inline ? Kirigami.Units.cornerRadius : 0
 
         Rectangle {
             id: bgFillRect
