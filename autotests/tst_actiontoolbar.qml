@@ -291,6 +291,7 @@ TestCase {
         Kirigami.ToolBarLayout {
             fullDelegate: Item {}
             iconDelegate: Item {}
+            separatorDelegate: Item {}
             moreButton: Item {}
         }
     }
