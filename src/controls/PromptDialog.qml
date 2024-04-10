@@ -3,6 +3,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
@@ -107,6 +109,16 @@ Kirigami.Dialog {
     padding: 0 // we want content padding, not padding of the scrollview
     preferredWidth: Kirigami.Units.gridUnit * 18
 
+    contentData: [
+        Component {
+            id: defaultContentItemComponent
+            Kirigami.SelectableLabel {
+                text: root.subtitle
+                wrapMode: TextEdit.Wrap
+            }
+        }
+    ]
+
     Kirigami.Padding {
         id: wrapper
 
@@ -114,10 +126,11 @@ Kirigami.Dialog {
         leftPadding: root.contentLeftPadding
         rightPadding: root.contentRightPadding
         bottomPadding: root.contentBottomPadding
+    }
 
-        contentItem: Kirigami.SelectableLabel {
-            text: root.subtitle
-            wrapMode: TextEdit.Wrap
+    Component.onCompleted: {
+        if (!wrapper.contentItem) {
+            wrapper.contentItem = defaultContentItemComponent.createObject(wrapper);
         }
     }
 }
