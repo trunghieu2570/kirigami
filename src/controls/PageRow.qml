@@ -81,7 +81,7 @@ QT.Control {
      * @property list<Page> items
      * @since 2.6
      */
-    readonly property alias items: columnView.contentChildren;
+    readonly property alias items: columnView.contentChildren
 
     /**
      * @brief This property holds all visible pages in the PageRow,
