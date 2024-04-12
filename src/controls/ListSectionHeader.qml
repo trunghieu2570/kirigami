@@ -25,7 +25,7 @@ import org.kde.kirigami as Kirigami
  *
  * ListView {
  *     section.delegate: Kirigami.ListSectionHeader {
- *         label: section
+ *         text: section
  *
  *         QQC2.Button {
  *             text: "Button 1"
@@ -43,7 +43,9 @@ QQC2.ItemDelegate {
     /**
      * @brief This property sets the text of the ListView's section header.
      * @property string label
+     * @deprecated since 6.2 Use base type's AbstractButton::text property directly
      */
+    @Deprecated { reason: "Use base type's AbstractButton::text property directly" }
     property alias label: listSection.text
 
     default property alias _contents: rowLayout.data
