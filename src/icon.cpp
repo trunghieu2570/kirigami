@@ -444,7 +444,11 @@ QImage Icon::findIcon(const QSize &size)
         QString iconId = iconUrl.path().remove(0, 1);
 
         QSize actualSize;
-        QQuickImageProvider *imageProvider = dynamic_cast<QQuickImageProvider *>(qmlEngine(this)->imageProvider(iconProviderId));
+        auto engine = qmlEngine(this);
+        if (!engine) {
+            return img;
+        }
+        QQuickImageProvider *imageProvider = dynamic_cast<QQuickImageProvider *>(engine->imageProvider(iconProviderId));
         if (!imageProvider) {
             return img;
         }
