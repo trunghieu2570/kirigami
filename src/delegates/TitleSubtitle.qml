@@ -102,6 +102,16 @@ Item {
      */
     readonly property bool truncated: labelItem.truncated || subtitleItem.truncated
 
+    /**
+     * @brief Emitted when the user clicks on a link embedded in the text of the title or subtitle.
+     */
+    signal linkActivated(string link)
+
+    /**
+     * @brief Emitted when the user hovers on a link embedded in the text of the title or subtitle.
+     */
+    signal linkHovered(string link)
+
     implicitWidth: Math.max(labelItem.implicitWidth, subtitleItem.implicitWidth)
     implicitHeight: labelItem.implicitHeight + (subtitleVisible ? subtitleItem.implicitHeight : 0)
 
@@ -119,6 +129,9 @@ Item {
         font: root.font
         elide: root.elide
         wrapMode: root.wrapMode
+
+        onLinkActivated: link => root.linkActivated(link)
+        onLinkHovered: link => root.linkHovered(link)
 
         // Work around Qt bug where left aligned text is not right aligned
         // in RTL mode unless horizontalAlignment is explicitly set.
@@ -157,6 +170,9 @@ Item {
         wrapMode: root.wrapMode
 
         visible: text.length > 0
+
+        onLinkActivated: link => root.linkActivated(link)
+        onLinkHovered: link => root.linkHovered(link)
 
         // Work around Qt bug where left aligned text is not right aligned
         // in RTL mode unless horizontalAlignment is explicitly set.

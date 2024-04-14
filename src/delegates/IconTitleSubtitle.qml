@@ -116,6 +116,16 @@ Item {
         height: width
     }
 
+    /**
+     * @copydoc Kirigami::TitleSubtitle::linkActivated
+     */
+    signal linkActivated(string link)
+
+    /**
+     * @copydoc Kirigami::TitleSubtitle::linkHovered
+     */
+    signal linkHovered(string link)
+
     implicitWidth: iconItem.implicitWidth + titleSubtitle.anchors.leftMargin + titleSubtitle.implicitWidth
     implicitHeight: Math.max(iconItem.implicitHeight, titleSubtitle.implicitHeight)
 
@@ -147,5 +157,8 @@ Item {
         }
 
         title: root.title
+
+        onLinkActivated: link => root.linkActivated(link)
+        onLinkHovered: link => root.linkHovered(link)
     }
 }
