@@ -63,9 +63,6 @@ QQC2.ToolButton {
 
     QQC2.ToolTip {
         id: toolTip
-        // Wikipedia says anything between 45 and 75 characters per line is
-        // acceptable. 21 * Kirigami.Units.gridUnit feels right.
-        implicitWidth: Math.min(21 * Kirigami.Units.gridUnit, root.Window.width)
         visible: root.hovered || root.toolTipVisible
         onVisibleChanged: {
             if (!visible && root.toolTipVisible) {
