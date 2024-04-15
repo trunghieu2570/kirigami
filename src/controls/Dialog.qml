@@ -272,7 +272,8 @@ T.Dialog {
     z: Kirigami.OverlayZStacking.z
 
     // calculate dimensions
-    implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding // maximum width enforced from our content (one source of truth) to avoid binding loops
+    implicitWidth: Math.max(contentItem.implicitWidth + leftPadding + rightPadding, // maximum width enforced from our content (one source of truth) to avoid binding loops
+                            implicitHeaderWidth, implicitFooterWidth)
     implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
                     + (implicitHeaderHeight > 0 ? implicitHeaderHeight + spacing : 0)
                     + (implicitFooterHeight > 0 ? implicitFooterHeight + spacing : 0);
