@@ -174,14 +174,15 @@ QQC2.ToolBar {
         // Counting buttons because Repeaters can be counted among visibleChildren
         let visibleButtonCount = 0;
         const minWidth = contentItem.height * 0.75;
+        const contentItemWidth = contentItem.width;
         for (const visibleChild of contentItem.visibleChildren) {
-            if (contentItem.width / visibleButtonCount >= minWidth && // make buttons go off the screen if there is physically no room for them
+            if (contentItemWidth / visibleButtonCount >= minWidth && // make buttons go off the screen if there is physically no room for them
                 visibleChild instanceof T.AbstractButton) { // Checking for AbstractButtons because any AbstractButton can act as a tab
                 ++visibleButtonCount;
             }
         }
 
-        return Math.round(contentItem.width / visibleButtonCount);
+        return Math.round(contentItemWidth / visibleButtonCount);
     }
 //END properties
 
