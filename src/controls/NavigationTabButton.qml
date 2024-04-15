@@ -205,6 +205,13 @@ T.TabButton {
 
             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
 
+            // Ensure label is in sync with the HCenter-aligned and ceiled to the pixel-grid icon during resizing.
+            // The trick is that the centered icon will shift its x position on every second pixel increment of control's width,
+            // but the Text/Label is capable is rendering as center-aligned at any single pixel width value,
+            // so the label is padded to match the Layout's/icon's snapping behavior.
+            leftPadding: control.mirrored && control.display === T.AbstractButton.TextUnderIcon && control.width % 2 === 0 ? 1 : undefined
+            rightPadding: !control.mirrored && control.display === T.AbstractButton.TextUnderIcon && control.width % 2 === 0 ? 1 : undefined
+
             Layout.topMargin: control.__verticalMargins
             Layout.bottomMargin: control.__verticalMargins
 
