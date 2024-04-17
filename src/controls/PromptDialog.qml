@@ -107,7 +107,6 @@ Kirigami.Dialog {
     property real contentRightPadding: contentPadding
 
     padding: 0 // we want content padding, not padding of the scrollview
-    preferredWidth: Kirigami.Units.gridUnit * 18
 
     contentData: [
         Component {
@@ -130,6 +129,7 @@ Kirigami.Dialog {
 
     Component.onCompleted: {
         if (!wrapper.contentItem) {
+            preferredWidth = Kirigami.Units.gridUnit * 18;
             wrapper.contentItem = defaultContentItemComponent.createObject(wrapper);
         }
     }
