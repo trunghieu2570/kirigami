@@ -373,9 +373,9 @@ T.Dialog {
         // - case 2: preferredWidth not set, so we are using the content's implicit width
         //   -> we expand the dialog's width to accommodate the scrollbar width (to respect the content's desired width)
 
-        // don't enforce preferred width and height if not set
-        property real preferredWidth: (root.preferredWidth >= 0 ? root.preferredWidth : calculatedImplicitWidth)
-        property real preferredHeight: root.preferredHeight >= 0 ? root.preferredHeight - otherHeights : calculatedImplicitHeight
+        // don't enforce preferred width and height if not set (-1), and expand to a larger implicit size
+        property real preferredWidth: Math.max(root.preferredWidth, calculatedImplicitWidth)
+        property real preferredHeight: Math.max(root.preferredHeight - otherHeights, calculatedImplicitHeight)
 
         property real maximumWidth: calculatedMaximumWidth
         property real maximumHeight: calculatedMaximumHeight - otherHeights // we enforce maximum height solely from the content
