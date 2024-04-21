@@ -185,7 +185,7 @@ QWindow *MnemonicAttached::window() const
 
 void MnemonicAttached::onAltPressed()
 {
-    if (!m_active || m_richTextLabel.isEmpty()) {
+    if (m_active || m_richTextLabel.isEmpty()) {
         return;
     }
 
