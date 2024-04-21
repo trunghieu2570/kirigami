@@ -410,11 +410,12 @@ T.Dialog {
         Kirigami.Theme.colorSet: Kirigami.Theme.Header
 
         contentItem: RowLayout {
+            spacing: Kirigami.Units.smallSpacing
+
             Kirigami.Heading {
                 id: heading
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
-                level: 2
                 text: root.title.length === 0 ? " " : root.title // always have text to ensure header height
                 elide: Text.ElideRight
 
@@ -423,41 +424,32 @@ T.Dialog {
                 QQC2.ToolTip.text: root.title
                 HoverHandler { id: titleHoverHandler }
             }
-            Kirigami.Icon {
+
+            QQC2.ToolButton {
                 id: closeIcon
-                visible: root.showCloseButton
 
                 // We want to position the close button in the top-right
                 // corner if the header is very tall, but we want to
                 // vertically center it in a short header
-                readonly property bool tallHeader: parent.height > (Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.largeSpacing + Kirigami.Units.largeSpacing)
+                readonly property bool tallHeader: parent.height > (Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.largeSpacing * 2)
                 Layout.alignment: tallHeader ? Qt.AlignRight | Qt.AlignTop : Qt.AlignRight | Qt.AlignVCenter
                 Layout.topMargin: tallHeader ? Kirigami.Units.largeSpacing : 0
-                implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                implicitWidth: implicitHeight
 
-                source: closeMouseArea.containsMouse ? "window-close" : "window-close-symbolic"
-                active: closeMouseArea.containsMouse
-                MouseArea {
-                    id: closeMouseArea
-                    hoverEnabled: Qt.styleHints.useHoverEffects
-                    anchors.fill: parent
-                    onClicked: mouse => root.reject()
-                }
+                visible: root.showCloseButton
+                icon.name: closeIcon.hovered ? "window-close" : "window-close-symbolic"
+                text: qsTr("Close", "@action:button close dialog")
+                onClicked: mouse => root.reject()
+                display: QQC2.AbstractButton.IconOnly
             }
         }
 
         // header background
-        background: Kirigami.ShadowedRectangle {
-            corners.topLeftRadius: Kirigami.Units.smallSpacing
-            corners.topRightRadius: Kirigami.Units.smallSpacing
-            Kirigami.Theme.colorSet: Kirigami.Theme.Header
-            Kirigami.Theme.inherit: false
-            color: Kirigami.Theme.backgroundColor
+        background: Item {
             Kirigami.Separator {
                 id: headerSeparator
                 width: parent.width
                 anchors.bottom: parent.bottom
+                visible: false
             }
         }
     }
@@ -467,11 +459,10 @@ T.Dialog {
         id: footerToolBar
 
         // if there is nothing in the footer, still maintain a height so that we can create a rounded bottom buffer for the dialog
-        property bool bufferMode: contentItem.implicitHeight === 0
-        implicitHeight: bufferMode ? Kirigami.Units.smallSpacing : contentItem.implicitHeight
+        property bool bufferMode: !root.footerLeadingComponent && !dialogButtonBox.visible
+        implicitHeight: bufferMode ? Math.round(Kirigami.Units.smallSpacing / 2) : contentItem.implicitHeight + topPadding + bottomPadding
 
-        leftPadding: 0; rightPadding: 0; bottomPadding: 0
-        topPadding: bufferMode ? 0 : footerSeparator.implicitHeight // add space for the separator above the footer
+        padding: !bufferMode ? Kirigami.Units.largeSpacing : 0
 
         contentItem: RowLayout {
             spacing: parent.spacing
@@ -489,6 +480,7 @@ T.Dialog {
                 id: dialogButtonBox
                 standardButtons: root.standardButtons
                 visible: count > 0
+                padding: 0
 
                 Layout.fillWidth: true
                 Layout.alignment: dialogButtonBox.alignment
@@ -527,20 +519,10 @@ T.Dialog {
             }
         }
 
-        background: Kirigami.ShadowedRectangle {
-            // curved footer bottom corners
-            corners.bottomLeftRadius: Kirigami.Units.smallSpacing
-            corners.bottomRightRadius: Kirigami.Units.smallSpacing
-
-            // we act as a content buffer if nothing is in the footer
-            Kirigami.Theme.colorSet: footerToolBar.bufferMode ? Kirigami.Theme.View : Kirigami.Theme.Window
-            Kirigami.Theme.inherit: false
-            color: Kirigami.Theme.backgroundColor
-
-            // separator above footer
+        background: Item {
             Kirigami.Separator {
                 id: footerSeparator
-                visible: !footerToolBar.bufferMode
+                visible: contentControl.contentHeight > contentControl.implicitHeight
                 width: parent.width
                 anchors.top: parent.top
             }

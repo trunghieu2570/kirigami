@@ -6,6 +6,7 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
@@ -72,7 +73,28 @@ import org.kde.kirigami as Kirigami
 Kirigami.Dialog {
     id: root
 
-    default property alias mainItem: wrapper.contentItem
+    default property alias mainItem: mainLayout.data
+
+    enum DialogType {
+        Success,
+        Warning,
+        Error,
+        Information,
+        None
+    }
+
+    /**
+     * This property holds the dialogType. It can be either:
+     *
+     * - `PromptDialog.Success`: For a sucess message
+     * - `PromptDialog.Warning`: For a warning message
+     * - `PromptDialog.Error`: For an actual error
+     * - `PromptDialog.Information`: For an informational message
+     * - `PromptDialog.None`: No specific dialog type.
+     *
+     * By default, the dialogType is `Kirigami.PromptDialog.None`
+     */
+    property int dialogType: Kirigami.PromptDialog.None
 
     /**
      * The text to use in the dialog's contents.
@@ -80,57 +102,104 @@ Kirigami.Dialog {
     property string subtitle
 
     /**
-     * The padding around the content, within the scroll area.
+     * The padding around the content, within te scroll area.
      *
      * Default is `Kirigami.Units.largeSpacing`.
+     *
+     * @deprecated Use padding instead
      */
     property real contentPadding: Kirigami.Units.largeSpacing
 
     /**
      * The top padding of the content, within the scroll area.
+     *
+     * @deprecated Use topPadding instead
      */
     property real contentTopPadding: contentPadding
 
     /**
      * The bottom padding of the content, within the scroll area.
+     *
+     * @deprecated Use bottomPadding instead
      */
-    property real contentBottomPadding: contentPadding
+    property real contentBottomPadding: 0
 
     /**
      * The left padding of the content, within the scroll area.
+     *
+     * @deprecated Use leftPadding instead
      */
     property real contentLeftPadding: contentPadding
 
     /**
      * The right padding of the content, within the scroll area.
+     *
+     * @deprecated Use rightPadding instead.
      */
     property real contentRightPadding: contentPadding
 
-    padding: 0 // we want content padding, not padding of the scrollview
+    /**
+     * This property holds the icon name used by the PromptDialog.
+     *
+     * By default this uses an icon name based on the dialogType value.
+     */
+    property string iconName: switch (root.dialogType) {
+    case Kirigami.PromptDialog.Success:
+        return "data-success";
+    case Kirigami.PromptDialog.Warning:
+        return "data-warning";
+    case Kirigami.PromptDialog.Error:
+        return "data-error";
+    case Kirigami.PromptDialog.Information:
+        return "data-information";
+    default:
+        return '';
+    }
+
+    padding: root.contentPadding
+    implicitWidth: Math.min(preferredWidth, maximumWidth) + leftPadding + rightPadding
     preferredWidth: Kirigami.Units.gridUnit * 18
 
-    contentData: [
-        Component {
-            id: defaultContentItemComponent
+    header: null
+
+    topPadding: root.contentTopPadding
+    leftPadding: root.contentLeftPadding
+    rightPadding: root.contentRightPadding
+    bottomPadding: root.contentBottomPadding
+
+    contentItem: RowLayout {
+        spacing: Kirigami.Units.largeSpacing
+
+        Kirigami.Icon {
+            source: root.iconName
+            visible: root.iconName.length > 0
+
+            Layout.preferredWidth: Kirigami.Units.iconSizes.huge
+            Layout.preferredHeight: Kirigami.Units.iconSizes.huge
+            Layout.alignment: Qt.AlignTop
+        }
+
+        ColumnLayout {
+            id: mainLayout
+
+            spacing: Kirigami.Units.smallSpacing
+
+            Layout.fillWidth: true
+
+            Kirigami.Heading {
+                text: root.title
+                visible: root.title.length > 0
+                elide: QQC2.Label.ElideRight
+                wrapMode: Text.WordWrap
+                Layout.fillWidth: true
+            }
+
             Kirigami.SelectableLabel {
                 text: root.subtitle
                 wrapMode: TextEdit.Wrap
+                visible: text.length > 0
+                Layout.fillWidth: true
             }
-        }
-    ]
-
-    Kirigami.Padding {
-        id: wrapper
-
-        topPadding: root.contentTopPadding
-        leftPadding: root.contentLeftPadding
-        rightPadding: root.contentRightPadding
-        bottomPadding: root.contentBottomPadding
-    }
-
-    Component.onCompleted: {
-        if (!wrapper.contentItem) {
-            wrapper.contentItem = defaultContentItemComponent.createObject(wrapper);
         }
     }
 }

@@ -21,8 +21,16 @@ import "templates" as T
 T.OverlaySheet {
     id: root
 
-    background: P.DefaultCardBackground {
-        Kirigami.Theme.colorSet: root.Kirigami.Theme.colorSet
+    background: Kirigami.ShadowedRectangle {
+        id: rect
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
         Kirigami.Theme.inherit: false
+        color: Kirigami.Theme.backgroundColor
+        radius: Kirigami.Units.cornerRadius
+        shadow {
+            size: radius * 2
+            color: Qt.rgba(0, 0, 0, 0.3)
+            yOffset: 1
+        }
     }
 }
