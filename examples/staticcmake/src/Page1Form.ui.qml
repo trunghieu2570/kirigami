@@ -15,13 +15,13 @@ Kirigami.Page {
     property alias textField1: textField1
     property alias button1: button1
 
-    actions {
-        main: Kirigami.Action {
+    actions: [
+        Kirigami.Action {
             text: "Sync"
             icon.name: "folder-sync"
             onTriggered: showPassiveNotification("Action clicked")
         }
-    }
+    ]
 
     RowLayout {
         anchors.horizontalCenter: parent.horizontalCenter
