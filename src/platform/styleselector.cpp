@@ -9,6 +9,7 @@
 #include <QDir>
 #include <QFile>
 #include <QQuickStyle>
+#include <kirigamiplatform_logging.h>
 
 namespace Kirigami
 {
@@ -77,6 +78,9 @@ QUrl StyleSelector::componentUrl(const QString &fileName)
         }
     }
 
+    if (!QFile::exists(resolveFilePath(fileName))) {
+        qCWarning(KirigamiPlatform) << "Requested an unexisting component" << fileName;
+    }
     return QUrl(resolveFileUrl(fileName));
 }
 
