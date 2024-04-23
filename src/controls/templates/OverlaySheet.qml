@@ -156,18 +156,12 @@ T.Popup {
         const flickable = scrollView.contentItem;
         flickable.contentY = flickable.originY - flickable.topMargin;
     }
-    onHeaderChanged: headerItem.initHeader()
-    onFooterChanged: {
-        footer.parent = footerParent;
-        footer.Layout.fillWidth = true;
-    }
 
     Component.onCompleted: {
         Qt.callLater(() => {
             if (!root.parent && typeof applicationWindow !== "undefined") {
                 root.parent = applicationWindow().overlay
             }
-            headerItem.initHeader();
         });
     }
 
@@ -258,23 +252,18 @@ T.Popup {
                 Kirigami.Theme.inherit: false
                 color: Kirigami.Theme.backgroundColor
 
-                function initHeader() {
-                    const h = root.header;
-                    if (h) {
-                        h.parent = headerParent;
-                        h.anchors.fill = headerParent;
-                    }
-                }
-
-                Item {
+                Kirigami.Padding {
                     id: headerParent
-                    implicitHeight: root.header?.implicitHeight ?? 0
-                    anchors {
-                        fill: parent
-                        margins: Kirigami.Units.smallSpacing
-                        leftMargin: Kirigami.Units.largeSpacing
-                        rightMargin: (root.showCloseButton ? closeIcon.width : 0) + Kirigami.Units.smallSpacing
-                    }
+
+                    readonly property real leadingPadding: Kirigami.Units.largeSpacing
+                    readonly property real trailingPadding: (root.showCloseButton ? closeIcon.width : 0) + Kirigami.Units.smallSpacing
+
+                    anchors.fill: parent
+                    verticalPadding: Kirigami.Units.smallSpacing
+                    leftPadding: root.mirrored ? trailingPadding : leadingPadding
+                    rightPadding: root.mirrored ? leadingPadding : trailingPadding
+
+                    contentItem: root.header
                 }
                 Kirigami.Icon {
                     id: closeIcon
@@ -368,14 +357,12 @@ T.Popup {
                 Layout.fillWidth: true
                 visible: footerParent.visible
             }
-            RowLayout {
+            Kirigami.Padding {
                 id: footerParent
                 Layout.fillWidth: true
-                Layout.leftMargin: Kirigami.Units.smallSpacing
-                Layout.topMargin: Kirigami.Units.smallSpacing
-                Layout.rightMargin: Kirigami.Units.smallSpacing
-                Layout.bottomMargin: Kirigami.Units.smallSpacing
-                visible: root.footer !== null
+                padding: Kirigami.Units.smallSpacing
+                contentItem: root.footer
+                visible: contentItem !== null
             }
         }
         Translate {
