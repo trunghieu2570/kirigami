@@ -1072,8 +1072,7 @@ QT.Control {
                 // instantiate page from component
                 // Important: The parent needs to be set otherwise a reference needs to be kept around
                 // to avoid the page being garbage collected.
-
-                page = pageComp.createObject(root, properties || {});
+                page = pageComp.createObject(pagesLogic, properties || {});
 
                 if (pageComp.status === Component.Error) {
                     throw new Error("Error while loading page: " + pageComp.errorString());
