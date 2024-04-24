@@ -147,8 +147,9 @@ TestCase {
             verify(pool.contains(page), "pool contains page " + page)
             pages.push(page)
         }
-        verify(pool.items.length == 5, "pool contains 5 items")
-        for (const item of pool.items) {
+        const items = Array.prototype.slice.call(pool.items);
+        verify(items.length == 5, "pool contains 5 items")
+        for (const item of items) {
             const url = pool.urlForPage(item)
             const found = pages.find(page => url.toString().endsWith(page))
             verify(found, "pool.items contains page " + found)
