@@ -148,14 +148,14 @@ TestCase {
             pages.push(page)
         }
         const items = Array.prototype.slice.call(pool.items);
-        verify(items.length == 5, "pool contains 5 items")
+        compare(items.length, 5, "pool contains 5 items")
         for (const item of items) {
             const url = pool.urlForPage(item)
             const found = pages.find(page => url.toString().endsWith(page))
             verify(found, "pool.items contains page " + found)
             pool.deletePage(item)
         }
-        verify(pool.items.length == 0, "all items have been deleted")
+        compare(pool.items.length, 0, "all items have been deleted")
     }
 
     function test_iterateAndDeleteByUrl () {
@@ -166,7 +166,7 @@ TestCase {
             verify(pool.contains(page), "pool contains page " + page)
             pages.push(page)
         }
-        verify(pool.urls.length == 5, "pool contains 5 urls")
+        compare(pool.urls.length, 5, "pool contains 5 urls")
         for (const url of pool.urls) {
             const found = pages.find(page => url.toString().endsWith(page))
             verify(found, "pool.urls contains page " + found)
@@ -174,6 +174,6 @@ TestCase {
         for (const page of pages) {
             pool.deletePage(page)
         }
-        verify(pool.urls.length == 0, "all urls have been deleted")
+        compare(pool.urls.length, 0, "all urls have been deleted")
     }
 }
