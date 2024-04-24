@@ -148,7 +148,12 @@ TestCase {
             pages.push(page)
         }
         verify(pool.items.length == 5, "pool contains 5 items")
-        pool.clear()
+        for (const item of pool.items) {
+            const url = pool.urlForPage(item)
+            const found = pages.find(page => url.toString().endsWith(page))
+            verify(found, "pool.items contains page " + found)
+            pool.deletePage(item)
+        }
         verify(pool.items.length == 0, "all items have been deleted")
     }
 
