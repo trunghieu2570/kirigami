@@ -9,6 +9,7 @@ import QtQuick.Layouts
 import QtQuick.Templates as QT
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.private as KirigamiPrivate
 import "private/globaltoolbar" as GlobalToolBar
 import "templates" as KT
 
@@ -211,13 +212,13 @@ QT.Control {
      * empty. Failing to comply with the following rules will make the method
      * return null before doing anything.
      *
-     * @param page A single page or an array of pages.
+     * @param page A single page or an array of pages (either a QT.Page, Component, string or url).
      * @param properties A single property object or an array of property
      * objects.
      *
      * @return The new created page (or the last one if it was an array).
      */
-    function push(page, properties): QT.Page {
+    function push(page: /*QT.Page | Component | string | url*/ var, properties: var): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
             console.warn("Pushed pages do not conform to the rules. Please check the documentation.");
             console.trace();
@@ -238,11 +239,12 @@ QT.Control {
      * close/hide it when in desktop or mobile mode. Note that Kiriami supports
      * calling `closeDialog()` only once.
      *
+     * @param page A single page or an array of pages (either a QT.Page, Component, string or url).
      * @param properties The properties given when initializing the page.
      * @param windowProperties The properties given to the initialized window on desktop.
      * @return Returns a newly created page.
      */
-    function pushDialogLayer(page, properties = {}, windowProperties = {}): QT.Page {
+    function pushDialogLayer(page: /*QT.Page | Component | string | url*/ var, properties: var, windowProperties: var): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
             console.warn("Page pushed as a dialog or layer does not conform to the rules. Please check the documentation.");
             console.trace();
@@ -272,7 +274,7 @@ QT.Control {
                 } else if (page instanceof Item) {
                     item = page;
                     page.parent = dialog.contentItem;
-                } else if (typeof page === 'object' && typeof page.toString() === 'string') { // url
+                } else if (KirigamiPrivate.TypesHelper.isUrl(page)) {
                     const component = Qt.createComponent(page);
                     item = component.createObject(dialog.contentItem, properties);
                     component.destroy();
@@ -342,14 +344,14 @@ QT.Control {
      * empty. Failing to comply with the following rules will make the method
      * return null before doing anything.
      *
-     * @param page A single page or an array of pages.
+     * @param page A single page or an array of pages (either a QT.Page, Component, string or url).
      * @param properties A single property object or an array of property
      * objects.
      *
      * @return The new created page (or the last one if it was an array).
      * @since 2.7
      */
-    function insertPage(position, page, properties): QT.Page {
+    function insertPage(position: int, page: /*QT.Page | Component | string | url*/ var, properties: var): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
             console.warn("Inserted pages do not conform to the rules. Please check the documentation.");
             console.trace();
@@ -370,17 +372,18 @@ QT.Control {
      * in order to keep the same current page.
      * @since 2.7
      */
-    function movePage(fromPos, toPos): void {
+    function movePage(fromPos: int, toPos: int): void {
         columnView.moveItem(fromPos, toPos);
     }
 
     /**
      * @brief Remove the given page.
+     * @param page A page or an integer index of the page.
      * @param page The page can be given both as integer position or by reference
      * @return The page that has just been removed
      * @since 2.7
      */
-    function removePage(page): QT.Page {
+    function removePage(page: /*Item | int*/ var): QT.Page {
         if (depth > 0) {
             return columnView.removeItem(page);
         }
@@ -389,35 +392,38 @@ QT.Control {
 
     /**
      * @brief Pops a page off the stack.
-     * @param page If page is specified then the stack is unwound to that page,
-     * to unwind to the first page specify page as null.
+     *
+     * If page is specified then the stack is unwound to that page.
+     * To pop all pages including the the first one, omit the page parameter or pass null.
+     *
+     * @param page A page or an integer index of the page. Optional parameter.
      * @return The page instance that was popped off the stack.
      */
-    function pop(page): QT.Page {
+    function pop(page: /*(Item | int)?*/ var): QT.Page {
         return columnView.pop(page);
     }
 
     /**
      * @brief Replaces a page on the current index.
      *
-     * A single page can be defined as an url, a component, or an object. It can
+     * A single page can be defined as a url, a component, or an QT.Page. It can
      * also be an array of the above said types, but in that case, the
      * properties' array length must match pages' array length or it must be
      * empty. Failing to comply with the following rules will make the method
      * return null before doing anything.
      *
-     * @param page A single page or an array of pages.
+     * @param page A single page or an array of pages (either a QT.Page, Component, string or url).
      * @param properties A single property object or an array of property
      * objects.
      *
      * @return The new created page (or the last one if it was an array).
      * @see push() for details.
      */
-    function replace(page, properties): QT.Page {
+    function replace(page: /*QT.Page | Component | string | url*/ var, properties: var): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
             console.warn("Specified pages do not conform to the rules. Please check the documentation.");
             console.trace();
-            return null
+            return null;
         }
 
         // Remove all pages on top of the one being replaced.
@@ -477,11 +483,11 @@ QT.Control {
     }
 
     /**
-     * @return the page at idx
-     * @param idx the depth of the page we want
+     * @return the page at index
+     * @param index the depth of the page we want
      */
-    function get(idx): QT.Page {
-        return items[idx];
+    function get(index: int): QT.Page {
+        return items[index];
     }
 
     /**
@@ -952,26 +958,30 @@ QT.Control {
 
     QtObject {
         id: pagesLogic
-        readonly property var componentCache: new Array()
+
+        // type: Map<string, Component>
+        readonly property var __componentCache: new Map()
 
         property Component __mobileDialogLayerComponent
 
-        function getMobileDialogLayerComponent() {
+        function getMobileDialogLayerComponent(): Component {
             if (!__mobileDialogLayerComponent) {
                 __mobileDialogLayerComponent = Qt.createComponent(Qt.resolvedUrl("private/MobileDialogLayer.qml"));
             }
             return __mobileDialogLayerComponent;
         }
 
-        function verifyPages(pages, properties): bool {
+        function verifyPages(pages: /*QT.Page | Component | string | url | [QT.Page | Component | string | url]*/ var, properties: var): bool {
             function validPage(page) {
-                //don't try adding an already existing page
+                // don't try adding an already existing page
                 if (page instanceof QT.Page && columnView.containsItem(page)) {
-                    console.log(`Page ${page} is already in the PageRow`)
-                    return false
+                    console.log(`Page ${page} is already in the PageRow`);
+                    return false;
                 }
-                return page instanceof QT.Page || page instanceof Component || typeof page === 'string'
-                    || (typeof page === 'object' && typeof page.toString() === 'string')
+                return page instanceof QT.Page
+                    || page instanceof Component
+                    || typeof page === 'string'
+                    || KirigamiPrivate.TypesHelper.isUrl(page);
             }
 
             // check page/pages that it is/they are valid
@@ -1006,7 +1016,7 @@ QT.Control {
                 && (!properties || (isProp || isValidPropArr))
         }
 
-        function insertPage_unchecked(position, page, properties) {
+        function insertPage_unchecked(position: int, page: /*QT.Page | Component | string | url*/ var, properties: var): QT.Page {
             columnView.pop(position - 1);
 
             // figure out if more than one page is being pushed
@@ -1042,53 +1052,63 @@ QT.Control {
             return pageItem;
         }
 
-        function getPageComponent(page): Component {
-            let pageComp;
-
-            if (page.createObject) {
-                // page defined as component
-                pageComp = page;
-            } else if (typeof page === "string") {
-                // page defined as string (a url)
-                pageComp = pagesLogic.componentCache[page];
-                if (!pageComp) {
-                    pageComp = pagesLogic.componentCache[page] = Qt.createComponent(page);
-                }
-            } else if (typeof page === "object" && !(page instanceof Item) && page.toString !== undefined) {
-                // page defined as url (QML value type, not a string)
-                pageComp = pagesLogic.componentCache[page.toString()];
-                if (!pageComp) {
-                    pageComp = pagesLogic.componentCache[page.toString()] = Qt.createComponent(page.toString());
-                }
+        function __getCachedPageComponent(pageUrl: url): Component {
+            const cacheKey = pageUrl.toString();
+            if (!__componentCache.has(cacheKey)) {
+                // Note: Relying on Map holding a strong reference to the
+                // stored components and on garbage collector to clean up
+                // after the PageRow is destroyed together with the map.
+                const component = Qt.createComponent(pageUrl);
+                __componentCache.set(cacheKey, component);
             }
-
-            return pageComp
+            return __componentCache.get(cacheKey);
         }
 
-        function initPage(page, properties): QT.Page {
-            const pageComp = getPageComponent(page, properties);
-
-            if (pageComp) {
-                // instantiate page from component
-                // Important: The parent needs to be set otherwise a reference needs to be kept around
-                // to avoid the page being garbage collected.
-                page = pageComp.createObject(pagesLogic, properties || {});
-
-                if (pageComp.status === Component.Error) {
-                    throw new Error("Error while loading page: " + pageComp.errorString());
-                }
+        function getPageComponent(page: /*Component | string | url*/ var): Component {
+            if (page instanceof Component) {
+                // page defined as a component itself
+                return page;
+            } else if (typeof page === "string") {
+                // page defined as stringified url (not as a url type)
+                //
+                // Note: Not using Qt.resolvedUrl because URLs must not be
+                // relative to this Kirigami.PageRow component.
+                return __getCachedPageComponent(Qt.url(page));
+            } else if (KirigamiPrivate.TypesHelper.isUrl(page)) {
+                // page defined as url (the url type, not a string)
+                return __getCachedPageComponent(page);
             } else {
-                // copy properties to the page
+                // This code path should be unreachable because the caller is
+                // expected to handle the !verifyPages() case beforehand.
+                throw new TypeError("page should be one of: Component, string, url; got: " + typeof page);
+            }
+        }
+
+        function initPage(page: /*QT.Page | Component | string | url*/ var, properties: var): QT.Page {
+            if (page instanceof QT.Page) {
+                // Copy properties to the page
                 for (const prop in properties) {
                     if (properties.hasOwnProperty(prop)) {
                         page[prop] = properties[prop];
                     }
                 }
+            } else {
+                // Instantiate page from component
+                const component = getPageComponent(page, properties);
+                // Memory management: the new page is QObject-parented to our
+                // internal object, and additionally the reference will be
+                // kept in the Map. Both mechanisms are preventing the page
+                // from being garbage collected.
+                page = component.createObject(pagesLogic, properties || {});
+
+                if (component.status === Component.Error) {
+                    throw new Error("Error while loading page: " + component.errorString());
+                }
             }
             return page;
         }
 
-        function initAndInsertPage(position, page, properties): QT.Page {
+        function initAndInsertPage(position: int, page: /*QT.Page | Component | string | url*/ var, properties: var): QT.Page {
             page = initPage(page, properties);
             columnView.insertItem(position, page);
             return page;
