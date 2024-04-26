@@ -38,16 +38,6 @@ QQC2.ItemDelegate {
      */
     property string subtitle
 
-    /**
-     * @copydoc Kirigami::TitleSubtitle::linkActivated
-     */
-    signal linkActivated(string link)
-
-    /**
-     * @copydoc Kirigami::TitleSubtitle::linkHovered
-     */
-    signal linkHovered(string link)
-
     QQC2.ToolTip.text: text + (subtitle.length > 0 ? "\n\n" + subtitle : "")
     QQC2.ToolTip.visible: (Kirigami.Settings.tabletMode ? down : hovered) && (contentItem?.truncated ?? false)
     QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
@@ -58,8 +48,5 @@ QQC2.ItemDelegate {
         subtitle: delegate.subtitle
         selected: delegate.highlighted || delegate.down
         font: delegate.font
-
-        onLinkActivated: link => root.linkActivated(link)
-        onLinkHovered: link => root.linkHovered(link)
     }
 }
