@@ -140,6 +140,9 @@ KT.OverlayDrawer {
                     if (root.edge !== Qt.LeftEdge && root.edge !== Qt.RightEdge) {
                         return false;
                     }
+                    if (root.collapsed) {
+                        return false;
+                    }
                     // compatible header
                     const header = root.header ?? null;
                     if (header instanceof T.ToolBar || header instanceof KT.AbstractApplicationHeader) {
