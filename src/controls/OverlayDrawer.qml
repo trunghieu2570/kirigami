@@ -137,7 +137,20 @@ KT.OverlayDrawer {
                 id: segmentedSeparator
                 visible: (root.edge === Qt.LeftEdge || root.edge === Qt.RightEdge) && ((root.hasOwnProperty("header") && (root.header instanceof T.ToolBar || root.header instanceof KT.AbstractApplicationHeader))
                     || root.contentItem instanceof ColumnLayout && root.contentItem.children[0] instanceof T.ToolBar)
-                y: applicationWindow()?.pageStack?.globalToolBar.preferredHeight - 2 * Kirigami.Units.largeSpacing
+
+                y: {
+                    if (typeof applicationWindow === "undefined") {
+                        return 0;
+                    }
+                    const window = applicationWindow();
+                    const globalToolBar = window.pageStack?.globalToolBar;
+                    if (!globalToolBar) {
+                        return 0;
+                    }
+
+                    return globalToolBar.preferredHeight - 2 * Kirigami.Units.largeSpacing;
+                }
+
                 color: Kirigami.Theme.backgroundColor
                 height: Kirigami.Units.largeSpacing - 1
                 width: (root.edge === Qt.LeftEdge || root.edge === Qt.RightEdge) ? separator.width : 0
