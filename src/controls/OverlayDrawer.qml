@@ -120,59 +120,98 @@ KT.OverlayDrawer {
 
         Kirigami.Separator {
             id: separator
+
             LayoutMirroring.enabled: false
-            // LayoutMirroring.childrenInherit: true
+
             anchors {
-                right: root.edge === Qt.RightEdge ? parent.left : (root.edge === Qt.LeftEdge ? undefined : parent.right)
-                left: root.edge === Qt.LeftEdge ? parent.right : (root.edge === Qt.RightEdge ? undefined : parent.left)
                 top: root.edge === Qt.TopEdge ? parent.bottom : (root.edge === Qt.BottomEdge ? undefined : parent.top)
+                left: root.edge === Qt.LeftEdge ? parent.right : (root.edge === Qt.RightEdge ? undefined : parent.left)
+                right: root.edge === Qt.RightEdge ? parent.left : (root.edge === Qt.LeftEdge ? undefined : parent.right)
                 bottom: root.edge === Qt.BottomEdge ? parent.top : (root.edge === Qt.TopEdge ? undefined : parent.bottom)
-                topMargin: root.edge === Qt.TopEdge || root.edge === Qt.BottomEdge || !segmentedSeparator.visible ? undefined : Kirigami.Units.largeSpacing
+                topMargin: segmentedSeparator.height
             }
+
             visible: !root.modal
+
             Kirigami.Theme.inherit: false
             Kirigami.Theme.colorSet: Kirigami.Theme.Header
+        }
 
-            Rectangle {
-                id: segmentedSeparator
+        Item {
+            id: segmentedSeparator
 
-                visible: {
-                    if (root.edge !== Qt.LeftEdge && root.edge !== Qt.RightEdge) {
-                        return false;
-                    }
-                    if (root.collapsed) {
-                        return false;
-                    }
-                    // compatible header
-                    const header = root.header ?? null;
-                    if (header instanceof T.ToolBar || header instanceof KT.AbstractApplicationHeader) {
-                        return true;
-                    }
-                    // or compatible content
-                    if (root.contentItem instanceof ColumnLayout && root.contentItem.children[0] instanceof T.ToolBar) {
-                        return true;
-                    }
+            // an alternative to segmented style is full height
+            readonly property bool shouldUseSegmentedStyle: {
+                if (root.edge !== Qt.LeftEdge && root.edge !== Qt.RightEdge) {
                     return false;
                 }
+                if (root.collapsed) {
+                    return false;
+                }
+                // compatible header
+                const header = root.header ?? null;
+                if (header instanceof T.ToolBar || header instanceof KT.AbstractApplicationHeader) {
+                    return true;
+                }
+                // or compatible content
+                if (root.contentItem instanceof ColumnLayout && root.contentItem.children[0] instanceof T.ToolBar) {
+                    return true;
+                }
+                return false;
+            }
 
-                y: {
-                    if (typeof applicationWindow === "undefined") {
-                        return 0;
-                    }
-                    const window = applicationWindow();
-                    const globalToolBar = window.pageStack?.globalToolBar;
-                    if (!globalToolBar) {
-                        return 0;
-                    }
+            anchors {
+                top: parent.top
+                left: separator.left
+                right: separator.right
+            }
 
-                    return globalToolBar.preferredHeight - 2 * Kirigami.Units.largeSpacing;
+            height: {
+                if (root.edge !== Qt.LeftEdge && root.edge !== Qt.RightEdge) {
+                    return 0;
+                }
+                if (typeof applicationWindow === "undefined") {
+                    return 0;
+                }
+                const window = applicationWindow();
+                const globalToolBar = window.pageStack?.globalToolBar;
+                if (!globalToolBar) {
+                    return 0;
                 }
 
-                color: Kirigami.Theme.backgroundColor
-                height: Kirigami.Units.largeSpacing - 1
-                width: (root.edge === Qt.LeftEdge || root.edge === Qt.RightEdge) ? separator.width : 0
+                return globalToolBar.preferredHeight;
+            }
+
+            visible: separator.visible
+
+            Kirigami.Separator {
+                LayoutMirroring.enabled: false
+
+                anchors {
+                    fill: parent
+                    topMargin: segmentedSeparator.shouldUseSegmentedStyle ? Kirigami.Units.largeSpacing : 0
+                    bottomMargin: segmentedSeparator.shouldUseSegmentedStyle ? Kirigami.Units.largeSpacing : 0
+                }
+
+                Behavior on anchors.topMargin {
+                    NumberAnimation {
+                        duration: Kirigami.Units.longDuration
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+
+                Behavior on anchors.bottomMargin {
+                    NumberAnimation {
+                        duration: Kirigami.Units.longDuration
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+
+                Kirigami.Theme.inherit: false
+                Kirigami.Theme.colorSet: Kirigami.Theme.Header
             }
         }
+
         KP.EdgeShadow {
             z: -2
             visible: root.modal
