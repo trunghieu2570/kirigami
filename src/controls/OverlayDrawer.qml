@@ -119,6 +119,7 @@ KT.OverlayDrawer {
         }
 
         Kirigami.Separator {
+            id: separator
             LayoutMirroring.enabled: false
             // LayoutMirroring.childrenInherit: true
             anchors {
@@ -139,7 +140,7 @@ KT.OverlayDrawer {
                 y: applicationWindow()?.pageStack?.globalToolBar.preferredHeight - 2 * Kirigami.Units.largeSpacing
                 color: Kirigami.Theme.backgroundColor
                 height: Kirigami.Units.largeSpacing - 1
-                width: 1
+                width: (root.edge === Qt.LeftEdge || root.edge === Qt.RightEdge) ? separator.width : 0
             }
         }
         KP.EdgeShadow {
