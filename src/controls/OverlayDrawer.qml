@@ -135,8 +135,22 @@ KT.OverlayDrawer {
 
             Rectangle {
                 id: segmentedSeparator
-                visible: (root.edge === Qt.LeftEdge || root.edge === Qt.RightEdge) && ((root.hasOwnProperty("header") && (root.header instanceof T.ToolBar || root.header instanceof KT.AbstractApplicationHeader))
-                    || root.contentItem instanceof ColumnLayout && root.contentItem.children[0] instanceof T.ToolBar)
+
+                visible: {
+                    if (root.edge !== Qt.LeftEdge && root.edge !== Qt.RightEdge) {
+                        return false;
+                    }
+                    // compatible header
+                    const header = root.header ?? null;
+                    if (header instanceof T.ToolBar || header instanceof KT.AbstractApplicationHeader) {
+                        return true;
+                    }
+                    // or compatible content
+                    if (root.contentItem instanceof ColumnLayout && root.contentItem.children[0] instanceof T.ToolBar) {
+                        return true;
+                    }
+                    return false;
+                }
 
                 y: {
                     if (typeof applicationWindow === "undefined") {
