@@ -456,6 +456,7 @@ Kirigami.OverlayDrawer {
 
         header: RowLayout {
             visible: root.title.length > 0 || Boolean(root.titleIcon)
+            spacing: Kirigami.Units.largeSpacing
 
             Kirigami.Icon {
                 source: root.titleIcon
