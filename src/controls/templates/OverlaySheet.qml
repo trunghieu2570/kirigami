@@ -147,7 +147,7 @@ T.Popup {
             h = scrollView.itemForSizeHints.height;
         }
         h += headerItem.implicitHeight + footerParent.implicitHeight + topPadding + bottomPadding;
-        return Math.min(h, parent.height - y)
+        return parent ? Math.min(h, parent.height - y) : h
     }
 //END Reimplemented Properties
 
