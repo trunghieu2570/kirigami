@@ -242,9 +242,6 @@ T.Dialog {
     readonly property list<T.Action> __visibleCustomFooterActions: customFooterActions
         .filter(action => !(action instanceof Kirigami.Action) || action?.visible)
 
-    // default standard button
-    standardButtons: QQC2.Dialog.Close
-
     function standardButton(button): T.AbstractButton {
         // in case a footer is redefined
         if (footer instanceof T.DialogButtonBox) {
@@ -342,7 +339,7 @@ T.Dialog {
         QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
         // height of everything else in the dialog other than the content
-        property real otherHeights: root.header.height + root.footer.height + root.topPadding + root.bottomPadding;
+        property real otherHeights: (root.header?.height ?? 0) + (root.footer?.height ?? 0) + root.topPadding + root.bottomPadding;
 
         property real calculatedMaximumWidth: Math.min(root.absoluteMaximumWidth, root.maximumWidth) - root.leftPadding - root.rightPadding
         property real calculatedMaximumHeight: Math.min(root.absoluteMaximumHeight, root.maximumHeight) - root.topPadding - root.bottomPadding
@@ -357,13 +354,17 @@ T.Dialog {
             if (!contentItem) {
                 return;
             }
-            /* Why this is necessary? A Flickable mainItem syncs its size with the conents only on startup,
+            /* Why this is necessary? A Flickable mainItem syncs its size with the contents only on startup,
              and if the contents can change their size dinamically afterwards (wrapping text does that),
              the contentsize will be wrong see BUG 477257
              We also don't do this declaratively but only we are sure a contentItem is declared/created as just
              accessing the property would create an internal flickable, making it impossible to assign custom
              flickables/ listviews to the Dialog*/
             contentItem.contentHeight = Qt.binding(()=>{return contentControl.calculatedImplicitHeight})
+
+            if (contentItem instanceof Flickable) {
+                contentItem.clip = true;
+            }
         }
 
         // how do we deal with the scrollbar width?
@@ -449,7 +450,7 @@ T.Dialog {
                 id: headerSeparator
                 width: parent.width
                 anchors.bottom: parent.bottom
-                visible: false
+                visible: contentControl.contentHeight > contentControl.implicitHeight
             }
         }
     }
@@ -522,7 +523,7 @@ T.Dialog {
         background: Item {
             Kirigami.Separator {
                 id: footerSeparator
-                visible: contentControl.contentHeight > contentControl.implicitHeight
+                visible: contentControl.contentHeight > contentControl.implicitHeight && footerToolBar.padding !== 0
                 width: parent.width
                 anchors.top: parent.top
             }

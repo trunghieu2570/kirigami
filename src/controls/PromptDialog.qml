@@ -122,7 +122,7 @@ Kirigami.Dialog {
      *
      * @deprecated Use bottomPadding instead
      */
-    property real contentBottomPadding: 0
+    property real contentBottomPadding: footer.padding === 0 ? contentPadding : 0 // add bottom padding if there is no footer
 
     /**
      * The left padding of the content, within the scroll area.
