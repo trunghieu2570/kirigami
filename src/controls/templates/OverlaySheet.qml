@@ -62,6 +62,7 @@ T.Popup {
      * and will always be displayed.
      */
     property Item header: Kirigami.Heading {
+        level: 2
         text: root.title
         elide: Text.ElideRight
 
@@ -247,6 +248,8 @@ T.Popup {
                 z: 2
                 corners.topLeftRadius: Kirigami.Units.smallSpacing
                 corners.topRightRadius: Kirigami.Units.smallSpacing
+                Kirigami.Theme.colorSet: Kirigami.Theme.Header
+                Kirigami.Theme.inherit: false
                 color: Kirigami.Theme.backgroundColor
 
                 Kirigami.Padding {
@@ -262,31 +265,54 @@ T.Popup {
 
                     contentItem: root.header
                 }
-
-                QQC2.ToolButton {
+                Kirigami.Icon {
                     id: closeIcon
+
+                    readonly property bool tallHeader: headerItem.height > (Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.largeSpacing + Kirigami.Units.largeSpacing)
 
                     anchors {
                         right: parent.right
-                        top: parent.top
-                        margins: Kirigami.Units.largeSpacing
+                        rightMargin: Kirigami.Units.largeSpacing
+                        verticalCenter: headerItem.verticalCenter
+                        margins: Kirigami.Units.smallSpacing
                     }
+
+                    // Apply the changes to the anchors imperatively, to first disable an anchor point
+                    // before setting the new one, so the icon don't grow unexpectedly
+                    onTallHeaderChanged: {
+                        if (tallHeader) {
+                            // We want to position the close button in the top-right corner if the header is very tall
+                            anchors.verticalCenter = undefined
+                            anchors.topMargin = Kirigami.Units.largeSpacing
+                            anchors.top = headerItem.top
+                        } else {
+                            // but we want to vertically center it in a short header
+                            anchors.top = undefined
+                            anchors.topMargin = undefined
+                            anchors.verticalCenter = headerItem.verticalCenter
+                        }
+                    }
+                    Component.onCompleted: tallHeaderChanged()
 
                     z: 3
                     visible: root.showCloseButton
-                    icon.name: hovered ? "window-close" : "window-close-symbolic"
-                    text: qsTr("Close", "@action:button close dialog")
-                    display: QQC2.AbstractButton.IconOnly
-                    onClicked: root.close();
+                    width: Kirigami.Units.iconSizes.smallMedium
+                    height: width
+                    source: closeMouseArea.containsMouse ? "window-close" : "window-close-symbolic"
+                    active: closeMouseArea.containsMouse
+                    MouseArea {
+                        id: closeMouseArea
+                        hoverEnabled: true
+                        anchors.fill: parent
+                        onClicked: root.close();
+                    }
                 }
-
                 Kirigami.Separator {
                     anchors {
                         right: parent.right
                         left: parent.left
                         top: parent.bottom
                     }
-                    visible: scrollView.QQC2.ScrollBar.vertical.position > 0
                 }
             }
 
@@ -334,7 +360,7 @@ T.Popup {
             Kirigami.Padding {
                 id: footerParent
                 Layout.fillWidth: true
-                padding: Kirigami.Units.largeSpacing
+                padding: Kirigami.Units.smallSpacing
                 contentItem: root.footer
                 visible: contentItem !== null
             }
