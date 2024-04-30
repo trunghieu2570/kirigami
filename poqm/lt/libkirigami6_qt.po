@@ -118,12 +118,12 @@ msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Atgal"
 
-#: controls/GlobalDrawer.qml:617
+#: controls/GlobalDrawer.qml:618
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Užverti šoninę juostą"
 
-#: controls/GlobalDrawer.qml:622
+#: controls/GlobalDrawer.qml:623
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Atverti šoninę juostą"

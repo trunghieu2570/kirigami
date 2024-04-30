@@ -117,12 +117,12 @@ msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "უკან"
 
-#: controls/GlobalDrawer.qml:617
+#: controls/GlobalDrawer.qml:618
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "გვერდითი ზოლის დახურვა"
 
-#: controls/GlobalDrawer.qml:622
+#: controls/GlobalDrawer.qml:623
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "გვერდითი ზოლის გახსნა"
