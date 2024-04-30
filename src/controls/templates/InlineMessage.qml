@@ -34,23 +34,25 @@ import org.kde.kirigami.templates.private as TP
  *
  * Example:
  * @code
- * InlineMessage {
+ * import org.kde.kirigami as Kirigami
+ *
+ * Kirigami.InlineMessage {
  *     type: Kirigami.MessageType.Error
  *
- *     text: "My error message"
+ *     text: i18n("My error message")
  *
  *     actions: [
  *         Kirigami.Action {
- *             icon.name: "edit"
- *             text: "Action text"
- *             onTriggered: {
+ *             icon.name: "list-add"
+ *             text: i18n("Add")
+ *             onTriggered: source => {
  *                 // do stuff
  *             }
  *         },
  *         Kirigami.Action {
  *             icon.name: "edit"
- *             text: "Action text"
- *             onTriggered: {
+ *             text: i18n("Edit")
+ *             onTriggered: source => {
  *                 // do stuff
  *             }
  *         }

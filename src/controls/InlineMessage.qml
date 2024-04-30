@@ -34,23 +34,23 @@ import org.kde.kirigami.templates as KT
  * @code
  * import org.kde.kirigami as Kirigami
  *
- * InlineMessage {
+ * Kirigami.InlineMessage {
  *     type: Kirigami.MessageType.Error
  *
- *     text: "My error message"
+ *     text: i18n("My error message")
  *
  *     actions: [
  *         Kirigami.Action {
- *             icon.name: "edit"
- *             text: "Action text"
- *             onTriggered: {
+ *             icon.name: "list-add"
+ *             text: i18n("Add")
+ *             onTriggered: source => {
  *                 // do stuff
  *             }
  *         },
  *         Kirigami.Action {
  *             icon.name: "edit"
- *             text: "Action text"
- *             onTriggered: {
+ *             text: i18n("Edit")
+ *             onTriggered: source => {
  *                 // do stuff
  *             }
  *         }
@@ -79,17 +79,17 @@ KT.InlineMessage {
             default: return Kirigami.Theme.activeTextColor;
         }
 
-        radius: root.position == KT.InlineMessage.Inline ? Kirigami.Units.cornerRadius : 0
+        radius: root.position === KT.InlineMessage.Position.Inline ? Kirigami.Units.cornerRadius : 0
 
         Rectangle {
             id: bgFillRect
 
             anchors.fill: parent
             anchors {
-                leftMargin: root.position == KT.InlineMessage.Inline ? 1 : 0
-                topMargin: root.position == KT.InlineMessage.Header ? 0 : 1
-                rightMargin: root.position == KT.InlineMessage.Inline ? 1 : 0
-                bottomMargin: root.position == KT.InlineMessage.Footer ? 0 : 1
+                leftMargin: root.position === KT.InlineMessage.Position.Inline ? 1 : 0
+                topMargin: root.position === KT.InlineMessage.Position.Header ? 0 : 1
+                rightMargin: root.position === KT.InlineMessage.Position.Inline ? 1 : 0
+                bottomMargin: root.position === KT.InlineMessage.Position.Footer ? 0 : 1
             }
 
             color: Kirigami.Theme.backgroundColor
