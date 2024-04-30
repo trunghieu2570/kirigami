@@ -487,7 +487,7 @@ Kirigami.OverlayDrawer {
                 contentWidth: width
                 contentHeight: mainColumn.Layout.minimumHeight
 
-                clip: root.footer !== null
+                clip: (mainLayout.header?.visible ?? false) || (mainLayout.footer?.visible ?? false)
 
                 ColumnLayout {
                     id: mainColumn
