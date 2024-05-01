@@ -110,6 +110,5 @@ Kirigami.AbstractCard {
         id: actionsToolBar
         actions: root.actions
         position: QQC2.ToolBar.Footer
-        visible: root.footer === actionsToolBar
     }
 }

@@ -23,6 +23,11 @@ TestCase {
     }
 
     Component {
+        id: itemComponent
+        Item {}
+    }
+
+    Component {
         id: cardWithActionsComponent
         Kirigami.Card {
             actions: [
@@ -39,6 +44,22 @@ TestCase {
     function test_init() {
         const card = createTemporaryObject(cardComponent, this);
         verify(card);
+    }
+
+    function test_customFooter() {
+        const card = createTemporaryObject(cardComponent, this);
+        verify(card);
+
+        const item = createTemporaryObject(itemComponent, this);
+        verify(item);
+
+        const defaultFooter = card.footer;
+        verify(defaultFooter.visible);
+        verify(defaultFooter.parent !== null);
+
+        card.footer = item;
+        verify(item.visible);
+        verify(!defaultFooter.visible);
     }
 
     function test_cardWithActions() {
