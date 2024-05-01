@@ -5,8 +5,9 @@
  */
 
 import QtQuick
-import QtQuick.Layouts
 import QtQuick.Controls as QQC2
+import QtQuick.Layouts
+import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import "private" as P
 
@@ -38,9 +39,9 @@ Kirigami.AbstractCard {
      * The actions will be represented by a list of ToolButtons with an optional overflow
      * menu, when not all of them will fit in the available Card width.
      *
-     * @property list<org::kde::kirigami::Action> Card::actions
+     * @property list<T.Action> actions
      */
-    property list<QtObject> actions
+    property list<T.Action> actions
 
     /**
      * @brief This grouped property controls the banner image present in the header.
