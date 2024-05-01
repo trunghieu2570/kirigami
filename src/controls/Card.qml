@@ -64,14 +64,15 @@ Kirigami.AbstractCard {
      */
     readonly property alias banner: bannerImage
 
-
     header: Kirigami.Padding {
-        leftPadding: -root.leftPadding + root.background.border.width
         topPadding: -root.topPadding + root.background.border.width
+        leftPadding: -root.leftPadding + root.background.border.width
         rightPadding: -root.rightPadding + root.background.border.width
-        bottomPadding: root.contentItem ? 0: -root.bottomPadding + root.background.border.width
+        bottomPadding: root.contentItem ? 0 : -root.bottomPadding + root.background.border.width
+
         contentItem: P.BannerImage {
             id: bannerImage
+
             implicitWidth: Layout.preferredWidth
             implicitHeight: (source.toString().length > 0 && sourceSize.width > 0 && sourceSize.height > 0 ? width / (sourceSize.width / sourceSize.height) : Layout.minimumHeight) + parent.topPadding + parent.bottomPadding
 
@@ -86,8 +87,9 @@ Kirigami.AbstractCard {
 
             checkable: root.checkable
             checked: root.checkable && root.checked
-            onToggled: (checked) => {
-                root.checked = checked
+
+            onToggled: checked => {
+                root.checked = checked;
             }
         }
     }
@@ -97,8 +99,8 @@ Kirigami.AbstractCard {
             return;
         }
 
+        header.anchors.topMargin = Qt.binding(() => -root.topPadding);
         header.anchors.leftMargin = Qt.binding(() => -root.leftPadding);
-        header.anchors.topMargin = Qt.binding(() =>  -root.topPadding);
         header.anchors.rightMargin = Qt.binding(() => -root.rightPadding);
         header.anchors.bottomMargin = Qt.binding(() => 0);
     }
