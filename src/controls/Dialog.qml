@@ -407,6 +407,8 @@ T.Dialog {
         padding: Kirigami.Units.largeSpacing
         bottomPadding: verticalPadding + headerSeparator.implicitHeight // add space for bottom separator
 
+        Kirigami.Theme.colorSet: Kirigami.Theme.Header
+
         contentItem: RowLayout {
             Kirigami.Heading {
                 id: heading
