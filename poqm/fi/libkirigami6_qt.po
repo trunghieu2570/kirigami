@@ -148,12 +148,12 @@ msgctxt "PasswordField|"
 msgid "Show Password"
 msgstr "Näytä salasana"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:84
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:83
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
 msgstr "Sulje valikko"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:84
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:83
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr "Avaa valikko"

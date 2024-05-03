@@ -148,12 +148,12 @@ msgctxt "PasswordField|"
 msgid "Show Password"
 msgstr "Jelszó megjelenítése"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:84
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:83
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
 msgstr "Menü bezárása"
 
-#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:84
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:83
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr "Menü megnyitása"
