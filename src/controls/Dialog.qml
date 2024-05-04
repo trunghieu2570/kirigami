@@ -283,11 +283,6 @@ T.Dialog {
     // determine parent so that popup knows which window to popup in
     // we want to open the dialog in the center of the window, if possible
     parent: QQC2.Overlay.overlay
-    Component.onCompleted: {
-        if (typeof applicationWindow !== "undefined") {
-            parent = applicationWindow().overlay;
-        }
-    }
 
     // center dialog
     x: parent ? Math.round((parent.width - width) / 2) : 0
