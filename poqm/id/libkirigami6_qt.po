@@ -115,6 +115,14 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr ""
 
+#: controls/Dialog.qml:441
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close drawer"
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "Tutup penggambar"
+
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"
 msgid "Back"
