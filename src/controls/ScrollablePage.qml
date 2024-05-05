@@ -110,15 +110,6 @@ Kirigami.Page {
     default property alias scrollablePageData: itemsParent.data
     property alias scrollablePageChildren: itemsParent.children
 
-    /*
-     * @deprecated here for compatibility; will be removed in KF6.
-     */
-    property QtObject mainItem
-    onMainItemChanged: {
-        print("Warning: the mainItem property is deprecated");
-        scrollablePageData.push(mainItem);
-    }
-
     /**
      * @brief This property sets whether it is possible to navigate the items in a view that support it.
      *
