@@ -12,8 +12,6 @@
 #include <QQuickWindow>
 #include <QWheelEvent>
 
-#include "platform/units.h"
-
 KirigamiWheelEvent::KirigamiWheelEvent(QObject *parent)
     : QObject(parent)
 {
@@ -388,15 +386,25 @@ void WheelHandler::classBegin()
 {
     // Initializes smooth scrolling
     m_engine = qmlEngine(this);
-    auto units = m_engine->singletonInstance<Kirigami::Platform::Units *>("org.kde.kirigami.platform", "Units");
-    m_yScrollAnimation.setDuration(units->longDuration());
-    connect(units, &Kirigami::Platform::Units::longDurationChanged, this, [this] {
-        m_yScrollAnimation.setDuration(static_cast<Kirigami::Platform::Units *>(sender())->longDuration());
-    });
+    m_units = m_engine->singletonInstance<Kirigami::Platform::Units *>("org.kde.kirigami.platform", "Units");
+    m_settings = m_engine->singletonInstance<Kirigami::Platform::Settings *>("org.kde.kirigami.platform", "Settings");
+    initSmoothScrollDuration();
+
+    connect(m_units, &Kirigami::Platform::Units::longDurationChanged, this, &WheelHandler::initSmoothScrollDuration);
+    connect(m_settings, &Kirigami::Platform::Settings::smoothScrollChanged, this, &WheelHandler::initSmoothScrollDuration);
 }
 
 void WheelHandler::componentComplete()
 {
+}
+
+void WheelHandler::initSmoothScrollDuration()
+{
+    if (m_settings->smoothScroll()) {
+        m_yScrollAnimation.setDuration(m_units->longDuration());
+    } else {
+        m_yScrollAnimation.setDuration(0);
+    }
 }
 
 void WheelHandler::setScrolling(bool scrolling)

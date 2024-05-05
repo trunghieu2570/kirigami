@@ -78,6 +78,12 @@ class KIRIGAMIPLATFORM_EXPORT Settings : public QObject
     Q_PROPERTY(int mouseWheelScrollLines READ mouseWheelScrollLines CONSTANT FINAL)
 
     /**
+     * This property holds whether to display animated transitions when scrolling with a
+     * mouse wheel or the keyboard.
+     */
+    Q_PROPERTY(bool smoothScroll READ smoothScroll NOTIFY smoothScrollChanged FINAL)
+
+    /**
      * This property holds the runtime information about the libraries in use.
      *
      * @since 5.52
@@ -117,6 +123,8 @@ public:
 
     int mouseWheelScrollLines() const;
 
+    bool smoothScroll() const;
+
     QStringList information() const;
 
     QVariant applicationWindowIcon() const;
@@ -129,10 +137,12 @@ Q_SIGNALS:
     void tabletModeChanged();
     void isMobileChanged();
     void hasTransientTouchInputChanged();
+    void smoothScrollChanged();
 
 private:
     QString m_style;
     int m_scrollLines = 0;
+    bool m_smoothScroll : 1;
     bool m_tabletModeAvailable : 1;
     bool m_mobile : 1;
     bool m_tabletMode : 1;

@@ -14,6 +14,9 @@
 #include <QStyleHints>
 #include <QTimer>
 
+#include "platform/settings.h"
+#include "platform/units.h"
+
 class QWheelEvent;
 class QQmlEngine;
 class WheelHandler;
@@ -358,10 +361,13 @@ private Q_SLOTS:
 private:
     void classBegin() override;
     void componentComplete() override;
+    void initSmoothScrollDuration();
 
     void setScrolling(bool scrolling);
     bool scrollFlickable(QPointF pixelDelta, QPointF angleDelta = {}, Qt::KeyboardModifiers modifiers = Qt::NoModifier);
 
+    Kirigami::Platform::Units *m_units = nullptr;
+    Kirigami::Platform::Settings *m_settings = nullptr;
     QPointer<QQuickItem> m_flickable;
     QPointer<QQuickItem> m_verticalScrollBar;
     QPointer<QQuickItem> m_horizontalScrollBar;

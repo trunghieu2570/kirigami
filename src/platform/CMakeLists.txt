@@ -22,6 +22,8 @@ target_sources(KirigamiPlatform PRIVATE
     tabletmodewatcher.h
     settings.cpp
     settings.h
+    smoothscrollwatcher.cpp
+    smoothscrollwatcher.h
     styleselector.cpp
     styleselector.h
     units.cpp

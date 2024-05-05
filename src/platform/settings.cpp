@@ -21,6 +21,7 @@
 #include <QtGui/qpa/qplatformtheme.h>
 
 #include "kirigamiplatform_version.h"
+#include "smoothscrollwatcher.h"
 #include "tabletmodewatcher.h"
 
 namespace Kirigami
@@ -89,9 +90,16 @@ Settings::Settings(QObject *parent)
         QSettings globals(configPath, QSettings::IniFormat);
         globals.beginGroup(QStringLiteral("KDE"));
         m_scrollLines = qMax(1, globals.value(QStringLiteral("WheelScrollLines"), 3).toInt());
+        m_smoothScroll = globals.value(QStringLiteral("SmoothScroll"), true).toBool();
     } else {
         m_scrollLines = 3;
+        m_smoothScroll = true;
     }
+
+    connect(SmoothScrollWatcher::self(), &SmoothScrollWatcher::enabledChanged, this, [this](bool enabled) {
+        m_smoothScroll = enabled;
+        Q_EMIT smoothScrollChanged();
+    });
 }
 
 Settings::~Settings()
@@ -197,6 +205,11 @@ void Settings::setStyle(const QString &style)
 int Settings::mouseWheelScrollLines() const
 {
     return m_scrollLines;
+}
+
+bool Settings::smoothScroll() const
+{
+    return m_smoothScroll;
 }
 
 QStringList Settings::information() const
