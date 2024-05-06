@@ -6,7 +6,6 @@
 
 import QtQuick
 import QtQml
-import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 

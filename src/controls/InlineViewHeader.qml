@@ -7,7 +7,6 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Templates as T
-import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
 /**
