@@ -524,4 +524,37 @@ T.Dialog {
             }
         }
     }
+
+    onOpened: {
+        function findDialogButtonBox(item) {
+            if (item === null) {
+                return null;
+            }
+
+            if (item instanceof QQC2.DialogButtonBox) {
+                return item;
+            }
+
+
+            for (let child of item.children) {
+                let result = findDialogButtonBox(child);
+                if (result !== null) {
+                    return result;
+                }
+            }
+            return result;
+        }
+
+        const buttonBox = findDialogButtonBox(footer);
+        if (buttonBox.contentItem instanceof ListView) {
+            const listView = buttonBox.contentItem as ListView;
+            for (let index = 0; index < listView.count; index++) {
+                const button = listView.itemAtIndex(index);
+                if (button.QQC2.DialogButtonBox.buttonRole === QQC2.DialogButtonBox.AcceptRole) {
+                    button.forceActiveFocus();
+                    return;
+                }
+            }
+        }
+    }
 }
