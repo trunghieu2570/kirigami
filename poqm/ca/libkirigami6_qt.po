@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kirigami\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"PO-Revision-Date: 2024-03-25 10:32+0100\n"
+"PO-Revision-Date: 2024-05-05 11:52+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -122,12 +122,9 @@ msgid "Show Contextual Help"
 msgstr "Mostra l'ajuda contextual"
 
 #: controls/Dialog.qml:441
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
-msgstr "Tanca el menú"
+msgstr "Tanca"
 
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"
@@ -225,19 +222,19 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Copia l'enllaç al porta-retalls"
 
-#: platform/settings.cpp:206
+#: platform/settings.cpp:219
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "Frameworks %1 de KDE"
 
-#: platform/settings.cpp:208
+#: platform/settings.cpp:221
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "El sistema de finestres %1"
 
-#: platform/settings.cpp:209
+#: platform/settings.cpp:222
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"

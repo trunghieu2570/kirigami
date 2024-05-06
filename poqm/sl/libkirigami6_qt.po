@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-03-25 06:31+0100\n"
+"PO-Revision-Date: 2024-05-05 07:12+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -119,12 +119,9 @@ msgid "Show Contextual Help"
 msgstr "Prikaži kontekstno pomoč"
 
 #: controls/Dialog.qml:441
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
-msgstr "Zapri meni"
+msgstr "Zapri"
 
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"
@@ -222,19 +219,19 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Kopiraj povezavo na odložišče"
 
-#: platform/settings.cpp:206
+#: platform/settings.cpp:219
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "KDE Frameworks %1"
 
-#: platform/settings.cpp:208
+#: platform/settings.cpp:221
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "Sistem oken %1"
 
-#: platform/settings.cpp:209
+#: platform/settings.cpp:222
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libkirigamiplugin_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-22 20:41+0800\n"
-"PO-Revision-Date: 2024-04-04 19:36+0900\n"
+"PO-Revision-Date: 2024-05-05 17:11+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -119,12 +119,9 @@ msgid "Show Contextual Help"
 msgstr "顯示內文說明"
 
 #: controls/Dialog.qml:441
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
-msgstr "關閉選單"
+msgstr "關閉"
 
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"
@@ -222,19 +219,19 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "複製連結至剪貼簿"
 
-#: platform/settings.cpp:206
+#: platform/settings.cpp:219
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "KDE Frameworks %1"
 
-#: platform/settings.cpp:208
+#: platform/settings.cpp:221
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "%1 視窗系統"
 
-#: platform/settings.cpp:209
+#: platform/settings.cpp:222
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"

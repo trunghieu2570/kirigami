@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-03-25 16:34+0100\n"
+"PO-Revision-Date: 2024-05-05 20:39+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.02.1\n"
+"X-Generator: Lokalize 24.02.2\n"
 "X-Qt-Contexts: true\n"
 
 #: controls/AboutItem.qml:163
@@ -113,12 +113,9 @@ msgid "Show Contextual Help"
 msgstr "Mostra la guida contestuale"
 
 #: controls/Dialog.qml:441
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
-msgstr "Chiudi il menu"
+msgstr "Chiudi"
 
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"
@@ -216,19 +213,19 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Copia il collegamento negli appunti"
 
-#: platform/settings.cpp:206
+#: platform/settings.cpp:219
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "KDE Frameworks %1"
 
-#: platform/settings.cpp:208
+#: platform/settings.cpp:221
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "Il sistema di gestione delle finestre %1"
 
-#: platform/settings.cpp:209
+#: platform/settings.cpp:222
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"

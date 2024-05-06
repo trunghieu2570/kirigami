@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-03-25 13:30+0300\n"
+"PO-Revision-Date: 2024-05-06 00:52+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.02.1\n"
+"X-Generator: Lokalize 24.07.70\n"
 "X-Qt-Contexts: true\n"
 "X-POOTLE-MTIME: 1497529432.000000\n"
 
@@ -115,12 +115,9 @@ msgid "Show Contextual Help"
 msgstr "Bağlamsal Yardımı Göster"
 
 #: controls/Dialog.qml:441
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
-msgstr "Menüyü kapat"
+msgstr "Kapat"
 
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"
@@ -218,19 +215,19 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Bağlantıyı Panoya Kopyala"
 
-#: platform/settings.cpp:206
+#: platform/settings.cpp:219
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "KDE Frameworks %1"
 
-#: platform/settings.cpp:208
+#: platform/settings.cpp:221
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "%1 pencereleme sistemi"
 
-#: platform/settings.cpp:209
+#: platform/settings.cpp:222
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
