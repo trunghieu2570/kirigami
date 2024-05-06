@@ -143,7 +143,7 @@ Kirigami.Dialog {
      *
      * By default this uses an icon name based on the dialogType value.
      */
-    property string iconName: switch (root.dialogType) {
+    property string iconName: switch (dialogType) {
     case Kirigami.PromptDialog.Success:
         return "data-success";
     case Kirigami.PromptDialog.Warning:
@@ -153,19 +153,19 @@ Kirigami.Dialog {
     case Kirigami.PromptDialog.Information:
         return "data-information";
     default:
-        return '';
+        return "";
     }
 
-    padding: root.contentPadding
+    padding: contentPadding
     implicitWidth: Math.min(preferredWidth, maximumWidth) + leftPadding + rightPadding
     preferredWidth: Kirigami.Units.gridUnit * 18
 
     header: null
 
-    topPadding: root.contentTopPadding
-    leftPadding: root.contentLeftPadding
-    rightPadding: root.contentRightPadding
-    bottomPadding: root.contentBottomPadding
+    topPadding: contentTopPadding
+    leftPadding: contentLeftPadding
+    rightPadding: contentRightPadding
+    bottomPadding: contentBottomPadding
 
     contentItem: RowLayout {
         spacing: Kirigami.Units.largeSpacing
