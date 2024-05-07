@@ -6,7 +6,8 @@
  */
 
 import QtQuick
-import org.kde.kirigami as Kirigami
+
+import org.kde.kirigami.platform as Platform
 
 /**
  * @brief A visual separator.
@@ -44,8 +45,9 @@ Rectangle {
      * mix weights lower than Normal with the background color
      * and mix weights higher than Normal with the text color.
      */
-    color: Kirigami.ColorUtils.linearInterpolation(
-        Kirigami.Theme.backgroundColor,
-        Kirigami.Theme.textColor,
-        weight === Separator.Weight.Light ? Kirigami.Theme.lightFrameContrast : Kirigami.Theme.frameContrast)
+    color: Platform.ColorUtils.linearInterpolation(
+        Platform.Theme.backgroundColor,
+        Platform.Theme.textColor,
+        weight === Separator.Weight.Light ? Platform.Theme.lightFrameContrast : Platform.Theme.frameContrast
+    )
 }

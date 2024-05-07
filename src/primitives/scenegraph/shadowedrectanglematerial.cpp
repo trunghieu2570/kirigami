@@ -83,7 +83,7 @@ bool ShadowedRectangleShader::updateUniformData(RenderState &state, QSGMaterial 
 
 void ShadowedRectangleShader::setShader(ShadowedRectangleMaterial::ShaderType shaderType, const QString &shader)
 {
-    const auto shaderRoot = QStringLiteral(":/org/kde/kirigami/shaders/");
+    const auto shaderRoot = QStringLiteral(":/qt/qml/org/kde/kirigami/primitives/shaders/");
 
     setShaderFileName(QSGMaterialShader::VertexStage, shaderRoot + QStringLiteral("shadowedrectangle.vert.qsb"));
 

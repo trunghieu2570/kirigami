@@ -11,7 +11,6 @@
 #include "platform/platformtheme.h"
 #include "platform/units.h"
 
-#include "loggingcategory.h"
 #include <QBitmap>
 #include <QDebug>
 #include <QGuiApplication>
@@ -331,8 +330,6 @@ void Icon::handleFinished(QNetworkReply *reply)
 
     const QString filename = reply->url().fileName();
     if (!m_loadedImage.load(reply, filename.mid(filename.indexOf(QLatin1Char('.'))).toLatin1().constData())) {
-        qCWarning(KirigamiLog) << "received broken image" << reply->url();
-
         // broken image from data, inform the user of this with some useful broken-image thing...
         m_loadedImage = iconPixmap(QIcon::fromTheme(m_fallback));
     }

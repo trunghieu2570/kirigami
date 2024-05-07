@@ -1,7 +1,7 @@
 include(${CMAKE_CURRENT_SOURCE_DIR}/IncludeStaticDependencies.cmake)
 
 add_subdirectory(platform)
-
+add_subdirectory(primitives)
 add_subdirectory(delegates)
 
 add_library(Kirigami)
@@ -26,6 +26,7 @@ ecm_add_qml_module(Kirigami URI "org.kde.kirigami" VERSION 2.0
     "QtQuick.Controls"
     IMPORTS
     "org.kde.kirigami.platform"
+    "org.kde.kirigami.primitives"
     "org.kde.kirigami.delegates"
     ${_extra_options}
 )
@@ -62,8 +63,6 @@ target_sources(Kirigami PRIVATE
     formlayoutattached.cpp
     formlayoutattached.h
     headerfooterlayout.cpp
-    icon.cpp
-    icon.h
     imagecolors.cpp
     imagecolors.h
     mnemonicattached.cpp
@@ -76,10 +75,6 @@ target_sources(Kirigami PRIVATE
     pagepool.h
     scenepositionattached.cpp
     scenepositionattached.h
-    shadowedrectangle.cpp
-    shadowedrectangle.h
-    shadowedtexture.cpp
-    shadowedtexture.h
     sizegroup.cpp
     sizegroup.h
     spellcheckattached.cpp
@@ -90,55 +85,11 @@ target_sources(Kirigami PRIVATE
     toolbarlayout.h
     wheelhandler.cpp
     wheelhandler.h
-
-    scenegraph/managedtexturenode.cpp
-    scenegraph/managedtexturenode.h
-    scenegraph/paintedrectangleitem.cpp
-    scenegraph/paintedrectangleitem.h
-    scenegraph/shadowedborderrectanglematerial.cpp
-    scenegraph/shadowedborderrectanglematerial.h
-    scenegraph/shadowedbordertexturematerial.cpp
-    scenegraph/shadowedbordertexturematerial.h
-    scenegraph/shadowedrectanglematerial.cpp
-    scenegraph/shadowedrectanglematerial.h
-    scenegraph/shadowedrectanglenode.cpp
-    scenegraph/shadowedrectanglenode.h
-    scenegraph/shadowedtexturematerial.cpp
-    scenegraph/shadowedtexturematerial.h
-    scenegraph/shadowedtexturenode.cpp
-    scenegraph/shadowedtexturenode.h
 )
 
 target_sources(Kirigamiplugin PRIVATE
     kirigamiplugin.cpp
     kirigamiplugin.h
-)
-
-qt6_add_shaders(Kirigami "shaders"
-    BATCHABLE
-    PRECOMPILE
-    OPTIMIZED
-    PREFIX "/org/kde/kirigami/shaders"
-    FILES
-        scenegraph/shaders6/shadowedrectangle.vert
-        scenegraph/shaders6/shadowedrectangle.frag
-        scenegraph/shaders6/shadowedrectangle_lowpower.frag
-        scenegraph/shaders6/shadowedborderrectangle.frag
-        scenegraph/shaders6/shadowedborderrectangle_lowpower.frag
-        scenegraph/shaders6/shadowedtexture.frag
-        scenegraph/shaders6/shadowedtexture_lowpower.frag
-        scenegraph/shaders6/shadowedbordertexture.frag
-        scenegraph/shaders6/shadowedbordertexture_lowpower.frag
-    OUTPUTS
-        shadowedrectangle.vert.qsb
-        shadowedrectangle.frag.qsb
-        shadowedrectangle_lowpower.frag.qsb
-        shadowedborderrectangle.frag.qsb
-        shadowedborderrectangle_lowpower.frag.qsb
-        shadowedtexture.frag.qsb
-        shadowedtexture_lowpower.frag.qsb
-        shadowedbordertexture.frag.qsb
-        shadowedbordertexture_lowpower.frag.qsb
 )
 
 ecm_target_qml_sources(Kirigami SOURCES
@@ -150,7 +101,6 @@ ecm_target_qml_sources(Kirigami SOURCES
     controls/ContextDrawer.qml
     controls/GlobalDrawer.qml
     controls/Heading.qml
-    controls/Separator.qml
     controls/PageRow.qml
     controls/OverlaySheet.qml
     controls/Page.qml
@@ -204,7 +154,6 @@ ecm_target_qml_sources(Kirigami VERSION 2.11 SOURCES
 )
 
 ecm_target_qml_sources(Kirigami VERSION 2.12 SOURCES
-    controls/ShadowedImage.qml
     controls/PlaceholderMessage.qml
 )
 
@@ -312,10 +261,10 @@ endif()
 if (NOT BUILD_SHARED_LIBS)
     # Ensure we install the plugin library file as that's required to link
     # against for static builds to work properly
-    target_link_libraries(Kirigamiplugin PRIVATE KirigamiPlatformplugin KirigamiDelegatesplugin)
+    target_link_libraries(Kirigamiplugin PRIVATE KirigamiPlatformplugin KirigamiDelegatesplugin KirigamiPrimitivesplugin)
     install(TARGETS Kirigamiplugin EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 else()
-    target_link_libraries(Kirigami PUBLIC KirigamiPlatform PRIVATE KirigamiDelegates)
+    target_link_libraries(Kirigami PUBLIC KirigamiPlatform PRIVATE KirigamiDelegates KirigamiPrimitives)
 endif()
 
 install(TARGETS Kirigami EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
@@ -349,3 +298,9 @@ if (ANDROID)
         RENAME Kirigami_${CMAKE_ANDROID_ARCH_ABI}-android-dependencies.xml
     )
 endif()
+
+ecm_qt_install_logging_categories(
+    EXPORT KIRIGAMI
+    FILE kirigami.categories
+    DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
+)
