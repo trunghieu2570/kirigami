@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
@@ -161,7 +163,7 @@ Item {
         readonly property var actualTwinFormLayouts: {
             // We need to copy that array by value
             const list = lay.reverseTwins.slice();
-            for (const parentLay of twinFormLayouts) {
+            for (const parentLay of root.twinFormLayouts) {
                 if (!parentLay || !parentLay.hasOwnProperty("children")) {
                     continue;
                 }
@@ -338,8 +340,8 @@ Item {
             Connections {
                 target: lay
                 function onXChanged() {
-                    if (item !== null) {
-                        item.x = x + lay.x;
+                    if (container.item !== null) {
+                        container.item.x = container.x + lay.x;
                     }
                 }
             }
