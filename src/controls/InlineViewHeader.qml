@@ -3,6 +3,7 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
@@ -88,7 +89,7 @@ T.ToolBar {
     // so this will only be done if the InlineViewHeader itself is the header item.
     // And of course it won't be there for ListView either, where we have headerPositioning.
     transform: Translate {
-        y: root.GridView.view ? root.GridView.view.contentY + height : 0
+        y: root.GridView.view ? root.GridView.view.contentY + root.height : 0
     }
 
     background: Rectangle {
