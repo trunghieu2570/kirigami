@@ -234,7 +234,7 @@ Item {
          * @param {Item} item
          * @returns {Qt::Alignment}
          */
-        function effectiveLayout(item) {
+        function effectiveLayout(item: Item): /*Qt.Alignment*/ int {
             if (!item) {
                 return 0;
             }
@@ -256,7 +256,7 @@ Item {
          * @param {Item} item
          * @returns vertical alignment of the item passed as an argument.
          */
-        function effectiveTextLayout(item) {
+        function effectiveTextLayout(item: Item): /*Qt.Alignment*/ int {
             if (!item) {
                 return 0;
             }
@@ -339,7 +339,7 @@ Item {
             Component.onCompleted: item.x = x + lay.x;
             Connections {
                 target: lay
-                function onXChanged() {
+                function onXChanged(): void {
                     if (container.item !== null) {
                         container.item.x = container.x + lay.x;
                     }
