@@ -4,6 +4,7 @@
     SPDX-FileCopyrightText: 2022 ivan tkachenko <me@ratijas.tk>
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQml
@@ -461,7 +462,7 @@ T.Dialog {
         padding: !bufferMode ? Kirigami.Units.largeSpacing : 0
 
         contentItem: RowLayout {
-            spacing: parent.spacing
+            spacing: footerToolBar.spacing
             // Don't let user interact with footer during transitions
             enabled: root.opened
 
@@ -503,7 +504,7 @@ T.Dialog {
                     delegate: QQC2.Button {
                         required property T.Action modelData
 
-                        flat: flatFooterButtons
+                        flat: root.flatFooterButtons
                         action: modelData
                     }
                 }
