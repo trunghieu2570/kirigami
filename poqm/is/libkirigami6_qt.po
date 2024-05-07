@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-03-18 15:23+0000\n"
-"Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
+"PO-Revision-Date: 2024-05-06 12:15+0000\n"
+"Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
@@ -23,12 +23,12 @@ msgstr "%1 (%2)"
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
-msgstr "Senda tölvupóst á %1"
+msgstr "Senda tölvupóst til %1"
 
 #: controls/AboutItem.qml:222
 msgctxt "AboutItem|"
 msgid "Get Involved"
-msgstr "Taktu þátt"
+msgstr "Taka þátt"
 
 #: controls/AboutItem.qml:228
 msgctxt "AboutItem|"
@@ -81,7 +81,7 @@ msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Þýðendur"
 
-#: controls/AboutPage.qml:102
+#: controls/AboutPage.qml:100
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
@@ -110,15 +110,12 @@ msgstr "Aðgerðir"
 #: controls/ContextualHelpButton.qml:50
 msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
-msgstr ""
+msgstr "Sýna samhengishjálp"
 
-#: controls/Dialog.qml:441
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
+#: controls/Dialog.qml:436
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
-msgstr "Loka valmynd"
+msgstr "Loka"
 
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"
@@ -138,7 +135,7 @@ msgstr "Opna hliðarstiku"
 #: controls/LoadingPlaceholder.qml:54
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
-msgstr "Hleð..."
+msgstr "Hleð inn…"
 
 #: controls/PasswordField.qml:42
 msgctxt "PasswordField|"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-03-26 23:18+0100\n"
+"PO-Revision-Date: 2024-05-06 10:30+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Lokalize 24.02.1\n"
+"X-Generator: Lokalize 24.02.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: controls/AboutItem.qml:163
@@ -82,7 +82,7 @@ msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Преводачи"
 
-#: controls/AboutPage.qml:102
+#: controls/AboutPage.qml:100
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
@@ -113,13 +113,10 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "Показване на контекстна помощ"
 
-#: controls/Dialog.qml:441
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
+#: controls/Dialog.qml:436
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
-msgstr "Затваряне на меню"
+msgstr "Затваряне"
 
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"

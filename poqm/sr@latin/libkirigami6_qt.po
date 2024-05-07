@@ -85,7 +85,7 @@ msgctxt "AboutItem|"
 msgid "Translators"
 msgstr ""
 
-#: controls/AboutPage.qml:102
+#: controls/AboutPage.qml:100
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
@@ -119,7 +119,7 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr ""
 
-#: controls/Dialog.qml:441
+#: controls/Dialog.qml:436
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
 msgstr ""

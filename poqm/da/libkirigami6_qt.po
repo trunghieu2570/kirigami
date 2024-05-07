@@ -103,7 +103,7 @@ msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Oversættere"
 
-#: controls/AboutPage.qml:102
+#: controls/AboutPage.qml:100
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "About"
@@ -136,7 +136,7 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr ""
 
-#: controls/Dialog.qml:441
+#: controls/Dialog.qml:436
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"

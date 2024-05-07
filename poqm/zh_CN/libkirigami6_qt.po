@@ -83,7 +83,7 @@ msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "翻译人员"
 
-#: controls/AboutPage.qml:102
+#: controls/AboutPage.qml:100
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
@@ -114,7 +114,7 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "显示相关帮助"
 
-#: controls/Dialog.qml:441
+#: controls/Dialog.qml:436
 #, fuzzy
 #| msgctxt "PageRowGlobalToolBarUI|"
 #| msgid "Close menu"
