@@ -434,7 +434,7 @@ T.Dialog {
                 visible: root.showCloseButton
                 icon.name: closeIcon.hovered ? "window-close" : "window-close-symbolic"
                 text: qsTr("Close", "@action:button close dialog")
-                onClicked: mouse => root.reject()
+                onClicked: root.reject()
                 display: QQC2.AbstractButton.IconOnly
             }
         }
