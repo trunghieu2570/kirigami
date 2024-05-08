@@ -11,11 +11,13 @@
 #include <QObject>
 #include <QQuickItem>
 
+#include "kirigamiplatform_export.h"
+
 /**
  * Utilities for processing items to obtain colors and information useful for
  * UIs that need to adjust to variable elements.
  */
-class ColorUtils : public QObject
+class KIRIGAMIPLATFORM_EXPORT ColorUtils : public QObject
 {
     Q_OBJECT
     QML_ELEMENT

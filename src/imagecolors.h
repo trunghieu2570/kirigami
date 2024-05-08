@@ -18,8 +18,6 @@
 
 #pragma once
 
-#include "colorutils.h"
-
 #include <QColor>
 #include <QFuture>
 #include <QImage>
@@ -28,6 +26,8 @@
 #include <QQuickItem>
 #include <QQuickItemGrabResult>
 #include <QQuickWindow>
+
+#include <platform/colorutils.h>
 
 class QTimer;
 

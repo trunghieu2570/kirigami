@@ -54,8 +54,6 @@ target_include_directories(Kirigami PRIVATE
 )
 
 target_sources(Kirigami PRIVATE
-    colorutils.cpp
-    colorutils.h
     columnview.cpp
     columnview.h
     columnview_p.h

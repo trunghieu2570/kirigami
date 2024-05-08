@@ -30,6 +30,8 @@ target_sources(KirigamiPlatform PRIVATE
     units.h
     virtualkeyboardwatcher.cpp
     virtualkeyboardwatcher.h
+    colorutils.cpp
+    colorutils.h
 )
 
 set(libkirigami_extra_sources "")

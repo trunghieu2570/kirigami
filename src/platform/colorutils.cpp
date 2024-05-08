@@ -6,11 +6,12 @@
 
 #include "colorutils.h"
 
-#include "loggingcategory.h"
 #include <QIcon>
 #include <QtMath>
 #include <cmath>
 #include <map>
+
+#include "kirigamiplatform_logging.h"
 
 ColorUtils::ColorUtils(QObject *parent)
     : QObject(parent)
@@ -123,7 +124,7 @@ ParsedAdjustments parseAdjustments(const QJSValue &value)
     }
 
     if ((parsed.red || parsed.green || parsed.blue) && (parsed.hue || parsed.saturation || parsed.value)) {
-        qCCritical(KirigamiLog) << "It is an error to have both RGB and HSV values in an adjustment.";
+        qCCritical(KirigamiPlatform) << "It is an error to have both RGB and HSV values in an adjustment.";
     }
 
     return parsed;
@@ -134,25 +135,25 @@ QColor ColorUtils::adjustColor(const QColor &color, const QJSValue &adjustments)
     auto adjusts = parseAdjustments(adjustments);
 
     if (qBound(-360.0, adjusts.hue, 360.0) != adjusts.hue) {
-        qCCritical(KirigamiLog) << "Hue is out of bounds";
+        qCCritical(KirigamiPlatform) << "Hue is out of bounds";
     }
     if (qBound(-255.0, adjusts.red, 255.0) != adjusts.red) {
-        qCCritical(KirigamiLog) << "Red is out of bounds";
+        qCCritical(KirigamiPlatform) << "Red is out of bounds";
     }
     if (qBound(-255.0, adjusts.green, 255.0) != adjusts.green) {
-        qCCritical(KirigamiLog) << "Green is out of bounds";
+        qCCritical(KirigamiPlatform) << "Green is out of bounds";
     }
     if (qBound(-255.0, adjusts.blue, 255.0) != adjusts.blue) {
-        qCCritical(KirigamiLog) << "Green is out of bounds";
+        qCCritical(KirigamiPlatform) << "Green is out of bounds";
     }
     if (qBound(-255.0, adjusts.saturation, 255.0) != adjusts.saturation) {
-        qCCritical(KirigamiLog) << "Saturation is out of bounds";
+        qCCritical(KirigamiPlatform) << "Saturation is out of bounds";
     }
     if (qBound(-255.0, adjusts.value, 255.0) != adjusts.value) {
-        qCCritical(KirigamiLog) << "Value is out of bounds";
+        qCCritical(KirigamiPlatform) << "Value is out of bounds";
     }
     if (qBound(-255.0, adjusts.alpha, 255.0) != adjusts.alpha) {
-        qCCritical(KirigamiLog) << "Alpha is out of bounds";
+        qCCritical(KirigamiPlatform) << "Alpha is out of bounds";
     }
 
     auto copy = color;
@@ -181,26 +182,26 @@ QColor ColorUtils::scaleColor(const QColor &color, const QJSValue &adjustments)
     auto copy = color;
 
     if (qBound(-100.0, adjusts.red, 100.00) != adjusts.red) {
-        qCCritical(KirigamiLog) << "Red is out of bounds";
+        qCCritical(KirigamiPlatform) << "Red is out of bounds";
     }
     if (qBound(-100.0, adjusts.green, 100.00) != adjusts.green) {
-        qCCritical(KirigamiLog) << "Green is out of bounds";
+        qCCritical(KirigamiPlatform) << "Green is out of bounds";
     }
     if (qBound(-100.0, adjusts.blue, 100.00) != adjusts.blue) {
-        qCCritical(KirigamiLog) << "Blue is out of bounds";
+        qCCritical(KirigamiPlatform) << "Blue is out of bounds";
     }
     if (qBound(-100.0, adjusts.saturation, 100.00) != adjusts.saturation) {
-        qCCritical(KirigamiLog) << "Saturation is out of bounds";
+        qCCritical(KirigamiPlatform) << "Saturation is out of bounds";
     }
     if (qBound(-100.0, adjusts.value, 100.00) != adjusts.value) {
-        qCCritical(KirigamiLog) << "Value is out of bounds";
+        qCCritical(KirigamiPlatform) << "Value is out of bounds";
     }
     if (qBound(-100.0, adjusts.alpha, 100.00) != adjusts.alpha) {
-        qCCritical(KirigamiLog) << "Alpha is out of bounds";
+        qCCritical(KirigamiPlatform) << "Alpha is out of bounds";
     }
 
     if (adjusts.hue != 0) {
-        qCCritical(KirigamiLog) << "Hue cannot be scaled";
+        qCCritical(KirigamiPlatform) << "Hue cannot be scaled";
     }
 
     auto shiftToAverage = [](double current, double factor) {
