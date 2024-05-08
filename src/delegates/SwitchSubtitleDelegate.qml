@@ -6,7 +6,6 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
-import org.kde.kirigami.delegates as KD
 import org.kde.kirigami.platform as Platform
 
 /**
@@ -38,7 +37,7 @@ QQC2.SwitchDelegate {
     QQC2.ToolTip.visible: (Platform.Settings.tabletMode ? down : hovered) && (contentItem?.truncated ?? false)
     QQC2.ToolTip.delay: Platform.Units.toolTipDelay
 
-    contentItem: KD.IconTitleSubtitle {
+    contentItem: IconTitleSubtitle {
         icon: icon.fromControlsIcon(delegate.icon)
         title: delegate.text
         subtitle: delegate.subtitle

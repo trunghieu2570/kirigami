@@ -7,7 +7,6 @@
  */
 
 import QtQuick
-import org.kde.kirigami.delegates as KD
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.templates.private as KTP
@@ -146,7 +145,7 @@ Item {
         color: root.icon.color
     }
 
-    KD.TitleSubtitle {
+    TitleSubtitle {
         id: titleSubtitle
 
         anchors {
