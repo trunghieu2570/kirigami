@@ -7,7 +7,7 @@
  */
 
 import QtQuick
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
 
 /**
  * A simple item containing a title and subtitle label.
@@ -57,23 +57,23 @@ Item {
      * By default this is `Kirigami.Theme.textColor` unless `selected` is true
      * in which case this is `Kirigami.Theme.highlightedTextColor`.
      */
-    property color color: selected ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
+    property color color: selected ? Platform.Theme.highlightedTextColor : Platform.Theme.textColor
     /**
      * The color to use for the subtitle.
      *
      * By default this is `color` mixed with the background color.
      */
     property color subtitleColor: selected
-        ? Kirigami.Theme.highlightedTextColor
-        : Kirigami.ColorUtils.linearInterpolation(color, Kirigami.Theme.backgroundColor, 0.3)
+        ? Platform.Theme.highlightedTextColor
+        : Platform.ColorUtils.linearInterpolation(color, Platform.Theme.backgroundColor, 0.3)
     /**
      * The font used to display the title.
      */
-    property font font: Kirigami.Theme.defaultFont
+    property font font: Platform.Theme.defaultFont
     /**
      * The font used to display the subtitle.
      */
-    property font subtitleFont: Kirigami.Theme.smallFont
+    property font subtitleFont: Platform.Theme.smallFont
     /**
      * The text elision mode used for both the title and subtitle.
      */

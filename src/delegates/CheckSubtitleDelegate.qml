@@ -6,8 +6,8 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
-import org.kde.kirigami as Kirigami
 import org.kde.kirigami.delegates as KD
+import org.kde.kirigami.platform as Platform
 
 /**
  * A convenience wrapper combining QtQuick Controls CheckDelegate and IconTitleSubtitle
@@ -35,8 +35,8 @@ QQC2.CheckDelegate {
     property string subtitle
 
     QQC2.ToolTip.text: text + (subtitle.length > 0 ? "\n\n" + subtitle : "")
-    QQC2.ToolTip.visible: (Kirigami.Settings.tabletMode ? down : hovered) && (contentItem?.truncated ?? false)
-    QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+    QQC2.ToolTip.visible: (Platform.Settings.tabletMode ? down : hovered) && (contentItem?.truncated ?? false)
+    QQC2.ToolTip.delay: Platform.Units.toolTipDelay
 
     contentItem: KD.IconTitleSubtitle {
         icon: icon.fromControlsIcon(delegate.icon)

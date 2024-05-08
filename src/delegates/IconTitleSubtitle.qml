@@ -7,8 +7,9 @@
  */
 
 import QtQuick
-import org.kde.kirigami as Kirigami
 import org.kde.kirigami.delegates as KD
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.templates.private as KTP
 
 /**
@@ -112,7 +113,7 @@ Item {
      * even if it is not set. To remove that space, set `icon.width` to 0.
      */
     property KTP.IconPropertiesGroup icon: KTP.IconPropertiesGroup {
-        width: titleSubtitle.subtitleVisible ? Kirigami.Units.iconSizes.medium : Kirigami.Units.iconSizes.smallMedium
+        width: titleSubtitle.subtitleVisible ? Platform.Units.iconSizes.medium : Platform.Units.iconSizes.smallMedium
         height: width
     }
 
@@ -129,7 +130,7 @@ Item {
     implicitWidth: iconItem.implicitWidth + titleSubtitle.anchors.leftMargin + titleSubtitle.implicitWidth
     implicitHeight: Math.max(iconItem.implicitHeight, titleSubtitle.implicitHeight)
 
-    Kirigami.Icon {
+    Primitives.Icon {
         id: iconItem
 
         anchors {
@@ -150,7 +151,7 @@ Item {
 
         anchors {
             left: iconItem.right
-            leftMargin: root.icon.width > 0 ? Kirigami.Units.mediumSpacing : 0
+            leftMargin: root.icon.width > 0 ? Platform.Units.mediumSpacing : 0
             top: parent.top
             bottom: parent.bottom
             right: parent.right
