@@ -115,12 +115,9 @@ msgid "Show Contextual Help"
 msgstr "显示相关帮助"
 
 #: controls/Dialog.qml:436
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
-msgstr "关闭菜单"
+msgstr ""
 
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-04-03 11:50+0200\n"
+"PO-Revision-Date: 2024-05-07 10:58+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.02.1\n"
+"X-Generator: Lokalize 24.02.2\n"
 "X-Qt-Contexts: true\n"
 
 #: controls/AboutItem.qml:163
@@ -114,12 +114,9 @@ msgid "Show Contextual Help"
 msgstr "Zobrazit kontextovou nápovědu"
 
 #: controls/Dialog.qml:436
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
-msgstr "Uzavřít nabídku"
+msgstr "Zavřít"
 
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"
