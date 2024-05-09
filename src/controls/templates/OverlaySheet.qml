@@ -29,7 +29,7 @@ import org.kde.kirigami as Kirigami
  * }
  * @endcode
  *
- * It needs a single element declared inseide, do *not* override its contentItem
+ * It needs a single element declared inside, do *not* override its contentItem
  *
  * @inherit QtQuick.Templates.Popup
  */
