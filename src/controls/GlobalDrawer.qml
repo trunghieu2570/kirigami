@@ -7,9 +7,9 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
+import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import "private" as KP
 
@@ -20,35 +20,32 @@ import "private" as KP
  *
  * Example usage:
  * @code
- * import org.kde.kirigami 2.4 as Kirigami
+ * import org.kde.kirigami as Kirigami
  *
  * Kirigami.ApplicationWindow {
- *  [...]
  *     globalDrawer: Kirigami.GlobalDrawer {
  *         actions: [
- *            Kirigami.Action {
- *                text: "View"
- *                icon.name: "view-list-icons"
- *                Kirigami.Action {
- *                        text: "action 1"
- *                }
- *                Kirigami.Action {
- *                        text: "action 2"
- *                }
- *                Kirigami.Action {
- *                        text: "action 3"
- *                }
- *            },
- *            Kirigami.Action {
- *                text: "Sync"
- *                icon.name: "folder-sync"
- *            }
+ *             Kirigami.Action {
+ *                 text: "View"
+ *                 icon.name: "view-list-icons"
+ *                 Kirigami.Action {
+ *                     text: "action 1"
+ *                 }
+ *                 Kirigami.Action {
+ *                     text: "action 2"
+ *                 }
+ *                 Kirigami.Action {
+ *                     text: "action 3"
+ *                 }
+ *             },
+ *             Kirigami.Action {
+ *                 text: "Sync"
+ *                 icon.name: "folder-sync"
+ *             }
  *         ]
  *     }
- *  [...]
  * }
  * @endcode
- *
  */
 Kirigami.OverlayDrawer {
     id: root
