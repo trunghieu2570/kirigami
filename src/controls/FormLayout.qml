@@ -396,7 +396,7 @@ Item {
                     if (item.Kirigami.FormData.isSection && labelItem.index !== 0) {
                         return implicitHeight + Kirigami.Units.largeSpacing * 2;
                     }
-                    else if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof QQC2.TextArea)) {
+                    else if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof TextEdit)) {
                         return Math.max(implicitHeight, item.Kirigami.FormData.buddyFor.height)
                     }
                     return implicitHeight;
