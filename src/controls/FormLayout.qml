@@ -25,19 +25,21 @@ import org.kde.kirigami as Kirigami
  *
  * Example usage:
  * @code
- * import org.kde.kirigami 2.3 as Kirigami
+ * import QtQuick.Controls as QQC2
+ * import org.kde.kirigami as Kirigami
+ *
  * Kirigami.FormLayout {
- *    TextField {
+ *    QQC2.TextField {
  *       Kirigami.FormData.label: "Label:"
  *    }
  *    Kirigami.Separator {
  *        Kirigami.FormData.label: "Section Title"
  *        Kirigami.FormData.isSection: true
  *    }
- *    TextField {
+ *    QQC2.TextField {
  *       Kirigami.FormData.label: "Label:"
  *    }
- *    TextField {
+ *    QQC2.TextField {
  *    }
  * }
  * @endcode
