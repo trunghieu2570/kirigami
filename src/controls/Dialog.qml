@@ -322,6 +322,11 @@ T.Dialog {
             color: Qt.rgba(0, 0, 0, 0.3)
             yOffset: 1
         }
+
+        border {
+            width: 1
+            color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, Kirigami.Theme.frameContrast);
+        }
     }
 
     // dialog content
