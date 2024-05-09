@@ -117,7 +117,7 @@ msgstr "显示相关帮助"
 #: controls/Dialog.qml:436
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 #: controls/GlobalDrawer.qml:309
 msgctxt "GlobalDrawer|"
