@@ -133,7 +133,7 @@ T.Dialog {
      * This is the window height, subtracted by largeSpacing on both the top
      * and bottom.
      */
-    readonly property real absoluteMaximumHeight: parent ? (parent.height - Kirigami.Units.largeSpacing * 2) : 0
+    readonly property real absoluteMaximumHeight: parent.height - Kirigami.Units.largeSpacing * 2
 
     /**
      * @brief This property holds the absolute maximum width the dialog can have.
@@ -141,7 +141,7 @@ T.Dialog {
      * By default, it is the window width, subtracted by largeSpacing on both
      * the top and bottom.
      */
-    readonly property real absoluteMaximumWidth: parent ? (parent.width - Kirigami.Units.largeSpacing * 2) : 0
+    readonly property real absoluteMaximumWidth: parent.width - Kirigami.Units.largeSpacing * 2
 
     /**
      * @brief This property holds the maximum height the dialog can have
@@ -285,7 +285,6 @@ T.Dialog {
 
     // determine parent so that popup knows which window to popup in
     // we want to open the dialog in the center of the window, if possible
-    parent: QQC2.Overlay.overlay
     Component.onCompleted: {
         if (typeof applicationWindow !== "undefined") {
             parent = applicationWindow().overlay;
@@ -293,8 +292,8 @@ T.Dialog {
     }
 
     // center dialog
-    x: parent ? Math.round((parent.width - width) / 2) : 0
-    y: parent ? Math.round((parent.height - height) / 2) + Kirigami.Units.gridUnit * 2 * (1 - opacity) : 0 // move animation
+    x: Math.round((parent.width - width) / 2)
+    y: Math.round((parent.height - height) / 2) + Kirigami.Units.gridUnit * 2 * (1 - opacity) // move animation
 
     // dialog enter and exit transitions
     enter: Transition {
