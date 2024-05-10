@@ -112,22 +112,22 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "சூழல்சார் உதவியைக் காட்டு"
 
-#: controls/Dialog.qml:436
+#: controls/Dialog.qml:442
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
 msgstr "மூடு"
 
-#: controls/GlobalDrawer.qml:309
+#: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "பின்னே"
 
-#: controls/GlobalDrawer.qml:618
+#: controls/GlobalDrawer.qml:615
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "ஓரப்பட்டையை மூடு"
 
-#: controls/GlobalDrawer.qml:623
+#: controls/GlobalDrawer.qml:620
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "ஓரப்பட்டையை திற"

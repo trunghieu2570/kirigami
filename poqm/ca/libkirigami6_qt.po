@@ -121,22 +121,22 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "Mostra l'ajuda contextual"
 
-#: controls/Dialog.qml:436
+#: controls/Dialog.qml:442
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
 msgstr "Tanca"
 
-#: controls/GlobalDrawer.qml:309
+#: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Enrere"
 
-#: controls/GlobalDrawer.qml:618
+#: controls/GlobalDrawer.qml:615
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Tanca la barra lateral"
 
-#: controls/GlobalDrawer.qml:623
+#: controls/GlobalDrawer.qml:620
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Obre la barra lateral"

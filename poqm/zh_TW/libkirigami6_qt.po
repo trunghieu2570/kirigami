@@ -118,22 +118,22 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "顯示內文說明"
 
-#: controls/Dialog.qml:436
+#: controls/Dialog.qml:442
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
 msgstr "關閉"
 
-#: controls/GlobalDrawer.qml:309
+#: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "返回"
 
-#: controls/GlobalDrawer.qml:618
+#: controls/GlobalDrawer.qml:615
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "關閉側邊欄"
 
-#: controls/GlobalDrawer.qml:623
+#: controls/GlobalDrawer.qml:620
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "開啟側邊欄"

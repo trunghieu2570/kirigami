@@ -140,7 +140,7 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr ""
 
-#: controls/Dialog.qml:436
+#: controls/Dialog.qml:442
 #, fuzzy
 #| msgctxt "OverlayDrawer|"
 #| msgid "Close"
@@ -148,17 +148,17 @@ msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
 msgstr "बंद करें"
 
-#: controls/GlobalDrawer.qml:309
+#: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "पीछे"
 
-#: controls/GlobalDrawer.qml:618
+#: controls/GlobalDrawer.qml:615
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "बाजूपट्टी बंद करें"
 
-#: controls/GlobalDrawer.qml:623
+#: controls/GlobalDrawer.qml:620
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"

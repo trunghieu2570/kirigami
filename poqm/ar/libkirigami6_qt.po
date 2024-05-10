@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-03-31 12:02+0400\n"
+"PO-Revision-Date: 2024-05-09 09:54+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -114,25 +114,22 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "اعرض المساعدة السياقية"
 
-#: controls/Dialog.qml:436
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
+#: controls/Dialog.qml:442
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
-msgstr "أغلق القائمة"
+msgstr "أغلق"
 
-#: controls/GlobalDrawer.qml:309
+#: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "عُد"
 
-#: controls/GlobalDrawer.qml:618
+#: controls/GlobalDrawer.qml:615
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "أغلق الشريط الجانبي"
 
-#: controls/GlobalDrawer.qml:623
+#: controls/GlobalDrawer.qml:620
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "افتح الشريط الجانبي"
