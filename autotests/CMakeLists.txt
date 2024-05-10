@@ -9,7 +9,7 @@ target_link_libraries(qmltest PRIVATE Qt6::Qml Qt6::QuickTest)
 if (BUILD_SHARED_LIBS)
     target_link_libraries(qmltest PRIVATE Kirigami)
 else()
-    target_link_libraries(qmltest PRIVATE Kirigamiplugin KirigamiPrivatePlugin)
+    target_link_libraries(qmltest PRIVATE Kirigamiplugin)
 endif()
 
 macro(kirigami_add_tests)
@@ -59,7 +59,6 @@ kirigami_add_tests(
     tst_scrollablepage.qml
     tst_spellcheck.qml
     tst_theme.qml
-    tst_typeshelper.qml
 
     mobile/tst_pagerow.qml
 

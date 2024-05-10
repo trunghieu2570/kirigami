@@ -338,8 +338,6 @@ ecm_add_qml_module(KirigamiPrivatePlugin
 target_sources(KirigamiPrivatePlugin PRIVATE
     copyhelper.cpp
     copyhelper.h
-    typeshelper.cpp
-    typeshelper.h
 )
 
 target_link_libraries(KirigamiPrivatePlugin PRIVATE Qt6::Gui)
