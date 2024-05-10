@@ -105,43 +105,31 @@ Kirigami.Dialog {
      * The padding around the content, within te scroll area.
      *
      * Default is `Kirigami.Units.largeSpacing`.
-     *
-     * @deprecated Use padding instead
      */
     property real contentPadding: Kirigami.Units.largeSpacing
 
     /**
      * The top padding of the content, within the scroll area.
-     *
-     * @deprecated Use topPadding instead
      */
     property real contentTopPadding: contentPadding
 
     /**
      * The bottom padding of the content, within the scroll area.
-     *
-     * @deprecated Use bottomPadding instead
      */
     property real contentBottomPadding: footer.padding === 0 ? contentPadding : 0 // add bottom padding if there is no footer
 
     /**
      * The left padding of the content, within the scroll area.
-     *
-     * @deprecated Use leftPadding instead
      */
     property real contentLeftPadding: contentPadding
 
     /**
      * The right padding of the content, within the scroll area.
-     *
-     * @deprecated Use rightPadding instead.
      */
     property real contentRightPadding: contentPadding
 
     /**
      * This property holds the icon name used by the PromptDialog.
-     *
-     * By default this uses an icon name based on the dialogType value.
      */
     property string iconName: switch (dialogType) {
     case Kirigami.PromptDialog.Success:
@@ -156,49 +144,53 @@ Kirigami.Dialog {
         return "";
     }
 
-    padding: contentPadding
+    padding: 0
     implicitWidth: Math.min(preferredWidth, maximumWidth) + leftPadding + rightPadding
     preferredWidth: Kirigami.Units.gridUnit * 18
 
     header: null
 
-    topPadding: contentTopPadding
-    leftPadding: contentLeftPadding
-    rightPadding: contentRightPadding
-    bottomPadding: contentBottomPadding
+    Kirigami.Padding {
+        id: wrapper
 
-    contentItem: RowLayout {
-        spacing: Kirigami.Units.largeSpacing
+        topPadding: root.contentTopPadding
+        leftPadding: root.contentLeftPadding
+        rightPadding: root.contentRightPadding
+        bottomPadding: root.contentBottomPadding
 
-        Kirigami.Icon {
-            source: root.iconName
-            visible: root.iconName.length > 0
+        contentItem: RowLayout {
+            spacing: Kirigami.Units.largeSpacing
 
-            Layout.preferredWidth: Kirigami.Units.iconSizes.huge
-            Layout.preferredHeight: Kirigami.Units.iconSizes.huge
-            Layout.alignment: Qt.AlignTop
-        }
+            Kirigami.Icon {
+                source: root.iconName
+                visible: root.iconName.length > 0
 
-        ColumnLayout {
-            id: mainLayout
-
-            spacing: Kirigami.Units.smallSpacing
-
-            Layout.fillWidth: true
-
-            Kirigami.Heading {
-                text: root.title
-                visible: root.title.length > 0
-                elide: QQC2.Label.ElideRight
-                wrapMode: Text.WordWrap
-                Layout.fillWidth: true
+                Layout.preferredWidth: Kirigami.Units.iconSizes.huge
+                Layout.preferredHeight: Kirigami.Units.iconSizes.huge
+                Layout.alignment: Qt.AlignTop
             }
 
-            Kirigami.SelectableLabel {
-                text: root.subtitle
-                wrapMode: TextEdit.Wrap
-                visible: text.length > 0
+            ColumnLayout {
+                id: mainLayout
+
+                spacing: Kirigami.Units.smallSpacing
+
                 Layout.fillWidth: true
+
+                Kirigami.Heading {
+                    text: root.title
+                    visible: root.title.length > 0
+                    elide: QQC2.Label.ElideRight
+                    wrapMode: Text.WordWrap
+                    Layout.fillWidth: true
+                }
+
+                Kirigami.SelectableLabel {
+                    text: root.subtitle
+                    wrapMode: TextEdit.Wrap
+                    visible: text.length > 0
+                    Layout.fillWidth: true
+                }
             }
         }
     }
