@@ -174,7 +174,7 @@ endif()
 ecm_install_po_files_as_qm(poqm)
 
 include(ECMFeatureSummary)
-ecm_feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+ecm_feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 configure_file(qmllint.ini.in ${CMAKE_SOURCE_DIR}/.qmllint.ini)
 
