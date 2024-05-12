@@ -124,6 +124,9 @@ Item {
             verticalCenter: parent.verticalCenter
         }
 
+        // Switch off here as this is expected to be set in the base component.
+        Accessible.ignored: true
+
         text: root.title
         color: root.color
         font: root.font
