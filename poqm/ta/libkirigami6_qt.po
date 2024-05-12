@@ -112,7 +112,7 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "சூழல்சார் உதவியைக் காட்டு"
 
-#: controls/Dialog.qml:442
+#: controls/Dialog.qml:446
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
 msgstr "மூடு"

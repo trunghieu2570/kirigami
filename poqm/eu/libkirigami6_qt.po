@@ -118,7 +118,7 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "Erakutsi testuinguru laguntza"
 
-#: controls/Dialog.qml:442
+#: controls/Dialog.qml:446
 #, fuzzy
 #| msgctxt "PageRowGlobalToolBarUI|"
 #| msgid "Close menu"

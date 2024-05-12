@@ -137,7 +137,7 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr ""
 
-#: controls/Dialog.qml:442
+#: controls/Dialog.qml:446
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
 msgstr ""

@@ -121,7 +121,7 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "Mostra l'ajuda contextual"
 
-#: controls/Dialog.qml:442
+#: controls/Dialog.qml:446
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
 msgstr "Tanca"
