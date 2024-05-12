@@ -30,8 +30,6 @@ if (NOT ${BUILD_SHARED_LIBS})
     set(BUILD_EXAMPLES OFF)
 endif()
 
-# Make CPack available to easy generate binary packages
-include(CPack)
 include(FeatureSummary)
 include(KDEInstallDirs)
 find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Core Quick Gui Svg QuickControls2 Concurrent ShaderTools)
