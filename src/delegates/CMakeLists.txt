@@ -26,4 +26,4 @@ if (NOT BUILD_SHARED_LIBS)
     install(TARGETS KirigamiDelegatesplugin EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 endif()
 
-install(TARGETS KirigamiDelegates EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
+install(TARGETS KirigamiDelegates EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
