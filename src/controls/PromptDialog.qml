@@ -177,19 +177,23 @@ Kirigami.Dialog {
 
                 Layout.fillWidth: true
 
-                Kirigami.Heading {
-                    text: root.title
-                    visible: root.title.length > 0
-                    elide: QQC2.Label.ElideRight
-                    wrapMode: Text.WordWrap
-                    Layout.fillWidth: true
-                }
+                ColumnLayout {
+                    spacing: 0
 
-                Kirigami.SelectableLabel {
-                    text: root.subtitle
-                    wrapMode: TextEdit.Wrap
-                    visible: text.length > 0
-                    Layout.fillWidth: true
+                    Kirigami.Heading {
+                        text: root.title
+                        visible: root.title.length > 0
+                        elide: QQC2.Label.ElideRight
+                        wrapMode: Text.WordWrap
+                        Layout.fillWidth: true
+                    }
+
+                    Kirigami.SelectableLabel {
+                        text: root.subtitle
+                        wrapMode: TextEdit.Wrap
+                        visible: text.length > 0
+                        Layout.fillWidth: true
+                    }
                 }
             }
         }
