@@ -23,6 +23,18 @@ TestCase {
     Component { id: sizeOnlyIcon; Kirigami.Icon { width: 50; height: 50 } }
     Component { id: sizeSourceIcon; Kirigami.Icon { width: 50; height: 50; source: "document-new" } }
     Component { id: minimalSizeIcon; Kirigami.Icon { width: 1; height: 1; source: "document-new" } }
+    Component {
+        id: absolutePathIcon;
+        Kirigami.Icon {
+            id: icon
+            width: 50;
+            height: 50;
+            source: Qt.resolvedUrl("stop-icon.svg")
+        }
+    }
+    Kirigami.ImageColors {
+        id: imageColors
+    }
 
     function test_create_data() {
         return [
@@ -41,5 +53,18 @@ TestCase {
         var icon = createTemporaryObject(data.component, testCase)
         verify(icon)
         verify(waitForRendering(icon))
+    }
+
+    function test_absolutepath_recoloring() {
+        var icon = createTemporaryObject(absolutePathIcon, testCase)
+        verify(icon)
+        verify(waitForRendering(icon))
+
+        var image = icon.grabToImage(function(result) {
+            // Access pixel data of the captured image
+            imageColors.source = result.image
+            imageColors.update()
+        })
+        tryCompare(imageColors, "dominant", "#2196f3")
     }
 }

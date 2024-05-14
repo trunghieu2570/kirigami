@@ -536,14 +536,11 @@ QImage Icon::findIcon(const QSize &size)
         }
 
         QIcon icon;
-        const bool isPath = iconSource.contains(QLatin1String("/"));
-        if (isPath) {
-            icon = QIcon(iconSource);
-        } else {
-            const QColor tintColor =
-                !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor()) : m_color;
-            icon = m_theme->iconFromTheme(iconSource, tintColor);
-        }
+
+        const QColor tintColor =
+            !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor()) : m_color;
+        icon = m_theme->iconFromTheme(iconSource, tintColor);
+
         if (!icon.isNull()) {
             img = iconPixmap(icon);
             setStatus(Ready);
