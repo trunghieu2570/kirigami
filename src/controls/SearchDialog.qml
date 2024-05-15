@@ -118,19 +118,6 @@ QQC2.Dialog {
 
     modal: true
 
-    background: Kirigami.ShadowedRectangle {
-        id: rect
-        Kirigami.Theme.colorSet: Kirigami.Theme.View
-        Kirigami.Theme.inherit: false
-        color: Kirigami.Theme.backgroundColor
-        radius: Kirigami.Units.cornerRadius
-        shadow {
-            size: radius * 2
-            color: Qt.rgba(0, 0, 0, 0.3)
-            yOffset: 1
-        }
-    }
-
     onOpened: {
         searchField.forceActiveFocus();
         searchField.text = "";
