@@ -38,7 +38,7 @@ import "private" as P
  *         anchors.centerIn: parent
  *         width: parent.width - (Kirigami.Units.largeSpacing * 4)
  *
- *         visible: listView.count === 0
+ *         opacity: listView.count === 0 ? 1 : 0
  *
  *         text: "There are no items in this list"
  *     }
@@ -57,7 +57,7 @@ import "private" as P
  *         anchors.centerIn: parent
  *         width: parent.width - (Kirigami.Units.largeSpacing * 4)
  *
- *         visible: listView.count === 0
+ *         opacity: listView.count === 0 ? 1 : 0
  *
  *         text: "Add an item to proceed"
  *
@@ -84,7 +84,7 @@ import "private" as P
  *         anchors.centerIn: parent
  *         width: parent.width - (Kirigami.Units.largeSpacing * 4)
  *
- *         visible: root.networkConnected
+ *         opacity: root.networkConnected ? 0 : 1
  *
  *         icon.name: "network-disconnect"
  *         text: "Unable to load content"
@@ -105,7 +105,7 @@ import "private" as P
  *         anchors.centerIn: parent
  *         width: parent.width - (Kirigami.Units.largeSpacing * 4)
  *
- *         visible: root.loading
+ *         opacity: root.loading ? 0 : 1
  *
  *         helpfulAction: Kirigami.Action {
  *             icon.name: "list-add"
@@ -216,6 +216,14 @@ ColumnLayout {
 //END properties
 
     spacing: Kirigami.Units.largeSpacing
+
+    visible: opacity > 0
+    Behavior on opacity {
+        NumberAnimation {
+            duration: Kirigami.Units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+    }
 
     Kirigami.Icon {
         visible: source !== undefined

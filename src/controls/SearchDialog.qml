@@ -180,7 +180,7 @@ QQC2.Dialog {
                     anchors.centerIn: parent
                     width: parent.width - Kirigami.Units.gridUnit * 4
                     icon.name: 'system-search-symbolic'
-                    visible: listView.count === 0 && text.length > 0
+                    opacity: listView.count === 0 && text.length > 0 ? 1 : 0
                 }
             }
         }
