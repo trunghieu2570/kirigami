@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kirigami\n"
-"PO-Revision-Date: 2024-03-25 11:02+0100\n"
+"PO-Revision-Date: 2024-05-18 16:02+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: controls/AboutItem.qml:163
 #, qt-format
@@ -119,12 +119,9 @@ msgid "Show Contextual Help"
 msgstr "Erakutsi testuinguru laguntza"
 
 #: controls/Dialog.qml:446
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
-msgstr "Itxi menua"
+msgstr "Itxi"
 
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
