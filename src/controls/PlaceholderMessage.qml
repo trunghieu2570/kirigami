@@ -217,6 +217,21 @@ ColumnLayout {
 
     spacing: Kirigami.Units.largeSpacing
 
+    Component.onCompleted: _announce();
+    onVisibleChanged: {
+        _announce();
+    }
+    function _announce()
+    {
+        if (visible && Accessible.announce) {
+            // Accessible.announce was added in Qt 6.8.0
+            if (root.text.length > 0)
+                Accessible.announce(root.text);
+            if (root.explanation.length > 0)
+                Accessible.announce(root.explanation);
+        }
+    }
+
     Kirigami.Icon {
         visible: source !== undefined
         opacity: 0.5
