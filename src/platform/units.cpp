@@ -34,7 +34,7 @@ public:
     explicit UnitsPrivate(Units *units)
         // Cache font so we don't have to go through QVariant and property every time
         : fontMetrics(QFontMetricsF(QGuiApplication::font()))
-        , gridUnit(std::ceil(fontMetrics.height()))
+        , gridUnit(18)
         , smallSpacing(4)
         , mediumSpacing(6)
         , largeSpacing(8)
@@ -279,8 +279,6 @@ bool Units::eventFilter([[maybe_unused]] QObject *watched, QEvent *event)
             return false;
         }
 
-        d->gridUnit = std::ceil(d->fontMetrics.height());
-        Q_EMIT gridUnitChanged();
         Q_EMIT d->iconSizes->sizeForLabelsChanged();
     }
     return false;
