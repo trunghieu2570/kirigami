@@ -91,6 +91,7 @@ Kirigami.AbstractCard {
 
             onToggled: checked => {
                 root.checked = checked;
+                root.toggled(checked);
             }
         }
     }
