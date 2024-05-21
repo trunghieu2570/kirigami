@@ -137,14 +137,19 @@ QQC2.Dialog {
             Layout.margins: Kirigami.Units.smallSpacing
 
             Keys.onDownPressed: {
+                const listViewHadFocus = listView.activeFocus;
                 listView.forceActiveFocus();
                 if (listView.currentIndex < listView.count - 1) {
-                    listView.currentIndex++;
+                    // don't move to the next entry when we just changed focus from the search field to the list view
+                    if (listViewHadFocus) {
+                        listView.currentIndex++;
+                    }
                 } else {
                     listView.currentIndex = 0;
                 }
             }
             Keys.onUpPressed: {
+                listView.forceActiveFocus();
                 if (listView.currentIndex === 0) {
                     listView.currentIndex = listView.count - 1;
                 } else {
