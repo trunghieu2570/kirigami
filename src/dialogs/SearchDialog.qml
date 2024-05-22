@@ -156,6 +156,21 @@ QQC2.Dialog {
                     listView.currentIndex--;
                 }
             }
+            Keys.onPressed: (event) => {
+                switch (event.key) {
+                    case Qt.Key_PageDown:
+                        listView.forceActiveFocus();
+                        listView.currentIndex = Math.min(listView.count - 1, listView.currentIndex + Math.floor(listView.height / listView.currentItem.height));
+                        event.accepted = true;
+                        break;
+                    case Qt.Key_PageUp:
+                        listView.forceActiveFocus();
+                        listView.currentIndex = Math.max(0, listView.currentIndex - Math.floor(listView.height / listView.currentItem.height));
+                        event.accepted = true;
+                        break;
+                }
+            }
+
             focusSequence: ""
             autoAccept: false
 
