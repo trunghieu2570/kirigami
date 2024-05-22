@@ -93,6 +93,11 @@ QQC2.Dialog {
     property alias searchFieldRightActions: searchField.rightActions
 
     /**
+     * The placeholder text shown in the (empty) search field.
+     */
+    property alias searchFieldPlaceholderText: searchField.placeholderText
+
+    /**
      * This property holds the number of search results displayed in the internal ListView.
      */
     property alias count: listView.count
