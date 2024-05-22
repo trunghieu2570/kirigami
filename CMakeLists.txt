@@ -13,10 +13,16 @@ if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
    message(FATAL_ERROR "kirigami requires an out of source build. Please create a separate build directory and run 'cmake path_to_kirigami [options]' there.")
 endif()
 
+# per default DBus only enabled on systems that use it
+set(default_disable_dbus ON)
+if(UNIX AND NOT APPLE AND NOT ANDROID)
+    set(default_disable_dbus OFF)
+endif()
+option(DISABLE_DBUS "Build without D-Bus support" ${default_disable_dbus})
+
 option(BUILD_SHARED_LIBS "Build a shared module" ON)
 option(DESKTOP_ENABLED "Build and install The Desktop style" ON)
 option(BUILD_EXAMPLES "Build and install examples" OFF)
-option(DISABLE_DBUS "Build without D-Bus support" OFF)
 option(UBUNTU_TOUCH "Build for Ubuntu Touch" OFF)
 if(DEFINED STATIC_LIBRARY)
     message(FATAL_ERROR "Use the BUILD_SHARED_LIBS=OFF option to build a static library, STATIC_LIBRARY is no longer a supported option")
