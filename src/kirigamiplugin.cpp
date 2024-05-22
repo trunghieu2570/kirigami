@@ -146,9 +146,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(QStringLiteral("AboutItem.qml")), uri, 2, 19, "AboutItem");
     qmlRegisterType(componentUrl(QStringLiteral("NavigationTabBar.qml")), uri, 2, 19, "NavigationTabBar");
     qmlRegisterType(componentUrl(QStringLiteral("NavigationTabButton.qml")), uri, 2, 19, "NavigationTabButton");
-    qmlRegisterType(componentUrl(QStringLiteral("Dialog.qml")), uri, 2, 19, "Dialog");
-    qmlRegisterType(componentUrl(QStringLiteral("MenuDialog.qml")), uri, 2, 19, "MenuDialog");
-    qmlRegisterType(componentUrl(QStringLiteral("PromptDialog.qml")), uri, 2, 19, "PromptDialog");
     qmlRegisterType(componentUrl(QStringLiteral("Chip.qml")), uri, 2, 19, "Chip");
     qmlRegisterType(componentUrl(QStringLiteral("LoadingPlaceholder.qml")), uri, 2, 19, "LoadingPlaceholder");
 

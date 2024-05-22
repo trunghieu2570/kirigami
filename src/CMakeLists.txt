@@ -3,6 +3,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/IncludeStaticDependencies.cmake)
 add_subdirectory(platform)
 add_subdirectory(primitives)
 add_subdirectory(delegates)
+add_subdirectory(dialogs)
 
 add_library(Kirigami)
 add_library(KF6::Kirigami ALIAS Kirigami)
@@ -28,6 +29,7 @@ ecm_add_qml_module(Kirigami URI "org.kde.kirigami" VERSION 2.0
     "org.kde.kirigami.platform"
     "org.kde.kirigami.primitives"
     "org.kde.kirigami.delegates"
+    "org.kde.kirigami.dialogs"
     ${_extra_options}
 )
 
@@ -165,9 +167,6 @@ ecm_target_qml_sources(Kirigami VERSION 2.19 SOURCES
     controls/AboutItem.qml
     controls/NavigationTabBar.qml
     controls/NavigationTabButton.qml
-    controls/Dialog.qml
-    controls/MenuDialog.qml
-    controls/PromptDialog.qml
     controls/Chip.qml
     controls/LoadingPlaceholder.qml
 )
@@ -176,7 +175,6 @@ ecm_target_qml_sources(Kirigami VERSION 2.20 SOURCES
     controls/SelectableLabel.qml
     controls/InlineViewHeader.qml
     controls/ContextualHelpButton.qml
-    controls/SearchDialog.qml
 )
 
 ecm_target_qml_sources(Kirigami PRIVATE PATH private SOURCES
@@ -262,10 +260,10 @@ endif()
 if (NOT BUILD_SHARED_LIBS)
     # Ensure we install the plugin library file as that's required to link
     # against for static builds to work properly
-    target_link_libraries(Kirigamiplugin PRIVATE KirigamiPlatformplugin KirigamiDelegatesplugin KirigamiPrimitivesplugin)
+    target_link_libraries(Kirigamiplugin PRIVATE KirigamiPlatformplugin KirigamiDelegatesplugin KirigamiPrimitivesplugin KirigamiDialogsplugin)
     install(TARGETS Kirigamiplugin EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 else()
-    target_link_libraries(Kirigami PUBLIC KirigamiPlatform PRIVATE KirigamiDelegates KirigamiPrimitives)
+    target_link_libraries(Kirigami PUBLIC KirigamiPlatform PRIVATE KirigamiDelegates KirigamiPrimitives KirigamiDialogs)
 endif()
 
 install(TARGETS Kirigami EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
