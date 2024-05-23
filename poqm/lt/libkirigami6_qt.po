@@ -113,14 +113,6 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr ""
 
-#: controls/Dialog.qml:446
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "Užverti meniu"
-
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
@@ -216,6 +208,14 @@ msgstr "Atverti nuorodą"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Kopijuoti nuorodą į iškarpinę"
+
+#: dialogs/Dialog.qml:446
+#, fuzzy
+#| msgctxt "PageRowGlobalToolBarUI|"
+#| msgid "Close menu"
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "Užverti meniu"
 
 #: platform/settings.cpp:219
 #, qt-format

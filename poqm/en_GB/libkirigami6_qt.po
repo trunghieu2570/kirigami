@@ -112,11 +112,6 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "Show Contextual Help"
 
-#: controls/Dialog.qml:446
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "Close"
-
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
@@ -212,6 +207,11 @@ msgstr "Open link"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Copy Link to Clipboard"
+
+#: dialogs/Dialog.qml:446
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "Close"
 
 #: platform/settings.cpp:219
 #, qt-format

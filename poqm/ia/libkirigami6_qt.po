@@ -112,11 +112,6 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "Monstra adjuta de contexto"
 
-#: controls/Dialog.qml:446
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "Claude"
-
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
@@ -212,6 +207,11 @@ msgstr "Aperi ligamine"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Copia ligame a area de transferentia"
+
+#: dialogs/Dialog.qml:446
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "Claude"
 
 #: platform/settings.cpp:219
 #, qt-format

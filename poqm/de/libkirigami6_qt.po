@@ -114,14 +114,6 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr ""
 
-#: controls/Dialog.qml:446
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "Menü schließen"
-
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
@@ -217,6 +209,14 @@ msgstr "Verknüpfung öffnen"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Verknüpfung in die Zwischenablage kopieren"
+
+#: dialogs/Dialog.qml:446
+#, fuzzy
+#| msgctxt "PageRowGlobalToolBarUI|"
+#| msgid "Close menu"
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "Menü schließen"
 
 #: platform/settings.cpp:219
 #, fuzzy, qt-format

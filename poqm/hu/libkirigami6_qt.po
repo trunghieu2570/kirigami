@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-01-08 09:51+0100\n"
+"PO-Revision-Date: 2024-05-22 10:40+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.07.70\n"
 
 #: controls/AboutItem.qml:163
 #, qt-format
@@ -111,15 +111,7 @@ msgstr "Műveletek"
 #: controls/ContextualHelpButton.qml:50
 msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
-msgstr ""
-
-#: controls/Dialog.qml:446
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "Menü bezárása"
+msgstr "Környezetfüggő súgó megjelenítése"
 
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
@@ -216,6 +208,11 @@ msgstr "Hivatkozás megnyitása"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Hivatkozás másolása a vágólapra"
+
+#: dialogs/Dialog.qml:446
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "Bezárás"
 
 #: platform/settings.cpp:219
 #, qt-format

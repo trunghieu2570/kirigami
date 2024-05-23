@@ -112,11 +112,6 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "சூழல்சார் உதவியைக் காட்டு"
 
-#: controls/Dialog.qml:446
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "மூடு"
-
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
@@ -212,6 +207,11 @@ msgstr "இணைப்பைத் திற"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "இணைப்பை பிடிப்புப்பலகைக்கு நகலெடு"
+
+#: dialogs/Dialog.qml:446
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "மூடு"
 
 #: platform/settings.cpp:219
 #, qt-format

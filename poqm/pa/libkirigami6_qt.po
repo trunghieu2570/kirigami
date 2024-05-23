@@ -112,14 +112,6 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr ""
 
-#: controls/Dialog.qml:446
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "ਮੇਨੂ ਬੰਦ ਕਰੋ"
-
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
@@ -224,6 +216,14 @@ msgstr "ਮੇਨੂ ਖੋਲ੍ਹੋ"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "ਲਿੰਕ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ"
+
+#: dialogs/Dialog.qml:446
+#, fuzzy
+#| msgctxt "PageRowGlobalToolBarUI|"
+#| msgid "Close menu"
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "ਮੇਨੂ ਬੰਦ ਕਰੋ"
 
 #: platform/settings.cpp:219
 #, fuzzy, qt-format

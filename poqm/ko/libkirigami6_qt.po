@@ -112,14 +112,6 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr ""
 
-#: controls/Dialog.qml:446
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "메뉴 닫기"
-
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
@@ -215,6 +207,14 @@ msgstr "링크 열기"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "클립보드에 링크 복사"
+
+#: dialogs/Dialog.qml:446
+#, fuzzy
+#| msgctxt "PageRowGlobalToolBarUI|"
+#| msgid "Close menu"
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "메뉴 닫기"
 
 #: platform/settings.cpp:219
 #, qt-format

@@ -117,12 +117,6 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr ""
 
-#: controls/Dialog.qml:446
-#, fuzzy
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "Lukk meny"
-
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
@@ -218,6 +212,12 @@ msgstr "Opna lenkja"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Kopier lenkja til utklippstavla"
+
+#: dialogs/Dialog.qml:446
+#, fuzzy
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "Lukk meny"
 
 #: platform/settings.cpp:219
 #, fuzzy, qt-format

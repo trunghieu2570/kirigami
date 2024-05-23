@@ -113,14 +113,6 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr ""
 
-#: controls/Dialog.qml:446
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "Sulje valikko"
-
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
@@ -216,6 +208,14 @@ msgstr "Avaa linkki"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Kopioi linkki leikepöydälle"
+
+#: dialogs/Dialog.qml:446
+#, fuzzy
+#| msgctxt "PageRowGlobalToolBarUI|"
+#| msgid "Close menu"
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "Sulje valikko"
 
 #: platform/settings.cpp:219
 #, fuzzy, qt-format

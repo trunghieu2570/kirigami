@@ -140,14 +140,6 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr ""
 
-#: controls/Dialog.qml:446
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "बंद करें"
-
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
@@ -264,6 +256,14 @@ msgstr "खोलें"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr ""
+
+#: dialogs/Dialog.qml:446
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close"
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "बंद करें"
 
 #: platform/settings.cpp:219
 #, fuzzy, qt-format

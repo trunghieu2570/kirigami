@@ -113,11 +113,6 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "Показване на контекстна помощ"
 
-#: controls/Dialog.qml:446
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "Затваряне"
-
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
@@ -213,6 +208,11 @@ msgstr "Отваряне на връзка"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Копиране на връзката в клипборда"
+
+#: dialogs/Dialog.qml:446
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "Затваряне"
 
 #: platform/settings.cpp:219
 #, qt-format

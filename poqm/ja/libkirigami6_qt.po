@@ -114,14 +114,6 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr ""
 
-#: controls/Dialog.qml:446
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "メニューを閉じる"
-
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
@@ -226,6 +218,14 @@ msgstr "メニューを開く"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "リンクをクリップボードにコピー"
+
+#: dialogs/Dialog.qml:446
+#, fuzzy
+#| msgctxt "PageRowGlobalToolBarUI|"
+#| msgid "Close menu"
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "メニューを閉じる"
 
 #: platform/settings.cpp:219
 #, fuzzy, qt-format

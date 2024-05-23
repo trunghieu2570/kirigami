@@ -118,11 +118,6 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "Erakutsi testuinguru laguntza"
 
-#: controls/Dialog.qml:446
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "Itxi"
-
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
@@ -218,6 +213,11 @@ msgstr "Ireki esteka"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Kopiatu esteka arbelera"
+
+#: dialogs/Dialog.qml:446
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "Itxi"
 
 #: platform/settings.cpp:219
 #, qt-format

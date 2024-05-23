@@ -115,14 +115,6 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr ""
 
-#: controls/Dialog.qml:446
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "Bağlamaq"
-
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
@@ -233,6 +225,14 @@ msgstr "Açmaq"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Keçidi mübadilə yaddaşına kopyalayın"
+
+#: dialogs/Dialog.qml:446
+#, fuzzy
+#| msgctxt "OverlayDrawer|"
+#| msgid "Close"
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "Bağlamaq"
 
 #: platform/settings.cpp:219
 #, fuzzy, qt-format

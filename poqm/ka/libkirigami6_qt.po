@@ -112,11 +112,6 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "კონტექსტური დახმარების ჩვენება"
 
-#: controls/Dialog.qml:446
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "დახურვა"
-
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
@@ -212,6 +207,11 @@ msgstr "ბმულის გახსნა"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "ბმულის ბმულის ბაფერში კოპირება"
+
+#: dialogs/Dialog.qml:446
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "დახურვა"
 
 #: platform/settings.cpp:219
 #, qt-format

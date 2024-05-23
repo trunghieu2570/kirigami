@@ -113,11 +113,6 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "Zobrazit kontextovou nápovědu"
 
-#: controls/Dialog.qml:446
-msgctxt "Dialog|@action:button close dialog"
-msgid "Close"
-msgstr "Zavřít"
-
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
 msgid "Back"
@@ -213,6 +208,11 @@ msgstr "Otevřít odkaz"
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Kopírovat odkaz do schránky"
+
+#: dialogs/Dialog.qml:446
+msgctxt "Dialog|@action:button close dialog"
+msgid "Close"
+msgstr "Zavřít"
 
 #: platform/settings.cpp:219
 #, qt-format
