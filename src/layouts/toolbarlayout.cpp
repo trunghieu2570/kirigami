@@ -372,7 +372,7 @@ void ToolBarLayoutPrivate::calculateImplicitSize()
     }
 
     if (!fullDelegate || !iconDelegate || !moreButton) {
-        qCWarning(KirigamiLog) << "ToolBarLayout: Unable to layout, required properties are not set";
+        qCWarning(KirigamiLayoutsLog) << "ToolBarLayout: Unable to layout, required properties are not set";
         return;
     }
 

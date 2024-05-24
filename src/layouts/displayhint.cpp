@@ -4,9 +4,9 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#include "enums.h"
+#include "displayhint.h"
 
-#include "moc_enums.cpp"
+#include "moc_displayhint.cpp"
 
 #include <QVariant>
 

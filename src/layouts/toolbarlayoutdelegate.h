@@ -7,7 +7,7 @@
 #ifndef TOOLBARLAYOUTDELEGATE_H
 #define TOOLBARLAYOUTDELEGATE_H
 
-#include "enums.h"
+#include "displayhint.h"
 #include <QQmlIncubator>
 #include <QQuickItem>
 

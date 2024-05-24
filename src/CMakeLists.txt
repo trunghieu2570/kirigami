@@ -4,6 +4,7 @@ add_subdirectory(platform)
 add_subdirectory(primitives)
 add_subdirectory(delegates)
 add_subdirectory(dialogs)
+add_subdirectory(layouts)
 
 add_library(Kirigami)
 add_library(KF6::Kirigami ALIAS Kirigami)
@@ -30,6 +31,7 @@ ecm_add_qml_module(Kirigami URI "org.kde.kirigami" VERSION 2.0
     "org.kde.kirigami.primitives"
     "org.kde.kirigami.delegates"
     "org.kde.kirigami.dialogs"
+    "org.kde.kirigami.layouts"
     ${_extra_options}
 )
 
@@ -57,34 +59,19 @@ target_include_directories(Kirigami PRIVATE
 )
 
 target_sources(Kirigami PRIVATE
-    columnview.cpp
-    columnview.h
-    columnview_p.h
-    enums.cpp
     enums.h
-    formlayoutattached.cpp
-    formlayoutattached.h
-    headerfooterlayout.cpp
     imagecolors.cpp
     imagecolors.h
     mnemonicattached.cpp
     mnemonicattached.h
     overlayzstackingattached.cpp
     overlayzstackingattached.h
-    padding.cpp
-    padding.h
     pagepool.cpp
     pagepool.h
     scenepositionattached.cpp
     scenepositionattached.h
-    sizegroup.cpp
-    sizegroup.h
     spellcheckattached.cpp
     spellcheckattached.h
-    toolbarlayout.cpp
-    toolbarlayoutdelegate.cpp
-    toolbarlayoutdelegate.h
-    toolbarlayout.h
     wheelhandler.cpp
     wheelhandler.h
 )
@@ -113,10 +100,6 @@ ecm_target_qml_sources(Kirigami SOURCES
 ecm_target_qml_sources(Kirigami VERSION 2.1 SOURCES
     controls/AbstractApplicationItem.qml
     controls/ApplicationItem.qml
-)
-
-ecm_target_qml_sources(Kirigami VERSION 2.3 SOURCES
-    controls/FormLayout.qml
 )
 
 ecm_target_qml_sources(Kirigami VERSION 2.4 SOURCES
@@ -260,10 +243,10 @@ endif()
 if (NOT BUILD_SHARED_LIBS)
     # Ensure we install the plugin library file as that's required to link
     # against for static builds to work properly
-    target_link_libraries(Kirigamiplugin PRIVATE KirigamiPlatformplugin KirigamiDelegatesplugin KirigamiPrimitivesplugin KirigamiDialogsplugin)
+    target_link_libraries(Kirigamiplugin PRIVATE KirigamiPlatformplugin KirigamiDelegatesplugin KirigamiPrimitivesplugin KirigamiDialogsplugin KirigamiLayoutsplugin)
     install(TARGETS Kirigamiplugin EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 else()
-    target_link_libraries(Kirigami PUBLIC KirigamiPlatform PRIVATE KirigamiDelegates KirigamiPrimitives KirigamiDialogs)
+    target_link_libraries(Kirigami PUBLIC KirigamiPlatform PRIVATE KirigamiDelegates KirigamiPrimitives KirigamiDialogs KirigamiLayouts)
 endif()
 
 install(TARGETS Kirigami EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})

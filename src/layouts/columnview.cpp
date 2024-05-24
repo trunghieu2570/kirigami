@@ -106,7 +106,7 @@ QtObject {
     /* clang-format on */
 
     m_instance = component.create();
-    // qCWarning(KirigamiLog)<<component.errors();
+    // qCWarning(KirigamiLayoutsLog)<<component.errors();
     Q_ASSERT(m_instance);
     m_instance->setParent(this);
 
@@ -1320,12 +1320,12 @@ void ColumnView::insertItem(int pos, QQuickItem *item)
 void ColumnView::replaceItem(int pos, QQuickItem *item)
 {
     if (pos < 0 || pos >= m_contentItem->m_items.length()) {
-        qCWarning(KirigamiLog) << "Position" << pos << "passed to ColumnView::replaceItem is out of range.";
+        qCWarning(KirigamiLayoutsLog) << "Position" << pos << "passed to ColumnView::replaceItem is out of range.";
         return;
     }
 
     if (!item) {
-        qCWarning(KirigamiLog) << "Null item passed to ColumnView::replaceItem.";
+        qCWarning(KirigamiLayoutsLog) << "Null item passed to ColumnView::replaceItem.";
         return;
     }
 

@@ -15,7 +15,7 @@ FormLayoutAttached::FormLayoutAttached(QObject *parent)
 {
     m_buddyFor = qobject_cast<QQuickItem *>(parent);
     if (!m_buddyFor) {
-        qWarning(KirigamiLog) << "FormData must be attached to an Item";
+        qWarning(KirigamiLayoutsLog) << "FormData must be attached to an Item";
     }
 }
 
@@ -89,7 +89,8 @@ void FormLayoutAttached::setBuddyFor(QQuickItem *aBuddyFor)
     // position calculation to support more nested buddy.
 
     if (aBuddyFor && aBuddyFor != attachee && aBuddyFor->parentItem() != attachee) {
-        qWarning(KirigamiLog).nospace() << "FormData.buddyFor must be a direct child of the attachee. Attachee: " << attachee << ", buddyFor: " << aBuddyFor;
+        qWarning(KirigamiLayoutsLog).nospace() << "FormData.buddyFor must be a direct child of the attachee. Attachee: " << attachee
+                                               << ", buddyFor: " << aBuddyFor;
         return;
     }
 
