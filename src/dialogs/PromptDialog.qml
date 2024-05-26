@@ -102,7 +102,7 @@ Kirigami.Dialog {
     property string subtitle
 
     /**
-     * The padding around the content, within te scroll area.
+     * The padding around the content, within the scroll area.
      *
      * Default is `Kirigami.Units.largeSpacing`.
      */
