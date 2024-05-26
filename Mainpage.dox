@@ -59,7 +59,7 @@ If you have any questions about Kirigami, feel free to drop by the <a href="http
 
 @code
 import QtQuick
-import QtQuick.Controls as Controls
+import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
 Kirigami.ApplicationWindow {
@@ -140,7 +140,7 @@ Kirigami.ApplicationWindow {
             Kirigami.OverlaySheet {
                 id: sheet
                 onSheetOpenChanged: page.actions.main.checked = sheetOpen
-                Controls.Label {
+                QQC2.Label {
                     wrapMode: Text.WordWrap
                     text: "Lorem ipsum dolor sit amet"
                 }

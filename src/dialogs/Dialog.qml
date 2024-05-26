@@ -45,7 +45,7 @@ import org.kde.kirigami as Kirigami
  * @code{.qml}
  * import QtQuick
  * import QtQuick.Layouts
- * import QtQuick.Controls as Controls
+ * import QtQuick.Controls as QQC2
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.Dialog {
@@ -62,7 +62,7 @@ import org.kde.kirigami as Kirigami
  *         spacing: 0
  *         Repeater {
  *             model: 5
- *             delegate: Controls.CheckDelegate {
+ *             delegate: QQC2.CheckDelegate {
  *                 topPadding: Kirigami.Units.smallSpacing * 2
  *                 bottomPadding: Kirigami.Units.smallSpacing * 2
  *                 Layout.fillWidth: true
@@ -76,6 +76,11 @@ import org.kde.kirigami as Kirigami
  * Example with scrolling (ListView scrolling behaviour is handled by the Dialog):
  *
  * @code{.qml}
+ * import QtQuick
+ * import QtQuick.Layouts
+ * import QtQuick.Controls as QQC2
+ * import org.kde.kirigami as Kirigami
+ *
  * Kirigami.Dialog {
  *     id: scrollableDialog
  *     title: i18n("Select Number")
@@ -87,7 +92,7 @@ import org.kde.kirigami as Kirigami
  *         implicitHeight: Kirigami.Units.gridUnit * 16
  *
  *         model: 100
- *         delegate: Controls.RadioDelegate {
+ *         delegate: QQC2.RadioDelegate {
  *             topPadding: Kirigami.Units.smallSpacing * 2
  *             bottomPadding: Kirigami.Units.smallSpacing * 2
  *             implicitWidth: listView.width
@@ -212,7 +217,6 @@ T.Dialog {
      * Example usage:
      * @code{.qml}
      * import QtQuick
-     * import QtQuick.Controls as Controls
      * import org.kde.kirigami as Kirigami
      *
      * Kirigami.PromptDialog {

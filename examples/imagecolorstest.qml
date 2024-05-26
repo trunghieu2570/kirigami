@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls as Controls
+import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
 RowLayout {
@@ -40,7 +40,7 @@ RowLayout {
             Layout.preferredHeight: 30
             color: palette.average
         }
-        Controls.Button {
+        QQC2.Button {
             text: "Next"
             onClicked: {
                 i = (i + 1) % icons.length
@@ -79,7 +79,7 @@ RowLayout {
             onStatusChanged: imgPalette.update()
         }
         ColumnLayout {
-            Controls.Button {
+            QQC2.Button {
                 text: "Update"
                 onClicked: {
                     image.source = "https://source.unsplash.com/random#" + (new Date()).getMilliseconds()
@@ -131,17 +131,17 @@ RowLayout {
                         implicitHeight: 10
                         color: Kirigami.Theme.highlightColor
                     }
-                    Controls.Label {
+                    QQC2.Label {
                         text: "Lorem Ipsum dolor sit amet"
                         color: Kirigami.Theme.textColor
                     }
                 }
                 RowLayout {
-                    Controls.TextField {
+                    QQC2.TextField {
                         Kirigami.Theme.inherit: true
                         text: "text"
                     }
-                    Controls.Button {
+                    QQC2.Button {
                         Kirigami.Theme.inherit: true
                         text: "Ok"
                     }

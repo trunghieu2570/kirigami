@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: %{CURRENT_YEAR} %{AUTHOR} <%{EMAIL}>
 
 import QtQuick
-import QtQuick.Controls as Controls
+import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.%{APPNAMELC}
@@ -87,7 +87,7 @@ Kirigami.ApplicationWindow {
                 text: root.counter === 0 ? i18n("Hello, World!") : root.counter
             }
 
-            Controls.Button {
+            QQC2.Button {
                 Layout.alignment: Qt.AlignHCenter
                 text: i18n("+ 1")
                 onClicked: root.counter += 1
