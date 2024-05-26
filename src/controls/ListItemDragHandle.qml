@@ -5,7 +5,7 @@
  */
 
 import QtQuick
-import org.kde.kirigami 2 as Kirigami
+import org.kde.kirigami as Kirigami
 
 /**
  * Implements a drag handle supposed to be in items in ListViews to reorder items
@@ -16,10 +16,10 @@ import org.kde.kirigami 2 as Kirigami
  *
  * It is recommended to use DelagateRecycler as base delegate like the following code:
  * @code
- * import QtQuick 2.15
- * import QtQuick.Layouts 1.15
- * import QtQuick.Controls 2.15 as QQC2
- * import org.kde.kirigami 2.19 as Kirigami
+ * import QtQuick
+ * import QtQuick.Layouts
+ * import QtQuick.Controls as QQC2
+ * import org.kde.kirigami as Kirigami
  *   ...
  *   Component {
  *       id: delegateComponent

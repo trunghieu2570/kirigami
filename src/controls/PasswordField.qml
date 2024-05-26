@@ -12,7 +12,7 @@ import org.kde.kirigami as Kirigami
  *
  * Example usage:
  * @code{.qml}
- * import org.kde.kirigami 2.20 as Kirigami
+ * import org.kde.kirigami as Kirigami
  *
  * Kirigami.PasswordField {
  *     id: passwordField

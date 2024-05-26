@@ -27,7 +27,7 @@ import "private" as P
  * Example usage:
  * @code{.qml}
  ** used as a "this view is empty" message
- * import org.kde.kirigami 2.12 as Kirigami
+ * import org.kde.kirigami as Kirigami
  *
  * ListView {
  *     id: listView
@@ -46,7 +46,7 @@ import "private" as P
  * @endcode
  * @code{.qml}
  ** Used as a "here's how to proceed" message
- * import org.kde.kirigami 2.12 as Kirigami
+ * import org.kde.kirigami as Kirigami
  *
  * ListView {
  *     id: listView
@@ -74,7 +74,7 @@ import "private" as P
  * @endcode
  * @code{.qml}
  ** Used as a "there was a problem here" message
- * import org.kde.kirigami 2.12 as Kirigami
+ * import org.kde.kirigami as Kirigami
  *
  * Kirigami.Page {
  *     id: root
@@ -95,7 +95,7 @@ import "private" as P
  * }
  * @endcode
  * @code{.qml}
- * import org.kde.kirigami 2.12 as Kirigami
+ * import org.kde.kirigami as Kirigami
  *
  ** Used as a "Here's what you do next" button
  * Kirigami.Page {

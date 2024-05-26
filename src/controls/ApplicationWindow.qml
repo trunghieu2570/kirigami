@@ -24,7 +24,7 @@ import org.kde.kirigami as Kirigami
  *
  * Example usage:
  * @code
- * import org.kde.kirigami 2.4 as Kirigami
+ * import org.kde.kirigami as Kirigami
  *
  * Kirigami.ApplicationWindow {
  *  [...]

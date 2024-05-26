@@ -43,10 +43,10 @@ import org.kde.kirigami as Kirigami
  * Example for a selection dialog:
  *
  * @code{.qml}
- * import QtQuick 2.15
- * import QtQuick.Layouts 1.15
- * import QtQuick.Controls 2.15 as Controls
- * import org.kde.kirigami 2.19 as Kirigami
+ * import QtQuick
+ * import QtQuick.Layouts
+ * import QtQuick.Controls as Controls
+ * import org.kde.kirigami as Kirigami
  *
  * Kirigami.Dialog {
  *     title: i18n("Dialog")
@@ -211,9 +211,9 @@ T.Dialog {
      *
      * Example usage:
      * @code{.qml}
-     * import QtQuick 2.15
-     * import QtQuick.Controls 2.15 as Controls
-     * import org.kde.kirigami 2.18 as Kirigami
+     * import QtQuick
+     * import QtQuick.Controls as Controls
+     * import org.kde.kirigami as Kirigami
      *
      * Kirigami.PromptDialog {
      *     id: dialog

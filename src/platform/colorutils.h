@@ -38,8 +38,8 @@ public:
      * Returns whether a color is bright or dark.
      *
      * @code{.qml}
-     * import QtQuick 2.0
-     * import org.kde.kirigami 2.12 as Kirigami
+     * import QtQuick
+     * import org.kde.kirigami as Kirigami
      *
      * Kirigami.Heading {
      *     text: {
@@ -76,8 +76,8 @@ public:
      * @param background The color to overlay the foreground on.
      *
      * @code{.qml}
-     * import QtQuick 2.0
-     * import org.kde.kirigami 2.12 as Kirigami
+     * import QtQuick
+     * import org.kde.kirigami as Kirigami
      *
      * Rectangle {
      *     color: Kirigami.ColorUtils.alphaBlend(Qt.rgba(0, 0, 0, 0.5), Qt.rgba(1, 1, 1, 1))
@@ -101,8 +101,8 @@ public:
      * are valid, and will result in extrapolation.
      *
      * @code{.qml}
-     * import QtQuick 2.0
-     * import org.kde.kirigami 2.12 as Kirigami
+     * import QtQuick
+     * import org.kde.kirigami as Kirigami
      *
      * Rectangle {
      *     color: Kirigami.ColorUtils.linearInterpolation("black", "white", 0.5)

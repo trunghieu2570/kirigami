@@ -45,7 +45,7 @@ QQC2.Page {
      * the ContextDrawer on mobile.
      *
      * @code
-     * import org.kde.kirigami 2 as Kirigami
+     * import org.kde.kirigami as Kirigami
      *
      * Kirigami.Page {
      *     actions: [

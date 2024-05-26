@@ -18,7 +18,7 @@ import org.kde.kirigami as Kirigami
  *
  * Example usage:
  * @code
- * import org.kde.kirigami 2.19
+ * import org.kde.kirigami
  *
  * ShadowedImage {
  *     source: 'qrc:/myKoolGearPicture.png'

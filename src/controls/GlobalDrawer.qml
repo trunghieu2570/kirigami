@@ -155,7 +155,7 @@ Kirigami.OverlayDrawer {
      *
      * Example usage:
      * @code
-     * import org.kde.kirigami 2.4 as Kirigami
+     * import org.kde.kirigami as Kirigami
      *
      * Kirigami.ApplicationWindow {
      *  [...]
@@ -178,7 +178,7 @@ Kirigami.OverlayDrawer {
      *
      * Example usage:
      * @code
-     * import org.kde.kirigami 2.4 as Kirigami
+     * import org.kde.kirigami as Kirigami
      *
      * Kirigami.ApplicationWindow {
      *  [...]

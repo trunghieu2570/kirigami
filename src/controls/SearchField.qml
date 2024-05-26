@@ -14,7 +14,7 @@ import org.kde.kirigami as Kirigami
  *
  * Example usage for the search field component:
  * @code
- * import org.kde.kirigami 2.20 as Kirigami
+ * import org.kde.kirigami as Kirigami
  *
  * Kirigami.SearchField {
  *     id: searchField
