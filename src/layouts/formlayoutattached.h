@@ -18,14 +18,15 @@ class QQuickItem;
  * It contains the text labels of fields and information about sections.
  *
  * Some of its properties can be used with other <a href="https://doc.qt.io/qt-6/qml-qtquick-layouts-layout.html">Layout</a> types.
- * @code
- * import org.kde.kirigami 2.3 as Kirigami
+ * @code{.qml}
+ * import org.kde.kirigami as Kirigami
+ *
  * Kirigami.FormLayout {
  *    TextField {
- *       Kirigami.FormData.label: "Label:"
+ *       Kirigami.FormData.label: "User:"
  *    }
  *    TextField {
- *       Kirigami.FormData.label: "Label:"
+ *       Kirigami.FormData.label: "Password:"
  *    }
  * }
  * @endcode
