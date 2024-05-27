@@ -261,7 +261,7 @@ void ImageColors::update()
     }
 }
 
-inline int squareDistance(QRgb color1, QRgb color2)
+static inline int squareDistance(QRgb color1, QRgb color2)
 {
     // https://en.wikipedia.org/wiki/Color_difference
     // Using RGB distance for performance, as CIEDE2000 is too complicated
