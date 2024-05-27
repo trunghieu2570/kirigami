@@ -211,10 +211,12 @@ QQuickItem *ImageColors::sourceItem() const
 void ImageColors::update()
 {
     if (m_futureImageData) {
+        m_futureImageData->disconnect(this, nullptr);
         m_futureImageData->cancel();
         m_futureImageData->deleteLater();
         m_futureImageData = nullptr;
     }
+
     auto runUpdate = [this]() {
         auto sourceImage{m_sourceImage};
         QFuture<ImageData> future = QtConcurrent::run([sourceImage = std::move(sourceImage)]() {
