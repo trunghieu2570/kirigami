@@ -1,5 +1,6 @@
 /*
  *  Copyright 2020 Marco Martin <mart@kde.org>
+ *  Copyright 2024 ivan tkachenko <me@ratijas.tk>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -46,6 +47,39 @@
             ? value                                                                                                                                            \
             : static_cast<Kirigami::Platform::PlatformTheme *>(qmlAttachedPropertiesObject<Kirigami::Platform::PlatformTheme>(this, true))->finally();         \
     }
+
+PaletteSwatch::PaletteSwatch()
+{
+}
+
+PaletteSwatch::PaletteSwatch(qreal ratio, const QColor &color, const QColor &contrastColor)
+    : m_ratio(ratio)
+    , m_color(color)
+    , m_contrastColor(contrastColor)
+{
+}
+
+qreal PaletteSwatch::ratio() const
+{
+    return m_ratio;
+}
+
+const QColor &PaletteSwatch::color() const
+{
+    return m_color;
+}
+
+const QColor &PaletteSwatch::contrastColor() const
+{
+    return m_contrastColor;
+}
+
+bool PaletteSwatch::operator==(const PaletteSwatch &other) const
+{
+    return m_ratio == other.m_ratio //
+        && m_color == other.m_color //
+        && m_contrastColor == other.m_contrastColor;
+}
 
 ImageColors::ImageColors(QObject *parent)
     : QObject(parent)
@@ -383,7 +417,7 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
             g = g / c;
             b = b / c;
             stat.centroid = qRgb(r, g, b);
-            stat.ratio = qreal(stat.colors.count()) / qreal(imageData.m_samples.count());
+            stat.ratio = std::clamp(qreal(stat.colors.count()) / qreal(imageData.m_samples.count()), 0.0, 1.0);
             stat.colors = QList<QRgb>({stat.centroid});
         } // END omp parallel for
 
@@ -429,10 +463,7 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
 #pragma omp parallel for ordered
     for (int i = 0; i < imageData.m_clusters.size(); ++i) {
         const auto &stat = imageData.m_clusters[i];
-        QVariantMap entry;
         const QColor color(stat.centroid);
-        entry[QStringLiteral("color")] = color;
-        entry[QStringLiteral("ratio")] = stat.ratio;
 
         QColor contrast = QColor(255 - color.red(), 255 - color.green(), 255 - color.blue());
         contrast.setHsl(contrast.hslHue(), //
@@ -465,7 +496,6 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
                             contrast.lightness() > 128 ? qMin(contrast.lightness() + 20, 255) : qMax(0, contrast.lightness() - 20));
         }
 
-        entry[QStringLiteral("contrastColor")] = contrast;
 #pragma omp ordered
         { // BEGIN omp ordered
             if (first) {
@@ -484,7 +514,7 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
             if (qGray(color.rgb()) < qGray(imageData.m_closestToBlack.rgb())) {
                 imageData.m_closestToBlack = color;
             }
-            imageData.m_palette << entry;
+            imageData.m_palette << PaletteSwatch(stat.ratio, color, contrast);
         } // END omp ordered
     }
 
@@ -553,7 +583,7 @@ void ImageColors::postProcess(ImageData &imageData) const
     adjustLightness(imageData.m_average);
 }
 
-QVariantList ImageColors::palette() const
+QList<PaletteSwatch> ImageColors::palette() const
 {
     if (m_futureImageData) {
         qCWarning(KirigamiLog) << m_futureImageData->future().isFinished();

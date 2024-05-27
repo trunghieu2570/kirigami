@@ -1,5 +1,6 @@
 /*
  *  Copyright 2020 Marco Martin <mart@kde.org>
+ *  Copyright 2024 ivan tkachenko <me@ratijas.tk>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,6 +32,30 @@
 
 class QTimer;
 
+struct PaletteSwatch {
+    Q_GADGET
+    QML_VALUE_TYPE(imageColorsPaletteSwatch)
+
+    Q_PROPERTY(qreal ratio READ ratio FINAL)
+    Q_PROPERTY(QColor color READ color FINAL)
+    Q_PROPERTY(QColor contrastColor READ contrastColor FINAL)
+
+public:
+    explicit PaletteSwatch();
+    explicit PaletteSwatch(qreal ratio, const QColor &color, const QColor &contrastColor);
+
+    qreal ratio() const;
+    const QColor &color() const;
+    const QColor &contrastColor() const;
+
+    bool operator==(const PaletteSwatch &other) const;
+
+private:
+    qreal m_ratio;
+    QColor m_color;
+    QColor m_contrastColor;
+};
+
 struct ImageData {
     struct colorStat {
         QList<QRgb> colors;
@@ -47,7 +72,7 @@ struct ImageData {
 
     QList<QRgb> m_samples;
     QList<colorStat> m_clusters;
-    QVariantList m_palette;
+    QList<PaletteSwatch> m_palette;
 
     bool m_darkPalette = true;
     QColor m_dominant = Qt::transparent;
@@ -75,7 +100,8 @@ class ImageColors : public QObject
      * * QIcon
      * * Icon name
      *
-     * Note that an Item's color palette will only be extracted once unless you * call `update()`, regardless of how the item hanges.
+     * Note that an Item's color palette will only be extracted once unless you
+     * call `update()`, regardless of how the item hanges.
      */
     Q_PROPERTY(QVariant source READ source WRITE setSource NOTIFY sourceChanged FINAL)
 
@@ -93,7 +119,7 @@ class ImageColors : public QObject
      *
      * \note K-means clustering is used to extract these colors; see https://en.wikipedia.org/wiki/K-means_clustering.
      */
-    Q_PROPERTY(QVariantList palette READ palette NOTIFY paletteChanged FINAL)
+    Q_PROPERTY(QList<PaletteSwatch> palette READ palette NOTIFY paletteChanged FINAL)
 
     /**
      * Information whether the palette is towards a light or dark color
@@ -169,7 +195,7 @@ class ImageColors : public QObject
      * The value to return when palette is not available, e.g. when
      * ImageColors is still computing it or the source is invalid.
      */
-    Q_PROPERTY(QVariantList fallbackPalette MEMBER m_fallbackPalette NOTIFY fallbackPaletteChanged FINAL)
+    Q_PROPERTY(QList<PaletteSwatch> fallbackPalette MEMBER m_fallbackPalette NOTIFY fallbackPaletteChanged FINAL)
 
     /**
      * The value to return when paletteBrightness is not available, e.g. when
@@ -228,7 +254,7 @@ public:
 
     Q_INVOKABLE void update();
 
-    QVariantList palette() const;
+    QList<PaletteSwatch> palette() const;
     ColorUtils::Brightness paletteBrightness() const;
     QColor average() const;
     QColor dominant() const;
@@ -273,7 +299,7 @@ private:
     QFutureWatcher<ImageData> *m_futureImageData = nullptr;
     ImageData m_imageData;
 
-    QVariantList m_fallbackPalette;
+    QList<PaletteSwatch> m_fallbackPalette;
     ColorUtils::Brightness m_fallbackPaletteBrightness;
     QColor m_fallbackAverage;
     QColor m_fallbackDominant;
