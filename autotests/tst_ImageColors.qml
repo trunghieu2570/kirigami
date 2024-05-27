@@ -57,6 +57,41 @@ TestCase {
         }
     }
 
+    Component {
+        id: invisibleWindowComponent
+        Window {
+            visible: false
+
+            readonly property Kirigami.ImageColors imageColors: Kirigami.ImageColors {
+                source: colorArea
+            }
+
+            readonly property alias colorArea: colorArea
+
+            Rectangle {
+                id: colorArea
+                anchors.fill: parent
+                color: "transparent"
+            }
+        }
+    }
+
+    Component {
+        id: noWindowComponent
+        QtObject {
+            readonly property Kirigami.ImageColors imageColors: Kirigami.ImageColors {
+                source: colorArea
+            }
+
+            readonly property Item colorArea: Rectangle {
+                id: colorArea
+                width: 10
+                height: 10
+                color: "transparent"
+            }
+        }
+    }
+
     function test_extractColors(): void {
         const item = createTemporaryObject(colorsComponent, testCase);
         const { colorArea, imageColors, paletteChangedSpy } = item;
@@ -72,5 +107,27 @@ TestCase {
         compare(imageColors.palette[0].color, colorArea.color);
         compare(imageColors.palette[0].contrastColor, "#e6e6e6");
         compare(imageColors.palette[0], item.swatch);
+    }
+
+    function test_invisibleWindow(): void {
+        // Do not attempt to grabToImage on an item whose window is invisible.
+        failOnWarning(/.?/);
+
+        const window = createTemporaryObject(invisibleWindowComponent, this);
+        const { imageColors, colorArea } = window;
+        verify(!window.visible);
+        verify(colorArea.visible);
+
+        imageColors.update();
+    }
+
+    function test_noWindow(): void {
+        // Do not attempt to grabToImage on an item which does not belong to any window.
+        failOnWarning(/.?/);
+
+        const { imageColors, colorArea } = createTemporaryObject(noWindowComponent, this);
+        verify(colorArea.visible);
+
+        imageColors.update();
     }
 }

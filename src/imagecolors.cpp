@@ -195,6 +195,7 @@ void ImageColors::setSourceItem(QQuickItem *source)
             if (m_window) {
                 connect(m_window, &QWindow::visibleChanged, this, &ImageColors::update);
             }
+            update();
         };
 
         connect(m_sourceItem, &QQuickItem::windowChanged, this, syncWindow);
@@ -234,7 +235,7 @@ void ImageColors::update()
         m_futureImageData->setFuture(future);
     };
 
-    if (!m_sourceItem) {
+    if (!m_sourceItem || !m_sourceItem->window() || !m_sourceItem->window()->isVisible()) {
         if (!m_sourceImage.isNull()) {
             runUpdate();
         } else {
