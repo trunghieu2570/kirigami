@@ -181,8 +181,9 @@ void ImageColors::update()
         m_futureImageData = nullptr;
     }
     auto runUpdate = [this]() {
-        QFuture<ImageData> future = QtConcurrent::run([this]() {
-            return generatePalette(m_sourceImage);
+        auto sourceImage{m_sourceImage};
+        QFuture<ImageData> future = QtConcurrent::run([sourceImage = std::move(sourceImage)]() {
+            return generatePalette(sourceImage);
         });
         m_futureImageData = new QFutureWatcher<ImageData>(this);
         connect(m_futureImageData, &QFutureWatcher<ImageData>::finished, this, [this]() {
@@ -313,7 +314,7 @@ void ImageColors::positionColorMP(const decltype(ImageData::m_samples) &samples,
 #endif
 }
 
-ImageData ImageColors::generatePalette(const QImage &sourceImage) const
+ImageData ImageColors::generatePalette(const QImage &sourceImage)
 {
     ImageData imageData;
 
@@ -389,7 +390,7 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage) const
         positionColorMP(imageData.m_samples, imageData.m_clusters, numCore);
     }
 
-    std::sort(imageData.m_clusters.begin(), imageData.m_clusters.end(), [this](const ImageData::colorStat &a, const ImageData::colorStat &b) {
+    std::sort(imageData.m_clusters.begin(), imageData.m_clusters.end(), [](const ImageData::colorStat &a, const ImageData::colorStat &b) {
         return getClusterScore(a) > getClusterScore(b);
     });
 
@@ -490,7 +491,7 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage) const
     return imageData;
 }
 
-double ImageColors::getClusterScore(const ImageData::colorStat &stat) const
+double ImageColors::getClusterScore(const ImageData::colorStat &stat)
 {
     return stat.ratio * ColorUtils::chroma(QColor(stat.centroid));
 }
