@@ -312,7 +312,6 @@ void ImageColors::positionColorMP(const decltype(ImageData::m_samples) &samples,
     std::vector<decltype(ImageData::m_clusters)> tempClusters(numCore, decltype(ImageData::m_clusters){});
 #pragma omp parallel for
     for (int i = 0; i < numCore; ++i) {
-        decltype(ImageData::m_samples) samplePart;
         const auto beginIt = std::next(samples.begin(), numSamplesPerThread * i);
         const auto endIt = i < numCore - 1 ? std::next(samples.begin(), numSamplesPerThread * (i + 1)) : samples.end();
 
