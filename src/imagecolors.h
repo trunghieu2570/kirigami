@@ -30,8 +30,6 @@
 
 #include <platform/colorutils.h>
 
-class QTimer;
-
 struct PaletteSwatch {
     Q_GADGET
     QML_VALUE_TYPE(imageColorsPaletteSwatch)
@@ -293,8 +291,6 @@ private:
     QSharedPointer<QQuickItemGrabResult> m_grabResult;
     QImage m_sourceImage;
     QFutureWatcher<QImage> *m_futureSourceImageData = nullptr;
-
-    QTimer *m_imageSyncTimer;
 
     QFutureWatcher<ImageData> *m_futureImageData = nullptr;
     ImageData m_imageData;

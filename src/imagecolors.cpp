@@ -22,7 +22,6 @@
 #include <QDebug>
 #include <QFutureWatcher>
 #include <QGuiApplication>
-#include <QTimer>
 #include <QtConcurrentRun>
 
 #include "loggingcategory.h"
@@ -84,12 +83,6 @@ bool PaletteSwatch::operator==(const PaletteSwatch &other) const
 ImageColors::ImageColors(QObject *parent)
     : QObject(parent)
 {
-    m_imageSyncTimer = new QTimer(this);
-    m_imageSyncTimer->setSingleShot(true);
-    m_imageSyncTimer->setInterval(100);
-    /* connect(m_imageSyncTimer, &QTimer::timeout, this, [this]() {
-        generatePalette();
-     });*/
 }
 
 ImageColors::~ImageColors()
