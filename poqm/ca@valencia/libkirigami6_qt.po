@@ -217,7 +217,7 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Copia l'enllaç a dins del porta-retalls"
 
-#: dialogs/Dialog.qml:446
+#: dialogs/Dialog.qml:450
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
 msgstr "Tanca"

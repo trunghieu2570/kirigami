@@ -213,7 +213,7 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Kopier lenkja til utklippstavla"
 
-#: dialogs/Dialog.qml:446
+#: dialogs/Dialog.qml:450
 #, fuzzy
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"

@@ -220,7 +220,7 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Salin Tautan ke Papan Klip"
 
-#: dialogs/Dialog.qml:446
+#: dialogs/Dialog.qml:450
 #, fuzzy
 #| msgctxt "OverlayDrawer|"
 #| msgid "Close drawer"

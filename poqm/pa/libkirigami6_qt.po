@@ -217,7 +217,7 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "ਲਿੰਕ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ"
 
-#: dialogs/Dialog.qml:446
+#: dialogs/Dialog.qml:450
 #, fuzzy
 #| msgctxt "PageRowGlobalToolBarUI|"
 #| msgid "Close menu"
