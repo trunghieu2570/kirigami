@@ -13,13 +13,6 @@ if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
    message(FATAL_ERROR "kirigami requires an out of source build. Please create a separate build directory and run 'cmake path_to_kirigami [options]' there.")
 endif()
 
-# per default DBus only enabled on systems that use it
-set(default_disable_dbus ON)
-if(UNIX AND NOT APPLE AND NOT ANDROID)
-    set(default_disable_dbus OFF)
-endif()
-option(DISABLE_DBUS "Build without D-Bus support" ${default_disable_dbus})
-
 option(BUILD_SHARED_LIBS "Build a shared module" ON)
 option(DESKTOP_ENABLED "Build and install The Desktop style" ON)
 option(BUILD_EXAMPLES "Build and install examples" OFF)
@@ -126,9 +119,16 @@ install(
     COMPONENT Devel
 )
 
-#use dbus on linux, bsd etc, but not android and apple stuff
-if (UNIX AND NOT ANDROID AND NOT(APPLE) AND NOT(DISABLE_DBUS))
-    find_package(Qt6DBus)
+# shall we use DBus?
+# enabled per default on Linux & BSD systems
+set(USE_DBUS_DEFAULT OFF)
+if(UNIX AND NOT APPLE AND NOT ANDROID AND NOT HAIKU)
+    set(USE_DBUS_DEFAULT ON)
+endif()
+option(USE_DBUS "Build components using DBus" ${USE_DBUS_DEFAULT})
+if(USE_DBUS)
+    find_package(Qt6DBus ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE)
+    set(WITH_DBUS ON)
     add_definitions(-DKIRIGAMI_ENABLE_DBUS)
 endif()
 

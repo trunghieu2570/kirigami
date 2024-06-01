@@ -36,8 +36,7 @@ target_sources(KirigamiPlatform PRIVATE
 
 set(libkirigami_extra_sources "")
 
-#use dbus on linux, bsd etc, but not android and apple stuff
-if (UNIX AND NOT ANDROID AND NOT(APPLE) AND NOT(DISABLE_DBUS))
+if (WITH_DBUS)
     set_source_files_properties(org.freedesktop.portal.Settings.xml PROPERTIES INCLUDE dbustypes.h)
     qt_add_dbus_interface(libkirigami_extra_sources org.freedesktop.portal.Settings.xml settings_interface)
     set(LIBKIRIGAMKI_EXTRA_LIBS Qt6::DBus)
