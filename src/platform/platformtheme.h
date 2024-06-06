@@ -206,7 +206,7 @@ public:
         View = 0, /** Color set for item views, usually the lightest of all */
         Window, /** Default Color set for windows and "chrome" areas */
         Button, /** Color set used by buttons */
-        Selection, /** Color set used by selectged areas */
+        Selection, /** Color set used by selected areas */
         Tooltip, /** Color set used by tooltips */
         Complementary, /** Color set meant to be complementary to Window: usually is a dark theme for light themes */
         Header, /** Color set to be used by heading areas of applications, such as toolbars */
