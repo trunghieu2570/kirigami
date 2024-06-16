@@ -4,13 +4,14 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
+import QtQuick.Templates as T
 
 Flickable {
     id: flickable
     property real cellWidth: 60
     property real cellHeight: 60
-    readonly property QQC2.Button enableSliderButton: enableSliderButton
-    readonly property QQC2.Slider slider: slider
+    readonly property T.Button enableSliderButton: enableSliderButton
+    readonly property T.Slider slider: slider
     implicitWidth: cellWidth * 10 + leftMargin + rightMargin
     implicitHeight: cellHeight * 10 + topMargin + bottomMargin
     contentWidth: contentItem.childrenRect.width
