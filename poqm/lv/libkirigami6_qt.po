@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-02-03 17:47+0200\n"
+"PO-Revision-Date: 2024-05-29 16:22+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -12,7 +12,7 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: controls/AboutItem.qml:163
 #, qt-format
@@ -111,7 +111,7 @@ msgstr "Darbības"
 #: controls/ContextualHelpButton.qml:50
 msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
-msgstr ""
+msgstr "Rādīt kontekstuālu palīdzību"
 
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
@@ -131,7 +131,7 @@ msgstr "Atvērt sānu joslu"
 #: controls/LoadingPlaceholder.qml:54
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
-msgstr "Ielādē..."
+msgstr "Ielādē…"
 
 #: controls/PasswordField.qml:42
 msgctxt "PasswordField|"
@@ -161,7 +161,7 @@ msgstr "Atvērt izvēlni"
 #: controls/SearchField.qml:86
 msgctxt "SearchField|"
 msgid "Search…"
-msgstr "Meklēt..."
+msgstr "Meklēt…"
 
 #: controls/SearchField.qml:88
 msgctxt "SearchField|"
@@ -210,12 +210,9 @@ msgid "Copy Link to Clipboard"
 msgstr "Kopēt saiti starpliktuvē"
 
 #: dialogs/Dialog.qml:450
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
-msgstr "Aizvērt izvēlni"
+msgstr "Aizvērt"
 
 #: platform/settings.cpp:219
 #, qt-format
