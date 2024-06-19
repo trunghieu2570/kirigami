@@ -1618,7 +1618,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
             }
         }
 
-        if ((!keepMouseGrab() && item->keepMouseGrab()) || item->property("preventStealing").toBool()) {
+        if ((!keepMouseGrab() && (item->keepMouseGrab() || item->keepTouchGrab())) || item->property("preventStealing").toBool()) {
             m_contentItem->snapToItem();
             m_oldMouseX = pos.x();
             m_oldMouseY = pos.y();
