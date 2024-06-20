@@ -1,8 +1,8 @@
-# Stefan Asserhäll <stefan.asserhall@gmail.com>, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-08-03 10:08+0200\n"
+"PO-Revision-Date: 2024-06-19 02:42+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: controls/AboutItem.qml:163
 #, qt-format
@@ -33,15 +33,12 @@ msgstr "Engagera dig"
 #: controls/AboutItem.qml:228
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Ge bidrag"
 
 #: controls/AboutItem.qml:245
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Report Bug…"
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "Rapportera fel…"
+msgstr "Rapportera ett fel"
 
 #: controls/AboutItem.qml:258
 msgctxt "AboutItem|"
@@ -113,7 +110,7 @@ msgstr "Åtgärder"
 #: controls/ContextualHelpButton.qml:50
 msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
-msgstr ""
+msgstr "Visa sammanhangsberoende hjälp"
 
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
@@ -141,36 +138,24 @@ msgid "Password"
 msgstr "Lösenord"
 
 #: controls/PasswordField.qml:45
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Hide Password"
-msgstr "Lösenord"
+msgstr "Dölj lösenord"
 
 #: controls/PasswordField.qml:45
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Show Password"
-msgstr "Lösenord"
+msgstr "Visa lösenord"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:83
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
-msgstr "Stäng"
+msgstr "Stäng meny"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:83
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Open"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
-msgstr "Öppna"
+msgstr "Visa meny"
 
 #: controls/SearchField.qml:86
 msgctxt "SearchField|"
@@ -185,7 +170,7 @@ msgstr "Sök"
 #: controls/SearchField.qml:99
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr ""
+msgstr "Rensa sökning"
 
 #: controls/templates/OverlayDrawer.qml:128
 msgctxt "OverlayDrawer|"
@@ -211,15 +196,12 @@ msgstr "Navigera framåt"
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link %1"
-msgstr ""
+msgstr "Öppna länk %1"
 
 #: controls/UrlButton.qml:35
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Open"
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
-msgstr "Öppna"
+msgstr "Öppna länk"
 
 #: controls/UrlButton.qml:58
 msgctxt "UrlButton|"
@@ -227,33 +209,24 @@ msgid "Copy Link to Clipboard"
 msgstr "Kopiera länk till klippbordet"
 
 #: dialogs/Dialog.qml:450
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
 msgstr "Stäng"
 
 #: platform/settings.cpp:219
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "KDE Frameworks %1"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "KDE Ramverk %1"
 
 #: platform/settings.cpp:221
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "The %1 windowing system"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "Fönsterhanteringssystemet %1"
 
 #: platform/settings.cpp:222
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "Qt %2 (built against %3)"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (byggt för %3)"
