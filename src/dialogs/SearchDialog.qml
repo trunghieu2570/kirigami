@@ -7,7 +7,6 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
-import org.kde.kitemmodels
 
 /**
  * A dialog to let's you do a global search accross your applications
