@@ -103,7 +103,7 @@ QQC2.TextField {
     }
 
     QQC2.ToolTip {
-        visible: focusShortcut.nativeText.length > 0 && root.text.length === 0 && !rightActionsRow.hovered && !leftActionsRow.hovered && root.hovered
+        visible: focusShortcut.nativeText.length > 0 && root.text.length === 0 && root.hovered
         text: focusShortcut.nativeText
     }
 
@@ -141,7 +141,7 @@ QQC2.TextField {
         Repeater {
             model: root.leftActions
             Kirigami.Icon {
-                id: delegate
+                id: leftIconDelegate
 
                 required property T.Action modelData
 
@@ -151,19 +151,19 @@ QQC2.TextField {
                 anchors.verticalCenter: parent.verticalCenter
 
                 source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
-                active: actionArea.containsPress || actionArea.activeFocus
+                active: leftActionArea.containsPress || leftActionArea.activeFocus
                 visible: !(modelData instanceof Kirigami.Action) || modelData.visible
                 enabled: modelData.enabled
 
                 ActionIconMouseArea {
-                    id: actionArea
-                    Accessible.name: delegate.modelData.text
-                    onClicked: mouse => delegate.modelData.trigger()
+                    id: leftActionArea
+                    Accessible.name: leftIconDelegate.modelData.text
+                    onClicked: mouse => leftIconDelegate.modelData.trigger()
                 }
 
                 QQC2.ToolTip {
-                    visible: (actionArea.containsMouse || actionArea.activeFocus) && (delegate.modelData.text.length > 0)
-                    text: delegate.modelData.text
+                    visible: (leftActionArea.containsMouse || leftActionArea.activeFocus) && (leftIconDelegate.modelData.text.length > 0)
+                    text: leftIconDelegate.modelData.text
                 }
             }
         }
@@ -184,7 +184,7 @@ QQC2.TextField {
         Repeater {
             model: root.rightActions
             Kirigami.Icon {
-                id: delegate
+                id: rightIconDelegate
 
                 required property T.Action modelData
 
@@ -194,19 +194,19 @@ QQC2.TextField {
                 anchors.verticalCenter: parent.verticalCenter
 
                 source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
-                active: actionArea.containsPress || actionArea.activeFocus
+                active: rightActionArea.containsPress || rightActionArea.activeFocus
                 visible: !(modelData instanceof Kirigami.Action) || modelData.visible
                 enabled: modelData.enabled
 
                 ActionIconMouseArea {
-                    id: actionArea
-                    Accessible.name: delegate.modelData.text
-                    onClicked: mouse => delegate.modelData.trigger()
+                    id: rightActionArea
+                    Accessible.name: rightIconDelegate.modelData.text
+                    onClicked: mouse => rightIconDelegate.modelData.trigger()
                 }
 
                 QQC2.ToolTip {
-                    visible: (actionArea.containsMouse || actionArea.activeFocus) && (delegate.modelData.text.length > 0)
-                    text: delegate.modelData.text
+                    visible: (rightActionArea.containsMouse || rightActionArea.activeFocus) && (rightIconDelegate.modelData.text.length > 0)
+                    text: rightIconDelegate.modelData.text
                 }
             }
         }
