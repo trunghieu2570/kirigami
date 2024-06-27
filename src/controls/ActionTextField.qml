@@ -107,22 +107,49 @@ QQC2.TextField {
         text: focusShortcut.nativeText
     }
 
-    component ActionIconMouseArea: MouseArea {
-        anchors.fill: parent
-        activeFocusOnTab: true
-        cursorShape: Qt.PointingHandCursor
-        hoverEnabled: true
-        Accessible.role: Accessible.Button
-        Keys.onPressed: event => {
-            switch (event.key) {
-            case Qt.Key_Space:
-            case Qt.Key_Enter:
-            case Qt.Key_Return:
-            case Qt.Key_Select:
-                clicked(null);
-                event.accepted = true;
-                break;
+    component InlineActionIcon: Kirigami.Icon {
+        id: iconDelegate
+
+        required property T.Action modelData
+
+        implicitWidth: Kirigami.Units.iconSizes.sizeForLabels
+        implicitHeight: Kirigami.Units.iconSizes.sizeForLabels
+
+        anchors.verticalCenter: parent.verticalCenter
+
+        source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
+        visible: !(modelData instanceof Kirigami.Action) || modelData.visible
+        active: actionArea.containsPress || actionArea.activeFocus
+        enabled: modelData.enabled
+
+        MouseArea {
+            id: actionArea
+
+            anchors.fill: parent
+            activeFocusOnTab: true
+            cursorShape: Qt.PointingHandCursor
+            hoverEnabled: true
+
+            Accessible.name: iconDelegate.modelData.text
+            Accessible.role: Accessible.Button
+
+            Keys.onPressed: event => {
+                switch (event.key) {
+                    case Qt.Key_Space:
+                    case Qt.Key_Enter:
+                    case Qt.Key_Return:
+                    case Qt.Key_Select:
+                        clicked(null);
+                        event.accepted = true;
+                        break;
+                }
             }
+            onClicked: mouse => iconDelegate.modelData.trigger()
+        }
+
+        QQC2.ToolTip {
+            visible: (actionArea.containsMouse || actionArea.activeFocus) && (iconDelegate.modelData.text.length > 0)
+            text: iconDelegate.modelData.text
         }
     }
 
@@ -140,32 +167,7 @@ QQC2.TextField {
         anchors.bottomMargin: parent.bottomPadding
         Repeater {
             model: root.leftActions
-            Kirigami.Icon {
-                id: leftIconDelegate
-
-                required property T.Action modelData
-
-                implicitWidth: Kirigami.Units.iconSizes.sizeForLabels
-                implicitHeight: Kirigami.Units.iconSizes.sizeForLabels
-
-                anchors.verticalCenter: parent.verticalCenter
-
-                source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
-                active: leftActionArea.containsPress || leftActionArea.activeFocus
-                visible: !(modelData instanceof Kirigami.Action) || modelData.visible
-                enabled: modelData.enabled
-
-                ActionIconMouseArea {
-                    id: leftActionArea
-                    Accessible.name: leftIconDelegate.modelData.text
-                    onClicked: mouse => leftIconDelegate.modelData.trigger()
-                }
-
-                QQC2.ToolTip {
-                    visible: (leftActionArea.containsMouse || leftActionArea.activeFocus) && (leftIconDelegate.modelData.text.length > 0)
-                    text: leftIconDelegate.modelData.text
-                }
-            }
+            InlineActionIcon { }
         }
     }
 
@@ -183,32 +185,7 @@ QQC2.TextField {
         anchors.bottomMargin: parent.bottomPadding
         Repeater {
             model: root.rightActions
-            Kirigami.Icon {
-                id: rightIconDelegate
-
-                required property T.Action modelData
-
-                implicitWidth: Kirigami.Units.iconSizes.sizeForLabels
-                implicitHeight: Kirigami.Units.iconSizes.sizeForLabels
-
-                anchors.verticalCenter: parent.verticalCenter
-
-                source: modelData.icon.name.length > 0 ? modelData.icon.name : modelData.icon.source
-                active: rightActionArea.containsPress || rightActionArea.activeFocus
-                visible: !(modelData instanceof Kirigami.Action) || modelData.visible
-                enabled: modelData.enabled
-
-                ActionIconMouseArea {
-                    id: rightActionArea
-                    Accessible.name: rightIconDelegate.modelData.text
-                    onClicked: mouse => rightIconDelegate.modelData.trigger()
-                }
-
-                QQC2.ToolTip {
-                    visible: (rightActionArea.containsMouse || rightActionArea.activeFocus) && (rightIconDelegate.modelData.text.length > 0)
-                    text: rightIconDelegate.modelData.text
-                }
-            }
+            InlineActionIcon { }
         }
     }
 }
