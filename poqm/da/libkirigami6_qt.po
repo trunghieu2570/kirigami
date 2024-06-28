@@ -250,7 +250,7 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr ""
 
-#: dialogs/Dialog.qml:450
+#: dialogs/Dialog.qml:448
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"

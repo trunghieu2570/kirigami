@@ -209,7 +209,7 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "העתקת הקישור ללוח הגזירים"
 
-#: dialogs/Dialog.qml:450
+#: dialogs/Dialog.qml:448
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
 msgstr "סגירה"

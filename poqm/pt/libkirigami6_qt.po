@@ -219,7 +219,7 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Copiar a Ligação para a Área de Transferência"
 
-#: dialogs/Dialog.qml:450
+#: dialogs/Dialog.qml:448
 #, fuzzy
 #| msgctxt "PageRowGlobalToolBarUI|"
 #| msgid "Close menu"
