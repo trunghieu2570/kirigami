@@ -149,6 +149,8 @@ T.Dialog {
      */
     readonly property real absoluteMaximumWidth: parent.width - Kirigami.Units.largeSpacing * 2
 
+    readonly property real __borderWidth: 1
+
     /**
      * @brief This property holds the maximum height the dialog can have
      * (including the header and footer).
@@ -284,6 +286,7 @@ T.Dialog {
     modal: true
     clip: false
     padding: 0
+    horizontalPadding: __borderWidth
 
     // determine parent so that popup knows which window to popup in
     // we want to open the dialog in the center of the window, if possible
@@ -332,7 +335,7 @@ T.Dialog {
         }
 
         border {
-            width: 1
+            width: root.__borderWidth
             color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, Kirigami.Theme.frameContrast);
         }
     }
