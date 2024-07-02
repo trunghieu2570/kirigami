@@ -89,8 +89,8 @@ T.TabButton {
 
     // FIXME: all those internal properties should go, and the button should style itself in a more standard way
     // probably similar to view items
-    readonly property color __foregroundColor: Qt.alpha(Kirigami.Theme.textColor, 0.85)
-    readonly property color __highlightForegroundColor: Qt.alpha(Kirigami.Theme.textColor, 0.85)
+    readonly property color __foregroundColor: Kirigami.Theme.textColor
+    readonly property color __highlightForegroundColor: Kirigami.Theme.textColor
 
     readonly property color __pressedColor: Qt.alpha(Kirigami.Theme.highlightColor, 0.3)
     readonly property color __hoverSelectColor: Qt.alpha(Kirigami.Theme.highlightColor, 0.2)
@@ -192,16 +192,9 @@ T.TabButton {
             color: control.checked ? control.__highlightForegroundColor : control.__foregroundColor
 
             font.bold: control.checked
-            font.family: Kirigami.Theme.smallFont.family
-            font.pointSize: {
-                if (control.display === T.AbstractButton.TextBesideIcon) {
-                    // row layout
-                    return Kirigami.Theme.defaultFont.pointSize;
-                } else {
-                    // column layout
-                    return icon.visible ? Kirigami.Theme.smallFont.pointSize : Kirigami.Theme.defaultFont.pointSize * 1.20; // 1.20 is equivalent to level 2 heading
-                }
-            }
+            font.pointSize: !icon.visible && control.display === T.AbstractButton.TextBelowIcon
+                    ? Kirigami.Theme.defaultFont.pointSize * 1.20 // 1.20 is equivalent to level 2 heading
+                    : Kirigami.Theme.defaultFont.pointSize
 
             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
 
