@@ -3,7 +3,8 @@ if(NOT TARGET Qt6::QuickTest)
     return()
 endif()
 
-add_executable(qmltest qmltest.cpp)
+add_executable(qmltest qmltest.cpp actiondata.cpp)
+qt_add_qml_module(qmltest URI KirigamiTestUtils)
 target_link_libraries(qmltest PRIVATE Qt6::Qml Qt6::QuickTest)
 
 if (BUILD_SHARED_LIBS)
@@ -32,6 +33,7 @@ macro(kirigami_add_tests)
 endmacro()
 
 kirigami_add_tests(
+    tst_action.qml
     tst_actiontoolbar.qml
     tst_card.qml
     tst_colorutils.qml

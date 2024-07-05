@@ -139,7 +139,7 @@ QQC2.Action {
     }
     checkable: fromQAction?.checkable ?? false
     checked: fromQAction?.checked ?? false
-    enabled: !fromQAction || fromQAction.enabled && parent.enabled
+    enabled: !fromQAction || fromQAction.enabled
 
     readonly property Shortcut alternateShortcut : Shortcut {
         sequences: P.ActionHelper.alternateShortcuts(fromQAction)
