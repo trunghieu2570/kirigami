@@ -30,6 +30,12 @@ ecm_add_qml_module(KirigamiPrivate
     GENERATE_PLUGIN_SOURCE
 )
 
+set_target_properties(KirigamiPrivate PROPERTIES
+    VERSION     ${PROJECT_VERSION}
+    SOVERSION   6
+    EXPORT_NAME "KirigamiPrivate"
+)
+
 target_sources(KirigamiPrivate PRIVATE
     copyhelper.cpp
     copyhelper.h
