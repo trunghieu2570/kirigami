@@ -24,7 +24,7 @@ endif()
 
 # Module: org.kde.kirigami.private
 
-add_library(KirigamiPrivate)
+add_library(KirigamiPrivate STATIC)
 ecm_add_qml_module(KirigamiPrivate
     URI "org.kde.kirigami.private"
     GENERATE_PLUGIN_SOURCE
@@ -43,17 +43,14 @@ target_sources(KirigamiPrivate PRIVATE
     actionhelper.h
 )
 
-include_static_dependencies(KirigamiPrivate EXPORT KirigamiTargets)
-
 target_link_libraries(KirigamiPrivate PRIVATE Qt6::Gui)
-
-ecm_finalize_qml_module(KirigamiPrivate DESTINATION ${KDE_INSTALL_QMLDIR})
+set_target_properties(KirigamiPrivate PROPERTIES POSITION_INDEPENDENT_CODE ON)
+set_target_properties(KirigamiPrivateplugin PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 if (NOT BUILD_SHARED_LIBS)
     install(TARGETS KirigamiPrivateplugin EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+    install(TARGETS KirigamiPrivate EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 endif()
-
-install(TARGETS KirigamiPrivate EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 # Module: org.kde.kirigami
 
@@ -269,6 +266,8 @@ target_link_libraries(Kirigami
     Qt6::Quick
     PRIVATE
     Qt6::Concurrent
+    KirigamiPrivate
+    KirigamiPrivateplugin
     ${Kirigami_EXTRA_LIBS}
 )
 
@@ -286,7 +285,6 @@ if (NOT BUILD_SHARED_LIBS)
             KirigamiPrimitivesplugin
             KirigamiDialogsplugin
             KirigamiLayoutsplugin
-            KirigamiPrivateplugin
     )
     install(TARGETS Kirigamiplugin EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 else()
@@ -298,7 +296,6 @@ else()
             KirigamiPrimitives
             KirigamiDialogs
             KirigamiLayouts
-            KirigamiPrivate
     )
 endif()
 
