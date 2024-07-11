@@ -243,7 +243,7 @@ endif()
 if (NOT BUILD_SHARED_LIBS)
     # Ensure we install the plugin library file as that's required to link
     # against for static builds to work properly
-    target_link_libraries(Kirigamiplugin PRIVATE KirigamiPlatformplugin KirigamiDelegatesplugin KirigamiPrimitivesplugin KirigamiDialogsplugin KirigamiLayoutsplugin)
+    target_link_libraries(Kirigamiplugin PRIVATE KirigamiPlatformplugin KirigamiDelegatesplugin KirigamiPrimitivesplugin KirigamiDialogsplugin KirigamiLayoutsplugin KirigamiPrivatePlugin)
     install(TARGETS Kirigamiplugin EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 else()
     target_link_libraries(Kirigami PUBLIC KirigamiPlatform PRIVATE KirigamiDelegates KirigamiPrimitives KirigamiDialogs KirigamiLayouts)
