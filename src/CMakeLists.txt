@@ -275,6 +275,10 @@ target_link_libraries(KirigamiPrivatePlugin PRIVATE Qt6::Gui)
 
 ecm_finalize_qml_module(KirigamiPrivatePlugin DESTINATION ${KDE_INSTALL_QMLDIR})
 
+if (NOT BUILD_SHARED_LIBS)
+    install(TARGETS KirigamiPrivatePlugin EXPORT KF6KirigamiPrivateTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+endif()
+
 if (ANDROID)
     install(FILES Kirigami-android-dependencies.xml
         DESTINATION ${KDE_INSTALL_LIBDIR}
