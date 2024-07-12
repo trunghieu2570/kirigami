@@ -207,7 +207,7 @@ QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * 
 {
     if (m_source.isNull() || qFuzzyIsNull(width()) || qFuzzyIsNull(height())) {
         delete node;
-        return Q_NULLPTR;
+        return nullptr;
     }
 
     if (!node) {
