@@ -286,7 +286,7 @@ T.Dialog {
     modal: true
     clip: false
     padding: 0
-    horizontalPadding: __borderWidth
+    horizontalPadding: __borderWidth + padding
 
     // determine parent so that popup knows which window to popup in
     // we want to open the dialog in the center of the window, if possible
