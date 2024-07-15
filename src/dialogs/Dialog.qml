@@ -363,19 +363,20 @@ T.Dialog {
                 : (contentItem.implicitHeight > 0 ? contentItem.implicitHeight : contentItem.height)) + topPadding + bottomPadding
 
         onContentItemChanged: {
-            if (!contentItem) {
-                return;
-            }
-            /* Why this is necessary? A Flickable mainItem syncs its size with the contents only on startup,
-             and if the contents can change their size dinamically afterwards (wrapping text does that),
-             the contentsize will be wrong see BUG 477257
-             We also don't do this declaratively but only we are sure a contentItem is declared/created as just
-             accessing the property would create an internal flickable, making it impossible to assign custom
-             flickables/ listviews to the Dialog*/
-            contentItem.contentHeight = Qt.binding(()=>{return contentControl.calculatedImplicitHeight})
+            const contentFlickable = contentItem as Flickable;
+            if (contentFlickable) {
+                /*
+                 Why this is necessary? A Flickable mainItem syncs its size with the contents only on startup,
+                 and if the contents can change their size dinamically afterwards (wrapping text does that),
+                 the contentsize will be wrong see BUG 477257.
 
-            if (contentItem instanceof Flickable) {
-                contentItem.clip = true;
+                 We also don't do this declaratively but only we are sure a contentItem is declared/created as just
+                 accessing the property would create an internal Flickable, making it impossible to assign custom
+                 flickables/listviews to the Dialog.
+                */
+                contentFlickable.contentHeight = Qt.binding(() => calculatedImplicitHeight);
+
+                contentFlickable.clip = true;
             }
         }
 
