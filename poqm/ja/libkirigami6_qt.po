@@ -219,7 +219,7 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "リンクをクリップボードにコピー"
 
-#: dialogs/Dialog.qml:451
+#: dialogs/Dialog.qml:452
 #, fuzzy
 #| msgctxt "PageRowGlobalToolBarUI|"
 #| msgid "Close menu"

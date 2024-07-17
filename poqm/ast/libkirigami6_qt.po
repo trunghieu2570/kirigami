@@ -208,7 +208,7 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr ""
 
-#: dialogs/Dialog.qml:451
+#: dialogs/Dialog.qml:452
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
 msgstr ""

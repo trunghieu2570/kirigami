@@ -209,7 +209,7 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Копиране на връзката в клипборда"
 
-#: dialogs/Dialog.qml:451
+#: dialogs/Dialog.qml:452
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
 msgstr "Затваряне"
