@@ -1,5 +1,5 @@
 /*
- *  SPDX-FileCopyrightText: 2017 by Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2017 Marco Martin <mart@kde.org>
  *  SPDX-FileCopyrightText: 2021 Arjen Hiemstra <ahiemstra@heimr.nl>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later

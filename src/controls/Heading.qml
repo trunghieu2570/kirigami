@@ -1,5 +1,5 @@
 /*
- *  SPDX-FileCopyrightText: 2012 by Sebastian Kügler <sebas@kde.org>
+ *  SPDX-FileCopyrightText: 2012 Sebastian Kügler <sebas@kde.org>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */

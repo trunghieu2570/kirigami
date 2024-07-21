@@ -1,5 +1,5 @@
 /*
- *  SPDX-FileCopyrightText: 2023 by Nate Graham <nate@kde.org>
+ *  SPDX-FileCopyrightText: 2023 Nate Graham <nate@kde.org>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
