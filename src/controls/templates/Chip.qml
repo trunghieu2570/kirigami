@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: 2022 Felipe Kinoshita <kinofhek@gmail.com>
-// SPDX-License-Identifier: GPL-2.0-or-later
+// SPDX-License-Identifier: LGPL-2.0-or-later
 
 import QtQuick
 import QtQuick.Templates as T
