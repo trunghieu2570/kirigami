@@ -50,6 +50,8 @@ QQC2.ToolButton {
     text: qsTr("Show Contextual Help")
     icon.name: "help-contextual-symbolic"
     display: QQC2.ToolButton.IconOnly
+    
+    Accessible.description: toolTipText
 
     onReleased: {
         toolTip.delay = toolTipVisible ? Kirigami.Units.toolTipDelay : 0;
