@@ -1,10 +1,9 @@
 # Translation of libkirigami6_qt to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2016, 2018, 2019, 2020, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-07-04 13:01+0200\n"
+"PO-Revision-Date: 2024-07-21 11:46+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -12,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.2\n"
+"X-Generator: Lokalize 24.05.2\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: qtrich\n"
@@ -115,7 +114,7 @@ msgstr "Handlingar"
 #: controls/ContextualHelpButton.qml:50
 msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
-msgstr ""
+msgstr "Vis emnehjelp"
 
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
@@ -214,25 +213,24 @@ msgid "Copy Link to Clipboard"
 msgstr "Kopier lenkja til utklippstavla"
 
 #: dialogs/Dialog.qml:452
-#, fuzzy
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
-msgstr "Lukk meny"
+msgstr "Lukk"
 
 #: platform/settings.cpp:219
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "KDE Frameworks %1"
 
 #: platform/settings.cpp:221
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "Vindaugssystemet %1"
 
 #: platform/settings.cpp:222
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (bygd mot %3)"
