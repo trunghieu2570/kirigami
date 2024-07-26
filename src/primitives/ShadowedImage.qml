@@ -125,6 +125,13 @@ Item {
      * @see QtQuick.Image::sourceSize
      */
     property alias sourceSize: image.sourceSize
+
+    /**
+     * @brief This property holds the status of image loading.
+     * @see QtQuick.Image::status
+     * @since 6.5
+     */
+    readonly property alias status: image.status
 //END properties
 
     Image {
