@@ -285,7 +285,8 @@ T.Dialog {
     closePolicy: QQC2.Popup.CloseOnEscape | QQC2.Popup.CloseOnReleaseOutside
     modal: true
     clip: false
-    padding: 0
+    padding: Kirigami.Units.largeSpacing
+    verticalPadding: 0
     horizontalPadding: __borderWidth + padding
 
     // determine parent so that popup knows which window to popup in
