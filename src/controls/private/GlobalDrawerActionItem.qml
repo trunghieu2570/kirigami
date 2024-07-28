@@ -151,7 +151,7 @@ QQC2.ItemDelegate {
             && listItem.hovered
             && text.length > 0
 
-        text: listItem.kAction?.tooltip ?? listItem.tAction?.text ?? ""
+        text: (listItem.kAction?.tooltip || listItem.tAction?.text) ?? ""
         delay: Kirigami.Units.toolTipDelay
         y: (listItem.height - height) / 2
         x: Qt.application.layoutDirection === Qt.RightToLeft ? -width : listItem.width
