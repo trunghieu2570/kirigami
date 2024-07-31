@@ -40,6 +40,10 @@ import org.kde.kirigami as Kirigami
  * to nest ListViews (it must be the top level item), as the scrolling
  * behaviour will not be handled. Use ListView's `header` and `footer` instead.
  *
+ * The dialog provides default padding ideal for most controls. Instead of using
+ * Dialog for scrolling content and forcing the padding to zero, use ScrollableDialog
+ * instead.
+ *
  * Example for a selection dialog:
  *
  * @code{.qml}
@@ -73,38 +77,10 @@ import org.kde.kirigami as Kirigami
  * }
  * @endcode
  *
- * Example with scrolling (ListView scrolling behaviour is handled by the Dialog):
- *
- * @code{.qml}
- * import QtQuick
- * import QtQuick.Layouts
- * import QtQuick.Controls as QQC2
- * import org.kde.kirigami as Kirigami
- *
- * Kirigami.Dialog {
- *     id: scrollableDialog
- *     title: i18n("Select Number")
- *
- *     ListView {
- *         id: listView
- *         // hints for the dialog dimensions
- *         implicitWidth: Kirigami.Units.gridUnit * 16
- *         implicitHeight: Kirigami.Units.gridUnit * 16
- *
- *         model: 100
- *         delegate: QQC2.RadioDelegate {
- *             topPadding: Kirigami.Units.smallSpacing * 2
- *             bottomPadding: Kirigami.Units.smallSpacing * 2
- *             implicitWidth: listView.width
- *             text: modelData
- *         }
- *     }
- * }
- * @endcode
- *
  * There are also sub-components of the Dialog that target specific usecases,
  * and can reduce boilerplate code if used:
  *
+ * @see ScrollableDialog
  * @see PromptDialog
  * @see MenuDialog
  *

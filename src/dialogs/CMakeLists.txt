@@ -12,6 +12,7 @@ ecm_target_qml_sources(KirigamiDialogs SOURCES
     Dialog.qml
     MenuDialog.qml
     PromptDialog.qml
+    ScrollableDialog.qml
     SearchDialog.qml
 )
 
