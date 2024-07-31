@@ -69,8 +69,8 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
 
     /**
      * Foreground color for disabled areas, usually a mid-gray
-     * @note Depending on the implementation, the color used for this property may not be 
-     *       based on the disabled palette. For example, for the Plasma implementation, 
+     * @note Depending on the implementation, the color used for this property may not be
+     *       based on the disabled palette. For example, for the Plasma implementation,
      *       "Inactive Text Color" of the active palette is used.
      */
     Q_PROPERTY(QColor disabledTextColor READ disabledTextColor WRITE setCustomDisabledTextColor RESET setCustomDisabledTextColor NOTIFY colorsChanged FINAL)
@@ -169,6 +169,11 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
 
     // decoration colors
     /**
+     * A decoration color that is used as a generic accent
+     */
+    Q_PROPERTY(QColor accentColor READ accentColor WRITE setCustomAccentColor RESET setCustomAccentColor NOTIFY colorsChanged FINAL)
+
+    /**
      * A decoration color that indicates active focus
      */
     Q_PROPERTY(QColor focusColor READ focusColor WRITE setCustomFocusColor RESET setCustomFocusColor NOTIFY colorsChanged FINAL)
@@ -260,6 +265,7 @@ public:
     QColor positiveBackgroundColor() const;
 
     // decoration colors
+    QColor accentColor() const;
     QColor focusColor() const;
     QColor hoverColor() const;
 
@@ -298,6 +304,7 @@ public:
     void setCustomNeutralBackgroundColor(const QColor &color = QColor());
     void setCustomPositiveBackgroundColor(const QColor &color = QColor());
     // decoration colors
+    void setCustomAccentColor(const QColor &color = QColor());
     void setCustomFocusColor(const QColor &color = QColor());
     void setCustomHoverColor(const QColor &color = QColor());
 
@@ -344,6 +351,7 @@ protected:
     void setPositiveBackgroundColor(const QColor &color);
 
     // decoration colors
+    void setAccentColor(const QColor &color);
     void setFocusColor(const QColor &color);
     void setHoverColor(const QColor &color);
 

@@ -87,6 +87,7 @@ public:
         NegativeBackgroundColor,
         NeutralBackgroundColor,
         PositiveBackgroundColor,
+        AccentColor,
         FocusColor,
         HoverColor,
 
@@ -247,6 +248,9 @@ public:
             break;
         case VisitedLinkColor:
             palette.setColor(QPalette::LinkVisited, color);
+            break;
+        case AccentColor:
+            palette.setColor(QPalette::Accent, color);
             break;
 
         default:
@@ -563,6 +567,11 @@ QColor PlatformTheme::positiveBackgroundColor() const
     return d->color(this, PlatformThemeData::PositiveBackgroundColor);
 }
 
+QColor PlatformTheme::accentColor() const
+{
+    return d->color(this, PlatformThemeData::AccentColor);
+}
+
 QColor PlatformTheme::focusColor() const
 {
     return d->color(this, PlatformThemeData::FocusColor);
@@ -667,6 +676,11 @@ void PlatformTheme::setPositiveBackgroundColor(const QColor &color)
 void PlatformTheme::setHoverColor(const QColor &color)
 {
     d->setDataColor(this, PlatformThemeData::HoverColor, color);
+}
+
+void PlatformTheme::setAccentColor(const QColor &color)
+{
+    d->setDataColor(this, PlatformThemeData::AccentColor, color);
 }
 
 void PlatformTheme::setFocusColor(const QColor &color)
@@ -807,6 +821,11 @@ void PlatformTheme::setCustomPositiveBackgroundColor(const QColor &color)
 void PlatformTheme::setCustomHoverColor(const QColor &color)
 {
     d->setColor(this, PlatformThemeData::HoverColor, color);
+}
+
+void PlatformTheme::setCustomAccentColor(const QColor &color)
+{
+    d->setColor(this, PlatformThemeData::AccentColor, color);
 }
 
 void PlatformTheme::setCustomFocusColor(const QColor &color)

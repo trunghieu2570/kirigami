@@ -30,6 +30,7 @@ class KIRIGAMIPLATFORM_EXPORT BasicThemeDefinition : public QObject
     Q_PROPERTY(QColor backgroundColor MEMBER backgroundColor NOTIFY changed FINAL)
     Q_PROPERTY(QColor alternateBackgroundColor MEMBER alternateBackgroundColor NOTIFY changed FINAL)
 
+    Q_PROPERTY(QColor accentColor MEMBER focusColor NOTIFY changed FINAL)
     Q_PROPERTY(QColor focusColor MEMBER focusColor NOTIFY changed FINAL)
     Q_PROPERTY(QColor hoverColor MEMBER hoverColor NOTIFY changed FINAL)
 
