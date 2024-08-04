@@ -145,8 +145,6 @@ Kirigami.Dialog {
     }
 
     padding: 0
-    implicitWidth: Math.min(preferredWidth, maximumWidth) + leftPadding + rightPadding
-    preferredWidth: Kirigami.Units.gridUnit * 18
 
     header: null
 
