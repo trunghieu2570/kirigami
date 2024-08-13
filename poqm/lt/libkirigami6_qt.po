@@ -12,7 +12,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: controls/AboutItem.qml:163
 #, qt-format
@@ -111,7 +111,7 @@ msgstr "Veiksmai"
 #: controls/ContextualHelpButton.qml:50
 msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
-msgstr ""
+msgstr "Rodyti kontekstinę pagalbą"
 
 #: controls/GlobalDrawer.qml:306
 msgctxt "GlobalDrawer|"
@@ -210,12 +210,9 @@ msgid "Copy Link to Clipboard"
 msgstr "Kopijuoti nuorodą į iškarpinę"
 
 #: dialogs/Dialog.qml:452
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
 msgctxt "Dialog|@action:button close dialog"
 msgid "Close"
-msgstr "Užverti meniu"
+msgstr "Užverti"
 
 #: platform/settings.cpp:219
 #, qt-format
