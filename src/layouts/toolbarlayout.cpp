@@ -651,6 +651,15 @@ ToolBarLayoutDelegate *ToolBarLayoutPrivate::createDelegate(QObject *action)
         newItem->setParentItem(q);
         auto attached = static_cast<ToolBarLayoutAttached *>(qmlAttachedPropertiesObject<ToolBarLayout>(newItem, true));
         attached->setAction(action);
+
+        if (!q->childItems().isEmpty() && q->childItems().first() != newItem) {
+            // Due to asynchronous item creation, we end up creating the last item
+            // first. So move items before previously inserted items to ensure
+            // we have a more sensible tab order.
+            // Note that this will be incorrect if we end up completing in random
+            // order.
+            newItem->stackBefore(q->childItems().first());
+        }
     });
 
     return result;
