@@ -33,7 +33,7 @@ QQC2.ToolButton {
         submenuComponent: ActionsMenu { }
     }
 
-    property QtObject menu: null
+    property T.Menu menu: null
 
     // We create the menu instance only when there are any actual menu items.
     // This also happens in the background, avoiding slowdowns due to menu item
@@ -65,6 +65,12 @@ QQC2.ToolButton {
     }
 
     visible: action instanceof Kirigami.Action ? action.visible : true
+
+    onVisibleChanged: {
+        if (!visible && menu && menu.visible) {
+            menu.dismiss()
+        }
+    }
 
     // Workaround for QTBUG-85941
     Binding {
