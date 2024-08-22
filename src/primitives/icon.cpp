@@ -634,7 +634,7 @@ QImage Icon::iconPixmap(const QIcon &icon) const
     const QQmlEngine *engine = qmlEngine(this);
     if (engine && !engine->property("_kirigamiTheme").toString().isEmpty()) {
         const QString iconName = icon.name();
-        if (!iconName.isEmpty()) {
+        if (!iconName.isEmpty() && QIcon::hasThemeIcon(iconName)) {
             sourceIcon = loadFromTheme(iconName);
         }
     }
