@@ -66,18 +66,24 @@ QQC2.ToolButton {
 
     visible: action instanceof Kirigami.Action ? action.visible : true
 
-    onVisibleChanged: {
-        if (!visible && menu && menu.visible) {
-            menu.dismiss()
-        }
-    }
-
     // Workaround for QTBUG-85941
     Binding {
         target: control
         property: "checkable"
         value: (control.action?.checkable ?? false) || (control.menuActions.length > 0)
         restoreMode: Binding.RestoreBinding
+    }
+
+    // Important: This cannot be a direct onVisibleChanged handler in the button
+    // because it breaks action assignment if we do that. However, this slightly
+    // more indirect Connections object does not have that effect.
+    Connections {
+        target: control
+        function onVisibleChanged() {
+            if (!control.visible && control.menu && control.menu.visible) {
+                control.menu.dismiss()
+            }
+        }
     }
 
     onToggled: {
