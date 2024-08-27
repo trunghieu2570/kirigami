@@ -352,7 +352,9 @@ public:
         }
 
         pendingColorChange = true;
-        QMetaObject::invokeMethod(theme, &PlatformTheme::emitColorChanged, Qt::QueuedConnection);
+
+        auto event = new PlatformThemeEvents::ColorChangedEvent(theme, Qt::red, Qt::blue);
+        QCoreApplication::postEvent(theme, event, 1);
     }
 
     inline void queueChildUpdate(PlatformTheme *theme)
@@ -926,7 +928,8 @@ bool PlatformTheme::event(QEvent *event)
     }
 
     if (event->type() == PlatformThemeEvents::ColorChangedEvent::type) {
-        d->emitCompressedColorChanged(this);
+        d->pendingColorChange = false;
+        Q_EMIT emitColorChanged();
         return true;
     }
 
