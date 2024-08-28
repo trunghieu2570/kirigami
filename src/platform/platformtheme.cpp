@@ -297,6 +297,7 @@ public:
             // Invalid color, assume we are resetting the value.
             auto itr = localOverrides->find(color);
             if (itr != localOverrides->end()) {
+                PlatformThemeChangeTracker tracker(theme, PlatformThemeChangeTracker::PropertyChange::Color);
                 localOverrides->erase(itr);
 
                 if (data) {
@@ -306,8 +307,6 @@ public:
                     // handle resetting the actual color.
                     data->setColor(theme, color, Qt::transparent);
                 }
-
-                emitCompressedColorChanged(theme);
             }
 
             return;
@@ -318,13 +317,13 @@ public:
             return;
         }
 
+        PlatformThemeChangeTracker tracker(theme, PlatformThemeChangeTracker::PropertyChange::Color);
+
         (*localOverrides)[color] = value;
 
         if (data) {
             data->setColor(theme, color, value);
         }
-
-        emitCompressedColorChanged(theme);
     }
 
     inline void setDataColor(PlatformTheme *theme, PlatformThemeData::ColorRole color, const QColor &value)
@@ -340,19 +339,11 @@ public:
             }
         }
 
+        PlatformThemeChangeTracker tracker(theme, PlatformThemeChangeTracker::PropertyChange::Color);
+
         if (data) {
             data->setColor(theme, color, value);
         }
-    }
-
-    inline void emitCompressedColorChanged(PlatformTheme *theme)
-    {
-        if (pendingColorChange) {
-            return;
-        }
-
-        pendingColorChange = true;
-        QMetaObject::invokeMethod(theme, &PlatformTheme::emitColorChanged, Qt::QueuedConnection);
     }
 
     inline void queueChildUpdate(PlatformTheme *theme)
@@ -430,6 +421,7 @@ PlatformTheme::~PlatformTheme()
 
 void PlatformTheme::setColorSet(PlatformTheme::ColorSet colorSet)
 {
+    PlatformThemeChangeTracker tracker(this, PlatformThemeChangeTracker::PropertyChange::ColorSet);
     d->colorSet = colorSet;
 
     if (d->data) {
@@ -444,6 +436,7 @@ PlatformTheme::ColorSet PlatformTheme::colorSet() const
 
 void PlatformTheme::setColorGroup(PlatformTheme::ColorGroup colorGroup)
 {
+    PlatformThemeChangeTracker tracker(this, PlatformThemeChangeTracker::PropertyChange::ColorGroup);
     d->colorGroup = colorGroup;
 
     if (d->data) {
@@ -681,6 +674,7 @@ QFont PlatformTheme::defaultFont() const
 
 void PlatformTheme::setDefaultFont(const QFont &font)
 {
+    PlatformThemeChangeTracker tracker(this, PlatformThemeChangeTracker::PropertyChange::Font);
     if (d->data) {
         d->data->setDefaultFont(this, font);
     }
@@ -693,6 +687,7 @@ QFont PlatformTheme::smallFont() const
 
 void PlatformTheme::setSmallFont(const QFont &font)
 {
+    PlatformThemeChangeTracker tracker(this, PlatformThemeChangeTracker::PropertyChange::Font);
     if (d->data) {
         d->data->setSmallFont(this, font);
     }
@@ -884,8 +879,39 @@ PlatformTheme *PlatformTheme::qmlAttachedProperties(QObject *object)
     return new BasicTheme(object);
 }
 
+void PlatformTheme::emitSignalsForChanges(int changes)
+{
+    if (!d->data) {
+        return;
+    }
+
+    auto propertyChanges = PlatformThemeChangeTracker::PropertyChanges::fromInt(changes);
+    if (propertyChanges & PlatformThemeChangeTracker::PropertyChange::ColorSet) {
+        Q_EMIT colorSetChanged(ColorSet(d->data->colorSet));
+    }
+
+    if (propertyChanges & PlatformThemeChangeTracker::PropertyChange::ColorGroup) {
+        Q_EMIT colorGroupChanged(ColorGroup(d->data->colorGroup));
+    }
+
+    if (propertyChanges & PlatformThemeChangeTracker::PropertyChange::Color) {
+        Q_EMIT colorsChanged();
+    }
+
+    if (propertyChanges & PlatformThemeChangeTracker::PropertyChange::Palette) {
+        Q_EMIT paletteChanged(d->data->palette);
+    }
+
+    if (propertyChanges & PlatformThemeChangeTracker::PropertyChange::Font) {
+        Q_EMIT defaultFontChanged(d->data->defaultFont);
+        Q_EMIT smallFontChanged(d->data->smallFont);
+    }
+}
+
 bool PlatformTheme::event(QEvent *event)
 {
+    PlatformThemeChangeTracker tracker(this);
+
     if (event->type() == PlatformThemeEvents::DataChangedEvent::type) {
         auto changeEvent = static_cast<PlatformThemeEvents::DataChangedEvent *>(event);
 
@@ -901,40 +927,29 @@ bool PlatformTheme::event(QEvent *event)
             auto data = changeEvent->newValue;
             data->addChangeWatcher(this);
 
-            Q_EMIT colorSetChanged(data->colorSet);
-            Q_EMIT colorGroupChanged(data->colorGroup);
-            Q_EMIT defaultFontChanged(data->defaultFont);
-            Q_EMIT smallFontChanged(data->smallFont);
-            d->emitCompressedColorChanged(this);
+            tracker.markDirty(PlatformThemeChangeTracker::PropertyChange::All);
         }
 
         return true;
     }
 
     if (event->type() == PlatformThemeEvents::ColorSetChangedEvent::type) {
-        if (d->data) {
-            Q_EMIT colorSetChanged(d->data->colorSet);
-        }
+        tracker.markDirty(PlatformThemeChangeTracker::PropertyChange::ColorSet);
         return true;
     }
 
     if (event->type() == PlatformThemeEvents::ColorGroupChangedEvent::type) {
-        if (d->data) {
-            Q_EMIT colorGroupChanged(d->data->colorGroup);
-        }
+        tracker.markDirty(PlatformThemeChangeTracker::PropertyChange::ColorGroup);
         return true;
     }
 
     if (event->type() == PlatformThemeEvents::ColorChangedEvent::type) {
-        d->emitCompressedColorChanged(this);
+        tracker.markDirty(PlatformThemeChangeTracker::PropertyChange::Color | PlatformThemeChangeTracker::PropertyChange::Palette);
         return true;
     }
 
     if (event->type() == PlatformThemeEvents::FontChangedEvent::type) {
-        if (d->data) {
-            Q_EMIT defaultFontChanged(d->data->defaultFont);
-            Q_EMIT smallFontChanged(d->data->smallFont);
-        }
+        tracker.markDirty(PlatformThemeChangeTracker::PropertyChange::Font);
         return true;
     }
 
@@ -1010,16 +1025,6 @@ void PlatformTheme::updateChildren(QObject *object)
     }
 }
 
-void PlatformTheme::emitColorChanged()
-{
-    if (d->data) {
-        Q_EMIT paletteChanged(d->data->palette);
-    }
-
-    Q_EMIT colorsChanged();
-    d->pendingColorChange = false;
-}
-
 // We sometimes set theme properties on non-visual objects. However, if an item
 // has a visual and a non-visual parent that are different, we should prefer the
 // visual parent, so we need to apply some extra logic.
@@ -1037,6 +1042,36 @@ QObject *PlatformTheme::determineParent(QObject *object)
     }
 }
 
+PlatformThemeChangeTracker::PlatformThemeChangeTracker(PlatformTheme *theme, PropertyChanges changes)
+    : m_theme(theme)
+{
+    if (!s_blockedChanges.contains(theme)) {
+        m_data = std::make_shared<Data>();
+        s_blockedChanges.insert(theme, m_data);
+    } else {
+        m_data = s_blockedChanges.value(theme).lock();
+    }
+
+    m_data->changes |= changes;
+}
+
+PlatformThemeChangeTracker::~PlatformThemeChangeTracker() noexcept
+{
+    std::weak_ptr<Data> dataWatcher = m_data;
+
+    auto changes = m_data->changes;
+    m_data.reset();
+
+    if (dataWatcher.use_count() <= 0) {
+        m_theme->emitSignalsForChanges(changes);
+        s_blockedChanges.remove(m_theme);
+    }
+}
+
+void PlatformThemeChangeTracker::markDirty(PropertyChanges changes)
+{
+    m_data->changes |= changes;
+}
 }
 }
 

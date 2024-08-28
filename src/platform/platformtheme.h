@@ -355,13 +355,61 @@ protected:
 private:
     KIRIGAMIPLATFORM_NO_EXPORT void update();
     KIRIGAMIPLATFORM_NO_EXPORT void updateChildren(QObject *item);
-    KIRIGAMIPLATFORM_NO_EXPORT void emitSignals();
-    KIRIGAMIPLATFORM_NO_EXPORT void emitColorChanged();
     KIRIGAMIPLATFORM_NO_EXPORT QObject *determineParent(QObject *object);
+    KIRIGAMIPLATFORM_NO_EXPORT void emitSignalsForChanges(int changes);
 
     PlatformThemePrivate *d;
     friend class PlatformThemePrivate;
     friend class PlatformThemeData;
+    friend class PlatformThemeChangeTracker;
+};
+
+/**
+ * A class that tracks changes to PlatformTheme properties and emits signals at the right moment.
+ *
+ * This should be used by PlatformTheme implementations to ensure that multiple
+ * changes to a PlatformTheme's properties do not emit multiple change signals,
+ * instead batching all of them into a single signal emission. This then ensures
+ * things making use of PlatformTheme aren't needlessly redrawn or redrawn in a
+ * partially changed state.
+ */
+class KIRIGAMIPLATFORM_EXPORT PlatformThemeChangeTracker
+{
+public:
+    /**
+     * Flags used to indicate changes made to certain properties.
+     */
+    enum class PropertyChange : uint8_t {
+        None = 0,
+        ColorSet = 1 << 0,
+        ColorGroup = 1 << 1,
+        Color = 1 << 2,
+        Palette = 1 << 3,
+        Font = 1 << 4,
+        All = ColorSet | ColorGroup | Color | Palette | Font,
+    };
+    Q_DECLARE_FLAGS(PropertyChanges, PropertyChange)
+
+    PlatformThemeChangeTracker(PlatformTheme *theme, PropertyChanges changes = PropertyChange::None);
+    ~PlatformThemeChangeTracker();
+
+    void markDirty(PropertyChanges changes);
+
+private:
+    PlatformTheme *m_theme;
+
+    // Per-PlatformTheme data that we need for PlatformThemeChangeBlocker.
+    // We don't want to store this in PlatformTheme since that would increase the
+    // size of every instance of PlatformTheme while it's only used when we want to
+    // block property change signal emissions. So instead we store it in a separate
+    // hash using the PlatformTheme as key.
+    struct Data {
+        PropertyChanges changes;
+    };
+
+    std::shared_ptr<Data> m_data;
+
+    inline static QHash<PlatformTheme *, std::weak_ptr<Data>> s_blockedChanges;
 };
 
 namespace PlatformThemeEvents
@@ -405,5 +453,7 @@ using FontChangedEvent = PropertyChangedEvent<QFont>;
 
 }
 } // namespace Kirigami
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(Kirigami::Platform::PlatformThemeChangeTracker::PropertyChanges)
 
 #endif // PLATFORMTHEME_H
