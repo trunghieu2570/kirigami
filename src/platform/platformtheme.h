@@ -386,7 +386,8 @@ public:
         Color = 1 << 2,
         Palette = 1 << 3,
         Font = 1 << 4,
-        All = ColorSet | ColorGroup | Color | Palette | Font,
+        Data = 1 << 5,
+        All = ColorSet | ColorGroup | Color | Palette | Font | Data,
     };
     Q_DECLARE_FLAGS(PropertyChanges, PropertyChange)
 

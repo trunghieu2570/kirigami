@@ -346,22 +346,6 @@ public:
         }
     }
 
-    inline void queueChildUpdate(PlatformTheme *theme)
-    {
-        if (pendingChildUpdate) {
-            return;
-        }
-
-        pendingChildUpdate = true;
-        QMetaObject::invokeMethod(
-            theme,
-            [this, theme]() {
-                pendingChildUpdate = false;
-                theme->updateChildren(theme->parent());
-            },
-            Qt::QueuedConnection);
-    }
-
     /*
      * Please note that there is no q pointer. This is intentional, as it avoids
      * having to store that information for each instance of PlatformTheme,
@@ -886,6 +870,7 @@ void PlatformTheme::emitSignalsForChanges(int changes)
     }
 
     auto propertyChanges = PlatformThemeChangeTracker::PropertyChanges::fromInt(changes);
+
     if (propertyChanges & PlatformThemeChangeTracker::PropertyChange::ColorSet) {
         Q_EMIT colorSetChanged(ColorSet(d->data->colorSet));
     }
@@ -905,6 +890,10 @@ void PlatformTheme::emitSignalsForChanges(int changes)
     if (propertyChanges & PlatformThemeChangeTracker::PropertyChange::Font) {
         Q_EMIT defaultFontChanged(d->data->defaultFont);
         Q_EMIT smallFontChanged(d->data->smallFont);
+    }
+
+    if (propertyChanges & PlatformThemeChangeTracker::PropertyChange::Data) {
+        updateChildren(parent());
     }
 }
 
@@ -926,10 +915,9 @@ bool PlatformTheme::event(QEvent *event)
         if (changeEvent->newValue) {
             auto data = changeEvent->newValue;
             data->addChangeWatcher(this);
-
-            tracker.markDirty(PlatformThemeChangeTracker::PropertyChange::All);
         }
 
+        tracker.markDirty(PlatformThemeChangeTracker::PropertyChange::All);
         return true;
     }
 
@@ -958,8 +946,6 @@ bool PlatformTheme::event(QEvent *event)
 
 void PlatformTheme::update()
 {
-    d->queueChildUpdate(this);
-
     auto oldData = d->data;
 
     if (d->inherit) {
