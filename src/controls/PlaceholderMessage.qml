@@ -234,7 +234,7 @@ ColumnLayout {
 
     Kirigami.Icon {
         visible: source !== undefined
-        opacity: 0.5
+        opacity: root.type === PlaceholderMessage.Type.Actionable ? 1 : 0.5
 
         Layout.alignment: Qt.AlignHCenter
         Layout.preferredWidth: Math.round(Kirigami.Units.iconSizes.huge * 1.5)
