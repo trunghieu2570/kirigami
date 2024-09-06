@@ -3,7 +3,7 @@
 # Alois Spitzbart <spitz234@hotmail.com>, 2021.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: libkirigami6_qt\n"
 "PO-Revision-Date: 2023-06-25 17:03+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
