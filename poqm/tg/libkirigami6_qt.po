@@ -114,7 +114,7 @@ msgctxt "AbstractApplicationWindow|"
 msgid "Quit"
 msgstr ""
 
-#: controls/ActionToolBar.qml:191
+#: controls/ActionToolBar.qml:193
 #, fuzzy
 #| msgctxt "ToolBarApplicationHeader|"
 #| msgid "More Actions"
