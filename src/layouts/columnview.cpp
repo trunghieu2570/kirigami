@@ -698,7 +698,7 @@ void ContentItem::layoutPinnedItems()
 
 void ContentItem::updateVisibleItems()
 {
-    QList<QObject *> newItems;
+    QList<QQuickItem *> newItems;
 
     for (auto *item : std::as_const(m_items)) {
         ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
@@ -1095,7 +1095,7 @@ QQuickItem *ColumnView::currentItem()
     return m_currentItem;
 }
 
-QList<QObject *> ColumnView::visibleItems() const
+QList<QQuickItem *> ColumnView::visibleItems() const
 {
     return m_contentItem->m_visibleItems;
 }
@@ -1106,7 +1106,7 @@ QQuickItem *ColumnView::leadingVisibleItem() const
         return nullptr;
     }
 
-    return qobject_cast<QQuickItem *>(m_contentItem->m_visibleItems.first());
+    return m_contentItem->m_visibleItems.first();
 }
 
 QQuickItem *ColumnView::trailingVisibleItem() const

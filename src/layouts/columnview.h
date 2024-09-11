@@ -229,7 +229,7 @@ class ColumnView : public QQuickItem
     /**
      * The list of all visible column items that are at least partially in the viewport at any given moment
      */
-    Q_PROPERTY(QList<QObject *> visibleItems READ visibleItems NOTIFY visibleItemsChanged FINAL)
+    Q_PROPERTY(QList<QQuickItem *> visibleItems READ visibleItems NOTIFY visibleItemsChanged FINAL)
 
     /**
      * The first of visibleItems provided from convenience
@@ -310,8 +310,7 @@ public:
 
     QQuickItem *currentItem();
 
-    // NOTE: It's a QList<QObject *> as QML can't correctly build an Array out of QList<QQuickItem*>
-    QList<QObject *> visibleItems() const;
+    QList<QQuickItem *> visibleItems() const;
     QQuickItem *leadingVisibleItem() const;
     QQuickItem *trailingVisibleItem() const;
 

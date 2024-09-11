@@ -81,7 +81,7 @@ private:
     QQuickItem *m_globalFooterParent;
     QPropertyAnimation *m_slideAnim;
     QList<QQuickItem *> m_items;
-    QList<QObject *> m_visibleItems;
+    QList<QQuickItem *> m_visibleItems;
     QPointer<QQuickItem> m_viewAnchorItem;
     QHash<QQuickItem *, QQuickItem *> m_leadingSeparators;
     QHash<QQuickItem *, QQuickItem *> m_trailingSeparators;
