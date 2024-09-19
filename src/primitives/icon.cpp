@@ -6,6 +6,7 @@
  */
 
 #include "icon.h"
+#include "scenegraph/crossfadenode.h"
 #include "scenegraph/managedtexturenode.h"
 
 #include "platform/platformtheme.h"
@@ -210,10 +211,44 @@ QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * 
         return nullptr;
     }
 
+    CrossFadeNode *mNode = static_cast<CrossFadeNode *>(node);
+
+    if (!mNode) {
+        mNode = new CrossFadeNode();
+    }
+
+    mNode->setRect(boundingRect());
+
+    mNode->setTextures(s_iconImageCache->loadTexture(window(), m_oldIcon), s_iconImageCache->loadTexture(window(), m_icon));
+
+    if (m_animation && m_animation->state() == QAbstractAnimation::Running) {
+        mNode->setBlendFactor(m_animValue);
+    } else {
+        mNode->setBlendFactor(1.0);
+    }
+
+    return mNode;
+
+#if 0
     if (!node) {
         node = new QSGNode{};
     }
 
+    if (node->childCount() == 0) {
+        auto mNode = new CrossFadeNode;
+        node->appendChildNode(mNode);
+
+        mNode->setTextures(s_iconImageCache->loadTexture(window(), m_oldIcon, QQuickWindow::TextureCanUseAtlas),
+                        s_iconImageCache->loadTexture(window(), m_icon, QQuickWindow::TextureCanUseAtlas));
+        m_sizeChanged = true;
+    }
+    auto mNode = static_cast<CrossFadeNode *>(node->firstChild());
+    if (m_animation && m_animation->state() == QAbstractAnimation::Running) {
+        mNode->setBlendFactor(m_animValue);
+    } else {
+        mNode->setBlendFactor(1.0);
+    }
+    /*
     if (m_animation && m_animation->state() == QAbstractAnimation::Running) {
         if (node->childCount() < 2) {
             node->appendChildNode(createSubtree(0.0));
@@ -239,11 +274,12 @@ QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * 
         }
 
         updateSubtree(node->firstChild(), 1.0);
-    }
+    }*/
 
     if (m_textureChanged) {
-        auto mNode = static_cast<ManagedTextureNode *>(node->lastChild()->firstChild());
-        mNode->setTexture(s_iconImageCache->loadTexture(window(), m_icon, QQuickWindow::TextureCanUseAtlas));
+        auto mNode = static_cast<CrossFadeNode *>(node->firstChild());
+        mNode->setTextures(s_iconImageCache->loadTexture(window(), m_oldIcon, QQuickWindow::TextureCanUseAtlas),
+                           s_iconImageCache->loadTexture(window(), m_icon, QQuickWindow::TextureCanUseAtlas));
         m_textureChanged = false;
         m_sizeChanged = true;
     }
@@ -269,15 +305,18 @@ QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * 
         QPointF posAdjust = QPointF(globalPixelPos.x() - std::round(globalPixelPos.x()), globalPixelPos.y() - std::round(globalPixelPos.y()));
         nodeRect.moveTopLeft(nodeRect.topLeft() - posAdjust);
 
-        for (int i = 0; i < node->childCount(); ++i) {
+       /* for (int i = 0; i < node->childCount(); ++i) {
             auto mNode = static_cast<ManagedTextureNode *>(node->childAtIndex(i)->firstChild());
             mNode->setRect(nodeRect);
-        }
+        }*/
+        auto mNode = static_cast<CrossFadeNode *>(node->firstChild());
+        mNode->setRect(nodeRect);
 
         m_sizeChanged = false;
     }
 
     return node;
+#endif
 }
 
 void Icon::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)

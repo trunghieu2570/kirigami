@@ -14,6 +14,8 @@ target_sources(KirigamiPrimitives PRIVATE
     shadowedtexture.cpp
     shadowedtexture.h
 
+    scenegraph/crossfadenode.cpp
+    scenegraph/crossfadematerial.cpp
     scenegraph/managedtexturenode.cpp
     scenegraph/managedtexturenode.h
     scenegraph/paintedrectangleitem.cpp
@@ -57,6 +59,8 @@ qt6_add_shaders(KirigamiPrimitives "shaders"
     BATCHABLE
     PREFIX "/qt/qml/org/kde/kirigami/primitives/shaders"
     FILES
+        shaders/crossfade.vert
+        shaders/crossfade.frag
         shaders/shadowedrectangle.vert
         shaders/shadowedrectangle.frag
         shaders/shadowedrectangle_lowpower.frag
@@ -67,6 +71,8 @@ qt6_add_shaders(KirigamiPrimitives "shaders"
         shaders/shadowedbordertexture.frag
         shaders/shadowedbordertexture_lowpower.frag
     OUTPUTS
+        crossfade.vert.qsb
+        crossfade.frag.qsb
         shadowedrectangle.vert.qsb
         shadowedrectangle.frag.qsb
         shadowedrectangle_lowpower.frag.qsb
