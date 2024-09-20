@@ -8,6 +8,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQml
+import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
@@ -229,8 +230,7 @@ QQC2.ToolBar {
         }
     }
 
-    // Using Row because setting just width is more convenient than having to set Layout.minimumWidth and Layout.maximumWidth
-    contentItem: Row {
+    contentItem: RowLayout {
         id: rowLayout
         spacing: root.spacing
     }
@@ -265,9 +265,12 @@ QQC2.ToolBar {
 
             parent: root.contentItem
             action: modelData
-            width: root.buttonWidth
             // Workaround setting the action when checkable is not explicitly set making tabs uncheckable
             onActionChanged: action.checkable = true
+
+            Layout.minimumWidth: root.buttonWidth
+            Layout.maximumWidth: root.buttonWidth
+            Layout.fillHeight: true
 
             Kirigami.Theme.textColor: root.Kirigami.Theme.textColor
             Kirigami.Theme.backgroundColor: root.Kirigami.Theme.backgroundColor
