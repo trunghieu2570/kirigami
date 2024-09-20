@@ -9,33 +9,36 @@ import QtQuick
 import QtQuick.Controls as QQC2
 
 /*!
- * \brief This is a label which supports text selection.
- *
- * You can use all elements of the QML TextArea component, in particular
- * the "text" property to define the label text.
- *
- * Example usage:
- * \code{.qml}
- *     Kirigami.SelectableLabel {
- *         text: "Label"
- *     }
- * \endcode
- *
- * \sa https://bugreports.qt.io/browse/QTBUG-14077
- * \since 5.95
- * \since org.kde.kirigami 2.20
- * @inherit QtQuick.Controls.TextArea
+  \qmltype SelectableLabel
+  \inqmlmodule org.kde.kirigami
+
+  \brief This is a label which supports text selection.
+
+  You can use all elements of the QML TextArea component, in particular
+  the "text" property to define the label text.
+
+  Example usage:
+  \qml
+      Kirigami.SelectableLabel {
+          text: "Label"
+      }
+  \endqml
+
+  \sa https://bugreports.qt.io/browse/QTBUG-14077
+  \since 5.95
  */
 QQC2.TextArea {
     id: root
 
     /*!
-     * \brief This property holds the cursor shape that will appear whenever
-     * the mouse is hovering over the label.
-     *
-     * default: @c Qt.IBeamCursor
-     *
-     * @property Qt::CursorShape cursorShape
+      \qmlproperty enumeration SelectableLabel::cursorShape
+
+      \brief This property holds the cursor shape that will appear whenever
+      the mouse is hovering over the label.
+
+      default: \c Qt.IBeamCursor
+
+      \sa Qt::CursorShape
      */
     property alias cursorShape: hoverHandler.cursorShape
 
