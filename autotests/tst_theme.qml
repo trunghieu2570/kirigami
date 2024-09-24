@@ -295,4 +295,34 @@ TestCase {
 
         compare(item.child.background.color, "#ff0000")
     }
+
+    Component {
+        id: signalCount
+
+        Rectangle {
+            id: rect
+
+            Kirigami.Theme.inherit: false
+
+            color: Kirigami.Theme.backgroundColor
+
+            property SignalSpy signalSpy: SignalSpy {
+                target: rect.Kirigami.Theme
+                signalName: "colorsChanged"
+            }
+        }
+    }
+
+    function test_signal_count() {
+        var item = createTemporaryObject(signalCount, testCase)
+        verify(item)
+        verify(item.signalSpy.valid)
+        compare(item.signalSpy.count, 0)
+
+        item.Kirigami.Theme.colorSet = Kirigami.Theme.View
+        compare(item.signalSpy.count, 1)
+
+        item.Kirigami.Theme.colorSet = Kirigami.Theme.Window
+        compare(item.signalSpy.count, 2)
+    }
 }
