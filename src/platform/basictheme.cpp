@@ -97,6 +97,8 @@ BasicTheme::~BasicTheme()
 
 void BasicTheme::sync()
 {
+    PlatformThemeChangeTracker tracker{this};
+
     auto &definition = basicThemeInstance()->themeDefinition(qmlEngine(parent()));
 
     switch (colorSet()) {
