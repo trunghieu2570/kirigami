@@ -98,6 +98,10 @@ TestCase {
         id: inherit
 
         Rectangle {
+            // Ensure the root object we test with doesn't accidentally inherit
+            // from the parent test object.
+            Kirigami.Theme.inherit: false
+
             color: Kirigami.Theme.backgroundColor
 
             property alias child1: rect1
@@ -170,6 +174,10 @@ TestCase {
         id: deepInherit
 
         Rectangle {
+            // Ensure the root object we test with doesn't accidentally inherit
+            // from the parent test object.
+            Kirigami.Theme.inherit: false
+
             color: Kirigami.Theme.backgroundColor
 
             property alias child1: rect1
@@ -248,6 +256,10 @@ TestCase {
         id: colorSet
 
         Rectangle {
+            // Ensure the root object we test with doesn't accidentally inherit
+            // from the parent test object.
+            Kirigami.Theme.inherit: false
+
             Kirigami.Theme.colorSet: Kirigami.Theme.View
             color: Kirigami.Theme.backgroundColor
         }
@@ -272,6 +284,10 @@ TestCase {
         id: colorGroup
 
         Rectangle {
+            // Ensure the root object we test with doesn't accidentally inherit
+            // from the parent test object.
+            Kirigami.Theme.inherit: false
+
             Kirigami.Theme.colorGroup: Kirigami.Theme.Disabled
             color: Kirigami.Theme.backgroundColor
         }
