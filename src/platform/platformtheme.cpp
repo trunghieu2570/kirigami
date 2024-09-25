@@ -255,6 +255,39 @@ public:
     }
 };
 
+class PlatformThemeStore : public QObject
+{
+    Q_OBJECT
+public:
+    PlatformThemeStore(QObject *parent = nullptr);
+    PlatformThemeData *themeData(PlatformTheme::ColorGroup group, PlatformTheme::ColorSet set);
+
+private:
+    QHash<QPair<PlatformTheme::ColorGroup, PlatformTheme::ColorSet>, PlatformThemeData *> m_themeData;
+};
+
+PlatformThemeStore::PlatformThemeStore(QObject *parent)
+    : QObject(parent)
+{
+}
+
+PlatformThemeData *PlatformThemeStore::themeData(PlatformTheme::ColorGroup group, PlatformTheme::ColorSet set)
+{
+    const QPair<PlatformTheme::ColorGroup, PlatformTheme::ColorSet> key(group, set);
+
+    auto search = m_themeData.constFind(key);
+    if (search == m_themeData.constEnd()) {
+        PlatformThemeData *data = new PlatformThemeData;
+        data->colorGroup = group;
+        data->colorSet = set;
+        m_themeData[key] = data;
+        return data;
+    }
+    return *search;
+}
+
+Q_GLOBAL_STATIC(PlatformThemeStore, platformThemeStore)
+
 class PlatformThemePrivate
 {
 public:
@@ -267,6 +300,7 @@ public:
         , colorSet(PlatformTheme::Window)
         , colorGroup(PlatformTheme::Active)
     {
+        data = platformThemeStore()->themeData(PlatformTheme::ColorGroup(colorGroup), PlatformTheme::ColorSet(colorSet));
     }
 
     inline QColor color(const PlatformTheme *theme, PlatformThemeData::ColorRole color) const
@@ -354,9 +388,11 @@ public:
      * works the same without needing memory.
      */
 
+    QPointer<PlatformTheme> parentTheme;
     // An instance of the data object. This is potentially shared with many
     // instances of PlatformTheme.
-    std::shared_ptr<PlatformThemeData> data;
+    // std::shared_ptr<PlatformThemeData> data;
+    PlatformThemeData *data = nullptr;
     // Used to store color overrides of inherited data. This is created on
     // demand and will only exist if we actually have local overrides.
     std::unique_ptr<PlatformThemeData::ColorMap> localOverrides;
@@ -949,15 +985,7 @@ void PlatformTheme::update()
 {
     auto oldData = d->data;
 
-    bool actualInherit = d->inherit;
-    if (QQuickItem *item = qobject_cast<QQuickItem *>(parent())) {
-        // For inactive windows it should work already, as also the non inherit themes get it
-        if (colorGroup() != Disabled && !item->isEnabled()) {
-            actualInherit = false;
-        }
-    }
-
-    if (actualInherit) {
+    if (d->inherit) {
         QObject *candidate = parent();
         while (true) {
             candidate = determineParent(candidate);
@@ -966,15 +994,16 @@ void PlatformTheme::update()
             }
 
             auto t = static_cast<PlatformTheme *>(qmlAttachedPropertiesObject<PlatformTheme>(candidate, false));
-            if (t && t->d->data && t->d->data->owner == t) {
-                if (d->data == t->d->data) {
-                    // Inheritance is already correct, do nothing.
-                    return;
-                }
+            if (t && t->d->data /*&& t->d->data->owner == t*/) {
+                /* if (d->data == t->d->data) {
+                     // Inheritance is already correct, do nothing.
+                     return;
+                 }*/
 
-                d->data = t->d->data;
+                d->parentTheme = t;
+                d->data = platformThemeStore()->themeData(Kirigami::Platform::PlatformTheme::ColorGroup(d->colorGroup), t->colorSet());
 
-                PlatformThemeEvents::DataChangedEvent event{this, oldData, t->d->data};
+                PlatformThemeEvents::DataChangedEvent event{this, oldData, d->data};
                 QCoreApplication::sendEvent(this, &event);
 
                 return;
@@ -987,7 +1016,7 @@ void PlatformTheme::update()
     }
 
     if (!d->data) {
-        d->data = std::make_shared<PlatformThemeData>();
+        d->data = platformThemeStore()->themeData(Kirigami::Platform::PlatformTheme::ColorGroup(d->colorGroup), colorSet());
         d->data->owner = this;
         d->data->setColorSet(this, static_cast<ColorSet>(d->colorSet));
         d->data->setColorGroup(this, static_cast<ColorGroup>(d->colorGroup));

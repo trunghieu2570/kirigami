@@ -444,7 +444,7 @@ public:
     static QEvent::Type type;
 };
 
-using DataChangedEvent = PropertyChangedEvent<std::shared_ptr<PlatformThemeData>>;
+using DataChangedEvent = PropertyChangedEvent<PlatformThemeData *>;
 using ColorSetChangedEvent = PropertyChangedEvent<PlatformTheme::ColorSet>;
 using ColorGroupChangedEvent = PropertyChangedEvent<PlatformTheme::ColorGroup>;
 using ColorChangedEvent = PropertyChangedEvent<QColor>;
