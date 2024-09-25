@@ -389,6 +389,7 @@ PlatformTheme::PlatformTheme(QObject *parent)
     if (QQuickItem *item = qobject_cast<QQuickItem *>(parent)) {
         connect(item, &QQuickItem::windowChanged, this, &PlatformTheme::update);
         connect(item, &QQuickItem::parentChanged, this, &PlatformTheme::update);
+        connect(item, &QQuickItem::enabledChanged, this, &PlatformTheme::update);
     }
 
     update();
@@ -948,7 +949,15 @@ void PlatformTheme::update()
 {
     auto oldData = d->data;
 
-    if (d->inherit) {
+    bool actualInherit = d->inherit;
+    if (QQuickItem *item = qobject_cast<QQuickItem *>(parent())) {
+        // For inactive windows it should work already, as also the non inherit themes get it
+        if (colorGroup() != Disabled && !item->isEnabled()) {
+            actualInherit = false;
+        }
+    }
+
+    if (actualInherit) {
         QObject *candidate = parent();
         while (true) {
             candidate = determineParent(candidate);
@@ -971,7 +980,7 @@ void PlatformTheme::update()
                 return;
             }
         }
-    } else if (d->data->owner != this) {
+    } else if (d->data && d->data->owner != this) {
         // Inherit has changed and we no longer want to inherit, clear the data
         // so it is recreated below.
         d->data = nullptr;

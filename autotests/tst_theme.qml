@@ -325,4 +325,54 @@ TestCase {
         item.Kirigami.Theme.colorSet = Kirigami.Theme.Window
         compare(item.signalSpy.count, 2)
     }
+
+    Component {
+        id: disable
+
+        Rectangle {
+            // Ensure the root object we test with doesn't accidentally inherit
+            // from the parent test object.
+            Kirigami.Theme.inherit: false
+
+            color: Kirigami.Theme.textColor
+
+            property alias child1: rect1
+            property alias child2: rect2
+
+            Rectangle {
+                id: rect1
+                color: Kirigami.Theme.textColor
+                Rectangle {
+                    id: rect2
+                    color: Kirigami.Theme.textColor
+                }
+            }
+        }
+    }
+
+    function test_disable() {
+        var item = createTemporaryObject(disable, testCase)
+        verify(item)
+        verify(waitForRendering(item))
+
+        // Default values are all the same
+        compare(item.color, "#31363b")
+        compare(item.child1.color, "#31363b")
+        compare(item.child2.color, "#31363b")
+
+        item.enabled = false
+        verify(waitForRendering(item))
+
+        compare(item.color, "#2b2d2f")
+        compare(item.child1.color, "#2b2d2f")
+        compare(item.child2.color, "#2b2d2f")
+
+        item.enabled = true
+        item.child1.enabled = false
+        verify(waitForRendering(item))
+
+        compare(item.color, "#31363b")
+        compare(item.child1.color, "#2b2d2f")
+        compare(item.child2.color, "#2b2d2f")
+    }
 }

@@ -194,6 +194,9 @@ bool BasicTheme::event(QEvent *event)
 
 QColor BasicTheme::tint(const QColor &color)
 {
+    if (QQuickItem *item = qobject_cast<QQuickItem *>(parent()); item && !item->isEnabled()) {
+        return QColor::fromHsvF(color.hueF(), color.saturationF() * 0.5, color.valueF() * 0.8);
+    }
     switch (colorGroup()) {
     case PlatformTheme::Inactive:
         return QColor::fromHsvF(color.hueF(), color.saturationF() * 0.5, color.valueF());
