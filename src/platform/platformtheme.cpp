@@ -389,7 +389,7 @@ PlatformTheme::PlatformTheme(QObject *parent)
     if (QQuickItem *item = qobject_cast<QQuickItem *>(parent)) {
         connect(item, &QQuickItem::windowChanged, this, &PlatformTheme::update);
         connect(item, &QQuickItem::parentChanged, this, &PlatformTheme::update);
-        connect(item, &QQuickItem::enabledChanged, this, &PlatformTheme::update);
+        connect(item, &QQuickItem::enabledChanged, this, &PlatformTheme::update, Qt::QueuedConnection);
     }
 
     update();
