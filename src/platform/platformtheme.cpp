@@ -147,7 +147,7 @@ public:
 
     inline void setColor(PlatformTheme *sender, ColorRole role, const QColor &color)
     {
-        if (sender != owner || colors[role] == color) {
+        if (sender->inherit() || colors[role] == color) {
             return;
         }
 
@@ -444,10 +444,6 @@ void PlatformTheme::setColorSet(PlatformTheme::ColorSet colorSet)
 {
     PlatformThemeChangeTracker tracker(this, PlatformThemeChangeTracker::PropertyChange::ColorSet);
     d->colorSet = colorSet;
-
-    if (d->data) {
-        d->data->setColorSet(this, colorSet);
-    }
 }
 
 PlatformTheme::ColorSet PlatformTheme::colorSet() const
@@ -459,10 +455,6 @@ void PlatformTheme::setColorGroup(PlatformTheme::ColorGroup colorGroup)
 {
     PlatformThemeChangeTracker tracker(this, PlatformThemeChangeTracker::PropertyChange::ColorGroup);
     d->colorGroup = colorGroup;
-
-    if (d->data) {
-        d->data->setColorGroup(this, colorGroup);
-    }
 }
 
 PlatformTheme::ColorGroup PlatformTheme::colorGroup() const
@@ -994,7 +986,7 @@ void PlatformTheme::update()
             }
 
             auto t = static_cast<PlatformTheme *>(qmlAttachedPropertiesObject<PlatformTheme>(candidate, false));
-            if (t && t->d->data /*&& t->d->data->owner == t*/) {
+            if (t /*&& t->d->data && t->d->data->owner == t*/) {
                 /* if (d->data == t->d->data) {
                      // Inheritance is already correct, do nothing.
                      return;
@@ -1003,13 +995,19 @@ void PlatformTheme::update()
                 d->parentTheme = t;
                 d->data = platformThemeStore()->themeData(Kirigami::Platform::PlatformTheme::ColorGroup(d->colorGroup), t->colorSet());
 
-                PlatformThemeEvents::DataChangedEvent event{this, oldData, d->data};
-                QCoreApplication::sendEvent(this, &event);
+                if (d->data != oldData) {
+                    PlatformThemeEvents::DataChangedEvent event{this, oldData, d->data};
+                    QCoreApplication::sendEvent(this, &event);
+                }
 
                 return;
             }
         }
-    } else if (d->data && d->data->owner != this) {
+    } else {
+        d->data = platformThemeStore()->themeData(Kirigami::Platform::PlatformTheme::ColorGroup(d->colorGroup),
+                                                  Kirigami::Platform::PlatformTheme::ColorSet(d->colorSet));
+    }
+    /* else if (d->data && d->data->owner != this) {
         // Inherit has changed and we no longer want to inherit, clear the data
         // so it is recreated below.
         d->data = nullptr;
@@ -1026,7 +1024,7 @@ void PlatformTheme::update()
         for (auto entry : *d->localOverrides) {
             d->data->setColor(this, PlatformThemeData::ColorRole(entry.first), entry.second);
         }
-    }
+    }*/
 
     PlatformThemeEvents::DataChangedEvent event{this, oldData, d->data};
     QCoreApplication::sendEvent(this, &event);
@@ -1069,7 +1067,8 @@ QObject *PlatformTheme::determineParent(QObject *object)
 PlatformThemeChangeTracker::PlatformThemeChangeTracker(PlatformTheme *theme, PropertyChanges changes)
     : m_theme(theme)
 {
-    if (!s_blockedChanges.contains(theme)) {
+    auto itr = s_blockedChanges.constFind(theme);
+    if (itr == s_blockedChanges.constEnd() || (*itr).expired()) {
         m_data = std::make_shared<Data>();
         s_blockedChanges.insert(theme, m_data);
     } else {
