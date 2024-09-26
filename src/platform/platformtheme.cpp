@@ -1040,11 +1040,12 @@ QObject *PlatformTheme::determineParent(QObject *object)
 PlatformThemeChangeTracker::PlatformThemeChangeTracker(PlatformTheme *theme, PropertyChanges changes)
     : m_theme(theme)
 {
-    if (!s_blockedChanges.contains(theme)) {
+    auto itr = s_blockedChanges.constFind(theme);
+    if (itr == s_blockedChanges.constEnd() || (*itr).expired()) {
         m_data = std::make_shared<Data>();
         s_blockedChanges.insert(theme, m_data);
     } else {
-        m_data = s_blockedChanges.value(theme).lock();
+        m_data = (*itr).lock();
     }
 
     m_data->changes |= changes;
