@@ -275,8 +275,8 @@ T.Dialog {
 
     z: Kirigami.OverlayZStacking.z
 
-    // calculate dimensions
-    implicitWidth: contentItem.implicitWidth + leftPadding + rightPadding // maximum width enforced from our content (one source of truth) to avoid binding loops
+    // calculate dimensions and in case footer is wider than content, use that
+    implicitWidth: Math.max(contentItem.implicitWidth, footerToolBar.implicitWidth) + leftPadding + rightPadding // maximum width enforced from our content (one source of truth) to avoid binding loops
     implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
                     + (implicitHeaderHeight > 0 ? implicitHeaderHeight + spacing : 0)
                     + (implicitFooterHeight > 0 ? implicitFooterHeight + spacing : 0);
@@ -473,6 +473,7 @@ T.Dialog {
         // if there is nothing in the footer, still maintain a height so that we can create a rounded bottom buffer for the dialog
         property bool bufferMode: !root.footerLeadingComponent && !dialogButtonBox.visible
         implicitHeight: bufferMode ? Math.round(Kirigami.Units.smallSpacing / 2) : contentItem.implicitHeight + topPadding + bottomPadding
+        implicitWidth: dialogButtonBox.implicitWidth
 
         padding: !bufferMode ? Kirigami.Units.largeSpacing : 0
 
