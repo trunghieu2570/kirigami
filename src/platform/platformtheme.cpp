@@ -389,6 +389,10 @@ PlatformTheme::PlatformTheme(QObject *parent)
     if (QQuickItem *item = qobject_cast<QQuickItem *>(parent)) {
         connect(item, &QQuickItem::windowChanged, this, &PlatformTheme::update);
         connect(item, &QQuickItem::parentChanged, this, &PlatformTheme::update);
+        // Needs to be connected to enabledChanged twice to correctly fully update when a
+        // Theme that does inherit becomes temporarly non-inherit and back due to
+        // the item being enabled or disabled
+        connect(item, &QQuickItem::enabledChanged, this, &PlatformTheme::update);
         connect(item, &QQuickItem::enabledChanged, this, &PlatformTheme::update, Qt::QueuedConnection);
     }
 
