@@ -311,9 +311,14 @@ public:
 
         QColor value = data->colors.at(color);
 
-        if (data->owner != theme && localOverrides) {
+        if (localOverrides) {
             auto itr = localOverrides->find(color);
             if (itr != localOverrides->end()) {
+                value = itr->second;
+            }
+        } else if (inherit && parentTheme && parentTheme->d->localOverrides) {
+            auto itr = parentTheme->d->localOverrides->find(color);
+            if (itr != parentTheme->d->localOverrides->end()) {
                 value = itr->second;
             }
         }
@@ -444,6 +449,7 @@ void PlatformTheme::setColorSet(PlatformTheme::ColorSet colorSet)
 {
     PlatformThemeChangeTracker tracker(this, PlatformThemeChangeTracker::PropertyChange::ColorSet);
     d->colorSet = colorSet;
+    update();
 }
 
 PlatformTheme::ColorSet PlatformTheme::colorSet() const
