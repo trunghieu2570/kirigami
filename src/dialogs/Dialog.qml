@@ -355,12 +355,8 @@ T.Dialog {
 
         property real calculatedMaximumWidth: Math.min(root.absoluteMaximumWidth, root.maximumWidth) - root.leftPadding - root.rightPadding
         property real calculatedMaximumHeight: Math.min(root.absoluteMaximumHeight, root.maximumHeight) - root.topPadding - root.bottomPadding
-        property real calculatedImplicitWidth: (contentChildren.length === 1 && contentChildren[0].implicitWidth > 0
-            ? contentChildren[0].implicitWidth
-            : (contentItem.implicitWidth > 0 ? contentItem.implicitWidth : contentItem.width)) + leftPadding + rightPadding
-        property real calculatedImplicitHeight: (contentChildren.length === 1 && contentChildren[0].implicitHeight > 0
-                ? contentChildren[0].implicitHeight
-                : (contentItem.implicitHeight > 0 ? contentItem.implicitHeight : contentItem.height)) + topPadding + bottomPadding
+        property real calculatedImplicitWidth: (contentChildren.length === 1 && contentChildren[0].implicitWidth > 0 ? contentChildren[0].implicitWidth : contentItem.implicitWidth) + leftPadding + rightPadding
+        property real calculatedImplicitHeight: (contentChildren.length === 1 && contentChildren[0].implicitHeight > 0? contentChildren[0].implicitHeight: contentItem.implicitHeight) + topPadding + bottomPadding
 
         onContentItemChanged: {
             const contentFlickable = contentItem as Flickable;
@@ -401,13 +397,7 @@ T.Dialog {
         property var widthHint: Binding {
             target: contentControl.contentChildren[0] || null
             property: "width"
-
-            // we want to avoid horizontal scrolling, so we apply maximumWidth as a hint if necessary
-            property real preferredWidthHint: contentControl.contentItem.width
-            property real maximumWidthHint: contentControl.calculatedMaximumWidth - contentControl.leftPadding - contentControl.rightPadding
-
-            value: Math.min(maximumWidthHint, preferredWidthHint)
-
+            value: contentControl.width + contentControl.leftPadding + contentControl.rightPadding
             restoreMode: Binding.RestoreBinding
         }
     }
