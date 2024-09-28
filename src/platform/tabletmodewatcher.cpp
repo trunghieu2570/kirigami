@@ -50,13 +50,10 @@ public:
         // Mostly for debug purposes and for platforms which are always mobile,
         // such as Plasma Mobile
         if (qEnvironmentVariableIsSet("QT_QUICK_CONTROLS_MOBILE") || qEnvironmentVariableIsSet("KDE_KIRIGAMI_TABLET_MODE")) {
-            /* clang-format off */
-            isTabletMode =
-                (QString::fromLatin1(qgetenv("QT_QUICK_CONTROLS_MOBILE")) == QStringLiteral("1")
-                    || QString::fromLatin1(qgetenv("QT_QUICK_CONTROLS_MOBILE")) == QStringLiteral("true"))
-                    || (QString::fromLatin1(qgetenv("KDE_KIRIGAMI_TABLET_MODE")) == QStringLiteral("1")
-                    || QString::fromLatin1(qgetenv("KDE_KIRIGAMI_TABLET_MODE")) == QStringLiteral("true"));
-            /* clang-format on */
+            isTabletMode = (QString::fromLatin1(qgetenv("QT_QUICK_CONTROLS_MOBILE")) == QLatin1String("1")
+                            || QString::fromLatin1(qgetenv("QT_QUICK_CONTROLS_MOBILE")) == QLatin1String("true"))
+                || (QString::fromLatin1(qgetenv("KDE_KIRIGAMI_TABLET_MODE")) == QLatin1String("1")
+                    || QString::fromLatin1(qgetenv("KDE_KIRIGAMI_TABLET_MODE")) == QLatin1String("true"));
             isTabletModeAvailable = isTabletMode;
         } else if (qEnvironmentVariableIsSet("QT_NO_XDG_DESKTOP_PORTAL")) {
             isTabletMode = false;
@@ -94,7 +91,7 @@ public:
 // TODO: case for Windows
 #endif
     }
-    ~TabletModeWatcherPrivate(){};
+    ~TabletModeWatcherPrivate() = default;
     void setIsTablet(bool tablet);
 
     TabletModeWatcher *q;
