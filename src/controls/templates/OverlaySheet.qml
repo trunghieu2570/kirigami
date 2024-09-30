@@ -64,6 +64,7 @@ T.Popup {
     property Item header: Kirigami.Heading {
         level: 2
         text: root.title
+        verticalAlignment: Text.AlignVCenter
         elide: Text.ElideRight
 
         // use tooltip for long text that is elided
