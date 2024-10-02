@@ -6,13 +6,17 @@
  */
 
 import QtQuick
+import org.kde.kirigami as Kirigami
 import QtQuick.Controls as QQC2
+import QtQuick.Templates as T
 
 /**
  * @brief This is a label which supports text selection.
  *
- * You can use all elements of the QML TextArea component, in particular
+ * You can use all elements of the QML TextEdit component, in particular
  * the "text" property to define the label text.
+ * The properties and signals that belong to TextArea are included for compatiblity reasons,
+ * but they're deprecated and do not do anything.
  *
  * Example usage:
  * @code{.qml}
@@ -24,10 +28,30 @@ import QtQuick.Controls as QQC2
  * @see https://bugreports.qt.io/browse/QTBUG-14077
  * @since 5.95
  * @since org.kde.kirigami 2.20
- * @inherit QtQuick.Controls.TextArea
+ * @inherit QtQuick.TextEdit
  */
-QQC2.TextArea {
+TextEdit {
     id: root
+
+    // Unused deprecated properties shared with TextArea to maintain API compatibility
+    property var background
+    property real bottomInset
+    property var focusReason
+    property bool hoverEnabled
+    property bool hovered
+    property real implicitBackgroundHeight
+    property real implicitBackgroundWidth
+    property real leftInset
+    property string placeholderText
+    property color placeholderTextColor
+    property real rightInset
+    property real topInset
+    property var flickable
+
+    // Unused deprecated signals shared with TextArea to maintain API compatibility
+    signal onPressAndHold()
+    signal onPressed()
+    signal onReleased()
 
     /**
      * @brief This property holds the cursor shape that will appear whenever
@@ -54,7 +78,10 @@ QQC2.TextArea {
     Accessible.selectableText: true
     Accessible.editable: false
 
-    background: Item {}
+    color: Kirigami.Theme.textColor
+    selectedTextColor: Kirigami.Theme.highlightedTextColor
+    selectionColor: Kirigami.Theme.highlightColor
+    onLinkActivated: url => Qt.openUrlExternally(url)
 
     HoverHandler {
         id: hoverHandler
@@ -66,5 +93,43 @@ QQC2.TextArea {
         // See qqc2-desktop-style Label.qml
         enabled: false
         cursorShape: root.hoveredLink ? Qt.PointingHandCursor : Qt.IBeamCursor
+    }
+
+    TapHandler {
+        enabled: root.selectByMouse
+
+        acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad | PointerDevice.Stylus
+        acceptedButtons: Qt.RightButton
+
+        onTapped: {
+            contextMenu.popup();
+        }
+    }
+
+    QQC2.Menu {
+        id: contextMenu
+        QQC2.MenuItem {
+            action: T.Action {
+                icon.name: "edit-copy-symbolic"
+                text: qsTr("Copy")
+                shortcut: StandardKey.Copy
+            }
+            enabled: root.selectedText.length > 0
+            onTriggered: {
+                root.copy();
+                root.deselect();
+            }
+        }
+        QQC2.MenuSeparator {}
+        QQC2.MenuItem {
+            action: T.Action {
+                icon.name: "edit-select-all-symbolic"
+                text: qsTr("Select All")
+                shortcut: StandardKey.SelectAll
+            }
+            onTriggered: {
+                root.selectAll();
+            }
+        }
     }
 }
