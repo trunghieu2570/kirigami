@@ -77,13 +77,6 @@ set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6Kirigami")
 option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
 add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
 
-configure_package_config_file(
-    "KF6KirigamiConfig.cmake.in"
-    "KF6KirigamiConfig.cmake"
-    INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
-    PATH_VARS CMAKE_INSTALL_PREFIX
-)
-
 ecm_setup_version(PROJECT
     VARIABLE_PREFIX KIRIGAMI
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kirigami_version.h"
@@ -95,28 +88,6 @@ ecm_setup_version(PROJECT
     VARIABLE_PREFIX KIRIGAMI
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2ConfigVersion.cmake"
     SOVERSION 6
-)
-
-install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiConfigVersion.cmake"
-    "${CMAKE_CURRENT_SOURCE_DIR}/KF6KirigamiMacros.cmake"
-    DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-    COMPONENT Devel
-)
-
-configure_package_config_file(
-    "KF6Kirigami2Config.cmake.in"
-    "KF6Kirigami2Config.cmake"
-    INSTALL_DESTINATION "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6Kirigami2"
-    PATH_VARS CMAKE_INSTALL_PREFIX
-)
-
-install(
-    FILES ${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2Config.cmake
-    "${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2ConfigVersion.cmake"
-    DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6Kirigami2
-    COMPONENT Devel
 )
 
 # shall we use DBus?
@@ -174,6 +145,35 @@ endif()
 if (BUILD_TESTING)
     add_subdirectory(autotests)
 endif()
+
+configure_package_config_file(
+    "KF6KirigamiConfig.cmake.in"
+    "KF6KirigamiConfig.cmake"
+    INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
+    PATH_VARS CMAKE_INSTALL_PREFIX
+)
+
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiConfigVersion.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/KF6KirigamiMacros.cmake"
+    DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+    COMPONENT Devel
+)
+
+configure_package_config_file(
+    "KF6Kirigami2Config.cmake.in"
+    "KF6Kirigami2Config.cmake"
+    INSTALL_DESTINATION "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6Kirigami2"
+    PATH_VARS CMAKE_INSTALL_PREFIX
+)
+
+install(
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2Config.cmake
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6Kirigami2ConfigVersion.cmake"
+    DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6Kirigami2
+    COMPONENT Devel
+)
 
 ecm_install_po_files_as_qm(poqm)
 
