@@ -198,6 +198,10 @@ ecm_target_qml_sources(Kirigami VERSION 2.20 SOURCES
     controls/ContextualHelpButton.qml
 )
 
+ecm_target_qml_sources(Kirigami VERSION 2.21 SOURCES
+    controls/SelectableText.qml
+)
+
 ecm_target_qml_sources(Kirigami PRIVATE PATH private SOURCES
     controls/private/ActionIconGroup.qml
     controls/private/ActionMenuItem.qml

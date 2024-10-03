@@ -14,8 +14,7 @@ import QtQuick.Templates as T
 /**
  * @brief This is a label which supports text selection.
  *
- * You can use all elements of the QML TextEdit component, in particular
- * the "text" property to define the label text.
+ * The label uses TextEdit component, which is wrapped inside a Control component.
  *
  * This element should be used instead of SelectableLabel, due to SelectableLabel using TextArea
  * which can have issues when resizing.
@@ -28,88 +27,103 @@ import QtQuick.Templates as T
  * @endcode
  *
  * @see https://bugreports.qt.io/browse/QTBUG-14077
+ * @since org.kde.kirigami 2.21
  * @since 6.7
  * @inherit QtQuick.TextEdit
  */
-TextEdit {
+
+QQC2.Control {
     id: root
 
-    /**
-     * @brief This property holds the cursor shape that will appear whenever
-     * the mouse is hovering over the label.
-     *
-     * default: @c Qt.IBeamCursor
-     *
-     * @property Qt::CursorShape cursorShape
-     */
-    property alias cursorShape: hoverHandler.cursorShape
-
     padding: 0
-    topPadding: undefined
-    leftPadding: undefined
-    rightPadding: undefined
-    bottomPadding: undefined
-
     activeFocusOnTab: false
-    readOnly: true
-    wrapMode: TextEdit.WordWrap
-    textFormat: TextEdit.AutoText
-    verticalAlignment: TextEdit.AlignTop
+    property bool readOnly: true
+    property var wrapMode: TextEdit.WordWrap
+    property var textFormat: TextEdit.AutoText
+    property var verticalAlignment: TextEdit.AlignTop
+    property color color: Kirigami.Theme.textColor
+    property color selectedTextColor: Kirigami.Theme.highlightedTextColor
+    property color selectionColor: Kirigami.Theme.highlightColor
+    property string text
 
-    Accessible.selectableText: true
-    Accessible.editable: false
+    implicitWidth: textEdit.implicitWidth
+    implicitHeight: textEdit.implicitHeight
 
-    color: Kirigami.Theme.textColor
-    selectedTextColor: Kirigami.Theme.highlightedTextColor
-    selectionColor: Kirigami.Theme.highlightColor
-    onLinkActivated: url => Qt.openUrlExternally(url)
+    TextEdit {
+        id: textEdit
 
-    HoverHandler {
-        id: hoverHandler
-        // By default HoverHandler accepts the left button while it shouldn't accept anything,
-        // causing https://bugreports.qt.io/browse/QTBUG-106489.
-        // Qt.NoButton unfortunately is not a valid value for acceptedButtons.
-        // Disabling masks the problem, but
-        // there is no proper workaround other than an upstream fix
-        // See qqc2-desktop-style Label.qml
-        enabled: false
-        cursorShape: root.hoveredLink ? Qt.PointingHandCursor : Qt.IBeamCursor
-    }
+        /**
+        * @brief This property holds the cursor shape that will appear whenever
+        * the mouse is hovering over the label.
+        *
+        * default: @c Qt.IBeamCursor
+        *
+        * @property Qt::CursorShape cursorShape
+        */
+        property alias cursorShape: hoverHandler.cursorShape
 
-    TapHandler {
-        enabled: root.selectByMouse
+        padding: root.padding
+        activeFocusOnTab: root.activeFocusOnTab
+        readOnly: root.readOnly
+        wrapMode: root.wrapMode
+        textFormat: root.textFormat
+        verticalAlignment: root.verticalAlignment
+        color: root.color
+        selectedTextColor: root.selectedTextColor
+        selectionColor: root.selectionColor
+        onLinkActivated: url => Qt.openUrlExternally(url)
 
-        acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad | PointerDevice.Stylus
-        acceptedButtons: Qt.RightButton
+        text: root.text
 
-        onTapped: {
-            contextMenu.popup();
+        Accessible.selectableText: true
+        Accessible.editable: false
+        HoverHandler {
+            id: hoverHandler
+            // By default HoverHandler accepts the left button while it shouldn't accept anything,
+            // causing https://bugreports.qt.io/browse/QTBUG-106489.
+            // Qt.NoButton unfortunately is not a valid value for acceptedButtons.
+            // Disabling masks the problem, but
+            // there is no proper workaround other than an upstream fix
+            // See qqc2-desktop-style Label.qml
+            enabled: false
+            cursorShape: textEdit.hoveredLink ? Qt.PointingHandCursor : Qt.IBeamCursor
         }
-    }
 
-    QQC2.Menu {
-        id: contextMenu
-        QQC2.MenuItem {
-            action: T.Action {
-                icon.name: "edit-copy-symbolic"
-                text: qsTr("Copy")
-                shortcut: StandardKey.Copy
-            }
-            enabled: root.selectedText.length > 0
-            onTriggered: {
-                root.copy();
-                root.deselect();
+        TapHandler {
+            enabled: textEdit.selectByMouse
+
+            acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad | PointerDevice.Stylus
+            acceptedButtons: Qt.RightButton
+
+            onTapped: {
+                contextMenu.popup();
             }
         }
-        QQC2.MenuSeparator {}
-        QQC2.MenuItem {
-            action: T.Action {
-                icon.name: "edit-select-all-symbolic"
-                text: qsTr("Select All")
-                shortcut: StandardKey.SelectAll
+
+        QQC2.Menu {
+            id: contextMenu
+            QQC2.MenuItem {
+                action: T.Action {
+                    icon.name: "edit-copy-symbolic"
+                    text: qsTr("Copy")
+                    shortcut: StandardKey.Copy
+                }
+                enabled: textEdit.selectedText.length > 0
+                onTriggered: {
+                    textEdit.copy();
+                    textEdit.deselect();
+                }
             }
-            onTriggered: {
-                root.selectAll();
+            QQC2.MenuSeparator {}
+            QQC2.MenuItem {
+                action: T.Action {
+                    icon.name: "edit-select-all-symbolic"
+                    text: qsTr("Select All")
+                    shortcut: StandardKey.SelectAll
+                }
+                onTriggered: {
+                    textEdit.selectAll();
+                }
             }
         }
     }
