@@ -14,7 +14,9 @@ add_library(KF6::Kirigami ALIAS Kirigami)
 # generation on Windows for now.
 # On Qt 6.7.2 cachegen is causing https://bugs.kde.org/show_bug.cgi?id=488326
 # investigate if future versions fix it and we can re-enable it
-set(_extra_options NO_CACHEGEN)
+if (NOT ANDROID)
+    set(_extra_options NO_CACHEGEN)
+endif()
 if (BUILD_SHARED_LIBS)
     set(_extra_options ${_extra_options} NO_PLUGIN_OPTIONAL)
 endif()
