@@ -1,7 +1,13 @@
 add_library(KirigamiPlatform)
 add_library(KF6::KirigamiPlatform ALIAS KirigamiPlatform)
 
-ecm_add_qml_module(KirigamiPlatform URI "org.kde.kirigami.platform" VERSION 2.0 GENERATE_PLUGIN_SOURCE DEPENDENCIES QtQuick)
+ecm_add_qml_module(KirigamiPlatform
+    URI "org.kde.kirigami.platform"
+    VERSION 2.0
+    GENERATE_PLUGIN_SOURCE
+    INSTALLED_PLUGIN_TARGET KF6::KirigamiPlatformplugin
+    DEPENDENCIES QtQuick
+)
 
 set_target_properties(KirigamiPlatform PROPERTIES
     VERSION     ${PROJECT_VERSION}
@@ -74,8 +80,6 @@ target_include_directories(KirigamiPlatform
     "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami/Platform>"
 )
 
-include_static_dependencies(KirigamiPlatform EXPORT KF6KirigamiPlatformTargets)
-
 target_link_libraries(KirigamiPlatform
     PUBLIC
     Qt6::Core
@@ -112,10 +116,6 @@ install(FILES
     COMPONENT Devel
 )
 
-if (NOT BUILD_SHARED_LIBS)
-    install(TARGETS KirigamiPlatformplugin EXPORT KF6KirigamiPlatformTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
-endif()
-
 install(TARGETS KirigamiPlatform EXPORT KF6KirigamiPlatformTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(EXPORT KF6KirigamiPlatformTargets
@@ -143,7 +143,7 @@ ecm_qt_install_logging_categories(
     DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
 )
 
-ecm_finalize_qml_module(KirigamiPlatform)
+ecm_finalize_qml_module(KirigamiPlatform EXPORT KF6KirigamiPlatformTargets)
 
 if(BUILD_QCH)
     ecm_add_qch(

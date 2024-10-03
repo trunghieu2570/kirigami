@@ -3,6 +3,7 @@ add_library(KirigamiPrimitives)
 ecm_add_qml_module(KirigamiPrimitives URI "org.kde.kirigami.primitives"
     VERSION 2.0
     GENERATE_PLUGIN_SOURCE
+    INSTALLED_PLUGIN_TARGET KF6KirigamiPrimitives
     DEPENDENCIES QtQuick org.kde.kirigami.platform
 )
 
@@ -77,14 +78,10 @@ qt6_add_shaders(KirigamiPrimitives "shaders"
         shadowedbordertexture.frag.qsb
         shadowedbordertexture_lowpower.frag.qsb
     ${_extra_options}
+    OUTPUT_TARGETS _out_targets
 )
 
-include_static_dependencies(KirigamiPrimitives EXPORT KirigamiTargets)
+ecm_finalize_qml_module(KirigamiPrimitives EXPORT KirigamiTargets)
 
-ecm_finalize_qml_module(KirigamiPrimitives)
+install(TARGETS KirigamiPrimitives ${_out_targets} EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
-if (NOT BUILD_SHARED_LIBS)
-    install(TARGETS KirigamiPrimitivesplugin EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
-endif()
-
-install(TARGETS KirigamiPrimitives EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})

@@ -1,5 +1,3 @@
-include(${CMAKE_CURRENT_SOURCE_DIR}/IncludeStaticDependencies.cmake)
-
 add_subdirectory(platform)
 add_subdirectory(primitives)
 add_subdirectory(delegates)
@@ -30,6 +28,7 @@ add_library(KirigamiPrivate)
 ecm_add_qml_module(KirigamiPrivate
     URI "org.kde.kirigami.private"
     GENERATE_PLUGIN_SOURCE
+    INSTALLED_PLUGIN_TARGET KF6KirigamiPrivateplugin
 )
 
 set_target_properties(KirigamiPrivate PROPERTIES
@@ -45,15 +44,9 @@ target_sources(KirigamiPrivate PRIVATE
     actionhelper.h
 )
 
-include_static_dependencies(KirigamiPrivate EXPORT KirigamiTargets)
-
 target_link_libraries(KirigamiPrivate PRIVATE Qt6::Gui)
 
-ecm_finalize_qml_module(KirigamiPrivate DESTINATION ${KDE_INSTALL_QMLDIR})
-
-if (NOT BUILD_SHARED_LIBS)
-    install(TARGETS KirigamiPrivateplugin EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
-endif()
+ecm_finalize_qml_module(KirigamiPrivate DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiTargets)
 
 install(TARGETS KirigamiPrivate EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
@@ -61,6 +54,7 @@ install(TARGETS KirigamiPrivate EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFA
 
 ecm_add_qml_module(Kirigami URI "org.kde.kirigami" VERSION 2.0
     CLASS_NAME KirigamiPlugin
+    INSTALLED_PLUGIN_TARGET KF6Kirigamiplugin
     DEPENDENCIES
     "QtQuick.Controls"
     "org.kde.kirigami.private"
@@ -252,16 +246,16 @@ ecm_target_qml_sources(Kirigami PRIVATE PATH templates/private SOURCES
 qt_target_qml_sources(Kirigami RESOURCES
     styles/Material/InlineMessage.qml
     styles/Material/Theme.qml
+    OUTPUT_TARGETS _out_targets_1
 )
 
 if (DESKTOP_ENABLED)
     qt_target_qml_sources(Kirigami RESOURCES
         styles/org.kde.desktop/AbstractApplicationHeader.qml
         styles/org.kde.desktop/Theme.qml
+        OUTPUT_TARGETS _out_targets_2
     )
 endif()
-
-include_static_dependencies(Kirigami EXPORT KirigamiTargets)
 
 target_link_libraries(Kirigami
     PUBLIC
@@ -290,7 +284,8 @@ if (NOT BUILD_SHARED_LIBS)
             KirigamiLayoutsplugin
             KirigamiPrivateplugin
     )
-    install(TARGETS Kirigamiplugin EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+    # for tests to find this under the name it's actually installed with'
+    add_library(KF6Kirigamiplugin ALIAS Kirigamiplugin)
 else()
     target_link_libraries(Kirigami
         PUBLIC
@@ -304,14 +299,14 @@ else()
     )
 endif()
 
-install(TARGETS Kirigami EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS Kirigami ${_out_targets_1} ${_out_targets_2} EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 install(EXPORT KirigamiTargets
     DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6Kirigami
     FILE KF6KirigamiTargets.cmake
     NAMESPACE KF6
 )
 
-ecm_finalize_qml_module(Kirigami DESTINATION ${KDE_INSTALL_QMLDIR})
+ecm_finalize_qml_module(Kirigami DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiTargets)
 
 if (ANDROID)
     install(FILES Kirigami-android-dependencies.xml
