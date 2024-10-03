@@ -46,10 +46,7 @@ QQC2.Control {
     property color selectionColor: Kirigami.Theme.highlightColor
     property string text
 
-    implicitWidth: textEdit.implicitWidth
-    implicitHeight: textEdit.implicitHeight
-
-    TextEdit {
+    contentItem: TextEdit {
         id: textEdit
 
         /**
@@ -62,7 +59,7 @@ QQC2.Control {
         */
         property alias cursorShape: hoverHandler.cursorShape
 
-        padding: root.padding
+        padding: 0
         activeFocusOnTab: root.activeFocusOnTab
         readOnly: root.readOnly
         wrapMode: root.wrapMode
