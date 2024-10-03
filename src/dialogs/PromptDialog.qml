@@ -186,7 +186,7 @@ Kirigami.Dialog {
                         Layout.fillWidth: true
                     }
 
-                    Kirigami.SelectableText {
+                    Kirigami.SelectableLabel {
                         text: root.subtitle
                         wrapMode: TextEdit.Wrap
                         visible: text.length > 0
