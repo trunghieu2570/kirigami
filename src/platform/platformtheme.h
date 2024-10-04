@@ -372,6 +372,9 @@ private:
  * instead batching all of them into a single signal emission. This then ensures
  * things making use of PlatformTheme aren't needlessly redrawn or redrawn in a
  * partially changed state.
+ *
+ * @since 6.7
+ *
  */
 class KIRIGAMIPLATFORM_EXPORT PlatformThemeChangeTracker
 {

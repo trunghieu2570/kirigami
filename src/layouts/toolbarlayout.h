@@ -78,6 +78,8 @@ class ToolBarLayout : public QQuickItem
     /**
      * A component that is used to create separator delegates from.
      *
+     * \since 6.7
+     *
      * \sa fullDelegate
      */
     Q_PROPERTY(QQmlComponent *separatorDelegate READ separatorDelegate WRITE setSeparatorDelegate NOTIFY separatorDelegateChanged FINAL)
