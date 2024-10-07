@@ -20,7 +20,7 @@ import QtQuick.Controls as QQC2
  *         text: "Label"
  *     }
  * @endcode
- * @deprecated since 6.2 Use SelectableText instead
+ * @deprecated since 6.8 Use SelectableText instead
  * @see https://bugreports.qt.io/browse/QTBUG-14077
  * @since 5.95
  * @since org.kde.kirigami 2.20

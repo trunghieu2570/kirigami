@@ -28,7 +28,7 @@ import QtQuick.Templates as T
  *
  * @see https://bugreports.qt.io/browse/QTBUG-14077
  * @since org.kde.kirigami 2.21
- * @since 6.7
+ * @since 6.8
  * @inherit QtQuick.TextEdit
  */
 
