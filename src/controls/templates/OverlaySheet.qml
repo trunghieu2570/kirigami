@@ -85,25 +85,19 @@ T.Popup {
 //END Own Properties
 
 //BEGIN Reimplemented Properties
-    T.Overlay.modeless: Item {
-        id: overlay
-        Rectangle {
-            x: sheetHandler.visualParent?.Kirigami.ScenePosition.x ?? 0
-            y: sheetHandler.visualParent?.Kirigami.ScenePosition.y ?? 0
-            width: sheetHandler.visualParent?.width ?? 0
-            height: sheetHandler.visualParent?.height ?? 0
-            color: Qt.rgba(0, 0, 0, 0.2)
-        }
+    QQC2.Overlay.modal: Rectangle {
+        color: Qt.rgba(0, 0, 0, 0.3)
+
+        // the opacity of the item is changed internally by QQuickPopup on open/close
         Behavior on opacity {
-            NumberAnimation {
-                property: "opacity"
-                easing.type: Easing.InOutQuad
+            OpacityAnimator {
                 duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutQuad
             }
         }
     }
 
-    modal: false
+    modal: true
     dim: true
 
     leftInset: -1
@@ -239,20 +233,28 @@ T.Popup {
             // we're using a ShadowedRectangle instead of a regular
             // rectangle because it allows fine-grained control over which
             // corners to round, which we need here
-            Kirigami.ShadowedRectangle {
+            Item {
                 id: headerItem
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignTop
                 //Layout.margins: 1
                 visible: root.header || root.showCloseButton
-                implicitHeight: Math.max(headerParent.implicitHeight, closeIcon.height) + Kirigami.Units.smallSpacing * 2
+                implicitHeight: Math.max(headerParent.implicitHeight, closeIcon.height)// + Kirigami.Units.smallSpacing * 2
                 z: 2
-                corners.topLeftRadius: Kirigami.Units.smallSpacing
-                corners.topRightRadius: Kirigami.Units.smallSpacing
-                Kirigami.Theme.colorSet: Kirigami.Theme.Header
-                Kirigami.Theme.inherit: false
-                color: Kirigami.Theme.backgroundColor
 
+                Rectangle {
+                    anchors {
+                        top: parent.top
+                        horizontalCenter: parent.horizontalCenter
+                        topMargin: Kirigami.Units.smallSpacing
+                    }
+                    width: Math.round(Kirigami.Units.gridUnit * 3)
+                    height: Math.round(Kirigami.Units.gridUnit / 4)
+                    radius: height
+                    color: Kirigami.Theme.textColor
+                    opacity: 0.4
+                    visible: Kirigami.Settings.hasTransientTouchInput
+                }
                 Kirigami.Padding {
                     id: headerParent
 
@@ -260,53 +262,33 @@ T.Popup {
                     readonly property real trailingPadding: (root.showCloseButton ? closeIcon.width : 0) + Kirigami.Units.smallSpacing
 
                     anchors.fill: parent
-                    verticalPadding: Kirigami.Units.smallSpacing
+                    verticalPadding: Kirigami.Units.largeSpacing
                     leftPadding: root.mirrored ? trailingPadding : leadingPadding
                     rightPadding: root.mirrored ? leadingPadding : trailingPadding
 
                     contentItem: root.header
                 }
-                Kirigami.Icon {
+                QQC2.ToolButton {
                     id: closeIcon
 
-                    readonly property bool tallHeader: headerItem.height > (Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.largeSpacing + Kirigami.Units.largeSpacing)
-
+                    // We want to position the close button in the top-right
+                    // corner if the header is very tall, but we want to
+                    // vertically center it in a short header
+                    readonly property bool tallHeader: parent.height > (Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.largeSpacing * 2)
+                    Layout.alignment: tallHeader ? Qt.AlignRight | Qt.AlignTop : Qt.AlignRight | Qt.AlignVCenter
+                    Layout.topMargin: tallHeader ? Kirigami.Units.largeSpacing : 0
                     anchors {
+                        verticalCenter: !tallHeader ? undefined : parent.verticalCenter
                         right: parent.right
-                        rightMargin: Kirigami.Units.largeSpacing
-                        verticalCenter: headerItem.verticalCenter
-                        margins: Kirigami.Units.smallSpacing
+                        margins: Kirigami.Units.largeSpacing
                     }
-
-                    // Apply the changes to the anchors imperatively, to first disable an anchor point
-                    // before setting the new one, so the icon don't grow unexpectedly
-                    onTallHeaderChanged: {
-                        if (tallHeader) {
-                            // We want to position the close button in the top-right corner if the header is very tall
-                            anchors.verticalCenter = undefined
-                            anchors.topMargin = Kirigami.Units.largeSpacing
-                            anchors.top = headerItem.top
-                        } else {
-                            // but we want to vertically center it in a short header
-                            anchors.top = undefined
-                            anchors.topMargin = undefined
-                            anchors.verticalCenter = headerItem.verticalCenter
-                        }
-                    }
-                    Component.onCompleted: tallHeaderChanged()
-
                     z: 3
+
                     visible: root.showCloseButton
-                    width: Kirigami.Units.iconSizes.smallMedium
-                    height: width
-                    source: closeMouseArea.containsMouse ? "window-close" : "window-close-symbolic"
-                    active: closeMouseArea.containsMouse
-                    MouseArea {
-                        id: closeMouseArea
-                        hoverEnabled: true
-                        anchors.fill: parent
-                        onClicked: root.close();
-                    }
+                    icon.name: closeIcon.hovered ? "window-close" : "window-close-symbolic"
+                    text: qsTr("Close", "@action:button close dialog")
+                    onClicked: root.reject()
+                    display: QQC2.AbstractButton.IconOnly
                 }
                 Kirigami.Separator {
                     anchors {
@@ -314,6 +296,7 @@ T.Popup {
                         left: parent.left
                         top: parent.bottom
                     }
+                    visible: scrollView.T.ScrollBar.vertical.visible
                 }
             }
 
