@@ -45,6 +45,12 @@ QQC2.Control {
     property color selectedTextColor: Kirigami.Theme.highlightedTextColor
     property color selectionColor: Kirigami.Theme.highlightColor
     property string text
+    property var cursorShape
+    property var onLinkHovered
+    property var onLinkActivated: url => Qt.openUrlExternally(url)
+    property var onClicked
+    property bool selectByMouse: true
+    readonly property string hoveredLink: textEdit.hoveredLink
 
     contentItem: TextEdit {
         id: textEdit
@@ -68,7 +74,9 @@ QQC2.Control {
         color: root.color
         selectedTextColor: root.selectedTextColor
         selectionColor: root.selectionColor
-        onLinkActivated: url => Qt.openUrlExternally(url)
+        onLinkActivated: root.onLinkActivated
+        onLinkHovered: root.onLinkHovered
+        selectByMouse: root.selectByMouse
 
         text: root.text
 
@@ -83,7 +91,17 @@ QQC2.Control {
             // there is no proper workaround other than an upstream fix
             // See qqc2-desktop-style Label.qml
             enabled: false
-            cursorShape: textEdit.hoveredLink ? Qt.PointingHandCursor : Qt.IBeamCursor
+            cursorShape: root.cursorShape ? root.cursorShape : (textEdit.hoveredLink ? Qt.PointingHandCursor : Qt.IBeamCursor)
+        }
+
+        TapHandler {
+            // For custom click actions we want selection to be turned off
+            enabled: !textEdit.selectByMouse
+
+            acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad | PointerDevice.Stylus
+            acceptedButtons: Qt.LeftButton
+
+            onTapped: root.onClicked
         }
 
         TapHandler {
