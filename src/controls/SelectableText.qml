@@ -54,6 +54,8 @@ QQC2.Control {
     signal linkActivated(string link)
     signal clicked()
 
+    onLinkActivated: link => Qt.openUrlExternally(link)
+
     contentItem: TextEdit {
         id: textEdit
 
@@ -79,8 +81,8 @@ QQC2.Control {
         selectionColor: root.selectionColor
         selectByMouse: root.selectByMouse
 
-        onLinkActivated: root.linkActivated()
-        onLinkHovered: root.linkHovered()
+        onLinkActivated: root.linkActivated(textEdit.hoveredLink)
+        onLinkHovered: root.linkHovered(textEdit.hoveredLink)
 
         text: root.text
 
