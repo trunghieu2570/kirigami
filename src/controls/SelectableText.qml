@@ -40,6 +40,7 @@ QQC2.Control {
     property bool readOnly: true
     property var wrapMode: TextEdit.WordWrap
     property var textFormat: TextEdit.AutoText
+    property var horizontalAlignment
     property var verticalAlignment: TextEdit.AlignTop
     property color color: Kirigami.Theme.textColor
     property color selectedTextColor: Kirigami.Theme.highlightedTextColor
@@ -49,7 +50,7 @@ QQC2.Control {
     property bool selectByMouse: true
     readonly property string hoveredLink: textEdit.hoveredLink
 
-    signal linkHovered
+    signal linkHovered(string link)
     signal linkActivated(string link)
     signal clicked()
 
@@ -71,6 +72,7 @@ QQC2.Control {
         readOnly: root.readOnly
         wrapMode: root.wrapMode
         textFormat: root.textFormat
+        horizontalAlignment: root.horizontalAlignment
         verticalAlignment: root.verticalAlignment
         color: root.color
         selectedTextColor: root.selectedTextColor
