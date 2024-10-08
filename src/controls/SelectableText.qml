@@ -46,11 +46,12 @@ QQC2.Control {
     property color selectionColor: Kirigami.Theme.highlightColor
     property string text
     property var cursorShape
-    property var onLinkHovered
-    property var onLinkActivated: url => Qt.openUrlExternally(url)
-    property var onClicked
     property bool selectByMouse: true
     readonly property string hoveredLink: textEdit.hoveredLink
+
+    signal linkHovered
+    signal linkActivated(string link)
+    signal clicked()
 
     contentItem: TextEdit {
         id: textEdit
@@ -74,9 +75,10 @@ QQC2.Control {
         color: root.color
         selectedTextColor: root.selectedTextColor
         selectionColor: root.selectionColor
-        onLinkActivated: root.onLinkActivated
-        onLinkHovered: root.onLinkHovered
         selectByMouse: root.selectByMouse
+
+        onLinkActivated: root.linkActivated()
+        onLinkHovered: root.linkHovered()
 
         text: root.text
 
@@ -101,7 +103,7 @@ QQC2.Control {
             acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad | PointerDevice.Stylus
             acceptedButtons: Qt.LeftButton
 
-            onTapped: root.onClicked
+            onTapped: root.clicked()
         }
 
         TapHandler {
