@@ -183,6 +183,14 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Avaa laatikko"
 
+#: controls/templates/OverlaySheet.qml:289
+#, fuzzy
+#| msgctxt "PageRowGlobalToolBarUI|"
+#| msgid "Close menu"
+msgctxt "OverlaySheet|@action:button close dialog"
+msgid "Close"
+msgstr "Sulje valikko"
+
 #: controls/templates/private/BackButton.qml:50
 msgctxt "BackButton|"
 msgid "Navigate Back"

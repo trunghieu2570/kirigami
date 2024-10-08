@@ -182,6 +182,14 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "மேல்தோன்றும் பலகையைத் திற"
 
+#: controls/templates/OverlaySheet.qml:289
+#, fuzzy
+#| msgctxt "Dialog|@action:button close dialog"
+#| msgid "Close"
+msgctxt "OverlaySheet|@action:button close dialog"
+msgid "Close"
+msgstr "மூடு"
+
 #: controls/templates/private/BackButton.qml:50
 msgctxt "BackButton|"
 msgid "Navigate Back"

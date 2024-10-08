@@ -225,6 +225,14 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr ""
 
+#: controls/templates/OverlaySheet.qml:289
+#, fuzzy
+#| msgctxt "GlobalDrawer|"
+#| msgid "Close Sidebar"
+msgctxt "OverlaySheet|@action:button close dialog"
+msgid "Close"
+msgstr "Sulge külgriba"
+
 #: controls/templates/private/BackButton.qml:50
 msgctxt "BackButton|"
 msgid "Navigate Back"

@@ -184,6 +184,14 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "打开抽屉栏"
 
+#: controls/templates/OverlaySheet.qml:289
+#, fuzzy
+#| msgctxt "Dialog|@action:button close dialog"
+#| msgid "Close"
+msgctxt "OverlaySheet|@action:button close dialog"
+msgid "Close"
+msgstr "关闭"
+
 #: controls/templates/private/BackButton.qml:50
 msgctxt "BackButton|"
 msgid "Navigate Back"

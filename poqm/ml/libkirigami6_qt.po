@@ -180,6 +180,11 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr ""
 
+#: controls/templates/OverlaySheet.qml:289
+msgctxt "OverlaySheet|@action:button close dialog"
+msgid "Close"
+msgstr ""
+
 #: controls/templates/private/BackButton.qml:50
 msgctxt "BackButton|"
 msgid "Navigate Back"
