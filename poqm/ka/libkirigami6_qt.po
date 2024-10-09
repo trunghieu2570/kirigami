@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #: controls/AboutItem.qml:163
 #, qt-format
@@ -183,9 +183,6 @@ msgid "Open drawer"
 msgstr "უჯრის გახსნა"
 
 #: controls/templates/OverlaySheet.qml:289
-#, fuzzy
-#| msgctxt "Dialog|@action:button close dialog"
-#| msgid "Close"
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "დახურვა"
