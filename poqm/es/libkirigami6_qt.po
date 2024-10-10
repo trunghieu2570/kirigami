@@ -1,8 +1,11 @@
+# Translation of libkirigami6_qt to Spanish
+#
 # SPDX-FileCopyrightText: 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: libkirigamiplugin_qt\n"
-"PO-Revision-Date: 2024-05-05 04:23+0200\n"
+"Project-Id-Version: libkirigami6_qt\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"PO-Revision-Date: 2024-10-09 08:31+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -11,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #: controls/AboutItem.qml:163
 #, qt-format
@@ -183,9 +186,6 @@ msgid "Open drawer"
 msgstr "Abrir cajón"
 
 #: controls/templates/OverlaySheet.qml:289
-#, fuzzy
-#| msgctxt "Dialog|@action:button close dialog"
-#| msgid "Close"
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "Cerrar"

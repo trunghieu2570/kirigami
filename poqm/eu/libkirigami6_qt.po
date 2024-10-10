@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kirigami\n"
-"PO-Revision-Date: 2024-05-18 16:02+0200\n"
+"PO-Revision-Date: 2024-10-09 21:00+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #: controls/AboutItem.qml:163
 #, qt-format
@@ -189,9 +189,6 @@ msgid "Open drawer"
 msgstr "Ireki tiradera"
 
 #: controls/templates/OverlaySheet.qml:289
-#, fuzzy
-#| msgctxt "Dialog|@action:button close dialog"
-#| msgid "Close"
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "Itxi"
