@@ -176,6 +176,19 @@ msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "Tøm søkjefelt"
 
+#: controls/SelectableLabel.qml:174
+#, fuzzy
+#| msgctxt "AboutItem|"
+#| msgid "Copyright"
+msgctxt "SelectableLabel|"
+msgid "Copy"
+msgstr "Opphavsrett"
+
+#: controls/SelectableLabel.qml:187
+msgctxt "SelectableLabel|"
+msgid "Select All"
+msgstr ""
+
 #: controls/templates/OverlayDrawer.qml:128
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
@@ -188,8 +201,6 @@ msgstr "Opna skuff"
 
 #: controls/templates/OverlaySheet.qml:289
 #, fuzzy
-#| msgctxt "Dialog|@action:button close dialog"
-#| msgid "Close"
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "Lukk"

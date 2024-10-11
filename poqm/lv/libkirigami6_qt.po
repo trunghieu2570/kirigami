@@ -173,6 +173,19 @@ msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "Notīrīt meklēšanu"
 
+#: controls/SelectableLabel.qml:174
+#, fuzzy
+#| msgctxt "AboutItem|"
+#| msgid "Copyright"
+msgctxt "SelectableLabel|"
+msgid "Copy"
+msgstr "Autortiesības"
+
+#: controls/SelectableLabel.qml:187
+msgctxt "SelectableLabel|"
+msgid "Select All"
+msgstr ""
+
 #: controls/templates/OverlayDrawer.qml:128
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"

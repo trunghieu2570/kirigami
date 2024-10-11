@@ -172,6 +172,19 @@ msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "தேடலை காலியாக்கு"
 
+#: controls/SelectableLabel.qml:174
+#, fuzzy
+#| msgctxt "AboutItem|"
+#| msgid "Copyright"
+msgctxt "SelectableLabel|"
+msgid "Copy"
+msgstr "பதிப்புரிமை"
+
+#: controls/SelectableLabel.qml:187
+msgctxt "SelectableLabel|"
+msgid "Select All"
+msgstr ""
+
 #: controls/templates/OverlayDrawer.qml:128
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
