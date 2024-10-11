@@ -287,7 +287,7 @@ T.Popup {
                     visible: root.showCloseButton
                     icon.name: closeIcon.hovered ? "window-close" : "window-close-symbolic"
                     text: qsTr("Close", "@action:button close dialog")
-                    onClicked: root.reject()
+                    onClicked: root.close()
                     display: QQC2.AbstractButton.IconOnly
                 }
                 Kirigami.Separator {
