@@ -44,7 +44,7 @@ public:
         , veryShortDuration(50)
         , humanMoment(2000)
         , toolTipDelay(700)
-        , cornerRadius(5)
+        , cornerRadius(0)
         , iconSizes(new IconSizes(units))
     {
     }
